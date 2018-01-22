@@ -1,0 +1,19 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<plugin name="Xendra extensions" description="Contains references to all Xendra core"
+	id="org.xendra.core" version="1.0" category="framework" enabled="true">
+  <extensionlist id="org.columba.core.frame">
+    	<extension id="XendraFrame" class="org.xendra.core.ui.frame.XendraFrameMediator" >
+      		<properties managed="true" /> 
+    	</extension>
+  </extensionlist>  	
+  <extensionlist id="org.columba.core.search">
+    <extension id="InvoiceSearchProvider" class="org.xendra.core.search.InvoiceSearchProvider"/>
+  </extensionlist>  
+  <extensionlist id="org.columba.core.component">
+        <extension id="XendraComponent" class="org.xendra.main.Main" />
+  </extensionlist>
+<extensionlist id="org.columba.core.action">
+	<extension id="Dashboard"	class="org.xendra.core.ui.action.DashboardAction" />
+	<!--<extension id="XendraStore"	class="org.xendra.core.ui.action.XendraStoreAction" />-->
+  </extensionlist>
+</plugin>

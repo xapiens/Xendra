@@ -1,0 +1,44 @@
+package org.xendra.rules
+
+import org.compiere.model.GridTab
+import org.compiere.model.GridField
+import org.compiere.model.MUOM
+import org.compiere.model.MUOMConversion
+import java.util.Properties
+import java.lang.Boolean
+import org.compiere.util.Env
+import java.math.BigDecimal
+global org.compiere.model.GridTab tab
+global org.compiere.model.GridField Field
+global Object Value
+global Object OldValue
+global Properties Ctx
+global Integer WindowNo
+
+rule "MovementQty"
+	dialect "java"
+    when
+        eval (Field.getColumnName().equals("QtyEntered"))        
+    then
+    	Qty(Ctx, WindowNo, tab, Field, Value);
+end
+
+function void Qty(Properties Ctx, Integer WindowNo, GridTab tab, GridField Field,Object Value) {	
+	Integer M_Product_ID = Env.getContextAsInt(Ctx, WindowNo, "M_Product_ID");
+	Integer C_UOM_To_ID = Env.getContextAsInt(Ctx, WindowNo, "C_UOM_ID");
+	BigDecimal QtyOrdered = Env.ZERO;
+	BigDecimal QtyEntered = (BigDecimal)Value;
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(Ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		QtyEntered = QtyEntered1;
+		tab.setValue("QtyEntered", QtyEntered);
+	}
+	QtyOrdered = MUOMConversion.convertProductFrom (Ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyOrdered == null)
+		QtyOrdered = QtyEntered;
+	Boolean conversion = QtyEntered.compareTo(QtyOrdered) != 0;
+	System.out.println("Drools : UOM=" + C_UOM_To_ID + ", QtyEntered=" + QtyEntered + " -> " + conversion	+ " QtyOrdered=" + QtyOrdered);
+	Env.setContext(Ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	tab.setValue("MovementQty", QtyOrdered);	
+}  

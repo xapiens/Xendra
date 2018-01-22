@@ -1,0 +1,22 @@
+package org.xendra.annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(value = ElementType.FIELD)
+@Retention(value = RetentionPolicy.RUNTIME)
+public @interface XendraForm {
+	String Name();
+	String Description();
+	String Help();	
+	String AD_Menu_ID();		
+	String Identifier();
+	String Synchronized();
+	String AccessLevel();
+	String EntityType();
+	boolean IsBetaFunctionality();
+	boolean IsMenu();
+	String Classname();
+}

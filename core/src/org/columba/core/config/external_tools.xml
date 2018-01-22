@@ -1,0 +1,4 @@
+<tools version="1.0">
+  <tool first_time="true" name="aspell"></tool>
+  <tool first_time="true" name="gpg"></tool>
+</tools>

@@ -1,0 +1,308 @@
+################################################################################
+# Name:    Black Ship
+# Author:  Romain Guy <romain.guy@sun.com>
+# Date:    1/22/2006
+################################################################################
+
+################################################################################
+# COMMON PROPERTIES
+################################################################################
+
+Common.shadowOpacity=0.5
+#Common.shadowColor=#000000
+Common.shadowColor=#C8E0C2
+Common.shadowDirection=60
+
+Common.lightColor=#4B5461
+#Common.darkColor=#202737
+Common.darkColor=#C8E0C2
+
+################################################################################
+# REGISTER USER
+################################################################################
+
+RegisterUser.hintColor=#FFFFFF
+RegisterUser.hintFont=Default-BOLD-24
+
+RegisterUser.inputFont=Default-BOLD-14
+# textbox
+RegisterUser.inputColor=70, 70, 70
+#RegisterUser.inputColor=200, 224, 194
+RegisterUser.inputBorderColor=220, 220, 220
+RegisterUser.inputTextColor=255, 255, 255
+RegisterUser.inputSelectionColor=255, 255, 255
+RegisterUser.inputSelectedTextColor=0, 0, 0
+
+################################################################################
+# REGISTER COMPANY
+################################################################################
+
+RegisterCompany.hintColor=#FFFFFF
+RegisterCompany.hintFont=Default-BOLD-24
+
+RegisterCompany.inputFont=Default-BOLD-14
+# textbox
+RegisterCompany.inputColor=70, 70, 70
+#RegisterCompany.inputColor=200, 224, 194
+RegisterCompany.inputBorderColor=220, 220, 220
+RegisterCompany.inputTextColor=255, 255, 255
+RegisterCompany.inputSelectionColor=255, 255, 255
+RegisterCompany.inputSelectedTextColor=0, 0, 0
+
+################################################################################
+# LOGIN OVERLAY
+################################################################################
+
+LoginOverlay.hintColor=#FFFFFF
+LoginOverlay.hintFont=Default-BOLD-24
+
+LoginOverlay.inputFont=Default-BOLD-14
+# textbox
+LoginOverlay.inputColor=70, 70, 70
+#LoginOverlay.inputColor=200, 224, 194
+LoginOverlay.inputBorderColor=220, 220, 220
+LoginOverlay.inputTextColor=255, 255, 255
+LoginOverlay.inputSelectionColor=255, 255, 255
+LoginOverlay.inputSelectedTextColor=0, 0, 0
+
+################################################################################
+# INTRODUCTION
+################################################################################
+
+IntroductionPanel.backgroundGradient={ContentPanel.backgroundGradient}
+IntroductionPanel.logo=resources/logo.png
+
+################################################################################
+# NAVIGATION HEADER
+################################################################################
+
+NavigationHeader.backgroundGradient=resources/header-gradient.png
+
+NavigationHeader.haloPicture=resources/header-halo.png
+
+NavigationHeader.title=resources/header-title.png
+NavigationHeader.titleAlpha=1.0
+
+NavigationHeader.lightColor={Common.lightColor}
+NavigationHeader.shadowColor={Common.darkColor}
+
+NavigationHeader.preferredHeight=32
+
+NavigationHeader.pathFont=Arial-PLAIN-18
+NavigationHeader.pathColor=#FFFFFF
+NavigationHeader.pathSeparatorLeft=resources/header-slash-left.png
+NavigationHeader.pathSeparatorRight=resources/header-slash-right.png
+
+NavigationHeader.pathShadowOpacity=0.7
+NavigationHeader.pathShadowColor={Common.shadowColor}
+NavigationHeader.pathShadowDirection={Common.shadowDirection}
+NavigationHeader.pathShadowDistance=1
+
+################################################################################
+# NEWS PANEL
+################################################################################
+
+NewsPanel.categoryFont=Arial Black-PLAIN-20
+NewsPanel.categorySmallFont=Arial-BOLD-14
+NewsPanel.categoryColor=210, 210, 210
+NewsPanel.categoryHighlightColor=255, 255, 255
+NewsPanel.categorySmallOpacity=0.8
+
+NewsPanel.shadowOpacity={Common.shadowOpacity}
+NewsPanel.shadowColor={Common.shadowColor}
+NewsPanel.shadowDirection={Common.shadowDirection}
+NewsPanel.shadowDistance=3
+
+################################################################################
+# POS PANEL
+################################################################################
+
+CategoryPanel.categoryFont=Arial Black-PLAIN-20
+CategoryPanel.categorySmallFont=Arial-BOLD-14
+CategoryPanel.categoryColor=210, 210, 210
+CategoryPanel.categoryHighlightColor=255, 255, 255
+CategoryPanel.categorySmallOpacity=0.8
+
+CategoryPanel.shadowOpacity={Common.shadowOpacity}
+CategoryPanel.shadowColor={Common.shadowColor}
+CategoryPanel.shadowDirection={Common.shadowDirection}
+CategoryPanel.shadowDistance=3
+
+################################################################################
+# TRIP REPORT PANEL
+################################################################################
+
+TripReportPanel.shadowOpacity={Common.shadowOpacity}
+TripReportPanel.shadowColor={Common.shadowColor}
+TripReportPanel.shadowDirection={Common.shadowDirection}
+TripReportPanel.shadowDistance=3
+
+TripReportPanel.websiteBackground=0, 0, 0
+
+################################################################################
+# BACKGROUND TITLE
+################################################################################
+
+BackgroundTitle.titleFont=Arial Black-PLAIN-36
+BackgroundTitle.titleColor=#FFFFFF
+BackgroundTitle.titleOpacity=0.8
+
+BackgroundTitle.shadowOpacity={Common.shadowOpacity}
+BackgroundTitle.shadowColor={Common.shadowColor}
+BackgroundTitle.shadowDirection={Common.shadowDirection}
+BackgroundTitle.shadowDistance=2
+
+BackgroundTitle.preferredHeight=90
+
+################################################################################
+# CONTENT PANEL
+################################################################################
+
+#ContentPanel.backgroundGradient=0,0 | 0,584 | 0.22,#202737 | 0.9,#8590A5
+#verde claro a verde un poco mas claro
+ContentPanel.backgroundGradient=0,0 | 0,584 | 0.22,#C8E0C2 | 0.9,#C8FF7D
+
+ContentPanel.light=resources/content-light.png
+ContentPanel.lightOpacity=0.5
+
+################################################################################
+# ACTION BUTTON
+################################################################################
+
+ActionButton.shadowDistance=1
+
+#ActionButton.buttonForeground={AlbumSelector.listColor}
+ActionButton.buttonForeground=#FFFFFF
+ActionButton.buttonFont=Arial-BOLD-22
+ActionButton.mainButton=resources/button-main.png
+ActionButton.mainButtonPressed=resources/button-main-pressed.png
+ActionButton.normalButton=resources/button-normal.png
+ActionButton.normalButtonPressed=resources/button-normal-pressed.png
+ActionButton.sourceInsets=6, 7, 6, 8
+ActionButton.buttonDimension=116, 35
+ActionButton.buttonHighlight=resources/header-halo.png
+
+################################################################################
+# ALBUM SELECTOR
+################################################################################
+
+AlbumSelector.listColor=#FFFFFF
+AlbumSelector.listOpacity=0.05
+AlbumSelector.listBorderOpacity=0.4
+
+AlbumSelector.selectionColor={AlbumSelector.listColor}
+AlbumSelector.selectionOpacity=0.2
+AlbumSelector.selectionBorderOpacity=0.8
+
+AlbumSelector.listItemColor={AlbumSelector.listColor}
+AlbumSelector.listUnselectedItemOpacity=0.85
+AlbumSelector.listItemFont=Arial-BOLD-16
+AlbumSelector.listSelectedItemFont=Arial-BOLD-18
+
+AlbumSelector.detailsColor={AlbumSelector.listItemColor}
+AlbumSelector.detailsBigFont=Arial Black-PLAIN-30
+AlbumSelector.detailsSmallFont=Arial-BOLD-14
+
+AlbumSelector.shadowDistance=1
+
+AlbumSelector.starOn=resources/star-on.png
+AlbumSelector.starOff=resources/star-off.png
+
+AlbumSelector.buttonForeground={AlbumSelector.listColor}
+AlbumSelector.buttonFont=Arial-BOLD-22
+AlbumSelector.mainButton=resources/button-main.png
+AlbumSelector.mainButtonPressed=resources/button-main-pressed.png
+AlbumSelector.normalButton=resources/button-normal.png
+AlbumSelector.normalButtonPressed=resources/button-normal-pressed.png
+AlbumSelector.sourceInsets=6, 7, 6, 8
+AlbumSelector.buttonDimension=116, 35
+AlbumSelector.buttonHighlight=resources/header-halo.png
+
+AlbumSelector.screenshotColor={AlbumSelector.listColor}
+AlbumSelector.screenshotDimension=220, 167
+AlbumSelector.screenshotOpacity=0.7
+AlbumSelector.screenshotTextColor=0, 0, 0, 127
+AlbumSelector.screenshotFont=Arial-BOLD-16
+
+################################################################################
+# ALBUM SELECTOR 3D
+################################################################################
+
+AlbumSelector3D.textColor=#FFFFFF
+AlbumSelector3D.textFont=Arial-BOLD-26
+
+AlbumSelector3D.shadowOpacity={Common.shadowOpacity}
+AlbumSelector3D.shadowColor={Common.shadowColor}
+AlbumSelector3D.shadowDirection={Common.shadowDirection}
+AlbumSelector3D.shadowDistance=1
+
+################################################################################
+# FOOTER
+################################################################################
+
+Footer.preferredHeight=17
+
+Footer.lightColor={Common.lightColor}
+Footer.shadowColor={Common.darkColor}
+
+Footer.inactiveLightColor={TitlePanel.inactiveLightColor}
+Footer.inactiveShadowColor={TitlePanel.inactiveShadowColor}
+
+Footer.backgroundGradient=0,0 | 0,15 | #666F7F | #202737
+Footer.inactiveBackgroundGradient=0,0 | 0,15 | #727272 | #383838
+
+################################################################################
+# FRAME BORDER
+################################################################################
+
+FrameBorder.lightColor={Common.lightColor}
+FrameBorder.mediumColor=#3A424F
+FrameBorder.shadowColor=#343A4D
+
+FrameBorder.inactiveLightColor=#565656
+FrameBorder.inactiveMediumColor=#444444
+FrameBorder.inactiveShadowColor=#404040
+
+################################################################################
+# TITLE PANEL
+################################################################################
+
+TitlePanel.preferredHeight=20
+
+TitlePanel.lightColor={Common.lightColor}
+TitlePanel.shadowColor={Common.darkColor}
+
+TitlePanel.inactiveLightColor=#565656
+TitlePanel.inactiveShadowColor=#2B2B2B
+
+TitlePanel.grip=resources/title-grip.png
+TitlePanel.backgroundGradient=resources/title-background.png
+
+TitlePanel.inactiveGrip=resources/title-grip-inactive.png
+TitlePanel.inactiveBackgroundGradient=resources/title-background-inactive.png
+
+TitlePanel.close=resources/title-close.png
+TitlePanel.closeInactive=resources/title-close-inactive.png
+TitlePanel.closeOver=resources/title-close-over.png
+TitlePanel.closePressed=resources/title-close-pressed.png
+
+TitlePanel.minimize=resources/title-minimize.png
+TitlePanel.minimizeInactive=resources/title-minimize-inactive.png
+TitlePanel.minimizeOver=resources/title-minimize-over.png
+TitlePanel.minimizePressed=resources/title-minimize-pressed.png
+
+################################################################################
+# WAIT OVERLAY
+################################################################################
+
+#WaitOverlay.javaCup=resources/java-cup.png
+#WaitOverlay.javaCupGlow=resources/java-cup-glow.png
+WaitOverlay.javaCup=resources/dravios-loading.png
+WaitOverlay.javaCupGlow=resources/dravios-loading.png
+WaitOverlay.waitCircle=resources/wait-circle.png
+
+WaitOverlay.opacity=0.9
+#WaitOverlay.color=#000000
+WaitOverlay.color=#C8E0C2
+WaitOverlay.messageFont=Default-BOLD-24
+WaitOverlay.messageColor=#FFFFFF

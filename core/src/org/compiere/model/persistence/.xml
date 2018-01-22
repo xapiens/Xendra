@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xml>
+<form AccessLevel="3" Classname="org.xendra.apps.form.VCreditMemoVendorGen" Description="CredirMemo" EntityType="D" Help="" IsBetaFunctionality="N" Name="Generate CreditMemo Vendor" Synchronized="2016-10-14 11:08:31.727"/>
+</xml>

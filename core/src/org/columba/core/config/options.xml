@@ -1,0 +1,11 @@
+<options version="1.0">
+  <gui>
+    <fonts overwrite="false">
+      <text name="Default" size="12"></text>
+      <main name="Default" size="12"></main>
+    </fonts>
+    <toolbar text_position="false" enable_icon="true" enable_text="true"></toolbar>
+    <theme name="Xendra" theme="Xendra Theme Green"></theme>
+  </gui>
+  <locale variant="" language="en" country=""></locale>
+</options>

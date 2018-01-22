@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+<record level="1">
+  <table name="AD_Plugin" accesslevel="0" level="1" Identifier="67dff047-7c04-1001-e4d1-ad0b0ce9a44a">
+    <column name="AccessLevel" type="String" value="7" referenceid="" />
+    <column name="CategoryName" type="String" value="framework" referenceid="" />
+    <column name="Description" type="String" value="Contains references of all core extension" referenceid="" />
+    <column name="EntityType" type="String" value="D" referenceid="" />
+    <column name="FileName" type="String" value="core.zip" referenceid="" />
+    <column name="FileSize" type="Integer" value="16537527" referenceid="" />
+    <column name="Folder" type="String" value="org.columba.core" referenceid="" />
+    <column name="ID" type="String" value="org.columba.core" referenceid="" />
+    <column name="Identifier" type="String" value="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" referenceid="" />
+    <column name="IsCompleted" type="Boolean" value="true" referenceid="" />
+    <column name="Name" type="String" value="Core framework extensions" referenceid="" />
+    <column name="plugin" type="String" value="&lt;plugin name=&quot;Core framework extensions&quot; 
+        description=&quot;Contains references of all core extension&quot; 
+        id=&quot;org.columba.core&quot; 
+        version=&quot;1.0&quot; 
+        category=&quot;framework&quot; 
+	synchronized=&quot;2017-03-21 07:41:16&quot;
+	enabled=&quot;true&quot;&gt;
+    &lt;extensionlist id=&quot;org.columba.core.action&quot;&gt;
+        &lt;!--&lt;extension id=&quot;OpenNewWindow&quot; class=&quot;org.columba.core.gui.menu.OpenNewWindowSubmenu&quot;/&gt;--&gt;
+        &lt;extension id=&quot;OpenNewMailWindow&quot; class=&quot;org.columba.core.gui.globalactions.OpenNewMailWindowAction&quot;/&gt;
+
+        &lt;extension id=&quot;OpenNewAddressbookWindow&quot; class=&quot;org.columba.core.gui.globalactions.OpenNewAddressbookWindowAction&quot;/&gt;
+        &lt;extension id=&quot;OpenNewMessageFrameWindow&quot; class=&quot;org.columba.core.gui.action.OpenNewMessageFrameWindowAction&quot;/&gt;
+        &lt;extension id=&quot;PluginManagerDialog&quot; class=&quot;org.columba.core.gui.globalactions.PluginManagerAction&quot; /&gt;
+        &lt;extension id=&quot;GlobalOptions&quot; class=&quot;org.columba.core.gui.globalactions.GlobalOptionsAction&quot;/&gt;
+        &lt;extension id=&quot;OpenExternalToolsDialog&quot; class=&quot;org.columba.core.gui.globalactions.OpenExternalToolsDialogAction&quot;/&gt;
+        &lt;extension id=&quot;OpenProfileManagerDialog&quot; class=&quot;org.columba.core.gui.globalactions.OpenProfileManagerDialogAction&quot;/&gt;
+        &lt;extension id=&quot;ChoosePerspectiveSubmenu&quot; class=&quot;org.columba.core.gui.globalactions.SwitchPerspectiveSubmenu&quot;/&gt;
+        &lt;extension id=&quot;NewSubmenu&quot; class=&quot;org.columba.core.gui.globalactions.NewSubmenu&quot;/&gt;
+        &lt;extension id=&quot;ShowHideViewSubmenu&quot; class=&quot;org.columba.core.gui.globalactions.ShowHideViewSubmenu&quot;/&gt;
+        &lt;extension id=&quot;ViewFolderInfoPanel&quot; class=&quot;org.columba.core.gui.globalactions.ViewFolderInfoPanelAction&quot;/&gt;
+        &lt;extension id=&quot;ViewLog&quot; class=&quot;org.columba.core.gui.globalactions.ViewLogAction&quot;/&gt;
+        &lt;extension id=&quot;Macro&quot; class=&quot;org.columba.core.gui.globalactions.BeanshellManagerAction&quot;/&gt;
+        
+        &lt;extension id=&quot;Cut&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.CutAction&quot;/&gt;
+        &lt;extension id=&quot;Copy&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.CopyAction&quot;/&gt;
+        &lt;extension id=&quot;Paste&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.PasteAction&quot;/&gt;
+        &lt;extension id=&quot;Delete&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.DeleteAction&quot;/&gt;
+        &lt;extension id=&quot;SelectAll&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.SelectAllAction&quot;/&gt;
+        &lt;extension id=&quot;PrintSetup&quot; class=&quot;org.columba.core.gui.globalactions.PrintSetupAction&quot;/&gt; 
+        
+        &lt;extension id=&quot;WorkOffline&quot; class=&quot;org.columba.core.gui.globalactions.WorkOfflineAction&quot;/&gt; 
+        &lt;extension id=&quot;Close&quot; class=&quot;org.columba.core.gui.globalactions.CloseAction&quot;/&gt; 
+        &lt;extension id=&quot;Exit&quot; class=&quot;org.columba.core.gui.globalactions.ExitAction&quot;/&gt; 
+        &lt;extension id=&quot;Undo&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.UndoAction&quot;/&gt; 
+        &lt;extension id=&quot;Redo&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.gui.globalactions.RedoAction&quot;/&gt; 
+  	    &lt;extension id=&quot;FindAgain&quot; class=&quot;org.columba.core.gui.globalactions.FindAgainAction&quot;/&gt;	
+        &lt;extension id=&quot;ViewToolbar&quot; class=&quot;org.columba.core.gui.globalactions.ViewToolbarAction&quot;/&gt; 
+        &lt;extension id=&quot;Cancel&quot; class=&quot;org.columba.core.gui.globalactions.CancelAction&quot;/&gt; 
+        
+        &lt;!-- help menu --&gt;
+        &lt;extension id=&quot;ShowHomepage&quot; class=&quot;org.columba.core.gui.globalactions.ShowHomepageAction&quot;/&gt;
+        &lt;extension id=&quot;ShowBugDatabase&quot; class=&quot;org.columba.core.gui.globalactions.ShowBugDatabaseAction&quot;/&gt;
+        &lt;extension id=&quot;ShowFAQ&quot; class=&quot;org.columba.core.gui.globalactions.ShowFAQAction&quot;/&gt;
+        &lt;extension id=&quot;ShowHelp&quot; class=&quot;org.columba.core.gui.globalactions.ShowHelpAction&quot;/&gt;
+        &lt;extension id=&quot;ShowLicense&quot; class=&quot;org.columba.core.gui.globalactions.ShowLicenseAction&quot;/&gt;
+        &lt;extension id=&quot;ShowProjectPage&quot; class=&quot;org.columba.core.gui.globalactions.ShowProjectPageAction&quot;/&gt;
+        &lt;extension id=&quot;AboutDialog&quot; class=&quot;org.columba.core.gui.globalactions.AboutDialogAction&quot;/&gt;
+        &lt;extension id=&quot;ShowContextSpecificHelp&quot; class=&quot;org.columba.core.gui.globalactions.ShowContextSpecificHelpAction&quot; /&gt;
+        &lt;extension id=&quot;Donate&quot; class=&quot;org.columba.core.gui.globalactions.DonateAction&quot; /&gt;
+        &lt;extension id=&quot;InfoProduct&quot; class=&quot;org.xendra.core.ui.action.InfoProduct&quot; /&gt;
+		&lt;extension id=&quot;InfoBPartner&quot; class=&quot;org.xendra.core.ui.action.InfoBPartner&quot;/&gt;
+		&lt;extension id=&quot;InfoAccount&quot; class=&quot;org.xendra.core.ui.action.InfoAccount&quot;/&gt;
+		&lt;extension id=&quot;InfoOrder&quot; class=&quot;org.xendra.core.ui.action.InfoOrder&quot;/&gt;
+		&lt;extension id=&quot;InfoInvoice&quot; class=&quot;org.xendra.core.ui.action.InfoInvoice&quot;/&gt;
+		&lt;extension id=&quot;InfoInOut&quot; class=&quot;org.xendra.core.ui.action.InfoInOut&quot;/&gt;
+		&lt;extension id=&quot;InfoPayment&quot; class=&quot;org.xendra.core.ui.action.InfoPayment&quot;/&gt;
+		&lt;extension id=&quot;InfoCashLine&quot; class=&quot;org.xendra.core.ui.action.InfoCashLine&quot;/&gt;
+		&lt;extension id=&quot;InfoAssignment&quot; class=&quot;org.xendra.core.ui.action.InfoAssignment&quot;/&gt;
+		&lt;extension id=&quot;InfoAsset&quot; class=&quot;org.xendra.core.ui.action.InfoAsset&quot;/&gt;
+		&lt;extension id=&quot;InfoBOE&quot; class=&quot;org.xendra.core.ui.action.InfoBOE&quot;/&gt;
+		&lt;extension id=&quot;InfoCashFlow&quot; class=&quot;org.xendra.core.ui.action.InfoCashFlow&quot;/&gt;
+		
+		&lt;!-- Window --&gt;
+		&lt;extension id=&quot;WindowMenu&quot; class=&quot;org.compiere.apps.WindowMenu&quot;/&gt;
+    &lt;/extensionlist&gt;
+    
+    &lt;extensionlist id=&quot;org.columba.core.component&quot;&gt;
+        &lt;!--&lt;extension id=&quot;MailComponent&quot; class=&quot;org.columba.mail.main.MailMain&quot; /&gt;--&gt;
+        &lt;!--&lt;extension id=&quot;AddressbookComponent&quot; class=&quot;org.columba.addressbook.main.AddressbookMain&quot; /&gt;--&gt;
+        &lt;!-- &lt;extension id=&quot;XendraComponent&quot; class=&quot;org.xendra.main.Main&quot; /&gt;--&gt;
+    &lt;/extensionlist&gt;
+    
+    &lt;extensionlist id=&quot;org.columba.core.config&quot;&gt;
+        &lt;extension id=&quot;PlasticConfigPlugin&quot; class=&quot;org.columba.core.gui.themes.plugin.PlasticLookAndFeelConfigPlugin&quot; /&gt;
+    &lt;/extensionlist&gt;
+&lt;extensionlist id=&quot;org.columba.core.externaltools&quot;&gt;
+ &lt;extension id=&quot;aspell&quot; class=&quot;org.columba.core.gui.externaltools.ASpellPlugin&quot; /&gt;
+ &lt;extension id=&quot;gpg&quot; class=&quot;org.columba.core.gui.externaltools.GPGPlugin&quot; /&gt;
+ &lt;extension id=&quot;spamc&quot; class=&quot;org.columba.mail.spam.spamassassin.SpamcExternalToolPlugin&quot; /&gt;
+ &lt;extension id=&quot;spamassassin&quot; class=&quot;org.columba.mail.spam.spamassassin.SpamAssassinExternalToolPlugin&quot; /&gt;
+ &lt;extension id=&quot;sa-learn&quot; class=&quot;org.columba.mail.spam.spamassassin.SALearnExternalToolPlugin&quot; /&gt;
+&lt;/extensionlist&gt;
+
+&lt;!--&lt;extensionlist id=&quot;org.columba.core.frame&quot;&gt;
+ &lt;extension id=&quot;ThreePaneMail&quot; class=&quot;org.columba.mail.gui.frame.ThreePaneMailFrameController&quot;&gt;
+  &lt;properties managed=&quot;true&quot; /&gt;
+ &lt;/extension&gt;
+ &lt;extension id=&quot;Addressbook&quot; class=&quot;org.columba.addressbook.gui.frame.AddressbookFrameController&quot;&gt;
+   &lt;properties managed=&quot;true&quot; /&gt;
+ &lt;/extension&gt;
+ &lt;extension id=&quot;Composer&quot; class=&quot;org.columba.mail.gui.composer.ComposerController&quot;&gt;
+   &lt;properties managed=&quot;false&quot; /&gt;
+ &lt;/extension&gt;
+ &lt;extension id=&quot;MessageFrame&quot; class=&quot;org.columba.mail.gui.messageframe.MessageFrameController&quot;&gt;
+   &lt;properties managed=&quot;false&quot; /&gt;
+ &lt;/extension&gt;
+&lt;/extensionlist&gt;--&gt;
+
+&lt;extensionlist id=&quot;org.columba.core.htmlviewer&quot;&gt;
+ &lt;extension id=&quot;Default&quot; class=&quot;org.columba.core.gui.htmlviewer.JavaHTMLViewerPlugin&quot; /&gt;
+ &lt;extension id=&quot;JDIC&quot; class=&quot;org.columba.core.gui.htmlviewer.JDICHTMLViewerPlugin&quot; /&gt; 
+&lt;/extensionlist&gt;
+
+&lt;extensionlist id=&quot;org.columba.core.service&quot;&gt;
+    &lt;extension id=&quot;BeanshellService&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.scripting.BeanshellService&quot; /&gt;
+&lt;/extensionlist&gt;
+
+&lt;extensionlist id=&quot;org.columba.core.theme&quot;&gt;
+ &lt;extension id=&quot;Quaqua&quot; class=&quot;org.columba.core.gui.themes.plugin.QuaquaLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Xendra&quot; class=&quot;org.columba.core.gui.themes.plugin.XendraLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Metal&quot; class=&quot;org.columba.core.gui.themes.plugin.MetalLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Windows&quot; class=&quot;org.columba.core.gui.themes.plugin.WindowsLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Mac&quot; class=&quot;org.columba.core.gui.themes.plugin.MacLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;CDE/Motif&quot; class=&quot;org.columba.core.gui.themes.plugin.MotifLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Gtk&quot; class=&quot;org.columba.core.gui.themes.plugin.GtkLookAndFeelPlugin&quot; /&gt;
+ &lt;extension id=&quot;Plastic&quot; class=&quot;org.columba.core.gui.themes.plugin.PlasticLookAndFeelPlugin&quot;&gt; 
+  &lt;properties config=&quot;PlasticConfigPlugin&quot; /&gt;
+ &lt;/extension&gt;
+ &lt;extension id=&quot;System Default&quot; class=&quot;org.columba.core.gui.theme.plugin.SystemLookAndFeelPlugin&quot;/&gt;
+&lt;/extensionlist&gt;
+
+
+&lt;extensionlist id=&quot;org.columba.core.view&quot;&gt;
+ &lt;extension id=&quot;ThreePaneMail&quot; class=&quot;org.columba.mail.gui.frame.MailFrameView&quot; /&gt;
+ &lt;extension id=&quot;Composer&quot; class=&quot;org.columba.mail.gui.composer.ComposerView&quot; /&gt;
+ &lt;extension id=&quot;MessageFrame&quot; class=&quot;org.columba.mail.gui.messageframe.MessageFrameView&quot; /&gt;
+ &lt;extension id=&quot;Addressbook&quot; class=&quot;org.columba.addressbook.gui.frame.AddressbookFrameView&quot; /&gt;
+&lt;/extensionlist&gt;
+
+&lt;extensionlist id=&quot;org.columba.core.service&quot;&gt;
+    &lt;extension id=&quot;BeanshellService&quot; singleton=&quot;true&quot; class=&quot;org.columba.core.scripting.BeanshellService&quot; /&gt;
+&lt;/extensionlist&gt;
+
+&lt;/plugin&gt;
+" referenceid="" />
+    <column name="Synchronized" type="Timestamp" value="2017-03-21 07:41:16.0" referenceid="" />
+    <column name="Version" type="BigDecimal" value="1.0" referenceid="" />
+    <column name="IsActive" type="Boolean" value="true" referenceid="" />
+  </table>
+</record>
+
+</stream>

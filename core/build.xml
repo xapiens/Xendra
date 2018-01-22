@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ============================================= -->
+<!-- Client                                        -->
+<!-- ============================================= -->
+<!-- $Header: /svn/Xendra/client/build.xml,v 1.2 2011/11/11 21:57:27 xapiens Exp $ -->
+
+<project name="client" default="clientDistribute" basedir=".">
+
+  <description>
+    This buildfile is used to build the client subproject within 
+    the Xendra project.
+  </description>
+
+  <!-- set global properties for this build -->
+  <property name="src" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="../lib"/>
+  <property name="plugin_id" value="org.columba.core"/>
+  <property name="jar.path" value="../lib"/>
+  <property name="jar.name" value="core"/>
+  <!--<property environment="env"/>-->
+  <import file="../utils_dev/properties.xml"/>
+  <!-- set path to include the necessary jar files for javac -->
+  <path id="project.class.path">
+	<pathelement path="${classpath}"/>    
+	<pathelement path="${jar.path}/holon.jar"/>
+	<pathelement path="${jar.path}/CCTools.jar"/>
+	<pathelement path="${jar.path}/common.jar"/>
+	<pathelement path="${jar.path}/Columba.jar"/>
+	<pathelement path="${jar.path}/holon.jar"/>
+	<pathelement path="${jar.path}/postgresql.jar"/>
+	<pathelement path="${jar.path}/Drools.jar"/>
+	<pathelement path="../store/org.xendra.store/store.jar"/>
+
+	<pathelement path="../tools/lib/javaee.jar"/>
+	<pathelement path="../tools/lib/commons-cli-1.0.jar"/>
+	<pathelement path="../tools/lib/flexdock-1.2.3.jar"/>
+	<pathelement path="../tools/lib/jwizz-0.1.3.jar"/>
+	<pathelement path="../tools/lib/junit.jar"/>
+	<pathelement location="../JasperReportsTools/lib"/>
+	<pathelement path="../tools/lib/lanterna-3.0.0-beta3.jar"/>
+	<fileset dir="../JasperReportsTools/lib">
+		<include name="**/*.jar"/>
+	</fileset>
+  </path>
+  
+  <target name="clientInit" description="initialization target">
+    <echo message="=========== Build core"/>
+    <echo message="CCTools is in ${jar.path}/CCTools.jar"/>
+    <!-- create the time stamp -->
+    <tstamp> 
+	<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" /> 
+    </tstamp>	    
+    <!-- create the build directory structure used by compile -->
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${plugin_id}"/>
+    <!-- check for the distribution directory -->
+    <available file="${dist.dir}" type="dir" property="dist.dir.exists"/>
+    <uptodate property="jar.uptodate" targetfile="${dist.dir}/${jar.name}.zip">
+      <srcfiles dir="${src}" includes="**/*.java"/>
+    </uptodate>
+  </target>
+	
+  <target name="clientMakedir" depends="clientInit" unless="dist.dir.exists">
+    <!-- create the distribution directory if not available -->
+    <mkdir dir="${dist.dir}"/>
+  </target>
+  
+
+  <!-- =========================================== -->
+  <!-- Compile                                     -->
+  <!-- =========================================== -->
+  <target name="clientCompile" depends="clientMakedir">
+    <!-- compile the java code from ${src} into ${build.dir} -->
+    <javac srcdir="${src}" destdir="${build.dir}" deprecation="off" debug="on">
+      <classpath refid="project.class.path"/>
+    </javac>
+    <!-- copy all image & sound files from src to the build directory -->
+    <copy todir="${build.dir}">
+      <fileset dir="${src}">
+        <include name="**/images/*"/>
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.png"/>
+        <include name="**/*.wav"/>
+        <include name="**/*.htm"/>
+	<include name="**/*.txt"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.html"/>
+        <include name="**/*.properties"/>
+        <exclude name="**/package.html"/>      	
+      </fileset>
+    </copy>
+  </target>
+
+
+  <!-- =========================================== -->
+  <!-- Distribution                                -->
+  <!-- =========================================== -->
+  <target name="clientDistribute" depends="clientCompile" unless="jar.uptodate">
+      <jar jarfile="${plugin_id}/${jar.name}.jar"  basedir="${build.dir}"  duplicate="preserve"  index="yes">
+      <!--<fileset dir="../core/build" /> -->
+      <manifest>
+        <attribute name="Specification-Title" value="Xendra"/>
+        <attribute name="Specification-Version" value="${env.XENDRA_VERSION}"/>
+        <attribute name="Specification-Vendor" value="Xendra"/>
+        <attribute name="Implementation-Title" value="Xendra ${env.XENDRA_VERSION}"/>
+        <attribute name="Implementation-Version" value="${env.XENDRA_VERSION} ${DSTAMP}-${TSTAMP}"/>
+        <attribute name="Implementation-Vendor" value="${env.XENDRA_VENDOR}"/> 
+        <attribute name="Implementation-URL" value="http://www.xendra.org"/>
+      </manifest> 
+    </jar>
+    <copy file="${plugin_id}/${jar.name}.jar" todir="${dist.dir}"/>
+    <copy file="src/org/columba/core/plugin/plugin.xml" todir="."/>
+    <replace file="./plugin.xml">
+        <replacefilter token="@timestamp@" value="${timestamp}"/>
+    </replace>
+    <zip destfile="${dist.dir}/${jar.name}.zip">
+       <zipfileset dir="${plugin_id}" prefix="${plugin_id}">
+	    <include name="core.jar"/>
+       </zipfileset> 
+       <zipfileset dir="." includes="plugin.xml" prefix="${plugin_id}"/>
+       <!--<zipfileset dir="resource" prefix="${plugin_id}/resource" />-->
+       <zipfileset dir="resource" prefix="${plugin_id}/resource"/>
+    </zip>
+    <delete file="./plugin.xml"/> 
+ </target>
+
+
+  <target name="clean">
+    <!-- Delete the ${build.dir} directory trees -->
+    <delete dir="${build.dir}"/>
+    <delete file="${dist.dir}/core.jar" failonerror="false"/>
+  </target>
+
+</project>
