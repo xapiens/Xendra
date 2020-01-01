@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  icons /usr/share/icons/gnome/ -->
+<toolbar visible="true">
+    <button action="AddTable"/>
+    <button action="AddColumn"/>
+    <button action="SaveModel"/>
+    <separator/>
+    <button action="EditProperties"/>
+</toolbar>

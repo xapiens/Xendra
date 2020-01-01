@@ -1,0 +1,52 @@
+#!/bin/bash
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=$(dirname $SCRIPT)
+pushd ..
+export XENDRA_HOME=$SCRIPTPATH
+popd
+VERSION="2.0"
+#JAVA_HOME=$XENDRA_HOME/java
+
+##	Check Java Home
+if [ $JAVA_HOME ]; then
+  JAVA=$JAVA_HOME/bin/java
+else
+  JAVA=java
+  echo JAVA_HOME is not set.
+  echo   You may not be able to start Xendra
+  echo   Set JAVA_HOME to the directory of your local JDK.
+fi
+
+## Check Xendra Home
+if [ $XENDRA_HOME ]; then
+  cd $XENDRA_HOME
+#  for i in `ls $XENDRA_HOME/lib/*.jar`; do
+#	CLASSPATH=$i:$CLASSPATH
+#  done
+#  HORNETQ=$XENDRA_HOME/hornetq
+fi
+
+classpath () 
+{
+for i in `find ./plugins -type f -name "*.jar"`
+do 
+	CLASSPATH=$i:$CLASSPATH
+done
+for i in `find ./lib -type f -name "*.jar"`
+do
+	CLASSPATH=$i:$CLASSPATH
+done
+}
+
+# To switch between multiple installs, copy the created Xendra.properties file
+# Select the configuration by setting the PROP variable
+PROP=-DPropertyFile=$XENDRA_HOME/conf/Xendra.properties
+#PROP=-DPropertyFile=test.properties
+
+#  To use your own Encryption class (implementing org.compiere.util.SecureInterface),
+#  you need to set it here (and in the server start script) - example:
+#  SECURE=-DXENDRA_SECURE=org.compiere.util.Secure
+SECURE=
+classpath
+$JAVA -Xms512m -DXENDRA_HOME=$XENDRA_HOME $PROP $SECURE -classpath "$CLASSPATH" org.xendra.modeleditor.FormModel
+

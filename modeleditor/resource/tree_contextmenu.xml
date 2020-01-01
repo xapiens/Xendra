@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<menu>
+ <menuitem id="CreateSubFolder"/>
+	 <menuitem id="GroupRefreshAction"/>
+	 <menuitem id="TableDeleteAction"/>
+	 <menuitem id="ColumnDeleteAction"/>
+	 <separator/>
+	 <menuitem id="ExportDataAction"/>
+	 <separator/>
+	 <menuitem id="Synchronized"/>
+</menu>

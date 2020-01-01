@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="Model editor extensions"
+	description="Contains references to model editor extension"
+	id="org.xendra.modeleditor" 
+	version="1.0" 
+	category="Developer" 
+	synchronized="@timestamp@"
+	tags="Developer Modeling"
+	enabled="true">
+	<handlerlist>
+		<handler id="org.xendra.modeleditor.folder"/>
+	</handlerlist> 
+
+	<extensionlist id="org.xendra.modeleditor.folder">
+		<extension id="Root" class="org.xendra.modeleditor.folder.Root" />
+		<extension id="plugin"  class="org.xendra.modeleditor.folder.PluginFolder" />
+		<extension id="package" class="org.xendra.modeleditor.folder.PackageFolder" />
+		<extension id="tab" class="org.xendra.modeleditor.folder.TabFolder"/>
+		<extension id="field" class="org.xendra.modeleditor.folder.FieldFolder"/>
+		<extension id="table" class="org.xendra.modeleditor.folder.TableFolder"/>
+		<extension id="column" class="org.xendra.modeleditor.folder.ColumnFolder"/>
+		<extension id="window" class="org.xendra.modeleditor.folder.WindowFolder"/>	
+	</extensionlist>
+
+	<extensionlist id="org.columba.core.action">
+		<extension id="AddTable" class="org.xendra.modeleditor.gui.action.AddTableAction"/>
+		<extension id="AddColumn" class="org.xendra.modeleditor.gui.action.AddColumnAction"/>
+		<extension id="Synchronized" class="org.xendra.modeleditor.gui.action.Synchronized"/>		
+		<extension id="GroupRefreshAction" class="org.xendra.modeleditor.gui.tree.action.GroupRefreshAction"/>
+		<extension id="TableDeleteAction" class="org.xendra.modeleditor.gui.tree.action.TableDeleteAction"/>
+		<extension id="ColumnDeleteAction" class="org.xendra.modeleditor.gui.action.DeleteColumnAction"/>
+		<extension id="ExportDataAction"   class="org.xendra.modeleditor.gui.tree.action.ExportDataAction"/>
+	</extensionlist>
+	<!-- here all the new item templates for frame -->
+	
+	<extensionlist id="org.columba.core.newitem">
+ 		<extension id="AddTable" class="org.xendra.modeleditor.gui.action.AddTableAction"/>
+ 		<extension id="AddColumn" class="org.xendra.modeleditor.gui.action.AddColumnAction"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.search">
+ 		<extension id="RuleSearchProvider" class="org.xendra.modeleditor.search.RuleSearchProvider"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.context.provider">
+	 <!--
+	 <extension id="ContactSearchProvider" class="org.columba.addressbook.gui.context.ContactContextualProvider"/>
+ 	 <extension id="ContactDetailsSearchProvider" class="org.columba.addressbook.gui.context.ContactDetailsContextualProvider"/>
+ 	 -->
+	</extensionlist>
+	<extensionlist id="org.columba.core.component.box">
+ 		<extension id="ContactBox" class="org.xendra.modeleditor.gui.box.ContactBox"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.frame">
+ 		<extension id="ModelEditor" class="org.xendra.modeleditor.gui.frame.ModelEditorFrameController">
+   			<properties managed="true" />
+ 		</extension>
+	</extensionlist>
+	<extensionlist id="org.columba.core.component">
+    	<extension id="ModelEditorComponent" class="org.xendra.modeleditor.main.ModelEditorMain" />
+	</extensionlist>
+</plugin>
