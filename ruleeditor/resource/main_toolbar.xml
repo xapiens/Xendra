@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  icons /usr/share/icons/gnome/ -->
+<toolbar visible="true">
+    <button action="AddSession"/>
+    <button action="ExportSession"/>
+    <button action="AddGroup"/>
+    <separator/>
+    <button action="AddRule"/>
+    <button action="SaveRule"/>
+    <separator/>
+    <button action="DeleteRule"/>
+    <separator/>
+    <button action="CompileRule"/>    
+    <separator/>
+    <button action="EditProperties"/>
+</toolbar>

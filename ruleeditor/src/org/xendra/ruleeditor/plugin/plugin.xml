@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="Rule editor"
+	description="Contains references to all rule extension"
+	id="org.xendra.ruleeditor" 
+	version="1.0" 
+	category="Business Rules" 
+	synchronized="@timestamp@"
+	tags = "rules"
+	enabled="true">
+	<handlerlist>
+		<handler id="org.xendra.ruleeditor.folder"/>
+	</handlerlist> 
+
+	<extensionlist id="org.xendra.ruleeditor.folder">
+		<extension id="Root" class="org.xendra.ruleeditor.folder.Root" />
+		<extension id="group" class="org.xendra.ruleeditor.folder.GroupFolder" />
+		<extension id="plugin" class="org.xendra.ruleeditor.folder.PluginFolder" />
+		<extension id="rule" class="org.xendra.ruleeditor.folder.RuleFolder" />
+		<extension id="fact" class="org.xendra.ruleeditor.folder.FactFolder" />
+		<extension id="model" class="org.xendra.ruleeditor.folder.ModelFolder" />
+		<extension id="form" class="org.xendra.ruleeditor.folder.FormFolder" />
+		<extension id="channel" class="org.xendra.ruleeditor.folder.ChannelFolder"/>
+		<extension id="kiebase" class="org.xendra.ruleeditor.folder.KieBaseFolder" />		
+	</extensionlist>
+
+	<extensionlist id="org.columba.core.action">
+		<extension id="AddSession" class="org.xendra.ruleeditor.gui.action.AddSessionAction"/>
+		<extension id="AddRule" class="org.xendra.ruleeditor.gui.action.AddRuleAction"/>		
+		<extension id="AddGroup" class="org.xendra.ruleeditor.gui.action.AddGroupAction"/>
+		<extension id="DeleteGroup" class="org.xendra.ruleeditor.gui.action.DeleteGroupAction"/>
+		<extension id="Refresh" class="org.xendra.ruleeditor.gui.action.RefreshFolderAction"/>
+		<extension id="SaveRule" class="org.xendra.ruleeditor.gui.action.SaveRuleAction"/>
+		<extension id="DeleteRule" class="org.xendra.ruleeditor.gui.action.DeleteRuleAction"/>
+		<extension id="CompileRule" class="org.xendra.ruleeditor.gui.action.CompileRuleAction"/>
+		<extension id="ExportSession" class="org.xendra.ruleeditor.gui.action.ExportSessionAction"/>
+	</extensionlist>
+	<!-- here all the new item templates for frame -->
+	<extensionlist id="org.columba.core.newitem">
+ 		<extension id="AddSession" class="org.xendra.ruleeditor.gui.action.AddSessionAction"/>
+ 		<extension id="AddRule" class="org.xendra.ruleeditor.gui.action.AddRuleAction"/>
+	</extensionlist>
+	<!--<extensionlist id="org.columba.core.search">
+ 		<extension id="RuleSearchProvider" class="org.xendra.ruleeditor.search.RuleSearchProvider"/>
+	</extensionlist>-->
+	<extensionlist id="org.columba.core.context.provider">
+	 <!--
+	 <extension id="ContactSearchProvider" class="org.columba.addressbook.gui.context.ContactContextualProvider"/>
+ 	 <extension id="ContactDetailsSearchProvider" class="org.columba.addressbook.gui.context.ContactDetailsContextualProvider"/>
+ 	 -->
+	</extensionlist>
+	<extensionlist id="org.columba.core.component.box">
+ 		<extension id="ContactBox" class="org.xendra.ruleeditor.gui.box.ContactBox"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.frame">
+ 		<extension id="RuleEditor" class="org.xendra.ruleeditor.gui.frame.RuleEditorFrameController">
+   			<properties managed="true" />
+ 		</extension>
+	</extensionlist>
+	<extensionlist id="org.columba.core.component">
+    	<extension id="RuleEditorComponent" class="org.xendra.ruleeditor.main.RuleEditorMain" />
+	</extensionlist>
+	<extensionlist id="org.columba.core.config">
+		<extension id="org.xendra.ruleeditor" class="org.xendra.ruleeditor.plugin.ConfigPlugin"/>
+	</extensionlist>
+</plugin>
