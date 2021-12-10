@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup>
+	<generalledger>
+		<category name="Standard" type="M" default="Y"/>
+		<category name="None" type="D" default="N" identifier = "41c2f077-2a7d-9c11-74dc-6dc5bba3796b">
+			<doctype name="Asunto del Proyecto" printname="Asunto del Proyecto" docbasetype="PJI" startno="640000" />
+			<doctype name="Corresponder OC" printname="Corresponder OC" docbasetype="MXP" startno="890000" />
+			<doctype name="Cotización" printname="Cotización" docbasetype="SOO"  docsubtype="OB" startno="10000" />			
+			<doctype identifier = "5017858b-4822-463d-992f-49d9e8b9dd81" name="Factura CxC" printname ="Factura CxC" docbasetype="ARI" startno="100000"/>
+			<doctype name="Orden de Compra" printname="Orden de Compra" docbasetype="POO" docsubtype="PO" startno="800000"/>
+			<doctype name="Orden POP" printname="Order POP" docbasetype="POO" docsubtype="PP"
+				 shipment="93f2415d-0d9c-2df5-9fa3-a6d234cd4a88" invoice="76c555e2-1b6d-4618-c04c-ea5525c42ca7"
+				startno="10000" />
+			<doctype name="Orden Compra Almacen" printname="Orden Compra Almacen" docbasetype="POO" docsubtype="PW"
+				 shipment="93f2415d-0d9c-2df5-9fa3-a6d234cd4a88" 
+				startno="10000" />			
+			<doctype name="Orden de Crédito" printname="Orden de Crédito" docbasetype="SOO" docsubtype="WI" startno="60000"/>
+			<doctype name="Orden Devolución" printname="Orden Devolución" docbasetype="SOO" docsubtype="RM" startno="30000"/>
+			<doctype identifier ="6549e7ec-232f-40fb-89f9-16eb59c039ef" 
+					 name="Orden Prepagada" printname="Orden Prepagada" docbasetype="SOO" docsubtype="PR" 
+					 shipment="0af77d84-3463-49c5-a9f6-395570e35d35" invoice="5017858b-4822-463d-992f-49d9e8b9dd81" startno="30000"/>
+			<doctype name="Order de Venta" printname="Order de Venta" docbasetype = "SOO" docsubtype="SO" startno="50000" />
+			<doctype name="Orden de Almacén" printname="Orden de Almacén" docbasetype="SOO" docsubtype="WP" 
+					 shipment="0af77d84-3463-49c5-a9f6-395570e35d35" startno="70000" />
+			<doctype identifier="15539d87-2bc0-425d-85b8-d842be8bfaf1" 
+					 name="Orden POS" printname="Orden POS" docbasetype="SOO" docsubtype="WR" 
+					 shipment="0af77d84-3463-49c5-a9f6-395570e35d35" invoice="5017858b-4822-463d-992f-49d9e8b9dd81" startno="80000"/>									
+			<doctype name="Producción" printname="Producción" docbasetype="MMP" startno="630000" transactiontype="B" /> 
+			<docyype name="Propuesta" printname="Propuesta" docbasetype="SOO" docsubtype="ON" startno="20000"/>
+			<doctype name="Requisición de Material" printname="Requisición de Material" docbasetype="POR" startno="900000" />
+			<doctype name="Letra de Cambio (Proveedor)" printname="Letra de Cambio (Poveedor)" docbasetype="BOE" />
+			<doctype name="Recibo Honorarios CxP" printname="Recibo Honorarios CxP" docbasetype="FPS" taxid="02" />			
+		</category>
+		<category name="Manual" type="M" default="N">
+			<doctype name="Asiento Diario" printname="Asiento Diario" docbasetype="GLJ" startno="1000" />
+			<doctype name="Lote de Diario" printname="Lote de Diario" docbasetype="GLJ" startno="100" />
+		</category>
+		<category name="AR Invoice" type="D" default="N">
+			<doctype name="Boleta CxC" printname="Boleta CxC" docbasetype="ARI" startno="150000" />
+			<doctype name="Nota de Crédito CxC" printname="Nota de Crédito CxC" docbasetype="ARC" startno="170000"/>
+			<doctype name="Nota de Débito CxC" printname="Nota de Débito CxC" docbasetype="ARI" startno="100000" />
+		</category>
+		<category name="AR Receipt" type="D" default="N">
+			<doctype name="Ingreso" printname="Ingreso" docbasetype="ARR" /> 
+		</category>
+		<category name="Material Management" type="D" default="N">
+			<doctype name="Devolución de Material (Proveedor)" printname="Devolución de Material (Proveedor)"  docbasetype="MRV"  transactiontype="B" startno="570000"/>
+			<doctype identifier = "0af77d84-3463-49c5-a9f6-395570e35d35" name="Entrega de Material" printname="Entrega de Material" docbasetype="MMS"  transactiontype="B" startno="500000"/>
+			<doctype name="Inventario Físico" printname="Inventario Físico" docbasetype="MMI" transactiontype="B" startno="620000"/>
+			<doctype name="Movimiento c/ Confirmación" printname = "Movimiento c/ Confirmación" docbasetype="MMM" startno="610000"/>
+			<doctype name="Movimiento Directo" printname ="Movimiento Directo" docbasetype="MMM"  transactiontype="B" startno="610000"/>
+			<doctype name="Guía de Remisión (Proveedor)" printname="Guía de Remisión (Proveedor)" docbasetype="MMR"/> 
+			<doctype identifier= "93f2415d-0d9c-2df5-9fa3-a6d234cd4a88" name="Recibo de Material" printname="Recibo de Material" docbasetype="MMR" transactiontype="B"/>
+			<doctype name="Letra de Cambio (Cliente)" printname="Letra de Cambio (Cliente)" docbasetype ="BOE"/>
+		</category>
+		<category name="AP Invoice" type="D" default="N">
+			<doctype name="Corresponder Factura" printname="Corresponder Factura" docbasetype="MXI" startno="390000" />
+			<doctype name="Devolución de Material (Cliente)" printname="Devolución de Material (Cliente)" docbasetype="MRC"  transactiontype="B" startno="570000"/>
+			<doctype name="Nota de Crédito CxP" printname="Nota de Crédito CxP" docbasetype="APC" taxid="07" /> 
+			<doctype name="Boleta CxP" printname="Boleta CxP" docbasetype="API" taxid="03" />
+			<doctype identifier = "76c555e2-1b6d-4618-c04c-ea5525c42ca7" name="Factura CxP" printname="Factura CxP" docbasetype="API" />
+			<doctype name="Recibo Servicios CxP" printname="Recibo Servicios CxP" docbasetype="API" taxid="14" />
+			<doctype name="Ticket CxP" printname="Ticket CxP" docbasetype="API" taxid="12" />
+			<doctype name="Nota de Débito CxP" printname="Nota de Débito CxP" docbasetype="APB" taxid="08" />
+			// SUNAT
+			<doctype name="Otros" printname="Otros" docbasetype="API" taxid="00"/>
+			<doctype name="Liquidacion de compras" printname="Liquidacion de compras" docbasetype="API" taxid="04"/>
+			<doctype name="Boleto de transporte aereo" printname="Boleto de transporte aereo" docbasetype="API" taxid="05" />
+			<doctype name="Carta de porte aereo" printname="Carta de porte aereo" docbasetype="API" taxid="06" />
+			<doctype name="Recibo por arrendamiento" printname="Recibo por arrendamiento" docbasetype="API" taxid="10" />
+			<doctype name="Docs.emitidos por las empresas del sistema financiero y de seguros" printname="Docs.emitidos por las empresas del sistema financiero y de seguros" docbasetype="API" taxid="13" />
+			<doctype name="Boleto de transporte terrestre" printname="Boleto de transporte terrestre" docbasetype="API" taxid="15" />
+			<doctype name="Boletos de viaje emitidos por las empresas de transporte nacional de pasajeros" printname="Boletos de viaje emitidos por las empresas de transporte nacional de pasajeros" docbasetype="API" taxid="16" />
+			<doctype name="Doc.emitido por las AFP" printname="Doc.emitido por las AFP" docbasetype="API" taxid="18" />
+			<doctype name="Boleto o entrada por atracciones y espectáculos públicos" printname="Boleto o entrada por atracciones y espectáculos públicos" docbasetype="API" taxid="19" />
+			<doctype name="Comprobante de Retención" printname="Comprobante de Retención" docbasetype="API" taxid="20" />
+			<doctype name="Conocimiento de embarque" printname="Conocimiento de embarque" docbasetype="API" taxid="21" />
+			<doctype name="Comprobante por Operaciones No Habituales" printname="Comprobante por Operaciones No Habituales" docbasetype="API" taxid="22" />
+			<doctype name="Comprobante de Percepción" printname="Comprobante de Percepción" docbasetype="API" taxid="40" />
+			<doctype name="Boletos emitidos por las Compañías de Aviación Comercial" printname="Boletos emitidos por las Compañías de Aviación Comercial" docbasetype="API" taxid="43" />
+			<doctype name="Declaración Única de Aduanas - Importación definitiva" printname="Declaración Única de Aduanas - Importación definitiva" docbasetype="API" taxid="50" />
+			<doctype name="Póliza o DUI Fraccionada" printname="Póliza o DUI Fraccionada" docbasetype="API" taxid="51" />
+			<doctype name="Despacho Simplificado - Importación Simplificada" printname="Despacho Simplificado - Importación Simplificada" docbasetype="API" taxid="52" />
+			<doctype name="Declaración de Mensajería o Courier" printname="Declaración de Mensajería o Courier" docbasetype="API" taxid="53" />
+			<doctype name="Liquidación de Cobranza" printname="Liquidación de Cobranza" docbasetype="API" taxid="54" />
+			<doctype name="Comprobante de No Domiciliado" printname="Comprobante de No Domiciliado" docbasetype="API" taxid="91" />
+			<doctype name="Nota de Crédito - No Domiciliado" printname="Nota de Crédito - No Domiciliado" docbasetype="API" taxid="97" />
+			<doctype name="Nota de Débito - No Domiciliado" printname="Nota de Débito - No Domiciliado" docbasetype="API" taxid="98" />
+			
+		</category>
+		<category name="AP Payment" type="D" default="N">
+			<doctype name="Egreso" printname="Egreso" docbasetype="APP" />  
+		</category>
+		<category name="Cash/Payments" type="D" default="N">
+			<doctype name="Asignación" printname="Asignación" docbasetype="CMA" startno="490000" />
+			<doctype name="Diario de Efectivo" printname="Diario de Efectivo" docbasetype="CMC" startno="750000"/>
+			<doctype name="Estado Bancario" printname="Estado Bancario" docbasetype="CMB" startno="700000"/>
+		</category>
+		<category name="Bank Account Transfer" type="D" default="N">
+			<doctype name="Transferencia" printname="Transferencia" docbasetype="BAT" startno="760000" />
+		</category>
+	</generalledger>
+	<preferences>
+		<preference field="C_DocTypeTarget_ID" table="C_DocType" value="15539d87-2bc0-425d-85b8-d842be8bfaf1" windowid="c6b21e03-9b7e-a7c6-27ff-50703fd13562" />
+	</preferences>	
+</setup>

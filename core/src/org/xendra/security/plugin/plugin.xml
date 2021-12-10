@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="Security editor extensions"
+	description="Certificate Security Editor"
+	id="org.xendra.security" 
+	version="1.0" 
+	category="security" 
+	synchronized="@timestamp@"
+	enabled="true">
+		
+	<extensionlist id="org.columba.core.action">
+		<extension id="LoadAction" class="org.xendra.security.gui.action.LoadAction"/>
+		<extension id="SaveAction" class="org.xendra.security.gui.action.SaveAction"/>		
+		<!--<extension id="AddCertificateAction" class="org.xendra.security.gui.action.AddCertificateAction"/>
+		<extension id="ExportAsciiAction" class="org.xendra.security.gui.action.ExportAsciiAction"/>
+		<extension id="ExportCertificateAction"   class="org.xendra.security.gui.action.ExportCertificateAction"/>-->
+	</extensionlist>
+		
+	<extensionlist id="org.columba.core.frame">
+ 		<extension id="SecurityEditor" class="org.xendra.security.gui.frame.SecurityEditorFrameController">
+   			<properties managed="true" />
+ 		</extension>
+	</extensionlist>
+</plugin>
