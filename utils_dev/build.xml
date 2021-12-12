@@ -1,0 +1,176 @@
+﻿<!-- ================================================ -->
+<!-- Xendra Build                                     -->
+<!-- ================================================ -->
+<!-- $Header: /cvsroot/xendra/erp/utils_dev/build.xml,v 1.1 2007/06/22 21:21:28 sergioaguayo Exp $ -->
+<project name="xendra" default="complete" basedir="../">
+	<description>
+    This buildfile is used to build the Xendra system.
+  </description>
+	<!-- set global properties for this build -->
+	<!--<property environment="env"/>-->
+  <import file="./properties.xml"/>
+	<property name="src" value="src"/>
+	<property name="build.dir" value="build"/>
+	<target name="init" description="initialization target">
+		<echo message="=========== Build Xendra - ${env.ENCODING}"/>
+		<echo>Ant Version ${ant.version}</echo>
+		<!-- Create the time stamp -->
+		<tstamp/>
+	</target>
+	<target name="build" depends="init">		
+		<ant inheritAll="false" dir="tools"/>	
+		<!--<ant inheritAll="false" dir="base"/>-->
+		<ant inheritAll="false" dir="core"/>
+		<!--<ant inheritAll="false" dir="xalos"/>-->
+		<!--<ant inheritAll="false" dir="ruleeditor"/>-->
+		<!--<ant inheritAll="false" dir="addressbook"/>-->
+		<!--<ant inheritAll="false" dir="calendar"/>-->
+		<!--<ant inheritAll="false" dir="mail"/>-->
+		<!--<ant inheritAll="false" dir="JasperReports"/>-->
+		<!--<ant inheritAll="false" dir="client"/>-->
+		<ant inheritAll="false" dir="pos"/>
+		<ant inheritAll="false" dir="xendrian"/>
+		<!--<ant inheritAll="false" dir="serverRoot"/>-->
+		<ant inheritAll="false" dir="serverApps"/>
+		<!--<ant inheritAll="false" dir="JasperReportsWebApp"/>-->
+		<!--<ant inheritAll="false" dir="webStore"/>-->
+		<ant inheritAll="false" dir="webservice"/>
+		<ant inheritAll="false" dir="customreports"/>
+		<ant inheritAll="false" dir="extend"/>
+		<!--<ant inheritAll="false" dir="xalos"/> -->
+		<!--<ant inheritAll="false" dir="install"/>-->
+	</target>
+	<target name="clean">
+		<!--<ant inheritAll="false" dir="xalos" target="clean"/>-->
+		<ant inheritAll="false" dir="tools" target="clean"/>
+		<!--<ant inheritAll="false" dir="base" target="clean"/>-->
+		<ant inheritAll="false" dir="core" target="clean"/>
+		<!--<ant inheritAll="false" dir="ruleeditor" target="clean"/>-->
+        	<ant inheritAll="false" dir="client" target="clean"/>
+		<ant inheritAll="false" dir="xendrian" target="clean"/>
+		<!--<ant inheritAll="false" dir="addressbook" target="clean"/>-->
+		<!--<ant inheritAll="false" dir="calendar" target="clean"/>-->
+		<!---<ant inheritAll="false" dir="mail" target="clean"/>-->
+		<!--<ant inheritAll="false" dir="pos" target="clean"/>-->
+		<!--<ant inheritAll="false" dir="JasperReports" target="clean"/>-->
+		<!--<ant inheritAll="false" dir="JasperReportsWebApp" target="clean"/>-->
+		<!--<ant inheritAll="false" dir="serverRoot" target="clean"/>-->
+		<ant inheritAll="false" dir="serverApps" target="clean"/>
+		<!--<ant inheritAll="false" dir="webStore" target="clean"/>-->
+		<ant inheritAll="false" dir="webservice" target="clean"/>
+		<ant inheritAll="false" dir="customreports" target="clean"/>
+   		<ant inheritAll="false" dir="extend" target="clean"/>
+		<!--<ant inheritAll="false" dir="install" target="clean"/>-->
+  </target>
+  <target name="clean-all" depends="clean">
+    <delete dir="${env.XENDRA_ROOT}"/>
+  </target>
+
+	<!-- ================================================ -->
+	<!-- Xendra Local Install                             -->
+	<!-- ================================================ -->
+	<target name="install" depends="" description="Environment dependent">
+		<echo message="=========== Install Xendra"/>
+		<!--<copy todir="${env.XENDRA_INSTALL}">
+			<fileset dir="install/build" includes="Xendra_*"/>
+		</copy>-->
+		<!-- Delete Existing stuff, but not utils + data 	-->
+		<!--<delete failonerror="false">
+			<fileset dir="${env.XENDRA_HOME}/lib"/>
+			<fileset dir="${env.XENDRA_HOME}/jboss"/>
+		</delete>-->
+		<!-- Unzip Install File			-->
+		<!--<unzip src="install/build/Xendra_${env.XENDRA_VERSION_FILE}.zip" 
+			dest="${env.XENDRA_ROOT}" 
+			overwrite="yes"/>-->
+		<!-- Run Setup				-->
+		<!--
+		<input addproperty="runSetupInput" 
+			message="Run Setup(Y/N) ? " 
+			validargs="Y,y,N,n"/>
+		
+		<antcall target="runSetup"/>
+		-->
+	</target>
+	
+	<!-- ================================================ -->
+	<!-- Xendra Local Update                              -->
+	<!-- ================================================ -->
+	<target name="updateDeploy" depends="" description="Environment dependent">
+		<echo message="=========== Update Xendra"/>
+		<copy todir="${env.XENDRA_INSTALL}">
+			<fileset dir="install/build" includes="Xendra_*"/>
+		</copy>
+		<!-- Unzip Install File			-->
+		<unzip src="install/build/Xendra_${env.XENDRA_VERSION_FILE}.zip" 
+			dest="${env.XENDRA_ROOT}" 
+			overwrite="yes"/>
+		<!-- Run Setup				-->
+		<antcall target="runUpdateWin"></antcall>
+		<antcall target="runUpdateNonWin"></antcall>
+	</target>
+	
+	<target name="runSetupInit">
+		<condition property="isWindows">
+			<os family="windows" />
+		</condition>
+	</target>
+	
+	<target name="runSetupWin" depends="runSetupInit" if="isWindows" >
+		<exec dir="${env.XENDRA_HOME}" executable="RUN_setup.bat" 
+			spawn="false" resolveexecutable="true">
+		</exec>
+	</target>
+	
+  <target name="runSetupNonWin" depends="runSetupInit" unless="isWindows" >
+    <chmod dir="${env.XENDRA_HOME}" perm="ugo+rx" includes="RUN_setup.sh"/>
+		<exec dir="${env.XENDRA_HOME}" executable="RUN_setup.sh" 
+			spawn="false" resolveexecutable="true">
+		</exec>
+	</target>
+	
+	<target name="runSetupCheck">
+		<condition property="setup.yes">
+			<or>
+				<equals arg1="y" arg2="${runSetupInput}"/>
+				<equals arg1="Y" arg2="${runSetupInput}"/>
+			</or>
+		</condition>
+	</target>
+	
+	<target name="runSetup" depends="runSetupCheck" if="setup.yes">
+		<antcall target="runSetupWin"></antcall>
+		<antcall target="runSetupNonWin"></antcall>
+	</target>
+
+	<target name="runUpdateWin" depends="runSetupInit" if="isWindows" >
+		<exec dir="${env.XENDRA_HOME}" executable="RUN_update.bat" 
+			spawn="false" resolveexecutable="true">
+		</exec>
+	</target>
+	
+  <target name="runUpdateNonWin" depends="runSetupInit" unless="isWindows" >
+    <chmod dir="${env.XENDRA_HOME}" perm="ugo+rx" includes="RUN_update.sh"/>
+		<exec dir="${env.XENDRA_HOME}" executable="RUN_update.sh" 
+			spawn="false" resolveexecutable="true">
+		</exec>
+	</target>
+
+	<!-- ================================================ -->
+	<!-- complete                                         -->
+	<!-- ================================================ -->
+	<target name="complete" depends="build, install">
+	</target>
+	
+	<!-- ================================================ -->
+	<!-- update                                           -->
+	<!-- ================================================ -->
+	<target name="update" depends="build, updateDeploy">
+	</target>
+
+	<!-- ================================================ -->
+	<!-- Transfer Install                                 -->
+	<!-- ================================================ -->
+	<target name="transfer" depends="complete" description="Transfer to Distribution media">
+	</target>
+</project>

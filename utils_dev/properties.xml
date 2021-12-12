@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<project name="properties" basedir=".">
+    <description>
+        This project file sets all properties needed during build and
+        installation. This file is imported in all other build.xml
+        files. This file provides a central place for managing
+        properties.
+    </description> 
+    <dirname property="xendra.base" file="${ant.file.properties}/.."/>
+    <property file="${user.home}/.xendra.properties"/>
+    <property file="${xendra.base}/utils_dev/mybuild.properties"/>
+    <property file="${xendra.base}/utils_dev/build.properties"/>
+</project>
