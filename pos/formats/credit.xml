@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="CreditoX MabyX" category="PRC" Identifier="251c99a2-e3ee-4c23-a81e-94f641005168" Synchronized="2020-01-18 15:15:27.316" >
+<properties/>
+<format>
+<![CDATA[
+
+======================================
+Tk. Boleta No: @{SerialToInvoice} - @{DocumentNoToInvoice}
+MAQ REG: @{PrinterSerial}
+CAJA No: @{MachineSerial}
+@{Created}   VEND: @{SalesRep_ID}
+======================================
+@{C_PaymentTerm_ID}
+======================================
+Titular  : @{C_BPartner_ID}
+
+T O T A L :S/. @{GrandTotal}
+
+AUTORIZO A ESTE CENTRO DE TRABAJO QUE
+ESTE MONTO SEA DESCONTADO DEL PAGO DE
+MIS HABERES
+
+FIRMA___________________________
+
+DNI:
+
+TIPO  : Cargo
+
+
+@command{paper_full_cut}-
+]]></format></printdocumentformat>

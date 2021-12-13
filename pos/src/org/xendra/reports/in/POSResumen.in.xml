@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Resumen Ventas" Name="Resumen Ventas" BaseRole="ALL" Description="" Help="Resumen Ventas" Classname="org.compiere.report.ReportStarter" CategoryName="Sales" AccessLevel="3" EntityType="D" FileName="POSResumen.jrxml" Identifier="" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="a5d49e1f-9a66-684e-8988-98699975c155" Synchronized="2016-05-03 11:51:14.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Org_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="61bd7340-e7ab-9746-0774-7d5a1036a0cd" Synchronized="2016-05-03 11:51:15.0" />
+  <parameter Name="Date Invoiced" Description="Date printed on Invoice" Help="The Date Invoice indicates the date printed on the invoice." AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateinvoiced" FieldLength="7" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="7bf4ffb7-7f10-cbd2-c891-6f17de3167ce" Synchronized="2018-11-30 09:58:02.0" />
+</process>
+
+

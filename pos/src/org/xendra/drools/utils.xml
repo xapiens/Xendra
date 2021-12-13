@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processes>
+<process value="MessageToOrder" accesslevel="6" frequencytype="M" frequency="2" keeplogdays="7" name="MessageToOrder" type="A" class="org.xendra.process.MessageToOrder" identifier="02f38405-5054-54f0-6226-6ebd3882f376"/>
+<parameter name="X_C_DocType.COLUMNNAME_C_DocType_ID" seqno="10" ad_reference_id
+ <parameter name="DateFrom" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[new SimpleDateFormat("dd/mm/yyyy").parse("01/01/2014")]]></defaultValueExpression>
+  </parameter>
+</processes>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="cuadre de caja" category="PRC" Identifier="05c0c676-686f-b8be-09c4-417fa438bc3c" Synchronized="2020-01-18 12:29:57.312" >
+<properties/>
+<format>
+<![CDATA[
+LIQUIDACION DE CAJA
+@{Created}
+@{startDate}
+CAJA N- :@{MachineSerial} Cajera: @{UserName}
+========================================
+FORMA PAGO  OPERADORA  SYSTEM DIFERENCIA
+========================================
+@code{counter=0}@foreach{index : Name}
+	@{Name[counter]} @{CountSystem[counter]} @{CountDiff[counter]} @code{counter++}@end{}
+
+========================================
+TOTALES   @{TotalCountHuman} @{TotalCountSystem} @{TotalCountDiff}
+========================================
+
+
+
+@command{paper_full_cut}-]]></format></printdocumentformat>

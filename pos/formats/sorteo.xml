@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="sorteo" category="PRC" Identifier="251c99a2-e3ee-4c23-a81e-94f641005168" Synchronized="2020-02-28 18:22:04.052" >
+<properties/>
+<format>
+<![CDATA[
+!!! SORTEO DIA DE LA MADRE !!!
+======================================
+Tk. Boleta No: @{SerialToInvoice} - @{DocumentNoToInvoice}
+@{Created}
+======================================
+T O T A L :S/. @{GrandTotal}
+
+CLIENTE:______________________________
+
+
+FIRMA:_______________________
+
+DNI  :_______________________ 
+
+@command{paper_full_cut}-]]></format></printdocumentformat>

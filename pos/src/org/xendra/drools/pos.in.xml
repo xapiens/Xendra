@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="poskb" category="pos sales" agenda="init" default="false" 
+	package="org.xendra.pos.rules" sessionname="posks" 
+	EqualsBehavior="EQUALITY" EventProcessingMode="CLOUD"	Identifier="6ef3453a-5d5f-2e73-8d17-90bf348a0f87"  synchronized="2017-04-06 18:48:41" type="kiebase">	
+<rule name="src/main/resources/org/xendra/pos/pos.drl" type="rule" sessionname="posks" file="pos.drl" Identifier = "19f42ebb-0079-d76e-18af-60e54e73c407"  synchronized="2017-09-06 11:20:41"/>
+</kiebase>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listen name="voidkb" category="void listener" agenda="void" default="True" 
+	package="org.xendra.rules.messages" queuename="/queue/void"  
+	queuelistenerclass="org.xendra.rules.messages.voidmessageListener" 
+	Identifier="f1eb541d-2e6a-d042-a80e-9c94aa9ec1cf"  synchronized="2016-08-31 10:40:41">
+	<process value="Void Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Void Listener" type="L" class="" Identifier="8659a8f2-ef82-57de-2e50-6fdea0c3d3c4"/>	
+</listen>

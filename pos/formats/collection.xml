@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="cobranza" category="PRC" Identifier="c199f206-5a6d-b618-4d92-05ebbe6f73f4" Synchronized="2020-03-01 22:09:16.717" >
+<properties/>
+<format>
+<![CDATA[
+
+
+=======================================
+@{Created}
+CAJA No: @{MachineSerial}  VEND: @{SalesRep_ID}
+Cliente: @{C_BPartner_ID}
+=======================================
+DEUDA   : @{Debt}
+PAGO    : @{Pay}
+SALDO   : @{Balance}
+
+
+FIRMA___________________________
+
+DNI:
+
+]]></format><source>
+<![CDATA[
+pd.setProperty("Created", source.get("Created"));
+pd.setProperty("MachineSerial",source.get("MachineSerial"));
+pd.setProperty("SalesRep_ID", source.get("SalesRep_ID"));
+pd.setProperty("C_BPartner_ID", source.get("C_BPartner_ID"));
+pd.setProperty("Debt", source.get("Debt"));
+pd.setProperty("Pay", source.get("Pay"));
+pd.setProperty("Balance", source.get("Balance"));]]></source></printdocumentformat>

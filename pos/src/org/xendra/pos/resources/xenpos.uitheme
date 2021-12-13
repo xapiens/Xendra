@@ -1,0 +1,27 @@
+################################################################################
+# Name:    XenPOS
+# Author:  xapiens
+# Date:    12/08/2014
+################################################################################
+
+################################################################################
+# COMMON PROPERTIES
+################################################################################
+
+Common.shadowOpacity=0.5
+#Common.shadowColor=#000000
+Common.shadowColor=#C8E0C2
+Common.shadowDirection=60
+
+Common.lightColor=#4B5461
+#Common.darkColor=#202737
+Common.darkColor=#C8E0C2
+
+################################################################################
+# XENPOS
+################################################################################
+PosPanel.pospriceFont=Monospaced-NORMAL-72
+#PosPanel.posgridFont=Default-BOLD-24
+PosPanel.posgridFont=Default-NORMAL-24
+
+ErrorPanel.poserrorFont=Default-NORMAL-24

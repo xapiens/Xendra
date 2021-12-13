@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="POS" IsSummary="Y" IsSOTrx="Y" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+	<menuitem Report="POSPago" SeqNo="10"/>
+	<menuitem Report="POSCorrelativo" SeqNo="20"/>
+	<menuitem Report="POSProducto" SeqNo="30"/>
+	<menuitem Report="POSResumen" SeqNo="40"/>
+</menuitem>

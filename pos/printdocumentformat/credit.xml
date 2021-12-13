@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="credito" category="PRC" Identifier="251c99a2-e3ee-4c23-a81e-94f641005168" Synchronized="2020-03-02 23:15:19.531" >
+<properties/>
+<format>
+<![CDATA[
+
+         MEGA MARKET
+MABY MARKET SAC  Ruc No 20484263010
+   JJ.FARFAN 260 - ANEXO CALLE GRAU 735
+     SULLANA - SULLANA PIURA
+      TELF. 509101 MEGA
+======================================
+Tk. Boleta No: @{SerialToInvoice} - @{DocumentNoToInvoice}
+MAQ REG: @{PrinterSerial}
+CAJA No: @{MachineSerial}
+@{Created}   VEND: @{SalesRep_ID}
+======================================
+@{C_PaymentTerm_ID}
+======================================
+Titular  : @{C_BPartner_ID}
+
+T O T A L :S/. @{GrandTotal}
+
+AUTORIZO A ESTE CENTRO DE TRABAJO QUE
+ESTE MONTO SEA DESCONTADO DEL PAGO DE
+MIS HABERES
+
+FIRMA___________________________
+
+DNI:
+
+TIPO  : Cargo
+
+
+@command{paper_full_cut}-
+]]></format><source>
+<![CDATA[
+pd.setProperty("SalesRep_ID", source.get("SalesRep_ID"));
+pd.setProperty("C_BPartner_ID",source.get("C_BPartner_ID"));
+pd.setProperty("GrandTotal",source.get("GrandTotal"));
+pd.setProperty("DifferenceAmt",source.get("DifferenceAmt"));
+pd.setProperty("PrinterSerial",source.get("PrinterSerial")); 
+pd.setProperty("MachineSerial",source.get("MachineSerial"));
+pd.setProperty("C_PaymentTerm_ID",source.get("C_PaymentTerm_ID"));
+pd.setProperty("SerialToInvoice","003");
+pd.setProperty("DocumentNoToInvoice",source.get("123"));]]></source></printdocumentformat>

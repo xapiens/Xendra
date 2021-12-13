@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="saleskb" category="sales acceptor" agenda="sales" default="True" 
+	package="org.xendra.rules.messages" queuename="/queue/pos" entrypoint="sales" sessionname="rulesKS" 
+	EqualsBehavior="EQUALITY" queuelistenerclass="org.xendra.rules.messages.posmessageListener" type="kiebase" 
+	EventProcessingMode="STREAM" Identifier="e76fcca5-8cb7-d9d4-96a1-6aca0cb60ea8"  synchronized="2018-09-25 18:48:41">	
+<rule name="src/main/resources/org/xendra/pos/acceptor.drl" type="rule" file="acceptor.drl" Identifier = "82170e1c-f58e-28ec-e1fd-80892399f01a"  synchronized="2018-09-25 18:48:41"/>
+<process value="Sales Acceptor" accesslevel="6" frequencytype="M" frequency="2" keeplogdays="7" name="Sales Acceptor" type="A" class="org.xendrian.process.AcceptSales" Identifier="6802e345-84a8-4b74-51f1-c15ef6961c63"/>
+<process value="Sales Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Sales Listener" type="L" class="" Identifier="8dfdc6f0-c851-7986-0b03-711e561d6d2b"/>
+</kiebase>

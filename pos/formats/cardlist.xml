@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="Lista de tarjetas" category="PRC" Identifier="e0d72c74-0a03-6394-23e7-9f0942e2aa05" Synchronized="2020-01-18 12:46:12.561" >
+<properties />
+<format>
+<![CDATA[
+DETALLE DE CREDITOS Y COBRANZAS
+
+@code{counter1=0}@foreach{index : cardname}
+@{cardname[counter1]} @{cardnumber[counter1]} @{Pay[counter1]} @code{counter1++}@end{}
+@code{counter1=0}@foreach{index : creditpartner}
+@{creditpartner[counter1]} @{creditamt[counter1]} @code{counter1++}@end{}]]></format></printdocumentformat>

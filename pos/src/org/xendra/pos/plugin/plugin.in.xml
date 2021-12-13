@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin name="Point of Sale extensions" 
+        description="Contains references to POS extension" 
+        id="org.xendra.pos" 
+        version="1.0" 
+        category="sales"
+	synchronized="@timestamp@"	
+	tags = "Sales"
+	enabled="true">              
+	<form name="Sales Point"
+		Classname="org.xendra.pos.PosPanel"	
+		accesslevel="3" EntityType="D"
+		Identifier="1ef0c100-8451-4920-88d2-ae0946a6e9e3"
+		synchronized="2017-05-21 15:33:00" menu="N">
+		<form_trl Language="es_PE" Name="PDV" Description="Punto de venta" Help="" />
+	</form>
+	<properties>
+		<property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos"/>
+	</properties>
+	<menu>
+	<menuitem AD_Menu_ID="419"
+		Name="Point of Sales Terminal"
+		Description=""
+		IsSummary="false" IsSOTrx="false" IsReadOnly="false"
+		EntityType="D" Action="X"
+		Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761"
+		AD_Form_ID="1ef0c100-8451-4920-88d2-ae0946a6e9e3"
+		Identifier="ba076ceb-78ee-4e8a-b87a-16945f72ff72" Synchronized="2012-09-21 18:25:41" BaseRole="ALL">
+		<menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Punto de Venta"/>
+	</menuitem>
+    <menuitem AD_Menu_ID="1000078" Name="POSProducto" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d5c36868-cccd-9e5e-11db-d24a93594e92" Action="R" Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Identifier="7b5cbd75-0b61-4146-ba3d-4fcf947d68e4" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="POS por producto" />
+    </menuitem>
+    <menuitem AD_Menu_ID="236" Name="Open Items" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="307c9064-20c2-4799-bf21-6280f61332a9" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Caja y Bancos" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Caja y Bancos" />
+    </menuitem>
+    <menuitem AD_Menu_ID="1000011" Name="Cash" Description="Cash" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="307c9064-20c2-4799-bf21-6280f61332a9" Identifier="727668d8-96b3-46a2-bffa-85769fc296ef" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Caja" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Caja" />
+    </menuitem>
+    <menuitem AD_Menu_ID="1000160" Name="POSCorrelativo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="5579fbff-30b6-9875-ab23-79e5d4b9531a" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="7ad3a527-3704-4691-b359-18f57d64571a" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Vtas por Docuemto" />
+    </menuitem>
+    <menuitem AD_Menu_ID="166" Name="Quote-to-Invoice" Description="" IsSummary="true" IsSOTrx="true" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="d1480446-c2bf-4bb0-947f-dfe6162be6eb" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas / Cotización-a-Factura" />
+    </menuitem>
+    <menuitem AD_Menu_ID="1000159" Name="POSResumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="db8df1ec-6749-f2ed-6334-a9c34f77596b" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="613400e4-6b64-44fc-9b91-51cd66057be3" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Resumen de Ventas - PDV" />
+    </menuitem>
+    <menuitem AD_Menu_ID="1000055" Name="POSPago" Description="" IsSummary="false" IsSOTrx="true" IsReadOnly="false" EntityType="D" AD_Process_ID="e695aa5c-77ac-8cc8-35cd-33186ce6c5b5" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="28fddde4-71ad-429b-a2dc-b92c24241dc4" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Ventas - PDV" />
+    </menuitem>
+    <menuitem AD_Menu_ID="1000064" Name="POS" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="d1480446-c2bf-4bb0-947f-dfe6162be6eb" Identifier="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="PDV" />
+    </menuitem>
+  </menu>
+  <!--<menuitem name="POS" IsSummary="Y" IsSOTrx="Y" IsReadOnly="Y" EntityType="D" anchor="SALES">
+   <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="PDV"/>	 
+   <menuitem Form="1ef0c100-8451-4920-88d2-ae0946a6e9e3" SeqNo="10"/>
+  </menuitem>-->
+	<extensionlist id="org.columba.core.config">
+		<extension id="POSConfigPlugin" class="org.xendra.pos.plugin.ConfigPlugin"/>
+	</extensionlist>
+</plugin>
+

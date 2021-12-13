@@ -1,0 +1,27 @@
+//created on: 26/08/2014
+package org.xendra.rules.messages
+
+import org.xendra.rules.model.SalesPolicyRequest
+import org.xendra.messages.MessageProcessor
+dialect "mvel"
+ 
+// tells the engine that a Sales Policy instance will assume the
+// role (semantics) of events 
+declare SalesPolicyRequest
+    @role( event )
+end 
+
+rule "generate sub docs"
+    agenda-group "sales"
+    //lock-on-active
+when
+	$spr : SalesPolicyRequest(processed == false) from entry-point "sales"	
+	eval($spr.processOrder())
+then
+	$spr.setProcessed( true );
+	//modify ($spr) {processOrder()}
+	modify ($spr) {setCashByWorkShift()}
+	modify ($spr) {payment()}
+	modify ($spr) {print()}    
+	retract ($spr)
+end

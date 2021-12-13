@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message uid="2" AD_Plugin_ID="2" type="message" name="sales" QueueName="/queue/pos" lockout="Y" synchronized="2020-03-23 22:25:19.333" Identifier="f11becf2-2ba5-0a56-aaa3-44b96875308e">
+  <section name="client" parent="" sequence="0">
+    <field area="client" mandatory="true" name="AD_Client_ID" sequence="0" columnid="e9cb549a-68a5-8ce7-872f-3e91392332e0" key="true" />
+  </section>
+  <section name="org" parent="" sequence="0">
+    <field area="org" mandatory="true" name="AD_Org_ID" sequence="0" columnid="91a880b5-492c-9607-ac78-5b8440d8becd" key="true" />
+  </section>
+  <section name="currency" parent="" sequence="0">
+    <field area="currency" mandatory="true" name="C_Currency_ID" sequence="0" key="true" columnid="0588a61e-a3ac-6f7c-0389-3f1cf5ea1d24" />
+  </section>
+  <process Value="Sales Listener" AccessLevel="4" FrequencyType="O" Frequency="1.000000000000" KeepLogDays="7.000000000000" Name="Sales Listener" QueueName="/queue/pos" Identifier="8dfdc6f0-c851-7986-0b03-711e561d6d2b" AD_Rule_ID="e76fcca5-8cb7-d9d4-96a1-6aca0cb60ea8" name="Sales Listener" />
+  <section name="Header" parent="" sequence="10">
+    <!-- Socio de negocio que recibe comision, ocurre en Colgate para distribuidoras por ejemplo -->
+    <field area="Header" mandatory="true" name="DateOrdered" sequence="0" key="false" columnid="464e2a7d-283e-0cc4-e0b4-d199602647f0" />
+    <field area="Header" mandatory="true" name="C_Order_ID" sequence="0" columnid="5ece825c-9b57-c4b3-ca54-30cdaa173af6" key="true" />
+    <field area="Header" mandatory="true" name="M_Warehouse_ID" sequence="0" key="false" columnid="bc652af4-954e-e90e-6cd5-03b021e6c9f3" />
+    <field area="Header" mandatory="true" name="C_BPartner_ID" sequence="0" key="false" columnid="a88f41e5-b858-bcc1-92bc-0e76d6da6670" />
+    <field area="Header" mandatory="true" name="IsSOTrx" sequence="0" key="false" columnid="80045d68-0415-6ef5-009e-cafdb852422f" />
+    <field area="Header" mandatory="true" name="IsTaxIncluded" sequence="0" key="false" columnid="5ec41287-4033-a6f7-775d-823d14d9d5c3" />
+    <field area="Header" mandatory="true" name="C_BPartner_Location_ID" sequence="0" key="false" columnid="5ac59b58-1dd2-b3fd-f93b-9a7cfedd6816" tableid="" />
+    <field area="Header" mandatory="true" name="HR_WorkShift_ID" sequence="0" key="false" columnid="" tableid="" />
+    <field area="Header" mandatory="false" name="SerialToInvoice" sequence="70" key="false" columnid="0ae3d2f1-d9e0-442e-9f5c-402f4715551b" />
+    <field area="Header" mandatory="false" name="DocumentNoToInvoice" sequence="80" key="false" columnid="0baafe12-48eb-40b1-9b2e-10964fadbd71" />
+    <field area="Header" mandatory="true" name="M_PriceList_ID" sequence="90" columnid="3823108b-33fb-aa99-cbbc-079dd0052e20" />
+    <field area="Header" mandatory="true" name="C_DocTypeTarget_ID" sequence="120" key="false" columnid="16e74fc3-6e2b-d165-cbbd-9708e66a7a9c" />
+    <field area="Header" mandatory="true" name="SalesRep_ID" sequence="150" columnid="efef7fb5-bf86-5b86-877e-2041221143cb" />
+    <field area="Header" mandatory="false" name="Pay_BPartner_ID" sequence="160" columnid="dec29d33-79e2-bc27-aaf6-facdf096383a" />
+    <field area="Header" mandatory="true" name="Bill_BPartner_ID" sequence="170" columnid="a8bc0ff8-8e9d-4588-c30d-7132cdeba6fe" />
+    <field area="Header" mandatory="true" name="Bill_Location_ID" sequence="180" columnid="04f971b4-5283-8663-62d9-491eee9b37c4" />
+    <field area="Header" mandatory="true" name="A_Machine_ID" sequence="220" />
+    <field area="Header" mandatory="true" name="PrinterSerial" sequence="240" columnid="770bcb9e-d9ed-42d6-87db-3ebf45a1f30d" />
+    <field area="Header" mandatory="true" name="AD_User_ID" sequence="250" columnid="cfa0a993-f146-f08d-4a44-e717097e1f65" />
+    <field area="Header" mandatory="true" name="Bill_User_ID" sequence="260" columnid="38b487a5-9bd5-dee5-59fc-b91ccaec1fce" />
+    <field area="Header" mandatory="true" name="POReference" sequence="270" key="false" columnid="bd472b12-a4ef-21a1-7fcc-7770cf3cbc87" />
+    <field area="Header" mandatory="true" name="Description" sequence="280" key="false" columnid="18006e0c-4a24-2be9-efbe-97031cdb8d0e" />
+    <field area="Header" mandatory="true" name="IsDiscountPrinted" sequence="290" columnid="245b4849-76d4-7e94-d9b4-653172b47217" />
+    <field area="Header" mandatory="true" name="InvoiceRule" sequence="300" key="false" columnid="5cea51bc-d1d2-a4d4-1f71-cef1201f30a1" />
+    <field area="Header" mandatory="true" name="DeliveryRule" sequence="310" key="false" columnid="c6de551e-6ca2-e079-afa5-0b77952fe7b8" />
+    <field area="Header" mandatory="true" name="PaymentRule" sequence="320" key="false" columnid="701d2122-8d80-2378-2288-1745f12e77e6" />
+    <field area="Header" mandatory="true" name="C_PaymentTerm_ID" sequence="330" key="false" columnid="41f3abf4-962a-8959-55c8-48197c2b44ca" />
+    <field area="Header" mandatory="true" name="FreightCostRule" sequence="340" key="false" columnid="9c436ea1-07a7-fb1d-8e92-ea314a57a5d0" />
+    <field area="Header" mandatory="true" name="DeliveryViaRule" sequence="350" key="false" columnid="462347e4-d9e8-2d33-4143-f4544f54ecde" />
+    <field area="Header" mandatory="true" name="PriorityRule" sequence="360" key="false" columnid="b8b67470-463d-0a63-e2ce-914896418e0f" />
+    <field area="Header" mandatory="true" name="DifferenceAmt" sequence="370" key="false" columnid="74b2b339-890a-400d-8e31-824e176e8ff5" />
+    <field area="Header" mandatory="true" name="DebtAmt" sequence="380" key="false" columnid="3cc9eae4-3217-4a4a-95aa-e26e19ec642e" />
+    <field area="Header" mandatory="true" name="C_BPartner_Points_ID" sequence="390" key="false" columnid="76bdffac-b2b7-f267-fa98-3a01aafe61a2" />
+    <field area="Header" mandatory="true" name="C_POS_ID" sequence="400" key="false" columnid="bbc740dc-e57e-4197-81f5-97ddaeced791" />
+  </section>
+  <section name="item" parent="" sequence="20">
+    <field area="item" mandatory="true" name="C_OrderLine_ID" sequence="0" key="true" columnid="f7005019-e4bb-cde9-3f9a-f0359fc55964" />
+    <field area="item" mandatory="true" name="M_Product_ID" sequence="40" key="false" columnid="bf7e2b80-3679-8f0b-fc2f-299b636f3d06" />
+    <field area="item" mandatory="true" name="PriceActual" sequence="60" key="false" columnid="3925d9b6-7973-678b-5d6c-c3d1bfb55201" />
+    <field area="item" mandatory="true" name="PriceList" sequence="70" key="false" columnid="45cb98d8-66f5-5fa0-c00e-2b11a57a969e" />
+    <field area="item" mandatory="true" name="PriceLimit" sequence="80" key="false" columnid="a91d9e08-84ab-b73d-c6a0-88d6ec6f8d67" />
+    <field area="item" mandatory="true" name="PriceEntered" sequence="90" key="false" columnid="4938cff4-1fec-b393-40fe-75bc24caf3d8" />
+    <field area="item" mandatory="true" name="QtyOrdered" sequence="100" key="false" columnid="4b8f9e82-2530-9d45-ef19-66b10bacce79" />
+    <field area="item" mandatory="true" name="QtyEntered" sequence="110" key="false" columnid="7510ac14-a5a9-e59d-bddf-78d964d87331" />
+    <field area="item" mandatory="true" name="PriceBase" sequence="120" key="false" columnid="73206858-3090-f47a-d7ff-a769febf5f15" />
+    <field area="item" mandatory="true" name="Discount" sequence="130" key="false" columnid="0c578ccc-7f70-1da9-0845-389da1a58bcc" />
+    <field area="item" mandatory="true" name="Discount1" sequence="140" key="false" columnid="38cbc136-8648-1c08-57de-74778c9278ba" />
+    <field area="item" mandatory="true" name="Discount2" sequence="150" key="false" columnid="ba1103ef-b5fb-e819-2684-2bfcae2b2a7f" />
+    <field area="item" mandatory="true" name="Discount3" sequence="160" key="false" columnid="9b8d6fe3-339a-1c15-a5c8-35fcf08a1a02" />
+    <field area="item" mandatory="true" name="Discount4" sequence="170" key="false" columnid="8c949ab3-f0eb-b700-2a89-b4a720e6c7dc" />
+    <field area="item" mandatory="true" name="M_AttributeSetInstance_ID" sequence="180" key="false" columnid="2bdab3c4-abb6-df01-c574-3642a90a91d2" />
+    <field area="item" mandatory="true" name="IsBonus" sequence="200" key="false" columnid="9d55e185-00c9-44bb-b1de-264a6b6693d6" />
+    <field area="item" mandatory="true" name="C_Tax_ID" sequence="210" key="false" columnid="76960e13-9a4d-bef4-61d3-1f524c1ef720" />
+    <field area="item" mandatory="true" name="C_UOM_ID" sequence="220" key="false" columnid="caba310b-fa21-87be-7d45-e3875d1d306e" />
+    <field area="item" mandatory="false" name="C_CampaignBonus_ID" sequence="230" key="false" columnid="4deff16e-d63d-6e77-ebc1-f2f7ecc0f391" />
+    <field area="item" mandatory="false" name="C_CampaignDiscount_ID" sequence="240" key="false" columnid="90925501-e3e0-47c4-3e18-e917f21ad568" />
+    <field area="item" mandatory="true" name="LineNetAmt" sequence="260" key="false" columnid="cc42a95a-29cc-110f-3cfe-0bfaecd22854" />
+  </section>
+  <section name="pay" parent="" sequence="30">
+    <field area="payment" mandatory="true" name="credit" sequence="0" key="false" columnid="" />
+    <field area="payment" mandatory="true" name="payment" sequence="0" key="false" columnid="" />
+    <field area="payment" mandatory="true" name="coupon" sequence="0" key="false" columnid="" />
+    <field area="payment" mandatory="true" name="cash" sequence="0" key="false" columnid="" />
+    <section name="cash" parent="payment" sequence="10">
+      <field area="cash" mandatory="true" name="C_DocType_ID" sequence="0" />
+      <field area="cash" mandatory="true" name="C_CashBook_ID" sequence="10" columnid="46ca3684-178a-4394-b03d-2b059f8ee427" key="true" />
+      <field area="cash" mandatory="true" name="WriteOffName" sequence="30" key="false" columnid="" />
+      <field area="cash" mandatory="true" name="WriteOffType" sequence="40" key="false" columnid="d61604a7-9ea7-4aaf-a9b2-58b944ae832b" />
+      <field area="cash" mandatory="true" name="WriteOffAmt" sequence="50" key="false" columnid="07bf2fce-3733-42ed-865c-a97cb5ba06d0" />
+    </section>
+    <section name="credit" parent="payment" sequence="20" />
+    <section name="payment" parent="payment" sequence="30">
+      <field area="payment" mandatory="true" name="C_Payment_ID" sequence="0" key="true" columnid="91eb7710-ab38-9103-a84b-bf451fcb8b5f" />
+      <field area="payment" mandatory="true" name="C_BPartner_ID" sequence="0" key="false" columnid="fb8aba21-80f5-aa87-2cb1-9a309d459bc3" />
+      <field area="payment" mandatory="true" name="C_Currency_ID" sequence="0" key="false" columnid="6d2477a1-1e42-8271-e63e-31af48a60cba" />
+      <field area="payment" mandatory="true" name="C_DocType_ID" sequence="20" />
+      <field area="payment" mandatory="true" name="C_BankAccount_ID" sequence="40" key="false" columnid="6f41d367-3daa-06b9-9add-90be451dac53" />
+      <field area="payment" mandatory="true" name="TrxType" sequence="50" key="false" columnid="595dbe94-921a-d518-0756-c4bc009ac040" />
+      <field area="payment" mandatory="true" name="CreditCardNumber" sequence="60" columnid="534b725d-4ce4-f746-e54e-087f3aaa4d97" />
+      <field area="payment" mandatory="true" name="CreditCardType" sequence="70" columnid="0132e8eb-bfd6-11b8-7e98-65f6927af565" />
+      <field area="payment" mandatory="true" name="TenderType" sequence="80" key="false" columnid="f6d84b7e-f091-1c62-1a57-4e004c8c400a" />
+      <field area="payment" mandatory="true" name="CheckNo" sequence="90" key="false" columnid="2d6308b2-cde7-94b2-9bdf-1b510d68160b" />
+    </section>
+    <section name="coupon" parent="payment" sequence="40">
+      <field area="coupon" mandatory="true" name="C_Coupon_ID" sequence="0" key="true" columnid="be88abe4-1077-8434-bdbe-65e4efc8c252" />
+      <field area="paycoupon" mandatory="true" name="C_BPartner_ID" sequence="10" key="false" columnid="bb74e5f4-4a69-2435-d8f1-6692e3629e43" />
+      <field area="paycoupon" mandatory="true" name="C_Currency_ID" sequence="20" key="false" columnid="b97e248b-373d-9d50-bc03-a93c153d05d6" />
+      <field area="paycoupon" mandatory="true" name="DocumentNo" sequence="30" key="false" columnid="46c88193-c0cd-461b-a154-44ac3057658c" />
+    </section>
+  </section>
+</message>
+

@@ -1,0 +1,1008 @@
+// created on: 16/05/2016
+// modified on : 8/03/2019
+// by xapiens
+// 8/3/2019 added campaign decision tables
+// 13/3/2020 added validation coupons
+// pkg start with init
+package org.xendra.pos.rules
+
+import org.compiere.model.MOrder
+import org.compiere.model.MPOS
+import org.compiere.model.MAttributeSet
+import org.compiere.model.MUOM
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MPriceList
+import org.compiere.model.MProductPricing
+import org.compiere.model.MProductBOM
+import org.compiere.model.MProduct
+import org.compiere.model.MRole
+import org.compiere.model.MStorage
+import org.compiere.model.Tax
+import org.compiere.model.MUser
+import org.compiere.model.MBPartner
+import org.xendra.pos.Row
+import org.xendra.pos.RowData
+import org.xendra.pos.PosPanel
+import org.xendra.pos.cardcomponent.PayPanel
+import java.sql.Timestamp
+import org.xendra.pos.rules.model.PolicyRequest
+import org.compiere.util.Env
+import org.compiere.util.Util
+import java.util.Properties
+import java.math.BigDecimal
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.xendra.rules.model.PaymentType
+import org.compiere.util.DB;
+
+//import accumulate org.xendra.utils.BigDecimalSumAccumulateFunction sumbd
+global Properties ctx
+dialect "mvel"
+
+rule "val1"
+	agenda-group "evaluation"
+	when
+	  PosPanel ( $paypanel : getPayPanel() )
+		eval($paypanel.setPartner())
+		eval($paypanel.setDocNumber())
+	then
+	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "payment" ).setFocus();
+end
+
+rule "val2"
+	agenda-group "payment"
+	when
+	 PosPanel ( $paypanel : getPayPanel() )
+	 $paymenttype : PaymentType()
+	 eval($paymenttype.isCreditCard())
+	then
+	 $paypanel.setCard()
+end
+
+rule "val3"
+	agenda-group "payment"
+	when
+	 PosPanel ( $paypanel : getPayPanel() )
+	 //eval($paypanel.isCredit())
+	 $paymenttype : PaymentType()
+	 eval($paymenttype.isCredit())
+	then
+	 $paypanel.setCredit()
+end
+
+rule "val4"
+	agenda-group "payment"
+	when
+	 PosPanel ( $paypanel : getPayPanel() )
+	 $paymenttype : PaymentType()
+	 eval($paymenttype.isCoupon())
+	then
+	 $paypanel.setCoupon()
+end
+
+rule "val5"
+	agenda-group "payment"
+	when
+	 PosPanel ( $paypanel : getPayPanel() )
+	 $paymenttype : PaymentType()
+	 eval($paymenttype.isCash())
+	then
+	 $paypanel.setCash()
+end
+
+rule "Defaults"
+	agenda-group "init"
+	auto-focus true
+	when
+		 $panel : PosPanel( )	
+		 MPOS ( $deliveryrule : DeliveryRule == null )
+		 PosPanel ( $error : error == "" )	 
+	then
+		 modify ($panel) { setError("no deliveryrule") }
+end	  
+
+//rule "Defaults2"
+//	agenda-group "init"
+//	auto-focus true
+//	dialect "mvel"
+//	when
+//		 $panel : PosPanel( )	
+//		 MPOS ( $machineserial : MachineSerial == null )
+//		 PosPanel ( $error : error == "" )	 
+//	then
+//		 modify ($panel) { setError("no machineserial") }
+//end	  
+
+//rule "Defaults3"
+//	agenda-group "init"
+//	auto-focus true
+//	dialect "mvel"
+//	when
+// 		 MPOS ( $deliveryrule : DeliveryRule != null )
+//		 MPOS ( $machineserial : MachineSerial != null )
+//	then
+//	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "order" ).setFocus();
+//end	  
+
+
+rule "order"
+	agenda-group "order"
+	when 
+		 $order : MOrder( M_Warehouse_ID == 0 )	
+		 $config : MPOS()
+	then
+	  modify( $order ) { 
+	  									 setDeliveryRule($config.getDeliveryRule()),
+	  									 setClientOrg( $config.getAD_Client_ID(), $config.getAD_Org_ID()),
+	  									 setM_Warehouse_ID($config.getM_Warehouse_ID()),
+	  									 setIdentifier(Util.getUUID())
+	  								  }	  	  
+	 // PolicyRequest.getInstance().setOrder($order);
+//	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "partner" ).setFocus();
+end	
+
+rule "partner"
+	agenda-group "partner"
+	when 
+		$order : MOrder( $orderpartner : C_BPartner_ID )
+		$partner : MBPartner( C_BPartner_ID != $orderpartner )					
+	then
+	  PolicyRequest.getInstance().PartnerToOrder($order, $partner); 		
+	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "partnerrows" ).setFocus();
+end 
+
+rule "partnerrows"
+	agenda-group "partnerrows"
+	when 
+		$row : Row( $rowpartner : getC_BPartner_ID() )
+		$partner : MBPartner( C_BPartner_ID != $rowpartner )					
+	then
+	  taxfunc($row,$partner);  	
+end 
+
+rule "user"
+	agenda-group "user"
+	when
+		$order : MOrder( $orderuser : AD_User_ID )
+		$user : MUser( AD_User_ID != $orderuser )
+	then
+		PolicyRequest.getInstance().UserToOrder($order, $user);
+end
+
+rule QtyOrdered no-loop
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "QtyOrdered" )
+	  //eval(qty($row))	  
+	  //eval(amt($row))
+	  eval(canFractioned($row))
+	  eval(canQtyOrdered($row))
+	 then
+	 //setPrice($row);
+	 //totalrow($row);
+	 //$row.getRowData().setQtyOrdered( $row.getFieldValue() );
+	 System.out.println("QtyOrdered rule");
+	 kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule QtyEntered no-loop
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "QtyEntered" )
+	 	eval(canFractioned($row))
+	 	eval(canQtyEntered($row))
+	 then
+	  setPrice($row);
+	  //setQtyEntered($row);
+	  totalrow($row);
+	  modify($row)
+	  System.out.println("QtyEntered->"+$row.getFieldValue());
+  	 //kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+	kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "discount" ).setFocus();
+	//kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "PriceActual"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "PriceActual" )
+	 	eval(canPriceActual($row))
+	 then
+	 	//totalrow($row);
+		//$row.getRowData().setPriceActual( $row.getFieldValue() );
+		System.out.println("PriceActual rule");
+	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end 
+
+rule PriceEntered no-loop
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "PriceEntered" )
+	 	//eval(canPriceEntered($row));
+	 	eval($row.isCanChangePrice());
+	 	//eval(amt($row))
+	 then
+	  //$row.getRowData().setPriceEntered( $row.getFieldValue() );
+	  canPriceEntered($row);
+	  //totalrow($row); 
+	  System.out.println("PriceEntered rule");
+    kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "M_Product_ID"
+	 agenda-group "row"
+	 when
+ 	  $partner : MBPartner( )					
+	 	$row : Row( getFieldName() == "M_Product_ID" )	 	
+	 then
+	   $row.getRowData().setM_Product_ID( $row.getFieldIntValue() );
+	   product($row, $partner);
+	   setPrice($row);
+	   //createAttribute($row);
+	   System.out.println("M_Product_ID rule ");
+  	 kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "M_AttributeSetInstance_ID"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "M_AttributeSetInstance_ID" )	 	
+	 then
+	   $row.getRowData().setM_AttributeSetInstance_ID( $row.getFieldIntValue() );
+end
+
+
+
+rule Discount no-loop
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount" )
+	 then
+		 //amt($row);
+		 setDiscount($row)
+end
+
+rule "Discount1"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount1" )
+	 then
+	   //amt($row);
+	   setDiscount1($row)
+end
+
+rule Discount2 no-loop
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount2" )
+	 then
+	 	setDiscount2($row)	    
+		modify($row)
+	   //amt($row);
+	kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "Discount3"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount3" )
+	 then
+	   setDiscount3($row)
+	   //amt($row);
+end
+
+rule "Discount4"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount4" )
+	 then
+	   setDiscount4($row)
+	   //amt($row);
+end
+
+rule "C_UOM_ID"
+	agenda-group "row"
+	when 
+	$row : Row ( getFieldName() == "C_UOM_ID" )
+	eval(setC_UOM_ID($row))
+	//eval(amt($row))
+	//eval(qty($row))
+	then
+	$row.getRowData().setC_UOM_ID( $row.getFieldIntValue() ); 
+	//totalrow($row);
+	System.out.println("C_UOM_ID");
+  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule total
+	agenda-group "total"
+	when 
+		$row : Row();
+	then
+		totalrow($row);
+		retract ($row)
+		System.out.println("soy la regla total");
+end
+
+rule doctypesoo
+	agenda-group "validation"
+	when
+	$panel : PosPanel( DocType.DocBaseType == "SOO", DocType.DocSubType == "WR", DocType.C_DocTypeInvoice_ID == 0 )
+	then
+	modify ($panel) { showError("Invoice not valid") }
+	retract ($panel)
+end
+
+rule partnervalid
+	agenda-group "validation"
+	when
+	$panel : PosPanel(  $partner : Partner)
+	eval(!ispartnervalid($partner))
+	then
+	modify ($panel) { showError("no valid partner") }
+	retract ($panel);
+end
+
+rule paymentvalidcredit
+	agenda-group "validation"
+	when
+	$panel : PosPanel( PaymentTermType == "Credit", PaymentTerm == 0 )
+	then
+	modify ($panel) { showError("la forma de pago es obligatoria")}
+	retract ($panel)
+end
+
+rule paymentvalidcreditcard
+	agenda-group "validation"
+	when
+	$panel : PosPanel( PaymentTermType == "Pay", TrxType == "", TenderType == "C")
+	then
+	modify ($panel) { showError("Tipo de transaccion es obligatoria") }
+	retract ($panel)
+end
+
+rule paymentvalidcreditcardtype
+	agenda-group "validation"
+	when
+	$panel : PosPanel( PaymentTermType == "Pay", CreditCardType == "", TenderType == "C")
+	then
+	modify ($panel) { showError("Tipo de tarjeta es obligatoria") }
+	retract ($panel)
+end
+
+rule paymentvalidcreditcardnumber
+	agenda-group "validation"
+	when
+	$panel : PosPanel( PaymentTermType == "Pay", CreditCardNumber == "", TenderType == "C")
+	then
+	modify ($panel) { showError("Tipo de tarjeta es obligatoria") }
+	retract ($panel)
+end
+
+rule paymentvaliddirectdeposit
+	agenda-group "validation"
+	when
+	$panel : PosPanel( PaymentTermType == "Pay", TrxType == "", TenderType == "A")
+	then
+	modify ($panel) { showError("Tipo de transaccion es obligatoria") }
+	retract ($panel)
+end
+
+rule coupon
+	agenda-group "validatecoupon"
+	when	
+    $panel : PosPanel ( $couponpanel : getCouponPanel() )
+	eval($couponpanel.getLength() == 0)
+	then
+	modify ($panel) { showError("debe escoger un cupon") }
+	retract ($panel)
+end
+
+rule preparepayment
+	agenda-group "prepare"
+	when
+	$panel : PosPanel( PaymentTermType == "Pay", TenderType == "C", $payment : getPayment(), $paypanel : getPayPanel())
+	then
+	modify ($payment) { setCreditCardType($panel.getCreditCardType() ) }
+ 	modify ($payment) { setCreditCardNumber($paypanel.getCreditCardNumber()) }
+	modify ($payment) { setBankAccountCard() }
+	retract ($payment)
+end
+
+function boolean ispartnervalid(MBPartner partner) {
+	boolean isvalid = true;
+	if (partner == null) {
+		System.out.println("partner is null");
+		isvalid = false;
+	}
+	else if(partner.getC_BPartner_ID() == 0) {
+		isvalid = false;
+		System.out.println("partner id = 0");
+	}
+	return isvalid;
+}
+
+//rule total 	no-loop
+//	agenda-group "total"
+//	when
+//	  $order : MOrder()
+//	  total : BigDecimal()  from accumulate( Row($price : getTotal()), sumbd( $price) )
+//	then
+//		//$row.setIsChanged(false)
+//	  modify( $order ) {grossTotal = total}
+//	  System.out.print("rule total ")
+//	  System.out.println(total)
+//
+//end
+
+function void createAttribute(Row row) {
+	if (row.getRowData().getM_AttributeSetInstance_ID() == 0) {
+		Integer new_AttributeSetInstance_ID = DB.getSQLValue(null, "SELECT * FROM getancientattributesetinstance(?, ?, ?, ?)", 
+			row.getRowData().getM_Warehouse_ID(), 
+			row.getRowData().getM_Product_ID(), 
+			row.getRowData().getQtyOrdered(), 
+			Env.getAD_Org_ID(Env.getCtx()));
+			if (new_AttributeSetInstance_ID > 0 )
+			{
+				row.getRowData().setM_AttributeSetInstance_ID(new_AttributeSetInstance_ID);				
+			}			
+	}
+}
+
+function boolean taxfunc(Row row, MBPartner partner)
+{
+  System.out.println("taxfunc");
+	if (row.getM_Product_ID() == 0)
+	{
+	  System.out.println("Product_ID == 0");
+		return false;		//
+	}
+	//	Check Partner Location
+	if (partner.getBillLocation() == null) {
+		System.out.println("no tiene direccion de facturacion");
+		return false;
+	}
+    if (partner.getShipLocation() == null) {
+	    System.out.println("no tiene direccion de entrega");
+	    return false;
+	}
+	int C_Tax_ID = Tax.get (Env.getCtx(), (int) row.getM_Product_ID(), 0, row.getRowData().getDateOrdered(), row.getRowData().getDatePromised(),
+	Env.getAD_Org_ID(Env.getCtx()), (int) row.getRowData().getM_Warehouse_ID(), partner.getBillLocation().getC_BPartner_Location_ID(), partner.getShipLocation().getC_BPartner_Location_ID(),	true);
+	row.setC_Tax_ID(new Integer(C_Tax_ID));
+	return true;
+		//return amt(name , value);
+}	//	tax
+
+function boolean canFractioned(Row row) {
+	// qty
+			int C_UOM_To_ID = row.getRowData().getC_UOM_ID(); 			
+			MUOM uom = MUOM.get(Env.getCtx(), row.getRowData().getC_UOM_ID());
+			if (row.getFieldValue().remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) > 0 && !uom.isSplit())
+			{
+				row.setM_processMsg("Producto no acepta fraccion");
+				return false;
+			}
+			return true;
+}
+
+function boolean canQtyOrdered(Row row) {
+	BigDecimal QtyOrdered = row.getFieldValue();
+	row.getRowData().setQtyOrdered(QtyOrdered);
+	int precision = MProduct.get(Env.getCtx(), row.getRowData().getM_Product_ID(), null).getUOMPrecision(); 
+	BigDecimal QtyOrdered1 = QtyOrdered.setScale(precision, BigDecimal.ROUND_HALF_UP);
+	if (QtyOrdered.compareTo(QtyOrdered1) != 0)
+	{
+		QtyOrdered = QtyOrdered1;
+		row.getRowData().setQtyOrdered(QtyOrdered);				
+	}
+	BigDecimal QtyEntered = MUOMConversion.convertProductTo (Env.getCtx(), 
+	row.getRowData().getM_Product_ID(),
+	row.getRowData().getC_UOM_ID(), 
+	QtyOrdered);
+	if (QtyEntered == null)
+		QtyEntered = QtyOrdered;
+	row.getRowData().setQtyEntered(QtyEntered);
+	return true;
+}
+
+function boolean canQtyEntered(Row row) {
+	row.getRowData().setQtyEntered(row.getFieldValue());
+	BigDecimal Qty = MUOMConversion.convertProductFrom(Env.getCtx(), 
+		row.getRowData().getM_Product_ID(),
+		row.getRowData().getC_UOM_ID(), 
+		row.getFieldValue());
+	if (Qty != null)
+		row.getRowData().setQtyOrdered(Qty);
+	else
+		row.getRowData().setQtyOrdered(row.getFieldValue());
+	return true;
+}
+
+function boolean canPriceActual(Row row) {
+	BigDecimal PriceActual = row.getFieldValue();
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom(Env.getCtx(), 
+			row.getRowData().getM_Product_ID(), 
+			row.getRowData().getC_UOM_ID(), 
+			PriceActual);
+	if (PriceEntered == null)
+		row.getRowData().setPriceEntered(PriceActual);
+	else
+		row.getRowData().setPriceEntered(PriceEntered);
+	return true;
+}
+
+function void canPriceEntered(Row row) {
+	//if (row.isCanChangePrice())
+	//{
+		BigDecimal PriceEntered = row.getFieldValue();
+		BigDecimal PriceActual = MUOMConversion.convertProductTo(Env.getCtx(), 
+				row.getRowData().getM_Product_ID(), 
+				row.getRowData().getC_UOM_ID(), 
+				PriceEntered);
+		if (PriceActual == null)
+			row.getRowData().setPriceActual(PriceEntered);
+		else
+			row.getRowData().setPriceActual(PriceActual);
+		row.getRowData().setPriceEntered(PriceEntered);
+	System.out.println(String.format("canPriceEntered->PriceEntered: %s",PriceEntered));
+	//}
+	//return row.isCanChangePrice();
+	//return true;
+}
+
+
+function void setPrice(Row row) {
+			MProductPricing pp = new MProductPricing (row.getRowData().getM_Product_ID(), 
+													  row.getRowData().getC_BPartner_ID(), 
+													  row.getRowData().getQtyOrdered(), true);
+			pp.setM_PriceList_ID(row.getRowData().getM_PriceList_ID());
+			pp.setM_PriceList_Version_ID(row.getRowData().getM_PriceListVersion_ID());
+			Timestamp date = row.getDateOrdered();
+			pp.setPriceDate(date);
+			//
+			row.getRowData().setPriceEntered( MUOMConversion.convertProductFrom (Env.getCtx(), 
+												row.getRowData().getM_Product_ID(), 
+												row.getRowData().getC_UOM_ID(), 
+												pp.getPriceStd()));
+												
+			if (row.getRowData().getPriceEntered() == null)
+				row.getRowData().setPriceEntered(pp.getPriceStd());
+			row.getRowData().setPriceEntered(row.getRowData().getPriceEntered()
+												.setScale(row.getRowData().getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+			row.getRowData().setPriceActual(pp.getPriceStd());
+			//row.getRowData().setDiscount(pp.getDiscount());
+			//
+			row.getRowData().setDiscount1(BigDecimal.ZERO);
+			row.getRowData().setDiscount2(BigDecimal.ZERO);
+			row.getRowData().setDiscount3(BigDecimal.ZERO);
+			row.getRowData().setDiscount4(BigDecimal.ZERO);
+			row.getRowData().setPriceList(pp.getPriceList());
+			row.getRowData().setPriceLimit(pp.getPriceLimit());						
+			row.getRowData().setC_UOM_ID(pp.getC_UOM_ID());
+			row.getRowData().setEnforcePriceLimit(pp.isEnforcePriceLimit());
+			row.getRowData().setIsReadOnlyPriceList(pp.isReadOnly());		
+}
+
+function boolean product(Row row, MBPartner partner) {
+	  System.out.println("product");
+		//BigDecimal Qty = row.getRowData().getQtyOrdered();
+		/** PLV is only accurate if PL selected in header */
+		//MProductPricing pp = new MProductPricing (row.getRowData().getM_Product_ID(), row.getRowData().getC_BPartner_ID(), Qty, row.getRowData().isIsSOTrx());
+		//pp.setM_PriceList_ID(row.getRowData().getM_PriceList_ID());
+		//pp.setM_PriceList_Version_ID(row.getRowData().getM_PriceListVersion_ID());
+		//pp.setPriceDate(row.getDateOrdered());
+		//		
+		//row.getRowData().setPriceList(pp.getPriceList());
+		//row.getRowData().setPriceLimit(pp.getPriceLimit());
+		//row.getRowData().setPriceActual(pp.getPriceStd());
+		//row.getRowData().setPriceEntered(pp.getPriceStd());
+		//row.getRowData().setPriceBase(pp.getPriceStd());
+		//row.getRowData().setC_Currency_ID(pp.getC_Currency_ID());
+		//row.getRowData().setDiscount(pp.getDiscount());
+		//System.out.println(" en function product C_UOM_ID -> "+pp.getC_UOM_ID());
+		//row.getRowData().setC_UOM_ID(pp.getC_UOM_ID());
+		//row.getRowData().setEnforcePriceLimit(pp.isEnforcePriceLimit());
+		//row.getRowData().setIsReadOnlyPriceList(pp.isReadOnly());		
+		//boms = MProductBOM.getBOMLines (m_Product);
+		row.setBOMLines( MProductBOM.getBOMLines(Env.getCtx(), row.getM_Product_ID(), null));
+		row.getRowData().setInvoicePrintDetails(row.getProduct().isInvoicePrintDetails());		
+		row.getRowData().setmProductBrand(row.getProduct().getBrand());
+		row.getRowData().setmProductBrandValue(row.getProduct().getBrandValue());
+		row.getRowData().setC_TaxCategory_ID(row.getProduct().getC_TaxCategory_ID());
+		row.setIsStocked(row.getProduct().isStocked());
+		row.getRowData().setM_AttributeSet_ID(row.getProduct().getM_AttributeSet_ID());
+
+		if (row.getRowData().getM_AttributeSet_ID() != 0) {
+			MAttributeSet mas = MAttributeSet.get(Env.getCtx(),	row.getRowData().getM_AttributeSet_ID(), null);
+			if (mas != null	&& mas.isMandatory())  {
+				row.getRowData().setIsAttributeMandatory(true);
+			}
+		}
+		//
+		taxfunc(row, partner);
+	  return true;
+}
+
+function void setDiscount1(Row row) {
+	row.getRowData().setDiscount1(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void setDiscount2(Row row) {
+	System.out.println("function discount2");
+	row.getRowData().setDiscount2(row.getFieldValue());
+	calculateDiscount(row);
+	//totalrow(row);
+}
+
+function void setDiscount3(Row row) {
+	row.getRowData().setDiscount3(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void setDiscount4(Row row) {
+	row.getRowData().setDiscount4(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void calculateDiscount(Row row) {
+	System.out.println("calculateDiscount");
+	float d1 = row.getDiscount1().floatValue();
+	float d2 = row.getDiscount2().floatValue();
+	float d3 = row.getDiscount3().floatValue();
+	float d4 = row.getDiscount4().floatValue();
+	float discount = (1-(d1 / 100)) * (1-(d2 / 100)) * (1-(d3 / 100)) * (1-(d4 / 100));
+	System.out.println(String.format("discount %s d1 %s d2 %s d3 %s d4 %s", discount, d1,d2,d3,d4));
+	if (discount != 1)	
+	{
+		//discount = (1 - discount) * 100;
+		//row.setPriceActual(row.getRowData().getPriceEntered().multiply(BigDecimal.valueOf(discount)));
+		//row.setPriceActual(row.getRowData().getPriceEntered().multiply(BigDecimal.valueOf(discount)));
+		BigDecimal pe = row.getRowData().getPriceActual().multiply(BigDecimal.valueOf(discount));
+		pe = pe.setScale(2, BigDecimal.ROUND_HALF_UP);
+		//row.getRowData().setPriceEntered(row.getRowData().getPriceActual().multiply(BigDecimal.valueOf(discount)));
+		row.getRowData().setPriceEntered(pe);
+		row.getRowData().setPriceActual(row.getRowData().getPriceEntered());
+		//row.setPriceEntered(new BigDecimal("66"));
+		//row.getRowData().setDiscount(new BigDecimal(Float.toString(discount)));
+	}
+	//totalrow(row);
+}
+
+//function boolean amt(Row row) {
+//	  
+//	BigDecimal oPriceActual 	= row.getRowData().getPriceActual();
+//	BigDecimal oPriceEntered 	= row.getRowData().getPriceEntered();
+//	BigDecimal oPriceList 		= row.getRowData().getPriceList();
+//	BigDecimal oDiscount 		=   row.getRowData().getDiscount();		
+//	Boolean ResetPriceList = false;
+//	if (row.getFieldName().equals("QtyOrdered") || 
+//		row.getFieldName().equals("QtyEntered")	|| 
+//		row.getFieldName().equals("M_Product_ID"))
+//	{
+//		if (row.getFieldName().equals("QtyEntered"))
+//			row.getRowData().setQtyOrdered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(),row.getRowData().getC_UOM_ID(), row.getRowData().getQtyEntered()));
+//		if (row.getRowData().getQtyOrdered() == null)
+//			row.getRowData().setQtyOrdered(row.getRowData().getQtyEntered());
+//
+//		MProductPricing pp = new MProductPricing (row.getRowData().getM_Product_ID(), row.getRowData().getC_BPartner_ID(), row.getRowData().getQtyOrdered(), true);
+//		pp.setM_PriceList_ID(row.getRowData().getM_PriceList_ID());
+//		pp.setM_PriceList_Version_ID(row.getRowData().getM_PriceListVersion_ID());
+//		Timestamp date = row.getDateOrdered();
+//		pp.setPriceDate(date);
+//		//
+//		row.getRowData().setPriceEntered( MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), 
+//				row.getRowData().getC_UOM_ID(), pp.getPriceStd()));
+//		if (row.getRowData().getPriceEntered() == null)
+//			row.getRowData().setPriceEntered(pp.getPriceStd());
+//		row.getRowData().setPriceEntered(row.getRowData().getPriceEntered().setScale(row.getRowData().getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+//		row.getRowData().setPriceActual(pp.getPriceStd());
+//		row.getRowData().setDiscount(pp.getDiscount());
+//	}
+//	else if (row.getFieldName().equals("PriceActual"))
+//	{
+//		row.getRowData().setPriceActual((BigDecimal) row.getFieldValue());
+//		row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), row.getRowData().getC_UOM_ID(), row.getRowData().getPriceActual()));
+//		if (row.getRowData().getPriceEntered() == null)
+//			row.getRowData().setPriceEntered(row.getRowData().getPriceActual());
+//	}
+//	else if (row.getFieldName().equals("PriceEntered"))
+//	{
+//		row.getRowData().setPriceEntered( (BigDecimal) row.getFieldValue());
+//		row.getRowData().setPriceActual( MUOMConversion.convertProductTo (Env.getCtx(), row.getRowData().getM_Product_ID(), row.getRowData().getC_UOM_ID(), row.getRowData().getPriceEntered()));
+//		if (row.getRowData().getPriceActual() == null)
+//			row.getRowData().setPriceActual(row.getRowData().getPriceEntered());
+//		
+//		if ((row.getRowData().getPriceList().compareTo(Env.ZERO) > 0 
+//			  || row.getRowData().getPriceEntered().compareTo(Env.ZERO) > 0) && 
+//				row.getRowData().getDiscount().equals(Env.ZERO) && 
+//				row.getRowData().getDiscount1().equals(Env.ZERO) && 
+//				row.getRowData().getDiscount2().equals(Env.ZERO) &&
+//				row.getRowData().getDiscount3().equals(Env.ZERO) &&
+//				row.getRowData().getDiscount4().equals(Env.ZERO))
+//		{
+//			if (row.getRowData().getPriceList().compareTo(Env.ZERO) > 0)
+//			{
+//				row.getRowData().setDiscount(new BigDecimal ((row.getRowData().getPriceList().doubleValue() - row.getRowData().getPriceActual().doubleValue()) / row.getRowData().getPriceList().doubleValue() * 100.0));				
+//				row.getRowData().setDiscountAmt(new BigDecimal ((100.0 - row.getRowData().getDiscount().doubleValue()) / 100.0 * row.getRowData().getPriceList().doubleValue()));
+//			}
+//			else
+//			{
+//				row.getRowData().setPriceList(row.getRowData().getPriceActual());
+//			}
+//		}						
+//	}
+//	//  Discount entered - Calculate Actual/Entered
+//	int StdPrecision = MPriceList.getStandardPrecision(Env.getCtx(), row.getRowData().getM_PriceList_ID()); // jala la precision de la moneda
+//	int PricePrecision = MPriceList.getPricePrecision(Env.getCtx(), row.getRowData().getM_PriceList_ID());
+//
+//	if (row.getFieldName().equals("Discount"))
+//	{
+//		row.getRowData().setDiscount((BigDecimal) row.getFieldValue());
+//		if (row.getRowData().getDiscount() == null)
+//			row.getRowData().setDiscount(Env.ZERO);
+//		if (row.getRowData().getDiscount().compareTo(Env.ZERO) == 0)
+//			row.getRowData().setDiscountAmt(Env.ZERO);
+//	}
+//	if (row.getFieldName().equals("Discount1"))
+//	{
+//		row.getRowData().setDiscount1((BigDecimal) row.getFieldValue());
+//		if (row.getRowData().getDiscount1() == null)
+//			row.getRowData().setDiscount1(Env.ZERO);
+//		if (row.getRowData().getDiscount1().compareTo(Env.ZERO) == 0)
+//			row.getRowData().setDiscount1Amt(Env.ZERO);
+//	}
+//	else if (row.getFieldName().equals("Discount2"))
+//	{
+//		row.getRowData().setDiscount2((BigDecimal) row.getFieldValue());
+//		if (row.getRowData().getDiscount2() == null)
+//			row.getRowData().setDiscount2(Env.ZERO);
+//		if (row.getRowData().getDiscount2().compareTo(Env.ZERO) == 0)
+//			row.getRowData().setDiscount2Amt(Env.ZERO);			 
+//	}
+//	else if (row.getFieldName().equals("Discount3"))
+//	{
+//		row.getRowData().setDiscount3((BigDecimal) row.getFieldValue());
+//		if (row.getRowData().getDiscount3() == null)
+//			row.getRowData().setDiscount3(Env.ZERO);
+//		if (row.getRowData().getDiscount3().compareTo(Env.ZERO) == 0)
+//			row.getRowData().setDiscount3Amt(Env.ZERO);			 
+//	}
+//	else if (row.getFieldName().equals("Discount4"))
+//	{
+//		row.getRowData().setDiscount4((BigDecimal) row.getFieldValue());
+//		if (row.getRowData().getDiscount4() == null)
+//			row.getRowData().setDiscount4(Env.ZERO);
+//		if (row.getRowData().getDiscount4().compareTo(Env.ZERO) == 0)
+//			row.getRowData().setDiscount4Amt(Env.ZERO);			 
+//	}		 
+//	BigDecimal PriceList1 = row.getRowData().getPriceList();
+//
+//	if (row.getRowData().getDiscount().compareTo(Env.ZERO) != 0)
+//	{
+//		row.getRowData().setDiscountAmt(new BigDecimal ((100.0 - row.getRowData().getDiscount().doubleValue()) / 100.0 * PriceList1.doubleValue()));		 
+//		PriceList1 = row.getRowData().getDiscountAmt();
+//		if (row.getRowData().getDiscount().scale() > 2)				
+//			row.getRowData().setDiscount(row.getRowData().getDiscount().setScale(2, BigDecimal.ROUND_HALF_UP));			
+//	}
+//			
+//	if (row.getRowData().getDiscount1().compareTo(Env.ZERO) != 0)
+//	{
+//		row.getRowData().setDiscount1Amt(new BigDecimal ((100.0 - row.getRowData().getDiscount1().doubleValue()) / 100.0 * PriceList1.doubleValue()));			
+//		PriceList1 = row.getRowData().getDiscount1Amt();
+//	}
+//
+//	if (row.getRowData().getDiscount2().compareTo(Env.ZERO) != 0)
+//	{
+//		row.getRowData().setDiscount2Amt(new BigDecimal ((100.0 - row.getRowData().getDiscount2().doubleValue()) / 100.0 * PriceList1.doubleValue()));		 
+//		PriceList1 = row.getRowData().getDiscount2Amt();
+//	}
+//
+//	if (row.getRowData().getDiscount3().compareTo(Env.ZERO) != 0)
+//	{
+//		row.getRowData().setDiscount3Amt(new BigDecimal ((100.0 - row.getRowData().getDiscount3().doubleValue()) / 100.0 * PriceList1.doubleValue()));		 
+//		PriceList1 = row.getRowData().getDiscount3Amt();
+//	}
+//
+//	if (row.getRowData().getDiscount4().compareTo(Env.ZERO) != 0)
+//	{
+//		row.getRowData().setDiscount4Amt(new BigDecimal ((100.0 - row.getRowData().getDiscount4().doubleValue()) / 100.0 * PriceList1.doubleValue()));		 
+//		PriceList1 = row.getRowData().getDiscount4Amt();
+//	}
+//	
+//	row.getRowData().setPriceActual( PriceList1.setScale(PricePrecision, BigDecimal.ROUND_HALF_UP));
+//	
+//	row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), row.getRowData().getC_UOM_ID(), row.getRowData().getPriceActual()));
+//	
+//	if (row.getRowData().getPriceEntered() == null)
+//		row.getRowData().setPriceEntered(row.getRowData().getPriceActual());
+//	else
+//		row.getRowData().setPriceEntered(row.getRowData().getPriceEntered().setScale(PricePrecision, BigDecimal.ROUND_HALF_UP));
+//	
+//	//	Check PriceLimit
+//	if (!CheckPriceLimit(row))
+//	{
+//		row.getRowData().setPriceActual(oPriceActual);
+//		row.getRowData().setPriceEntered(oPriceEntered);
+//		row.getRowData().setPriceList(oPriceList);
+//		row.getRowData().setDiscount(oDiscount);
+//		if (row.getFieldName().equals("Discount4"))
+//		{
+//			row.getRowData().setDiscount4(Env.ZERO);
+//			row.getRowData().setDiscount4Amt(Env.ZERO);
+//		}
+//		return false;
+//	}
+//			
+//	if (ResetPriceList)
+//		row.getRowData().setPriceList(Env.ZERO);
+//	
+//	return true;
+//}
+
+function void setDiscount(Row row) {
+
+}
+
+//function void totalrow(Row row) {
+//		int StdPrecision = MPriceList.getStandardPrecision(Env.getCtx(), row.getRowData().getM_PriceList_ID()); // jala la precision de la moneda
+//		//row.getRowData().setGross(row.getRowData().getPriceActual().multiply(row.getRowData().getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP));
+//		row.getRowData().setTotal(row.getRowData().getPriceActual().multiply(row.getRowData().getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP));
+//}
+
+function void totalrow(Row row) {	
+	RowData rd = row.getRowData();
+	int StdPrecision = MPriceList.getStandardPrecision(Env.getCtx(), rd.getM_PriceList_ID()); // jala la precision de la moneda 
+	//BigDecimal total = rd.getPriceActual().multiply(rd.getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP);
+	//BigDecimal discount = BigDecimal.ZERO;
+	//if (rd.getDiscount().compareTo(BigDecimal.ZERO) > 0) {
+	//	discount = total.multiply(BigDecimal.ONE.subtract(rd.getDiscount()));
+	//	total = total.subtract(discount);
+	//}
+	//total = new BigDecimal("33.33");
+	System.out.println(String.format("totalrow price entered %s", rd.getPriceEntered()));
+	System.out.println(String.format("totalrow price actual %s", rd.getPriceActual()));
+	rd.setTotal(rd.getPriceEntered().multiply(rd.getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP));
+	//rd.setTotal(total);
+	//rd.setTotal(total);
+	//rd.setTotal(new BigDecimal("66"));
+}
+
+function void setQtyEntered(Row row)
+{
+			int C_UOM_To_ID = row.getRowData().getC_UOM_ID(); 			
+			MUOM uom = MUOM.get(Env.getCtx(), row.getRowData().getC_UOM_ID());
+			row.getRowData().setQtyEntered(row.getFieldValue());
+			//BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(Env.getCtx(), C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+			BigDecimal QtyEntered1 = row.getRowData().getQtyEntered().setScale(uom.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+			if (row.getRowData().getQtyEntered().compareTo(QtyEntered1) != 0)
+			{
+				row.getRowData().setQtyEntered(QtyEntered1);
+			}
+			row.getRowData().setQtyOrdered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(),	C_UOM_To_ID, row.getRowData().getQtyEntered()));
+			if (row.getRowData().getQtyOrdered() == null)
+				row.getRowData().setQtyOrdered(row.getRowData().getQtyEntered());
+			boolean conversion = row.getRowData().getQtyEntered().compareTo(row.getRowData().getQtyOrdered()) != 0;
+			row.getRowData().setUOMConversion(conversion ? "Y" : "N");	
+	// amt
+		//if (row.getFieldName().equals("QtyEntered"))
+			row.getRowData().setQtyOrdered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(),row.getRowData().getC_UOM_ID(), row.getRowData().getQtyEntered()));
+		if (row.getRowData().getQtyOrdered() == null)
+			row.getRowData().setQtyOrdered(row.getRowData().getQtyEntered());
+
+		MProductPricing pp = new MProductPricing (row.getRowData().getM_Product_ID(), row.getRowData().getC_BPartner_ID(), row.getRowData().getQtyOrdered(), true);
+		pp.setM_PriceList_ID(row.getRowData().getM_PriceList_ID());
+		pp.setM_PriceList_Version_ID(row.getRowData().getM_PriceListVersion_ID());
+		Timestamp date = row.getDateOrdered();
+		pp.setPriceDate(date);
+		//
+		row.getRowData().setPriceEntered( MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), 
+				row.getRowData().getC_UOM_ID(), pp.getPriceStd()));
+		if (row.getRowData().getPriceEntered() == null)
+			row.getRowData().setPriceEntered(pp.getPriceStd());
+		row.getRowData().setPriceEntered(row.getRowData().getPriceEntered().setScale(row.getRowData().getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+		row.getRowData().setPriceActual(pp.getPriceStd());
+		row.getRowData().setDiscount(pp.getDiscount());	
+}
+
+function boolean setC_UOM_ID(Row row) {
+			int C_UOM_To_ID = row.getFieldIntValue();
+			BigDecimal QtyEntered1 = row.getRowData().getQtyEntered().setScale(MUOM.getPrecision(Env.getCtx(), C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+			if (row.getRowData().getQtyEntered().compareTo(QtyEntered1) != 0)
+			{
+				row.getRowData().setQtyEntered(QtyEntered1);
+			}
+			row.getRowData().setQtyOrdered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getRowData().getQtyEntered()));
+			if (row.getRowData().getQtyOrdered() == null)
+				row.getRowData().setQtyOrdered(row.getRowData().getQtyEntered());
+			boolean conversion = row.getRowData().getQtyEntered().compareTo(row.getRowData().getQtyOrdered()) != 0;
+			row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getRowData().getPriceActual()));
+			if (row.getRowData().getPriceEntered() == null)
+				row.getRowData().setPriceEntered(row.getRowData().getPriceActual()); 
+			row.getRowData().setUOMConversion(conversion ? "Y" : "N");	
+		if (!row.getRowData().getIsStocked())
+			 return true;		
+		return checkAvailable(row);			
+}
+
+function boolean qty(Row row) {
+	  System.out.println("function qty ejecutada :D");
+		if ( row.getM_Product_ID() == 0)
+			return true;
+		else if (row.getFieldName() == "C_UOM_ID")
+		{
+		}
+		//	QtyEntered changed - calculate QtyOrdered
+		else if (row.getFieldName() == "QtyEntered")
+		{
+		}
+		else if (row.getFieldName() == "QtyOrdered")
+		{
+			int c_UOM_From_ID = row.getRowData().getC_UOM_ID();
+			row.getRowData().setQtyOrdered(row.getFieldValue());
+			row.getRowData().setQtyEntered(MUOMConversion.convertProductFrom(Env.getCtx(), row.getRowData().getM_Product_ID(),	c_UOM_From_ID, row.getRowData().getQtyOrdered()));
+			if (row.getRowData().getQtyEntered() == null)
+				row.getRowData().setQtyEntered(row.getRowData().getQtyOrdered());
+			boolean conversion = row.getRowData().getQtyOrdered().compareTo(row.getRowData().getQtyEntered()) != 0;
+			row.getRowData().setUOMConversion(conversion ? "Y" : "N");	
+		}
+		if (!row.getRowData().getIsStocked())
+			 return true;
+		
+		return checkAvailable(row);
+}
+
+function boolean checkAvailable(Row row) {
+	  System.out.println("CheckAvailable");
+		if (row.isVoidTransaction())
+			return true;
+		if (row.getRowData().getM_DeliveryRule().equals(REF_C_OrderDeliveryRule.Force))
+			return true;
+		BigDecimal available = MStorage.getQtyAvailable(row.getRowData().getM_Warehouse_ID(),
+								0,
+								row.getRowData().getM_Product_ID().intValue(),
+								row.getRowData().getM_AttributeSetInstance_ID(),
+								row.getRowData().getRef_AttributeSetInstance_ID(), null);
+		if (available == null)
+			available = BigDecimal.ZERO;
+		if (available.signum() == 0)
+		{
+		  row.setM_processMsg("NoQtyAvailable");
+		  row.setQtyLostSales(row.getRowData().getQtyOrdered());
+		  return false;
+		}
+		else if (available.compareTo(row.getRowData().getQtyOrdered()) < 0)
+		{
+			row.setM_processMsg("InsufficientQtyAvailable");
+			row.setQtyLostSales(row.getRowData().getQtyOrdered());
+			return false;
+		}
+		return true;
+}
+
+function boolean CheckPriceLimit(Row row) {
+  System.out.println("CheckPriceLimit");
+	boolean enforce = row.getRowData().isIsSOTrx() && row.getRowData().getEnforcePriceLimit();
+	if (enforce && MRole.getDefault().isOverwritePriceLimit())
+		enforce = false;
+	//	Check Price Limit?
+	if (enforce && row.getRowData().getPriceLimit().doubleValue() != 0.0
+			&& row.getRowData().getPriceActual().compareTo(row.getRowData().getPriceLimit()) < 0)
+	{
+		row.getRowData().setPriceActual(row.getRowData().getPriceLimit());
+		row.getRowData().setPriceEntered( MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), row.getRowData().getC_UOM_ID(), row.getRowData().getPriceLimit()));
+		if (row.getRowData().getPriceEntered() == null)
+			row.getRowData().setPriceEntered(row.getRowData().getPriceLimit());
+		row.setM_processMsg("UnderLimitPrice");
+		row.getRowData().setPriceActual(row.getRowData().getPriceLimit());
+		try {
+			row.getRowData().setDiscount( new BigDecimal ((row.getRowData().getPriceList().doubleValue() - row.getRowData().getPriceActual().doubleValue()) / row.getRowData().getPriceList().doubleValue() * 100.0));
+			if (row.getRowData().getDiscount().scale() > 2)				
+				row.getRowData().setDiscount(row.getRowData().getDiscount().setScale(2, BigDecimal.ROUND_HALF_UP));
+		}
+		catch (NumberFormatException e) {
+			row.getRowData().setDiscount(Env.ZERO);
+		}			
+		return false;
+	}
+	return true;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="ticketboleta" category="PRC" Identifier="7d034fe8-b267-56be-9f3b-710608935f41" Synchronized="2020-01-18 15:21:10.5" >
+<properties />
+<format>
+<![CDATA[
+@pic{/home/americas/Downloads/mega.png}
+        BOTICASA
+QFARMA EIRL  Ruc No 44444444
+CALLE : ABC   n: 555  - SURCO
+    SURCO - LIMA
+      TELF. 509101
+
+========================================
+Tk. Boleta No: @{SerialToInvoice} - @{DocumentNoToInvoice}
+MAQ REG:@{PrinterSerial}
+CAJA No:@{MachineSerial}
+@{Created} VEND: @{SalesRep_ID}
+Cliente : @{C_BPartner_ID}
+
+========================================
+@code{counter1=0}@foreach{index : M_Product_ID}
+@{QtyEntered[counter1]} @{C_UOM_ID[counter1]} @{Pretty.left(ShortName[counter1],25)} @{PriceEntered[counter1]} @{LineNetAmt[counter1]}
+@code{counter1++}@end{}
+=======================================
+
+Total   : S/. @{GrandTotal}
+Pagado  : S/. @{DebtAmt}
+Vuelto  : S/. @{DifferenceAmt}
+
+
+
+
+
+
+
+@command{paper_full_cut}
+]]></format></printdocumentformat>
