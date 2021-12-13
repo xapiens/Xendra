@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="saleskb" category="sales acceptor" agenda="sales" default="True" 
+	package="org.xendra.rules.messages" queuename="/queue/pos" EntryPoint="sales" SessionName="rulesKS" 
+	EqualsBehavior="EQUALITY" queuelistenerclass="org.xendra.rules.messages.posmessageListener" 
+	EventProcessingMode="STREAM" identifier="e76fcca5-8cb7-d9d4-96a1-6aca0cb60ea8" client="False">	
+<rule name="src/main/resources/org/xendra/rules/messages/sales.drl" identifier = "82170e1c-f58e-28ec-e1fd-80892399f01a" client="False">
+<![CDATA[
+//created on: 26/08/2014
+package org.xendra.rules.messages
+
+import org.xendra.rules.model.SalesPolicyRequest
+ 
+dialect "mvel"
+ 
+// tells the engine that a Sales Policy instance will assume the
+// role (semantics) of events 
+declare SalesPolicyRequest
+    @role( event )
+end 
+
+rule "generate sub docs"
+    agenda-group "sales"
+    //lock-on-active
+when
+    $dm : SalesPolicyRequest(getGroupCount() == 0) from entry-point "sales"
+then
+	//modify ( $dm ) { GroupByBrand() }   // agrupando por marca las guias
+    //modify( $dm ) { Grouping() } // agrupando    
+    modify ($dm) {simple()} 
+    retract ($dm)
+end
+]]>
+</rule>
+<process value="Sales Acceptor" accesslevel="6" frequencytype="M" frequency="2" keeplogdays="7" name="Sales Acceptor" client="No" type="A" class="org.xendrian.process.AcceptSales" identifier="6802e345-84a8-4b74-51f1-c15ef6961c63"/>
+<process value="Sales Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Sales Listener" client="Yes" type="L" class="" identifier="8dfdc6f0-c851-7986-0b03-711e561d6d2b"/>
+</kiebase>

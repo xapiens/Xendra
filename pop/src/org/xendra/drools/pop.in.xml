@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="popkb" category="point of purchase" agenda="init" default="false" 
+	package="org.xendra.pop.rules" sessionname="popks"	
+	EqualsBehavior="EQUALITY" EventProcessingMode="CLOUD"	Identifier="5db56a8e-fae8-ea9f-e186-73c016fb3a80"  synchronized="2017-09-13 14:34:41">	
+<rule name="src/main/resources/org/xendra/pop/pop.drl" file="pop.drl" Identifier = "409afb2c-c551-cbc0-889b-ba226be2a774"  synchronized="2017-09-13 14:34:41"/>
+</kiebase>

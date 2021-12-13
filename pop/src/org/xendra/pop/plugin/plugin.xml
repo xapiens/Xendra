@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin name="Point of Purchase extensions" 
+        description="Contains references to POP extension" 
+        id="org.xendra.pop" 
+        version="1.0" 
+        category="Purchase" 
+	synchronized="@timestamp@"
+	tags="Purchase"
+	enabled="true">
+	<form name="Purchase Point"
+		Classname="org.xendra.pop.PopPanel"
+		accesslevel="3" EntityType="D"
+		Identifier="79c0aa4c-c7f7-4017-b4be-06b0944b920c"
+		synchronized="2017-05-21 15:33:00" menu="N">
+		<form_trl Language="es_PE" Name="PDC" Description="Punto de Compra" Help="" />
+	</form>
+	<properties>
+		<property name="infourl" value="http://americas/public/plugin?id=org.xendra.pop"/>
+	</properties>
+	<menu>
+	<menuitem AD_Menu_ID="1000050"
+		Name="Point Of Purchases Terminal"
+		Description=""
+		IsSummary="false" IsSOTrx="false" IsReadOnly="false"
+		EntityType="D" Action="X"
+		Parent_ID="fe0069eb-c3d3-4ad2-b837-7b22f3b5e808"
+		AD_Form_ID="79c0aa4c-c7f7-4017-b4be-06b0944b920c"
+		Identifier="7a2a7531-ff99-40fe-b5d5-66352c4e76f8" Synchronized="2012-09-21 18:25:41" BaseRole="ALL">
+		<menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Punto de Compra"/>
+	</menuitem>
+	</menu>
+	<extensionlist id="org.columba.core.frame">
+ 		<extension id="PurchaseDashboard" class="org.xendra.pop.gui.frame.PurchaseFrameController">
+   			<properties managed="true" />
+ 		</extension>
+	</extensionlist>	
+</plugin>

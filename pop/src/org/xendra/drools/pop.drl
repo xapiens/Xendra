@@ -1,0 +1,747 @@
+// created by xapiens on 2016/09/12
+// modified by xapiens on 2018/05/31 23:13
+// pkg start with init
+package org.xendra.pop.rules
+
+import org.compiere.model.MOrder
+import org.compiere.model.MPOP
+import org.compiere.model.MUser
+import org.compiere.model.MBPartner
+import org.compiere.model.MAttributeSet
+import org.compiere.model.MUOM
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MPriceList
+import org.compiere.model.MPriceListVersion
+import org.compiere.model.MProductPricing
+import org.compiere.model.MProductBOM
+import org.compiere.model.MProduct
+import org.compiere.model.MRole
+import org.compiere.model.MTax
+import org.compiere.model.Tax
+import org.compiere.util.Env
+import org.compiere.util.Util
+import org.xendra.pop.Row
+import org.xendra.pop.RowData
+import org.xendra.pop.PopPanel
+import org.xendra.model.PolicyRequest
+
+import java.util.Properties
+import java.math.BigDecimal
+import java.sql.Timestamp
+
+global Properties ctx
+dialect "mvel"
+
+rule "order"
+	agenda-group "order"
+	when 
+		 $order : MOrder( M_Warehouse_ID == 0 )	
+		 $config : MPOP()
+	then	  
+	  modify( $order ) {   		
+  		setClientOrg( $config.getAD_Client_ID(), $config.getAD_Org_ID()),
+  		setM_Warehouse_ID($config.getM_Warehouse_ID()),
+  		setIdentifier(Util.getUUID())
+	  }	  	  
+end	
+
+rule "user"
+	agenda-group "user"
+	when
+		$order : MOrder( $orderuser : AD_User_ID )
+		$user : MUser( AD_User_ID != $orderuser )
+	then
+		PolicyRequest.getInstance().UserToOrder($order, $user);
+end
+
+rule "pricelistversion"
+	agenda-group "pricelistversion"
+	when
+		$order : MOrder ( $orderpricelist : M_PriceList_ID )
+		$pricelistversion : MPriceListVersion ( M_PriceList_ID != $orderpricelist )
+	then
+		MPriceList $mpl = MPriceList.get(Env.getCtx(), $pricelistversion.getM_PriceList_ID(), null);
+		modify( $order ) {
+			setM_PriceList_ID($pricelistversion.getM_PriceList_ID()),
+			setC_Currency_ID($mpl.getC_Currency_ID() ),
+			setIsTaxIncluded($mpl.isTaxIncluded() )
+		}
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "row" ).setFocus();
+end		
+
+rule "partner"
+	agenda-group "partner"
+	when 
+		$order : MOrder( $orderpartner : C_BPartner_ID )
+		$partner : MBPartner( C_BPartner_ID != $orderpartner )					
+	then
+	  PolicyRequest.getInstance().PartnerToOrder($order, $partner); 		
+	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "partnerrows" ).setFocus();
+end 
+
+rule "partnerrows"
+	agenda-group "partnerrows"
+	when 
+		$row : Row( $rowpartner : getC_BPartner_ID() )
+		$partner : MBPartner( C_BPartner_ID != $rowpartner )					
+	then
+	  taxfunc($row,$partner);  	
+end 
+
+rule "uno"
+	agenda-group "rownewline"
+	when
+		$row : Row ()
+		eval($row.IsNew("uno"))
+	then
+		//modify ($row) { setIsNew(false) }
+		$row.setIsNew(false);
+end
+
+rule "dos"
+	agenda-group "rownewline"
+	no-loop true
+	when
+	    $panel : PopPanel( $errormsg : getErrorMessagePanel())	
+		$row : Row ($qtyentered : getQtyEntered(), $qtybonus : getQtyBonus())
+		eval(!$row.IsNew("dos"))
+		eval($qtyentered.compareTo(BigDecimal.ZERO) == 0 && $qtybonus.compareTo(BigDecimal.ZERO) == 0)	    
+		eval($errormsg.length == 0)
+	then
+		modify ($panel) { showErrorPanel("QtyInsufficient") }
+		//$panel.showErrorPanel("QtyInsufficient")
+		//retract ($panel)
+end
+
+rule "tres"
+	agenda-group "rownewline"
+	when
+		eval(namerule("tres"))
+	    //$panel : PopPanel( )	
+		$panel : PopPanel( $errormsg : getErrorMessagePanel())	
+		$row : Row ()
+		eval(!$row.IsAttributeOK())
+	    eval(!$row.IsNew("tres"))
+		eval($row.getQtyEntered() > 0)
+		eval($errormsg.length == 0)
+	then
+		//$panel.showErrorPanel("PAttributeNoAttributeSet")
+		modify ($panel) { showErrorPanel("PAttributeNoAttributeSet") }
+		//retract ($panel)
+end
+
+rule "cuatro"
+	agenda-group "rownewline"
+	no-loop true
+	when	
+	   eval(namerule("cuatro"))
+	    $panel : PopPanel( $errormsg : getErrorMessagePanel())	
+		$row : Row ($qtyentered : getQtyEntered(), $qtybonus : getQtyBonus())
+		eval($qtyentered.compareTo(BigDecimal.ZERO) > 0 || $qtybonus.compareTo(BigDecimal.ZERO) > 0)
+	    eval(!$row.IsNew("cuatro"))
+		eval($row.IsAttributeOK())
+	    eval($errormsg.length == 0)
+	then
+		modify ($panel) { AddLine() }
+		//retract ($panel)
+end	
+
+rule "PriceActual"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "PriceActual" )	  
+	 then
+	  System.out.println("PriceActual rule");
+	 //qtyamt($row)
+     priceactual($row);
+end
+
+rule "PriceEntered"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "PriceEntered" )	  
+	 then
+	 //qtyamt($row)
+	priceentered($row);
+end
+
+rule "PriceEnteredWithoutTax"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "PriceEnteredWithoutTax" )	  
+	 then
+	 //qtyamt($row)
+	 priceenteredwithouttax($row);
+	 addPriceEnteredTax($row);
+end
+
+rule "QtyEntered"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "QtyEntered" )	  
+	 then
+	 //qtyamt($row)
+	qtyentered($row);
+	 $row.getRowData().setQtyEntered( $row.getFieldValue() );
+	 kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "QtyBonus"
+	agenda-group "row"
+	when
+		$row : Row( getFieldName() == "QtyBonus" )
+	then
+		qtybonus($row);
+		//qtyamt($row)
+end
+
+rule "SalesMargin"
+	agenda-group "row"
+	when 
+		$row : Row( getFieldName() == "Margin" )
+	then
+		//qtyamt($row)
+		margin($row);
+end
+
+rule "SalesPriceList"
+	agenda-group "row"
+	when 
+	  $row : Row( getFieldName() == "SalesPriceList" )
+	then
+	setSalesPriceList($row);
+	//$row.getRowData().setSalesPriceList( $row.getFieldValue());
+	//kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end 
+
+rule "DiscountAcquire"
+	agenda-group "row"
+	when
+	  $row : Row( getFieldName() == "DiscountAcquire1")
+	then
+	setdiscountacquire($row);
+end 
+
+rule "M_Product_ID"
+	agenda-group "row"
+	when 
+		$row : Row( getFieldName() == "M_Product_ID" )
+		eval(product($row));
+	then
+		$row.getRowData().setM_Product_ID( $row.getFieldIntValue());
+end
+
+rule "C_UOM_ID"
+	agenda-group "row"
+	when 
+		$row : Row ( getFieldName() == "C_UOM_ID" )
+	then
+	$row.getRowData().setC_UOM_ID( $row.getFieldIntValue() ); 
+	//totalrow($row);	
+	setC_UOM_ID($row);
+  	kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "C_UOMBonus_ID"
+	agenda-group "row"
+	when 
+		$row : Row ( getFieldName() == "C_UOMBonus_ID")
+	then
+		$row.getRowData().setC_UOMBonus_ID($row.getFieldIntValue() );
+		setC_UOMBonus_ID($row);
+end
+
+rule "C_UOMSales_ID"
+	agenda-group "row"
+	when
+		$row : Row( getFieldName() == "C_UOMSales_ID" )
+	then
+		$row.getRowData().setC_UOMSales_ID( $row.getFieldIntValue());
+		updatepricesaleslist($row);		
+end
+
+rule "AttributeSetInstance"
+	agenda-group "row"
+	when 
+		$row : Row ( getFieldName() == "M_AttributeSetInstance_ID" )
+	then
+		$row.getRowData().setM_AttributeSetInstance_ID( $row.getFieldIntValue());
+end
+
+rule "Discount"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount" )
+	 then
+		 setDiscount($row)
+		 //qtyamt($row)
+end
+
+rule "Discount1"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount1" )
+	 then
+	   setDiscount1($row)
+	   //qtyamt($row)
+end
+
+rule "Discount2"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount2" )
+	 then
+	 	setDiscount2($row)
+		//qtyamt($row)
+end
+
+rule "Discount3"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount3" )
+	 then
+	   setDiscount3($row)
+	   //qtyamt($row)
+end
+
+rule "Discount4"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "Discount4" )
+	 then
+	   setDiscount4($row)	   
+	   //qtyamt($row)
+end
+
+rule "Total"
+	agenda-group "row"
+	when
+	   $row : Row( getFieldName() == "Total" )
+	then
+	   setTotal($row)
+	   //qtyamt($row)
+end
+
+function void setdiscountacquire(Row row) {
+	BigDecimal value = (BigDecimal) row.getFieldValue();
+	System.out.println(String.format("discountacquire function %s", value));
+	float d  = value.floatValue();	
+	System.out.println(String.format("calculateDiscount-> d %s",d));
+	float discount = (1-(d / 100));
+	System.out.println(String.format("discount %s", discount));
+	if (discount < 1)	
+	{
+		float val = (row.getPrice().floatValue() * discount);
+		row.getRowData().setDiscountAcquire1(value);
+		row.getRowData().setPriceAcquisition(BigDecimal.valueOf(val));
+	}
+	else if (discount == 1)
+	{
+		row.getRowData().setDiscountAcquire1(BigDecimal.ZERO);
+		row.getRowData().setPriceAcquisition(BigDecimal.ZERO);
+	}	
+	updatesalespricemargin(row);
+}
+
+function boolean namerule(String name) {
+	System.out.println("namerule ->" + name);
+	return true;
+}
+
+function void setC_UOM_ID(Row row) {
+	int C_UOM_To_ID = row.getC_UOM_ID();
+	System.out.println(String.format("setC_UOM_ID-> C_UOM_ID=%s", C_UOM_To_ID));
+	BigDecimal QtyEntered1 = row.getQtyEntered().setScale(MUOM.getPrecision(Env.getCtx(), C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (row.getQtyEntered().compareTo(QtyEntered1) != 0)
+	{
+		row.getRowData().setQtyEntered(QtyEntered1);
+	}
+	row.getRowData().setQtyOrdered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getM_Product_ID(), C_UOM_To_ID, row.getQtyEntered()));
+	if (row.getQtyOrdered() == null)
+		row.getRowData().setQtyOrdered(row.getQtyEntered());
+	boolean conversion = row.getRowData().getQtyEntered().compareTo(row.getRowData().getQtyOrdered()) != 0;
+	row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getRowData().getPriceActual()));
+	if (row.getRowData().getPriceEntered() == null)
+		row.getRowData().setPriceEntered(row.getRowData().getPriceActual()); 
+		row.getRowData().setUOMConversion(conversion ? "Y" : "N");	
+	setC_UOMBonus_ID(row);
+	updateprice(row);
+	update(row);
+}
+
+function boolean product(Row row) {
+	System.out.println("product->");
+	setPriceProduct(row);
+	return true;
+}
+
+function void setPriceProduct(Row row) {
+	int M_Product_ID = row.getFieldIntValue();
+	BigDecimal Qty = row.getQtyOrdered();
+	Env.setContext(Env.getCtx(), row.getWindowNo(), "M_Product_ID", M_Product_ID);
+	MProduct product = MProduct.get (Env.getCtx(), M_Product_ID, null);
+	row.getRowData().setM_Product_ID(M_Product_ID);
+	MProductPricing pp = row.getProductPricing(row);
+	row.getRowData().setDiscount1(pp.getDiscount());
+	row.getRowData().setC_UOM_ID(product.getC_UOM_ID());
+	row.getRowData().setC_UOMBonus_ID(row.getC_UOM_ID());
+	row.getRowData().setPriceList(pp.getPriceList());
+	row.getRowData().setPriceStd(pp.getPriceStd());
+	row.getRowData().setPriceLimit(pp.getPriceLimit());
+	
+	row.setProductBrand(product.getBrand());
+	row.setProductBrandValue(product.getBrandValue());
+	row.getRowData().setC_TaxCategory_ID(product.getC_TaxCategory_ID());
+	row.setM_AttributeSet_ID(product.getM_AttributeSet_ID());	
+	if (row.getRowData().getM_AttributeSet_ID() != 0) {
+		MAttributeSet mas = MAttributeSet.get(Env.getCtx(),	row.getM_AttributeSet_ID(), null);
+		if (mas != null	&& mas.isMandatory())  {
+			row.setIsAttributeMandatory(true);			
+		}
+	}
+	row.tax(row);
+	updateprice(row);
+}
+
+function void updateprice(Row row) {
+	BigDecimal priceentered = MUOMConversion.convertProductFrom (Env.getCtx(), 
+		row.getM_Product_ID(), 
+		row.getC_UOM_ID(),
+		row.getPriceStd());
+	if (priceentered == null)
+		priceentered = row.getPriceStd();	
+	System.out.println(String.format("updateprice.>uom %s priceentered %s",row.getC_UOM_ID(), priceentered));
+	row.getRowData().setPriceEntered(priceentered);
+	BigDecimal tax = row.getTax().calculateTax(priceentered, true, row.getStdPrecision());
+	row.getRowData().setPriceEnteredWithoutTax(priceentered.subtract(tax));
+			//
+	row.getRowData().setPriceActual( MUOMConversion.convertProductTo (Env.getCtx(), 
+			row.getRowData().getM_Product_ID(), 
+			row.getRowData().getC_UOM_ID(), 
+			row.getRowData().getPriceEntered()));
+	if (row.getPriceActual() == null)
+		row.getRowData().setPriceActual(row.getPriceEntered());
+}
+
+function void addPriceEnteredTax(Row row)
+{	
+	System.out.println("addpriceenteredtax->");
+	MTax tax = MTax.get(Env.getCtx(), row.getC_Tax_ID());
+	BigDecimal taxamt = tax.calculateTax(row.getFieldValue(), false, row.getStdPrecision());
+	BigDecimal amt = row.getFieldValue();
+	amt = amt.add(taxamt);
+	row.getRowData().setPriceEntered( amt );
+}
+
+function boolean taxfunc(Row row, MBPartner partner)
+{
+	System.out.println("taxfunc->");
+	if (row.getM_Product_ID() == 0)
+	{
+		return false;		//
+	}
+	//	Check Partner Location
+	if (partner.getBillLocation() == null) {
+		System.out.println("no tiene direccion de facturacion");
+		return false;
+	}
+    if (partner.getShipLocation() == null) {
+     System.out.println("no tiene direccion de entrega");
+     return false;
+    }
+    int C_Tax_ID = Tax.get (Env.getCtx(), (int) row.getM_Product_ID(), 0, row.getRowData().getDateOrdered(), row.getRowData().getDatePromised(),
+			Env.getAD_Org_ID(Env.getCtx()), (int) row.getRowData().getM_Warehouse_ID(), partner.getBillLocation().getC_BPartner_Location_ID(), partner.getShipLocation().getC_BPartner_Location_ID(),	true);
+	row.setC_Tax_ID(new Integer(C_Tax_ID));
+	return true;
+}	//	tax
+
+function void setDiscount(Row row) {
+	row.getRowData().setDiscount(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void setDiscount1(Row row) {
+	row.getRowData().setDiscount1(row.getFieldValue());
+	calculateDiscount(row);
+
+}
+
+function void setDiscount2(Row row) {
+	row.getRowData().setDiscount2(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void setDiscount3(Row row) {
+	row.getRowData().setDiscount3(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void setDiscount4(Row row) {
+	row.getRowData().setDiscount4(row.getFieldValue());
+	calculateDiscount(row);
+}
+
+function void calculateDiscount(Row row) {
+	float d  = row.getDiscount().floatValue();	
+	//float d1 = row.getDiscount1().floatValue();
+	float d2 = row.getDiscount2().floatValue();
+	float d3 = row.getDiscount3().floatValue();
+	float d4 = row.getDiscount4().floatValue();
+	System.out.println(String.format("calculateDiscount-> d %s d2 %s d3 %s d4 %s",d,d2,d3,d4));
+	//float discount = (1-(d / 100)) * (1-(d1 / 100)) * (1-(d2 / 100)) * (1-(d3 / 100)) * (1-(d4 / 100));
+    float discount = (1-(d / 100)) * (1-(d2 / 100)) * (1-(d3 / 100)) * (1-(d4 / 100));
+	if (discount < 1)	
+	{
+		row.setDiscountAmt(BigDecimal.valueOf(discount));
+	}
+	else if (discount == 1)
+	{
+		row.setDiscountAmt(BigDecimal.ZERO);
+	}	
+	updatesalespricemargin(row);
+	update(row);
+
+}
+
+function void setTotal(Row row) {
+	System.out.println(String.format("settotal-> total %s", row.getFieldValue()));
+	float d  = row.getDiscount().floatValue();
+	//float d1 = row.getDiscount1().floatValue();
+	float d2 = row.getDiscount2().floatValue();
+	float d3 = row.getDiscount3().floatValue();
+	float d4 = row.getDiscount4().floatValue();
+	// float discount = (1-(d / 100)) * (1-(d1 / 100)) * (1-(d2 / 100)) * (1-(d3 / 100)) * (1-(d4 / 100));
+	float discount = (1-(d / 100)) * (1-(d2 / 100)) * (1-(d3 / 100)) * (1-(d4 / 100));
+	float total = row.getFieldValue().floatValue();
+	float pa = row.getPriceActual().floatValue();
+	System.out.println(String.format("settotal->discount %s %s %s %s discount %s priceactual %s total %s ", d,d2,d3,d4, discount, pa, total));
+	System.out.println(String.format("Qty Ordered %s", row.getQtyOrdered()));
+	//float tot = value.floatValue();
+	total = total / row.getQtyOrdered().floatValue();
+	float np = total / pa;
+	System.out.println(String.format("settotal->newprice %s", np));
+	float pa2 = (np / discount) * pa;
+	System.out.println(String.format("settotal->priceactual %s", pa2));
+	row.setPriceActual(BigDecimal.valueOf(pa2));
+	//float d = row.getTotal().floatValue();
+}
+
+function void priceactual(Row row) {
+	System.out.println("priceactual->");
+	// convierto a la unidad de medida minima para guardar a priceEntered
+	// cuando es from debe dividir
+	row.getRowData().setPriceActual((BigDecimal) row.getFieldValue());
+	row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), 
+	row.getRowData().getM_Product_ID(), 
+	row.getRowData().getC_UOM_ID(), 
+	row.getRowData().getPriceActual()));
+	if (row.getRowData().getPriceEntered() == null)
+		row.getRowData().setPriceEntered(row.getPriceActual());
+	updatesalespricemargin(row);
+	update(row);
+}
+
+function void priceenteredwithouttax(Row row) {
+	System.out.println("priceenteredwithouttax->");
+	BigDecimal PriceEnteredWithoutTax = (BigDecimal) row.getFieldValue();
+	if (PriceEnteredWithoutTax== null)
+		PriceEnteredWithoutTax = BigDecimal.ZERO;
+	BigDecimal tax = row.getTax().calculateTax(PriceEnteredWithoutTax, false, row.getStdPrecision());
+	BigDecimal amt  = PriceEnteredWithoutTax.add(tax);  
+	row.getRowData().setPriceEnteredWithoutTax(PriceEnteredWithoutTax);
+	row.setField("PriceEntered", amt);
+}
+
+function void priceentered(Row row) {
+	BigDecimal value = row.getFieldValue();
+	row.getRowData().setPriceEntered( value );
+	BigDecimal tax = row.getTax().calculateTax(value, true, row.getStdPrecision());
+	row.getRowData().setPriceEnteredWithoutTax(value.subtract(tax));
+			//
+	row.getRowData().setPriceActual( MUOMConversion.convertProductTo (Env.getCtx(), 
+			row.getRowData().getM_Product_ID(), 
+			row.getRowData().getC_UOM_ID(), 
+			row.getRowData().getPriceEntered()));
+	if (row.getPriceActual() == null)
+		row.getRowData().setPriceActual(row.getPriceEntered());
+	System.out.println(String.format("priceentered->priceactual:", row.getPriceActual()));
+	if (row.getPriceList().compareTo(Env.ZERO) > 0 || row.getPriceEntered().compareTo(Env.ZERO) > 0) 
+	{
+		if (row.getPriceList().compareTo(Env.ZERO) > 0)
+		{
+		}
+		else
+		{
+			row.getRowData().setPriceList(row.getPriceActual());
+		}
+	}						
+	update(row);
+}
+
+function void qtyentered(Row row) {
+	BigDecimal QtyEntered = row.getFieldValue();
+	row.convertToOrderer(row, QtyEntered);
+	System.out.println(String.format("qtyentered-> oriceentered %s", row.getPriceEntered()));
+	//row.getRowData().setPriceEntered(MUOMConversion.convertProductFrom (Env.getCtx(), 
+	//	row.getM_Product_ID(), 
+	//	row.getC_UOM_ID(), 
+	//	row.getPriceActual()));
+	//if (row.getPriceEntered() == null)
+	//	row.getRowData().setPriceEntered(row.getPriceActual());
+	System.out.println(String.format("qtyentered-> pricestd %s-oriceentered %s", row.getPriceStd(), row.getPriceEntered()));
+	row.getRowData().setPriceEntered(row.getPriceEntered().setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+	row.getRowData().setPriceActual(row.getRowData().getPriceEntered());
+	update(row);
+}
+
+function void qtybonus(Row row) {
+	BigDecimal QtyBonus = row.getFieldValue();
+	row.getRowData().setQtyBonus(QtyBonus);
+	if (QtyBonus.compareTo(Env.ZERO) == 0)
+	{
+		row.setDiscount1(BigDecimal.ZERO);
+		row.getRowData().setQtyBonusOrdered(BigDecimal.ZERO);
+	}
+	else
+	{
+		// Qty Bonus debe ser convertido a la unidad de la compra
+		BigDecimal QtyOrderedBonus1 = MUOMConversion
+						.convertProductFrom(Env.getCtx(), row.getM_Product_ID(), row.getC_UOMBonus_ID(), QtyBonus);
+		if (QtyOrderedBonus1 == null)
+		{
+			QtyOrderedBonus1 = QtyBonus;
+		}	
+		row.getRowData().setQtyBonusOrdered(QtyOrderedBonus1);
+		BigDecimal QtyOrdered1 = row.getQtyOrdered();
+		System.out.println(String.format("qtybonus->QtyOrderedBonus1 %s QtyOrdered1 %s", QtyOrderedBonus1, QtyOrdered1));
+		QtyOrdered1 = QtyOrdered1.add(QtyOrderedBonus1); 
+
+		if (row.getQtyOrdered().compareTo(BigDecimal.ZERO) > 0 && QtyOrdered1.compareTo(Env.ZERO) > 0)
+		{
+			BigDecimal newprice    = row.getPriceActual().divide(QtyOrdered1,10,BigDecimal.ROUND_HALF_UP);
+			BigDecimal price = row.getPriceActual().divide(row.getQtyOrdered(),10,BigDecimal.ROUND_HALF_UP);
+			BigDecimal discount = BigDecimal.ONE.subtract(newprice.divide(price,10,BigDecimal.ROUND_HALF_UP));
+			discount = discount.multiply(Env.ONEHUNDRED);
+			discount = discount.setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+			row.setDiscount1(discount);
+		}
+		else
+		{
+			row.setDiscount(BigDecimal.ZERO);
+		}				
+	}
+}
+
+function setC_UOMBonus_ID(Row row) {
+	int C_UOM_To_ID = row.getC_UOMBonus_ID();
+	System.out.println(String.format("setC_UOMBonus_ID->uom bonus %s", C_UOM_To_ID));
+	BigDecimal QtyEntered1 = row.getQtyBonus().setScale(MUOM.getPrecision(Env.getCtx(), C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (row.getQtyBonus().compareTo(QtyEntered1) != 0)
+	{
+		row.getRowData().setQtyBonus(QtyEntered1);
+	}
+	row.getRowData().setQtyBonusOrdered(MUOMConversion.convertProductFrom(Env.getCtx(), row.getM_Product_ID(), C_UOM_To_ID, row.getQtyBonus()));
+	if (row.getQtyBonusOrdered() == null)
+		row.getRowData().setQtyBonusOrdered(row.getQtyBonus());
+	System.out.println(String.format("setC_UOMBonus_ID->bonus %s bonus ordered %s", row.getQtyBonus(),row.getQtyBonusOrdered()));
+	//
+	BigDecimal QtyOrdered1 = row.getQtyOrdered();
+	System.out.println(String.format("setC_UOMBonus_ID->QtyOrderedBonus1 %s QtyOrdered1 %s", row.getQtyBonusOrdered(), QtyOrdered1));
+	QtyOrdered1 = QtyOrdered1.add(row.getQtyBonusOrdered()); 
+
+	if (row.getQtyOrdered().compareTo(BigDecimal.ZERO) > 0 && QtyOrdered1.compareTo(Env.ZERO) > 0)
+	{
+		BigDecimal newprice    = row.getPriceActual().divide(QtyOrdered1,10,BigDecimal.ROUND_HALF_UP);
+		BigDecimal price = row.getPriceActual().divide(row.getQtyOrdered(),10,BigDecimal.ROUND_HALF_UP);
+		if (price.compareTo(BigDecimal.ZERO) > 0) {
+			BigDecimal discount = BigDecimal.ONE.subtract(newprice.divide(price,10,BigDecimal.ROUND_HALF_UP));
+			discount = discount.multiply(Env.ONEHUNDRED);
+			discount = discount.setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+			row.setDiscount1(discount);
+		}
+	}
+	else
+	{
+		row.setDiscount(BigDecimal.ZERO);
+	}
+	System.out.println(String.format("setC_UOMBonus_ID->discount1 %s",row.getDiscount1()));
+}
+
+function void margin(Row row)
+{
+	BigDecimal margin = row.getFieldValue();
+	row.getRowData().setMargin(margin);
+	BigDecimal buyprice = row.getPrice();
+
+	BigDecimal salesprice = margin.divide(Env.ONEHUNDRED, Env.divideprecision, BigDecimal.ROUND_HALF_UP);
+	salesprice = Env.ONE.subtract(salesprice);
+	salesprice = buyprice.divide(salesprice, Env.divideprecision, BigDecimal.ROUND_HALF_UP);
+	row.getRowData().setSalesPriceList(salesprice);
+	update(row);
+}
+
+function void setSalesPriceList(Row row) {
+	BigDecimal salespricelist = row.getFieldValue();
+	row.getRowData().setSalesPriceList(salespricelist);
+	updatesalespricemargin(row);
+	update(row);
+}
+
+function void updatepricesaleslist(Row row) {
+	BigDecimal buyprice = row.getPrice();
+	int C_UOM_To_ID = row.getC_UOMSales_ID();
+	BigDecimal price = MUOMConversion.convertProductTo (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getPrice());
+	System.out.println(String.format("updatepricesaleslist-> price %s", price));
+}
+
+function void updatesalespricemargin(Row row)
+{
+	BigDecimal salesprice = row.getSalesPriceList();
+	System.out.println(String.format("updatesalespricemargin->salesprice %s", salesprice));
+	if (salesprice != null && salesprice.compareTo(BigDecimal.ZERO) > 0)
+	{
+		BigDecimal buyprice = row.getPrice();
+		if (row.getDiscountAcquire1().compareTo(BigDecimal.ZERO) > 0)
+		{
+			float d = row.getDiscountAcquire1().floatValue();
+			float discount = (1-(d / 100));
+			if (discount < 1)	
+			{
+				float val = (buyprice.floatValue() * discount);
+				buyprice = BigDecimal.valueOf(val);
+				System.out.println(String.format("buyprice %s",buyprice));
+			}		
+		}
+		BigDecimal margin = buyprice.divide(salesprice, Env.divideprecision, BigDecimal.ROUND_HALF_UP);
+		margin = BigDecimal.ONE.subtract(margin);
+		margin = margin.multiply(Env.ONEHUNDRED);
+		margin = margin.setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+		row.getRowData().setMargin(margin);
+	}
+}
+
+function void calculatesalesmargin(Row row) {
+	update(row);
+}
+
+function void update(Row row)
+{
+	System.out.println(String.format("update->priceentered %s", row.getPriceEntered()));
+	System.out.println(String.format("update->priceactual %s", row.getPriceActual()));
+	System.out.println(String.format("update->qtyordered %s", row.getQtyOrdered()));
+	System.out.println(String.format("update->price %s", row.getPrice()));
+	System.out.println(String.format("qtyentered %s", row.getQtyEntered()));
+	row.getRowData().setGross(row.getPriceEntered().multiply(row.getQtyEntered()).setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+	//row.getRowData().setGross(row.getPriceEntered().multiply(row.getQtyEntered()).setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP));
+	BigDecimal Net = row.getPriceEntered().multiply(row.getQtyEntered()).setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+	//BigDecimal Net = row.getPriceEntered().multiply(row.getQtyEntered()).setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+	row.getRowData().setNet(Net);
+	row.tax(row);
+	BigDecimal Total = Net;
+	if (!row.IsTaxIncluded())
+	{
+		Total = Total.add(row.getTaxAmount());		 
+	}	 
+	Total = Total.setScale(row.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+	row.getRowData().setTotal(Total);
+}

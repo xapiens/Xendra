@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="buykb" category="buy acceptor" agenda="buy" default="True" 
+	package="org.xendra.rules.messages" queuename="/queue/pop" entrypoint="buy" sessionname="buyKS" 
+	EqualsBehavior="EQUALITY" queuelistenerclass="org.xendra.messages.popmessageListener"  type="kiebase"
+	EventProcessingMode="STREAM" Identifier="febcc63a-8b4f-f643-3201-74e362cc41b1"  synchronized="2018-05-22 22:03:41">		
+<rule name="src/main/resources/org/xendra/pop/acceptor.drl" file="acceptor.drl" Identifier = "ad70d227-5e99-ea64-525e-129e1e759ae4"  synchronized="2018-05-22 22:03:41"/>
+<process value="Buy Acceptor" accesslevel="6" frequencytype="M" frequency="1" keeplogdays="7" name="Buy Acceptor" type="A" class="org.xendrian.process.AcceptPurchases" Identifier="852faa47-7b1c-a818-6d47-8cfed536c145"/>
+<process value="Buy Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Buy Listener" type="L" class="" Identifier="89e10e92-a500-847d-3032-5e8de9863396"/>
+</kiebase>

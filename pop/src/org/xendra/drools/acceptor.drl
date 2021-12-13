@@ -1,0 +1,19 @@
+//created on: 28/09/2016
+package org.xendra.rules.messages
+
+import org.xendra.messages.BuyPolicyRequest
+
+dialect "mvel"
+
+declare BuyPolicyRequest
+	@role( event )
+end
+
+rule "generate docs"
+	agenda-group "buy"
+when
+	$bpr : BuyPolicyRequest() from entry-point "buy"
+then
+	modify ($bpr) {simple()}
+	retract ($bpr)
+end
