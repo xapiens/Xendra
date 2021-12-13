@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="AD_Package">
+    <table name="AD_Package" accesslevel="0" level="1" Identifier="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd">
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd" IsActive="true">
+        <Name><![CDATA[org.xendra.communication]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="645f34c0-ea3a-ac63-618d-8ca49873c33b" IsActive="true">
+        <Name><![CDATA[org.xendra.import]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="98af94a4-a4cd-bdc0-5651-5880caf79899" IsActive="true">
+        <Name><![CDATA[org.xendra.commercial]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="9df191d4-b8da-879a-276b-6e16b286e868" IsActive="true">
+        <Name><![CDATA[org.xendra.workflow]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="34bf6e21-8c70-8fb9-604c-a300eb925459" IsActive="true">
+        <Name><![CDATA[org.xendra.performanceanalysis]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="a0ba5f31-73ac-fb58-5a46-04ff03d1a8c1" IsActive="true">
+        <Name><![CDATA[org.xendra.bids]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="1b3656e5-71c7-1296-994e-9b2c4549c7fd" IsActive="true">
+        <Name><![CDATA[org.xendra.standard]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="95f9a029-eaee-0747-b1a5-58cfdd8f8ae5" IsActive="true">
+        <Name><![CDATA[org.xendra.humanresource]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="140d4d0c-8da8-bcb6-9c20-bc776701f80c" IsActive="true">
+        <Name><![CDATA[org.xendra.dictionary]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="2809ac2d-7d43-20f8-05f0-a478f2e50204" IsActive="true">
+        <Name><![CDATA[org.xendra.material]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="24337a04-c03d-922c-e7ce-2876bf8880b5" IsActive="true">
+        <Name><![CDATA[org.xendra.request]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="2ac04657-d663-47c2-4ec1-927ad71f1e96" IsActive="true">
+        <Name><![CDATA[org.xendra.accounting]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="4bb6f0e4-f72d-dcbb-9183-88af0357143f" IsActive="true">
+        <Name><![CDATA[org.xendra.services]]></Name>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a" Identifier="f42d3f39-06e2-bcd9-2954-27694ae45e5d" IsActive="true">
+        <Name><![CDATA[org.xendra.asset]]></Name>
+      </row>
+    </table>
+  </record>
+</stream>
+
