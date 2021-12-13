@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ============================================= -->
-<!-- Client                                        -->
+<!-- Core                                          -->
 <!-- ============================================= -->
 <!-- $Header: /svn/Xendra/client/build.xml,v 1.2 2011/11/11 21:57:27 xapiens Exp $ -->
 
-<project name="client" default="clientDistribute" basedir=".">
+<project name="core" default="catalog" basedir=".">
 
   <description>
     This buildfile is used to build the client subproject within 
@@ -24,28 +24,16 @@
   <!-- set path to include the necessary jar files for javac -->
   <path id="project.class.path">
 	<pathelement path="${classpath}"/>    
-	<pathelement path="${jar.path}/holon.jar"/>
-	<pathelement path="${jar.path}/CCTools.jar"/>
-	<pathelement path="${jar.path}/common.jar"/>
-	<pathelement path="${jar.path}/Columba.jar"/>
-	<pathelement path="${jar.path}/holon.jar"/>
-	<pathelement path="${jar.path}/postgresql.jar"/>
-	<pathelement path="${jar.path}/Drools.jar"/>
-	<pathelement path="../store/org.xendra.store/store.jar"/>
-
-	<pathelement path="../tools/lib/javaee.jar"/>
-	<pathelement path="../tools/lib/commons-cli-1.0.jar"/>
-	<pathelement path="../tools/lib/flexdock-1.2.3.jar"/>
-	<pathelement path="../tools/lib/jwizz-0.1.3.jar"/>
+	<pathelement path="${jar.path}/Xendralib.jar"/>
+	<pathelement path="../tools/lib/original-escposjava-1.0-SNAPSHOT.jar"/>
+	<pathelement path="../tools/lib/escpos_coffee.jar"/>
 	<pathelement path="../tools/lib/junit.jar"/>
-	<pathelement location="../JasperReportsTools/lib"/>
-	<pathelement path="../tools/lib/lanterna-3.0.0-beta3.jar"/>
 	<fileset dir="../JasperReportsTools/lib">
 		<include name="**/*.jar"/>
 	</fileset>
   </path>
   
-  <target name="clientInit" description="initialization target">
+  <target name="clientInit" depends="clean" description="initialization target">
     <echo message="=========== Build core"/>
     <echo message="CCTools is in ${jar.path}/CCTools.jar"/>
     <!-- create the time stamp -->
@@ -57,9 +45,9 @@
     <mkdir dir="${plugin_id}"/>
     <!-- check for the distribution directory -->
     <available file="${dist.dir}" type="dir" property="dist.dir.exists"/>
-    <uptodate property="jar.uptodate" targetfile="${dist.dir}/${jar.name}.zip">
+    <!--<uptodate property="jar.uptodate" targetfile="${dist.dir}/${jar.name}.zip">
       <srcfiles dir="${src}" includes="**/*.java"/>
-    </uptodate>
+    </uptodate>-->
   </target>
 	
   <target name="clientMakedir" depends="clientInit" unless="dist.dir.exists">
@@ -76,6 +64,13 @@
     <javac srcdir="${src}" destdir="${build.dir}" deprecation="off" debug="on">
       <classpath refid="project.class.path"/>
     </javac>
+    <!--<java fork="true" classname="org.xendra.developer.GenerateCatalog" >
+       <arg value="."/>
+       <arg value="src/org/columba/core/plugin/plugin.xml"/>
+       <classpath refid="project.class.path"/>
+    </java>-->
+    <copy file="src/org/columba/core/plugin/plugin.xml" todir="."/>
+    <!--</java>-->
     <!-- copy all image & sound files from src to the build directory -->
     <copy todir="${build.dir}">
       <fileset dir="${src}">
@@ -87,13 +82,13 @@
         <include name="**/*.htm"/>
 	<include name="**/*.txt"/>
         <include name="**/*.xml"/>
+        <include name="**/*.zip"/>
         <include name="**/*.html"/>
         <include name="**/*.properties"/>
         <exclude name="**/package.html"/>      	
       </fileset>
     </copy>
   </target>
-
 
   <!-- =========================================== -->
   <!-- Distribution                                -->
@@ -111,7 +106,7 @@
         <attribute name="Implementation-URL" value="http://www.xendra.org"/>
       </manifest> 
     </jar>
-    <copy file="${plugin_id}/${jar.name}.jar" todir="${dist.dir}"/>
+    <!--<copy file="${plugin_id}/${jar.name}.jar" todir="${dist.dir}"/>-->
     <copy file="src/org/columba/core/plugin/plugin.xml" todir="."/>
     <replace file="./plugin.xml">
         <replacefilter token="@timestamp@" value="${timestamp}"/>
@@ -123,10 +118,26 @@
        <zipfileset dir="." includes="plugin.xml" prefix="${plugin_id}"/>
        <!--<zipfileset dir="resource" prefix="${plugin_id}/resource" />-->
        <zipfileset dir="resource" prefix="${plugin_id}/resource"/>
+       <zipfileset dir="../lib" includes="CCTools.jar" prefix="${plugin_id}" />
+       <zipfileset dir="fill" prefix="${plugin_id}/fill"/>
     </zip>
-    <delete file="./plugin.xml"/> 
+    <copy file="${plugin_id}/${jar.name}.jar" todir="${dist.dir}"/>
+    <!--<delete file="./plugin.xml"/>-->
  </target>
 
+  <!--<target name="catalog" depends="clientDistribute" unless="jar.uptodate">-->
+  <target name="catalog" depends="clientDistribute">
+    <java fork="true" classname="org.xendra.developer.GenerateCatalog" >
+       <arg value="."/>
+       <!--<arg value="src/org/columba/core/plugin/plugin.xml"/>-->
+       <arg value="./plugin.xml"/>
+       <classpath refid="project.class.path"/>
+       <classpath>
+	       <pathelement location="${plugin_id}/${jar.name}.jar"/>
+       </classpath>	
+    </java>
+    <delete file="./plugin.xml"/>
+  </target>
 
   <target name="clean">
     <!-- Delete the ${build.dir} directory trees -->
