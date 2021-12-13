@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar visible="true">
+ <button action="AddFormat"/>
+ <button action="PrintFormat"/>
+ <button action="Save"/>
+ <separator/>
+ <button action="Storage"/>
+ <separator/>
+ <button action="CompileFormat"/>
+</toolbar>

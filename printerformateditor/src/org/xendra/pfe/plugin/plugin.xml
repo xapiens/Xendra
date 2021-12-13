@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin name="Printer format editor extensions" 
+        description="Printer format editor extension" 
+        id="org.xendra.pfe" 
+        version="1.0" 
+        category="Printing"
+	synchronized="@timestamp@"	
+	enabled="true">              
+	<properties>
+		<property name="infourl" value="http://americas/public/plugin?id=org.xendra.pfe"/>
+	</properties>
+	<handlerlist>
+		<handler id="org.xendra.pfe.folder"/>
+	</handlerlist>
+	<extensionlist id="org.xendra.pfe.folder">
+		<extension id="Root" class="org.xendra.pfe.folder.Root"/>
+		<extension id="plugin"  class="org.xendra.pfe.folder.PluginFolder"/>
+		<extension id="format" class="org.xendra.pfe.folder.FormatFolder"/>
+		<extension id="table" class="org.xendra.pfe.folder.TableFolder"/>
+		<extension id="field" class="org.xendra.pfe.folder.FieldFolder"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.action">
+		<extension id="AddFormat" class="org.xendra.pfe.gui.action.AddFormatAction"/>
+		<extension id="CompileFormat" class="org.xendra.pfe.gui.action.CompileFormatAction"/>
+		<extension id="PrintFormat" class="org.xendra.pfe.gui.action.PrintFormatAction"/>
+		<extension id="Storage" class="org.xendra.pfe.gui.action.StorageAction"/>
+		<extension id="Save" class="org.xendra.pfe.gui.action.SaveAction"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.frame">
+		<extension id="PrinterFormatEditor" class="org.xendra.pfe.gui.frame.PFEFrameController">
+			<properties managed="true"/>
+		</extension>	
+	</extensionlist>
+	<extensionlist id="org.columba.core.config">
+		<extension id="POSConfigPlugin" class="org.xendra.pfe.plugin.ConfigPlugin"/>
+	</extensionlist>
+</plugin>

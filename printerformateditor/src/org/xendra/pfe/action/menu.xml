@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menubar>
+	<menu id="menu_file" placeholderid="top">
+		<menuitem id="Remove" />
+	</menu>
+</menubar>
