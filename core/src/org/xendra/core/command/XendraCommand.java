@@ -36,11 +36,13 @@ import org.compiere.apps.AWindow;
 import org.compiere.apps.ProcessDialog;
 import org.compiere.apps.form.FormFrame;
 import org.compiere.model.MTask;
+import org.compiere.model.reference.REF_WF_Action;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
 import org.compiere.util.Msg;
+import org.xendra.apps.WorkflowDialog;
 import org.xendra.swing.ToastMessage;
 
 public class XendraCommand extends Command implements ActionListener  {
@@ -48,13 +50,13 @@ public class XendraCommand extends Command implements ActionListener  {
 	private static CLogger log = CLogger.getCLogger(XendraCommand.class);
 
 	private static final int UPDATE_TIMER_INTERVAL = 100;
-	
+
 	private Timer updateTimer = new Timer(UPDATE_TIMER_INTERVAL, this);
 
 	private IWorkerStatusController m_worker;
 
 	private Integer m_progress = 0;
-	
+
 	public XendraCommand(XendraCommandReference ref) {
 		super(ref);		
 	}
@@ -71,52 +73,52 @@ public class XendraCommand extends Command implements ActionListener  {
 			boolean base = Env.isBaseLanguage(Env.getCtx(), "AD_Menu");
 			if (base)
 				sql.append("SELECT m.AD_Menu_ID, m.Name,m.Description,m.IsSummary,m.Action, "
-					+ "m.AD_Window_ID, m.AD_Process_ID, m.AD_Form_ID, m.AD_Workflow_ID, m.AD_Task_ID, m.AD_Workbench_ID, m.ISSOTrx "
-					+ "FROM AD_Menu m");
+						+ "m.AD_Window_ID, m.AD_Process_ID, m.AD_Form_ID, m.AD_Workflow_ID, m.AD_Task_ID, m.AD_Workbench_ID, m.ISSOTrx "
+						+ "FROM AD_Menu m");
 			else
 				sql.append("SELECT m.AD_Menu_ID,  t.Name,t.Description,m.IsSummary,m.Action, "
-					+ "m.AD_Window_ID, m.AD_Process_ID, m.AD_Form_ID, m.AD_Workflow_ID, m.AD_Task_ID, m.AD_Workbench_ID, m.ISSOTrx "
-					+ "FROM AD_Menu m, AD_Menu_Trl t");
+						+ "m.AD_Window_ID, m.AD_Process_ID, m.AD_Form_ID, m.AD_Workflow_ID, m.AD_Task_ID, m.AD_Workbench_ID, m.ISSOTrx "
+						+ "FROM AD_Menu m, AD_Menu_Trl t");
 			if (!base)
 				sql.append(" WHERE m.AD_Menu_ID=t.AD_Menu_ID AND t.AD_Language='")
-					.append(Env.getAD_Language(Env.getCtx())).append("'")
-					.append(" AND m.AD_Menu_ID=?");
+				.append(Env.getAD_Language(Env.getCtx())).append("'")
+				.append(" AND m.AD_Menu_ID=?");
 			else
 				sql.append(" WHERE m.AD_Menu_ID=?");
 			//
 			if (!r.isMenu())
-				sql.append("SELECT * FROM AD_WF_Node WHERE AD_WF_Node_ID=?");
-				//sql = "SELECT * FROM AD_WF_Node WHERE AD_WF_Node_ID=?";			)
+				sql = new StringBuilder("SELECT * FROM AD_WF_Node WHERE AD_WF_Node_ID=?");
+
 			PreparedStatement pstmt = DB.prepareStatement(sql.toString(), null);
 			pstmt.setInt(1, r.getID());
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next())	//	should only be one
 			{
-                ToastMessage toastMessage = new ToastMessage(rs.getString("name"),3000);
-                toastMessage.setVisible(true);
+				ToastMessage toastMessage = new ToastMessage(rs.getString("name"),3000);
+				toastMessage.setVisible(true);
 				m_worker.setDisplayText(rs.getString("name"));
 				String Action = rs.getString("Action");
 				String IsSOTrx = "Y";
 				if (r.isMenu())
 					IsSOTrx = rs.getString("IsSOTrx");
 				int cmd;
-				if (Action.equals("W"))				//	Window
+				if (Action.equals(REF_WF_Action.UserWindow))				//	Window
 				{
 					cmd = rs.getInt("AD_Window_ID");
 					startWindow(0, cmd);
 				}
-				else if (Action.equals("P") || Action.equals("R"))	//	Process & Report
+				else if (Action.equals(REF_WF_Action.AppsProcess) || Action.equals(REF_WF_Action.AppsReport))	//	Process & Report
 				{
 					cmd = rs.getInt("AD_Process_ID");
 					startProcess(cmd, IsSOTrx);
 				}
-				else if (Action.equals("B"))		//	Workbench
+				else if (Action.equals(REF_WF_Action.UserWorkbench))		//	Workbench
 				{
 					cmd = rs.getInt("AD_Workbench_ID");
 					startWindow (cmd, 0);
-				}
-				else if (Action.equals("F"))		//	WorkFlow
+				}				
+				else if (Action.equals(REF_WF_Action.SubWorkflow))		//	WorkFlow
 				{
 					if (r.isMenu())
 						cmd = rs.getInt("AD_Workflow_ID");
@@ -124,13 +126,14 @@ public class XendraCommand extends Command implements ActionListener  {
 						cmd = rs.getInt("Workflow_ID");
 					//if (m_menu != null)
 					//	m_menu.startWorkFlow(cmd);
+					WorkflowDialog.createInstance().startWorkflow(cmd);
 				}
-				else if (Action.equals("T"))		//	Task
+				else if (Action.equals(REF_WF_Action.AppsTask))		//	Task
 				{
 					cmd = rs.getInt("AD_Task_ID");
 					startTask(cmd, r.getName());
 				}
-				else if (Action.equals("X"))		//	Form
+				else if (Action.equals(REF_WF_Action.UserForm))		//	Form
 				{
 					cmd = rs.getInt("AD_Form_ID");
 					startForm(cmd);
@@ -154,7 +157,7 @@ public class XendraCommand extends Command implements ActionListener  {
 		catch (InterruptedException ie) {}
 
 	}
-	
+
 	private void startWindow(int AD_Workbench_ID, int AD_Window_ID)
 	{
 		AWindow frame = (AWindow)Env.showWindow(AD_Window_ID); 
@@ -177,34 +180,34 @@ public class XendraCommand extends Command implements ActionListener  {
 			OK = frame.initWorkbench(AD_Workbench_ID);
 		else
 			OK = frame.initWindow(AD_Window_ID, null);	//	No Query Value
-			if (!OK)
-				return;
+		if (!OK)
+			return;
 
 
-			if (Ini.isPropertyBool(Ini.P_OPEN_WINDOW_MAXIMIZED) ) 
-			{
-				frame.pack();
-				frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-			}
+		if (Ini.isPropertyBool(Ini.P_OPEN_WINDOW_MAXIMIZED) ) 
+		{
+			frame.pack();
+			frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		}
 
-			//	Center the window
-			if (Ini.isPropertyBool(Ini.P_OPEN_WINDOW_MAXIMIZED) ) 
-			{
-				frame.setVisible(true);
-				frame.toFront();
-			} 
-			else
-			{
-				frame.validate();
-				AEnv.showCenterScreen(frame);
-			}
+		//	Center the window
+		if (Ini.isPropertyBool(Ini.P_OPEN_WINDOW_MAXIMIZED) ) 
+		{
+			frame.setVisible(true);
+			frame.toFront();
+		} 
+		else
+		{
+			frame.validate();
+			AEnv.showCenterScreen(frame);
+		}
 
-			//m_menu.getWindowManager().add(frame);
-			Environment.getWindowManager().add(frame);
+		//m_menu.getWindowManager().add(frame);
+		Environment.getWindowManager().add(frame);
 
-			//			if (wfPanel.isVisible())
-			//				m_WF_Window = frame;            //  maintain one reference
-			frame = null;
+		//			if (wfPanel.isVisible())
+		//				m_WF_Window = frame;            //  maintain one reference
+		frame = null;
 	}	//	startWindow
 
 	/**
@@ -294,7 +297,7 @@ public class XendraCommand extends Command implements ActionListener  {
 			if (m_progress == m_worker.getProgessBarMaximum())
 				m_progress = 0;			
 			m_worker.setProgressBarValue(m_progress);
-			
+
 		}
 	}	//	startForm
-	}
+}

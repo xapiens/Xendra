@@ -63,11 +63,12 @@ public static int Table_ID=MTable.getTable_ID("W_BasketLine");
 @XendraTrl(Identifier="df5299e5-6525-61ec-cc5e-b334d6bad139")
 public static String es_PE_TABLE_W_BasketLine_Name="Línea de Almacenado";
 
-@XendraTable(Name="Basket Line",Description="Web Basket Line",Help="",TableName="W_BasketLine",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="df5299e5-6525-61ec-cc5e-b334d6bad139",
-Synchronized="2017-08-16 11:44:28.0")
+@XendraTable(Name="Basket Line",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Web Basket Line",Help="",
+TableName="W_BasketLine",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="df5299e5-6525-61ec-cc5e-b334d6bad139",
+Synchronized="2020-03-03 21:40:31.0")
 /** TableName=W_BasketLine */
 public static final String Table_Name="W_BasketLine";
 
@@ -137,7 +138,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="18b7aeba-f142-87c3-8b07-5c703d8debcb",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c38b1d4f-b18e-4d1e-8f6a-58000b99718f",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Line No.
@@ -202,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="679d6697-7be0-86fa-ddd9-c17d07db317b",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 /** Set Product.
@@ -231,7 +232,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e0ea837f-46bf-f225-eb7f-a63c46233c6b",Synchronized="2017-08-05 16:56:31.0")
+Identifier="e0ea837f-46bf-f225-eb7f-a63c46233c6b",Synchronized="2019-08-30 22:24:30.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Price.
@@ -259,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="44f0c175-48c3-52d2-fae6-4ac0e003c6c2",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Price */
 public static final String COLUMNNAME_Price = "Price";
 /** Set Product.
@@ -292,7 +293,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d7c82c9-4b27-0948-89f5-c1f6d7237998",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Product */
 public static final String COLUMNNAME_Product = "Product";
 /** Set Quantity.
@@ -320,7 +321,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="884b83d9-5e28-a298-2ed2-f8b86b885fde",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Qty */
 public static final String COLUMNNAME_Qty = "Qty";
 /** Set W_Basket_ID.
@@ -348,7 +349,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd4eaf3c-312f-00fe-88da-96ebacd04911",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name W_Basket_ID */
 public static final String COLUMNNAME_W_Basket_ID = "W_Basket_ID";
 /** Set Basket Line.

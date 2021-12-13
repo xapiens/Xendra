@@ -200,7 +200,7 @@ public class DocumentModify extends SvrProcess {
 		MInvoice invoice = MInvoice.get(getCtx(), m_C_Invoice_ID);
 		MDocType dt = MDocType.get(getCtx(), invoice.getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), invoice.getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), invoice.getDateAcct(), dt.getDocBaseType(), invoice.getAD_Org_ID(), invoice.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}				

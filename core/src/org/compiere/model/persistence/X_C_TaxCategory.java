@@ -61,10 +61,10 @@ public static int Table_ID=MTable.getTable_ID("C_TaxCategory");
 public static String es_PE_TAB_TaxCategory_Description="Categoría de Impuestos";
 
 @XendraTrl(Identifier="c15277e7-13b0-1ef9-91a7-93da41dff2b3")
-public static String es_PE_TAB_TaxCategory_Name="Categoría de Impuesto";
+public static String es_PE_TAB_TaxCategory_Help="La pestaña de Categoría de Impuesto es usada para definir y mantener las categorías de impuestos. Cada producto es asociado a una categoría. Esto facilita generar cambios como resultado de cambios en los regímenes de impuestos dictados por entidades gubernamentales.";
 
 @XendraTrl(Identifier="c15277e7-13b0-1ef9-91a7-93da41dff2b3")
-public static String es_PE_TAB_TaxCategory_Help="La pestaña de Categoría de Impuesto es usada para definir y mantener las categorías de impuestos. Cada producto es asociado a una categoría. Esto facilita generar cambios como resultado de cambios en los regímenes de impuestos dictados por entidades gubernamentales.";
+public static String es_PE_TAB_TaxCategory_Name="Categoría de Impuesto";
 
 @XendraTab(Name="Tax Category",Description="Tax Category",
 Help="The Tax Category Tab is used to define and maintain Tax Categories.  Each Product is associated with a Tax Category.  This facilitates adapting to changes in taxation.",
@@ -79,11 +79,12 @@ public static final String TABNAME_TaxCategory="c15277e7-13b0-1ef9-91a7-93da41df
 @XendraTrl(Identifier="52812880-00dd-e493-95db-6e98e9dafcb3")
 public static String es_PE_TABLE_C_TaxCategory_Name="Categoría del Impuesto";
 
-@XendraTable(Name="Tax Category",Description="Tax Category",Help="",TableName="C_TaxCategory",
-AccessLevel="2",AD_Window_ID="8e0e0cd7-287d-ef15-cd46-1def743ad2fe",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=75,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="52812880-00dd-e493-95db-6e98e9dafcb3",Synchronized="2017-08-16 11:42:31.0")
+@XendraTable(Name="Tax Category",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Tax Category",Help="",
+TableName="C_TaxCategory",AccessLevel="2",AD_Window_ID="8e0e0cd7-287d-ef15-cd46-1def743ad2fe",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=75,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="52812880-00dd-e493-95db-6e98e9dafcb3",Synchronized="2020-03-03 21:37:43.0")
 /** TableName=C_TaxCategory */
 public static final String Table_Name="C_TaxCategory";
 
@@ -143,13 +144,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="4dcf03a9-0fd4-39af-d2d6-fe786df8d754")
+public static String es_PE_FIELD_TaxCategory_CommodityCode_Name="Código de Mercancía";
+
+@XendraTrl(Identifier="4dcf03a9-0fd4-39af-d2d6-fe786df8d754")
 public static String es_PE_FIELD_TaxCategory_CommodityCode_Description="Código de mercancía usado para cálculo de impuestos";
 
 @XendraTrl(Identifier="4dcf03a9-0fd4-39af-d2d6-fe786df8d754")
 public static String es_PE_FIELD_TaxCategory_CommodityCode_Help="El código mercancía indica un código que se usa en el cálculo de impuestos";
-
-@XendraTrl(Identifier="4dcf03a9-0fd4-39af-d2d6-fe786df8d754")
-public static String es_PE_FIELD_TaxCategory_CommodityCode_Name="Código de Mercancía";
 
 @XendraField(AD_Column_ID="CommodityCode",IsCentrallyMaintained=true,
 AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ed59700-cdef-61c0-0933-8f8008d8a9a2",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name CommodityCode */
 public static final String COLUMNNAME_CommodityCode = "CommodityCode";
 /** Set Tax Category.
@@ -187,13 +188,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="26c9741a-44fb-ec44-3b9e-18ba0d5419d1")
+public static String es_PE_FIELD_TaxCategory_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="26c9741a-44fb-ec44-3b9e-18ba0d5419d1")
 public static String es_PE_FIELD_TaxCategory_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="26c9741a-44fb-ec44-3b9e-18ba0d5419d1")
 public static String es_PE_FIELD_TaxCategory_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="26c9741a-44fb-ec44-3b9e-18ba0d5419d1")
-public static String es_PE_FIELD_TaxCategory_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -231,13 +232,13 @@ return value;
 }
 
 @XendraTrl(Identifier="2d711c46-66e3-cafd-8fc5-4dd57cec2f72")
+public static String es_PE_FIELD_TaxCategory_Description_Name="Observación";
+
+@XendraTrl(Identifier="2d711c46-66e3-cafd-8fc5-4dd57cec2f72")
 public static String es_PE_FIELD_TaxCategory_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="2d711c46-66e3-cafd-8fc5-4dd57cec2f72")
 public static String es_PE_FIELD_TaxCategory_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="2d711c46-66e3-cafd-8fc5-4dd57cec2f72")
-public static String es_PE_FIELD_TaxCategory_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8cd16d9a-15b6-fd3a-481c-e84e94b3f818",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -287,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a84b0ea-509a-4672-a4f6-06112fa038de",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -310,13 +311,13 @@ return false;
 }
 
 @XendraTrl(Identifier="34acfe3c-303f-48dc-f9ca-6056122c4250")
+public static String es_PE_FIELD_TaxCategory_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="34acfe3c-303f-48dc-f9ca-6056122c4250")
 public static String es_PE_FIELD_TaxCategory_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="34acfe3c-303f-48dc-f9ca-6056122c4250")
 public static String es_PE_FIELD_TaxCategory_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="34acfe3c-303f-48dc-f9ca-6056122c4250")
-public static String es_PE_FIELD_TaxCategory_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -334,7 +335,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1d78422-f29c-8075-161a-88d753096eec",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -366,18 +367,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
+public static String es_PE_FIELD_TaxCategory_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
 public static String es_PE_FIELD_TaxCategory_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
 public static String es_PE_FIELD_TaxCategory_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
-public static String es_PE_FIELD_TaxCategory_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="c15277e7-13b0-1ef9-91a7-93da41dff2b3",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d56ac230-7dad-4319-b654-4feb74368f2a")
 public static final String FIELDNAME_TaxCategory_Name="d56ac230-7dad-4319-b654-4feb74368f2a";
 
 @XendraTrl(Identifier="9be6b177-1df8-7e30-cd1f-4b50508518e8")
@@ -389,7 +391,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9be6b177-1df8-7e30-cd1f-4b50508518e8",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

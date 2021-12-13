@@ -164,7 +164,10 @@ public class MJournalBatch extends X_GL_JournalBatch implements DocAction
 			return;
 		if (getC_Period_ID() != 0)
 			return;
-		int C_Period_ID = MPeriod.getC_Period_ID(getCtx(), DateAcct);
+		int C_Period_ID = 0;
+		MPeriod p  = MPeriod.get(Env.getCtx(), DateAcct, getAD_Org_ID(), getAD_Client_ID());
+		if (p != null)
+			C_Period_ID = p.getC_Period_ID();
 		if (C_Period_ID == 0)
 			log.warning("Period not found");
 		else
@@ -313,7 +316,7 @@ public class MJournalBatch extends X_GL_JournalBatch implements DocAction
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -864,8 +867,8 @@ public class MJournalBatch extends X_GL_JournalBatch implements DocAction
 	}	//	getApprovalAmt
 
 	public boolean RestoreIt()
-	{
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.GLJournal, getAD_Org_ID()))
+	{		
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.GLJournal, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			return false;
 		}				
@@ -884,10 +887,14 @@ public class MJournalBatch extends X_GL_JournalBatch implements DocAction
 			journals[i].save(get_TrxName());
 			
 			Doc doc = null;
-			MAcctSchema[] ass = MAcctSchema.getClientAcctSchema(Env.getCtx(), getAD_Client_ID());
-			doc = Doc.get (ass, MJournal.Table_ID, get_ID(), get_TrxName());
-			doc.deleteAcct();			
+			String sql = "DELETE FROM Fact_Acct WHERE AD_Table_ID=" + MJournal.Table_ID + " AND Record_ID=?";
+			DB.executeUpdate(sql, journals[i].get_ID(), get_TrxName());			
 		}
+		setIsApproved(false);
+		setDocStatus(REF__DocumentStatus.Drafted);
+		setDocAction(REF__DocumentAction.Complete);
+		setProcessed(false);
+		save();		
 		return true;
 	}
 

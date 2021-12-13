@@ -545,7 +545,7 @@ public class CostAverageCalc implements ICostCalcMethod {
 				}
 				else
 				{
-					MPeriod period = MPeriod.get(Env.getCtx(), acctDate, 0);					
+					MPeriod period = MPeriod.get(Env.getCtx(), acctDate, 0, 0);					
 					//MYear year = MYear.get(C_Calendar_ID, acctDate, null);
 					if  (period.isOpen(dt.getDocBaseType(), acctDate))
 					{

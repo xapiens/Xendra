@@ -245,7 +245,7 @@ public class MWithholdingHdr extends X_C_WithholdingHdr implements DocAction {
 			MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 			
 			//	Std Period open?
-			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 			{
 				m_processMsg = "@PeriodClosed@";
 				return DocAction.STATUS_Invalid;

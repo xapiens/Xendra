@@ -67,10 +67,10 @@ public static int Table_ID=MTable.getTable_ID("PA_Hierarchy");
 public static String es_PE_TAB_ReportingHierarchy_Description="Informe por Jerarquías";
 
 @XendraTrl(Identifier="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184")
-public static String es_PE_TAB_ReportingHierarchy_Name="Informe por Jerarquías";
+public static String es_PE_TAB_ReportingHierarchy_Help="Informe por Jerarquías le permite seleccionar diferentes Jerarquías/Árboles para el informe.Segmentos deseados de cuenta, Organización, Cuentas, Productos pueden tener alguna jerarquía para acomodar diferentes vistas sobre el negocio.";
 
 @XendraTrl(Identifier="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184")
-public static String es_PE_TAB_ReportingHierarchy_Help="Informe por Jerarquías le permite seleccionar diferentes Jerarquías/Árboles para el informe.Segmentos deseados de cuenta, Organización, Cuentas, Productos pueden tener alguna jerarquía para acomodar diferentes vistas sobre el negocio.";
+public static String es_PE_TAB_ReportingHierarchy_Name="Informe por Jerarquías";
 
 @XendraTab(Name="Reporting Hierarchy",Description="Reporting Hierarchy",
 Help="Reporting Hierarchy allows you to select different Hierarchies/Trees for the report. Accounting Segments like Organization, Account, Product may have several hierarchies to accomodate different views on the business",
@@ -85,11 +85,12 @@ public static final String TABNAME_ReportingHierarchy="c2ee2ad8-e9b6-f03a-22e6-b
 @XendraTrl(Identifier="61a4e1c2-25fd-74c7-cc2b-946ed207afdf")
 public static String es_PE_TABLE_PA_Hierarchy_Name="Reportando Jerarquías";
 
-@XendraTable(Name="Reporting Hierarchy",Description="Reporting Hierarchy",Help="",
+@XendraTable(Name="Reporting Hierarchy",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Reporting Hierarchy",Help="",
 TableName="PA_Hierarchy",AccessLevel="2",AD_Window_ID="2eb028f0-ed2c-25ac-5adc-2af3cb4baaab",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="61a4e1c2-25fd-74c7-cc2b-946ed207afdf",Synchronized="2017-08-16 11:43:40.0")
+Identifier="61a4e1c2-25fd-74c7-cc2b-946ed207afdf",Synchronized="2020-03-03 21:39:03.0")
 /** TableName=PA_Hierarchy */
 public static final String Table_Name="PA_Hierarchy";
 
@@ -122,9 +123,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_PA_Hierarchy[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_Tree_Account_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_ACCOUNT_ID_AD_Reference_ID=184;
 /** Set Account Tree.
 @param AD_Tree_Account_ID Tree for Natural Account Tree */
 public void setAD_Tree_Account_ID (int AD_Tree_Account_ID)
@@ -142,10 +140,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6e38adcd-06e2-c7c0-3f08-af74d36c789d")
-public static String es_PE_FIELD_ReportingHierarchy_AccountTree_Description="Árbol para Árbol de Cuentas Naturales";
+public static String es_PE_FIELD_ReportingHierarchy_AccountTree_Name="Árbol de Cuentas";
 
 @XendraTrl(Identifier="6e38adcd-06e2-c7c0-3f08-af74d36c789d")
-public static String es_PE_FIELD_ReportingHierarchy_AccountTree_Name="Árbol de Cuentas";
+public static String es_PE_FIELD_ReportingHierarchy_AccountTree_Description="Árbol para Árbol de Cuentas Naturales";
 
 @XendraField(AD_Column_ID="AD_Tree_Account_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -164,12 +162,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="63caa19d-86e5-c6da-c47a-6a9f9b2bb91b",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Account_ID */
 public static final String COLUMNNAME_AD_Tree_Account_ID = "AD_Tree_Account_ID";
-
-/** AD_Tree_Activity_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_ACTIVITY_ID_AD_Reference_ID=184;
 /** Set Activity Tree.
 @param AD_Tree_Activity_ID Tree to determine activity hierarchy */
 public void setAD_Tree_Activity_ID (int AD_Tree_Activity_ID)
@@ -207,12 +202,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7609f45d-c1b2-47da-0795-6fb1caac9a94",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Activity_ID */
 public static final String COLUMNNAME_AD_Tree_Activity_ID = "AD_Tree_Activity_ID";
-
-/** AD_Tree_BPartner_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_BPARTNER_ID_AD_Reference_ID=184;
 /** Set BPartner Tree.
 @param AD_Tree_BPartner_ID Tree to determine business partner hierarchy */
 public void setAD_Tree_BPartner_ID (int AD_Tree_BPartner_ID)
@@ -250,12 +242,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ec475f2d-c04f-a999-da89-fd8b172ebb9e",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_BPartner_ID */
 public static final String COLUMNNAME_AD_Tree_BPartner_ID = "AD_Tree_BPartner_ID";
-
-/** AD_Tree_Campaign_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_CAMPAIGN_ID_AD_Reference_ID=184;
 /** Set Campaign Tree.
 @param AD_Tree_Campaign_ID Tree to determine marketing campaign hierarchy */
 public void setAD_Tree_Campaign_ID (int AD_Tree_Campaign_ID)
@@ -293,12 +282,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e2d8909-ecca-c4c0-087d-49ad196902f2",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Campaign_ID */
 public static final String COLUMNNAME_AD_Tree_Campaign_ID = "AD_Tree_Campaign_ID";
-
-/** AD_Tree_Org_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_ORG_ID_AD_Reference_ID=184;
 /** Set Organization Tree.
 @param AD_Tree_Org_ID Tree to determine organizational hierarchy */
 public void setAD_Tree_Org_ID (int AD_Tree_Org_ID)
@@ -335,12 +321,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc1bedfe-6891-e1e6-59ba-558048391532",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Org_ID */
 public static final String COLUMNNAME_AD_Tree_Org_ID = "AD_Tree_Org_ID";
-
-/** AD_Tree_Product_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_PRODUCT_ID_AD_Reference_ID=184;
 /** Set Product Tree.
 @param AD_Tree_Product_ID Tree to determine product hierarchy */
 public void setAD_Tree_Product_ID (int AD_Tree_Product_ID)
@@ -377,12 +360,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b445467f-5b2a-d45f-0a82-26049869b213",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Product_ID */
 public static final String COLUMNNAME_AD_Tree_Product_ID = "AD_Tree_Product_ID";
-
-/** AD_Tree_Project_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_PROJECT_ID_AD_Reference_ID=184;
 /** Set Project Tree.
 @param AD_Tree_Project_ID Tree to determine project hierarchy */
 public void setAD_Tree_Project_ID (int AD_Tree_Project_ID)
@@ -419,12 +399,9 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a6164b72-82ef-864a-1175-f9f6bca0ff1f",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_Project_ID */
 public static final String COLUMNNAME_AD_Tree_Project_ID = "AD_Tree_Project_ID";
-
-/** AD_Tree_SalesRegion_ID AD_Reference=79a8ec82-b2c4-01ef-3d8c-2a2a8d8a2952 */
-public static final int AD_TREE_SALESREGION_ID_AD_Reference_ID=184;
 /** Set Sales Region Tree.
 @param AD_Tree_SalesRegion_ID Tree to determine sales regional hierarchy */
 public void setAD_Tree_SalesRegion_ID (int AD_Tree_SalesRegion_ID)
@@ -462,7 +439,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fe344d66-e175-91d5-2abb-4437aa240041",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Tree_SalesRegion_ID */
 public static final String COLUMNNAME_AD_Tree_SalesRegion_ID = "AD_Tree_SalesRegion_ID";
 /** Set Description.
@@ -493,13 +470,13 @@ return value;
 }
 
 @XendraTrl(Identifier="52f654b6-7271-b54a-5bc4-71a1737a01ae")
+public static String es_PE_FIELD_ReportingHierarchy_Description_Name="Observación";
+
+@XendraTrl(Identifier="52f654b6-7271-b54a-5bc4-71a1737a01ae")
 public static String es_PE_FIELD_ReportingHierarchy_Description_Description="Observación";
 
 @XendraTrl(Identifier="52f654b6-7271-b54a-5bc4-71a1737a01ae")
 public static String es_PE_FIELD_ReportingHierarchy_Description_Help="Observación";
-
-@XendraTrl(Identifier="52f654b6-7271-b54a-5bc4-71a1737a01ae")
-public static String es_PE_FIELD_ReportingHierarchy_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -517,7 +494,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d21ff86d-bf8c-4024-b878-d8f0837c1cb3",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -543,13 +520,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ae8e3742-80ab-9af2-ab76-1f00f48d40f5")
+public static String es_PE_FIELD_ReportingHierarchy_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="ae8e3742-80ab-9af2-ab76-1f00f48d40f5")
 public static String es_PE_FIELD_ReportingHierarchy_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="ae8e3742-80ab-9af2-ab76-1f00f48d40f5")
 public static String es_PE_FIELD_ReportingHierarchy_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="ae8e3742-80ab-9af2-ab76-1f00f48d40f5")
-public static String es_PE_FIELD_ReportingHierarchy_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -567,7 +544,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e75a9650-8263-97de-db3e-203b1afee350",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -599,7 +576,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a825e846-7d6e-414c-b9c1-a1fdf87fed5a",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -631,13 +608,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="edf06223-fa66-9bcb-d9d3-ed7358fe7e10")
+public static String es_PE_FIELD_ReportingHierarchy_Name_Name="Nombre";
+
+@XendraTrl(Identifier="edf06223-fa66-9bcb-d9d3-ed7358fe7e10")
 public static String es_PE_FIELD_ReportingHierarchy_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="edf06223-fa66-9bcb-d9d3-ed7358fe7e10")
 public static String es_PE_FIELD_ReportingHierarchy_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="edf06223-fa66-9bcb-d9d3-ed7358fe7e10")
-public static String es_PE_FIELD_ReportingHierarchy_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -655,7 +632,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="62d3f70f-3de9-a363-48d5-9b4c273c96db",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Reporting Hierarchy.
@@ -675,13 +652,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e130e5e0-b45a-0cf6-fce0-a088a95da07e")
+public static String es_PE_FIELD_ReportingHierarchy_ReportingHierarchy_Name="Reportando Jerarquías";
+
+@XendraTrl(Identifier="e130e5e0-b45a-0cf6-fce0-a088a95da07e")
 public static String es_PE_FIELD_ReportingHierarchy_ReportingHierarchy_Description="Reporte Opcional de Jerarquías - Si no seleccionó se emplea el árbol predeterminado de jerarquías";
 
 @XendraTrl(Identifier="e130e5e0-b45a-0cf6-fce0-a088a95da07e")
 public static String es_PE_FIELD_ReportingHierarchy_ReportingHierarchy_Help="Reportar Jerarquías le permite seleccionar diferentes Jerarquías/Árboles para el Reoporte.Segmentos contables deseadosm Organizaciones, Cuentas, Productos pueden tener algunas jerarquías para acomodar siferentes vistas acerca del negocio.";
-
-@XendraTrl(Identifier="e130e5e0-b45a-0cf6-fce0-a088a95da07e")
-public static String es_PE_FIELD_ReportingHierarchy_ReportingHierarchy_Name="Reportando Jerarquías";
 
 @XendraField(AD_Column_ID="PA_Hierarchy_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c2ee2ad8-e9b6-f03a-22e6-ba90b46f5184",AD_FieldGroup_ID="",IsDisplayed=false,

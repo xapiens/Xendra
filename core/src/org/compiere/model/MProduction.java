@@ -39,7 +39,6 @@ import org.compiere.print.*;
 import org.compiere.process.*;
 import org.compiere.util.*;
 import org.xendra.Constants;
-import org.xendra.material.StockWorker;
 
 
 /**
@@ -234,7 +233,7 @@ public class MProduction extends X_M_Production implements DocAction
 			return DocAction.STATUS_Invalid;			
 		}
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -305,7 +304,7 @@ public class MProduction extends X_M_Production implements DocAction
 		if (!isApproved())
 			approveIt();
 		log.info(toString());
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
 		StringBuffer info = new StringBuffer();
 		//
 		String whereClause = "M_Production_ID=? ";
@@ -382,16 +381,16 @@ public class MProduction extends X_M_Production implements DocAction
 		m_processMsg = info.toString().trim();
 		setProcessed(true);
 		//MStorage.CheckPeriod(C_Period_ID);
-		MPeriod period = MPeriod.get(Env.getCtx(), getMovementDate(), 0);
-		StockWorker sw = new StockWorker();
-		sw.setCommand(StockWorker.Document);
-		sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, getAD_Client_ID());
-		sw.addProperty(X_M_Production.COLUMNNAME_M_Production_ID, get_ID());
-		sw.addProperty(X_AD_Table.COLUMNNAME_AD_Table_ID, X_M_Production.Table_ID);
-		sw.addProperty(X_C_Period.COLUMNNAME_C_Period_ID, period.ToEnd());
-		sw.addProperty(X_C_Order.COLUMNNAME_DocStatus, DocAction.STATUS_Completed);							
-		sw.setMachine(Env.getServerMaterial());
-		sw.Pull();				
+		MPeriod period = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID());
+//		StockWorker sw = new StockWorker();
+//		sw.setCommand(StockWorker.Document);
+//		sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, getAD_Client_ID());
+//		sw.addProperty(X_M_Production.COLUMNNAME_M_Production_ID, get_ID());
+//		sw.addProperty(X_AD_Table.COLUMNNAME_AD_Table_ID, X_M_Production.Table_ID);
+//		sw.addProperty(X_C_Period.COLUMNNAME_C_Period_ID, period.ToEnd());
+//		sw.addProperty(X_C_Order.COLUMNNAME_DocStatus, DocAction.STATUS_Completed);							
+//		sw.setMachine(Env.getServerMaterial());
+//		sw.Pull();				
 		setDocAction(REF__DocumentAction.Close);		
 		return DocAction.STATUS_Completed;
 	}	//	completeIt

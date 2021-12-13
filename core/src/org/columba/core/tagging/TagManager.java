@@ -22,6 +22,7 @@ import org.columba.core.tagging.api.ITagEvent;
 import org.columba.core.tagging.api.ITagListener;
 import org.columba.core.tagging.api.ITagManager;
 import org.compiere.model.MConfig;
+import org.compiere.util.CLogger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.xendra.Constants;
@@ -39,9 +40,8 @@ public class TagManager implements ITagManager {
 	private static final String COLOR = "color";
 	private static final String NAME = "name";
 	private static final String ID = "id";
-
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger.getLogger("org.columba.core.tagging.TagManager");
+	
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.tagging.TagManager");
 
 	public static Hashtable<String, ITag> map = new Hashtable<String, ITag>();
 

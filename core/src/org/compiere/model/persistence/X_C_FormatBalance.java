@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("C_FormatBalance");
 @XendraTrl(Identifier="27d5fed9-2d64-22bd-a4c7-2bb3e8524a23")
 public static String es_PE_TABLE_C_FormatBalance_Name="C_FormatBalance";
 
-@XendraTable(Name="C_FormatBalance",Description="",Help="",TableName="C_FormatBalance",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="27d5fed9-2d64-22bd-a4c7-2bb3e8524a23",
-Synchronized="2017-08-16 11:41:47.0")
+@XendraTable(Name="C_FormatBalance",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_FormatBalance",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.accounting",Identifier="27d5fed9-2d64-22bd-a4c7-2bb3e8524a23",
+Synchronized="2020-03-03 21:36:55.0")
 /** TableName=C_FormatBalance */
 public static final String Table_Name="C_FormatBalance";
 
@@ -126,7 +127,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6fcae5bc-48e8-8b00-62c0-d3dd80434bff",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name AccountType */
 public static final String COLUMNNAME_AccountType = "AccountType";
 /** Set C_FormatBalance_ID.
@@ -170,7 +171,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f7162b09-20cb-229f-97ad-33c8f83b3302",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name Formula */
 public static final String COLUMNNAME_Formula = "Formula";
 /** Set formulapostfija.
@@ -202,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b8973f28-5db3-cca6-8902-29a11b021747",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name formulapostfija */
 public static final String COLUMNNAME_formulapostfija = "formulapostfija";
 /** Set Identifier.
@@ -234,7 +235,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="42815769-3bef-4376-8257-64eb9535c74c",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -274,7 +275,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="702b07c3-4c4e-f400-a383-ad0650c83d0b",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sequence.
@@ -301,7 +302,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5fdcd6b0-85e6-a016-fb68-1942fab80017",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set Search Key.
@@ -334,7 +335,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7c314e58-b1ad-cc2d-4afb-47c51acba3fd",
-Synchronized="2017-08-05 16:53:40.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

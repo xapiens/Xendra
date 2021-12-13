@@ -44,6 +44,7 @@ import org.compiere.plaf.CompiereThemeIce;
 import org.compiere.swing.CButton;
 import org.compiere.swing.ColorBlind;
 import org.compiere.swing.ExtendedTheme;
+import org.compiere.util.CLogger;
 import org.compiere.util.Ini;
 import org.compiere.util.ValueNamePair;
 
@@ -62,7 +63,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
 public final class XendraPLAF
 {
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(XendraPLAF.class.getName());
+	private static CLogger log = CLogger.getCLogger(XendraPLAF.class.getName());
 	
 	/****** Background *******************************************************/
 

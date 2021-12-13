@@ -144,7 +144,7 @@ public class Doc_Movement extends Doc {
 			BigDecimal costs = ce.getCostForProduct(getAD_Client_ID(),
 					0, line.getProduct().get_ID(), 
 					getDateAcct(), false,false,false, 
-					line.getLine(), null);
+					line.getLine(), getTrxName());
 
 			// If the cost is negative means an error
 			// see the MCostCalc methods documentation.
@@ -220,10 +220,14 @@ public class Doc_Movement extends Doc {
 	public void createFact_ID() {
 		MMovement move = (MMovement) getPO(); 
 		/* Fact ID */
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID(MGLBookPeriod.getID(move.getAD_Org_ID(), move
 					.getAD_Client_ID(), move.Table_ID, move.getC_DocType_ID(),
 					"", move.getMovementDate()));
+			setGL_Book_ID(MGLBookPeriod.getGLBookID(move.getAD_Org_ID(), move
+					.getAD_Client_ID(), move.Table_ID, move.getC_DocType_ID(),
+					"", move.getMovementDate()));		
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), move.getMovementDate(), move.getAD_Org_ID() , move.getAD_Client_ID());
@@ -261,6 +265,12 @@ public class Doc_Movement extends Doc {
 							move.getC_DocType_ID(), 
 							"", 
 							move.getDateAcct()));
+					setGL_Book_ID(MGLBookPeriod.getGLBookID(move.getAD_Org_ID(), 
+							move.getAD_Client_ID(), 
+							move.Table_ID, 
+							move.getC_DocType_ID(), 
+							"", 
+							move.getDateAcct()));					
 				}
 			}
 			else // change the oldformat to new format
@@ -271,6 +281,12 @@ public class Doc_Movement extends Doc {
 						move.getC_DocType_ID(), 
 						"", 
 						move.getDateAcct()));
+				setGL_Book_ID(MGLBookPeriod.getGLBookID(move.getAD_Org_ID(), 
+						move.getAD_Client_ID(), 
+						move.Table_ID, 
+						move.getC_DocType_ID(), 
+						"", 
+						move.getDateAcct()));				
 			}
 		}
 		

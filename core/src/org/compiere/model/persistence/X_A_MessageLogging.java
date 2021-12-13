@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("A_MessageLogging");
 @XendraTrl(Identifier="3137ea2d-3a6e-47d4-a73a-1ac1a9fb705e")
 public static String es_PE_TABLE_A_MessageLogging_Name="Message Logging";
 
-@XendraTable(Name="Message Logging",Description="",Help="",TableName="A_MessageLogging",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="3137ea2d-3a6e-47d4-a73a-1ac1a9fb705e",
-Synchronized="2017-08-16 11:41:14.0")
+@XendraTable(Name="Message Logging",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_MessageLogging",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="3137ea2d-3a6e-47d4-a73a-1ac1a9fb705e",
+Synchronized="2020-03-03 21:36:14.0")
 /** TableName=A_MessageLogging */
 public static final String Table_Name="A_MessageLogging";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="73242761-7e7a-4765-8244-f549b9b323a5",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Message.
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f775d9d-ad9c-4eab-b028-9d5db6a6dba0",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 /** Set Type.
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="06d15413-90c7-42ca-913b-761b74ca4031",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Type */
 public static final String COLUMNNAME_Type = "Type";
 }

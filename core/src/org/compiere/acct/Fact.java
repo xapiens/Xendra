@@ -125,9 +125,7 @@ public final class Fact
 			return null;
 		}
 		//
-		FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), 
-			m_doc.get_ID(),
-			docLine == null ? 0 : docLine.get_ID(), m_doc.getFact_ID(), m_trxName);
+		FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(), docLine == null ? 0 : docLine.get_ID(), m_doc.getGL_Book_ID(), m_doc.getFact_ID(), m_trxName);
 		//  Set Info & Account
 		line.setDocumentInfo(m_doc, docLine);
 		line.setPostingType(m_postingType);
@@ -182,8 +180,7 @@ public final class Fact
 				return null;
 			}
 			//
-			FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(),
-				docLine == null ? 0 : docLine.get_ID(), m_doc.getFact_ID(), m_trxName);
+			FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(), docLine == null ? 0 : docLine.get_ID(), m_doc.getGL_Book_ID(), m_doc.getFact_ID(), m_trxName);
 			//  Set Info & Account
 			if (dateAcctPay != null)
 				line.setDocumentInfo(m_doc, docLine, dateAcct, dateAcctPay );
@@ -651,8 +648,7 @@ public final class Fact
 				if (!difference.isZeroBalance())
 				{
 					//  Create Balancing Entry
-					FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), 
-						m_doc.get_ID(), 0, m_doc.getFact_ID(), m_trxName);
+					FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(), 0, m_doc.getGL_Book_ID(), m_doc.getFact_ID(), m_trxName);
 					line.setDocumentInfo(m_doc, null);
 					line.setPostingType(m_postingType);
 					//  Amount & Account
@@ -771,8 +767,7 @@ public final class Fact
 		//  Create Currency Balancing Entry
 		if (m_acctSchema.isCurrencyBalancing())
 		{
-			line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), 
-				m_doc.get_ID(), 0, m_doc.getFact_ID(), m_trxName);
+			line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(), 0, m_doc.getGL_Book_ID(), m_doc.getFact_ID(), m_trxName);
 			line.setDocumentInfo (m_doc, null);
 			line.setPostingType (m_postingType);
 			
@@ -907,14 +902,14 @@ public final class Fact
 				MDistributionLine dl = lines[j];
 				if (!dl.isActive() || dl.getAmt().signum() == 0)
 					continue;
-				FactLine factLine = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(),
-					m_doc.get_ID(), 0, m_doc.getFact_ID(), m_trxName);
+				FactLine factLine = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(), m_doc.get_ID(), 0, m_doc.getGL_Book_ID(), m_doc.getFact_ID(), m_trxName);
 				//  Set Info & Account
 				factLine.setDocumentInfo(m_doc, dLine.getDocLine());
 				factLine.setAccount(m_acctSchema, dl.getAccount());
 				factLine.setPostingType(m_postingType);
 				factLine.setC_DocType_ID(m_doc.getC_DocType_ID());
 				factLine.setIsDistribution(true);
+				factLine.setIsCloseDocument(dLine.isCloseDocument());
 				if (dl.isOverwriteOrg())	//	set Org explicitly
 					factLine.setAD_Org_ID(dl.getOrg_ID());
 				//

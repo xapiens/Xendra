@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Mail");
 @XendraTrl(Identifier="d084b532-fc87-4fe3-a827-e2b6c02a0c3b")
 public static String es_PE_TABLE_AD_Mail_Name="AD_Mail";
 
-@XendraTable(Name="AD_Mail",Description="",Help="",TableName="AD_Mail",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="d084b532-fc87-4fe3-a827-e2b6c02a0c3b",Synchronized="2017-08-16 11:40:27.0")
+@XendraTable(Name="AD_Mail",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Mail",
+AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="d084b532-fc87-4fe3-a827-e2b6c02a0c3b",
+Synchronized="2020-03-03 21:35:07.0")
 /** TableName=AD_Mail */
 public static final String Table_Name="AD_Mail";
 

@@ -21,6 +21,7 @@ import java.io.InvalidClassException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 import javax.swing.JFrame;
@@ -31,6 +32,7 @@ import org.compiere.db.CConnection;
 //import org.compiere.interfaces.Server;
 import org.compiere.model.MPInstance;
 import org.compiere.model.MRule;
+import org.compiere.model.persistence.X_AD_Process;
 import org.compiere.print.ReportCtl;
 import org.compiere.process.ClientProcess;
 import org.compiere.process.ProcessInfo;
@@ -43,6 +45,8 @@ import org.compiere.util.Ini;
 import org.compiere.util.Msg;
 import org.compiere.util.Trx;
 import org.compiere.wf.MWFProcess;
+
+import bsh.util.Util;
 
 /**
  *	Process Interface Controller.
@@ -275,7 +279,6 @@ public class ProcessCtl implements Runnable
 		//	Get Process Information: Name, Procedure Name, ClassName, IsReport, IsDirectPrint
 		String 	ProcedureName = "";
 		String  JasperReport = "";
-		String  LinePrinterFormat = "";
 		int     AD_ReportView_ID = 0;
 		int		AD_Workflow_ID = 0;
 		boolean IsReport = false;
@@ -286,7 +289,7 @@ public class ProcessCtl implements Runnable
 		String sql = "SELECT p.Name, p.ProcedureName,p.ClassName, p.AD_Process_ID,"		//	1..4
 			+ " p.isReport,p.IsDirectPrint,p.AD_ReportView_ID,p.AD_Workflow_ID,"		//	5..8
 			+ " CASE WHEN COALESCE(p.Statistic_Count,0)=0 THEN 0 ELSE p.Statistic_Seconds/p.Statistic_Count END,"
-			+ " p.IsServerProcess, p.JasperReport, p.lineprinterformat " 
+			+ " p.IsServerProcess, p.JasperReport " 
 			+ "FROM AD_Process p"
 			+ " INNER JOIN AD_PInstance i ON (p.AD_Process_ID=i.AD_Process_ID) "
 			+ "WHERE p.IsActive='Y'"
@@ -295,7 +298,7 @@ public class ProcessCtl implements Runnable
 			sql = "SELECT t.Name, p.ProcedureName,p.ClassName, p.AD_Process_ID,"		//	1..4
 				+ " p.isReport, p.IsDirectPrint,p.AD_ReportView_ID,p.AD_Workflow_ID,"	//	5..8
 				+ " CASE WHEN COALESCE(p.Statistic_Count,0)=0 THEN 0 ELSE p.Statistic_Seconds/p.Statistic_Count END,"
-				+ " p.IsServerProcess, p.JasperReport, p.lineprinterformat "
+				+ " p.IsServerProcess, p.JasperReport "
 				+ "FROM AD_Process p"
 				+ " INNER JOIN AD_PInstance i ON (p.AD_Process_ID=i.AD_Process_ID) "
 				+ " INNER JOIN AD_Process_Trl t ON (p.AD_Process_ID=t.AD_Process_ID"
@@ -338,8 +341,7 @@ public class ProcessCtl implements Runnable
 						m_waiting.setTimerEstimate(m_pi.getEstSeconds());
 				}
 				m_IsServerProcess = "Y".equals(rs.getString(10));
-				JasperReport = rs.getString(11);
-				LinePrinterFormat = rs.getString(12);
+				JasperReport = rs.getString(11);				
 			}
 			else
 				log.log(Level.SEVERE, "No AD_PInstance_ID=" + m_pi.getAD_PInstance_ID());
@@ -381,14 +383,6 @@ public class ProcessCtl implements Runnable
 			}
 		}
 		
-		boolean isLinePrinter = false;
-		if (LinePrinterFormat != null && LinePrinterFormat.trim().length() > 0)
-		{
-			isLinePrinter = true;
-			if (ProcessUtil.LINEPRINTER_STARTER_CLASS.equals(m_pi.getClassName())) {
-				m_pi.setClassName(null);
-			}
-		}
 		/**********************************************************************
 		 *	Start Optional Class
 		 */
@@ -441,16 +435,7 @@ public class ProcessCtl implements Runnable
 			startProcess();
 			unlock();
 			return;
-		}
-		if (isLinePrinter)
-		{
-			m_pi.setReportingProcess(true);
-			m_pi.setClassName(ProcessUtil.LINEPRINTER_STARTER_CLASS);
-			startProcess();
-			unlock();
-			return;			
-		}
-		
+		}		
 		if (IsReport)
 		{
 			m_pi.setReportingProcess(true);

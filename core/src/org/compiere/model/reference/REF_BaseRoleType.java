@@ -6,7 +6,13 @@ import org.compiere.model.Reference;
 
 public class REF_BaseRoleType implements Reference 
 {
- 	@XendraRefItem(Name="Account",
+ 	@XendraRefItem(Name="All",
+		Value="ALL",
+		Description="",
+		Identifier="fde7e0dd-5756-4673-9497-b35bdcf38e03")
+	/** All = ALL */
+	public static final String All = "ALL";
+	@XendraRefItem(Name="Account",
 		Value="ACT",
 		Description="",
 		Identifier="927cd268-c179-4ec5-b042-fc0c69e7c893")
@@ -56,7 +62,7 @@ public class REF_BaseRoleType implements Reference
 		VFormat="",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2016-07-20 00:22:55.878",
+		Synchronized="2019-04-01 09:39:18.684",
 		Extension="",
 		Identifier="fc2ae4f4-a201-4dfd-834b-949971e56775")
 	public static final String Identifier = "fc2ae4f4-a201-4dfd-834b-949971e56775";

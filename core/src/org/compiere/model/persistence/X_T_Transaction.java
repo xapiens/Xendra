@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_TransactionMovementType;
 /** Generated Model for T_Transaction
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -65,10 +64,12 @@ public static int Table_ID=MTable.getTable_ID("T_Transaction");
 @XendraTrl(Identifier="b460d466-d170-68e4-a50f-b6716ed17cb4")
 public static String es_PE_TABLE_T_Transaction_Name="T_Transaction";
 
-@XendraTable(Name="T_Transaction",Description="",Help="",TableName="T_Transaction",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="b460d466-d170-68e4-a50f-b6716ed17cb4",Synchronized="2017-08-16 11:44:26.0")
+@XendraTable(Name="T_Transaction",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="T_Transaction",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="b460d466-d170-68e4-a50f-b6716ed17cb4",
+Synchronized="2020-03-03 21:40:30.0")
 /** TableName=T_Transaction */
 public static final String Table_Name="T_Transaction";
 
@@ -126,7 +127,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5ae5025f-2871-fd28-7004-46ff76d1acf3",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Project.
@@ -155,7 +156,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ba1264b3-1623-56c1-6901-7eefab47538e",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name C_Project_ID */
 public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
 /** Set Project Issue.
@@ -184,7 +185,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9f5c0c11-7a6c-7305-863b-79d87756535d",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name C_ProjectIssue_ID */
 public static final String COLUMNNAME_C_ProjectIssue_ID = "C_ProjectIssue_ID";
 /** Set Attribute Set Instance.
@@ -212,7 +213,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="22569a3f-4434-4000-efd4-ef48f1f30f27",Synchronized="2017-08-05 16:56:30.0")
+Identifier="22569a3f-4434-4000-efd4-ef48f1f30f27",Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Shipment/Receipt.
@@ -241,7 +242,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fa02f386-8d2e-5141-fcf5-73da7c4ff119",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_InOut_ID */
 public static final String COLUMNNAME_M_InOut_ID = "M_InOut_ID";
 /** Set Shipment/Receipt Line.
@@ -270,7 +271,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="33282bc1-0ca6-df8a-f867-d331052e66dc",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_InOutLine_ID */
 public static final String COLUMNNAME_M_InOutLine_ID = "M_InOutLine_ID";
 /** Set Phys.Inventory.
@@ -299,7 +300,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0c6d4ed5-3370-49a3-222e-a9251619dd0e",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_Inventory_ID */
 public static final String COLUMNNAME_M_Inventory_ID = "M_Inventory_ID";
 /** Set Phys.Inventory Line.
@@ -328,7 +329,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9ee2c1c0-17b4-d6d8-4a55-d0eb1a6d63b4",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_InventoryLine_ID */
 public static final String COLUMNNAME_M_InventoryLine_ID = "M_InventoryLine_ID";
 /** Set Locator.
@@ -356,7 +357,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0455ae7d-aa5a-015f-5d5e-12bac7b87c18",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Inventory Move.
@@ -385,7 +386,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6bcd25f6-ff03-84c7-c38a-cf9f3e1bcaf0",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_Movement_ID */
 public static final String COLUMNNAME_M_Movement_ID = "M_Movement_ID";
 /** Set Move Line.
@@ -414,7 +415,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a36bfd34-ba29-9db9-dab9-cbe2fc3f696c",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name M_MovementLine_ID */
 public static final String COLUMNNAME_M_MovementLine_ID = "M_MovementLine_ID";
 /** Set Movement Date.
@@ -440,7 +441,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9a25f536-ba13-423b-682c-56b68ee1204a",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name MovementDate */
 public static final String COLUMNNAME_MovementDate = "MovementDate";
 /** Set Movement Quantity.
@@ -468,19 +469,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8e270647-75de-01aa-23a7-7d5182de9837",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:28.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
-
-/** MovementType AD_Reference=0455b4db-004d-594c-a505-3e493bfda9ad */
-public static final int MOVEMENTTYPE_AD_Reference_ID=189;
 /** Set Movement Type.
 @param MovementType Method of moving the inventory */
 public void setMovementType (String MovementType)
 {
-if (MovementType == null) throw new IllegalArgumentException ("MovementType is mandatory");
-if (MovementType.equals(REF_M_TransactionMovementType.WorkOrderPlus) || MovementType.equals(REF_M_TransactionMovementType.WorkOrder_) || MovementType.equals(REF_M_TransactionMovementType.ProductionPlus) || MovementType.equals(REF_M_TransactionMovementType.InventoryIn) || MovementType.equals(REF_M_TransactionMovementType.VendorReturns) || MovementType.equals(REF_M_TransactionMovementType.MovementFrom) || MovementType.equals(REF_M_TransactionMovementType.Production_) || MovementType.equals(REF_M_TransactionMovementType.CustomerShipment) || MovementType.equals(REF_M_TransactionMovementType.VendorReceipts) || MovementType.equals(REF_M_TransactionMovementType.InventoryOut) || MovementType.equals(REF_M_TransactionMovementType.MovementTo) || MovementType.equals(REF_M_TransactionMovementType.CustomerReturns) || MovementType.equals(REF_M_TransactionMovementType.NotApply));
- else throw new IllegalArgumentException ("MovementType Invalid value - " + MovementType + " - Reference_ID=189 - W+ - W- - P+ - I+ - R- - M- - P- - C- - V+ - I- - M+ - R+ - NA");
 if (MovementType.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -504,7 +499,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7e923061-def3-e7b2-9028-edaf24017b98",Synchronized="2017-08-05 16:56:30.0")
+Identifier="7e923061-def3-e7b2-9028-edaf24017b98",Synchronized="2019-08-30 22:24:28.0")
 /** Column name MovementType */
 public static final String COLUMNNAME_MovementType = "MovementType";
 /** Set Product.
@@ -532,7 +527,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d06b7d4-a08e-e2e7-82a5-d2e4623299f4",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:29.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Production.
@@ -561,7 +556,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67ec1b66-5a5b-7427-ceea-eeae2d3a5da1",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:29.0")
 /** Column name M_Production_ID */
 public static final String COLUMNNAME_M_Production_ID = "M_Production_ID";
 /** Set Production Line.
@@ -590,7 +585,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3de0573f-4a75-a68e-6d21-1313ab45ddd8",Synchronized="2017-08-05 16:56:30.0")
+Identifier="3de0573f-4a75-a68e-6d21-1313ab45ddd8",Synchronized="2019-08-30 22:24:29.0")
 /** Column name M_ProductionLine_ID */
 public static final String COLUMNNAME_M_ProductionLine_ID = "M_ProductionLine_ID";
 /** Set Inventory Transaction.
@@ -618,7 +613,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fb4df81e-e54f-0fc3-7102-f33887d836da",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:29.0")
 /** Column name M_Transaction_ID */
 public static final String COLUMNNAME_M_Transaction_ID = "M_Transaction_ID";
 /** Set Cost Price.
@@ -645,12 +640,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ab8ca52a-730a-b7e8-bc10-0c9c940b67f6",
-Synchronized="2017-08-05 16:56:30.0")
+Synchronized="2019-08-30 22:24:29.0")
 /** Column name PriceCost */
 public static final String COLUMNNAME_PriceCost = "PriceCost";
-
-/** Search_InOut_ID AD_Reference=09bcaf38-49c7-0311-4a15-1296d9699294 */
-public static final int SEARCH_INOUT_ID_AD_Reference_ID=295;
 /** Set Search Shipment/Receipt.
 @param Search_InOut_ID Material Shipment Document */
 public void setSearch_InOut_ID (int Search_InOut_ID)
@@ -677,12 +669,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c3883ac7-d28a-e750-77a6-d6fc4b5d1f8f",Synchronized="2017-08-05 16:56:30.0")
+Identifier="c3883ac7-d28a-e750-77a6-d6fc4b5d1f8f",Synchronized="2019-08-30 22:24:29.0")
 /** Column name Search_InOut_ID */
 public static final String COLUMNNAME_Search_InOut_ID = "Search_InOut_ID";
-
-/** Search_Invoice_ID AD_Reference=7fd6a4ea-911e-151b-68bf-3a86cc5f06e3 */
-public static final int SEARCH_INVOICE_ID_AD_Reference_ID=336;
 /** Set Search Invoice.
 @param Search_Invoice_ID Search Invoice Identifier */
 public void setSearch_Invoice_ID (int Search_Invoice_ID)
@@ -709,12 +698,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d58c042e-994c-a87c-02f5-ba1344468fc0",Synchronized="2017-08-05 16:56:30.0")
+Identifier="d58c042e-994c-a87c-02f5-ba1344468fc0",Synchronized="2019-08-30 22:24:29.0")
 /** Column name Search_Invoice_ID */
 public static final String COLUMNNAME_Search_Invoice_ID = "Search_Invoice_ID";
-
-/** Search_Order_ID AD_Reference=0dbd9edb-94cc-bd5a-1824-0c6381e7976b */
-public static final int SEARCH_ORDER_ID_AD_Reference_ID=290;
 /** Set Search Order.
 @param Search_Order_ID Order Identifier */
 public void setSearch_Order_ID (int Search_Order_ID)
@@ -741,7 +727,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b54d975a-5af2-353a-cbbc-d74360fba5a6",Synchronized="2017-08-05 16:56:30.0")
+Identifier="b54d975a-5af2-353a-cbbc-d74360fba5a6",Synchronized="2019-08-30 22:24:29.0")
 /** Column name Search_Order_ID */
 public static final String COLUMNNAME_Search_Order_ID = "Search_Order_ID";
 }

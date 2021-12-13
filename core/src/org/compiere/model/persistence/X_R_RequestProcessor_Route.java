@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("R_RequestProcessor_Route");
 public static String es_PE_TAB_Routing_Description="Ruta de la solicitud";
 
 @XendraTrl(Identifier="3d6267ed-5f23-6b11-e123-ad46f1593c8e")
-public static String es_PE_TAB_Routing_Name="Ruta";
-
-@XendraTrl(Identifier="3d6267ed-5f23-6b11-e123-ad46f1593c8e")
 public static String es_PE_TAB_Routing_Help="Define la secuencia de palabras claves y a quien deben ser dirigidos las solicitudes via web y los de e-mail.";
 
-@XendraTab(Name="Routing",Description="Request Routing",
+@XendraTrl(Identifier="3d6267ed-5f23-6b11-e123-ad46f1593c8e")
+public static String es_PE_TAB_Routing_Name="Ruta";
+@XendraTab(Name="Routing",
+Description="Request Routing",
 Help="Define the sequence of request types and keywords and to whom the web and mail requests should be routed to. The keywords are separated by space, comma, semicolon, tab or new line. The first match wins (first request type then keyword.",
 AD_Window_ID="33d28bbc-a670-970b-7b9c-ecf75fc3740d",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,12 +80,13 @@ public static final String TABNAME_Routing="3d6267ed-5f23-6b11-e123-ad46f1593c8e
 public static String es_PE_TABLE_R_RequestProcessor_Route_Name="Ruteo de la Solicitud";
 
 
-@XendraTable(Name="Request Routing",Description="Automatic routing of requests",Help="",
-TableName="R_RequestProcessor_Route",AccessLevel="2",
+@XendraTable(Name="Request Routing",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Automatic routing of requests",
+Help="",TableName="R_RequestProcessor_Route",AccessLevel="2",
 AD_Window_ID="33d28bbc-a670-970b-7b9c-ecf75fc3740d",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.standard",Identifier="26529be5-246b-43db-8617-c67de629274e",
-Synchronized="2017-08-16 11:43:52.0")
+Synchronized="2020-03-03 21:39:40.0")
 /** TableName=R_RequestProcessor_Route */
 public static final String Table_Name="R_RequestProcessor_Route";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7074f347-2581-0c93-a083-063a14a6c8ce")
+public static String es_PE_FIELD_Routing_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="7074f347-2581-0c93-a083-063a14a6c8ce")
 public static String es_PE_FIELD_Routing_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="7074f347-2581-0c93-a083-063a14a6c8ce")
 public static String es_PE_FIELD_Routing_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="7074f347-2581-0c93-a083-063a14a6c8ce")
-public static String es_PE_FIELD_Routing_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3d6267ed-5f23-6b11-e123-ad46f1593c8e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="007a9432-d760-7812-a70c-59f17cd29966",Synchronized="2017-08-05 16:55:56.0")
+Identifier="007a9432-d760-7812-a70c-59f17cd29966",Synchronized="2019-08-30 22:23:50.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -191,7 +192,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8fa9bb96-2fb9-4543-a938-4f377c594b05",
-Synchronized="2017-08-05 16:55:56.0")
+Synchronized="2019-08-30 22:23:50.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Keyword.
@@ -215,13 +216,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="abff6859-8fa2-abda-2010-08500e656f4e")
+public static String es_PE_FIELD_Routing_Keyword_Name="Palabra clave";
+
+@XendraTrl(Identifier="abff6859-8fa2-abda-2010-08500e656f4e")
 public static String es_PE_FIELD_Routing_Keyword_Description="Palabra clave no sensible a mayúsculas / minúsculas";
 
 @XendraTrl(Identifier="abff6859-8fa2-abda-2010-08500e656f4e")
 public static String es_PE_FIELD_Routing_Keyword_Help="Palabra clave insensible a mayúsculas para correspondencia. Si hay dos palabras; ambas palabras deben existir.";
-
-@XendraTrl(Identifier="abff6859-8fa2-abda-2010-08500e656f4e")
-public static String es_PE_FIELD_Routing_Keyword_Name="Palabra clave";
 
 @XendraField(AD_Column_ID="Keyword",IsCentrallyMaintained=true,
 AD_Tab_ID="3d6267ed-5f23-6b11-e123-ad46f1593c8e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -239,7 +240,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c20fecfc-97bc-f111-337d-1ba1816d32ce",
-Synchronized="2017-08-05 16:55:56.0")
+Synchronized="2019-08-30 22:23:50.0")
 /** Column name Keyword */
 public static final String COLUMNNAME_Keyword = "Keyword";
 /** Set Request Processor.
@@ -277,7 +278,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3e4f7aeb-f4c0-3c03-1ae6-587a40805e33",Synchronized="2017-08-05 16:55:56.0")
+Identifier="3e4f7aeb-f4c0-3c03-1ae6-587a40805e33",Synchronized="2019-08-30 22:23:50.0")
 /** Column name R_RequestProcessor_ID */
 public static final String COLUMNNAME_R_RequestProcessor_ID = "R_RequestProcessor_ID";
 /** Set Request Routing.
@@ -297,10 +298,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9364f387-02d7-455a-a0e6-e911d5d944e7")
-public static String es_PE_FIELD_Routing_RequestRouting_Description="Ruteo automático de la solicitud";
+public static String es_PE_FIELD_Routing_RequestRouting_Name="Ruteo de la Solicitud";
 
 @XendraTrl(Identifier="9364f387-02d7-455a-a0e6-e911d5d944e7")
-public static String es_PE_FIELD_Routing_RequestRouting_Name="Ruteo de la Solicitud";
+public static String es_PE_FIELD_Routing_RequestRouting_Description="Ruteo automático de la solicitud";
 
 @XendraField(AD_Column_ID="R_RequestProcessor_Route_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3d6267ed-5f23-6b11-e123-ad46f1593c8e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -328,13 +329,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="33c4a046-c3f2-2e4d-e810-bff145a6aecc")
+public static String es_PE_FIELD_Routing_RequestType_Name="Tipo de Solicitud";
+
+@XendraTrl(Identifier="33c4a046-c3f2-2e4d-e810-bff145a6aecc")
 public static String es_PE_FIELD_Routing_RequestType_Description="Tipo de Solicitud (pregunta; queja).";
 
 @XendraTrl(Identifier="33c4a046-c3f2-2e4d-e810-bff145a6aecc")
 public static String es_PE_FIELD_Routing_RequestType_Help="Tipos de solicitud son usados para procesar y categorizar solicitudes. Ejemplos: consultas de cuentas; garantías; etc.";
-
-@XendraTrl(Identifier="33c4a046-c3f2-2e4d-e810-bff145a6aecc")
-public static String es_PE_FIELD_Routing_RequestType_Name="Tipo de Solicitud";
 
 @XendraField(AD_Column_ID="R_RequestType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3d6267ed-5f23-6b11-e123-ad46f1593c8e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -352,7 +353,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a58393b-17b2-9f15-cfc9-e04bc88bdc99",
-Synchronized="2017-08-05 16:55:56.0")
+Synchronized="2019-08-30 22:23:50.0")
 /** Column name R_RequestType_ID */
 public static final String COLUMNNAME_R_RequestType_ID = "R_RequestType_ID";
 /** Set Sequence.
@@ -377,13 +378,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getSeqNo()));
 }
 
 @XendraTrl(Identifier="d0c91825-b50a-27b6-3661-2e2fc7ecbb11")
+public static String es_PE_FIELD_Routing_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="d0c91825-b50a-27b6-3661-2e2fc7ecbb11")
 public static String es_PE_FIELD_Routing_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="d0c91825-b50a-27b6-3661-2e2fc7ecbb11")
 public static String es_PE_FIELD_Routing_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="d0c91825-b50a-27b6-3661-2e2fc7ecbb11")
-public static String es_PE_FIELD_Routing_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="3d6267ed-5f23-6b11-e123-ad46f1593c8e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -401,7 +402,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8bf5e179-78a3-7a1f-3da5-1e3a4e219fb1",
-Synchronized="2017-08-05 16:55:56.0")
+Synchronized="2019-08-30 22:23:50.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

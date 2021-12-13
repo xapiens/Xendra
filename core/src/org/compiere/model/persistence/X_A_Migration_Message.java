@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("A_Migration_Message");
 @XendraTrl(Identifier="b265669e-87ea-40ab-aa47-bf27fd290134")
 public static String es_PE_TABLE_A_Migration_Message_Name="Migration Message";
 
-@XendraTable(Name="Migration Message",Description="",Help="",TableName="A_Migration_Message",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="b265669e-87ea-40ab-aa47-bf27fd290134",
-Synchronized="2017-08-16 11:41:14.0")
+@XendraTable(Name="Migration Message",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_Migration_Message",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="b265669e-87ea-40ab-aa47-bf27fd290134",Synchronized="2020-03-03 21:36:15.0")
 /** TableName=A_Migration_Message */
 public static final String Table_Name="A_Migration_Message";
 
@@ -120,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cddee466-cd9b-40e5-b808-d5f6de28ab03",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name AD_Process_ID */
 public static final String COLUMNNAME_AD_Process_ID = "AD_Process_ID";
 /** Set Migration Message.
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="170af119-749f-4a35-90ea-ab6e6a128f0e",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Identifier.
@@ -201,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d6fb1dda-5b8c-4d5c-861c-e0f10116a7f7",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Message.
@@ -228,7 +229,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e183dfb3-b0fc-4453-9718-ea0113e1ccee",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 /** Set MigrateMessage.
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7fbc4dc4-ea34-4361-bebd-3b7749ba50f4",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name MigrateMessage */
 public static final String COLUMNNAME_MigrateMessage = "MigrateMessage";
 /** Set Processed.
@@ -286,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7755e324-c405-455d-a180-861bc408fc13",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -317,7 +318,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f2e44330-b056-4430-bff0-d0627bc775a3",
-Synchronized="2015-08-11 20:41:44.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

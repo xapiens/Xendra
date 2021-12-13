@@ -49,7 +49,7 @@ public class RestoreShipment extends SvrProcess {
 		
 		MDocType dt = MDocType.get(getCtx(), inout.getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), inout.getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), inout.getDateAcct(), dt.getDocBaseType(), inout.getAD_Org_ID(), inout.getAD_Client_ID()))
 		{
 			//m_processMsg = "@PeriodClosed@";
 			return "@Error@: @PeriodClosed@";
@@ -61,7 +61,7 @@ public class RestoreShipment extends SvrProcess {
 		inout.setPosted(false);
 		inout.setIsApproved(false);
 		
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), inout.getMovementDate()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), inout.getMovementDate(), inout.getAD_Org_ID(), inout.getAD_Client_ID()).getC_Period_ID();
 		
 		MInOutLine lines[] = inout.getLines();
 		

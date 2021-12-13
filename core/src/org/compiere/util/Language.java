@@ -222,7 +222,7 @@ public class Language implements Serializable
 	private static Language     s_loginLanguage = s_languages[0];
 
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(Language.class.getName());
+	private static CLogger log = CLogger.getCLogger(Language.class.getName());
 	
 	/**
 	 *  Get Number of Languages

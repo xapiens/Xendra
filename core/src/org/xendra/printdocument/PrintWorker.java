@@ -11,10 +11,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-import org.compiere.model.Query;
+import org.compiere.model.MMessageFormat;
 import org.compiere.model.persistence.X_A_Machine;
-import org.compiere.model.persistence.X_C_PrinterDocumentFormat;
-import org.compiere.util.Env;
 import org.xendra.xendrian.FormatMessage;
 
 public class PrintWorker implements Serializable {
@@ -26,7 +24,7 @@ public class PrintWorker implements Serializable {
 	public static final String RemovePrintJob = "RemovePrintJob";
 	public static final String IsAlive = "isAlive";
 	public static final String getQueues = "getQueues";
-	private Integer C_PrinterDocumentFormat_ID = 0;
+	//private Integer C_PrinterDocumentFormat_ID = 0;
 	private Integer NumberLines = 0;
 	private String command = "command";
 	private Hashtable props = new Hashtable();	
@@ -42,6 +40,7 @@ public class PrintWorker implements Serializable {
 	private X_A_Machine machine;
 	private String Name = "printer job";
 	private boolean m_IsConnect = false;
+	private PrintDocument m_printDocument;
 
 	public String getJobName() {
 		return Name;
@@ -65,6 +64,7 @@ public class PrintWorker implements Serializable {
 	
 	public String Print(String job)
 	{
+		
 		String error = "";
 		if (!m_IsConnect )
 		{
@@ -73,8 +73,8 @@ public class PrintWorker implements Serializable {
 		if (error.length() == 0)
 		{
 			try {
-				if (this.getPrinterDocumentFormat_ID() == 0)
-					throw new Exception("no hay print document format");
+				//if (this.getPrinterDocumentFormat_ID() == 0)
+				//	throw new Exception("no hay print document format");
 
 				Socket socket = new Socket();
 				socket.connect(new InetSocketAddress(machine.getName(), PrintConstants.port), 1000);															
@@ -154,27 +154,47 @@ public class PrintWorker implements Serializable {
 		return propsline;
 	}
 	
-	public Integer getPrinterDocumentFormat_ID() {
-		return C_PrinterDocumentFormat_ID;
-	}
+//	public Integer getPrinterDocumentFormat_ID() {
+//		return C_PrinterDocumentFormat_ID;
+//	}
 
-	public String setPrinterDocumentFormat_ID(Integer format) {		
-		String errordocformat = "";
-		X_C_PrinterDocumentFormat pdf = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name,"C_PrinterDocumentFormat_ID = ?", null)
-		.setParameters(format).first();		
-		if (pdf != null)
-		{
-			if (pdf.getFormat() == null)
-				errordocformat = "la definicion de formato es nula";
-			else if (pdf.getFormat().length() == 0)
-				errordocformat = "la definicion de formato esta vacia";
-			else 
-				C_PrinterDocumentFormat_ID = format;
-		}		
-		else
-			errordocformat = "no existe la definicion de formato";
-		return errordocformat;
-	}
+//	public String AssignPrinterDocumentFormat(Integer format) {
+//		String errordocformat = "";
+//		try {
+//		X_C_PrinterDocumentFormat pdf = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name,"C_PrinterDocumentFormat_ID = ?", null)
+//		.setParameters(format).first();
+//		if (pdf == null) 
+//			throw new Exception("no existe la definicion de formato");
+//		else {
+//			if (pdf.getFormat() == null)
+//				throw new Exception("la definicion de formato es nula");
+//			else if (pdf.getFormat().length() == 0)
+//				throw new Exception("la definicion de formato esta vacia");			
+//		}
+//		C_PrinterDocumentFormat_ID = format;
+//		} catch (Exception e) {
+//			errordocformat = e.getMessage();
+//		}
+//		return errordocformat;
+//	}
+	
+//	public String setPrinterDocumentFormat_ID(Integer format) {		
+//		String errordocformat = "";
+//		X_C_PrinterDocumentFormat pdf = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name,"C_PrinterDocumentFormat_ID = ?", null)
+//		.setParameters(format).first();		
+//		if (pdf != null)
+//		{
+//			if (pdf.getFormat() == null)
+//				errordocformat = "la definicion de formato es nula";
+//			else if (pdf.getFormat().length() == 0)
+//				errordocformat = "la definicion de formato esta vacia";
+//			else 
+//				C_PrinterDocumentFormat_ID = format;
+//		}		
+//		else
+//			errordocformat = "no existe la definicion de formato";
+//		return errordocformat;
+//	}
 	
 	public Integer getNumberLines() {
 		return NumberLines;
@@ -258,7 +278,7 @@ public class PrintWorker implements Serializable {
 			else
 			{
 				if (!queues.contains(QueueName))
-					error += "la cola especificada no existe en el servidor de impresion";
+					error += String.format("la cola %s no existe en el servidor de impresion", QueueName);
 				else
 					m_IsConnect = true;
 			}								
@@ -295,6 +315,15 @@ public class PrintWorker implements Serializable {
 	public void setAttribute(FormatMessage s, String group, String id) {
 		AddProperty(id, s.getProperty(group, id));		
 	}
+	//public void setVariable(MMessageFormat format, String group, String id) {
+	//	AddProperty(id, format.getProperty(group, id, false));
+	//}
+	public void setVariable(String id, String value) {
+		AddProperty(id, value);
+	}
+	//public void setVariable(MMessageFormat format, String group, String id, boolean getName) {
+	//	AddProperty(id, format.getProperty(group, id, true));
+	//}
 	public void setAttribute(FormatMessage s, String group, String id, boolean getName) {
 		AddProperty(id, s.getProperty(group, id, true));
 	}
@@ -304,4 +333,27 @@ public class PrintWorker implements Serializable {
 	public void setAttributeLine(FormatMessage s, String group, String id, boolean getName) {
 		AddPropertyLine(id, s.getProperty(group, id, getName));
 	}
+	public void setVariableLine(MMessageFormat format, String group, String id, boolean getName) {
+		AddPropertyLine(id, format.getProperty(group, id, getName));
+	}
+	public void setVariableLine(MMessageFormat format, String group, String id) {
+		AddPropertyLine(id, format.getProperty(group, id));
+	}
+	public void setVariableLine(String id, String value) {
+		AddPropertyLine(id, value);
+	}
+
+	public String getProcessMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String setPrintDocument(PrintDocument printDocument) {
+		m_printDocument = printDocument;
+		// verificar algo y retornar error
+		return "";
+	}			
+	public PrintDocument getPrintDocument() {
+		return m_printDocument;
+	} 
 }

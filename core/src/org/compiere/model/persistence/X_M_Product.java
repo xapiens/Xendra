@@ -23,10 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_TypesOfGoodsAndServicesPurchased;
-import org.compiere.model.reference.REF_M_Product_ProductType;
-import org.compiere.model.reference.REF_M_Product_ProductType_Tax;
-import org.compiere.model.reference.REF_WithholdingType;
 /** Generated Model for M_Product
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -97,10 +93,10 @@ public static int Table_ID=MTable.getTable_ID("M_Product");
 public static String es_PE_TAB_ProductDimension_Description="Mantenga la dimensión del árbol del producto.";
 
 @XendraTrl(Identifier="3613957f-d0c4-6b93-13a2-0fb23284d808")
-public static String es_PE_TAB_ProductDimension_Name="Dimensión Productos";
+public static String es_PE_TAB_ProductDimension_Help="¡Observe por favor que usted no podrá crear entidades nuevas en esta ventana si usted no tiene defecto fijado para todos los valores obligatorios!.";
 
 @XendraTrl(Identifier="3613957f-d0c4-6b93-13a2-0fb23284d808")
-public static String es_PE_TAB_ProductDimension_Help="¡Observe por favor que usted no podrá crear entidades nuevas en esta ventana si usted no tiene defecto fijado para todos los valores obligatorios!.";
+public static String es_PE_TAB_ProductDimension_Name="Dimensión Productos";
 
 @XendraTab(Name="Product Dimension",Description="Maintain Product Accounting Dimension Tree",
 Help="Please note that you will not be able to create new entities in this window if you have not default set for all mandatory values! ",
@@ -178,12 +174,12 @@ public static final String TABNAME_Product="4b12a806-caeb-ad25-c955-727c0c0e3e63
 public static String es_PE_TAB_ResourceProduct_Description="Mantener Información de productos para recursos";
 
 @XendraTrl(Identifier="fc913b56-1737-810e-a21d-efaa2bde7153")
-public static String es_PE_TAB_ResourceProduct_Name="Producto";
-
-@XendraTrl(Identifier="fc913b56-1737-810e-a21d-efaa2bde7153")
 public static String es_PE_TAB_ResourceProduct_Help="El producto para el recurso es creado automáticamente y sincronizado. Actualiza Nombre; Unidad de Medida; etc. En el recurso y no lo cambia en el producto.";
 
-@XendraTab(Name="Resource Product",Description="Maintain Product information of Resource",
+@XendraTrl(Identifier="fc913b56-1737-810e-a21d-efaa2bde7153")
+public static String es_PE_TAB_ResourceProduct_Name="Producto";
+@XendraTab(Name="Resource Product",
+Description="Maintain Product information of Resource",
 Help="The product for the resource is automatically created and synchronized. Update Name, Unit of Measure, etc. in the Resource and don't change it in the product.",
 AD_Window_ID="d64fba3f-bbf2-bd5b-1f70-0c9bcedb722a",SeqNo=30,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -198,12 +194,12 @@ public static final String TABNAME_ResourceProduct="fc913b56-1737-810e-a21d-efaa
 public static String es_PE_TAB_Product2_Description="Definir producto";
 
 @XendraTrl(Identifier="cda82352-4ccb-b0c6-7307-2c5795eb49f6")
-public static String es_PE_TAB_Product2_Name="Producto";
-
-@XendraTrl(Identifier="cda82352-4ccb-b0c6-7307-2c5795eb49f6")
 public static String es_PE_TAB_Product2_Help="La pestaña de producto define cada producto y lo identifica para su uso en lista de precios y ordenes.";
 
-@XendraTab(Name="Product",Description="Define Product",
+@XendraTrl(Identifier="cda82352-4ccb-b0c6-7307-2c5795eb49f6")
+public static String es_PE_TAB_Product2_Name="Producto";
+@XendraTab(Name="Product",
+Description="Define Product",
 Help="The Product Tab defines each product and identifies it for use in price lists and orders. The Location is the default location when receiving the stored product.",
 AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -216,11 +212,12 @@ public static final String TABNAME_Product2="cda82352-4ccb-b0c6-7307-2c5795eb49f
 @XendraTrl(Identifier="b819f4da-3df6-ed33-3c4a-2f06b4b46999")
 public static String es_PE_TABLE_M_Product_Name="Producto";
 
-@XendraTable(Name="Product",Description="Product, Service, Item",Help="",TableName="M_Product",
-AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="b819f4da-3df6-ed33-3c4a-2f06b4b46999",Synchronized="2017-08-16 11:43:25.0")
+@XendraTable(Name="Product",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product, Service, Item",Help="",
+TableName="M_Product",AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="b819f4da-3df6-ed33-3c4a-2f06b4b46999",Synchronized="2020-11-02 17:52:25.0")
 /** TableName=M_Product */
 public static final String Table_Name="M_Product";
 
@@ -259,6 +256,12 @@ public static final String INDEXNAME_m_product_expensetype = "850a59d4-7c3e-94b6
 Column_Names="s_resource_id",IsUnique="true",
 TableIdentifier="90f7e582-f4e9-ecdd-a1e1-4cee8c08459f",Synchronized="2014-06-01 19:03:58.0")
 public static final String INDEXNAME_m_product_resource = "90f7e582-f4e9-ecdd-a1e1-4cee8c08459f";
+
+
+@XendraIndex(Name="m_product_identifier",Identifier="2d836251-a13e-46f3-b242-f6755f0798fd",
+Column_Names="identifier",IsUnique="false",TableIdentifier="2d836251-a13e-46f3-b242-f6755f0798fd",
+Synchronized="2020-11-02 17:52:25.0")
+public static final String INDEXNAME_m_product_identifier = "2d836251-a13e-46f3-b242-f6755f0798fd";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"M_Product");
 
@@ -310,13 +313,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="90c3389f-a47b-30a1-2661-918ab04222f7")
+public static String es_PE_FIELD_Product_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="90c3389f-a47b-30a1-2661-918ab04222f7")
 public static String es_PE_FIELD_Product_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="90c3389f-a47b-30a1-2661-918ab04222f7")
 public static String es_PE_FIELD_Product_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="90c3389f-a47b-30a1-2661-918ab04222f7")
-public static String es_PE_FIELD_Product_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -326,13 +329,13 @@ Identifier="90c3389f-a47b-30a1-2661-918ab04222f7")
 public static final String FIELDNAME_Product_Classification="90c3389f-a47b-30a1-2661-918ab04222f7";
 
 @XendraTrl(Identifier="3f094e2e-7623-61e7-1b6d-16a8d5f81f32")
+public static String es_PE_FIELD_AssignedProducts_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="3f094e2e-7623-61e7-1b6d-16a8d5f81f32")
 public static String es_PE_FIELD_AssignedProducts_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="3f094e2e-7623-61e7-1b6d-16a8d5f81f32")
 public static String es_PE_FIELD_AssignedProducts_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="3f094e2e-7623-61e7-1b6d-16a8d5f81f32")
-public static String es_PE_FIELD_AssignedProducts_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -342,13 +345,13 @@ Identifier="3f094e2e-7623-61e7-1b6d-16a8d5f81f32")
 public static final String FIELDNAME_AssignedProducts_Classification="3f094e2e-7623-61e7-1b6d-16a8d5f81f32";
 
 @XendraTrl(Identifier="0c3dbda3-2817-5ff8-d163-24a69d429934")
+public static String es_PE_FIELD_ExpenseProduct_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="0c3dbda3-2817-5ff8-d163-24a69d429934")
 public static String es_PE_FIELD_ExpenseProduct_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="0c3dbda3-2817-5ff8-d163-24a69d429934")
 public static String es_PE_FIELD_ExpenseProduct_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="0c3dbda3-2817-5ff8-d163-24a69d429934")
-public static String es_PE_FIELD_ExpenseProduct_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -358,13 +361,13 @@ Identifier="0c3dbda3-2817-5ff8-d163-24a69d429934")
 public static final String FIELDNAME_ExpenseProduct_Classification="0c3dbda3-2817-5ff8-d163-24a69d429934";
 
 @XendraTrl(Identifier="faba62e6-3c90-dbf3-76b5-b39ebd669335")
+public static String es_PE_FIELD_ResourceProduct_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="faba62e6-3c90-dbf3-76b5-b39ebd669335")
 public static String es_PE_FIELD_ResourceProduct_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="faba62e6-3c90-dbf3-76b5-b39ebd669335")
 public static String es_PE_FIELD_ResourceProduct_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="faba62e6-3c90-dbf3-76b5-b39ebd669335")
-public static String es_PE_FIELD_ResourceProduct_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -374,13 +377,13 @@ Identifier="faba62e6-3c90-dbf3-76b5-b39ebd669335")
 public static final String FIELDNAME_ResourceProduct_Classification="faba62e6-3c90-dbf3-76b5-b39ebd669335";
 
 @XendraTrl(Identifier="834014ea-d0d8-8d0f-0fd9-43eb635e7f50")
+public static String es_PE_FIELD_ProductDimension_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="834014ea-d0d8-8d0f-0fd9-43eb635e7f50")
 public static String es_PE_FIELD_ProductDimension_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="834014ea-d0d8-8d0f-0fd9-43eb635e7f50")
 public static String es_PE_FIELD_ProductDimension_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="834014ea-d0d8-8d0f-0fd9-43eb635e7f50")
-public static String es_PE_FIELD_ProductDimension_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -390,13 +393,13 @@ Identifier="834014ea-d0d8-8d0f-0fd9-43eb635e7f50")
 public static final String FIELDNAME_ProductDimension_Classification="834014ea-d0d8-8d0f-0fd9-43eb635e7f50";
 
 @XendraTrl(Identifier="c7d576d8-8716-bd5c-fe27-116c1c75ef42")
+public static String es_PE_FIELD_SelectProduct_Classification_Name="Item de Producto";
+
+@XendraTrl(Identifier="c7d576d8-8716-bd5c-fe27-116c1c75ef42")
 public static String es_PE_FIELD_SelectProduct_Classification_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="c7d576d8-8716-bd5c-fe27-116c1c75ef42")
 public static String es_PE_FIELD_SelectProduct_Classification_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="c7d576d8-8716-bd5c-fe27-116c1c75ef42")
-public static String es_PE_FIELD_SelectProduct_Classification_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -406,13 +409,13 @@ Identifier="c7d576d8-8716-bd5c-fe27-116c1c75ef42")
 public static final String FIELDNAME_SelectProduct_Classification="c7d576d8-8716-bd5c-fe27-116c1c75ef42";
 
 @XendraTrl(Identifier="a1b851dd-bf2b-2ca2-f6a0-1a04ad57a4a7")
+public static String es_PE_FIELD_Product_Classification2_Name="Item de Producto";
+
+@XendraTrl(Identifier="a1b851dd-bf2b-2ca2-f6a0-1a04ad57a4a7")
 public static String es_PE_FIELD_Product_Classification2_Description="Clasificación para agrupaciones de productos";
 
 @XendraTrl(Identifier="a1b851dd-bf2b-2ca2-f6a0-1a04ad57a4a7")
 public static String es_PE_FIELD_Product_Classification2_Help="La clasificación puede ser usada para agrupar productos opcionalmente.";
-
-@XendraTrl(Identifier="a1b851dd-bf2b-2ca2-f6a0-1a04ad57a4a7")
-public static String es_PE_FIELD_Product_Classification2_Name="Item de Producto";
 
 @XendraField(AD_Column_ID="Classification",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -430,7 +433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7564162a-730d-dfaa-f3fe-8401321c125a",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name Classification */
 public static final String COLUMNNAME_Classification = "Classification";
 /** Set Revenue Recognition.
@@ -451,13 +454,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853")
+public static String es_PE_FIELD_Product_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853")
 public static String es_PE_FIELD_Product_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853")
 public static String es_PE_FIELD_Product_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853")
-public static String es_PE_FIELD_Product_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -467,13 +470,13 @@ Identifier="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853")
 public static final String FIELDNAME_Product_RevenueRecognition="c0d0ebd4-a8f5-985d-d033-7f4c6e5fb853";
 
 @XendraTrl(Identifier="d08dc90f-2f56-9f89-f974-5c6ae6714b99")
+public static String es_PE_FIELD_AssignedProducts_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="d08dc90f-2f56-9f89-f974-5c6ae6714b99")
 public static String es_PE_FIELD_AssignedProducts_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="d08dc90f-2f56-9f89-f974-5c6ae6714b99")
 public static String es_PE_FIELD_AssignedProducts_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="d08dc90f-2f56-9f89-f974-5c6ae6714b99")
-public static String es_PE_FIELD_AssignedProducts_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -483,13 +486,13 @@ Identifier="d08dc90f-2f56-9f89-f974-5c6ae6714b99")
 public static final String FIELDNAME_AssignedProducts_RevenueRecognition="d08dc90f-2f56-9f89-f974-5c6ae6714b99";
 
 @XendraTrl(Identifier="b9bbe6e7-df47-d284-a47f-93235e858e82")
+public static String es_PE_FIELD_ExpenseProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="b9bbe6e7-df47-d284-a47f-93235e858e82")
 public static String es_PE_FIELD_ExpenseProduct_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="b9bbe6e7-df47-d284-a47f-93235e858e82")
 public static String es_PE_FIELD_ExpenseProduct_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="b9bbe6e7-df47-d284-a47f-93235e858e82")
-public static String es_PE_FIELD_ExpenseProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -499,13 +502,13 @@ Identifier="b9bbe6e7-df47-d284-a47f-93235e858e82")
 public static final String FIELDNAME_ExpenseProduct_RevenueRecognition="b9bbe6e7-df47-d284-a47f-93235e858e82";
 
 @XendraTrl(Identifier="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac")
+public static String es_PE_FIELD_ResourceProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac")
 public static String es_PE_FIELD_ResourceProduct_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac")
 public static String es_PE_FIELD_ResourceProduct_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac")
-public static String es_PE_FIELD_ResourceProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -515,13 +518,13 @@ Identifier="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac")
 public static final String FIELDNAME_ResourceProduct_RevenueRecognition="daf2e12a-7c1a-07cb-5dc7-7a6625a548ac";
 
 @XendraTrl(Identifier="546372b2-e2ef-cc59-24dd-821fcc1c6500")
+public static String es_PE_FIELD_ProductDimension_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="546372b2-e2ef-cc59-24dd-821fcc1c6500")
 public static String es_PE_FIELD_ProductDimension_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="546372b2-e2ef-cc59-24dd-821fcc1c6500")
 public static String es_PE_FIELD_ProductDimension_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="546372b2-e2ef-cc59-24dd-821fcc1c6500")
-public static String es_PE_FIELD_ProductDimension_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -531,13 +534,13 @@ Identifier="546372b2-e2ef-cc59-24dd-821fcc1c6500")
 public static final String FIELDNAME_ProductDimension_RevenueRecognition="546372b2-e2ef-cc59-24dd-821fcc1c6500";
 
 @XendraTrl(Identifier="81dad54d-8624-9973-a070-89d6d283f0e7")
+public static String es_PE_FIELD_SelectProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="81dad54d-8624-9973-a070-89d6d283f0e7")
 public static String es_PE_FIELD_SelectProduct_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="81dad54d-8624-9973-a070-89d6d283f0e7")
 public static String es_PE_FIELD_SelectProduct_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="81dad54d-8624-9973-a070-89d6d283f0e7")
-public static String es_PE_FIELD_SelectProduct_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -547,13 +550,13 @@ Identifier="81dad54d-8624-9973-a070-89d6d283f0e7")
 public static final String FIELDNAME_SelectProduct_RevenueRecognition="81dad54d-8624-9973-a070-89d6d283f0e7";
 
 @XendraTrl(Identifier="071f8543-02bf-37d9-d889-790e53e068b5")
+public static String es_PE_FIELD_Product_RevenueRecognition2_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="071f8543-02bf-37d9-d889-790e53e068b5")
 public static String es_PE_FIELD_Product_RevenueRecognition2_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="071f8543-02bf-37d9-d889-790e53e068b5")
 public static String es_PE_FIELD_Product_RevenueRecognition2_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="071f8543-02bf-37d9-d889-790e53e068b5")
-public static String es_PE_FIELD_Product_RevenueRecognition2_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -571,7 +574,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ea2c1a39-4df8-95a0-3cc1-0f6a12f03c45",Synchronized="2017-08-05 16:55:20.0")
+Identifier="ea2c1a39-4df8-95a0-3cc1-0f6a12f03c45",Synchronized="2020-03-03 21:38:47.0")
 /** Column name C_RevenueRecognition_ID */
 public static final String COLUMNNAME_C_RevenueRecognition_ID = "C_RevenueRecognition_ID";
 /** Set Subscription Type.
@@ -592,13 +595,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9dc43a36-85f3-b52a-b71f-0c6abddd226e")
+public static String es_PE_FIELD_Product_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="9dc43a36-85f3-b52a-b71f-0c6abddd226e")
 public static String es_PE_FIELD_Product_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="9dc43a36-85f3-b52a-b71f-0c6abddd226e")
 public static String es_PE_FIELD_Product_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="9dc43a36-85f3-b52a-b71f-0c6abddd226e")
-public static String es_PE_FIELD_Product_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -608,13 +611,13 @@ Identifier="9dc43a36-85f3-b52a-b71f-0c6abddd226e")
 public static final String FIELDNAME_Product_SubscriptionType="9dc43a36-85f3-b52a-b71f-0c6abddd226e";
 
 @XendraTrl(Identifier="39437d40-65a3-f25b-c3a3-89618115e623")
+public static String es_PE_FIELD_AssignedProducts_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="39437d40-65a3-f25b-c3a3-89618115e623")
 public static String es_PE_FIELD_AssignedProducts_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="39437d40-65a3-f25b-c3a3-89618115e623")
 public static String es_PE_FIELD_AssignedProducts_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="39437d40-65a3-f25b-c3a3-89618115e623")
-public static String es_PE_FIELD_AssignedProducts_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -624,13 +627,13 @@ Identifier="39437d40-65a3-f25b-c3a3-89618115e623")
 public static final String FIELDNAME_AssignedProducts_SubscriptionType="39437d40-65a3-f25b-c3a3-89618115e623";
 
 @XendraTrl(Identifier="90dd8fca-3715-adf1-41a8-860d3c98a3a0")
+public static String es_PE_FIELD_ExpenseProduct_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="90dd8fca-3715-adf1-41a8-860d3c98a3a0")
 public static String es_PE_FIELD_ExpenseProduct_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="90dd8fca-3715-adf1-41a8-860d3c98a3a0")
 public static String es_PE_FIELD_ExpenseProduct_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="90dd8fca-3715-adf1-41a8-860d3c98a3a0")
-public static String es_PE_FIELD_ExpenseProduct_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -640,13 +643,13 @@ Identifier="90dd8fca-3715-adf1-41a8-860d3c98a3a0")
 public static final String FIELDNAME_ExpenseProduct_SubscriptionType="90dd8fca-3715-adf1-41a8-860d3c98a3a0";
 
 @XendraTrl(Identifier="29cad1d6-895f-c4fd-ae88-24b389752deb")
+public static String es_PE_FIELD_ResourceProduct_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="29cad1d6-895f-c4fd-ae88-24b389752deb")
 public static String es_PE_FIELD_ResourceProduct_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="29cad1d6-895f-c4fd-ae88-24b389752deb")
 public static String es_PE_FIELD_ResourceProduct_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="29cad1d6-895f-c4fd-ae88-24b389752deb")
-public static String es_PE_FIELD_ResourceProduct_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -656,13 +659,13 @@ Identifier="29cad1d6-895f-c4fd-ae88-24b389752deb")
 public static final String FIELDNAME_ResourceProduct_SubscriptionType="29cad1d6-895f-c4fd-ae88-24b389752deb";
 
 @XendraTrl(Identifier="fc6ad80d-7767-c4eb-02c6-93f3a2f00715")
+public static String es_PE_FIELD_ProductDimension_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="fc6ad80d-7767-c4eb-02c6-93f3a2f00715")
 public static String es_PE_FIELD_ProductDimension_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="fc6ad80d-7767-c4eb-02c6-93f3a2f00715")
 public static String es_PE_FIELD_ProductDimension_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="fc6ad80d-7767-c4eb-02c6-93f3a2f00715")
-public static String es_PE_FIELD_ProductDimension_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -672,13 +675,13 @@ Identifier="fc6ad80d-7767-c4eb-02c6-93f3a2f00715")
 public static final String FIELDNAME_ProductDimension_SubscriptionType="fc6ad80d-7767-c4eb-02c6-93f3a2f00715";
 
 @XendraTrl(Identifier="7f91ebde-7274-4b1c-8d45-cc20708bf0de")
+public static String es_PE_FIELD_SelectProduct_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="7f91ebde-7274-4b1c-8d45-cc20708bf0de")
 public static String es_PE_FIELD_SelectProduct_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="7f91ebde-7274-4b1c-8d45-cc20708bf0de")
 public static String es_PE_FIELD_SelectProduct_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="7f91ebde-7274-4b1c-8d45-cc20708bf0de")
-public static String es_PE_FIELD_SelectProduct_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -688,13 +691,13 @@ Identifier="7f91ebde-7274-4b1c-8d45-cc20708bf0de")
 public static final String FIELDNAME_SelectProduct_SubscriptionType="7f91ebde-7274-4b1c-8d45-cc20708bf0de";
 
 @XendraTrl(Identifier="dc8a75f1-b33f-a927-8e6b-b7af7b2ba1ba")
+public static String es_PE_FIELD_Product_SubscriptionType2_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="dc8a75f1-b33f-a927-8e6b-b7af7b2ba1ba")
 public static String es_PE_FIELD_Product_SubscriptionType2_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="dc8a75f1-b33f-a927-8e6b-b7af7b2ba1ba")
 public static String es_PE_FIELD_Product_SubscriptionType2_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="dc8a75f1-b33f-a927-8e6b-b7af7b2ba1ba")
-public static String es_PE_FIELD_Product_SubscriptionType2_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -712,7 +715,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8432aea6-2852-cad1-c683-63641592daf1",Synchronized="2017-08-05 16:55:20.0")
+Identifier="8432aea6-2852-cad1-c683-63641592daf1",Synchronized="2020-03-03 21:38:47.0")
 /** Column name C_SubscriptionType_ID */
 public static final String COLUMNNAME_C_SubscriptionType_ID = "C_SubscriptionType_ID";
 /** Set Tax Category.
@@ -732,13 +735,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
+public static String es_PE_FIELD_Product_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
 public static String es_PE_FIELD_Product_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
 public static String es_PE_FIELD_Product_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
-public static String es_PE_FIELD_Product_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -749,13 +752,13 @@ Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
 public static final String FIELDNAME_Product_TaxCategory="99d106b6-0340-656d-99e9-b21f177f74ac";
 
 @XendraTrl(Identifier="a462a87f-b668-dad0-1cb5-b78bb696c73d")
+public static String es_PE_FIELD_AssignedProducts_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="a462a87f-b668-dad0-1cb5-b78bb696c73d")
 public static String es_PE_FIELD_AssignedProducts_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="a462a87f-b668-dad0-1cb5-b78bb696c73d")
 public static String es_PE_FIELD_AssignedProducts_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="a462a87f-b668-dad0-1cb5-b78bb696c73d")
-public static String es_PE_FIELD_AssignedProducts_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -765,13 +768,13 @@ Identifier="a462a87f-b668-dad0-1cb5-b78bb696c73d")
 public static final String FIELDNAME_AssignedProducts_TaxCategory="a462a87f-b668-dad0-1cb5-b78bb696c73d";
 
 @XendraTrl(Identifier="1f794719-bbb7-e876-6c3e-0aaa5927675d")
+public static String es_PE_FIELD_ExpenseProduct_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="1f794719-bbb7-e876-6c3e-0aaa5927675d")
 public static String es_PE_FIELD_ExpenseProduct_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="1f794719-bbb7-e876-6c3e-0aaa5927675d")
 public static String es_PE_FIELD_ExpenseProduct_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="1f794719-bbb7-e876-6c3e-0aaa5927675d")
-public static String es_PE_FIELD_ExpenseProduct_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -782,13 +785,13 @@ Identifier="1f794719-bbb7-e876-6c3e-0aaa5927675d")
 public static final String FIELDNAME_ExpenseProduct_TaxCategory="1f794719-bbb7-e876-6c3e-0aaa5927675d";
 
 @XendraTrl(Identifier="605f2597-992d-f4a1-d36b-056f45f9fe66")
+public static String es_PE_FIELD_ResourceProduct_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="605f2597-992d-f4a1-d36b-056f45f9fe66")
 public static String es_PE_FIELD_ResourceProduct_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="605f2597-992d-f4a1-d36b-056f45f9fe66")
 public static String es_PE_FIELD_ResourceProduct_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="605f2597-992d-f4a1-d36b-056f45f9fe66")
-public static String es_PE_FIELD_ResourceProduct_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -799,13 +802,13 @@ Identifier="605f2597-992d-f4a1-d36b-056f45f9fe66")
 public static final String FIELDNAME_ResourceProduct_TaxCategory="605f2597-992d-f4a1-d36b-056f45f9fe66";
 
 @XendraTrl(Identifier="1ef441cb-33b2-312c-d224-4797909e133d")
+public static String es_PE_FIELD_ProductDimension_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="1ef441cb-33b2-312c-d224-4797909e133d")
 public static String es_PE_FIELD_ProductDimension_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="1ef441cb-33b2-312c-d224-4797909e133d")
 public static String es_PE_FIELD_ProductDimension_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="1ef441cb-33b2-312c-d224-4797909e133d")
-public static String es_PE_FIELD_ProductDimension_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -815,13 +818,13 @@ Identifier="1ef441cb-33b2-312c-d224-4797909e133d")
 public static final String FIELDNAME_ProductDimension_TaxCategory="1ef441cb-33b2-312c-d224-4797909e133d";
 
 @XendraTrl(Identifier="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f")
+public static String es_PE_FIELD_SelectProduct_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f")
 public static String es_PE_FIELD_SelectProduct_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f")
 public static String es_PE_FIELD_SelectProduct_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f")
-public static String es_PE_FIELD_SelectProduct_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -831,13 +834,13 @@ Identifier="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f")
 public static final String FIELDNAME_SelectProduct_TaxCategory="5b6d465e-51f0-c72f-7a1a-f236b3bdbc5f";
 
 @XendraTrl(Identifier="71213acc-5545-9d05-9b12-9ada087a6f0f")
+public static String es_PE_FIELD_Product_TaxCategory2_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="71213acc-5545-9d05-9b12-9ada087a6f0f")
 public static String es_PE_FIELD_Product_TaxCategory2_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="71213acc-5545-9d05-9b12-9ada087a6f0f")
 public static String es_PE_FIELD_Product_TaxCategory2_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="71213acc-5545-9d05-9b12-9ada087a6f0f")
-public static String es_PE_FIELD_Product_TaxCategory2_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -856,7 +859,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4e7b86a3-547a-7452-2cd9-ecbd55e9b22f",Synchronized="2017-08-05 16:55:20.0")
+Identifier="4e7b86a3-547a-7452-2cd9-ecbd55e9b22f",Synchronized="2020-03-03 21:38:47.0")
 /** Column name C_TaxCategory_ID */
 public static final String COLUMNNAME_C_TaxCategory_ID = "C_TaxCategory_ID";
 /** Set UOM.
@@ -876,28 +879,29 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
+public static String es_PE_FIELD_Product_UOM_Name="UM";
+
+@XendraTrl(Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
 public static String es_PE_FIELD_Product_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
 public static String es_PE_FIELD_Product_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
-public static String es_PE_FIELD_Product_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=130,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=130,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
 public static final String FIELDNAME_Product_UOM="d519fc38-f447-58bb-7d0f-f888498b95ee";
+
+@XendraTrl(Identifier="27f35615-eb68-716e-8895-96f131072f31")
+public static String es_PE_FIELD_AssignedProducts_UOM_Name="UM";
 
 @XendraTrl(Identifier="27f35615-eb68-716e-8895-96f131072f31")
 public static String es_PE_FIELD_AssignedProducts_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="27f35615-eb68-716e-8895-96f131072f31")
 public static String es_PE_FIELD_AssignedProducts_UOM_Help="La UM define una unidad de medida única no monetaria";
-
-@XendraTrl(Identifier="27f35615-eb68-716e-8895-96f131072f31")
-public static String es_PE_FIELD_AssignedProducts_UOM_Name="UM";
 
 @XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -907,28 +911,29 @@ Identifier="27f35615-eb68-716e-8895-96f131072f31")
 public static final String FIELDNAME_AssignedProducts_UOM="27f35615-eb68-716e-8895-96f131072f31";
 
 @XendraTrl(Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
+public static String es_PE_FIELD_ExpenseProduct_UOM_Name="UM";
+
+@XendraTrl(Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
 public static String es_PE_FIELD_ExpenseProduct_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
 public static String es_PE_FIELD_ExpenseProduct_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
-public static String es_PE_FIELD_ExpenseProduct_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=160,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=160,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b66e3894-14fd-d4ba-0c00-5e01fd909955")
 public static final String FIELDNAME_ExpenseProduct_UOM="b66e3894-14fd-d4ba-0c00-5e01fd909955";
+
+@XendraTrl(Identifier="22175ceb-3088-a38a-269b-dc518260c9d1")
+public static String es_PE_FIELD_ResourceProduct_UOM_Name="UM";
 
 @XendraTrl(Identifier="22175ceb-3088-a38a-269b-dc518260c9d1")
 public static String es_PE_FIELD_ResourceProduct_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="22175ceb-3088-a38a-269b-dc518260c9d1")
 public static String es_PE_FIELD_ResourceProduct_UOM_Help="La UM define una unidad de medida única no monetaria";
-
-@XendraTrl(Identifier="22175ceb-3088-a38a-269b-dc518260c9d1")
-public static String es_PE_FIELD_ResourceProduct_UOM_Name="UM";
 
 @XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -938,13 +943,13 @@ Identifier="22175ceb-3088-a38a-269b-dc518260c9d1")
 public static final String FIELDNAME_ResourceProduct_UOM="22175ceb-3088-a38a-269b-dc518260c9d1";
 
 @XendraTrl(Identifier="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a")
+public static String es_PE_FIELD_ProductDimension_UOM_Name="UM";
+
+@XendraTrl(Identifier="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a")
 public static String es_PE_FIELD_ProductDimension_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a")
 public static String es_PE_FIELD_ProductDimension_UOM_Help="La UM define una unidad de medida única no monetaria";
-
-@XendraTrl(Identifier="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a")
-public static String es_PE_FIELD_ProductDimension_UOM_Name="UM";
 
 @XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -954,19 +959,23 @@ Identifier="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a")
 public static final String FIELDNAME_ProductDimension_UOM="d0a80076-bbee-4704-a5ed-e8ae3bb50d6a";
 
 @XendraTrl(Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
+public static String es_PE_FIELD_SelectProduct_UOM_Name="UM";
+
+@XendraTrl(Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
 public static String es_PE_FIELD_SelectProduct_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
 public static String es_PE_FIELD_SelectProduct_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
-public static String es_PE_FIELD_SelectProduct_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=110,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="bf17c159-6811-ba10-0881-aa8a545af4b9")
 public static final String FIELDNAME_SelectProduct_UOM="bf17c159-6811-ba10-0881-aa8a545af4b9";
+
+@XendraTrl(Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
+public static String es_PE_FIELD_Product_UOM2_Name="UM";
 
 @XendraTrl(Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
 public static String es_PE_FIELD_Product_UOM2_Description="Unidad de Medida";
@@ -974,13 +983,11 @@ public static String es_PE_FIELD_Product_UOM2_Description="Unidad de Medida";
 @XendraTrl(Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
 public static String es_PE_FIELD_Product_UOM2_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
-public static String es_PE_FIELD_Product_UOM2_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=170,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="6f834899-6f7e-23bf-7fea-b33d4ea4be6e")
 public static final String FIELDNAME_Product_UOM2="6f834899-6f7e-23bf-7fea-b33d4ea4be6e";
 
 @XendraTrl(Identifier="f5d5df62-7f23-8b41-c0fd-7ce90e228d1f")
@@ -992,12 +999,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f5d5df62-7f23-8b41-c0fd-7ce90e228d1f",Synchronized="2017-08-05 16:55:20.0")
+Identifier="f5d5df62-7f23-8b41-c0fd-7ce90e228d1f",Synchronized="2020-03-03 21:38:47.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
-
-/** C_UOM_Order_ID AD_Reference=723d7831-ccf2-1634-fe46-62dbc58e9a8e */
-public static final int C_UOM_ORDER_ID_AD_Reference_ID=114;
 /** Set C_UOM_Order_ID.
 @param C_UOM_Order_ID C_UOM_Order_ID */
 public void setC_UOM_Order_ID (int C_UOM_Order_ID)
@@ -1035,7 +1039,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a18f571-0891-1a22-ad78-e409b3ea92a3",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name C_UOM_Order_ID */
 public static final String COLUMNNAME_C_UOM_Order_ID = "C_UOM_Order_ID";
 /** Set Description.
@@ -1066,29 +1070,29 @@ return value;
 }
 
 @XendraTrl(Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
+public static String es_PE_FIELD_Product_Description_Name="Observación";
+
+@XendraTrl(Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
 public static String es_PE_FIELD_Product_Description_Description="Observación";
 
 @XendraTrl(Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
 public static String es_PE_FIELD_Product_Description_Help="Observación";
 
-@XendraTrl(Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
-public static String es_PE_FIELD_Product_Description_Name="Observación";
-
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
 public static final String FIELDNAME_Product_Description="be13c470-de37-2b36-c030-ae1ec0d6b03e";
+
+@XendraTrl(Identifier="d65dccfb-b0cc-6e09-a409-e5ce41f61c28")
+public static String es_PE_FIELD_AssignedProducts_Description_Name="Observación";
 
 @XendraTrl(Identifier="d65dccfb-b0cc-6e09-a409-e5ce41f61c28")
 public static String es_PE_FIELD_AssignedProducts_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="d65dccfb-b0cc-6e09-a409-e5ce41f61c28")
 public static String es_PE_FIELD_AssignedProducts_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="d65dccfb-b0cc-6e09-a409-e5ce41f61c28")
-public static String es_PE_FIELD_AssignedProducts_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1098,13 +1102,13 @@ Identifier="d65dccfb-b0cc-6e09-a409-e5ce41f61c28")
 public static final String FIELDNAME_AssignedProducts_Description="d65dccfb-b0cc-6e09-a409-e5ce41f61c28";
 
 @XendraTrl(Identifier="60238d7f-d491-1047-e53f-f1150b7fe419")
+public static String es_PE_FIELD_ExpenseProduct_Description_Name="Observación";
+
+@XendraTrl(Identifier="60238d7f-d491-1047-e53f-f1150b7fe419")
 public static String es_PE_FIELD_ExpenseProduct_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="60238d7f-d491-1047-e53f-f1150b7fe419")
 public static String es_PE_FIELD_ExpenseProduct_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="60238d7f-d491-1047-e53f-f1150b7fe419")
-public static String es_PE_FIELD_ExpenseProduct_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1114,13 +1118,13 @@ Identifier="60238d7f-d491-1047-e53f-f1150b7fe419")
 public static final String FIELDNAME_ExpenseProduct_Description="60238d7f-d491-1047-e53f-f1150b7fe419";
 
 @XendraTrl(Identifier="1211be16-46a0-9c4a-3c98-9cec103a32d7")
+public static String es_PE_FIELD_ResourceProduct_Description_Name="Observación";
+
+@XendraTrl(Identifier="1211be16-46a0-9c4a-3c98-9cec103a32d7")
 public static String es_PE_FIELD_ResourceProduct_Description_Description="Observación";
 
 @XendraTrl(Identifier="1211be16-46a0-9c4a-3c98-9cec103a32d7")
 public static String es_PE_FIELD_ResourceProduct_Description_Help="Observación";
-
-@XendraTrl(Identifier="1211be16-46a0-9c4a-3c98-9cec103a32d7")
-public static String es_PE_FIELD_ResourceProduct_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1130,13 +1134,13 @@ Identifier="1211be16-46a0-9c4a-3c98-9cec103a32d7")
 public static final String FIELDNAME_ResourceProduct_Description="1211be16-46a0-9c4a-3c98-9cec103a32d7";
 
 @XendraTrl(Identifier="ac34a134-efcb-e894-f8fc-849963a06cc8")
+public static String es_PE_FIELD_ProductDimension_Description_Name="Observación";
+
+@XendraTrl(Identifier="ac34a134-efcb-e894-f8fc-849963a06cc8")
 public static String es_PE_FIELD_ProductDimension_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="ac34a134-efcb-e894-f8fc-849963a06cc8")
 public static String es_PE_FIELD_ProductDimension_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="ac34a134-efcb-e894-f8fc-849963a06cc8")
-public static String es_PE_FIELD_ProductDimension_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1146,13 +1150,13 @@ Identifier="ac34a134-efcb-e894-f8fc-849963a06cc8")
 public static final String FIELDNAME_ProductDimension_Description="ac34a134-efcb-e894-f8fc-849963a06cc8";
 
 @XendraTrl(Identifier="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc")
+public static String es_PE_FIELD_SelectProduct_Description_Name="Observación";
+
+@XendraTrl(Identifier="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc")
 public static String es_PE_FIELD_SelectProduct_Description_Description="Observación";
 
 @XendraTrl(Identifier="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc")
 public static String es_PE_FIELD_SelectProduct_Description_Help="Observación";
-
-@XendraTrl(Identifier="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc")
-public static String es_PE_FIELD_SelectProduct_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1162,13 +1166,13 @@ Identifier="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc")
 public static final String FIELDNAME_SelectProduct_Description="08c5e8b1-bb0d-8f50-e90b-b62971fb5cfc";
 
 @XendraTrl(Identifier="bc38deb2-6b82-4b04-ff42-9907e92a5b87")
+public static String es_PE_FIELD_Product_Description2_Name="Observación";
+
+@XendraTrl(Identifier="bc38deb2-6b82-4b04-ff42-9907e92a5b87")
 public static String es_PE_FIELD_Product_Description2_Description="Observación";
 
 @XendraTrl(Identifier="bc38deb2-6b82-4b04-ff42-9907e92a5b87")
 public static String es_PE_FIELD_Product_Description2_Help="Observación";
-
-@XendraTrl(Identifier="bc38deb2-6b82-4b04-ff42-9907e92a5b87")
-public static String es_PE_FIELD_Product_Description2_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1186,7 +1190,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,
 AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="96fbe46f-b22e-fce0-356d-c7ee1acc1c04",Synchronized="2017-08-05 16:55:20.0")
+Identifier="96fbe46f-b22e-fce0-356d-c7ee1acc1c04",Synchronized="2020-03-03 21:38:47.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Description URL.
@@ -1210,10 +1214,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="f9f6fd86-3049-ab52-d028-df070fa5a37e")
-public static String es_PE_FIELD_Product_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_Product_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="f9f6fd86-3049-ab52-d028-df070fa5a37e")
-public static String es_PE_FIELD_Product_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_Product_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1223,10 +1227,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="f9f6fd86-3049-ab52-d028-df070fa
 public static final String FIELDNAME_Product_DescriptionURL="f9f6fd86-3049-ab52-d028-df070fa5a37e";
 
 @XendraTrl(Identifier="b030098f-9140-0406-4156-b73a1bc20ac4")
-public static String es_PE_FIELD_AssignedProducts_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_AssignedProducts_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="b030098f-9140-0406-4156-b73a1bc20ac4")
-public static String es_PE_FIELD_AssignedProducts_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_AssignedProducts_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1236,10 +1240,10 @@ Identifier="b030098f-9140-0406-4156-b73a1bc20ac4")
 public static final String FIELDNAME_AssignedProducts_DescriptionURL="b030098f-9140-0406-4156-b73a1bc20ac4";
 
 @XendraTrl(Identifier="60641d31-e1f9-7bba-e2da-a43a6eaa6971")
-public static String es_PE_FIELD_ExpenseProduct_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_ExpenseProduct_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="60641d31-e1f9-7bba-e2da-a43a6eaa6971")
-public static String es_PE_FIELD_ExpenseProduct_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_ExpenseProduct_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1249,10 +1253,10 @@ Identifier="60641d31-e1f9-7bba-e2da-a43a6eaa6971")
 public static final String FIELDNAME_ExpenseProduct_DescriptionURL="60641d31-e1f9-7bba-e2da-a43a6eaa6971";
 
 @XendraTrl(Identifier="7084b8a8-8700-6d82-d8bf-112c487b2b1f")
-public static String es_PE_FIELD_ResourceProduct_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_ResourceProduct_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="7084b8a8-8700-6d82-d8bf-112c487b2b1f")
-public static String es_PE_FIELD_ResourceProduct_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_ResourceProduct_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1262,10 +1266,10 @@ Identifier="7084b8a8-8700-6d82-d8bf-112c487b2b1f")
 public static final String FIELDNAME_ResourceProduct_DescriptionURL="7084b8a8-8700-6d82-d8bf-112c487b2b1f";
 
 @XendraTrl(Identifier="792a7bf1-f590-4db1-a51a-18a46ab57dae")
-public static String es_PE_FIELD_ProductDimension_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_ProductDimension_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="792a7bf1-f590-4db1-a51a-18a46ab57dae")
-public static String es_PE_FIELD_ProductDimension_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_ProductDimension_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1275,10 +1279,10 @@ Identifier="792a7bf1-f590-4db1-a51a-18a46ab57dae")
 public static final String FIELDNAME_ProductDimension_DescriptionURL="792a7bf1-f590-4db1-a51a-18a46ab57dae";
 
 @XendraTrl(Identifier="769842f3-fddf-e8d7-0c05-199175434c3d")
-public static String es_PE_FIELD_SelectProduct_DescriptionURL_Description="Descripción de la URL";
+public static String es_PE_FIELD_SelectProduct_DescriptionURL_Name="Descripción URL";
 
 @XendraTrl(Identifier="769842f3-fddf-e8d7-0c05-199175434c3d")
-public static String es_PE_FIELD_SelectProduct_DescriptionURL_Name="Descripción URL";
+public static String es_PE_FIELD_SelectProduct_DescriptionURL_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1288,10 +1292,10 @@ Identifier="769842f3-fddf-e8d7-0c05-199175434c3d")
 public static final String FIELDNAME_SelectProduct_DescriptionURL="769842f3-fddf-e8d7-0c05-199175434c3d";
 
 @XendraTrl(Identifier="72f34d9a-b528-c74b-7949-4755894e7f1b")
-public static String es_PE_FIELD_Product_DescriptionURL2_Description="Descripción de la URL";
+public static String es_PE_FIELD_Product_DescriptionURL2_Name="Descripción URL";
 
 @XendraTrl(Identifier="72f34d9a-b528-c74b-7949-4755894e7f1b")
-public static String es_PE_FIELD_Product_DescriptionURL2_Name="Descripción URL";
+public static String es_PE_FIELD_Product_DescriptionURL2_Description="Descripción de la URL";
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1309,7 +1313,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="155eb3ff-a360-618c-6b9d-4e5d0efde138",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name DescriptionURL */
 public static final String COLUMNNAME_DescriptionURL = "DescriptionURL";
 /** Set Discontinued.
@@ -1332,13 +1336,13 @@ return false;
 }
 
 @XendraTrl(Identifier="5b245f28-3f13-369a-f3d0-79524facb505")
+public static String es_PE_FIELD_Product_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="5b245f28-3f13-369a-f3d0-79524facb505")
 public static String es_PE_FIELD_Product_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="5b245f28-3f13-369a-f3d0-79524facb505")
 public static String es_PE_FIELD_Product_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="5b245f28-3f13-369a-f3d0-79524facb505")
-public static String es_PE_FIELD_Product_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1348,13 +1352,13 @@ Identifier="5b245f28-3f13-369a-f3d0-79524facb505")
 public static final String FIELDNAME_Product_Discontinued="5b245f28-3f13-369a-f3d0-79524facb505";
 
 @XendraTrl(Identifier="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1")
+public static String es_PE_FIELD_AssignedProducts_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1")
 public static String es_PE_FIELD_AssignedProducts_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1")
 public static String es_PE_FIELD_AssignedProducts_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1")
-public static String es_PE_FIELD_AssignedProducts_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1364,13 +1368,13 @@ Identifier="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1")
 public static final String FIELDNAME_AssignedProducts_Discontinued="4007ee7e-1cf4-aa80-e8d5-6824ebf6d7d1";
 
 @XendraTrl(Identifier="022bf94c-493f-4813-1538-3585addb58a8")
+public static String es_PE_FIELD_ExpenseProduct_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="022bf94c-493f-4813-1538-3585addb58a8")
 public static String es_PE_FIELD_ExpenseProduct_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="022bf94c-493f-4813-1538-3585addb58a8")
 public static String es_PE_FIELD_ExpenseProduct_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="022bf94c-493f-4813-1538-3585addb58a8")
-public static String es_PE_FIELD_ExpenseProduct_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1380,13 +1384,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="022bf94c-493f-4813-1538-3585add
 public static final String FIELDNAME_ExpenseProduct_Discontinued="022bf94c-493f-4813-1538-3585addb58a8";
 
 @XendraTrl(Identifier="c1770e3a-363c-3382-8f44-087bfd5e1c38")
+public static String es_PE_FIELD_ResourceProduct_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="c1770e3a-363c-3382-8f44-087bfd5e1c38")
 public static String es_PE_FIELD_ResourceProduct_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="c1770e3a-363c-3382-8f44-087bfd5e1c38")
 public static String es_PE_FIELD_ResourceProduct_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="c1770e3a-363c-3382-8f44-087bfd5e1c38")
-public static String es_PE_FIELD_ResourceProduct_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1396,13 +1400,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="c1770e3a-363c-3382-8f44-087bfd5
 public static final String FIELDNAME_ResourceProduct_Discontinued="c1770e3a-363c-3382-8f44-087bfd5e1c38";
 
 @XendraTrl(Identifier="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef")
+public static String es_PE_FIELD_ProductDimension_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef")
 public static String es_PE_FIELD_ProductDimension_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef")
 public static String es_PE_FIELD_ProductDimension_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef")
-public static String es_PE_FIELD_ProductDimension_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1412,13 +1416,13 @@ Identifier="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef")
 public static final String FIELDNAME_ProductDimension_Discontinued="4a81a9b1-538a-c56c-6f93-e7fc5ba4d3ef";
 
 @XendraTrl(Identifier="867dc65c-2569-265b-2893-850140ae60d5")
+public static String es_PE_FIELD_SelectProduct_Discontinued_Name="Suspendido";
+
+@XendraTrl(Identifier="867dc65c-2569-265b-2893-850140ae60d5")
 public static String es_PE_FIELD_SelectProduct_Discontinued_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="867dc65c-2569-265b-2893-850140ae60d5")
 public static String es_PE_FIELD_SelectProduct_Discontinued_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="867dc65c-2569-265b-2893-850140ae60d5")
-public static String es_PE_FIELD_SelectProduct_Discontinued_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1428,13 +1432,13 @@ Identifier="867dc65c-2569-265b-2893-850140ae60d5")
 public static final String FIELDNAME_SelectProduct_Discontinued="867dc65c-2569-265b-2893-850140ae60d5";
 
 @XendraTrl(Identifier="6364942d-89c7-3f5a-4b81-60e5d8500be8")
+public static String es_PE_FIELD_Product_Discontinued2_Name="Suspendido";
+
+@XendraTrl(Identifier="6364942d-89c7-3f5a-4b81-60e5d8500be8")
 public static String es_PE_FIELD_Product_Discontinued2_Description="Este registro no está disponible";
 
 @XendraTrl(Identifier="6364942d-89c7-3f5a-4b81-60e5d8500be8")
 public static String es_PE_FIELD_Product_Discontinued2_Help="El cuadro de verificación descontinuado indica un producto que ha sido descontinuado.";
-
-@XendraTrl(Identifier="6364942d-89c7-3f5a-4b81-60e5d8500be8")
-public static String es_PE_FIELD_Product_Discontinued2_Name="Suspendido";
 
 @XendraField(AD_Column_ID="Discontinued",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1452,7 +1456,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="567b2ea0-303e-5d25-0e8c-4b3e5e00b0a8",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name Discontinued */
 public static final String COLUMNNAME_Discontinued = "Discontinued";
 /** Set Discontinued by.
@@ -1469,13 +1473,13 @@ return (Timestamp)get_Value(COLUMNNAME_DiscontinuedBy);
 }
 
 @XendraTrl(Identifier="9950f036-3b48-546a-2067-bb982f14c20b")
+public static String es_PE_FIELD_Product_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="9950f036-3b48-546a-2067-bb982f14c20b")
 public static String es_PE_FIELD_Product_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="9950f036-3b48-546a-2067-bb982f14c20b")
 public static String es_PE_FIELD_Product_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="9950f036-3b48-546a-2067-bb982f14c20b")
-public static String es_PE_FIELD_Product_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1485,13 +1489,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="9950f036-3b48-546a-2067-bb982f1
 public static final String FIELDNAME_Product_DiscontinuedBy="9950f036-3b48-546a-2067-bb982f14c20b";
 
 @XendraTrl(Identifier="076a9838-6757-17bc-b86c-81b4fee71fa2")
+public static String es_PE_FIELD_AssignedProducts_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="076a9838-6757-17bc-b86c-81b4fee71fa2")
 public static String es_PE_FIELD_AssignedProducts_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="076a9838-6757-17bc-b86c-81b4fee71fa2")
 public static String es_PE_FIELD_AssignedProducts_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="076a9838-6757-17bc-b86c-81b4fee71fa2")
-public static String es_PE_FIELD_AssignedProducts_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1501,13 +1505,13 @@ Identifier="076a9838-6757-17bc-b86c-81b4fee71fa2")
 public static final String FIELDNAME_AssignedProducts_DiscontinuedBy="076a9838-6757-17bc-b86c-81b4fee71fa2";
 
 @XendraTrl(Identifier="f64ecb50-d091-bc2a-6ba4-9d47c7048f13")
+public static String es_PE_FIELD_ExpenseProduct_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="f64ecb50-d091-bc2a-6ba4-9d47c7048f13")
 public static String es_PE_FIELD_ExpenseProduct_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="f64ecb50-d091-bc2a-6ba4-9d47c7048f13")
 public static String es_PE_FIELD_ExpenseProduct_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="f64ecb50-d091-bc2a-6ba4-9d47c7048f13")
-public static String es_PE_FIELD_ExpenseProduct_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1517,13 +1521,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="f64ecb50-d091-bc2a-6ba4-9d47c70
 public static final String FIELDNAME_ExpenseProduct_DiscontinuedBy="f64ecb50-d091-bc2a-6ba4-9d47c7048f13";
 
 @XendraTrl(Identifier="13c2ac80-bbec-9374-1040-8cb771309647")
+public static String es_PE_FIELD_ResourceProduct_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="13c2ac80-bbec-9374-1040-8cb771309647")
 public static String es_PE_FIELD_ResourceProduct_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="13c2ac80-bbec-9374-1040-8cb771309647")
 public static String es_PE_FIELD_ResourceProduct_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="13c2ac80-bbec-9374-1040-8cb771309647")
-public static String es_PE_FIELD_ResourceProduct_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1533,13 +1537,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="13c2ac80-bbec-9374-1040-8cb7713
 public static final String FIELDNAME_ResourceProduct_DiscontinuedBy="13c2ac80-bbec-9374-1040-8cb771309647";
 
 @XendraTrl(Identifier="339f6a9f-106d-5b11-c089-b5bfe98ded75")
+public static String es_PE_FIELD_ProductDimension_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="339f6a9f-106d-5b11-c089-b5bfe98ded75")
 public static String es_PE_FIELD_ProductDimension_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="339f6a9f-106d-5b11-c089-b5bfe98ded75")
 public static String es_PE_FIELD_ProductDimension_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="339f6a9f-106d-5b11-c089-b5bfe98ded75")
-public static String es_PE_FIELD_ProductDimension_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1549,13 +1553,13 @@ Identifier="339f6a9f-106d-5b11-c089-b5bfe98ded75")
 public static final String FIELDNAME_ProductDimension_DiscontinuedBy="339f6a9f-106d-5b11-c089-b5bfe98ded75";
 
 @XendraTrl(Identifier="e877c67c-b2a5-ad19-4d26-f10fe393d3f3")
+public static String es_PE_FIELD_SelectProduct_DiscontinuedBy_Name="Suspendido Por";
+
+@XendraTrl(Identifier="e877c67c-b2a5-ad19-4d26-f10fe393d3f3")
 public static String es_PE_FIELD_SelectProduct_DiscontinuedBy_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="e877c67c-b2a5-ad19-4d26-f10fe393d3f3")
 public static String es_PE_FIELD_SelectProduct_DiscontinuedBy_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="e877c67c-b2a5-ad19-4d26-f10fe393d3f3")
-public static String es_PE_FIELD_SelectProduct_DiscontinuedBy_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1565,13 +1569,13 @@ Identifier="e877c67c-b2a5-ad19-4d26-f10fe393d3f3")
 public static final String FIELDNAME_SelectProduct_DiscontinuedBy="e877c67c-b2a5-ad19-4d26-f10fe393d3f3";
 
 @XendraTrl(Identifier="e3dddbc1-b973-50e7-b4ce-acce3ed6f719")
+public static String es_PE_FIELD_Product_DiscontinuedBy2_Name="Suspendido Por";
+
+@XendraTrl(Identifier="e3dddbc1-b973-50e7-b4ce-acce3ed6f719")
 public static String es_PE_FIELD_Product_DiscontinuedBy2_Description="Descontinuado Por";
 
 @XendraTrl(Identifier="e3dddbc1-b973-50e7-b4ce-acce3ed6f719")
 public static String es_PE_FIELD_Product_DiscontinuedBy2_Help="El suspendido por indica el individuo que suspendió este producto.";
-
-@XendraTrl(Identifier="e3dddbc1-b973-50e7-b4ce-acce3ed6f719")
-public static String es_PE_FIELD_Product_DiscontinuedBy2_Name="Suspendido Por";
 
 @XendraField(AD_Column_ID="DiscontinuedBy",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1589,7 +1593,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0817f907-0714-156f-4273-9d2b2294090d",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name DiscontinuedBy */
 public static final String COLUMNNAME_DiscontinuedBy = "DiscontinuedBy";
 /** Set Document Note.
@@ -1608,13 +1612,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="df715a1b-1877-6d00-dcb4-1db22b319c4b")
+public static String es_PE_FIELD_Product_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="df715a1b-1877-6d00-dcb4-1db22b319c4b")
 public static String es_PE_FIELD_Product_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="df715a1b-1877-6d00-dcb4-1db22b319c4b")
 public static String es_PE_FIELD_Product_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="df715a1b-1877-6d00-dcb4-1db22b319c4b")
-public static String es_PE_FIELD_Product_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1624,13 +1628,13 @@ Identifier="df715a1b-1877-6d00-dcb4-1db22b319c4b")
 public static final String FIELDNAME_Product_DocumentNote="df715a1b-1877-6d00-dcb4-1db22b319c4b";
 
 @XendraTrl(Identifier="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb")
+public static String es_PE_FIELD_AssignedProducts_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb")
 public static String es_PE_FIELD_AssignedProducts_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb")
 public static String es_PE_FIELD_AssignedProducts_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb")
-public static String es_PE_FIELD_AssignedProducts_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1640,13 +1644,13 @@ Identifier="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb")
 public static final String FIELDNAME_AssignedProducts_DocumentNote="bae76c86-8dc0-56f2-e9fd-8afa3f8202bb";
 
 @XendraTrl(Identifier="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66")
+public static String es_PE_FIELD_ExpenseProduct_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66")
 public static String es_PE_FIELD_ExpenseProduct_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66")
 public static String es_PE_FIELD_ExpenseProduct_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66")
-public static String es_PE_FIELD_ExpenseProduct_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1656,13 +1660,13 @@ Identifier="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66")
 public static final String FIELDNAME_ExpenseProduct_DocumentNote="3fdaf50b-51c7-58cb-aaf1-7034bae4bc66";
 
 @XendraTrl(Identifier="8e886312-714e-c05f-d549-6a65a05da256")
+public static String es_PE_FIELD_ResourceProduct_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="8e886312-714e-c05f-d549-6a65a05da256")
 public static String es_PE_FIELD_ResourceProduct_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="8e886312-714e-c05f-d549-6a65a05da256")
 public static String es_PE_FIELD_ResourceProduct_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="8e886312-714e-c05f-d549-6a65a05da256")
-public static String es_PE_FIELD_ResourceProduct_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1672,13 +1676,13 @@ Identifier="8e886312-714e-c05f-d549-6a65a05da256")
 public static final String FIELDNAME_ResourceProduct_DocumentNote="8e886312-714e-c05f-d549-6a65a05da256";
 
 @XendraTrl(Identifier="7c20ffcc-5d89-1e23-9fd1-ac6853c33418")
+public static String es_PE_FIELD_ProductDimension_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="7c20ffcc-5d89-1e23-9fd1-ac6853c33418")
 public static String es_PE_FIELD_ProductDimension_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="7c20ffcc-5d89-1e23-9fd1-ac6853c33418")
 public static String es_PE_FIELD_ProductDimension_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="7c20ffcc-5d89-1e23-9fd1-ac6853c33418")
-public static String es_PE_FIELD_ProductDimension_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1688,13 +1692,13 @@ Identifier="7c20ffcc-5d89-1e23-9fd1-ac6853c33418")
 public static final String FIELDNAME_ProductDimension_DocumentNote="7c20ffcc-5d89-1e23-9fd1-ac6853c33418";
 
 @XendraTrl(Identifier="3e64972e-ecec-bcae-b856-3799eb245fed")
+public static String es_PE_FIELD_SelectProduct_DocumentNote_Name="Nota de Documento";
+
+@XendraTrl(Identifier="3e64972e-ecec-bcae-b856-3799eb245fed")
 public static String es_PE_FIELD_SelectProduct_DocumentNote_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="3e64972e-ecec-bcae-b856-3799eb245fed")
 public static String es_PE_FIELD_SelectProduct_DocumentNote_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="3e64972e-ecec-bcae-b856-3799eb245fed")
-public static String es_PE_FIELD_SelectProduct_DocumentNote_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1704,13 +1708,13 @@ Identifier="3e64972e-ecec-bcae-b856-3799eb245fed")
 public static final String FIELDNAME_SelectProduct_DocumentNote="3e64972e-ecec-bcae-b856-3799eb245fed";
 
 @XendraTrl(Identifier="80051a73-e930-c3f3-91bc-a9a6c2d16e19")
+public static String es_PE_FIELD_Product_DocumentNote2_Name="Nota de Documento";
+
+@XendraTrl(Identifier="80051a73-e930-c3f3-91bc-a9a6c2d16e19")
 public static String es_PE_FIELD_Product_DocumentNote2_Description="Información adicional para un documento";
 
 @XendraTrl(Identifier="80051a73-e930-c3f3-91bc-a9a6c2d16e19")
 public static String es_PE_FIELD_Product_DocumentNote2_Help="La nota de documento se usa para registrar cualquier información adicional considerando este producto.";
-
-@XendraTrl(Identifier="80051a73-e930-c3f3-91bc-a9a6c2d16e19")
-public static String es_PE_FIELD_Product_DocumentNote2_Name="Nota de Documento";
 
 @XendraField(AD_Column_ID="DocumentNote",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1728,7 +1732,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1cb10902-ace0-593f-fdfb-81b6c9762582",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name DocumentNote */
 public static final String COLUMNNAME_DocumentNote = "DocumentNote";
 /** Set Guarantee Days.
@@ -1747,13 +1751,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da")
+public static String es_PE_FIELD_Product_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da")
 public static String es_PE_FIELD_Product_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da")
 public static String es_PE_FIELD_Product_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da")
-public static String es_PE_FIELD_Product_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1763,13 +1767,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b
 public static final String FIELDNAME_Product_GuaranteeDays="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da";
 
 @XendraTrl(Identifier="f72f2725-9728-bf0b-249a-66eeaa4f9a0b")
+public static String es_PE_FIELD_AssignedProducts_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="f72f2725-9728-bf0b-249a-66eeaa4f9a0b")
 public static String es_PE_FIELD_AssignedProducts_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="f72f2725-9728-bf0b-249a-66eeaa4f9a0b")
 public static String es_PE_FIELD_AssignedProducts_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="f72f2725-9728-bf0b-249a-66eeaa4f9a0b")
-public static String es_PE_FIELD_AssignedProducts_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1779,13 +1783,13 @@ Identifier="f72f2725-9728-bf0b-249a-66eeaa4f9a0b")
 public static final String FIELDNAME_AssignedProducts_GuaranteeDays="f72f2725-9728-bf0b-249a-66eeaa4f9a0b";
 
 @XendraTrl(Identifier="dad672cf-0d0e-84fc-5372-33daf285116c")
+public static String es_PE_FIELD_ExpenseProduct_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="dad672cf-0d0e-84fc-5372-33daf285116c")
 public static String es_PE_FIELD_ExpenseProduct_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="dad672cf-0d0e-84fc-5372-33daf285116c")
 public static String es_PE_FIELD_ExpenseProduct_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="dad672cf-0d0e-84fc-5372-33daf285116c")
-public static String es_PE_FIELD_ExpenseProduct_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1795,13 +1799,13 @@ Identifier="dad672cf-0d0e-84fc-5372-33daf285116c")
 public static final String FIELDNAME_ExpenseProduct_GuaranteeDays="dad672cf-0d0e-84fc-5372-33daf285116c";
 
 @XendraTrl(Identifier="37136b2f-c276-9e93-cc09-100c5961d23a")
+public static String es_PE_FIELD_ResourceProduct_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="37136b2f-c276-9e93-cc09-100c5961d23a")
 public static String es_PE_FIELD_ResourceProduct_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="37136b2f-c276-9e93-cc09-100c5961d23a")
 public static String es_PE_FIELD_ResourceProduct_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="37136b2f-c276-9e93-cc09-100c5961d23a")
-public static String es_PE_FIELD_ResourceProduct_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1811,13 +1815,13 @@ Identifier="37136b2f-c276-9e93-cc09-100c5961d23a")
 public static final String FIELDNAME_ResourceProduct_GuaranteeDays="37136b2f-c276-9e93-cc09-100c5961d23a";
 
 @XendraTrl(Identifier="df957fef-cd5a-d664-e54e-844ad8241e36")
+public static String es_PE_FIELD_ProductDimension_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="df957fef-cd5a-d664-e54e-844ad8241e36")
 public static String es_PE_FIELD_ProductDimension_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="df957fef-cd5a-d664-e54e-844ad8241e36")
 public static String es_PE_FIELD_ProductDimension_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="df957fef-cd5a-d664-e54e-844ad8241e36")
-public static String es_PE_FIELD_ProductDimension_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1827,13 +1831,13 @@ Identifier="df957fef-cd5a-d664-e54e-844ad8241e36")
 public static final String FIELDNAME_ProductDimension_GuaranteeDays="df957fef-cd5a-d664-e54e-844ad8241e36";
 
 @XendraTrl(Identifier="a45d1444-1748-219e-5761-bf120c28e375")
+public static String es_PE_FIELD_SelectProduct_GuaranteeDays_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="a45d1444-1748-219e-5761-bf120c28e375")
 public static String es_PE_FIELD_SelectProduct_GuaranteeDays_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="a45d1444-1748-219e-5761-bf120c28e375")
 public static String es_PE_FIELD_SelectProduct_GuaranteeDays_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="a45d1444-1748-219e-5761-bf120c28e375")
-public static String es_PE_FIELD_SelectProduct_GuaranteeDays_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1843,13 +1847,13 @@ Identifier="a45d1444-1748-219e-5761-bf120c28e375")
 public static final String FIELDNAME_SelectProduct_GuaranteeDays="a45d1444-1748-219e-5761-bf120c28e375";
 
 @XendraTrl(Identifier="b00e213f-7cb1-cb67-d358-7279ead57970")
+public static String es_PE_FIELD_Product_GuaranteeDays2_Name="Días de Caducidad";
+
+@XendraTrl(Identifier="b00e213f-7cb1-cb67-d358-7279ead57970")
 public static String es_PE_FIELD_Product_GuaranteeDays2_Description="Número de días que el producto está garantizado ó disponible";
 
 @XendraTrl(Identifier="b00e213f-7cb1-cb67-d358-7279ead57970")
 public static String es_PE_FIELD_Product_GuaranteeDays2_Help="Si el valor es 0, no hay límite a la disponibilidad ó garantía, si no la fecha de la garantía es calculada agregando los días a la fecha de entrega.";
-
-@XendraTrl(Identifier="b00e213f-7cb1-cb67-d358-7279ead57970")
-public static String es_PE_FIELD_Product_GuaranteeDays2_Name="Días de Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1867,7 +1871,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ca24ba2-da61-829b-8ada-3e704e5ca49e",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name GuaranteeDays */
 public static final String COLUMNNAME_GuaranteeDays = "GuaranteeDays";
 /** Set Min Guarantee Days.
@@ -1886,13 +1890,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="02e73528-1c4b-7607-ad79-37cb5a6fa5d4")
+public static String es_PE_FIELD_Product_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="02e73528-1c4b-7607-ad79-37cb5a6fa5d4")
 public static String es_PE_FIELD_Product_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="02e73528-1c4b-7607-ad79-37cb5a6fa5d4")
 public static String es_PE_FIELD_Product_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="02e73528-1c4b-7607-ad79-37cb5a6fa5d4")
-public static String es_PE_FIELD_Product_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1902,13 +1906,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="02e73528-1c4b-7607-ad79-37cb5a6
 public static final String FIELDNAME_Product_MinGuaranteeDays="02e73528-1c4b-7607-ad79-37cb5a6fa5d4";
 
 @XendraTrl(Identifier="8271f699-c06d-3ebd-80be-0ec8ab4f85c7")
+public static String es_PE_FIELD_AssignedProducts_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="8271f699-c06d-3ebd-80be-0ec8ab4f85c7")
 public static String es_PE_FIELD_AssignedProducts_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="8271f699-c06d-3ebd-80be-0ec8ab4f85c7")
 public static String es_PE_FIELD_AssignedProducts_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="8271f699-c06d-3ebd-80be-0ec8ab4f85c7")
-public static String es_PE_FIELD_AssignedProducts_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1918,13 +1922,13 @@ Identifier="8271f699-c06d-3ebd-80be-0ec8ab4f85c7")
 public static final String FIELDNAME_AssignedProducts_MinGuaranteeDays="8271f699-c06d-3ebd-80be-0ec8ab4f85c7";
 
 @XendraTrl(Identifier="e1b6dd10-0201-3a62-b0c8-d2716b47a490")
+public static String es_PE_FIELD_ExpenseProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="e1b6dd10-0201-3a62-b0c8-d2716b47a490")
 public static String es_PE_FIELD_ExpenseProduct_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="e1b6dd10-0201-3a62-b0c8-d2716b47a490")
 public static String es_PE_FIELD_ExpenseProduct_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="e1b6dd10-0201-3a62-b0c8-d2716b47a490")
-public static String es_PE_FIELD_ExpenseProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1934,13 +1938,13 @@ Identifier="e1b6dd10-0201-3a62-b0c8-d2716b47a490")
 public static final String FIELDNAME_ExpenseProduct_MinGuaranteeDays="e1b6dd10-0201-3a62-b0c8-d2716b47a490";
 
 @XendraTrl(Identifier="414fb74f-cf17-85e9-1518-ccb3d700dc4f")
+public static String es_PE_FIELD_ResourceProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="414fb74f-cf17-85e9-1518-ccb3d700dc4f")
 public static String es_PE_FIELD_ResourceProduct_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="414fb74f-cf17-85e9-1518-ccb3d700dc4f")
 public static String es_PE_FIELD_ResourceProduct_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="414fb74f-cf17-85e9-1518-ccb3d700dc4f")
-public static String es_PE_FIELD_ResourceProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1950,13 +1954,13 @@ Identifier="414fb74f-cf17-85e9-1518-ccb3d700dc4f")
 public static final String FIELDNAME_ResourceProduct_MinGuaranteeDays="414fb74f-cf17-85e9-1518-ccb3d700dc4f";
 
 @XendraTrl(Identifier="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a")
+public static String es_PE_FIELD_ProductDimension_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a")
 public static String es_PE_FIELD_ProductDimension_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a")
 public static String es_PE_FIELD_ProductDimension_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a")
-public static String es_PE_FIELD_ProductDimension_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1966,13 +1970,13 @@ Identifier="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a")
 public static final String FIELDNAME_ProductDimension_MinGuaranteeDays="5d4a9056-aa19-b5ac-9757-9e62b6a77c6a";
 
 @XendraTrl(Identifier="f45a98ce-84eb-b99b-3786-dc54720b9117")
+public static String es_PE_FIELD_SelectProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="f45a98ce-84eb-b99b-3786-dc54720b9117")
 public static String es_PE_FIELD_SelectProduct_MinGuaranteeDays_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="f45a98ce-84eb-b99b-3786-dc54720b9117")
 public static String es_PE_FIELD_SelectProduct_MinGuaranteeDays_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="f45a98ce-84eb-b99b-3786-dc54720b9117")
-public static String es_PE_FIELD_SelectProduct_MinGuaranteeDays_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1982,13 +1986,13 @@ Identifier="f45a98ce-84eb-b99b-3786-dc54720b9117")
 public static final String FIELDNAME_SelectProduct_MinGuaranteeDays="f45a98ce-84eb-b99b-3786-dc54720b9117";
 
 @XendraTrl(Identifier="eeea6122-ab36-93e5-a710-75f66850177e")
+public static String es_PE_FIELD_Product_MinGuaranteeDays2_Name="Días Mínimos Caducidad";
+
+@XendraTrl(Identifier="eeea6122-ab36-93e5-a710-75f66850177e")
 public static String es_PE_FIELD_Product_MinGuaranteeDays2_Description="Número minimo de días de garantía";
 
 @XendraTrl(Identifier="eeea6122-ab36-93e5-a710-75f66850177e")
 public static String es_PE_FIELD_Product_MinGuaranteeDays2_Help="Cuando selecciona el producto/lote con una fecha de garantia, las fechas minimas de garantias son tomadas automaticamente. Usted puede seleccionar cualquier producto/lote manualmente.";
-
-@XendraTrl(Identifier="eeea6122-ab36-93e5-a710-75f66850177e")
-public static String es_PE_FIELD_Product_MinGuaranteeDays2_Name="Días Mínimos Caducidad";
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2006,7 +2010,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0aee13b8-e322-bfc0-ccae-c3482bc43124",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name GuaranteeDaysMin */
 public static final String COLUMNNAME_GuaranteeDaysMin = "GuaranteeDaysMin";
 /** Set Comment/Help.
@@ -2032,28 +2036,29 @@ return value;
 }
 
 @XendraTrl(Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
+public static String es_PE_FIELD_Product_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
 public static String es_PE_FIELD_Product_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
 public static String es_PE_FIELD_Product_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
 
-@XendraTrl(Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
-public static String es_PE_FIELD_Product_CommentHelp_Name="Ayuda";
-@XendraField(AD_Column_ID="Help",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=0,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
+@XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="f926c5a4-a55d-d5fa-a7be-f9084103cd99")
 public static final String FIELDNAME_Product_CommentHelp="f926c5a4-a55d-d5fa-a7be-f9084103cd99";
+
+@XendraTrl(Identifier="1941e933-9d48-33d9-5bbe-788797466b7b")
+public static String es_PE_FIELD_AssignedProducts_CommentHelp_Name="Ayuda";
 
 @XendraTrl(Identifier="1941e933-9d48-33d9-5bbe-788797466b7b")
 public static String es_PE_FIELD_AssignedProducts_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="1941e933-9d48-33d9-5bbe-788797466b7b")
 public static String es_PE_FIELD_AssignedProducts_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="1941e933-9d48-33d9-5bbe-788797466b7b")
-public static String es_PE_FIELD_AssignedProducts_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2063,13 +2068,13 @@ Identifier="1941e933-9d48-33d9-5bbe-788797466b7b")
 public static final String FIELDNAME_AssignedProducts_CommentHelp="1941e933-9d48-33d9-5bbe-788797466b7b";
 
 @XendraTrl(Identifier="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd")
+public static String es_PE_FIELD_ExpenseProduct_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd")
 public static String es_PE_FIELD_ExpenseProduct_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd")
 public static String es_PE_FIELD_ExpenseProduct_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd")
-public static String es_PE_FIELD_ExpenseProduct_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2079,13 +2084,13 @@ Identifier="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd")
 public static final String FIELDNAME_ExpenseProduct_CommentHelp="938a47a3-e89c-b8bb-e5f0-1eebcd7742bd";
 
 @XendraTrl(Identifier="3b929bcf-94bb-4ddc-651c-5ac66fac1232")
+public static String es_PE_FIELD_ResourceProduct_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="3b929bcf-94bb-4ddc-651c-5ac66fac1232")
 public static String es_PE_FIELD_ResourceProduct_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="3b929bcf-94bb-4ddc-651c-5ac66fac1232")
 public static String es_PE_FIELD_ResourceProduct_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="3b929bcf-94bb-4ddc-651c-5ac66fac1232")
-public static String es_PE_FIELD_ResourceProduct_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2095,13 +2100,13 @@ Identifier="3b929bcf-94bb-4ddc-651c-5ac66fac1232")
 public static final String FIELDNAME_ResourceProduct_CommentHelp="3b929bcf-94bb-4ddc-651c-5ac66fac1232";
 
 @XendraTrl(Identifier="060df4b1-7be0-6d43-0f10-daf7feae403f")
+public static String es_PE_FIELD_ProductDimension_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="060df4b1-7be0-6d43-0f10-daf7feae403f")
 public static String es_PE_FIELD_ProductDimension_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="060df4b1-7be0-6d43-0f10-daf7feae403f")
 public static String es_PE_FIELD_ProductDimension_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="060df4b1-7be0-6d43-0f10-daf7feae403f")
-public static String es_PE_FIELD_ProductDimension_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2111,13 +2116,13 @@ Identifier="060df4b1-7be0-6d43-0f10-daf7feae403f")
 public static final String FIELDNAME_ProductDimension_CommentHelp="060df4b1-7be0-6d43-0f10-daf7feae403f";
 
 @XendraTrl(Identifier="41a4a4d8-9621-b531-384e-d3eb2faac081")
+public static String es_PE_FIELD_SelectProduct_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="41a4a4d8-9621-b531-384e-d3eb2faac081")
 public static String es_PE_FIELD_SelectProduct_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="41a4a4d8-9621-b531-384e-d3eb2faac081")
 public static String es_PE_FIELD_SelectProduct_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="41a4a4d8-9621-b531-384e-d3eb2faac081")
-public static String es_PE_FIELD_SelectProduct_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2127,13 +2132,13 @@ Identifier="41a4a4d8-9621-b531-384e-d3eb2faac081")
 public static final String FIELDNAME_SelectProduct_CommentHelp="41a4a4d8-9621-b531-384e-d3eb2faac081";
 
 @XendraTrl(Identifier="07d7a308-25f6-d947-0994-caaae4f9994d")
+public static String es_PE_FIELD_Product_CommentHelp2_Name="Ayuda";
+
+@XendraTrl(Identifier="07d7a308-25f6-d947-0994-caaae4f9994d")
 public static String es_PE_FIELD_Product_CommentHelp2_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="07d7a308-25f6-d947-0994-caaae4f9994d")
 public static String es_PE_FIELD_Product_CommentHelp2_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="07d7a308-25f6-d947-0994-caaae4f9994d")
-public static String es_PE_FIELD_Product_CommentHelp2_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2151,7 +2156,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c6775663-9f61-3ff8-e590-b2778ec47f99",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -2174,6 +2179,16 @@ if (value == null)
   return "";
 return value;
 }
+@XendraTrl(Identifier="13f5a94c-90f1-4b6d-b414-b429b43600dc")
+public static String es_PE_FIELD_Product_Identifier_Name="Identifier";
+
+@XendraField(AD_Column_ID="Identifier",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=36,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-11-02 17:52:23.0",
+Identifier="13f5a94c-90f1-4b6d-b414-b429b43600dc")
+public static final String FIELDNAME_Product_Identifier="13f5a94c-90f1-4b6d-b414-b429b43600dc";
+
 @XendraTrl(Identifier="21b42f54-6988-4736-ac48-7373890a03e1")
 public static String es_PE_COLUMN_Identifier_Name="Identifier";
 
@@ -2183,7 +2198,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="21b42f54-6988-4736-ac48-7373890a03e1",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Image URL.
@@ -2205,13 +2220,13 @@ return (String)get_Value(COLUMNNAME_ImageURL);
 }
 
 @XendraTrl(Identifier="55e7d592-7769-25db-b39d-0884fc079841")
+public static String es_PE_FIELD_Product_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="55e7d592-7769-25db-b39d-0884fc079841")
 public static String es_PE_FIELD_Product_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="55e7d592-7769-25db-b39d-0884fc079841")
 public static String es_PE_FIELD_Product_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="55e7d592-7769-25db-b39d-0884fc079841")
-public static String es_PE_FIELD_Product_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2221,13 +2236,13 @@ Identifier="55e7d592-7769-25db-b39d-0884fc079841")
 public static final String FIELDNAME_Product_ImageURL="55e7d592-7769-25db-b39d-0884fc079841";
 
 @XendraTrl(Identifier="f5410be2-6b5b-6b57-1171-539ca2a2564b")
+public static String es_PE_FIELD_AssignedProducts_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="f5410be2-6b5b-6b57-1171-539ca2a2564b")
 public static String es_PE_FIELD_AssignedProducts_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="f5410be2-6b5b-6b57-1171-539ca2a2564b")
 public static String es_PE_FIELD_AssignedProducts_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="f5410be2-6b5b-6b57-1171-539ca2a2564b")
-public static String es_PE_FIELD_AssignedProducts_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2237,13 +2252,13 @@ Identifier="f5410be2-6b5b-6b57-1171-539ca2a2564b")
 public static final String FIELDNAME_AssignedProducts_ImageURL="f5410be2-6b5b-6b57-1171-539ca2a2564b";
 
 @XendraTrl(Identifier="c2007d81-d7b7-31eb-e0db-b841e89ae83c")
+public static String es_PE_FIELD_ExpenseProduct_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="c2007d81-d7b7-31eb-e0db-b841e89ae83c")
 public static String es_PE_FIELD_ExpenseProduct_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="c2007d81-d7b7-31eb-e0db-b841e89ae83c")
 public static String es_PE_FIELD_ExpenseProduct_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="c2007d81-d7b7-31eb-e0db-b841e89ae83c")
-public static String es_PE_FIELD_ExpenseProduct_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2253,13 +2268,13 @@ Identifier="c2007d81-d7b7-31eb-e0db-b841e89ae83c")
 public static final String FIELDNAME_ExpenseProduct_ImageURL="c2007d81-d7b7-31eb-e0db-b841e89ae83c";
 
 @XendraTrl(Identifier="3c3c34db-be94-bca4-eb64-5d54fd1046a4")
+public static String es_PE_FIELD_ResourceProduct_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="3c3c34db-be94-bca4-eb64-5d54fd1046a4")
 public static String es_PE_FIELD_ResourceProduct_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="3c3c34db-be94-bca4-eb64-5d54fd1046a4")
 public static String es_PE_FIELD_ResourceProduct_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="3c3c34db-be94-bca4-eb64-5d54fd1046a4")
-public static String es_PE_FIELD_ResourceProduct_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2269,13 +2284,13 @@ Identifier="3c3c34db-be94-bca4-eb64-5d54fd1046a4")
 public static final String FIELDNAME_ResourceProduct_ImageURL="3c3c34db-be94-bca4-eb64-5d54fd1046a4";
 
 @XendraTrl(Identifier="cf9a147d-ad62-e75b-2e35-8beb8e140b32")
+public static String es_PE_FIELD_ProductDimension_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="cf9a147d-ad62-e75b-2e35-8beb8e140b32")
 public static String es_PE_FIELD_ProductDimension_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="cf9a147d-ad62-e75b-2e35-8beb8e140b32")
 public static String es_PE_FIELD_ProductDimension_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="cf9a147d-ad62-e75b-2e35-8beb8e140b32")
-public static String es_PE_FIELD_ProductDimension_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2285,13 +2300,13 @@ Identifier="cf9a147d-ad62-e75b-2e35-8beb8e140b32")
 public static final String FIELDNAME_ProductDimension_ImageURL="cf9a147d-ad62-e75b-2e35-8beb8e140b32";
 
 @XendraTrl(Identifier="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72")
+public static String es_PE_FIELD_SelectProduct_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72")
 public static String es_PE_FIELD_SelectProduct_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72")
 public static String es_PE_FIELD_SelectProduct_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72")
-public static String es_PE_FIELD_SelectProduct_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2301,13 +2316,13 @@ Identifier="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72")
 public static final String FIELDNAME_SelectProduct_ImageURL="dfd9dc0f-c6bb-35d2-527b-d20f3f766b72";
 
 @XendraTrl(Identifier="5dc2d45f-e071-fc93-5d0f-e3ebf67f9fcd")
+public static String es_PE_FIELD_Product_ImageURL2_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="5dc2d45f-e071-fc93-5d0f-e3ebf67f9fcd")
 public static String es_PE_FIELD_Product_ImageURL2_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="5dc2d45f-e071-fc93-5d0f-e3ebf67f9fcd")
 public static String es_PE_FIELD_Product_ImageURL2_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="5dc2d45f-e071-fc93-5d0f-e3ebf67f9fcd")
-public static String es_PE_FIELD_Product_ImageURL2_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2325,7 +2340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="08714ebb-8c2b-bf9b-b206-25e0cbb65368",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name ImageURL */
 public static final String COLUMNNAME_ImageURL = "ImageURL";
 /** Set Bill of Materials.
@@ -2348,13 +2363,13 @@ return false;
 }
 
 @XendraTrl(Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
+public static String es_PE_FIELD_Product_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
 public static String es_PE_FIELD_Product_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
 public static String es_PE_FIELD_Product_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
-public static String es_PE_FIELD_Product_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2365,13 +2380,13 @@ Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
 public static final String FIELDNAME_Product_BillOfMaterials="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e";
 
 @XendraTrl(Identifier="9a580b16-f0b5-8372-bbac-8aafdae46ccb")
+public static String es_PE_FIELD_AssignedProducts_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="9a580b16-f0b5-8372-bbac-8aafdae46ccb")
 public static String es_PE_FIELD_AssignedProducts_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="9a580b16-f0b5-8372-bbac-8aafdae46ccb")
 public static String es_PE_FIELD_AssignedProducts_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="9a580b16-f0b5-8372-bbac-8aafdae46ccb")
-public static String es_PE_FIELD_AssignedProducts_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2381,13 +2396,13 @@ Identifier="9a580b16-f0b5-8372-bbac-8aafdae46ccb")
 public static final String FIELDNAME_AssignedProducts_BillOfMaterials="9a580b16-f0b5-8372-bbac-8aafdae46ccb";
 
 @XendraTrl(Identifier="e1e4fd4c-d819-e3bc-3706-d84ace76d431")
+public static String es_PE_FIELD_ExpenseProduct_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="e1e4fd4c-d819-e3bc-3706-d84ace76d431")
 public static String es_PE_FIELD_ExpenseProduct_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="e1e4fd4c-d819-e3bc-3706-d84ace76d431")
 public static String es_PE_FIELD_ExpenseProduct_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="e1e4fd4c-d819-e3bc-3706-d84ace76d431")
-public static String es_PE_FIELD_ExpenseProduct_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2397,13 +2412,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="e1e4fd4c-d819-e3bc-3706-d84ace7
 public static final String FIELDNAME_ExpenseProduct_BillOfMaterials="e1e4fd4c-d819-e3bc-3706-d84ace76d431";
 
 @XendraTrl(Identifier="3e48db7e-8eea-4980-f379-12aff22a3244")
+public static String es_PE_FIELD_ResourceProduct_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="3e48db7e-8eea-4980-f379-12aff22a3244")
 public static String es_PE_FIELD_ResourceProduct_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="3e48db7e-8eea-4980-f379-12aff22a3244")
 public static String es_PE_FIELD_ResourceProduct_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="3e48db7e-8eea-4980-f379-12aff22a3244")
-public static String es_PE_FIELD_ResourceProduct_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2413,13 +2428,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="3e48db7e-8eea-4980-f379-12aff22
 public static final String FIELDNAME_ResourceProduct_BillOfMaterials="3e48db7e-8eea-4980-f379-12aff22a3244";
 
 @XendraTrl(Identifier="fffda66c-0dce-1832-03b8-a178036381d9")
+public static String es_PE_FIELD_ProductDimension_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="fffda66c-0dce-1832-03b8-a178036381d9")
 public static String es_PE_FIELD_ProductDimension_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="fffda66c-0dce-1832-03b8-a178036381d9")
 public static String es_PE_FIELD_ProductDimension_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="fffda66c-0dce-1832-03b8-a178036381d9")
-public static String es_PE_FIELD_ProductDimension_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2429,13 +2444,13 @@ Identifier="fffda66c-0dce-1832-03b8-a178036381d9")
 public static final String FIELDNAME_ProductDimension_BillOfMaterials="fffda66c-0dce-1832-03b8-a178036381d9";
 
 @XendraTrl(Identifier="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7")
+public static String es_PE_FIELD_SelectProduct_BillOfMaterials_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7")
 public static String es_PE_FIELD_SelectProduct_BillOfMaterials_Description="Lista de materiales";
 
 @XendraTrl(Identifier="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7")
 public static String es_PE_FIELD_SelectProduct_BillOfMaterials_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7")
-public static String es_PE_FIELD_SelectProduct_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2445,13 +2460,13 @@ Identifier="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7")
 public static final String FIELDNAME_SelectProduct_BillOfMaterials="60ab3c9c-4b0b-b531-9fea-0d9a7b7840f7";
 
 @XendraTrl(Identifier="d15aae27-93c6-9812-de82-ca3e0dc8c7e9")
+public static String es_PE_FIELD_Product_BillOfMaterials2_Name="Lista de Materiales";
+
+@XendraTrl(Identifier="d15aae27-93c6-9812-de82-ca3e0dc8c7e9")
 public static String es_PE_FIELD_Product_BillOfMaterials2_Description="Lista de materiales";
 
 @XendraTrl(Identifier="d15aae27-93c6-9812-de82-ca3e0dc8c7e9")
 public static String es_PE_FIELD_Product_BillOfMaterials2_Help="El cuadro de verificación de lista de materiales indica si este producto contiene una lista de materiales.";
-
-@XendraTrl(Identifier="d15aae27-93c6-9812-de82-ca3e0dc8c7e9")
-public static String es_PE_FIELD_Product_BillOfMaterials2_Name="Lista de Materiales";
 
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2471,7 +2486,7 @@ ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1547a86f-3fde-3b45-7920-f37b477b3b74",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsBOM */
 public static final String COLUMNNAME_IsBOM = "IsBOM";
 /** Set IsCostable.
@@ -2512,7 +2527,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d248e364-7ed9-f758-c21e-fd15d73d2dbd",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsCostable */
 public static final String COLUMNNAME_IsCostable = "IsCostable";
 /** Set Drop Shipment.
@@ -2535,13 +2550,13 @@ return false;
 }
 
 @XendraTrl(Identifier="8c85c45d-6b28-b82d-5087-2ae807a5398b")
+public static String es_PE_FIELD_Product_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="8c85c45d-6b28-b82d-5087-2ae807a5398b")
 public static String es_PE_FIELD_Product_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="8c85c45d-6b28-b82d-5087-2ae807a5398b")
 public static String es_PE_FIELD_Product_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="8c85c45d-6b28-b82d-5087-2ae807a5398b")
-public static String es_PE_FIELD_Product_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2551,13 +2566,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="8c85c45d-6b28-b82d-5087-2ae807a
 public static final String FIELDNAME_Product_DropShipment="8c85c45d-6b28-b82d-5087-2ae807a5398b";
 
 @XendraTrl(Identifier="cfce6235-d5ec-0b6d-c336-4480bfa2fad8")
+public static String es_PE_FIELD_AssignedProducts_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="cfce6235-d5ec-0b6d-c336-4480bfa2fad8")
 public static String es_PE_FIELD_AssignedProducts_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="cfce6235-d5ec-0b6d-c336-4480bfa2fad8")
 public static String es_PE_FIELD_AssignedProducts_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="cfce6235-d5ec-0b6d-c336-4480bfa2fad8")
-public static String es_PE_FIELD_AssignedProducts_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2567,13 +2582,13 @@ Identifier="cfce6235-d5ec-0b6d-c336-4480bfa2fad8")
 public static final String FIELDNAME_AssignedProducts_DropShipment="cfce6235-d5ec-0b6d-c336-4480bfa2fad8";
 
 @XendraTrl(Identifier="f8f8fa1b-767b-7ad9-8547-784532e25a81")
+public static String es_PE_FIELD_ExpenseProduct_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="f8f8fa1b-767b-7ad9-8547-784532e25a81")
 public static String es_PE_FIELD_ExpenseProduct_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="f8f8fa1b-767b-7ad9-8547-784532e25a81")
 public static String es_PE_FIELD_ExpenseProduct_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="f8f8fa1b-767b-7ad9-8547-784532e25a81")
-public static String es_PE_FIELD_ExpenseProduct_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2583,13 +2598,13 @@ Identifier="f8f8fa1b-767b-7ad9-8547-784532e25a81")
 public static final String FIELDNAME_ExpenseProduct_DropShipment="f8f8fa1b-767b-7ad9-8547-784532e25a81";
 
 @XendraTrl(Identifier="6a807c97-3f3d-b08e-db29-f95d96a07336")
+public static String es_PE_FIELD_ResourceProduct_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="6a807c97-3f3d-b08e-db29-f95d96a07336")
 public static String es_PE_FIELD_ResourceProduct_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="6a807c97-3f3d-b08e-db29-f95d96a07336")
 public static String es_PE_FIELD_ResourceProduct_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="6a807c97-3f3d-b08e-db29-f95d96a07336")
-public static String es_PE_FIELD_ResourceProduct_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2599,13 +2614,13 @@ Identifier="6a807c97-3f3d-b08e-db29-f95d96a07336")
 public static final String FIELDNAME_ResourceProduct_DropShipment="6a807c97-3f3d-b08e-db29-f95d96a07336";
 
 @XendraTrl(Identifier="e8b18083-e1c0-a47e-fd12-52db13765588")
+public static String es_PE_FIELD_ProductDimension_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="e8b18083-e1c0-a47e-fd12-52db13765588")
 public static String es_PE_FIELD_ProductDimension_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="e8b18083-e1c0-a47e-fd12-52db13765588")
 public static String es_PE_FIELD_ProductDimension_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="e8b18083-e1c0-a47e-fd12-52db13765588")
-public static String es_PE_FIELD_ProductDimension_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2615,13 +2630,13 @@ Identifier="e8b18083-e1c0-a47e-fd12-52db13765588")
 public static final String FIELDNAME_ProductDimension_DropShipment="e8b18083-e1c0-a47e-fd12-52db13765588";
 
 @XendraTrl(Identifier="0d9554af-e5e3-344b-4097-c647ca8da7ba")
+public static String es_PE_FIELD_SelectProduct_DropShipment_Name="Entrega Directa";
+
+@XendraTrl(Identifier="0d9554af-e5e3-344b-4097-c647ca8da7ba")
 public static String es_PE_FIELD_SelectProduct_DropShipment_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="0d9554af-e5e3-344b-4097-c647ca8da7ba")
 public static String es_PE_FIELD_SelectProduct_DropShipment_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="0d9554af-e5e3-344b-4097-c647ca8da7ba")
-public static String es_PE_FIELD_SelectProduct_DropShipment_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2631,13 +2646,13 @@ Identifier="0d9554af-e5e3-344b-4097-c647ca8da7ba")
 public static final String FIELDNAME_SelectProduct_DropShipment="0d9554af-e5e3-344b-4097-c647ca8da7ba";
 
 @XendraTrl(Identifier="c0f0c2e1-6f5c-63f5-f02f-13b14dc29c30")
+public static String es_PE_FIELD_Product_DropShipment2_Name="Entrega Directa";
+
+@XendraTrl(Identifier="c0f0c2e1-6f5c-63f5-f02f-13b14dc29c30")
 public static String es_PE_FIELD_Product_DropShipment2_Description="Los envíos de la nota se envían del vendedor directamente al cliente";
 
 @XendraTrl(Identifier="c0f0c2e1-6f5c-63f5-f02f-13b14dc29c30")
 public static String es_PE_FIELD_Product_DropShipment2_Help="Los envíos de la nota no causan ningunas reservaciones ó movimientos del inventario mientras que el envío es del inventario del vendedor. El envío del vendedor al cliente debe ser confirmado.";
-
-@XendraTrl(Identifier="c0f0c2e1-6f5c-63f5-f02f-13b14dc29c30")
-public static String es_PE_FIELD_Product_DropShipment2_Name="Entrega Directa";
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2655,7 +2670,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="294e6f51-9021-e13c-a5f0-ec5a2da1c9c0",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsDropShip */
 public static final String COLUMNNAME_IsDropShip = "IsDropShip";
 /** Set Exclude Auto Delivery.
@@ -2678,13 +2693,13 @@ return false;
 }
 
 @XendraTrl(Identifier="abd2ba27-572f-5c92-733e-a2ec17857093")
+public static String es_PE_FIELD_Product_ExcludeAutoDelivery_Name="Excluir de Auto Entrega";
+
+@XendraTrl(Identifier="abd2ba27-572f-5c92-733e-a2ec17857093")
 public static String es_PE_FIELD_Product_ExcludeAutoDelivery_Description="Excluir de Entrega  automática";
 
 @XendraTrl(Identifier="abd2ba27-572f-5c92-733e-a2ec17857093")
 public static String es_PE_FIELD_Product_ExcludeAutoDelivery_Help="El producto es excluído de la generación de entregas. Esto permite la creación manual de entregas Si seleccionó debe crear manualmente la  entrega.  Pero, los artículos siempre son incluidos, cuando las reglas de entrega de la órden son forzadas (ej. PDV).Esto permite una granularidad más fina de las Reglas de Entrega Manual.";
-
-@XendraTrl(Identifier="abd2ba27-572f-5c92-733e-a2ec17857093")
-public static String es_PE_FIELD_Product_ExcludeAutoDelivery_Name="Excluir de Auto Entrega";
 
 @XendraField(AD_Column_ID="IsExcludeAutoDelivery",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2702,7 +2717,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="69d1706f-5a57-1d1a-a78c-7f7fc59771c3",Synchronized="2017-08-05 16:55:20.0")
+Identifier="69d1706f-5a57-1d1a-a78c-7f7fc59771c3",Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsExcludeAutoDelivery */
 public static final String COLUMNNAME_IsExcludeAutoDelivery = "IsExcludeAutoDelivery";
 /** Set Print detail records on invoice .
@@ -2725,13 +2740,13 @@ return false;
 }
 
 @XendraTrl(Identifier="af32840a-5771-935a-4c52-318419e5cb90")
+public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="af32840a-5771-935a-4c52-318419e5cb90")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="af32840a-5771-935a-4c52-318419e5cb90")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="af32840a-5771-935a-4c52-318419e5cb90")
-public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2741,13 +2756,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="af32840a-5771-935a-4c52-318419e
 public static final String FIELDNAME_Product_PrintDetailRecordsOnInvoice="af32840a-5771-935a-4c52-318419e5cb90";
 
 @XendraTrl(Identifier="254633b4-e4b1-f53e-5884-203fde716372")
+public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="254633b4-e4b1-f53e-5884-203fde716372")
 public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="254633b4-e4b1-f53e-5884-203fde716372")
 public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="254633b4-e4b1-f53e-5884-203fde716372")
-public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2757,13 +2772,13 @@ Identifier="254633b4-e4b1-f53e-5884-203fde716372")
 public static final String FIELDNAME_AssignedProducts_PrintDetailRecordsOnInvoice="254633b4-e4b1-f53e-5884-203fde716372";
 
 @XendraTrl(Identifier="9dce349e-6637-e6c9-93ca-964e4fff7cc0")
+public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="9dce349e-6637-e6c9-93ca-964e4fff7cc0")
 public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="9dce349e-6637-e6c9-93ca-964e4fff7cc0")
 public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="9dce349e-6637-e6c9-93ca-964e4fff7cc0")
-public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2773,13 +2788,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="9dce349e-6637-e6c9-93ca-964e4ff
 public static final String FIELDNAME_ExpenseProduct_PrintDetailRecordsOnInvoice="9dce349e-6637-e6c9-93ca-964e4fff7cc0";
 
 @XendraTrl(Identifier="12576ada-e074-a7ae-a7b4-087856d58236")
+public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="12576ada-e074-a7ae-a7b4-087856d58236")
 public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="12576ada-e074-a7ae-a7b4-087856d58236")
 public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="12576ada-e074-a7ae-a7b4-087856d58236")
-public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2789,13 +2804,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="12576ada-e074-a7ae-a7b4-087856d
 public static final String FIELDNAME_ResourceProduct_PrintDetailRecordsOnInvoice="12576ada-e074-a7ae-a7b4-087856d58236";
 
 @XendraTrl(Identifier="987d663b-70d0-6f7b-399f-2c4697165b6f")
+public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="987d663b-70d0-6f7b-399f-2c4697165b6f")
 public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="987d663b-70d0-6f7b-399f-2c4697165b6f")
 public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="987d663b-70d0-6f7b-399f-2c4697165b6f")
-public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2805,13 +2820,13 @@ Identifier="987d663b-70d0-6f7b-399f-2c4697165b6f")
 public static final String FIELDNAME_ProductDimension_PrintDetailRecordsOnInvoice="987d663b-70d0-6f7b-399f-2c4697165b6f";
 
 @XendraTrl(Identifier="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2")
+public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2")
 public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnInvoice_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2")
 public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnInvoice_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2")
-public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnInvoice_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2821,13 +2836,13 @@ Identifier="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2")
 public static final String FIELDNAME_SelectProduct_PrintDetailRecordsOnInvoice="b8c1f8d3-21a3-b212-b0c8-7809fe42b2e2";
 
 @XendraTrl(Identifier="5daeb9ca-d411-0c18-5062-00df1428df9a")
+public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice2_Name="Imprimir Detalle en la Factura";
+
+@XendraTrl(Identifier="5daeb9ca-d411-0c18-5062-00df1428df9a")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice2_Description="Imprimir detalle de elementos de LDM en la factura";
 
 @XendraTrl(Identifier="5daeb9ca-d411-0c18-5062-00df1428df9a")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice2_Help="El Imprimir detalles en la factura indica que los productos en la lista de materiales se imprimirán en la factura en contraposición a este producto.";
-
-@XendraTrl(Identifier="5daeb9ca-d411-0c18-5062-00df1428df9a")
-public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice2_Name="Imprimir Detalle en la Factura";
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2845,7 +2860,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="80dcfa70-b671-acce-2716-829cff5427b6",Synchronized="2017-08-05 16:55:20.0")
+Identifier="80dcfa70-b671-acce-2716-829cff5427b6",Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsInvoicePrintDetails */
 public static final String COLUMNNAME_IsInvoicePrintDetails = "IsInvoicePrintDetails";
 /** Set Print detail records on pick list.
@@ -2868,13 +2883,13 @@ return false;
 }
 
 @XendraTrl(Identifier="4a8aaf66-29b2-ed52-ec31-95db0396eacf")
+public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="4a8aaf66-29b2-ed52-ec31-95db0396eacf")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="4a8aaf66-29b2-ed52-ec31-95db0396eacf")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="4a8aaf66-29b2-ed52-ec31-95db0396eacf")
-public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2884,13 +2899,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="4a8aaf66-29b2-ed52-ec31-95db039
 public static final String FIELDNAME_Product_PrintDetailRecordsOnPickList="4a8aaf66-29b2-ed52-ec31-95db0396eacf";
 
 @XendraTrl(Identifier="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54")
+public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54")
 public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54")
 public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54")
-public static String es_PE_FIELD_AssignedProducts_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2900,13 +2915,13 @@ Identifier="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54")
 public static final String FIELDNAME_AssignedProducts_PrintDetailRecordsOnPickList="7dafb62d-84e3-dc7f-3e09-32e2ca5a7d54";
 
 @XendraTrl(Identifier="2bc3a144-d283-8615-9deb-b728531b8b90")
+public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="2bc3a144-d283-8615-9deb-b728531b8b90")
 public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="2bc3a144-d283-8615-9deb-b728531b8b90")
 public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="2bc3a144-d283-8615-9deb-b728531b8b90")
-public static String es_PE_FIELD_ExpenseProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2916,13 +2931,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="2bc3a144-d283-8615-9deb-b728531
 public static final String FIELDNAME_ExpenseProduct_PrintDetailRecordsOnPickList="2bc3a144-d283-8615-9deb-b728531b8b90";
 
 @XendraTrl(Identifier="ce22a968-ab9a-0bf9-dde5-976f9e6b1257")
+public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="ce22a968-ab9a-0bf9-dde5-976f9e6b1257")
 public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="ce22a968-ab9a-0bf9-dde5-976f9e6b1257")
 public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="ce22a968-ab9a-0bf9-dde5-976f9e6b1257")
-public static String es_PE_FIELD_ResourceProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2932,13 +2947,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="ce22a968-ab9a-0bf9-dde5-976f9e6
 public static final String FIELDNAME_ResourceProduct_PrintDetailRecordsOnPickList="ce22a968-ab9a-0bf9-dde5-976f9e6b1257";
 
 @XendraTrl(Identifier="ac2f4919-0194-3700-8d78-b36f15b594ed")
+public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="ac2f4919-0194-3700-8d78-b36f15b594ed")
 public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="ac2f4919-0194-3700-8d78-b36f15b594ed")
 public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="ac2f4919-0194-3700-8d78-b36f15b594ed")
-public static String es_PE_FIELD_ProductDimension_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2948,13 +2963,13 @@ Identifier="ac2f4919-0194-3700-8d78-b36f15b594ed")
 public static final String FIELDNAME_ProductDimension_PrintDetailRecordsOnPickList="ac2f4919-0194-3700-8d78-b36f15b594ed";
 
 @XendraTrl(Identifier="a1f71151-53d9-4744-dae5-c9b2df4848ac")
+public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="a1f71151-53d9-4744-dae5-c9b2df4848ac")
 public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnPickList_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="a1f71151-53d9-4744-dae5-c9b2df4848ac")
 public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnPickList_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="a1f71151-53d9-4744-dae5-c9b2df4848ac")
-public static String es_PE_FIELD_SelectProduct_PrintDetailRecordsOnPickList_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -2964,13 +2979,13 @@ Identifier="a1f71151-53d9-4744-dae5-c9b2df4848ac")
 public static final String FIELDNAME_SelectProduct_PrintDetailRecordsOnPickList="a1f71151-53d9-4744-dae5-c9b2df4848ac";
 
 @XendraTrl(Identifier="1c416643-32b2-fe12-9d85-afecb855c310")
+public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList2_Name="Imprimir detalle en lista de recolección";
+
+@XendraTrl(Identifier="1c416643-32b2-fe12-9d85-afecb855c310")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList2_Description="Imprimir detalle de elementos de LDM en la lista de selección";
 
 @XendraTrl(Identifier="1c416643-32b2-fe12-9d85-afecb855c310")
 public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList2_Help="El Imprimir detalles en la lista de selección indica que los elementos de la lista de materiales se imprimirán en la lista de selección en contraposición a este producto.";
-
-@XendraTrl(Identifier="1c416643-32b2-fe12-9d85-afecb855c310")
-public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList2_Name="Imprimir detalle en lista de recolección";
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -2988,7 +3003,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="192575d2-570d-75ae-57a5-cf7f6c09859a",Synchronized="2017-08-05 16:55:20.0")
+Identifier="192575d2-570d-75ae-57a5-cf7f6c09859a",Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsPickListPrintDetails */
 public static final String COLUMNNAME_IsPickListPrintDetails = "IsPickListPrintDetails";
 /** Set Purchased.
@@ -3011,13 +3026,13 @@ return false;
 }
 
 @XendraTrl(Identifier="4268004a-815a-d180-a112-dce7be3d4fa8")
+public static String es_PE_FIELD_Product_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="4268004a-815a-d180-a112-dce7be3d4fa8")
 public static String es_PE_FIELD_Product_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="4268004a-815a-d180-a112-dce7be3d4fa8")
 public static String es_PE_FIELD_Product_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="4268004a-815a-d180-a112-dce7be3d4fa8")
-public static String es_PE_FIELD_Product_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3027,13 +3042,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="4268004a-815a-d180-a112-dce7be3
 public static final String FIELDNAME_Product_Purchased="4268004a-815a-d180-a112-dce7be3d4fa8";
 
 @XendraTrl(Identifier="f5b736ca-d582-2260-2770-45f052bcd466")
+public static String es_PE_FIELD_AssignedProducts_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="f5b736ca-d582-2260-2770-45f052bcd466")
 public static String es_PE_FIELD_AssignedProducts_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="f5b736ca-d582-2260-2770-45f052bcd466")
 public static String es_PE_FIELD_AssignedProducts_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="f5b736ca-d582-2260-2770-45f052bcd466")
-public static String es_PE_FIELD_AssignedProducts_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3043,13 +3058,13 @@ Identifier="f5b736ca-d582-2260-2770-45f052bcd466")
 public static final String FIELDNAME_AssignedProducts_Purchased="f5b736ca-d582-2260-2770-45f052bcd466";
 
 @XendraTrl(Identifier="b0768ef6-11a3-fafb-8ed5-d0645c5eb0de")
+public static String es_PE_FIELD_ExpenseProduct_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="b0768ef6-11a3-fafb-8ed5-d0645c5eb0de")
 public static String es_PE_FIELD_ExpenseProduct_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="b0768ef6-11a3-fafb-8ed5-d0645c5eb0de")
 public static String es_PE_FIELD_ExpenseProduct_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="b0768ef6-11a3-fafb-8ed5-d0645c5eb0de")
-public static String es_PE_FIELD_ExpenseProduct_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3059,13 +3074,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="b0768ef6-11a3-fafb-8ed5-d0645c5
 public static final String FIELDNAME_ExpenseProduct_Purchased="b0768ef6-11a3-fafb-8ed5-d0645c5eb0de";
 
 @XendraTrl(Identifier="2e66cd4c-499d-1dc7-a9f4-8d1369e395ed")
+public static String es_PE_FIELD_ResourceProduct_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="2e66cd4c-499d-1dc7-a9f4-8d1369e395ed")
 public static String es_PE_FIELD_ResourceProduct_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="2e66cd4c-499d-1dc7-a9f4-8d1369e395ed")
 public static String es_PE_FIELD_ResourceProduct_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="2e66cd4c-499d-1dc7-a9f4-8d1369e395ed")
-public static String es_PE_FIELD_ResourceProduct_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3075,13 +3090,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="2e66cd4c-499d-1dc7-a9f4-8d1369e
 public static final String FIELDNAME_ResourceProduct_Purchased="2e66cd4c-499d-1dc7-a9f4-8d1369e395ed";
 
 @XendraTrl(Identifier="b218edcb-9cd4-8232-2959-abbf069a5755")
+public static String es_PE_FIELD_ProductDimension_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="b218edcb-9cd4-8232-2959-abbf069a5755")
 public static String es_PE_FIELD_ProductDimension_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="b218edcb-9cd4-8232-2959-abbf069a5755")
 public static String es_PE_FIELD_ProductDimension_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="b218edcb-9cd4-8232-2959-abbf069a5755")
-public static String es_PE_FIELD_ProductDimension_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3091,13 +3106,13 @@ Identifier="b218edcb-9cd4-8232-2959-abbf069a5755")
 public static final String FIELDNAME_ProductDimension_Purchased="b218edcb-9cd4-8232-2959-abbf069a5755";
 
 @XendraTrl(Identifier="fdc91c8c-16aa-a666-cc8b-ce232466094a")
+public static String es_PE_FIELD_SelectProduct_Purchased_Name="Comprado";
+
+@XendraTrl(Identifier="fdc91c8c-16aa-a666-cc8b-ce232466094a")
 public static String es_PE_FIELD_SelectProduct_Purchased_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="fdc91c8c-16aa-a666-cc8b-ce232466094a")
 public static String es_PE_FIELD_SelectProduct_Purchased_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="fdc91c8c-16aa-a666-cc8b-ce232466094a")
-public static String es_PE_FIELD_SelectProduct_Purchased_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3107,13 +3122,13 @@ Identifier="fdc91c8c-16aa-a666-cc8b-ce232466094a")
 public static final String FIELDNAME_SelectProduct_Purchased="fdc91c8c-16aa-a666-cc8b-ce232466094a";
 
 @XendraTrl(Identifier="0d9a925d-de55-121a-986d-344e0846b8c7")
+public static String es_PE_FIELD_Product_Purchased2_Name="Comprado";
+
+@XendraTrl(Identifier="0d9a925d-de55-121a-986d-344e0846b8c7")
 public static String es_PE_FIELD_Product_Purchased2_Description="Organización que compra este producto";
 
 @XendraTrl(Identifier="0d9a925d-de55-121a-986d-344e0846b8c7")
 public static String es_PE_FIELD_Product_Purchased2_Help="El cuadro de verificación comprado indica si este producto es comprado por esta organización";
-
-@XendraTrl(Identifier="0d9a925d-de55-121a-986d-344e0846b8c7")
-public static String es_PE_FIELD_Product_Purchased2_Name="Comprado";
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3131,7 +3146,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6c043dd2-5ffe-85d9-6b0b-d89a4305af64",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsPurchased */
 public static final String COLUMNNAME_IsPurchased = "IsPurchased";
 /** Set Self-Service.
@@ -3154,13 +3169,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b6bfbc3d-ac15-1357-a620-d12872a94a6e")
+public static String es_PE_FIELD_Product_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="b6bfbc3d-ac15-1357-a620-d12872a94a6e")
 public static String es_PE_FIELD_Product_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="b6bfbc3d-ac15-1357-a620-d12872a94a6e")
 public static String es_PE_FIELD_Product_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="b6bfbc3d-ac15-1357-a620-d12872a94a6e")
-public static String es_PE_FIELD_Product_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3170,13 +3185,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="b6bfbc3d-ac15-1357-a620-d12872a
 public static final String FIELDNAME_Product_Self_Service="b6bfbc3d-ac15-1357-a620-d12872a94a6e";
 
 @XendraTrl(Identifier="62ee039b-a504-c1ee-dbe7-0d291f04c1a8")
+public static String es_PE_FIELD_AssignedProducts_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="62ee039b-a504-c1ee-dbe7-0d291f04c1a8")
 public static String es_PE_FIELD_AssignedProducts_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="62ee039b-a504-c1ee-dbe7-0d291f04c1a8")
 public static String es_PE_FIELD_AssignedProducts_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="62ee039b-a504-c1ee-dbe7-0d291f04c1a8")
-public static String es_PE_FIELD_AssignedProducts_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3186,13 +3201,13 @@ Identifier="62ee039b-a504-c1ee-dbe7-0d291f04c1a8")
 public static final String FIELDNAME_AssignedProducts_Self_Service="62ee039b-a504-c1ee-dbe7-0d291f04c1a8";
 
 @XendraTrl(Identifier="bed93ac0-38c4-6d25-7c17-e686ce656a86")
+public static String es_PE_FIELD_ExpenseProduct_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="bed93ac0-38c4-6d25-7c17-e686ce656a86")
 public static String es_PE_FIELD_ExpenseProduct_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="bed93ac0-38c4-6d25-7c17-e686ce656a86")
 public static String es_PE_FIELD_ExpenseProduct_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="bed93ac0-38c4-6d25-7c17-e686ce656a86")
-public static String es_PE_FIELD_ExpenseProduct_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3202,13 +3217,13 @@ Identifier="bed93ac0-38c4-6d25-7c17-e686ce656a86")
 public static final String FIELDNAME_ExpenseProduct_Self_Service="bed93ac0-38c4-6d25-7c17-e686ce656a86";
 
 @XendraTrl(Identifier="50627076-206c-5bb6-19de-a874da3acce8")
+public static String es_PE_FIELD_ResourceProduct_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="50627076-206c-5bb6-19de-a874da3acce8")
 public static String es_PE_FIELD_ResourceProduct_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="50627076-206c-5bb6-19de-a874da3acce8")
 public static String es_PE_FIELD_ResourceProduct_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="50627076-206c-5bb6-19de-a874da3acce8")
-public static String es_PE_FIELD_ResourceProduct_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3218,13 +3233,13 @@ Identifier="50627076-206c-5bb6-19de-a874da3acce8")
 public static final String FIELDNAME_ResourceProduct_Self_Service="50627076-206c-5bb6-19de-a874da3acce8";
 
 @XendraTrl(Identifier="7013887a-ccf5-4b9e-f124-2c49b3a69441")
+public static String es_PE_FIELD_ProductDimension_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="7013887a-ccf5-4b9e-f124-2c49b3a69441")
 public static String es_PE_FIELD_ProductDimension_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="7013887a-ccf5-4b9e-f124-2c49b3a69441")
 public static String es_PE_FIELD_ProductDimension_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="7013887a-ccf5-4b9e-f124-2c49b3a69441")
-public static String es_PE_FIELD_ProductDimension_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3234,13 +3249,13 @@ Identifier="7013887a-ccf5-4b9e-f124-2c49b3a69441")
 public static final String FIELDNAME_ProductDimension_Self_Service="7013887a-ccf5-4b9e-f124-2c49b3a69441";
 
 @XendraTrl(Identifier="7d6be0cc-c66e-de75-b60f-2b3877284735")
+public static String es_PE_FIELD_SelectProduct_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="7d6be0cc-c66e-de75-b60f-2b3877284735")
 public static String es_PE_FIELD_SelectProduct_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="7d6be0cc-c66e-de75-b60f-2b3877284735")
 public static String es_PE_FIELD_SelectProduct_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="7d6be0cc-c66e-de75-b60f-2b3877284735")
-public static String es_PE_FIELD_SelectProduct_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3250,13 +3265,13 @@ Identifier="7d6be0cc-c66e-de75-b60f-2b3877284735")
 public static final String FIELDNAME_SelectProduct_Self_Service="7d6be0cc-c66e-de75-b60f-2b3877284735";
 
 @XendraTrl(Identifier="4f8a7c0a-3d43-9050-4e38-ebaf49d4668a")
+public static String es_PE_FIELD_Product_Self_Service2_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="4f8a7c0a-3d43-9050-4e38-ebaf49d4668a")
 public static String es_PE_FIELD_Product_Self_Service2_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="4f8a7c0a-3d43-9050-4e38-ebaf49d4668a")
 public static String es_PE_FIELD_Product_Self_Service2_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="4f8a7c0a-3d43-9050-4e38-ebaf49d4668a")
-public static String es_PE_FIELD_Product_Self_Service2_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3274,7 +3289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f6bfca30-d27e-3c25-ba64-dde293728dab",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Sold.
@@ -3297,28 +3312,29 @@ return false;
 }
 
 @XendraTrl(Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
+public static String es_PE_FIELD_Product_Sold_Name="Vendido";
+
+@XendraTrl(Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
 public static String es_PE_FIELD_Product_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
 public static String es_PE_FIELD_Product_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
 
-@XendraTrl(Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
-public static String es_PE_FIELD_Product_Sold_Name="Vendido";
-@XendraField(AD_Column_ID="IsSold",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=370,
-SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
+@XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=370,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
 public static final String FIELDNAME_Product_Sold="11ec6527-b64f-4487-8454-82d3c1ccd319";
+
+@XendraTrl(Identifier="47e2c514-b3c2-d068-7b5c-12db61c6731b")
+public static String es_PE_FIELD_AssignedProducts_Sold_Name="Vendido";
 
 @XendraTrl(Identifier="47e2c514-b3c2-d068-7b5c-12db61c6731b")
 public static String es_PE_FIELD_AssignedProducts_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="47e2c514-b3c2-d068-7b5c-12db61c6731b")
 public static String es_PE_FIELD_AssignedProducts_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
-
-@XendraTrl(Identifier="47e2c514-b3c2-d068-7b5c-12db61c6731b")
-public static String es_PE_FIELD_AssignedProducts_Sold_Name="Vendido";
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3328,13 +3344,13 @@ Identifier="47e2c514-b3c2-d068-7b5c-12db61c6731b")
 public static final String FIELDNAME_AssignedProducts_Sold="47e2c514-b3c2-d068-7b5c-12db61c6731b";
 
 @XendraTrl(Identifier="b097a153-c558-13fb-da37-739fe895a63a")
+public static String es_PE_FIELD_ExpenseProduct_Sold_Name="Vendido";
+
+@XendraTrl(Identifier="b097a153-c558-13fb-da37-739fe895a63a")
 public static String es_PE_FIELD_ExpenseProduct_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="b097a153-c558-13fb-da37-739fe895a63a")
 public static String es_PE_FIELD_ExpenseProduct_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
-
-@XendraTrl(Identifier="b097a153-c558-13fb-da37-739fe895a63a")
-public static String es_PE_FIELD_ExpenseProduct_Sold_Name="Vendido";
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3344,13 +3360,13 @@ Identifier="b097a153-c558-13fb-da37-739fe895a63a")
 public static final String FIELDNAME_ExpenseProduct_Sold="b097a153-c558-13fb-da37-739fe895a63a";
 
 @XendraTrl(Identifier="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6")
+public static String es_PE_FIELD_ResourceProduct_Sold_Name="Vendido";
+
+@XendraTrl(Identifier="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6")
 public static String es_PE_FIELD_ResourceProduct_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6")
 public static String es_PE_FIELD_ResourceProduct_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
-
-@XendraTrl(Identifier="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6")
-public static String es_PE_FIELD_ResourceProduct_Sold_Name="Vendido";
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3360,13 +3376,13 @@ Identifier="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6")
 public static final String FIELDNAME_ResourceProduct_Sold="7f9e9298-f77c-fe62-9ab6-6d3015a7bdd6";
 
 @XendraTrl(Identifier="bcd358bc-fd77-42c0-8900-03a7bd338cec")
+public static String es_PE_FIELD_ProductDimension_Sold_Name="Vendido";
+
+@XendraTrl(Identifier="bcd358bc-fd77-42c0-8900-03a7bd338cec")
 public static String es_PE_FIELD_ProductDimension_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="bcd358bc-fd77-42c0-8900-03a7bd338cec")
 public static String es_PE_FIELD_ProductDimension_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
-
-@XendraTrl(Identifier="bcd358bc-fd77-42c0-8900-03a7bd338cec")
-public static String es_PE_FIELD_ProductDimension_Sold_Name="Vendido";
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3376,13 +3392,13 @@ Identifier="bcd358bc-fd77-42c0-8900-03a7bd338cec")
 public static final String FIELDNAME_ProductDimension_Sold="bcd358bc-fd77-42c0-8900-03a7bd338cec";
 
 @XendraTrl(Identifier="279b9565-913e-a6af-4928-6bab0b97bcd5")
+public static String es_PE_FIELD_SelectProduct_Sold_Name="Vendido";
+
+@XendraTrl(Identifier="279b9565-913e-a6af-4928-6bab0b97bcd5")
 public static String es_PE_FIELD_SelectProduct_Sold_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="279b9565-913e-a6af-4928-6bab0b97bcd5")
 public static String es_PE_FIELD_SelectProduct_Sold_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
-
-@XendraTrl(Identifier="279b9565-913e-a6af-4928-6bab0b97bcd5")
-public static String es_PE_FIELD_SelectProduct_Sold_Name="Vendido";
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3392,18 +3408,19 @@ Identifier="279b9565-913e-a6af-4928-6bab0b97bcd5")
 public static final String FIELDNAME_SelectProduct_Sold="279b9565-913e-a6af-4928-6bab0b97bcd5";
 
 @XendraTrl(Identifier="73e13886-f836-3aab-6180-900fad5eea10")
+public static String es_PE_FIELD_Product_Sold2_Name="Vendido";
+
+@XendraTrl(Identifier="73e13886-f836-3aab-6180-900fad5eea10")
 public static String es_PE_FIELD_Product_Sold2_Description="La Organización vende este producto";
 
 @XendraTrl(Identifier="73e13886-f836-3aab-6180-900fad5eea10")
 public static String es_PE_FIELD_Product_Sold2_Help="El cuadro de verificación vendido indica si este producto es vendido por esta organización";
 
-@XendraTrl(Identifier="73e13886-f836-3aab-6180-900fad5eea10")
-public static String es_PE_FIELD_Product_Sold2_Name="Vendido";
-@XendraField(AD_Column_ID="IsSold",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=370,
-SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="73e13886-f836-3aab-6180-900fad5eea10")
+@XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=370,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="73e13886-f836-3aab-6180-900fad5eea10")
 public static final String FIELDNAME_Product_Sold2="73e13886-f836-3aab-6180-900fad5eea10";
 
 @XendraTrl(Identifier="5c97f49d-6c74-14d6-28f8-929ccdeba487")
@@ -3415,7 +3432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c97f49d-6c74-14d6-28f8-929ccdeba487",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsSold */
 public static final String COLUMNNAME_IsSold = "IsSold";
 /** Set Stocked.
@@ -3438,13 +3455,13 @@ return false;
 }
 
 @XendraTrl(Identifier="304ce511-52b3-764e-2b8b-c25f6cb8287c")
+public static String es_PE_FIELD_Product_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="304ce511-52b3-764e-2b8b-c25f6cb8287c")
 public static String es_PE_FIELD_Product_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="304ce511-52b3-764e-2b8b-c25f6cb8287c")
 public static String es_PE_FIELD_Product_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="304ce511-52b3-764e-2b8b-c25f6cb8287c")
-public static String es_PE_FIELD_Product_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3454,13 +3471,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="304ce511-52b3-764e-2b8b-c25f6cb
 public static final String FIELDNAME_Product_Stocked="304ce511-52b3-764e-2b8b-c25f6cb8287c";
 
 @XendraTrl(Identifier="10667868-c614-af99-872e-aaa28bcb1522")
+public static String es_PE_FIELD_AssignedProducts_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="10667868-c614-af99-872e-aaa28bcb1522")
 public static String es_PE_FIELD_AssignedProducts_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="10667868-c614-af99-872e-aaa28bcb1522")
 public static String es_PE_FIELD_AssignedProducts_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="10667868-c614-af99-872e-aaa28bcb1522")
-public static String es_PE_FIELD_AssignedProducts_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3470,13 +3487,13 @@ Identifier="10667868-c614-af99-872e-aaa28bcb1522")
 public static final String FIELDNAME_AssignedProducts_Stocked="10667868-c614-af99-872e-aaa28bcb1522";
 
 @XendraTrl(Identifier="26dcbd32-cc15-0f36-0854-d8d910f43e8d")
+public static String es_PE_FIELD_ExpenseProduct_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="26dcbd32-cc15-0f36-0854-d8d910f43e8d")
 public static String es_PE_FIELD_ExpenseProduct_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="26dcbd32-cc15-0f36-0854-d8d910f43e8d")
 public static String es_PE_FIELD_ExpenseProduct_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="26dcbd32-cc15-0f36-0854-d8d910f43e8d")
-public static String es_PE_FIELD_ExpenseProduct_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3486,13 +3503,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="26dcbd32-cc15-0f36-0854-d8d910f
 public static final String FIELDNAME_ExpenseProduct_Stocked="26dcbd32-cc15-0f36-0854-d8d910f43e8d";
 
 @XendraTrl(Identifier="43e9231a-5d29-9c5a-db1a-e0721b68b105")
+public static String es_PE_FIELD_ResourceProduct_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="43e9231a-5d29-9c5a-db1a-e0721b68b105")
 public static String es_PE_FIELD_ResourceProduct_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="43e9231a-5d29-9c5a-db1a-e0721b68b105")
 public static String es_PE_FIELD_ResourceProduct_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="43e9231a-5d29-9c5a-db1a-e0721b68b105")
-public static String es_PE_FIELD_ResourceProduct_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3502,13 +3519,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="43e9231a-5d29-9c5a-db1a-e0721b6
 public static final String FIELDNAME_ResourceProduct_Stocked="43e9231a-5d29-9c5a-db1a-e0721b68b105";
 
 @XendraTrl(Identifier="2d2e864f-5203-c3eb-a617-c5f546121ab4")
+public static String es_PE_FIELD_ProductDimension_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="2d2e864f-5203-c3eb-a617-c5f546121ab4")
 public static String es_PE_FIELD_ProductDimension_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="2d2e864f-5203-c3eb-a617-c5f546121ab4")
 public static String es_PE_FIELD_ProductDimension_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="2d2e864f-5203-c3eb-a617-c5f546121ab4")
-public static String es_PE_FIELD_ProductDimension_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3518,13 +3535,13 @@ Identifier="2d2e864f-5203-c3eb-a617-c5f546121ab4")
 public static final String FIELDNAME_ProductDimension_Stocked="2d2e864f-5203-c3eb-a617-c5f546121ab4";
 
 @XendraTrl(Identifier="2d338d27-df38-2b42-beef-aad4f4659ca4")
+public static String es_PE_FIELD_SelectProduct_Stocked_Name="Almacenado";
+
+@XendraTrl(Identifier="2d338d27-df38-2b42-beef-aad4f4659ca4")
 public static String es_PE_FIELD_SelectProduct_Stocked_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="2d338d27-df38-2b42-beef-aad4f4659ca4")
 public static String es_PE_FIELD_SelectProduct_Stocked_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="2d338d27-df38-2b42-beef-aad4f4659ca4")
-public static String es_PE_FIELD_SelectProduct_Stocked_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3534,13 +3551,13 @@ Identifier="2d338d27-df38-2b42-beef-aad4f4659ca4")
 public static final String FIELDNAME_SelectProduct_Stocked="2d338d27-df38-2b42-beef-aad4f4659ca4";
 
 @XendraTrl(Identifier="5f980bd1-91f8-196c-179e-31fd8d10b7fa")
+public static String es_PE_FIELD_Product_Stocked2_Name="Almacenado";
+
+@XendraTrl(Identifier="5f980bd1-91f8-196c-179e-31fd8d10b7fa")
 public static String es_PE_FIELD_Product_Stocked2_Description="La Organización almacena este producto";
 
 @XendraTrl(Identifier="5f980bd1-91f8-196c-179e-31fd8d10b7fa")
 public static String es_PE_FIELD_Product_Stocked2_Help="El Cuadro de Verificación Almacenado indica si este producto es almacenado por esta organización";
-
-@XendraTrl(Identifier="5f980bd1-91f8-196c-179e-31fd8d10b7fa")
-public static String es_PE_FIELD_Product_Stocked2_Name="Almacenado";
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3559,7 +3576,7 @@ ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd2e6375-efbc-b207-f470-ec2f24006683",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsStocked */
 public static final String COLUMNNAME_IsStocked = "IsStocked";
 /** Set Summary Level.
@@ -3582,13 +3599,13 @@ return false;
 }
 
 @XendraTrl(Identifier="5aeb1373-b452-d435-f331-219c8f2ca60c")
+public static String es_PE_FIELD_Product_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="5aeb1373-b452-d435-f331-219c8f2ca60c")
 public static String es_PE_FIELD_Product_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="5aeb1373-b452-d435-f331-219c8f2ca60c")
 public static String es_PE_FIELD_Product_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="5aeb1373-b452-d435-f331-219c8f2ca60c")
-public static String es_PE_FIELD_Product_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3598,13 +3615,13 @@ Identifier="5aeb1373-b452-d435-f331-219c8f2ca60c")
 public static final String FIELDNAME_Product_SummaryLevel="5aeb1373-b452-d435-f331-219c8f2ca60c";
 
 @XendraTrl(Identifier="c000f2f0-9a44-b25d-5ed4-19f69b90d70c")
+public static String es_PE_FIELD_AssignedProducts_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="c000f2f0-9a44-b25d-5ed4-19f69b90d70c")
 public static String es_PE_FIELD_AssignedProducts_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="c000f2f0-9a44-b25d-5ed4-19f69b90d70c")
 public static String es_PE_FIELD_AssignedProducts_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="c000f2f0-9a44-b25d-5ed4-19f69b90d70c")
-public static String es_PE_FIELD_AssignedProducts_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3614,13 +3631,13 @@ Identifier="c000f2f0-9a44-b25d-5ed4-19f69b90d70c")
 public static final String FIELDNAME_AssignedProducts_SummaryLevel="c000f2f0-9a44-b25d-5ed4-19f69b90d70c";
 
 @XendraTrl(Identifier="9ad945dd-db59-fbbf-9229-bcfdd0f23a53")
+public static String es_PE_FIELD_ExpenseProduct_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="9ad945dd-db59-fbbf-9229-bcfdd0f23a53")
 public static String es_PE_FIELD_ExpenseProduct_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="9ad945dd-db59-fbbf-9229-bcfdd0f23a53")
 public static String es_PE_FIELD_ExpenseProduct_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="9ad945dd-db59-fbbf-9229-bcfdd0f23a53")
-public static String es_PE_FIELD_ExpenseProduct_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3630,13 +3647,13 @@ Identifier="9ad945dd-db59-fbbf-9229-bcfdd0f23a53")
 public static final String FIELDNAME_ExpenseProduct_SummaryLevel="9ad945dd-db59-fbbf-9229-bcfdd0f23a53";
 
 @XendraTrl(Identifier="b1b867ed-6931-46d3-32dc-d9777f889465")
+public static String es_PE_FIELD_ResourceProduct_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="b1b867ed-6931-46d3-32dc-d9777f889465")
 public static String es_PE_FIELD_ResourceProduct_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="b1b867ed-6931-46d3-32dc-d9777f889465")
 public static String es_PE_FIELD_ResourceProduct_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="b1b867ed-6931-46d3-32dc-d9777f889465")
-public static String es_PE_FIELD_ResourceProduct_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3646,13 +3663,13 @@ Identifier="b1b867ed-6931-46d3-32dc-d9777f889465")
 public static final String FIELDNAME_ResourceProduct_SummaryLevel="b1b867ed-6931-46d3-32dc-d9777f889465";
 
 @XendraTrl(Identifier="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d")
+public static String es_PE_FIELD_ProductDimension_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d")
 public static String es_PE_FIELD_ProductDimension_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d")
 public static String es_PE_FIELD_ProductDimension_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d")
-public static String es_PE_FIELD_ProductDimension_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3662,13 +3679,13 @@ Identifier="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d")
 public static final String FIELDNAME_ProductDimension_SummaryLevel="06cc2b36-dd1c-2ec4-168b-39ab1fa17e2d";
 
 @XendraTrl(Identifier="322f3f05-c953-1e13-22a1-b92077473824")
+public static String es_PE_FIELD_SelectProduct_SummaryLevel_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="322f3f05-c953-1e13-22a1-b92077473824")
 public static String es_PE_FIELD_SelectProduct_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="322f3f05-c953-1e13-22a1-b92077473824")
 public static String es_PE_FIELD_SelectProduct_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="322f3f05-c953-1e13-22a1-b92077473824")
-public static String es_PE_FIELD_SelectProduct_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3678,13 +3695,13 @@ Identifier="322f3f05-c953-1e13-22a1-b92077473824")
 public static final String FIELDNAME_SelectProduct_SummaryLevel="322f3f05-c953-1e13-22a1-b92077473824";
 
 @XendraTrl(Identifier="92dcfc0f-7772-ed12-f094-c06144b0c403")
+public static String es_PE_FIELD_Product_SummaryLevel2_Name="Entidad Acumulada";
+
+@XendraTrl(Identifier="92dcfc0f-7772-ed12-f094-c06144b0c403")
 public static String es_PE_FIELD_Product_SummaryLevel2_Description="Esta es una entidad sumaria";
 
 @XendraTrl(Identifier="92dcfc0f-7772-ed12-f094-c06144b0c403")
 public static String es_PE_FIELD_Product_SummaryLevel2_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
-
-@XendraTrl(Identifier="92dcfc0f-7772-ed12-f094-c06144b0c403")
-public static String es_PE_FIELD_Product_SummaryLevel2_Name="Entidad Acumulada";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3702,7 +3719,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a7815f72-c6be-14fe-1483-e627f7b37068",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsSummary */
 public static final String COLUMNNAME_IsSummary = "IsSummary";
 /** Set Verified.
@@ -3725,13 +3742,13 @@ return false;
 }
 
 @XendraTrl(Identifier="60829e33-63c3-e0b0-4ec9-2802065c77f9")
+public static String es_PE_FIELD_Product_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="60829e33-63c3-e0b0-4ec9-2802065c77f9")
 public static String es_PE_FIELD_Product_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="60829e33-63c3-e0b0-4ec9-2802065c77f9")
 public static String es_PE_FIELD_Product_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="60829e33-63c3-e0b0-4ec9-2802065c77f9")
-public static String es_PE_FIELD_Product_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3741,13 +3758,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="60829e33-63c3-e0b0-4ec9-2802065
 public static final String FIELDNAME_Product_Verified="60829e33-63c3-e0b0-4ec9-2802065c77f9";
 
 @XendraTrl(Identifier="53ae0dc7-88a6-d4e2-e17a-85f042b74869")
+public static String es_PE_FIELD_AssignedProducts_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="53ae0dc7-88a6-d4e2-e17a-85f042b74869")
 public static String es_PE_FIELD_AssignedProducts_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="53ae0dc7-88a6-d4e2-e17a-85f042b74869")
 public static String es_PE_FIELD_AssignedProducts_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="53ae0dc7-88a6-d4e2-e17a-85f042b74869")
-public static String es_PE_FIELD_AssignedProducts_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3757,13 +3774,13 @@ Identifier="53ae0dc7-88a6-d4e2-e17a-85f042b74869")
 public static final String FIELDNAME_AssignedProducts_Verified="53ae0dc7-88a6-d4e2-e17a-85f042b74869";
 
 @XendraTrl(Identifier="792239b5-15af-3f33-9c3c-69fa11aa34a9")
+public static String es_PE_FIELD_ExpenseProduct_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="792239b5-15af-3f33-9c3c-69fa11aa34a9")
 public static String es_PE_FIELD_ExpenseProduct_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="792239b5-15af-3f33-9c3c-69fa11aa34a9")
 public static String es_PE_FIELD_ExpenseProduct_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="792239b5-15af-3f33-9c3c-69fa11aa34a9")
-public static String es_PE_FIELD_ExpenseProduct_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3773,13 +3790,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="792239b5-15af-3f33-9c3c-69fa11a
 public static final String FIELDNAME_ExpenseProduct_Verified="792239b5-15af-3f33-9c3c-69fa11aa34a9";
 
 @XendraTrl(Identifier="542801da-51c6-c539-8081-894487b42e06")
+public static String es_PE_FIELD_ResourceProduct_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="542801da-51c6-c539-8081-894487b42e06")
 public static String es_PE_FIELD_ResourceProduct_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="542801da-51c6-c539-8081-894487b42e06")
 public static String es_PE_FIELD_ResourceProduct_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="542801da-51c6-c539-8081-894487b42e06")
-public static String es_PE_FIELD_ResourceProduct_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3789,13 +3806,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="542801da-51c6-c539-8081-894487b
 public static final String FIELDNAME_ResourceProduct_Verified="542801da-51c6-c539-8081-894487b42e06";
 
 @XendraTrl(Identifier="25009465-ebab-316d-74a5-6c2d739ede3b")
+public static String es_PE_FIELD_ProductDimension_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="25009465-ebab-316d-74a5-6c2d739ede3b")
 public static String es_PE_FIELD_ProductDimension_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="25009465-ebab-316d-74a5-6c2d739ede3b")
 public static String es_PE_FIELD_ProductDimension_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="25009465-ebab-316d-74a5-6c2d739ede3b")
-public static String es_PE_FIELD_ProductDimension_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3805,13 +3822,13 @@ Identifier="25009465-ebab-316d-74a5-6c2d739ede3b")
 public static final String FIELDNAME_ProductDimension_Verified="25009465-ebab-316d-74a5-6c2d739ede3b";
 
 @XendraTrl(Identifier="fed89c25-40cb-c649-3b7b-9b279468c9a5")
+public static String es_PE_FIELD_SelectProduct_Verified_Name="Verificado";
+
+@XendraTrl(Identifier="fed89c25-40cb-c649-3b7b-9b279468c9a5")
 public static String es_PE_FIELD_SelectProduct_Verified_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="fed89c25-40cb-c649-3b7b-9b279468c9a5")
 public static String es_PE_FIELD_SelectProduct_Verified_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="fed89c25-40cb-c649-3b7b-9b279468c9a5")
-public static String es_PE_FIELD_SelectProduct_Verified_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3821,13 +3838,13 @@ Identifier="fed89c25-40cb-c649-3b7b-9b279468c9a5")
 public static final String FIELDNAME_SelectProduct_Verified="fed89c25-40cb-c649-3b7b-9b279468c9a5";
 
 @XendraTrl(Identifier="285a4300-0734-c392-c5fe-8beaca341254")
+public static String es_PE_FIELD_Product_Verified2_Name="Verificado";
+
+@XendraTrl(Identifier="285a4300-0734-c392-c5fe-8beaca341254")
 public static String es_PE_FIELD_Product_Verified2_Description="La configuración de LDM ha sido verificada";
 
 @XendraTrl(Identifier="285a4300-0734-c392-c5fe-8beaca341254")
 public static String es_PE_FIELD_Product_Verified2_Help="El cuadro de  verificación verificado indica si la configuración de este producto ha sido verificada. Este es usado para productos que constan de una lista de materiales.";
-
-@XendraTrl(Identifier="285a4300-0734-c392-c5fe-8beaca341254")
-public static String es_PE_FIELD_Product_Verified2_Name="Verificado";
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3845,7 +3862,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c0429d43-038e-56c6-9118-ea4f1c883ad4",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsVerified */
 public static final String COLUMNNAME_IsVerified = "IsVerified";
 /** Set Featured in Web Store.
@@ -3868,13 +3885,13 @@ return false;
 }
 
 @XendraTrl(Identifier="e9a13bee-9d84-4251-3472-6bd2484cd1e1")
+public static String es_PE_FIELD_Product_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="e9a13bee-9d84-4251-3472-6bd2484cd1e1")
 public static String es_PE_FIELD_Product_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="e9a13bee-9d84-4251-3472-6bd2484cd1e1")
 public static String es_PE_FIELD_Product_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="e9a13bee-9d84-4251-3472-6bd2484cd1e1")
-public static String es_PE_FIELD_Product_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3884,13 +3901,13 @@ Identifier="e9a13bee-9d84-4251-3472-6bd2484cd1e1")
 public static final String FIELDNAME_Product_FeaturedInWebStore="e9a13bee-9d84-4251-3472-6bd2484cd1e1";
 
 @XendraTrl(Identifier="246c6ace-0bfd-cfcc-0125-acd3c0929909")
+public static String es_PE_FIELD_AssignedProducts_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="246c6ace-0bfd-cfcc-0125-acd3c0929909")
 public static String es_PE_FIELD_AssignedProducts_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="246c6ace-0bfd-cfcc-0125-acd3c0929909")
 public static String es_PE_FIELD_AssignedProducts_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="246c6ace-0bfd-cfcc-0125-acd3c0929909")
-public static String es_PE_FIELD_AssignedProducts_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3900,13 +3917,13 @@ Identifier="246c6ace-0bfd-cfcc-0125-acd3c0929909")
 public static final String FIELDNAME_AssignedProducts_FeaturedInWebStore="246c6ace-0bfd-cfcc-0125-acd3c0929909";
 
 @XendraTrl(Identifier="ed6cdcf6-cf74-1e40-d9fe-3010dd310947")
+public static String es_PE_FIELD_ExpenseProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="ed6cdcf6-cf74-1e40-d9fe-3010dd310947")
 public static String es_PE_FIELD_ExpenseProduct_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="ed6cdcf6-cf74-1e40-d9fe-3010dd310947")
 public static String es_PE_FIELD_ExpenseProduct_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="ed6cdcf6-cf74-1e40-d9fe-3010dd310947")
-public static String es_PE_FIELD_ExpenseProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3916,13 +3933,13 @@ Identifier="ed6cdcf6-cf74-1e40-d9fe-3010dd310947")
 public static final String FIELDNAME_ExpenseProduct_FeaturedInWebStore="ed6cdcf6-cf74-1e40-d9fe-3010dd310947";
 
 @XendraTrl(Identifier="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec")
+public static String es_PE_FIELD_ResourceProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec")
 public static String es_PE_FIELD_ResourceProduct_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec")
 public static String es_PE_FIELD_ResourceProduct_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec")
-public static String es_PE_FIELD_ResourceProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3932,13 +3949,13 @@ Identifier="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec")
 public static final String FIELDNAME_ResourceProduct_FeaturedInWebStore="095d4f87-5b61-4d6a-c9d9-ca8b733b0aec";
 
 @XendraTrl(Identifier="732f59dc-b59b-382b-47a5-8e58ffd5063c")
+public static String es_PE_FIELD_ProductDimension_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="732f59dc-b59b-382b-47a5-8e58ffd5063c")
 public static String es_PE_FIELD_ProductDimension_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="732f59dc-b59b-382b-47a5-8e58ffd5063c")
 public static String es_PE_FIELD_ProductDimension_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="732f59dc-b59b-382b-47a5-8e58ffd5063c")
-public static String es_PE_FIELD_ProductDimension_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3948,13 +3965,13 @@ Identifier="732f59dc-b59b-382b-47a5-8e58ffd5063c")
 public static final String FIELDNAME_ProductDimension_FeaturedInWebStore="732f59dc-b59b-382b-47a5-8e58ffd5063c";
 
 @XendraTrl(Identifier="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62")
+public static String es_PE_FIELD_SelectProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62")
 public static String es_PE_FIELD_SelectProduct_FeaturedInWebStore_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62")
 public static String es_PE_FIELD_SelectProduct_FeaturedInWebStore_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62")
-public static String es_PE_FIELD_SelectProduct_FeaturedInWebStore_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -3964,13 +3981,13 @@ Identifier="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62")
 public static final String FIELDNAME_SelectProduct_FeaturedInWebStore="3e7f0114-4d52-d6c2-507b-0c8c7b2ffe62";
 
 @XendraTrl(Identifier="48aa16bb-f580-5a68-e22c-94290667a75c")
+public static String es_PE_FIELD_Product_FeaturedInWebStore2_Name="Presentación del Almacen Web";
+
+@XendraTrl(Identifier="48aa16bb-f580-5a68-e22c-94290667a75c")
 public static String es_PE_FIELD_Product_FeaturedInWebStore2_Description="Si esta seleccionado, el producto es exhibido en búsqueda inicial ó cualquier otra.";
 
 @XendraTrl(Identifier="48aa16bb-f580-5a68-e22c-94290667a75c")
 public static String es_PE_FIELD_Product_FeaturedInWebStore2_Help="En la exhibición de productos en almacén de la Web, el producto se exhibe en la visión inicial ó si no ninguno incorporará criterios de búsqueda. Para ser exhibido, el producto debe estar en la lista de precios usada.";
-
-@XendraTrl(Identifier="48aa16bb-f580-5a68-e22c-94290667a75c")
-public static String es_PE_FIELD_Product_FeaturedInWebStore2_Name="Presentación del Almacen Web";
 
 @XendraField(AD_Column_ID="IsWebStoreFeatured",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -3988,7 +4005,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9410d414-34e9-28e6-3e6d-b17a2614260f",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsWebStoreFeatured */
 public static final String COLUMNNAME_IsWebStoreFeatured = "IsWebStoreFeatured";
 /** Set IsWithholding.
@@ -4010,6 +4027,16 @@ if (oo != null)
 return false;
 }
 
+@XendraTrl(Identifier="b4bc9355-8ddf-4693-a00d-08d63ded830c")
+public static String es_PE_FIELD_Product_IsWithholding_Name="iswithholding";
+
+@XendraField(AD_Column_ID="IsWithholding",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-11-02 17:52:24.0",
+Identifier="b4bc9355-8ddf-4693-a00d-08d63ded830c")
+public static final String FIELDNAME_Product_IsWithholding="b4bc9355-8ddf-4693-a00d-08d63ded830c";
+
 @XendraTrl(Identifier="d51bc498-42c8-428e-bce7-cc197ae41180")
 public static String es_PE_COLUMN_IsWithholding_Name="iswithholding";
 
@@ -4019,7 +4046,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d51bc498-42c8-428e-bce7-cc197ae41180",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name IsWithholding */
 public static final String COLUMNNAME_IsWithholding = "IsWithholding";
 /** Set Attribute Set.
@@ -4040,13 +4067,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d8ebd4d8-4762-30b9-02b6-3a568a02c517")
+public static String es_PE_FIELD_Product_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="d8ebd4d8-4762-30b9-02b6-3a568a02c517")
 public static String es_PE_FIELD_Product_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="d8ebd4d8-4762-30b9-02b6-3a568a02c517")
 public static String es_PE_FIELD_Product_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="d8ebd4d8-4762-30b9-02b6-3a568a02c517")
-public static String es_PE_FIELD_Product_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4056,13 +4083,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="d8ebd4d8-4762-30b9-02b6-3a568a0
 public static final String FIELDNAME_Product_AttributeSet="d8ebd4d8-4762-30b9-02b6-3a568a02c517";
 
 @XendraTrl(Identifier="063b7f5a-b0e5-5296-024f-be904070d421")
+public static String es_PE_FIELD_AssignedProducts_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="063b7f5a-b0e5-5296-024f-be904070d421")
 public static String es_PE_FIELD_AssignedProducts_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="063b7f5a-b0e5-5296-024f-be904070d421")
 public static String es_PE_FIELD_AssignedProducts_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="063b7f5a-b0e5-5296-024f-be904070d421")
-public static String es_PE_FIELD_AssignedProducts_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4072,13 +4099,13 @@ Identifier="063b7f5a-b0e5-5296-024f-be904070d421")
 public static final String FIELDNAME_AssignedProducts_AttributeSet="063b7f5a-b0e5-5296-024f-be904070d421";
 
 @XendraTrl(Identifier="a480b386-4d69-1829-a435-a588276b42c6")
+public static String es_PE_FIELD_ExpenseProduct_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="a480b386-4d69-1829-a435-a588276b42c6")
 public static String es_PE_FIELD_ExpenseProduct_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="a480b386-4d69-1829-a435-a588276b42c6")
 public static String es_PE_FIELD_ExpenseProduct_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="a480b386-4d69-1829-a435-a588276b42c6")
-public static String es_PE_FIELD_ExpenseProduct_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4088,13 +4115,13 @@ Identifier="a480b386-4d69-1829-a435-a588276b42c6")
 public static final String FIELDNAME_ExpenseProduct_AttributeSet="a480b386-4d69-1829-a435-a588276b42c6";
 
 @XendraTrl(Identifier="7be48689-5e82-816d-6750-7a1775091d15")
+public static String es_PE_FIELD_ResourceProduct_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="7be48689-5e82-816d-6750-7a1775091d15")
 public static String es_PE_FIELD_ResourceProduct_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="7be48689-5e82-816d-6750-7a1775091d15")
 public static String es_PE_FIELD_ResourceProduct_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="7be48689-5e82-816d-6750-7a1775091d15")
-public static String es_PE_FIELD_ResourceProduct_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4104,13 +4131,13 @@ Identifier="7be48689-5e82-816d-6750-7a1775091d15")
 public static final String FIELDNAME_ResourceProduct_AttributeSet="7be48689-5e82-816d-6750-7a1775091d15";
 
 @XendraTrl(Identifier="8e9851b2-6509-f02b-7300-a9825f8861c6")
+public static String es_PE_FIELD_ProductDimension_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="8e9851b2-6509-f02b-7300-a9825f8861c6")
 public static String es_PE_FIELD_ProductDimension_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="8e9851b2-6509-f02b-7300-a9825f8861c6")
 public static String es_PE_FIELD_ProductDimension_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="8e9851b2-6509-f02b-7300-a9825f8861c6")
-public static String es_PE_FIELD_ProductDimension_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4120,13 +4147,13 @@ Identifier="8e9851b2-6509-f02b-7300-a9825f8861c6")
 public static final String FIELDNAME_ProductDimension_AttributeSet="8e9851b2-6509-f02b-7300-a9825f8861c6";
 
 @XendraTrl(Identifier="90388576-fbc0-deb5-b7ff-eb28fd1134a9")
+public static String es_PE_FIELD_SelectProduct_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="90388576-fbc0-deb5-b7ff-eb28fd1134a9")
 public static String es_PE_FIELD_SelectProduct_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="90388576-fbc0-deb5-b7ff-eb28fd1134a9")
 public static String es_PE_FIELD_SelectProduct_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="90388576-fbc0-deb5-b7ff-eb28fd1134a9")
-public static String es_PE_FIELD_SelectProduct_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4136,13 +4163,13 @@ Identifier="90388576-fbc0-deb5-b7ff-eb28fd1134a9")
 public static final String FIELDNAME_SelectProduct_AttributeSet="90388576-fbc0-deb5-b7ff-eb28fd1134a9";
 
 @XendraTrl(Identifier="d449280d-a57c-5207-a936-ce21bb1696f1")
+public static String es_PE_FIELD_Product_AttributeSet2_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="d449280d-a57c-5207-a936-ce21bb1696f1")
 public static String es_PE_FIELD_Product_AttributeSet2_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="d449280d-a57c-5207-a936-ce21bb1696f1")
 public static String es_PE_FIELD_Product_AttributeSet2_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="d449280d-a57c-5207-a936-ce21bb1696f1")
-public static String es_PE_FIELD_Product_AttributeSet2_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4160,7 +4187,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a93d47f-bad3-a1e2-0ecb-4e1a906c4aa9",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:47.0")
 /** Column name M_AttributeSet_ID */
 public static final String COLUMNNAME_M_AttributeSet_ID = "M_AttributeSet_ID";
 /** Set Attribute Set Instance.
@@ -4180,13 +4207,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="55e9f205-72f7-50c7-c953-987ec345616d")
+public static String es_PE_FIELD_Product_AttributeSetInstance_Name="Instancia Conjunto de Atributos ";
+
+@XendraTrl(Identifier="55e9f205-72f7-50c7-c953-987ec345616d")
 public static String es_PE_FIELD_Product_AttributeSetInstance_Description="Valor Atributos de Productos";
 
 @XendraTrl(Identifier="55e9f205-72f7-50c7-c953-987ec345616d")
 public static String es_PE_FIELD_Product_AttributeSetInstance_Help="Los valores actuales de Atributos de Producto. Instancia Atributo de Producto  son definidos en The values of the actual Product Attributes. Product Instance attributes are defined in the actual transactions.";
-
-@XendraTrl(Identifier="55e9f205-72f7-50c7-c953-987ec345616d")
-public static String es_PE_FIELD_Product_AttributeSetInstance_Name="Instancia Conjunto de Atributos ";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=false,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4196,13 +4223,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="55e9f205-72f7-50c7-c953-987ec34
 public static final String FIELDNAME_Product_AttributeSetInstance="55e9f205-72f7-50c7-c953-987ec345616d";
 
 @XendraTrl(Identifier="a0d942d7-e69b-3ee6-c367-8b3bb06a153b")
+public static String es_PE_FIELD_AssignedProducts_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="a0d942d7-e69b-3ee6-c367-8b3bb06a153b")
 public static String es_PE_FIELD_AssignedProducts_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="a0d942d7-e69b-3ee6-c367-8b3bb06a153b")
 public static String es_PE_FIELD_AssignedProducts_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="a0d942d7-e69b-3ee6-c367-8b3bb06a153b")
-public static String es_PE_FIELD_AssignedProducts_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4212,13 +4239,13 @@ Identifier="a0d942d7-e69b-3ee6-c367-8b3bb06a153b")
 public static final String FIELDNAME_AssignedProducts_AttributeSetInstance="a0d942d7-e69b-3ee6-c367-8b3bb06a153b";
 
 @XendraTrl(Identifier="ce5722ba-29f4-a592-0b16-e6ed21ffc634")
+public static String es_PE_FIELD_ExpenseProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="ce5722ba-29f4-a592-0b16-e6ed21ffc634")
 public static String es_PE_FIELD_ExpenseProduct_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="ce5722ba-29f4-a592-0b16-e6ed21ffc634")
 public static String es_PE_FIELD_ExpenseProduct_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="ce5722ba-29f4-a592-0b16-e6ed21ffc634")
-public static String es_PE_FIELD_ExpenseProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4228,13 +4255,13 @@ Identifier="ce5722ba-29f4-a592-0b16-e6ed21ffc634")
 public static final String FIELDNAME_ExpenseProduct_AttributeSetInstance="ce5722ba-29f4-a592-0b16-e6ed21ffc634";
 
 @XendraTrl(Identifier="262332c6-4b27-99e5-8c90-d977cbc29ffb")
+public static String es_PE_FIELD_ResourceProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="262332c6-4b27-99e5-8c90-d977cbc29ffb")
 public static String es_PE_FIELD_ResourceProduct_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="262332c6-4b27-99e5-8c90-d977cbc29ffb")
 public static String es_PE_FIELD_ResourceProduct_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="262332c6-4b27-99e5-8c90-d977cbc29ffb")
-public static String es_PE_FIELD_ResourceProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4244,13 +4271,13 @@ Identifier="262332c6-4b27-99e5-8c90-d977cbc29ffb")
 public static final String FIELDNAME_ResourceProduct_AttributeSetInstance="262332c6-4b27-99e5-8c90-d977cbc29ffb";
 
 @XendraTrl(Identifier="628bba46-ae1c-01c7-1a35-e12aacc804a3")
+public static String es_PE_FIELD_ProductDimension_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="628bba46-ae1c-01c7-1a35-e12aacc804a3")
 public static String es_PE_FIELD_ProductDimension_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="628bba46-ae1c-01c7-1a35-e12aacc804a3")
 public static String es_PE_FIELD_ProductDimension_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="628bba46-ae1c-01c7-1a35-e12aacc804a3")
-public static String es_PE_FIELD_ProductDimension_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4260,13 +4287,13 @@ Identifier="628bba46-ae1c-01c7-1a35-e12aacc804a3")
 public static final String FIELDNAME_ProductDimension_AttributeSetInstance="628bba46-ae1c-01c7-1a35-e12aacc804a3";
 
 @XendraTrl(Identifier="20b9c404-4c3b-8ccf-05bb-deacde29e1f7")
+public static String es_PE_FIELD_SelectProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="20b9c404-4c3b-8ccf-05bb-deacde29e1f7")
 public static String es_PE_FIELD_SelectProduct_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="20b9c404-4c3b-8ccf-05bb-deacde29e1f7")
 public static String es_PE_FIELD_SelectProduct_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="20b9c404-4c3b-8ccf-05bb-deacde29e1f7")
-public static String es_PE_FIELD_SelectProduct_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4276,13 +4303,13 @@ Identifier="20b9c404-4c3b-8ccf-05bb-deacde29e1f7")
 public static final String FIELDNAME_SelectProduct_AttributeSetInstance="20b9c404-4c3b-8ccf-05bb-deacde29e1f7";
 
 @XendraTrl(Identifier="aac0ae85-81fb-09ad-7ac5-d8cfcf7fdd9b")
+public static String es_PE_FIELD_Product_AttributeSetInstance2_Name="Instancia Conjunto de Atributos";
+
+@XendraTrl(Identifier="aac0ae85-81fb-09ad-7ac5-d8cfcf7fdd9b")
 public static String es_PE_FIELD_Product_AttributeSetInstance2_Description="Valores Atributos de Producto";
 
 @XendraTrl(Identifier="aac0ae85-81fb-09ad-7ac5-d8cfcf7fdd9b")
 public static String es_PE_FIELD_Product_AttributeSetInstance2_Help="Los valores de los Atributos de Producto actual. Atributos Instancias de Producto son definidos en transacción actual.";
-
-@XendraTrl(Identifier="aac0ae85-81fb-09ad-7ac5-d8cfcf7fdd9b")
-public static String es_PE_FIELD_Product_AttributeSetInstance2_Name="Instancia Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=false,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4300,7 +4327,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8ec14b1c-8a9d-4761-eb91-2ab834d5b54c",Synchronized="2017-08-05 16:55:21.0")
+Identifier="8ec14b1c-8a9d-4761-eb91-2ab834d5b54c",Synchronized="2020-03-03 21:38:47.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Freight Category.
@@ -4321,13 +4348,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9c7b3000-b38d-d844-d04e-bf63907e1639")
+public static String es_PE_FIELD_Product_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="9c7b3000-b38d-d844-d04e-bf63907e1639")
 public static String es_PE_FIELD_Product_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="9c7b3000-b38d-d844-d04e-bf63907e1639")
 public static String es_PE_FIELD_Product_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="9c7b3000-b38d-d844-d04e-bf63907e1639")
-public static String es_PE_FIELD_Product_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4337,13 +4364,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="9c7b3000-b38d-d844-d04e-bf63907
 public static final String FIELDNAME_Product_FreightCategory="9c7b3000-b38d-d844-d04e-bf63907e1639";
 
 @XendraTrl(Identifier="6a255f79-e7a5-dab3-d59b-472271e28764")
+public static String es_PE_FIELD_AssignedProducts_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="6a255f79-e7a5-dab3-d59b-472271e28764")
 public static String es_PE_FIELD_AssignedProducts_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="6a255f79-e7a5-dab3-d59b-472271e28764")
 public static String es_PE_FIELD_AssignedProducts_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="6a255f79-e7a5-dab3-d59b-472271e28764")
-public static String es_PE_FIELD_AssignedProducts_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4353,13 +4380,13 @@ Identifier="6a255f79-e7a5-dab3-d59b-472271e28764")
 public static final String FIELDNAME_AssignedProducts_FreightCategory="6a255f79-e7a5-dab3-d59b-472271e28764";
 
 @XendraTrl(Identifier="2114bef6-0d6b-c125-6d27-0f95893f1ef5")
+public static String es_PE_FIELD_ExpenseProduct_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="2114bef6-0d6b-c125-6d27-0f95893f1ef5")
 public static String es_PE_FIELD_ExpenseProduct_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="2114bef6-0d6b-c125-6d27-0f95893f1ef5")
 public static String es_PE_FIELD_ExpenseProduct_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="2114bef6-0d6b-c125-6d27-0f95893f1ef5")
-public static String es_PE_FIELD_ExpenseProduct_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4369,13 +4396,13 @@ Identifier="2114bef6-0d6b-c125-6d27-0f95893f1ef5")
 public static final String FIELDNAME_ExpenseProduct_FreightCategory="2114bef6-0d6b-c125-6d27-0f95893f1ef5";
 
 @XendraTrl(Identifier="d5d06cec-4d00-a210-9cb7-f80c92aede86")
+public static String es_PE_FIELD_ResourceProduct_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="d5d06cec-4d00-a210-9cb7-f80c92aede86")
 public static String es_PE_FIELD_ResourceProduct_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="d5d06cec-4d00-a210-9cb7-f80c92aede86")
 public static String es_PE_FIELD_ResourceProduct_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="d5d06cec-4d00-a210-9cb7-f80c92aede86")
-public static String es_PE_FIELD_ResourceProduct_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4385,13 +4412,13 @@ Identifier="d5d06cec-4d00-a210-9cb7-f80c92aede86")
 public static final String FIELDNAME_ResourceProduct_FreightCategory="d5d06cec-4d00-a210-9cb7-f80c92aede86";
 
 @XendraTrl(Identifier="d75abe2a-7df3-5e88-1f93-d71c65659269")
+public static String es_PE_FIELD_ProductDimension_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="d75abe2a-7df3-5e88-1f93-d71c65659269")
 public static String es_PE_FIELD_ProductDimension_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="d75abe2a-7df3-5e88-1f93-d71c65659269")
 public static String es_PE_FIELD_ProductDimension_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="d75abe2a-7df3-5e88-1f93-d71c65659269")
-public static String es_PE_FIELD_ProductDimension_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4401,13 +4428,13 @@ Identifier="d75abe2a-7df3-5e88-1f93-d71c65659269")
 public static final String FIELDNAME_ProductDimension_FreightCategory="d75abe2a-7df3-5e88-1f93-d71c65659269";
 
 @XendraTrl(Identifier="8f2c5695-22af-5c61-6c1b-331d7d9a92d8")
+public static String es_PE_FIELD_SelectProduct_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="8f2c5695-22af-5c61-6c1b-331d7d9a92d8")
 public static String es_PE_FIELD_SelectProduct_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="8f2c5695-22af-5c61-6c1b-331d7d9a92d8")
 public static String es_PE_FIELD_SelectProduct_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="8f2c5695-22af-5c61-6c1b-331d7d9a92d8")
-public static String es_PE_FIELD_SelectProduct_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4417,13 +4444,13 @@ Identifier="8f2c5695-22af-5c61-6c1b-331d7d9a92d8")
 public static final String FIELDNAME_SelectProduct_FreightCategory="8f2c5695-22af-5c61-6c1b-331d7d9a92d8";
 
 @XendraTrl(Identifier="4500c5ff-bb77-0e8f-51f5-220838b674e8")
+public static String es_PE_FIELD_Product_FreightCategory2_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="4500c5ff-bb77-0e8f-51f5-220838b674e8")
 public static String es_PE_FIELD_Product_FreightCategory2_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="4500c5ff-bb77-0e8f-51f5-220838b674e8")
 public static String es_PE_FIELD_Product_FreightCategory2_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="4500c5ff-bb77-0e8f-51f5-220838b674e8")
-public static String es_PE_FIELD_Product_FreightCategory2_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4441,7 +4468,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3c4b5940-be48-7bd8-898b-3f5baf96f30e",Synchronized="2017-08-05 16:55:21.0")
+Identifier="3c4b5940-be48-7bd8-898b-3f5baf96f30e",Synchronized="2020-03-03 21:38:47.0")
 /** Column name M_FreightCategory_ID */
 public static final String COLUMNNAME_M_FreightCategory_ID = "M_FreightCategory_ID";
 /** Set Locator.
@@ -4462,13 +4489,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0112f3f9-116e-21b9-f4d6-837d6e6b47a7")
+public static String es_PE_FIELD_Product_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="0112f3f9-116e-21b9-f4d6-837d6e6b47a7")
 public static String es_PE_FIELD_Product_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="0112f3f9-116e-21b9-f4d6-837d6e6b47a7")
 public static String es_PE_FIELD_Product_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="0112f3f9-116e-21b9-f4d6-837d6e6b47a7")
-public static String es_PE_FIELD_Product_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4478,13 +4505,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="0112f3f9-116e-21b9-f4d6-837d6e6
 public static final String FIELDNAME_Product_Locator="0112f3f9-116e-21b9-f4d6-837d6e6b47a7";
 
 @XendraTrl(Identifier="3d40ade5-79cb-02db-8da5-e16c0ece1eca")
+public static String es_PE_FIELD_AssignedProducts_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="3d40ade5-79cb-02db-8da5-e16c0ece1eca")
 public static String es_PE_FIELD_AssignedProducts_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="3d40ade5-79cb-02db-8da5-e16c0ece1eca")
 public static String es_PE_FIELD_AssignedProducts_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="3d40ade5-79cb-02db-8da5-e16c0ece1eca")
-public static String es_PE_FIELD_AssignedProducts_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4494,13 +4521,13 @@ Identifier="3d40ade5-79cb-02db-8da5-e16c0ece1eca")
 public static final String FIELDNAME_AssignedProducts_Locator="3d40ade5-79cb-02db-8da5-e16c0ece1eca";
 
 @XendraTrl(Identifier="4d786871-005e-82da-fb5c-a3a808a1bae3")
+public static String es_PE_FIELD_ExpenseProduct_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="4d786871-005e-82da-fb5c-a3a808a1bae3")
 public static String es_PE_FIELD_ExpenseProduct_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="4d786871-005e-82da-fb5c-a3a808a1bae3")
 public static String es_PE_FIELD_ExpenseProduct_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="4d786871-005e-82da-fb5c-a3a808a1bae3")
-public static String es_PE_FIELD_ExpenseProduct_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4510,13 +4537,13 @@ Identifier="4d786871-005e-82da-fb5c-a3a808a1bae3")
 public static final String FIELDNAME_ExpenseProduct_Locator="4d786871-005e-82da-fb5c-a3a808a1bae3";
 
 @XendraTrl(Identifier="48b68be1-2220-72b5-f149-c05334d799b3")
+public static String es_PE_FIELD_ResourceProduct_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="48b68be1-2220-72b5-f149-c05334d799b3")
 public static String es_PE_FIELD_ResourceProduct_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="48b68be1-2220-72b5-f149-c05334d799b3")
 public static String es_PE_FIELD_ResourceProduct_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="48b68be1-2220-72b5-f149-c05334d799b3")
-public static String es_PE_FIELD_ResourceProduct_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4526,13 +4553,13 @@ Identifier="48b68be1-2220-72b5-f149-c05334d799b3")
 public static final String FIELDNAME_ResourceProduct_Locator="48b68be1-2220-72b5-f149-c05334d799b3";
 
 @XendraTrl(Identifier="3605bc4c-f268-9634-9bb9-dd8abfa3f294")
+public static String es_PE_FIELD_ProductDimension_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="3605bc4c-f268-9634-9bb9-dd8abfa3f294")
 public static String es_PE_FIELD_ProductDimension_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="3605bc4c-f268-9634-9bb9-dd8abfa3f294")
 public static String es_PE_FIELD_ProductDimension_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="3605bc4c-f268-9634-9bb9-dd8abfa3f294")
-public static String es_PE_FIELD_ProductDimension_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4542,13 +4569,13 @@ Identifier="3605bc4c-f268-9634-9bb9-dd8abfa3f294")
 public static final String FIELDNAME_ProductDimension_Locator="3605bc4c-f268-9634-9bb9-dd8abfa3f294";
 
 @XendraTrl(Identifier="93ba5997-db7a-0a40-d825-4bdca0d5128d")
+public static String es_PE_FIELD_SelectProduct_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="93ba5997-db7a-0a40-d825-4bdca0d5128d")
 public static String es_PE_FIELD_SelectProduct_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="93ba5997-db7a-0a40-d825-4bdca0d5128d")
 public static String es_PE_FIELD_SelectProduct_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="93ba5997-db7a-0a40-d825-4bdca0d5128d")
-public static String es_PE_FIELD_SelectProduct_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4558,13 +4585,13 @@ Identifier="93ba5997-db7a-0a40-d825-4bdca0d5128d")
 public static final String FIELDNAME_SelectProduct_Locator="93ba5997-db7a-0a40-d825-4bdca0d5128d";
 
 @XendraTrl(Identifier="88b16f3e-bcc2-50e5-ea56-4eda096da35a")
+public static String es_PE_FIELD_Product_Locator2_Name="Ubicación";
+
+@XendraTrl(Identifier="88b16f3e-bcc2-50e5-ea56-4eda096da35a")
 public static String es_PE_FIELD_Product_Locator2_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="88b16f3e-bcc2-50e5-ea56-4eda096da35a")
 public static String es_PE_FIELD_Product_Locator2_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="88b16f3e-bcc2-50e5-ea56-4eda096da35a")
-public static String es_PE_FIELD_Product_Locator2_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4582,7 +4609,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="636d386b-f86f-4764-f621-8f45736747e5",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Product Brand.
@@ -4603,10 +4630,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3b753a8d-ec55-91e8-2fb7-74f3d1e6a379")
-public static String es_PE_FIELD_Product_ProductBrand_Description="Linea";
+public static String es_PE_FIELD_Product_ProductBrand_Name="Linea";
 
 @XendraTrl(Identifier="3b753a8d-ec55-91e8-2fb7-74f3d1e6a379")
-public static String es_PE_FIELD_Product_ProductBrand_Name="Linea";
+public static String es_PE_FIELD_Product_ProductBrand_Description="Linea";
 
 @XendraField(AD_Column_ID="M_Product_Brand_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
@@ -4624,12 +4651,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b7f92bb-935f-1fd9-2c3f-f796652a2a86",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Product_Brand_ID */
 public static final String COLUMNNAME_M_Product_Brand_ID = "M_Product_Brand_ID";
-
-/** M_Product_Category_ID AD_Reference=36e5e285-96f7-de95-1ec8-5e02581d0f51 */
-public static final int M_PRODUCT_CATEGORY_ID_AD_Reference_ID=163;
 /** Set Product Category.
 @param M_Product_Category_ID Category of a Product */
 public void setM_Product_Category_ID (int M_Product_Category_ID)
@@ -4647,13 +4671,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2bf10c3a-14c5-9c2d-80d6-2531d00ef911")
+public static String es_PE_FIELD_Product_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="2bf10c3a-14c5-9c2d-80d6-2531d00ef911")
 public static String es_PE_FIELD_Product_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="2bf10c3a-14c5-9c2d-80d6-2531d00ef911")
 public static String es_PE_FIELD_Product_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="2bf10c3a-14c5-9c2d-80d6-2531d00ef911")
-public static String es_PE_FIELD_Product_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4663,13 +4687,13 @@ Identifier="2bf10c3a-14c5-9c2d-80d6-2531d00ef911")
 public static final String FIELDNAME_Product_ProductCategory="2bf10c3a-14c5-9c2d-80d6-2531d00ef911";
 
 @XendraTrl(Identifier="1006d7c8-7830-14ff-16a0-8ec850ae4cd7")
+public static String es_PE_FIELD_AssignedProducts_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="1006d7c8-7830-14ff-16a0-8ec850ae4cd7")
 public static String es_PE_FIELD_AssignedProducts_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="1006d7c8-7830-14ff-16a0-8ec850ae4cd7")
 public static String es_PE_FIELD_AssignedProducts_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="1006d7c8-7830-14ff-16a0-8ec850ae4cd7")
-public static String es_PE_FIELD_AssignedProducts_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4679,13 +4703,13 @@ Identifier="1006d7c8-7830-14ff-16a0-8ec850ae4cd7")
 public static final String FIELDNAME_AssignedProducts_ProductCategory="1006d7c8-7830-14ff-16a0-8ec850ae4cd7";
 
 @XendraTrl(Identifier="9613037f-00d9-6648-4805-215fe0a2aebd")
+public static String es_PE_FIELD_ExpenseProduct_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="9613037f-00d9-6648-4805-215fe0a2aebd")
 public static String es_PE_FIELD_ExpenseProduct_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="9613037f-00d9-6648-4805-215fe0a2aebd")
 public static String es_PE_FIELD_ExpenseProduct_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="9613037f-00d9-6648-4805-215fe0a2aebd")
-public static String es_PE_FIELD_ExpenseProduct_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4695,13 +4719,13 @@ Identifier="9613037f-00d9-6648-4805-215fe0a2aebd")
 public static final String FIELDNAME_ExpenseProduct_ProductCategory="9613037f-00d9-6648-4805-215fe0a2aebd";
 
 @XendraTrl(Identifier="468ae713-d4e9-2a27-56e7-d9e49cd3a79c")
+public static String es_PE_FIELD_ResourceProduct_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="468ae713-d4e9-2a27-56e7-d9e49cd3a79c")
 public static String es_PE_FIELD_ResourceProduct_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="468ae713-d4e9-2a27-56e7-d9e49cd3a79c")
 public static String es_PE_FIELD_ResourceProduct_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="468ae713-d4e9-2a27-56e7-d9e49cd3a79c")
-public static String es_PE_FIELD_ResourceProduct_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4711,13 +4735,13 @@ Identifier="468ae713-d4e9-2a27-56e7-d9e49cd3a79c")
 public static final String FIELDNAME_ResourceProduct_ProductCategory="468ae713-d4e9-2a27-56e7-d9e49cd3a79c";
 
 @XendraTrl(Identifier="acb23542-b38a-8594-1594-4950ee0f23b5")
+public static String es_PE_FIELD_ProductDimension_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="acb23542-b38a-8594-1594-4950ee0f23b5")
 public static String es_PE_FIELD_ProductDimension_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="acb23542-b38a-8594-1594-4950ee0f23b5")
 public static String es_PE_FIELD_ProductDimension_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="acb23542-b38a-8594-1594-4950ee0f23b5")
-public static String es_PE_FIELD_ProductDimension_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4727,13 +4751,13 @@ Identifier="acb23542-b38a-8594-1594-4950ee0f23b5")
 public static final String FIELDNAME_ProductDimension_ProductCategory="acb23542-b38a-8594-1594-4950ee0f23b5";
 
 @XendraTrl(Identifier="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1")
+public static String es_PE_FIELD_SelectProduct_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1")
 public static String es_PE_FIELD_SelectProduct_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1")
 public static String es_PE_FIELD_SelectProduct_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1")
-public static String es_PE_FIELD_SelectProduct_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4743,13 +4767,13 @@ Identifier="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1")
 public static final String FIELDNAME_SelectProduct_ProductCategory="8d972ce2-f60d-3f92-1682-63cfb7a9ecd1";
 
 @XendraTrl(Identifier="51a0d95e-abc5-e3a1-ac55-a0677d922c5b")
+public static String es_PE_FIELD_Product_ProductCategory2_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="51a0d95e-abc5-e3a1-ac55-a0677d922c5b")
 public static String es_PE_FIELD_Product_ProductCategory2_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="51a0d95e-abc5-e3a1-ac55-a0677d922c5b")
 public static String es_PE_FIELD_Product_ProductCategory2_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="51a0d95e-abc5-e3a1-ac55-a0677d922c5b")
-public static String es_PE_FIELD_Product_ProductCategory2_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -4768,7 +4792,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6f298307-ee89-b44b-1341-afb769b7f98c",Synchronized="2017-08-05 16:55:21.0")
+Identifier="6f298307-ee89-b44b-1341-afb769b7f98c",Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Product Generic.
@@ -4789,10 +4813,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="af9d610b-6f58-350a-0337-cd5899d0f2eb")
-public static String es_PE_FIELD_Product_ProductGeneric_Description="Generico";
+public static String es_PE_FIELD_Product_ProductGeneric_Name="Generico";
 
 @XendraTrl(Identifier="af9d610b-6f58-350a-0337-cd5899d0f2eb")
-public static String es_PE_FIELD_Product_ProductGeneric_Name="Generico";
+public static String es_PE_FIELD_Product_ProductGeneric_Description="Generico";
 
 @XendraField(AD_Column_ID="M_Product_Generic_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
@@ -4810,7 +4834,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5e2c5c0c-15b5-9e84-d131-e86cb3233333",Synchronized="2017-08-05 16:55:21.0")
+Identifier="5e2c5c0c-15b5-9e84-d131-e86cb3233333",Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Product_Generic_ID */
 public static final String COLUMNNAME_M_Product_Generic_ID = "M_Product_Generic_ID";
 /** Set Product Group.
@@ -4849,7 +4873,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef4e67eb-3681-0229-6fe7-52ecb93f1f14",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Product_Group_ID */
 public static final String COLUMNNAME_M_Product_Group_ID = "M_Product_Group_ID";
 /** Set Product.
@@ -4869,13 +4893,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="90f69f51-ad35-7fb6-ff9d-ebb037c201d8")
+public static String es_PE_FIELD_Product_Product_Name="Producto";
+
+@XendraTrl(Identifier="90f69f51-ad35-7fb6-ff9d-ebb037c201d8")
 public static String es_PE_FIELD_Product_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="90f69f51-ad35-7fb6-ff9d-ebb037c201d8")
 public static String es_PE_FIELD_Product_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="90f69f51-ad35-7fb6-ff9d-ebb037c201d8")
-public static String es_PE_FIELD_Product_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4885,13 +4909,13 @@ Identifier="90f69f51-ad35-7fb6-ff9d-ebb037c201d8")
 public static final String FIELDNAME_Product_Product="90f69f51-ad35-7fb6-ff9d-ebb037c201d8";
 
 @XendraTrl(Identifier="16eba7b9-96c0-db5d-db30-d73e2c3b5788")
+public static String es_PE_FIELD_AssignedProducts_Product_Name="Producto";
+
+@XendraTrl(Identifier="16eba7b9-96c0-db5d-db30-d73e2c3b5788")
 public static String es_PE_FIELD_AssignedProducts_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="16eba7b9-96c0-db5d-db30-d73e2c3b5788")
 public static String es_PE_FIELD_AssignedProducts_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="16eba7b9-96c0-db5d-db30-d73e2c3b5788")
-public static String es_PE_FIELD_AssignedProducts_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4901,13 +4925,13 @@ Identifier="16eba7b9-96c0-db5d-db30-d73e2c3b5788")
 public static final String FIELDNAME_AssignedProducts_Product="16eba7b9-96c0-db5d-db30-d73e2c3b5788";
 
 @XendraTrl(Identifier="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1")
+public static String es_PE_FIELD_ExpenseProduct_Product_Name="Producto";
+
+@XendraTrl(Identifier="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1")
 public static String es_PE_FIELD_ExpenseProduct_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1")
 public static String es_PE_FIELD_ExpenseProduct_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1")
-public static String es_PE_FIELD_ExpenseProduct_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4917,13 +4941,13 @@ Identifier="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1")
 public static final String FIELDNAME_ExpenseProduct_Product="97ba061d-7458-23a8-f08e-3b3a9ea9b5c1";
 
 @XendraTrl(Identifier="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3")
+public static String es_PE_FIELD_ResourceProduct_Product_Name="Producto";
+
+@XendraTrl(Identifier="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3")
 public static String es_PE_FIELD_ResourceProduct_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3")
 public static String es_PE_FIELD_ResourceProduct_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3")
-public static String es_PE_FIELD_ResourceProduct_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4933,13 +4957,13 @@ Identifier="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3")
 public static final String FIELDNAME_ResourceProduct_Product="d9cbc308-18f9-f8ea-b3f7-bcc659cbd6d3";
 
 @XendraTrl(Identifier="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91")
+public static String es_PE_FIELD_ProductDimension_Product_Name="Producto";
+
+@XendraTrl(Identifier="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91")
 public static String es_PE_FIELD_ProductDimension_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91")
 public static String es_PE_FIELD_ProductDimension_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91")
-public static String es_PE_FIELD_ProductDimension_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4949,13 +4973,13 @@ Identifier="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91")
 public static final String FIELDNAME_ProductDimension_Product="bcab40ce-9c2d-5c62-aaf1-a82d77a3af91";
 
 @XendraTrl(Identifier="71de1bb2-9fd6-3120-d690-93cf5894b161")
+public static String es_PE_FIELD_SelectProduct_Product_Name="Producto";
+
+@XendraTrl(Identifier="71de1bb2-9fd6-3120-d690-93cf5894b161")
 public static String es_PE_FIELD_SelectProduct_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="71de1bb2-9fd6-3120-d690-93cf5894b161")
 public static String es_PE_FIELD_SelectProduct_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="71de1bb2-9fd6-3120-d690-93cf5894b161")
-public static String es_PE_FIELD_SelectProduct_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4965,13 +4989,13 @@ Identifier="71de1bb2-9fd6-3120-d690-93cf5894b161")
 public static final String FIELDNAME_SelectProduct_Product="71de1bb2-9fd6-3120-d690-93cf5894b161";
 
 @XendraTrl(Identifier="62b36559-2e01-5570-412a-89dbbf998b71")
+public static String es_PE_FIELD_Product_Product2_Name="Producto";
+
+@XendraTrl(Identifier="62b36559-2e01-5570-412a-89dbbf998b71")
 public static String es_PE_FIELD_Product_Product2_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="62b36559-2e01-5570-412a-89dbbf998b71")
 public static String es_PE_FIELD_Product_Product2_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="62b36559-2e01-5570-412a-89dbbf998b71")
-public static String es_PE_FIELD_Product_Product2_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -4999,10 +5023,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d20f5fc3-3a0c-ca9e-025f-84df78a16ab3")
-public static String es_PE_FIELD_Product_ProductType_Description="Tipo";
+public static String es_PE_FIELD_Product_ProductType_Name="Tipo";
 
 @XendraTrl(Identifier="d20f5fc3-3a0c-ca9e-025f-84df78a16ab3")
-public static String es_PE_FIELD_Product_ProductType_Name="Tipo";
+public static String es_PE_FIELD_Product_ProductType_Description="Tipo";
 
 @XendraField(AD_Column_ID="M_Product_Type_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
@@ -5020,7 +5044,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="491acf00-4569-86d1-0b03-51c54bd42f0a",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name M_Product_Type_ID */
 public static final String COLUMNNAME_M_Product_Type_ID = "M_Product_Type_ID";
 /** Set Name.
@@ -5052,28 +5076,29 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
+public static String es_PE_FIELD_Product_Name_Name="Nombre";
+
+@XendraTrl(Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
 public static String es_PE_FIELD_Product_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
 public static String es_PE_FIELD_Product_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
-public static String es_PE_FIELD_Product_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="956518b3-35b7-b9d8-d37b-149a37329383")
 public static final String FIELDNAME_Product_Name="956518b3-35b7-b9d8-d37b-149a37329383";
+
+@XendraTrl(Identifier="22a6c176-1811-f06e-015d-edc55e364dfd")
+public static String es_PE_FIELD_AssignedProducts_Name_Name="Nombre";
 
 @XendraTrl(Identifier="22a6c176-1811-f06e-015d-edc55e364dfd")
 public static String es_PE_FIELD_AssignedProducts_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="22a6c176-1811-f06e-015d-edc55e364dfd")
 public static String es_PE_FIELD_AssignedProducts_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="22a6c176-1811-f06e-015d-edc55e364dfd")
-public static String es_PE_FIELD_AssignedProducts_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5083,13 +5108,13 @@ Identifier="22a6c176-1811-f06e-015d-edc55e364dfd")
 public static final String FIELDNAME_AssignedProducts_Name="22a6c176-1811-f06e-015d-edc55e364dfd";
 
 @XendraTrl(Identifier="03df0d4b-c439-099a-86e4-90d9c6e434ce")
+public static String es_PE_FIELD_ExpenseProduct_Name_Name="Nombre";
+
+@XendraTrl(Identifier="03df0d4b-c439-099a-86e4-90d9c6e434ce")
 public static String es_PE_FIELD_ExpenseProduct_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="03df0d4b-c439-099a-86e4-90d9c6e434ce")
 public static String es_PE_FIELD_ExpenseProduct_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="03df0d4b-c439-099a-86e4-90d9c6e434ce")
-public static String es_PE_FIELD_ExpenseProduct_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5099,13 +5124,13 @@ Identifier="03df0d4b-c439-099a-86e4-90d9c6e434ce")
 public static final String FIELDNAME_ExpenseProduct_Name="03df0d4b-c439-099a-86e4-90d9c6e434ce";
 
 @XendraTrl(Identifier="47d04546-cdc5-93ca-71e5-3e57cea394fa")
+public static String es_PE_FIELD_ResourceProduct_Name_Name="Nombre";
+
+@XendraTrl(Identifier="47d04546-cdc5-93ca-71e5-3e57cea394fa")
 public static String es_PE_FIELD_ResourceProduct_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="47d04546-cdc5-93ca-71e5-3e57cea394fa")
 public static String es_PE_FIELD_ResourceProduct_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="47d04546-cdc5-93ca-71e5-3e57cea394fa")
-public static String es_PE_FIELD_ResourceProduct_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5115,13 +5140,13 @@ Identifier="47d04546-cdc5-93ca-71e5-3e57cea394fa")
 public static final String FIELDNAME_ResourceProduct_Name="47d04546-cdc5-93ca-71e5-3e57cea394fa";
 
 @XendraTrl(Identifier="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4")
+public static String es_PE_FIELD_ProductDimension_Name_Name="Nombre";
+
+@XendraTrl(Identifier="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4")
 public static String es_PE_FIELD_ProductDimension_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4")
 public static String es_PE_FIELD_ProductDimension_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4")
-public static String es_PE_FIELD_ProductDimension_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5131,19 +5156,23 @@ Identifier="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4")
 public static final String FIELDNAME_ProductDimension_Name="39aaa40c-b2dd-c7e9-f8b4-f5de805a2fd4";
 
 @XendraTrl(Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
+public static String es_PE_FIELD_SelectProduct_Name_Name="Nombre";
+
+@XendraTrl(Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
 public static String es_PE_FIELD_SelectProduct_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
 public static String es_PE_FIELD_SelectProduct_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
-public static String es_PE_FIELD_SelectProduct_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="f544ca90-ad71-7eb2-b232-bb76df87d5d4")
 public static final String FIELDNAME_SelectProduct_Name="f544ca90-ad71-7eb2-b232-bb76df87d5d4";
+
+@XendraTrl(Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
+public static String es_PE_FIELD_Product_Name2_Name="Nombre";
 
 @XendraTrl(Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
 public static String es_PE_FIELD_Product_Name2_Description="Identificador alfanumérico de la entidad.";
@@ -5151,13 +5180,11 @@ public static String es_PE_FIELD_Product_Name2_Description="Identificador alfanu
 @XendraTrl(Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
 public static String es_PE_FIELD_Product_Name2_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
-public static String es_PE_FIELD_Product_Name2_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="6070ecc7-8862-cb11-8980-2645387787f9")
 public static final String FIELDNAME_Product_Name2="6070ecc7-8862-cb11-8980-2645387787f9";
 
 @XendraTrl(Identifier="4e3c688f-2ca2-c2a7-1c75-e233e781a684")
@@ -5169,18 +5196,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=true,SeqNo=1,
 IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,
 AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4e3c688f-2ca2-c2a7-1c75-e233e781a684",Synchronized="2017-08-05 16:55:21.0")
+Identifier="4e3c688f-2ca2-c2a7-1c75-e233e781a684",Synchronized="2020-03-03 21:38:48.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** PO_GS AD_Reference=684506f6-a7aa-49ad-852c-8e6c59f303f6 */
-public static final int PO_GS_AD_Reference_ID=1000071;
 /** Set PO_GS.
 @param PO_GS PO_GS */
 public void setPO_GS (String PO_GS)
 {
-if (PO_GS == null || PO_GS.equals(REF_TypesOfGoodsAndServicesPurchased.GOODSRAWMATERIALSSUPPLIES) || PO_GS.equals(REF_TypesOfGoodsAndServicesPurchased.FIXEDASSETS) || PO_GS.equals(REF_TypesOfGoodsAndServicesPurchased.OTHERASSETSHELDINNO1AND2) || PO_GS.equals(REF_TypesOfGoodsAndServicesPurchased.EXPENSESEducationRecreationHealthCulturalREPRESENT) || PO_GS.equals(REF_TypesOfGoodsAndServicesPurchased.OTHEREXPENSESNOTINCLUDEDInParagraph4));
- else throw new IllegalArgumentException ("PO_GS Invalid value - " + PO_GS + " - Reference_ID=1000071 - 1 - 2 - 3 - 4 - 5");
 if (PO_GS != null && PO_GS.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -5195,6 +5217,15 @@ public String getPO_GS()
 return (String)get_Value(COLUMNNAME_PO_GS);
 }
 
+@XendraTrl(Identifier="9d4dd45b-69a5-40ca-9328-bd3b97b8e523")
+public static String es_PE_FIELD_Product_PO_GS_Name="PO_GS";
+@XendraField(AD_Column_ID="PO_GS",
+IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
+IsDisplayed=false,DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=0,SortNo=0,
+IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2020-11-02 17:52:24.0",Identifier="9d4dd45b-69a5-40ca-9328-bd3b97b8e523")
+public static final String FIELDNAME_Product_PO_GS="9d4dd45b-69a5-40ca-9328-bd3b97b8e523";
+
 @XendraTrl(Identifier="22ffb320-abff-41dd-b32c-adcc10e465cf")
 public static String es_PE_COLUMN_PO_GS_Name="po_gs";
 
@@ -5204,7 +5235,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="22ffb320-abff-41dd-b32c-adcc10e465cf",Synchronized="2017-08-05 16:55:21.0")
+Identifier="22ffb320-abff-41dd-b32c-adcc10e465cf",Synchronized="2020-03-03 21:38:48.0")
 /** Column name PO_GS */
 public static final String COLUMNNAME_PO_GS = "PO_GS";
 /** Set Process Now.
@@ -5227,13 +5258,13 @@ return false;
 }
 
 @XendraTrl(Identifier="9226f0da-ae44-9173-2c05-3baa0a99d0cc")
+public static String es_PE_FIELD_Product_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="9226f0da-ae44-9173-2c05-3baa0a99d0cc")
 public static String es_PE_FIELD_Product_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="9226f0da-ae44-9173-2c05-3baa0a99d0cc")
 public static String es_PE_FIELD_Product_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="9226f0da-ae44-9173-2c05-3baa0a99d0cc")
-public static String es_PE_FIELD_Product_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5243,13 +5274,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="9226f0da-ae44-9173-2c05-3baa0a9
 public static final String FIELDNAME_Product_ProcessNow="9226f0da-ae44-9173-2c05-3baa0a99d0cc";
 
 @XendraTrl(Identifier="8a1136c5-13f5-b531-ac4b-4ceca56a70a9")
+public static String es_PE_FIELD_AssignedProducts_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="8a1136c5-13f5-b531-ac4b-4ceca56a70a9")
 public static String es_PE_FIELD_AssignedProducts_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="8a1136c5-13f5-b531-ac4b-4ceca56a70a9")
 public static String es_PE_FIELD_AssignedProducts_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="8a1136c5-13f5-b531-ac4b-4ceca56a70a9")
-public static String es_PE_FIELD_AssignedProducts_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5259,13 +5290,13 @@ Identifier="8a1136c5-13f5-b531-ac4b-4ceca56a70a9")
 public static final String FIELDNAME_AssignedProducts_ProcessNow="8a1136c5-13f5-b531-ac4b-4ceca56a70a9";
 
 @XendraTrl(Identifier="4f38b293-a3e1-de7a-ef94-493d619d6946")
+public static String es_PE_FIELD_ExpenseProduct_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="4f38b293-a3e1-de7a-ef94-493d619d6946")
 public static String es_PE_FIELD_ExpenseProduct_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="4f38b293-a3e1-de7a-ef94-493d619d6946")
 public static String es_PE_FIELD_ExpenseProduct_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="4f38b293-a3e1-de7a-ef94-493d619d6946")
-public static String es_PE_FIELD_ExpenseProduct_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5275,13 +5306,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="4f38b293-a3e1-de7a-ef94-493d619
 public static final String FIELDNAME_ExpenseProduct_ProcessNow="4f38b293-a3e1-de7a-ef94-493d619d6946";
 
 @XendraTrl(Identifier="d27a3be1-457c-6bbc-9458-2e5cf1b52e85")
+public static String es_PE_FIELD_ResourceProduct_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="d27a3be1-457c-6bbc-9458-2e5cf1b52e85")
 public static String es_PE_FIELD_ResourceProduct_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="d27a3be1-457c-6bbc-9458-2e5cf1b52e85")
 public static String es_PE_FIELD_ResourceProduct_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="d27a3be1-457c-6bbc-9458-2e5cf1b52e85")
-public static String es_PE_FIELD_ResourceProduct_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5291,13 +5322,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="d27a3be1-457c-6bbc-9458-2e5cf1b
 public static final String FIELDNAME_ResourceProduct_ProcessNow="d27a3be1-457c-6bbc-9458-2e5cf1b52e85";
 
 @XendraTrl(Identifier="3cc792c8-f682-2e99-10c4-a877ac19f08e")
+public static String es_PE_FIELD_ProductDimension_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="3cc792c8-f682-2e99-10c4-a877ac19f08e")
 public static String es_PE_FIELD_ProductDimension_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="3cc792c8-f682-2e99-10c4-a877ac19f08e")
 public static String es_PE_FIELD_ProductDimension_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="3cc792c8-f682-2e99-10c4-a877ac19f08e")
-public static String es_PE_FIELD_ProductDimension_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5307,13 +5338,13 @@ Identifier="3cc792c8-f682-2e99-10c4-a877ac19f08e")
 public static final String FIELDNAME_ProductDimension_ProcessNow="3cc792c8-f682-2e99-10c4-a877ac19f08e";
 
 @XendraTrl(Identifier="df98c458-527e-80e9-af44-a8690a03d0f7")
+public static String es_PE_FIELD_SelectProduct_ProcessNow_Name="Verificar LDM";
+
+@XendraTrl(Identifier="df98c458-527e-80e9-af44-a8690a03d0f7")
 public static String es_PE_FIELD_SelectProduct_ProcessNow_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="df98c458-527e-80e9-af44-a8690a03d0f7")
 public static String es_PE_FIELD_SelectProduct_ProcessNow_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="df98c458-527e-80e9-af44-a8690a03d0f7")
-public static String es_PE_FIELD_SelectProduct_ProcessNow_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5323,13 +5354,13 @@ Identifier="df98c458-527e-80e9-af44-a8690a03d0f7")
 public static final String FIELDNAME_SelectProduct_ProcessNow="df98c458-527e-80e9-af44-a8690a03d0f7";
 
 @XendraTrl(Identifier="26beac5e-ffa0-68fa-c02d-620a590ef6f6")
+public static String es_PE_FIELD_Product_ProcessNow2_Name="Verificar LDM";
+
+@XendraTrl(Identifier="26beac5e-ffa0-68fa-c02d-620a590ef6f6")
 public static String es_PE_FIELD_Product_ProcessNow2_Description="Verificar estructura de LDM";
 
 @XendraTrl(Identifier="26beac5e-ffa0-68fa-c02d-620a590ef6f6")
 public static String es_PE_FIELD_Product_ProcessNow2_Help="Verificar la estructura de la LDM revisa los elementos y pasos que hacen parte de la lista de materiales";
-
-@XendraTrl(Identifier="26beac5e-ffa0-68fa-c02d-620a590ef6f6")
-public static String es_PE_FIELD_Product_ProcessNow2_Name="Verificar LDM";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5347,19 +5378,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="d551caf4-4ce8-9c21-490e-764e98942f42",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b8f5a634-f077-27b5-a1b0-73ae6d0cf569",Synchronized="2017-08-05 16:55:21.0")
+Identifier="b8f5a634-f077-27b5-a1b0-73ae6d0cf569",Synchronized="2020-03-03 21:38:48.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** ProductType AD_Reference=028a2683-c298-dd54-f589-fe0d15a36c1b */
-public static final int PRODUCTTYPE_AD_Reference_ID=270;
 /** Set Product Type.
 @param ProductType Type of product */
 public void setProductType (String ProductType)
 {
-if (ProductType == null) throw new IllegalArgumentException ("ProductType is mandatory");
-if (ProductType.equals(REF_M_Product_ProductType.Item) || ProductType.equals(REF_M_Product_ProductType.Service) || ProductType.equals(REF_M_Product_ProductType.Resource) || ProductType.equals(REF_M_Product_ProductType.ExpenseType) || ProductType.equals(REF_M_Product_ProductType.Online));
- else throw new IllegalArgumentException ("ProductType Invalid value - " + ProductType + " - Reference_ID=270 - I - S - R - E - O");
 if (ProductType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -5375,13 +5400,13 @@ return (String)get_Value(COLUMNNAME_ProductType);
 }
 
 @XendraTrl(Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
+public static String es_PE_FIELD_Product_ProductType2_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
 public static String es_PE_FIELD_Product_ProductType2_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
 public static String es_PE_FIELD_Product_ProductType2_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
-public static String es_PE_FIELD_Product_ProductType2_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5391,13 +5416,13 @@ Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
 public static final String FIELDNAME_Product_ProductType2="5fab9065-8b85-fd25-02d5-9bfe9994053e";
 
 @XendraTrl(Identifier="85f2f9d8-ff85-0f3a-693a-f6ded336a39d")
+public static String es_PE_FIELD_AssignedProducts_ProductType_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="85f2f9d8-ff85-0f3a-693a-f6ded336a39d")
 public static String es_PE_FIELD_AssignedProducts_ProductType_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="85f2f9d8-ff85-0f3a-693a-f6ded336a39d")
 public static String es_PE_FIELD_AssignedProducts_ProductType_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="85f2f9d8-ff85-0f3a-693a-f6ded336a39d")
-public static String es_PE_FIELD_AssignedProducts_ProductType_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5407,13 +5432,13 @@ Identifier="85f2f9d8-ff85-0f3a-693a-f6ded336a39d")
 public static final String FIELDNAME_AssignedProducts_ProductType="85f2f9d8-ff85-0f3a-693a-f6ded336a39d";
 
 @XendraTrl(Identifier="779fee64-0680-4cb6-96f6-1a2ecbee5f83")
+public static String es_PE_FIELD_ExpenseProduct_ProductType_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="779fee64-0680-4cb6-96f6-1a2ecbee5f83")
 public static String es_PE_FIELD_ExpenseProduct_ProductType_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="779fee64-0680-4cb6-96f6-1a2ecbee5f83")
 public static String es_PE_FIELD_ExpenseProduct_ProductType_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="779fee64-0680-4cb6-96f6-1a2ecbee5f83")
-public static String es_PE_FIELD_ExpenseProduct_ProductType_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5423,13 +5448,13 @@ Identifier="779fee64-0680-4cb6-96f6-1a2ecbee5f83")
 public static final String FIELDNAME_ExpenseProduct_ProductType="779fee64-0680-4cb6-96f6-1a2ecbee5f83";
 
 @XendraTrl(Identifier="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2")
+public static String es_PE_FIELD_ResourceProduct_ProductType_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2")
 public static String es_PE_FIELD_ResourceProduct_ProductType_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2")
 public static String es_PE_FIELD_ResourceProduct_ProductType_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2")
-public static String es_PE_FIELD_ResourceProduct_ProductType_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5439,13 +5464,13 @@ Identifier="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2")
 public static final String FIELDNAME_ResourceProduct_ProductType="1ccf5631-4a05-3766-e5b6-f7ed64a6e0b2";
 
 @XendraTrl(Identifier="2ca6c62c-988a-08ec-8c60-2d811041fb85")
+public static String es_PE_FIELD_ProductDimension_ProductType_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="2ca6c62c-988a-08ec-8c60-2d811041fb85")
 public static String es_PE_FIELD_ProductDimension_ProductType_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="2ca6c62c-988a-08ec-8c60-2d811041fb85")
 public static String es_PE_FIELD_ProductDimension_ProductType_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="2ca6c62c-988a-08ec-8c60-2d811041fb85")
-public static String es_PE_FIELD_ProductDimension_ProductType_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5455,13 +5480,13 @@ Identifier="2ca6c62c-988a-08ec-8c60-2d811041fb85")
 public static final String FIELDNAME_ProductDimension_ProductType="2ca6c62c-988a-08ec-8c60-2d811041fb85";
 
 @XendraTrl(Identifier="c13c67bb-33a5-f2b8-72bf-348edfcb9774")
+public static String es_PE_FIELD_SelectProduct_ProductType_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="c13c67bb-33a5-f2b8-72bf-348edfcb9774")
 public static String es_PE_FIELD_SelectProduct_ProductType_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="c13c67bb-33a5-f2b8-72bf-348edfcb9774")
 public static String es_PE_FIELD_SelectProduct_ProductType_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="c13c67bb-33a5-f2b8-72bf-348edfcb9774")
-public static String es_PE_FIELD_SelectProduct_ProductType_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5471,13 +5496,13 @@ Identifier="c13c67bb-33a5-f2b8-72bf-348edfcb9774")
 public static final String FIELDNAME_SelectProduct_ProductType="c13c67bb-33a5-f2b8-72bf-348edfcb9774";
 
 @XendraTrl(Identifier="cadbb073-0de2-eedf-a691-ff678d6bec5a")
+public static String es_PE_FIELD_Product_ProductType3_Name="Tipo de Producto";
+
+@XendraTrl(Identifier="cadbb073-0de2-eedf-a691-ff678d6bec5a")
 public static String es_PE_FIELD_Product_ProductType3_Description="Tipo de Producto";
 
 @XendraTrl(Identifier="cadbb073-0de2-eedf-a691-ff678d6bec5a")
 public static String es_PE_FIELD_Product_ProductType3_Help="El tipo de producto también determina consecuencias contables";
-
-@XendraTrl(Identifier="cadbb073-0de2-eedf-a691-ff678d6bec5a")
-public static String es_PE_FIELD_Product_ProductType3_Name="Tipo de Producto";
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5495,19 +5520,13 @@ FieldLength=1,DefaultValue="I",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b1eb05ff-9b0e-6b4f-31b9-1a771064c4ab",Synchronized="2017-08-05 16:55:21.0")
+Identifier="b1eb05ff-9b0e-6b4f-31b9-1a771064c4ab",Synchronized="2020-03-03 21:38:48.0")
 /** Column name ProductType */
 public static final String COLUMNNAME_ProductType = "ProductType";
-
-/** ProductTypeTax AD_Reference=aa86fc62-6f03-d7f8-4cb3-2cdef5206e20 */
-public static final int PRODUCTTYPETAX_AD_Reference_ID=1000024;
 /** Set ProductTypeTax.
 @param ProductTypeTax ProductTypeTax */
 public void setProductTypeTax (String ProductTypeTax)
 {
-if (ProductTypeTax == null) throw new IllegalArgumentException ("ProductTypeTax is mandatory");
-if (ProductTypeTax.equals(REF_M_Product_ProductType_Tax.Commodity) || ProductTypeTax.equals(REF_M_Product_ProductType_Tax.Materials) || ProductTypeTax.equals(REF_M_Product_ProductType_Tax.FineshedProduct) || ProductTypeTax.equals(REF_M_Product_ProductType_Tax.VariousSupplies) || ProductTypeTax.equals(REF_M_Product_ProductType_Tax.Packaging) || ProductTypeTax.equals(REF_M_Product_ProductType_Tax.Others));
- else throw new IllegalArgumentException ("ProductTypeTax Invalid value - " + ProductTypeTax + " - Reference_ID=1000024 - MC - MT - PT - SD - EE - OT");
 if (ProductTypeTax.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -5541,7 +5560,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e92b15bd-a77a-66b2-9293-5c91c23f76fe",Synchronized="2017-08-05 16:55:21.0")
+Identifier="e92b15bd-a77a-66b2-9293-5c91c23f76fe",Synchronized="2020-03-03 21:38:48.0")
 /** Column name ProductTypeTax */
 public static final String COLUMNNAME_ProductTypeTax = "ProductTypeTax";
 /** Set Mail Template.
@@ -5562,13 +5581,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7229adb0-b387-5bad-3363-2d951397eefc")
+public static String es_PE_FIELD_Product_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="7229adb0-b387-5bad-3363-2d951397eefc")
 public static String es_PE_FIELD_Product_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="7229adb0-b387-5bad-3363-2d951397eefc")
 public static String es_PE_FIELD_Product_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="7229adb0-b387-5bad-3363-2d951397eefc")
-public static String es_PE_FIELD_Product_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5578,13 +5597,13 @@ Identifier="7229adb0-b387-5bad-3363-2d951397eefc")
 public static final String FIELDNAME_Product_MailTemplate="7229adb0-b387-5bad-3363-2d951397eefc";
 
 @XendraTrl(Identifier="cc6ee418-191b-8347-16f9-dbe4227d0493")
+public static String es_PE_FIELD_AssignedProducts_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="cc6ee418-191b-8347-16f9-dbe4227d0493")
 public static String es_PE_FIELD_AssignedProducts_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="cc6ee418-191b-8347-16f9-dbe4227d0493")
 public static String es_PE_FIELD_AssignedProducts_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="cc6ee418-191b-8347-16f9-dbe4227d0493")
-public static String es_PE_FIELD_AssignedProducts_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5594,13 +5613,13 @@ Identifier="cc6ee418-191b-8347-16f9-dbe4227d0493")
 public static final String FIELDNAME_AssignedProducts_MailTemplate="cc6ee418-191b-8347-16f9-dbe4227d0493";
 
 @XendraTrl(Identifier="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7")
+public static String es_PE_FIELD_ExpenseProduct_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7")
 public static String es_PE_FIELD_ExpenseProduct_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7")
 public static String es_PE_FIELD_ExpenseProduct_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7")
-public static String es_PE_FIELD_ExpenseProduct_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5610,13 +5629,13 @@ Identifier="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7")
 public static final String FIELDNAME_ExpenseProduct_MailTemplate="2af3a49f-ec32-93ea-8f9e-f47183d6cbb7";
 
 @XendraTrl(Identifier="ce79d959-e176-953f-4a5a-118d3451195f")
+public static String es_PE_FIELD_ResourceProduct_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="ce79d959-e176-953f-4a5a-118d3451195f")
 public static String es_PE_FIELD_ResourceProduct_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="ce79d959-e176-953f-4a5a-118d3451195f")
 public static String es_PE_FIELD_ResourceProduct_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="ce79d959-e176-953f-4a5a-118d3451195f")
-public static String es_PE_FIELD_ResourceProduct_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5626,13 +5645,13 @@ Identifier="ce79d959-e176-953f-4a5a-118d3451195f")
 public static final String FIELDNAME_ResourceProduct_MailTemplate="ce79d959-e176-953f-4a5a-118d3451195f";
 
 @XendraTrl(Identifier="c77243a5-fdfa-5ed7-ff28-92943ab30c65")
+public static String es_PE_FIELD_ProductDimension_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="c77243a5-fdfa-5ed7-ff28-92943ab30c65")
 public static String es_PE_FIELD_ProductDimension_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="c77243a5-fdfa-5ed7-ff28-92943ab30c65")
 public static String es_PE_FIELD_ProductDimension_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="c77243a5-fdfa-5ed7-ff28-92943ab30c65")
-public static String es_PE_FIELD_ProductDimension_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5642,13 +5661,13 @@ Identifier="c77243a5-fdfa-5ed7-ff28-92943ab30c65")
 public static final String FIELDNAME_ProductDimension_MailTemplate="c77243a5-fdfa-5ed7-ff28-92943ab30c65";
 
 @XendraTrl(Identifier="72a292b0-4698-fd7f-1724-cd569be3819e")
+public static String es_PE_FIELD_SelectProduct_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="72a292b0-4698-fd7f-1724-cd569be3819e")
 public static String es_PE_FIELD_SelectProduct_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="72a292b0-4698-fd7f-1724-cd569be3819e")
 public static String es_PE_FIELD_SelectProduct_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="72a292b0-4698-fd7f-1724-cd569be3819e")
-public static String es_PE_FIELD_SelectProduct_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5658,13 +5677,13 @@ Identifier="72a292b0-4698-fd7f-1724-cd569be3819e")
 public static final String FIELDNAME_SelectProduct_MailTemplate="72a292b0-4698-fd7f-1724-cd569be3819e";
 
 @XendraTrl(Identifier="8e265ed5-b5d5-40ec-f41a-60a16664d8ae")
+public static String es_PE_FIELD_Product_MailTemplate2_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="8e265ed5-b5d5-40ec-f41a-60a16664d8ae")
 public static String es_PE_FIELD_Product_MailTemplate2_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="8e265ed5-b5d5-40ec-f41a-60a16664d8ae")
 public static String es_PE_FIELD_Product_MailTemplate2_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="8e265ed5-b5d5-40ec-f41a-60a16664d8ae")
-public static String es_PE_FIELD_Product_MailTemplate2_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5682,12 +5701,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f37f98a-4091-bb3a-b951-c90e212b9359",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name R_MailText_ID */
 public static final String COLUMNNAME_R_MailText_ID = "R_MailText_ID";
-
-/** SalesRep_ID AD_Reference=15251147-a1b6-4a83-a3a5-2d3ae7db69d9 */
-public static final int SALESREP_ID_AD_Reference_ID=190;
 /** Set Sales Representative.
 @param SalesRep_ID Sales Representative or Company Agent */
 public void setSalesRep_ID (int SalesRep_ID)
@@ -5706,13 +5722,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="bffc196a-59d0-620f-6d9f-dd5ac7984214")
+public static String es_PE_FIELD_Product_CompanyAgent_Name="Comprador";
+
+@XendraTrl(Identifier="bffc196a-59d0-620f-6d9f-dd5ac7984214")
 public static String es_PE_FIELD_Product_CompanyAgent_Description="Comprador/ Agente";
 
 @XendraTrl(Identifier="bffc196a-59d0-620f-6d9f-dd5ac7984214")
 public static String es_PE_FIELD_Product_CompanyAgent_Help="Agente de compras para el documento.";
-
-@XendraTrl(Identifier="bffc196a-59d0-620f-6d9f-dd5ac7984214")
-public static String es_PE_FIELD_Product_CompanyAgent_Name="Comprador";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5722,13 +5738,13 @@ Identifier="bffc196a-59d0-620f-6d9f-dd5ac7984214")
 public static final String FIELDNAME_Product_CompanyAgent="bffc196a-59d0-620f-6d9f-dd5ac7984214";
 
 @XendraTrl(Identifier="f54f43cd-b587-a91e-9308-7a41324dba93")
+public static String es_PE_FIELD_AssignedProducts_CompanyAgent_Name="Comprador";
+
+@XendraTrl(Identifier="f54f43cd-b587-a91e-9308-7a41324dba93")
 public static String es_PE_FIELD_AssignedProducts_CompanyAgent_Description="Comprador/ Agente";
 
 @XendraTrl(Identifier="f54f43cd-b587-a91e-9308-7a41324dba93")
 public static String es_PE_FIELD_AssignedProducts_CompanyAgent_Help="Agente de compras para el documento.";
-
-@XendraTrl(Identifier="f54f43cd-b587-a91e-9308-7a41324dba93")
-public static String es_PE_FIELD_AssignedProducts_CompanyAgent_Name="Comprador";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5738,13 +5754,13 @@ Identifier="f54f43cd-b587-a91e-9308-7a41324dba93")
 public static final String FIELDNAME_AssignedProducts_CompanyAgent="f54f43cd-b587-a91e-9308-7a41324dba93";
 
 @XendraTrl(Identifier="5848aba3-ce1f-f843-f061-c857be87db67")
+public static String es_PE_FIELD_ExpenseProduct_SalesRepresentative_Name="Agente Cía";
+
+@XendraTrl(Identifier="5848aba3-ce1f-f843-f061-c857be87db67")
 public static String es_PE_FIELD_ExpenseProduct_SalesRepresentative_Description="Representante de Ventas";
 
 @XendraTrl(Identifier="5848aba3-ce1f-f843-f061-c857be87db67")
 public static String es_PE_FIELD_ExpenseProduct_SalesRepresentative_Help="El representante de ventas indica el representante de ventas para esta región.";
-
-@XendraTrl(Identifier="5848aba3-ce1f-f843-f061-c857be87db67")
-public static String es_PE_FIELD_ExpenseProduct_SalesRepresentative_Name="Agente Cía";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5754,13 +5770,13 @@ Identifier="5848aba3-ce1f-f843-f061-c857be87db67")
 public static final String FIELDNAME_ExpenseProduct_SalesRepresentative="5848aba3-ce1f-f843-f061-c857be87db67";
 
 @XendraTrl(Identifier="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066")
+public static String es_PE_FIELD_ResourceProduct_SalesRepresentative_Name="Agente Cía";
+
+@XendraTrl(Identifier="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066")
 public static String es_PE_FIELD_ResourceProduct_SalesRepresentative_Description="Representante de Ventas";
 
 @XendraTrl(Identifier="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066")
 public static String es_PE_FIELD_ResourceProduct_SalesRepresentative_Help="El representante de ventas indica el representante de ventas para esta región.";
-
-@XendraTrl(Identifier="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066")
-public static String es_PE_FIELD_ResourceProduct_SalesRepresentative_Name="Agente Cía";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5770,13 +5786,13 @@ Identifier="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066")
 public static final String FIELDNAME_ResourceProduct_SalesRepresentative="3675dcc5-dde3-c0f6-60b2-bf98b0ebb066";
 
 @XendraTrl(Identifier="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027")
+public static String es_PE_FIELD_ProductDimension_SalesRepresentative_Name="Agente Cía";
+
+@XendraTrl(Identifier="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027")
 public static String es_PE_FIELD_ProductDimension_SalesRepresentative_Description="Representante de Ventas";
 
 @XendraTrl(Identifier="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027")
 public static String es_PE_FIELD_ProductDimension_SalesRepresentative_Help="El representante de ventas indica el representante de ventas para esta región.";
-
-@XendraTrl(Identifier="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027")
-public static String es_PE_FIELD_ProductDimension_SalesRepresentative_Name="Agente Cía";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5786,13 +5802,13 @@ Identifier="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027")
 public static final String FIELDNAME_ProductDimension_SalesRepresentative="bdd8226c-ec6f-8fd1-8aa0-51c4d27fa027";
 
 @XendraTrl(Identifier="5bae1709-2b15-5ad8-e7cf-59da0a543337")
+public static String es_PE_FIELD_SelectProduct_CompanyAgent_Name="Comprador";
+
+@XendraTrl(Identifier="5bae1709-2b15-5ad8-e7cf-59da0a543337")
 public static String es_PE_FIELD_SelectProduct_CompanyAgent_Description="Comprador/ Agente";
 
 @XendraTrl(Identifier="5bae1709-2b15-5ad8-e7cf-59da0a543337")
 public static String es_PE_FIELD_SelectProduct_CompanyAgent_Help="Agente de compras para el documento.";
-
-@XendraTrl(Identifier="5bae1709-2b15-5ad8-e7cf-59da0a543337")
-public static String es_PE_FIELD_SelectProduct_CompanyAgent_Name="Comprador";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5802,13 +5818,13 @@ Identifier="5bae1709-2b15-5ad8-e7cf-59da0a543337")
 public static final String FIELDNAME_SelectProduct_CompanyAgent="5bae1709-2b15-5ad8-e7cf-59da0a543337";
 
 @XendraTrl(Identifier="46ab34f9-c70a-cef1-496f-da5be4de1943")
+public static String es_PE_FIELD_Product_CompanyAgent2_Name="Comprador";
+
+@XendraTrl(Identifier="46ab34f9-c70a-cef1-496f-da5be4de1943")
 public static String es_PE_FIELD_Product_CompanyAgent2_Description="Comprador/ Agente";
 
 @XendraTrl(Identifier="46ab34f9-c70a-cef1-496f-da5be4de1943")
 public static String es_PE_FIELD_Product_CompanyAgent2_Help="Agente de compras para el documento.";
-
-@XendraTrl(Identifier="46ab34f9-c70a-cef1-496f-da5be4de1943")
-public static String es_PE_FIELD_Product_CompanyAgent2_Name="Comprador";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5826,7 +5842,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a50d170c-123f-183d-a1f2-1d587810574f",Synchronized="2017-08-05 16:55:21.0")
+Identifier="a50d170c-123f-183d-a1f2-1d587810574f",Synchronized="2020-03-03 21:38:48.0")
 /** Column name SalesRep_ID */
 public static final String COLUMNNAME_SalesRep_ID = "SalesRep_ID";
 /** Set Expense Type.
@@ -5847,10 +5863,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fde980b3-1091-b61f-8056-f7dce696fdbb")
-public static String es_PE_FIELD_Product_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_Product_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="fde980b3-1091-b61f-8056-f7dce696fdbb")
-public static String es_PE_FIELD_Product_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_Product_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5860,10 +5876,10 @@ Identifier="fde980b3-1091-b61f-8056-f7dce696fdbb")
 public static final String FIELDNAME_Product_ExpenseType="fde980b3-1091-b61f-8056-f7dce696fdbb";
 
 @XendraTrl(Identifier="1fb517d5-023b-3da5-4eb2-8b767f7f09c3")
-public static String es_PE_FIELD_AssignedProducts_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_AssignedProducts_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="1fb517d5-023b-3da5-4eb2-8b767f7f09c3")
-public static String es_PE_FIELD_AssignedProducts_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_AssignedProducts_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5873,10 +5889,10 @@ Identifier="1fb517d5-023b-3da5-4eb2-8b767f7f09c3")
 public static final String FIELDNAME_AssignedProducts_ExpenseType="1fb517d5-023b-3da5-4eb2-8b767f7f09c3";
 
 @XendraTrl(Identifier="d71ab3bb-0a48-5a95-cc02-e9664a8db083")
-public static String es_PE_FIELD_ExpenseProduct_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_ExpenseProduct_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="d71ab3bb-0a48-5a95-cc02-e9664a8db083")
-public static String es_PE_FIELD_ExpenseProduct_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_ExpenseProduct_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5886,10 +5902,10 @@ Identifier="d71ab3bb-0a48-5a95-cc02-e9664a8db083")
 public static final String FIELDNAME_ExpenseProduct_ExpenseType="d71ab3bb-0a48-5a95-cc02-e9664a8db083";
 
 @XendraTrl(Identifier="71b180ad-90ba-397e-14ac-49bd4e79abdf")
-public static String es_PE_FIELD_ResourceProduct_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_ResourceProduct_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="71b180ad-90ba-397e-14ac-49bd4e79abdf")
-public static String es_PE_FIELD_ResourceProduct_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_ResourceProduct_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5899,10 +5915,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="71b180ad-90ba-397e-14ac-49bd4e7
 public static final String FIELDNAME_ResourceProduct_ExpenseType="71b180ad-90ba-397e-14ac-49bd4e79abdf";
 
 @XendraTrl(Identifier="7c75b3f6-edaf-1437-02a9-61399c04fb84")
-public static String es_PE_FIELD_ProductDimension_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_ProductDimension_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="7c75b3f6-edaf-1437-02a9-61399c04fb84")
-public static String es_PE_FIELD_ProductDimension_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_ProductDimension_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5912,10 +5928,10 @@ Identifier="7c75b3f6-edaf-1437-02a9-61399c04fb84")
 public static final String FIELDNAME_ProductDimension_ExpenseType="7c75b3f6-edaf-1437-02a9-61399c04fb84";
 
 @XendraTrl(Identifier="25f9bde6-4cb0-072b-5f98-994fd1ffb72a")
-public static String es_PE_FIELD_SelectProduct_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_SelectProduct_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="25f9bde6-4cb0-072b-5f98-994fd1ffb72a")
-public static String es_PE_FIELD_SelectProduct_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_SelectProduct_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5925,10 +5941,10 @@ Identifier="25f9bde6-4cb0-072b-5f98-994fd1ffb72a")
 public static final String FIELDNAME_SelectProduct_ExpenseType="25f9bde6-4cb0-072b-5f98-994fd1ffb72a";
 
 @XendraTrl(Identifier="0255e5ce-90de-fa60-e1e4-80bb79ffa281")
-public static String es_PE_FIELD_Product_ExpenseType2_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_Product_ExpenseType2_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="0255e5ce-90de-fa60-e1e4-80bb79ffa281")
-public static String es_PE_FIELD_Product_ExpenseType2_Name="Tipo de Gasto";
+public static String es_PE_FIELD_Product_ExpenseType2_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5946,7 +5962,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0bafc89a-ea6a-5f13-86b0-7aa1a03389e4",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name S_ExpenseType_ID */
 public static final String COLUMNNAME_S_ExpenseType_ID = "S_ExpenseType_ID";
 /** Set Shelf Depth.
@@ -5965,13 +5981,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2")
+public static String es_PE_FIELD_Product_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2")
 public static String es_PE_FIELD_Product_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2")
 public static String es_PE_FIELD_Product_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2")
-public static String es_PE_FIELD_Product_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -5981,13 +5997,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac
 public static final String FIELDNAME_Product_ShelfDepth="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2";
 
 @XendraTrl(Identifier="d4898f4a-fe72-9779-7090-2ff4cdac3812")
+public static String es_PE_FIELD_AssignedProducts_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="d4898f4a-fe72-9779-7090-2ff4cdac3812")
 public static String es_PE_FIELD_AssignedProducts_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="d4898f4a-fe72-9779-7090-2ff4cdac3812")
 public static String es_PE_FIELD_AssignedProducts_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="d4898f4a-fe72-9779-7090-2ff4cdac3812")
-public static String es_PE_FIELD_AssignedProducts_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -5997,13 +6013,13 @@ Identifier="d4898f4a-fe72-9779-7090-2ff4cdac3812")
 public static final String FIELDNAME_AssignedProducts_ShelfDepth="d4898f4a-fe72-9779-7090-2ff4cdac3812";
 
 @XendraTrl(Identifier="082fb112-cc2a-007c-9371-9e7f6ab2ca0b")
+public static String es_PE_FIELD_ExpenseProduct_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="082fb112-cc2a-007c-9371-9e7f6ab2ca0b")
 public static String es_PE_FIELD_ExpenseProduct_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="082fb112-cc2a-007c-9371-9e7f6ab2ca0b")
 public static String es_PE_FIELD_ExpenseProduct_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="082fb112-cc2a-007c-9371-9e7f6ab2ca0b")
-public static String es_PE_FIELD_ExpenseProduct_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6013,13 +6029,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="082fb112-cc2a-007c-9371-9e7f6ab
 public static final String FIELDNAME_ExpenseProduct_ShelfDepth="082fb112-cc2a-007c-9371-9e7f6ab2ca0b";
 
 @XendraTrl(Identifier="24bea1fa-63e8-03fa-e76b-fcbc671e0dd5")
+public static String es_PE_FIELD_ResourceProduct_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="24bea1fa-63e8-03fa-e76b-fcbc671e0dd5")
 public static String es_PE_FIELD_ResourceProduct_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="24bea1fa-63e8-03fa-e76b-fcbc671e0dd5")
 public static String es_PE_FIELD_ResourceProduct_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="24bea1fa-63e8-03fa-e76b-fcbc671e0dd5")
-public static String es_PE_FIELD_ResourceProduct_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6029,13 +6045,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="24bea1fa-63e8-03fa-e76b-fcbc671
 public static final String FIELDNAME_ResourceProduct_ShelfDepth="24bea1fa-63e8-03fa-e76b-fcbc671e0dd5";
 
 @XendraTrl(Identifier="9d8983cc-0e8f-a19b-22db-502b7035d305")
+public static String es_PE_FIELD_ProductDimension_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="9d8983cc-0e8f-a19b-22db-502b7035d305")
 public static String es_PE_FIELD_ProductDimension_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="9d8983cc-0e8f-a19b-22db-502b7035d305")
 public static String es_PE_FIELD_ProductDimension_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="9d8983cc-0e8f-a19b-22db-502b7035d305")
-public static String es_PE_FIELD_ProductDimension_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6045,13 +6061,13 @@ Identifier="9d8983cc-0e8f-a19b-22db-502b7035d305")
 public static final String FIELDNAME_ProductDimension_ShelfDepth="9d8983cc-0e8f-a19b-22db-502b7035d305";
 
 @XendraTrl(Identifier="32458ba5-aba6-b07c-6194-b0dd8e97a74d")
+public static String es_PE_FIELD_SelectProduct_ShelfDepth_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="32458ba5-aba6-b07c-6194-b0dd8e97a74d")
 public static String es_PE_FIELD_SelectProduct_ShelfDepth_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="32458ba5-aba6-b07c-6194-b0dd8e97a74d")
 public static String es_PE_FIELD_SelectProduct_ShelfDepth_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="32458ba5-aba6-b07c-6194-b0dd8e97a74d")
-public static String es_PE_FIELD_SelectProduct_ShelfDepth_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6061,13 +6077,13 @@ Identifier="32458ba5-aba6-b07c-6194-b0dd8e97a74d")
 public static final String FIELDNAME_SelectProduct_ShelfDepth="32458ba5-aba6-b07c-6194-b0dd8e97a74d";
 
 @XendraTrl(Identifier="36a7e019-2273-2a69-f0d8-a17bd4217489")
+public static String es_PE_FIELD_Product_ShelfDepth2_Name="Profundidad del Anaquel";
+
+@XendraTrl(Identifier="36a7e019-2273-2a69-f0d8-a17bd4217489")
 public static String es_PE_FIELD_Product_ShelfDepth2_Description="Profundidad del anaquel requerida";
 
 @XendraTrl(Identifier="36a7e019-2273-2a69-f0d8-a17bd4217489")
 public static String es_PE_FIELD_Product_ShelfDepth2_Help="La profundidad del Anaquel indica la dimensión de la profundidad requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="36a7e019-2273-2a69-f0d8-a17bd4217489")
-public static String es_PE_FIELD_Product_ShelfDepth2_Name="Profundidad del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6085,7 +6101,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1039c92e-dc25-3176-b35e-7a81aefbd213",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name ShelfDepth */
 public static final String COLUMNNAME_ShelfDepth = "ShelfDepth";
 /** Set Shelf Height.
@@ -6104,13 +6120,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba")
+public static String es_PE_FIELD_Product_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba")
 public static String es_PE_FIELD_Product_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba")
 public static String es_PE_FIELD_Product_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba")
-public static String es_PE_FIELD_Product_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6120,13 +6136,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="d89ac9a2-9ca1-8f01-122a-9c8709f
 public static final String FIELDNAME_Product_ShelfHeight="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba";
 
 @XendraTrl(Identifier="72d1dcea-4adb-b710-47b2-3989aa759b6d")
+public static String es_PE_FIELD_AssignedProducts_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="72d1dcea-4adb-b710-47b2-3989aa759b6d")
 public static String es_PE_FIELD_AssignedProducts_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="72d1dcea-4adb-b710-47b2-3989aa759b6d")
 public static String es_PE_FIELD_AssignedProducts_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="72d1dcea-4adb-b710-47b2-3989aa759b6d")
-public static String es_PE_FIELD_AssignedProducts_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6136,13 +6152,13 @@ Identifier="72d1dcea-4adb-b710-47b2-3989aa759b6d")
 public static final String FIELDNAME_AssignedProducts_ShelfHeight="72d1dcea-4adb-b710-47b2-3989aa759b6d";
 
 @XendraTrl(Identifier="b891c263-498c-15df-56d7-b8aa330be7c8")
+public static String es_PE_FIELD_ExpenseProduct_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="b891c263-498c-15df-56d7-b8aa330be7c8")
 public static String es_PE_FIELD_ExpenseProduct_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="b891c263-498c-15df-56d7-b8aa330be7c8")
 public static String es_PE_FIELD_ExpenseProduct_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="b891c263-498c-15df-56d7-b8aa330be7c8")
-public static String es_PE_FIELD_ExpenseProduct_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6152,13 +6168,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="b891c263-498c-15df-56d7-b8aa330
 public static final String FIELDNAME_ExpenseProduct_ShelfHeight="b891c263-498c-15df-56d7-b8aa330be7c8";
 
 @XendraTrl(Identifier="d8d2783c-fbcf-22bf-2008-157187f0a2cd")
+public static String es_PE_FIELD_ResourceProduct_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="d8d2783c-fbcf-22bf-2008-157187f0a2cd")
 public static String es_PE_FIELD_ResourceProduct_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="d8d2783c-fbcf-22bf-2008-157187f0a2cd")
 public static String es_PE_FIELD_ResourceProduct_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="d8d2783c-fbcf-22bf-2008-157187f0a2cd")
-public static String es_PE_FIELD_ResourceProduct_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6168,13 +6184,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="d8d2783c-fbcf-22bf-2008-157187f
 public static final String FIELDNAME_ResourceProduct_ShelfHeight="d8d2783c-fbcf-22bf-2008-157187f0a2cd";
 
 @XendraTrl(Identifier="88def597-cbd5-5184-d281-a7363535de50")
+public static String es_PE_FIELD_ProductDimension_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="88def597-cbd5-5184-d281-a7363535de50")
 public static String es_PE_FIELD_ProductDimension_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="88def597-cbd5-5184-d281-a7363535de50")
 public static String es_PE_FIELD_ProductDimension_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="88def597-cbd5-5184-d281-a7363535de50")
-public static String es_PE_FIELD_ProductDimension_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6184,13 +6200,13 @@ Identifier="88def597-cbd5-5184-d281-a7363535de50")
 public static final String FIELDNAME_ProductDimension_ShelfHeight="88def597-cbd5-5184-d281-a7363535de50";
 
 @XendraTrl(Identifier="636b1ded-8749-8c09-75e8-5f82686957f9")
+public static String es_PE_FIELD_SelectProduct_ShelfHeight_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="636b1ded-8749-8c09-75e8-5f82686957f9")
 public static String es_PE_FIELD_SelectProduct_ShelfHeight_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="636b1ded-8749-8c09-75e8-5f82686957f9")
 public static String es_PE_FIELD_SelectProduct_ShelfHeight_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="636b1ded-8749-8c09-75e8-5f82686957f9")
-public static String es_PE_FIELD_SelectProduct_ShelfHeight_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6200,13 +6216,13 @@ Identifier="636b1ded-8749-8c09-75e8-5f82686957f9")
 public static final String FIELDNAME_SelectProduct_ShelfHeight="636b1ded-8749-8c09-75e8-5f82686957f9";
 
 @XendraTrl(Identifier="ac9eec37-8109-be7d-ecdc-26fb79139855")
+public static String es_PE_FIELD_Product_ShelfHeight2_Name="Altura del Anaquel";
+
+@XendraTrl(Identifier="ac9eec37-8109-be7d-ecdc-26fb79139855")
 public static String es_PE_FIELD_Product_ShelfHeight2_Description="Altura del anaquel requerida";
 
 @XendraTrl(Identifier="ac9eec37-8109-be7d-ecdc-26fb79139855")
 public static String es_PE_FIELD_Product_ShelfHeight2_Help="La altura del Anaquel indica la dimensión de la altura requerida en un anaquel para un producto";
-
-@XendraTrl(Identifier="ac9eec37-8109-be7d-ecdc-26fb79139855")
-public static String es_PE_FIELD_Product_ShelfHeight2_Name="Altura del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6224,7 +6240,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7933b77-900e-b627-8aa8-4b16e9c0a197",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name ShelfHeight */
 public static final String COLUMNNAME_ShelfHeight = "ShelfHeight";
 /** Set Shelf Width.
@@ -6243,13 +6259,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b4f382d0-6415-9b88-e908-7542456731e2")
+public static String es_PE_FIELD_Product_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="b4f382d0-6415-9b88-e908-7542456731e2")
 public static String es_PE_FIELD_Product_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="b4f382d0-6415-9b88-e908-7542456731e2")
 public static String es_PE_FIELD_Product_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="b4f382d0-6415-9b88-e908-7542456731e2")
-public static String es_PE_FIELD_Product_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6259,13 +6275,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="b4f382d0-6415-9b88-e908-7542456
 public static final String FIELDNAME_Product_ShelfWidth="b4f382d0-6415-9b88-e908-7542456731e2";
 
 @XendraTrl(Identifier="0887541a-b686-5e45-69a9-7733ae4bfc71")
+public static String es_PE_FIELD_AssignedProducts_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="0887541a-b686-5e45-69a9-7733ae4bfc71")
 public static String es_PE_FIELD_AssignedProducts_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="0887541a-b686-5e45-69a9-7733ae4bfc71")
 public static String es_PE_FIELD_AssignedProducts_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="0887541a-b686-5e45-69a9-7733ae4bfc71")
-public static String es_PE_FIELD_AssignedProducts_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6275,13 +6291,13 @@ Identifier="0887541a-b686-5e45-69a9-7733ae4bfc71")
 public static final String FIELDNAME_AssignedProducts_ShelfWidth="0887541a-b686-5e45-69a9-7733ae4bfc71";
 
 @XendraTrl(Identifier="79400657-e032-edec-d4fc-3105c458e1fe")
+public static String es_PE_FIELD_ExpenseProduct_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="79400657-e032-edec-d4fc-3105c458e1fe")
 public static String es_PE_FIELD_ExpenseProduct_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="79400657-e032-edec-d4fc-3105c458e1fe")
 public static String es_PE_FIELD_ExpenseProduct_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="79400657-e032-edec-d4fc-3105c458e1fe")
-public static String es_PE_FIELD_ExpenseProduct_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6291,13 +6307,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="79400657-e032-edec-d4fc-3105c45
 public static final String FIELDNAME_ExpenseProduct_ShelfWidth="79400657-e032-edec-d4fc-3105c458e1fe";
 
 @XendraTrl(Identifier="07330995-7424-b2a9-1079-db9068829d1d")
+public static String es_PE_FIELD_ResourceProduct_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="07330995-7424-b2a9-1079-db9068829d1d")
 public static String es_PE_FIELD_ResourceProduct_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="07330995-7424-b2a9-1079-db9068829d1d")
 public static String es_PE_FIELD_ResourceProduct_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="07330995-7424-b2a9-1079-db9068829d1d")
-public static String es_PE_FIELD_ResourceProduct_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6307,13 +6323,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="07330995-7424-b2a9-1079-db90688
 public static final String FIELDNAME_ResourceProduct_ShelfWidth="07330995-7424-b2a9-1079-db9068829d1d";
 
 @XendraTrl(Identifier="9a526f24-057f-d1c9-2660-69b15a0558fd")
+public static String es_PE_FIELD_ProductDimension_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="9a526f24-057f-d1c9-2660-69b15a0558fd")
 public static String es_PE_FIELD_ProductDimension_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="9a526f24-057f-d1c9-2660-69b15a0558fd")
 public static String es_PE_FIELD_ProductDimension_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="9a526f24-057f-d1c9-2660-69b15a0558fd")
-public static String es_PE_FIELD_ProductDimension_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6323,13 +6339,13 @@ Identifier="9a526f24-057f-d1c9-2660-69b15a0558fd")
 public static final String FIELDNAME_ProductDimension_ShelfWidth="9a526f24-057f-d1c9-2660-69b15a0558fd";
 
 @XendraTrl(Identifier="013328e8-0164-86b8-1359-d9a83c6e2cbc")
+public static String es_PE_FIELD_SelectProduct_ShelfWidth_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="013328e8-0164-86b8-1359-d9a83c6e2cbc")
 public static String es_PE_FIELD_SelectProduct_ShelfWidth_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="013328e8-0164-86b8-1359-d9a83c6e2cbc")
 public static String es_PE_FIELD_SelectProduct_ShelfWidth_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="013328e8-0164-86b8-1359-d9a83c6e2cbc")
-public static String es_PE_FIELD_SelectProduct_ShelfWidth_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6339,13 +6355,13 @@ Identifier="013328e8-0164-86b8-1359-d9a83c6e2cbc")
 public static final String FIELDNAME_SelectProduct_ShelfWidth="013328e8-0164-86b8-1359-d9a83c6e2cbc";
 
 @XendraTrl(Identifier="30e93307-2865-88ab-c4c4-7477b93e56da")
+public static String es_PE_FIELD_Product_ShelfWidth2_Name="Ancho del Anaquel";
+
+@XendraTrl(Identifier="30e93307-2865-88ab-c4c4-7477b93e56da")
 public static String es_PE_FIELD_Product_ShelfWidth2_Description="Ancho del anaquel requerido";
 
 @XendraTrl(Identifier="30e93307-2865-88ab-c4c4-7477b93e56da")
 public static String es_PE_FIELD_Product_ShelfWidth2_Help="El ancho del Anaquel indica la dimensión del ancho requerido en un anaquel para un producto";
-
-@XendraTrl(Identifier="30e93307-2865-88ab-c4c4-7477b93e56da")
-public static String es_PE_FIELD_Product_ShelfWidth2_Name="Ancho del Anaquel";
 
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6363,17 +6379,17 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ead264e3-490e-2bb5-7062-5f7426ff20c9",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name ShelfWidth */
 public static final String COLUMNNAME_ShelfWidth = "ShelfWidth";
 /** Set ShortName.
 @param ShortName ShortName */
 public void setShortName (String ShortName)
 {
-if (ShortName != null && ShortName.length() > 65)
+if (ShortName != null && ShortName.length() > 30)
 {
-log.warning("Length > 65 - truncated");
-ShortName = ShortName.substring(0,64);
+log.warning("Length > 30 - truncated");
+ShortName = ShortName.substring(0,29);
 }
 set_Value (COLUMNNAME_ShortName, ShortName);
 }
@@ -6386,16 +6402,26 @@ if (value == null)
   return "";
 return value;
 }
+@XendraTrl(Identifier="0246d048-036c-4117-9d2d-ff828df8b2ce")
+public static String es_PE_FIELD_Product_ShortName_Name="Nombre corto";
+
+@XendraField(AD_Column_ID="ShortName",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=30,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-11-02 17:52:24.0",
+Identifier="0246d048-036c-4117-9d2d-ff828df8b2ce")
+public static final String FIELDNAME_Product_ShortName="0246d048-036c-4117-9d2d-ff828df8b2ce";
+
 @XendraTrl(Identifier="d1d73f17-2f30-4bb0-9b9e-bfc2dd40b082")
 public static String es_PE_COLUMN_ShortName_Name="ShortName";
 
 @XendraColumn(AD_Element_ID="885ce67a-fc00-4e8b-be05-8d8045283c6c",ColumnName="ShortName",
-AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=65,DefaultValue="",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=30,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1d73f17-2f30-4bb0-9b9e-bfc2dd40b082",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-04-21 19:23:04.0")
 /** Column name ShortName */
 public static final String COLUMNNAME_ShortName = "ShortName";
 /** Set SKU.
@@ -6419,29 +6445,28 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
+public static String es_PE_FIELD_Product_SKU_Name="Codigo Laboratorio";
+
+@XendraTrl(Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
 public static String es_PE_FIELD_Product_SKU_Description="Codigo proporcionado por el laboratorio, para el control de los productos";
 
 @XendraTrl(Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
 public static String es_PE_FIELD_Product_SKU_Help="";
-
-@XendraTrl(Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
-public static String es_PE_FIELD_Product_SKU_Name="Codigo Laboratorio";
-
-@XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
-AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=true,
-IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
-Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
+@XendraField(AD_Column_ID="SKU",
+IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
+IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=40,SortNo=0,
+IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2012-03-17 18:47:14.0",Identifier="803309e9-82e2-edae-afd1-e097567c6aa4")
 public static final String FIELDNAME_Product_SKU="803309e9-82e2-edae-afd1-e097567c6aa4";
+
+@XendraTrl(Identifier="988b84af-8435-e997-4c5b-45244fc59613")
+public static String es_PE_FIELD_AssignedProducts_SKU_Name="UM Almacenamiento";
 
 @XendraTrl(Identifier="988b84af-8435-e997-4c5b-45244fc59613")
 public static String es_PE_FIELD_AssignedProducts_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="988b84af-8435-e997-4c5b-45244fc59613")
 public static String es_PE_FIELD_AssignedProducts_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="988b84af-8435-e997-4c5b-45244fc59613")
-public static String es_PE_FIELD_AssignedProducts_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6451,13 +6476,13 @@ Identifier="988b84af-8435-e997-4c5b-45244fc59613")
 public static final String FIELDNAME_AssignedProducts_SKU="988b84af-8435-e997-4c5b-45244fc59613";
 
 @XendraTrl(Identifier="fd906495-5adf-0b6b-9b2d-e2f9003762c6")
+public static String es_PE_FIELD_ExpenseProduct_SKU_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="fd906495-5adf-0b6b-9b2d-e2f9003762c6")
 public static String es_PE_FIELD_ExpenseProduct_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="fd906495-5adf-0b6b-9b2d-e2f9003762c6")
 public static String es_PE_FIELD_ExpenseProduct_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="fd906495-5adf-0b6b-9b2d-e2f9003762c6")
-public static String es_PE_FIELD_ExpenseProduct_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6467,13 +6492,13 @@ Identifier="fd906495-5adf-0b6b-9b2d-e2f9003762c6")
 public static final String FIELDNAME_ExpenseProduct_SKU="fd906495-5adf-0b6b-9b2d-e2f9003762c6";
 
 @XendraTrl(Identifier="42f7b12f-29e5-8115-cdc5-f1fffd5671ee")
+public static String es_PE_FIELD_ResourceProduct_SKU_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="42f7b12f-29e5-8115-cdc5-f1fffd5671ee")
 public static String es_PE_FIELD_ResourceProduct_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="42f7b12f-29e5-8115-cdc5-f1fffd5671ee")
 public static String es_PE_FIELD_ResourceProduct_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="42f7b12f-29e5-8115-cdc5-f1fffd5671ee")
-public static String es_PE_FIELD_ResourceProduct_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6483,13 +6508,13 @@ Identifier="42f7b12f-29e5-8115-cdc5-f1fffd5671ee")
 public static final String FIELDNAME_ResourceProduct_SKU="42f7b12f-29e5-8115-cdc5-f1fffd5671ee";
 
 @XendraTrl(Identifier="dd863e02-6097-51c3-89ad-64a26d1dbc03")
+public static String es_PE_FIELD_ProductDimension_SKU_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="dd863e02-6097-51c3-89ad-64a26d1dbc03")
 public static String es_PE_FIELD_ProductDimension_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="dd863e02-6097-51c3-89ad-64a26d1dbc03")
 public static String es_PE_FIELD_ProductDimension_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="dd863e02-6097-51c3-89ad-64a26d1dbc03")
-public static String es_PE_FIELD_ProductDimension_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6499,13 +6524,13 @@ Identifier="dd863e02-6097-51c3-89ad-64a26d1dbc03")
 public static final String FIELDNAME_ProductDimension_SKU="dd863e02-6097-51c3-89ad-64a26d1dbc03";
 
 @XendraTrl(Identifier="1b1feaf3-1a42-a539-11bc-7e22553c47dc")
+public static String es_PE_FIELD_SelectProduct_SKU_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="1b1feaf3-1a42-a539-11bc-7e22553c47dc")
 public static String es_PE_FIELD_SelectProduct_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="1b1feaf3-1a42-a539-11bc-7e22553c47dc")
 public static String es_PE_FIELD_SelectProduct_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="1b1feaf3-1a42-a539-11bc-7e22553c47dc")
-public static String es_PE_FIELD_SelectProduct_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6515,13 +6540,13 @@ Identifier="1b1feaf3-1a42-a539-11bc-7e22553c47dc")
 public static final String FIELDNAME_SelectProduct_SKU="1b1feaf3-1a42-a539-11bc-7e22553c47dc";
 
 @XendraTrl(Identifier="ed291510-0650-a637-6b31-0c98417467f9")
+public static String es_PE_FIELD_Product_SKU2_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="ed291510-0650-a637-6b31-0c98417467f9")
 public static String es_PE_FIELD_Product_SKU2_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="ed291510-0650-a637-6b31-0c98417467f9")
 public static String es_PE_FIELD_Product_SKU2_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="ed291510-0650-a637-6b31-0c98417467f9")
-public static String es_PE_FIELD_Product_SKU2_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6539,7 +6564,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38780182-f3dd-9c5a-2c3d-4e3125b0a89d",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name SKU */
 public static final String COLUMNNAME_SKU = "SKU";
 /** Set Resource.
@@ -6560,10 +6585,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3f9e3b4e-e69e-9afb-a30a-ba3c9dc136fd")
-public static String es_PE_FIELD_Product_Resource_Description="Recurso";
+public static String es_PE_FIELD_Product_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="3f9e3b4e-e69e-9afb-a30a-ba3c9dc136fd")
-public static String es_PE_FIELD_Product_Resource_Name="Recurso";
+public static String es_PE_FIELD_Product_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6573,10 +6598,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="3f9e3b4e-e69e-9afb-a30a-ba3c9dc
 public static final String FIELDNAME_Product_Resource="3f9e3b4e-e69e-9afb-a30a-ba3c9dc136fd";
 
 @XendraTrl(Identifier="195efe4b-4091-ae0e-5e32-9c1dbb46ab06")
-public static String es_PE_FIELD_AssignedProducts_Resource_Description="Recurso";
+public static String es_PE_FIELD_AssignedProducts_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="195efe4b-4091-ae0e-5e32-9c1dbb46ab06")
-public static String es_PE_FIELD_AssignedProducts_Resource_Name="Recurso";
+public static String es_PE_FIELD_AssignedProducts_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6586,10 +6611,10 @@ Identifier="195efe4b-4091-ae0e-5e32-9c1dbb46ab06")
 public static final String FIELDNAME_AssignedProducts_Resource="195efe4b-4091-ae0e-5e32-9c1dbb46ab06";
 
 @XendraTrl(Identifier="fc4c9142-8faf-ea93-bd57-99d3082d3e4e")
-public static String es_PE_FIELD_ExpenseProduct_Resource_Description="Recurso";
+public static String es_PE_FIELD_ExpenseProduct_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="fc4c9142-8faf-ea93-bd57-99d3082d3e4e")
-public static String es_PE_FIELD_ExpenseProduct_Resource_Name="Recurso";
+public static String es_PE_FIELD_ExpenseProduct_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6599,10 +6624,10 @@ Identifier="fc4c9142-8faf-ea93-bd57-99d3082d3e4e")
 public static final String FIELDNAME_ExpenseProduct_Resource="fc4c9142-8faf-ea93-bd57-99d3082d3e4e";
 
 @XendraTrl(Identifier="6615e369-f68f-c200-2c3a-ed9f01af62af")
-public static String es_PE_FIELD_ResourceProduct_Resource_Description="Recurso";
+public static String es_PE_FIELD_ResourceProduct_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="6615e369-f68f-c200-2c3a-ed9f01af62af")
-public static String es_PE_FIELD_ResourceProduct_Resource_Name="Recurso";
+public static String es_PE_FIELD_ResourceProduct_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6612,10 +6637,10 @@ Identifier="6615e369-f68f-c200-2c3a-ed9f01af62af")
 public static final String FIELDNAME_ResourceProduct_Resource="6615e369-f68f-c200-2c3a-ed9f01af62af";
 
 @XendraTrl(Identifier="e747b020-1ae8-5106-c60f-d2440e5555b1")
-public static String es_PE_FIELD_ProductDimension_Resource_Description="Recurso";
+public static String es_PE_FIELD_ProductDimension_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="e747b020-1ae8-5106-c60f-d2440e5555b1")
-public static String es_PE_FIELD_ProductDimension_Resource_Name="Recurso";
+public static String es_PE_FIELD_ProductDimension_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6625,10 +6650,10 @@ Identifier="e747b020-1ae8-5106-c60f-d2440e5555b1")
 public static final String FIELDNAME_ProductDimension_Resource="e747b020-1ae8-5106-c60f-d2440e5555b1";
 
 @XendraTrl(Identifier="a167d290-f850-2229-11d7-a91af803c2d3")
-public static String es_PE_FIELD_SelectProduct_Resource_Description="Recurso";
+public static String es_PE_FIELD_SelectProduct_Resource_Name="Recurso";
 
 @XendraTrl(Identifier="a167d290-f850-2229-11d7-a91af803c2d3")
-public static String es_PE_FIELD_SelectProduct_Resource_Name="Recurso";
+public static String es_PE_FIELD_SelectProduct_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6638,10 +6663,10 @@ Identifier="a167d290-f850-2229-11d7-a91af803c2d3")
 public static final String FIELDNAME_SelectProduct_Resource="a167d290-f850-2229-11d7-a91af803c2d3";
 
 @XendraTrl(Identifier="fcc80cb4-267d-7916-ff23-ea501737d519")
-public static String es_PE_FIELD_Product_Resource2_Description="Recurso";
+public static String es_PE_FIELD_Product_Resource2_Name="Recurso";
 
 @XendraTrl(Identifier="fcc80cb4-267d-7916-ff23-ea501737d519")
-public static String es_PE_FIELD_Product_Resource2_Name="Recurso";
+public static String es_PE_FIELD_Product_Resource2_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6659,7 +6684,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="31237d94-b549-ea5d-5513-b766a7fe1ac6",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name S_Resource_ID */
 public static final String COLUMNNAME_S_Resource_ID = "S_Resource_ID";
 /** Set Units Per Pallet.
@@ -6678,13 +6703,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e26286ed-0dea-6d19-2fae-4346e4405c55")
+public static String es_PE_FIELD_Product_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="e26286ed-0dea-6d19-2fae-4346e4405c55")
 public static String es_PE_FIELD_Product_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="e26286ed-0dea-6d19-2fae-4346e4405c55")
 public static String es_PE_FIELD_Product_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="e26286ed-0dea-6d19-2fae-4346e4405c55")
-public static String es_PE_FIELD_Product_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6694,13 +6719,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="e26286ed-0dea-6d19-2fae-4346e44
 public static final String FIELDNAME_Product_UnitsPerPallet="e26286ed-0dea-6d19-2fae-4346e4405c55";
 
 @XendraTrl(Identifier="9eb5c87f-5b88-be91-d860-c1699563709b")
+public static String es_PE_FIELD_AssignedProducts_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="9eb5c87f-5b88-be91-d860-c1699563709b")
 public static String es_PE_FIELD_AssignedProducts_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="9eb5c87f-5b88-be91-d860-c1699563709b")
 public static String es_PE_FIELD_AssignedProducts_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="9eb5c87f-5b88-be91-d860-c1699563709b")
-public static String es_PE_FIELD_AssignedProducts_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6710,13 +6735,13 @@ Identifier="9eb5c87f-5b88-be91-d860-c1699563709b")
 public static final String FIELDNAME_AssignedProducts_UnitsPerPallet="9eb5c87f-5b88-be91-d860-c1699563709b";
 
 @XendraTrl(Identifier="8e1cb16b-1035-d190-8e70-25a323b444f9")
+public static String es_PE_FIELD_ExpenseProduct_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="8e1cb16b-1035-d190-8e70-25a323b444f9")
 public static String es_PE_FIELD_ExpenseProduct_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="8e1cb16b-1035-d190-8e70-25a323b444f9")
 public static String es_PE_FIELD_ExpenseProduct_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="8e1cb16b-1035-d190-8e70-25a323b444f9")
-public static String es_PE_FIELD_ExpenseProduct_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6726,13 +6751,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="8e1cb16b-1035-d190-8e70-25a323b
 public static final String FIELDNAME_ExpenseProduct_UnitsPerPallet="8e1cb16b-1035-d190-8e70-25a323b444f9";
 
 @XendraTrl(Identifier="c5f7f05c-5e3c-700d-0b7d-86cdd49abeed")
+public static String es_PE_FIELD_ResourceProduct_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="c5f7f05c-5e3c-700d-0b7d-86cdd49abeed")
 public static String es_PE_FIELD_ResourceProduct_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="c5f7f05c-5e3c-700d-0b7d-86cdd49abeed")
 public static String es_PE_FIELD_ResourceProduct_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="c5f7f05c-5e3c-700d-0b7d-86cdd49abeed")
-public static String es_PE_FIELD_ResourceProduct_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6742,13 +6767,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="c5f7f05c-5e3c-700d-0b7d-86cdd49
 public static final String FIELDNAME_ResourceProduct_UnitsPerPallet="c5f7f05c-5e3c-700d-0b7d-86cdd49abeed";
 
 @XendraTrl(Identifier="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7")
+public static String es_PE_FIELD_ProductDimension_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7")
 public static String es_PE_FIELD_ProductDimension_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7")
 public static String es_PE_FIELD_ProductDimension_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7")
-public static String es_PE_FIELD_ProductDimension_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6758,13 +6783,13 @@ Identifier="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7")
 public static final String FIELDNAME_ProductDimension_UnitsPerPallet="6a90d473-e1de-d1b9-1cb0-d124d4f26ad7";
 
 @XendraTrl(Identifier="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a")
+public static String es_PE_FIELD_SelectProduct_UnitsPerPallet_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a")
 public static String es_PE_FIELD_SelectProduct_UnitsPerPallet_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a")
 public static String es_PE_FIELD_SelectProduct_UnitsPerPallet_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a")
-public static String es_PE_FIELD_SelectProduct_UnitsPerPallet_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6774,13 +6799,13 @@ Identifier="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a")
 public static final String FIELDNAME_SelectProduct_UnitsPerPallet="4d6f46d3-2b4b-df5f-9ac2-01907044fa3a";
 
 @XendraTrl(Identifier="9f757adf-6555-913e-dedf-133283c2465b")
+public static String es_PE_FIELD_Product_UnitsPerPallet2_Name="Unidades por Tarima";
+
+@XendraTrl(Identifier="9f757adf-6555-913e-dedf-133283c2465b")
 public static String es_PE_FIELD_Product_UnitsPerPallet2_Description="Unidades por Tarima";
 
 @XendraTrl(Identifier="9f757adf-6555-913e-dedf-133283c2465b")
 public static String es_PE_FIELD_Product_UnitsPerPallet2_Help="Las unidades por tarima indica el número de unidades de este producto que caben en una tarima";
-
-@XendraTrl(Identifier="9f757adf-6555-913e-dedf-133283c2465b")
-public static String es_PE_FIELD_Product_UnitsPerPallet2_Name="Unidades por Tarima";
 
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6798,7 +6823,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ed340deb-3244-c25f-5539-073f56f2cacb",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name UnitsPerPallet */
 public static final String COLUMNNAME_UnitsPerPallet = "UnitsPerPallet";
 /** Set UPC/EAN.
@@ -6822,28 +6847,29 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
+public static String es_PE_FIELD_Product_UPCEAN_Name="UPC/EAN";
+
+@XendraTrl(Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
 public static String es_PE_FIELD_Product_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
 public static String es_PE_FIELD_Product_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
 
-@XendraTrl(Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
-public static String es_PE_FIELD_Product_UPCEAN_Name="UPC/EAN";
-@XendraField(AD_Column_ID="UPC",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=70,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
+@XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
 public static final String FIELDNAME_Product_UPCEAN="41543b40-a92b-d0f9-fe03-a2e1c10b93a8";
+
+@XendraTrl(Identifier="20e31356-571d-49aa-5f9d-ba6fb62e9f85")
+public static String es_PE_FIELD_AssignedProducts_UPCEAN_Name="UPC/EAN";
 
 @XendraTrl(Identifier="20e31356-571d-49aa-5f9d-ba6fb62e9f85")
 public static String es_PE_FIELD_AssignedProducts_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="20e31356-571d-49aa-5f9d-ba6fb62e9f85")
 public static String es_PE_FIELD_AssignedProducts_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
-
-@XendraTrl(Identifier="20e31356-571d-49aa-5f9d-ba6fb62e9f85")
-public static String es_PE_FIELD_AssignedProducts_UPCEAN_Name="UPC/EAN";
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6853,13 +6879,13 @@ Identifier="20e31356-571d-49aa-5f9d-ba6fb62e9f85")
 public static final String FIELDNAME_AssignedProducts_UPCEAN="20e31356-571d-49aa-5f9d-ba6fb62e9f85";
 
 @XendraTrl(Identifier="8dc58632-9a73-bb48-6881-e48d4ab1dc22")
+public static String es_PE_FIELD_ExpenseProduct_UPCEAN_Name="UPC/EAN";
+
+@XendraTrl(Identifier="8dc58632-9a73-bb48-6881-e48d4ab1dc22")
 public static String es_PE_FIELD_ExpenseProduct_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="8dc58632-9a73-bb48-6881-e48d4ab1dc22")
 public static String es_PE_FIELD_ExpenseProduct_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
-
-@XendraTrl(Identifier="8dc58632-9a73-bb48-6881-e48d4ab1dc22")
-public static String es_PE_FIELD_ExpenseProduct_UPCEAN_Name="UPC/EAN";
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6869,13 +6895,13 @@ Identifier="8dc58632-9a73-bb48-6881-e48d4ab1dc22")
 public static final String FIELDNAME_ExpenseProduct_UPCEAN="8dc58632-9a73-bb48-6881-e48d4ab1dc22";
 
 @XendraTrl(Identifier="489b75bf-a108-5d1c-d12d-45a696366946")
+public static String es_PE_FIELD_ResourceProduct_UPCEAN_Name="UPC/EAN";
+
+@XendraTrl(Identifier="489b75bf-a108-5d1c-d12d-45a696366946")
 public static String es_PE_FIELD_ResourceProduct_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="489b75bf-a108-5d1c-d12d-45a696366946")
 public static String es_PE_FIELD_ResourceProduct_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
-
-@XendraTrl(Identifier="489b75bf-a108-5d1c-d12d-45a696366946")
-public static String es_PE_FIELD_ResourceProduct_UPCEAN_Name="UPC/EAN";
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6885,13 +6911,13 @@ Identifier="489b75bf-a108-5d1c-d12d-45a696366946")
 public static final String FIELDNAME_ResourceProduct_UPCEAN="489b75bf-a108-5d1c-d12d-45a696366946";
 
 @XendraTrl(Identifier="7883efe7-c96b-ecc7-1f17-1444805e0e05")
+public static String es_PE_FIELD_ProductDimension_UPCEAN_Name="UPC/EAN";
+
+@XendraTrl(Identifier="7883efe7-c96b-ecc7-1f17-1444805e0e05")
 public static String es_PE_FIELD_ProductDimension_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="7883efe7-c96b-ecc7-1f17-1444805e0e05")
 public static String es_PE_FIELD_ProductDimension_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
-
-@XendraTrl(Identifier="7883efe7-c96b-ecc7-1f17-1444805e0e05")
-public static String es_PE_FIELD_ProductDimension_UPCEAN_Name="UPC/EAN";
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -6901,13 +6927,13 @@ Identifier="7883efe7-c96b-ecc7-1f17-1444805e0e05")
 public static final String FIELDNAME_ProductDimension_UPCEAN="7883efe7-c96b-ecc7-1f17-1444805e0e05";
 
 @XendraTrl(Identifier="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46")
+public static String es_PE_FIELD_SelectProduct_UPCEAN_Name="UPC/EAN";
+
+@XendraTrl(Identifier="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46")
 public static String es_PE_FIELD_SelectProduct_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46")
 public static String es_PE_FIELD_SelectProduct_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
-
-@XendraTrl(Identifier="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46")
-public static String es_PE_FIELD_SelectProduct_UPCEAN_Name="UPC/EAN";
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6917,18 +6943,19 @@ Identifier="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46")
 public static final String FIELDNAME_SelectProduct_UPCEAN="ad0bf781-69a8-5f00-5c9e-7fc4d9e5ea46";
 
 @XendraTrl(Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
+public static String es_PE_FIELD_Product_UPCEAN2_Name="UPC/EAN";
+
+@XendraTrl(Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
 public static String es_PE_FIELD_Product_UPCEAN2_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
 public static String es_PE_FIELD_Product_UPCEAN2_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
 
-@XendraTrl(Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
-public static String es_PE_FIELD_Product_UPCEAN2_Name="UPC/EAN";
-@XendraField(AD_Column_ID="UPC",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
+@XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="87970555-6e7c-ba4a-639b-018f9ebb1156")
 public static final String FIELDNAME_Product_UPCEAN2="87970555-6e7c-ba4a-639b-018f9ebb1156";
 
 @XendraTrl(Identifier="3a52ba7d-bddd-6d22-ffaa-12f7581986b1")
@@ -6940,7 +6967,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a52ba7d-bddd-6d22-ffaa-12f7581986b1",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name UPC */
 public static final String COLUMNNAME_UPC = "UPC";
 /** Set Search Key.
@@ -6965,13 +6992,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf")
+public static String es_PE_FIELD_Product_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf")
 public static String es_PE_FIELD_Product_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf")
 public static String es_PE_FIELD_Product_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf")
-public static String es_PE_FIELD_Product_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6981,13 +7008,13 @@ Identifier="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf")
 public static final String FIELDNAME_Product_SearchKey="2344fd4f-7ed3-a7cc-a97f-38a895e47ddf";
 
 @XendraTrl(Identifier="5aec92ac-590e-3194-2b76-89cb145f1c59")
+public static String es_PE_FIELD_AssignedProducts_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="5aec92ac-590e-3194-2b76-89cb145f1c59")
 public static String es_PE_FIELD_AssignedProducts_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="5aec92ac-590e-3194-2b76-89cb145f1c59")
 public static String es_PE_FIELD_AssignedProducts_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="5aec92ac-590e-3194-2b76-89cb145f1c59")
-public static String es_PE_FIELD_AssignedProducts_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -6997,13 +7024,13 @@ Identifier="5aec92ac-590e-3194-2b76-89cb145f1c59")
 public static final String FIELDNAME_AssignedProducts_SearchKey="5aec92ac-590e-3194-2b76-89cb145f1c59";
 
 @XendraTrl(Identifier="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2")
+public static String es_PE_FIELD_ExpenseProduct_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2")
 public static String es_PE_FIELD_ExpenseProduct_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2")
 public static String es_PE_FIELD_ExpenseProduct_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2")
-public static String es_PE_FIELD_ExpenseProduct_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7013,13 +7040,13 @@ Identifier="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2")
 public static final String FIELDNAME_ExpenseProduct_SearchKey="f99ece2f-e1e6-36b2-a7a0-8934f916b7f2";
 
 @XendraTrl(Identifier="5bb90bfd-b58d-b664-b6f6-2c4009d51805")
+public static String es_PE_FIELD_ResourceProduct_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="5bb90bfd-b58d-b664-b6f6-2c4009d51805")
 public static String es_PE_FIELD_ResourceProduct_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="5bb90bfd-b58d-b664-b6f6-2c4009d51805")
 public static String es_PE_FIELD_ResourceProduct_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="5bb90bfd-b58d-b664-b6f6-2c4009d51805")
-public static String es_PE_FIELD_ResourceProduct_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7029,13 +7056,13 @@ Identifier="5bb90bfd-b58d-b664-b6f6-2c4009d51805")
 public static final String FIELDNAME_ResourceProduct_SearchKey="5bb90bfd-b58d-b664-b6f6-2c4009d51805";
 
 @XendraTrl(Identifier="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf")
+public static String es_PE_FIELD_ProductDimension_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf")
 public static String es_PE_FIELD_ProductDimension_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf")
 public static String es_PE_FIELD_ProductDimension_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf")
-public static String es_PE_FIELD_ProductDimension_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7045,13 +7072,13 @@ Identifier="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf")
 public static final String FIELDNAME_ProductDimension_SearchKey="ecff505c-71bc-ead2-07d4-6da3ff0c6bcf";
 
 @XendraTrl(Identifier="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8")
+public static String es_PE_FIELD_SelectProduct_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8")
 public static String es_PE_FIELD_SelectProduct_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8")
 public static String es_PE_FIELD_SelectProduct_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8")
-public static String es_PE_FIELD_SelectProduct_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7061,13 +7088,13 @@ Identifier="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8")
 public static final String FIELDNAME_SelectProduct_SearchKey="bb54fcbe-d91f-ac36-d0bb-79971a6cf7a8";
 
 @XendraTrl(Identifier="9fc509cc-89bf-4100-7a7b-d63eb38e46c6")
+public static String es_PE_FIELD_Product_SearchKey2_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="9fc509cc-89bf-4100-7a7b-d63eb38e46c6")
 public static String es_PE_FIELD_Product_SearchKey2_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="9fc509cc-89bf-4100-7a7b-d63eb38e46c6")
 public static String es_PE_FIELD_Product_SearchKey2_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="9fc509cc-89bf-4100-7a7b-d63eb38e46c6")
-public static String es_PE_FIELD_Product_SearchKey2_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7085,7 +7112,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8136eec6-1db3-f369-a841-e26d1ce019ae",Synchronized="2017-08-05 16:55:21.0")
+Identifier="8136eec6-1db3-f369-a841-e26d1ce019ae",Synchronized="2020-03-03 21:38:48.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Version No.
@@ -7109,10 +7136,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="b8adc1f2-dd50-3f80-a103-d2f22c1c3673")
-public static String es_PE_FIELD_Product_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_Product_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="b8adc1f2-dd50-3f80-a103-d2f22c1c3673")
-public static String es_PE_FIELD_Product_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_Product_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7122,10 +7149,10 @@ Identifier="b8adc1f2-dd50-3f80-a103-d2f22c1c3673")
 public static final String FIELDNAME_Product_VersionNo="b8adc1f2-dd50-3f80-a103-d2f22c1c3673";
 
 @XendraTrl(Identifier="09f19617-4777-45f6-dc11-43b613c002e8")
-public static String es_PE_FIELD_AssignedProducts_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_AssignedProducts_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="09f19617-4777-45f6-dc11-43b613c002e8")
-public static String es_PE_FIELD_AssignedProducts_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_AssignedProducts_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7135,10 +7162,10 @@ Identifier="09f19617-4777-45f6-dc11-43b613c002e8")
 public static final String FIELDNAME_AssignedProducts_VersionNo="09f19617-4777-45f6-dc11-43b613c002e8";
 
 @XendraTrl(Identifier="ea1bf703-3b6b-3c32-955f-d53ca09dedbf")
-public static String es_PE_FIELD_ExpenseProduct_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_ExpenseProduct_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="ea1bf703-3b6b-3c32-955f-d53ca09dedbf")
-public static String es_PE_FIELD_ExpenseProduct_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_ExpenseProduct_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7148,10 +7175,10 @@ Identifier="ea1bf703-3b6b-3c32-955f-d53ca09dedbf")
 public static final String FIELDNAME_ExpenseProduct_VersionNo="ea1bf703-3b6b-3c32-955f-d53ca09dedbf";
 
 @XendraTrl(Identifier="ab05c213-a874-4112-7d41-148a8e4daab3")
-public static String es_PE_FIELD_ResourceProduct_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_ResourceProduct_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="ab05c213-a874-4112-7d41-148a8e4daab3")
-public static String es_PE_FIELD_ResourceProduct_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_ResourceProduct_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7161,10 +7188,10 @@ Identifier="ab05c213-a874-4112-7d41-148a8e4daab3")
 public static final String FIELDNAME_ResourceProduct_VersionNo="ab05c213-a874-4112-7d41-148a8e4daab3";
 
 @XendraTrl(Identifier="31a1e377-96e3-d4ee-01cc-836300d129f5")
-public static String es_PE_FIELD_ProductDimension_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_ProductDimension_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="31a1e377-96e3-d4ee-01cc-836300d129f5")
-public static String es_PE_FIELD_ProductDimension_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_ProductDimension_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7174,10 +7201,10 @@ Identifier="31a1e377-96e3-d4ee-01cc-836300d129f5")
 public static final String FIELDNAME_ProductDimension_VersionNo="31a1e377-96e3-d4ee-01cc-836300d129f5";
 
 @XendraTrl(Identifier="fc43a9a8-780c-d3b1-46fc-6d80d75ed309")
-public static String es_PE_FIELD_SelectProduct_VersionNo_Description="Número de versión";
+public static String es_PE_FIELD_SelectProduct_VersionNo_Name="No. de Versión";
 
 @XendraTrl(Identifier="fc43a9a8-780c-d3b1-46fc-6d80d75ed309")
-public static String es_PE_FIELD_SelectProduct_VersionNo_Name="No. de Versión";
+public static String es_PE_FIELD_SelectProduct_VersionNo_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7187,10 +7214,10 @@ Identifier="fc43a9a8-780c-d3b1-46fc-6d80d75ed309")
 public static final String FIELDNAME_SelectProduct_VersionNo="fc43a9a8-780c-d3b1-46fc-6d80d75ed309";
 
 @XendraTrl(Identifier="26e1d9df-958a-9faf-30f8-79ebd2e824b9")
-public static String es_PE_FIELD_Product_VersionNo2_Description="Número de versión";
+public static String es_PE_FIELD_Product_VersionNo2_Name="No. de Versión";
 
 @XendraTrl(Identifier="26e1d9df-958a-9faf-30f8-79ebd2e824b9")
-public static String es_PE_FIELD_Product_VersionNo2_Name="No. de Versión";
+public static String es_PE_FIELD_Product_VersionNo2_Description="Número de versión";
 
 @XendraField(AD_Column_ID="VersionNo",IsCentrallyMaintained=true,
 AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -7208,7 +7235,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7d2ce56-ba03-644d-7661-1f3b15070ffd",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name VersionNo */
 public static final String COLUMNNAME_VersionNo = "VersionNo";
 /** Set Volume.
@@ -7227,29 +7254,29 @@ return bd;
 }
 
 @XendraTrl(Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
+public static String es_PE_FIELD_Product_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
 public static String es_PE_FIELD_Product_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
 public static String es_PE_FIELD_Product_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
 
-@XendraTrl(Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
-public static String es_PE_FIELD_Product_Volume_Name="Volúmen";
-@XendraField(AD_Column_ID="Volume",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,
-IsReadOnly=false,SeqNo=230,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
-Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
-Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
+@XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=230,
+SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2012-03-17 18:47:14.0",Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
 public static final String FIELDNAME_Product_Volume="a6164304-70b6-c7d1-3932-9fe7d78650c3";
+
+@XendraTrl(Identifier="9e0749e0-1341-bf8b-7a18-0acdb9312c69")
+public static String es_PE_FIELD_AssignedProducts_Volume_Name="Volúmen";
 
 @XendraTrl(Identifier="9e0749e0-1341-bf8b-7a18-0acdb9312c69")
 public static String es_PE_FIELD_AssignedProducts_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="9e0749e0-1341-bf8b-7a18-0acdb9312c69")
 public static String es_PE_FIELD_AssignedProducts_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
-
-@XendraTrl(Identifier="9e0749e0-1341-bf8b-7a18-0acdb9312c69")
-public static String es_PE_FIELD_AssignedProducts_Volume_Name="Volúmen";
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7259,13 +7286,13 @@ Identifier="9e0749e0-1341-bf8b-7a18-0acdb9312c69")
 public static final String FIELDNAME_AssignedProducts_Volume="9e0749e0-1341-bf8b-7a18-0acdb9312c69";
 
 @XendraTrl(Identifier="bfea2571-6190-6e29-edb7-f7cf98a5c343")
+public static String es_PE_FIELD_ExpenseProduct_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="bfea2571-6190-6e29-edb7-f7cf98a5c343")
 public static String es_PE_FIELD_ExpenseProduct_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="bfea2571-6190-6e29-edb7-f7cf98a5c343")
 public static String es_PE_FIELD_ExpenseProduct_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
-
-@XendraTrl(Identifier="bfea2571-6190-6e29-edb7-f7cf98a5c343")
-public static String es_PE_FIELD_ExpenseProduct_Volume_Name="Volúmen";
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7275,13 +7302,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="bfea2571-6190-6e29-edb7-f7cf98a
 public static final String FIELDNAME_ExpenseProduct_Volume="bfea2571-6190-6e29-edb7-f7cf98a5c343";
 
 @XendraTrl(Identifier="1d2ba731-e6e7-9cc0-1c49-b3c23ac0454b")
+public static String es_PE_FIELD_ResourceProduct_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="1d2ba731-e6e7-9cc0-1c49-b3c23ac0454b")
 public static String es_PE_FIELD_ResourceProduct_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="1d2ba731-e6e7-9cc0-1c49-b3c23ac0454b")
 public static String es_PE_FIELD_ResourceProduct_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
-
-@XendraTrl(Identifier="1d2ba731-e6e7-9cc0-1c49-b3c23ac0454b")
-public static String es_PE_FIELD_ResourceProduct_Volume_Name="Volúmen";
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7291,13 +7318,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="1d2ba731-e6e7-9cc0-1c49-b3c23ac
 public static final String FIELDNAME_ResourceProduct_Volume="1d2ba731-e6e7-9cc0-1c49-b3c23ac0454b";
 
 @XendraTrl(Identifier="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0")
+public static String es_PE_FIELD_ProductDimension_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0")
 public static String es_PE_FIELD_ProductDimension_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0")
 public static String es_PE_FIELD_ProductDimension_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
-
-@XendraTrl(Identifier="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0")
-public static String es_PE_FIELD_ProductDimension_Volume_Name="Volúmen";
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7307,13 +7334,13 @@ Identifier="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0")
 public static final String FIELDNAME_ProductDimension_Volume="2fc1ef90-ab40-90ab-5e35-2dc0e1403ae0";
 
 @XendraTrl(Identifier="e5bf1657-3cc8-df89-03af-e6834bf3a7fe")
+public static String es_PE_FIELD_SelectProduct_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="e5bf1657-3cc8-df89-03af-e6834bf3a7fe")
 public static String es_PE_FIELD_SelectProduct_Volume_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="e5bf1657-3cc8-df89-03af-e6834bf3a7fe")
 public static String es_PE_FIELD_SelectProduct_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
-
-@XendraTrl(Identifier="e5bf1657-3cc8-df89-03af-e6834bf3a7fe")
-public static String es_PE_FIELD_SelectProduct_Volume_Name="Volúmen";
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7323,19 +7350,19 @@ Identifier="e5bf1657-3cc8-df89-03af-e6834bf3a7fe")
 public static final String FIELDNAME_SelectProduct_Volume="e5bf1657-3cc8-df89-03af-e6834bf3a7fe";
 
 @XendraTrl(Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
+public static String es_PE_FIELD_Product_Volume2_Name="Volúmen";
+
+@XendraTrl(Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
 public static String es_PE_FIELD_Product_Volume2_Description="Volúmen del producto";
 
 @XendraTrl(Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
 public static String es_PE_FIELD_Product_Volume2_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
 
-@XendraTrl(Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
-public static String es_PE_FIELD_Product_Volume2_Name="Volúmen";
-@XendraField(AD_Column_ID="Volume",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,
-IsReadOnly=false,SeqNo=220,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
-Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
-Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
+@XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=220,
+SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2012-03-17 18:47:14.0",Identifier="6c2cd584-5ce2-23ce-5e03-e58787961644")
 public static final String FIELDNAME_Product_Volume2="6c2cd584-5ce2-23ce-5e03-e58787961644";
 
 @XendraTrl(Identifier="1f05009e-6d76-93d2-2881-3a6bc6cb73af")
@@ -7347,7 +7374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1f05009e-6d76-93d2-2881-3a6bc6cb73af",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name Volume */
 public static final String COLUMNNAME_Volume = "Volume";
 /** Set Weight.
@@ -7366,29 +7393,29 @@ return bd;
 }
 
 @XendraTrl(Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
+public static String es_PE_FIELD_Product_Weight_Name="Peso";
+
+@XendraTrl(Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
 public static String es_PE_FIELD_Product_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
 public static String es_PE_FIELD_Product_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
 
-@XendraTrl(Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
-public static String es_PE_FIELD_Product_Weight_Name="Peso";
-@XendraField(AD_Column_ID="Weight",
-IsCentrallyMaintained=true,AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,
-IsReadOnly=false,SeqNo=220,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,
-Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
-Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
+@XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=220,
+SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2012-03-17 18:47:14.0",Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
 public static final String FIELDNAME_Product_Weight="8da47754-d37b-dd8f-c87e-6e392fecba31";
+
+@XendraTrl(Identifier="f63db4cb-16c6-45a7-e868-76ab77e92ab3")
+public static String es_PE_FIELD_AssignedProducts_Weight_Name="Peso";
 
 @XendraTrl(Identifier="f63db4cb-16c6-45a7-e868-76ab77e92ab3")
 public static String es_PE_FIELD_AssignedProducts_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="f63db4cb-16c6-45a7-e868-76ab77e92ab3")
 public static String es_PE_FIELD_AssignedProducts_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
-
-@XendraTrl(Identifier="f63db4cb-16c6-45a7-e868-76ab77e92ab3")
-public static String es_PE_FIELD_AssignedProducts_Weight_Name="Peso";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="0259cb0c-f204-3a56-705d-b9cdd730f9d8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7398,13 +7425,13 @@ Identifier="f63db4cb-16c6-45a7-e868-76ab77e92ab3")
 public static final String FIELDNAME_AssignedProducts_Weight="f63db4cb-16c6-45a7-e868-76ab77e92ab3";
 
 @XendraTrl(Identifier="1b0c5722-dcd8-a236-2260-5ab85ac1e9e2")
+public static String es_PE_FIELD_ExpenseProduct_Weight_Name="Peso";
+
+@XendraTrl(Identifier="1b0c5722-dcd8-a236-2260-5ab85ac1e9e2")
 public static String es_PE_FIELD_ExpenseProduct_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="1b0c5722-dcd8-a236-2260-5ab85ac1e9e2")
 public static String es_PE_FIELD_ExpenseProduct_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
-
-@XendraTrl(Identifier="1b0c5722-dcd8-a236-2260-5ab85ac1e9e2")
-public static String es_PE_FIELD_ExpenseProduct_Weight_Name="Peso";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="df1d44fb-fbe7-d3a7-b2a6-7eb0a2846973",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7414,13 +7441,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="1b0c5722-dcd8-a236-2260-5ab85ac
 public static final String FIELDNAME_ExpenseProduct_Weight="1b0c5722-dcd8-a236-2260-5ab85ac1e9e2";
 
 @XendraTrl(Identifier="8d610da3-dfb3-4078-c51c-f33a1b9cffd5")
+public static String es_PE_FIELD_ResourceProduct_Weight_Name="Peso";
+
+@XendraTrl(Identifier="8d610da3-dfb3-4078-c51c-f33a1b9cffd5")
 public static String es_PE_FIELD_ResourceProduct_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="8d610da3-dfb3-4078-c51c-f33a1b9cffd5")
 public static String es_PE_FIELD_ResourceProduct_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
-
-@XendraTrl(Identifier="8d610da3-dfb3-4078-c51c-f33a1b9cffd5")
-public static String es_PE_FIELD_ResourceProduct_Weight_Name="Peso";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="fc913b56-1737-810e-a21d-efaa2bde7153",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7430,13 +7457,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="8d610da3-dfb3-4078-c51c-f33a1b9
 public static final String FIELDNAME_ResourceProduct_Weight="8d610da3-dfb3-4078-c51c-f33a1b9cffd5";
 
 @XendraTrl(Identifier="7bae8acf-f77c-ff1f-3870-a2532804ff85")
+public static String es_PE_FIELD_ProductDimension_Weight_Name="Peso";
+
+@XendraTrl(Identifier="7bae8acf-f77c-ff1f-3870-a2532804ff85")
 public static String es_PE_FIELD_ProductDimension_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="7bae8acf-f77c-ff1f-3870-a2532804ff85")
 public static String es_PE_FIELD_ProductDimension_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
-
-@XendraTrl(Identifier="7bae8acf-f77c-ff1f-3870-a2532804ff85")
-public static String es_PE_FIELD_ProductDimension_Weight_Name="Peso";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="3613957f-d0c4-6b93-13a2-0fb23284d808",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7446,13 +7473,13 @@ Identifier="7bae8acf-f77c-ff1f-3870-a2532804ff85")
 public static final String FIELDNAME_ProductDimension_Weight="7bae8acf-f77c-ff1f-3870-a2532804ff85";
 
 @XendraTrl(Identifier="979c17ed-2e56-0a18-0999-49c50f613ac5")
+public static String es_PE_FIELD_SelectProduct_Weight_Name="Peso";
+
+@XendraTrl(Identifier="979c17ed-2e56-0a18-0999-49c50f613ac5")
 public static String es_PE_FIELD_SelectProduct_Weight_Description="Peso del producto";
 
 @XendraTrl(Identifier="979c17ed-2e56-0a18-0999-49c50f613ac5")
 public static String es_PE_FIELD_SelectProduct_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
-
-@XendraTrl(Identifier="979c17ed-2e56-0a18-0999-49c50f613ac5")
-public static String es_PE_FIELD_SelectProduct_Weight_Name="Peso";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="b2bfdf14-fd43-88d6-16f0-6764a52e3edd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -7462,19 +7489,19 @@ Identifier="979c17ed-2e56-0a18-0999-49c50f613ac5")
 public static final String FIELDNAME_SelectProduct_Weight="979c17ed-2e56-0a18-0999-49c50f613ac5";
 
 @XendraTrl(Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
+public static String es_PE_FIELD_Product_Weight2_Name="Peso";
+
+@XendraTrl(Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
 public static String es_PE_FIELD_Product_Weight2_Description="Peso del producto";
 
 @XendraTrl(Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
 public static String es_PE_FIELD_Product_Weight2_Help="El peso indica el peso del producto en la UM de peso del cliente.";
 
-@XendraTrl(Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
-public static String es_PE_FIELD_Product_Weight2_Name="Peso";
-@XendraField(AD_Column_ID="Weight",
-IsCentrallyMaintained=true,AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,
-IsReadOnly=false,SeqNo=210,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,
-Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
-Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
+@XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
+AD_Tab_ID="4b12a806-caeb-ad25-c955-727c0c0e3e63",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=210,
+SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+Synchronized="2012-03-17 18:47:14.0",Identifier="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b")
 public static final String FIELDNAME_Product_Weight2="a2aad97f-9ee1-a4ec-5e42-2912b8ff5a6b";
 
 @XendraTrl(Identifier="969963cc-5561-dd1c-e8ec-80b6410e10e0")
@@ -7486,18 +7513,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="969963cc-5561-dd1c-e8ec-80b6410e10e0",
-Synchronized="2017-08-05 16:55:21.0")
+Synchronized="2020-03-03 21:38:48.0")
 /** Column name Weight */
 public static final String COLUMNNAME_Weight = "Weight";
-
-/** WithholdingType AD_Reference=843810e4-0376-4299-bd8c-1fc15022d579 */
-public static final int WITHHOLDINGTYPE_AD_Reference_ID=1000052;
 /** Set WithholdingType.
 @param WithholdingType WithholdingType */
 public void setWithholdingType (String WithholdingType)
 {
-if (WithholdingType == null || WithholdingType.equals(REF_WithholdingType.Perception) || WithholdingType.equals(REF_WithholdingType.Detraction) || WithholdingType.equals(REF_WithholdingType.Retention) || WithholdingType.equals(REF_WithholdingType.None));
- else throw new IllegalArgumentException ("WithholdingType Invalid value - " + WithholdingType + " - Reference_ID=1000052 - P - D - R - N");
 if (WithholdingType != null && WithholdingType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -7512,6 +7534,16 @@ public String getWithholdingType()
 return (String)get_Value(COLUMNNAME_WithholdingType);
 }
 
+@XendraTrl(Identifier="cc617f37-a9f7-4470-913e-e5d0329b0f77")
+public static String es_PE_FIELD_Product_WithholdingType_Name="withholdingtype";
+
+@XendraField(AD_Column_ID="WithholdingType",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-11-02 17:52:25.0",
+Identifier="cc617f37-a9f7-4470-913e-e5d0329b0f77")
+public static final String FIELDNAME_Product_WithholdingType="cc617f37-a9f7-4470-913e-e5d0329b0f77";
+
 @XendraTrl(Identifier="9652fd50-9378-4124-9a7a-0dec894c3ef2")
 public static String es_PE_COLUMN_WithholdingType_Name="WithholdingType";
 
@@ -7521,7 +7553,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9652fd50-9378-4124-9a7a-0dec894c3ef2",Synchronized="2017-08-05 16:55:21.0")
+Identifier="9652fd50-9378-4124-9a7a-0dec894c3ef2",Synchronized="2020-03-03 21:38:48.0")
 /** Column name WithholdingType */
 public static final String COLUMNNAME_WithholdingType = "WithholdingType";
 }

@@ -15,7 +15,7 @@ import java.io.*;
 
 import org.simoes.lpd.exception.*;
 import org.simoes.util.StringUtil;
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * This encapsulates the control file and all of it's commands.
@@ -31,7 +31,7 @@ public class ControlFileCommands implements Cloneable {
 	/**
 	 * 
 	 */
-	static Logger log = Logger.getLogger(ControlFileCommands.class);
+	static CLogger log = CLogger.getCLogger(ControlFileCommands.class);
 
     private String classForBannerPage;
     private String host;
@@ -330,7 +330,7 @@ public class ControlFileCommands implements Cloneable {
 		try {
 			result = super.clone();
 		} catch(CloneNotSupportedException e) {
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new InternalError(METHOD_NAME + e.getMessage());
 		}
 		return result;
@@ -453,7 +453,7 @@ public class ControlFileCommands implements Cloneable {
 	            processCommand(line + "\n");
 	        }
 		} catch(IOException e) {
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new LPDException(e);
 		}
     }

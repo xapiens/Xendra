@@ -98,7 +98,7 @@ public class Doc_Bank extends Doc
 			//	Set Date Acct
 			if (i == 0)
 				setDateAcct(line.getDateAcct());
-			MPeriod period = MPeriod.get(getCtx(), line.getDateAcct());
+			MPeriod period = MPeriod.get(getCtx(), line.getDateAcct(), getAD_Org_ID(), getAD_Client_ID());
 			if (period != null && period.isOpen(REF_C_DocTypeDocBaseType.BankStatement))
 				docLine.setC_Period_ID(period.getC_Period_ID());
 			//

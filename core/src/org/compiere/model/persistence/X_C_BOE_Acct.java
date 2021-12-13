@@ -57,11 +57,13 @@ public static int Table_ID=MTable.getTable_ID("C_BOE_Acct");
 @XendraTrl(Identifier="a9c72ebf-cfc2-21e5-5209-39f77fe4c77b")
 public static String es_PE_TABLE_C_BOE_Acct_Name="Bill Of Exchange Accounting";
 
-@XendraTable(Name="Bill Of Exchange Accounting",Description="Bill Of Exchange Accounting",Help="",
-TableName="C_BOE_Acct",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=120,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="a9c72ebf-cfc2-21e5-5209-39f77fe4c77b",
-Synchronized="2017-08-16 11:41:26.0")
+@XendraTable(Name="Bill Of Exchange Accounting",
+AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Bill Of Exchange Accounting",
+Help="",TableName="C_BOE_Acct",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=120,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="a9c72ebf-cfc2-21e5-5209-39f77fe4c77b",Synchronized="2020-03-03 21:36:29.0")
 /** TableName=C_BOE_Acct */
 public static final String Table_Name="C_BOE_Acct";
 
@@ -118,7 +120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ad44064a-b61b-b611-71c5-4d76a6af0d3c",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Confirm_Acct */
 public static final String COLUMNNAME_BOE_Confirm_Acct = "BOE_Confirm_Acct";
 /** Set BOE_Discount_Acct.
@@ -145,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9ae40062-a2f2-fac8-cfc2-e3ff4598dfd1",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Discount_Acct */
 public static final String COLUMNNAME_BOE_Discount_Acct = "BOE_Discount_Acct";
 /** Set BOE_Portfolio_Acct.
@@ -172,7 +174,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5ac97cff-433b-e18d-76c6-7bfeb124cc28",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Portfolio_Acct */
 public static final String COLUMNNAME_BOE_Portfolio_Acct = "BOE_Portfolio_Acct";
 /** Set BOE_Protested_Acct.
@@ -199,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="86c445f6-fcfc-8690-778e-b761915399c4",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Protested_Acct */
 public static final String COLUMNNAME_BOE_Protested_Acct = "BOE_Protested_Acct";
 /** Set BOE_Receivables_Acct.
@@ -226,7 +228,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4ca9645b-ac26-2f67-7dde-acd4eec06463",Synchronized="2017-08-05 16:53:17.0")
+Identifier="4ca9645b-ac26-2f67-7dde-acd4eec06463",Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Receivables_Acct */
 public static final String COLUMNNAME_BOE_Receivables_Acct = "BOE_Receivables_Acct";
 /** Set BOE_Vendor_Acct.
@@ -253,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="07a315be-b21c-f204-8c54-5e97ebe2be52",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Vendor_Acct */
 public static final String COLUMNNAME_BOE_Vendor_Acct = "BOE_Vendor_Acct";
 /** Set BOE_Warranty_Acct.
@@ -280,7 +282,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="df9b8894-1eda-ab1f-87df-0ba92d3c540a",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name BOE_Warranty_Acct */
 public static final String COLUMNNAME_BOE_Warranty_Acct = "BOE_Warranty_Acct";
 /** Set Accounting Schema.
@@ -308,7 +310,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="87e0963b-cc61-b284-5cbc-8340090b1fda",
-Synchronized="2017-08-05 16:53:17.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Identifier.
@@ -340,7 +342,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4672fc22-8260-4ab2-abcc-fe83f9d06d7e",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:06.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

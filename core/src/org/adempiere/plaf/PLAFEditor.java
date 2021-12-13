@@ -86,7 +86,7 @@ public class PLAFEditor extends JDialog
 	}   //  PLAFEditor
 
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(PLAFEditor.class.getName());
+	private static CLogger log = CLogger.getCLogger(PLAFEditor.class.getName());
 
 	
 	/**************************************************************************

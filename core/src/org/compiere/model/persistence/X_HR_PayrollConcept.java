@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("HR_PayrollConcept");
 @XendraTrl(Identifier="f70c635c-18bb-4b0c-ad1a-2d518104c7ce")
 public static String es_PE_TABLE_HR_PayrollConcept_Name="Payroll Concept";
 
-@XendraTable(Name="Payroll Concept",Description="",Help="",TableName="HR_PayrollConcept",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.humanresource",Identifier="f70c635c-18bb-4b0c-ad1a-2d518104c7ce",
-Synchronized="2017-08-16 11:42:49.0")
+@XendraTable(Name="Payroll Concept",AD_Package_ID="95f9a029-eaee-0747-b1a5-58cfdd8f8ae5",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="HR_PayrollConcept",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.humanresource",Identifier="f70c635c-18bb-4b0c-ad1a-2d518104c7ce",
+Synchronized="2020-03-03 21:38:02.0")
 /** TableName=HR_PayrollConcept */
 public static final String Table_Name="HR_PayrollConcept";
 
@@ -119,7 +120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ec2fb5bf-b8ba-4a8f-8ba8-85dfa7b55ad5",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:41.0")
 /** Column name AD_Rule_ID */
 public static final String COLUMNNAME_AD_Rule_ID = "AD_Rule_ID";
 /** Set HR_Concept_ID.
@@ -148,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c2f22a0a-cead-47d0-add2-6b42f836c461",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:41.0")
 /** Column name HR_Concept_ID */
 public static final String COLUMNNAME_HR_Concept_ID = "HR_Concept_ID";
 /** Set Payroll Concept.
@@ -198,7 +199,7 @@ FieldLength=37,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5e52ea78-9e34-4edb-a34c-1f2ce3e4e7f9",Synchronized="2017-08-05 16:54:47.0")
+Identifier="5e52ea78-9e34-4edb-a34c-1f2ce3e4e7f9",Synchronized="2019-08-30 22:22:41.0")
 /** Column name HR_payrollconcept_UU */
 public static final String COLUMNNAME_HR_payrollconcept_UU = "HR_payrollconcept_UU";
 /** Set HR_Payroll_ID.
@@ -227,7 +228,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d6c6e803-741e-4176-84d5-82834f2f9121",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name HR_Payroll_ID */
 public static final String COLUMNNAME_HR_Payroll_ID = "HR_Payroll_ID";
 /** Set Displayed.
@@ -258,7 +259,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f4e7cad3-ea6b-4233-97ee-94ebe023bdaa",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name IsDisplayed */
 public static final String COLUMNNAME_IsDisplayed = "IsDisplayed";
 /** Set Included.
@@ -289,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="81b350b8-9dde-430c-a8b7-9ebc0364be5f",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name IsInclude */
 public static final String COLUMNNAME_IsInclude = "IsInclude";
 /** Set Printed.
@@ -320,7 +321,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fe293bd3-70a9-4dd6-9528-91e5a37d2729",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name IsPrinted */
 public static final String COLUMNNAME_IsPrinted = "IsPrinted";
 /** Set Name.
@@ -359,7 +360,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="402e4a41-287d-42ec-8960-8218518b9c08",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sequence.
@@ -386,7 +387,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5958cfe3-2cb3-463d-8269-98f11f1fee32",
-Synchronized="2017-08-05 16:54:47.0")
+Synchronized="2019-08-30 22:22:42.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

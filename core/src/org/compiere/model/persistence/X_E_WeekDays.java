@@ -51,17 +51,18 @@ public X_E_WeekDays (Properties ctx, ResultSet rs, String trxName)
 {
 super (ctx, rs, trxName);
 }
-/** AD_Table_ID=1000634 */
+/** AD_Table_ID=1000394 */
 public static int Table_ID=MTable.getTable_ID("E_WeekDays");
 
 @XendraTrl(Identifier="ae1d2335-1aeb-48c1-885e-4c945d8c54ab")
 public static String es_PE_TABLE_E_WeekDays_Name="Week days";
 
-@XendraTable(Name="Week days",Description="Week Days",Help="Week Days",TableName="E_WeekDays",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="ae1d2335-1aeb-48c1-885e-4c945d8c54ab",
-Synchronized="2017-09-14 18:33:46.0")
+@XendraTable(Name="Week days",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Week Days",Help="Week Days",
+TableName="E_WeekDays",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="ae1d2335-1aeb-48c1-885e-4c945d8c54ab",
+Synchronized="2020-03-03 21:37:49.0")
 /** TableName=E_WeekDays */
 public static final String Table_Name="E_WeekDays";
 
@@ -114,13 +115,13 @@ return ii.intValue();
 @XendraTrl(Identifier="e6d5dfdf-a361-4863-aa98-4148261a8d5c")
 public static String es_PE_COLUMN_E_WeekDay_ID_Name="E_WeekDay_ID";
 
-@XendraColumn(AD_Element_ID="7e80aa30-e406-49d3-86dd-d29702eccfd1",ColumnName="E_WeekDay_ID",
+@XendraColumn(AD_Element_ID="7815dd85-d251-4a11-86b9-cda10399cebe",ColumnName="E_WeekDay_ID",
 AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e6d5dfdf-a361-4863-aa98-4148261a8d5c",
-Synchronized="2017-09-14 18:32:23.0")
+Synchronized="2019-08-30 22:22:27.0")
 /** Column name E_WeekDay_ID */
 public static final String COLUMNNAME_E_WeekDay_ID = "E_WeekDay_ID";
 /** Set E_WeekDays_ID.

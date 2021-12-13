@@ -73,11 +73,13 @@ public static final String TABNAME_Count="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d";
 @XendraTrl(Identifier="6c6dca6d-af09-071e-2d6a-dcac20f35209")
 public static String es_PE_TABLE_W_CounterCount_Name="Cuenta Contraria";
 
-@XendraTable(Name="Counter Count",Description="Web Counter Count Management",Help="",
-TableName="W_CounterCount",AccessLevel="3",AD_Window_ID="8f8d4e21-4aa4-aea5-05d8-e157ddc1d91a",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="6c6dca6d-af09-071e-2d6a-dcac20f35209",Synchronized="2017-08-16 11:44:29.0")
+@XendraTable(Name="Counter Count",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Web Counter Count Management",
+Help="",TableName="W_CounterCount",AccessLevel="3",
+AD_Window_ID="8f8d4e21-4aa4-aea5-05d8-e157ddc1d91a",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="6c6dca6d-af09-071e-2d6a-dcac20f35209",
+Synchronized="2020-03-03 21:40:33.0")
 /** TableName=W_CounterCount */
 public static final String Table_Name="W_CounterCount";
 
@@ -116,9 +118,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_W_CounterCount[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** C_BPartner_ID AD_Reference=60ae0c61-2010-74a0-d56f-a6f27933c4c4 */
-public static final int C_BPARTNER_ID_AD_Reference_ID=232;
 /** Set Business Partner .
 @param C_BPartner_ID Identifies a Business Partner */
 public void setC_BPartner_ID (int C_BPartner_ID)
@@ -137,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2264e00b-167a-e0c0-1685-2eb78ec5f835")
+public static String es_PE_FIELD_Count_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="2264e00b-167a-e0c0-1685-2eb78ec5f835")
 public static String es_PE_FIELD_Count_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="2264e00b-167a-e0c0-1685-2eb78ec5f835")
 public static String es_PE_FIELD_Count_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="2264e00b-167a-e0c0-1685-2eb78ec5f835")
-public static String es_PE_FIELD_Count_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,7 +160,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="60da8075-9493-c85f-18e4-ed2519266747",Synchronized="2017-08-05 16:56:32.0")
+Identifier="60da8075-9493-c85f-18e4-ed2519266747",Synchronized="2019-08-30 22:24:31.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Counter.
@@ -180,18 +179,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
+public static String es_PE_FIELD_Count_Counter_Name="Contador";
+
+@XendraTrl(Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
 public static String es_PE_FIELD_Count_Counter_Description="Valor de contador";
 
 @XendraTrl(Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
 public static String es_PE_FIELD_Count_Counter_Help="Numero de contador";
 
-@XendraTrl(Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
-public static String es_PE_FIELD_Count_Counter_Name="Contador";
-@XendraField(AD_Column_ID="Counter",
-IsCentrallyMaintained=true,AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=true,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
+@XendraField(AD_Column_ID="Counter",IsCentrallyMaintained=true,
+AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=true,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e4987b42-f1cf-e319-21a4-27785d2ee838")
 public static final String FIELDNAME_Count_Counter="e4987b42-f1cf-e319-21a4-27785d2ee838";
 
 @XendraTrl(Identifier="eae9ccc9-8776-7573-f31a-3f13c4dee76b")
@@ -204,7 +204,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT COUNT(*) FROM W_Counter c WHERE c.W_CounterCount_ID=W_CounterCount.W_CounterCount_ID)",
 IsAllowLogging=false,Identifier="eae9ccc9-8776-7573-f31a-3f13c4dee76b",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Counter */
 public static final String COLUMNNAME_Counter = "Counter";
 /** Set Description.
@@ -235,13 +235,13 @@ return value;
 }
 
 @XendraTrl(Identifier="744cf24a-01c4-7372-80a3-1ebaa41aec8a")
+public static String es_PE_FIELD_Count_Description_Name="Observación";
+
+@XendraTrl(Identifier="744cf24a-01c4-7372-80a3-1ebaa41aec8a")
 public static String es_PE_FIELD_Count_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="744cf24a-01c4-7372-80a3-1ebaa41aec8a")
 public static String es_PE_FIELD_Count_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="744cf24a-01c4-7372-80a3-1ebaa41aec8a")
-public static String es_PE_FIELD_Count_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -259,7 +259,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4328d5f7-e8ee-2a07-431e-30f52ad599e7",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -291,7 +291,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b861c325-0dbf-4dad-985b-89ac12fbaadb",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -323,18 +323,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
+public static String es_PE_FIELD_Count_Name_Name="Nombre";
+
+@XendraTrl(Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
 public static String es_PE_FIELD_Count_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
 public static String es_PE_FIELD_Count_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
-public static String es_PE_FIELD_Count_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5")
 public static final String FIELDNAME_Count_Name="968dc04c-2e40-cacb-eeb8-6fc73dfaf9a5";
 
 @XendraTrl(Identifier="730fe9f4-3fc9-d81a-3a65-62c6fef4a82a")
@@ -346,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="730fe9f4-3fc9-d81a-3a65-62c6fef4a82a",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Page URL.
@@ -389,7 +390,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c9efce9a-dca2-53fb-1c48-2b408fde8044",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name PageURL */
 public static final String COLUMNNAME_PageURL = "PageURL";
 /** Set Counter Count.
@@ -409,13 +410,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="876dec3c-23e2-1ee3-bdf8-c61fc196b14b")
+public static String es_PE_FIELD_Count_CounterCount_Name="Cuenta Contraria";
+
+@XendraTrl(Identifier="876dec3c-23e2-1ee3-bdf8-c61fc196b14b")
 public static String es_PE_FIELD_Count_CounterCount_Description="Gerencia contraria de la cuenta Web";
 
 @XendraTrl(Identifier="876dec3c-23e2-1ee3-bdf8-c61fc196b14b")
 public static String es_PE_FIELD_Count_CounterCount_Help="Información de la cuenta contaria en Web";
-
-@XendraTrl(Identifier="876dec3c-23e2-1ee3-bdf8-c61fc196b14b")
-public static String es_PE_FIELD_Count_CounterCount_Name="Cuenta Contraria";
 
 @XendraField(AD_Column_ID="W_CounterCount_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6bf2ffe9-fe57-a248-1248-20d40ffa2d3d",AD_FieldGroup_ID="",IsDisplayed=false,

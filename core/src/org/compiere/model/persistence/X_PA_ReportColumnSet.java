@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("PA_ReportColumnSet");
 public static String es_PE_TAB_ReportColumnSet_Description="Mantener conjunto de columnas del Informe financiero";
 
 @XendraTrl(Identifier="14c45403-38aa-e2ce-565d-a91e0db9345c")
-public static String es_PE_TAB_ReportColumnSet_Name="Conjunto de Columnas del Informe";
+public static String es_PE_TAB_ReportColumnSet_Help="Los conjuntos de columnas son la combinación de columnas que son incluidas en el Informe financiero.";
 
 @XendraTrl(Identifier="14c45403-38aa-e2ce-565d-a91e0db9345c")
-public static String es_PE_TAB_ReportColumnSet_Help="Los conjuntos de columnas son la combinación de columnas que son incluidas en el Informe financiero.";
+public static String es_PE_TAB_ReportColumnSet_Name="Conjunto de Columnas del Informe";
 
 @XendraTab(Name="Report Column Set",Description="Maintain Financial Report Column Sets",
 Help="Column Sets are the combination of Columns to be included in a Financial Report",
@@ -79,11 +79,13 @@ public static final String TABNAME_ReportColumnSet="14c45403-38aa-e2ce-565d-a91e
 public static String es_PE_TABLE_PA_ReportColumnSet_Name="Grupo de Columnas del Informe";
 
 
-@XendraTable(Name="Report Column Set",Description="Collection of Columns for Report",Help="",
-TableName="PA_ReportColumnSet",AccessLevel="7",AD_Window_ID="1f84b370-fe0e-cce4-68b9-422e755a2bf5",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="67839b71-9c90-d67a-d871-1e4c970482f7",Synchronized="2017-08-16 11:43:42.0")
+@XendraTable(Name="Report Column Set",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Collection of Columns for Report",
+Help="",TableName="PA_ReportColumnSet",AccessLevel="7",
+AD_Window_ID="1f84b370-fe0e-cce4-68b9-422e755a2bf5",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="67839b71-9c90-d67a-d871-1e4c970482f7",Synchronized="2020-03-03 21:39:13.0")
 /** TableName=PA_ReportColumnSet */
 public static final String Table_Name="PA_ReportColumnSet";
 
@@ -144,13 +146,13 @@ return value;
 }
 
 @XendraTrl(Identifier="e46c5e79-97ce-931e-9704-564fa35a4d99")
+public static String es_PE_FIELD_ReportColumnSet_Description_Name="Observación";
+
+@XendraTrl(Identifier="e46c5e79-97ce-931e-9704-564fa35a4d99")
 public static String es_PE_FIELD_ReportColumnSet_Description_Description="Observación";
 
 @XendraTrl(Identifier="e46c5e79-97ce-931e-9704-564fa35a4d99")
 public static String es_PE_FIELD_ReportColumnSet_Description_Help="Observación";
-
-@XendraTrl(Identifier="e46c5e79-97ce-931e-9704-564fa35a4d99")
-public static String es_PE_FIELD_ReportColumnSet_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="14c45403-38aa-e2ce-565d-a91e0db9345c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -168,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d0af363-ee01-51a7-8056-d2ab0893622f",
-Synchronized="2017-08-05 16:55:43.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3307e86a-9777-404a-a8f0-2081fecbaf84",
-Synchronized="2017-08-05 16:55:43.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -232,13 +234,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="0493aba0-a7bd-52d2-1b3d-e65d4aca0c36")
+public static String es_PE_FIELD_ReportColumnSet_Name_Name="Nombre";
+
+@XendraTrl(Identifier="0493aba0-a7bd-52d2-1b3d-e65d4aca0c36")
 public static String es_PE_FIELD_ReportColumnSet_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="0493aba0-a7bd-52d2-1b3d-e65d4aca0c36")
 public static String es_PE_FIELD_ReportColumnSet_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="0493aba0-a7bd-52d2-1b3d-e65d4aca0c36")
-public static String es_PE_FIELD_ReportColumnSet_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="14c45403-38aa-e2ce-565d-a91e0db9345c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -256,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c093b3f4-3dae-7ceb-ecbf-a81194ac42bf",
-Synchronized="2017-08-05 16:55:43.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Report Column Set.
@@ -276,13 +278,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2ee58b2f-3793-a3f4-5082-faba123df331")
+public static String es_PE_FIELD_ReportColumnSet_ReportColumnSet_Name="Grupo de Columnas del Informe";
+
+@XendraTrl(Identifier="2ee58b2f-3793-a3f4-5082-faba123df331")
 public static String es_PE_FIELD_ReportColumnSet_ReportColumnSet_Description="Colección de columnas para Informe";
 
 @XendraTrl(Identifier="2ee58b2f-3793-a3f4-5082-faba123df331")
 public static String es_PE_FIELD_ReportColumnSet_ReportColumnSet_Help="El conjunto de columnas del Informe identifica las columnas usadas en un Informe.";
-
-@XendraTrl(Identifier="2ee58b2f-3793-a3f4-5082-faba123df331")
-public static String es_PE_FIELD_ReportColumnSet_ReportColumnSet_Name="Grupo de Columnas del Informe";
 
 @XendraField(AD_Column_ID="PA_ReportColumnSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14c45403-38aa-e2ce-565d-a91e0db9345c",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -312,13 +314,13 @@ return false;
 }
 
 @XendraTrl(Identifier="3cca83da-b8a7-77ca-8015-32cc3c22bd1c")
+public static String es_PE_FIELD_ReportColumnSet_ProcessNow_Name="Copiar Columnas";
+
+@XendraTrl(Identifier="3cca83da-b8a7-77ca-8015-32cc3c22bd1c")
 public static String es_PE_FIELD_ReportColumnSet_ProcessNow_Description="Copiar columnas de un reporte desde otro conjunto de columnas";
 
 @XendraTrl(Identifier="3cca83da-b8a7-77ca-8015-32cc3c22bd1c")
 public static String es_PE_FIELD_ReportColumnSet_ProcessNow_Help="Copiar columnas al final de éste conjunto de columnas";
-
-@XendraTrl(Identifier="3cca83da-b8a7-77ca-8015-32cc3c22bd1c")
-public static String es_PE_FIELD_ReportColumnSet_ProcessNow_Name="Copiar Columnas";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="14c45403-38aa-e2ce-565d-a91e0db9345c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -336,7 +338,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="446ef822-9c87-8b07-0125-162a8c405fa2",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="456d5332-0d1b-b3b6-d866-594182f8c31b",Synchronized="2017-08-05 16:55:43.0")
+Identifier="456d5332-0d1b-b3b6-d866-594182f8c31b",Synchronized="2019-08-30 22:23:39.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

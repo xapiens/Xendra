@@ -2,7 +2,7 @@ package org.xendra.printdocument;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * Represents any print jobs sent to us.  It holds the {@link ControlFile}
@@ -17,7 +17,7 @@ public class PrintJob implements Cloneable {
 	/**
 	 * 
 	 */
-	static Logger log = Logger.getLogger(PrintJob.class);
+	static CLogger log = CLogger.getCLogger(PrintJob.class);
 
 	private ControlFile controlFile;
 	private DataFile dataFile;
@@ -62,7 +62,7 @@ public class PrintJob implements Cloneable {
 			result.controlFile = (ControlFile)controlFile.clone();
 			result.dataFile = (DataFile)dataFile.clone();
 		} catch(CloneNotSupportedException e) {
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new InternalError(METHOD_NAME + e.getMessage());
 		}
 		return result;

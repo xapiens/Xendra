@@ -67,13 +67,12 @@ public static int Table_ID=MTable.getTable_ID("M_Locator");
 public static String es_PE_TAB_Locator_Description="Ubicación";
 
 @XendraTrl(Identifier="5640a18f-e029-ec46-9391-fdb04c20c9d5")
-public static String es_PE_TAB_Locator_Name="Ubicación";
-
-@XendraTrl(Identifier="5640a18f-e029-ec46-9391-fdb04c20c9d5")
 public static String es_PE_TAB_Locator_Help="La pestaña de Ubicación define las localizaciones de un almacén.";
 
-@XendraTab(Name="Locator",Description="Locator",
-Help="The Locator Tab defines any Locators for that Warehouse.",
+@XendraTrl(Identifier="5640a18f-e029-ec46-9391-fdb04c20c9d5")
+public static String es_PE_TAB_Locator_Name="Ubicación";
+@XendraTab(Name="Locator",
+Description="Locator",Help="The Locator Tab defines any Locators for that Warehouse.",
 AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",SeqNo=20,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -85,11 +84,12 @@ public static final String TABNAME_Locator="5640a18f-e029-ec46-9391-fdb04c20c9d5
 @XendraTrl(Identifier="fc67ed5c-1e66-6f17-a8ce-18764108eb97")
 public static String es_PE_TABLE_M_Locator_Name="Ubicación";
 
-@XendraTable(Name="Locator",Description="Warehouse Locator",Help="",TableName="M_Locator",
-AccessLevel="7",AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="fc67ed5c-1e66-6f17-a8ce-18764108eb97",Synchronized="2017-08-16 11:43:18.0")
+@XendraTable(Name="Locator",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Warehouse Locator",Help="",
+TableName="M_Locator",AccessLevel="7",AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="fc67ed5c-1e66-6f17-a8ce-18764108eb97",Synchronized="2020-12-13 11:16:26.0")
 /** TableName=M_Locator */
 public static final String Table_Name="M_Locator";
 
@@ -98,6 +98,12 @@ public static final String Table_Name="M_Locator";
 Column_Names="m_warehouse_id, x, y, z",IsUnique="true",
 TableIdentifier="4a7204d5-4c97-b57e-c2de-70f2a516458e",Synchronized="2014-06-01 19:03:58.0")
 public static final String INDEXNAME_m_location_where = "4a7204d5-4c97-b57e-c2de-70f2a516458e";
+
+
+@XendraIndex(Name="m_locator_identifier",Identifier="0b7497e7-0265-4f95-98e2-35506bed788a",
+Column_Names="identifier",IsUnique="false",TableIdentifier="0b7497e7-0265-4f95-98e2-35506bed788a",
+Synchronized="2020-11-02 17:48:51.0")
+public static final String INDEXNAME_m_locator_identifier = "0b7497e7-0265-4f95-98e2-35506bed788a";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"M_Locator");
 
@@ -149,18 +155,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
+public static String es_PE_FIELD_Locator_Alias_Name="Alias";
+
+@XendraTrl(Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
 public static String es_PE_FIELD_Locator_Alias_Description="Define un método alterno de identificar una combinación de cuenta";
 
 @XendraTrl(Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
 public static String es_PE_FIELD_Locator_Alias_Help="El campo Alias le permite identificar un método alterno para referirse a una combinación completa de cuenta. Por Ej.; La cuenta por cobrar para Garden World puede tener el alias de  GW_AR.";
 
-@XendraTrl(Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
-public static String es_PE_FIELD_Locator_Alias_Name="Alias";
-@XendraField(AD_Column_ID="Alias",
-IsCentrallyMaintained=true,AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=0,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
+@XendraField(AD_Column_ID="Alias",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="466457e0-9417-3a07-01cc-2d01ac506c64")
 public static final String FIELDNAME_Locator_Alias="466457e0-9417-3a07-01cc-2d01ac506c64";
 
 @XendraTrl(Identifier="7ea2ca4a-7568-ef06-22bb-6a553882943d")
@@ -172,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7ea2ca4a-7568-ef06-22bb-6a553882943d",
-Synchronized="2017-08-05 16:55:13.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name Alias */
 public static final String COLUMNNAME_Alias = "Alias";
 /** Set Identifier.
@@ -195,6 +202,16 @@ if (value == null)
   return "";
 return value;
 }
+@XendraTrl(Identifier="d78dbc1c-e403-481a-ad67-360649307b38")
+public static String es_PE_FIELD_Locator_Identifier_Name="Identifier";
+
+@XendraField(AD_Column_ID="Identifier",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=36,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-12-13 11:16:25.0",
+Identifier="d78dbc1c-e403-481a-ad67-360649307b38")
+public static final String FIELDNAME_Locator_Identifier="d78dbc1c-e403-481a-ad67-360649307b38";
+
 @XendraTrl(Identifier="7544fc43-86c8-4962-9b82-1bed44f1ada0")
 public static String es_PE_COLUMN_Identifier_Name="Identifier";
 
@@ -204,7 +221,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7544fc43-86c8-4962-9b82-1bed44f1ada0",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -227,13 +244,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b78265d1-63e8-7216-4151-a530a55baee3")
+public static String es_PE_FIELD_Locator_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="b78265d1-63e8-7216-4151-a530a55baee3")
 public static String es_PE_FIELD_Locator_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="b78265d1-63e8-7216-4151-a530a55baee3")
 public static String es_PE_FIELD_Locator_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="b78265d1-63e8-7216-4151-a530a55baee3")
-public static String es_PE_FIELD_Locator_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -251,7 +268,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="02c704f1-5625-8165-5090-c4babedcb235",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Locator.
@@ -271,13 +288,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="55c3380d-4638-e09f-f37f-adc796fef2c0")
+public static String es_PE_FIELD_Locator_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="55c3380d-4638-e09f-f37f-adc796fef2c0")
 public static String es_PE_FIELD_Locator_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="55c3380d-4638-e09f-f37f-adc796fef2c0")
 public static String es_PE_FIELD_Locator_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="55c3380d-4638-e09f-f37f-adc796fef2c0")
-public static String es_PE_FIELD_Locator_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -304,13 +321,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2eb9f606-2d92-b116-f3af-3006c89b21f5")
+public static String es_PE_FIELD_Locator_Warehouse_Name="Almacén";
+
+@XendraTrl(Identifier="2eb9f606-2d92-b116-f3af-3006c89b21f5")
 public static String es_PE_FIELD_Locator_Warehouse_Description="Almacén";
 
 @XendraTrl(Identifier="2eb9f606-2d92-b116-f3af-3006c89b21f5")
 public static String es_PE_FIELD_Locator_Warehouse_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="2eb9f606-2d92-b116-f3af-3006c89b21f5")
-public static String es_PE_FIELD_Locator_Warehouse_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -328,7 +345,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9a5d3f06-120d-3eb6-5925-11430b2922da",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 /** Set Relative Priority.
@@ -347,13 +364,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="28b01cc8-078d-f1fd-ef11-e0ea60878aee")
+public static String es_PE_FIELD_Locator_RelativePriority_Name="Prioridad Relativa";
+
+@XendraTrl(Identifier="28b01cc8-078d-f1fd-ef11-e0ea60878aee")
 public static String es_PE_FIELD_Locator_RelativePriority_Description="De donde se seleccionará primero el inventario";
 
 @XendraTrl(Identifier="28b01cc8-078d-f1fd-ef11-e0ea60878aee")
 public static String es_PE_FIELD_Locator_RelativePriority_Help="La prioridad relativa indica la ubicación desde la que se va a seleccionar primero un producto si está almacenado en más de una ubicación (0 = la más alta prioridad)";
-
-@XendraTrl(Identifier="28b01cc8-078d-f1fd-ef11-e0ea60878aee")
-public static String es_PE_FIELD_Locator_RelativePriority_Name="Prioridad Relativa";
 
 @XendraField(AD_Column_ID="PriorityNo",IsCentrallyMaintained=true,
 AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -371,7 +388,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9d566f39-58c6-23d6-e963-6be3680f1bb3",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name PriorityNo */
 public static final String COLUMNNAME_PriorityNo = "PriorityNo";
 /** Set Search Key.
@@ -403,13 +420,13 @@ return new KeyNamePair(get_ID(), getValue());
 }
 
 @XendraTrl(Identifier="59feaf3e-ecb9-0f3e-bae3-cfe89dec5ab5")
+public static String es_PE_FIELD_Locator_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="59feaf3e-ecb9-0f3e-bae3-cfe89dec5ab5")
 public static String es_PE_FIELD_Locator_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="59feaf3e-ecb9-0f3e-bae3-cfe89dec5ab5")
 public static String es_PE_FIELD_Locator_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="59feaf3e-ecb9-0f3e-bae3-cfe89dec5ab5")
-public static String es_PE_FIELD_Locator_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -427,9 +444,95 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a3f36bf2-26a2-0bcb-f390-d1c3f0040c21",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
+/** Set Volume.
+@param Volume Volume of a product */
+public void setVolume (BigDecimal Volume)
+{
+set_Value (COLUMNNAME_Volume, Volume);
+}
+/** Get Volume.
+@return Volume of a product */
+public BigDecimal getVolume() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Volume);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="a2cb1f1a-ba2a-48fc-96c9-ec8ce22cfce9")
+public static String es_PE_FIELD_Locator_Volume_Name="Volúmen";
+
+@XendraTrl(Identifier="a2cb1f1a-ba2a-48fc-96c9-ec8ce22cfce9")
+public static String es_PE_FIELD_Locator_Volume_Description="Volúmen del producto";
+
+@XendraTrl(Identifier="a2cb1f1a-ba2a-48fc-96c9-ec8ce22cfce9")
+public static String es_PE_FIELD_Locator_Volume_Help="El Volumen indica el volumen del producto en la UM de volúmen del cliente";
+
+@XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-12-13 11:16:25.0",
+Identifier="a2cb1f1a-ba2a-48fc-96c9-ec8ce22cfce9")
+public static final String FIELDNAME_Locator_Volume="a2cb1f1a-ba2a-48fc-96c9-ec8ce22cfce9";
+
+@XendraTrl(Identifier="f59e8686-80e0-4624-a0b5-d2a768e8971b")
+public static String es_PE_COLUMN_Volume_Name="Volume";
+
+@XendraColumn(AD_Element_ID="464c5f3e-92af-e641-7d3a-e7e5427af367",ColumnName="Volume",
+AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="f59e8686-80e0-4624-a0b5-d2a768e8971b",
+Synchronized="2020-12-13 11:03:02.0")
+/** Column name Volume */
+public static final String COLUMNNAME_Volume = "Volume";
+/** Set Weight.
+@param Weight Weight of a product */
+public void setWeight (BigDecimal Weight)
+{
+set_Value (COLUMNNAME_Weight, Weight);
+}
+/** Get Weight.
+@return Weight of a product */
+public BigDecimal getWeight() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Weight);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="cb54684d-04de-4bf3-90f7-d9f009a13116")
+public static String es_PE_FIELD_Locator_Weight_Name="Peso";
+
+@XendraTrl(Identifier="cb54684d-04de-4bf3-90f7-d9f009a13116")
+public static String es_PE_FIELD_Locator_Weight_Description="Peso del producto";
+
+@XendraTrl(Identifier="cb54684d-04de-4bf3-90f7-d9f009a13116")
+public static String es_PE_FIELD_Locator_Weight_Help="El peso indica el peso del producto en la UM de peso del cliente.";
+
+@XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2020-12-13 11:16:25.0",
+Identifier="cb54684d-04de-4bf3-90f7-d9f009a13116")
+public static final String FIELDNAME_Locator_Weight="cb54684d-04de-4bf3-90f7-d9f009a13116";
+
+@XendraTrl(Identifier="17a1d0e1-7c67-4857-8007-11cf9da9633b")
+public static String es_PE_COLUMN_Weight_Name="Weight";
+
+@XendraColumn(AD_Element_ID="712867f4-95e8-b3a8-b07b-f884a12efbb4",ColumnName="Weight",
+AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="17a1d0e1-7c67-4857-8007-11cf9da9633b",
+Synchronized="2020-12-13 11:03:02.0")
+/** Column name Weight */
+public static final String COLUMNNAME_Weight = "Weight";
 /** Set Aisle (X).
 @param X X dimension, e.g., Aisle */
 public void setX (String X)
@@ -452,18 +555,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
+public static String es_PE_FIELD_Locator_AisleX_Name="Rack";
+
+@XendraTrl(Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
 public static String es_PE_FIELD_Locator_AisleX_Description="Dimensión X; Ej. Pasillo";
 
 @XendraTrl(Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
 public static String es_PE_FIELD_Locator_AisleX_Help="La dimensión X indica el Pasillo en donde un producto está localizado";
 
-@XendraTrl(Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
-public static String es_PE_FIELD_Locator_AisleX_Name="Rack";
-@XendraField(AD_Column_ID="X",
-IsCentrallyMaintained=true,AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
+@XendraField(AD_Column_ID="X",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="2caae405-0086-8df4-2f7c-5655065685cb")
 public static final String FIELDNAME_Locator_AisleX="2caae405-0086-8df4-2f7c-5655065685cb";
 
 @XendraTrl(Identifier="d1646b07-6e59-db9e-997e-0c6dab21a14a")
@@ -475,7 +579,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1646b07-6e59-db9e-997e-0c6dab21a14a",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name X */
 public static final String COLUMNNAME_X = "X";
 /** Set Bin (Y).
@@ -500,18 +604,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="68227542-2891-fb88-6142-8d7386648ad5")
+public static String es_PE_FIELD_Locator_BinY_Name="Columna";
+
+@XendraTrl(Identifier="68227542-2891-fb88-6142-8d7386648ad5")
 public static String es_PE_FIELD_Locator_BinY_Description="Dimensión Y; Ej. Cajón";
 
 @XendraTrl(Identifier="68227542-2891-fb88-6142-8d7386648ad5")
 public static String es_PE_FIELD_Locator_BinY_Help="La dimensión Y indica el anaquel en que un producto está localizado";
 
-@XendraTrl(Identifier="68227542-2891-fb88-6142-8d7386648ad5")
-public static String es_PE_FIELD_Locator_BinY_Name="Columna";
-@XendraField(AD_Column_ID="Y",
-IsCentrallyMaintained=true,AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="68227542-2891-fb88-6142-8d7386648ad5")
+@XendraField(AD_Column_ID="Y",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="68227542-2891-fb88-6142-8d7386648ad5")
 public static final String FIELDNAME_Locator_BinY="68227542-2891-fb88-6142-8d7386648ad5";
 
 @XendraTrl(Identifier="22cdfbed-41bf-731d-ccf3-68df9370821a")
@@ -523,7 +628,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="22cdfbed-41bf-731d-ccf3-68df9370821a",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name Y */
 public static final String COLUMNNAME_Y = "Y";
 /** Set Level (Z).
@@ -548,18 +653,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
+public static String es_PE_FIELD_Locator_LevelZ_Name="Nivel ";
+
+@XendraTrl(Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
 public static String es_PE_FIELD_Locator_LevelZ_Description="Dimensión Z; Ej. nivel";
 
 @XendraTrl(Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
 public static String es_PE_FIELD_Locator_LevelZ_Help="La dimensión Z indica el nivel en que un producto está localizado.";
 
-@XendraTrl(Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
-public static String es_PE_FIELD_Locator_LevelZ_Name="Nivel ";
-@XendraField(AD_Column_ID="Z",
-IsCentrallyMaintained=true,AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=100,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
+@XendraField(AD_Column_ID="Z",IsCentrallyMaintained=true,
+AD_Tab_ID="5640a18f-e029-ec46-9391-fdb04c20c9d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=100,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0")
 public static final String FIELDNAME_Locator_LevelZ="9cec79f6-5789-4d9d-fc9f-bab8aec5d6f0";
 
 @XendraTrl(Identifier="e292f259-0277-b09a-76e7-8300aa22c6f5")
@@ -571,7 +677,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e292f259-0277-b09a-76e7-8300aa22c6f5",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2020-12-13 11:03:02.0")
 /** Column name Z */
 public static final String COLUMNNAME_Z = "Z";
 }

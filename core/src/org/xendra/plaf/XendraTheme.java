@@ -26,6 +26,7 @@ import javax.swing.plaf.FontUIResource;
 //import org.compiere.plaf.ColorBlind;
 import org.compiere.swing.ColorBlind;
 import org.compiere.swing.ExtendedTheme;
+import org.compiere.util.CLogger;
 import org.compiere.util.Ini;
 
 import com.jgoodies.looks.plastic.PlasticScrollBarUI;
@@ -78,7 +79,7 @@ public class XendraTheme extends com.jgoodies.looks.plastic.PlasticTheme {
 	protected static String			s_name = "Xendra Theme";
         public static final String	NAME = s_name;
 	/**	Logger					*/
-	protected static Logger 	log = Logger.getLogger(org.xendra.plaf.XendraTheme.class.getName());
+	protected static CLogger 	log = CLogger.getCLogger(org.xendra.plaf.XendraTheme.class.getName());
 	/** Active Theme			*/
 	protected static XendraTheme	s_theme = null;
 	// #658ABB dark blue

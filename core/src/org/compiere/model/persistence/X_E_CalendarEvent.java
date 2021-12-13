@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_CalendarType;
 /** Generated Model for E_CalendarEvent
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -52,17 +51,18 @@ public X_E_CalendarEvent (Properties ctx, ResultSet rs, String trxName)
 {
 super (ctx, rs, trxName);
 }
-/** AD_Table_ID=1000413 */
+/** AD_Table_ID=1000389 */
 public static int Table_ID=MTable.getTable_ID("E_CalendarEvent");
 
 @XendraTrl(Identifier="6d4f7cde-c3bf-45e2-83da-e88f8e1e8bda")
 public static String es_PE_TABLE_E_CalendarEvent_Name="Calendar Event";
 
-@XendraTable(Name="Calendar Event",Description="",Help="",TableName="E_CalendarEvent",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="6d4f7cde-c3bf-45e2-83da-e88f8e1e8bda",
-Synchronized="2017-09-15 19:13:43.0")
+@XendraTable(Name="Calendar Event",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="E_CalendarEvent",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="6d4f7cde-c3bf-45e2-83da-e88f8e1e8bda",
+Synchronized="2020-03-03 21:37:46.0")
 /** TableName=E_CalendarEvent */
 public static final String Table_Name="E_CalendarEvent";
 
@@ -118,24 +118,19 @@ return value;
 @XendraTrl(Identifier="17862328-c0a2-42c1-b0e5-3726cf7e5b02")
 public static String es_PE_COLUMN_alldayevent_Name="alldayevent";
 
-@XendraColumn(AD_Element_ID="5ca52778-6ec8-43d8-abe2-2fb2b6e68b09",ColumnName="alldayevent",
+@XendraColumn(AD_Element_ID="6f2680c5-cafe-42f3-b5c4-b6325fa79ffe",ColumnName="alldayevent",
 AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="17862328-c0a2-42c1-b0e5-3726cf7e5b02",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name alldayevent */
 public static final String COLUMNNAME_alldayevent = "alldayevent";
-
-/** CalendarType AD_Reference=710925ba-3a28-4c2a-b444-af8a8a22f060 */
-public static final int CALENDARTYPE_AD_Reference_ID=1000112;
 /** Set CalendarType.
 @param CalendarType CalendarType */
 public void setCalendarType (String CalendarType)
 {
-if (CalendarType == null || CalendarType.equals(REF_CalendarType.Event) || CalendarType.equals(REF_CalendarType.FreeBusy) || CalendarType.equals(REF_CalendarType.Journal) || CalendarType.equals(REF_CalendarType.Todo) || CalendarType.equals(REF_CalendarType.Timezone));
- else throw new IllegalArgumentException ("CalendarType Invalid value - " + CalendarType + " - Reference_ID=1000112 - EV - FB - JN - TD - TZ");
 if (CalendarType != null && CalendarType.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -153,13 +148,13 @@ return (String)get_Value(COLUMNNAME_CalendarType);
 @XendraTrl(Identifier="a72c4b40-f624-43ea-827a-7780773e0dfb")
 public static String es_PE_COLUMN_CalendarType_Name="CalendarType";
 
-@XendraColumn(AD_Element_ID="1dcfa80a-f64a-4c02-b6f3-c69cefb65700",ColumnName="CalendarType",
+@XendraColumn(AD_Element_ID="31d91d2f-3616-43a6-93e8-07cff4fecf16",ColumnName="CalendarType",
 AD_Reference_ID=17,AD_Reference_Value_ID="710925ba-3a28-4c2a-b444-af8a8a22f060",AD_Val_Rule_ID="",
 FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a72c4b40-f624-43ea-827a-7780773e0dfb",Synchronized="2017-09-14 20:36:49.0")
+Identifier="a72c4b40-f624-43ea-827a-7780773e0dfb",Synchronized="2019-08-30 22:22:23.0")
 /** Column name CalendarType */
 public static final String COLUMNNAME_CalendarType = "CalendarType";
 /** Set Description.
@@ -193,7 +188,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="275b8df6-b053-4a08-b08b-95f0d9180e53",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set DTEnd.
@@ -218,7 +213,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c700e6bd-9404-4332-8ddc-06c222776d9d",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name DTEnd */
 public static final String COLUMNNAME_DTEnd = "DTEnd";
 /** Set DTStart.
@@ -243,18 +238,18 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="306a81c7-cfbb-4a9b-a500-f789810e00d0",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name DTStart */
 public static final String COLUMNNAME_DTStart = "DTStart";
-/** Set E_CalendarEvent_ID.
-@param E_CalendarEvent_ID E_CalendarEvent_ID */
+/** Set Calendar Event.
+@param E_CalendarEvent_ID Calendar Event */
 public void setE_CalendarEvent_ID (int E_CalendarEvent_ID)
 {
 if (E_CalendarEvent_ID < 1) throw new IllegalArgumentException ("E_CalendarEvent_ID is mandatory.");
 set_ValueNoCheck (COLUMNNAME_E_CalendarEvent_ID, Integer.valueOf(E_CalendarEvent_ID));
 }
-/** Get E_CalendarEvent_ID.
-@return E_CalendarEvent_ID */
+/** Get Calendar Event.
+@return Calendar Event */
 public int getE_CalendarEvent_ID() 
 {
 Integer ii = (Integer)get_Value(COLUMNNAME_E_CalendarEvent_ID);
@@ -289,19 +284,19 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64f489ed-6554-4e30-8c12-873169f18500",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name E_CalendarItem_ID */
 public static final String COLUMNNAME_E_CalendarItem_ID = "E_CalendarItem_ID";
-/** Set E_CalendarRecurrence_ID.
-@param E_CalendarRecurrence_ID E_CalendarRecurrence_ID */
+/** Set Calendar Recurrence.
+@param E_CalendarRecurrence_ID Calendar Recurrence */
 public void setE_CalendarRecurrence_ID (int E_CalendarRecurrence_ID)
 {
 if (E_CalendarRecurrence_ID <= 0) set_Value (COLUMNNAME_E_CalendarRecurrence_ID, null);
  else 
 set_Value (COLUMNNAME_E_CalendarRecurrence_ID, Integer.valueOf(E_CalendarRecurrence_ID));
 }
-/** Get E_CalendarRecurrence_ID.
-@return E_CalendarRecurrence_ID */
+/** Get Calendar Recurrence.
+@return Calendar Recurrence */
 public int getE_CalendarRecurrence_ID() 
 {
 Integer ii = (Integer)get_Value(COLUMNNAME_E_CalendarRecurrence_ID);
@@ -312,13 +307,13 @@ return ii.intValue();
 @XendraTrl(Identifier="e2b98fa8-1d3e-468e-b3e7-d225b7e59a87")
 public static String es_PE_COLUMN_E_CalendarRecurrence_ID_Name="E_CalendarRecurrence_ID";
 
-@XendraColumn(AD_Element_ID="abf8afb6-f74b-4260-a84f-9fb8b5afa511",
+@XendraColumn(AD_Element_ID="9c614822-f549-4e83-a846-bc72965b4c33",
 ColumnName="E_CalendarRecurrence_ID",AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",
 FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e2b98fa8-1d3e-468e-b3e7-d225b7e59a87",Synchronized="2017-09-14 20:36:49.0")
+Identifier="e2b98fa8-1d3e-468e-b3e7-d225b7e59a87",Synchronized="2019-08-30 22:22:24.0")
 /** Column name E_CalendarRecurrence_ID */
 public static final String COLUMNNAME_E_CalendarRecurrence_ID = "E_CalendarRecurrence_ID";
 /** Set EventClass.
@@ -345,7 +340,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="87d675a6-20d8-452a-9c3b-90ba3509f128",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name EventClass */
 public static final String COLUMNNAME_EventClass = "EventClass";
 /** Set Identifier.
@@ -377,17 +372,17 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8170466-9944-4933-baac-473e92b09ea6",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-/** Set IsReadOnly.
-@param IsReadOnly IsReadOnly */
+/** Set Read Only.
+@param IsReadOnly Field is read only */
 public void setIsReadOnly (boolean IsReadOnly)
 {
 set_Value (COLUMNNAME_IsReadOnly, Boolean.valueOf(IsReadOnly));
 }
-/** Get IsReadOnly.
-@return IsReadOnly */
+/** Get Read Only.
+@return Field is read only */
 public boolean isReadOnly() 
 {
 Object oo = get_Value(COLUMNNAME_IsReadOnly);
@@ -408,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fbe3b42b-bc6c-4fe7-b1fe-d14b28e43212",
-Synchronized="2017-09-15 19:13:13.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name IsReadOnly */
 public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
 /** Set Location.
@@ -435,7 +430,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="a368ac09-0c10-4a68-a93d-236c435a2b7b",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Location */
 public static final String COLUMNNAME_Location = "Location";
 /** Set Priority.
@@ -462,7 +457,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="65de5721-45b0-41fc-97bb-9e612e354f0d",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Priority */
 public static final String COLUMNNAME_Priority = "Priority";
 /** Set Status.
@@ -489,7 +484,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="4b35800f-8b63-4497-99fc-fe091f88ab4f",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Status */
 public static final String COLUMNNAME_Status = "Status";
 /** Set Summary.
@@ -516,7 +511,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="362ed126-dab3-4f79-a2a9-ec3e26121b1b",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Summary */
 public static final String COLUMNNAME_Summary = "Summary";
 /** Set Transsp.
@@ -537,13 +532,13 @@ return value;
 @XendraTrl(Identifier="ab6bc1a5-9714-4963-bf6f-897fe1f4876f")
 public static String es_PE_COLUMN_Transsp_Name="Transsp";
 
-@XendraColumn(AD_Element_ID="4e904c95-4c4e-45f3-becb-ff3304d8b4e0",ColumnName="Transsp",
+@XendraColumn(AD_Element_ID="48c1e7bc-2d4e-4c92-806c-9bb61229af62",ColumnName="Transsp",
 AD_Reference_ID=14,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ab6bc1a5-9714-4963-bf6f-897fe1f4876f",
-Synchronized="2017-09-14 20:36:49.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Transsp */
 public static final String COLUMNNAME_Transsp = "Transsp";
 }

@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("PA_SLA_Criteria");
 public static String es_PE_TAB_SLACriteria_Description="Acuerdo de Nivel de Servicio Criterio";
 
 @XendraTrl(Identifier="2e2420a0-42e2-e9d9-ee82-8603e37573d9")
-public static String es_PE_TAB_SLACriteria_Name="ANS Criterio";
-
-@XendraTrl(Identifier="2e2420a0-42e2-e9d9-ee82-8603e37573d9")
 public static String es_PE_TAB_SLACriteria_Help="Defina los criterios para medir acuerdos del porcentaje de disponibilidad (ej. la calidad, entrega resuelve la fecha prometida,..). Si usted define una clase de proceso, es necesario poner org.compiere.process.SvrProcess en ejecución (véase el ejemplo)";
 
-@XendraTab(Name="SLA Criteria",Description="Service Level Agreement Criteria",
+@XendraTrl(Identifier="2e2420a0-42e2-e9d9-ee82-8603e37573d9")
+public static String es_PE_TAB_SLACriteria_Name="ANS Criterio";
+@XendraTab(Name="SLA Criteria",
+Description="Service Level Agreement Criteria",
 Help="Define a criteria to measure service level agreements (e.g. Quality, Delivery meets Promised date, ..). If you define a process class, it need to implement org.compiere.sla.SLACriteria (see example)",
 AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,13 @@ public static final String TABNAME_SLACriteria="2e2420a0-42e2-e9d9-ee82-8603e375
 @XendraTrl(Identifier="6a8f4d95-9979-bb03-9f8e-ad29c0f4865d")
 public static String es_PE_TABLE_PA_SLA_Criteria_Name="Criterio ANS";
 
-@XendraTable(Name="SLA Criteria",Description="Service Level Agreement Criteria",Help="",
-TableName="PA_SLA_Criteria",AccessLevel="6",AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="6a8f4d95-9979-bb03-9f8e-ad29c0f4865d",Synchronized="2017-08-16 11:43:43.0")
+@XendraTable(Name="SLA Criteria",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Service Level Agreement Criteria",
+Help="",TableName="PA_SLA_Criteria",AccessLevel="6",
+AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="6a8f4d95-9979-bb03-9f8e-ad29c0f4865d",Synchronized="2020-03-03 21:39:18.0")
 /** TableName=PA_SLA_Criteria */
 public static final String Table_Name="PA_SLA_Criteria";
 
@@ -137,13 +139,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="35e6e68e-0dd2-4141-45ae-80361b7ca138")
+public static String es_PE_FIELD_SLACriteria_Classname_Name="Nombre de Clase";
+
+@XendraTrl(Identifier="35e6e68e-0dd2-4141-45ae-80361b7ca138")
 public static String es_PE_FIELD_SLACriteria_Classname_Description="Nombre de la clase Java";
 
 @XendraTrl(Identifier="35e6e68e-0dd2-4141-45ae-80361b7ca138")
 public static String es_PE_FIELD_SLACriteria_Classname_Help="El nombre de clase identifica el nombre de la clase Java usada por este Informe ó proceso.";
-
-@XendraTrl(Identifier="35e6e68e-0dd2-4141-45ae-80361b7ca138")
-public static String es_PE_FIELD_SLACriteria_Classname_Name="Nombre de Clase";
 
 @XendraField(AD_Column_ID="Classname",IsCentrallyMaintained=true,
 AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1c375ab9-4e96-e14b-0abc-e30c455a9ba6",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name Classname */
 public static final String COLUMNNAME_Classname = "Classname";
 /** Set Description.
@@ -192,13 +194,13 @@ return value;
 }
 
 @XendraTrl(Identifier="bcd044e2-7986-7254-00a4-362aa79a10f1")
+public static String es_PE_FIELD_SLACriteria_Description_Name="Observación";
+
+@XendraTrl(Identifier="bcd044e2-7986-7254-00a4-362aa79a10f1")
 public static String es_PE_FIELD_SLACriteria_Description_Description="Observación";
 
 @XendraTrl(Identifier="bcd044e2-7986-7254-00a4-362aa79a10f1")
 public static String es_PE_FIELD_SLACriteria_Description_Help="Observación";
-
-@XendraTrl(Identifier="bcd044e2-7986-7254-00a4-362aa79a10f1")
-public static String es_PE_FIELD_SLACriteria_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -216,7 +218,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a107335-56d7-83f8-efbd-63c6851634ae",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -242,13 +244,13 @@ return value;
 }
 
 @XendraTrl(Identifier="1bb0ce31-3f74-164c-6049-514581e505c8")
+public static String es_PE_FIELD_SLACriteria_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="1bb0ce31-3f74-164c-6049-514581e505c8")
 public static String es_PE_FIELD_SLACriteria_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="1bb0ce31-3f74-164c-6049-514581e505c8")
 public static String es_PE_FIELD_SLACriteria_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="1bb0ce31-3f74-164c-6049-514581e505c8")
-public static String es_PE_FIELD_SLACriteria_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -266,7 +268,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="36ccd26c-41a9-ca1e-ab19-574727eea244",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -298,7 +300,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e0f00f0e-056e-41ad-b0aa-a6f1063d8b24",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Manual.
@@ -321,13 +323,13 @@ return false;
 }
 
 @XendraTrl(Identifier="ca9b4970-ad02-1a6b-c4ac-9621c6395243")
+public static String es_PE_FIELD_SLACriteria_Manual_Name="Manual";
+
+@XendraTrl(Identifier="ca9b4970-ad02-1a6b-c4ac-9621c6395243")
 public static String es_PE_FIELD_SLACriteria_Manual_Description="Éste es un proceso manual.";
 
 @XendraTrl(Identifier="ca9b4970-ad02-1a6b-c4ac-9621c6395243")
 public static String es_PE_FIELD_SLACriteria_Manual_Help="El cuadro de verificación manual indica si el proceso será hecho manualmente.";
-
-@XendraTrl(Identifier="ca9b4970-ad02-1a6b-c4ac-9621c6395243")
-public static String es_PE_FIELD_SLACriteria_Manual_Name="Manual";
 
 @XendraField(AD_Column_ID="IsManual",IsCentrallyMaintained=true,
 AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -345,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="000809ad-2541-2e24-c4c6-895bfb78d741",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name IsManual */
 public static final String COLUMNNAME_IsManual = "IsManual";
 /** Set Name.
@@ -377,18 +379,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
+public static String es_PE_FIELD_SLACriteria_Name_Name="Nombre";
+
+@XendraTrl(Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
 public static String es_PE_FIELD_SLACriteria_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
 public static String es_PE_FIELD_SLACriteria_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
-public static String es_PE_FIELD_SLACriteria_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="2b591342-e89b-1a72-803e-143fa6bce494")
 public static final String FIELDNAME_SLACriteria_Name="2b591342-e89b-1a72-803e-143fa6bce494";
 
 @XendraTrl(Identifier="a02de56d-8dce-b356-55f3-5448e66ce55b")
@@ -400,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a02de56d-8dce-b356-55f3-5448e66ce55b",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:40.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set SLA Criteria.
@@ -420,13 +423,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2e1fbaf7-2ff5-e532-7643-db93b1fbe69e")
+public static String es_PE_FIELD_SLACriteria_SLACriteria_Name="Criterio ANS";
+
+@XendraTrl(Identifier="2e1fbaf7-2ff5-e532-7643-db93b1fbe69e")
 public static String es_PE_FIELD_SLACriteria_SLACriteria_Description="Criterios de acuerdo del porcentaje de disponibilidad";
 
 @XendraTrl(Identifier="2e1fbaf7-2ff5-e532-7643-db93b1fbe69e")
 public static String es_PE_FIELD_SLACriteria_SLACriteria_Help="Criterios para medir los acuerdos del porcentaje de disponibilidad (Ej. de la calidad, de la entrega prometidas la fecha,..)";
-
-@XendraTrl(Identifier="2e1fbaf7-2ff5-e532-7643-db93b1fbe69e")
-public static String es_PE_FIELD_SLACriteria_SLACriteria_Name="Criterio ANS";
 
 @XendraField(AD_Column_ID="PA_SLA_Criteria_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2e2420a0-42e2-e9d9-ee82-8603e37573d9",AD_FieldGroup_ID="",IsDisplayed=false,

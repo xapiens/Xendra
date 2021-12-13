@@ -8,11 +8,12 @@ import org.compiere.model.View;
 public class VIEW_M_movementlinema_v 
 {
  
-@XendraTable(Name="M_MovementLineMA_v",Description="",Help="",TableName="M_MovementLineMA_v",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=150,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=true,PO_Window_ID="",
-ID="org.xendra.material",Identifier="efac7332-6dd3-c94e-f5b8-566b5b1ea71d",
-Synchronized="2017-08-16 12:37:59.0")
+@XendraTable(Name="M_MovementLineMA_v",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_MovementLineMA_v",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=150,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
+IsView=true,PO_Window_ID="",ID="org.xendra.material",
+Identifier="efac7332-6dd3-c94e-f5b8-566b5b1ea71d",Synchronized="2020-03-03 21:38:43.0")
 /** TableName=M_MovementLineMA_v */
 public static final String Table_Name="M_MovementLineMA_v";
 
@@ -41,7 +42,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="45d2bb0c-4833-4766-8c3d-eff3ff2a6c85",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:42.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 
@@ -71,7 +72,7 @@ IsMandatory=false,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cc889ff-9796-1cf4-e9fb-ed4080dd3684",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:42.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 
@@ -100,7 +101,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c404277a-a08f-405c-b323-d7a973fe4e49",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:42.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 
@@ -129,7 +130,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="33ad8ea1-dc5e-40eb-93a0-f0c66f56d9e3",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:42.0")
 /** Column name M_LocatorTo_ID */
 public static final String COLUMNNAME_M_LocatorTo_ID = "M_LocatorTo_ID";
 
@@ -158,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="96510122-0a7a-4e1d-86a3-a46e11f6477d",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:43.0")
 /** Column name M_Movement_ID */
 public static final String COLUMNNAME_M_Movement_ID = "M_Movement_ID";
 
@@ -187,7 +188,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ad247b12-53ed-4591-9cb3-2f58729df864",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:43.0")
 /** Column name M_MovementLine_ID */
 public static final String COLUMNNAME_M_MovementLine_ID = "M_MovementLine_ID";
 
@@ -216,7 +217,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8fcbb27b-62ec-4493-a21c-756a984487a1",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:43.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
 
@@ -245,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dd4e8527-a5f5-44c2-8f5f-df99400ee087",
-Synchronized="2017-08-16 12:37:59.0")
+Synchronized="2020-03-03 21:38:43.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 	@XendraView(Identifier="efac7332-6dd3-c94e-f5b8-566b5b1ea71d",

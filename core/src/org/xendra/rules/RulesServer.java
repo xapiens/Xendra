@@ -1,19 +1,17 @@
 package org.xendra.rules;
 
 import java.awt.EventQueue;
-import java.io.*;
-import java.net.*;
 
-import org.apache.log4j.Logger;
 import org.compiere.apps.AEnv;
 import org.compiere.apps.ALogin;
+import org.compiere.util.CLogger;
 import org.compiere.util.Splash;
 
 /**
  * based in Line Printer Daemon (LPD).  
  */
 public class RulesServer implements Runnable {
-	static Logger log = Logger.getLogger(RulesServer.class);
+	static CLogger log = CLogger.getCLogger(RulesServer.class);
 
 	private final static RulesServer INSTANCE = new RulesServer();
 	/**
@@ -21,7 +19,7 @@ public class RulesServer implements Runnable {
 	 */
 	private RulesServer() {
 		super();
-		log.debug("LPD(): STARTED");
+		log.fine("LPD(): STARTED");
 		try {
 			//Template t = ve.getTemplate("foo.vm");
 		} catch (Exception e) {
@@ -47,7 +45,7 @@ public class RulesServer implements Runnable {
 	}
 
 	public static void main(String args[]) {
-		log.debug("main(): STARTED");
+		log.fine("main(): STARTED");
 		try {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -75,8 +73,8 @@ public class RulesServer implements Runnable {
 				}
 			});			
 		} catch(Exception e) {
-			log.fatal(e.getMessage(), e);
+			log.severe(e.getMessage());
 		}
-		log.debug("main(): FINSHED");
+		log.fine("main(): FINSHED");
 	}
 }

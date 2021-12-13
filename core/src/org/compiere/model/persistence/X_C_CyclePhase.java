@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_CyclePhase");
 public static String es_PE_TAB_CyclePhase_Description="Definir Pasos del Ciclo de Proyecto";
 
 @XendraTrl(Identifier="1813d1fa-5e55-24c3-3e7b-fe3c642ca110")
-public static String es_PE_TAB_CyclePhase_Name="Fase del Ciclo";
-
-@XendraTrl(Identifier="1813d1fa-5e55-24c3-3e7b-fe3c642ca110")
 public static String es_PE_TAB_CyclePhase_Help="Los pasos del ciclo determinan la secuencia lógica de eventos dentro del ciclo.";
 
-@XendraTab(Name="Cycle Phase",Description="Link Cycle Step with Project Phases",
+@XendraTrl(Identifier="1813d1fa-5e55-24c3-3e7b-fe3c642ca110")
+public static String es_PE_TAB_CyclePhase_Name="Fase del Ciclo";
+@XendraTab(Name="Cycle Phase",
+Description="Link Cycle Step with Project Phases",
 Help="Link similar Project Phases to a Cycle Step ",
 AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",SeqNo=30,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -77,11 +77,12 @@ public static final String TABNAME_CyclePhase="1813d1fa-5e55-24c3-3e7b-fe3c642ca
 @XendraTrl(Identifier="23a9d1d4-daf7-d7d2-ca2c-8570b21f172b")
 public static String es_PE_TABLE_C_CyclePhase_Name="C_CyclePhase";
 
-@XendraTable(Name="C_CyclePhase",Description="",Help="",TableName="C_CyclePhase",AccessLevel="3",
-AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="23a9d1d4-daf7-d7d2-ca2c-8570b21f172b",
-Synchronized="2017-08-16 11:41:42.0")
+@XendraTable(Name="C_CyclePhase",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_CyclePhase",AccessLevel="3",AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="23a9d1d4-daf7-d7d2-ca2c-8570b21f172b",Synchronized="2020-03-03 21:36:49.0")
 /** TableName=C_CyclePhase */
 public static final String Table_Name="C_CyclePhase";
 
@@ -131,13 +132,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="176ca927-5c42-ca48-a694-74db89f4c4ae")
+public static String es_PE_FIELD_CyclePhase_CycleStep_Name="Etapa del Ciclo";
+
+@XendraTrl(Identifier="176ca927-5c42-ca48-a694-74db89f4c4ae")
 public static String es_PE_FIELD_CyclePhase_CycleStep_Description="El paso para este ciclo";
 
 @XendraTrl(Identifier="176ca927-5c42-ca48-a694-74db89f4c4ae")
 public static String es_PE_FIELD_CyclePhase_CycleStep_Help="Identifica unos ó más pasos dentro de un ciclo del proyecto.";
-
-@XendraTrl(Identifier="176ca927-5c42-ca48-a694-74db89f4c4ae")
-public static String es_PE_FIELD_CyclePhase_CycleStep_Name="Etapa del Ciclo";
 
 @XendraField(AD_Column_ID="C_CycleStep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1813d1fa-5e55-24c3-3e7b-fe3c642ca110",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -155,7 +156,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="834a0fa3-3b20-d0bd-f287-e3f9d2df0e13",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name C_CycleStep_ID */
 public static final String COLUMNNAME_C_CycleStep_ID = "C_CycleStep_ID";
 /** Set Standard Phase.
@@ -175,13 +176,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e2551255-f8bc-c160-352d-15fc55cc66f6")
+public static String es_PE_FIELD_CyclePhase_StandardPhase_Name="Fase Estándar";
+
+@XendraTrl(Identifier="e2551255-f8bc-c160-352d-15fc55cc66f6")
 public static String es_PE_FIELD_CyclePhase_StandardPhase_Description="Fase estándar de el tipo de proyecto";
 
 @XendraTrl(Identifier="e2551255-f8bc-c160-352d-15fc55cc66f6")
 public static String es_PE_FIELD_CyclePhase_StandardPhase_Help="Fase del proyecto con la información estándar del funcionamiento con el trabajo estándar.";
-
-@XendraTrl(Identifier="e2551255-f8bc-c160-352d-15fc55cc66f6")
-public static String es_PE_FIELD_CyclePhase_StandardPhase_Name="Fase Estándar";
 
 @XendraField(AD_Column_ID="C_Phase_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1813d1fa-5e55-24c3-3e7b-fe3c642ca110",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="975a3685-ef6c-33b5-c828-3c5233ad33c7",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name C_Phase_ID */
 public static final String COLUMNNAME_C_Phase_ID = "C_Phase_ID";
 /** Set Identifier.
@@ -231,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="04028c24-f604-476d-aaa4-e9a5901cc05c",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

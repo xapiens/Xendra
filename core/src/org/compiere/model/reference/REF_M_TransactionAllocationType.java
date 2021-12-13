@@ -26,7 +26,7 @@ public class REF_M_TransactionAllocationType implements Reference
 		VFormat="",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2012-07-12 00:00:00.0",
+		Synchronized="2018-06-25 17:25:45.643",
 		Extension="",
 		Identifier="9148d9e2-9168-fae3-adbc-678718e7ce5f")
 	public static final String Identifier = "9148d9e2-9168-fae3-adbc-678718e7ce5f";

@@ -959,7 +959,7 @@ public class MOrderLine extends X_C_OrderLine
 	}
 
 	public BigDecimal getAmount() {
-		BigDecimal price = getPriceActual();
+		BigDecimal price = getPriceList();
 		float d  = getDiscount().floatValue();
 		float d1 = getDiscount1().floatValue();
 		float d2 = getDiscount2().floatValue();
@@ -971,6 +971,9 @@ public class MOrderLine extends X_C_OrderLine
 			price = price.multiply(BigDecimal.valueOf(discount));
 		}
 		return price;
+	}
+	public BigDecimal getUpdatePrice() {
+		return BigDecimal.ZERO;	
 	}
 }	//	MOrderLine
 

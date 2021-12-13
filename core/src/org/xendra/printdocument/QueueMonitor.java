@@ -1,6 +1,6 @@
 package org.xendra.printdocument;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.xendra.common.Lock;
 
 /**
@@ -12,7 +12,7 @@ import org.xendra.common.Lock;
 
 public class QueueMonitor implements Runnable{
 
-	static Logger log = Logger.getLogger(QueueMonitor.class);
+	static CLogger log = CLogger.getCLogger(QueueMonitor.class);
 
 	private boolean run;
 	private String name;
@@ -57,17 +57,17 @@ public class QueueMonitor implements Runnable{
 					// start spin lock
 					while(0 == Queues.getInstance().getQueueSize(name)) {
 						try {
-							log.debug(METHOD_NAME + "Nothing to process going to wait()");
+							log.fine(METHOD_NAME + "Nothing to process going to wait()");
 							queueLock.wait();
-							log.debug(METHOD_NAME + "Somebody woke me up, going to check the Queue: " + name);
+							log.fine(METHOD_NAME + "Somebody woke me up, going to check the Queue: " + name);
 						} catch(InterruptedException e) {}  // ignored on purpose
 					}
 					// if queue has printJob(s) then process them
 					currentJob = Queues.getInstance().getNextPrintJob(name);
 				} // end synchronized
 				HandlerInterface handler = handlerFactory.getPrintHandler(currentJob.getPrintJob());
-				String Format = formats.getFormat(currentJob.getPrintJob().getControlFile().getC_PrinterDocumentFormat_ID());
-				if(handler.process(currentJob.getPrintJob(), Format)) {
+				//String Format = formats.getFormat(currentJob.getPrintJob().getControlFile().getC_PrinterDocumentFormat_ID());
+				if(handler.process(currentJob.getPrintJob())) {
 					String userName = currentJob.getPrintJob().getOwner();
 					String jobId = String.valueOf(currentJob.getJobId());
 					PrintJob printjob = Queues.getInstance().removePrintJob(name, userName, jobId);
@@ -76,14 +76,14 @@ public class QueueMonitor implements Runnable{
 					long jobId = currentJob.getJobId();
 					String error = handler.getError();
 					Queues.getInstance().addError(name, jobId, error);
-					log.error(METHOD_NAME + "Error trying to process: " + currentJob.toString());
+					log.severe(METHOD_NAME + "Error trying to process: " + currentJob.toString());
 					Thread.sleep(1000);
 				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			log.error(METHOD_NAME + e.getMessage());
-			log.fatal(METHOD_NAME + "The error above killed the QueueMonitor for:" + name);
+			log.severe(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + "The error above killed the QueueMonitor for:" + name);
 		}
 	}
 }

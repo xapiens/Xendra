@@ -31,9 +31,6 @@ import org.compiere.model.reference.REF_PA_MeasureDataType;
 import org.compiere.model.reference.REF_PA_MeasureType;
 import org.compiere.util.*;
 import org.xendra.Constants;
-import org.xendra.material.QueuedStockJob;
-import org.xendra.material.StockQueue;
-import org.xendra.material.StockWorker;
 
 /**
  * 	Performance Goal
@@ -95,16 +92,6 @@ public class MGoal extends X_PA_Goal
 			pstmt = null;
 		}
 		MGoal[] retValue = new MGoal[list.size ()];
-		if (retValue.length > 0)
-		{
-			X_A_Machine material = Env.getServerMaterial();
-			StockWorker sw = new StockWorker();
-			sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(ctx));
-			sw.addProperty(Constants.AD_User_ID, AD_User_ID);
-			sw.setCommand(StockWorker.Goals);		
-			sw.setMachine(material);
-			sw.Pull();																			
-		}
 		list.toArray (retValue);
 		return retValue;
 	}	//	getUserGoals

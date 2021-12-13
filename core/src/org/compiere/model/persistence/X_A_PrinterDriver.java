@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("A_PrinterDriver");
 @XendraTrl(Identifier="dc9e7304-fdf7-43bb-8130-b74d5e421c1f")
 public static String es_PE_TABLE_A_PrinterDriver_Name="Printer Driver";
 
-@XendraTable(Name="Printer Driver",Description="",Help="",TableName="A_PrinterDriver",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="dc9e7304-fdf7-43bb-8130-b74d5e421c1f",
-Synchronized="2017-08-16 11:41:14.0")
+@XendraTable(Name="Printer Driver",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_PrinterDriver",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="dc9e7304-fdf7-43bb-8130-b74d5e421c1f",
+Synchronized="2020-03-03 21:36:15.0")
 /** TableName=A_PrinterDriver */
 public static final String Table_Name="A_PrinterDriver";
 
@@ -136,7 +137,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fb76e627-f0d1-4aa1-a853-bf328d7c5575",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Attributes */
 public static final String COLUMNNAME_Attributes = "Attributes";
 /** Set Identifier.
@@ -168,7 +169,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27cabdac-8350-4a75-a6af-c8018fd893c4",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -207,7 +208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b2e44351-5cb4-44b6-830b-966276f45437",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Processed.
@@ -238,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="91071601-3408-43f9-845f-8a1a9ae52b8e",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Properties.
@@ -266,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1e59c6db-f447-4df3-9f9a-f5a716cbd5fa",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Properties */
 public static final String COLUMNNAME_Properties = "Properties";
 }

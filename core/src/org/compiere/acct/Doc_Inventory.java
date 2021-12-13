@@ -136,7 +136,11 @@ public class Doc_Inventory extends Doc {
 	 * @return Fact
 	 */
 	public ArrayList<Fact> createFacts(MAcctSchema as) {
-		MInventory inventory = (MInventory) getPO();		
+		MInventory inventory = (MInventory) getPO();
+		 //(M_Inventory - M_Inventory_ID=1000016)
+		if (inventory.getM_Inventory_ID() == 1000016) {
+			System.out.println("X");
+		}
 		if (!inventory.isCosted())
 			return null;		
 		int processed = 0;
@@ -144,7 +148,7 @@ public class Doc_Inventory extends Doc {
 		Fact fact = new Fact(this, as, Fact.POST_Actual);
 		setC_Currency_ID(as.getC_Currency_ID());
 
-		MCostElement ce = new MCostElement(Env.getCtx(), as.getM_CostElement_ID(), null);
+		MCostElement ce = new MCostElement(Env.getCtx(), as.getM_CostElement_ID(), getTrxName());
 		
 		// Line pointers
 		FactLine dr = null;
@@ -159,7 +163,7 @@ public class Doc_Inventory extends Doc {
 			BigDecimal costs = ce.getCostForProduct(getAD_Client_ID(),
 					0, line.getProduct().get_ID(), 
 					getDateAcct(), false,false,false, 
-					line.getLine(), null);
+					line.getLine(), getTrxName());
 			// If the cost is negative means an error
 			// see the MCostCalc methods documentation.
 			if (costs.signum() < 0) {

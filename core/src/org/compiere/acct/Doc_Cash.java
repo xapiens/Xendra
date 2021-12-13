@@ -104,7 +104,7 @@ public class Doc_Cash extends Doc
 		return dls;
 	}	//	loadLines
 
-	
+
 	/**************************************************************************
 	 *  Get Source Currency Balance - subtracts line amounts from total - no rounding
 	 *  @return positive amount, if total invoice is bigger than lines
@@ -125,7 +125,7 @@ public class Doc_Cash extends Doc
 		sb.append("]");
 		//
 		log.fine(toString() + " Balance=" + retValue + sb.toString());
-	//	return retValue;
+		//	return retValue;
 		return Env.ZERO;    //  Lines are balanced
 	}   //  getBalance
 
@@ -157,10 +157,10 @@ public class Doc_Cash extends Doc
 	 */
 	public ArrayList<Fact> createFacts (MAcctSchema as)
 	{
-		
+
 		if (1 == 1)  // debido a que todo va al allocation, ya no se contabiliza nada x aca.
 			return null;
-		
+
 		//  Need to have CashBook
 		if (getC_CashBook_ID() == 0)
 		{
@@ -168,16 +168,16 @@ public class Doc_Cash extends Doc
 			log.log(Level.SEVERE, p_Error);
 			return null;
 		}
-				
-		
+
+
 		//  create Fact Header
 		Fact fact = new Fact(this, as, Fact.POST_Actual);
 
 		//  Header posting amt as Invoices and Transfer could be differenet currency
 		//  CashAsset Total
 		BigDecimal assetAmt = Env.ZERO;
-		
-		
+
+
 		// 
 		if (getFact_ID().length() == 0)
 			return null;
@@ -193,7 +193,7 @@ public class Doc_Cash extends Doc
 				//  CashExpense     DR
 				//  CashAsset               CR
 				fact.createLine(line, getAccount(Doc.ACCTTYPE_CashExpense, as),
-					getC_Currency_ID(), line.getAmount().negate(), null);
+						getC_Currency_ID(), line.getAmount().negate(), null);
 				assetAmt = assetAmt.subtract(line.getAmount().negate());
 			}
 			else if (CashType.equals(DocLine_Cash.CASHTYPE_RECEIPT))
@@ -202,14 +202,14 @@ public class Doc_Cash extends Doc
 				//  CashReceipt             CR
 				assetAmt = assetAmt.add(line.getAmount());
 				fact.createLine(line, getAccount(Doc.ACCTTYPE_CashReceipt, as),
-					getC_Currency_ID(), null, line.getAmount());
+						getC_Currency_ID(), null, line.getAmount());
 			}
 			else if (CashType.equals(DocLine_Cash.CASHTYPE_CHARGE))
 			{   //  amount is negative
 				//  Charge          DR
 				//  CashAsset               CR
 				fact.createLine(line, line.getChargeAccount(as, getAmount()),
-					getC_Currency_ID(), line.getAmount().negate(), null);
+						getC_Currency_ID(), line.getAmount().negate(), null);
 				assetAmt = assetAmt.subtract(line.getAmount().negate());
 			}
 			else if (CashType.equals(DocLine_Cash.CASHTYPE_DIFFERENCE))
@@ -217,7 +217,7 @@ public class Doc_Cash extends Doc
 				//  CashDifference  DR
 				//  CashAsset               CR
 				fact.createLine(line, getAccount(Doc.ACCTTYPE_CashDifference, as),
-					getC_Currency_ID(), line.getAmount().negate());
+						getC_Currency_ID(), line.getAmount().negate());
 				assetAmt = assetAmt.add(line.getAmount());
 			}
 			else if (CashType.equals(DocLine_Cash.CASHTYPE_TRANSFER))
@@ -227,22 +227,22 @@ public class Doc_Cash extends Doc
 				int temp = getC_BankAccount_ID();
 				setC_BankAccount_ID (line.getC_BankAccount_ID());
 				fact.createLine(line,
-					getAccount(Doc.ACCTTYPE_BankInTransit, as),
-					line.getC_Currency_ID(), line.getAmount().negate());
+						getAccount(Doc.ACCTTYPE_BankInTransit, as),
+						line.getC_Currency_ID(), line.getAmount().negate());
 				setC_BankAccount_ID(temp);
 				if (line.getC_Currency_ID() == getC_Currency_ID())
 					assetAmt = assetAmt.add (line.getAmount());
 				else
 					fact.createLine(line,
-						getAccount(Doc.ACCTTYPE_CashAsset, as),
-						line.getC_Currency_ID(), line.getAmount());
+							getAccount(Doc.ACCTTYPE_CashAsset, as),
+							line.getC_Currency_ID(), line.getAmount());
 			}
 		}	//  lines
 
 		//  Cash Asset
 		if (assetAmt.signum() != 0)
 			fact.createLine(null, getAccount(Doc.ACCTTYPE_CashAsset, as),
-				getC_Currency_ID(), assetAmt);
+					getC_Currency_ID(), assetAmt);
 
 		//
 		ArrayList<Fact> facts = new ArrayList<Fact>();
@@ -252,18 +252,23 @@ public class Doc_Cash extends Doc
 
 	public void createFact_ID() {
 		/* Fact ID */
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
-			//setFact_ID(DB.getNextAcctID(getAD_Client_ID(), cash.getDateAcct(), getTrxName()));
-			;
-		;				
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID (
 					MGLBookPeriod.getID(p_po.getAD_Org_ID(),
-										p_po.getAD_Client_ID(),
-										p_po.get_Table_ID(), 
-										0, 
-										"", 
-										(Timestamp) p_po.get_Value(X_C_Cash.COLUMNNAME_DateAcct))
+							p_po.getAD_Client_ID(),
+							p_po.get_Table_ID(), 
+							0, 
+							"", 
+							(Timestamp) p_po.get_Value(X_C_Cash.COLUMNNAME_DateAcct))
 					);
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(p_po.getAD_Org_ID(),
+							p_po.getAD_Client_ID(),
+							p_po.get_Table_ID(), 
+							0, 
+							"", 
+							(Timestamp) p_po.get_Value(X_C_Cash.COLUMNNAME_DateAcct))
+					);
+		}
 	}
-
 }   //  Doc_Cash

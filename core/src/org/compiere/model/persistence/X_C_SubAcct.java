@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_SubAcct");
 public static String es_PE_TAB_SubAccount_Description="Sub Cuenta para Valor del Elemento";
 
 @XendraTrl(Identifier="0c04d238-8871-cd02-f92c-207347187ba7")
-public static String es_PE_TAB_SubAccount_Name="Sub Cuenta";
-
-@XendraTrl(Identifier="0c04d238-8871-cd02-f92c-207347187ba7")
 public static String es_PE_TAB_SubAccount_Help="El Valor del Elemento (ej. Cuenta) puede tener opcionalmente sub cuentas para detalles adicionales. La sub cuenta es dependiente  sobr los valores de la cuenta, en consecuencia los detalles posteriores. Si las sub cuentas son mas o menos lo mismo, considere emplear otra dimensión contable.";
 
-@XendraTab(Name="Sub Account",Description="Sub Account for Element Value",
+@XendraTrl(Identifier="0c04d238-8871-cd02-f92c-207347187ba7")
+public static String es_PE_TAB_SubAccount_Name="Sub Cuenta";
+@XendraTab(Name="Sub Account",
+Description="Sub Account for Element Value",
 Help="The Element Value (e.g. Account) may have optional sub accounts for further detail. The sub account is dependent on the value of the account, so a further specification. If the sub-accounts are more or less the same, consider using another accounting dimension.",
 AD_Window_ID="ed28a38f-7f48-c102-93c3-c8952924b221",SeqNo=40,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_SubAccount="0c04d238-8871-cd02-f92c-207347187
 @XendraTrl(Identifier="5cb223dd-388e-549c-1ba5-ebd8ba782470")
 public static String es_PE_TABLE_C_SubAcct_Name="Sub Cuenta";
 
-@XendraTable(Name="Sub Account",Description="Sub account for Element Value",Help="",
-TableName="C_SubAcct",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="5cb223dd-388e-549c-1ba5-ebd8ba782470",
-Synchronized="2017-08-16 11:42:29.0")
+@XendraTable(Name="Sub Account",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Sub account for Element Value",
+Help="",TableName="C_SubAcct",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="5cb223dd-388e-549c-1ba5-ebd8ba782470",Synchronized="2020-03-03 21:37:41.0")
 /** TableName=C_SubAcct */
 public static final String Table_Name="C_SubAcct";
 
@@ -133,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3c608a29-a4ba-c22e-40a7-055c8b6d88d4")
+public static String es_PE_FIELD_SubAccount_AccountElement_Name="Valor del Elemento";
+
+@XendraTrl(Identifier="3c608a29-a4ba-c22e-40a7-055c8b6d88d4")
 public static String es_PE_FIELD_SubAccount_AccountElement_Description="Valor del Elemento";
 
 @XendraTrl(Identifier="3c608a29-a4ba-c22e-40a7-055c8b6d88d4")
 public static String es_PE_FIELD_SubAccount_AccountElement_Help="El valor de elemento es un identificador único de una instancia de un elemento.";
-
-@XendraTrl(Identifier="3c608a29-a4ba-c22e-40a7-055c8b6d88d4")
-public static String es_PE_FIELD_SubAccount_AccountElement_Name="Valor del Elemento";
 
 @XendraField(AD_Column_ID="C_ElementValue_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -157,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1776068e-1448-fe6b-11b0-b16d981a36ff",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name C_ElementValue_ID */
 public static final String COLUMNNAME_C_ElementValue_ID = "C_ElementValue_ID";
 /** Set Sub Account.
@@ -177,13 +178,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="12c9077d-05bc-d896-e295-1bf41afd65eb")
+public static String es_PE_FIELD_SubAccount_SubAccount_Name="Sub Cuenta";
+
+@XendraTrl(Identifier="12c9077d-05bc-d896-e295-1bf41afd65eb")
 public static String es_PE_FIELD_SubAccount_SubAccount_Description="Sub Cuenta para Valor del Elemento";
 
 @XendraTrl(Identifier="12c9077d-05bc-d896-e295-1bf41afd65eb")
 public static String es_PE_FIELD_SubAccount_SubAccount_Help="El Valor del Elemento (ej. Cuenta) opcionalmente puede tener subcuentas para detalles adicionales. La subcuenta es dependientedel valor de la cuenta, así también las especificaciónes. Si las cuentas son mas o menos lo mismo, considere el empleo de otra dimensión contable.";
-
-@XendraTrl(Identifier="12c9077d-05bc-d896-e295-1bf41afd65eb")
-public static String es_PE_FIELD_SubAccount_SubAccount_Name="Sub Cuenta";
 
 @XendraField(AD_Column_ID="C_SubAcct_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -221,13 +222,13 @@ return value;
 }
 
 @XendraTrl(Identifier="01900c0c-2c9d-ad6e-f3fb-9d4557ad7bc5")
+public static String es_PE_FIELD_SubAccount_Description_Name="Observación";
+
+@XendraTrl(Identifier="01900c0c-2c9d-ad6e-f3fb-9d4557ad7bc5")
 public static String es_PE_FIELD_SubAccount_Description_Description="Observación";
 
 @XendraTrl(Identifier="01900c0c-2c9d-ad6e-f3fb-9d4557ad7bc5")
 public static String es_PE_FIELD_SubAccount_Description_Help="Observación";
-
-@XendraTrl(Identifier="01900c0c-2c9d-ad6e-f3fb-9d4557ad7bc5")
-public static String es_PE_FIELD_SubAccount_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -245,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d9c9eb6-21da-2b30-d00c-62266ba5a095",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -271,13 +272,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ab75871a-a0c0-eadf-d29a-457c580b885d")
+public static String es_PE_FIELD_SubAccount_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="ab75871a-a0c0-eadf-d29a-457c580b885d")
 public static String es_PE_FIELD_SubAccount_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="ab75871a-a0c0-eadf-d29a-457c580b885d")
 public static String es_PE_FIELD_SubAccount_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="ab75871a-a0c0-eadf-d29a-457c580b885d")
-public static String es_PE_FIELD_SubAccount_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -295,7 +296,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="37d685f3-922e-1e2e-9acc-3361ff1d5848",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -327,7 +328,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8282aa76-75b6-474d-9f74-b6663dbf2190",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -352,18 +353,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
+public static String es_PE_FIELD_SubAccount_Name_Name="Nombre";
+
+@XendraTrl(Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
 public static String es_PE_FIELD_SubAccount_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
 public static String es_PE_FIELD_SubAccount_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
-public static String es_PE_FIELD_SubAccount_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e6470ed8-1fa5-6264-c648-39613856f555")
 public static final String FIELDNAME_SubAccount_Name="e6470ed8-1fa5-6264-c648-39613856f555";
 
 @XendraTrl(Identifier="009291b2-a8c0-4371-004d-c36a665cf071")
@@ -375,7 +377,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="009291b2-a8c0-4371-004d-c36a665cf071",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Search Key.
@@ -407,13 +409,13 @@ return new KeyNamePair(get_ID(), getValue());
 }
 
 @XendraTrl(Identifier="d6f1e820-748f-d389-7162-ab1beb34099f")
+public static String es_PE_FIELD_SubAccount_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="d6f1e820-748f-d389-7162-ab1beb34099f")
 public static String es_PE_FIELD_SubAccount_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="d6f1e820-748f-d389-7162-ab1beb34099f")
 public static String es_PE_FIELD_SubAccount_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="d6f1e820-748f-d389-7162-ab1beb34099f")
-public static String es_PE_FIELD_SubAccount_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="0c04d238-8871-cd02-f92c-207347187ba7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -431,7 +433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4f703e2b-9525-4a98-6ab7-3d783fb81a56",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

@@ -27,9 +27,9 @@ import org.columba.core.base.OSInfo;
 import org.columba.core.gui.base.SelfClosingPopupMenu;
 import org.columba.core.gui.menu.MenuXMLDecoder;
 import org.columba.core.io.DiskIO;
-import org.columba.core.logging.Logging;
 import org.columba.core.resourceloader.ImageLoader;
 import org.columba.core.shutdown.ShutdownManager;
+import org.compiere.util.CLogMgt;
 
 /**
  * Uses the JDIC api to add a tray icon to the system default tray.
@@ -158,12 +158,12 @@ public class ColumbaTrayIcon {
 				// tray icon not supported on Mac
 			}
 		} catch (Exception e) {
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 
 			activeIcon = new DefaultTrayIcon();
 		} catch (Error e) {
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 
 			activeIcon = new DefaultTrayIcon();

@@ -27,6 +27,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;

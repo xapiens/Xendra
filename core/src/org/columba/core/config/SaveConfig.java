@@ -18,8 +18,8 @@
 package org.columba.core.config;
 
 import java.util.logging.Logger;
-
-import org.columba.core.logging.Logging;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 
 /**
  * @author fdietz
@@ -27,8 +27,7 @@ import org.columba.core.logging.Logging;
  */
 public class SaveConfig implements Runnable {
 
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger.getLogger("org.columba.core.shutdown"); //$NON-NLS-1$
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.shutdown"); //$NON-NLS-1$
 
 	/**
 	 *  
@@ -46,7 +45,7 @@ public class SaveConfig implements Runnable {
 		} catch (final Exception e) {
 			LOG.severe(e.getMessage());
 
-			if (Logging.DEBUG) {
+			if (CLogMgt.DEBUG) {
 				e.printStackTrace();
 			}
 		}

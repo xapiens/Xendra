@@ -65,10 +65,10 @@ public static int Table_ID=MTable.getTable_ID("C_CommissionDetail");
 public static String es_PE_TAB_CommissionDetail_Description="Información de detalle de comisión";
 
 @XendraTrl(Identifier="ef0111c7-52e0-366e-19c1-12b0b52d4f97")
-public static String es_PE_TAB_CommissionDetail_Name="Detalle de Comisión";
+public static String es_PE_TAB_CommissionDetail_Help="Es posible alterar el total y la cantidad de los registros de detalle; pero se sugiere adicionar nuevas líneas para corregir. Los totales son convertidos desde la moneda de la transacción a la moneda de la comisión (definida en la ventana de comisión) usando la fecha de comienzo y la tasa del punto de cambio.";
 
 @XendraTrl(Identifier="ef0111c7-52e0-366e-19c1-12b0b52d4f97")
-public static String es_PE_TAB_CommissionDetail_Help="Es posible alterar el total y la cantidad de los registros de detalle; pero se sugiere adicionar nuevas líneas para corregir. Los totales son convertidos desde la moneda de la transacción a la moneda de la comisión (definida en la ventana de comisión) usando la fecha de comienzo y la tasa del punto de cambio.";
+public static String es_PE_TAB_CommissionDetail_Name="Detalle de Comisión";
 
 @XendraTab(Name="Commission Detail",Description="Commission Detail Information",
 Help="You may alter the amount and quantity of the detail records, but the suggested way is to add new correcting lines. The amounts are converted from the transaction currency to the Commission Currency (defined in the Commission window) using the start date and the spot exchange rate.",
@@ -83,12 +83,13 @@ public static final String TABNAME_CommissionDetail="ef0111c7-52e0-366e-19c1-12b
 @XendraTrl(Identifier="50b2c9e8-66fb-f18c-6c80-d3cbc1117a28")
 public static String es_PE_TABLE_C_CommissionDetail_Name="Detalle de comisiones";
 
-@XendraTable(Name="Commission Detail",Description="Supporting information for Commission Amounts",
-Help="",TableName="C_CommissionDetail",AccessLevel="1",
-AD_Window_ID="4951efe3-6b21-ab9a-5bc7-01af51e516d9",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="50b2c9e8-66fb-f18c-6c80-d3cbc1117a28",
-Synchronized="2017-08-16 11:41:38.0")
+@XendraTable(Name="Commission Detail",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Supporting information for Commission Amounts",Help="",TableName="C_CommissionDetail",
+AccessLevel="1",AD_Window_ID="4951efe3-6b21-ab9a-5bc7-01af51e516d9",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="50b2c9e8-66fb-f18c-6c80-d3cbc1117a28",Synchronized="2020-03-03 21:36:45.0")
 /** TableName=C_CommissionDetail */
 public static final String Table_Name="C_CommissionDetail";
 
@@ -138,13 +139,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="4f871a10-5e72-dd78-eada-4a5d0e45a896")
+public static String es_PE_FIELD_CommissionDetail_ActualAmount_Name="Total Real";
+
+@XendraTrl(Identifier="4f871a10-5e72-dd78-eada-4a5d0e45a896")
 public static String es_PE_FIELD_CommissionDetail_ActualAmount_Description="El Total Real";
 
 @XendraTrl(Identifier="4f871a10-5e72-dd78-eada-4a5d0e45a896")
 public static String es_PE_FIELD_CommissionDetail_ActualAmount_Help="El Total real indica la cantidad acordada para un documento";
-
-@XendraTrl(Identifier="4f871a10-5e72-dd78-eada-4a5d0e45a896")
-public static String es_PE_FIELD_CommissionDetail_ActualAmount_Name="Total Real";
 
 @XendraField(AD_Column_ID="ActualAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -162,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d494097b-dd40-efa8-e470-7cad59fe7f18",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name ActualAmt */
 public static final String COLUMNNAME_ActualAmt = "ActualAmt";
 /** Set Actual Quantity.
@@ -182,13 +183,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="d1c751d1-89ff-0ad5-2ae5-f030679e6405")
+public static String es_PE_FIELD_CommissionDetail_ActualQuantity_Name="Cantidad Actual";
+
+@XendraTrl(Identifier="d1c751d1-89ff-0ad5-2ae5-f030679e6405")
 public static String es_PE_FIELD_CommissionDetail_ActualQuantity_Description="La cantidad actual";
 
 @XendraTrl(Identifier="d1c751d1-89ff-0ad5-2ae5-f030679e6405")
 public static String es_PE_FIELD_CommissionDetail_ActualQuantity_Help="La Cantidad actual indica la cantidad tal como se refiere en un documento";
-
-@XendraTrl(Identifier="d1c751d1-89ff-0ad5-2ae5-f030679e6405")
-public static String es_PE_FIELD_CommissionDetail_ActualQuantity_Name="Cantidad Actual";
 
 @XendraField(AD_Column_ID="ActualQty",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -206,7 +207,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d2b0353f-359e-0d7c-f684-ce8844cb0a58",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name ActualQty */
 public static final String COLUMNNAME_ActualQty = "ActualQty";
 /** Set Commission Amount.
@@ -226,13 +227,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9cea441e-52c5-4c72-7c4b-e8b424f39c6d")
+public static String es_PE_FIELD_CommissionDetail_CommissionAmount_Name="Total de la Comisión";
+
+@XendraTrl(Identifier="9cea441e-52c5-4c72-7c4b-e8b424f39c6d")
 public static String es_PE_FIELD_CommissionDetail_CommissionAmount_Description="Total de la comisión generada";
 
 @XendraTrl(Identifier="9cea441e-52c5-4c72-7c4b-e8b424f39c6d")
 public static String es_PE_FIELD_CommissionDetail_CommissionAmount_Help="La cantidad de la Comisión indica la cantidad que resulta de un funcionamiento de la comisión.";
-
-@XendraTrl(Identifier="9cea441e-52c5-4c72-7c4b-e8b424f39c6d")
-public static String es_PE_FIELD_CommissionDetail_CommissionAmount_Name="Total de la Comisión";
 
 @XendraField(AD_Column_ID="C_CommissionAmt_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -250,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ac2bfe18-d25b-8c31-ed32-8099b2760559",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_CommissionAmt_ID */
 public static final String COLUMNNAME_C_CommissionAmt_ID = "C_CommissionAmt_ID";
 /** Set Commission Detail.
@@ -270,13 +271,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="bcf0d1d5-e3f7-976d-2040-1c6b83413dea")
+public static String es_PE_FIELD_CommissionDetail_CommissionDetail_Name="Detalle de comisiones";
+
+@XendraTrl(Identifier="bcf0d1d5-e3f7-976d-2040-1c6b83413dea")
 public static String es_PE_FIELD_CommissionDetail_CommissionDetail_Description="Información de apoyo para cálculo del total de las comisiones";
 
 @XendraTrl(Identifier="bcf0d1d5-e3f7-976d-2040-1c6b83413dea")
 public static String es_PE_FIELD_CommissionDetail_CommissionDetail_Help="El detalle de comisión proporciona información de soporte en una corrida de comisión. Cada línea del documento que haya sido parte de la corrida de comisión será reflejada aquí";
-
-@XendraTrl(Identifier="bcf0d1d5-e3f7-976d-2040-1c6b83413dea")
-public static String es_PE_FIELD_CommissionDetail_CommissionDetail_Name="Detalle de comisiones";
 
 @XendraField(AD_Column_ID="C_CommissionDetail_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -303,13 +304,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="caf6d9f1-afc6-745e-6216-d057a3acd656")
+public static String es_PE_FIELD_CommissionDetail_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="caf6d9f1-afc6-745e-6216-d057a3acd656")
 public static String es_PE_FIELD_CommissionDetail_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="caf6d9f1-afc6-745e-6216-d057a3acd656")
 public static String es_PE_FIELD_CommissionDetail_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="caf6d9f1-afc6-745e-6216-d057a3acd656")
-public static String es_PE_FIELD_CommissionDetail_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -327,7 +328,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e8d1d55-7214-d5e7-c396-d4335c08eca2",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Invoice Line.
@@ -348,13 +349,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="099d0e77-c8b9-b0fe-4522-cc6e0ae64365")
+public static String es_PE_FIELD_CommissionDetail_InvoiceLine_Name="Item de Factura";
+
+@XendraTrl(Identifier="099d0e77-c8b9-b0fe-4522-cc6e0ae64365")
 public static String es_PE_FIELD_CommissionDetail_InvoiceLine_Description="Item de detalle de factura";
 
 @XendraTrl(Identifier="099d0e77-c8b9-b0fe-4522-cc6e0ae64365")
 public static String es_PE_FIELD_CommissionDetail_InvoiceLine_Help="Identifica de manera única un Item de la factura";
-
-@XendraTrl(Identifier="099d0e77-c8b9-b0fe-4522-cc6e0ae64365")
-public static String es_PE_FIELD_CommissionDetail_InvoiceLine_Name="Item de Factura";
 
 @XendraField(AD_Column_ID="C_InvoiceLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -372,7 +373,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a375ab41-d409-a752-d36a-4849d19cf5bd",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_InvoiceLine_ID */
 public static final String COLUMNNAME_C_InvoiceLine_ID = "C_InvoiceLine_ID";
 /** Set Converted Amount.
@@ -392,13 +393,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="6c9eabf1-50bc-27f1-51f5-2d2c3af615b4")
+public static String es_PE_FIELD_CommissionDetail_ConvertedAmount_Name="Total Convertido";
+
+@XendraTrl(Identifier="6c9eabf1-50bc-27f1-51f5-2d2c3af615b4")
 public static String es_PE_FIELD_CommissionDetail_ConvertedAmount_Description="Total Convertido";
 
 @XendraTrl(Identifier="6c9eabf1-50bc-27f1-51f5-2d2c3af615b4")
 public static String es_PE_FIELD_CommissionDetail_ConvertedAmount_Help="El Total convertido es el resultado de multiplicar el total fuente por la tasa de conversión para esta moneda destino.";
-
-@XendraTrl(Identifier="6c9eabf1-50bc-27f1-51f5-2d2c3af615b4")
-public static String es_PE_FIELD_CommissionDetail_ConvertedAmount_Name="Total Convertido";
 
 @XendraField(AD_Column_ID="ConvertedAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -416,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef87e17e-96e1-b49a-0857-108e6924db6b",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name ConvertedAmt */
 public static final String COLUMNNAME_ConvertedAmt = "ConvertedAmt";
 /** Set Sales Order Line.
@@ -437,13 +438,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="671d4f72-ede3-74d3-99fd-8f1b5758d29f")
+public static String es_PE_FIELD_CommissionDetail_PurchaseOrderLine_Name="Item";
+
+@XendraTrl(Identifier="671d4f72-ede3-74d3-99fd-8f1b5758d29f")
 public static String es_PE_FIELD_CommissionDetail_PurchaseOrderLine_Description="Item de orden de compra";
 
 @XendraTrl(Identifier="671d4f72-ede3-74d3-99fd-8f1b5758d29f")
 public static String es_PE_FIELD_CommissionDetail_PurchaseOrderLine_Help="Identificador único para un Item en una orden.";
-
-@XendraTrl(Identifier="671d4f72-ede3-74d3-99fd-8f1b5758d29f")
-public static String es_PE_FIELD_CommissionDetail_PurchaseOrderLine_Name="Item";
 
 @XendraField(AD_Column_ID="C_OrderLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -461,7 +462,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=false,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d91a8eeb-eb64-d995-5935-1ef478bc2e26",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_OrderLine_ID */
 public static final String COLUMNNAME_C_OrderLine_ID = "C_OrderLine_ID";
 /** Set Identifier.
@@ -493,7 +494,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8d48dc9b-726d-46c9-9e9c-67c97322b3d6",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Info.
@@ -517,13 +518,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="69bdf344-4706-f771-f4c3-2ad4d0b979ea")
+public static String es_PE_FIELD_CommissionDetail_Info_Name="Información";
+
+@XendraTrl(Identifier="69bdf344-4706-f771-f4c3-2ad4d0b979ea")
 public static String es_PE_FIELD_CommissionDetail_Info_Description="Información";
 
 @XendraTrl(Identifier="69bdf344-4706-f771-f4c3-2ad4d0b979ea")
 public static String es_PE_FIELD_CommissionDetail_Info_Help="La Información despliega datos desde la línea del documento fuente";
-
-@XendraTrl(Identifier="69bdf344-4706-f771-f4c3-2ad4d0b979ea")
-public static String es_PE_FIELD_CommissionDetail_Info_Name="Información";
 
 @XendraField(AD_Column_ID="Info",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -541,7 +542,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cc9c95aa-0435-e7d6-0438-b877d837fb7d",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Info */
 public static final String COLUMNNAME_Info = "Info";
 /** Set Reference.
@@ -572,13 +573,13 @@ return new KeyNamePair(get_ID(), getReference());
 }
 
 @XendraTrl(Identifier="2b59363d-baad-6728-727b-98a8b3565235")
+public static String es_PE_FIELD_CommissionDetail_Reference_Name="Referencia";
+
+@XendraTrl(Identifier="2b59363d-baad-6728-727b-98a8b3565235")
 public static String es_PE_FIELD_CommissionDetail_Reference_Description="Referencia para este registro";
 
 @XendraTrl(Identifier="2b59363d-baad-6728-727b-98a8b3565235")
 public static String es_PE_FIELD_CommissionDetail_Reference_Help="La referencia despliega el número del documento fuente";
-
-@XendraTrl(Identifier="2b59363d-baad-6728-727b-98a8b3565235")
-public static String es_PE_FIELD_CommissionDetail_Reference_Name="Referencia";
 
 @XendraField(AD_Column_ID="Reference",IsCentrallyMaintained=true,
 AD_Tab_ID="ef0111c7-52e0-366e-19c1-12b0b52d4f97",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -596,7 +597,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="311b22fe-72ef-7df5-61f3-86e484e92441",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Reference */
 public static final String COLUMNNAME_Reference = "Reference";
 }

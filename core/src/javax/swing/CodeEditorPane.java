@@ -130,8 +130,10 @@ public class CodeEditorPane extends LineNumbersTextPane {
                         highlight_brace = null;
                     }
                     try {
-                        highlight_brace = getHighlighter().addHighlight(caret_brace_start, caret_brace_end, painter_brace);
-                        nh++;
+                    	if (caret_brace_start <= caret_brace_end) {
+                    		highlight_brace = getHighlighter().addHighlight(caret_brace_start, caret_brace_end, painter_brace);
+                        	nh++;
+                    	}
                     } catch (BadLocationException ex) {
                         ex.printStackTrace();
                     }
@@ -389,7 +391,7 @@ public class CodeEditorPane extends LineNumbersTextPane {
                 newitems.add(new KeyWordItem(k, help, completionMenu, i));
             }
         }
-        Collections.sort(newitems);
+        //Collections.sort(newitems);
         return newitems;
     }
 
@@ -598,6 +600,7 @@ public class CodeEditorPane extends LineNumbersTextPane {
     protected String font_width_ex = "a";
     protected boolean reset_font_width = true;
     protected boolean reset_font_height = true;
+	private Integer m_id;	
     
     @Override
     public void setFont(Font font) {
@@ -612,4 +615,11 @@ public class CodeEditorPane extends LineNumbersTextPane {
             reset_font_height = true;
         }
     }
+
+	public void setAD_Rule_ID(Integer id) {
+		m_id = id;		
+	}
+	public Integer getAD_Rule_ID() {
+		return m_id; 
+	}
 }

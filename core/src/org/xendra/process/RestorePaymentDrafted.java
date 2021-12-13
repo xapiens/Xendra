@@ -36,8 +36,8 @@ public class RestorePaymentDrafted extends SvrProcess {
 	@Override
 	protected String doIt() throws Exception {
 		MPayment payment = new MPayment(getCtx(), m_C_Payment_ID, get_TrxName());
-		if (!MPeriod.isOpen(getCtx(), payment.getDateAcct(), REF_C_DocTypeDocBaseType.APPayment, Env.getAD_Org_ID(Env.getCtx())) && 
-            !MPeriod.isOpen(getCtx(), payment.getDateAcct(), REF_C_DocTypeDocBaseType.ARReceipt, Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), payment.getDateAcct(), REF_C_DocTypeDocBaseType.APPayment, payment.getAD_Org_ID(), payment.getAD_Client_ID()) && 
+            !MPeriod.isOpen(getCtx(), payment.getDateAcct(), REF_C_DocTypeDocBaseType.ARReceipt, payment.getAD_Org_ID(), payment.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}

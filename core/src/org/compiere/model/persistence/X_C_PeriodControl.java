@@ -23,9 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
-import org.compiere.model.reference.REF_C_PeriodControlAction;
-import org.compiere.model.reference.REF_C_PeriodControlStatus;
 /** Generated Model for C_PeriodControl
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -83,11 +80,12 @@ public static final String TABNAME_PeriodControl="31e6aa31-d676-aaa8-ceba-e68405
 @XendraTrl(Identifier="ce136414-e04f-21df-f957-7c9395b611d1")
 public static String es_PE_TABLE_C_PeriodControl_Name="Período de Control";
 
-@XendraTable(Name="Period Control",Description="",Help="",TableName="C_PeriodControl",
-AccessLevel="2",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="ce136414-e04f-21df-f957-7c9395b611d1",Synchronized="2017-12-22 07:02:45.0")
+@XendraTable(Name="Period Control",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_PeriodControl",AccessLevel="2",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="ce136414-e04f-21df-f957-7c9395b611d1",Synchronized="2020-03-03 21:37:26.0")
 /** TableName=C_PeriodControl */
 public static final String Table_Name="C_PeriodControl";
 
@@ -194,19 +192,13 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1f1bac68-c181-28a7-b6e7-f7ea5cbb3775",
-Synchronized="2017-08-28 09:56:03.0")
+Synchronized="2019-08-30 22:22:03.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
-
-/** DocBaseType AD_Reference=c1999318-834d-4c66-5345-371ffe3c1f06 */
-public static final int DOCBASETYPE_AD_Reference_ID=183;
 /** Set Document BaseType.
 @param DocBaseType Logical type of document */
 public void setDocBaseType (String DocBaseType)
 {
-if (DocBaseType == null) throw new IllegalArgumentException ("DocBaseType is mandatory");
-if (DocBaseType.equals(REF_C_DocTypeDocBaseType.PurchaseOrder) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PurchaseRequisition) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MatchInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialProduction) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ProjectIssue) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APCreditMemo) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARCreditMemo) || DocBaseType.equals(REF_C_DocTypeDocBaseType.GLJournal) || DocBaseType.equals(REF_C_DocTypeDocBaseType.GLDocument) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MatchPO) || DocBaseType.equals(REF_C_DocTypeDocBaseType.CashJournal) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BillOfExchange) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PersonalFeeShip) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReturnOfVendor) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReturnOfCustomer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APPayment) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARReceipt) || DocBaseType.equals(REF_C_DocTypeDocBaseType.SalesOrder) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARProFormaInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialDelivery) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReceipt) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PaymentAllocation) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialPhysicalInventory) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Retention) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARInvoiceFreeTransfer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.DeclarationCustomsValue) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APCreditMemoDiscount) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialMovement) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BankAccountTransfer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BankStatement) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Withholding) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialProductionReversed) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Payroll) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APDebit) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialAdjust));
- else throw new IllegalArgumentException ("DocBaseType Invalid value - " + DocBaseType + " - Reference_ID=183 - POO - POR - MXI - MMP - PJI - APC - ARC - GLJ - GLD - API - MXP - CMC - BOE - FPS - MRV - MRC - APP - ARI - ARR - SOO - ARF - MMS - MMR - CMA - MMI - RET - ART - DCV - APD - MMM - BAT - CMB - WIT - MPR - HRP - APB - MMA");
 if (DocBaseType.length() > 3)
 {
 log.warning("Length > 3 - truncated");
@@ -246,7 +238,7 @@ FieldLength=3,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="34c0f83b-35af-c5eb-d78d-4cdaa98fd886",Synchronized="2017-08-28 09:56:03.0")
+Identifier="34c0f83b-35af-c5eb-d78d-4cdaa98fd886",Synchronized="2019-08-30 22:22:03.0")
 /** Column name DocBaseType */
 public static final String COLUMNNAME_DocBaseType = "DocBaseType";
 /** Set Identifier.
@@ -278,19 +270,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90e49a12-42e8-4902-bccf-9d938715a9b7",
-Synchronized="2017-08-28 09:56:03.0")
+Synchronized="2019-08-30 22:22:03.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** PeriodAction AD_Reference=6d64edf3-1b4f-9316-fe28-18a11e3727de */
-public static final int PERIODACTION_AD_Reference_ID=176;
 /** Set Period Action.
 @param PeriodAction Action taken for this period */
 public void setPeriodAction (String PeriodAction)
 {
-if (PeriodAction == null) throw new IllegalArgumentException ("PeriodAction is mandatory");
-if (PeriodAction.equals(REF_C_PeriodControlAction.OpenPeriod) || PeriodAction.equals(REF_C_PeriodControlAction.ClosePeriod) || PeriodAction.equals(REF_C_PeriodControlAction.NoAction) || PeriodAction.equals(REF_C_PeriodControlAction.PermanentlyClosePeriod));
- else throw new IllegalArgumentException ("PeriodAction Invalid value - " + PeriodAction + " - Reference_ID=176 - O - C - N - P");
 if (PeriodAction.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -330,18 +316,13 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6ad82595-e49f-bc31-5cf0-a1129db183fc",Synchronized="2017-08-28 09:56:03.0")
+Identifier="6ad82595-e49f-bc31-5cf0-a1129db183fc",Synchronized="2019-08-30 22:22:03.0")
 /** Column name PeriodAction */
 public static final String COLUMNNAME_PeriodAction = "PeriodAction";
-
-/** PeriodStatus AD_Reference=8e8ed358-4348-653f-ffae-63b13cc40a68 */
-public static final int PERIODSTATUS_AD_Reference_ID=177;
 /** Set Period Status.
 @param PeriodStatus Current state of this period */
 public void setPeriodStatus (String PeriodStatus)
 {
-if (PeriodStatus == null || PeriodStatus.equals(REF_C_PeriodControlStatus.NeverOpened) || PeriodStatus.equals(REF_C_PeriodControlStatus.Open) || PeriodStatus.equals(REF_C_PeriodControlStatus.Closed) || PeriodStatus.equals(REF_C_PeriodControlStatus.PermanentlyClosed));
- else throw new IllegalArgumentException ("PeriodStatus Invalid value - " + PeriodStatus + " - Reference_ID=177 - N - O - C - P");
 if (PeriodStatus != null && PeriodStatus.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -381,7 +362,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="97d2030f-653d-803f-33d9-7e97ab20ad1d",Synchronized="2017-08-28 09:56:03.0")
+Identifier="97d2030f-653d-803f-33d9-7e97ab20ad1d",Synchronized="2019-08-30 22:22:03.0")
 /** Column name PeriodStatus */
 public static final String COLUMNNAME_PeriodStatus = "PeriodStatus";
 /** Set Process Now.
@@ -422,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="9d722911-3461-4489-e497-210c7badfef3",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2b6c1b27-30bd-b438-ba8b-c5c3a06d9bcb",Synchronized="2017-08-28 09:56:03.0")
+Identifier="2b6c1b27-30bd-b438-ba8b-c5c3a06d9bcb",Synchronized="2019-08-30 22:22:03.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

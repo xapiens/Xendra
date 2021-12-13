@@ -9,7 +9,7 @@ public class Costaveragemonth0
 @XendraFunction(Name="costaveragemonth",Output="integer",Owner="xendra",Language="plpgsql",
 Identifier="0f540aca-9ea8-76d2-2869-4d99deb3c667",
 Arguments="client_id numeric, product_id numeric, costelement_id numeric, p_period_id numeric",
-Extension="",Synchronized="2017-12-23 09:35:22.0")
+Extension="",Synchronized="2020-03-06 21:45:00.0")
 	public static final String Identifier = "0f540aca-9ea8-76d2-2869-4d99deb3c667";
 
 	public static final String getCode() 
@@ -43,6 +43,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("_newstock 		NUMERIC := 0;");
 	sb.appendln("_newamount 		NUMERIC := 0;");
 	sb.appendln("_newPrice 		NUMERIC := 0;");
+	sb.appendln("_linenetamt		NUMERIC := 0;");
 	sb.appendln("CARDINGCALC 		xendra.m_carding%ROWTYPE;");
 	sb.appendln("COSTCALC 		xendra.m_costcalc%ROWTYPE;");
 	sb.appendln("_tablename 		CHARACTER VARYING := '';");
@@ -62,6 +63,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("_threshold		NUMERIC := 0;");
 	sb.appendln("_processed 		NUMERIC[];");
 	sb.appendln("_policystartdate	TIMESTAMP;");
+	sb.appendln("_returndate	 	TIMESTAMP;");
 	sb.appendln("_docbasetypeadjust 	TEXT;");
 	sb.appendln("_movementadjustid	NUMERIC := 0;");
 	sb.appendln("_movementadjustlineid	NUMERIC := 0;");
@@ -215,11 +217,11 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("			JOIN C_PERIOD p on upmovementdate.currentdate::date BETWEEN p.startdate AND p.enddate");
 	sb.appendln("			WHERE upmovementdate.m_transaction_id = m_transaction.m_transaction_id;		    	");
 	sb.appendln("	     END IF;");
-	sb.appendln("	     WITH upseqno as (select row_number() over (order by movementdate,line) as seqno, ");
+	sb.appendln("	  end if;	  ");
+	sb.appendln("	  WITH upseqno as (select row_number() over (order by movementdate,right(movementtype,1) desc,m_transaction_id) as seqno, 	  ");
 	sb.appendln("		m_transaction_id from m_transaction where m_product_id = product_ID AND c_period_id = p_period_id)");
 	sb.appendln("	     update m_transaction set seqno = upseqno.seqno from upseqno ");
-	sb.appendln("	     WHERE upseqno.m_transaction_id = m_transaction.m_transaction_id;			");
-	sb.appendln("	  end if;	  	  	  ");
+	sb.appendln("	     WHERE upseqno.m_transaction_id = m_transaction.m_transaction_id;				  	  	  ");
 	sb.appendln("	  FOR CARDING IN SELECT *,");
 	sb.appendln("		    (SELECT TABLENAME FROM AD_TABLE WHERE AD_TABLE_ID = t.AD_TABLE_ID) as tablename,	");
 	sb.appendln("		    CASE WHEN ad_table_id = 318 then (select documentno from c_invoice where c_invoice_id = record_id)");
@@ -228,25 +230,47 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("			 WHEN ad_table_id = 323 then (select documentno from m_movement where m_movement_id = record_id)");
 	sb.appendln("			 WHEN ad_table_id = 325 then (select documentno from m_production where m_production_id = record_id)");
 	sb.appendln("		    END as documentno,");
+	sb.appendln("		    CASE WHEN ad_table_id = 318 then (select dateinvoiced from c_invoice where c_invoice_id = record_id)");
+	sb.appendln("		         WHEN ad_table_id = 319 then (select movementdate from m_inout where m_inout_id = record_id) ");
+	sb.appendln("		         WHEN ad_table_id = 321 then (select movementdate from m_inventory where m_inventory_id = record_id)");
+	sb.appendln("		         WHEN ad_table_id = 323 then (select movementdate from m_movement where m_movement_id = record_id)");
+	sb.appendln("		         WHEN ad_table_id = 325 then (select movementdate from m_production where m_production_id = record_id) ");
+	sb.appendln("		    end AS currentdate,");
+	sb.appendln("		    CASE WHEN ad_table_id = 318 then (select c_period_id from ");
+	sb.appendln("			c_invoice i, c_period p  where i.dateinvoiced::date BETWEEN p.startdate AND p.enddate AND p.ad_client_id in (0, client_id) and c_invoice_id = record_id)");
+	sb.appendln("			 WHEN ad_table_id = 319 then (select c_period_id from");
+	sb.appendln("			m_inout io, c_period p where io.movementdate::date BETWEEN p.startdate AND p.enddate AND p.ad_client_id in (0, client_id) and m_inout_id = record_id)");
+	sb.appendln("			 WHEN ad_table_id = 321 then (select c_period_id from ");
+	sb.appendln("			m_inventory i, c_period p where i.movementdate::date BETWEEN p.startdate AND p.enddate AND p.ad_client_id in (0, client_id) and m_inventory_id = record_id)");
+	sb.appendln("			 WHEN ad_table_id = 323 then (select c_period_id from");
+	sb.appendln("			m_movement m, c_period p where m.movementdate::date BETWEEN p.startdate AND p.enddate AND p.ad_client_id in (0, client_id) and m_movement_id = record_id)");
+	sb.appendln("			 WHEN ad_table_id = 325 then (select c_period_id from");
+	sb.appendln("			m_production prod, c_period p where prod.movementdate::date BETWEEN p.startdate AND p.enddate AND p.ad_client_id in (0, client_id) AND m_production_id = record_id)			");
+	sb.appendln("		    end as currentperiod,");
 	sb.appendln("		    CASE WHEN ad_table_id = 318 then (select docstatus from c_invoice where c_invoice_id = record_id) ");
 	sb.appendln("			 WHEN ad_table_id = 319 then (select docstatus from m_inout where m_inout_id = record_id) ");
 	sb.appendln("			 WHEN ad_table_id = 321 then (select docstatus from m_inventory where m_inventory_id = record_id)");
 	sb.appendln("			 WHEN ad_table_id = 323 then (select docstatus from m_movement where m_movement_id = record_id)");
 	sb.appendln("			 WHEN ad_table_id = 325 then (select docstatus from m_production where m_production_id = record_id)			 ");
 	sb.appendln("		    END as currentdocstatus");
-	sb.appendln("			FROM M_TRANSACTION t ");
+	sb.appendln("			FROM M_TRANSACTION t 			");
 	sb.appendln("			 WHERE t.M_Product_ID = product_ID ");
 	sb.appendln("			 AND t.AD_Client_ID = Client_ID");
 	sb.appendln("			 AND t.C_Period_ID = p_period_id");
 	sb.appendln("			 AND t.processed = 'N'");
 	sb.appendln("			 ORDER BY SEQNO");
 	sb.appendln("	  LOOP	    	    	    ");
-	sb.appendln("	    RAISE NOTICE 'CURRENTDOCSTATUS % , DOCSTATUS %',CARDING.CURRENTDOCSTATUS,CARDING.DOCSTATUS;");
 	sb.appendln("	    IF CARDING.DOCSTATUS != CARDING.CURRENTDOCSTATUS THEN");
 	sb.appendln("		UPDATE M_TRANSACTION SET DOCSTATUS = CARDING.CURRENTDOCSTATUS WHERE M_TRANSACTION_ID = CARDING.M_TRANSACTION_ID;");
 	sb.appendln("		CARDING.DOCSTATUS = CARDING.CURRENTDOCSTATUS;");
 	sb.appendln("		_checkStock := true;");
 	sb.appendln("	    END IF;");
+	sb.appendln("	    IF CARDING.currentperiod != CARDING.C_PERIOD_ID THEN");
+	sb.appendln("		UPDATE M_TRANSACTION SET c_period_id = CARDING.currentperiod WHERE M_TRANSACTION_ID = CARDING.M_TRANSACTION_ID;");
+	sb.appendln("	    END IF;");
+	sb.appendln("	    IF CARDING.currentdate != CARDING.movementdate THEN  ");
+	sb.appendln("		UPDATE M_TRANSACTION SET movementdate = CARDING.currentdate AND M_TRANSACTION_ID = CARDING.M_TRANSACTION_ID;");
+	sb.appendln("	    END IF;	    ");
 	sb.appendln("	    IF CARDING.docstatus NOT in ('CO','CL') THEN		");
 	sb.appendln("		UPDATE M_TRANSACTION SET PROCESSED = 'Y' WHERE M_Transaction_ID = CARDING.M_TRANSACTION_ID;");
 	sb.appendln("		CONTINUE;");
@@ -306,7 +330,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		  SELECT * INTO COSTCALC From xendra.M_CostCalc ");
 	sb.appendln("		  WHERE AD_Table_ID = CARDING.AD_Table_ID AND");
 	sb.appendln("			Record_ID = CARDING.Record_ID AND");
-	sb.appendln("			Line = CARDING.Line AND ");
+	sb.appendln("			COALESCE(Line,0) = COALESCE(CARDING.Line,0) AND ");
 	sb.appendln("			M_Product_ID = CARDING.M_PRODUCT_ID; ");
 	sb.appendln("		  IF COSTCALC isnull THEN");
 	sb.appendln("		    COSTCALC.AD_Client_ID 	:= Client_ID;");
@@ -325,6 +349,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		    COSTCALC.IsCostedOk		:= 'Y';						");
 	sb.appendln("		    COSTCALC.AD_Table_ID  	:= CARDING.AD_Table_ID;");
 	sb.appendln("		    COSTCALC.Record_ID 	 	:= CARDING.Record_ID;	");
+	sb.appendln("		    COSTCALC.LineNetAmt		:= 0;");
 	sb.appendln("		    COSTCALC.Line		:= CARDING.Line;");
 	sb.appendln("		  ELSE");
 	sb.appendln("		    COSTCALC.UPDATED 		:= current_timestamp;");
@@ -341,11 +366,16 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		    _newStock := _oldStock;");
 	sb.appendln("		  end if;");
 	sb.appendln("		  IF _IsReturn then");
+	sb.appendln("		    _returndate := xendra.getcostdate(CARDING.record_id,");
+	sb.appendln("						      CARDING.c_orderline_id,");
+	sb.appendln("						      CARDING.movementtype);");
+	sb.appendln("		   _returndate := COALESCE(_returndate,CARDING.movementdate);");
 	sb.appendln("		    _newCost := xendra.getaveragecost(CARDING.AD_Client_ID,								     ");
 	sb.appendln("						      costelement_id,");
 	sb.appendln("						      CARDING.M_Product_ID,");
-	sb.appendln("						      CARDING.movementdate, false); ");
+	sb.appendln("						      _returndate, false); ");
 	sb.appendln("		    PRODUCT_COSTING.currentcostprice := _newCost;");
+	sb.appendln("		    COSTCALC.InCost := _newCost;");
 	sb.appendln("		    if _oldcost = 0 then				    ");
 	sb.appendln("		      PRODUCT_COSTING.currentcostprice := _newCost;");
 	sb.appendln("				    _oldcost := PRODUCT_COSTING.currentcostprice;");
@@ -354,13 +384,12 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		     IF _IsProduction THEN");
 	sb.appendln("		       IF CARDING.TRANSACTIONTYPE = 'B' OR CARDING.TRANSACTIONTYPE = 'C' THEN");
 	sb.appendln("		         _newPrice := 0;");
-	sb.appendln("		         RAISE NOTICE 'ProductionPlanID %',CARDING.M_ProductionPlan_ID;");
+	sb.appendln("		         --RAISE NOTICE 'ProductionPlanID %',CARDING.M_ProductionPlan_ID;");
 	sb.appendln("		         FOR PRODUCTION IN SELECT M_Product_ID, MovementQty ");
 	sb.appendln("					  FROM xendra.M_Transaction");
 	sb.appendln("					  WHERE M_ProductionPlan_ID = CARDING.M_ProductionPlan_ID");
 	sb.appendln("						AND MovementType = 'P-'");
 	sb.appendln("		         LOOP ");
-	sb.appendln("			   RAISE NOTICE '%',CARDING.movementdate;");
 	sb.appendln("			   _newCost := xendra.getaveragecost(CLIENT_ID,								     ");
 	sb.appendln("				costelement_id,");
 	sb.appendln("				PRODUCTION.M_Product_ID,	");
@@ -377,7 +406,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("			     --GET DIAGNOSTICS _found = ROW_COUNT;	 																												");
 	sb.appendln("			     --RAISE NOTICE '%', _found;");
 	sb.appendln("			     _abort := TRUE;");
-	sb.appendln("			     RAISE EXCEPTION 'Productos con costo 0 cancela hasta la siguiente ejecucion' USING HINT = 'falta costear productos en produccion';			     ");
+	sb.appendln("			     --RAISE EXCEPTION 'Productos con costo 0 cancela hasta la siguiente ejecucion' USING HINT = 'falta costear productos en produccion';			     ");
 	sb.appendln("			     RETURN -2;");
 	sb.appendln("			   else");
 	sb.appendln("			     _newPrice := _newPrice + _newCost * abs( PRODUCTION.MovementQty ) ;");
@@ -388,6 +417,9 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		             _newPrice := _newPrice / carding.MovementQty;");
 	sb.appendln("		           END IF;");
 	sb.appendln("			   COSTCALC.InCost := _newPrice;");
+	sb.appendln("			   UPDATE M_PRODUCTIONPLAN SET INCOST = _newPrice ");
+	sb.appendln("				where M_Product_ID = CARDING.M_Product_ID");
+	sb.appendln("				AND M_ProductionPlan_ID = CARDING.M_ProductionPlan_ID;");
 	sb.appendln("			 END IF;");
 	sb.appendln("		       END IF;");
 	sb.appendln("		     ELSE");
@@ -404,7 +436,6 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("				  _threshold := 100;");
 	sb.appendln("				end if;");
 	sb.appendln("				_threshold := abs(_threshold);");
-	sb.appendln("				RAISE NOTICE '%',_threshold;");
 	sb.appendln("				if _threshold <= 50 then ");
 	sb.appendln("				  IF COSTCALC.Incost - _priceactual > 0 THEN ");
 	sb.appendln("					COSTCALC.Incost := COSTCALC.Incost - _priceactual;");
@@ -432,7 +463,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		       ELSIF COALESCE(CARDING.C_ORDERLINE_ID,0) > 0 THEN");
 	sb.appendln("		         IF CARDING.TRANSACTIONTYPE = 'B' OR CARDING.TRANSACTIONTYPE = 'C' THEN");
 	sb.appendln("			   select ol.priceactual,");
-	sb.appendln("				  ol.c_currency_id,");
+	sb.appendln("				  ol.c_currency_id,				  ");
 	sb.appendln("				  o.c_conversiontype_id,");
 	sb.appendln("				  o.istaxincluded='Y',");
 	sb.appendln("				  ol.c_tax_id ");
@@ -444,7 +475,6 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		           select max(rate) into _rate FROM c_tax ");
 	sb.appendln("				  where c_taxcategory_id in");
 	sb.appendln("				  (SELECT c_taxcategory_id from m_product where m_product_id =  product_id);");
-	sb.appendln("			   raise notice 'priceactual % % % % % ',_priceactual,_c_currency_id,_c_conversiontype_id,_istaxincluded,_c_tax_id;");
 	sb.appendln("			   IF _istaxincluded AND _rate > 0 AND _priceactual > 0 then");
 	sb.appendln("			     SELECT rate into _rate FROM c_tax ");
 	sb.appendln("			       where c_tax_id = _c_tax_id;");
@@ -464,6 +494,8 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("				COSTCALC.ERRORMSG := 'problema de conversion ' || date(CARDING.movementdate) || ' '|| COALESCE((select name from c_conversiontype where c_conversiontype_id = _c_conversiontype_id),'') ;				");
 	sb.appendln("			   end if;");
 	sb.appendln("			   COSTCALC.InCost := _pricelastpo;");
+	sb.appendln("			   _linenetamt := round(_pricelastpo * CARDING.MovementQty, 2);");
+	sb.appendln("			   COSTCALC.linenetamt := _linenetamt;");
 	sb.appendln("		         END IF;");
 	sb.appendln("		       ELSIF COALESCE(CARDING.M_InventoryLine_ID,0) > 0 THEN");
 	sb.appendln("		         IF CARDING.TRANSACTIONTYPE = 'B' OR CARDING.TRANSACTIONTYPE = 'C' THEN");
@@ -601,7 +633,8 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("			END IF;");
 	sb.appendln("		  END IF;");
 	sb.appendln("	       END IF;");
-	sb.appendln("	       UPDATE M_TRANSACTION SET PROCESSED = 'Y', ERRORMSG = CASE WHEN COSTCALC.Stock < 0 THEN ERRORMSG || 'Negative' ELSE ERRORMSG || '' END");
+	sb.appendln("	       UPDATE M_TRANSACTION SET PROCESSED = 'Y', costaverage = COSTCALC.Cost, pricelastpo = COSTCALC.incost, ");
+	sb.appendln("		ERRORMSG = CASE WHEN COSTCALC.Stock < 0 THEN ERRORMSG || 'Negative' ELSE ERRORMSG || '' END");
 	sb.appendln("	       WHERE M_Transaction_ID = CARDING.M_TRANSACTION_ID;");
 	sb.appendln("	       _processed := array_append(_processed,CARDING.M_TRANSACTION_ID);");
 	sb.appendln("	       IF NOT _defercreate THEN");
@@ -611,7 +644,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("				IsActive,created,createdby,updated,updatedby,");
 	sb.appendln("				precost, cost,prestock, stock,");
 	sb.appendln("				iscostedok,movementdate,omovementdate,");
-	sb.appendln("				m_warehouse_id,	incost,	ismanual, Record_ID, AD_Table_ID, Line, Parent_ID, Master_ID, errormsg) ");
+	sb.appendln("				m_warehouse_id,	incost,	ismanual, Record_ID, AD_Table_ID, Line, Parent_ID, Master_ID, linenetamt, errormsg) ");
 	sb.appendln("				values (");
 	sb.appendln("				COSTCALC.C_PERIOD_ID, COSTCALC.M_COSTCALC_ID,	COSTCALC.AD_CLIENT_ID, COSTCALC.AD_ORG_ID,COSTCALC.M_PRODUCT_ID, ");
 	sb.appendln("				COSTCALC.M_COSTELEMENT_ID, 'Y'::bpchar,	COSTCALC.created, COSTCALC.createdby, COSTCALC.updated,");
@@ -619,7 +652,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("				COSTCALC.precost, COSTCALC.cost, COSTCALC.prestock, COSTCALC.stock,");
 	sb.appendln("				'Y'::bpchar, COSTCALC.movementdate,");
 	sb.appendln("				COALESCE(COSTCALC.omovementdate,'01/01/1969'::timestamp),COSTCALC.m_warehouse_id,COSTCALC.incost,");
-	sb.appendln("				'N'::bpchar,COSTCALC.Record_id,	COSTCALC.AD_table_id,COSTCALC.Line, COSTCALC.parent_id,COSTCALC.master_id, COSTCALC.errormsg);");
+	sb.appendln("				'N'::bpchar,COSTCALC.Record_id,	COSTCALC.AD_table_id,COSTCALC.Line, COSTCALC.parent_id,COSTCALC.master_id,COSTCALC.linenetamt,COSTCALC.errormsg);");
 	sb.appendln("	         ELSE");
 	sb.appendln("		   UPDATE xendra.M_COSTCALC set cost = COSTCALC.cost, ");
 	sb.appendln("				      precost = COSTCALC.precost,");
@@ -627,6 +660,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("				      errormsg = COSTCALC.errormsg,");
 	sb.appendln("				      prestock = COSTCALC.prestock,");
 	sb.appendln("				      stock = COSTCALC.stock,");
+	sb.appendln("				      linenetamt = COSTCALC.linenetamt,");
 	sb.appendln("				      omovementdate = COSTCALC.omovementdate ");
 	sb.appendln("				      WHERE M_CostCalc.M_CostCalc_ID = costcalc.m_CostCalc_ID;");
 	sb.appendln("		 END IF;");
@@ -704,7 +738,6 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	sb.appendln("		RETURN 0;");
 	sb.appendln("	      END IF;");
 	sb.appendln("	    ELSE");
-	sb.appendln("	      RAISE NOTICE 'register(s) not found';");
 	sb.appendln("	      if COALESCE(PREVPERIOD.C_PERIOD_ID,0) != 0 THEN");
 	sb.appendln("	        SELECT count(*) into _count FROM M_PRODUCT_COSTING WHERE ");
 	sb.appendln("		  M_Product_ID = product_id ");
@@ -757,7 +790,7 @@ Extension="",Synchronized="2017-12-23 09:35:22.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-12-23 09:35:22.0");
+ 	sb.appendln("@Synchronized=2020-03-06 21:45:00.0");
 	sb.appendln("@depends=getcostfrominvoiceline");
 	sb.appendln("");
 	sb.appendln("@Identifier=0f540aca-9ea8-76d2-2869-4d99deb3c667");

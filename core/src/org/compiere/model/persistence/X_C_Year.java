@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("C_Year");
 public static String es_PE_TAB_Year_Description="Definir año calendario";
 
 @XendraTrl(Identifier="16660d6f-b0ca-f334-5dff-2f5cdf7519ee")
-public static String es_PE_TAB_Year_Name="Año";
-
-@XendraTrl(Identifier="16660d6f-b0ca-f334-5dff-2f5cdf7519ee")
 public static String es_PE_TAB_Year_Help="La ventana de año es usada para definir cada año para el calendario especifico.";
 
-@XendraTab(Name="Year",Description="Define Calendar Year",
+@XendraTrl(Identifier="16660d6f-b0ca-f334-5dff-2f5cdf7519ee")
+public static String es_PE_TAB_Year_Name="Año";
+@XendraTab(Name="Year",
+Description="Define Calendar Year",
 Help="The Year Window is used to define each year for the specified calendar.",
 AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,11 +81,12 @@ public static final String TABNAME_Year="16660d6f-b0ca-f334-5dff-2f5cdf7519ee";
 @XendraTrl(Identifier="630439f8-f6fd-c3ad-0344-302dfaf45373")
 public static String es_PE_TABLE_C_Year_Name="Año";
 
-@XendraTable(Name="Year",Description="Calendar Year",Help="",TableName="C_Year",AccessLevel="2",
-AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",AD_Val_Rule_ID="",IsKey=1,LoadSeq=115,
-IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="630439f8-f6fd-c3ad-0344-302dfaf45373",
-Synchronized="2017-08-16 11:42:34.0")
+@XendraTable(Name="Year",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Calendar Year",Help="",
+TableName="C_Year",AccessLevel="2",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=115,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="630439f8-f6fd-c3ad-0344-302dfaf45373",Synchronized="2020-03-03 21:37:46.0")
 /** TableName=C_Year */
 public static final String Table_Name="C_Year";
 
@@ -141,13 +142,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="59675dcb-9a57-a94f-05a2-e91d4d301e7c")
+public static String es_PE_FIELD_Year_Calendar_Name="Calendario";
+
+@XendraTrl(Identifier="59675dcb-9a57-a94f-05a2-e91d4d301e7c")
 public static String es_PE_FIELD_Year_Calendar_Description="Nombre del Calendario Contable";
 
 @XendraTrl(Identifier="59675dcb-9a57-a94f-05a2-e91d4d301e7c")
 public static String es_PE_FIELD_Year_Calendar_Help="El calendario únicamente identifica un calendario contable. Múltiples calendarios pueden ser usados. Ej. Ud. puede necesitar un calendario estándar que corre del 1 de enero al 31 de diciembre y un calendario fiscal que corre del 1 de julio al 30 de junio.";
-
-@XendraTrl(Identifier="59675dcb-9a57-a94f-05a2-e91d4d301e7c")
-public static String es_PE_FIELD_Year_Calendar_Name="Calendario";
 
 @XendraField(AD_Column_ID="C_Calendar_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -165,7 +166,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d0d1dad-1706-3ccd-823c-fe23f74b273b",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name C_Calendar_ID */
 public static final String COLUMNNAME_C_Calendar_ID = "C_Calendar_ID";
 /** Set Year.
@@ -185,18 +186,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
+public static String es_PE_FIELD_Year_Year_Name="Año";
+
+@XendraTrl(Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
 public static String es_PE_FIELD_Year_Year_Description="Año del calendario";
 
 @XendraTrl(Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
 public static String es_PE_FIELD_Year_Year_Help="El Año identifica únicamente un año contable para un calendario";
 
-@XendraTrl(Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
-public static String es_PE_FIELD_Year_Year_Name="Año";
-@XendraField(AD_Column_ID="C_Year_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
+@XendraField(AD_Column_ID="C_Year_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d32e0cfc-389a-2390-636d-5d6feef42beb")
 public static final String FIELDNAME_Year_Year="d32e0cfc-389a-2390-636d-5d6feef42beb";
 /** Column name C_Year_ID */
 public static final String COLUMNNAME_C_Year_ID = "C_Year_ID";
@@ -223,7 +225,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d07ac3ce-d4e1-4935-b637-d499e20deeaa",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DateAcctClose */
 public static final String COLUMNNAME_DateAcctClose = "DateAcctClose";
 /** Set Description.
@@ -254,13 +256,13 @@ return value;
 }
 
 @XendraTrl(Identifier="d27eaa76-e2f2-e342-3b52-55a033eddef7")
+public static String es_PE_FIELD_Year_Description_Name="Observación";
+
+@XendraTrl(Identifier="d27eaa76-e2f2-e342-3b52-55a033eddef7")
 public static String es_PE_FIELD_Year_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="d27eaa76-e2f2-e342-3b52-55a033eddef7")
 public static String es_PE_FIELD_Year_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="d27eaa76-e2f2-e342-3b52-55a033eddef7")
-public static String es_PE_FIELD_Year_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -278,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9d1ba9c4-1c9c-7d69-a6bd-8737af5d1a7a",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Year.
@@ -310,18 +312,19 @@ return new KeyNamePair(get_ID(), getFiscalYear());
 }
 
 @XendraTrl(Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
+public static String es_PE_FIELD_Year_Year2_Name="Año";
+
+@XendraTrl(Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
 public static String es_PE_FIELD_Year_Year2_Description="Representa el año fisico";
 
 @XendraTrl(Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
 public static String es_PE_FIELD_Year_Year2_Help="El año identifica el año calendario contable.";
 
-@XendraTrl(Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
-public static String es_PE_FIELD_Year_Year2_Name="Año";
-@XendraField(AD_Column_ID="FiscalYear",
-IsCentrallyMaintained=true,AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=-1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
+@XendraField(AD_Column_ID="FiscalYear",IsCentrallyMaintained=true,
+AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=-1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="4ffbcb71-b7ae-1e69-2275-3539dc26e482")
 public static final String FIELDNAME_Year_Year2="4ffbcb71-b7ae-1e69-2275-3539dc26e482";
 
 @XendraTrl(Identifier="7067adb5-8993-2fea-56b9-36e7bb0aeeb9")
@@ -333,7 +336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7067adb5-8993-2fea-56b9-36e7bb0aeeb9",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name FiscalYear */
 public static final String COLUMNNAME_FiscalYear = "FiscalYear";
 /** Set Identifier.
@@ -365,7 +368,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0ec9a918-e608-4b82-ad7d-8f46c6a3fc66",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Closed Status.
@@ -396,7 +399,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4a301cae-f7e0-4ae5-abd0-ea3dd79d9559",
-Synchronized="2017-08-05 16:54:32.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name IsClosed */
 public static final String COLUMNNAME_IsClosed = "IsClosed";
 /** Set Process Now.
@@ -419,10 +422,10 @@ return false;
 }
 
 @XendraTrl(Identifier="4eb55c64-f946-388b-0020-76bb6582648d")
-public static String es_PE_FIELD_Year_ProcessNow_Description="Crear 12 períodos de calendario estándar (Ene-Dic)";
+public static String es_PE_FIELD_Year_ProcessNow_Name="Crear Períodos";
 
 @XendraTrl(Identifier="4eb55c64-f946-388b-0020-76bb6582648d")
-public static String es_PE_FIELD_Year_ProcessNow_Name="Crear Períodos";
+public static String es_PE_FIELD_Year_ProcessNow_Description="Crear 12 períodos de calendario estándar (Ene-Dic)";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="16660d6f-b0ca-f334-5dff-2f5cdf7519ee",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -440,7 +443,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="8e296982-10cd-3044-f422-b56e0f8f943e",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5280634a-9aab-e766-4d7c-2932c3eba5f8",Synchronized="2017-08-05 16:54:32.0")
+Identifier="5280634a-9aab-e766-4d7c-2932c3eba5f8",Synchronized="2019-08-30 22:22:23.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

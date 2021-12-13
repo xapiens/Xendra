@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_BankAccountType;
 /** Generated Model for C_BankAccount
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -67,12 +66,12 @@ public static int Table_ID=MTable.getTable_ID("C_BankAccount");
 public static String es_PE_TAB_Account_Description="Mantener Cuenta";
 
 @XendraTrl(Identifier="39c8492e-0050-d63f-e4f9-75a787f86dc2")
-public static String es_PE_TAB_Account_Name="Cuenta";
-
-@XendraTrl(Identifier="39c8492e-0050-d63f-e4f9-75a787f86dc2")
 public static String es_PE_TAB_Account_Help="La pestaña Cuenta es usada para definir una ó mas cuentas de un banco. Cada cuenta tiene un número de cuenta y una moneda.";
 
-@XendraTab(Name="Account",Description="Maintain Bank Account",
+@XendraTrl(Identifier="39c8492e-0050-d63f-e4f9-75a787f86dc2")
+public static String es_PE_TAB_Account_Name="Cuenta";
+@XendraTab(Name="Account",
+Description="Maintain Bank Account",
 Help="The Account Tab is used to define one or more accounts for a Bank.  Each account has a unique Account No and Currency.  The bank account organization is used for accounting.",
 AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",SeqNo=20,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -85,11 +84,12 @@ public static final String TABNAME_Account="39c8492e-0050-d63f-e4f9-75a787f86dc2
 @XendraTrl(Identifier="e4c77184-cb88-1bf5-ed45-9c3c97f674b2")
 public static String es_PE_TABLE_C_BankAccount_Name="Cuenta Bancaria";
 
-@XendraTable(Name="Bank Account",Description="Account at the Bank",Help="",
+@XendraTable(Name="Bank Account",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Account at the Bank",Help="",
 TableName="C_BankAccount",AccessLevel="3",AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="e4c77184-cb88-1bf5-ed45-9c3c97f674b2",Synchronized="2017-08-16 11:41:22.0")
+Identifier="e4c77184-cb88-1bf5-ed45-9c3c97f674b2",Synchronized="2020-03-03 21:36:25.0")
 /** TableName=C_BankAccount */
 public static final String Table_Name="C_BankAccount";
 
@@ -150,13 +150,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d99d48df-b9bd-f4f8-861b-1caf84369454")
+public static String es_PE_FIELD_Account_AccountNo_Name="No. De Cuenta";
+
+@XendraTrl(Identifier="d99d48df-b9bd-f4f8-861b-1caf84369454")
 public static String es_PE_FIELD_Account_AccountNo_Description="Número de cuenta";
 
 @XendraTrl(Identifier="d99d48df-b9bd-f4f8-861b-1caf84369454")
 public static String es_PE_FIELD_Account_AccountNo_Help="El número de cuenta indica el número asignado a esta cuenta.";
-
-@XendraTrl(Identifier="d99d48df-b9bd-f4f8-861b-1caf84369454")
-public static String es_PE_FIELD_Account_AccountNo_Name="No. De Cuenta";
 
 @XendraField(AD_Column_ID="AccountNo",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -174,19 +174,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aafc72d6-75e2-8a90-7e15-24899da19dbf",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name AccountNo */
 public static final String COLUMNNAME_AccountNo = "AccountNo";
-
-/** BankAccountType AD_Reference=acb85a97-8387-31f1-319a-5aec11c0aca3 */
-public static final int BANKACCOUNTTYPE_AD_Reference_ID=216;
 /** Set Bank Account Type.
 @param BankAccountType Bank Account Type */
 public void setBankAccountType (String BankAccountType)
 {
-if (BankAccountType == null) throw new IllegalArgumentException ("BankAccountType is mandatory");
-if (BankAccountType.equals(REF_C_BankAccountType.Checking) || BankAccountType.equals(REF_C_BankAccountType.Savings) || BankAccountType.equals(REF_C_BankAccountType.Detraccion) || BankAccountType.equals(REF_C_BankAccountType.Card));
- else throw new IllegalArgumentException ("BankAccountType Invalid value - " + BankAccountType + " - Reference_ID=216 - C - S - D - K");
 if (BankAccountType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -202,13 +196,13 @@ return (String)get_Value(COLUMNNAME_BankAccountType);
 }
 
 @XendraTrl(Identifier="8fb607f0-63ec-6931-261f-1b014ee10e3c")
+public static String es_PE_FIELD_Account_BankAccountType_Name="Tipo de Cuenta Bancaria";
+
+@XendraTrl(Identifier="8fb607f0-63ec-6931-261f-1b014ee10e3c")
 public static String es_PE_FIELD_Account_BankAccountType_Description="Tipo de cuenta Bancaria";
 
 @XendraTrl(Identifier="8fb607f0-63ec-6931-261f-1b014ee10e3c")
 public static String es_PE_FIELD_Account_BankAccountType_Help="El Tipo de Cuenta Bancario indica el tipo de cuenta (ahorros; cheques; etc.) como está definida esta cuenta";
-
-@XendraTrl(Identifier="8fb607f0-63ec-6931-261f-1b014ee10e3c")
-public static String es_PE_FIELD_Account_BankAccountType_Name="Tipo de Cuenta Bancaria";
 
 @XendraField(AD_Column_ID="BankAccountType",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -226,7 +220,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="539226a1-19da-0359-2ba9-0b55c06e3c7c",Synchronized="2017-08-05 16:53:13.0")
+Identifier="539226a1-19da-0359-2ba9-0b55c06e3c7c",Synchronized="2019-08-30 22:21:03.0")
 /** Column name BankAccountType */
 public static final String COLUMNNAME_BankAccountType = "BankAccountType";
 /** Set BBAN.
@@ -250,18 +244,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
+public static String es_PE_FIELD_Account_BBAN_Name="NCBB";
+
+@XendraTrl(Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
 public static String es_PE_FIELD_Account_BBAN_Description="Numero de Cuenta Bancaria Básica";
 
 @XendraTrl(Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
 public static String es_PE_FIELD_Account_BBAN_Help="El Numero de Cuenta Básica (ó Domestica) usada para transferencias (Ver también NCBB) para mayores detalles 13616 y http://www.ecbs.org/.";
 
-@XendraTrl(Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
-public static String es_PE_FIELD_Account_BBAN_Name="NCBB";
-@XendraField(AD_Column_ID="BBAN",
-IsCentrallyMaintained=true,AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
+@XendraField(AD_Column_ID="BBAN",IsCentrallyMaintained=true,
+AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="cc7413f2-e387-fda8-6d60-2d3cfd31d292")
 public static final String FIELDNAME_Account_BBAN="cc7413f2-e387-fda8-6d60-2d3cfd31d292";
 
 @XendraTrl(Identifier="ef72b9d0-a164-7532-aba1-bcb69c3df607")
@@ -273,7 +268,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef72b9d0-a164-7532-aba1-bcb69c3df607",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name BBAN */
 public static final String COLUMNNAME_BBAN = "BBAN";
 /** Set Bank Account.
@@ -293,13 +288,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cf01befa-53a7-b9e4-3f7b-68bf836faa94")
+public static String es_PE_FIELD_Account_BankAccount_Name="Cuenta Bancaria";
+
+@XendraTrl(Identifier="cf01befa-53a7-b9e4-3f7b-68bf836faa94")
 public static String es_PE_FIELD_Account_BankAccount_Description="Cuenta bancaria";
 
 @XendraTrl(Identifier="cf01befa-53a7-b9e4-3f7b-68bf836faa94")
 public static String es_PE_FIELD_Account_BankAccount_Help="La cuenta bancaria identifica una cuenta en este banco";
-
-@XendraTrl(Identifier="cf01befa-53a7-b9e4-3f7b-68bf836faa94")
-public static String es_PE_FIELD_Account_BankAccount_Name="Cuenta Bancaria";
 
 @XendraField(AD_Column_ID="C_BankAccount_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -332,18 +327,19 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_Bank_ID()));
 }
 
 @XendraTrl(Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
+public static String es_PE_FIELD_Account_Bank_Name="Banco";
+
+@XendraTrl(Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
 public static String es_PE_FIELD_Account_Bank_Description="Banco";
 
 @XendraTrl(Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
 public static String es_PE_FIELD_Account_Bank_Help="El Banco es un identificador único de un Banco para esta Organización o para un Socio del Negocio con quien esta organización efectúa transacciones";
 
-@XendraTrl(Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
-public static String es_PE_FIELD_Account_Bank_Name="Banco";
-@XendraField(AD_Column_ID="C_Bank_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=30,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
+@XendraField(AD_Column_ID="C_Bank_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=30,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="946ca8a8-1f10-d2cb-3886-32038a3cb13e")
 public static final String FIELDNAME_Account_Bank="946ca8a8-1f10-d2cb-3886-32038a3cb13e";
 
 @XendraTrl(Identifier="861e278a-53b9-2a7c-f405-352bbabe21cd")
@@ -355,7 +351,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="861e278a-53b9-2a7c-f405-352bbabe21cd",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name C_Bank_ID */
 public static final String COLUMNNAME_C_Bank_ID = "C_Bank_ID";
 /** Set Currency.
@@ -375,13 +371,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="66858b13-5321-4603-d181-00510db352b9")
+public static String es_PE_FIELD_Account_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="66858b13-5321-4603-d181-00510db352b9")
 public static String es_PE_FIELD_Account_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="66858b13-5321-4603-d181-00510db352b9")
 public static String es_PE_FIELD_Account_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="66858b13-5321-4603-d181-00510db352b9")
-public static String es_PE_FIELD_Account_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -399,7 +395,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56f552ef-b38b-10de-6838-b3a0c80a05dc",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Credit limit.
@@ -419,13 +415,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="daa3733a-55e3-d346-5c4f-61473f46ee4e")
+public static String es_PE_FIELD_Account_CreditLimit_Name="Límite de Crédito";
+
+@XendraTrl(Identifier="daa3733a-55e3-d346-5c4f-61473f46ee4e")
 public static String es_PE_FIELD_Account_CreditLimit_Description="Total de crédito permitido";
 
 @XendraTrl(Identifier="daa3733a-55e3-d346-5c4f-61473f46ee4e")
 public static String es_PE_FIELD_Account_CreditLimit_Help="Indica el límite de crédito para esta cuenta.";
-
-@XendraTrl(Identifier="daa3733a-55e3-d346-5c4f-61473f46ee4e")
-public static String es_PE_FIELD_Account_CreditLimit_Name="Límite de Crédito";
 
 @XendraField(AD_Column_ID="CreditLimit",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -443,7 +439,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a49e05d1-bc2d-7183-fbce-d06d8b310126",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name CreditLimit */
 public static final String COLUMNNAME_CreditLimit = "CreditLimit";
 /** Set Current balance.
@@ -463,13 +459,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="c351d727-0471-411a-b8ae-7232bf98ab56")
+public static String es_PE_FIELD_Account_CurrentBalance_Name="Saldo Actual ";
+
+@XendraTrl(Identifier="c351d727-0471-411a-b8ae-7232bf98ab56")
 public static String es_PE_FIELD_Account_CurrentBalance_Description="Saldo Actual";
 
 @XendraTrl(Identifier="c351d727-0471-411a-b8ae-7232bf98ab56")
 public static String es_PE_FIELD_Account_CurrentBalance_Help="El campo Saldo Actual indica el saldo actual en esta cuenta";
-
-@XendraTrl(Identifier="c351d727-0471-411a-b8ae-7232bf98ab56")
-public static String es_PE_FIELD_Account_CurrentBalance_Name="Saldo Actual ";
 
 @XendraField(AD_Column_ID="CurrentBalance",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -487,7 +483,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e81698f4-3501-d51d-3e06-a01bd718dd10",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name CurrentBalance */
 public static final String COLUMNNAME_CurrentBalance = "CurrentBalance";
 /** Set Description.
@@ -518,13 +514,13 @@ return value;
 }
 
 @XendraTrl(Identifier="69dced48-1abe-ec1d-07e0-97b4520e224b")
+public static String es_PE_FIELD_Account_Description_Name="Observación";
+
+@XendraTrl(Identifier="69dced48-1abe-ec1d-07e0-97b4520e224b")
 public static String es_PE_FIELD_Account_Description_Description="Observación";
 
 @XendraTrl(Identifier="69dced48-1abe-ec1d-07e0-97b4520e224b")
 public static String es_PE_FIELD_Account_Description_Help="Observación";
-
-@XendraTrl(Identifier="69dced48-1abe-ec1d-07e0-97b4520e224b")
-public static String es_PE_FIELD_Account_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -542,7 +538,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7289d58d-9a90-1ff7-0d4e-67f1391a35ac",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set IBAN.
@@ -566,18 +562,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
+public static String es_PE_FIELD_Account_IBAN_Name="IBAN";
+
+@XendraTrl(Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
 public static String es_PE_FIELD_Account_IBAN_Description="Numero Internacional de la Cuenta Bancaria";
 
 @XendraTrl(Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
 public static String es_PE_FIELD_Account_IBAN_Help="Si su banco proporciona un número internacional de la cuenta bancaria, incorpórelo aquí detallamente ISO 13616 y http://www.ecbs.org. El número de cuenta tiene la longitud máxima de 22 caracteres (sin espacios). El IBAN se imprime a menudo con un espacio después de 4 caracteres. No incorpore los espacios a Adempiere.";
 
-@XendraTrl(Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
-public static String es_PE_FIELD_Account_IBAN_Name="IBAN";
-@XendraField(AD_Column_ID="IBAN",
-IsCentrallyMaintained=true,AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
+@XendraField(AD_Column_ID="IBAN",IsCentrallyMaintained=true,
+AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="391af4cf-94a4-dd27-43eb-6f7d91dc60a6")
 public static final String FIELDNAME_Account_IBAN="391af4cf-94a4-dd27-43eb-6f7d91dc60a6";
 
 @XendraTrl(Identifier="33b04976-e732-a142-f2dc-3cd8e21935ac")
@@ -589,7 +586,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="33b04976-e732-a142-f2dc-3cd8e21935ac",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name IBAN */
 public static final String COLUMNNAME_IBAN = "IBAN";
 /** Set Identifier.
@@ -621,7 +618,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2322b817-156a-4e7b-931f-64a825372056",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -644,13 +641,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b7110de7-9fdb-8c1d-8b49-c5e66721d1a3")
+public static String es_PE_FIELD_Account_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="b7110de7-9fdb-8c1d-8b49-c5e66721d1a3")
 public static String es_PE_FIELD_Account_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="b7110de7-9fdb-8c1d-8b49-c5e66721d1a3")
 public static String es_PE_FIELD_Account_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="b7110de7-9fdb-8c1d-8b49-c5e66721d1a3")
-public static String es_PE_FIELD_Account_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="39c8492e-0050-d63f-e4f9-75a787f86dc2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -668,7 +665,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="de10a578-5894-84d6-eabc-85075bb1f668",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 }

@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("GL_FundRestriction");
 public static String es_PE_TAB_Restriction_Description="Restriction of Funds";
 
 @XendraTrl(Identifier="ac094e1a-4c7e-0483-6153-479a4f7f25d5")
-public static String es_PE_TAB_Restriction_Name="Restriction";
-
-@XendraTrl(Identifier="ac094e1a-4c7e-0483-6153-479a4f7f25d5")
 public static String es_PE_TAB_Restriction_Help="If defined, you can use the fund only for the accounts selected. You can select summary values.";
 
-@XendraTab(Name="Restriction",Description="Restriction of Funds",
+@XendraTrl(Identifier="ac094e1a-4c7e-0483-6153-479a4f7f25d5")
+public static String es_PE_TAB_Restriction_Name="Restriction";
+@XendraTab(Name="Restriction",
+Description="Restriction of Funds",
 Help="If defined, you can use the fund only for the accounts selected. You can select summary values.",
 AD_Window_ID="a41bf769-4482-1b0b-a5df-51f1a6e8835a",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_Restriction="ac094e1a-4c7e-0483-6153-479a4f7f
 @XendraTrl(Identifier="693b571e-a635-f58b-bd60-1ca491445e26")
 public static String es_PE_TABLE_GL_FundRestriction_Name="Fund Restriction";
 
-@XendraTable(Name="Fund Restriction",Description="Restriction of Funds",Help="",
+@XendraTable(Name="Fund Restriction",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Restriction of Funds",Help="",
 TableName="GL_FundRestriction",AccessLevel="2",AD_Window_ID="a41bf769-4482-1b0b-a5df-51f1a6e8835a",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="693b571e-a635-f58b-bd60-1ca491445e26",Synchronized="2017-08-16 11:42:45.0")
+Identifier="693b571e-a635-f58b-bd60-1ca491445e26",Synchronized="2020-03-03 21:37:57.0")
 /** TableName=GL_FundRestriction */
 public static final String Table_Name="GL_FundRestriction";
 
@@ -133,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fbba9a6e-cde1-0a4e-5f40-8945f440e9e7")
+public static String es_PE_FIELD_Restriction_AccountElement_Name="Valor del Elemento";
+
+@XendraTrl(Identifier="fbba9a6e-cde1-0a4e-5f40-8945f440e9e7")
 public static String es_PE_FIELD_Restriction_AccountElement_Description="Valor del Elemento";
 
 @XendraTrl(Identifier="fbba9a6e-cde1-0a4e-5f40-8945f440e9e7")
 public static String es_PE_FIELD_Restriction_AccountElement_Help="El valor de elemento es un identificador único de una instancia de un elemento.";
-
-@XendraTrl(Identifier="fbba9a6e-cde1-0a4e-5f40-8945f440e9e7")
-public static String es_PE_FIELD_Restriction_AccountElement_Name="Valor del Elemento";
 
 @XendraField(AD_Column_ID="C_ElementValue_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -157,7 +158,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7bb3c4c5-b356-b8e4-4b6d-91c8a916b875",Synchronized="2017-08-05 16:54:43.0")
+Identifier="7bb3c4c5-b356-b8e4-4b6d-91c8a916b875",Synchronized="2019-08-30 22:22:34.0")
 /** Column name C_ElementValue_ID */
 public static final String COLUMNNAME_C_ElementValue_ID = "C_ElementValue_ID";
 /** Set Description.
@@ -188,13 +189,13 @@ return value;
 }
 
 @XendraTrl(Identifier="6a9a396c-4b53-fcd2-2789-c5911048365d")
+public static String es_PE_FIELD_Restriction_Description_Name="Observación";
+
+@XendraTrl(Identifier="6a9a396c-4b53-fcd2-2789-c5911048365d")
 public static String es_PE_FIELD_Restriction_Description_Description="Observación";
 
 @XendraTrl(Identifier="6a9a396c-4b53-fcd2-2789-c5911048365d")
 public static String es_PE_FIELD_Restriction_Description_Help="Observación";
-
-@XendraTrl(Identifier="6a9a396c-4b53-fcd2-2789-c5911048365d")
-public static String es_PE_FIELD_Restriction_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -212,7 +213,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="397cd97f-9344-99da-3d1d-e73f0c9d627b",
-Synchronized="2017-08-05 16:54:43.0")
+Synchronized="2019-08-30 22:22:34.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set GL Fund.
@@ -232,13 +233,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f79e4b8e-6ad9-2bc4-b31b-a7103936d198")
+public static String es_PE_FIELD_Restriction_GLFund_Name="GL Fund";
+
+@XendraTrl(Identifier="f79e4b8e-6ad9-2bc4-b31b-a7103936d198")
 public static String es_PE_FIELD_Restriction_GLFund_Description="General Ledger Funds Control";
 
 @XendraTrl(Identifier="f79e4b8e-6ad9-2bc4-b31b-a7103936d198")
 public static String es_PE_FIELD_Restriction_GLFund_Help="General Ledger Funds Control allows you to restrict the use of funds.  This is independent from budget control.";
-
-@XendraTrl(Identifier="f79e4b8e-6ad9-2bc4-b31b-a7103936d198")
-public static String es_PE_FIELD_Restriction_GLFund_Name="GL Fund";
 
 @XendraField(AD_Column_ID="GL_Fund_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -256,7 +257,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7b1a758-bf72-ebb0-4d64-6450bfc84471",
-Synchronized="2017-08-05 16:54:43.0")
+Synchronized="2019-08-30 22:22:34.0")
 /** Column name GL_Fund_ID */
 public static final String COLUMNNAME_GL_Fund_ID = "GL_Fund_ID";
 /** Set Fund Restriction.
@@ -276,13 +277,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5a1a909e-78be-08fb-27ff-4d5ee8063a3f")
+public static String es_PE_FIELD_Restriction_FundRestriction_Name="Fund Restriction";
+
+@XendraTrl(Identifier="5a1a909e-78be-08fb-27ff-4d5ee8063a3f")
 public static String es_PE_FIELD_Restriction_FundRestriction_Description="Restriction of Funds";
 
 @XendraTrl(Identifier="5a1a909e-78be-08fb-27ff-4d5ee8063a3f")
 public static String es_PE_FIELD_Restriction_FundRestriction_Help="If defined, you can use the fund only for the accounts selected.";
-
-@XendraTrl(Identifier="5a1a909e-78be-08fb-27ff-4d5ee8063a3f")
-public static String es_PE_FIELD_Restriction_FundRestriction_Name="Fund Restriction";
 
 @XendraField(AD_Column_ID="GL_FundRestriction_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -321,7 +322,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ece2729f-5fff-44fb-a303-5f294b2426d7",
-Synchronized="2017-08-05 16:54:43.0")
+Synchronized="2019-08-30 22:22:34.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -353,18 +354,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
+public static String es_PE_FIELD_Restriction_Name_Name="Nombre";
+
+@XendraTrl(Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
 public static String es_PE_FIELD_Restriction_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
 public static String es_PE_FIELD_Restriction_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
-public static String es_PE_FIELD_Restriction_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="ac094e1a-4c7e-0483-6153-479a4f7f25d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e1518b59-168d-cd36-9147-b9a94e6fd8da")
 public static final String FIELDNAME_Restriction_Name="e1518b59-168d-cd36-9147-b9a94e6fd8da";
 
 @XendraTrl(Identifier="56255760-86cd-95a2-f033-256e55d9e928")
@@ -376,7 +378,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56255760-86cd-95a2-f033-256e55d9e928",
-Synchronized="2017-08-05 16:54:43.0")
+Synchronized="2019-08-30 22:22:34.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

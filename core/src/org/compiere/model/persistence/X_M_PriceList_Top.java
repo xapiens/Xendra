@@ -70,11 +70,12 @@ public static final String TABNAME_PriceListTop="b59d1842-e560-4b58-b19f-ee886e9
 @XendraTrl(Identifier="d46ee19a-826e-4e19-a496-bfe40ac990ea")
 public static String es_PE_TABLE_M_PriceList_Top_Name="Price List Top";
 
-@XendraTable(Name="Price List Top",Description="",Help="",TableName="M_PriceList_Top",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.material",Identifier="d46ee19a-826e-4e19-a496-bfe40ac990ea",
-Synchronized="2017-08-16 11:43:24.0")
+@XendraTable(Name="Price List Top",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_PriceList_Top",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="d46ee19a-826e-4e19-a496-bfe40ac990ea",
+Synchronized="2020-03-03 21:38:46.0")
 /** TableName=M_PriceList_Top */
 public static final String Table_Name="M_PriceList_Top";
 
@@ -125,18 +126,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
+public static String es_PE_FIELD_PriceListTop_UOM_Name="UM";
+
+@XendraTrl(Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
 public static String es_PE_FIELD_PriceListTop_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
 public static String es_PE_FIELD_PriceListTop_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
-public static String es_PE_FIELD_PriceListTop_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2013-01-21 11:15:11.0",Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2013-01-21 11:15:11.0",
+Identifier="6c36bb98-65a8-4de8-b202-15772c80e544")
 public static final String FIELDNAME_PriceListTop_UOM="6c36bb98-65a8-4de8-b202-15772c80e544";
 
 @XendraTrl(Identifier="bfb018a9-8b7a-47ed-8f8e-654513ac954a")
@@ -148,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bfb018a9-8b7a-47ed-8f8e-654513ac954a",
-Synchronized="2013-01-21 10:54:30.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set Identifier.
@@ -180,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f868a6b-5756-417a-a78c-a677faeb441c",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Image URL.
@@ -204,13 +206,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="755aee32-4975-44cf-bd6b-83d24a46385e")
+public static String es_PE_FIELD_PriceListTop_ImageURL_Name="URL de la Imagen";
+
+@XendraTrl(Identifier="755aee32-4975-44cf-bd6b-83d24a46385e")
 public static String es_PE_FIELD_PriceListTop_ImageURL_Description="URL de la estructura de la imagen";
 
 @XendraTrl(Identifier="755aee32-4975-44cf-bd6b-83d24a46385e")
 public static String es_PE_FIELD_PriceListTop_ImageURL_Help="URL de imagen de la textura; La imagen no se almacena en la base de datos; ";
-
-@XendraTrl(Identifier="755aee32-4975-44cf-bd6b-83d24a46385e")
-public static String es_PE_FIELD_PriceListTop_ImageURL_Name="URL de la Imagen";
 
 @XendraField(AD_Column_ID="ImageURL",IsCentrallyMaintained=true,
 AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -228,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d9a32da-0b1c-4f45-8bca-103683113bfd",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name ImageURL */
 public static final String COLUMNNAME_ImageURL = "ImageURL";
 /** Set M_PriceList_ID.
@@ -248,13 +250,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ed4c9e52-ad9b-4330-b94c-91ef641cae81")
+public static String es_PE_FIELD_PriceListTop_M_PriceList_ID_Name="Lista de Precios";
+
+@XendraTrl(Identifier="ed4c9e52-ad9b-4330-b94c-91ef641cae81")
 public static String es_PE_FIELD_PriceListTop_M_PriceList_ID_Description="Identificador único de mi lista de precios";
 
 @XendraTrl(Identifier="ed4c9e52-ad9b-4330-b94c-91ef641cae81")
 public static String es_PE_FIELD_PriceListTop_M_PriceList_ID_Help="Listas de precios son usadas para determinar el precio; margen y costo de artículos comprados ó vendidos.";
-
-@XendraTrl(Identifier="ed4c9e52-ad9b-4330-b94c-91ef641cae81")
-public static String es_PE_FIELD_PriceListTop_M_PriceList_ID_Name="Lista de Precios";
 
 @XendraField(AD_Column_ID="M_PriceList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -272,7 +274,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2c2a2839-4385-49e1-b1bc-fd0fce6acb55",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name M_PriceList_ID */
 public static final String COLUMNNAME_M_PriceList_ID = "M_PriceList_ID";
 /** Set Price List Top.
@@ -319,13 +321,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b9721bb8-2d9a-4519-8a55-7aea4e18af0b")
+public static String es_PE_FIELD_PriceListTop_Product_Name="Producto";
+
+@XendraTrl(Identifier="b9721bb8-2d9a-4519-8a55-7aea4e18af0b")
 public static String es_PE_FIELD_PriceListTop_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="b9721bb8-2d9a-4519-8a55-7aea4e18af0b")
 public static String es_PE_FIELD_PriceListTop_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="b9721bb8-2d9a-4519-8a55-7aea4e18af0b")
-public static String es_PE_FIELD_PriceListTop_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -343,7 +345,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a364198b-2af9-4e3c-80ae-5fe80c1d94c1",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Sequence.
@@ -362,13 +364,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a2dad0d1-cb30-4455-9154-6436556fd391")
+public static String es_PE_FIELD_PriceListTop_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="a2dad0d1-cb30-4455-9154-6436556fd391")
 public static String es_PE_FIELD_PriceListTop_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="a2dad0d1-cb30-4455-9154-6436556fd391")
 public static String es_PE_FIELD_PriceListTop_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="a2dad0d1-cb30-4455-9154-6436556fd391")
-public static String es_PE_FIELD_PriceListTop_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="b59d1842-e560-4b58-b19f-ee886e992991",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -386,7 +388,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2882d108-477b-4c91-a3eb-592d2cfcbd1f",
-Synchronized="2017-08-05 16:55:20.0")
+Synchronized="2019-08-30 22:23:22.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

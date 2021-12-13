@@ -19,8 +19,6 @@ package org.compiere.acct;
 import java.math.*;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.*;
-
 import org.compiere.model.MAccount;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MGLBookPeriod;
@@ -29,10 +27,10 @@ import org.compiere.model.MPeriod;
 import org.compiere.model.MRetention;
 import org.compiere.model.MRetentionStatement;
 import org.compiere.model.MYear;
+import org.compiere.model.Query;
 import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
 import org.compiere.process.DocAction;
 import org.compiere.util.*;
-import org.xendra.exceptions.ConversionRateException;
 
 /**
  *  Post Retention Documents.
@@ -74,6 +72,7 @@ public class Doc_RetentionStatement extends Doc
 	 */
 	protected String loadDocumentDetails ()
 	{
+		String error = null;
 		MRetentionStatement retstatement = (MRetentionStatement)getPO();
 		setStatus(retstatement.getStatus());	
 		setPreStatus(retstatement.getPreStatus());	
@@ -81,11 +80,17 @@ public class Doc_RetentionStatement extends Doc
 		setC_RetentionStatement_ID(retstatement.getC_RetentionStatement_ID());
 		
 		//	Amounts
-		MRetention boe  = new MRetention(Env.getCtx(),retstatement.getC_Retention_ID(), getTrxName() );
-		setAmount(AMTTYPE_Gross, boe.getTaxAmt());
-		setC_BPartner_ID(boe.getC_BPartner_ID());
-		setC_Currency_ID (retstatement.getC_Currency_ID());
-		return null;		
+		MRetention ret  = new Query(Env.getCtx(), MRetention.Table_Name, "C_Retention_ID = ?", getTrxName())
+			.setParameters(retstatement.getC_Retention_ID()).first();
+		if (ret != null) {
+			setAmount(AMTTYPE_Gross, ret.getTaxAmt());
+			setC_BPartner_ID(ret.getC_BPartner_ID());
+			setC_Currency_ID (retstatement.getC_Currency_ID());
+		} else {
+			error = "Retention of Retention statement not found";
+		} 
+			
+		return error;		
 	}   //  loadDocumentDetails
 
 	private void setC_Retention_ID(int RetentionID) {
@@ -272,7 +277,7 @@ public class Doc_RetentionStatement extends Doc
 	public void createFact_ID() {
 		/* Fact ID */
 		MRetentionStatement retstatement = (MRetentionStatement)getPO();
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID (
 					MGLBookPeriod.getID(retstatement.getAD_Org_ID(),
 										retstatement.getAD_Client_ID(),
@@ -280,7 +285,16 @@ public class Doc_RetentionStatement extends Doc
 										0, 
 										isSOTrx()==true ? "Y":"N", 
 										retstatement.getDateAcct())
-					);		
+					);	
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(retstatement.getAD_Org_ID(),
+										retstatement.getAD_Client_ID(),
+										retstatement.Table_ID, 
+										0, 
+										isSOTrx()==true ? "Y":"N", 
+										retstatement.getDateAcct())
+					);					
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), retstatement.getDateAcct(), retstatement.getAD_Org_ID() , retstatement.getAD_Client_ID());
@@ -306,7 +320,15 @@ public class Doc_RetentionStatement extends Doc
 											0, 
 											isSOTrx()==true ? "Y":"N", 
 											retstatement.getDateAcct())
-						);		
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(retstatement.getAD_Org_ID(),
+											retstatement.getAD_Client_ID(),
+											retstatement.Table_ID, 
+											0, 
+											isSOTrx()==true ? "Y":"N", 
+											retstatement.getDateAcct())
+						);						
 				return;
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
@@ -318,7 +340,15 @@ public class Doc_RetentionStatement extends Doc
 											0, 
 											isSOTrx()==true ? "Y":"N", 
 											retstatement.getDateAcct())
-						);		
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(retstatement.getAD_Org_ID(),
+											retstatement.getAD_Client_ID(),
+											retstatement.Table_ID, 
+											0, 
+											isSOTrx()==true ? "Y":"N", 
+											retstatement.getDateAcct())
+						);						
 			}
 		}
 		

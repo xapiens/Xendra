@@ -10,14 +10,14 @@ public class VIEW_Rv_warehouseprice
  	@XendraView(Identifier="5f27982c-cfb5-401d-8c25-cdd85bbfa524",
 Synchronized="2017-08-26 19:41:55.0",
 Name="rv_warehouseprice",
-Owner="postgres",
+Owner="xendra",
 Extension="")
 	public static final String Identifier = "5f27982c-cfb5-401d-8c25-cdd85bbfa524";
 
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-08-26 19:41:55.367");
+ 	sb.appendln("@Synchronized=2017-08-26 19:41:55.0");
 	sb.appendln("@Identifier=5f27982c-cfb5-401d-8c25-cdd85bbfa524");
 	return sb.toString();
 }

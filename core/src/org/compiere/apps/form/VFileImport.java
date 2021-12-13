@@ -404,7 +404,8 @@ public class VFileImport extends CPanel
 			log.log(Level.SEVERE, "FormatElements=" + size + " != Fields=" + lInfo.length);
 		for (int i = 0; i < size; i++)
 		{
-			m_fields[i].setText(lInfo[i].getName());
+			if (i < lInfo.length)
+				m_fields[i].setText(lInfo[i].getValue());
 			m_fields[i].setCaretPosition(0);
 		}
 	}	//	cmd_applyFormat

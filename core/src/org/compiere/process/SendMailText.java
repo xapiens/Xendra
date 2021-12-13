@@ -23,7 +23,7 @@ import java.util.logging.*;
 import org.compiere.model.MClient;
 import org.compiere.model.MInterestArea;
 import org.compiere.model.MMailText;
-import org.compiere.model.MStore;
+import org.compiere.model.MWebStore;
 import org.compiere.model.MUser;
 import org.compiere.model.MUserMail;
 import org.compiere.util.*;
@@ -224,7 +224,7 @@ public class SendMailText extends SvrProcess
 				+ ": " + m_ia.getName()
 				+ "\n" + Msg.getMsg(getCtx(), "UnsubscribeInfo")
 				+ "\n";
-			MStore[] wstores = MStore.getOfClient(m_client);
+			MWebStore[] wstores = MWebStore.getOfClient(m_client);
 			int index = 0;
 			for (int i = 0; i < wstores.length; i++)
 			{

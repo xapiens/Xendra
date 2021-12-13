@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("M_Warehouse_Acct");
 public static String es_PE_TAB_Accounting_Description="Contabilidad";
 
 @XendraTrl(Identifier="3c47e833-7cbc-6dcc-7038-0d00e77a8c43")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="3c47e833-7cbc-6dcc-7038-0d00e77a8c43")
 public static String es_PE_TAB_Accounting_Help="La pestaña de Contabilidad define los parámetros contables a ser usados para el inventario de ese almacén.";
 
-@XendraTab(Name="Accounting",Description="Accounting",
+@XendraTrl(Identifier="3c47e833-7cbc-6dcc-7038-0d00e77a8c43")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Accounting",
 Help="The Accounting Tab defines the Accounting parameters to be used for inventory in that Warehouse.",
 AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",SeqNo=40,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,11 +81,12 @@ public static final String TABNAME_Accounting="3c47e833-7cbc-6dcc-7038-0d00e77a8
 @XendraTrl(Identifier="2e2b859b-42fc-8776-5d4d-416a43e553a3")
 public static String es_PE_TABLE_M_Warehouse_Acct_Name="M_Warehouse_Acct";
 
-@XendraTable(Name="M_Warehouse_Acct",Description="",Help="",TableName="M_Warehouse_Acct",
-AccessLevel="3",AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="2e2b859b-42fc-8776-5d4d-416a43e553a3",Synchronized="2017-08-16 11:43:38.0")
+@XendraTable(Name="M_Warehouse_Acct",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_Warehouse_Acct",AccessLevel="3",AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="2e2b859b-42fc-8776-5d4d-416a43e553a3",Synchronized="2020-03-03 21:39:00.0")
 /** TableName=M_Warehouse_Acct */
 public static final String Table_Name="M_Warehouse_Acct";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f95a4a21-9243-3686-fa41-29d8be2534d3")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="f95a4a21-9243-3686-fa41-29d8be2534d3")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="f95a4a21-9243-3686-fa41-29d8be2534d3")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="f95a4a21-9243-3686-fa41-29d8be2534d3")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f01bccbf-2b3c-f8bb-bb7e-4666c9c8a7b0",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Identifier.
@@ -191,7 +192,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e13e55b1-5614-4e65-912d-6201e3e00b02",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Warehouse.
@@ -211,13 +212,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f5c31dc2-bea5-89fe-2bf5-7afc2bdb4628")
+public static String es_PE_FIELD_Accounting_Warehouse_Name="Almacén";
+
+@XendraTrl(Identifier="f5c31dc2-bea5-89fe-2bf5-7afc2bdb4628")
 public static String es_PE_FIELD_Accounting_Warehouse_Description="Almacén";
 
 @XendraTrl(Identifier="f5c31dc2-bea5-89fe-2bf5-7afc2bdb4628")
 public static String es_PE_FIELD_Accounting_Warehouse_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="f5c31dc2-bea5-89fe-2bf5-7afc2bdb4628")
-public static String es_PE_FIELD_Accounting_Warehouse_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +236,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0da7c46c-1399-474d-78c5-9db2beef058b",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 /** Set Warehouse Differences.
@@ -254,13 +255,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4f0f1052-0815-9c42-bdea-8b752f295419")
+public static String es_PE_FIELD_Accounting_WarehouseDifferences_Name="Discrepancia en Almacén";
+
+@XendraTrl(Identifier="4f0f1052-0815-9c42-bdea-8b752f295419")
 public static String es_PE_FIELD_Accounting_WarehouseDifferences_Description="Cuenta de discrepancias en almacén";
 
 @XendraTrl(Identifier="4f0f1052-0815-9c42-bdea-8b752f295419")
 public static String es_PE_FIELD_Accounting_WarehouseDifferences_Help="La cuenta diferencia en almacenes indica la cuenta usada para registrar las diferencias identificadas durante el conteo de inventario";
-
-@XendraTrl(Identifier="4f0f1052-0815-9c42-bdea-8b752f295419")
-public static String es_PE_FIELD_Accounting_WarehouseDifferences_Name="Discrepancia en Almacén";
 
 @XendraField(AD_Column_ID="W_Differences_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -278,7 +279,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="03b1824a-e6ca-b976-2ff1-5776f12cb622",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name W_Differences_Acct */
 public static final String COLUMNNAME_W_Differences_Acct = "W_Differences_Acct";
 /** Set Inventory Adjustment.
@@ -297,13 +298,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0e7c66d6-4c07-3635-64c4-7202a4d3647c")
+public static String es_PE_FIELD_Accounting_InventoryAdjustment_Name="Ajuste de Inventario";
+
+@XendraTrl(Identifier="0e7c66d6-4c07-3635-64c4-7202a4d3647c")
 public static String es_PE_FIELD_Accounting_InventoryAdjustment_Description="Cuenta de Ajuste del valor del inventario por costeo actual.";
 
 @XendraTrl(Identifier="0e7c66d6-4c07-3635-64c4-7202a4d3647c")
 public static String es_PE_FIELD_Accounting_InventoryAdjustment_Help="En sistemas de costeo actual; esta cuenta se usa para registrar ajustes al valor del inventario. Usted podría establecerla a la cuenta estándar de Activo de Inventarios.";
-
-@XendraTrl(Identifier="0e7c66d6-4c07-3635-64c4-7202a4d3647c")
-public static String es_PE_FIELD_Accounting_InventoryAdjustment_Name="Ajuste de Inventario";
 
 @XendraField(AD_Column_ID="W_InvActualAdjust_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -321,7 +322,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="13d098c1-524b-55fd-f7b0-ff796b900ae1",Synchronized="2017-08-05 16:55:38.0")
+Identifier="13d098c1-524b-55fd-f7b0-ff796b900ae1",Synchronized="2019-08-30 22:23:35.0")
 /** Column name W_InvActualAdjust_Acct */
 public static final String COLUMNNAME_W_InvActualAdjust_Acct = "W_InvActualAdjust_Acct";
 /** Set (Not Used).
@@ -340,13 +341,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f939ef8f-f111-beef-430d-1a02dc9250d3")
+public static String es_PE_FIELD_Accounting_NotUsed_Name="Inventario de Materia Prima";
+
+@XendraTrl(Identifier="f939ef8f-f111-beef-430d-1a02dc9250d3")
 public static String es_PE_FIELD_Accounting_NotUsed_Description="Cuenta de inventarios";
 
 @XendraTrl(Identifier="f939ef8f-f111-beef-430d-1a02dc9250d3")
 public static String es_PE_FIELD_Accounting_NotUsed_Help="La cuenta de inventarios identifica la cuenta usada para registrar el valor de su inventario.";
-
-@XendraTrl(Identifier="f939ef8f-f111-beef-430d-1a02dc9250d3")
-public static String es_PE_FIELD_Accounting_NotUsed_Name="Inventario de Materia Prima";
 
 @XendraField(AD_Column_ID="W_Inventory_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -364,7 +365,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a83221e4-9c06-2bd1-9aca-f93daadf053b",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name W_Inventory_Acct */
 public static final String COLUMNNAME_W_Inventory_Acct = "W_Inventory_Acct";
 /** Set Inventory Revaluation.
@@ -383,13 +384,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="83a50e5e-a367-a001-7a56-fa39cbf0fff8")
+public static String es_PE_FIELD_Accounting_InventoryRevaluation_Name="Reevaluación de Inventario";
+
+@XendraTrl(Identifier="83a50e5e-a367-a001-7a56-fa39cbf0fff8")
 public static String es_PE_FIELD_Accounting_InventoryRevaluation_Description="Cuenta de Reevaluación de Inventarios";
 
 @XendraTrl(Identifier="83a50e5e-a367-a001-7a56-fa39cbf0fff8")
 public static String es_PE_FIELD_Accounting_InventoryRevaluation_Help="La cuenta de Revaluación de Inventarios identifica la cuenta usada y los cambios del inventario debido a la evaluación actual.";
-
-@XendraTrl(Identifier="83a50e5e-a367-a001-7a56-fa39cbf0fff8")
-public static String es_PE_FIELD_Accounting_InventoryRevaluation_Name="Reevaluación de Inventario";
 
 @XendraField(AD_Column_ID="W_Revaluation_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="3c47e833-7cbc-6dcc-7038-0d00e77a8c43",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -407,7 +408,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d0bab789-2565-3b91-5772-5a9f478312a4",
-Synchronized="2017-08-05 16:55:38.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name W_Revaluation_Acct */
 public static final String COLUMNNAME_W_Revaluation_Acct = "W_Revaluation_Acct";
 }

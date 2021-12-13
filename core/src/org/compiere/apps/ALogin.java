@@ -262,7 +262,7 @@ public final class ALogin extends CDialog
 		connectionPanel.add(copy0Label,       new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0
 			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
-		copy1Label.setText("\u00A9 2006-2016 dravios \u00AE");
+		copy1Label.setText(Xendra.COPYRIGHT);
 		connectionPanel.add(copy1Label,         new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 12, 12), 0, 0));
 		connectionPanel.add(compileDate,        new GridBagConstraints(2, 1, 2, 1, 0.0, 0.0
@@ -400,20 +400,6 @@ public final class ALogin extends CDialog
 			confirmPanel.getOKButton().requestFocusInWindow();
 		}
 	}   //  processWindowEvent
-
-	private void validateAppServer() {
-		m_cc.testAppsServer();
-		if (m_cc.getAppsServerException() != null)
-		{
-//			if (m_cc.isRMIoverHTTP())
-//			{
-//				m_cc.getAppsServerException().printStackTrace();
-//				JOptionPane.showMessageDialog(null, 
-//					m_cc.getAppsServerException().getLocalizedMessage(),
-//					"Error", JOptionPane.ERROR_MESSAGE);
-//			}
-		}
-	}
 	
 	private void connectToDatabase() {
 		//Check connection
@@ -574,7 +560,12 @@ public final class ALogin extends CDialog
 			return false;
 
 		//	Set Properties
-		Ini.setProperty(Ini.P_CONNECTION, CConnection.get().toStringLong());		
+		//Ini.setProperty(Ini.P_CONNECTION, CConnection.get().toStringLong());
+		Ini.setProperty(Ini.P_DatabaseServer, CConnection.get().getDbHost());
+		Ini.setProperty(Ini.P_DatabaseName, CConnection.get().getDbName());
+		Ini.setProperty(Ini.P_DatabasePort, CConnection.get().getDbPort());
+		Ini.setProperty(Ini.P_DatabaseUser, CConnection.get().getDbUid());
+		Ini.setProperty(Ini.P_DatabasePassword, CConnection.get().getDbPwd());
 		Ini.setProperty(Ini.P_LANGUAGE, (String)languageCombo.getSelectedItem());
 		
 		String error = m_login.validateLogin(org);

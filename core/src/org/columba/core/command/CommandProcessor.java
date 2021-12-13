@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import org.columba.api.command.ICommand;
 import org.columba.core.base.Mutex;
 import org.columba.core.gui.exception.ExceptionHandler;
+import org.compiere.util.CLogger;
 
 /**
  * Scheduler for background threads
@@ -31,10 +32,8 @@ import org.columba.core.gui.exception.ExceptionHandler;
  * 
  * @author tstich
  */
-public class CommandProcessor implements Runnable {
-    /** JDK 1.4+ logging framework logger, used for logging. */
-    private static final Logger LOG = Logger
-	    .getLogger("org.columba.api.command"); //$NON-NLS-1$
+public class CommandProcessor implements Runnable {    
+    private static final CLogger LOG = CLogger.getCLogger("org.columba.api.command"); //$NON-NLS-1$
 
     public final static int MAX_WORKERS = 5;
 

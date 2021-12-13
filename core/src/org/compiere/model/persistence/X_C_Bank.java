@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("C_Bank");
 public static String es_PE_TAB_Bank_Description="Mantener Bancos";
 
 @XendraTrl(Identifier="da0edea0-f116-797e-76ba-dec16671de16")
-public static String es_PE_TAB_Bank_Name="Banco";
-
-@XendraTrl(Identifier="da0edea0-f116-797e-76ba-dec16671de16")
 public static String es_PE_TAB_Bank_Help="La pestaña Bancos define un banco que es usado por una organización ó socio de negocio. Cada banco contiene un nombre; dirección número de ruta y código Swift.";
 
-@XendraTab(Name="Bank",Description="Maintain Bank",
+@XendraTrl(Identifier="da0edea0-f116-797e-76ba-dec16671de16")
+public static String es_PE_TAB_Bank_Name="Banco";
+@XendraTab(Name="Bank",
+Description="Maintain Bank",
 Help="The Bank Tab defines a bank that is used by an organization or business partner.  Each Bank is given an identifying Name, Address, Routing No and Swift Code",
 AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,11 +80,12 @@ public static final String TABNAME_Bank="da0edea0-f116-797e-76ba-dec16671de16";
 @XendraTrl(Identifier="be63c79c-eef0-c2db-ce47-df757cd9f072")
 public static String es_PE_TABLE_C_Bank_Name="Banco";
 
-@XendraTable(Name="Bank",Description="Bank",Help="",TableName="C_Bank",AccessLevel="3",
-AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="be63c79c-eef0-c2db-ce47-df757cd9f072",
-Synchronized="2017-08-16 11:41:22.0")
+@XendraTable(Name="Bank",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Bank",Help="",TableName="C_Bank",
+AccessLevel="3",AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="be63c79c-eef0-c2db-ce47-df757cd9f072",Synchronized="2020-03-03 21:36:25.0")
 /** TableName=C_Bank */
 public static final String Table_Name="C_Bank";
 
@@ -134,18 +135,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
+public static String es_PE_FIELD_Bank_Bank_Name="Banco";
+
+@XendraTrl(Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
 public static String es_PE_FIELD_Bank_Bank_Description="Banco";
 
 @XendraTrl(Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
 public static String es_PE_FIELD_Bank_Bank_Help="El Banco es un identificador único de un Banco para esta Organización o para un Socio del Negocio con quien esta organización efectúa transacciones";
 
-@XendraTrl(Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
-public static String es_PE_FIELD_Bank_Bank_Name="Banco";
-@XendraField(AD_Column_ID="C_Bank_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=0,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
+@XendraField(AD_Column_ID="C_Bank_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="78882d3f-578d-ef69-6732-e82b17fa8ea0")
 public static final String FIELDNAME_Bank_Bank="78882d3f-578d-ef69-6732-e82b17fa8ea0";
 /** Column name C_Bank_ID */
 public static final String COLUMNNAME_C_Bank_ID = "C_Bank_ID";
@@ -167,13 +169,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c68de8d8-3aa7-80db-0700-0b36b2a46f1c")
+public static String es_PE_FIELD_Bank_Address_Name="Localización / Dirección";
+
+@XendraTrl(Identifier="c68de8d8-3aa7-80db-0700-0b36b2a46f1c")
 public static String es_PE_FIELD_Bank_Address_Description="Ubicación ó dirección";
 
 @XendraTrl(Identifier="c68de8d8-3aa7-80db-0700-0b36b2a46f1c")
 public static String es_PE_FIELD_Bank_Address_Help="El campo Ubicación / Dirección define la ubicación de una entidad.";
-
-@XendraTrl(Identifier="c68de8d8-3aa7-80db-0700-0b36b2a46f1c")
-public static String es_PE_FIELD_Bank_Address_Name="Localización / Dirección";
 
 @XendraField(AD_Column_ID="C_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -191,7 +193,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5ac36e58-33ff-c29e-7e91-3c8643bae51d",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name C_Location_ID */
 public static final String COLUMNNAME_C_Location_ID = "C_Location_ID";
 /** Set Description.
@@ -222,13 +224,13 @@ return value;
 }
 
 @XendraTrl(Identifier="b46169a8-f744-6f4b-725f-564a1350d0fe")
+public static String es_PE_FIELD_Bank_Description_Name="Observación";
+
+@XendraTrl(Identifier="b46169a8-f744-6f4b-725f-564a1350d0fe")
 public static String es_PE_FIELD_Bank_Description_Description="Observación";
 
 @XendraTrl(Identifier="b46169a8-f744-6f4b-725f-564a1350d0fe")
 public static String es_PE_FIELD_Bank_Description_Help="Observación";
-
-@XendraTrl(Identifier="b46169a8-f744-6f4b-725f-564a1350d0fe")
-public static String es_PE_FIELD_Bank_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -246,7 +248,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="81540f8d-cd86-7fc1-77d1-829f02705a47",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -278,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b5f1c1eb-8637-4fc4-a706-58aec033b8ea",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Own Bank.
@@ -301,13 +303,13 @@ return false;
 }
 
 @XendraTrl(Identifier="9e249b44-4a51-b2b4-3405-c35e7ace14c0")
+public static String es_PE_FIELD_Bank_OwnBank_Name="Banco Propio";
+
+@XendraTrl(Identifier="9e249b44-4a51-b2b4-3405-c35e7ace14c0")
 public static String es_PE_FIELD_Bank_OwnBank_Description="Banco para esta organización";
 
 @XendraTrl(Identifier="9e249b44-4a51-b2b4-3405-c35e7ace14c0")
 public static String es_PE_FIELD_Bank_OwnBank_Help="El campo Banco Propio indica si este banco es para la organización en lugar del banco de un socio";
-
-@XendraTrl(Identifier="9e249b44-4a51-b2b4-3405-c35e7ace14c0")
-public static String es_PE_FIELD_Bank_OwnBank_Name="Banco Propio";
 
 @XendraField(AD_Column_ID="IsOwnBank",IsCentrallyMaintained=true,
 AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -325,7 +327,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1d2e81c4-01a7-06a4-ff3e-84825f01098a",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name IsOwnBank */
 public static final String COLUMNNAME_IsOwnBank = "IsOwnBank";
 /** Set Name.
@@ -357,18 +359,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
+public static String es_PE_FIELD_Bank_Name_Name="Nombre";
+
+@XendraTrl(Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
 public static String es_PE_FIELD_Bank_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
 public static String es_PE_FIELD_Bank_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
-public static String es_PE_FIELD_Bank_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="82421b9f-4b2c-d7f7-1031-30bf4e9efb75")
 public static final String FIELDNAME_Bank_Name="82421b9f-4b2c-d7f7-1031-30bf4e9efb75";
 
 @XendraTrl(Identifier="0174a607-70cc-2107-0769-cee05324ff32")
@@ -380,7 +383,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0174a607-70cc-2107-0769-cee05324ff32",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Routing No.
@@ -405,13 +408,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="7f4136e1-7d6f-bef5-97ab-e6a221b6b7a4")
+public static String es_PE_FIELD_Bank_RoutingNo_Name="Código Sunat";
+
+@XendraTrl(Identifier="7f4136e1-7d6f-bef5-97ab-e6a221b6b7a4")
 public static String es_PE_FIELD_Bank_RoutingNo_Description="Número de sucursal bancaria";
 
 @XendraTrl(Identifier="7f4136e1-7d6f-bef5-97ab-e6a221b6b7a4")
 public static String es_PE_FIELD_Bank_RoutingNo_Help="El número de ruta del banco (Número ABA) identifica un banco legal. Se usa en ruteo de cheques y transacciones electrónicas.";
-
-@XendraTrl(Identifier="7f4136e1-7d6f-bef5-97ab-e6a221b6b7a4")
-public static String es_PE_FIELD_Bank_RoutingNo_Name="Código Sunat";
 
 @XendraField(AD_Column_ID="RoutingNo",IsCentrallyMaintained=true,
 AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -429,7 +432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7d273d5-93e0-17ec-40cf-a7601b8eee62",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name RoutingNo */
 public static final String COLUMNNAME_RoutingNo = "RoutingNo";
 /** Set Swift code.
@@ -453,13 +456,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d3c26c53-1c57-932d-9f56-6ba89822d9cb")
+public static String es_PE_FIELD_Bank_SwiftCode_Name="Código Swift";
+
+@XendraTrl(Identifier="d3c26c53-1c57-932d-9f56-6ba89822d9cb")
 public static String es_PE_FIELD_Bank_SwiftCode_Description="Código Swift ";
 
 @XendraTrl(Identifier="d3c26c53-1c57-932d-9f56-6ba89822d9cb")
 public static String es_PE_FIELD_Bank_SwiftCode_Help="El código SWIFT es un identificador de un banco";
-
-@XendraTrl(Identifier="d3c26c53-1c57-932d-9f56-6ba89822d9cb")
-public static String es_PE_FIELD_Bank_SwiftCode_Name="Código Swift";
 
 @XendraField(AD_Column_ID="SwiftCode",IsCentrallyMaintained=true,
 AD_Tab_ID="da0edea0-f116-797e-76ba-dec16671de16",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -477,7 +480,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7f252d24-a864-b618-b8bb-4a8751221e17",
-Synchronized="2017-08-05 16:53:13.0")
+Synchronized="2019-08-30 22:21:03.0")
 /** Column name SwiftCode */
 public static final String COLUMNNAME_SwiftCode = "SwiftCode";
 }

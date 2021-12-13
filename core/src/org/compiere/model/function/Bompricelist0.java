@@ -9,7 +9,7 @@ public class Bompricelist0
 @XendraFunction(Name="bompricelist",Output="numeric",Owner="xendra",Language="plpgsql",
 Identifier="e3e0753c-e9bf-3d9f-c079-391a9231fb2d",
 Arguments="product_id numeric, pricelist_version_id numeric",Extension="",
-Synchronized="2013-09-29 01:27:28.0")
+Synchronized="2020-02-08 12:22:28.0")
 	public static final String Identifier = "e3e0753c-e9bf-3d9f-c079-391a9231fb2d";
 
 	public static final String getCode() 
@@ -32,12 +32,14 @@ Synchronized="2013-09-29 01:27:28.0")
 	sb.appendln("			FROM M_Product_BOM b, M_Product p");
 	sb.appendln("			WHERE b.M_ProductBOM_ID=p.M_Product_ID");
 	sb.appendln("		  	AND b.M_Product_ID=Product_ID");
-	sb.appendln("		LOOP");
+	sb.appendln("		LOOP			");
 	sb.appendln("			v_ProductPrice := bomPriceList (bom.M_ProductBOM_ID, PriceList_Version_ID);");
-	sb.appendln("			v_Price := v_Price + (bom.BOMQty * v_ProductPrice);");
+	sb.appendln("			v_Price := v_Price + (bom.BOMQty * v_ProductPrice);			");
 	sb.appendln("		END LOOP;");
 	sb.appendln("	END IF;");
 	sb.appendln("	--");
+	sb.appendln("	RETURN v_Price;");
+	sb.appendln("EXCEPTION WHEN OTHERS THEN");
 	sb.appendln("	RETURN v_Price;");
 	sb.appendln("END;");
 	return sb.toString();
@@ -45,7 +47,7 @@ Synchronized="2013-09-29 01:27:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2013-09-29 01:27:28.0");
+ 	sb.appendln("@Synchronized=2020-02-08 12:22:28.0");
 	sb.appendln("@Identifier=e3e0753c-e9bf-3d9f-c079-391a9231fb2d");
 	return sb.toString();
 }

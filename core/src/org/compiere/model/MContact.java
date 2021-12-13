@@ -35,7 +35,7 @@ public class MContact  extends X_C_Contact {
 		}
 		if (fn.length() == 0)
 		{
-			System.out.println("X");
+			System.out.println("X16");
 		}
 		return fn;
 	}

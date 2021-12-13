@@ -195,6 +195,7 @@ implements ActionListener, DragGestureListener, DragSourceListener, DropTargetLi
 	private CMenuItem mBarRemove = new CMenuItem();
 	private CMenuItem mBarRemoveFromRol = new CMenuItem();
 	private CMenuItem mBarExport = new CMenuItem();
+	private CMenuItem mBarAddAnchor = new CMenuItem();
 	private BorderLayout southLayout = new BorderLayout();
 	private JSplitPane centerSplitPane = new JSplitPane();
 	private JScrollPane treePane = new JScrollPane();
@@ -303,6 +304,10 @@ implements ActionListener, DragGestureListener, DragSourceListener, DropTargetLi
 		mBarExport.setActionCommand("BarExport");
 		mBarExport.addActionListener(this);
 		//
+		mBarAddAnchor.setText(Msg.getMsg(Env.getCtx(), "AnchorAdd"));
+		mBarAddAnchor.setActionCommand("AnchorAdd");
+		mBarAddAnchor.addActionListener(this);
+		//
 		mBarRemove.setText(Msg.getMsg(Env.getCtx(), "BarRemove"));		
 		mBarRemove.setActionCommand("BarRemove");
 		mBarRemove.addActionListener(this);
@@ -321,6 +326,7 @@ implements ActionListener, DragGestureListener, DragSourceListener, DropTargetLi
 			popMenuTree.addSeparator();
 			popMenuTree.add(mBarRemoveFromRol);
 			popMenuTree.add(mBarExport);
+			popMenuTree.add(mBarAddAnchor);
 		}
 		popMenuBar.setLightWeightPopupEnabled(false);
 		//popMenuBar.add(mBarRemove);			
@@ -862,6 +868,8 @@ implements ActionListener, DragGestureListener, DragSourceListener, DropTargetLi
 				moveTo();
 			else if (e.getActionCommand().equals("BarAdd"))
 				barAdd();
+			else if (e.getActionCommand().equals("AnchorAdd"))
+				anchorAdd();
 			else if (e.getActionCommand().equals("BarRemove"))
 				barRemove();
 			else if (e.getActionCommand().equals("BarExport"))
@@ -915,6 +923,27 @@ implements ActionListener, DragGestureListener, DragSourceListener, DropTargetLi
 		if (barDBupdate(true, nd.getNode_ID()))
 			addToBar(nd);
 	}   //  barAdd
+
+	
+	private void anchorAdd() {
+		MTreeNode nd = (MTreeNode)tree.getSelectionPath().getLastPathComponent();
+		anchorupdate(nd);			
+	}
+
+	private void anchorupdate(MTreeNode nd)
+	{
+		X_AD_Menu m = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "AD_Menu_ID = ?", null)
+			.setParameters(nd.getNode_ID()).first();
+		String anchor = m.getAnchor();
+		if (anchor == null) {
+			anchor = "";
+		}
+		anchor = JOptionPane.showInputDialog("Anchor", anchor);
+		if (anchor != null) {
+			m.setAnchor(anchor);
+			m.save();			
+		}
+	}   //  addToBar
 
 	/**
 	 *  Remove from Bar

@@ -26,10 +26,10 @@ import org.columba.api.plugin.IExtensionHandlerKeys;
 import org.columba.api.plugin.IExtensionInterface;
 import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginHandlerNotFoundException;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.Extension;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.scripting.service.api.IColumbaService;
+import org.compiere.util.CLogMgt;
 
 public class ServiceManager {
 
@@ -69,7 +69,7 @@ public class ServiceManager {
 		} catch (PluginException e1) {
 			LOG.severe("Failed to load service: " + e1.getMessage());
 
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e1.printStackTrace();
 
 			return null;

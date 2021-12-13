@@ -17,15 +17,10 @@ package org.columba.core.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
-
-import org.columba.core.config.DefaultConfigDirectory;
 import org.compiere.apps.ADialog;
+import org.compiere.util.CLogger;
 import org.compiere.util.Env;
-import org.compiere.util.Ini;
-import org.xendra.Constants;
 
 
 /**
@@ -36,7 +31,7 @@ import org.xendra.Constants;
  */
 public final class PluginFinder {
 
-    private static final Logger LOG = Logger.getLogger("org.columba.core.plugin");
+    private static final CLogger LOG = CLogger.getCLogger("org.columba.core.plugin");
 
     /**
      * Constructor for PluginFinder.
@@ -52,29 +47,17 @@ public final class PluginFinder {
      */
     public static File[] searchPlugins() {
         File[] programList = null;
-        String plugins = (String) Env.getMachine().getProperties().get(Constants.PLUGINS);
-        if (plugins == null || plugins.compareTo(Ini.getXendraFolder(Constants.PLUGINS)) != 0)
-        {
-        	plugins = Ini.getXendraFolder(Constants.PLUGINS);
-        	HashMap props = Env.getMachine().getProperties();
-        	props.put(Constants.PLUGINS, plugins);
-        	Env.getMachine().setProperties(props);
-        	Env.getMachine().save();
-        }
-        else
-        {
-        	LOG.warning(String.format("Search plugins in %s from %s (id %s)", plugins, Env.getMachine().getName(), Env.getMachine().getA_Machine_ID()));
-        }
-        File programFolder = new File(plugins);
-		if (!programFolder.exists())
-			programFolder.mkdir();
-		
+        File programFolder = Env.getMachine().getPluginsFolder();
         if (programFolder.exists()) {
             programList = programFolder.listFiles();
         } else {
         	String error = String.format("no se puede acceder a %s modifique la ruta o elimine el registro del equipo",
         			programFolder.getAbsolutePath());
-        	ADialog.error(0, null, error);
+        	if (Env.isHeadless()) {
+        		
+        	} else {
+        		ADialog.error(0, null, error);
+        	}
         	System.exit(2);
         }
 
@@ -118,7 +101,6 @@ public final class PluginFinder {
             File plugin = new File(file, "plugin.xml");
             return plugin.exists();
         }
-
         return false;
     }
 }

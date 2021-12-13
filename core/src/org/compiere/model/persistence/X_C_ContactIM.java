@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_IMType;
 /** Generated Model for C_ContactIM
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_ContactIM");
 @XendraTrl(Identifier="6147b9c9-0961-45be-b02a-276db06f2da5")
 public static String es_PE_TABLE_C_ContactIM_Name="Contact Instant Messaging";
 
-@XendraTable(Name="Contact Instant Messaging",Description="",Help="",TableName="C_ContactIM",
+@XendraTable(Name="Contact Instant Messaging",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_ContactIM",
 AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
 IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
 ID="org.xendra.commercial",Identifier="6147b9c9-0961-45be-b02a-276db06f2da5",
-Synchronized="2017-08-16 11:41:40.0")
+Synchronized="2020-03-03 21:36:46.0")
 /** TableName=C_ContactIM */
 public static final String Table_Name="C_ContactIM";
 
@@ -121,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8c6735ec-51a0-43dd-b019-0804a14b73a7",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name C_Contact_ID */
 public static final String COLUMNNAME_C_Contact_ID = "C_Contact_ID";
 /** Set Contact Instant Messaging.
@@ -170,18 +170,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f93de47a-7dc2-4432-bc62-3e994d92366f",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** IMType AD_Reference=3459f1ff-f65a-459e-8205-eec5017a1804 */
-public static final int IMTYPE_AD_Reference_ID=1000061;
 /** Set IMType.
 @param IMType IMType */
 public void setIMType (String IMType)
 {
-if (IMType == null || IMType.equals(REF_IMType.GMail) || IMType.equals(REF_IMType.Facebook) || IMType.equals(REF_IMType.ICQ) || IMType.equals(REF_IMType.MSN) || IMType.equals(REF_IMType.Yahoo) || IMType.equals(REF_IMType.AIM) || IMType.equals(REF_IMType.Jabber));
- else throw new IllegalArgumentException ("IMType Invalid value - " + IMType + " - Reference_ID=1000061 - 6 - 5 - 4 - 3 - 2 - 1 - 0");
 if (IMType != null && IMType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -205,7 +200,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="243840b1-0298-4b64-8748-f16b78eaaf07",Synchronized="2017-08-05 16:53:32.0")
+Identifier="243840b1-0298-4b64-8748-f16b78eaaf07",Synchronized="2019-08-30 22:21:25.0")
 /** Column name IMType */
 public static final String COLUMNNAME_IMType = "IMType";
 /** Set User ID.
@@ -237,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5fd19a16-5952-4219-b631-a5726c20f0de",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name UserID */
 public static final String COLUMNNAME_UserID = "UserID";
 }

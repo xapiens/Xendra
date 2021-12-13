@@ -304,7 +304,7 @@ public class MBankStatement extends X_C_BankStatement implements DocAction
 			return DocAction.STATUS_Invalid;
 
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -330,8 +330,8 @@ public class MBankStatement extends X_C_BankStatement implements DocAction
 		}
 		setStatementDifference(total);
 		setEndingBalance(getBeginningBalance().add(total));
-		if (!MPeriod.isOpen(getCtx(), minDate, REF_C_DocTypeDocBaseType.BankStatement, Env.getAD_Org_ID(getCtx()))
-			|| !MPeriod.isOpen(getCtx(), maxDate, REF_C_DocTypeDocBaseType.BankStatement, Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), minDate, REF_C_DocTypeDocBaseType.BankStatement, getAD_Org_ID(), getAD_Client_ID())
+			|| !MPeriod.isOpen(getCtx(), maxDate, REF_C_DocTypeDocBaseType.BankStatement, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -476,7 +476,7 @@ public class MBankStatement extends X_C_BankStatement implements DocAction
 		//	Std Period open?
 		else
 		{
-			if (!MPeriod.isOpen(getCtx(), getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, Env.getAD_Org_ID(getCtx())))
+			if (!MPeriod.isOpen(getCtx(), getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, getAD_Org_ID(), getAD_Client_ID()))
 			{
 				m_processMsg = "@PeriodClosed@";
 				return false;

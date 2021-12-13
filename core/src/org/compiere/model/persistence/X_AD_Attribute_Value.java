@@ -58,11 +58,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Attribute_Value");
 @XendraTrl(Identifier="d8b9c389-8205-1a8e-cc91-0a5500f75da0")
 public static String es_PE_TABLE_AD_Attribute_Value_Name="AD_Attribute_Value";
 
-@XendraTable(Name="AD_Attribute_Value",Description="",Help="",TableName="AD_Attribute_Value",
-AccessLevel="7",AD_Window_ID="545edb7a-56cf-9857-622b-b8c9cc333346",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="d8b9c389-8205-1a8e-cc91-0a5500f75da0",Synchronized="2017-08-16 11:39:59.0")
+@XendraTable(Name="AD_Attribute_Value",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Attribute_Value",AccessLevel="7",AD_Window_ID="545edb7a-56cf-9857-622b-b8c9cc333346",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="d8b9c389-8205-1a8e-cc91-0a5500f75da0",Synchronized="2020-03-03 21:34:53.0")
 /** TableName=AD_Attribute_Value */
 public static final String Table_Name="AD_Attribute_Value";
 
@@ -120,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="52149706-1802-0125-54af-f37ad25cd966",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name AD_Attribute_ID */
 public static final String COLUMNNAME_AD_Attribute_ID = "AD_Attribute_ID";
 /** Set Identifier.
@@ -152,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="abf3ef60-c1bc-414c-a411-d91c8078a5df",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Record ID.
@@ -180,7 +181,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="677e13f4-88ed-c592-4ebf-7f93328f68ea",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
 /** Set V_Date.
@@ -205,7 +206,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f199495c-7318-cb29-3fff-825cd0302c05",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name V_Date */
 public static final String COLUMNNAME_V_Date = "V_Date";
 /** Set V_Number.
@@ -237,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="131b25b1-f273-71b0-7585-f2a02ae7cf25",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name V_Number */
 public static final String COLUMNNAME_V_Number = "V_Number";
 /** Set V_String.
@@ -269,7 +270,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="408fe1b4-7687-2c38-c7c6-2377e829abad",
-Synchronized="2017-08-05 16:52:23.0")
+Synchronized="2020-03-03 21:34:24.0")
 /** Column name V_String */
 public static final String COLUMNNAME_V_String = "V_String";
 }

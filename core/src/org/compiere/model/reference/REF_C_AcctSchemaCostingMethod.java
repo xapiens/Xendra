@@ -12,12 +12,6 @@ public class REF_C_AcctSchemaCostingMethod implements Reference
 		Identifier="f556e299-20e5-0a67-80c0-7eb4e663e21f")
 	/** Last PO Price = p */
 	public static final String LastPOPrice = "p";
-	@XendraRefItem(Name="_",
-		Value="x",
-		Description="",
-		Identifier="ef15998b-1525-8721-4b53-acadde3d9a14")
-	/** _ = x */
-	public static final String _ = "x";
 	@XendraRefItem(Name="Standard Costing",
 		Value="S",
 		Description="Standard Purchase Order Price Costing",
@@ -74,7 +68,7 @@ public class REF_C_AcctSchemaCostingMethod implements Reference
 		VFormat="L",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2012-07-12 00:00:00.0",
+		Synchronized="2019-03-26 16:22:05.242",
 		Extension="",
 		Identifier="f784bd15-8b38-c388-3a0e-a0ae23b717ec")
 	public static final String Identifier = "f784bd15-8b38-c388-3a0e-a0ae23b717ec";

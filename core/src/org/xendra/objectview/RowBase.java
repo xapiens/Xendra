@@ -75,9 +75,26 @@ public class RowBase implements IRow {
 	{
 		return identifier;
 	}
+	public void setField(String name, Object value, Boolean force) {
+		if (value instanceof BigDecimal)
+		{
+			m_FieldValue = (BigDecimal) value;
+		}
+		else if (value instanceof Integer)
+		{
+			m_FieldIntValue = (Integer) value;
+		}
+		oldvalues.put(name, value);
+		m_FieldName = name;
+		setIsChanged(true);
+		updateRow();				
+	}
 	public void setField(String name, Object value) {
 		if (value == null)
 			return;
+		if (name.toLowerCase().equals("qtyentered")) {
+			System.out.println("X");
+		}
 		if (oldvalues.containsKey(name))
 		{
 			if (oldvalues.get(name) != null)
@@ -94,8 +111,8 @@ public class RowBase implements IRow {
 		}
 		oldvalues.put(name, value);
 		m_FieldName = name;
-		updateRow();
 		setIsChanged(true);
+		updateRow();		
 	}
 	public String getFieldName()
 	{
@@ -109,9 +126,5 @@ public class RowBase implements IRow {
 	{
 		return m_FieldIntValue;
 	}	
-	public void updateRow() {
-		
-	}
-	
-	
+	public void updateRow() {}	
 }

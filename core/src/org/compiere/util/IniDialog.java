@@ -71,7 +71,7 @@ public final class IniDialog extends JDialog implements ActionListener
 	static ResourceBundle   s_res = ResourceBundle.getBundle("org.compiere.util.IniRes");
 	private boolean         m_accept = false;
 	/**	Logger	*/
-	private static Logger	log	= Logger.getLogger (IniDialog.class.getName());
+	private static CLogger	log	= CLogger.getCLogger (IniDialog.class.getName());
 	
 
 	private CPanel mainPanel = new CPanel();

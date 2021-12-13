@@ -61,10 +61,10 @@ public static int Table_ID=MTable.getTable_ID("C_BP_Employee_Acct");
 public static String es_PE_TAB_EmployeeAccounting_Description="Definir Contabilidad del Empleado";
 
 @XendraTrl(Identifier="ffd6162a-abc2-87c8-c476-ea11aec77117")
-public static String es_PE_TAB_EmployeeAccounting_Name="Contabilidad del Empleado";
+public static String es_PE_TAB_EmployeeAccounting_Help="La pestaña de Contabilidad del Empleado define los valores predeterminados usados cuando este socio de negocio es seleccionado para transacciones de reembolso de gastos.";
 
 @XendraTrl(Identifier="ffd6162a-abc2-87c8-c476-ea11aec77117")
-public static String es_PE_TAB_EmployeeAccounting_Help="La pestaña de Contabilidad del Empleado define los valores predeterminados usados cuando este socio de negocio es seleccionado para transacciones de reembolso de gastos.";
+public static String es_PE_TAB_EmployeeAccounting_Name="Contabilidad del Empleado";
 
 @XendraTab(Name="Employee Accounting",Description="Define Employee Accounting",
 Help="The Employee Accounting Tab defines the default accounts to use when this business partner is referenced on a expense reimbursement.",
@@ -80,11 +80,12 @@ public static final String TABNAME_EmployeeAccounting="ffd6162a-abc2-87c8-c476-e
 @XendraTrl(Identifier="863b4a66-919a-d847-c44e-a28c3f244675")
 public static String es_PE_TABLE_C_BP_Employee_Acct_Name="C_BP_Employee_Acct";
 
-@XendraTable(Name="C_BP_Employee_Acct",Description="",Help="",TableName="C_BP_Employee_Acct",
-AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="863b4a66-919a-d847-c44e-a28c3f244675",Synchronized="2017-08-16 11:41:33.0")
+@XendraTable(Name="C_BP_Employee_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_BP_Employee_Acct",AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="863b4a66-919a-d847-c44e-a28c3f244675",Synchronized="2020-03-03 21:36:38.0")
 /** TableName=C_BP_Employee_Acct */
 public static final String Table_Name="C_BP_Employee_Acct";
 
@@ -134,13 +135,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b9ea28cd-7b24-282e-0388-20f80598d509")
+public static String es_PE_FIELD_EmployeeAccounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="b9ea28cd-7b24-282e-0388-20f80598d509")
 public static String es_PE_FIELD_EmployeeAccounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="b9ea28cd-7b24-282e-0388-20f80598d509")
 public static String es_PE_FIELD_EmployeeAccounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="b9ea28cd-7b24-282e-0388-20f80598d509")
-public static String es_PE_FIELD_EmployeeAccounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ffd6162a-abc2-87c8-c476-ea11aec77117",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a4c6a4c-0297-c525-8465-0d3395ed7e10",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:15.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Business Partner .
@@ -178,13 +179,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="305d5da6-aebe-7634-878a-af212be87296")
+public static String es_PE_FIELD_EmployeeAccounting_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="305d5da6-aebe-7634-878a-af212be87296")
 public static String es_PE_FIELD_EmployeeAccounting_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="305d5da6-aebe-7634-878a-af212be87296")
 public static String es_PE_FIELD_EmployeeAccounting_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="305d5da6-aebe-7634-878a-af212be87296")
-public static String es_PE_FIELD_EmployeeAccounting_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ffd6162a-abc2-87c8-c476-ea11aec77117",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc36f0ab-ac48-7e6f-967d-9957745d386c",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:15.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Employee Expense.
@@ -221,13 +222,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2db6a84f-f55b-6209-5044-0a971034a76e")
+public static String es_PE_FIELD_EmployeeAccounting_EmployeeExpense_Name="Gastos de Empleados";
+
+@XendraTrl(Identifier="2db6a84f-f55b-6209-5044-0a971034a76e")
 public static String es_PE_FIELD_EmployeeAccounting_EmployeeExpense_Description="Cuenta para gastos de empleados";
 
 @XendraTrl(Identifier="2db6a84f-f55b-6209-5044-0a971034a76e")
 public static String es_PE_FIELD_EmployeeAccounting_EmployeeExpense_Help="La Cuenta de Gastos de empleados identifica la cuenta a usar para registrar gastos para este empleado";
-
-@XendraTrl(Identifier="2db6a84f-f55b-6209-5044-0a971034a76e")
-public static String es_PE_FIELD_EmployeeAccounting_EmployeeExpense_Name="Gastos de Empleados";
 
 @XendraField(AD_Column_ID="E_Expense_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="ffd6162a-abc2-87c8-c476-ea11aec77117",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -245,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9fbbd61-e8d7-a537-dfc4-a91f832ccfc2",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:15.0")
 /** Column name E_Expense_Acct */
 public static final String COLUMNNAME_E_Expense_Acct = "E_Expense_Acct";
 /** Set Employee Prepayment.
@@ -264,13 +265,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7b504d28-b058-f0ea-be7a-fa5d5a966129")
+public static String es_PE_FIELD_EmployeeAccounting_EmployeePrepayment_Name="Pago Anticipado a Empleados";
+
+@XendraTrl(Identifier="7b504d28-b058-f0ea-be7a-fa5d5a966129")
 public static String es_PE_FIELD_EmployeeAccounting_EmployeePrepayment_Description="Cuenta para pagos anticipados a empleados";
 
 @XendraTrl(Identifier="7b504d28-b058-f0ea-be7a-fa5d5a966129")
 public static String es_PE_FIELD_EmployeeAccounting_EmployeePrepayment_Help="La cuenta de anticipos a empleados identifica la cuenta a usar para registrar anticipos de gastos hechos a este empleado.";
-
-@XendraTrl(Identifier="7b504d28-b058-f0ea-be7a-fa5d5a966129")
-public static String es_PE_FIELD_EmployeeAccounting_EmployeePrepayment_Name="Pago Anticipado a Empleados";
 
 @XendraField(AD_Column_ID="E_Prepayment_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="ffd6162a-abc2-87c8-c476-ea11aec77117",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -288,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c216c249-1b24-cc17-e6b8-8aee84b153a2",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:15.0")
 /** Column name E_Prepayment_Acct */
 public static final String COLUMNNAME_E_Prepayment_Acct = "E_Prepayment_Acct";
 /** Set Identifier.
@@ -320,7 +321,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8e5261fe-9ce4-42ee-88bd-1553191d5e7b",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:15.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

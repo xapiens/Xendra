@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_EventTableRuleList;
 /** Generated Model for AD_Table_Rule
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -61,10 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Table_Rule");
 @XendraTrl(Identifier="32dc781d-a876-4dfd-9803-1a2746b836ae")
 public static String es_PE_TABLE_AD_Table_Rule_Name="Table Rule";
 
-@XendraTable(Name="Table Rule",Description="",Help="",TableName="AD_Table_Rule",AccessLevel="6",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="32dc781d-a876-4dfd-9803-1a2746b836ae",Synchronized="2017-08-16 11:41:02.0")
+@XendraTable(Name="Table Rule",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Table_Rule",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="32dc781d-a876-4dfd-9803-1a2746b836ae",
+Synchronized="2020-03-03 21:35:59.0")
 /** TableName=AD_Table_Rule */
 public static final String Table_Name="AD_Table_Rule";
 
@@ -122,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="05b645cf-f050-4f67-8235-a0ac52d043ee",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name AD_Rule_ID */
 public static final String COLUMNNAME_AD_Rule_ID = "AD_Rule_ID";
 /** Set Table.
@@ -150,7 +151,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="efe62aa3-d7ab-4d00-bb1d-20e94364ae47",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Table Rule.
@@ -170,16 +171,10 @@ return ii.intValue();
 }
 /** Column name AD_Table_Rule_ID */
 public static final String COLUMNNAME_AD_Table_Rule_ID = "AD_Table_Rule_ID";
-
-/** EventTable AD_Reference=64aec07a-a34f-4fd7-b4a0-88c09c379e6a */
-public static final int EVENTTABLE_AD_Reference_ID=1000068;
 /** Set EventtTable.
 @param EventTable EventtTable */
 public void setEventTable (String EventTable)
 {
-if (EventTable == null) throw new IllegalArgumentException ("EventTable is mandatory");
-if (EventTable.equals(REF_EventTableRuleList.BeforeSave));
- else throw new IllegalArgumentException ("EventTable Invalid value - " + EventTable + " - Reference_ID=1000068 - BESA");
 if (EventTable.length() > 4)
 {
 log.warning("Length > 4 - truncated");
@@ -203,7 +198,7 @@ FieldLength=4,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8a85c2fb-5ad5-4148-948d-76ddbb57805e",Synchronized="2017-08-05 16:52:53.0")
+Identifier="8a85c2fb-5ad5-4148-948d-76ddbb57805e",Synchronized="2019-08-30 22:20:44.0")
 /** Column name EventTable */
 public static final String COLUMNNAME_EventTable = "EventTable";
 /** Set Identifier.
@@ -235,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e4c2d52e-98ff-4022-bc5a-2445668d2409",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

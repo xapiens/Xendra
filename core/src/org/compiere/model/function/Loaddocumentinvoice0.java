@@ -8,7 +8,7 @@ public class Loaddocumentinvoice0
  
 @XendraFunction(Name="loaddocumentinvoice",Output="void",Owner="xendra",Language="plpgsql",
 Identifier="a1b9a645-d742-a4fb-8aee-a38d668a165e",Arguments="id numeric, p_period_id numeric",
-Extension="",Synchronized="2017-10-11 11:12:28.0")
+Extension="",Synchronized="2019-04-15 11:29:28.0")
 	public static final String Identifier = "a1b9a645-d742-a4fb-8aee-a38d668a165e";
 
 	public static final String getCode() 
@@ -25,9 +25,9 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	sb.appendln("		i.c_bpartner_id,i.documentno,i.c_doctype_id,il.identifier, ");
 	sb.appendln("		i.MovementType,  il.c_invoiceline_id, il.c_orderline_id,");
 	sb.appendln("		il.m_attributesetinstance_id, i.ad_org_id, i.docstatus,iol.m_product_id,");
-	sb.appendln("		il.m_locator_id, i.movementdate, il.line, dt.transactiontype");
+	sb.appendln("		il.m_locator_id, i.movementdate, il.line, dt.transactiontype, il.line		");
 	sb.appendln("		from c_invoiceline il join c_invoice i on i.c_invoice_id = il.c_invoice_id ");
-	sb.appendln("		join c_doctype dt on i.c_doctype_id = dt.c_doctype_id");
+	sb.appendln("		join c_doctype dt on i.c_doctype_id = dt.c_doctype_id		");
 	sb.appendln("		LEFT JOIN  m_transaction t on t.c_invoiceline_id = il.c_invoiceline_id		");
 	sb.appendln("		WHERE i.c_invoice_id = id AND t.c_invoiceline_id ISNULL");
 	sb.appendln("	LOOP");
@@ -64,7 +64,9 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	sb.appendln("		carding.updated := now();");
 	sb.appendln("		carding.updatedby := ar.updatedby;	");
 	sb.appendln("		carding.transactiontype := ar.transactiontype;");
+	sb.appendln("		carding.seqno := ar.line;");
 	sb.appendln("		carding.identifier := ar.identifier;");
+	sb.appendln("		carding.processed := 'N';");
 	sb.appendln("		insert into m_transaction select (x).* from (select carding as x) ss;		");
 	sb.appendln("	end loop;");
 	sb.appendln("	update c_invoice set iscosted = 'Y' where c_invoice_id = id;");
@@ -74,7 +76,7 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-10-11 11:12:28.0");
+ 	sb.appendln("@Synchronized=2019-04-15 11:29:28.0");
 	sb.appendln("@Identifier=a1b9a645-d742-a4fb-8aee-a38d668a165e");
 	return sb.toString();
 }

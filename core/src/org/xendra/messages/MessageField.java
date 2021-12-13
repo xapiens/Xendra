@@ -1,11 +1,17 @@
 package org.xendra.messages;
 
+import org.compiere.model.persistence.X_AD_Column;
+import org.compiere.model.persistence.X_AD_Table;
+
 public class MessageField {
 	String name;
 	String area;
-	String value;
-	String printname;
-	String condition;	
+	boolean mandatory;
+	Boolean key;
+	Integer sequence;
+	X_AD_Column column;
+	X_AD_Table table;
+	String tablename;
 	public String getName() {
 		return name;
 	}
@@ -18,22 +24,40 @@ public class MessageField {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getValue() {
-		return value;
+	public boolean isMandatory() {
+		return mandatory;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setMandatory(boolean mandatory) {
+		this.mandatory = mandatory;
 	}
-	public String getPrintname() {
-		return printname;
+	public Integer getSequence() {
+		return sequence;
 	}
-	public void setPrintname(String printname) {
-		this.printname = printname;
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
 	}
-	public String getCondition() {
-		return condition;
+	public Boolean getKey() {
+		return key;
 	}
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setKey(Boolean key) {
+		this.key = key;
+	}
+	public X_AD_Column getColumn() {
+		return column;
+	}
+	public void setColumn(X_AD_Column var) {
+		this.column = var;
+	}
+	public X_AD_Table getTable() {
+		return table;
+	}
+	public void setTable(X_AD_Table var) {
+		this.table = var;
+	}
+	public String getTablename() {
+		return tablename;
+	}
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
 	}	
 }

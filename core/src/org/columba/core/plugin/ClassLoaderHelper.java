@@ -35,9 +35,10 @@ public class ClassLoaderHelper {
 			throws NoSuchMethodException {
 
 		Constructor constructor = null;
-
+		// to check if the class is loaded from the correct jar. 
+		//System.out.println(String.format("ClassLoaderHelper findConstructor %s location %s", actClass, actClass.getProtectionDomain().getCodeSource().getLocation()));
 		Constructor[] list = actClass.getConstructors();
-
+		
 		for (int i = 0; i < list.length; i++) {
 			Constructor c = list[i];
 

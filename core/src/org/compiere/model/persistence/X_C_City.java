@@ -77,11 +77,12 @@ public static final String TABNAME_City="8742cfab-d7dd-dc6f-03a8-a8651de4f4ee";
 @XendraTrl(Identifier="6e48c88e-a589-0c81-d592-c3ed6a876ff5")
 public static String es_PE_TABLE_C_City_Name="Ciudad";
 
-@XendraTable(Name="City",Description="City",Help="",TableName="C_City",AccessLevel="6",
-AD_Window_ID="566e8b2a-6be5-463e-f216-e211f099e497",AD_Val_Rule_ID="",IsKey=1,LoadSeq=65,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="6e48c88e-a589-0c81-d592-c3ed6a876ff5",
-Synchronized="2017-12-13 15:36:05.0")
+@XendraTable(Name="City",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="City",Help="",TableName="C_City",
+AccessLevel="6",AD_Window_ID="566e8b2a-6be5-463e-f216-e211f099e497",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=65,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="6e48c88e-a589-0c81-d592-c3ed6a876ff5",Synchronized="2020-03-03 21:36:44.0")
 /** TableName=C_City */
 public static final String Table_Name="C_City";
 
@@ -165,7 +166,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="14053e15-99f0-4565-9094-fe7dccc47c1e",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name AreaCode */
 public static final String COLUMNNAME_AreaCode = "AreaCode";
 /** Set City.
@@ -243,7 +244,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=false,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f940fce3-d678-2d5a-3697-f93b541001b4",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name C_Country_ID */
 public static final String COLUMNNAME_C_Country_ID = "C_Country_ID";
 /** Set CityCode.
@@ -275,7 +276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cb6e6963-a0ba-4349-b847-f6c993c502ba",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name CityCode */
 public static final String COLUMNNAME_CityCode = "CityCode";
 /** Set Coordinates.
@@ -320,7 +321,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fc131b01-ae21-3775-94e2-7e913595b941",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Coordinates */
 public static final String COLUMNNAME_Coordinates = "Coordinates";
 /** Set C_Province_ID.
@@ -349,12 +350,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="659c017d-1c2a-db66-b705-fa45f8557619",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name C_Province_ID */
 public static final String COLUMNNAME_C_Province_ID = "C_Province_ID";
-
-/** C_Region_ID AD_Reference=f560243f-2ea5-bcb4-265f-52555b17a707 */
-public static final int C_REGION_ID_AD_Reference_ID=157;
 /** Set Region.
 @param C_Region_ID Identifies a geographical Region */
 public void setC_Region_ID (int C_Region_ID)
@@ -398,7 +396,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b016694a-11ee-4219-65a0-fdab1d9d0607",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name C_Region_ID */
 public static final String COLUMNNAME_C_Region_ID = "C_Region_ID";
 /** Set Identifier.
@@ -430,7 +428,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c9d26800-ce42-48de-9e00-fd05e0390101",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -461,9 +459,36 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5bc3975e-214e-49e1-9eb4-cf36152e6f6b",
-Synchronized="2017-12-13 15:33:11.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
+/** Set Latitude.
+@param Latitude Latitude */
+public void setLatitude (BigDecimal Latitude)
+{
+set_Value (COLUMNNAME_Latitude, Latitude);
+}
+/** Get Latitude.
+@return Latitude */
+public BigDecimal getLatitude() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Latitude);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="d7570727-07b8-44b7-a598-c2a9e347a0ab")
+public static String es_PE_COLUMN_Latitude_Name="Latitude";
+
+@XendraColumn(AD_Element_ID="eff88696-5c3a-4c77-b521-a73f3c80f03e",ColumnName="Latitude",
+AD_Reference_ID=22,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=131089,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="d7570727-07b8-44b7-a598-c2a9e347a0ab",
+Synchronized="2019-08-30 22:21:22.0")
+/** Column name Latitude */
+public static final String COLUMNNAME_Latitude = "Latitude";
 /** Set Locode.
 @param Locode Location code - UN/LOCODE  */
 public void setLocode (String Locode)
@@ -509,9 +534,36 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5f06bca2-d9e0-770d-1ff4-d2268f2605dd",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Locode */
 public static final String COLUMNNAME_Locode = "Locode";
+/** Set Longitude.
+@param Longitude Longitude */
+public void setLongitude (BigDecimal Longitude)
+{
+set_Value (COLUMNNAME_Longitude, Longitude);
+}
+/** Get Longitude.
+@return Longitude */
+public BigDecimal getLongitude() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Longitude);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="bdd5e96f-ea0e-4b02-abf4-8bf6ec3767e9")
+public static String es_PE_COLUMN_Longitude_Name="Longitude";
+
+@XendraColumn(AD_Element_ID="a1db4f5a-e74b-4db0-bfe3-3dbf92bc35a5",ColumnName="Longitude",
+AD_Reference_ID=22,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=131089,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="bdd5e96f-ea0e-4b02-abf4-8bf6ec3767e9",
+Synchronized="2019-08-30 22:21:22.0")
+/** Column name Longitude */
+public static final String COLUMNNAME_Longitude = "Longitude";
 /** Set Name.
 @param Name Alphanumeric identifier of the entity */
 public void setName (String Name)
@@ -565,7 +617,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a79c7b95-104d-0754-69b6-e0e89c3ec82c",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set ZIP.
@@ -613,7 +665,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80c21319-f063-62a4-b73c-a46905059fd5",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Postal */
 public static final String COLUMNNAME_Postal = "Postal";
 /** Set Supervisor.
@@ -642,7 +694,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2fbfd7c1-57ca-8b8b-e386-2a19f8b69f14",
-Synchronized="2017-08-28 09:55:29.0")
+Synchronized="2019-08-30 22:21:22.0")
 /** Column name Supervisor_ID */
 public static final String COLUMNNAME_Supervisor_ID = "Supervisor_ID";
 }

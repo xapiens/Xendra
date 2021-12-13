@@ -68,10 +68,11 @@ public final class MCountry extends X_C_Country
 			MClient client = MClient.get (ctx);
 			MLanguage lang = MLanguage.get(ctx, client.getAD_Language());
 			System.out.println("the language for the client is "+lang.toString());
-			if (!loadCountry(lang.getLanguageISO(), lang.getCountryCode(), ctx))
-			{
-				loadAllCountries(ctx);
-			}
+			loadAllCountries(ctx);
+			//if (!loadCountry(lang.getLanguageISO(), lang.getCountryCode(), ctx))
+			//{
+			//	 loadAllCountries(ctx);
+			//}
 		}
 		return s_default;
 	}	//	get
@@ -168,7 +169,7 @@ public final class MCountry extends X_C_Country
 		//
 		String sql = "SELECT * FROM C_Country WHERE IsActive='Y' AND countrycode=?";
 		try{
-			PreparedStatement stmt = DB.prepareStatement(sql);
+			PreparedStatement stmt = DB.prepareStatement(sql, null);
 			stmt.setString(1,countrycode);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())

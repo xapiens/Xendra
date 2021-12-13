@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("M_AttributeSearch");
 public static String es_PE_TAB_AttributeSearch_Description="Atributo Común de la Búsqueda";
 
 @XendraTrl(Identifier="df8672ba-9ec6-1349-c336-92d2a019a62a")
-public static String es_PE_TAB_AttributeSearch_Name="Búsqueda de Atributo";
+public static String es_PE_TAB_AttributeSearch_Help="Las Atributos son específicos para un atributo de producto fijado (ej. tamaño para las camisetas: S, m, l). Si usted tiene atributos multiples y desea buscar bajo atributo común, usted define un atributo de la búsqueda. Ejemplo: tiene un atributo de la búsqueda del tamaño el combinar de los valores de todos los diversos tamaños (tamaño para la camisa XL, l, m, s, xs del vestido). La búsqueda del atributo permite que usted tenga todos los valores disponibles para la selección. Esto facilita el mantenimiento del atributo de producto individual.";
 
 @XendraTrl(Identifier="df8672ba-9ec6-1349-c336-92d2a019a62a")
-public static String es_PE_TAB_AttributeSearch_Help="Las Atributos son específicos para un atributo de producto fijado (ej. tamaño para las camisetas: S, m, l). Si usted tiene atributos multiples y desea buscar bajo atributo común, usted define un atributo de la búsqueda. Ejemplo: tiene un atributo de la búsqueda del tamaño el combinar de los valores de todos los diversos tamaños (tamaño para la camisa XL, l, m, s, xs del vestido). La búsqueda del atributo permite que usted tenga todos los valores disponibles para la selección. Esto facilita el mantenimiento del atributo de producto individual.";
+public static String es_PE_TAB_AttributeSearch_Name="Búsqueda de Atributo";
 
 @XendraTab(Name="Attribute Search",Description="Common Search Attribute ",
 Help="Attributes are specific to a Product Attribute Set (e.g. Size for T-Shirts: S,M,L). If you have multiple attributes and want to search under a common sttribute, you define a search sttribute. Example: have one Size search attribute combining the values of all different sizes (Size for Dress Shirt  XL,L,M,S,XS). The Attribute Search allows you to have all values available for selection.  This eases the maintenance of the individual product attribute.",
@@ -77,11 +77,12 @@ public static final String TABNAME_AttributeSearch="df8672ba-9ec6-1349-c336-92d2
 @XendraTrl(Identifier="09b925ce-88b5-dace-679b-7d28a8799c43")
 public static String es_PE_TABLE_M_AttributeSearch_Name="Búsqueda de Atributos";
 
-@XendraTable(Name="Attribute Search",Description="Common Search Attribute ",Help="",
+@XendraTable(Name="Attribute Search",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Common Search Attribute ",Help="",
 TableName="M_AttributeSearch",AccessLevel="3",AD_Window_ID="a7326f33-ae69-d8f0-8a3a-cd7d698b46f8",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="09b925ce-88b5-dace-679b-7d28a8799c43",Synchronized="2017-08-16 11:43:05.0")
+Identifier="09b925ce-88b5-dace-679b-7d28a8799c43",Synchronized="2020-03-03 21:38:15.0")
 /** TableName=M_AttributeSearch */
 public static final String Table_Name="M_AttributeSearch";
 
@@ -142,13 +143,13 @@ return value;
 }
 
 @XendraTrl(Identifier="036c042b-1dac-7d88-f2d9-58f47f3c2851")
+public static String es_PE_FIELD_AttributeSearch_Description_Name="Observación";
+
+@XendraTrl(Identifier="036c042b-1dac-7d88-f2d9-58f47f3c2851")
 public static String es_PE_FIELD_AttributeSearch_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="036c042b-1dac-7d88-f2d9-58f47f3c2851")
 public static String es_PE_FIELD_AttributeSearch_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="036c042b-1dac-7d88-f2d9-58f47f3c2851")
-public static String es_PE_FIELD_AttributeSearch_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="df8672ba-9ec6-1349-c336-92d2a019a62a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b357fa0e-176a-e08a-b865-b5245b1b7bd4",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -198,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="030bea9e-9203-47da-b6df-4066851d215e",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute Search.
@@ -218,13 +219,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7fdc18db-8de6-a5cb-fc92-0603353c4a4b")
+public static String es_PE_FIELD_AttributeSearch_AttributeSearch_Name="Búsqueda de Atributos";
+
+@XendraTrl(Identifier="7fdc18db-8de6-a5cb-fc92-0603353c4a4b")
 public static String es_PE_FIELD_AttributeSearch_AttributeSearch_Description="Cualidad común de la busqueda";
 
 @XendraTrl(Identifier="7fdc18db-8de6-a5cb-fc92-0603353c4a4b")
 public static String es_PE_FIELD_AttributeSearch_AttributeSearch_Help="Los atributos son especificos para una configuración de producto. (ej. Tamaño para las camisetas: G,M,CH). Si usted tiene cualidades multiples y desea buscar bajo atributo común, usted define un atributo de la busqueda. Ejemplo: tenga una cualidad de la búsqueda del tamaño el combinar de los valores de todos los diversos tamaños (tamaño para la camisa XL, l, m, s, xs del vestido).  La búsqueda de la cualidad permite que usted tenga todos los valores disponibles para la selección. Esto facilita el mantenimiento de la cualidad de producto individual.";
-
-@XendraTrl(Identifier="7fdc18db-8de6-a5cb-fc92-0603353c4a4b")
-public static String es_PE_FIELD_AttributeSearch_AttributeSearch_Name="Búsqueda de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSearch_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="df8672ba-9ec6-1349-c336-92d2a019a62a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -263,13 +264,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d06f51e0-d9a5-252b-fded-1748b3bc79a0")
+public static String es_PE_FIELD_AttributeSearch_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d06f51e0-d9a5-252b-fded-1748b3bc79a0")
 public static String es_PE_FIELD_AttributeSearch_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d06f51e0-d9a5-252b-fded-1748b3bc79a0")
 public static String es_PE_FIELD_AttributeSearch_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="d06f51e0-d9a5-252b-fded-1748b3bc79a0")
-public static String es_PE_FIELD_AttributeSearch_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="df8672ba-9ec6-1349-c336-92d2a019a62a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -287,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eab2e241-b6d4-2aac-d286-3b46b2fe632c",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

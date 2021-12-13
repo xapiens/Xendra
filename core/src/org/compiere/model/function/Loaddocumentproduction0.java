@@ -8,7 +8,7 @@ public class Loaddocumentproduction0
  
 @XendraFunction(Name="loaddocumentproduction",Output="void",Owner="xendra",Language="plpgsql",
 Identifier="b8dbe70a-6f90-d161-1dad-64d1c85ca766",Arguments="id numeric, p_period_id numeric",
-Extension="",Synchronized="2017-10-11 11:13:28.0")
+Extension="",Synchronized="2019-04-15 11:30:28.0")
 	public static final String Identifier = "b8dbe70a-6f90-d161-1dad-64d1c85ca766";
 
 	public static final String getCode() 
@@ -36,7 +36,8 @@ Extension="",Synchronized="2017-10-11 11:13:28.0")
 	sb.appendln("		pl.m_attributesetinstance_id, pp.ad_org_id,  pl.m_product_id,");
 	sb.appendln("		pl.m_locator_id, pl.m_productionplan_id, pl.m_productionline_id,");
 	sb.appendln("		pl.line,");
-	sb.appendln("		l.m_warehouse_id, CASE WHEN pl.movementqty >= 0::numeric THEN 'P+'::text ELSE 'P-'::text  END AS movementtype");
+	sb.appendln("		l.m_warehouse_id, CASE WHEN pl.movementqty >= 0::numeric THEN 'P+'::text ELSE 'P-'::text  END AS movementtype,");
+	sb.appendln("		pl.line");
 	sb.appendln("		FROM m_productionline pl join m_productionplan pp on pp.m_productionplan_id = pl.m_productionplan_id ");
 	sb.appendln("		JOIN m_locator l ON l.m_locator_id = pl.m_locator_id");
 	sb.appendln("		LEFT JOIN m_transaction t on t.m_productionline_id = pl.m_productionline_id");
@@ -89,7 +90,9 @@ Extension="",Synchronized="2017-10-11 11:13:28.0")
 	sb.appendln("		carding.updated := now();");
 	sb.appendln("		carding.updatedby := ar.updatedby;");
 	sb.appendln("		carding.transactiontype := pplan.transactiontype;	");
-	sb.appendln("		carding.identifier := ar.identifier;						");
+	sb.appendln("		carding.seqno := ar.line;");
+	sb.appendln("		carding.identifier := ar.identifier;		");
+	sb.appendln("		carding.processed := 'N';				");
 	sb.appendln("		insert into m_transaction select (x).* from (select carding as x) ss;		");
 	sb.appendln("	END LOOP;");
 	sb.appendln("  END LOOP;");
@@ -100,7 +103,7 @@ Extension="",Synchronized="2017-10-11 11:13:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-10-11 11:13:28.0");
+ 	sb.appendln("@Synchronized=2019-04-15 11:30:28.0");
 	sb.appendln("@Identifier=b8dbe70a-6f90-d161-1dad-64d1c85ca766");
 	return sb.toString();
 }

@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("R_StandardResponse");
 public static String es_PE_TAB_StandardResponse_Description="Mantener respuesta estandar de la petición";
 
 @XendraTrl(Identifier="5c80d030-1df3-a565-b0c1-d9cbe9e3a6a5")
-public static String es_PE_TAB_StandardResponse_Name="Respuesta Estandar";
+public static String es_PE_TAB_StandardResponse_Help="Bloques de texto que se copiarán en el texto de la respuesta de la solicitud.";
 
 @XendraTrl(Identifier="5c80d030-1df3-a565-b0c1-d9cbe9e3a6a5")
-public static String es_PE_TAB_StandardResponse_Help="Bloques de texto que se copiarán en el texto de la respuesta de la solicitud.";
+public static String es_PE_TAB_StandardResponse_Name="Respuesta Estandar";
 
 @XendraTab(Name="Standard Response",Description="Maintain Request Standard Response ",
 Help="Text blocks to be copied into request response text",
@@ -78,11 +78,13 @@ public static final String TABNAME_StandardResponse="5c80d030-1df3-a565-b0c1-d9c
 @XendraTrl(Identifier="a582e6c1-d2aa-29f1-3efe-9d24caaa9808")
 public static String es_PE_TABLE_R_StandardResponse_Name="Respuesta Estandar";
 
-@XendraTable(Name="Standard Response",Description="Request Standard Response ",Help="",
-TableName="R_StandardResponse",AccessLevel="6",AD_Window_ID="958a7813-237f-199e-c86a-dce566105f5e",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="a582e6c1-d2aa-29f1-3efe-9d24caaa9808",Synchronized="2017-08-16 11:43:54.0")
+@XendraTable(Name="Standard Response",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Request Standard Response ",
+Help="",TableName="R_StandardResponse",AccessLevel="6",
+AD_Window_ID="958a7813-237f-199e-c86a-dce566105f5e",AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="a582e6c1-d2aa-29f1-3efe-9d24caaa9808",
+Synchronized="2020-03-03 21:39:42.0")
 /** TableName=R_StandardResponse */
 public static final String Table_Name="R_StandardResponse";
 
@@ -144,7 +146,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9cea4420-f5a8-42e7-ab13-e6a5e10a208d",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -176,13 +178,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d6f91b5e-df9b-24f7-ab9d-26a64ce6442d")
+public static String es_PE_FIELD_StandardResponse_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d6f91b5e-df9b-24f7-ab9d-26a64ce6442d")
 public static String es_PE_FIELD_StandardResponse_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d6f91b5e-df9b-24f7-ab9d-26a64ce6442d")
 public static String es_PE_FIELD_StandardResponse_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="d6f91b5e-df9b-24f7-ab9d-26a64ce6442d")
-public static String es_PE_FIELD_StandardResponse_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="5c80d030-1df3-a565-b0c1-d9cbe9e3a6a5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d2ce9db1-c164-1dd7-41bd-a1032b95163e",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Response Text.
@@ -220,13 +222,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="a5b1e5d2-5cb7-8319-b458-6e8a59733320")
+public static String es_PE_FIELD_StandardResponse_ResponseText_Name="Texto de Respuesta";
+
+@XendraTrl(Identifier="a5b1e5d2-5cb7-8319-b458-6e8a59733320")
 public static String es_PE_FIELD_StandardResponse_ResponseText_Description="Texto de Respuesta de la Solicitud";
 
 @XendraTrl(Identifier="a5b1e5d2-5cb7-8319-b458-6e8a59733320")
 public static String es_PE_FIELD_StandardResponse_ResponseText_Help="Bloque de texto copiada en el area de texto de respuesta de la solicitud.";
-
-@XendraTrl(Identifier="a5b1e5d2-5cb7-8319-b458-6e8a59733320")
-public static String es_PE_FIELD_StandardResponse_ResponseText_Name="Texto de Respuesta";
 
 @XendraField(AD_Column_ID="ResponseText",IsCentrallyMaintained=true,
 AD_Tab_ID="5c80d030-1df3-a565-b0c1-d9cbe9e3a6a5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -244,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc28f9cb-7860-1302-32d0-522db8854cb2",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name ResponseText */
 public static final String COLUMNNAME_ResponseText = "ResponseText";
 /** Set Standard Response.
@@ -264,13 +266,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c5f5ba37-4c1e-5e57-169c-f10105c1dab3")
+public static String es_PE_FIELD_StandardResponse_StandardResponse_Name="Respuesta Estandar";
+
+@XendraTrl(Identifier="c5f5ba37-4c1e-5e57-169c-f10105c1dab3")
 public static String es_PE_FIELD_StandardResponse_StandardResponse_Description="Respuesta estandar de la solicitud.";
 
 @XendraTrl(Identifier="c5f5ba37-4c1e-5e57-169c-f10105c1dab3")
 public static String es_PE_FIELD_StandardResponse_StandardResponse_Help="Bloques de texto que se copiarán en el texto de la respuesta de la solicitud.";
-
-@XendraTrl(Identifier="c5f5ba37-4c1e-5e57-169c-f10105c1dab3")
-public static String es_PE_FIELD_StandardResponse_StandardResponse_Name="Respuesta Estandar";
 
 @XendraField(AD_Column_ID="R_StandardResponse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5c80d030-1df3-a565-b0c1-d9cbe9e3a6a5",AD_FieldGroup_ID="",IsDisplayed=false,

@@ -71,10 +71,10 @@ public static int Table_ID=MTable.getTable_ID("PA_MeasureCalc");
 public static String es_PE_TAB_PerformanceMeasureCalculation_Description="Mantener Cálculo de Medida de Desempeño";
 
 @XendraTrl(Identifier="e1901153-6971-2152-cebc-3fef17ea2905")
-public static String es_PE_TAB_PerformanceMeasureCalculation_Name="Cálculo de Medida de Desempeño";
+public static String es_PE_TAB_PerformanceMeasureCalculation_Help="El Calculo de Medición del Desempeño define como la medida de desempeño se calcula. Por favor probar el comando en SQL*Plus primero. El Select necesita regresar un solo valor! Cualquier restricción de rango de fecha; organizaciones; socios de negocio; productos debe ser hecha via la ventana `Medida de desempeño`. Este es un calculo genérico. Como este tema es algo técnico; el sistema viene con algunos ejemplos predefinidos.";
 
 @XendraTrl(Identifier="e1901153-6971-2152-cebc-3fef17ea2905")
-public static String es_PE_TAB_PerformanceMeasureCalculation_Help="El Calculo de Medición del Desempeño define como la medida de desempeño se calcula. Por favor probar el comando en SQL*Plus primero. El Select necesita regresar un solo valor! Cualquier restricción de rango de fecha; organizaciones; socios de negocio; productos debe ser hecha via la ventana `Medida de desempeño`. Este es un calculo genérico. Como este tema es algo técnico; el sistema viene con algunos ejemplos predefinidos.";
+public static String es_PE_TAB_PerformanceMeasureCalculation_Name="Cálculo de Medida de Desempeño";
 
 @XendraTab(Name="Performance Measure Calculation",
 Description="Maintain your Performance Measure Calculation",
@@ -90,12 +90,13 @@ public static final String TABNAME_PerformanceMeasureCalculation="e1901153-6971-
 @XendraTrl(Identifier="42a34360-ab71-ec63-0f92-bcccb715f9bc")
 public static String es_PE_TABLE_PA_MeasureCalc_Name="Cálculo de la Medida";
 
-@XendraTable(Name="Measure Calculation",Description="Calculation method for measuring performance",
-Help="",TableName="PA_MeasureCalc",AccessLevel="6",
-AD_Window_ID="d362b95b-dd7c-a124-9127-7762977e7fcb",AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="42a34360-ab71-ec63-0f92-bcccb715f9bc",Synchronized="2017-08-16 11:43:40.0")
+@XendraTable(Name="Measure Calculation",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Calculation method for measuring performance",Help="",TableName="PA_MeasureCalc",
+AccessLevel="6",AD_Window_ID="d362b95b-dd7c-a124-9127-7762977e7fcb",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="42a34360-ab71-ec63-0f92-bcccb715f9bc",Synchronized="2020-03-03 21:39:05.0")
 /** TableName=PA_MeasureCalc */
 public static final String Table_Name="PA_MeasureCalc";
 
@@ -145,13 +146,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3464603e-f76e-5f7f-d629-41be6d70dd77")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_Table_Name="Tabla";
+
+@XendraTrl(Identifier="3464603e-f76e-5f7f-d629-41be6d70dd77")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="3464603e-f76e-5f7f-d629-41be6d70dd77")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="3464603e-f76e-5f7f-d629-41be6d70dd77")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="179801f6-4f3c-d685-a34e-0ad246252c4e",
-Synchronized="2017-08-05 16:55:41.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set B.Partner Column.
@@ -193,13 +194,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="7b0ae2ed-8610-c403-3621-320491b96efc")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_BPartnerColumn_Name="Columna Socio del Negocio";
+
+@XendraTrl(Identifier="7b0ae2ed-8610-c403-3621-320491b96efc")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_BPartnerColumn_Description="Columna clave del socio del negocio completamente calificada (C_BPartner_ID)";
 
 @XendraTrl(Identifier="7b0ae2ed-8610-c403-3621-320491b96efc")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_BPartnerColumn_Help="La columna socio del negocio indica el socio del negocio a usar cuando se calcule esta medida";
-
-@XendraTrl(Identifier="7b0ae2ed-8610-c403-3621-320491b96efc")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_BPartnerColumn_Name="Columna Socio del Negocio";
 
 @XendraField(AD_Column_ID="BPartnerColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -217,7 +218,7 @@ DefaultValue="x.C_BPartner_ID",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="16ba4015-3a64-0644-37d3-e1eafdb00c6f",Synchronized="2017-08-05 16:55:41.0")
+Identifier="16ba4015-3a64-0644-37d3-e1eafdb00c6f",Synchronized="2019-08-30 22:23:37.0")
 /** Column name BPartnerColumn */
 public static final String COLUMNNAME_BPartnerColumn = "BPartnerColumn";
 /** Set Date Column.
@@ -242,13 +243,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="8ff5238e-8e4a-ce4b-e2c1-b3f9cf3b58b5")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_DateColumn_Name="Columna Fecha";
+
+@XendraTrl(Identifier="8ff5238e-8e4a-ce4b-e2c1-b3f9cf3b58b5")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_DateColumn_Description="Columna fecha completamente calificada";
 
 @XendraTrl(Identifier="8ff5238e-8e4a-ce4b-e2c1-b3f9cf3b58b5")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_DateColumn_Help="La columna Fecha indica la fecha a ser usada cuando se calcule esta medida";
-
-@XendraTrl(Identifier="8ff5238e-8e4a-ce4b-e2c1-b3f9cf3b58b5")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_DateColumn_Name="Columna Fecha";
 
 @XendraField(AD_Column_ID="DateColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -266,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2c72d44f-d95d-d998-0188-664bd13250a6",
-Synchronized="2017-08-05 16:55:41.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name DateColumn */
 public static final String COLUMNNAME_DateColumn = "DateColumn";
 /** Set Description.
@@ -297,13 +298,13 @@ return value;
 }
 
 @XendraTrl(Identifier="61d02a9c-74cb-71d4-89b0-06fc0a4f73bf")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_Description_Name="Observación";
+
+@XendraTrl(Identifier="61d02a9c-74cb-71d4-89b0-06fc0a4f73bf")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="61d02a9c-74cb-71d4-89b0-06fc0a4f73bf")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="61d02a9c-74cb-71d4-89b0-06fc0a4f73bf")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -321,12 +322,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="196fb3b9-e4f0-23f7-1b27-8fbfec4936af",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -346,13 +344,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="4b5d2c22-69aa-bbb8-f7ef-097fb3d53e94")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="4b5d2c22-69aa-bbb8-f7ef-097fb3d53e94")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="4b5d2c22-69aa-bbb8-f7ef-097fb3d53e94")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="4b5d2c22-69aa-bbb8-f7ef-097fb3d53e94")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -370,7 +368,7 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="659ed6fd-600e-6cf1-1b6b-a44fe53e213b",Synchronized="2017-08-05 16:55:42.0")
+Identifier="659ed6fd-600e-6cf1-1b6b-a44fe53e213b",Synchronized="2019-08-30 22:23:37.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Identifier.
@@ -402,7 +400,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f55b8a8f-0fb2-474c-9993-818d48ee7ea3",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Key Column.
@@ -427,10 +425,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d902cb51-6a61-67c4-d2d5-beef90cc00b3")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_KeyColumn_Description="Key Column for Table";
+public static String es_PE_FIELD_PerformanceMeasureCalculation_KeyColumn_Name="Key Column";
 
 @XendraTrl(Identifier="d902cb51-6a61-67c4-d2d5-beef90cc00b3")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_KeyColumn_Name="Key Column";
+public static String es_PE_FIELD_PerformanceMeasureCalculation_KeyColumn_Description="Key Column for Table";
 
 @XendraField(AD_Column_ID="KeyColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -448,7 +446,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="86e7039d-e5e8-8833-db91-31dd40e32024",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name KeyColumn */
 public static final String COLUMNNAME_KeyColumn = "KeyColumn";
 /** Set Name.
@@ -480,13 +478,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="1cea46a6-77c7-93aa-d345-5e7bd86350a5")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_Name_Name="Nombre";
+
+@XendraTrl(Identifier="1cea46a6-77c7-93aa-d345-5e7bd86350a5")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="1cea46a6-77c7-93aa-d345-5e7bd86350a5")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="1cea46a6-77c7-93aa-d345-5e7bd86350a5")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -504,7 +502,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="edb2540d-dd92-6571-5d55-22b131e324a2",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Org Column.
@@ -529,13 +527,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="a8725aaf-6771-6c78-afa3-8bc6239bb453")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_OrgColumn_Name="Columna de la Organización";
+
+@XendraTrl(Identifier="a8725aaf-6771-6c78-afa3-8bc6239bb453")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_OrgColumn_Description="Columna organización completamente calificada (AD_Org_ID)";
 
 @XendraTrl(Identifier="a8725aaf-6771-6c78-afa3-8bc6239bb453")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_OrgColumn_Help="La columna organización indica la organización a ser usada en el cálculo de esta medida";
-
-@XendraTrl(Identifier="a8725aaf-6771-6c78-afa3-8bc6239bb453")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_OrgColumn_Name="Columna de la Organización";
 
 @XendraField(AD_Column_ID="OrgColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -553,7 +551,7 @@ DefaultValue="x.AD_Org_ID",IsKey=false,IsInternal=false,IsParent=false,IsMandato
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7a15b820-5805-b108-c054-b377c0a45905",Synchronized="2017-08-05 16:55:42.0")
+Identifier="7a15b820-5805-b108-c054-b377c0a45905",Synchronized="2019-08-30 22:23:37.0")
 /** Column name OrgColumn */
 public static final String COLUMNNAME_OrgColumn = "OrgColumn";
 /** Set Measure Calculation.
@@ -573,13 +571,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4ca10fc6-11d5-4ae8-1ad5-540d93e24493")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_MeasureCalculation_Name="Cálculo de la Medida";
+
+@XendraTrl(Identifier="4ca10fc6-11d5-4ae8-1ad5-540d93e24493")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_MeasureCalculation_Description="Método de cálculo para medir el desempeño";
 
 @XendraTrl(Identifier="4ca10fc6-11d5-4ae8-1ad5-540d93e24493")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_MeasureCalculation_Help="El Cálculo de la Medida indica el método para medir el desempeño";
-
-@XendraTrl(Identifier="4ca10fc6-11d5-4ae8-1ad5-540d93e24493")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_MeasureCalculation_Name="Cálculo de la Medida";
 
 @XendraField(AD_Column_ID="PA_MeasureCalc_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -610,13 +608,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d0f143a9-9a87-4b03-3fe0-bb0373928610")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_ProductColumn_Name="Columna Producto";
+
+@XendraTrl(Identifier="d0f143a9-9a87-4b03-3fe0-bb0373928610")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_ProductColumn_Description="Columna producto completamente calificada (M_Product_ID)";
 
 @XendraTrl(Identifier="d0f143a9-9a87-4b03-3fe0-bb0373928610")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_ProductColumn_Help="La columna producto indica el producto a usar cuando calcule esta medida";
-
-@XendraTrl(Identifier="d0f143a9-9a87-4b03-3fe0-bb0373928610")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_ProductColumn_Name="Columna Producto";
 
 @XendraField(AD_Column_ID="ProductColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -634,7 +632,7 @@ DefaultValue="x.M_Product_ID",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="39cf0d8b-c39e-e960-1863-e5395af75f68",Synchronized="2017-08-05 16:55:42.0")
+Identifier="39cf0d8b-c39e-e960-1863-e5395af75f68",Synchronized="2019-08-30 22:23:37.0")
 /** Column name ProductColumn */
 public static final String COLUMNNAME_ProductColumn = "ProductColumn";
 /** Set Sql SELECT.
@@ -654,13 +652,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="571c8b82-8a98-9f8b-7385-32d2f2e4f56e")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlSELECT_Name="Cláusula Select ";
+
+@XendraTrl(Identifier="571c8b82-8a98-9f8b-7385-32d2f2e4f56e")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlSELECT_Description="Seleccione la cláusula";
 
 @XendraTrl(Identifier="571c8b82-8a98-9f8b-7385-32d2f2e4f56e")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlSELECT_Help="La Cláusula Select indica la cláusula SQL SELECT a usar para seleccionar el registro en un cálculo de medida";
-
-@XendraTrl(Identifier="571c8b82-8a98-9f8b-7385-32d2f2e4f56e")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlSELECT_Name="Cláusula Select ";
 
 @XendraField(AD_Column_ID="SelectClause",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -678,7 +676,7 @@ DefaultValue="SELECT ... FROM ...",IsKey=false,IsInternal=false,IsParent=false,I
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2e047e6f-1531-3cb3-a785-0c7b96547300",Synchronized="2017-08-05 16:55:42.0")
+Identifier="2e047e6f-1531-3cb3-a785-0c7b96547300",Synchronized="2019-08-30 22:23:37.0")
 /** Column name SelectClause */
 public static final String COLUMNNAME_SelectClause = "SelectClause";
 /** Set Sql WHERE.
@@ -698,13 +696,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="99f6ee40-8c27-3e74-863f-1e568a73dd2c")
+public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlWHERE_Name="Cláusula Where SQL";
+
+@XendraTrl(Identifier="99f6ee40-8c27-3e74-863f-1e568a73dd2c")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlWHERE_Description="Cláusula WHERE completamente calificada";
 
 @XendraTrl(Identifier="99f6ee40-8c27-3e74-863f-1e568a73dd2c")
 public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlWHERE_Help="La cláusula Where indica la cláusula SQL WHERE a usar para la selección del registro";
-
-@XendraTrl(Identifier="99f6ee40-8c27-3e74-863f-1e568a73dd2c")
-public static String es_PE_FIELD_PerformanceMeasureCalculation_SqlWHERE_Name="Cláusula Where SQL";
 
 @XendraField(AD_Column_ID="WhereClause",IsCentrallyMaintained=true,
 AD_Tab_ID="e1901153-6971-2152-cebc-3fef17ea2905",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -722,7 +720,7 @@ DefaultValue="WHERE ...",IsKey=false,IsInternal=false,IsParent=false,IsMandatory
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c314432f-aecb-892a-1e4c-b54f3dbcf183",Synchronized="2017-08-05 16:55:42.0")
+Identifier="c314432f-aecb-892a-1e4c-b54f3dbcf183",Synchronized="2019-08-30 22:23:37.0")
 /** Column name WhereClause */
 public static final String COLUMNNAME_WhereClause = "WhereClause";
 }

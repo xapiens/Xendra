@@ -17,13 +17,15 @@
 package org.columba.core.gui.util;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.columba.core.command.TaskManager;
 import org.columba.core.command.TaskManagerEvent;
 import org.columba.core.command.TaskManagerListener;
-import org.columba.core.gui.base.AnimatedGIFComponent;
 import org.columba.core.resourceloader.ImageLoader;
 
 /**
@@ -40,16 +42,16 @@ public class ThrobberIcon extends JPanel implements TaskManagerListener {
 
 	private TaskManager taskManager;
 
-	private AnimatedGIFComponent comp;
+	JLabel comp = null;
+	//private AnimatedGIFComponent comp;
 
 	public ThrobberIcon() {
 		super();
-
 		setLayout(new BorderLayout());
-
-		comp = new AnimatedGIFComponent(ImageLoader
-				.getMiscIcon("Throbber.gif").getImage(), ImageLoader
-				.getMiscIcon("Throbber.png").getImage());
+		ImageIcon img = new ImageIcon(ImageLoader.getMiscIcon("Throbber.png").getImage());
+		comp = new JLabel(img);
+		//comp = new AnimatedGIFComponent(ImageLoader
+		//		.getMiscIcon("Throbber.png").getImage(), ImageLoader.getMiscIcon("Throbber.png").getImage());
 		add(comp, BorderLayout.CENTER);
 
 		// register interested on changes in the running worker list
@@ -64,30 +66,30 @@ public class ThrobberIcon extends JPanel implements TaskManagerListener {
 		return isRequestFocusEnabled();
 	}
 
-	public void start() {
-		comp.go();
-	}
-
-	public void stop() {
-		comp.stop();
-
-	}
+//	public void start() {
+//		comp.go();
+//	}
+//
+//	public void stop() {
+//		comp.stop();
+//
+//	}
 
 	public void workerAdded(TaskManagerEvent e) {
-		update();
+		//update();
 	}
 
 	public void workerRemoved(TaskManagerEvent e) {
-		update();
+		//update();
 	}
 
-	protected void update() {
-		// just the animation, if there are more than zero
-		// workers running
-		if (taskManager.count() > 0) {
-			start();
-		} else {
-			stop();
-		}
-	}
+//	protected void update() {
+//		// just the animation, if there are more than zero
+//		// workers running
+//		if (taskManager.count() > 0) {
+//			start();
+//		} else {
+//			stop();
+//		}
+//	}
 }

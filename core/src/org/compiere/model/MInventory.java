@@ -22,8 +22,9 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
+import org.compiere.model.persistence.X_AD_MessageFormat;
+import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.model.persistence.X_M_Inventory;
-import org.compiere.model.persistence.X_M_InventoryLine;
 import org.compiere.model.persistence.X_M_StockTaking;
 import org.compiere.model.persistence.X_M_StockTakingLine;
 import org.compiere.model.reference.REF__DocumentAction;
@@ -33,6 +34,11 @@ import org.compiere.model.reference.REF_M_TransactionMovementType;
 import org.compiere.model.reference.REF__MMPolicy;
 import org.compiere.process.*;
 import org.compiere.util.*;
+import org.kie.api.KieBase;
+import org.kie.api.runtime.KieSession;
+import org.xendra.messages.MessageQ;
+import org.xendra.rules.CustomAgendaEventListener;
+import org.xendra.rules.CustomWorkingMemoryEventListener;
 
 /**
  *  Physical Inventory Model
@@ -62,8 +68,8 @@ public class MInventory extends X_M_Inventory implements DocAction
 
 	/**	Cache						*/
 	private static CCache<Integer,MInventory> s_cache = new CCache<Integer,MInventory>("M_Inventory", 5, 5);
-	
-	
+
+
 	/**
 	 * 	Standard Constructor
 	 *	@param ctx context 
@@ -75,8 +81,8 @@ public class MInventory extends X_M_Inventory implements DocAction
 		super (ctx, M_Inventory_ID, trxName);
 		if (M_Inventory_ID == 0)
 		{
-		//	setName (null);
-		//  setM_Warehouse_ID (0);		//	FK
+			//	setName (null);
+			//  setM_Warehouse_ID (0);		//	FK
 			setMovementDate (new Timestamp(System.currentTimeMillis()));
 			setDocAction (REF__DocumentAction.Complete);	// CO
 			setDocStatus (REF__DocumentStatus.Drafted);	// DR
@@ -108,11 +114,11 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setClientOrg(wh);
 		setM_Warehouse_ID(wh.getM_Warehouse_ID());
 	}	//	MInventory
-	
-	
+
+
 	/**	Lines						*/
 	private MInventoryLine[]	m_lines = null;
-	
+
 	/**
 	 * 	Get Lines
 	 *	@param requery requery
@@ -149,12 +155,12 @@ public class MInventory extends X_M_Inventory implements DocAction
 		{
 			pstmt = null;
 		}
-		
+
 		m_lines = new MInventoryLine[list.size ()];
 		list.toArray (m_lines);
 		return m_lines;
 	}	//	getLines
-	
+
 	/**
 	 * 	Add to Description
 	 *	@param description text
@@ -167,7 +173,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		else
 			setDescription(desc + " | " + description);
 	}	//	addDescription
-	
+
 	/**
 	 * 	Overwrite Client/Org - from Import.
 	 * 	@param AD_Client_ID client
@@ -186,12 +192,12 @@ public class MInventory extends X_M_Inventory implements DocAction
 	{
 		StringBuffer sb = new StringBuffer ("MInventory[");
 		sb.append (get_ID())
-			.append ("-").append (getDocumentNo())
-			.append (",M_Warehouse_ID=").append(getM_Warehouse_ID())
-			.append ("]");
+		.append ("-").append (getDocumentNo())
+		.append (",M_Warehouse_ID=").append(getM_Warehouse_ID())
+		.append ("]");
 		return sb.toString ();
 	}	//	toString
-	
+
 	/**
 	 * 	Get Document Info
 	 *	@return document info (untranslated)
@@ -227,13 +233,13 @@ public class MInventory extends X_M_Inventory implements DocAction
 	 */
 	public File createPDF (File file)
 	{
-	//	ReportEngine re = ReportEngine.get (getCtx(), ReportEngine.INVOICE, getC_Invoice_ID());
-	//	if (re == null)
-			return null;
-	//	return re.getPDF(file);
+		//	ReportEngine re = ReportEngine.get (getCtx(), ReportEngine.INVOICE, getC_Invoice_ID());
+		//	if (re == null)
+		return null;
+		//	return re.getPDF(file);
 	}	//	createPDF
 
-	
+
 	/**
 	 * 	Before Save
 	 *	@param newRecord new
@@ -254,8 +260,8 @@ public class MInventory extends X_M_Inventory implements DocAction
 		}
 		return true;
 	}	//	beforeSave
-	
-	
+
+
 	/**
 	 * 	Set Processed.
 	 * 	Propergate to Lines/Taxes
@@ -267,14 +273,14 @@ public class MInventory extends X_M_Inventory implements DocAction
 		if (get_ID() == 0)
 			return;
 		String sql = "UPDATE M_InventoryLine SET Processed='"
-			+ (processed ? "Y" : "N")
-			+ "' WHERE M_Inventory_ID=" + getM_Inventory_ID();
+				+ (processed ? "Y" : "N")
+				+ "' WHERE M_Inventory_ID=" + getM_Inventory_ID();
 		int noLine = DB.executeUpdate(sql, get_TrxName());
 		m_lines = null;
 		log.fine("Processed=" + processed + " - Lines=" + noLine);
 	}	//	setProcessed
 
-	
+
 	/**************************************************************************
 	 * 	Process document
 	 *	@param processAction document action
@@ -286,12 +292,26 @@ public class MInventory extends X_M_Inventory implements DocAction
 		DocumentEngine engine = new DocumentEngine (this, getDocStatus());
 		return engine.processIt (processAction, getDocAction());
 	}	//	processIt
-	
+
 	/**	Process Message 			*/
 	private String		m_processMsg = null;
 	/**	Just Prepared Flag			*/
 	private boolean		m_justPrepared = false;
 
+	private String rulestatus;	
+	private KieSession ksession;
+
+	public String getRulestatus() {
+		return rulestatus;
+	}
+
+	public void setRulestatus(String rulestatus) {		
+		if (rulestatus.compareTo(DocAction.STATUS_Completed) == 0 || 
+				rulestatus.compareTo(DocAction.STATUS_WaitingPayment) == 0 && 
+				getProcessMsg() == null)
+			setProcessed(true);
+		this.rulestatus = rulestatus;
+	}	
 	//private String MOVEMENTTYPE_InventoryIn = "I+";
 	//private String MOVEMENTTYPE_InventoryOut = "I-";
 	/**
@@ -304,7 +324,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setProcessing(false);
 		return true;
 	}	//	unlockIt
-	
+
 	/**
 	 * 	Invalidate Document
 	 * 	@return true if success 
@@ -315,12 +335,45 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setDocAction(REF__DocumentAction.Prepare);
 		return true;
 	}	//	invalidateIt
-	
+
+
+	public String prepareIt()
+	{						
+		log.info(toString());
+		setProcessMsg(ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE));
+		if (getProcessMsg() != null)
+			return DocAction.STATUS_Invalid;
+
+		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
+		int AD_Rule_ID = dt.getAD_Rule_ID();		
+		KieBase kb = Env.startRule(AD_Rule_ID);
+		if (kb != null)
+		{
+			ksession = kb.newKieSession();
+			//ksession.addEventListener(new DebugAgendaEventListener());
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());
+			ksession.setGlobal("ctx", Env.getCtx());								
+			ksession.insert(this);			
+		}		
+		else
+		{
+			setProcessMsg(String.format("%s %s %s", Env.getKieError(AD_Rule_ID), dt.getC_DocType_ID(), dt.getName()));
+			if (getProcessMsg() != null)
+				return DocAction.STATUS_Invalid;
+		}		
+		setRulestatus(DocAction.STATUS_InProgress);
+		ksession.getAgenda().getAgendaGroup( "prepare" ).setFocus();
+		ksession.fireAllRules();		
+		ksession.dispose();
+		return rulestatus;
+	}		
 	/**
 	 *	Prepare Document
 	 * 	@return new status (In Progress or Invalid) 
 	 */
-	public String prepareIt()
+	public String prepareIt2()
 	{
 		log.info(toString());
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE);
@@ -328,7 +381,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 			return DocAction.STATUS_Invalid;
 
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getMovementDate(), REF_C_DocTypeDocBaseType.MaterialPhysicalInventory, Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getMovementDate(), REF_C_DocTypeDocBaseType.MaterialPhysicalInventory, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -341,8 +394,8 @@ public class MInventory extends X_M_Inventory implements DocAction
 		}
 
 		//	TODO: Add up Amounts
-	//	setApprovalAmt();
-		
+		//	setApprovalAmt();
+
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_PREPARE);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
@@ -352,7 +405,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 			setDocAction(REF__DocumentAction.Complete);
 		return DocAction.STATUS_InProgress;
 	}	//	prepareIt
-	
+
 	/**
 	 * 	Approve Document
 	 * 	@return true if success 
@@ -363,7 +416,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setIsApproved(true);
 		return true;
 	}	//	approveIt
-	
+
 	/**
 	 * 	Reject Approval
 	 * 	@return true if success 
@@ -394,12 +447,78 @@ public class MInventory extends X_M_Inventory implements DocAction
 		log.info(toString());
 		return DocAction.STATUS_Returned;
 	}	//	returnedIt	
-	
+
+	public String completeIt()
+	{
+		if (!m_justPrepared) {
+			String status = prepareIt();
+			if (!DocAction.STATUS_InProgress.equals(status))
+				return status;
+		}		
+		setProcessMsg(ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_COMPLETE));
+		if (getProcessMsg() != null)
+		{
+			System.out.println("status invalid");
+			return DocAction.STATUS_Invalid;
+		}				
+
+		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
+		int AD_Rule_ID = dt.getAD_Rule_ID();	
+		log.log(Level.WARNING, String.format("ruling movement <%s>", getDocumentNo()));
+		KieBase kb = Env.startRule(AD_Rule_ID);
+		if (kb != null)
+		{
+			ksession = kb.newKieSession();
+			List<Integer> channels = Env.getChannels(AD_Rule_ID);
+			if (channels.size() > 0) {
+				for (Integer channel:channels) {
+					X_AD_Rule rulechannel = new Query(Env.getCtx(), X_AD_Rule.Table_Name, "AD_Rule_ID = ?", null)
+					.setParameters(channel).first();
+					if (rulechannel != null) {
+						HashMap props = rulechannel.getProperties();
+						String name = rulechannel.getName();
+						if (props.containsKey(X_AD_MessageFormat.COLUMNNAME_AD_MessageFormat_ID)) {
+							Integer messageid = Integer.valueOf(props.get(X_AD_MessageFormat.COLUMNNAME_AD_MessageFormat_ID).toString());
+							MMessageFormat format = new Query(Env.getCtx(), X_AD_MessageFormat.Table_Name, "AD_MessageFormat_ID = ?", null)
+							.setParameters(messageid).first();
+							if (format != null) {
+								MessageQ messageq = new MessageQ();
+								messageq.setMessageFormat(format);								
+								ksession.registerChannel(name, messageq);	
+							}							
+						}						
+					}						
+				}				
+			}			
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
+			ksession.setGlobal("ctx", Env.getCtx());								
+			ksession.insert(this);			
+		}		
+		else
+		{
+			String error = String.format("%s en %s", Env.getKieError(AD_Rule_ID), dt.getName()); 						
+			setProcessMsg(error);
+			if (getProcessMsg() != null)
+				return DocAction.STATUS_Invalid;
+		}		
+		ksession.getAgenda().getAgendaGroup( "complete" ).setFocus();
+		setRulestatus(DocAction.STATUS_Completed);		
+		ksession.fireAllRules();	
+		if (rulestatus.equals(DocAction.STATUS_Completed)) {
+			ksession.getAgenda().getAgendaGroup( "post" ).setFocus();
+			ksession.fireAllRules();
+		}
+		ksession.dispose();
+		return rulestatus;
+	}	
+
 	/**
 	 * 	Complete Document
 	 * 	@return new status (Complete, In Progress, Invalid, Waiting ..)
 	 */
-	public String completeIt()
+	public String completeIt2()
 	{
 		//	Re-Check
 		if (!m_justPrepared)
@@ -408,7 +527,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 			if (!DocAction.STATUS_InProgress.equals(status))
 				return status;
 		}
-		
+
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_COMPLETE);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
@@ -417,28 +536,28 @@ public class MInventory extends X_M_Inventory implements DocAction
 		if (!isApproved())
 			approveIt();
 		log.info(toString());
-        
+
 		MAcctSchema as = MClient.get(getCtx(), getAD_Client_ID()).getAcctSchema();
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();
-        //vpj-cd begin e-evolution recalculate the attribute instances and qty.
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
+		//vpj-cd begin e-evolution recalculate the attribute instances and qty.
 		List<Integer> StockTaking = new ArrayList<Integer>();
 		MInventoryLine[] lines = getLines(false);
-        for (MInventoryLine line : lines)
+		for (MInventoryLine line : lines)
 		{
 			if (!line.isActive())
 				continue;
-			
+
 			X_M_StockTakingLine stl = new Query(Env.getCtx(), X_M_StockTakingLine.Table_Name, "M_InventoryLine_ID = ?", get_TrxName())
-				.setParameters(line.getM_InventoryLine_ID()).first();
-			
+			.setParameters(line.getM_InventoryLine_ID()).first();
+
 			if (stl != null)
 			{
 				if(!StockTaking.contains(stl.getM_StockTaking_ID()))
 					StockTaking.add(stl.getM_StockTaking_ID());
 			}
-			
+
 			MProduct product = line.getProduct();
-			
+
 			//Get Quantity to Inventory Inernal Use
 			BigDecimal qtyDiff = line.getQtyInternalUse().negate();
 			//If Quantity to Inventory Internal Use = Zero Then is Physical Inventory  Else is  Inventory Internal Use 
@@ -488,7 +607,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 						}
 
 						String m_MovementType =null;
-						
+
 						if(QtyMA.negate().compareTo(Env.ZERO) > 0 )
 							m_MovementType = REF_M_TransactionMovementType.InventoryIn;
 						else
@@ -529,15 +648,15 @@ public class MInventory extends X_M_Inventory implements DocAction
 				}	//	Fallback
 			}	//	stock movement				
 		}
-        if (StockTaking.size() > 0)
-        {
-        	for (Integer stocktaking:StockTaking)
-        	{
-        		X_M_StockTaking st = new X_M_StockTaking(Env.getCtx(), stocktaking, get_TrxName());
-        		st.setProcessed(true);
-        		st.save();
-        	}
-        }                       
+		if (StockTaking.size() > 0)
+		{
+			for (Integer stocktaking:StockTaking)
+			{
+				X_M_StockTaking st = new X_M_StockTaking(Env.getCtx(), stocktaking, get_TrxName());
+				st.setProcessed(true);
+				st.save();
+			}
+		}                       
 		//
 		setProcessed(true);
 		setIsCosted(false);
@@ -545,214 +664,210 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setDocAction(REF__DocumentAction.Close);
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
-	
-        
-    	/**
-    	 * 	Check Material Policy.
-    	 */
-    	private void checkMaterialPolicy(MInventoryLine line, BigDecimal qtyDiff)
-    	{
-    		int no = MInventoryLineMA.deleteInventoryLineMA(line.getM_InventoryLine_ID(), get_TrxName());
-    		if (no > 0)
-    			log.config("Delete old #" + no);
 
-    		//	Check Line
-    		boolean needSave = false;
-    		//	Attribute Set Instance
-    		if (line.getM_AttributeSetInstance_ID() == 0)
-    		{
-    			MProduct product = MProduct.get(getCtx(), line.getM_Product_ID(), get_TrxName());
-    			if (qtyDiff.signum() > 0)	//	Incoming Trx
-    			{
-    				MAttributeSetInstance asi = null;
-    				//auto balance negative on hand
-    				MStorage[] storages = MStorage.getWarehouse(getCtx(), getM_Warehouse_ID(), line.getM_Product_ID(), 0,
-    						null, REF__MMPolicy.FiFo.equals(product.getMMPolicy()), false, line.getM_Locator_ID(), get_TrxName());
-    				for (MStorage storage : storages)
-    				{
-    					if (storage.getQtyOnHand().signum() < 0)
-    					{
-    						asi = new MAttributeSetInstance(getCtx(), storage.getM_AttributeSetInstance_ID(), get_TrxName());
-    						break;
-    					}
-    				}
-    				if (asi == null)
-    				{
-    					asi = MAttributeSetInstance.create(getCtx(), product, get_TrxName());
-    				}
-    				line.setM_AttributeSetInstance_ID(asi.getM_AttributeSetInstance_ID());
-    				needSave = true;
-    			}
-    			else	//	Outgoing Trx
-    			{
-    				String MMPolicy = product.getMMPolicy();
-    				if (line.getM_Product_ID() == 1044852)
-    				{
-    					System.out.println("X");
-    				}
-    				MStorage[] storages = MStorage.getWarehouse(getCtx(), getM_Warehouse_ID(), line.getM_Product_ID(), 0,
-    						null, REF__MMPolicy.FiFo.equals(MMPolicy), true, line.getM_Locator_ID(), get_TrxName());
 
-    				BigDecimal qtyToDeliver = qtyDiff.negate();
+	/**
+	 * 	Check Material Policy.
+	 */
+	private void checkMaterialPolicy(MInventoryLine line, BigDecimal qtyDiff)
+	{
+		int no = MInventoryLineMA.deleteInventoryLineMA(line.getM_InventoryLine_ID(), get_TrxName());
+		if (no > 0)
+			log.config("Delete old #" + no);
 
-    				for (MStorage storage: storages)
-    				{					
-    					if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
-    					{
-    						MInventoryLineMA ma = new MInventoryLineMA (line, 
-    								storage.getM_AttributeSetInstance_ID(),
-    								qtyToDeliver);
-    						ma.saveEx();		
-    						qtyToDeliver = Env.ZERO;
-    						log.fine( ma + ", QtyToDeliver=" + qtyToDeliver);		
-    					}
-    					else
-    					{	
-    						MInventoryLineMA ma = new MInventoryLineMA (line, 
-    								storage.getM_AttributeSetInstance_ID(),
-    								storage.getQtyOnHand());
-    						ma.saveEx();	
-    						qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
-    						log.fine( ma + ", QtyToDeliver=" + qtyToDeliver);		
-    					}
-    					if (qtyToDeliver.signum() == 0)
-    						break;
-    				}
+		//	Check Line
+		boolean needSave = false;
+		//	Attribute Set Instance
+		if (line.getM_AttributeSetInstance_ID() == 0)
+		{
+			MProduct product = MProduct.get(getCtx(), line.getM_Product_ID(), get_TrxName());
+			if (qtyDiff.signum() > 0)	//	Incoming Trx
+			{
+				MAttributeSetInstance asi = null;
+				//auto balance negative on hand
+				MStorage[] storages = MStorage.getWarehouse(getCtx(), getM_Warehouse_ID(), line.getM_Product_ID(), 0,
+						null, REF__MMPolicy.FiFo.equals(product.getMMPolicy()), false, line.getM_Locator_ID(), get_TrxName());
+				for (MStorage storage : storages)
+				{
+					if (storage.getQtyOnHand().signum() < 0)
+					{
+						asi = new MAttributeSetInstance(getCtx(), storage.getM_AttributeSetInstance_ID(), get_TrxName());
+						break;
+					}
+				}
+				if (asi == null)
+				{
+					asi = MAttributeSetInstance.create(getCtx(), product, get_TrxName());
+				}
+				line.setM_AttributeSetInstance_ID(asi.getM_AttributeSetInstance_ID());
+				needSave = true;
+			}
+			else	//	Outgoing Trx
+			{
+				String MMPolicy = product.getMMPolicy();
+				MStorage[] storages = MStorage.getWarehouse(getCtx(), getM_Warehouse_ID(), line.getM_Product_ID(), 0,
+						null, REF__MMPolicy.FiFo.equals(MMPolicy), true, line.getM_Locator_ID(), get_TrxName());
 
-    				//	No AttributeSetInstance found for remainder
-    				if (qtyToDeliver.signum() != 0)
-    				{
-    					//deliver using new asi
-    					MAttributeSetInstance asi = MAttributeSetInstance.create(getCtx(), product, get_TrxName());
-    					int M_AttributeSetInstance_ID = asi.getM_AttributeSetInstance_ID();
-    					MInventoryLineMA ma = new MInventoryLineMA (line, M_AttributeSetInstance_ID , qtyToDeliver);
+				BigDecimal qtyToDeliver = qtyDiff.negate();
 
-    					ma.saveEx();
-    					log.fine("##: " + ma);
-    				}
-    			}	//	outgoing Trx
+				for (MStorage storage: storages)
+				{					
+					if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
+					{
+						MInventoryLineMA ma = new MInventoryLineMA (line, 
+								storage.getM_AttributeSetInstance_ID(),
+								qtyToDeliver);
+						ma.saveEx();		
+						qtyToDeliver = Env.ZERO;
+						log.fine( ma + ", QtyToDeliver=" + qtyToDeliver);		
+					}
+					else
+					{	
+						MInventoryLineMA ma = new MInventoryLineMA (line, 
+								storage.getM_AttributeSetInstance_ID(),
+								storage.getQtyOnHand());
+						ma.saveEx();	
+						qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
+						log.fine( ma + ", QtyToDeliver=" + qtyToDeliver);		
+					}
+					if (qtyToDeliver.signum() == 0)
+						break;
+				}
 
-    			if (needSave)
-    			{
-    				line.saveEx();
-    			}
-    		}	//	for all lines
+				//	No AttributeSetInstance found for remainder
+				if (qtyToDeliver.signum() != 0)
+				{
+					//deliver using new asi
+					MAttributeSetInstance asi = MAttributeSetInstance.create(getCtx(), product, get_TrxName());
+					int M_AttributeSetInstance_ID = asi.getM_AttributeSetInstance_ID();
+					MInventoryLineMA ma = new MInventoryLineMA (line, M_AttributeSetInstance_ID , qtyToDeliver);
 
-    	}	//	checkMaterialPolicy
-	
-//	/**
-//	 * 	Check Material Policy.
-//	 * 	(NOT USED)
-//	 * 	Sets line ASI
-//	 */
-//	private void checkMaterialPolicy()
-//	{
-//		int no = MInventoryLineMA.deleteInventoryMA(getM_Inventory_ID(), get_TrxName());
-//		if (no > 0)
-//			log.config("Delete old #" + no);
-//		MInventoryLine[] lines = getLines(false);
-//		
-//		//	Incoming Trx
-//		MClient client = MClient.get(getCtx());
-//		
-//		//	Check Lines
-//		for (int i = 0; i < lines.length; i++)
-//		{
-//			MInventoryLine line = lines[i];
-//			boolean needSave = false;
-//
-//			//	Attribute Set Instance
-//			if (line.getM_AttributeSetInstance_ID() == 0)
-//			{
-//				MProduct product = MProduct.get(getCtx(), line.getM_Product_ID());
-//				BigDecimal qtyDiff = line.getQtyInternalUse().negate();
-//				if (Env.ZERO.compareTo(qtyDiff) == 0)
-//					qtyDiff = line.getQtyCount().subtract(line.getQtyBook());
-//				log.fine("Count=" + line.getQtyCount()
-//					+ ",Book=" + line.getQtyBook() + ", Difference=" + qtyDiff); 
-//				if (qtyDiff.signum() > 0)	//	In
-//				{
-//					MAttributeSetInstance asi = new MAttributeSetInstance(getCtx(), 0, get_TrxName());
-//					asi.setClientOrg(getAD_Client_ID(), 0);
-//					asi.setM_AttributeSet_ID(product.getM_AttributeSet_ID());
-//					if (asi.save())
-//					{
-//						line.setM_AttributeSetInstance_ID(asi.getM_AttributeSetInstance_ID());
-//						needSave = true;
-//					}
-//				}
-//				else	//	Outgoing Trx
-//				{
-//					MProductCategory pc = MProductCategory.get(getCtx(), product.getM_Product_Category_ID());
-//					String MMPolicy = pc.getMMPolicy();
-//					if (MMPolicy == null || MMPolicy.length() == 0)
-//						MMPolicy = client.getMMPolicy();
-//					//
-//					MStorage[] storages = MStorage.getAllWithASI(getCtx(), 
-//						line.getM_Product_ID(),	line.getM_Locator_ID(), 
-//						REF__MMPolicy.FiFo.equals(MMPolicy), get_TrxName());
-//					BigDecimal qtyToDeliver = qtyDiff.negate();
-//					for (int ii = 0; ii < storages.length; ii++)
-//					{
-//						MStorage storage = storages[ii];
-//						if (ii == 0)
-//						{
-//							if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
-//							{
-//								line.setM_AttributeSetInstance_ID(storage.getM_AttributeSetInstance_ID());
-//								needSave = true;
-//								log.config("Direct - " + line);
-//								qtyToDeliver = Env.ZERO;
-//							}
-//							else
-//							{
-//								log.config("Split - " + line);
-//								MInventoryLineMA ma = new MInventoryLineMA (line, 
-//									storage.getM_AttributeSetInstance_ID(),
-//									storage.getQtyOnHand().negate());
-//								if (!ma.save())
-//									;
-//								qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
-//								log.fine("#" + ii + ": " + ma + ", QtyToDeliver=" + qtyToDeliver);
-//							}
-//						}
-//						else	//	 create addl material allocation
-//						{
-//							MInventoryLineMA ma = new MInventoryLineMA (line, 
-//								storage.getM_AttributeSetInstance_ID(),
-//								qtyToDeliver.negate());
-//							if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
-//								qtyToDeliver = Env.ZERO;
-//							else
-//							{
-//								ma.setMovementQty(storage.getQtyOnHand().negate());
-//								qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
-//							}
-//							if (!ma.save())
-//								;
-//							log.fine("#" + ii + ": " + ma + ", QtyToDeliver=" + qtyToDeliver);
-//						}
-//						if (qtyToDeliver.signum() == 0)
-//							break;
-//					}	//	 for all storages
-//					
-//					//	No AttributeSetInstance found for remainder
-//					if (qtyToDeliver.signum() != 0)
-//					{
-//						MInventoryLineMA ma = new MInventoryLineMA (line, 
-//							0, qtyToDeliver.negate());
-//						if (!ma.save())
-//							;
-//						log.fine("##: " + ma);
-//					}
-//				}	//	outgoing Trx
-//			}	//	attributeSetInstance
-//			
-//			if (needSave && !line.save())
-//				log.severe("NOT saved " + line);
-//		}	//	for all lines
-//
-//	}	//	checkMaterialPolicy
+					ma.saveEx();
+					log.fine("##: " + ma);
+				}
+			}	//	outgoing Trx
+
+			if (needSave)
+			{
+				line.saveEx();
+			}
+		}	//	for all lines
+
+	}	//	checkMaterialPolicy
+
+	//	/**
+	//	 * 	Check Material Policy.
+	//	 * 	(NOT USED)
+	//	 * 	Sets line ASI
+	//	 */
+	//	private void checkMaterialPolicy()
+	//	{
+	//		int no = MInventoryLineMA.deleteInventoryMA(getM_Inventory_ID(), get_TrxName());
+	//		if (no > 0)
+	//			log.config("Delete old #" + no);
+	//		MInventoryLine[] lines = getLines(false);
+	//		
+	//		//	Incoming Trx
+	//		MClient client = MClient.get(getCtx());
+	//		
+	//		//	Check Lines
+	//		for (int i = 0; i < lines.length; i++)
+	//		{
+	//			MInventoryLine line = lines[i];
+	//			boolean needSave = false;
+	//
+	//			//	Attribute Set Instance
+	//			if (line.getM_AttributeSetInstance_ID() == 0)
+	//			{
+	//				MProduct product = MProduct.get(getCtx(), line.getM_Product_ID());
+	//				BigDecimal qtyDiff = line.getQtyInternalUse().negate();
+	//				if (Env.ZERO.compareTo(qtyDiff) == 0)
+	//					qtyDiff = line.getQtyCount().subtract(line.getQtyBook());
+	//				log.fine("Count=" + line.getQtyCount()
+	//					+ ",Book=" + line.getQtyBook() + ", Difference=" + qtyDiff); 
+	//				if (qtyDiff.signum() > 0)	//	In
+	//				{
+	//					MAttributeSetInstance asi = new MAttributeSetInstance(getCtx(), 0, get_TrxName());
+	//					asi.setClientOrg(getAD_Client_ID(), 0);
+	//					asi.setM_AttributeSet_ID(product.getM_AttributeSet_ID());
+	//					if (asi.save())
+	//					{
+	//						line.setM_AttributeSetInstance_ID(asi.getM_AttributeSetInstance_ID());
+	//						needSave = true;
+	//					}
+	//				}
+	//				else	//	Outgoing Trx
+	//				{
+	//					MProductCategory pc = MProductCategory.get(getCtx(), product.getM_Product_Category_ID());
+	//					String MMPolicy = pc.getMMPolicy();
+	//					if (MMPolicy == null || MMPolicy.length() == 0)
+	//						MMPolicy = client.getMMPolicy();
+	//					//
+	//					MStorage[] storages = MStorage.getAllWithASI(getCtx(), 
+	//						line.getM_Product_ID(),	line.getM_Locator_ID(), 
+	//						REF__MMPolicy.FiFo.equals(MMPolicy), get_TrxName());
+	//					BigDecimal qtyToDeliver = qtyDiff.negate();
+	//					for (int ii = 0; ii < storages.length; ii++)
+	//					{
+	//						MStorage storage = storages[ii];
+	//						if (ii == 0)
+	//						{
+	//							if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
+	//							{
+	//								line.setM_AttributeSetInstance_ID(storage.getM_AttributeSetInstance_ID());
+	//								needSave = true;
+	//								log.config("Direct - " + line);
+	//								qtyToDeliver = Env.ZERO;
+	//							}
+	//							else
+	//							{
+	//								log.config("Split - " + line);
+	//								MInventoryLineMA ma = new MInventoryLineMA (line, 
+	//									storage.getM_AttributeSetInstance_ID(),
+	//									storage.getQtyOnHand().negate());
+	//								if (!ma.save())
+	//									;
+	//								qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
+	//								log.fine("#" + ii + ": " + ma + ", QtyToDeliver=" + qtyToDeliver);
+	//							}
+	//						}
+	//						else	//	 create addl material allocation
+	//						{
+	//							MInventoryLineMA ma = new MInventoryLineMA (line, 
+	//								storage.getM_AttributeSetInstance_ID(),
+	//								qtyToDeliver.negate());
+	//							if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
+	//								qtyToDeliver = Env.ZERO;
+	//							else
+	//							{
+	//								ma.setMovementQty(storage.getQtyOnHand().negate());
+	//								qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
+	//							}
+	//							if (!ma.save())
+	//								;
+	//							log.fine("#" + ii + ": " + ma + ", QtyToDeliver=" + qtyToDeliver);
+	//						}
+	//						if (qtyToDeliver.signum() == 0)
+	//							break;
+	//					}	//	 for all storages
+	//					
+	//					//	No AttributeSetInstance found for remainder
+	//					if (qtyToDeliver.signum() != 0)
+	//					{
+	//						MInventoryLineMA ma = new MInventoryLineMA (line, 
+	//							0, qtyToDeliver.negate());
+	//						if (!ma.save())
+	//							;
+	//						log.fine("##: " + ma);
+	//					}
+	//				}	//	outgoing Trx
+	//			}	//	attributeSetInstance
+	//			
+	//			if (needSave && !line.save())
+	//				log.severe("NOT saved " + line);
+	//		}	//	for all lines
+	//
+	//	}	//	checkMaterialPolicy
 
 	/**
 	 * 	Void Document.
@@ -765,10 +880,10 @@ public class MInventory extends X_M_Inventory implements DocAction
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_VOID);
 		if (m_processMsg != null)
 			return false;
-		
+
 		if (REF__DocumentStatus.Closed.equals(getDocStatus())
-			|| REF__DocumentStatus.Reversed.equals(getDocStatus())
-			|| REF__DocumentStatus.Voided.equals(getDocStatus()))
+				|| REF__DocumentStatus.Reversed.equals(getDocStatus())
+				|| REF__DocumentStatus.Voided.equals(getDocStatus()))
 		{
 			m_processMsg = "Document Closed: " + getDocStatus();
 			return false;
@@ -776,10 +891,10 @@ public class MInventory extends X_M_Inventory implements DocAction
 
 		//	Not Processed
 		if (REF__DocumentStatus.Drafted.equals(getDocStatus())
-			|| REF__DocumentStatus.Invalid.equals(getDocStatus())
-			|| REF__DocumentStatus.InProgress.equals(getDocStatus())
-			|| REF__DocumentStatus.Approved.equals(getDocStatus())
-			|| REF__DocumentStatus.NotApproved.equals(getDocStatus()) )
+				|| REF__DocumentStatus.Invalid.equals(getDocStatus())
+				|| REF__DocumentStatus.InProgress.equals(getDocStatus())
+				|| REF__DocumentStatus.Approved.equals(getDocStatus())
+				|| REF__DocumentStatus.NotApproved.equals(getDocStatus()) )
 		{
 			//	Set lines to 0
 			MInventoryLine[] lines = getLines(false);
@@ -789,7 +904,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 				BigDecimal oldCount = line.getQtyCount();
 				BigDecimal oldInternal = line.getQtyInternalUse();
 				if (oldCount.compareTo(line.getQtyBook()) != 0 
-					|| oldInternal.signum() != 0)
+						|| oldInternal.signum() != 0)
 				{
 					line.setQtyInternalUse(Env.ZERO);
 					line.setQtyCount(line.getQtyBook());
@@ -802,7 +917,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		{
 			return reverseCorrectIt();
 		}
-			
+
 		// After Void
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_VOID);
 		if (m_processMsg != null)
@@ -811,7 +926,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setDocAction(REF__DocumentAction.None);
 		return true;
 	}	//	voidIt
-	
+
 	/**
 	 * 	Close Document.
 	 * 	@return true if success 
@@ -831,7 +946,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setDocAction(REF__DocumentAction.None);
 		return true;
 	}	//	closeIt
-	
+
 	/**
 	 * 	Reverse Correction
 	 * 	@return false 
@@ -843,9 +958,9 @@ public class MInventory extends X_M_Inventory implements DocAction
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_REVERSECORRECT);
 		if (m_processMsg != null)
 			return false;
-				
+
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-		if (!MPeriod.isOpen(getCtx(), getMovementDate(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getMovementDate(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return false;
@@ -865,7 +980,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 			m_processMsg = "Could not create Inventory Reversal";
 			return false;
 		}
-		
+
 		//	Reverse Line Qty
 		MInventoryLine[] oLines = getLines(true);
 		for (int i = 0; i < oLines.length; i++)
@@ -896,7 +1011,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		reversal.setDocAction(REF__DocumentAction.None);
 		reversal.save();
 		m_processMsg = reversal.getDocumentNo();
-		
+
 		//	Update Reversed (this)
 		addDescription("(" + reversal.getDocumentNo() + "<-)");
 		// After reverseCorrect
@@ -906,10 +1021,10 @@ public class MInventory extends X_M_Inventory implements DocAction
 		setProcessed(true);
 		setDocStatus(REF__DocumentStatus.Reversed);	//	may come from void
 		setDocAction(REF__DocumentAction.None);
-		
+
 		return true;
 	}	//	reverseCorrectionIt
-	
+
 	/**
 	 * 	Reverse Accrual
 	 * 	@return false 
@@ -921,15 +1036,15 @@ public class MInventory extends X_M_Inventory implements DocAction
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_REVERSEACCRUAL);
 		if (m_processMsg != null)
 			return false;
-		
+
 		// After reverseAccrual
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_REVERSEACCRUAL);
 		if (m_processMsg != null)
 			return false;
-		
+
 		return false;
 	}	//	reverseAccrualIt
-	
+
 	/** 
 	 * 	Re-activate
 	 * 	@return false 
@@ -941,16 +1056,16 @@ public class MInventory extends X_M_Inventory implements DocAction
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_REACTIVATE);
 		if (m_processMsg != null)
 			return false;	
-		
+
 		// After reActivate
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_REACTIVATE);
 		if (m_processMsg != null)
 			return false;
-		
+
 		return false;
 	}	//	reActivateIt
-	
-	
+
+
 	/*************************************************************************
 	 * 	Get Summary
 	 *	@return Summary of Document
@@ -961,14 +1076,14 @@ public class MInventory extends X_M_Inventory implements DocAction
 		sb.append(getDocumentNo());
 		//	: Total Lines = 123.00 (#1)
 		sb.append(": ")
-			.append(Msg.translate(getCtx(),"ApprovalAmt")).append("=").append(getApprovalAmt())
-			.append(" (#").append(getLines(false).length).append(")");
+		.append(Msg.translate(getCtx(),"ApprovalAmt")).append("=").append(getApprovalAmt())
+		.append(" (#").append(getLines(false).length).append(")");
 		//	 - Description
 		if (getDescription() != null && getDescription().length() > 0)
 			sb.append(" - ").append(getDescription());
 		return sb.toString();
 	}	//	getSummary
-	
+
 	/**
 	 * 	Get Process Message
 	 *	@return clear text error message
@@ -977,7 +1092,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 	{
 		return m_processMsg;
 	}	//	getProcessMsg
-	
+
 	/**
 	 * 	Get Document Owner (Responsible)
 	 *	@return AD_User_ID
@@ -986,21 +1101,21 @@ public class MInventory extends X_M_Inventory implements DocAction
 	{
 		return getUpdatedBy();
 	}	//	getDoc_User_ID
-	
+
 	/**
 	 * 	Get Document Currency
 	 *	@return C_Currency_ID
 	 */
 	public int getC_Currency_ID()
 	{
-	//	MPriceList pl = MPriceList.get(getCtx(), getM_PriceList_ID());
-	//	return pl.getC_Currency_ID();
+		//	MPriceList pl = MPriceList.get(getCtx(), getM_PriceList_ID());
+		//	return pl.getC_Currency_ID();
 		return 0;
 	}	//	getC_Currency_ID
-	
+
 	/** Reversal Flag		*/
 	private boolean m_reversal = false;
-	
+
 	/**
 	 * 	Set Reversal
 	 *	@param reversal reversal
@@ -1013,11 +1128,11 @@ public class MInventory extends X_M_Inventory implements DocAction
 	 * 	Is Reversal
 	 *	@return reversal
 	 */
-	private boolean isReversal()
+	public boolean isReversal()
 	{
 		return m_reversal;
 	}	//	isReversal
-		
+
 	/**
 	 * Create Cost Detail
 	 * @param line
@@ -1025,19 +1140,19 @@ public class MInventory extends X_M_Inventory implements DocAction
 	 * @return an EMPTY String on success otherwise an ERROR message
 	 */
 	// TODO: Verificar , CARLOS , YA no es llamada ya que cost detail no se usa.
-/*	private String createCostDetail(MInventoryLine line, int M_AttributeSetInstance_ID, BigDecimal qty)
+	/*	private String createCostDetail(MInventoryLine line, int M_AttributeSetInstance_ID, BigDecimal qty)
 	{
 		// Get Account Schemas to create MCostDetail
 		MAcctSchema[] acctschemas = MAcctSchema.getClientAcctSchema(getCtx(), getAD_Client_ID());
 		for(int asn = 0; asn < acctschemas.length; asn++)
 		{
 			MAcctSchema as = acctschemas[asn];
-			
+
 			if (as.isSkipOrg(getAD_Org_ID()) || as.isSkipOrg(line.getAD_Org_ID()))
 			{
 				continue;
 			}
-			
+
 			BigDecimal costs = Env.ZERO;
 			if (isReversal())
 			{				
@@ -1061,7 +1176,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 			{
 				return "No Costs for " + line.getProduct().getName();
 			}
-			
+
 			// Set Total Amount and Total Quantity from Inventory
 			MCostDetail.createInventory(as, line.getAD_Org_ID(), 
 					line.getM_Product_ID(), M_AttributeSetInstance_ID,
@@ -1069,7 +1184,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 					costs, qty,			
 					line.getDescription(), line.get_TrxName());
 		}
-		
+
 		return "";
 	}*/
 
@@ -1087,7 +1202,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 
 	@Override
 	public boolean RestoreIt() {
-		// TODO Auto-generated method stub
+		this.setProcessMsg("el restaurado de inventario no esta permitido");
 		return false;
 	}
 
@@ -1095,5 +1210,84 @@ public class MInventory extends X_M_Inventory implements DocAction
 	{
 		m_processMsg = msg;
 	}
-	
+
+	public int getLength()
+	{		
+		MInventoryLine[] lines = getLines(true);
+		return lines.length;
+	}
+
+	public Boolean updatestorage(MInventoryLine line)  {
+		try {			
+			Env.setContext(Env.getCtx(), "AD_Client_ID", getAD_Client_ID());
+			Integer C_Period_ID = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
+			BigDecimal qtyDiff = line.getQtyInternalUse().negate();
+			if (qtyDiff.signum() == 0)
+				qtyDiff = line.getQtyCount().subtract(line.getQtyBook());			
+			if (line.getM_AttributeSetInstance_ID() == 0 || qtyDiff.compareTo(BigDecimal.ZERO) == 0) {
+				MInventoryLineMA[] mas = MInventoryLineMA.get(Env.getCtx(), line.getM_InventoryLine_ID(), get_TrxName());
+				for (MInventoryLineMA ma:mas) {
+					BigDecimal QtyMA = ma.getMovementQty();
+					BigDecimal QtyNew = QtyMA.add(qtyDiff);
+					String error = MStorage.add(getCtx(), getM_Warehouse_ID(),
+							line.getM_Locator_ID(),
+							line.getM_Product_ID(),
+							ma.getM_AttributeSetInstance_ID(), 0,
+							QtyMA.negate(), BigDecimal.ZERO, BigDecimal.ZERO, false, 
+							C_Period_ID, 
+							"MInventory.completeit()", get_TrxName());
+					if (line.getQtyInternalUse().compareTo(BigDecimal.ZERO) == 0) {
+						MStorage storage =MStorage.get(getCtx(), line.getM_Locator_ID(),
+								line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), get_TrxName());
+						storage.setDateLastInventory(getMovementDate());
+						if (!storage.save(get_TrxName())) {
+							throw new Exception("Storage not updated");
+						}
+					}
+					String m_MovementType =null;
+					if (QtyMA.negate().compareTo(BigDecimal.ZERO) > 0 ) 
+						m_MovementType = REF_M_TransactionMovementType.InventoryIn;
+					else
+						m_MovementType = REF_M_TransactionMovementType.InventoryOut;
+					qtyDiff = QtyNew;
+				}
+				if (qtyDiff.compareTo(BigDecimal.ZERO) != 0) {
+					String error = MStorage.add(getCtx(), getM_Warehouse_ID(),
+							line.getM_Locator_ID(),
+							line.getM_Product_ID(),
+							line.getM_AttributeSetInstance_ID(), 0,
+							qtyDiff, BigDecimal.ZERO, BigDecimal.ZERO, false,
+							C_Period_ID,
+							"MInventory.completeIt()",
+							get_TrxName());					
+				}												
+			}
+			else {
+				String error = MStorage.add(getCtx(), getM_Warehouse_ID(),
+						line.getM_Locator_ID(),
+						line.getM_Product_ID(),
+						line.getM_AttributeSetInstance_ID(), 0,
+						qtyDiff, BigDecimal.ZERO, BigDecimal.ZERO, false,
+						C_Period_ID,
+						"MInventory.completeIt()",
+						get_TrxName());
+				if (line.getQtyInternalUse().compareTo(BigDecimal.ZERO) == 0) {
+					MStorage storage = MStorage.get(getCtx(), line.getM_Locator_ID(),
+							line.getM_Product_ID(), line.getM_AttributeSetInstance_ID(), get_TrxName());
+					storage.setDateLastInventory(getMovementDate());
+					if (!storage.save(get_TrxName())) {
+						throw new Exception("Storage not updated(2)");
+					}
+				}
+				String m_MovementType =null;
+				if (qtyDiff.compareTo(BigDecimal.ZERO) > 0 ) 
+					m_MovementType = REF_M_TransactionMovementType.InventoryIn;
+				else
+					m_MovementType = REF_M_TransactionMovementType.InventoryOut;
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 }	//	MInventory

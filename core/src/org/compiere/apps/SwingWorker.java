@@ -16,6 +16,8 @@
  *****************************************************************************/
 package org.compiere.apps;
 
+import java.util.HashMap;
+
 import javax.swing.*;
 
 /**
@@ -43,6 +45,8 @@ import javax.swing.*;
  */
 public abstract class SwingWorker
 {
+	private HashMap m_properties;
+
 	/**
 	 * Start a thread that will call the <code>construct</code> method
 	 * and then exit.
@@ -79,6 +83,14 @@ public abstract class SwingWorker
 		m_threadVar = new ThreadVar(t);
 	}   //  SwingWorker
 
+	public void setProperties(HashMap properties) {		
+		m_properties = properties;
+	}
+
+	public HashMap getProperties()  {
+		return m_properties;
+	}
+	
 	/** Worker Thread			*/
 	private ThreadVar   m_threadVar;
 	/** Return value			*/

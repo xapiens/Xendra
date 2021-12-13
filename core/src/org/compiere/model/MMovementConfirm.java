@@ -38,6 +38,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.compiere.db.CConnection;
 import org.compiere.interfaces.Status;
 import org.compiere.model.persistence.X_AD_Table;
+import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.model.persistence.X_M_MovementConfirm;
 import org.compiere.model.persistence.X_M_MovementLineConfirm;
 import org.compiere.model.persistence.X_M_Product;
@@ -54,7 +55,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xendra.Constants;
-import org.xendra.replication.Utilities;
 import org.xendra.xendrian.FormatMessage;
 
 
@@ -104,23 +104,6 @@ public class MMovementConfirm extends X_M_MovementConfirm implements DocAction, 
 		return confirm;
 	}	//	MInOutConfirm
 
-	public String getReplicateMessage() {		
-		FormatMessage s = new FormatMessage(Constants.TRANSFERMESSAGE);
-		s.AddDocumentPart(Constants.HEADER, X_M_MovementConfirm.Table_Name);
-		s.addProperties(Constants.HEADER, (PO) this);
-		MMovementLineConfirm[] lines = this.getLines(false);
-		int linesprocessed = 0;
-		for (MMovementLineConfirm line:lines)
-		{
-			String lineno = String.format("Line%d", linesprocessed);
-			s.addProperties(lineno, line);
-			linesprocessed++;
-		}
-		s.AddDocumentPart(Constants.LINES, "");
-		s.AddProperty(Constants.LINES, Constants.Count, String.valueOf(linesprocessed));		
-		return s.getMessage();
-	}
-	
 	/**************************************************************************
 	 * 	Standard Constructor
 	 *	@param ctx context
@@ -353,7 +336,7 @@ public class MMovementConfirm extends X_M_MovementConfirm implements DocAction, 
 			return DocAction.STATUS_Invalid;
 
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getUpdated(), REF_C_DocTypeDocBaseType.MaterialMovement, getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getUpdated(), REF_C_DocTypeDocBaseType.MaterialMovement, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -552,8 +535,9 @@ public class MMovementConfirm extends X_M_MovementConfirm implements DocAction, 
 		IsQueueInitialized = true;
 		try 
 		{
-			queue = (Queue) CConnection.get().lookup(Env.getMessageHost(), Status.JMS_NAME);
-			QueueConnectionFactory cf = (QueueConnectionFactory) CConnection.get().lookup(Env.getMessageHost(), "/ConnectionFactory");				
+			X_A_Machine machine = Env.getMessageHost();
+			queue = (Queue) CConnection.get().lookup(machine.getName(), Status.JMS_NAME);
+			QueueConnectionFactory cf = (QueueConnectionFactory) CConnection.get().lookup(machine.getName(), "/ConnectionFactory");				
 			connection = cf.createQueueConnection();
 			connection.start();
 			session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);

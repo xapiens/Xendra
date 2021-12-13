@@ -21,10 +21,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
+import org.compiere.util.CLogger;
+
 
 public class StreamThread extends Thread {
 
-    private static final Logger LOG = Logger.getLogger("org.columba.core.base"); //$NON-NLS-1$
+    private static final CLogger LOG = CLogger.getCLogger("org.columba.core.base"); //$NON-NLS-1$
 
     InputStream is;
     String type;

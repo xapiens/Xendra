@@ -2,7 +2,7 @@ package org.xendra.printdocument;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.simoes.util.FileUtil;
 
 /**
@@ -11,7 +11,7 @@ import org.simoes.util.FileUtil;
  * @author Chris Simoes
  */
 public class FileHandler implements HandlerInterface {
-	static Logger log = Logger.getLogger(FileHandler.class);
+	static CLogger log = CLogger.getCLogger(FileHandler.class);
 
 	public FileHandler() {
 		super();
@@ -22,7 +22,8 @@ public class FileHandler implements HandlerInterface {
 	 * @param printJob the PrintJob we are processing
 	 * @return the result of our work, true for success or false for non-success
 	 */
-	public boolean process(PrintJob printJob, String Format) {
+	//public boolean process(PrintJob printJob, String Format) {
+	public boolean process(PrintJob printJob) {
 		final String METHOD_NAME = "process(): ";
 		boolean result = false;
 //		if(null != printJob 

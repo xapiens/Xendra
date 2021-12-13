@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_ReplenishType;
 /** Generated Model for M_Replenish
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -65,12 +64,12 @@ public static int Table_ID=MTable.getTable_ID("M_Replenish");
 public static String es_PE_TAB_Replenish_Description="Define Reabastecimiento de Producto";
 
 @XendraTrl(Identifier="0cf50741-bdd1-4390-7c8f-99941aabf6b0")
-public static String es_PE_TAB_Replenish_Name="Reabastecimiento";
-
-@XendraTrl(Identifier="0cf50741-bdd1-4390-7c8f-99941aabf6b0")
 public static String es_PE_TAB_Replenish_Help="La pestaña Reabastecimiento define el tipo de cantidad reabastecimiento. Esto es empleado para ordenes automatizadas. Si seleccionó personalizar tipo reabastecimiento, debe realizar una implementación de clase org.compiere.util.ReplenishInterface y ajustar sobre nivel de almacén.";
 
-@XendraTab(Name="Replenish",Description="Define Product Replenishment",
+@XendraTrl(Identifier="0cf50741-bdd1-4390-7c8f-99941aabf6b0")
+public static String es_PE_TAB_Replenish_Name="Reabastecimiento";
+@XendraTab(Name="Replenish",
+Description="Define Product Replenishment",
 Help="The Replenishment Tab defines the type of replenishment quantities.  This is used for automated ordering.  If you select a custom replenishment type, you need to create a class implementing org.compiere.util.ReplenishInterface and set that on warehouse level.",
 AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",SeqNo=35,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -85,12 +84,12 @@ public static final String TABNAME_Replenish="0cf50741-bdd1-4390-7c8f-99941aabf6
 public static String es_PE_TAB_Replenish2_Description="Definir reabastecimiento";
 
 @XendraTrl(Identifier="a3d290aa-d186-2356-d01d-bfa943dd8175")
-public static String es_PE_TAB_Replenish2_Name="Reabastecer";
-
-@XendraTrl(Identifier="a3d290aa-d186-2356-d01d-bfa943dd8175")
 public static String es_PE_TAB_Replenish2_Help="La pestaña de reabastecer define el tipo de reposición. Esta información es usada para reordenamiento automático.";
 
-@XendraTab(Name="Replenish",Description="Define Product Replenishment",
+@XendraTrl(Identifier="a3d290aa-d186-2356-d01d-bfa943dd8175")
+public static String es_PE_TAB_Replenish2_Name="Reabastecer";
+@XendraTab(Name="Replenish",
+Description="Define Product Replenishment",
 Help="The Replenishment Tab defines the type of replenishment quantities.  This is used for automated ordering.  If you select a custom replenishment type, you need to create a class implementing org.compiere.util.ReplenishInterface and set that on warehouse level.",
 AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",SeqNo=60,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -104,11 +103,12 @@ public static final String TABNAME_Replenish2="a3d290aa-d186-2356-d01d-bfa943dd8
 @XendraTrl(Identifier="f5acf5f6-4242-429f-ecb5-15c09410a9f5")
 public static String es_PE_TABLE_M_Replenish_Name="M_Replenish";
 
-@XendraTable(Name="M_Replenish",Description="",Help="",TableName="M_Replenish",AccessLevel="3",
-AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.material",Identifier="f5acf5f6-4242-429f-ecb5-15c09410a9f5",
-Synchronized="2017-08-16 11:43:31.0")
+@XendraTable(Name="M_Replenish",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="M_Replenish",
+AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="f5acf5f6-4242-429f-ecb5-15c09410a9f5",Synchronized="2020-03-03 21:38:54.0")
 /** TableName=M_Replenish */
 public static final String Table_Name="M_Replenish";
 
@@ -170,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c003f1a-61ec-4e94-8e13-4ba4654c2eac",
-Synchronized="2017-08-05 16:55:29.0")
+Synchronized="2019-08-30 22:23:29.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Maximum Level.
@@ -190,13 +190,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="e950eaa0-1d5d-35d1-5f38-a66898789b9e")
+public static String es_PE_FIELD_Replenish_MaximumLevel_Name="Nivel Máximo";
+
+@XendraTrl(Identifier="e950eaa0-1d5d-35d1-5f38-a66898789b9e")
 public static String es_PE_FIELD_Replenish_MaximumLevel_Description="Nivel máximo de inventario para este producto";
 
 @XendraTrl(Identifier="e950eaa0-1d5d-35d1-5f38-a66898789b9e")
 public static String es_PE_FIELD_Replenish_MaximumLevel_Help="Indica la cantidad máxima de este producto a ser almacenada en inventario";
-
-@XendraTrl(Identifier="e950eaa0-1d5d-35d1-5f38-a66898789b9e")
-public static String es_PE_FIELD_Replenish_MaximumLevel_Name="Nivel Máximo";
 
 @XendraField(AD_Column_ID="Level_Max",IsCentrallyMaintained=true,
 AD_Tab_ID="a3d290aa-d186-2356-d01d-bfa943dd8175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -206,13 +206,13 @@ Identifier="e950eaa0-1d5d-35d1-5f38-a66898789b9e")
 public static final String FIELDNAME_Replenish_MaximumLevel="e950eaa0-1d5d-35d1-5f38-a66898789b9e";
 
 @XendraTrl(Identifier="1569a94e-1e39-d883-97b8-7574f3283956")
+public static String es_PE_FIELD_Replenish_MaximumLevel2_Name="Nivel Máximo";
+
+@XendraTrl(Identifier="1569a94e-1e39-d883-97b8-7574f3283956")
 public static String es_PE_FIELD_Replenish_MaximumLevel2_Description="Nivel máximo de inventario para este producto";
 
 @XendraTrl(Identifier="1569a94e-1e39-d883-97b8-7574f3283956")
 public static String es_PE_FIELD_Replenish_MaximumLevel2_Help="Indica la cantidad máxima de este producto a ser almacenada en inventario";
-
-@XendraTrl(Identifier="1569a94e-1e39-d883-97b8-7574f3283956")
-public static String es_PE_FIELD_Replenish_MaximumLevel2_Name="Nivel Máximo";
 
 @XendraField(AD_Column_ID="Level_Max",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -230,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="106e8810-bdcb-85f0-9c2e-9b0d9467babd",
-Synchronized="2017-08-05 16:55:29.0")
+Synchronized="2019-08-30 22:23:29.0")
 /** Column name Level_Max */
 public static final String COLUMNNAME_Level_Max = "Level_Max";
 /** Set Minimum Level.
@@ -250,13 +250,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="e7959c06-231b-f362-78d2-2188644e087b")
+public static String es_PE_FIELD_Replenish_MinimumLevel_Name="Nivel Mínimo";
+
+@XendraTrl(Identifier="e7959c06-231b-f362-78d2-2188644e087b")
 public static String es_PE_FIELD_Replenish_MinimumLevel_Description="Nivel mínimo de inventario para este producto";
 
 @XendraTrl(Identifier="e7959c06-231b-f362-78d2-2188644e087b")
 public static String es_PE_FIELD_Replenish_MinimumLevel_Help="Indica la cantidad mínima de este producto a ser almacenada en inventario";
-
-@XendraTrl(Identifier="e7959c06-231b-f362-78d2-2188644e087b")
-public static String es_PE_FIELD_Replenish_MinimumLevel_Name="Nivel Mínimo";
 
 @XendraField(AD_Column_ID="Level_Min",IsCentrallyMaintained=true,
 AD_Tab_ID="a3d290aa-d186-2356-d01d-bfa943dd8175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -266,13 +266,13 @@ Identifier="e7959c06-231b-f362-78d2-2188644e087b")
 public static final String FIELDNAME_Replenish_MinimumLevel="e7959c06-231b-f362-78d2-2188644e087b";
 
 @XendraTrl(Identifier="197980d5-025f-0d7f-e20b-1696e93dad88")
+public static String es_PE_FIELD_Replenish_MinimumLevel2_Name="Nivel Mínimo";
+
+@XendraTrl(Identifier="197980d5-025f-0d7f-e20b-1696e93dad88")
 public static String es_PE_FIELD_Replenish_MinimumLevel2_Description="Nivel mínimo de inventario para este producto";
 
 @XendraTrl(Identifier="197980d5-025f-0d7f-e20b-1696e93dad88")
 public static String es_PE_FIELD_Replenish_MinimumLevel2_Help="Indica la cantidad mínima de este producto a ser almacenada en inventario";
-
-@XendraTrl(Identifier="197980d5-025f-0d7f-e20b-1696e93dad88")
-public static String es_PE_FIELD_Replenish_MinimumLevel2_Name="Nivel Mínimo";
 
 @XendraField(AD_Column_ID="Level_Min",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -290,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0af9a061-384e-5674-1000-5d64b62d49ce",
-Synchronized="2017-08-05 16:55:30.0")
+Synchronized="2019-08-30 22:23:29.0")
 /** Column name Level_Min */
 public static final String COLUMNNAME_Level_Min = "Level_Min";
 /** Set Product.
@@ -310,13 +310,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e0acd3da-bcec-2ad9-179d-b76a685258c9")
+public static String es_PE_FIELD_Replenish_Product_Name="Producto";
+
+@XendraTrl(Identifier="e0acd3da-bcec-2ad9-179d-b76a685258c9")
 public static String es_PE_FIELD_Replenish_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="e0acd3da-bcec-2ad9-179d-b76a685258c9")
 public static String es_PE_FIELD_Replenish_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="e0acd3da-bcec-2ad9-179d-b76a685258c9")
-public static String es_PE_FIELD_Replenish_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a3d290aa-d186-2356-d01d-bfa943dd8175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -326,13 +326,13 @@ Identifier="e0acd3da-bcec-2ad9-179d-b76a685258c9")
 public static final String FIELDNAME_Replenish_Product="e0acd3da-bcec-2ad9-179d-b76a685258c9";
 
 @XendraTrl(Identifier="7552cc67-f2db-815b-75c0-b430ae7d8904")
+public static String es_PE_FIELD_Replenish_Product2_Name="Producto";
+
+@XendraTrl(Identifier="7552cc67-f2db-815b-75c0-b430ae7d8904")
 public static String es_PE_FIELD_Replenish_Product2_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="7552cc67-f2db-815b-75c0-b430ae7d8904")
 public static String es_PE_FIELD_Replenish_Product2_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="7552cc67-f2db-815b-75c0-b430ae7d8904")
-public static String es_PE_FIELD_Replenish_Product2_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -350,7 +350,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ee6e24ef-76b0-5a1c-3720-83631f189433",Synchronized="2017-08-05 16:55:30.0")
+Identifier="ee6e24ef-76b0-5a1c-3720-83631f189433",Synchronized="2019-08-30 22:23:29.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Warehouse.
@@ -370,13 +370,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7b6edf5c-c838-d9c7-380a-324968b51042")
+public static String es_PE_FIELD_Replenish_Warehouse_Name="Almacén";
+
+@XendraTrl(Identifier="7b6edf5c-c838-d9c7-380a-324968b51042")
 public static String es_PE_FIELD_Replenish_Warehouse_Description="Almacén";
 
 @XendraTrl(Identifier="7b6edf5c-c838-d9c7-380a-324968b51042")
 public static String es_PE_FIELD_Replenish_Warehouse_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="7b6edf5c-c838-d9c7-380a-324968b51042")
-public static String es_PE_FIELD_Replenish_Warehouse_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a3d290aa-d186-2356-d01d-bfa943dd8175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -386,13 +386,13 @@ Identifier="7b6edf5c-c838-d9c7-380a-324968b51042")
 public static final String FIELDNAME_Replenish_Warehouse="7b6edf5c-c838-d9c7-380a-324968b51042";
 
 @XendraTrl(Identifier="75c3463c-472a-712f-7f39-07817050e881")
+public static String es_PE_FIELD_Replenish_Warehouse2_Name="Almacén";
+
+@XendraTrl(Identifier="75c3463c-472a-712f-7f39-07817050e881")
 public static String es_PE_FIELD_Replenish_Warehouse2_Description="Almacén";
 
 @XendraTrl(Identifier="75c3463c-472a-712f-7f39-07817050e881")
 public static String es_PE_FIELD_Replenish_Warehouse2_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="75c3463c-472a-712f-7f39-07817050e881")
-public static String es_PE_FIELD_Replenish_Warehouse2_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -410,12 +410,9 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="110a9030-a339-c5a7-52a0-18a4cb651ee6",
-Synchronized="2017-08-05 16:55:30.0")
+Synchronized="2019-08-30 22:23:30.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
-
-/** M_WarehouseSource_ID AD_Reference=e3999c76-66f0-38b0-a95e-fb0d580cde7a */
-public static final int M_WAREHOUSESOURCE_ID_AD_Reference_ID=197;
 /** Set Source Warehouse.
 @param M_WarehouseSource_ID Optional Warehouse to replenish from */
 public void setM_WarehouseSource_ID (int M_WarehouseSource_ID)
@@ -444,13 +441,13 @@ Identifier="4f0e141a-9dab-cf9c-76bb-f57781c31630")
 public static final String FIELDNAME_Replenish_SourceWarehouse="4f0e141a-9dab-cf9c-76bb-f57781c31630";
 
 @XendraTrl(Identifier="61e1dd6e-080e-9638-e706-3e4d2e415159")
+public static String es_PE_FIELD_Replenish_SourceWarehouse2_Name="Almacén Fuente";
+
+@XendraTrl(Identifier="61e1dd6e-080e-9638-e706-3e4d2e415159")
 public static String es_PE_FIELD_Replenish_SourceWarehouse2_Description="Almacén Opcional de Reabastecimiento para ";
 
 @XendraTrl(Identifier="61e1dd6e-080e-9638-e706-3e4d2e415159")
 public static String es_PE_FIELD_Replenish_SourceWarehouse2_Help="Si seleccionó, el almacén seleccionado es empleado para reabastecimiento de producto(s)";
-
-@XendraTrl(Identifier="61e1dd6e-080e-9638-e706-3e4d2e415159")
-public static String es_PE_FIELD_Replenish_SourceWarehouse2_Name="Almacén Fuente";
 
 @XendraField(AD_Column_ID="M_WarehouseSource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -469,19 +466,13 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="72d6272a-d041-5f52-9645-47ad3a0acbe9",
-Synchronized="2017-08-05 16:55:30.0")
+Synchronized="2019-08-30 22:23:30.0")
 /** Column name M_WarehouseSource_ID */
 public static final String COLUMNNAME_M_WarehouseSource_ID = "M_WarehouseSource_ID";
-
-/** ReplenishType AD_Reference=4ae23d3a-7913-5665-971c-430591c605b3 */
-public static final int REPLENISHTYPE_AD_Reference_ID=164;
 /** Set Replenish Type.
 @param ReplenishType Method for re-ordering a product */
 public void setReplenishType (String ReplenishType)
 {
-if (ReplenishType == null) throw new IllegalArgumentException ("ReplenishType is mandatory");
-if (ReplenishType.equals(REF_M_ReplenishType.MaintainMaximumLevel) || ReplenishType.equals(REF_M_ReplenishType.Manual) || ReplenishType.equals(REF_M_ReplenishType.ReorderBelowMinimumLevel) || ReplenishType.equals(REF_M_ReplenishType.Custom));
- else throw new IllegalArgumentException ("ReplenishType Invalid value - " + ReplenishType + " - Reference_ID=164 - 2 - 0 - 1 - 9");
 if (ReplenishType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -497,13 +488,13 @@ return (String)get_Value(COLUMNNAME_ReplenishType);
 }
 
 @XendraTrl(Identifier="8807c393-f846-d0b9-2fd7-f94c2fc41c65")
+public static String es_PE_FIELD_Replenish_ReplenishType_Name="Tipo de Reabastecimiento";
+
+@XendraTrl(Identifier="8807c393-f846-d0b9-2fd7-f94c2fc41c65")
 public static String es_PE_FIELD_Replenish_ReplenishType_Description="Método para re-ordenar un producto";
 
 @XendraTrl(Identifier="8807c393-f846-d0b9-2fd7-f94c2fc41c65")
 public static String es_PE_FIELD_Replenish_ReplenishType_Help="El Tipo de Reabastecimiento indica si este producto será manualmente reordenado; ordenado cuando la cantidad esté por debajo de la cantidad mínima u ordenado cuando esté debajo de la cantidad máxima.";
-
-@XendraTrl(Identifier="8807c393-f846-d0b9-2fd7-f94c2fc41c65")
-public static String es_PE_FIELD_Replenish_ReplenishType_Name="Tipo de Reabastecimiento";
 
 @XendraField(AD_Column_ID="ReplenishType",IsCentrallyMaintained=true,
 AD_Tab_ID="a3d290aa-d186-2356-d01d-bfa943dd8175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -513,13 +504,13 @@ Identifier="8807c393-f846-d0b9-2fd7-f94c2fc41c65")
 public static final String FIELDNAME_Replenish_ReplenishType="8807c393-f846-d0b9-2fd7-f94c2fc41c65";
 
 @XendraTrl(Identifier="d0885e29-0365-598a-179a-3f11b5d2a347")
+public static String es_PE_FIELD_Replenish_ReplenishType2_Name="Tipo de Reabastecimiento";
+
+@XendraTrl(Identifier="d0885e29-0365-598a-179a-3f11b5d2a347")
 public static String es_PE_FIELD_Replenish_ReplenishType2_Description="Método para re-ordenar un producto";
 
 @XendraTrl(Identifier="d0885e29-0365-598a-179a-3f11b5d2a347")
 public static String es_PE_FIELD_Replenish_ReplenishType2_Help="El Tipo de Reabastecimiento indica si este producto será manualmente reordenado; ordenado cuando la cantidad esté por debajo de la cantidad mínima u ordenado cuando esté debajo de la cantidad máxima.";
-
-@XendraTrl(Identifier="d0885e29-0365-598a-179a-3f11b5d2a347")
-public static String es_PE_FIELD_Replenish_ReplenishType2_Name="Tipo de Reabastecimiento";
 
 @XendraField(AD_Column_ID="ReplenishType",IsCentrallyMaintained=true,
 AD_Tab_ID="0cf50741-bdd1-4390-7c8f-99941aabf6b0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -537,7 +528,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e833013b-f616-2612-d551-147a422328fd",Synchronized="2017-08-05 16:55:30.0")
+Identifier="e833013b-f616-2612-d551-147a422328fd",Synchronized="2019-08-30 22:23:30.0")
 /** Column name ReplenishType */
 public static final String COLUMNNAME_ReplenishType = "ReplenishType";
 }

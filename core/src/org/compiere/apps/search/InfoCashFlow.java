@@ -133,7 +133,8 @@ public class InfoCashFlow extends Info implements VetoableChangeListener
 		fDateFrom.setToolTipText(Msg.translate(Env.getCtx(), "DateFrom"));		
 		
 		Timestamp p_Date = new Timestamp(System.currentTimeMillis());
-		MPeriod first = MPeriod.getFirstInYear (Env.getCtx(), p_Date);
+		// rewrite the cashflow or migrate to BI
+		MPeriod first = MPeriod.getFirstInYear (Env.getCtx(), p_Date, 0, 0);
 		if (first != null)
 			fDateFrom.setValue(first.getStartDate());		
 		fDateFrom.addVetoableChangeListener(this);

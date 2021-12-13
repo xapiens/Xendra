@@ -40,17 +40,13 @@ import java.util.logging.Level;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-import org.xendra.Constants;
 import org.xendra.exceptions.DBException;
-import org.xendra.replication.Utilities;
-import org.xendra.xendrian.FormatMessage;
 import org.compiere.model.persistence.X_AD_Org;
 import org.compiere.model.persistence.X_AD_ReportView;
 import org.compiere.model.persistence.X_AD_Role;
 import org.compiere.model.persistence.X_AD_System;
 import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.persistence.X_AD_User;
-import org.compiere.model.persistence.X_A_Xendrian_Replication;
 import org.compiere.model.persistence.X_C_DocType;
 import org.compiere.model.persistence.X_GL_Category;
 import org.compiere.model.persistence.X_M_AttributeSet;
@@ -2177,18 +2173,18 @@ public class GridTable extends AbstractTableModel
 				m_virtualBuffer.put(sort.index, data);
 			}
 		}
-		String rmsgerror = po.getReplicateMessageError();
-		if (rmsgerror.length() > 0)
-		{
-			fireDataStatusEEvent(rmsgerror, "Replication error", false);
-		}
-		String rmsg = po.getReplicateMessage();
-		if (rmsg != null && rmsg.length() > 0)
-		{			
-			System.out.println(rmsg);
-			String identifier = (String) po.get_Value(X_AD_Table.COLUMNNAME_Identifier);
-			Utilities.sendMessage(identifier,Constants.QREPLICATIONMERGEQUEUE , rmsg);
-		}
+//		String rmsgerror = po.getReplicateMessageError();
+//		if (rmsgerror.length() > 0)
+//		{
+//			fireDataStatusEEvent(rmsgerror, "Replication error", false);
+//		}
+//		String rmsg = po.getReplicateMessage();
+//		if (rmsg != null && rmsg.length() > 0)
+//		{			
+//			System.out.println(rmsg);
+//			String identifier = (String) po.get_Value(X_AD_Table.COLUMNNAME_Identifier);
+//			Utilities.sendMessage(identifier,Constants.QUEUEMERGE , rmsg);
+//		}
 		//	Refresh - update buffer
 		String whereClause = po.get_WhereClause(true);
 		log.fine("Reading ... " + whereClause);

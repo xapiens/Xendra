@@ -75,11 +75,13 @@ public static final String TABNAME_Workbench="6f897716-f826-da4e-04c3-24e61a4aab
 public static String es_PE_TABLE_AD_DesktopWorkbench_Name="Banco de Trabajo del Escritorio";
 
 
-@XendraTable(Name="Desktop Workbench",Description="",Help="",TableName="AD_DesktopWorkbench",
-AccessLevel="4",AD_Window_ID="1e215aa5-19c2-dcfe-4977-953ef21540ec",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="8515eabb-8311-04f0-ced1-3f5e37d6b8f0",Synchronized="2017-08-16 11:40:09.0")
+@XendraTable(Name="Desktop Workbench",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_DesktopWorkbench",AccessLevel="4",
+AD_Window_ID="1e215aa5-19c2-dcfe-4977-953ef21540ec",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="8515eabb-8311-04f0-ced1-3f5e37d6b8f0",
+Synchronized="2020-03-03 21:34:59.0")
 /** TableName=AD_DesktopWorkbench */
 public static final String Table_Name="AD_DesktopWorkbench";
 
@@ -129,10 +131,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3193393d-0492-bf90-d1a4-10fb356ca44e")
-public static String es_PE_FIELD_Workbench_Desktop_Description="Colección de bancos de trabajo";
+public static String es_PE_FIELD_Workbench_Desktop_Name="Escritorio";
 
 @XendraTrl(Identifier="3193393d-0492-bf90-d1a4-10fb356ca44e")
-public static String es_PE_FIELD_Workbench_Desktop_Name="Escritorio";
+public static String es_PE_FIELD_Workbench_Desktop_Description="Colección de bancos de trabajo";
 
 @XendraField(AD_Column_ID="AD_Desktop_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6f897716-f826-da4e-04c3-24e61a4aab40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -150,7 +152,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1d4b6f40-1f54-51c9-28b2-8c84af96b1f9",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name AD_Desktop_ID */
 public static final String COLUMNNAME_AD_Desktop_ID = "AD_Desktop_ID";
 /** Set Desktop Workbench.
@@ -203,10 +205,10 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_Workbench_ID()));
 }
 
 @XendraTrl(Identifier="11160896-c402-5884-b2a5-bef297e5c179")
-public static String es_PE_FIELD_Workbench_Workbench_Description="Colección de ventanas; Informes";
+public static String es_PE_FIELD_Workbench_Workbench_Name="Banco de Trabajo";
 
 @XendraTrl(Identifier="11160896-c402-5884-b2a5-bef297e5c179")
-public static String es_PE_FIELD_Workbench_Workbench_Name="Banco de Trabajo";
+public static String es_PE_FIELD_Workbench_Workbench_Description="Colección de ventanas; Informes";
 
 @XendraField(AD_Column_ID="AD_Workbench_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6f897716-f826-da4e-04c3-24e61a4aab40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -224,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="23557cc2-b9fd-58f6-5121-0642a469e6ec",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name AD_Workbench_ID */
 public static final String COLUMNNAME_AD_Workbench_ID = "AD_Workbench_ID";
 /** Set Identifier.
@@ -256,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ababbfcb-c25f-4714-803d-8c70eab2a717",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sequence.
@@ -275,13 +277,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="79168f5b-7366-603d-3e9a-1a160db72fcc")
+public static String es_PE_FIELD_Workbench_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="79168f5b-7366-603d-3e9a-1a160db72fcc")
 public static String es_PE_FIELD_Workbench_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="79168f5b-7366-603d-3e9a-1a160db72fcc")
 public static String es_PE_FIELD_Workbench_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="79168f5b-7366-603d-3e9a-1a160db72fcc")
-public static String es_PE_FIELD_Workbench_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="6f897716-f826-da4e-04c3-24e61a4aab40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -299,7 +301,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="881e6307-0ae0-69c6-220b-66f2df359224",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

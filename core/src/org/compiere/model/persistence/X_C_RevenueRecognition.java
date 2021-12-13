@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_RevenueRecognitionFrequency;
 /** Generated Model for C_RevenueRecognition
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -63,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("C_RevenueRecognition");
 public static String es_PE_TAB_RevenueRecognition_Description="Reconocimiento de Ingresos";
 
 @XendraTrl(Identifier="e4d1030c-9309-fe65-e965-254d4799daca")
-public static String es_PE_TAB_RevenueRecognition_Name="Reconocimiento de Ingresos";
+public static String es_PE_TAB_RevenueRecognition_Help="La pestaña Reconocimiento de Ingresos define los intervalos a los cuales los ingresos serán reconocidos. Es posible basar el reconocimiento de ingresos en los niveles de servicio previstos.";
 
 @XendraTrl(Identifier="e4d1030c-9309-fe65-e965-254d4799daca")
-public static String es_PE_TAB_RevenueRecognition_Help="La pestaña Reconocimiento de Ingresos define los intervalos a los cuales los ingresos serán reconocidos. Es posible basar el reconocimiento de ingresos en los niveles de servicio previstos.";
+public static String es_PE_TAB_RevenueRecognition_Name="Reconocimiento de Ingresos";
 
 @XendraTab(Name="Revenue Recognition",Description="Revenue Recognition",
 Help="The Revenue Recognition Tab defines the intervals at which revenue will be recognized.  You can also base the revenue recognition on provided Service Levels.",
@@ -82,12 +81,13 @@ public static final String TABNAME_RevenueRecognition="e4d1030c-9309-fe65-e965-2
 public static String es_PE_TABLE_C_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 
-@XendraTable(Name="Revenue Recognition",Description="Method for recording revenue",Help="",
-TableName="C_RevenueRecognition",AccessLevel="3",
+@XendraTable(Name="Revenue Recognition",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Method for recording revenue",
+Help="",TableName="C_RevenueRecognition",AccessLevel="3",
 AD_Window_ID="733a8f19-500f-50a8-f39f-40d4949bd162",AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="006b6711-3073-f6c8-3508-6a8ab8e30c0f",
-Synchronized="2017-08-16 11:42:24.0")
+Synchronized="2020-03-03 21:37:36.0")
 /** TableName=C_RevenueRecognition */
 public static final String Table_Name="C_RevenueRecognition";
 
@@ -137,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cbb2da20-d353-80ae-4962-22293d7be911")
+public static String es_PE_FIELD_RevenueRecognition_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="cbb2da20-d353-80ae-4962-22293d7be911")
 public static String es_PE_FIELD_RevenueRecognition_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="cbb2da20-d353-80ae-4962-22293d7be911")
 public static String es_PE_FIELD_RevenueRecognition_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="cbb2da20-d353-80ae-4962-22293d7be911")
-public static String es_PE_FIELD_RevenueRecognition_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e4d1030c-9309-fe65-e965-254d4799daca",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -181,13 +181,13 @@ return value;
 }
 
 @XendraTrl(Identifier="4d83d92a-bd02-c6b8-d409-517d28570b8f")
+public static String es_PE_FIELD_RevenueRecognition_Description_Name="Observación";
+
+@XendraTrl(Identifier="4d83d92a-bd02-c6b8-d409-517d28570b8f")
 public static String es_PE_FIELD_RevenueRecognition_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="4d83d92a-bd02-c6b8-d409-517d28570b8f")
 public static String es_PE_FIELD_RevenueRecognition_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="4d83d92a-bd02-c6b8-d409-517d28570b8f")
-public static String es_PE_FIELD_RevenueRecognition_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="e4d1030c-9309-fe65-e965-254d4799daca",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -205,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4e592b93-1f00-7245-7805-a71bfd25f043",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -237,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1ca60dd9-4960-47c8-bc49-a6ea001ae9bd",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Time based.
@@ -260,13 +260,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b3fe5652-b604-bf33-f983-da93c59c8d99")
+public static String es_PE_FIELD_RevenueRecognition_TimeBased_Name="Basado en Tiempo";
+
+@XendraTrl(Identifier="b3fe5652-b604-bf33-f983-da93c59c8d99")
 public static String es_PE_FIELD_RevenueRecognition_TimeBased_Description="Reconocimiento de Ingresos basados en el tiempo o Nivel de Servicio";
 
 @XendraTrl(Identifier="b3fe5652-b604-bf33-f983-da93c59c8d99")
 public static String es_PE_FIELD_RevenueRecognition_TimeBased_Help="Reconocimiento de Ingresos puede estar basado en el nivel de servicio o en el tiempo";
-
-@XendraTrl(Identifier="b3fe5652-b604-bf33-f983-da93c59c8d99")
-public static String es_PE_FIELD_RevenueRecognition_TimeBased_Name="Basado en Tiempo";
 
 @XendraField(AD_Column_ID="IsTimeBased",IsCentrallyMaintained=true,
 AD_Tab_ID="e4d1030c-9309-fe65-e965-254d4799daca",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -284,7 +284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9fb302aa-4bda-56c3-8c3a-2d05ef1ae487",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name IsTimeBased */
 public static final String COLUMNNAME_IsTimeBased = "IsTimeBased";
 /** Set Name.
@@ -316,13 +316,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="49e5d361-cfb8-cb82-8b76-6b68dac0e50a")
+public static String es_PE_FIELD_RevenueRecognition_Name_Name="Nombre";
+
+@XendraTrl(Identifier="49e5d361-cfb8-cb82-8b76-6b68dac0e50a")
 public static String es_PE_FIELD_RevenueRecognition_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="49e5d361-cfb8-cb82-8b76-6b68dac0e50a")
 public static String es_PE_FIELD_RevenueRecognition_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="49e5d361-cfb8-cb82-8b76-6b68dac0e50a")
-public static String es_PE_FIELD_RevenueRecognition_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="e4d1030c-9309-fe65-e965-254d4799daca",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -340,7 +340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="726525b5-5ee8-dd46-a19f-8396e45431c8",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Number of Months.
@@ -377,19 +377,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="233fa336-1d44-0855-227b-1288eb6e7635",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name NoMonths */
 public static final String COLUMNNAME_NoMonths = "NoMonths";
-
-/** RecognitionFrequency AD_Reference=19c5b9f0-1445-8b89-2573-2f4fc66c7a45 */
-public static final int RECOGNITIONFREQUENCY_AD_Reference_ID=196;
 /** Set Recognition frequency.
 @param RecognitionFrequency Recognition frequency */
 public void setRecognitionFrequency (String RecognitionFrequency)
 {
-if (RecognitionFrequency == null) throw new IllegalArgumentException ("RecognitionFrequency is mandatory");
-if (RecognitionFrequency.equals(REF_C_RevenueRecognitionFrequency.Month) || RecognitionFrequency.equals(REF_C_RevenueRecognitionFrequency.Quarter) || RecognitionFrequency.equals(REF_C_RevenueRecognitionFrequency.Year));
- else throw new IllegalArgumentException ("RecognitionFrequency Invalid value - " + RecognitionFrequency + " - Reference_ID=196 - M - Q - Y");
 if (RecognitionFrequency.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -424,7 +418,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="b9655dea-b57a-de0a-e63c-7042d2da38e4",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name RecognitionFrequency */
 public static final String COLUMNNAME_RecognitionFrequency = "RecognitionFrequency";
 }

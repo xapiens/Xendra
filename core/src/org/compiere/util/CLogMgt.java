@@ -17,6 +17,8 @@
 package org.compiere.util;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -39,12 +41,13 @@ import org.compiere.db.CConnection;
 import org.compiere.model.MClient;
 
 /**
- * Adempiere Log Management.
+ * Xendra Log Management.
  * 
  * @author Jorg Janke
  * @version $Id: CLogMgt.java 5762 2016-02-18 02:16:12Z xapiens $
  */
 public class CLogMgt {
+	public static boolean DEBUG = false;
 	/**
 	 * Initialize Logging
 	 * 
@@ -57,9 +60,9 @@ public class CLogMgt {
 
 		if (isClient) {
 			LogManager mgr = LogManager.getLogManager();
-			try { // Load Logging config from org.compiere.util.*properties
+			try { // Load Logging config from org.compiere.util.*properties				
 				String fileName = "logClient.properties";
-				InputStream in = CLogMgt.class.getResourceAsStream(fileName);
+				InputStream in = CLogMgt.class.getResourceAsStream(fileName);				
 				BufferedInputStream bin = new BufferedInputStream(in);
 				mgr.readConfiguration(bin);
 				in.close();
@@ -153,15 +156,29 @@ public class CLogMgt {
 		// setLevel(s_currentLevel);
 		// setLoggerLevel(Level.ALL, null);
 		//
-		CLogMgtLog4J.initialize(isClient);
-		 System.out.println("Handlers=" + s_handlers.size() + ", Level=" +
-		 s_currentLevel);
+		//CLogMgtLog4J.initialize(isClient);
+				
+		String levelString = Ini.getProperty(Ini.P_TRACELEVEL);
+		for (int i = 0; i < CLogMgt.LEVELS.length; i++) {
+			if (CLogMgt.LEVELS[i].getName().equals(levelString)) { 
+				s_currentLevel = CLogMgt.LEVELS[i];
+				break;
+			}
+		}
+		
+		System.out.println("Handlers=" + s_handlers.size() + ", Level=" + s_currentLevel);
+		//
+		// en teoria se crea en Xendra.java linea 476
+		//Logging.createDefaultFileHandler(DefaultConfigDirectory.getDefaultPath());
+		//Logging.createDefaultFileHandler(new File(Ini.getXendraHome()));
+
 	} // initialize
 
 	/** Handlers */
 	private static ArrayList<Handler> s_handlers = null;
 	/** Current Log Level */
-	private static Level s_currentLevel = Level.INFO;
+	//private static Level s_currentLevel = Level.INFO;
+	private static Level s_currentLevel = Level.WARNING;
 
 	/** Logger */
 	private static Logger log = Logger.getAnonymousLogger();
@@ -463,7 +480,7 @@ public class CLogMgt {
 		if (sb == null)
 			sb = new StringBuffer();
 		final String eq = " = ";
-		sb.append(getMsg("Host")).append(eq).append(getServerInfo()).append(NL);
+		//sb.append(getMsg("Host")).append(eq).append(getServerInfo()).append(NL);
 		sb.append(getMsg("Database")).append(eq).append(getDatabaseInfo())
 				.append(NL);
 		sb.append(getMsg("Schema")).append(eq).append(
@@ -578,28 +595,28 @@ public class CLogMgt {
 		return msg;
 	} // getMsg
 
-	/**
-	 * Get Server Info.
-	 * 
-	 * @return host : port (NotActive) via CMhost : port
-	 */
-	private static String getServerInfo() {
-		StringBuffer sb = new StringBuffer();
-		CConnection cc = CConnection.get();
-		// Host
-		sb.append(cc.getAppsHost()).append(" : ").append(Util.getAppsPort())
-				.append(" (");
-
-		// Server
-		if (cc.isAppsServerOK(false))
-			sb.append(CConnection.get().getServerVersion());
-		else
-			sb.append(getMsg("NotActive"));
-		//
-		sb.append(")\n  ");
-		//
-		return sb.toString();
-	} // getServerInfo
+//	/**
+//	 * Get Server Info.
+//	 * 
+//	 * @return host : port (NotActive) via CMhost : port
+//	 */
+//	private static String getServerInfo() {
+//		StringBuffer sb = new StringBuffer();
+//		CConnection cc = CConnection.get();
+//		// Host
+//		sb.append(cc.getAppsHost()).append(" : ").append(Util.getAppsPort())
+//				.append(" (");
+//
+//		// Server
+//		if (cc.isAppsServerOK(false))
+//			sb.append(CConnection.get().getServerVersion());
+//		else
+//			sb.append(getMsg("NotActive"));
+//		//
+//		sb.append(")\n  ");
+//		//
+//		return sb.toString();
+//	} // getServerInfo
 
 	/**
 	 * Get Database Info
@@ -680,4 +697,12 @@ public class CLogMgt {
 		new CLogMgt();
 	} // CLogMgt
 
+	public static void setDebugging(boolean debug) {
+		if (debug) {
+			setLevel(Level.ALL);
+		} else {
+			setLevel(Level.SEVERE);
+		}
+	}
+	
 } // CLogMgt

@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 import org.columba.api.exception.StoreException;
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.core.gui.action.AbstractColumbaAction;
-import org.columba.core.logging.Logging;
 import org.columba.core.tagging.TagManager;
 import org.columba.core.tagging.api.ITag;
+import org.compiere.util.CLogMgt;
 
 public class AddTagAction extends AbstractColumbaAction {
 
@@ -41,7 +41,7 @@ public class AddTagAction extends AbstractColumbaAction {
 						JOptionPane.showMessageDialog(frame, "Error adding Tag");
 
 				} catch (StoreException e) {
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						e.printStackTrace();
 					JOptionPane.showMessageDialog(frame, "Error adding Tag");
 				}

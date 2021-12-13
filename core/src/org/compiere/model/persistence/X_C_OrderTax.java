@@ -67,12 +67,12 @@ public static int Table_ID=MTable.getTable_ID("C_OrderTax");
 public static String es_PE_TAB_OrderTax_Description="Impuestos de la Orden";
 
 @XendraTrl(Identifier="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4")
-public static String es_PE_TAB_OrderTax_Name="Impuestos de la Orden";
-
-@XendraTrl(Identifier="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4")
 public static String es_PE_TAB_OrderTax_Help="La pestaña de Impuestos de la Orden despliega los Totales de impuesto para una orden basados en las líneas de la orden ingresadas.";
 
-@XendraTab(Name="Order Tax",Description="Order Tax",
+@XendraTrl(Identifier="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4")
+public static String es_PE_TAB_OrderTax_Name="Impuestos de la Orden";
+@XendraTab(Name="Order Tax",
+Description="Order Tax",
 Help="The Order Tax Tab displays the tax amount for an Order based on the lines entered.",
 AD_Window_ID="c6b21e03-9b7e-a7c6-27ff-50703fd13562",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
@@ -87,13 +87,12 @@ public static final String TABNAME_OrderTax="5270301f-d0c1-0c8e-3adb-a0c12b6b70c
 public static String es_PE_TAB_OrderTax2_Description="Impuesto de la Orden";
 
 @XendraTrl(Identifier="b1eb59bc-4998-2a8f-c4d4-7d92003d4243")
-public static String es_PE_TAB_OrderTax2_Name="Impuesto de la Orden";
-
-@XendraTrl(Identifier="b1eb59bc-4998-2a8f-c4d4-7d92003d4243")
 public static String es_PE_TAB_OrderTax2_Help="La pestaña Impuesto de la Orden despliega el impuesto asociado con las líneas de la orden.";
 
-@XendraTab(Name="Order Tax",Description="Order Tax",
-Help="The Order Tax Tab displays the tax associated with the Order Lines.",
+@XendraTrl(Identifier="b1eb59bc-4998-2a8f-c4d4-7d92003d4243")
+public static String es_PE_TAB_OrderTax2_Name="Impuesto de la Orden";
+@XendraTab(Name="Order Tax",
+Description="Order Tax",Help="The Order Tax Tab displays the tax associated with the Order Lines.",
 AD_Window_ID="041b9539-24f3-7494-c2fa-c360634d60b2",SeqNo=50,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
 AD_Column_ID="317f0a10-04ae-aefb-e7c6-87d3c04bbdcd",HasTree=false,WhereClause="",OrderByClause="",
@@ -106,11 +105,12 @@ public static final String TABNAME_OrderTax2="b1eb59bc-4998-2a8f-c4d4-7d92003d42
 @XendraTrl(Identifier="4c811f7f-7dd6-b9de-0e92-188b1e5e41cc")
 public static String es_PE_TABLE_C_OrderTax_Name="C_OrderTax";
 
-@XendraTable(Name="Order Tax",Description="",Help="",TableName="C_OrderTax",AccessLevel="1",
-AD_Window_ID="c6b21e03-9b7e-a7c6-27ff-50703fd13562",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="041b9539-24f3-7494-c2fa-c360634d60b2",ID="org.xendra.commercial",
-Identifier="4c811f7f-7dd6-b9de-0e92-188b1e5e41cc",Synchronized="2017-08-16 11:42:05.0")
+@XendraTable(Name="Order Tax",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_OrderTax",
+AccessLevel="1",AD_Window_ID="c6b21e03-9b7e-a7c6-27ff-50703fd13562",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="041b9539-24f3-7494-c2fa-c360634d60b2",ID="org.xendra.commercial",
+Identifier="4c811f7f-7dd6-b9de-0e92-188b1e5e41cc",Synchronized="2020-03-03 21:37:16.0")
 /** TableName=C_OrderTax */
 public static final String Table_Name="C_OrderTax";
 
@@ -160,13 +160,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f11d5b51-c0ca-75e8-ec62-6567a2a9c309")
+public static String es_PE_FIELD_OrderTax_Order_Name="Orden de Venta";
+
+@XendraTrl(Identifier="f11d5b51-c0ca-75e8-ec62-6567a2a9c309")
 public static String es_PE_FIELD_OrderTax_Order_Description="Orden de Venta";
 
 @XendraTrl(Identifier="f11d5b51-c0ca-75e8-ec62-6567a2a9c309")
 public static String es_PE_FIELD_OrderTax_Order_Help="La ID de la orden de ventas es un identificador único de la orden de ventas; Ésta es controlada por la secuencia del documento para este tipo de documento.";
-
-@XendraTrl(Identifier="f11d5b51-c0ca-75e8-ec62-6567a2a9c309")
-public static String es_PE_FIELD_OrderTax_Order_Name="Orden de Venta";
 
 @XendraField(AD_Column_ID="C_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -176,13 +176,13 @@ Identifier="f11d5b51-c0ca-75e8-ec62-6567a2a9c309")
 public static final String FIELDNAME_OrderTax_Order="f11d5b51-c0ca-75e8-ec62-6567a2a9c309";
 
 @XendraTrl(Identifier="03921db0-608c-d651-7f70-89ce2bfc11b2")
+public static String es_PE_FIELD_OrderTax_PurchaseOrder_Name="Orden de compra";
+
+@XendraTrl(Identifier="03921db0-608c-d651-7f70-89ce2bfc11b2")
 public static String es_PE_FIELD_OrderTax_PurchaseOrder_Description="Orden de compra";
 
 @XendraTrl(Identifier="03921db0-608c-d651-7f70-89ce2bfc11b2")
 public static String es_PE_FIELD_OrderTax_PurchaseOrder_Help="La compra es Identificada con un ID único de orden de compra. Esta controlado por la secuencia de este tipo de documento.";
-
-@XendraTrl(Identifier="03921db0-608c-d651-7f70-89ce2bfc11b2")
-public static String es_PE_FIELD_OrderTax_PurchaseOrder_Name="Orden de compra";
 
 @XendraField(AD_Column_ID="C_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -200,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="317f0a10-04ae-aefb-e7c6-87d3c04bbdcd",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:53.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Tax.
@@ -220,28 +220,29 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
+public static String es_PE_FIELD_OrderTax_Tax_Name="Impuesto";
+
+@XendraTrl(Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
 public static String es_PE_FIELD_OrderTax_Tax_Description="Identificador del Impuesto";
 
 @XendraTrl(Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
 public static String es_PE_FIELD_OrderTax_Tax_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
 
-@XendraTrl(Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
-public static String es_PE_FIELD_OrderTax_Tax_Name="Impuesto";
-@XendraField(AD_Column_ID="C_Tax_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
+@XendraField(AD_Column_ID="C_Tax_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="95d2f469-1214-aa23-dd5d-343e3695fc19")
 public static final String FIELDNAME_OrderTax_Tax="95d2f469-1214-aa23-dd5d-343e3695fc19";
+
+@XendraTrl(Identifier="0da5dcc9-2bff-021d-d842-c319558404b2")
+public static String es_PE_FIELD_OrderTax_Tax2_Name="Impuesto";
 
 @XendraTrl(Identifier="0da5dcc9-2bff-021d-d842-c319558404b2")
 public static String es_PE_FIELD_OrderTax_Tax2_Description="Identificador del Impuesto";
 
 @XendraTrl(Identifier="0da5dcc9-2bff-021d-d842-c319558404b2")
 public static String es_PE_FIELD_OrderTax_Tax2_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
-
-@XendraTrl(Identifier="0da5dcc9-2bff-021d-d842-c319558404b2")
-public static String es_PE_FIELD_OrderTax_Tax2_Name="Impuesto";
 
 @XendraField(AD_Column_ID="C_Tax_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -259,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0b81ca5d-a1ea-fa32-edd2-a20eb46fd0e0",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name C_Tax_ID */
 public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
 /** Set Identifier.
@@ -291,7 +292,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7e0d6507-26b9-4bd6-a827-b16b5633afd4",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Price includes Tax.
@@ -314,13 +315,13 @@ return false;
 }
 
 @XendraTrl(Identifier="2a0f07b6-e92d-e82e-d08f-646445b3eb6b")
+public static String es_PE_FIELD_OrderTax_PriceIncludesTax_Name="Impuesto Incluido en el Precio";
+
+@XendraTrl(Identifier="2a0f07b6-e92d-e82e-d08f-646445b3eb6b")
 public static String es_PE_FIELD_OrderTax_PriceIncludesTax_Description="Impuesto incluido en el precio";
 
 @XendraTrl(Identifier="2a0f07b6-e92d-e82e-d08f-646445b3eb6b")
 public static String es_PE_FIELD_OrderTax_PriceIncludesTax_Help="El cuadro de verificación Impuesto Incluido indica que el precio incluye impuestos. Esto es también conocido como el precio bruto";
-
-@XendraTrl(Identifier="2a0f07b6-e92d-e82e-d08f-646445b3eb6b")
-public static String es_PE_FIELD_OrderTax_PriceIncludesTax_Name="Impuesto Incluido en el Precio";
 
 @XendraField(AD_Column_ID="IsTaxIncluded",IsCentrallyMaintained=true,
 AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -330,13 +331,13 @@ Identifier="2a0f07b6-e92d-e82e-d08f-646445b3eb6b")
 public static final String FIELDNAME_OrderTax_PriceIncludesTax="2a0f07b6-e92d-e82e-d08f-646445b3eb6b";
 
 @XendraTrl(Identifier="b8d47d17-b5c3-f183-b9fb-6b00a0d79d25")
+public static String es_PE_FIELD_OrderTax_PriceIncludesTax2_Name="Impuesto Incluido en el Precio";
+
+@XendraTrl(Identifier="b8d47d17-b5c3-f183-b9fb-6b00a0d79d25")
 public static String es_PE_FIELD_OrderTax_PriceIncludesTax2_Description="Impuesto incluido en el precio";
 
 @XendraTrl(Identifier="b8d47d17-b5c3-f183-b9fb-6b00a0d79d25")
 public static String es_PE_FIELD_OrderTax_PriceIncludesTax2_Help="El cuadro de verificación Impuesto Incluido indica que el precio incluye impuestos. Esto es también conocido como el precio bruto";
-
-@XendraTrl(Identifier="b8d47d17-b5c3-f183-b9fb-6b00a0d79d25")
-public static String es_PE_FIELD_OrderTax_PriceIncludesTax2_Name="Impuesto Incluido en el Precio";
 
 @XendraField(AD_Column_ID="IsTaxIncluded",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -354,7 +355,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b69a64b-de1c-ba38-4772-bc4beb39bf24",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name IsTaxIncluded */
 public static final String COLUMNNAME_IsTaxIncluded = "IsTaxIncluded";
 /** Set Processed.
@@ -377,13 +378,13 @@ return false;
 }
 
 @XendraTrl(Identifier="d330f734-6bdb-c2a8-5657-ab949872128b")
+public static String es_PE_FIELD_OrderTax_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="d330f734-6bdb-c2a8-5657-ab949872128b")
 public static String es_PE_FIELD_OrderTax_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="d330f734-6bdb-c2a8-5657-ab949872128b")
 public static String es_PE_FIELD_OrderTax_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="d330f734-6bdb-c2a8-5657-ab949872128b")
-public static String es_PE_FIELD_OrderTax_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -393,13 +394,13 @@ Identifier="d330f734-6bdb-c2a8-5657-ab949872128b")
 public static final String FIELDNAME_OrderTax_Processed="d330f734-6bdb-c2a8-5657-ab949872128b";
 
 @XendraTrl(Identifier="37eb138b-70df-c649-741d-dd92f8851250")
+public static String es_PE_FIELD_OrderTax_Processed2_Name="Procesado";
+
+@XendraTrl(Identifier="37eb138b-70df-c649-741d-dd92f8851250")
 public static String es_PE_FIELD_OrderTax_Processed2_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="37eb138b-70df-c649-741d-dd92f8851250")
 public static String es_PE_FIELD_OrderTax_Processed2_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="37eb138b-70df-c649-741d-dd92f8851250")
-public static String es_PE_FIELD_OrderTax_Processed2_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -417,7 +418,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="77a93e9c-daf3-6d64-d4ee-2e3cafbaa7d3",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Tax Amount.
@@ -437,13 +438,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="0163c797-c5e6-16a0-790b-40ca486f6bcd")
+public static String es_PE_FIELD_OrderTax_TaxAmount_Name="Total del Impuesto";
+
+@XendraTrl(Identifier="0163c797-c5e6-16a0-790b-40ca486f6bcd")
 public static String es_PE_FIELD_OrderTax_TaxAmount_Description="Total del impuesto para un documento";
 
 @XendraTrl(Identifier="0163c797-c5e6-16a0-790b-40ca486f6bcd")
 public static String es_PE_FIELD_OrderTax_TaxAmount_Help="El Total de Impuesto despliega el total de impuesto para un documento";
-
-@XendraTrl(Identifier="0163c797-c5e6-16a0-790b-40ca486f6bcd")
-public static String es_PE_FIELD_OrderTax_TaxAmount_Name="Total del Impuesto";
 
 @XendraField(AD_Column_ID="TaxAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -453,13 +454,13 @@ Identifier="0163c797-c5e6-16a0-790b-40ca486f6bcd")
 public static final String FIELDNAME_OrderTax_TaxAmount="0163c797-c5e6-16a0-790b-40ca486f6bcd";
 
 @XendraTrl(Identifier="1d265c55-ca29-b0f7-9c75-e60964850c3e")
+public static String es_PE_FIELD_OrderTax_TaxAmount2_Name="Total del Impuesto";
+
+@XendraTrl(Identifier="1d265c55-ca29-b0f7-9c75-e60964850c3e")
 public static String es_PE_FIELD_OrderTax_TaxAmount2_Description="Total del impuesto para un documento";
 
 @XendraTrl(Identifier="1d265c55-ca29-b0f7-9c75-e60964850c3e")
 public static String es_PE_FIELD_OrderTax_TaxAmount2_Help="El Total de Impuesto despliega el total de impuesto para un documento";
-
-@XendraTrl(Identifier="1d265c55-ca29-b0f7-9c75-e60964850c3e")
-public static String es_PE_FIELD_OrderTax_TaxAmount2_Name="Total del Impuesto";
 
 @XendraField(AD_Column_ID="TaxAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -477,7 +478,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="788d7535-6bb0-0dd4-a961-7ca8e9b0aac7",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name TaxAmt */
 public static final String COLUMNNAME_TaxAmt = "TaxAmt";
 /** Set Tax base Amount.
@@ -497,13 +498,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="cda59d77-38c0-cb16-72c0-a23351927082")
+public static String es_PE_FIELD_OrderTax_TaxBaseAmount_Name="Total Base del Impuesto";
+
+@XendraTrl(Identifier="cda59d77-38c0-cb16-72c0-a23351927082")
 public static String es_PE_FIELD_OrderTax_TaxBaseAmount_Description="Base para calcular el total del impuesto";
 
 @XendraTrl(Identifier="cda59d77-38c0-cb16-72c0-a23351927082")
 public static String es_PE_FIELD_OrderTax_TaxBaseAmount_Help="El total base de impuesto indica el total base usado para calcular el total de impuesto.";
-
-@XendraTrl(Identifier="cda59d77-38c0-cb16-72c0-a23351927082")
-public static String es_PE_FIELD_OrderTax_TaxBaseAmount_Name="Total Base del Impuesto";
 
 @XendraField(AD_Column_ID="TaxBaseAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="5270301f-d0c1-0c8e-3adb-a0c12b6b70c4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -513,13 +514,13 @@ Identifier="cda59d77-38c0-cb16-72c0-a23351927082")
 public static final String FIELDNAME_OrderTax_TaxBaseAmount="cda59d77-38c0-cb16-72c0-a23351927082";
 
 @XendraTrl(Identifier="f1afdc79-ab3f-51f3-b6f6-764b68214e89")
+public static String es_PE_FIELD_OrderTax_TaxBaseAmount2_Name="Total Base del Impuesto";
+
+@XendraTrl(Identifier="f1afdc79-ab3f-51f3-b6f6-764b68214e89")
 public static String es_PE_FIELD_OrderTax_TaxBaseAmount2_Description="Base para calcular el total del impuesto";
 
 @XendraTrl(Identifier="f1afdc79-ab3f-51f3-b6f6-764b68214e89")
 public static String es_PE_FIELD_OrderTax_TaxBaseAmount2_Help="El total base de impuesto indica el total base usado para calcular el total de impuesto.";
-
-@XendraTrl(Identifier="f1afdc79-ab3f-51f3-b6f6-764b68214e89")
-public static String es_PE_FIELD_OrderTax_TaxBaseAmount2_Name="Total Base del Impuesto";
 
 @XendraField(AD_Column_ID="TaxBaseAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="b1eb59bc-4998-2a8f-c4d4-7d92003d4243",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -537,7 +538,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="967b59fe-2b5f-df91-3fa2-e5b109723803",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name TaxBaseAmt */
 public static final String COLUMNNAME_TaxBaseAmt = "TaxBaseAmt";
 }

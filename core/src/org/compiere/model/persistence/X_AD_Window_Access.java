@@ -61,14 +61,14 @@ public static int Table_ID=MTable.getTable_ID("AD_Window_Access");
 public static String es_PE_TAB_WindowAccess_Description="Acceso a Ventana";
 
 @XendraTrl(Identifier="fa6b3ea3-b169-e592-740f-258c9255481b")
-public static String es_PE_TAB_WindowAccess_Name="Acceso a Ventana";
+public static String es_PE_TAB_WindowAccess_Help="La pestaña Acceso de Ventanas define las ventanas y el tipo de acceso que este rol tiene.";
 
 @XendraTrl(Identifier="fa6b3ea3-b169-e592-740f-258c9255481b")
-public static String es_PE_TAB_WindowAccess_Help="La pestaña Acceso de Ventanas define las ventanas y el tipo de acceso que este rol tiene.";
+public static String es_PE_TAB_WindowAccess_Name="Acceso a Ventana";
 
 @XendraTab(Name="Window Access",Description="Window Access",
 Help="The Window Access Tab defines the Windows and type of access that this Role is granted.",
-AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=40,TabLevel=1,IsSingleRow=false,
+AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=50,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
 AD_Column_ID="174e72d3-8a67-8478-34f9-139d3dbe9e10",HasTree=false,WhereClause="",OrderByClause="",
 CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",
@@ -81,12 +81,12 @@ public static final String TABNAME_WindowAccess="fa6b3ea3-b169-e592-740f-258c925
 public static String es_PE_TAB_Access_Description="Acceso a Ventana";
 
 @XendraTrl(Identifier="c40f3f11-0529-bf1e-c50c-6a75799e6d35")
-public static String es_PE_TAB_Access_Name="Acceso";
-
-@XendraTrl(Identifier="c40f3f11-0529-bf1e-c50c-6a75799e6d35")
 public static String es_PE_TAB_Access_Help="La pestaña Acceso de Ventanas define los roles que tienen acceso a esta ventana.";
 
-@XendraTab(Name="Access",Description="Window Access",
+@XendraTrl(Identifier="c40f3f11-0529-bf1e-c50c-6a75799e6d35")
+public static String es_PE_TAB_Access_Name="Acceso";
+@XendraTab(Name="Access",
+Description="Window Access",
 Help="The Window Access Tab defines the Roles which have access to this Window.",
 AD_Window_ID="30d54758-dbe1-9262-0e6e-4d5cd8507e38",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -100,11 +100,12 @@ public static final String TABNAME_Access="c40f3f11-0529-bf1e-c50c-6a75799e6d35"
 @XendraTrl(Identifier="4485919e-6b7f-7517-0eb3-aea509576359")
 public static String es_PE_TABLE_AD_Window_Access_Name="AD_Window_Access";
 
-@XendraTable(Name="AD_Window_Access",Description="",Help="",TableName="AD_Window_Access",
-AccessLevel="6",AD_Window_ID="30d54758-dbe1-9262-0e6e-4d5cd8507e38",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="4485919e-6b7f-7517-0eb3-aea509576359",Synchronized="2017-08-16 11:41:12.0")
+@XendraTable(Name="AD_Window_Access",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Window_Access",AccessLevel="6",AD_Window_ID="30d54758-dbe1-9262-0e6e-4d5cd8507e38",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="4485919e-6b7f-7517-0eb3-aea509576359",Synchronized="2020-03-03 21:36:11.0")
 /** TableName=AD_Window_Access */
 public static final String Table_Name="AD_Window_Access";
 
@@ -154,13 +155,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="38bc92e0-cbed-12ab-2f6e-2c330490b87d")
+public static String es_PE_FIELD_WindowAccess_Role_Name="Rol";
+
+@XendraTrl(Identifier="38bc92e0-cbed-12ab-2f6e-2c330490b87d")
 public static String es_PE_FIELD_WindowAccess_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="38bc92e0-cbed-12ab-2f6e-2c330490b87d")
 public static String es_PE_FIELD_WindowAccess_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="38bc92e0-cbed-12ab-2f6e-2c330490b87d")
-public static String es_PE_FIELD_WindowAccess_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fa6b3ea3-b169-e592-740f-258c9255481b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -170,18 +171,19 @@ Identifier="38bc92e0-cbed-12ab-2f6e-2c330490b87d")
 public static final String FIELDNAME_WindowAccess_Role="38bc92e0-cbed-12ab-2f6e-2c330490b87d";
 
 @XendraTrl(Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
+public static String es_PE_FIELD_Access_Role_Name="Rol";
+
+@XendraTrl(Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
 public static String es_PE_FIELD_Access_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
 public static String es_PE_FIELD_Access_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
 
-@XendraTrl(Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
-public static String es_PE_FIELD_Access_Role_Name="Rol";
-@XendraField(AD_Column_ID="AD_Role_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="c40f3f11-0529-bf1e-c50c-6a75799e6d35",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
+@XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="c40f3f11-0529-bf1e-c50c-6a75799e6d35",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e267cf6e-432d-78e5-0ab4-2465697afc92")
 public static final String FIELDNAME_Access_Role="e267cf6e-432d-78e5-0ab4-2465697afc92";
 
 @XendraTrl(Identifier="174e72d3-8a67-8478-34f9-139d3dbe9e10")
@@ -193,7 +195,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="174e72d3-8a67-8478-34f9-139d3dbe9e10",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Window.
@@ -213,13 +215,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1c61a16d-53e0-3e82-e780-4cc5f01141a5")
+public static String es_PE_FIELD_WindowAccess_Window_Name="Ventana";
+
+@XendraTrl(Identifier="1c61a16d-53e0-3e82-e780-4cc5f01141a5")
 public static String es_PE_FIELD_WindowAccess_Window_Description="Ventana de entrada de datos ó despliegue";
 
 @XendraTrl(Identifier="1c61a16d-53e0-3e82-e780-4cc5f01141a5")
 public static String es_PE_FIELD_WindowAccess_Window_Help="El campo ventana identifica una ventana única en el sistema";
-
-@XendraTrl(Identifier="1c61a16d-53e0-3e82-e780-4cc5f01141a5")
-public static String es_PE_FIELD_WindowAccess_Window_Name="Ventana";
 
 @XendraField(AD_Column_ID="AD_Window_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fa6b3ea3-b169-e592-740f-258c9255481b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -229,13 +231,13 @@ Identifier="1c61a16d-53e0-3e82-e780-4cc5f01141a5")
 public static final String FIELDNAME_WindowAccess_Window="1c61a16d-53e0-3e82-e780-4cc5f01141a5";
 
 @XendraTrl(Identifier="39877421-11bc-bfe3-3b22-e4d2cdf9571b")
+public static String es_PE_FIELD_Access_Window_Name="Ventana";
+
+@XendraTrl(Identifier="39877421-11bc-bfe3-3b22-e4d2cdf9571b")
 public static String es_PE_FIELD_Access_Window_Description="Ventana de entrada de datos ó despliegue";
 
 @XendraTrl(Identifier="39877421-11bc-bfe3-3b22-e4d2cdf9571b")
 public static String es_PE_FIELD_Access_Window_Help="El campo ventana identifica una ventana única en el sistema";
-
-@XendraTrl(Identifier="39877421-11bc-bfe3-3b22-e4d2cdf9571b")
-public static String es_PE_FIELD_Access_Window_Name="Ventana";
 
 @XendraField(AD_Column_ID="AD_Window_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c40f3f11-0529-bf1e-c50c-6a75799e6d35",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -253,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9f598d3f-0ebd-fccb-471a-acd51b911b37",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AD_Window_ID */
 public static final String COLUMNNAME_AD_Window_ID = "AD_Window_ID";
 /** Set Identifier.
@@ -285,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cc31580-715f-4875-9a80-347bc505ac96",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Read Write.
@@ -308,13 +310,13 @@ return false;
 }
 
 @XendraTrl(Identifier="8915c43f-4458-cd94-2a59-61ad7bed764b")
+public static String es_PE_FIELD_WindowAccess_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="8915c43f-4458-cd94-2a59-61ad7bed764b")
 public static String es_PE_FIELD_WindowAccess_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="8915c43f-4458-cd94-2a59-61ad7bed764b")
 public static String es_PE_FIELD_WindowAccess_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="8915c43f-4458-cd94-2a59-61ad7bed764b")
-public static String es_PE_FIELD_WindowAccess_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="fa6b3ea3-b169-e592-740f-258c9255481b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -324,13 +326,13 @@ Identifier="8915c43f-4458-cd94-2a59-61ad7bed764b")
 public static final String FIELDNAME_WindowAccess_ReadWrite="8915c43f-4458-cd94-2a59-61ad7bed764b";
 
 @XendraTrl(Identifier="2212e2ae-be74-c1bf-b118-8a4d386506c4")
+public static String es_PE_FIELD_Access_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="2212e2ae-be74-c1bf-b118-8a4d386506c4")
 public static String es_PE_FIELD_Access_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="2212e2ae-be74-c1bf-b118-8a4d386506c4")
 public static String es_PE_FIELD_Access_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="2212e2ae-be74-c1bf-b118-8a4d386506c4")
-public static String es_PE_FIELD_Access_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="c40f3f11-0529-bf1e-c50c-6a75799e6d35",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -348,7 +350,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cd3c4b73-47f3-ad0e-1072-cf22bac78153",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name IsReadWrite */
 public static final String COLUMNNAME_IsReadWrite = "IsReadWrite";
 }

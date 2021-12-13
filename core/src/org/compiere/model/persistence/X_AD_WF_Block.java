@@ -60,12 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_WF_Block");
 public static String es_PE_TAB_Block_Description="Bloque de Ejecución en Transacción de Flujo de Trabajo.";
 
 @XendraTrl(Identifier="79fee10e-54c9-6bbb-9603-d7ae242602a9")
-public static String es_PE_TAB_Block_Name="Bloques";
-
-@XendraTrl(Identifier="79fee10e-54c9-6bbb-9603-d7ae242602a9")
 public static String es_PE_TAB_Block_Help="Un Bloque de Ejecución de Flujo de Trabajo es opcional y permite que todo el trabajo sea realizado en una sola transacción. Si un paso (actividad del nodo) falla, el trabajo entero se rueda detrás.";
 
-@XendraTab(Name="Block",Description="Workflow Transaction Execution Block",
+@XendraTrl(Identifier="79fee10e-54c9-6bbb-9603-d7ae242602a9")
+public static String es_PE_TAB_Block_Name="Bloques";
+@XendraTab(Name="Block",
+Description="Workflow Transaction Execution Block",
 Help="A workflow execution block is optional and allows all work to be performed in a single transaction. If one step (node activity) fails, the entire work is rolled back.",
 AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",SeqNo=40,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -78,11 +78,13 @@ public static final String TABNAME_Block="79fee10e-54c9-6bbb-9603-d7ae242602a9";
 @XendraTrl(Identifier="2021680c-5688-05fe-47cc-279b85f8a4de")
 public static String es_PE_TABLE_AD_WF_Block_Name="Bloque de Flujo de Trabajo";
 
-@XendraTable(Name="Workflow Block",Description="Workflow Transaction Execution Block",Help="",
-TableName="AD_WF_Block",AccessLevel="6",AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="2021680c-5688-05fe-47cc-279b85f8a4de",Synchronized="2017-08-16 11:41:08.0")
+@XendraTable(Name="Workflow Block",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Workflow Transaction Execution Block",Help="",TableName="AD_WF_Block",AccessLevel="6",
+AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.workflow",Identifier="2021680c-5688-05fe-47cc-279b85f8a4de",
+Synchronized="2020-03-03 21:36:07.0")
 /** TableName=AD_WF_Block */
 public static final String Table_Name="AD_WF_Block";
 
@@ -132,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="47eba8b3-3fa9-d49e-c774-8fcc338151be")
+public static String es_PE_FIELD_Block_WorkflowBlock_Name="Bloque de Flujo de Trabajo";
+
+@XendraTrl(Identifier="47eba8b3-3fa9-d49e-c774-8fcc338151be")
 public static String es_PE_FIELD_Block_WorkflowBlock_Description="Ejecuta el bloque de transacción de flujo de trabajo.";
 
 @XendraTrl(Identifier="47eba8b3-3fa9-d49e-c774-8fcc338151be")
 public static String es_PE_FIELD_Block_WorkflowBlock_Help="La ejecución del bloque en un flujo de trabajo es opcional y permite que todo el trabajo sea realizado en una sola transacción. Si un paso (actividad del nodo) falla, el trabajo entero se rueda detrás.";
-
-@XendraTrl(Identifier="47eba8b3-3fa9-d49e-c774-8fcc338151be")
-public static String es_PE_FIELD_Block_WorkflowBlock_Name="Bloque de Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_WF_Block_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="79fee10e-54c9-6bbb-9603-d7ae242602a9",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -165,13 +167,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="57fe770a-9482-7282-1909-750b0d10d5b1")
+public static String es_PE_FIELD_Block_Workflow_Name="Flujo de Trabajo";
+
+@XendraTrl(Identifier="57fe770a-9482-7282-1909-750b0d10d5b1")
 public static String es_PE_FIELD_Block_Workflow_Description="Flujo de trabajo ó combinación de tareas";
 
 @XendraTrl(Identifier="57fe770a-9482-7282-1909-750b0d10d5b1")
 public static String es_PE_FIELD_Block_Workflow_Help="El campo flujo de trabajo identifica un flujo de trabajo único en el sistema.";
-
-@XendraTrl(Identifier="57fe770a-9482-7282-1909-750b0d10d5b1")
-public static String es_PE_FIELD_Block_Workflow_Name="Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_Workflow_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="79fee10e-54c9-6bbb-9603-d7ae242602a9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -189,7 +191,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="76ebe352-847e-18da-998f-ab44b31ba3fa",
-Synchronized="2017-08-05 16:52:59.0")
+Synchronized="2019-08-30 22:20:50.0")
 /** Column name AD_Workflow_ID */
 public static final String COLUMNNAME_AD_Workflow_ID = "AD_Workflow_ID";
 /** Set Description.
@@ -220,13 +222,13 @@ return value;
 }
 
 @XendraTrl(Identifier="8c4415cd-498f-92bf-840e-f74f435977fe")
+public static String es_PE_FIELD_Block_Description_Name="Observación";
+
+@XendraTrl(Identifier="8c4415cd-498f-92bf-840e-f74f435977fe")
 public static String es_PE_FIELD_Block_Description_Description="Observación";
 
 @XendraTrl(Identifier="8c4415cd-498f-92bf-840e-f74f435977fe")
 public static String es_PE_FIELD_Block_Description_Help="Observación";
-
-@XendraTrl(Identifier="8c4415cd-498f-92bf-840e-f74f435977fe")
-public static String es_PE_FIELD_Block_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="79fee10e-54c9-6bbb-9603-d7ae242602a9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -244,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dde9167e-232f-5e9a-63c5-3f7ba34d62c2",
-Synchronized="2017-08-05 16:52:59.0")
+Synchronized="2019-08-30 22:20:50.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -276,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8eacbf05-adde-47e4-8c89-bef2bc3cec08",
-Synchronized="2017-08-05 16:52:59.0")
+Synchronized="2019-08-30 22:20:50.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -308,18 +310,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
+public static String es_PE_FIELD_Block_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
 public static String es_PE_FIELD_Block_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
 public static String es_PE_FIELD_Block_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
-public static String es_PE_FIELD_Block_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="79fee10e-54c9-6bbb-9603-d7ae242602a9",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="79fee10e-54c9-6bbb-9603-d7ae242602a9",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d43ef319-5c80-a906-614f-d5fdc4941676")
 public static final String FIELDNAME_Block_Name="d43ef319-5c80-a906-614f-d5fdc4941676";
 
 @XendraTrl(Identifier="2eb97646-1ffa-464c-da81-d4544b45dda5")
@@ -331,7 +334,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2eb97646-1ffa-464c-da81-d4544b45dda5",
-Synchronized="2017-08-05 16:52:59.0")
+Synchronized="2019-08-30 22:20:50.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

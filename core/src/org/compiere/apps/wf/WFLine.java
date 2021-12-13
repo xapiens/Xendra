@@ -39,13 +39,13 @@ public class WFLine extends Component
 	public WFLine (MWFNodeNext next)
 	{
 		m_next = next;
-	//	setOpaque(false);
+		//	setOpaque(false);
 		setFocusable(false);
 		//
 		m_description = next.getDescription();
 		if (m_description != null && m_description.length() > 0)
 			m_description = "{" + String.valueOf(next.getSeqNo()) 
-				+ ": " + m_description + "}";
+			+ ": " + m_description + "}";
 	}	//	WFLine
 
 	/**	Model					*/
@@ -60,7 +60,7 @@ public class WFLine extends Component
 	private boolean			m_visited = false;
 	/**	Logger					*/
 	private static CLogger	log = CLogger.getCLogger(WFLine.class);
-	
+
 	/**
 	 * 	Get From rectangle
 	 * 	@return from node rectangle
@@ -124,7 +124,7 @@ public class WFLine extends Component
 	private boolean isRightTop()					//	\
 	{
 		return (m_from.x+m_from.width <= m_to.x		//	right.bottom - left.top
-			&& m_from.y+m_from.height  <= m_to.y);	
+				&& m_from.y+m_from.height  <= m_to.y);	
 	}
 	/**
 	 *	From: Bottom - To: Top		= top | down 	
@@ -142,13 +142,13 @@ public class WFLine extends Component
 	}
 	/**
 	 *	From: Left - To: Right		=	right o <- o left
- 	 */
+	 */
 	private boolean isLeftRight()					// 	->
 	{
 		return (m_to.x+m_to.width <= m_from.x);
 	}
-	
-	
+
+
 	/**************************************************************************
 	 * 	Paint it.
 	 *	Coordinates based on WFContentPanel.
@@ -158,11 +158,11 @@ public class WFLine extends Component
 	{
 		if (m_from == null || m_to == null)
 			return;
-		
+
 		Polygon arrow = new Polygon();
 		Point from = null;
 		Point to = null;
-		
+
 		//	
 		if (isRightTop())
 		{
@@ -209,7 +209,7 @@ public class WFLine extends Component
 		else
 			g.setColor(Color.black);
 		g.drawPolygon(arrow);			//	line
-		
+
 		//	Paint Dot for AND From
 		if (m_next.isFromSplitAnd())
 		{
@@ -222,41 +222,43 @@ public class WFLine extends Component
 			g.setColor(Color.magenta);
 			g.fillOval(to.x-3, to.y-3, 6, 6);
 		}
-		
+
 		//	Paint Description in red
 		if (m_description != null)
 		{
-			Graphics2D g2D = (Graphics2D)g;
-			Font font = new Font("Dialog", Font.PLAIN, 9);
-			if (m_next.isUnconditional())
-				g2D.setColor(Color.black);
-			else
-				g2D.setColor(Color.red);
-			TextLayout layout = new TextLayout (m_description, font, g2D.getFontRenderContext());
-			
-			//	Mid Point
-			int x = 0;
-			if (from.x < to.x)
-				x = from.x + ((to.x - from.x) / 2);
-			else
-				x = to.x + ((from.x - to.x) / 2);
-			int y = 0;
-			if (from.y < to.y)
-				y = from.y + ((to.y - from.y) / 2);
-			else
-				y = to.y + ((from.y - to.y) / 2);
+			if (m_description.length() > 0) {
+				Graphics2D g2D = (Graphics2D)g;
+				Font font = new Font("Dialog", Font.PLAIN, 9);
+				if (m_next.isUnconditional())
+					g2D.setColor(Color.black);
+				else
+					g2D.setColor(Color.red);
+				TextLayout layout = new TextLayout (m_description, font, g2D.getFontRenderContext());
 
-			//	Adjust |
-			y -= (layout.getAscent() - 3);		//	above center
-			
-			//	Adjust -
-			x -= (layout.getAdvance() / 2);		//	center
-			if (x < 2)
-				x = 2;
-			
-			layout.draw(g2D, x, y);
+				//	Mid Point
+				int x = 0;
+				if (from.x < to.x)
+					x = from.x + ((to.x - from.x) / 2);
+				else
+					x = to.x + ((from.x - to.x) / 2);
+				int y = 0;
+				if (from.y < to.y)
+					y = from.y + ((to.y - from.y) / 2);
+				else
+					y = to.y + ((from.y - to.y) / 2);
+
+				//	Adjust |
+				y -= (layout.getAscent() - 3);		//	above center
+
+				//	Adjust -
+				x -= (layout.getAdvance() / 2);		//	center
+				if (x < 2)
+					x = 2;
+
+				layout.draw(g2D, x, y);
+			}
 		}
-		
+
 	}	//	paintComponent
 
 	/**

@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Operator");
 @XendraTrl(Identifier="91861a60-a519-49f3-a764-b456475e19e3")
 public static String es_PE_TABLE_AD_Operator_Name="Operator";
 
-@XendraTable(Name="Operator",Description="",Help="",TableName="AD_Operator",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="91861a60-a519-49f3-a764-b456475e19e3",Synchronized="2017-08-16 11:40:31.0")
+@XendraTable(Name="Operator",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Operator",
+AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="91861a60-a519-49f3-a764-b456475e19e3",
+Synchronized="2020-03-03 21:35:09.0")
 /** TableName=AD_Operator */
 public static final String Table_Name="AD_Operator";
 
@@ -139,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ddf74f5a-f3d4-4e24-8195-a0fda9b99fed",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name CompOp */
 public static final String COLUMNNAME_CompOp = "CompOp";
 /** Set Description.
@@ -178,7 +180,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="12b28657-affc-44c7-bf93-7e10e218d373",
-Synchronized="2017-08-05 16:52:38.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -210,7 +212,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7fa4ff83-b94f-489d-b78b-6d4a0c9dbb68",
-Synchronized="2015-08-15 14:37:50.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set LeftType.
@@ -242,7 +244,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c530edc-b634-4f18-abdc-93d640401fe7",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name LeftType */
 public static final String COLUMNNAME_LeftType = "LeftType";
 /** Set OprName.
@@ -274,7 +276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="724a35a7-7b15-4a0c-bae9-13549e19e732",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name OprName */
 public static final String COLUMNNAME_OprName = "OprName";
 /** Set OprProc.
@@ -306,7 +308,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0445e021-36d0-43cd-80ef-0fbea324fe1b",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name OprProc */
 public static final String COLUMNNAME_OprProc = "OprProc";
 /** Set Owner.
@@ -338,7 +340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6dfda3d4-0410-436a-b1c9-4dedc9b1cd61",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name Owner */
 public static final String COLUMNNAME_Owner = "Owner";
 /** Set RightType.
@@ -370,7 +372,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b811d08a-d092-42fa-83ef-82d3d8dd1c92",
-Synchronized="2015-08-15 14:25:01.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name RightType */
 public static final String COLUMNNAME_RightType = "RightType";
 /** Set Synchronized.
@@ -395,7 +397,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1b380c07-5a0d-486e-9771-bfb145c9b820",
-Synchronized="2015-08-15 18:30:17.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name Synchronized */
 public static final String COLUMNNAME_Synchronized = "Synchronized";
 }

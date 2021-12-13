@@ -117,7 +117,7 @@ public class ExchangeDifferencebyCurrency extends SvrProcess {
 
 			ResultSet rs = pstmt.executeQuery();
 
-			MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose);
+			MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose, 0, m_AD_Client_ID);
 			MDocType docType = new MDocType(getCtx(), m_C_DocType_ID, get_TrxName());
 			MAcctSchema schema = new MAcctSchema(getCtx(), m_C_AcctSchema_ID, get_TrxName());
 

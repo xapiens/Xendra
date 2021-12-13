@@ -54,6 +54,7 @@ import org.compiere.swing.CLabel;
 import org.compiere.swing.CPanel;
 import org.compiere.swing.CTabbedPane;
 import org.compiere.swing.CollapsiblePanel;
+import org.compiere.util.CLogMgt;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.DisplayType;
@@ -84,8 +85,7 @@ public final class VPanel extends CPanel
 	private static final long serialVersionUID = 8227080366665213627L;
 
 	private int m_WindowNo;
-	// show layout grid
-	private boolean debug = false;
+	// show layout grid	
 	private String defaultLayoutConstraints;
 	private int labelMinWidth = 0;
 	private int fieldMinWidth = 0;
@@ -105,7 +105,7 @@ public final class VPanel extends CPanel
 		m_WindowNo = WindowNo;
 		
 		defaultLayoutConstraints =  "hidemode 3";   // hidden fields take no part in grid
-		defaultLayoutConstraints += debug ? ", debug" : "";
+		defaultLayoutConstraints += CLogMgt.DEBUG ? ", debug" : "";
 		
 		//[ 1757088 ]	
 		m_main.setName(Name);

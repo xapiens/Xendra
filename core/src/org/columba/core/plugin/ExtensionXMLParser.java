@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
 import org.columba.api.plugin.ExtensionForm;
 import org.columba.api.plugin.ExtensionFormTrl;
 import org.columba.api.plugin.ExtensionHandlerMetadata;
@@ -22,16 +21,21 @@ import org.columba.api.plugin.ExtensionMetadata;
 import org.columba.api.plugin.PluginMetadata;
 import org.columba.api.plugin.ServletMetadata;
 import org.columba.core.xml.XMLCoreParser;
+import org.compiere.model.Query;
 import org.compiere.model.persistence.X_AD_Column;
 import org.compiere.model.persistence.X_AD_Form;
 import org.compiere.model.persistence.X_AD_Function;
 import org.compiere.model.persistence.X_AD_Menu;
-import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.persistence.X_AD_TreeNodeMM;
+import org.compiere.model.persistence.X_A_Machine;
+import org.compiere.model.persistence.X_A_MachineServer;
 import org.compiere.model.reference.REF_AD_MenuAction;
+import org.compiere.util.CLogger;
+import org.compiere.util.Env;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
 import org.xendra.Constants;
 
 /**
@@ -40,8 +44,10 @@ import org.xendra.Constants;
  * @author Frederik Dietzs
  */
 public class ExtensionXMLParser extends XMLCoreParser {
-	private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger("org.columba.core.plugin");
-	private Enumeration<ExtensionHandlerMetadata> e = null;	
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.plugin");
+	private Enumeration<ExtensionHandlerMetadata> e = null;
+	private HashMap plugin;
+	private String filename;	
 
 	/**
 	 * Parse IExtension enumeration metadata from xml file.
@@ -60,7 +66,7 @@ public class ExtensionXMLParser extends XMLCoreParser {
 		Document doc = retrieveDocument(is);
 
 		Element parent = doc.getRootElement();
-	
+
 		if (parent == null || !parent.getName().equals(Constants.XML_ELEMENT_EXTENSIONLIST)) {
 			LOG.severe("missing <extensionlist> element");
 			return null;
@@ -165,11 +171,14 @@ public class ExtensionXMLParser extends XMLCoreParser {
 		String version = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_VERSION);
 		String enabled = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_ENABLED);
 		String category = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_CATEGORY);
+		String tags = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_TAGS);
+		if (tags == null)
+			tags = "";
 		String description = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_DESCRIPTION);
 		String syncro = pluginElement.getAttributeValue(Constants.XML_ATTRIBUTE_SYNCHRONIZED);
-		
-		PluginMetadata pluginMetadata = new PluginMetadata(id, name,description, version, category, syncro, new Boolean(enabled).booleanValue());
 
+		PluginMetadata pluginMetadata = new PluginMetadata(id, name,description, version, category, syncro, new Boolean(enabled).booleanValue(), false);
+		pluginMetadata.setTags(tags);
 		return pluginMetadata;
 	}
 
@@ -178,7 +187,7 @@ public class ExtensionXMLParser extends XMLCoreParser {
 		Element list = pluginElement.getChild(Constants.XML_ELEMENT_HANDLERLIST);
 		if (list == null)
 			return vector.elements();
-		
+
 		Iterator it = list.getChildren().listIterator();
 		while (it.hasNext()) {
 			Element child = (Element) it.next();
@@ -239,14 +248,16 @@ public class ExtensionXMLParser extends XMLCoreParser {
 	 *            hashtable will be filled with Vector of all extensions
 	 * @return plugin metadata
 	 */
-	//public PluginMetadata parsePlugin(InputStream is, Hashtable extensionlist) {
-	public HashMap parsePlugin(InputStream is) {
-		HashMap plugin = new HashMap();
+	public HashMap parsePlugin(String filename, InputStream is) {
+		this.filename = filename;
+		plugin = new HashMap();
 		Hashtable extensionlist = new Hashtable();
-		Hashtable servletlist = new Hashtable();		
-		Hashtable forms = new Hashtable();		
+		Hashtable servletlist = new Hashtable();
+		Hashtable properties = new Hashtable();
+		Hashtable forms = new Hashtable();	
+		Hashtable server = new Hashtable();
 		Document doc = retrieveDocument(is);
-		
+
 		if (doc == null)
 			return null;
 
@@ -286,6 +297,12 @@ public class ExtensionXMLParser extends XMLCoreParser {
 				plugin.put("menu", menu);
 				plugin.put("menutrl", menutrl);
 			}
+			else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_MENUITEM)) 
+			{
+				XMLOutputter outp = new XMLOutputter();
+				String s = outp.outputString(extensionListXmlElement);
+				plugin.put(Constants.XML_ELEMENT_MENUITEM, s);				
+			}			
 			else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_SERVLETLIST))
 			{
 				String extensionpointId = extensionListXmlElement.getAttributeValue(Constants.XML_ATTRIBUTE_ID);
@@ -308,6 +325,18 @@ public class ExtensionXMLParser extends XMLCoreParser {
 				servletlist.put(extensionpointId, vector);
 				plugin.put("servletlist", servletlist);
 			}
+			else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_PROPERTIES)) {
+				Iterator props = extensionListXmlElement.getChildren().listIterator();
+				HashMap propmap = new HashMap();
+				while (props.hasNext()) {
+					Element property = (Element) props.next();
+					if (!property.getName().equals(Constants.Property))
+						continue;
+					propmap.put(property.getAttributeValue(Constants.XML_ATTRIBUTE_NAME), property.getAttributeValue(Constants.XML_ATTRIBUTE_VALUE));
+				}
+
+				plugin.put(Constants.XML_ELEMENT_PROPERTIES, propmap);
+			}
 			else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_EXTENSIONLIST))
 			{
 				String extensionpointId = extensionListXmlElement.getAttributeValue(Constants.XML_ATTRIBUTE_ID);
@@ -320,19 +349,22 @@ public class ExtensionXMLParser extends XMLCoreParser {
 				while (it2.hasNext() ) {
 					Element extensionXmlElement = (Element) it2.next();
 					// skip if no <extension> element found
-					if (extensionXmlElement.getName().equals(Constants.XML_ELEMENT_EXTENSION) == false)
+					if (!extensionXmlElement.getName().equals(Constants.XML_ELEMENT_EXTENSION))
 						continue;
 
 					ExtensionMetadata extensionMetadata = new ExtensionXMLParser().parseExtensionMetadata(extensionXmlElement);
 					vector.add(extensionMetadata);
 				}
 				extensionlist.put(extensionpointId, vector);
-				plugin.put("extensionlist", extensionlist);
+				plugin.put(Constants.XML_ELEMENT_EXTENSIONLIST, extensionlist);
 			}
 			else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_FORM))
 			{				
 				List<ExtensionFormTrl> formtrl = new ArrayList<ExtensionFormTrl>();
 				ExtensionForm form = parseForm(extensionListXmlElement);
+				if (form == null) {
+					LOG.severe("incomplete form parameters");
+				}
 				Iterator itrl = extensionListXmlElement.getChildren().listIterator();
 				while (itrl.hasNext() ) {
 					Element ftrl = (Element) itrl.next();
@@ -342,10 +374,82 @@ public class ExtensionXMLParser extends XMLCoreParser {
 				form.addTrl(formtrl);
 				forms.put(form.getIdentifier(), form);
 				plugin.put("form", forms);
+			} else if (extensionListXmlElement.getName().equals("server")) {				
+				parseServer(extensionListXmlElement);			
+			} else if (extensionListXmlElement.getName().equals(Constants.XML_ELEMENT_DIRECTORY)) {
+				// the folder name
+				String name = extensionListXmlElement.getAttributeValue(Constants.XML_ATTRIBUTE_NAME);
+				// the destination
+				String location = extensionListXmlElement.getAttributeValue(Constants.XML_ELEMENT_LOCATION);
+				HashMap directory = null;
+				if (plugin.containsKey("directory")) {
+					directory = (HashMap) plugin.get("directory");
+				} else {
+					directory = new HashMap();
+				}				
+				directory.put(name, location);
+				plugin.put("directory", directory);
+				//File webdir = new File(pluginDirectory, name);
+				//ZipFileIO.extract(name, px);
+				
+				//String plugins = (String) Env.getMachine().getProperties().get(Constants.PLUGINS);				
+				//File dirplugins = new File(plugins);
+				
+//				ZipFileIO.extract(webfile, Env.getMachine().getWebFolder());
+				//name += pluginDirectory.getName();
+				//PluginMetadata pluginMetadata = parsePluginMetadata(pluginElement);
+				//plugin.put("metadata", pluginMetadata);
+
+
+
+				//				File outdatedpluginDirectory = new File(dirplugins, location);
+				//				if (outdatedpluginDirectory.exists())
+				//				{
+				//					Date curDate = new Date();
+				//					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+				//					String name = sdf.format(curDate);
+				//					name += pluginDirectory.getName();
+				//					File destfile = new File(dirtrash, name);
+				//					if (outdatedpluginDirectory.renameTo(destfile))
+				//					{
+				//
+				//					}									
+				//				}				
 			}
 		}			
 		return plugin;
 	}
+	private void parseServer(Element item) {
+		try {
+			Hashtable server = new Hashtable();
+			if (plugin.containsKey("server")) {
+				server = (Hashtable) plugin.get("server");					
+			}			
+			String servertype = item.getAttributeValue("type");
+			if (servertype.equals("material")) {				
+				HashMap pr = new HashMap();
+				Element epolicy = item.getChild("policy");
+				String xtables = epolicy.getChild("tables").getValue();
+				String xdtonlyio = epolicy.getChild("dtonlyio").getValue();				
+				String xseqno = epolicy.getChild("seqno").getValue();
+				String dates = epolicy.getChild("dates").getValue();
+				String xdtiocost = epolicy.getChild("dtiocost").getValue();
+				String adjust = epolicy.getChild("adjust").getValue();
+				pr.put("tables", xtables);
+				pr.put("dtonlyio", xdtonlyio);
+				pr.put("seqno", xseqno);
+				pr.put("dates", dates);
+				pr.put("dtiocost", xdtiocost);
+				pr.put("adjust", adjust);
+				pr.put("filename", this.filename);
+				server.put("material", pr);
+				plugin.put("server", server);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
 	private ExtensionFormTrl parseFormTrl(Element ftrl) {
 		ExtensionFormTrl f = new ExtensionFormTrl();
 		f.setLang(ftrl.getAttributeValue(X_AD_Function.COLUMNNAME_Language));
@@ -355,36 +459,43 @@ public class ExtensionXMLParser extends XMLCoreParser {
 		return f;
 	}
 
-//	ExtensionMenuItemTrl emt = new ExtensionMenuItemTrl();
-//	emt.setLang(xitm.getAttributeValue(X_AD_Function.COLUMNNAME_Language));
-//	emt.setColumnName(xitm.getAttributeValue(X_AD_Column.COLUMNNAME_ColumnName));
-//	emt.setTranslate(xitm.getAttributeValue(X_AD_Column.COLUMNNAME_IsTranslated));
-//	return emt;
-	
+	//	ExtensionMenuItemTrl emt = new ExtensionMenuItemTrl();
+	//	emt.setLang(xitm.getAttributeValue(X_AD_Function.COLUMNNAME_Language));
+	//	emt.setColumnName(xitm.getAttributeValue(X_AD_Column.COLUMNNAME_ColumnName));
+	//	emt.setTranslate(xitm.getAttributeValue(X_AD_Column.COLUMNNAME_IsTranslated));
+	//	return emt;
+
 	private ExtensionForm parseForm(Element item) {
 		ExtensionForm form = new ExtensionForm();
-		form.setName(item.getAttributeValue(Constants.XML_ATTRIBUTE_NAME));
-		form.setDescription(item.getAttributeValue(Constants.XML_ATTRIBUTE_DESCRIPTION));		
-		String accesslevel = item.getAttributeValue(Constants.XML_ATTRIBUTE_ACCESSLEVEL);		
-		form.setAccesslevel(accesslevel);
-		form.setIdentifier(item.getAttributeValue(Constants.XML_ATTRIBUTE_IDENTIFIER));
-		form.setClassname(item.getAttributeValue(X_AD_Form.COLUMNNAME_Classname));
-		form.setEntityType(item.getAttributeValue(X_AD_Form.COLUMNNAME_EntityType));
-		String sync = item.getAttributeValue(Constants.XML_ATTRIBUTE_SYNCHRONIZED);
-		if (sync == null)
-			sync = "";
-		if (sync.length() > 0)		
-		{
-			try {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-				Date parsedDate = dateFormat.parse(sync);
-				Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-				form.setSynchro(timestamp);
+		try {
+			form.setName(item.getAttributeValue(Constants.XML_ATTRIBUTE_NAME));
+			form.setDescription(item.getAttributeValue(Constants.XML_ATTRIBUTE_DESCRIPTION));		
+			String accesslevel = item.getAttributeValue(Constants.XML_ATTRIBUTE_ACCESSLEVEL);		
+			form.setAccesslevel(accesslevel);
+			form.setIdentifier(item.getAttributeValue(Constants.XML_ATTRIBUTE_IDENTIFIER));
+			if (form.getIdentifier() == null) {
+				throw new Exception("Identifier is null");
 			}
-			catch (Exception e)
+			form.setClassname(item.getAttributeValue(X_AD_Form.COLUMNNAME_Classname));
+			form.setEntityType(item.getAttributeValue(X_AD_Form.COLUMNNAME_EntityType));
+			String sync = item.getAttributeValue(Constants.XML_ATTRIBUTE_SYNCHRONIZED);
+			if (sync == null)
+				sync = "";
+			if (sync.length() > 0)		
 			{
-				e.printStackTrace();
+				try {
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					Date parsedDate = dateFormat.parse(sync);
+					Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+					form.setSynchro(timestamp);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
+		} catch (Exception e) {
+			form = null;
 		}
 		return form;
 	}
@@ -424,4 +535,29 @@ public class ExtensionXMLParser extends XMLCoreParser {
 		emi.setSynchronized(sync);
 		return emi;		
 	}
+
+	public static void addservertype(String ServerType, HashMap defaultprops) {
+		int A_Machine_ID = Env.getMachine().getA_Machine_ID();
+		X_A_MachineServer machineserver = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ? AND properties->'A_Machine_ID'  = ?", null)
+		.setParameters(ServerType, String.valueOf(A_Machine_ID)).first();
+		if (machineserver == null)
+		{
+			machineserver = new X_A_MachineServer(Env.getCtx(), 0, null);
+			machineserver.setServerType(ServerType);
+		}			
+		HashMap props = machineserver.getProperties();
+		props.put(X_A_Machine.COLUMNNAME_A_Machine_ID, A_Machine_ID);
+		if (defaultprops != null) {
+			Iterator it = defaultprops.keySet().iterator();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				if (!props.containsKey(key))
+					props.put(key, defaultprops.get(key));
+			}
+		}
+		machineserver.setProperties(props);
+		machineserver.setIsActive(true);
+		machineserver.save();										
+	}
+
 }

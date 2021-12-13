@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("C_Retention_Acct");
 @XendraTrl(Identifier="9075cd39-81d7-24e0-76dc-c2709207fbf4")
 public static String es_PE_TABLE_C_Retention_Acct_Name="Retention Acct";
 
-@XendraTable(Name="Retention Acct",Description="",Help="",TableName="C_Retention_Acct",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=65,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="9075cd39-81d7-24e0-76dc-c2709207fbf4",
-Synchronized="2017-08-16 11:42:23.0")
+@XendraTable(Name="Retention Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Retention_Acct",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=65,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="9075cd39-81d7-24e0-76dc-c2709207fbf4",
+Synchronized="2020-03-03 21:37:36.0")
 /** TableName=C_Retention_Acct */
 public static final String Table_Name="C_Retention_Acct";
 
@@ -119,7 +120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b1dcf9af-f5d0-5ce7-5a85-ed719862862c",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Identifier.
@@ -151,7 +152,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a0259bf-2bb7-47f5-8643-d6fd219d16b3",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Retention_Apply_Acct.
@@ -178,7 +179,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bb616d10-f58d-ec46-8782-67656a1c2905",Synchronized="2017-08-05 16:54:21.0")
+Identifier="bb616d10-f58d-ec46-8782-67656a1c2905",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Retention_Apply_Acct */
 public static final String COLUMNNAME_Retention_Apply_Acct = "Retention_Apply_Acct";
 /** Set Retention_Collect_Acct.
@@ -205,7 +206,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="32aaa410-cf91-e347-fdda-69066c62050c",Synchronized="2017-08-05 16:54:21.0")
+Identifier="32aaa410-cf91-e347-fdda-69066c62050c",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Retention_Collect_Acct */
 public static final String COLUMNNAME_Retention_Collect_Acct = "Retention_Collect_Acct";
 /** Set Retention_ToCollect_Acct.
@@ -232,7 +233,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="eb48d045-f615-e7a0-bac1-0291033be63a",Synchronized="2017-08-05 16:54:21.0")
+Identifier="eb48d045-f615-e7a0-bac1-0291033be63a",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Retention_ToCollect_Acct */
 public static final String COLUMNNAME_Retention_ToCollect_Acct = "Retention_ToCollect_Acct";
 }

@@ -56,11 +56,13 @@ public static int Table_ID=MTable.getTable_ID("A_Association");
 @XendraTrl(Identifier="82c0a181-0c2f-48e1-b8fa-3bad026de98e")
 public static String es_PE_TABLE_A_Association_Name="Association between plugins ";
 
-@XendraTable(Name="Association between plugins ",Description="",Help="",TableName="A_Association",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="82c0a181-0c2f-48e1-b8fa-3bad026de98e",
-Synchronized="2017-08-16 11:39:56.0")
+@XendraTable(Name="Association between plugins ",
+AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_Association",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="82c0a181-0c2f-48e1-b8fa-3bad026de98e",
+Synchronized="2020-03-03 21:34:50.0")
 /** TableName=A_Association */
 public static final String Table_Name="A_Association";
 
@@ -140,7 +142,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="566d0006-bf0e-4d51-85b3-20821b28ae31",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name ItemID */
 public static final String COLUMNNAME_ItemID = "ItemID";
 /** Set MetadataID.
@@ -172,7 +174,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="68a331e7-53f3-4225-b3df-24617fc0519f",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:18.0")
 /** Column name MetadataID */
 public static final String COLUMNNAME_MetadataID = "MetadataID";
 /** Set ServiceID.
@@ -204,7 +206,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="62c47b10-85d0-41df-af56-9b86b1cbfa05",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:18.0")
 /** Column name ServiceID */
 public static final String COLUMNNAME_ServiceID = "ServiceID";
 }

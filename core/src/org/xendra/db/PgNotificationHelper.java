@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.compiere.util.CLogger;
 import org.postgresql.PGConnection;
 import org.postgresql.PGNotification;
 
@@ -272,7 +274,7 @@ public class PgNotificationHelper{
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PgNotificationHelper.class.getName()).log(Level.SEVERE, null, ex);
+            CLogger.getCLogger(PgNotificationHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.compiere.model;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
@@ -351,5 +352,16 @@ public class MLocator extends X_M_Locator
 		
 		return count != 0;
 	}	//	isCanStoreProduct
-	
+
+
+	public BigDecimal getAvailable() {		
+		BigDecimal Used = DB.getSQLValueBD(null, "SELECT sum(qtyonhand) from m_storage  where m_locator_id = ? AND isactive = 'Y'", this.getM_Locator_ID());
+		if (Used == null)
+			Used = BigDecimal.ZERO;
+		BigDecimal Available = getVolume().subtract(Used);
+		if (Available.compareTo(BigDecimal.ZERO) < 0) {
+			Available = BigDecimal.ZERO;
+		}
+		return Available;
+	}	
 }	//	MLocator

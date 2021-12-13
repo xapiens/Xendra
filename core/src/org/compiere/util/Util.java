@@ -16,8 +16,14 @@
  *****************************************************************************/
 package org.compiere.util;
 
+//import io.github.escposjava.print.image.Image;
+
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Window;
 import java.awt.font.TextAttribute;
+import java.awt.image.BufferedImage;
+import java.beans.VetoableChangeListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,6 +38,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -62,25 +69,42 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import org.compiere.apps.ADialog;
+import org.compiere.apps.AEnv;
+import org.compiere.apps.ProcessDialog;
 import org.compiere.db.CConnection;
+import org.compiere.grid.ed.VLookup;
+import org.compiere.model.Lookup;
 //import org.compiere.interfaces.MD5;
 import org.compiere.model.MFunction;
+import org.compiere.model.MInvoiceLine;
+import org.compiere.model.MLookupFactory;
 import org.compiere.model.MTable;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_Process;
 import org.compiere.model.persistence.X_AD_Reference;
 import org.compiere.model.persistence.X_A_Machine;
+import org.compiere.model.reference.REF_ServerType;
 import org.compiere.model.reference.REF_WriteOffType;
+import org.frapuccino.swing.ActiveWindowTracker;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xendra.Constants;
+import org.xendra.common.DialogAskPassword;
+import org.xendra.core.command.Environment;
 
 import bsh.This;
 
@@ -105,8 +129,8 @@ import javax.xml.transform.stream.StreamResult;
 public class Util
 {
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(Util.class.getName());
-
+	private static CLogger log = CLogger.getCLogger(Util.class.getName());
+	private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();
 	/**
 	 *	Replace String values.
 	 *  @param value string to be processed
@@ -824,7 +848,7 @@ public class Util
 		return friendlyMsg;
 	}
 
-	
+
 	public static String now(String dateFormat) {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
@@ -959,70 +983,70 @@ public class Util
 		}
 	}
 
-//	/**
-//	 * @param requestedURLString
-//	 * @return md5 hash of remote file computed directly on application server
-//	 * 			null if problem or if report doesn't seem to be on AS (different IP or 404)
-//	 */
-//	public static String ejbGetRemoteMD5(String requestedURLString)
-//	{
-//		InitialContext context = null;
-//		String md5Hash = null;
-//		try {
-//			URL requestURL = new URL(requestedURLString);
-//			//String requestURLHost = requestURL.getHost();
-//			Hashtable<String, String> env = new Hashtable<String, String>();
-//			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
-//			env.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-//			env.put(Context.PROVIDER_URL, requestURL.getHost() + ":" + Util.getAppsPort());
-//			context = new InitialContext(env);
-//			if (isRequestedonAS(requestURL) && isMD5HomeInterfaceAvailable())
-//			{
-//				MD5 md5 = (MD5) context.lookup(MD5.JNDI_NAME);
-//				md5Hash = md5.getFileMD5(requestedURLString);
-//				log.info("MD5 for " + requestedURLString + " is " + md5Hash);
-//			}
-//
-//		}
-//		catch (MalformedURLException e) {
-//			log.severe("URL is invalid: "+ e.getMessage());
-//			return null;
-//		}
-//		catch (NamingException e){
-//			log.warning("Unable to create jndi context did you deployed webApp.ear package?\nRemote hashing is impossible");
-//			return null;
-//		}
-//		return md5Hash;
-//	}
+	//	/**
+	//	 * @param requestedURLString
+	//	 * @return md5 hash of remote file computed directly on application server
+	//	 * 			null if problem or if report doesn't seem to be on AS (different IP or 404)
+	//	 */
+	//	public static String ejbGetRemoteMD5(String requestedURLString)
+	//	{
+	//		InitialContext context = null;
+	//		String md5Hash = null;
+	//		try {
+	//			URL requestURL = new URL(requestedURLString);
+	//			//String requestURLHost = requestURL.getHost();
+	//			Hashtable<String, String> env = new Hashtable<String, String>();
+	//			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
+	//			env.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
+	//			env.put(Context.PROVIDER_URL, requestURL.getHost() + ":" + Util.getAppsPort());
+	//			context = new InitialContext(env);
+	//			if (isRequestedonAS(requestURL) && isMD5HomeInterfaceAvailable())
+	//			{
+	//				MD5 md5 = (MD5) context.lookup(MD5.JNDI_NAME);
+	//				md5Hash = md5.getFileMD5(requestedURLString);
+	//				log.info("MD5 for " + requestedURLString + " is " + md5Hash);
+	//			}
+	//
+	//		}
+	//		catch (MalformedURLException e) {
+	//			log.severe("URL is invalid: "+ e.getMessage());
+	//			return null;
+	//		}
+	//		catch (NamingException e){
+	//			log.warning("Unable to create jndi context did you deployed webApp.ear package?\nRemote hashing is impossible");
+	//			return null;
+	//		}
+	//		return md5Hash;
+	//	}
 
 	/**
 	 * @param requestURL
 	 * @return true if the report is on the same ip address than Application Server
 	 */
-	private static boolean isRequestedonAS(URL requestURL)
-	{
-		boolean tBool = false;
-		try{
-			InetAddress[] request_iaddrs = InetAddress.getAllByName(requestURL.getHost());
-			InetAddress as_iaddr = InetAddress.getByName(CConnection.get().getAppsHost());
-			for(int i=0;i<request_iaddrs.length;i++)
-			{
-				log.info("Got "+request_iaddrs[i].toString()+" for "+requestURL+" as address #"+i);
-				if(request_iaddrs[i].equals(as_iaddr))
-				{
-					log.info("Requested report is on application server host");
-					tBool = true;
-					break;
-				}
-			}
-		}
-		catch (UnknownHostException e) {
-			log.severe("Unknown dns lookup error");
-			return false;
-		}
-		return tBool;
-
-	}
+	//	private static boolean isRequestedonAS(URL requestURL)
+	//	{
+	//		boolean tBool = false;
+	//		try{
+	//			InetAddress[] request_iaddrs = InetAddress.getAllByName(requestURL.getHost());
+	//			InetAddress as_iaddr = InetAddress.getByName(CConnection.get().getAppsHost());
+	//			for(int i=0;i<request_iaddrs.length;i++)
+	//			{
+	//				log.info("Got "+request_iaddrs[i].toString()+" for "+requestURL+" as address #"+i);
+	//				if(request_iaddrs[i].equals(as_iaddr))
+	//				{
+	//					log.info("Requested report is on application server host");
+	//					tBool = true;
+	//					break;
+	//				}
+	//			}
+	//		}
+	//		catch (UnknownHostException e) {
+	//			log.severe("Unknown dns lookup error");
+	//			return false;
+	//		}
+	//		return tBool;
+	//
+	//	}
 
 	/**
 	 * @return true if the class org.compiere.interfaces.MD5Home is present
@@ -1116,7 +1140,7 @@ public class Util
 		}
 		return localhost;		
 	}
-	
+
 	public static String getLocalMacAddress() {
 		String address = "";
 		try {
@@ -1172,7 +1196,7 @@ public class Util
 	{
 		writeToFile(sb.toString(), fileName);
 	}
-	
+
 	/**************************************************************************
 	 * 	Write to file
 	 * 	@param sb string buffer
@@ -1287,7 +1311,7 @@ public class Util
 			}
 			else
 			{
-				System.out.println("X");
+				System.out.println("X2");
 			}
 			xpf.setAttribute(propertyname, value);
 		}
@@ -1296,7 +1320,7 @@ public class Util
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void setattrToElem(Element xpf, PO persistence, String propertyname) {
 		try 
 		{
@@ -1330,7 +1354,7 @@ public class Util
 			}
 			else
 			{
-				System.out.println("X");
+				System.out.println("X1");
 			}
 			xpf.setAttribute(propertyname, value);
 		}
@@ -1406,7 +1430,7 @@ public class Util
 			}
 			else
 			{
-				System.out.println("X");
+				System.out.println("X3");
 			}
 		}
 		catch (Exception e)
@@ -1501,7 +1525,7 @@ public class Util
 			hour = String.valueOf(value-12).concat(" pm.");
 		return hour;
 	}
-	
+
 	public static String getvalue(ResultSet rs, String namecolumn) {
 		String value = null;
 		try {
@@ -1530,15 +1554,15 @@ public class Util
 	 */
 	public static String pad(String str, int nspaces, String align, char padchar) {
 		String result = new String();
-		
+
 		if (align == null)
 			align = Constants.FIELDALIGNMENTTYPE_LeadingLeft;
-		
+
 		if (nspaces == 0)
 			nspaces = str.length();
-		
+
 		if (str.length() == nspaces) return str;
-		
+
 		if (str.length() > nspaces ) {
 			result = str.substring(0, nspaces-1);
 		}
@@ -1566,7 +1590,7 @@ public class Util
 						result = result + padchar;
 					}
 				}
-				
+
 			}
 		}
 		return result;
@@ -1609,7 +1633,7 @@ public class Util
 		}
 		return response.toString();		
 	}
-	
+
 	public static URL getResourceURL(String path) 
 	{
 		URL url;
@@ -1639,57 +1663,62 @@ public class Util
 		int port = 1099;
 		return port;
 	}
-	
-	public static Object convertObject(int type, Object value) {		
-		if (type == DisplayType.String)
-			return String.valueOf(value);
-		//else if (type == DisplayType.TableDir)
-		//	return Integer.valueOf(value);
-		else if (type == DisplayType.Integer)
-			return Integer.valueOf(((String) value).toString());
-		else if (type == DisplayType.Amount)
-			return new BigDecimal(value.toString());
-		else if (type == DisplayType.YesNo)
-			return Boolean.valueOf(value.equals("true"));
-		else if (type == DisplayType.CostPrice)
-			return new BigDecimal(String.valueOf(value));
-		//else if (type.equals("HashMap")
-		//	return new HashMap(value);
-		else if (type == DisplayType.URL) {
-			return String.valueOf(value);
-		}
-		else if (type == DisplayType.Date)
-		{
-			try
+
+	public static Object convertObject(int type, Object value) {
+		Object var = null;
+		try {
+			if (type == DisplayType.String)
+				var = String.valueOf(value);
+			else if (type == DisplayType.ID) {
+				var = Integer.valueOf(((String) value).toString());
+			}
+			else if (type == DisplayType.Integer) {
+				if (value instanceof String) {
+					var = Integer.valueOf(((String) value).toString());
+				} else if (value instanceof Integer)
+					var = (Integer) value;
+				else {
+					throw new Exception("not defined");
+				}
+			}
+			else if (type == DisplayType.Amount)
+				var = new BigDecimal(value.toString());
+			else if (type == DisplayType.YesNo)
+				var = Boolean.valueOf(value.equals("true"));
+			else if (type == DisplayType.Button)
+				var = Boolean.valueOf(value.equals("true"));
+			else if (type == DisplayType.CostPrice)
+				var = new BigDecimal(String.valueOf(value));
+			else if (type == DisplayType.Number)
+				var = new BigDecimal(String.valueOf(value));
+			else if (type == DisplayType.Quantity)
+				var = new BigDecimal(String.valueOf(value));
+			//else if (type.equals("HashMap")
+			//	return new HashMap(value);
+			else if (type == DisplayType.URL) {
+				var = String.valueOf(value);
+			}
+			else if (type == DisplayType.Date)
 			{
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date parsedDate = dateFormat.parse(String.valueOf(value));
 				Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-				return timestamp;			
+				var = timestamp;			
 			}
-			catch (Exception e)
-			{
-
-			}
-			return null;
-		}
-		else if (type == DisplayType.DateTime)
-		{
-			try
+			else if (type == DisplayType.DateTime)
 			{
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-			    Date parsedDate = dateFormat.parse(String.valueOf(value));
-			    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-			    return timestamp;
+				Date parsedDate = dateFormat.parse(String.valueOf(value));
+				Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+				var = timestamp;
 			}
-			catch (Exception e)
-			{
-				
-			}
-			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else
-			return null;
+		if (var == null) {
+			System.out.println("X");
+		}
+		return var;
 	}
 
 	public static String getStringclean(String funcname) {		
@@ -1834,7 +1863,7 @@ public class Util
 						{
 							props.put(varname, varvalue);
 						}
-							
+
 					}
 					else 
 					{
@@ -1895,24 +1924,24 @@ public class Util
 		BufferedInputStream buf;						
 		try {
 			buf = new BufferedInputStream(new FileInputStream(pluginDirectory));
-            byte[] contents = new byte[1024];			                         
-            int bytesRead=0;			                        			                        
-            while( (bytesRead = buf.read(contents)) != -1){			                                
-              strFileContents += new String(contents, 0, bytesRead);
-              //System.out.print(strFileContents);
-            }			        				
+			byte[] contents = new byte[1024];			                         
+			int bytesRead=0;			                        			                        
+			while( (bytesRead = buf.read(contents)) != -1){			                                
+				strFileContents += new String(contents, 0, bytesRead);
+				//System.out.print(strFileContents);
+			}			        				
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}		
 		return strFileContents;
 	}
-//	public static void setXendrianServer(String macaddr) {		
-//		setUniquePropertyServer(macaddr, "xendrianserver", "true", "false");
-//	}
-//	public static void setWebServer(String macaddr) {
-//		setUniquePropertyServer(macaddr, "webserver", "true", "false");
-//		setUniquePropertyServer(macaddr, "webport", "8080", "8080");
-//	}
+	//	public static void setXendrianServer(String macaddr) {		
+	//		setUniquePropertyServer(macaddr, "xendrianserver", "true", "false");
+	//	}
+	//	public static void setWebServer(String macaddr) {
+	//		setUniquePropertyServer(macaddr, "webserver", "true", "false");
+	//		setUniquePropertyServer(macaddr, "webport", "8080", "8080");
+	//	}
 	public static void setUniquePropertyServer(String macaddr, String property, String unique, String nonunique) {
 		if (macaddr == null || macaddr.length() == 0)
 			macaddr = Util.getLocalMacAddress();
@@ -1935,14 +1964,14 @@ public class Util
 			}
 		}		
 	}
-    // Get file name portion of URL.
-    public static String getFileName(URL url) {
-        String fileName = url.getFile();
-        return fileName.substring(fileName.lastIndexOf('/') + 1);
-    }
-    public static String getFileName(String path) {
-    	return path.substring(path.lastIndexOf("/") + 1);
-    }
+	// Get file name portion of URL.
+	public static String getFileName(URL url) {
+		String fileName = url.getFile();
+		return fileName.substring(fileName.lastIndexOf('/') + 1);
+	}
+	public static String getFileName(String path) {
+		return path.substring(path.lastIndexOf("/") + 1);
+	}
 
 	public static String setMultiLineMessage(String m_processMsg, int minwindow, int maxwindow) {
 		int lenmsg = m_processMsg.length();
@@ -1982,14 +2011,37 @@ public class Util
 		}
 		return var;
 	}
+	
+	public static String ListtoString(HashMap<String, List<String>> tablefields) {
+		
+		return null;
+	}
+
 
 	public static List<String> StringtoList(String var) {
 		List<String> list = new ArrayList<String>();
 		StringTokenizer st = new StringTokenizer( var , "," );
 		while ( st.hasMoreTokens()) {
+			String varitem = st.nextToken().trim();			
+			list.add(varitem);
+		}
+		return list;
+	}
+	public static List<Integer> IntegertoList(String var) {
+		List<Integer> list = new ArrayList<Integer>();
+		StringTokenizer st = new StringTokenizer( var , "," );
+		while ( st.hasMoreTokens()) {
 			String varitem = st.nextToken();
-			if (!list.contains(varitem))
-				list.add(varitem);
+			list.add(Integer.valueOf(varitem));
+		}
+		return list;
+	}	
+	public static List<Boolean> BooleantoList(String var) {
+		List<Boolean> list = new ArrayList<Boolean>();
+		StringTokenizer st = new StringTokenizer(var, ",");
+		while (st.hasMoreTokens()) {
+			String varitem = st.nextToken();
+			list.add(Boolean.valueOf(varitem));
 		}
 		return list;
 	}
@@ -2005,9 +2057,9 @@ public class Util
 		} else {
 			value = value.setScale(2);
 			round = round.setScale(2);
-//			BigDecimal TWENTY = new BigDecimal("20");
-//			BigDecimal divided = value.divide(TWENTY, 2, RoundingMode.FLOOR);
-//			BigDecimal result = divided.multiply(TWENTY);
+			//			BigDecimal TWENTY = new BigDecimal("20");
+			//			BigDecimal divided = value.divide(TWENTY, 2, RoundingMode.FLOOR);
+			//			BigDecimal result = divided.multiply(TWENTY);
 			if (AdjustType.equals(REF_WriteOffType.WriteOffAmt))
 			{
 				BigDecimal decimal = value.subtract(value.setScale(0, RoundingMode.FLOOR)).movePointRight(value.scale()); 
@@ -2100,4 +2152,157 @@ public class Util
 		}
 		return id;
 	}
+
+	public static boolean requestAuthorization(String password) {
+		DialogAskPassword dialog = new DialogAskPassword(null, password);
+		dialog.pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
+		return dialog.getPasswordOk();
+	}
+	public static VLookup getLookup(int AD_Table_ID, int WindowNo, String ColumnName, int DisplayType, boolean addvetoable, VetoableChangeListener parent) {
+		int AD_Column_ID = Util.getColumnID(AD_Table_ID, ColumnName);
+		Lookup lookup = MLookupFactory.get (Env.getCtx(), WindowNo, 0, AD_Column_ID, DisplayType);
+		VLookup control = new VLookup (ColumnName, true, false, true, lookup);
+		if (addvetoable && parent != null)
+			//control.addVetoableChangeListener(this);
+			control.addVetoableChangeListener(parent);
+		return control;		
+	}
+
+	public static String toHexString(byte[] bytes) {
+		StringBuilder sb = new StringBuilder(bytes.length * 3);
+		for (int b : bytes) {
+			b &= 0xff;
+			sb.append(HEXDIGITS[b >> 4]);
+			sb.append(HEXDIGITS[b & 15]);
+			sb.append(' ');
+		}
+		return sb.toString();
+	}
+	public static String hex(String... params) {
+		String value = "";
+		for (String para:params) {
+			value += hexinner(para);
+		}
+		return value;
+	}
+	public static String hexinner(String para) {
+		String value = "";
+		Integer i = Integer.decode(para);
+		BigInteger bi = BigInteger.valueOf(i);
+		byte[] bytes = bi.toByteArray();
+		String nvalue = new String(bytes);
+		value += nvalue;    
+		return value;    	
+	}
+	public static final byte[] CTL_LF = {0x0a};
+
+	public static String printImage(String path) {		
+		String value = "";
+		try {
+			BufferedImage image = ImageIO.read(new File(path));
+			//Image img = new Image();
+			Object img = null;
+			int[][] pixels = null;  //img.getPixelsSlow(image);						
+			List<byte[]> ss = new ArrayList<byte[]>();
+			for (int y=0;  y<pixels.length; y += 24) {
+				ss.add(new byte[]{(byte)0x1b, (byte) 0x33, (byte) 24});
+				ss.add(new byte[]{(byte)0x1b, (byte) 0x2a, (byte) 33});
+				ss.add(new byte[]{(byte)(0x00ff & pixels[y].length), (byte) ((0xff00 & pixels[y].length) >> 8)});
+				//byte[] imagefile = new byte[0];
+				for(int x = 0; x < pixels[y].length; x++) {
+					//byte[] line = img.recollectSlice(y, x, pixels);
+					//ss.add(line);
+				}
+				//value += write(CTL_LF);
+				ss.add(CTL_LF);
+				//Byte[] soundBytes = ss.toArray(new Byte[ss.size()]);
+				//String ww = new String(myArr);
+				//value += soundBytes.toString();
+				//Byte[][] xxsds = ss.toArray(new Byte[ss.size()][]);
+				//byte[] xxsds = new byte[soundBytes.length];
+				//byte[] xx = new byte[][ss.size()];
+				//value = new b(ss.)				
+				//MInvoiceLine[] lines = new MInvoiceLine[list.size()];
+				//list.toArray(lines);
+
+			}
+			byte[][] myArr = ss.toArray(new byte[ss.size()][]);
+			System.out.println("X");
+			int e = 0;
+			for (int s=0; s < ss.size(); s++) {
+				byte[] xx = myArr[s];
+				e = e + xx.length;
+				//value += new String(xx);
+			}
+			byte[] destination = new byte[e];
+			e = 0;
+			for (int s=0; s < ss.size(); s++) {
+				byte[] xx = myArr[s];					
+				System.arraycopy(xx, 0, destination, e, xx.length);
+				e = e + xx.length;
+				//value += new String(xx);
+			}				
+			value += new String(destination);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return value;
+	}
+
+	private static String write(byte[] bs) {
+		String value = "";
+		value = new String(bs);
+		return value;
+	}
+
+	public static String format_size(Double size) {
+		if (size == null) {
+			return "";
+		}
+		int unit_index = 0;
+		List<String> units = new ArrayList<String>();
+		units.add("B");
+		units.add("KB");
+		units.add("MB");
+		units.add("GB");
+		units.add("TB");
+		units.add("PB");
+		while (size>1024) {
+			size = size / 1024;
+			unit_index++;
+		}
+		String sizestr = String.format("%.2f%s", size, units.get(unit_index));
+		return sizestr;
+	}
+
+	public static void RunProcess(String identifier) {
+		// int WindowNo, Container c, 
+		
+		Window w = ActiveWindowTracker.findActiveWindow();
+		int WindowNo = Env.getWindowNo(w);		
+		X_AD_Process p = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
+		.setParameters(identifier).first();
+		if  (p == null) {
+			ADialog.error(WindowNo, w, "ProcessNotDefined");
+		} else {
+			ProcessDialog pd = new ProcessDialog ( p.getAD_Process_ID(), true);
+			if (!pd.init())
+				return;
+			Environment.getWindowManager().add(pd);
+			pd.getContentPane().invalidate();
+			pd.getContentPane().validate();
+			pd.pack();			
+			AEnv.showCenterScreen(pd);					
+		}
+	}
+
+	public String pretty(Object value) {
+		System.out.println("X");
+		return "X";
+		
+	}
+
+	
 }   //  Util

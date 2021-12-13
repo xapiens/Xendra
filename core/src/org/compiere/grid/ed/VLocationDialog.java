@@ -22,10 +22,14 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import java.util.logging.*;
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
+import net.miginfocom.swing.MigLayout;
 import org.compiere.apps.*;
 import org.compiere.model.MCity;
 import org.compiere.model.MCountry;
@@ -34,15 +38,32 @@ import org.compiere.model.MRegion;
 import org.compiere.model.Query;
 import org.compiere.swing.*;
 import org.compiere.util.*;
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.cache.FileBasedLocalCache;
+import org.jxmapviewer.input.CenterMapListener;
+import org.jxmapviewer.input.PanKeyListener;
+import org.jxmapviewer.input.PanMouseInputListener;
+import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
+import org.jxmapviewer.viewer.WaypointPainter;
+import org.xendra.map.FancyWaypointRenderer;
+import org.xendra.map.MyWaypoint;
+import org.xendra.map.SelectionAdapter;
 
 /**
  *	Dialog to enter Location Info (Address)
  *
  *  @author 	Jorg Janke
  *  @version 	$Id: VLocationDialog.java 5430 2014-08-20 07:01:26Z xapiens $
+ *  
+ *  @author 	xapiens 
+ *  			Added Map location
  */
 public class VLocationDialog extends CDialog 
-	implements ActionListener, PropertyChangeListener, VetoableChangeListener
+implements ActionListener, PropertyChangeListener, VetoableChangeListener
 {
 	/**
 	 *	Constructor
@@ -55,11 +76,13 @@ public class VLocationDialog extends CDialog
 	{
 		super(frame, title, true);
 		try
-		{
-			jbInit();
+		{		
+			initMap();
+			jbInit();						
 		}
 		catch(Exception ex)
 		{
+			ex.printStackTrace();
 			log.log(Level.SEVERE, ex.getMessage());
 		}
 		m_location = location;
@@ -70,7 +93,7 @@ public class VLocationDialog extends CDialog
 			setTitle(Msg.getMsg(Env.getCtx(), "LocationNew"));
 		else
 			setTitle(Msg.getMsg(Env.getCtx(), "LocationUpdate"));
-		
+
 
 		//	Current Country
 		MCountry.setDisplayLanguage(Env.getAD_Language(Env.getCtx()));
@@ -82,10 +105,8 @@ public class VLocationDialog extends CDialog
 		fRegion = new CComboBox(MRegion.getRegions(Env.getCtx(), m_origCountry_ID));
 		if (m_location.getCountry().isHasRegion())
 			lRegion.setText(m_location.getCountry().getRegionName());	//	name for region
-		
-		//
-		//initCities();
-		initLocation();
+
+		initLocation();				
 		AEnv.positionCenterWindow(frame, this);
 	}	//	VLocationDialog
 
@@ -128,6 +149,9 @@ public class VLocationDialog extends CDialog
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private Insets labelInsets = new Insets(2,15,2,0);		// 	top,left,bottom,right
 	private Insets fieldInsets = new Insets(2,5,2,10);
+	private JXMapViewer mapViewer;
+	private SelectionAdapter sa;
+	private WaypointPainter<MyWaypoint> waypointPainter;
 
 	/**
 	 *	Static component init
@@ -136,12 +160,17 @@ public class VLocationDialog extends CDialog
 	void jbInit() throws Exception
 	{
 		panel.setLayout(panelLayout);
-		southPanel.setLayout(southLayout);
 		mainPanel.setLayout(gridBagLayout);
+		JPanel mapPanel = new JPanel(new MigLayout("fill"));				
+		mapPanel.setPreferredSize(new Dimension(300,200));
+		mapPanel.add(mapViewer,"grow");
+		JSplitPane location = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainPanel, mapPanel);
+
+		southPanel.setLayout(southLayout);		
 		panelLayout.setHgap(5);
 		panelLayout.setVgap(10);
 		getContentPane().add(panel);
-		panel.add(mainPanel, BorderLayout.CENTER);
+		panel.add(location, BorderLayout.CENTER);
 		panel.add(southPanel, BorderLayout.SOUTH);
 		southPanel.add(confirmPanel, BorderLayout.NORTH);
 		//
@@ -151,15 +180,15 @@ public class VLocationDialog extends CDialog
 	/**
 	 *	Dynanmic Init & fill fields - Called when Country changes!
 	 */
-	
+
 	private MRegion[] getregions() 
 	{
 		String whereClause = "C_Country_ID = ?";
 		List<MRegion> listregions = new Query(Env.getCtx(), MRegion.Table_Name , whereClause, null)
-		  .setParameters(m_location.getC_Country_ID())
-		  .setOrderBy("Description")
-			  .list();
-		
+		.setParameters(m_location.getC_Country_ID())
+		.setOrderBy("Description")
+		.list();
+
 		MRegion[] regions = new MRegion[listregions.size()];
 		listregions.toArray(regions);
 		return regions;
@@ -170,10 +199,10 @@ public class VLocationDialog extends CDialog
 			return null;
 		String whereClause = "C_Region_ID = ?";
 		List<MCity> listcities = new Query(Env.getCtx(), MCity.Table_Name , whereClause, null)
-		  .setParameters(region.getC_Region_ID())
-		  .setOrderBy("Name")
-			  .list();
-		
+		.setParameters(region.getC_Region_ID())
+		.setOrderBy("Name")
+		.list();
+
 		MCity[] cities = new MCity[listcities.size()];
 		listcities.toArray(cities);
 		return cities;
@@ -182,16 +211,14 @@ public class VLocationDialog extends CDialog
 	{
 		MCountry country = m_location.getCountry();
 		log.fine(country.getName() + ", Region=" + country.isHasRegion() + " " + country.getDisplaySequence()
-			+ ", C_Location_ID=" + m_location.getC_Location_ID());
+				+ ", C_Location_ID=" + m_location.getC_Location_ID());
 		//	new Region
 		if (m_location.getC_Country_ID() != s_oldCountry_ID && country.isHasRegion())
 		{
-			 			
+
 			fRegion = new CComboBox(getregions());
 			fRegion.addActionListener(this);
-			//fRegion = new CComboBox(MRegion.getRegions(Env.getCtx(), country.getC_Country_ID()));
 			lRegion.setText(country.getRegionName());
-			
 			s_oldCountry_ID = m_location.getC_Country_ID();
 			//
 			if (m_location.getRegion() != null)
@@ -212,7 +239,6 @@ public class VLocationDialog extends CDialog
 				fCity = new CComboBox();
 			}
 			fCity.addActionListener(this);
-			//initCities();			
 		}
 
 		gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -276,9 +302,60 @@ public class VLocationDialog extends CDialog
 			}
 			fCountry.setSelectedItem(country);
 		}
-		//	Update UI
+		//	Update UI		
+		defaultMap();
 		pack();
 	}	//	initLocation
+
+	void defaultMap()  {
+		mapViewer.setZoom(9);
+		GeoPosition x = mapViewer.getAddressLocation();
+		if (x == null) {
+			BigDecimal lat = m_location.getCityObject().getLatitude();		
+			BigDecimal lon = m_location.getCityObject().getLongitude();
+			if (lat != null && lon != null && lat.compareTo(BigDecimal.ZERO) != 0  && lon.compareTo(BigDecimal.ZERO) != 0) {
+				x = new GeoPosition(lat.doubleValue(), lon.doubleValue());
+			} else {
+				x = new GeoPosition(-12.060809058367294, -77.04574584960938);
+			}
+		}
+		mapViewer.setAddressLocation(x);		
+	}
+	void initMap() {
+		// Create a TileFactoryInfo for OpenStreetMap
+		TileFactoryInfo info = new OSMTileFactoryInfo();
+		DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+
+		// Setup local file cache
+		File cacheDir = new File(System.getProperty("user.home") + File.separator + ".jxmapviewer2");
+		tileFactory.setLocalCache(new FileBasedLocalCache(cacheDir, false));
+
+		// Setup JXMapViewer
+		mapViewer = new JXMapViewer();
+		mapViewer.setTileFactory(tileFactory);
+
+		GeoPosition geodefault = null;
+
+		// set the focus
+		// Add interactions
+		MouseInputListener mia = new PanMouseInputListener(mapViewer);
+		mapViewer.addMouseListener(mia);
+		mapViewer.addMouseMotionListener(mia);            
+
+		mapViewer.addMouseListener(new CenterMapListener(mapViewer));
+		mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
+		mapViewer.addKeyListener(new PanKeyListener(mapViewer));
+		//
+		waypointPainter = new WaypointPainter<MyWaypoint>();
+		waypointPainter.setRenderer(new FancyWaypointRenderer());					
+		mapViewer.setOverlayPainter(waypointPainter);
+		
+		sa = new SelectionAdapter(mapViewer, this);		
+		mapViewer.addMouseListener(sa);		
+	}
+
+	//private void updateMap() {
+	//}
 
 	private void initCities() {
 		if (s_oldRegion_ID != m_location.getC_Region_ID())
@@ -331,7 +408,7 @@ public class VLocationDialog extends CDialog
 	 *  @param e ActionEvent
 	 */
 	public void actionPerformed(ActionEvent e)
-	{
+	{		
 		if (e.getActionCommand().equals(ConfirmPanel.A_OK))
 		{
 			action_OK();
@@ -362,7 +439,38 @@ public class VLocationDialog extends CDialog
 			initCities();
 			fRegion.requestFocus();
 		}
+		else if (e.getSource() == fCity) {			
+			MCity city = (MCity) fCity.getSelectedItem();
+			if (city != null) {
+				m_location.setCity(city);
+				// current address
+				Double loclatitude = m_location.getLatitude().doubleValue();
+				Double loclongitude = m_location.getLongitude().doubleValue();
+				Double citlatitude = city.getLatitude().doubleValue();
+				Double citlongitude = city.getLongitude().doubleValue();
+				GeoPosition geodefault = null;
+				if (loclatitude != 0 && loclongitude != 0) {
+					geodefault = new GeoPosition(loclatitude, loclongitude);
+				} else if (citlatitude != 0 && citlongitude != 0) {
+					geodefault = new GeoPosition(citlatitude, citlongitude);
+				}
+				if (geodefault != null) {
+					setGeoPosition(geodefault);
+				}
+				invalidate();				
+			}
+		}
 	}	//	actionPerformed
+
+	public void setGeoPosition(GeoPosition geodefault) {
+		mapViewer.setAddressLocation(geodefault);
+		Set<MyWaypoint> waypoints = new HashSet<MyWaypoint>(Arrays.asList(new MyWaypoint("C", Color.GREEN, geodefault)));
+		waypointPainter.setWaypoints(waypoints);
+		mapViewer.invalidate();		
+		m_location.setLatitude(new BigDecimal(geodefault.getLatitude()));
+		m_location.setLongitude(new BigDecimal(geodefault.getLongitude()));
+		m_location.save();		
+	}
 
 	/**
 	 * 	OK - check for changes (save them) & Exit
@@ -373,7 +481,6 @@ public class VLocationDialog extends CDialog
 		m_location.setAddress2(fAddress2.getText());
 		m_location.setAddress3(fAddress3.getText());
 		m_location.setAddress4(fAddress4.getText());
-		//m_location.setCity(fCity.getText());		
 		m_location.setPostal(fPostal.getText());
 		m_location.setPostal_Add(fPostalAdd.getText());
 		//  Country/Region
@@ -420,5 +527,11 @@ public class VLocationDialog extends CDialog
 	public void vetoableChange(PropertyChangeEvent evt)
 			throws PropertyVetoException {
 	}
-	
+
+	public String getLocationName() {
+		String loc = "";
+		if (m_location != null)
+		loc = m_location.toString();
+		return loc;
+	}
 }	//	VLocationDialog

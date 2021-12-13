@@ -58,11 +58,13 @@ public static int Table_ID=MTable.getTable_ID("M_AttributeInstance");
 @XendraTrl(Identifier="ea9031da-a574-4c5e-d2e5-70c076cd9edf")
 public static String es_PE_TABLE_M_AttributeInstance_Name="M_AttributeInstance";
 
-@XendraTable(Name="M_AttributeInstance",Description="",Help="",TableName="M_AttributeInstance",
-AccessLevel="3",AD_Window_ID="1b6bcb89-ad62-5249-c6bc-bf851e4e624f",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="ea9031da-a574-4c5e-d2e5-70c076cd9edf",Synchronized="2017-08-16 11:43:05.0")
+@XendraTable(Name="M_AttributeInstance",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_AttributeInstance",AccessLevel="3",
+AD_Window_ID="1b6bcb89-ad62-5249-c6bc-bf851e4e624f",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="ea9031da-a574-4c5e-d2e5-70c076cd9edf",
+Synchronized="2020-03-03 21:38:15.0")
 /** TableName=M_AttributeInstance */
 public static final String Table_Name="M_AttributeInstance";
 
@@ -124,7 +126,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="645d9cee-bbef-4205-aca4-0eabcb427aa3",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute.
@@ -152,7 +154,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fc8c8595-edbe-41d9-f9ec-5f9b94a1844d",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name M_Attribute_ID */
 public static final String COLUMNNAME_M_Attribute_ID = "M_Attribute_ID";
 /** Set Attribute Set Instance.
@@ -180,7 +182,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="442acb55-cecb-357e-7dd3-078697d3033b",Synchronized="2017-08-05 16:54:59.0")
+Identifier="442acb55-cecb-357e-7dd3-078697d3033b",Synchronized="2019-08-30 22:22:57.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Attribute Value.
@@ -215,7 +217,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="67867fc6-e092-e27d-c13c-7d5457a18dc9",Synchronized="2017-08-05 16:54:59.0")
+Identifier="67867fc6-e092-e27d-c13c-7d5457a18dc9",Synchronized="2019-08-30 22:22:57.0")
 /** Column name M_AttributeValue_ID */
 public static final String COLUMNNAME_M_AttributeValue_ID = "M_AttributeValue_ID";
 /** Set Search Key.
@@ -247,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="30044fa0-b84f-6d80-6a4e-596ba7bb85c4",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Value.
@@ -274,7 +276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3e3a2315-674b-1c28-03dd-7ada0c6c07a6",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name ValueNumber */
 public static final String COLUMNNAME_ValueNumber = "ValueNumber";
 }

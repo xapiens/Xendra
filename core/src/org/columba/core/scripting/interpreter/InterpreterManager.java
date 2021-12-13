@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 
 import org.columba.core.scripting.config.BeanshellConfig;
 import org.columba.core.scripting.model.ColumbaScript;
+import org.compiere.util.CLogger;
 
 
 /**
@@ -38,7 +39,7 @@ import org.columba.core.scripting.model.ColumbaScript;
 public class InterpreterManager
 {
 
-    private static final Logger LOG = Logger.getLogger(InterpreterManager.class.getName());
+    private static final CLogger LOG = CLogger.getCLogger(InterpreterManager.class.getName());
 
     /**
      The interpreters Map has the format

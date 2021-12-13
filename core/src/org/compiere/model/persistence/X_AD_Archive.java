@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Archive");
 @XendraTrl(Identifier="dd9d3411-429d-77c2-2ae6-d153a976b105")
 public static String es_PE_TABLE_AD_Archive_Name="Archivo";
 
-@XendraTable(Name="Archive",Description="Document Archive",Help="",TableName="AD_Archive",
-AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="dd9d3411-429d-77c2-2ae6-d153a976b105",
-Synchronized="2017-08-16 11:39:58.0")
+@XendraTable(Name="Archive",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Document Archive",Help="",
+TableName="AD_Archive",AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="dd9d3411-429d-77c2-2ae6-d153a976b105",
+Synchronized="2020-03-03 21:34:52.0")
 /** TableName=AD_Archive */
 public static final String Table_Name="AD_Archive";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="25d85651-8cec-3776-f81b-e6fbf21d9c94",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name AD_Process_ID */
 public static final String COLUMNNAME_AD_Process_ID = "AD_Process_ID";
 /** Set Table.
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef984e20-864a-8972-c2ef-beed547ba76e",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Business Partner .
@@ -198,7 +199,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9c74a4b9-e1b9-fe46-93ce-351cd717ca80",Synchronized="2017-08-05 16:52:22.0")
+Identifier="9c74a4b9-e1b9-fe46-93ce-351cd717ca80",Synchronized="2020-03-03 21:34:22.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Description.
@@ -237,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="339c75e8-93c1-5747-ee9a-74e6447ab460",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -276,7 +277,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8ec4b874-a0c3-ae14-b348-ef0c095fb3b0",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -308,7 +309,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3935ef5d-8368-4278-99ae-710b448001b2",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Report.
@@ -339,7 +340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="31c3a5b3-182e-2472-7351-5997e572c2fe",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name IsReport */
 public static final String COLUMNNAME_IsReport = "IsReport";
 /** Set Name.
@@ -379,7 +380,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5fbf182f-5e4e-62e4-b61e-202561b8d246",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Record ID.
@@ -408,7 +409,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="22bc3247-2dea-6f26-c744-e3f7b91600f4",
-Synchronized="2017-08-05 16:52:22.0")
+Synchronized="2020-03-03 21:34:22.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
 }

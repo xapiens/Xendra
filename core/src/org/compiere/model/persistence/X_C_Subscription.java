@@ -80,12 +80,13 @@ public static final String TABNAME_Subscription="efe09e31-93db-dbb0-2820-8cc5e39
 @XendraTrl(Identifier="1eb34e33-8c7f-0317-2c47-fb65af886e2e")
 public static String es_PE_TABLE_C_Subscription_Name="Suscripción";
 
-@XendraTable(Name="Subscription",
+@XendraTable(Name="Subscription",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Subscription of a Business Partner of a Product to renew",Help="",
 TableName="C_Subscription",AccessLevel="3",AD_Window_ID="373de6ec-d5d0-3388-abbd-f4ba4739d419",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="1eb34e33-8c7f-0317-2c47-fb65af886e2e",Synchronized="2017-08-16 11:42:30.0")
+Identifier="1eb34e33-8c7f-0317-2c47-fb65af886e2e",Synchronized="2020-03-03 21:37:42.0")
 /** TableName=C_Subscription */
 public static final String Table_Name="C_Subscription";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2a10dc0e-3c63-26cd-b5de-85e9947c439e")
+public static String es_PE_FIELD_Subscription_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="2a10dc0e-3c63-26cd-b5de-85e9947c439e")
 public static String es_PE_FIELD_Subscription_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="2a10dc0e-3c63-26cd-b5de-85e9947c439e")
 public static String es_PE_FIELD_Subscription_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="2a10dc0e-3c63-26cd-b5de-85e9947c439e")
-public static String es_PE_FIELD_Subscription_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b4eaf3f2-beb6-5206-5467-686e1ac044a5",Synchronized="2017-08-05 16:54:27.0")
+Identifier="b4eaf3f2-beb6-5206-5467-686e1ac044a5",Synchronized="2019-08-30 22:22:18.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Subscription.
@@ -179,13 +180,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8354f23b-9b69-a332-fd35-bbdb12135efa")
+public static String es_PE_FIELD_Subscription_Subscription_Name="Suscripción";
+
+@XendraTrl(Identifier="8354f23b-9b69-a332-fd35-bbdb12135efa")
 public static String es_PE_FIELD_Subscription_Subscription_Description="Suscripción del socio de negocio para renovar producto.";
 
 @XendraTrl(Identifier="8354f23b-9b69-a332-fd35-bbdb12135efa")
 public static String es_PE_FIELD_Subscription_Subscription_Help="Suscripción del socio de negocio para renovar producto.";
-
-@XendraTrl(Identifier="8354f23b-9b69-a332-fd35-bbdb12135efa")
-public static String es_PE_FIELD_Subscription_Subscription_Name="Suscripción";
 
 @XendraField(AD_Column_ID="C_Subscription_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -212,13 +213,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1ceceb26-0a04-a841-b3c0-8c4af0794d23")
+public static String es_PE_FIELD_Subscription_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="1ceceb26-0a04-a841-b3c0-8c4af0794d23")
 public static String es_PE_FIELD_Subscription_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="1ceceb26-0a04-a841-b3c0-8c4af0794d23")
 public static String es_PE_FIELD_Subscription_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="1ceceb26-0a04-a841-b3c0-8c4af0794d23")
-public static String es_PE_FIELD_Subscription_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -236,7 +237,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c46d5f4e-cd9b-ecff-2a03-ad5397382cd7",Synchronized="2017-08-05 16:54:27.0")
+Identifier="c46d5f4e-cd9b-ecff-2a03-ad5397382cd7",Synchronized="2019-08-30 22:22:18.0")
 /** Column name C_SubscriptionType_ID */
 public static final String COLUMNNAME_C_SubscriptionType_ID = "C_SubscriptionType_ID";
 /** Set Identifier.
@@ -268,7 +269,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="43db28aa-5939-4f6f-bccf-21d808ba2305",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Due.
@@ -291,15 +292,16 @@ return false;
 }
 
 @XendraTrl(Identifier="afb323b0-a3e3-83cd-668d-c82455b1d402")
-public static String es_PE_FIELD_Subscription_Due_Description="La renovación de la suscripción es vencida";
+public static String es_PE_FIELD_Subscription_Due_Name="Vencido";
 
 @XendraTrl(Identifier="afb323b0-a3e3-83cd-668d-c82455b1d402")
-public static String es_PE_FIELD_Subscription_Due_Name="Vencido";
-@XendraField(AD_Column_ID="IsDue",
-IsCentrallyMaintained=true,AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=120,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="afb323b0-a3e3-83cd-668d-c82455b1d402")
+public static String es_PE_FIELD_Subscription_Due_Description="La renovación de la suscripción es vencida";
+
+@XendraField(AD_Column_ID="IsDue",IsCentrallyMaintained=true,
+AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="afb323b0-a3e3-83cd-668d-c82455b1d402")
 public static final String FIELDNAME_Subscription_Due="afb323b0-a3e3-83cd-668d-c82455b1d402";
 
 @XendraTrl(Identifier="4b6e46cb-5d20-1de0-b823-c4e91d6d8457")
@@ -311,7 +313,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4b6e46cb-5d20-1de0-b823-c4e91d6d8457",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name IsDue */
 public static final String COLUMNNAME_IsDue = "IsDue";
 /** Set Product.
@@ -331,13 +333,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="31d794f1-4b64-633b-36b2-304bc4bbb52c")
+public static String es_PE_FIELD_Subscription_Product_Name="Producto";
+
+@XendraTrl(Identifier="31d794f1-4b64-633b-36b2-304bc4bbb52c")
 public static String es_PE_FIELD_Subscription_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="31d794f1-4b64-633b-36b2-304bc4bbb52c")
 public static String es_PE_FIELD_Subscription_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="31d794f1-4b64-633b-36b2-304bc4bbb52c")
-public static String es_PE_FIELD_Subscription_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -355,7 +357,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bc901bb5-8a6e-051c-45b2-d9a503e05483",Synchronized="2017-08-05 16:54:27.0")
+Identifier="bc901bb5-8a6e-051c-45b2-d9a503e05483",Synchronized="2019-08-30 22:22:18.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Name.
@@ -387,18 +389,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
+public static String es_PE_FIELD_Subscription_Name_Name="Nombre";
+
+@XendraTrl(Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
 public static String es_PE_FIELD_Subscription_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
 public static String es_PE_FIELD_Subscription_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
-public static String es_PE_FIELD_Subscription_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="ca63944d-1156-4f57-1558-dc3e0506dbc2")
 public static final String FIELDNAME_Subscription_Name="ca63944d-1156-4f57-1558-dc3e0506dbc2";
 
 @XendraTrl(Identifier="b08555c8-f037-6d4a-246f-00a7437acb2d")
@@ -410,7 +413,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b08555c8-f037-6d4a-246f-00a7437acb2d",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Paid Until.
@@ -427,10 +430,10 @@ return (Timestamp)get_Value(COLUMNNAME_PaidUntilDate);
 }
 
 @XendraTrl(Identifier="9020bd2b-ea7b-7898-abff-ded63ebf24e0")
-public static String es_PE_FIELD_Subscription_PaidUntil_Description="Subscripción es pagada / valida hasta esta fecha.";
+public static String es_PE_FIELD_Subscription_PaidUntil_Name="Pagado Hasta";
 
 @XendraTrl(Identifier="9020bd2b-ea7b-7898-abff-ded63ebf24e0")
-public static String es_PE_FIELD_Subscription_PaidUntil_Name="Pagado Hasta";
+public static String es_PE_FIELD_Subscription_PaidUntil_Description="Subscripción es pagada / valida hasta esta fecha.";
 
 @XendraField(AD_Column_ID="PaidUntilDate",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -448,7 +451,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d07c4bd-26b7-bb5f-b664-544bc536ebbb",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name PaidUntilDate */
 public static final String COLUMNNAME_PaidUntilDate = "PaidUntilDate";
 /** Set Renewal Date.
@@ -484,7 +487,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1e4b56fe-39ad-e2e8-65ed-e30f9abbfa18",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name RenewalDate */
 public static final String COLUMNNAME_RenewalDate = "RenewalDate";
 /** Set Start Date.
@@ -502,13 +505,13 @@ return (Timestamp)get_Value(COLUMNNAME_StartDate);
 }
 
 @XendraTrl(Identifier="13220ff1-8d9a-5d54-176c-6bb8c3b51004")
+public static String es_PE_FIELD_Subscription_StartDate_Name="Fecha de Inicio";
+
+@XendraTrl(Identifier="13220ff1-8d9a-5d54-176c-6bb8c3b51004")
 public static String es_PE_FIELD_Subscription_StartDate_Description="Primer día efectivo (inclusive)";
 
 @XendraTrl(Identifier="13220ff1-8d9a-5d54-176c-6bb8c3b51004")
 public static String es_PE_FIELD_Subscription_StartDate_Help="La fecha de Inicio indica la primera fecha ó fecha inicial de un rango";
-
-@XendraTrl(Identifier="13220ff1-8d9a-5d54-176c-6bb8c3b51004")
-public static String es_PE_FIELD_Subscription_StartDate_Name="Fecha de Inicio";
 
 @XendraField(AD_Column_ID="StartDate",IsCentrallyMaintained=true,
 AD_Tab_ID="efe09e31-93db-dbb0-2820-8cc5e39e63c2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -526,7 +529,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf9d3563-4f79-78d3-291a-d18ccfba1b76",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:18.0")
 /** Column name StartDate */
 public static final String COLUMNNAME_StartDate = "StartDate";
 }

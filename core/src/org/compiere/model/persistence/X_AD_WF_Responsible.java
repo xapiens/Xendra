@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_WF_ParticipantType;
 /** Generated Model for AD_WF_Responsible
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -64,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("AD_WF_Responsible");
 public static String es_PE_TAB_Responsible_Description="Responsable para la ejecución del flujo de trabajo";
 
 @XendraTrl(Identifier="09c95482-4c21-60f5-dc87-9b130d3de871")
-public static String es_PE_TAB_Responsible_Name="Responsable";
-
-@XendraTrl(Identifier="09c95482-4c21-60f5-dc87-9b130d3de871")
 public static String es_PE_TAB_Responsible_Help="La última responsabilidad de un flujo de trabajo está con un usuario real. El flujo de trabajo responsable permite definir maneras de encontrar a ese usuario real.";
 
-@XendraTab(Name="Responsible",Description="Responsible for Workflow Execution",
+@XendraTrl(Identifier="09c95482-4c21-60f5-dc87-9b130d3de871")
+public static String es_PE_TAB_Responsible_Name="Responsable";
+@XendraTab(Name="Responsible",
+Description="Responsible for Workflow Execution",
 Help="The ultimate responsibility for a workflow is with an actual user. The Workflow Responsible allows to define ways to find that actual User.",
 AD_Window_ID="c0f9b7a2-e1dc-66dc-1baa-e2e1b93d5240",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -83,11 +82,13 @@ public static final String TABNAME_Responsible="09c95482-4c21-60f5-dc87-9b130d3d
 public static String es_PE_TABLE_AD_WF_Responsible_Name="Responsable del Flujo de Trabajo";
 
 
-@XendraTable(Name="Workflow Responsible",Description="Responsible for Workflow Execution",Help="",
-TableName="AD_WF_Responsible",AccessLevel="6",AD_Window_ID="c0f9b7a2-e1dc-66dc-1baa-e2e1b93d5240",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=120,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="64ad4ea4-9cb6-b30b-3820-bb96ae3a61b8",Synchronized="2017-08-16 11:41:12.0")
+@XendraTable(Name="Workflow Responsible",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Responsible for Workflow Execution",Help="",TableName="AD_WF_Responsible",
+AccessLevel="6",AD_Window_ID="c0f9b7a2-e1dc-66dc-1baa-e2e1b93d5240",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=120,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
+Identifier="64ad4ea4-9cb6-b30b-3820-bb96ae3a61b8",Synchronized="2020-03-03 21:36:10.0")
 /** TableName=AD_WF_Responsible */
 public static final String Table_Name="AD_WF_Responsible";
 
@@ -137,13 +138,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="46f60936-6dbd-09cc-abe7-a0fd69da4d10")
+public static String es_PE_FIELD_Responsible_Role_Name="Rol";
+
+@XendraTrl(Identifier="46f60936-6dbd-09cc-abe7-a0fd69da4d10")
 public static String es_PE_FIELD_Responsible_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="46f60936-6dbd-09cc-abe7-a0fd69da4d10")
 public static String es_PE_FIELD_Responsible_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="46f60936-6dbd-09cc-abe7-a0fd69da4d10")
-public static String es_PE_FIELD_Responsible_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,12 +162,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f29530dd-c3f2-1b08-032d-6278bbf849c5",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
-
-/** AD_User_ID AD_Reference=91f52193-02ab-6545-99f8-d6d30b9d03a1 */
-public static final int AD_USER_ID_AD_Reference_ID=286;
 /** Set User/Contact.
 @param AD_User_ID User within the system - Internal or Business Partner Contact */
 public void setAD_User_ID (int AD_User_ID)
@@ -185,13 +183,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d7a09c29-f922-f7c6-f1f1-6439c26cafdd")
+public static String es_PE_FIELD_Responsible_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="d7a09c29-f922-f7c6-f1f1-6439c26cafdd")
 public static String es_PE_FIELD_Responsible_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="d7a09c29-f922-f7c6-f1f1-6439c26cafdd")
 public static String es_PE_FIELD_Responsible_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="d7a09c29-f922-f7c6-f1f1-6439c26cafdd")
-public static String es_PE_FIELD_Responsible_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -209,7 +207,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="757992d9-b1db-f481-be54-8cbddf628732",Synchronized="2017-08-05 16:53:02.0")
+Identifier="757992d9-b1db-f481-be54-8cbddf628732",Synchronized="2019-08-30 22:20:53.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Workflow Responsible.
@@ -229,13 +227,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4301c83f-0ab5-1431-40a7-2dc2eb275d6e")
+public static String es_PE_FIELD_Responsible_WorkflowResponsible_Name="Responsable del Flujo de Trabajo";
+
+@XendraTrl(Identifier="4301c83f-0ab5-1431-40a7-2dc2eb275d6e")
 public static String es_PE_FIELD_Responsible_WorkflowResponsible_Description="Responsable para la ejecución del flujo de trabajo.";
 
 @XendraTrl(Identifier="4301c83f-0ab5-1431-40a7-2dc2eb275d6e")
 public static String es_PE_FIELD_Responsible_WorkflowResponsible_Help="La última responsabilidad para el flujo de trabajo es con un usuario actual. El flujo de trabajo responsable permite definir maneras de encontrar a ese usuario final.";
-
-@XendraTrl(Identifier="4301c83f-0ab5-1431-40a7-2dc2eb275d6e")
-public static String es_PE_FIELD_Responsible_WorkflowResponsible_Name="Responsable del Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_WF_Responsible_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -273,13 +271,13 @@ return value;
 }
 
 @XendraTrl(Identifier="f15b1b62-55d2-1da9-480a-150e7e8fb875")
+public static String es_PE_FIELD_Responsible_Description_Name="Observación";
+
+@XendraTrl(Identifier="f15b1b62-55d2-1da9-480a-150e7e8fb875")
 public static String es_PE_FIELD_Responsible_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="f15b1b62-55d2-1da9-480a-150e7e8fb875")
 public static String es_PE_FIELD_Responsible_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="f15b1b62-55d2-1da9-480a-150e7e8fb875")
-public static String es_PE_FIELD_Responsible_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -297,12 +295,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="65928a41-e51c-ed28-8150-851ef8337a40",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -322,13 +317,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="6cdb8362-82ce-5f30-2844-124e9fc92bb4")
+public static String es_PE_FIELD_Responsible_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="6cdb8362-82ce-5f30-2844-124e9fc92bb4")
 public static String es_PE_FIELD_Responsible_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="6cdb8362-82ce-5f30-2844-124e9fc92bb4")
 public static String es_PE_FIELD_Responsible_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="6cdb8362-82ce-5f30-2844-124e9fc92bb4")
-public static String es_PE_FIELD_Responsible_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -346,7 +341,7 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="88831242-6b2e-4df0-ee04-4d937640c618",Synchronized="2017-08-05 16:53:02.0")
+Identifier="88831242-6b2e-4df0-ee04-4d937640c618",Synchronized="2019-08-30 22:20:53.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Identifier.
@@ -378,7 +373,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="48960e84-f60f-4289-946d-3c065e89a4d6",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -410,18 +405,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
+public static String es_PE_FIELD_Responsible_Name_Name="Nombre";
+
+@XendraTrl(Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
 public static String es_PE_FIELD_Responsible_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
 public static String es_PE_FIELD_Responsible_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
-public static String es_PE_FIELD_Responsible_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="9a7d512d-3f64-560b-1048-1aafc389e367")
 public static final String FIELDNAME_Responsible_Name="9a7d512d-3f64-560b-1048-1aafc389e367";
 
 @XendraTrl(Identifier="b18d559d-3c10-f00d-b2a3-4018f143835b")
@@ -433,19 +429,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b18d559d-3c10-f00d-b2a3-4018f143835b",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** ResponsibleType AD_Reference=ae7055f1-e121-2966-f907-d95e1d377264 */
-public static final int RESPONSIBLETYPE_AD_Reference_ID=304;
 /** Set Responsible Type.
 @param ResponsibleType Type of the Responsibility for a workflow */
 public void setResponsibleType (String ResponsibleType)
 {
-if (ResponsibleType == null) throw new IllegalArgumentException ("ResponsibleType is mandatory");
-if (ResponsibleType.equals(REF_WF_ParticipantType.Organization) || ResponsibleType.equals(REF_WF_ParticipantType.Human) || ResponsibleType.equals(REF_WF_ParticipantType.Role) || ResponsibleType.equals(REF_WF_ParticipantType.SystemResource));
- else throw new IllegalArgumentException ("ResponsibleType Invalid value - " + ResponsibleType + " - Reference_ID=304 - O - H - R - S");
 if (ResponsibleType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -461,13 +451,13 @@ return (String)get_Value(COLUMNNAME_ResponsibleType);
 }
 
 @XendraTrl(Identifier="281c52bf-0644-25bb-f7f3-4956df5caf89")
+public static String es_PE_FIELD_Responsible_ResponsibleType_Name="Tipo de Responsable";
+
+@XendraTrl(Identifier="281c52bf-0644-25bb-f7f3-4956df5caf89")
 public static String es_PE_FIELD_Responsible_ResponsibleType_Description="Tipo de responsabilidad de un flujo de trabajo.";
 
 @XendraTrl(Identifier="281c52bf-0644-25bb-f7f3-4956df5caf89")
 public static String es_PE_FIELD_Responsible_ResponsibleType_Help="Tipo de usuario responsable para la ejecución de un flujo de trabajo determinado.";
-
-@XendraTrl(Identifier="281c52bf-0644-25bb-f7f3-4956df5caf89")
-public static String es_PE_FIELD_Responsible_ResponsibleType_Name="Tipo de Responsable";
 
 @XendraField(AD_Column_ID="ResponsibleType",IsCentrallyMaintained=true,
 AD_Tab_ID="09c95482-4c21-60f5-dc87-9b130d3de871",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -485,7 +475,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="10f4e85b-47a4-d490-61b7-22069babca90",Synchronized="2017-08-05 16:53:02.0")
+Identifier="10f4e85b-47a4-d490-61b7-22069babca90",Synchronized="2019-08-30 22:20:53.0")
 /** Column name ResponsibleType */
 public static final String COLUMNNAME_ResponsibleType = "ResponsibleType";
 }

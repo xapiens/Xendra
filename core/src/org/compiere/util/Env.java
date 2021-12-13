@@ -19,12 +19,14 @@ package org.compiere.util;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
@@ -50,6 +52,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.jms.Connection;
@@ -68,11 +71,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import org.columba.core.xml.XmlIO;
 import org.compiere.Xendra;
 import org.compiere.db.CConnection;
 import org.compiere.model.MClient;
@@ -80,7 +78,6 @@ import org.compiere.model.MLookupCache;
 import org.compiere.model.MRole;
 import org.compiere.model.MRule;
 import org.compiere.model.MSession;
-import org.compiere.model.MSystem;
 import org.compiere.model.Machine;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
@@ -89,7 +86,6 @@ import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.model.persistence.X_A_MachineServer;
 import org.compiere.model.reference.REF_ServerType;
-import org.compiere.server.XendraServer;
 import org.compiere.swing.CFrame;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -98,13 +94,16 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.Message;
 import org.kie.api.builder.Results;
-import org.kie.api.builder.model.KieBaseModel;
-import org.kie.api.builder.model.KieModuleModel;
-import org.kie.api.builder.model.KieSessionModel;
 import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.conf.EventProcessingOption;
+import org.kie.api.io.KieResources;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.rule.EntryPoint;
+import org.kie.internal.builder.DecisionTableConfiguration;
+import org.kie.internal.builder.DecisionTableInputType;
+import org.kie.internal.builder.KnowledgeBuilderFactory;
+import org.kie.internal.io.ResourceFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -112,9 +111,9 @@ import org.xendra.Constants;
 import org.xendra.db.PgNotificationPoller;
 import org.xendra.db.PgNotificationPoller.PgNotificationExceptionListener;
 import org.xendra.db.PgNotificationPoller.PgNotificationListener;
-import org.xendra.material.MaterialManager;
-import org.xendra.material.MaterialServer;
+import org.xendra.util.TableProperties;
 import org.xml.sax.InputSource;
+
 
 /**
  *  System Environment and static variables.
@@ -142,6 +141,7 @@ public final class Env
 	// knowledge
 	private static HashMap <Integer, String> sessionEntrypoints = new HashMap<Integer, String>();
 	private static HashMap <Integer, String> listagenda = new HashMap<Integer, String>();
+	private static HashMap <Integer, List<Integer>> channels = new HashMap<Integer, List<Integer>>();
 	private static Map <String, EntryPoint> Entrypoints = new HashMap<String, EntryPoint>();	
 	private static HashMap<Integer, KieBase> kiebases = new HashMap<Integer, KieBase>();
 	private static HashMap<Integer, Vector> kieerror = new HashMap<Integer, Vector>();
@@ -261,6 +261,14 @@ public final class Env
 	{
 	}
 
+	public static List<Integer> getChannels(int AD_Rule_ID) {
+		List<Integer> channel = new ArrayList<Integer>();
+		if (channels.containsKey(AD_Rule_ID)) {
+			channel = channels.get(AD_Rule_ID);
+		}
+		return channel;
+	}
+
 	public static String getSessionEntrypoints(int AD_Rule_ID) {
 		String entrypoint = null;
 		if (sessionEntrypoints.containsKey(AD_Rule_ID))
@@ -285,7 +293,7 @@ public final class Env
 			kiebases.remove(AD_Rule_ID);
 		}
 	}
-	public static KieBase startRule(int AD_Rule_ID, boolean reset) {
+	public static KieBase startRule(int AD_Rule_ID, boolean reset) {		
 		if (reset)
 		{
 			if (kiebases.containsKey(AD_Rule_ID))
@@ -296,11 +304,21 @@ public final class Env
 		return startRule(AD_Rule_ID);
 	}
 
+	//	public static void startDT(KieBase kb, File file) {
+	//		DecisionTableConfiguration dtconf = KnowledgeBuilderFactory.newDecisionTableConfiguration();
+	//		dtconf.setInputType(DecisionTableInputType.XLS);
+	//		ExternalSpreadsheetCompiler converter = new ExternalSpreadsheetCompiler();
+	//		//String drl = converter.compile(file, type, listener)
+	//		//knowledgeBuilder.add(ResourceFactory.newFileResource(file), ResourceType.DTABLE, dtconf);
+	//	
+	//	}	
 	// some insights.
 	// http://stackoverflow.com/questions/27065125/drools-mode-stream-and-containers
 	public static KieBase startRule(int AD_Rule_ID) {			
-		if (kiebases.containsKey(AD_Rule_ID))
-			return kiebases.get(AD_Rule_ID);	
+		if (kiebases.containsKey(AD_Rule_ID)) {
+			if (!CLogMgt.DEBUG)
+				return kiebases.get(AD_Rule_ID);	
+		}
 		List<MRule> rules = new Query(Env.getCtx(), X_AD_Rule.Table_Name,"AD_Rule_ID = ? OR Parent_ID = ?", null)
 		.setParameters(AD_Rule_ID, AD_Rule_ID).list();
 		if (rules.size() == 0)
@@ -329,6 +347,8 @@ public final class Env
 				// 21/6 be careful with the property name of the rule, for some reason in case is not well saved acording hstore
 				// el compilador drools no da error, pero tampoco levanta nada, solucion : vuelve a grabar el nombre
 				// the drools compiler don't show any error, but still, don't work. fix : save the property name again. ( rare )
+				// 28/9 the rare bug is because the resource HAVE TO START with src/main/resources to work because is predefined
+				// in the kfs , i added a validation for that in case the rule don't start throw an exception
 				for (MRule rule:rules)
 				{
 					properties = (HashMap) rule.getProperties();
@@ -356,6 +376,14 @@ public final class Env
 						}
 						String m_package = (String) properties.get(Constants.XML_ATTRIBUTE_PACKAGE);
 						String m_sessionname = (String) properties.get(Constants.XML_ATTRIBUTE_SESSIONNAME);
+						if (m_sessionname == null)
+							m_sessionname = "";
+						if (m_sessionname.length() == 0) {
+							Vector vector = new Vector();
+							vector.add(String.format("the Knowledge base %s don't have session name defined", name));
+							kieerror.put(AD_Rule_ID, vector);
+							return null;							
+						}
 						sessions.add(m_sessionname);
 						String m_EqualsBehavior = (String) properties.get(Constants.XML_ATTRIBUTE_EQUALSBEHAVIOR);
 						EqualityBehaviorOption equalbehavopt = EqualityBehaviorOption.EQUALITY ;						
@@ -377,18 +405,25 @@ public final class Env
 						kiebase.add(m_sessionname);
 						activerules.put(name, kiebase);
 					}	
-					else if (type.equals("rule"))
-					{
+					else if (type.equals("rule")) {
 						// "name"=>"src/main/resources/org/xendra/rules/messages/sales.drl", "type"=>"rule"
 						String m_name = (String) properties.get("name");
 						String script = rule.getScript();
-						String m_sessionname = (String) properties.get("SessionName");
+						String m_sessionname = (String) properties.get(Constants.XML_ATTRIBUTE_SESSIONNAME);
 						Vector ruleitem = new Vector();
 						ruleitem.add(m_sessionname);
 						ruleitem.add(m_name);
 						ruleitem.add(script);
 						ruleitems.add(ruleitem);
 						//kfs.write(m_name, script);
+					} else if (type.equals("channel")) {
+						List<Integer> channel = new ArrayList<Integer>();
+						if (channels.containsKey(AD_Rule_ID)) {
+							channel = channels.get(AD_Rule_ID);
+						}																		
+						if (!channel.contains(rule.getAD_Rule_ID()))
+							channel.add(rule.getAD_Rule_ID());
+						channels.put(AD_Rule_ID, channel);
 					}	
 				}				
 				boolean hasdefault = false;
@@ -437,18 +472,25 @@ public final class Env
 					for (Vector rule:ruleitems)
 					{
 						String m_sessionname = (String) rule.firstElement();
+						if (m_sessionname == null)
+							m_sessionname = "";
 						if (m_sessionname.equals(session))
 						{
 							String m_name = (String) rule.get(1);
 							String script = (String) rule.lastElement();
 							if (kfs != null)
 							{
-								kfs.write(m_name, script);
+								//src/main/resources/
+								if (m_name.startsWith("src/main/resources")) 
+									kfs.write(m_name, script);
+								else {
+									error += String.format("the rule %s don't start with src/main/resources", m_name);									
+								}
 							}
 						} 
 					}
 				}
-				kieBuilder = ks.newKieBuilder(kfs).buildAll();	    
+				kieBuilder = ks.newKieBuilder(kfs).buildAll();
 				Results rs = kieBuilder.getResults();
 				List<Message> msgs = rs.getMessages();
 				for (Message msg:msgs)
@@ -456,7 +498,9 @@ public final class Env
 					if (msg.getLevel().equals(Message.Level.ERROR))
 					{
 						error += msg.getText();						
-					}					
+					} else if (msg.getLevel().equals(Message.Level.INFO)) {
+						error += msg.getText();
+					}			 		
 				}
 				if (error.length() == 0)
 				{
@@ -513,9 +557,21 @@ public final class Env
 		{
 			Vector vector = kieerror.get(AD_Rule_ID);
 			msgs = (List<Message>) vector.lastElement();
+			String error = (String) vector.firstElement();
+			if (error.length() > 0) {
+				KieMessage msg = new KieMessage(error);						
+				if (msgs != null)
+					msgs.add(msg);
+				else { 				 
+					msgs = new ArrayList<Message>();
+					msgs.add(msg);
+				}
+			}
+
 		}
 		return msgs;		
 	}
+
 
 	public static String RulesBootstrap()
 	{		
@@ -2152,11 +2208,11 @@ public final class Env
 
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-	private static String messageserver = null;
+	private static X_A_Machine messageserver = null;
 	private static X_A_Machine webserver = null;
+	private static X_A_Machine updateserver = null;
 	private static X_A_Machine xendrianserver = null;
 	private static X_A_Machine materialserver = null;
-	private static X_A_Machine replicationserver = null;
 	private static X_A_Machine transferenceserver = null;
 	private static Machine machine = null;
 
@@ -2176,6 +2232,8 @@ public final class Env
 	private static PgNotificationPoller poller;
 
 	private static HashMap DocStates = new HashMap();
+
+	private static final CLogger LOG = CLogger.getCLogger("org.compiere.util");
 
 	//private static MaterialServer materialServer;
 	//private static MaterialManager materialmanager;
@@ -2441,41 +2499,23 @@ public final class Env
 		//getCtx().put(HOLON, "N");
 	}   //  static
 
-	public static X_A_Machine getServerXendrian() {
-		if (xendrianserver == null)
-		{
-			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
-			.setParameters(REF_ServerType.XendrianServer).first();
-			if (server != null)
-			{
-				X_A_Machine machine = new X_A_Machine(Env.getCtx(), server.getA_Machine_ID(), null);
-				xendrianserver = machine;
-			}
-			//			 List<X_A_Machine> machines = getMachineByProperty("xendrianserver","true");
-			//			 for (X_A_Machine machine:machines)
-			//			 {
-			//				xendrianserver = machine;
-			//				if (xendrianserver.getA_Machine_ID() == Env.getMachine().getA_Machine_ID())
-			//					break;
-			//			 }
-			//		}				
-			//		if (xendrianserver != null && xendrianserver.getA_Machine_ID() != Env.getMachine().getA_Machine_ID())
-			//			if (!IsAlive(xendrianserver))
-			//				xendrianserver = null;
-			//		if (xendrianserver == null)
-			//		{
-			//			List<X_A_Machine>  machines = new Query(Env.getCtx(), X_A_Machine.Table_Name, "IsActive = 'Y'", null).list();
-			//			for (X_A_Machine machine:machines)
-			//			{		
-			//				if (IsAlive(machine, 6666))
-			//				{					
-			//					xendrianserver = machine;
-			//					break;
-			//				}
-			//			}
-		}		
-		return xendrianserver;
-	}
+	//	public static X_A_Machine getServerXendrian() {
+	//		if (xendrianserver == null)
+	//		{
+	//			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
+	//			.setParameters(REF_ServerType.XendrianServer).first();
+	//			if (server != null)
+	//			{				
+	//				TableProperties props = new TableProperties(server.getProperties());				
+	//				Integer A_Machine_ID = props.getInteger(X_A_Machine.COLUMNNAME_A_Machine_ID);
+	//				if (A_Machine_ID != null) {
+	//					X_A_Machine machine = new X_A_Machine(Env.getCtx(), A_Machine_ID, null);
+	//					xendrianserver = machine;					
+	//				}
+	//			}
+	//		}		
+	//		return xendrianserver;
+	//	}
 
 	private static boolean IsAlive(X_A_Machine webserver, int port) {
 		boolean ok = false;
@@ -2493,43 +2533,6 @@ public final class Env
 		return ok;
 	}
 
-	private static boolean IsAlive(X_A_Machine webserver) {
-		boolean ok = false;
-		try  
-		{					
-			ok = IsAlive(webserver, 8080);
-			if (ok)
-			{
-				String url = String.format("http://%s:%s/plugin?type=alive", webserver.getName(),8080);
-				OkHttpClient client = new OkHttpClient();
-				Request request = new Request.Builder().url(url).build();
-				try {
-					Response response = client.newCall(request).execute();
-					String result = response.body().string();
-					XmlIO io = new XmlIO();
-					io.load(new ByteArrayInputStream(result.getBytes("UTF-8")));
-					String dbname = io.getRoot().getElement("info").getElement("databasename").getData();
-					String dbhost = io.getRoot().getElement("info").getElement("databasehost").getData();
-					String version = io.getRoot().getElement("info").getElement("version").getData();
-					if (version.equals(Xendra.DATE_VERSION))
-					{
-						CConnection m_cc = CConnection.get();
-						if ( m_cc.getDbHost().equals(dbhost) && m_cc.getDbName().equals(dbname))
-						{
-							ok = true;
-						}
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		} 
-		catch (Exception e)
-		{
-			// 
-		}				
-		return ok;
-	}
 	public static void setServerMaterial(X_A_Machine machine) {
 		materialserver = machine;
 	}
@@ -2540,66 +2543,64 @@ public final class Env
 			.setParameters(REF_ServerType.MaterialServer).first();
 			if (server != null)
 			{
-				X_A_Machine machine = new X_A_Machine(Env.getCtx(), server.getA_Machine_ID(), null);
-				materialserver = machine;
+				TableProperties props = new TableProperties(server.getProperties());
+				Integer A_Machine_ID = props.getInteger(X_A_Machine.COLUMNNAME_A_Machine_ID);
+				if (A_Machine_ID != null) {
+					X_A_Machine machine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+					.setParameters(A_Machine_ID).first();
+					if (machine != null)
+						materialserver = machine;					
+				}
 			}			
 		}		
 		return materialserver;
 	}
 
-	public static X_A_Machine getserverTransference() {
-		if (transferenceserver == null)
-		{
-			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
-			.setParameters(REF_ServerType.TransferenceServer).first();
-			if (server != null)
-			{
-				X_A_Machine machine = new X_A_Machine(Env.getCtx(), server.getA_Machine_ID(), null);
-				transferenceserver = machine;				
-			}
-		}
-		return transferenceserver;
-	}
-	public static X_A_Machine getServerReplication() {
-		if (replicationserver == null)
-		{
-			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
-			.setParameters(REF_ServerType.ReplicationServer).first();
-			if (server != null)
-			{
-				X_A_Machine machine = new X_A_Machine(Env.getCtx(), server.getA_Machine_ID(), null);
-				replicationserver = machine;
-			}
-		}
-		return replicationserver; 
-	}
+//	public static X_A_Machine getServerUpdate() {
+//		if (updateserver == null) {
+//			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
+//			.setParameters(REF_ServerType.UpdateServer).first();
+//			if (server != null) {
+//				TableProperties props = new TableProperties(server.getProperties());
+//				Integer A_Machine_ID = props.getInteger(X_A_Machine.COLUMNNAME_A_Machine_ID);
+//				if (A_Machine_ID != null) {
+//					X_A_Machine updatemachine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+//					.setParameters(A_Machine_ID).first();
+//					if (updatemachine != null) {
+//						updateserver = updatemachine;					
+//					} else {
+//						server.delete(true);
+//						server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
+//						.setParameters(REF_ServerType.UpdateServer).first();
+//						props = new TableProperties(server.getProperties());
+//						A_Machine_ID = props.getInteger(X_A_Machine.COLUMNNAME_A_Machine_ID);
+//						if (A_Machine_ID != null) {
+//							updatemachine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+//							.setParameters(A_Machine_ID).first();
+//							if (updatemachine != null) {
+//								updateserver = updatemachine;					
+//							}
+//						}					
+//					}
+//				}				
+//			}
+//		}
+//		return updateserver;
+//	}
 
-	public static X_A_Machine getServerWeb() {
-		if (webserver == null)
-		{
-			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
-			.setParameters(REF_ServerType.WebServer).first();
-			if (server != null)
-			{
-				X_A_Machine webmachine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
-				.setParameters(server.getA_Machine_ID()).first();
-				if (webmachine != null) 
-					webserver = webmachine;				
-			}
-		}
-		return webserver;
-	}
 
-	public static int getServerWebPort() {
-		int port = 0;
-		X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
-		.setParameters(REF_ServerType.WebServer).first();
-		if (server != null)
-		{
-			port = server.getHostPort();
-		}		
-		return port;
-	}
+	//	public static int getServerWebPort() {
+	//		int port = 0;
+	//		X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType = ?", null)
+	//		.setParameters(REF_ServerType.WebServer).first();
+	//		if (server != null)
+	//		{
+	//			HashMap msprops = server.getProperties();
+	//			if (msprops.containsKey("port"))
+	//				port = Integer.valueOf((String) msprops.get("port"));
+	//		}		
+	//		return port;
+	//	}
 
 	public static List<X_A_Machine> getMachineByProperty(String property, String value)
 	{
@@ -2608,114 +2609,195 @@ public final class Env
 		retval = new Query(Env.getCtx(), X_A_Machine.Table_Name, query, null).list();
 		return retval;
 	}	
+	public static HashMap getServerProperties(int A_Machine_ID, String servertype) {
 
+		HashMap properties = new HashMap(); 
+		String machineid = String.valueOf(A_Machine_ID);
+		String where = "properties->'A_Machine_ID'  = ? AND servertype = ?";
+		X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, where, null)
+		.setParameters(machineid, servertype).first();
+		if (server != null)
+			properties = server.getProperties();
+		return properties;
+	}
 	public static Machine getMachine() {		
 		if (machine == null)
 		{			
-			X_A_Machine current = new Query(Env.getCtx(), X_A_Machine.Table_Name, "Mac_Address = ? AND IsActive = 'Y'", null)
+			X_A_Machine curr = new Query(Env.getCtx(), Machine.Table_Name, "Mac_Address = ? AND IsActive = 'Y'", null)
 			.setParameters(Util.getLocalMacAddress()).first();
 
-			if (current == null)
+			if (curr == null)
 			{
-				current = new Machine(Env.getCtx(), 0, null);
+				Machine current = new Machine(Env.getCtx(), 0, null);
 				current.setAD_Org_ID(0);
 				current.set_ValueOfColumn(Constants.COLUMNNAME_AD_Client_ID, 0);
 				current.setName(Util.getLocalHostName());
-				current.setMac_Address(Util.getLocalMacAddress());				
-				current.save();				
+				current.setMac_Address(Util.getLocalMacAddress());
+				HashMap p = new HashMap();			
+				p.put(Constants.WEB, current.getWebFolder());
+				p.put(Constants.KEYSTORE, current.getKeyStoreFolder());
+				p.put(Constants.REPORTS, current.getReportsFolder());
+				p.put(Constants.TRASH, current.getTrashFolder());
+				p.put(Constants.PLUGINS, current.getPluginsFolder());
+				p.put(Constants.REPLICATION, current.getReplicationFolder());
+				p.put(Constants.DOWNLOAD, current.getDownloadFolder());
+				p.put(Constants.INSTALLED, current.getInstalledFolder());
+				p.put(Constants.STORE, current.getStoreFolder());				
+				current.setProperties(p);
+				current.save();
+				curr = current;
 			}			
-			if (!current.isLockout()) {
-				if (current.getName().compareTo(Util.getLocalHostName()) != 0)
+			if (!curr.isLockout()) {
+				LOG.warning(String.format("current machine name %s", Util.getLocalHostName()));
+				if (curr.getName().compareTo(Util.getLocalHostName()) != 0)
 				{
-					current.setName(Util.getLocalHostName());
-					current.save();
+					curr.setName(Util.getLocalHostName());
+					curr.save();
 				}
+			} else {
+				LOG.warning(String.format("Lockout for %s don't update the name", curr.getName()));
 			}
-			machine = new Machine(Env.getCtx(), current.getA_Machine_ID(), null);
-			ValidateDirectories(machine);
+			machine = new Machine(Env.getCtx(), curr.getA_Machine_ID(), null);
 		}
 		return machine;
 	}
 
-	public static void ValidateDirectories(Machine machine) {
-		ValidateDirectories(machine, false);
-	}
+	//	public static void ValidateDirectories(Machine machine) {
+	//		ValidateDirectories(machine, false);
+	//	}
+	//
+	//	public static void ValidateDirectories(Machine machine, boolean server) {
+	//
+	//		HashMap props = machine.getProperties();		
+	//
+	//		if (server)
+	//		{
+	//			Ini.getXendraFolder(Constants.TRASH, true);
+	//			if (!props.containsKey(Constants.TRASH))
+	//				props.put(Constants.TRASH, Ini.getXendraFolder(Constants.TRASH));
+	//
+	//			Ini.getXendraFolder(Constants.REPLICATION, true);
+	//			if (!props.containsKey(Constants.REPLICATION))
+	//				props.put(Constants.REPLICATION, Ini.getXendraFolder(Constants.REPLICATION));
+	//
+	//		}
+	//
+	//		Ini.getXendraFolder(Constants.KEYSTORE, true);
+	//		if (!props.containsKey(Constants.KEYSTORE))
+	//			props.put(Constants.KEYSTORE, Ini.getXendraFolder(Constants.KEYSTORE));
+	//
+	//		Ini.getXendraFolder(Constants.REPORTS, true);
+	//		if (!props.containsKey(Constants.REPORTS))
+	//			props.put(Constants.REPORTS, Ini.getXendraFolder(Constants.REPORTS));
+	//
+	//		Ini.getXendraFolder(Constants.PLUGINS, true);
+	//		if (!props.containsKey(Constants.PLUGINS))
+	//			props.put(Constants.PLUGINS, Ini.getXendraFolder(Constants.PLUGINS));
+	//
+	//		Ini.getXendraFolder(Constants.XENDRIAN, true);
+	//		if (!props.containsKey(Constants.XENDRIAN))
+	//			props.put(Constants.XENDRIAN, Ini.getXendraFolder(Constants.XENDRIAN));					
+	//
+	//		Ini.getXendraFolder(Constants.DOWNLOAD, true);
+	//		if (!props.containsKey(Constants.DOWNLOAD))
+	//			props.put(Constants.DOWNLOAD, Ini.getXendraFolder(Constants.DOWNLOAD));
+	//
+	//		Ini.getXendraFolder(Constants.STORE, true);
+	//		if (!props.containsKey(Constants.STORE))
+	//			props.put(Constants.STORE, Ini.getXendraFolder(Constants.STORE));					
+	//
+	//		Ini.getXendraFolder(Constants.INSTALLED, true);
+	//		if (!props.containsKey(Constants.INSTALLED))
+	//			props.put(Constants.INSTALLED, Ini.getXendraFolder(Constants.INSTALLED));																
+	//
+	//		machine.setProperties(props);		
+	//		machine.save();
+	//	}
 
-	public static void ValidateDirectories(Machine machine, boolean server) {
-
-		HashMap props = machine.getProperties();		
-
-		if (server)
+	public static X_A_Machine getServerWeb(X_A_Machine src) {
+		if (webserver == null)
 		{
-			Ini.getXendraFolder(Constants.TRASH, true);
-			if (!props.containsKey(Constants.TRASH))
-				props.put(Constants.TRASH, Ini.getXendraFolder(Constants.TRASH));
-
-			Ini.getXendraFolder(Constants.REPLICATION, true);
-			if (!props.containsKey(Constants.REPLICATION))
-				props.put(Constants.REPLICATION, Ini.getXendraFolder(Constants.REPLICATION));
-			
+			List<X_A_MachineServer> serverlist = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=? AND properties->'IsDefault'='true'", null)
+			.setParameters(REF_ServerType.WebServer).list();
+			if (serverlist != null) {
+				for (X_A_MachineServer server:serverlist) {
+					String machineid = (String) server.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+					X_A_Machine webserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+					.setParameters(Integer.valueOf(machineid)).first();
+					// the machine is not found, delete bacause is inconsistent
+					if (webserver == null) {					
+						server.delete(true);
+						// try again
+					}								
+				}
+			}
+			X_A_MachineServer server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=? AND properties->'IsDefault'='true'", null)
+			.setParameters(REF_ServerType.WebServer).first();			
+			if (server == null) {
+				server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "properties->'A_Machine_ID'=? AND ServerType=?", null)
+				.setParameters(String.valueOf(src.getA_Machine_ID()), REF_ServerType.WebServer).first();
+				if (server != null)
+				{
+					String machineid = (String) server.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+					webserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+					.setParameters(Integer.valueOf(machineid)).first();									
+				} else {
+					server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=?", null)
+					.setParameters(REF_ServerType.WebServer).first();
+					if (server != null) {
+						while (!server.getProperties().containsKey(X_A_Machine.COLUMNNAME_A_Machine_ID)) {
+							server.delete(true);
+							server = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=?", null)
+							.setParameters(REF_ServerType.WebServer).first();
+						}
+						String machineid = (String) server.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+						if (machineid != null) {
+							webserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+							.setParameters(Integer.valueOf(machineid)).first();
+						}
+					}
+				}
+			} else {
+				String machineid = (String) server.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+				webserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+				.setParameters(Integer.valueOf(machineid)).first();
+			}
 		}
-		
-		Ini.getXendraFolder(Constants.KEYSTORE, true);
-		if (!props.containsKey(Constants.KEYSTORE))
-			props.put(Constants.KEYSTORE, Ini.getXendraFolder(Constants.KEYSTORE));
-		
-		Ini.getXendraFolder(Constants.REPORTS, true);
-		if (!props.containsKey(Constants.REPORTS))
-			props.put(Constants.REPORTS, Ini.getXendraFolder(Constants.REPORTS));
-
-		//		Ini.getXendraFolder(Constants.COREPLUGINS, true);
-		//		if (!props.containsKey(Constants.COREPLUGINS))
-		//			props.put(Constants.COREPLUGINS, Ini.getXendraFolder(Constants.COREPLUGINS));
-		Ini.getXendraFolder(Constants.PLUGINS, true);
-		if (!props.containsKey(Constants.PLUGINS))
-			props.put(Constants.PLUGINS, Ini.getXendraFolder(Constants.PLUGINS));
-
-
-		Ini.getXendraFolder(Constants.PLUGINS, true);
-		if (!props.containsKey(Constants.PLUGINS))
-			props.put(Constants.PLUGINS, Ini.getXendraFolder(Constants.PLUGINS));
-
-		Ini.getXendraFolder(Constants.XENDRIAN, true);
-		if (!props.containsKey(Constants.XENDRIAN))
-			props.put(Constants.XENDRIAN, Ini.getXendraFolder(Constants.XENDRIAN));					
-
-		Ini.getXendraFolder(Constants.STORE, true);
-		if (!props.containsKey(Constants.STORE))
-			props.put(Constants.STORE, Ini.getXendraFolder(Constants.STORE));					
-
-		//		Ini.getXendraFolder(Constants.COREINSTALLED, true);					
-		//		if (!props.containsKey(Constants.COREINSTALLED))
-		//			props.put(Constants.COREINSTALLED, Ini.getXendraFolder(Constants.COREINSTALLED));
-
-		Ini.getXendraFolder(Constants.INSTALLED, true);
-		if (!props.containsKey(Constants.INSTALLED))
-			props.put(Constants.INSTALLED, Ini.getXendraFolder(Constants.INSTALLED));																
-
-		machine.setProperties(props);		
-		machine.save();
+		return webserver;
 	}
 
-	public static String getMessageHost() {
-		System.out.println("entrando a Env.getMessageHost()");
+
+	public static void setMessageHost(X_A_Machine machine) {
+		messageserver = machine;
+	}
+	public static X_A_Machine getMessageHost() {
 		if (messageserver == null)
 		{
-			X_A_Machine machine = new Query(Env.getCtx(), X_A_Machine.Table_Name, X_A_Machine.COLUMNNAME_IsServerMessage+" = 'Y'", null)
-			.first();
-			if (machine != null)
-			{
-				messageserver = machine.getName();
-			}
-			else
-			{
-				machine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "mac_address = ?", null)
-				.setParameters(Util.getLocalMacAddress()).first();
-				if (machine != null)
-					messageserver = machine.getName();
+			X_A_MachineServer ms = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=? AND properties->'IsDefault'='true'", null)
+			.setParameters(REF_ServerType.MessageServer).first();			
+			if (ms == null) {
+				ms = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "properties->'A_Machine_ID'=? AND ServerType=?", null)
+				.setParameters(String.valueOf(machine.getA_Machine_ID()), REF_ServerType.MessageServer).first();				
+				if (ms != null) {
+					String machineid = (String) ms.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+					messageserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+					.setParameters(Integer.valueOf(machineid)).first();					
+				}
+				else {
+					ms = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "ServerType=?", null)
+					.setParameters(REF_ServerType.MessageServer).first();
+					if (ms != null) {
+						String machineid = (String) ms.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+						messageserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+						.setParameters(Integer.valueOf(machineid)).first();											
+					}
+				}				
+			} else {
+				String machineid = (String) ms.getProperties().get(X_A_Machine.COLUMNNAME_A_Machine_ID);
+				messageserver = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
+				.setParameters(Integer.valueOf(machineid)).first();
 			}
 		}
-		System.out.println("server message is ->"+messageserver);
 		return messageserver;
 	}
 
@@ -2756,7 +2838,8 @@ public final class Env
 	}
 
 	public static String getResource(String packname, String folder, String resource, String subfolder) {		
-		String pluginpath = (String) Env.getMachine().getProperties().get(Constants.PLUGINS);        
+		//String pluginpath = (String) Env.getMachine().getProperties().get(Constants.PLUGINS);
+		String pluginpath = Env.getMachine().getPluginsFolder().getAbsolutePath();
 		String respath = packname + File.separator + folder + File.separator ;
 		if (subfolder != null && subfolder.length() > 0)
 			respath = respath + subfolder + File.separator;
@@ -2805,10 +2888,10 @@ public final class Env
 		return value;
 	}
 
-	public static void getMaterialManager(MClient m_client, int frequencystart) {		
-		MaterialManager.getInstance().get(m_client, frequencystart);
-		//materialmanager = MaterialManager.get(m_client);		
-	}
+	//	public static void getMaterialManager(MClient m_client, int frequencystart) {		
+	//		MaterialManager.getInstance().get(m_client, frequencystart);
+	//		//materialmanager = MaterialManager.get(m_client);		
+	//	}
 
 	public static HashMap getstates(int m_AD_Table_ID) {
 		HashMap docstates = (HashMap) DocStates.get(m_AD_Table_ID);
@@ -2840,4 +2923,10 @@ public final class Env
 		}					
 		return docstates;
 	}
+
+	public static boolean isHeadless() {
+		Boolean headless = GraphicsEnvironment.isHeadless();
+		return headless;
+	}
+
 }   //  Env

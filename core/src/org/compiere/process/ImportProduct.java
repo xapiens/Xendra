@@ -596,11 +596,13 @@ public class ImportProduct extends SvrProcess
 			//	Product
 			if (newProduct)			//	Insert new Product
 			{
+				iproduct.setC_TaxCategory_ID(taxcategory.getC_TaxCategory_ID());
 				MProduct product = new MProduct(iproduct);
-				product.setC_TaxCategory_ID(taxcategory.getC_TaxCategory_ID());
+				//product.setC_TaxCategory_ID();
 				if (product.save())
 				{
 					M_Product_ID = product.getM_Product_ID();
+					iproduct.setM_Product_ID(M_Product_ID);
 					log.finer("Insert Product");
 					noInsert++;
 				}
@@ -668,7 +670,7 @@ public class ImportProduct extends SvrProcess
 				o.setField(X_M_Product_PO.COLUMNNAME_VendorProductNo, iproduct.getVendorProductNo());
 				o.setField(X_M_Product_PO.COLUMNNAME_VendorCategory, iproduct.getVendorCategory());
 				o.setField(X_M_Product_PO.COLUMNNAME_Manufacturer, iproduct.getManufacturer());
-				o.setField(X_M_Product_PO.COLUMNNAME_Discontinued, iproduct.isDiscontinued());
+				o.setField(X_M_Product_PO.COLUMNNAME_Discontinued, iproduct.isDiscontinued() ? "Y":"N");
 				o.setField(X_M_Product_PO.COLUMNNAME_DiscontinuedBy, iproduct.getDiscontinuedBy());
 				o.setField(X_M_Product_PO.COLUMNNAME_Order_Min , iproduct.getOrder_Min());
 				o.setField(X_M_Product_PO.COLUMNNAME_Order_Pack, iproduct.getOrder_Pack());

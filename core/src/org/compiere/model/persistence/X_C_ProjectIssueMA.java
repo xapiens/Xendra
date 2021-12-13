@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_ProjectIssueMA");
 @XendraTrl(Identifier="6f966b7b-fb3b-8843-397b-c8992a35c521")
 public static String es_PE_TABLE_C_ProjectIssueMA_Name="C_ProjectIssueMA";
 
-@XendraTable(Name="C_ProjectIssueMA",Description="",Help="",TableName="C_ProjectIssueMA",
-AccessLevel="1",AD_Window_ID="3d408be2-c806-9eca-e379-2876dfbbec6d",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="6f966b7b-fb3b-8843-397b-c8992a35c521",Synchronized="2017-08-16 11:42:20.0")
+@XendraTable(Name="C_ProjectIssueMA",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_ProjectIssueMA",AccessLevel="1",AD_Window_ID="3d408be2-c806-9eca-e379-2876dfbbec6d",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="6f966b7b-fb3b-8843-397b-c8992a35c521",Synchronized="2020-03-03 21:37:33.0")
 /** TableName=C_ProjectIssueMA */
 public static final String Table_Name="C_ProjectIssueMA";
 
@@ -127,7 +128,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="230b5e9c-d69d-fe93-bb9b-d0e402e46d79",
-Synchronized="2017-08-05 16:54:17.0")
+Synchronized="2019-08-30 22:22:08.0")
 /** Column name C_ProjectIssue_ID */
 public static final String COLUMNNAME_C_ProjectIssue_ID = "C_ProjectIssue_ID";
 /** Set Identifier.
@@ -159,7 +160,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="972853a1-8b82-4c9d-b09c-fa6462e596d1",
-Synchronized="2017-08-05 16:54:17.0")
+Synchronized="2019-08-30 22:22:08.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute Set Instance.
@@ -187,7 +188,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9fe3402d-6f07-3bbd-68a3-b0696c8a4d01",Synchronized="2017-08-05 16:54:17.0")
+Identifier="9fe3402d-6f07-3bbd-68a3-b0696c8a4d01",Synchronized="2019-08-30 22:22:08.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Movement Quantity.
@@ -215,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5da8670d-7f8a-7d28-c8a2-b8188c8559e5",
-Synchronized="2017-08-05 16:54:17.0")
+Synchronized="2019-08-30 22:22:08.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
 }

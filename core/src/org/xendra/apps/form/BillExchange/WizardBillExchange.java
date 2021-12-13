@@ -85,7 +85,7 @@ public class WizardBillExchange extends CFrame implements FormPanel, ActionListe
 							AEnv.exit(1);
 					}										
 					WizardBillExchange frame = new WizardBillExchange();
-					//frame.setPreferredSize(new Dimension( 450, 200 ));
+					frame.setPreferredSize(new Dimension( 450, 200 ));
 					frame.pack();
 					frame.setVisible(true);
 				} catch (Exception e) {

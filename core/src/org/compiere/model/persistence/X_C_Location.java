@@ -59,13 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_Location");
 public static String es_PE_TAB_Location_Description="Definir localización";
 
 @XendraTrl(Identifier="c3f58789-7548-84a7-2d18-6bab4db13096")
-public static String es_PE_TAB_Location_Name="Localización";
-
-@XendraTrl(Identifier="c3f58789-7548-84a7-2d18-6bab4db13096")
 public static String es_PE_TAB_Location_Help="La pestaña de localización define la localización de una organización.";
 
-@XendraTab(Name="Location",Description="Define Location",
-Help="The Location Tab defines the location of an Organization.",
+@XendraTrl(Identifier="c3f58789-7548-84a7-2d18-6bab4db13096")
+public static String es_PE_TAB_Location_Name="Localización";
+@XendraTab(Name="Location",
+Description="Define Location",Help="The Location Tab defines the location of an Organization.",
 AD_Window_ID="200e7024-e010-3538-89e8-af4533eb66b7",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -77,11 +76,12 @@ public static final String TABNAME_Location="c3f58789-7548-84a7-2d18-6bab4db1309
 @XendraTrl(Identifier="62a5afdf-c9c9-ae3f-4bd1-6cb1ad5ec010")
 public static String es_PE_TABLE_C_Location_Name="Localización / Dirección";
 
-@XendraTable(Name="Address",Description="Location or Address",Help="",TableName="C_Location",
-AccessLevel="7",AD_Window_ID="200e7024-e010-3538-89e8-af4533eb66b7",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=70,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="62a5afdf-c9c9-ae3f-4bd1-6cb1ad5ec010",Synchronized="2017-08-16 11:41:59.0")
+@XendraTable(Name="Address",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Location or Address",Help="",
+TableName="C_Location",AccessLevel="7",AD_Window_ID="200e7024-e010-3538-89e8-af4533eb66b7",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=70,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="62a5afdf-c9c9-ae3f-4bd1-6cb1ad5ec010",Synchronized="2020-03-03 21:37:09.0")
 /** TableName=C_Location */
 public static final String Table_Name="C_Location";
 
@@ -141,13 +141,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="fdc50718-c928-2d21-4339-daba770479d2")
+public static String es_PE_FIELD_Location_Address_Name="Calle";
+
+@XendraTrl(Identifier="fdc50718-c928-2d21-4339-daba770479d2")
 public static String es_PE_FIELD_Location_Address_Description="Dirección para esta ubicación";
 
 @XendraTrl(Identifier="fdc50718-c928-2d21-4339-daba770479d2")
 public static String es_PE_FIELD_Location_Address_Help="La Dirección 1 identifica la dirección para una entidad";
-
-@XendraTrl(Identifier="fdc50718-c928-2d21-4339-daba770479d2")
-public static String es_PE_FIELD_Location_Address_Name="Calle";
 
 @XendraField(AD_Column_ID="Address1",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -165,7 +165,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6e40b2d3-94e0-2687-52b2-071300c346ae",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Address1 */
 public static final String COLUMNNAME_Address1 = "Address1";
 /** Set Address 2.
@@ -189,13 +189,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="3d7dafc0-232e-596b-4468-3128e84ad61d")
+public static String es_PE_FIELD_Location_Address22_Name="Colonía";
+
+@XendraTrl(Identifier="3d7dafc0-232e-596b-4468-3128e84ad61d")
 public static String es_PE_FIELD_Location_Address22_Description="Dirección 2 para esta ubicación";
 
 @XendraTrl(Identifier="3d7dafc0-232e-596b-4468-3128e84ad61d")
 public static String es_PE_FIELD_Location_Address22_Help="La Dirección 2 provee información de la dirección adicional para una entidad. Puede ser usada para integrar la ubicación; número de apartamento; ó información similar";
-
-@XendraTrl(Identifier="3d7dafc0-232e-596b-4468-3128e84ad61d")
-public static String es_PE_FIELD_Location_Address22_Name="Colonía";
 
 @XendraField(AD_Column_ID="Address2",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -213,7 +213,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c5b6a16c-e47a-f364-3201-5467f71721fa",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Address2 */
 public static final String COLUMNNAME_Address2 = "Address2";
 /** Set Address 3.
@@ -237,10 +237,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="75c733c3-3c68-59ff-c1af-86a1a3ae8520")
-public static String es_PE_FIELD_Location_Address33_Description="Linea dirección 3";
+public static String es_PE_FIELD_Location_Address33_Name="Municipio ";
 
 @XendraTrl(Identifier="75c733c3-3c68-59ff-c1af-86a1a3ae8520")
-public static String es_PE_FIELD_Location_Address33_Name="Municipio ";
+public static String es_PE_FIELD_Location_Address33_Description="Linea dirección 3";
 
 @XendraField(AD_Column_ID="Address3",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -258,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3914a209-6f58-6d79-2f9e-9b2d29a7e377",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Address3 */
 public static final String COLUMNNAME_Address3 = "Address3";
 /** Set Address 4.
@@ -282,10 +282,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="4fa9082a-f81d-2a79-6d10-575425db28ff")
-public static String es_PE_FIELD_Location_Address44_Description="Línea dirección 4";
+public static String es_PE_FIELD_Location_Address44_Name="Más Información";
 
 @XendraTrl(Identifier="4fa9082a-f81d-2a79-6d10-575425db28ff")
-public static String es_PE_FIELD_Location_Address44_Name="Más Información";
+public static String es_PE_FIELD_Location_Address44_Description="Línea dirección 4";
 
 @XendraField(AD_Column_ID="Address4",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -303,7 +303,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aa77f36a-f8a1-54ba-0aa0-f3a2df976f73",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Address4 */
 public static final String COLUMNNAME_Address4 = "Address4";
 /** Set City.
@@ -324,18 +324,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
+public static String es_PE_FIELD_Location_City_Name="Ciudad";
+
+@XendraTrl(Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
 public static String es_PE_FIELD_Location_City_Description="Ciudad";
 
 @XendraTrl(Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
 public static String es_PE_FIELD_Location_City_Help="Ciudad en el país";
 
-@XendraTrl(Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
-public static String es_PE_FIELD_Location_City_Name="Ciudad";
-@XendraField(AD_Column_ID="C_City_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=26,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
+@XendraField(AD_Column_ID="C_City_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=26,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05")
 public static final String FIELDNAME_Location_City="dc6d1a24-b2cc-a8ce-eb51-32e62d5e9d05";
 
 @XendraTrl(Identifier="11c47ef5-f3dd-2a4d-ad51-0b910058cc68")
@@ -347,7 +348,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="11c47ef5-f3dd-2a4d-ad51-0b910058cc68",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name C_City_ID */
 public static final String COLUMNNAME_C_City_ID = "C_City_ID";
 /** Set Country_ID.
@@ -367,13 +368,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b07b5082-896f-4abb-e4df-eb13d378f340")
+public static String es_PE_FIELD_Location_Country_ID_Name="País";
+
+@XendraTrl(Identifier="b07b5082-896f-4abb-e4df-eb13d378f340")
 public static String es_PE_FIELD_Location_Country_ID_Description="País";
 
 @XendraTrl(Identifier="b07b5082-896f-4abb-e4df-eb13d378f340")
 public static String es_PE_FIELD_Location_Country_ID_Help="El país define un país. Cada país debe ser definido antes de que pueda ser usado en un documento.";
-
-@XendraTrl(Identifier="b07b5082-896f-4abb-e4df-eb13d378f340")
-public static String es_PE_FIELD_Location_Country_ID_Name="País";
 
 @XendraField(AD_Column_ID="C_Country_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -391,7 +392,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1.000000000000",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="537a8726-9aed-552a-25bf-0dba3689a2d8",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name C_Country_ID */
 public static final String COLUMNNAME_C_Country_ID = "C_Country_ID";
 /** Set City.
@@ -422,18 +423,19 @@ return new KeyNamePair(get_ID(), getCity());
 }
 
 @XendraTrl(Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
+public static String es_PE_FIELD_Location_City2_Name="Ciudad";
+
+@XendraTrl(Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
 public static String es_PE_FIELD_Location_City2_Description="Identifica una Ciudad";
 
 @XendraTrl(Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
 public static String es_PE_FIELD_Location_City2_Help="La Ciudad identifica una ciudad única para este País ó Región";
 
-@XendraTrl(Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
-public static String es_PE_FIELD_Location_City2_Name="Ciudad";
-@XendraField(AD_Column_ID="City",
-IsCentrallyMaintained=true,AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
+@XendraField(AD_Column_ID="City",IsCentrallyMaintained=true,
+AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b6584228-0646-e26d-728a-1c8007da0e21")
 public static final String FIELDNAME_Location_City2="b6584228-0646-e26d-728a-1c8007da0e21";
 
 @XendraTrl(Identifier="772fc80a-19bc-d4fe-61a9-948fde140dad")
@@ -445,7 +447,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="772fc80a-19bc-d4fe-61a9-948fde140dad",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name City */
 public static final String COLUMNNAME_City = "City";
 /** Set Address.
@@ -465,13 +467,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7fd9aee2-dc2a-9da6-a771-640af168233a")
+public static String es_PE_FIELD_Location_Address5_Name="Localización / Dirección";
+
+@XendraTrl(Identifier="7fd9aee2-dc2a-9da6-a771-640af168233a")
 public static String es_PE_FIELD_Location_Address5_Description="Ubicación ó dirección";
 
 @XendraTrl(Identifier="7fd9aee2-dc2a-9da6-a771-640af168233a")
 public static String es_PE_FIELD_Location_Address5_Help="El campo Ubicación / Dirección define la ubicación de una entidad.";
-
-@XendraTrl(Identifier="7fd9aee2-dc2a-9da6-a771-640af168233a")
-public static String es_PE_FIELD_Location_Address5_Name="Localización / Dirección";
 
 @XendraField(AD_Column_ID="C_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -507,7 +509,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1ea85d40-6fd8-cc5f-d8e8-96e15d2c822e",
-Synchronized="2017-08-05 16:53:52.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name C_Province_ID */
 public static final String COLUMNNAME_C_Province_ID = "C_Province_ID";
 /** Set Region.
@@ -528,13 +530,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="363e1d03-f6fc-9acf-0a62-b13479d7f027")
+public static String es_PE_FIELD_Location_Region_Name="Región";
+
+@XendraTrl(Identifier="363e1d03-f6fc-9acf-0a62-b13479d7f027")
 public static String es_PE_FIELD_Location_Region_Description="Identifica una región geográfica";
 
 @XendraTrl(Identifier="363e1d03-f6fc-9acf-0a62-b13479d7f027")
 public static String es_PE_FIELD_Location_Region_Help="La región indica una región única para este país";
-
-@XendraTrl(Identifier="363e1d03-f6fc-9acf-0a62-b13479d7f027")
-public static String es_PE_FIELD_Location_Region_Name="Región";
 
 @XendraField(AD_Column_ID="C_Region_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -552,7 +554,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6a2e0c60-d187-01c9-57c3-9ea35ec071d1",Synchronized="2017-08-05 16:53:52.0")
+Identifier="6a2e0c60-d187-01c9-57c3-9ea35ec071d1",Synchronized="2019-08-30 22:21:47.0")
 /** Column name C_Region_ID */
 public static final String COLUMNNAME_C_Region_ID = "C_Region_ID";
 /** Set Identifier.
@@ -584,9 +586,36 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7b081f0-6892-4eda-9385-34961d2989a4",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
+/** Set Latitude.
+@param Latitude Latitude */
+public void setLatitude (BigDecimal Latitude)
+{
+set_Value (COLUMNNAME_Latitude, Latitude);
+}
+/** Get Latitude.
+@return Latitude */
+public BigDecimal getLatitude() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Latitude);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="21673848-7d6e-4187-9974-f40e31d5faa5")
+public static String es_PE_COLUMN_Latitude_Name="Latitude";
+
+@XendraColumn(AD_Element_ID="eff88696-5c3a-4c77-b521-a73f3c80f03e",ColumnName="Latitude",
+AD_Reference_ID=22,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="21673848-7d6e-4187-9974-f40e31d5faa5",
+Synchronized="2019-08-30 22:21:47.0")
+/** Column name Latitude */
+public static final String COLUMNNAME_Latitude = "Latitude";
 /** Set LocationCode.
 @param LocationCode LocationCode */
 public void setLocationCode (String LocationCode)
@@ -616,9 +645,36 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="49220558-9217-45dc-999e-21023ee06157",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name LocationCode */
 public static final String COLUMNNAME_LocationCode = "LocationCode";
+/** Set Longitude.
+@param Longitude Longitude */
+public void setLongitude (BigDecimal Longitude)
+{
+set_Value (COLUMNNAME_Longitude, Longitude);
+}
+/** Get Longitude.
+@return Longitude */
+public BigDecimal getLongitude() 
+{
+BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Longitude);
+if (bd == null) return Env.ZERO;
+return bd;
+}
+
+@XendraTrl(Identifier="add78f2c-f73f-481c-9b52-47f28d797d38")
+public static String es_PE_COLUMN_Longitude_Name="Longitude";
+
+@XendraColumn(AD_Element_ID="a1db4f5a-e74b-4db0-bfe3-3dbf92bc35a5",ColumnName="Longitude",
+AD_Reference_ID=22,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="add78f2c-f73f-481c-9b52-47f28d797d38",
+Synchronized="2019-08-30 22:21:47.0")
+/** Column name Longitude */
+public static final String COLUMNNAME_Longitude = "Longitude";
 /** Set ZIP.
 @param Postal Postal code */
 public void setPostal (String Postal)
@@ -640,13 +696,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="697e0249-8d45-1a6d-0886-1d4feec85ced")
+public static String es_PE_FIELD_Location_ZIP_Name="Código Postal";
+
+@XendraTrl(Identifier="697e0249-8d45-1a6d-0886-1d4feec85ced")
 public static String es_PE_FIELD_Location_ZIP_Description="Código Postal";
 
 @XendraTrl(Identifier="697e0249-8d45-1a6d-0886-1d4feec85ced")
 public static String es_PE_FIELD_Location_ZIP_Help="El campo Código Postal identifica el código postal para esta entidad";
-
-@XendraTrl(Identifier="697e0249-8d45-1a6d-0886-1d4feec85ced")
-public static String es_PE_FIELD_Location_ZIP_Name="Código Postal";
 
 @XendraField(AD_Column_ID="Postal",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -664,7 +720,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a094ee20-6f98-3430-ce65-334b632ce9bd",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Postal */
 public static final String COLUMNNAME_Postal = "Postal";
 /** Set -.
@@ -688,18 +744,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
+public static String es_PE_FIELD_Location___Name="-";
+
+@XendraTrl(Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
 public static String es_PE_FIELD_Location___Description="ZIP adicional o Código Postal";
 
 @XendraTrl(Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
 public static String es_PE_FIELD_Location___Help="El código o Zona postal adicional identifica; si es apropiado; cualquier información de código postal adicional";
 
-@XendraTrl(Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
-public static String es_PE_FIELD_Location___Name="-";
-@XendraField(AD_Column_ID="Postal_Add",
-IsCentrallyMaintained=true,AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=110,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
+@XendraField(AD_Column_ID="Postal_Add",IsCentrallyMaintained=true,
+AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="3ee653a1-4dd1-eae8-40c0-b52d022c18a9")
 public static final String FIELDNAME_Location__="3ee653a1-4dd1-eae8-40c0-b52d022c18a9";
 
 @XendraTrl(Identifier="6e84f1b7-d224-f0b8-7560-5268b2c1df21")
@@ -711,7 +768,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6e84f1b7-d224-f0b8-7560-5268b2c1df21",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Postal_Add */
 public static final String COLUMNNAME_Postal_Add = "Postal_Add";
 /** Set Region.
@@ -735,13 +792,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="67fc1cc2-f7f6-62cf-164c-fef217be9c29")
+public static String es_PE_FIELD_Location_Region2_Name="Nombre de Región";
+
+@XendraTrl(Identifier="67fc1cc2-f7f6-62cf-164c-fef217be9c29")
 public static String es_PE_FIELD_Location_Region2_Description="Nombre de esta región";
 
 @XendraTrl(Identifier="67fc1cc2-f7f6-62cf-164c-fef217be9c29")
 public static String es_PE_FIELD_Location_Region2_Help="El nombre de región define el nombre que se imprimirá cuando esta región se use en un documento.";
-
-@XendraTrl(Identifier="67fc1cc2-f7f6-62cf-164c-fef217be9c29")
-public static String es_PE_FIELD_Location_Region2_Name="Nombre de Región";
 
 @XendraField(AD_Column_ID="RegionName",IsCentrallyMaintained=true,
 AD_Tab_ID="c3f58789-7548-84a7-2d18-6bab4db13096",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -759,7 +816,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c8c6e6c-0aca-e18e-6999-9fb7ea237f67",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name RegionName */
 public static final String COLUMNNAME_RegionName = "RegionName";
 }

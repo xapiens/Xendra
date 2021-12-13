@@ -150,8 +150,9 @@ public class MLocation extends X_C_Location implements Comparator
 				System.out.println("nuevo region por defecto "+defaultRegion.toString());
 				setRegion(defaultRegion);
 				MCity city = MCity.getFirst(defaultRegion);		
-				System.out.println("ciudad por defecto "+city.toString());
-				setCity(city);
+				if (city != null) {					
+					setCity(city);
+				}
 			}
 		}
 	}	//	MLocation

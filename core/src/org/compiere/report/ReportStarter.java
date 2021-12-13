@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,6 +52,7 @@ import org.compiere.model.MAttachmentEntry;
 import org.compiere.model.MProcess;
 import org.compiere.model.PrintInfo;
 import org.compiere.model.persistence.X_AD_PInstance_Para;
+import org.compiere.model.persistence.X_AD_Process;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.PrintUtil;
 import org.compiere.print.ReportCtl;
@@ -299,10 +301,13 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 					;
 				}
 			}
-
-			Connection conn = null;
+			Connection conn = null;			
+			//conn = DriverManager.getConnection(m_jdbcURL, m_uid, m_pwd);
 			try {
-				conn = reportManager.getConnection();
+				conn = reportData.getConnection();
+				if (conn == null) {
+					conn = reportManager.getConnection();
+				}
 				jasperPrint = JasperFillManager.fillReport(jasperReport,params, conn);
 				if (reportData.isDirectPrint()) {
 					log.info("ReportStarter.startProcess print report -"
@@ -366,8 +371,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 					viewerLauncher.openViewer(jasperPrint, pi.getTitle()+reportPath);
 				}
 			} catch (JRException e) {
-				log.severe("ReportStarter.startProcess: Can not run report - "
-						+ e.getMessage());
+				log.severe(String.format("ReportStarter.startProcess: Can not run report - %s %s",e.getCause(),e.getMessage()));
 			} finally {
 				if (conn != null)
 					try {
@@ -621,7 +625,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 	 */
 	public ReportData getReportData(ProcessInfo pi, String trxName) {
 		log.info("");
-		String sql = "SELECT pr.JasperReport, pr.IsDirectPrint "
+		String sql = "SELECT pr.JasperReport, pr.IsDirectPrint, pr.Properties "
 				+ "FROM AD_Process pr, AD_PInstance pi "
 				+ "WHERE pr.AD_Process_ID = pi.AD_Process_ID "
 				+ " AND pi.AD_PInstance_ID=?";
@@ -635,9 +639,13 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 			String path = null;
 			boolean directPrint = false;
 			boolean isPrintPreview = pi.isPrintPreview();
+			HashMap props = null;
 			if (rs.next()) {
 				path = rs.getString(1);
-
+				props = (HashMap) rs.getObject(X_AD_Process.COLUMNNAME_Properties);
+				if (props == null) {
+					props = new HashMap();
+				}								
 				if ("Y".equalsIgnoreCase(rs.getString(2))
 						&& !Ini.isPropertyBool(Ini.P_PRINTPREVIEW)
 						&& !isPrintPreview)
@@ -647,7 +655,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 				return null;
 			}
 
-			return reportManager.getReportDataInstance(path, directPrint);
+			return reportManager.getReportDataInstance(path, directPrint, props);
 		} catch (SQLException e) {
 			throw new DBException(e, sql);
 			// log.severe("sql = "+sql+"; e.getMessage() = "+ e.getMessage());

@@ -58,11 +58,13 @@ public static int Table_ID=MTable.getTable_ID("AD_ReplicationFile");
 public static String es_PE_TABLE_AD_ReplicationFile_Name="Replication Files configuration";
 
 
-@XendraTable(Name="Replication Files configuration",Description="",Help="",
+@XendraTable(Name="Replication Files configuration",
+AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="AD_ReplicationFile",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.request",Identifier="96c6326a-0984-45e6-938d-ff17808676b0",
-Synchronized="2017-08-16 11:40:56.0")
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="96c6326a-0984-45e6-938d-ff17808676b0",
+Synchronized="2020-03-03 21:35:51.0")
 /** TableName=AD_ReplicationFile */
 public static final String Table_Name="AD_ReplicationFile";
 
@@ -136,41 +138,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="b80c51a7-62eb-4b28-88ec-41f615ed6277",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name Content */
 public static final String COLUMNNAME_Content = "Content";
-/** Set Identifier.
-@param Identifier Identifier */
-public void setIdentifier (String Identifier)
-{
-if (Identifier != null && Identifier.length() > 36)
-{
-log.warning("Length > 36 - truncated");
-Identifier = Identifier.substring(0,35);
-}
-set_Value (COLUMNNAME_Identifier, Identifier);
-}
-/** Get Identifier.
-@return Identifier */
-public String getIdentifier() 
-{
-String value = (String)get_Value(COLUMNNAME_Identifier);
-if (value == null)
-  return "";
-return value;
-}
-@XendraTrl(Identifier="29e9590f-1670-4cf5-bce5-5992ba5c8d6b")
-public static String es_PE_COLUMN_Identifier_Name="Identifier";
-
-@XendraColumn(AD_Element_ID="f9dfa544-a995-1afd-baaf-53bbadefbbcb",ColumnName="Identifier",
-AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=36,DefaultValue="",
-IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
-Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
-IsAllowLogging=false,Identifier="29e9590f-1670-4cf5-bce5-5992ba5c8d6b",
-Synchronized="2017-08-05 16:52:47.0")
-/** Column name Identifier */
-public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
 @param Name Alphanumeric identifier of the entity */
 public void setName (String Name)
@@ -207,7 +177,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="705f0cf1-8ee6-4552-8a7e-3e0801cada63",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Synchronized.
@@ -232,7 +202,39 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b44b1aa-37ff-436e-9c3f-9d3b6bec7fb6",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name Synchronized */
 public static final String COLUMNNAME_Synchronized = "Synchronized";
+/** Set TableIdentifier.
+@param TableIdentifier TableIdentifier */
+public void setTableIdentifier (String TableIdentifier)
+{
+if (TableIdentifier != null && TableIdentifier.length() > 36)
+{
+log.warning("Length > 36 - truncated");
+TableIdentifier = TableIdentifier.substring(0,35);
+}
+set_Value (COLUMNNAME_TableIdentifier, TableIdentifier);
+}
+/** Get TableIdentifier.
+@return TableIdentifier */
+public String getTableIdentifier() 
+{
+String value = (String)get_Value(COLUMNNAME_TableIdentifier);
+if (value == null)
+  return "";
+return value;
+}
+@XendraTrl(Identifier="9aed0e22-804c-4a73-8527-25811c8af91e")
+public static String es_PE_COLUMN_TableIdentifier_Name="TableIdentifier";
+
+@XendraColumn(AD_Element_ID="8b4a9083-e1f3-4fef-9d45-5361fb409c11",ColumnName="TableIdentifier",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=36,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="9aed0e22-804c-4a73-8527-25811c8af91e",
+Synchronized="2019-08-30 22:20:38.0")
+/** Column name TableIdentifier */
+public static final String COLUMNNAME_TableIdentifier = "TableIdentifier";
 }

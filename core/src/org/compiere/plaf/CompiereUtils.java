@@ -26,6 +26,7 @@ import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import org.compiere.util.CLogger;
 import org.xendra.plaf.XendraPLAF;
 
 /**
@@ -38,7 +39,7 @@ public class CompiereUtils
 {
 	
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(CompiereUtils.class.getName());
+	private static CLogger log = CLogger.getCLogger(CompiereUtils.class.getName());
 
 	/**
 	 *  Fill Background with Color.

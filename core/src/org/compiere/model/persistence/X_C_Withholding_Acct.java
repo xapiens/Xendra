@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_Withholding_Acct");
 public static String es_PE_TAB_Accounting_Description="Contabilidad de Retenciones";
 
 @XendraTrl(Identifier="b9580b1e-520d-38bc-dfcf-133d7332c11c")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="b9580b1e-520d-38bc-dfcf-133d7332c11c")
 public static String es_PE_TAB_Accounting_Help="La pestaña de Contabilidad de Retención define los parámetros contables para retenciones.";
 
-@XendraTab(Name="Accounting",Description="Withholding Accounting",
+@XendraTrl(Identifier="b9580b1e-520d-38bc-dfcf-133d7332c11c")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Withholding Accounting",
 Help="The Withholding Accounting Tab defines the accounting parameters for Withholding.",
 AD_Window_ID="1506817d-7a38-4734-8175-af48f9288444",SeqNo=20,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_Accounting="b9580b1e-520d-38bc-dfcf-133d7332c
 @XendraTrl(Identifier="1f47b380-cc34-69df-c7be-2749fc6dd0f5")
 public static String es_PE_TABLE_C_Withholding_Acct_Name="C_Withholding_Acct";
 
-@XendraTable(Name="C_Withholding_Acct",Description="",Help="",TableName="C_Withholding_Acct",
-AccessLevel="3",AD_Window_ID="1506817d-7a38-4734-8175-af48f9288444",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="1f47b380-cc34-69df-c7be-2749fc6dd0f5",Synchronized="2017-08-16 11:42:33.0")
+@XendraTable(Name="C_Withholding_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Withholding_Acct",AccessLevel="3",AD_Window_ID="1506817d-7a38-4734-8175-af48f9288444",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="1f47b380-cc34-69df-c7be-2749fc6dd0f5",Synchronized="2020-03-03 21:37:45.0")
 /** TableName=C_Withholding_Acct */
 public static final String Table_Name="C_Withholding_Acct";
 
@@ -133,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9db94f8d-6efb-272f-6fee-13d2e27dcbbd")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="9db94f8d-6efb-272f-6fee-13d2e27dcbbd")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="9db94f8d-6efb-272f-6fee-13d2e27dcbbd")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="9db94f8d-6efb-272f-6fee-13d2e27dcbbd")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b9580b1e-520d-38bc-dfcf-133d7332c11c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -157,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10a5a51c-eff2-13d2-859c-38738328ca3b",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Withholding.
@@ -177,13 +178,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2c7a201b-cbae-a969-98e8-9fe107329cf9")
+public static String es_PE_FIELD_Accounting_Withholding_Name="Retención";
+
+@XendraTrl(Identifier="2c7a201b-cbae-a969-98e8-9fe107329cf9")
 public static String es_PE_FIELD_Accounting_Withholding_Description="Tipo de retención definida";
 
 @XendraTrl(Identifier="2c7a201b-cbae-a969-98e8-9fe107329cf9")
 public static String es_PE_FIELD_Accounting_Withholding_Help="La Retención indica el tipo de retención a ser calculada";
-
-@XendraTrl(Identifier="2c7a201b-cbae-a969-98e8-9fe107329cf9")
-public static String es_PE_FIELD_Accounting_Withholding_Name="Retención";
 
 @XendraField(AD_Column_ID="C_Withholding_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b9580b1e-520d-38bc-dfcf-133d7332c11c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -201,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f4a34dfa-bd84-b3f6-a7d9-e6967adf9ef3",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name C_Withholding_ID */
 public static final String COLUMNNAME_C_Withholding_ID = "C_Withholding_ID";
 /** Set Exchange_Acct.
@@ -228,7 +229,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b621765c-6ae2-4609-bf6a-dcd9782b7bc5",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name Exchange_Acct */
 public static final String COLUMNNAME_Exchange_Acct = "Exchange_Acct";
 /** Set Identifier.
@@ -260,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b1fabbca-f733-4409-bd24-0cdd170afc98",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Vendor_Acct.
@@ -287,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e2c78244-c1f6-41f3-a5c5-f76f299334e4",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name Vendor_Acct */
 public static final String COLUMNNAME_Vendor_Acct = "Vendor_Acct";
 /** Set VendorExchange_Acct.
@@ -314,7 +315,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="50b09762-2836-4151-81dd-7d52d789cdc1",Synchronized="2017-08-05 16:54:31.0")
+Identifier="50b09762-2836-4151-81dd-7d52d789cdc1",Synchronized="2019-08-30 22:22:23.0")
 /** Column name VendorExchange_Acct */
 public static final String COLUMNNAME_VendorExchange_Acct = "VendorExchange_Acct";
 /** Set Withholding.
@@ -333,13 +334,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1d3bd55b-7d38-7662-f590-44e55dc7f579")
+public static String es_PE_FIELD_Accounting_Withholding2_Name="Retención";
+
+@XendraTrl(Identifier="1d3bd55b-7d38-7662-f590-44e55dc7f579")
 public static String es_PE_FIELD_Accounting_Withholding2_Description="Cuenta de Retenciones";
 
 @XendraTrl(Identifier="1d3bd55b-7d38-7662-f590-44e55dc7f579")
 public static String es_PE_FIELD_Accounting_Withholding2_Help="La cuenta de Retenciones indica la cuenta para registrar retenciones";
-
-@XendraTrl(Identifier="1d3bd55b-7d38-7662-f590-44e55dc7f579")
-public static String es_PE_FIELD_Accounting_Withholding2_Name="Retención";
 
 @XendraField(AD_Column_ID="Withholding_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="b9580b1e-520d-38bc-dfcf-133d7332c11c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -357,7 +358,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b93fb1d5-39c8-d802-321e-990b4a855162",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Withholding_Acct */
 public static final String COLUMNNAME_Withholding_Acct = "Withholding_Acct";
 /** Set WithholdingApply_Acct.
@@ -394,7 +395,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1.000000000000",IsSelectionColumn=false,
 AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d4dbf196-2b30-4b26-bd9d-bcd6d04b8f71",Synchronized="2017-08-05 16:54:31.0")
+Identifier="d4dbf196-2b30-4b26-bd9d-bcd6d04b8f71",Synchronized="2019-08-30 22:22:23.0")
 /** Column name WithholdingApply_Acct */
 public static final String COLUMNNAME_WithholdingApply_Acct = "WithholdingApply_Acct";
 }

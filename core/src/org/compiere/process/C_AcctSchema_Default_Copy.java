@@ -21,7 +21,36 @@ package org.compiere.process;
 import java.sql.*;
 import java.util.logging.*;
 
+import org.compiere.model.persistence.X_C_AcctSchema_Default;
+import org.compiere.model.persistence.X_C_BOE_Acct;
+import org.compiere.model.persistence.X_C_BP_Employee_Acct;
+import org.compiere.model.persistence.X_C_BP_Group;
+import org.compiere.model.persistence.X_C_BP_Group_Acct;
+import org.compiere.model.persistence.X_C_BPartner;
+import org.compiere.model.persistence.X_C_BankAccount;
+import org.compiere.model.persistence.X_C_BankAccount_Acct;
+import org.compiere.model.persistence.X_C_CashBook;
+import org.compiere.model.persistence.X_C_CashBook_Acct;
+import org.compiere.model.persistence.X_C_Charge;
+import org.compiere.model.persistence.X_C_Charge_Acct;
+import org.compiere.model.persistence.X_C_Currency;
+import org.compiere.model.persistence.X_C_Currency_Acct;
+import org.compiere.model.persistence.X_C_Project;
+import org.compiere.model.persistence.X_C_Project_Acct;
+import org.compiere.model.persistence.X_C_Tax;
+import org.compiere.model.persistence.X_C_Tax_Acct;
+import org.compiere.model.persistence.X_C_Withholding;
+import org.compiere.model.persistence.X_C_Withholding_Acct;
+import org.compiere.model.persistence.X_M_Product;
+import org.compiere.model.persistence.X_M_Product_Acct;
+import org.compiere.model.persistence.X_M_Product_Category;
+import org.compiere.model.persistence.X_M_Product_Category_Acct;
+import org.compiere.model.persistence.X_M_Warehouse;
+import org.compiere.model.persistence.X_M_Warehouse_Acct;
 import org.compiere.util.*;
+import org.xendra.Constants;
+import org.xendra.util.SelectPO;
+import org.xendra.util.UpdatePO;
 /**
  * Title:	Copy Acct Info
  * Description:	
@@ -38,12 +67,12 @@ public class C_AcctSchema_Default_Copy extends SvrProcess
 	 * NOTE: The original oracle procedure C_AcctSchema_Default_Copy had a
 	 *       Client_ID parameter for Direct Call not implemented in this class
 	 */
-	
+
 	/** The Business Partner Group		*/
 	private int		AD_Client_ID = -1;
 	/** The Record						*/
 	private int		p_Record_ID = 0;
-	
+
 	/**
 	 *  Prepare - e.g., get Parameters.
 	 */
@@ -90,380 +119,706 @@ public class C_AcctSchema_Default_Copy extends SvrProcess
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next())
 			{
-				// Update existing Product Category
-				sqlupd = "UPDATE M_Product_Category_Acct "
-			           + "SET P_Revenue_Acct=" + rs.getInt("P_Revenue_Acct") + ", " 
-			           + "P_Expense_Acct=" + rs.getInt("P_Expense_Acct") + ", "
-			           + "P_Asset_Acct=" + rs.getInt("P_Asset_Acct") + ", "
-			           + "P_CoGs_Acct=" + rs.getInt("P_CoGs_Acct") + ", "
-			           + "P_PurchasePriceVariance_Acct=" + rs.getInt("P_PurchasePriceVariance_Acct") + ", "
-			           + "P_InvoicePriceVariance_Acct=" + rs.getInt("P_InvoicePriceVariance_Acct") + ", "
-			           + "P_TradeDiscountRec_Acct=" + rs.getInt("P_TradeDiscountRec_Acct") + ", "
-			           + "P_TradeDiscountGrant_Acct=" + rs.getInt("P_TradeDiscountGrant_Acct") + ", "
-			           + "Updated=CURRENT_TIMESTAMP, "
-			           + "UpdatedBy=0 "
-			           + "WHERE M_Product_Category_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-			           + "AND EXISTS (SELECT * FROM M_Product_Category p " 
-			           + "WHERE p.M_Product_Category_ID=M_Product_Category_Acct.M_Product_Category_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				UpdatePO o = new UpdatePO();
+				o.setTablename(X_M_Product_Category_Acct.Table_Name);
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_Revenue_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Revenue_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_Expense_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Expense_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_Asset_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Asset_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_COGS_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_COGS_Acct));				
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_PurchasePriceVariance_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_PurchasePriceVariance_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_InvoicePriceVariance_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InvoicePriceVariance_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_TradeDiscountRec_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountRec_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_TradeDiscountGrant_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountGrant_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_InventoryClearing_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InventoryClearing_Acct));
+				o.setField(X_M_Product_Category_Acct.COLUMNNAME_P_CostAdjustment_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_CostAdjustment_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				String where = String.format("M_Product_Category_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM M_Product_Category p WHERE p.M_Product_Category_ID=M_Product_Category_Acct.M_Product_Category_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID)); 
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new Product Category
-				sqlins = "INSERT INTO M_Product_Category_Acct "
-					   + "(M_Product_Category_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "P_Revenue_Acct, P_Expense_Acct, P_Asset_Acct, P_CoGs_Acct, " 
-					   + "P_PurchasePriceVariance_Acct, P_InvoicePriceVariance_Acct, "
-					   + "P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct) "
-					   + "SELECT p.M_Product_Category_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "p.AD_Client_ID, p.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + rs.getInt("P_Revenue_Acct") + ", " + rs.getInt("P_Expense_Acct") + ", " 
-					   + rs.getInt("P_Asset_Acct") + ", " + rs.getInt("P_CoGs_Acct") + ", " 
-					   + rs.getInt("P_PurchasePriceVariance_Acct") + ", " + rs.getInt("P_InvoicePriceVariance_Acct") + ", "
-					   + rs.getInt("P_TradeDiscountRec_Acct") + ", " + rs.getInt("P_TradeDiscountGrant_Acct") + " "
-					   + "FROM	M_Product_Category p "
-					   + "WHERE AD_Client_ID=" + rs.getInt("AD_Client_ID") + " "
-					   + "AND NOT EXISTS (SELECT * FROM M_Product_Category_Acct pa " 
-					   + "WHERE pa.M_Product_Category_ID=p.M_Product_Category_ID " 
-					   + "AND pa.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				SelectPO s = new SelectPO();
+				s.setTablename(X_M_Product_Category.Table_Name);
+				s.setAlias("p");
+				s.setField(X_M_Product_Category.COLUMNNAME_M_Product_Category_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Revenue_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Expense_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Asset_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_COGS_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_PurchasePriceVariance_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InvoicePriceVariance_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountRec_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountGrant_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InventoryClearing_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_CostAdjustment_Acct));
+
+				where = String.format("AD_Client_ID=%s  AND NOT EXISTS (SELECT * FROM M_Product_Category_Acct pa WHERE pa.M_Product_Category_ID=p.M_Product_Category_ID AND pa.C_AcctSchema_ID=%s)", rs.getInt(Constants.COLUMNNAME_AD_Client_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID)); 
+				s.setWhere(where);				
+				o = new UpdatePO();
+				o.setTablename(X_M_Product_Category_Acct.Table_Name);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_M_Product_Category_ID);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_Revenue_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_Expense_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_Asset_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_COGS_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_PurchasePriceVariance_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_InvoicePriceVariance_Acct);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_TradeDiscountRec_Acct); 
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_TradeDiscountGrant_Acct);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_InventoryClearing_Acct);
+				o.setFieldInsert(X_M_Product_Category_Acct.COLUMNNAME_P_CostAdjustment_Acct);
+
+				cnti = o.insertfromSelect(s, get_TrxName());								
 				toti += cnti;
 				log.info("Product Category = " + cntu + " / " + cnti);
-
+				// Product
+				o = new UpdatePO();
+				o.setTablename(X_M_Product_Acct.Table_Name);
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_Revenue_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Revenue_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_Expense_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Expense_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_Asset_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Asset_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_COGS_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_COGS_Acct));				
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_PurchasePriceVariance_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_PurchasePriceVariance_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_InvoicePriceVariance_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InvoicePriceVariance_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_TradeDiscountRec_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountRec_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_TradeDiscountGrant_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountGrant_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_InventoryClearing_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InventoryClearing_Acct));
+				o.setField(X_M_Product_Acct.COLUMNNAME_P_CostAdjustment_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_CostAdjustment_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("M_Product_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM M_Product p WHERE p.M_Product_ID=M_Product_Acct.M_Product_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID)); 
+				cntu = o.update(where, get_TrxName());
+				totu += cntu;
+				s = new SelectPO();
+				s.setTablename(X_M_Product.Table_Name);
+				s.setAlias("p");
+				s.setField(X_M_Product.COLUMNNAME_M_Product_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Revenue_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Expense_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_Asset_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_COGS_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_PurchasePriceVariance_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InvoicePriceVariance_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountRec_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountGrant_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_InventoryClearing_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_P_CostAdjustment_Acct));
+				
+				where = String.format("AD_Client_ID=%s  AND NOT EXISTS (SELECT * FROM M_Product_Acct pa WHERE pa.M_Product_ID=p.M_Product_ID AND pa.C_AcctSchema_ID=%s)", rs.getInt(Constants.COLUMNNAME_AD_Client_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID)); 
+				s.setWhere(where);				
+				o = new UpdatePO();
+				o.setTablename(X_M_Product_Acct.Table_Name);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_M_Product_ID);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_Revenue_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_Expense_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_Asset_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_COGS_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_PurchasePriceVariance_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_InvoicePriceVariance_Acct);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_TradeDiscountRec_Acct); 
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_TradeDiscountGrant_Acct);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_InventoryClearing_Acct);
+				o.setFieldInsert(X_M_Product_Acct.COLUMNNAME_P_CostAdjustment_Acct);				
+				cnti = o.insertfromSelect(s, get_TrxName());								
+				toti += cnti;
+				log.info("Product Category = " + cntu + " / " + cnti);
+				
 				// Business Partner Group
-				sqlupd = "UPDATE C_BP_Group_Acct "
-					   + "SET C_Receivable_Acct=" + rs.getInt("C_Receivable_Acct") + ", "
-					   + "C_PrePayment_Acct=" + rs.getInt("C_PrePayment_Acct") + ", " 
-					   + "V_Liability_Acct=" + rs.getInt("V_Liability_Acct") + ", " 
-					   + "V_Liability_Services_Acct=" + rs.getInt("V_Liability_Services_Acct") + ", " 
-					   + "V_PrePayment_Acct=" + rs.getInt("V_PrePayment_Acct") + ", "
-					   + "PayDiscount_Exp_Acct=" + rs.getInt("PayDiscount_Exp_Acct") + ", " 
-					   + "PayDiscount_Rev_Acct=" + rs.getInt("PayDiscount_Rev_Acct") + ", " 
-					   + "WriteOffGain_Acct=" + rs.getInt("WriteOffGain_Acct") + ", "
-					   + "WriteOffLoss_Acct=" + rs.getInt("WriteOffLoss_Acct") + ", "
-					   + "NotInvoicedReceipts_Acct=" + rs.getInt("NotInvoicedReceipts_Acct") + ", " 
-					   + "UnEarnedRevenue_Acct=" + rs.getInt("UnEarnedRevenue_Acct") + ", " 
-					   + "NotInvoicedRevenue_Acct=" + rs.getInt("NotInvoicedRevenue_Acct") + ", " 
-					   + "NotInvoicedReceivables_Acct=" + rs.getInt("NotInvoicedReceivables_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_BP_Group_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_BP_Group_Acct x "
-					   + "WHERE x.C_BP_Group_ID=C_BP_Group_Acct.C_BP_Group_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_BP_Group_Acct.Table_Name);
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_C_Receivable_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_Receivable_Acct));				
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_C_Prepayment_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_Prepayment_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_V_Liability_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_V_Liability_Services_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Services_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_V_Prepayment_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Prepayment_Acct));
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_PayDiscount_Exp_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Exp_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_PayDiscount_Rev_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Rev_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_WriteOffGain_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WriteOffGain_Acct));
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_WriteOffLoss_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WriteOffLoss_Acct));
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedReceipts_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceipts_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_UnEarnedRevenue_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnEarnedRevenue_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedRevenue_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedRevenue_Acct)); 
+				o.setField(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedReceivables_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceivables_Acct));
+				where = String.format("C_BP_Group_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_BP_Group_Acct x WHERE x.C_BP_Group_ID=C_BP_Group_Acct.C_BP_Group_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new
-				sqlins = "INSERT INTO C_BP_Group_Acct "
-					   + "(C_BP_Group_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "C_Receivable_Acct, C_PrePayment_Acct, " 
-					   + "V_Liability_Acct, V_Liability_Services_Acct, V_PrePayment_Acct, " 
-					   + "PayDiscount_Exp_Acct, PayDiscount_Rev_Acct, WriteOffGain_Acct, "
-					   + "WriteOffLoss_Acct, NotInvoicedReceipts_Acct, UnEarnedRevenue_Acct, " 
-					   + "NotInvoicedRevenue_Acct, NotInvoicedReceivables_Acct) "
-					   + "SELECT x.C_BP_Group_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + rs.getInt("C_Receivable_Acct") + ", " + rs.getInt("C_PrePayment_Acct") + ", " 
-					   + rs.getInt("V_Liability_Acct") + ", " + rs.getInt("V_Liability_Services_Acct") + ", " 
-					   + rs.getInt("V_PrePayment_Acct") + ", " 
-					   + rs.getInt("PayDiscount_Exp_Acct") + ", " + rs.getInt("PayDiscount_Rev_Acct") + ", " 
-					   + rs.getInt("WriteOffGain_Acct") + ", " + rs.getInt("WriteOffLoss_Acct") + ", " 
-					   + rs.getInt("NotInvoicedReceipts_Acct") + ", " + rs.getInt("UnEarnedRevenue_Acct") + ", " 
-					   + rs.getInt("NotInvoicedRevenue_Acct") + ", " + rs.getInt("NotInvoicedReceivables_Acct") + " "
-					   + "FROM	C_BP_Group x "
-					   + "WHERE AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_BP_Group_Acct a " 
-					   + "WHERE a.C_BP_Group_ID=x.C_BP_Group_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+
+				s = new SelectPO();
+				s.setAlias("x");
+				s.setTablename(X_C_BP_Group.Table_Name);
+				s.setField(X_C_BP_Group.COLUMNNAME_C_BP_Group_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_Receivable_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_Prepayment_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Services_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_V_Prepayment_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Exp_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Rev_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WriteOffGain_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WriteOffLoss_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceipts_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnEarnedRevenue_Acct)); 
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedRevenue_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceivables_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_BP_Group_Acct a WHERE a.C_BP_Group_ID=x.C_BP_Group_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_BP_Group_Acct.Table_Name);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_C_BP_Group_ID);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_C_Receivable_Acct);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_C_Prepayment_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_V_Liability_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_V_Liability_Services_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_V_Prepayment_Acct);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_PayDiscount_Exp_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_PayDiscount_Rev_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_WriteOffGain_Acct);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_WriteOffLoss_Acct);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedReceipts_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_UnEarnedRevenue_Acct); 
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedRevenue_Acct);
+				o.setFieldInsert(X_C_BP_Group_Acct.COLUMNNAME_NotInvoicedReceivables_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());						   
 				toti += cnti;
 				log.info("Business Group = " + cntu + " / " + cnti);
 
 				// Business Partner Employee
-				sqlupd = "UPDATE C_BP_Employee_Acct "
-					   + "SET E_Expense_Acct=" + rs.getInt("E_Expense_Acct") + ", "
-					   + "E_PrePayment_Acct=" + rs.getInt("E_PrePayment_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_BP_Employee_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_BP_Employee_Acct x "
-					   + "WHERE x.C_BPartner_ID=C_BP_Employee_Acct.C_BPartner_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_BP_Employee_Acct.Table_Name);
+				o.setField(X_C_BP_Employee_Acct.COLUMNNAME_E_Expense_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_E_Expense_Acct));
+				o.setField(X_C_BP_Employee_Acct.COLUMNNAME_E_Prepayment_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_E_Prepayment_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_BP_Employee_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_BP_Employee_Acct x WHERE x.C_BPartner_ID=C_BP_Employee_Acct.C_BPartner_ID)",rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));						
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
+
 				// Insert new
-				sqlins = "INSERT INTO C_BP_Employee_Acct "
-					   + "(C_BPartner_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "E_Expense_Acct, E_PrePayment_Acct) "
-					   + "SELECT x.C_BPartner_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("E_Expense_Acct") + ", " + rs.getInt("E_PrePayment_Acct") + " "
-					   + "FROM	C_BPartner x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_BP_Employee_Acct a " 
-					   + "WHERE a.C_BPartner_ID=x.C_BPartner_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_BPartner.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_BPartner.COLUMNNAME_C_BPartner_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_E_Expense_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_E_Prepayment_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_BP_Employee_Acct a WHERE a.C_BPartner_ID=x.C_BPartner_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_BP_Employee_Acct.Table_Name);
+				o.setFieldInsert(X_C_BP_Employee_Acct.COLUMNNAME_C_BPartner_ID);
+				o.setFieldInsert(X_C_BP_Employee_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_BP_Employee_Acct.COLUMNNAME_E_Expense_Acct);
+				o.setFieldInsert(X_C_BP_Employee_Acct.COLUMNNAME_E_Prepayment_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Employees = " + cntu + " / " + cnti);
 
 				// Warehouse
-				sqlupd = "UPDATE M_Warehouse_Acct "
-					   + "SET W_Inventory_Acct=" + rs.getInt("W_Inventory_Acct") + ", "
-					   + "W_Differences_Acct=" + rs.getInt("W_Differences_Acct") + ", "
-					   + "W_Revaluation_Acct=" + rs.getInt("W_Revaluation_Acct") + ", "
-					   + "W_InvActualAdjust_Acct=" + rs.getInt("W_InvActualAdjust_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE M_Warehouse_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM M_Warehouse_Acct x "
-					   + "WHERE x.M_Warehouse_ID=M_Warehouse_Acct.M_Warehouse_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_M_Warehouse_Acct.Table_Name);
+				o.setField(X_M_Warehouse_Acct.COLUMNNAME_W_Inventory_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Inventory_Acct));
+				o.setField(X_M_Warehouse_Acct.COLUMNNAME_W_Differences_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Differences_Acct));
+				o.setField(X_M_Warehouse_Acct.COLUMNNAME_W_Revaluation_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Revaluation_Acct));
+				o.setField(X_M_Warehouse_Acct.COLUMNNAME_W_InvActualAdjust_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_InvActualAdjust_Acct));
+				where = String.format("M_Warehouse_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM M_Warehouse_Acct x WHERE x.M_Warehouse_ID=M_Warehouse_Acct.M_Warehouse_ID)",rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
+
 				// Insert new
-				sqlins = "INSERT INTO M_Warehouse_Acct "
-					   + "(M_Warehouse_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "W_Inventory_Acct, W_Differences_Acct, W_Revaluation_Acct, W_InvActualAdjust_Acct) "
-					   + "SELECT x.M_Warehouse_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("W_Inventory_Acct") + ", " + rs.getInt("W_Differences_Acct") + ", " + rs.getInt("W_Revaluation_Acct") + ", " + rs.getInt("W_InvActualAdjust_Acct") + " "
-					   + "FROM	M_Warehouse x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " "
-					   + "AND NOT EXISTS (SELECT * FROM M_Warehouse_Acct a " 
-					   + "WHERE a.M_Warehouse_ID=x.M_Warehouse_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_M_Warehouse.Table_Name);
+				s.setAlias("x");
+				s.setField(X_M_Warehouse.COLUMNNAME_M_Warehouse_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Inventory_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Differences_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_Revaluation_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_W_InvActualAdjust_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM M_Warehouse_Acct a WHERE a.M_Warehouse_ID=x.M_Warehouse_ID AND a.C_AcctSchema_ID=%s)", rs.getInt("AD_Client_ID"),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);				
+				o = new UpdatePO();
+				o.setTablename(X_M_Warehouse_Acct.Table_Name);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_M_Warehouse_ID);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_W_Inventory_Acct);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_W_Differences_Acct);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_W_Revaluation_Acct);
+				o.setFieldInsert(X_M_Warehouse_Acct.COLUMNNAME_W_InvActualAdjust_Acct);				
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Warehouse = " + cntu + " / " + cnti);
 
-				// Project
-				sqlupd = "UPDATE C_Project_Acct "
-					   + "SET PJ_Asset_Acct=" + rs.getInt("PJ_Asset_Acct") + ", " 
-					   + "PJ_WIP_Acct=" + rs.getInt("PJ_Asset_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_Project_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_Project_Acct x "
-					   + "WHERE x.C_Project_ID=C_Project_Acct.C_Project_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				// Currency
+				o = new UpdatePO();
+				o.setTablename(X_C_Currency_Acct.Table_Name);
+				o.setField(X_C_Currency_Acct.COLUMNNAME_UnrealizedGain_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedGain_Acct));
+				o.setField(X_C_Currency_Acct.COLUMNNAME_UnrealizedLoss_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedLoss_Acct));
+				o.setField(X_C_Currency_Acct.COLUMNNAME_RealizedGain_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_RealizedGain_Acct));
+				o.setField(X_C_Currency_Acct.COLUMNNAME_RealizedLoss_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_RealizedLoss_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Currency_ID = (select c_currency_id from c_acctschema where c_acctschema_id = %s) AND EXISTS (SELECT * FROM C_Currency_Acct x WHERE x.C_Currency_ID=C_Currency_Acct.C_Currency_ID)",rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
+
 				// Insert new
-				sqlins = "INSERT INTO C_Project_Acct "
-					   + "(C_Project_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "PJ_Asset_Acct, PJ_WIP_Acct) "
-					   + "SELECT x.C_Project_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("PJ_Asset_Acct") + ", " + rs.getInt("PJ_WIP_Acct") + " "
-					   + "FROM	C_Project x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_Project_Acct a " 
-					   + "WHERE a.C_Project_ID=x.C_Project_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_Currency.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_Currency.COLUMNNAME_C_Currency_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedGain_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedLoss_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_RealizedGain_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_RealizedLoss_Acct));
+				where = String.format("C_Currency_ID = (select c_currency_id from c_acctschema where c_acctschema_id = %s) AND NOT EXISTS (SELECT * FROM C_Currency_Acct a WHERE a.C_Currency_ID=x.C_Currency_ID AND a.C_AcctSchema_ID=%s)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_Currency_Acct.Table_Name);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_C_Currency_ID);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_UnrealizedGain_Acct);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_UnrealizedLoss_Acct);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_RealizedGain_Acct);
+				o.setFieldInsert(X_C_Currency_Acct.COLUMNNAME_RealizedLoss_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());				
+				toti += cnti;
+				log.info("Currency = " + cntu + " / " + cnti);
+				
+				// Project
+				o = new UpdatePO();
+				o.setTablename(X_C_Project_Acct.Table_Name);
+				o.setField(X_C_Project_Acct.COLUMNNAME_PJ_Asset_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PJ_Asset_Acct));
+				o.setField(X_C_Project_Acct.COLUMNNAME_PJ_WIP_Acct,  rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PJ_Asset_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Project_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_Project_Acct x WHERE x.C_Project_ID=C_Project_Acct.C_Project_ID)",rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
+				totu += cntu;
+								
+				// Insert new
+				s = new SelectPO();
+				s.setTablename(X_C_Project.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_Project.COLUMNNAME_C_Project_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PJ_Asset_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_PJ_WIP_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_Project_Acct a WHERE a.C_Project_ID=x.C_Project_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_Project_Acct.Table_Name);
+				o.setFieldInsert(X_C_Project_Acct.COLUMNNAME_C_Project_ID);
+				o.setFieldInsert(X_C_Project_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_Project_Acct.COLUMNNAME_PJ_Asset_Acct);
+				o.setFieldInsert(X_C_Project_Acct.COLUMNNAME_PJ_WIP_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());				
 				toti += cnti;
 				log.info("Project = " + cntu + " / " + cnti);
 
 				// Tax
-				sqlupd = "UPDATE C_Tax_Acct "
-			           + "SET T_Due_Acct=" + rs.getInt("T_Due_Acct") + ", "
-			           + "T_Liability_Acct=" + rs.getInt("T_Liability_Acct") + ", "
-			           + "T_Credit_Acct=" + rs.getInt("T_Credit_Acct") + ", "
-			           + "T_Receivables_Acct=" + rs.getInt("T_Receivables_Acct") + ", "
-			           + "T_Expense_Acct=" + rs.getInt("T_Expense_Acct") + ", "
-			           + "Updated=CURRENT_TIMESTAMP, "
-			           + "UpdatedBy=0 "
-			           + "WHERE C_Tax_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-			           + "AND EXISTS (SELECT * FROM C_Tax_Acct x "
-			           + "WHERE x.C_Tax_ID=C_Tax_Acct.C_Tax_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_Tax_Acct.Table_Name);
+				o.setField(X_C_Tax_Acct.COLUMNNAME_T_Due_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Due_Acct));
+				o.setField(X_C_Tax_Acct.COLUMNNAME_T_Liability_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Liability_Acct)); 
+				o.setField(X_C_Tax_Acct.COLUMNNAME_T_Credit_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Credit_Acct));
+				o.setField(X_C_Tax_Acct.COLUMNNAME_T_Receivables_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Receivables_Acct));
+				o.setField(X_C_Tax_Acct.COLUMNNAME_T_Expense_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Expense_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Tax_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_Tax_Acct x WHERE x.C_Tax_ID=C_Tax_Acct.C_Tax_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
+
 				// Insert new
-				sqlins = "INSERT INTO C_Tax_Acct "
-					   + "(C_Tax_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "T_Due_Acct, T_Liability_Acct, T_Credit_Acct, T_Receivables_Acct, T_Expense_Acct) "
-					   + "SELECT x.C_Tax_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("T_Due_Acct") + ", " + rs.getInt("T_Liability_Acct") + ", " + rs.getInt("T_Credit_Acct") + ", " + rs.getInt("T_Receivables_Acct") + ", " + rs.getInt("T_Expense_Acct") + " "
-					   + "FROM	C_Tax x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_Tax_Acct a  "
-					   + "WHERE a.C_Tax_ID=x.C_Tax_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_Tax.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_Tax.COLUMNNAME_C_Tax_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Due_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Liability_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Credit_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Receivables_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_T_Expense_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_Tax_Acct a WHERE a.C_Tax_ID=x.C_Tax_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_Tax_Acct.Table_Name);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_C_Tax_ID);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_T_Due_Acct);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_T_Liability_Acct);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_T_Credit_Acct);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_T_Receivables_Acct);
+				o.setFieldInsert(X_C_Tax_Acct.COLUMNNAME_T_Expense_Acct); 
+				cnti = o.insertfromSelect(s, get_TrxName());			
 				toti += cnti;
 				log.info("Tax = " + cntu + " / " + cnti);
 
 				// BankAccount
-				sqlupd = "UPDATE C_BankAccount_Acct "
-					   + "SET B_InTransit_Acct=" + rs.getInt("B_InTransit_Acct") + ", " 
-					   + "B_Asset_Acct=" + rs.getInt("B_Asset_Acct") + ", " 
-					   + "B_Expense_Acct=" + rs.getInt("B_Expense_Acct") + ", " 
-					   + "B_InterestRev_Acct=" + rs.getInt("B_InterestRev_Acct") + ", " 
-					   + "B_InterestExp_Acct=" + rs.getInt("B_InterestExp_Acct") + ", "
-					   + "B_UnIdentified_Acct=" + rs.getInt("B_UnIdentified_Acct") + ",  "
-					   + "B_UnAllocatedCash_Acct=" + rs.getInt("B_UnAllocatedCash_Acct") + ", " 
-					   + "B_PaymentSelect_Acct=" + rs.getInt("B_PaymentSelect_Acct") + ", " 
-					   + "B_SettlementGain_Acct=" + rs.getInt("B_SettlementGain_Acct") + ", "
-					   + "B_SettlementLoss_Acct=" + rs.getInt("B_SettlementLoss_Acct") + ", "
-					   + "B_RevaluationGain_Acct=" + rs.getInt("B_RevaluationGain_Acct") + ",  "
-					   + "B_RevaluationLoss_Acct=" + rs.getInt("B_RevaluationLoss_Acct") + ", "
-					   + "BOE_Confirm_Acct=" + rs.getInt("BOE_Confirm_Acct") + ", "
-					   + "BOE_wr_Acct=" + rs.getInt("BOE_wr_Acct") + ", "
-					   + "BOE_rv_Acct=" + rs.getInt("BOE_rv_Acct") + ", "
-					   + "BOE_ds_Acct=" + rs.getInt("BOE_ds_Acct") + ", "
-					   + "BOE_pd_Acct=" + rs.getInt("BOE_pd_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_BankAccount_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_BankAccount_Acct x "
-					   + "WHERE x.C_BankAccount_ID=C_BankAccount_Acct.C_BankAccount_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_BankAccount_Acct.Table_Name);
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_InTransit_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InTransit_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_Asset_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Asset_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_Expense_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Expense_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_InterestRev_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InterestRev_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_InterestExp_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InterestExp_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_Unidentified_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Unidentified_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_UnallocatedCash_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_UnallocatedCash_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_PaymentSelect_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_PaymentSelect_Acct)); 
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_SettlementGain_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementGain_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_SettlementLoss_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementLoss_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_RevaluationGain_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationGain_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_B_RevaluationLoss_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationLoss_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_BOE_Confirm_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Confirm_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_BOE_Warranty_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Warranty_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_BOE_Receivables_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Receivables_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_BOE_Discount_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Discount_Acct));
+				o.setField(X_C_BankAccount_Acct.COLUMNNAME_BOE_Protested_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Protested_Acct));
+				where = String.format("C_BankAccount_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_BankAccount_Acct x WHERE x.C_BankAccount_ID=C_BankAccount_Acct.C_BankAccount_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new
-				sqlins = "INSERT INTO C_BankAccount_Acct "
-					   + "(C_BankAccount_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "B_InTransit_Acct, B_Asset_Acct, B_Expense_Acct, B_InterestRev_Acct, B_InterestExp_Acct, "
-					   + "B_UnIdentified_Acct, B_UnAllocatedCash_Acct, B_PaymentSelect_Acct, "
-					   + "B_SettlementGain_Acct, B_SettlementLoss_Acct, "
-					   + "B_RevaluationGain_Acct, B_RevaluationLoss_Acct, BOE_Confirm_Acct, BOE_wr_Acct, BOE_rv_Acct, BOE_ds_Acct, BOE_pd_Acct) "
-					   + "SELECT x.C_BankAccount_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("B_InTransit_Acct") + ", " + rs.getInt("B_Asset_Acct") + ", " + rs.getInt("B_Expense_Acct") + ", " + rs.getInt("B_InterestRev_Acct") + ", " + rs.getInt("B_InterestExp_Acct") + ", "
-					   + "" + rs.getInt("B_UnIdentified_Acct") + ", " + rs.getInt("B_UnAllocatedCash_Acct") + ", " + rs.getInt("B_PaymentSelect_Acct") + ", "
-					   + "" + rs.getInt("B_SettlementGain_Acct") + ", " + rs.getInt("B_SettlementLoss_Acct") + ", "
-					   + "" + rs.getInt("B_RevaluationGain_Acct") + ", " + rs.getInt("B_RevaluationLoss_Acct") + ", " + rs.getInt("BOE_Confirm_Acct") + " "
-					   + "" + rs.getInt("BOE_wr_Acct") + ", " + rs.getInt("BOE_rv_Acct") + ", " + rs.getInt("BOE_ds_Acct") + ", " + rs.getInt("BOE_pd_Acct") + " "
-					   + "FROM	C_BankAccount x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_BankAccount_Acct a " 
-					   + "WHERE a.C_BankAccount_ID=x.C_BankAccount_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_BankAccount.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_BankAccount.COLUMNNAME_C_BankAccount_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InTransit_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Asset_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Expense_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InterestRev_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_InterestExp_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_Unidentified_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_UnallocatedCash_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_PaymentSelect_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementGain_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementLoss_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationGain_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationLoss_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Confirm_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Warranty_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Receivables_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Discount_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Protested_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_BankAccount_Acct a WHERE a.C_BankAccount_ID=x.C_BankAccount_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_BankAccount_Acct.Table_Name);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_C_BankAccount_ID);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_InTransit_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_Asset_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_Expense_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_InterestRev_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_InterestExp_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_Unidentified_Acct);				
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_UnallocatedCash_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_PaymentSelect_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_SettlementGain_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_SettlementLoss_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_RevaluationGain_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_B_RevaluationLoss_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_BOE_Confirm_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_BOE_Warranty_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_BOE_Receivables_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_BOE_Discount_Acct);
+				o.setFieldInsert(X_C_BankAccount_Acct.COLUMNNAME_BOE_Protested_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Bank Account = " + cntu + " / " + cnti);
 
 				// Withholding
-				sqlupd = "UPDATE C_Withholding_Acct "
-					   + "SET Withholding_Acct=" + rs.getInt("Withholding_Acct") + ", "
-					   + "WithholdingApply_Acct=" + rs.getInt("WithholdingApply_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_Withholding_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_Withholding_Acct x "
-					   + "WHERE x.C_Withholding_ID=C_Withholding_Acct.C_Withholding_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_Withholding_Acct.Table_Name);
+				o.setField(X_C_Withholding_Acct.COLUMNNAME_Withholding_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Withholding_Acct));
+				o.setField(X_C_Withholding_Acct.COLUMNNAME_WithholdingApply_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WithholdingApply_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Withholding_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_Withholding_Acct x WHERE x.C_Withholding_ID=C_Withholding_Acct.C_Withholding_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new
-				sqlins = "INSERT INTO C_Withholding_Acct "
-					   + "(C_Withholding_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "Withholding_Acct, WithholdingApply_Acct) "
-					   + "SELECT x.C_Withholding_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("Withholding_Acct") + ", " + rs.getInt("WithholdingApply_Acct")+" "
-					   + "FROM	C_Withholding x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " "
-					   + "AND NOT EXISTS (SELECT * FROM C_Withholding_Acct a " 
-					   + "WHERE a.C_Withholding_ID=x.C_Withholding_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_Withholding.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_Withholding.COLUMNNAME_C_Withholding_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Withholding_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_WithholdingApply_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_Withholding_Acct a WHERE a.C_Withholding_ID=x.C_Withholding_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID),rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_Withholding_Acct.Table_Name);
+				o.setFieldInsert(X_C_Withholding_Acct.COLUMNNAME_C_Withholding_ID);
+				o.setFieldInsert(X_C_Withholding_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_Withholding_Acct.COLUMNNAME_Withholding_Acct);
+				o.setFieldInsert(X_C_Withholding_Acct.COLUMNNAME_WithholdingApply_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Withholding = " + cntu + " / " + cnti);
 
 				// Charge
-				sqlupd = "UPDATE C_Charge_Acct "
-					   + "SET Ch_Expense_Acct=" + rs.getInt("Ch_Expense_Acct") + ", "
-					   + "Ch_Revenue_Acct=" + rs.getInt("Ch_Revenue_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_Charge_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_Charge_Acct x "
-					   + "WHERE x.C_Charge_ID=C_Charge_Acct.C_Charge_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_Charge_Acct.Table_Name);
+				o.setField(X_C_Charge_Acct.COLUMNNAME_Ch_Expense_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Ch_Expense_Acct));
+				o.setField(X_C_Charge_Acct.COLUMNNAME_Ch_Revenue_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Ch_Revenue_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Charge_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_Charge_Acct x WHERE x.C_Charge_ID=C_Charge_Acct.C_Charge_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new
-				sqlins = "INSERT INTO C_Charge_Acct "
-					   + "(C_Charge_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "Ch_Expense_Acct, Ch_Revenue_Acct) "
-					   + "SELECT x.C_Charge_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("Ch_Expense_Acct") + ", " + rs.getInt("Ch_Revenue_Acct") + " "
-					   + "FROM	C_Charge x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " "
-					   + "AND NOT EXISTS (SELECT * FROM C_Charge_Acct a " 
-					   + "WHERE a.C_Charge_ID=x.C_Charge_ID " 
-					   + "AND a.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_Charge.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_Charge.COLUMNNAME_C_Charge_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Ch_Expense_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_Ch_Revenue_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_Charge_Acct a WHERE a.C_Charge_ID=x.C_Charge_ID AND a.C_AcctSchema_ID=%s)",rs.getInt(Constants.COLUMNNAME_AD_Client_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_Charge_Acct.Table_Name);
+				o.setFieldInsert(X_C_Charge_Acct.COLUMNNAME_C_Charge_ID);
+				o.setFieldInsert(X_C_Charge_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_Charge_Acct.COLUMNNAME_Ch_Expense_Acct);
+				o.setFieldInsert(X_C_Charge_Acct.COLUMNNAME_Ch_Revenue_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Charge = " + cntu + " / " + cnti);
 
 				// Cashbook
-				sqlupd = "UPDATE C_Cashbook_Acct "
-					   + "SET CB_Asset_Acct=" + rs.getInt("CB_Asset_Acct") + ", "
-					   + "CB_Differences_Acct=" + rs.getInt("CB_Differences_Acct") + ", "
-					   + "CB_CashTransfer_Acct=" + rs.getInt("CB_CashTransfer_Acct") + ", "
-					   + "CB_Expense_Acct=" + rs.getInt("CB_Expense_Acct") + ", "
-					   + "CB_Receipt_Acct=" + rs.getInt("CB_Receipt_Acct") + ", "
-					   + "Updated=CURRENT_TIMESTAMP, "
-					   + "UpdatedBy=0 "
-					   + "WHERE C_Cashbook_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + " " 
-					   + "AND EXISTS (SELECT * FROM C_Cashbook_Acct x "
-					   + "WHERE x.C_Cashbook_ID=C_Cashbook_Acct.C_Cashbook_ID)";
-				cntu = DB.executeUpdate(sqlupd, get_TrxName());
+				o = new UpdatePO();
+				o.setTablename(X_C_CashBook_Acct.Table_Name);
+				o.setField(X_C_CashBook_Acct.COLUMNNAME_CB_Asset_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Asset_Acct));
+				o.setField(X_C_CashBook_Acct.COLUMNNAME_CB_Differences_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Differences_Acct)); 
+				o.setField(X_C_CashBook_Acct.COLUMNNAME_CB_CashTransfer_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_CashTransfer_Acct));
+				o.setField(X_C_CashBook_Acct.COLUMNNAME_CB_Expense_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Expense_Acct));
+				o.setField(X_C_CashBook_Acct.COLUMNNAME_CB_Receipt_Acct, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Receipt_Acct));
+				o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
+				o.setField(Constants.COLUMNNAME_UpdatedBy, 0);
+				where = String.format("C_Cashbook_Acct.C_AcctSchema_ID=%s AND EXISTS (SELECT * FROM C_Cashbook_Acct x WHERE x.C_Cashbook_ID=C_Cashbook_Acct.C_Cashbook_ID)", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				cntu = o.update(where, get_TrxName());
 				totu += cntu;
 				// Insert new
-				sqlins = "INSERT INTO C_Cashbook_Acct "
-					   + "(C_Cashbook_ID, C_AcctSchema_ID, "
-					   + "AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy, "
-					   + "CB_Asset_Acct, CB_Differences_Acct, CB_CashTransfer_Acct, "
-					   + "CB_Expense_Acct, CB_Receipt_Acct) "
-					   + "SELECT x.C_Cashbook_ID, " + rs.getInt("C_AcctSchema_ID") + ", "
-					   + "x.AD_Client_ID, x.AD_Org_ID, 'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0, "
-					   + "" + rs.getInt("CB_Asset_Acct") + ", " + rs.getInt("CB_Differences_Acct") + ", " + rs.getInt("CB_CashTransfer_Acct") + ", "
-					   + "" + rs.getInt("CB_Expense_Acct") + ", " + rs.getInt("CB_Receipt_Acct") + " "
-					   + "FROM	C_Cashbook x "
-					   + "WHERE 	AD_Client_ID=" + rs.getInt("AD_Client_ID") + " " 
-					   + "AND NOT EXISTS (SELECT * FROM C_Cashbook_Acct a " 
-					   + "WHERE C_Cashbook_Acct.C_Cashbook_ID=x.C_Cashbook_ID " 
-					   + "AND C_Cashbook_Acct.C_AcctSchema_ID=" + rs.getInt("C_AcctSchema_ID") + ")";
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				s = new SelectPO();
+				s.setTablename(X_C_CashBook.Table_Name);
+				s.setAlias("x");
+				s.setField(X_C_CashBook.COLUMNNAME_C_CashBook_ID);
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setField(Constants.COLUMNNAME_AD_Client_ID);
+				s.setField(Constants.COLUMNNAME_AD_Org_ID);
+				s.setFieldExpr(Constants.YES);
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setField("CURRENT_TIMESTAMP");
+				s.setField("0");
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Asset_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Differences_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_CashTransfer_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Expense_Acct));
+				s.setFieldExpr(rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_CB_Receipt_Acct));
+				where = String.format("AD_Client_ID=%s AND NOT EXISTS (SELECT * FROM C_Cashbook_Acct a WHERE a.C_Cashbook_ID=x.C_Cashbook_ID AND a.C_AcctSchema_ID=%s)", rs.getInt(Constants.COLUMNNAME_AD_Client_ID), rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+				s.setWhere(where);
+				o = new UpdatePO();
+				o.setTablename(X_C_CashBook_Acct.Table_Name);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_C_CashBook_ID);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_C_AcctSchema_ID);
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Client_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_AD_Org_ID); 
+				o.setFieldInsert(Constants.COLUMNNAME_IsActive); 
+				o.setFieldInsert(Constants.COLUMNNAME_Created); 
+				o.setFieldInsert(Constants.COLUMNNAME_CreatedBy); 
+				o.setFieldInsert(Constants.COLUMNNAME_Updated); 
+				o.setFieldInsert(Constants.COLUMNNAME_UpdatedBy);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_CB_Asset_Acct);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_CB_Differences_Acct);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_CB_CashTransfer_Acct);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_CB_Expense_Acct);
+				o.setFieldInsert(X_C_CashBook_Acct.COLUMNNAME_CB_Receipt_Acct);
+				cnti = o.insertfromSelect(s, get_TrxName());
 				toti += cnti;
 				log.info("Cashbook = " + cntu + " / " + cnti);
-				
-				//	Update existing Bill of Exchange
-				sqlupd = "UPDATE C_BOE_Acct boe "
-						+ "SET BOE_portfolio_acct=" + rs.getInt("BOE_Portfolio_Acct")
-						+ ", BOE_discount_acct=" + rs.getInt("BOE_Discount_Acct")
-						+ ", BOE_receivables_acct=" + rs.getInt("BOE_Receivables_Acct")
-						+ ", BOE_warranty_acct=" + rs.getInt("BOE_Warranty_Acct")
-						+ ", BOE_protested_acct=" + rs.getInt("BOE_Protested_Acct")
-						+ ", BOE_vendor_acct=" + rs.getInt("BOE_Vendor_Acct")
-						+ ", Updated=CURRENT_TIMESTAMP, UpdatedBy=0 "
-						+ "WHERE boe.C_AcctSchema_ID=" + + rs.getInt("C_AcctSchema_ID");
-				 cntu = DB.executeUpdate(sqlupd, get_TrxName());
-				 totu += cntu;
 
-				sqlins = "INSERT INTO C_BOE_Acct "
-					+ "(C_AcctSchema_ID,"
-					+ " AD_Client_ID, AD_Org_ID, IsActive, Created, CreatedBy, Updated, UpdatedBy,"
-					+ " BOE_portfolio_acct, BOE_discount_acct, BOE_receivables_acct,  BOE_warranty_acct, BOE_protested_acct, BOE_vendor_acct)"
-				//	+ " VALUES "
-					+ " SELECT "
-					+ rs.getInt("C_AcctSchema_ID")+","
-					+ rs.getInt("AD_Client_ID")+","
-					+ rs.getInt("AD_Org_ID")+","
-					+ "'Y', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0,"
-					+ rs.getInt("boe_portfolio_acct")+", "
-					+ rs.getInt("boe_discount_acct")+","
-					+ rs.getInt("boe_receivables_acct")+","
-					+ rs.getInt("boe_warranty_acct")+","
-					+ rs.getInt("boe_protested_acct")+","
-					+ rs.getInt("boe_vendor_acct");
-				cnti = DB.executeUpdate(sqlins, get_TrxName());
+				//	Update existing Bill of Exchange
+				o = new UpdatePO();
+				o.setTablename(X_C_BOE_Acct.Table_Name);
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Portfolio_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Portfolio_Acct));
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Discount_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Discount_Acct));
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Receivables_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Receivables_Acct));
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Warranty_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Warranty_Acct));
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Protested_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Protested_Acct));
+				o.setField(X_C_BOE_Acct.COLUMNNAME_BOE_Vendor_Acct,rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_BOE_Vendor_Acct));
+				cntu = o.update(String.format("C_AcctSchema_ID=%s", rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID)), get_TrxName());
+				totu += cntu;
+
+				if (cntu == 0) {
+					o.setField(X_C_BOE_Acct.COLUMNNAME_C_AcctSchema_ID, rs.getInt(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID));
+					cnti = o.insert(get_TrxName());
+				}								
 				toti += cnti;
 				log.info("Bill of Exchange = " + cntu + " / " + cnti);
 			}
@@ -490,5 +845,5 @@ public class C_AcctSchema_Default_Copy extends SvrProcess
 
 		return "@Created@=" + cnti + ", @Updated@=" + cntu;		
 	}	//	doIt
-	
+
 }	//	C_AcctSchema_Default_Copy

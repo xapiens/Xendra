@@ -58,11 +58,12 @@ public static int Table_ID=MTable.getTable_ID("A_MachinePrinter");
 @XendraTrl(Identifier="6be07074-4a06-4506-89fe-8fc0e38827b2")
 public static String es_PE_TABLE_A_MachinePrinter_Name="Machine Printers";
 
-@XendraTable(Name="Machine Printers",Description="",Help="",TableName="A_MachinePrinter",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="6be07074-4a06-4506-89fe-8fc0e38827b2",
-Synchronized="2017-08-16 11:41:14.0")
+@XendraTable(Name="Machine Printers",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_MachinePrinter",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="6be07074-4a06-4506-89fe-8fc0e38827b2",
+Synchronized="2020-03-03 21:36:14.0")
 /** TableName=A_MachinePrinter */
 public static final String Table_Name="A_MachinePrinter";
 
@@ -120,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c67e7824-bf57-4646-9ea4-c8556077899c",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name A_Machine_ID */
 public static final String COLUMNNAME_A_Machine_ID = "A_Machine_ID";
 /** Set Machine Printers.
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="04426660-2626-45a1-9a18-92d43c2ffe77",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name A_PrinterDriver_ID */
 public static final String COLUMNNAME_A_PrinterDriver_ID = "A_PrinterDriver_ID";
 /** Set DeviceName.
@@ -198,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="74ead767-ab47-4643-ae38-27095842c9ca",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name DeviceName */
 public static final String COLUMNNAME_DeviceName = "DeviceName";
 /** Set Identifier.
@@ -230,7 +231,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6531e9bb-e9c2-4cc2-bfe0-5a66a155c85c",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set QueueName.
@@ -262,7 +263,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54b0a223-6ad5-470a-bf18-2d3089a77afc",
-Synchronized="2017-08-05 16:53:04.0")
+Synchronized="2019-08-30 22:20:55.0")
 /** Column name QueueName */
 public static final String COLUMNNAME_QueueName = "QueueName";
 }

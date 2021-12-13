@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_FolderSpam");
 @XendraTrl(Identifier="6e8e6521-5a80-4804-b32b-993c290be094")
 public static String es_PE_TABLE_E_FolderSpam_Name="E_FolderSpam";
 
-@XendraTable(Name="E_FolderSpam",Description="",Help="",TableName="E_FolderSpam",AccessLevel="6",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.communication",
-Identifier="6e8e6521-5a80-4804-b32b-993c290be094",Synchronized="2017-08-16 11:42:35.0")
+@XendraTable(Name="E_FolderSpam",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="E_FolderSpam",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="6e8e6521-5a80-4804-b32b-993c290be094",
+Synchronized="2020-03-03 21:37:47.0")
 /** TableName=E_FolderSpam */
 public static final String Table_Name="E_FolderSpam";
 
@@ -119,12 +121,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cddb3ddc-ed76-4cdf-af63-bd1cc184cdc8",
-Synchronized="2017-08-05 16:54:32.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
-
-/** E_FolderIncoming_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERINCOMING_ID_AD_Reference_ID=1000055;
 /** Set E_FolderIncoming_ID.
 @param E_FolderIncoming_ID E_FolderIncoming_ID */
 public void setE_FolderIncoming_ID (int E_FolderIncoming_ID)
@@ -152,12 +151,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="145221ff-a228-4c94-97ce-a293cb92ceb4",
-Synchronized="2017-08-05 16:54:32.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name E_FolderIncoming_ID */
 public static final String COLUMNNAME_E_FolderIncoming_ID = "E_FolderIncoming_ID";
-
-/** E_FolderMove_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERMOVE_ID_AD_Reference_ID=1000055;
 /** Set E_FolderMove_ID.
 @param E_FolderMove_ID E_FolderMove_ID */
 public void setE_FolderMove_ID (int E_FolderMove_ID)
@@ -184,7 +180,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a345a66c-07dc-4736-84f4-5a66c2e93f85",Synchronized="2017-08-05 16:54:32.0")
+Identifier="a345a66c-07dc-4736-84f4-5a66c2e93f85",Synchronized="2019-08-30 22:22:24.0")
 /** Column name E_FolderMove_ID */
 public static final String COLUMNNAME_E_FolderMove_ID = "E_FolderMove_ID";
 /** Set E_FolderSpam_ID.
@@ -233,7 +229,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bd8192bf-cbc7-4b6c-9fa9-4b7c66718524",
-Synchronized="2017-08-05 16:54:32.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsCheckAddressBook.
@@ -264,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4b30492b-d43c-4667-b3e9-762998407995",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name IsCheckAddressBook */
 public static final String COLUMNNAME_IsCheckAddressBook = "IsCheckAddressBook";
 /** Set IsIncomingTrash.
@@ -295,7 +291,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b65920cb-1faf-4a28-93be-95e1391f859d",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name IsIncomingTrash */
 public static final String COLUMNNAME_IsIncomingTrash = "IsIncomingTrash";
 /** Set IsMoveIncomingJunkMessages.
@@ -326,7 +322,7 @@ AD_Val_Rule_ID="",FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5f69110c-cdb7-4da1-bfe5-cb6699ba5a3d",Synchronized="2017-08-05 16:54:33.0")
+Identifier="5f69110c-cdb7-4da1-bfe5-cb6699ba5a3d",Synchronized="2019-08-30 22:22:24.0")
 /** Column name IsMoveIncomingJunkMessages */
 public static final String COLUMNNAME_IsMoveIncomingJunkMessages = "IsMoveIncomingJunkMessages";
 /** Set IsMoveMessageWhenMarking.
@@ -357,7 +353,7 @@ AD_Val_Rule_ID="",FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e1b43301-2004-4308-a67a-43da66c89b42",Synchronized="2017-08-05 16:54:33.0")
+Identifier="e1b43301-2004-4308-a67a-43da66c89b42",Synchronized="2019-08-30 22:22:24.0")
 /** Column name IsMoveMessageWhenMarking */
 public static final String COLUMNNAME_IsMoveMessageWhenMarking = "IsMoveMessageWhenMarking";
 /** Set IsMoveTrash.
@@ -388,7 +384,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fa7a2428-f5e5-4381-8476-6d50a880e87d",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name IsMoveTrash */
 public static final String COLUMNNAME_IsMoveTrash = "IsMoveTrash";
 }

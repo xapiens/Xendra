@@ -79,7 +79,7 @@ public class CompiereTheme extends MetalTheme
 	/** Theme Name	*/
 	protected static String			s_name = "Compiere Theme";
 	/**	Logger					*/
-	protected static Logger 	log = Logger.getLogger(CompiereTheme.class.getName());
+	protected static CLogger 	log = CLogger.getCLogger(CompiereTheme.class.getName());
 	/** Active Theme			*/
 	protected static CompiereTheme	s_theme = null;
 

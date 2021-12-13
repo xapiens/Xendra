@@ -74,11 +74,8 @@ public class VTableExcelAdapter
 	/** Source table */
 	private VTable table;
 	
-	/** System locale */
-	private static Locale sysLocale = new Locale(
-			System.getProperty("user.language"), 
-			System.getProperty("user.country")
-	);
+	/** System locale */	
+	private static Locale sysLocale = Locale.getDefault(); 
 	/** System number formater */
 	private static NumberFormat sysNumberFormat = NumberFormat.getNumberInstance(sysLocale);
 	/** System date formater */

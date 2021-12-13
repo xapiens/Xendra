@@ -130,6 +130,11 @@ public class MUOM extends X_C_UOM
 		return uom;
 	}	//	getUOMfromCache
 
+	public static MUOM get (Properties ctx, String Symbol) {
+		MUOM uom = new Query(Env.getCtx(), MUOM.Table_Name, "uomsymbol = ?", null)
+			.setParameters(Symbol).first();
+		return uom;
+	}
 	/**
 	 * 	Get Precision
 	 * 	@param ctx context

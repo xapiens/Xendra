@@ -6,12 +6,12 @@ import org.compiere.model.Reference;
 
 public class REF_C_DocTypeSubType implements Reference 
 {
- 	@XendraRefItem(Name="Purchase Order",
+ 	@XendraRefItem(Name="Purchase Standard Order",
 		Value="PO",
 		Description="",
 		Identifier="cffcf52a-96f0-4b31-b179-1f08e5560dad")
-	/** Purchase Order = PO */
-	public static final String PurchaseOrder = "PO";
+	/** Purchase Standard Order = PO */
+	public static final String PurchaseStandardOrder = "PO";
 	@XendraRefItem(Name="Request",
 		Value="RQ",
 		Description="",
@@ -66,12 +66,18 @@ public class REF_C_DocTypeSubType implements Reference
 		Identifier="ff204dda-d566-4ae8-b3cd-9563d12b098f")
 	/** Quotation = OB */
 	public static final String Quotation = "OB";
-	@XendraRefItem(Name="Purchase Standard Order",
-		Value="PQ",
+	@XendraRefItem(Name="Purchase Warehouse Order",
+		Value="PW",
 		Description="",
 		Identifier="188d6880-767f-4b01-bba2-c44ac563bee1")
-	/** Purchase Standard Order = PQ */
-	public static final String PurchaseStandardOrder = "PQ";
+	/** Purchase Warehouse Order = PW */
+	public static final String PurchaseWarehouseOrder = "PW";
+	@XendraRefItem(Name="Purchase POP Order",
+		Value="PP",
+		Description="",
+		Identifier="fe7e284d-84d2-4dd2-8a79-a73b3967f1a2")
+	/** Purchase POP Order = PP */
+	public static final String PurchasePOPOrder = "PP";
 	@XendraRef(Name="C_DocType SubType",
 		AD_Reference_ID="0",
 		ValidationType="L",
@@ -80,7 +86,7 @@ public class REF_C_DocTypeSubType implements Reference
 		VFormat="",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2017-12-08 16:17:24.869",
+		Synchronized="2018-04-07 22:39:10.777",
 		Extension="",
 		Identifier="510701bb-3d4a-4be3-a6ef-074558e57de9")
 	public static final String Identifier = "510701bb-3d4a-4be3-a6ef-074558e57de9";

@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.table.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
@@ -19,7 +19,7 @@ import org.compiere.util.Msg;
  *
  */
 public class PrintJobTableModel extends AbstractTableModel {
-	static Logger log = Logger.getLogger(PrintJobTableModel.class);
+	static CLogger log = CLogger.getCLogger(PrintJobTableModel.class);
  
     private PrintQueue printQueue;
     private String[] headers = {Msg.translate(Env.getCtx(), "JobName"), 
@@ -79,12 +79,12 @@ public class PrintJobTableModel extends AbstractTableModel {
 		List printJobs = printQueue.list();
 		// error checking
 		if(row >= getRowCount()) {
-			log.warn(METHOD_NAME + "requested row: " + row + ", only " + getRowCount() + " rows available");
-			log.warn(METHOD_NAME + "The PrintJob was removed from the queue before we could show it.");
+			log.warning(METHOD_NAME + "requested row: " + row + ", only " + getRowCount() + " rows available");
+			log.warning(METHOD_NAME + "The PrintJob was removed from the queue before we could show it.");
 			//throw new ArrayIndexOutOfBoundsException("requested row: " + row + ", only " + getRowCount() + " rows available");
 		} else if(column >= getColumnCount()) {
-			log.warn(METHOD_NAME + "The PrintJob was removed from the queue before we could show it.");
-			log.warn(METHOD_NAME + "requested column: " + column + ", only " + getColumnCount() + " columns available");
+			log.warning(METHOD_NAME + "The PrintJob was removed from the queue before we could show it.");
+			log.warning(METHOD_NAME + "requested column: " + column + ", only " + getColumnCount() + " columns available");
 			//throw new ArrayIndexOutOfBoundsException("requested column: " + column + ", only " + getColumnCount() + " columns available");
 		} else {
 			// get row

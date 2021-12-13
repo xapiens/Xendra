@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import org.columba.core.io.DiskIO;
 import org.columba.core.scripting.config.BeanshellConfig;
 import org.columba.core.scripting.service.api.IColumbaService;
+import org.compiere.util.CLogger;
 
 /**
  This class represents the Beanshell Service.<br>
@@ -50,7 +51,7 @@ public class BeanshellService
                 Observer
 {
 
-    private static final Logger LOG = Logger.getLogger(BeanshellService.class.getName());
+    private static final CLogger LOG = CLogger.getCLogger(BeanshellService.class.getName());
 
     private BeanshellConfig config = BeanshellConfig.getInstance();
 

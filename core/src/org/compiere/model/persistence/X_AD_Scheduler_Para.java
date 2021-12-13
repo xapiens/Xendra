@@ -59,14 +59,14 @@ public static int Table_ID=MTable.getTable_ID("AD_Scheduler_Para");
 public static String es_PE_TAB_Parameter_Description="Parámetro del planificador";
 
 @XendraTrl(Identifier="be7a542c-6558-e724-51db-ba39649e73b3")
-public static String es_PE_TAB_Parameter_Name="Parámetro";
-
-@XendraTrl(Identifier="be7a542c-6558-e724-51db-ba39649e73b3")
 public static String es_PE_TAB_Parameter_Help="Proporcione el parámetro para el proceso a programar";
 
-@XendraTab(Name="Parameter",Description="Scheduler Parameter",
-Help="Provide parameter for scheduled process",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",
-SeqNo=20,TabLevel=1,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
+@XendraTrl(Identifier="be7a542c-6558-e724-51db-ba39649e73b3")
+public static String es_PE_TAB_Parameter_Name="Parámetro";
+@XendraTab(Name="Parameter",
+Description="Scheduler Parameter",Help="Provide parameter for scheduled process",
+AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",SeqNo=20,TabLevel=1,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
 AD_Column_ID="ee8dcb69-7826-7eb4-1a0c-2d933a7cca86",HasTree=false,WhereClause="",OrderByClause="",
 CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",
 IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=true,
@@ -77,11 +77,12 @@ public static final String TABNAME_Parameter="be7a542c-6558-e724-51db-ba39649e73
 @XendraTrl(Identifier="ab01c06c-e82c-ccab-6c71-4f708577e290")
 public static String es_PE_TABLE_AD_Scheduler_Para_Name="AD_Scheduler_Para";
 
-@XendraTable(Name="AD_Scheduler_Para",Description="",Help="",TableName="AD_Scheduler_Para",
-AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="ab01c06c-e82c-ccab-6c71-4f708577e290",Synchronized="2017-08-16 11:40:58.0")
+@XendraTable(Name="AD_Scheduler_Para",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Scheduler_Para",AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="ab01c06c-e82c-ccab-6c71-4f708577e290",Synchronized="2020-03-03 21:35:55.0")
 /** TableName=AD_Scheduler_Para */
 public static final String Table_Name="AD_Scheduler_Para";
 
@@ -149,7 +150,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="84b60ada-00b9-36d1-4f65-6679ecf38c3c",Synchronized="2017-08-05 16:52:50.0")
+Identifier="84b60ada-00b9-36d1-4f65-6679ecf38c3c",Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Process_Para_ID */
 public static final String COLUMNNAME_AD_Process_Para_ID = "AD_Process_Para_ID";
 /** Set Scheduler.
@@ -169,13 +170,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6053e672-dd52-5bfb-82a3-ae4a05e4954c")
+public static String es_PE_FIELD_Parameter_Scheduler_Name="Programación";
+
+@XendraTrl(Identifier="6053e672-dd52-5bfb-82a3-ae4a05e4954c")
 public static String es_PE_FIELD_Parameter_Scheduler_Description="Programación de procesos";
 
 @XendraTrl(Identifier="6053e672-dd52-5bfb-82a3-ae4a05e4954c")
 public static String es_PE_FIELD_Parameter_Scheduler_Help="Programación de procesos para ser ejecutada la sincronización.";
-
-@XendraTrl(Identifier="6053e672-dd52-5bfb-82a3-ae4a05e4954c")
-public static String es_PE_FIELD_Parameter_Scheduler_Name="Programación";
 
 @XendraField(AD_Column_ID="AD_Scheduler_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="be7a542c-6558-e724-51db-ba39649e73b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ee8dcb69-7826-7eb4-1a0c-2d933a7cca86",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Scheduler_ID */
 public static final String COLUMNNAME_AD_Scheduler_ID = "AD_Scheduler_ID";
 /** Set AD_Scheduler_Para_ID.
@@ -242,13 +243,13 @@ return value;
 }
 
 @XendraTrl(Identifier="e20e7e23-a7fa-ab4d-8111-e8f4933a33ea")
+public static String es_PE_FIELD_Parameter_Description_Name="Observación";
+
+@XendraTrl(Identifier="e20e7e23-a7fa-ab4d-8111-e8f4933a33ea")
 public static String es_PE_FIELD_Parameter_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="e20e7e23-a7fa-ab4d-8111-e8f4933a33ea")
 public static String es_PE_FIELD_Parameter_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="e20e7e23-a7fa-ab4d-8111-e8f4933a33ea")
-public static String es_PE_FIELD_Parameter_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="be7a542c-6558-e724-51db-ba39649e73b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -266,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d9d9dab-11f2-2f92-ed7d-0ea1c8167bcf",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -298,7 +299,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3984ac6d-ab3b-4c8b-a7ee-238d3bed3072",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default Parameter.
@@ -322,13 +323,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="813501b1-8a04-51ff-8971-7ff116fe5788")
+public static String es_PE_FIELD_Parameter_DefaultParameter_Name="Parametro Predeterminado";
+
+@XendraTrl(Identifier="813501b1-8a04-51ff-8971-7ff116fe5788")
 public static String es_PE_FIELD_Parameter_DefaultParameter_Description="Valor predeterminado del parámetro.";
 
 @XendraTrl(Identifier="813501b1-8a04-51ff-8971-7ff116fe5788")
 public static String es_PE_FIELD_Parameter_DefaultParameter_Help="El valor predeterminado del parámetro puede ser una variable como @#Fecha@ ";
-
-@XendraTrl(Identifier="813501b1-8a04-51ff-8971-7ff116fe5788")
-public static String es_PE_FIELD_Parameter_DefaultParameter_Name="Parametro Predeterminado";
 
 @XendraField(AD_Column_ID="ParameterDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="be7a542c-6558-e724-51db-ba39649e73b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -346,7 +347,39 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="00048539-e502-034e-1cac-9cdd78c06422",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name ParameterDefault */
 public static final String COLUMNNAME_ParameterDefault = "ParameterDefault";
+/** Set ParameterDisplay.
+@param ParameterDisplay ParameterDisplay */
+public void setParameterDisplay (String ParameterDisplay)
+{
+if (ParameterDisplay != null && ParameterDisplay.length() > 60)
+{
+log.warning("Length > 60 - truncated");
+ParameterDisplay = ParameterDisplay.substring(0,59);
+}
+set_Value (COLUMNNAME_ParameterDisplay, ParameterDisplay);
+}
+/** Get ParameterDisplay.
+@return ParameterDisplay */
+public String getParameterDisplay() 
+{
+String value = (String)get_Value(COLUMNNAME_ParameterDisplay);
+if (value == null)
+  return "";
+return value;
+}
+@XendraTrl(Identifier="a14c0382-9ac3-4685-8689-fb08cceaeb77")
+public static String es_PE_COLUMN_ParameterDisplay_Name="parameterdisplay";
+
+@XendraColumn(AD_Element_ID="3988f700-f89d-4a5b-88f0-ec1529030b24",ColumnName="ParameterDisplay",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=60,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="a14c0382-9ac3-4685-8689-fb08cceaeb77",
+Synchronized="2019-08-30 22:20:40.0")
+/** Column name ParameterDisplay */
+public static final String COLUMNNAME_ParameterDisplay = "ParameterDisplay";
 }

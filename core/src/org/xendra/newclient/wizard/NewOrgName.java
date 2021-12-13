@@ -38,9 +38,7 @@ public class NewOrgName extends AbstractStep {
 		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "newclient", "orgname_text")));
 		component.add(Box.createVerticalStrut(40));
 		LabelWithMnemonic psLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "newclient", "orgname"));
-		//clientname  = new CTextField(20);    	
 		psLabel.setLabelFor(orgname);
-		orgname.setInputVerifier(new OrgNameVerifier());
 		WizardTextField middlePanel = new WizardTextField();		
 		Method method = null;
 		try {			
@@ -48,34 +46,14 @@ public class NewOrgName extends AbstractStep {
 		} 
 		catch (NoSuchMethodException nsme) {
 		}			    	
-		data.registerDataLookup(Constants.COLUMNNAME_AD_Org_ID ,new DefaultDataLookup(orgname, method, null));                    
+		data.registerDataLookup(Constants.COLUMNNAME_AD_Org_ID ,new DefaultDataLookup(orgname, method, null));
+		middlePanel.addLabel(psLabel);
 		middlePanel.addTextField(orgname);        			
 		middlePanel.addEmptyExample();
 		component.add(middlePanel);
 
 		return component;
 	}
-	class OrgNameVerifier extends InputVerifier {
-	    @Override
-	    public boolean verify(JComponent input) {
-	        String text = ((CTextField) input).getText();
-	        try {
-	    		String SQL = String.format("UPDATE AD_Org SET CreatedBy=0 WHERE Name='%s'", text);
-	    		if (DB.executeUpdate(SQL, null) != 0) {
-	    			setCanGoNext(false);			
-	    			ADialog.error(0, null, "NotUnique", text);
-	    			return false;
-	    		}
-	    		else
-	    		{
-	    			setCanGoNext(true);			
-	    			return true;	    			
-	    		}
-	        } catch (NumberFormatException e) {
-	            return false;
-	        }
-	    }
-	}	
 	public void prepareRendering() {
 	}	
 }

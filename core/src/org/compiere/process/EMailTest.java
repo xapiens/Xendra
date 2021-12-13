@@ -20,7 +20,7 @@ import java.io.*;
 
 import org.compiere.util.*;
 import org.compiere.model.MClient;
-import org.compiere.model.MStore;
+import org.compiere.model.MWebStore;
 
 import org.xendra.annotations.XendraProcess;
 /**
@@ -77,10 +77,10 @@ public class EMailTest extends SvrProcess
 				addLog(0, null, null, "Not Found Directory: " + client.getDocumentDir());
 		}
 
-		MStore[] wstores = MStore.getOfClient(client);
+		MWebStore[] wstores = MWebStore.getOfClient(client);
 		for (int i = 0; i < wstores.length; i++)
 		{
-			MStore store = wstores[i];
+			MWebStore store = wstores[i];
 			String test = store.testEMail();
 			addLog(0, null, null, store.getName() + ": " + test);
 		}

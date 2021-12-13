@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("M_Restore");
 @XendraTrl(Identifier="ddaccab3-5443-ba9c-4f91-e3d0a4e26388")
 public static String es_PE_TABLE_M_Restore_Name="M_Restore";
 
-@XendraTable(Name="M_Restore",Description="",Help="",TableName="M_Restore",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="ddaccab3-5443-ba9c-4f91-e3d0a4e26388",Synchronized="2017-08-16 11:43:32.0")
+@XendraTable(Name="M_Restore",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="M_Restore",
+AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.material",Identifier="ddaccab3-5443-ba9c-4f91-e3d0a4e26388",
+Synchronized="2020-03-03 21:38:55.0")
 /** TableName=M_Restore */
 public static final String Table_Name="M_Restore";
 
@@ -122,7 +124,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ad4ad705-014a-463c-a674-e7c8a67c2d23",
-Synchronized="2017-08-05 16:55:31.0")
+Synchronized="2019-08-30 22:23:30.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set M_Restore_ID.

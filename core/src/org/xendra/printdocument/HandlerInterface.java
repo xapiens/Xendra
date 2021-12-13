@@ -14,6 +14,7 @@ public interface HandlerInterface {
 	 * @param printJob the PrintJob to process
 	 * @return the result of the processing
 	 */
-	public boolean process(PrintJob printJob, String Format);
+	//public boolean process(PrintJob printJob, String Format);
+	public boolean process(PrintJob printJob);
 	public String getError();
 }

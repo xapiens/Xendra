@@ -212,6 +212,9 @@ public class MTree extends MTree_Base
 			while (rs.next())
 			{
 				int node_ID = rs.getInt(1);
+				if (node_ID == 1001204) {
+					System.out.println("X");
+				}
 				int parent_ID = rs.getInt(2);
 				int seqNo = rs.getInt(3);
 				boolean onBar = (rs.getString(4) != null);
@@ -455,8 +458,7 @@ public class MTree extends MTree_Base
 	 *  @return Node
 	 */
 	private MTreeNode getNodeDetail (int node_ID, int parent_ID, int seqNo, boolean onBar)
-	{
-		System.out.println("X");
+	{		
 		MTreeNode retValue = null;
 		try
 		{

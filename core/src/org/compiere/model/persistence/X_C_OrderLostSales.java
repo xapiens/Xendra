@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_OrderLostSales");
 @XendraTrl(Identifier="bd5c38e4-1ae9-41cc-8710-264b76448716")
 public static String es_PE_TABLE_C_OrderLostSales_Name="Order Lost Sales";
 
-@XendraTable(Name="Order Lost Sales",Description="",Help="",TableName="C_OrderLostSales",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="bd5c38e4-1ae9-41cc-8710-264b76448716",
-Synchronized="2017-08-16 11:42:05.0")
+@XendraTable(Name="Order Lost Sales",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_OrderLostSales",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="bd5c38e4-1ae9-41cc-8710-264b76448716",
+Synchronized="2020-03-03 21:37:16.0")
 /** TableName=C_OrderLostSales */
 public static final String Table_Name="C_OrderLostSales";
 
@@ -138,7 +139,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d40ebf48-16da-4eff-8f1e-3f3b78906019",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:53.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set Identifier.
@@ -170,7 +171,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4db0efb2-0257-4a16-a3e0-9466e774d0f0",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:53.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -198,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="36b790fc-a3c4-4b16-80b1-10ab95099253",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:53.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Lost Sales Qty.
@@ -225,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9f7863d7-87a5-4b97-9198-8789396856ac",
-Synchronized="2017-08-05 16:53:58.0")
+Synchronized="2019-08-30 22:21:53.0")
 /** Column name QtyLostSales */
 public static final String COLUMNNAME_QtyLostSales = "QtyLostSales";
 }

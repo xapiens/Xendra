@@ -64,12 +64,12 @@ public static int Table_ID=MTable.getTable_ID("C_Tax_Acct");
 public static String es_PE_TAB_Accounting_Description="Contabilidad";
 
 @XendraTrl(Identifier="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1")
 public static String es_PE_TAB_Accounting_Help="La pestaña Contabilidad define los parámetros contables que son usados en transacciones que usen esta tasa de impuestos.";
 
-@XendraTab(Name="Accounting",Description="Accounting",
+@XendraTrl(Identifier="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Accounting",
 Help="The Accounting Tab defines the accounting parameters to be used for transactions referencing this Tax Rate.",
 AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",SeqNo=40,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -82,11 +82,12 @@ public static final String TABNAME_Accounting="87c0c52a-7f66-dde4-6f07-623ef6f7c
 @XendraTrl(Identifier="111fbf70-5e14-00a0-8e64-399e8b293097")
 public static String es_PE_TABLE_C_Tax_Acct_Name="C_Tax_Acct";
 
-@XendraTable(Name="C_Tax_Acct",Description="",Help="",TableName="C_Tax_Acct",AccessLevel="3",
-AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="111fbf70-5e14-00a0-8e64-399e8b293097",
-Synchronized="2017-08-16 11:42:31.0")
+@XendraTable(Name="C_Tax_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_Tax_Acct",
+AccessLevel="3",AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="111fbf70-5e14-00a0-8e64-399e8b293097",Synchronized="2020-03-03 21:37:43.0")
 /** TableName=C_Tax_Acct */
 public static final String Table_Name="C_Tax_Acct";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b12a8bf9-7aac-b180-2a26-74e9ad3d9979")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="b12a8bf9-7aac-b180-2a26-74e9ad3d9979")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="b12a8bf9-7aac-b180-2a26-74e9ad3d9979")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="b12a8bf9-7aac-b180-2a26-74e9ad3d9979")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="902f45bc-004e-aa2c-e098-9433f7c4ca38",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Tax.
@@ -180,13 +181,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="019ed90e-7daa-428e-d00e-9f1c7ffb848e")
+public static String es_PE_FIELD_Accounting_Tax_Name="Impuesto";
+
+@XendraTrl(Identifier="019ed90e-7daa-428e-d00e-9f1c7ffb848e")
 public static String es_PE_FIELD_Accounting_Tax_Description="Identificador del Impuesto";
 
 @XendraTrl(Identifier="019ed90e-7daa-428e-d00e-9f1c7ffb848e")
 public static String es_PE_FIELD_Accounting_Tax_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
-
-@XendraTrl(Identifier="019ed90e-7daa-428e-d00e-9f1c7ffb848e")
-public static String es_PE_FIELD_Accounting_Tax_Name="Impuesto";
 
 @XendraField(AD_Column_ID="C_Tax_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -204,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2647509a-f344-3edc-37b5-e05f69482d29",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name C_Tax_ID */
 public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
 /** Set Identifier.
@@ -236,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67de51b0-6eb1-466f-b9b2-e78a7fa43589",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Tax Credit.
@@ -255,13 +256,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8526ebb1-ecb8-0a69-637c-16697cb9845f")
+public static String es_PE_FIELD_Accounting_TaxCredit_Name="Impuesto por Acreditar";
+
+@XendraTrl(Identifier="8526ebb1-ecb8-0a69-637c-16697cb9845f")
 public static String es_PE_FIELD_Accounting_TaxCredit_Description="Cuenta para impuestos a reclamar";
 
 @XendraTrl(Identifier="8526ebb1-ecb8-0a69-637c-16697cb9845f")
 public static String es_PE_FIELD_Accounting_TaxCredit_Help="La cuenta de Impuesto por Acreditar indica la cuenta usada para acumular impuestos que pueden ser reclamados";
-
-@XendraTrl(Identifier="8526ebb1-ecb8-0a69-637c-16697cb9845f")
-public static String es_PE_FIELD_Accounting_TaxCredit_Name="Impuesto por Acreditar";
 
 @XendraField(AD_Column_ID="T_Credit_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -279,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="650b9130-108e-99ba-f50a-0d99b5d4029b",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name T_Credit_Acct */
 public static final String COLUMNNAME_T_Credit_Acct = "T_Credit_Acct";
 /** Set Tax Due.
@@ -298,13 +299,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7f51a565-c211-ffdb-50df-8eecd29c0a70")
+public static String es_PE_FIELD_Accounting_TaxDue_Name="Impuestos por pagar";
+
+@XendraTrl(Identifier="7f51a565-c211-ffdb-50df-8eecd29c0a70")
 public static String es_PE_FIELD_Accounting_TaxDue_Description="Cuenta para impuestos a pagar.";
 
 @XendraTrl(Identifier="7f51a565-c211-ffdb-50df-8eecd29c0a70")
 public static String es_PE_FIELD_Accounting_TaxDue_Help="La cuenta de impuestos por pagar indica la cuenta usada para acumular impuestos que se deben pagar.";
-
-@XendraTrl(Identifier="7f51a565-c211-ffdb-50df-8eecd29c0a70")
-public static String es_PE_FIELD_Accounting_TaxDue_Name="Impuestos por pagar";
 
 @XendraField(AD_Column_ID="T_Due_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -322,7 +323,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8353aca6-62e9-f315-8d63-eafebbe7674c",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name T_Due_Acct */
 public static final String COLUMNNAME_T_Due_Acct = "T_Due_Acct";
 /** Set Tax Expense.
@@ -341,13 +342,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e448918b-fd92-024f-6b13-2b40ab3870d3")
+public static String es_PE_FIELD_Accounting_TaxExpense_Name="Impuesto Absorbido";
+
+@XendraTrl(Identifier="e448918b-fd92-024f-6b13-2b40ab3870d3")
 public static String es_PE_FIELD_Accounting_TaxExpense_Description="Cuenta para impuestos pagados que usted no puede reclamar";
 
 @XendraTrl(Identifier="e448918b-fd92-024f-6b13-2b40ab3870d3")
 public static String es_PE_FIELD_Accounting_TaxExpense_Help="La cuenta de impuestos absorbidos indica la cuenta usada para registrar los impuestos que han sido pagados y que no pueden ser reclamados.";
-
-@XendraTrl(Identifier="e448918b-fd92-024f-6b13-2b40ab3870d3")
-public static String es_PE_FIELD_Accounting_TaxExpense_Name="Impuesto Absorbido";
 
 @XendraField(AD_Column_ID="T_Expense_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -365,7 +366,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ab42d875-ce5f-0db1-7bd5-9f7528667e08",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name T_Expense_Acct */
 public static final String COLUMNNAME_T_Expense_Acct = "T_Expense_Acct";
 /** Set Tax Liability.
@@ -384,13 +385,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8a7d9f24-2992-122f-886b-288a0a954f20")
+public static String es_PE_FIELD_Accounting_TaxLiability_Name="Impuesto Pagado";
+
+@XendraTrl(Identifier="8a7d9f24-2992-122f-886b-288a0a954f20")
 public static String es_PE_FIELD_Accounting_TaxLiability_Description="Cuenta para declaración de impuesto pagado";
 
 @XendraTrl(Identifier="8a7d9f24-2992-122f-886b-288a0a954f20")
 public static String es_PE_FIELD_Accounting_TaxLiability_Help="La cuenta de impuesto pagado indica la cuenta usada para registrar su declaración de responsabilidad de impuestos";
-
-@XendraTrl(Identifier="8a7d9f24-2992-122f-886b-288a0a954f20")
-public static String es_PE_FIELD_Accounting_TaxLiability_Name="Impuesto Pagado";
 
 @XendraField(AD_Column_ID="T_Liability_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -408,7 +409,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fda5feb2-6365-f42b-189d-def3eace0555",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name T_Liability_Acct */
 public static final String COLUMNNAME_T_Liability_Acct = "T_Liability_Acct";
 /** Set Tax Receivables.
@@ -427,13 +428,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c14eea53-c077-029d-7db3-4e0e106e4640")
+public static String es_PE_FIELD_Accounting_TaxReceivables_Name="Impuesto Acreditado";
+
+@XendraTrl(Identifier="c14eea53-c077-029d-7db3-4e0e106e4640")
 public static String es_PE_FIELD_Accounting_TaxReceivables_Description="Cuenta de Impuesto acreditado después de la declaración de impuestos";
 
 @XendraTrl(Identifier="c14eea53-c077-029d-7db3-4e0e106e4640")
 public static String es_PE_FIELD_Accounting_TaxReceivables_Help="Cuenta de Impuesto acreditado después de la declaración de impuestos";
-
-@XendraTrl(Identifier="c14eea53-c077-029d-7db3-4e0e106e4640")
-public static String es_PE_FIELD_Accounting_TaxReceivables_Name="Impuesto Acreditado";
 
 @XendraField(AD_Column_ID="T_Receivables_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="87c0c52a-7f66-dde4-6f07-623ef6f7c1d1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -451,7 +452,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f791bbc-ffd4-2361-ee53-2ba9503b20b1",
-Synchronized="2017-08-05 16:54:28.0")
+Synchronized="2019-08-30 22:22:20.0")
 /** Column name T_Receivables_Acct */
 public static final String COLUMNNAME_T_Receivables_Acct = "T_Receivables_Acct";
 }

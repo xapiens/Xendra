@@ -449,7 +449,15 @@ public class Doc_Payment extends Doc
 										pay.getC_DocType_ID(), 
 										"", 
 										pay.getDateAcct())
-					);	
+					);
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(pay.getAD_Org_ID(),
+										pay.getAD_Client_ID(),
+										pay.Table_ID, 
+										pay.getC_DocType_ID(), 
+										"", 
+										pay.getDateAcct())
+					);				
 		}
 		else
 		{
@@ -476,7 +484,15 @@ public class Doc_Payment extends Doc
 											pay.getC_DocType_ID(), 
 											"", 
 											pay.getDateAcct())
-						);	
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(pay.getAD_Org_ID(),
+											pay.getAD_Client_ID(),
+											pay.Table_ID, 
+											pay.getC_DocType_ID(), 
+											"", 
+											pay.getDateAcct())
+						);					
 				return;
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
@@ -488,12 +504,16 @@ public class Doc_Payment extends Doc
 											pay.getC_DocType_ID(), 
 											"", 
 											pay.getDateAcct())
-						);									
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(pay.getAD_Org_ID(),
+											pay.getAD_Client_ID(),
+											pay.Table_ID, 
+											pay.getC_DocType_ID(), 
+											"", 
+											pay.getDateAcct())
+						);													
 			}
-		}
-				
+		}			
 	}
-	
-
-	
 }   //  Doc_Payment

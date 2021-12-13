@@ -74,11 +74,12 @@ public static final String TABNAME_CampaignDiscount="32d70564-5e54-948c-e1d5-193
 @XendraTrl(Identifier="f024dd4b-1345-224c-52af-6ef86759c8af")
 public static String es_PE_TABLE_C_CampaignDiscount_Name="CampaignDiscount";
 
-@XendraTable(Name="CampaignDiscount",Description="CampaignDiscount",Help="",
+@XendraTable(Name="CampaignDiscount",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="CampaignDiscount",Help="",
 TableName="C_CampaignDiscount",AccessLevel="3",AD_Window_ID="5fbd0093-6a0b-0961-2180-55573e4d502a",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=95,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="f024dd4b-1345-224c-52af-6ef86759c8af",Synchronized="2017-08-16 11:41:34.0")
+Identifier="f024dd4b-1345-224c-52af-6ef86759c8af",Synchronized="2020-03-03 21:36:40.0")
 /** TableName=C_CampaignDiscount */
 public static final String Table_Name="C_CampaignDiscount";
 
@@ -155,13 +156,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="908c548a-196a-83ab-3f4a-c8a0dce0f447")
+public static String es_PE_FIELD_CampaignDiscount_Campaign_Name="Campaña";
+
+@XendraTrl(Identifier="908c548a-196a-83ab-3f4a-c8a0dce0f447")
 public static String es_PE_FIELD_CampaignDiscount_Campaign_Description="Campaña de Mercadeo";
 
 @XendraTrl(Identifier="908c548a-196a-83ab-3f4a-c8a0dce0f447")
 public static String es_PE_FIELD_CampaignDiscount_Campaign_Help="La Campaña define un programa de mercadotecnia único. Los proyectos pueden estar asociados con una campaña de mercadotecnia única. Usted puede entonces reportar basado en una campaña específica";
-
-@XendraTrl(Identifier="908c548a-196a-83ab-3f4a-c8a0dce0f447")
-public static String es_PE_FIELD_CampaignDiscount_Campaign_Name="Campaña";
 
 @XendraField(AD_Column_ID="C_Campaign_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="32d70564-5e54-948c-e1d5-19394477e08c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -179,7 +180,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6c68ddf4-15db-0b7b-72be-87fc776a27b3",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:17.0")
 /** Column name C_Campaign_ID */
 public static final String COLUMNNAME_C_Campaign_ID = "C_Campaign_ID";
 /** Set UOM.
@@ -200,13 +201,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c38200d4-1fe6-ca88-6d0d-6e3a70e5ecc0")
+public static String es_PE_FIELD_CampaignDiscount_UOM_Name="UM";
+
+@XendraTrl(Identifier="c38200d4-1fe6-ca88-6d0d-6e3a70e5ecc0")
 public static String es_PE_FIELD_CampaignDiscount_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="c38200d4-1fe6-ca88-6d0d-6e3a70e5ecc0")
 public static String es_PE_FIELD_CampaignDiscount_UOM_Help="La UM define una unidad de medida única no monetaria";
-
-@XendraTrl(Identifier="c38200d4-1fe6-ca88-6d0d-6e3a70e5ecc0")
-public static String es_PE_FIELD_CampaignDiscount_UOM_Name="UM";
 
 @XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="32d70564-5e54-948c-e1d5-19394477e08c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -224,7 +225,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="68473775-3c53-911a-6441-5b9d08daf2fa",Synchronized="2017-08-05 16:53:26.0")
+Identifier="68473775-3c53-911a-6441-5b9d08daf2fa",Synchronized="2019-08-30 22:21:17.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set Identifier.
@@ -256,7 +257,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e0355465-d512-4bd2-853e-5fbd836622f7",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Discount Schema.
@@ -276,13 +277,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="41cc0000-f10e-f209-ffc8-f5932f5464c8")
+public static String es_PE_FIELD_CampaignDiscount_DiscountSchema_Name="Esq List Precios/Desc";
+
+@XendraTrl(Identifier="41cc0000-f10e-f209-ffc8-f5932f5464c8")
 public static String es_PE_FIELD_CampaignDiscount_DiscountSchema_Description="Esquema para calcular el porcentaje de descuento comercial";
 
 @XendraTrl(Identifier="41cc0000-f10e-f209-ffc8-f5932f5464c8")
 public static String es_PE_FIELD_CampaignDiscount_DiscountSchema_Help="Después del cálculo de precio (estándar); el porcentaje de descuento comercial es calculado y aplicado resultando en el precio final";
-
-@XendraTrl(Identifier="41cc0000-f10e-f209-ffc8-f5932f5464c8")
-public static String es_PE_FIELD_CampaignDiscount_DiscountSchema_Name="Esq List Precios/Desc";
 
 @XendraField(AD_Column_ID="M_DiscountSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="32d70564-5e54-948c-e1d5-19394477e08c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -300,7 +301,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d4aff296-f6c3-08b1-64ac-b36bc7e41278",Synchronized="2017-08-05 16:53:26.0")
+Identifier="d4aff296-f6c3-08b1-64ac-b36bc7e41278",Synchronized="2019-08-30 22:21:17.0")
 /** Column name M_DiscountSchema_ID */
 public static final String COLUMNNAME_M_DiscountSchema_ID = "M_DiscountSchema_ID";
 /** Set Product Brand.
@@ -321,13 +322,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1b8eee96-6fff-981d-154a-53ec9ad3521f")
+public static String es_PE_FIELD_CampaignDiscount_ProductBrand_Name="Linea";
+
+@XendraTrl(Identifier="1b8eee96-6fff-981d-154a-53ec9ad3521f")
 public static String es_PE_FIELD_CampaignDiscount_ProductBrand_Description="";
 
 @XendraTrl(Identifier="1b8eee96-6fff-981d-154a-53ec9ad3521f")
 public static String es_PE_FIELD_CampaignDiscount_ProductBrand_Help="";
-
-@XendraTrl(Identifier="1b8eee96-6fff-981d-154a-53ec9ad3521f")
-public static String es_PE_FIELD_CampaignDiscount_ProductBrand_Name="Linea";
 
 @XendraField(AD_Column_ID="M_Product_Brand_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="32d70564-5e54-948c-e1d5-19394477e08c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -345,7 +346,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="beb4ebab-e154-e4dc-19ba-17162f668d10",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:18.0")
 /** Column name M_Product_Brand_ID */
 public static final String COLUMNNAME_M_Product_Brand_ID = "M_Product_Brand_ID";
 /** Set Product.
@@ -372,13 +373,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_Product_ID()));
 }
 
 @XendraTrl(Identifier="c8665c0f-c2b9-0226-c8bf-c4669c482178")
+public static String es_PE_FIELD_CampaignDiscount_Product_Name="Producto";
+
+@XendraTrl(Identifier="c8665c0f-c2b9-0226-c8bf-c4669c482178")
 public static String es_PE_FIELD_CampaignDiscount_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="c8665c0f-c2b9-0226-c8bf-c4669c482178")
 public static String es_PE_FIELD_CampaignDiscount_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="c8665c0f-c2b9-0226-c8bf-c4669c482178")
-public static String es_PE_FIELD_CampaignDiscount_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="32d70564-5e54-948c-e1d5-19394477e08c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -396,7 +397,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c41a0c7a-15c4-2e81-cb3d-668f85c58bce",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:18.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 }

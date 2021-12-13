@@ -305,7 +305,7 @@ public class PropertySheetTableModel
     if (item.isProperty() ) {
       if (columnIndex == VALUE_COLUMN) {
         try {
-          item.getProperty().setValue(value);
+        	item.getProperty().setValue(value);
         } catch (Exception e) {
           e.printStackTrace();
         }

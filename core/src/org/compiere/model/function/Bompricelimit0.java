@@ -9,7 +9,7 @@ public class Bompricelimit0
 @XendraFunction(Name="bompricelimit",Output="numeric",Owner="xendra",Language="plpgsql",
 Identifier="c7a502f1-b25c-a9a3-d1c7-5f83e7de1fc2",
 Arguments="product_id numeric, pricelist_version_id numeric",Extension="",
-Synchronized="2013-09-29 01:27:28.0")
+Synchronized="2020-02-08 13:54:28.0")
 	public static final String Identifier = "c7a502f1-b25c-a9a3-d1c7-5f83e7de1fc2";
 
 	public static final String getCode() 
@@ -39,13 +39,15 @@ Synchronized="2013-09-29 01:27:28.0")
 	sb.appendln("	END IF;");
 	sb.appendln("	--");
 	sb.appendln("	RETURN v_Price;");
+	sb.appendln("	EXCEPTION WHEN OTHERS THEN");
+	sb.appendln("	RETURN v_Price;");
 	sb.appendln("END;");
 	return sb.toString();
 }
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2013-09-29 01:27:28.0");
+ 	sb.appendln("@Synchronized=2020-02-08 13:54:28.0");
 	sb.appendln("@Identifier=c7a502f1-b25c-a9a3-d1c7-5f83e7de1fc2");
 	return sb.toString();
 }

@@ -70,10 +70,10 @@ public static int Table_ID=MTable.getTable_ID("C_CommissionLine");
 public static String es_PE_TAB_CommissionLine_Description="Definir reglas de cálculo de comisiones";
 
 @XendraTrl(Identifier="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7")
-public static String es_PE_TAB_CommissionLine_Name="Ìtem de Comisión";
+public static String es_PE_TAB_CommissionLine_Help="Definir los criterios de selección para el pago de comisiones. Si no se entran parámetros restrictivos (ej. Para Socios de Negocio específicos (grupos) ó productos (Categorías); etc. todas las transacciones para el período serán usadas para el calculo de la comisión. Después de convertir de la moneda de la transacción a la moneda de pago de la comisión; la formula para calcular la comisión es: (Total Convertido - Total a Sustraer) * Multiplicador Total + (Cantidad Real - Cantidad a Sustraer) * Multiplicador Cantidad. Es posible escoger; que solo Totales positivos (Total Convertido - Total a Sustraer) y cantidades positivas (Cantidad Real - Cantidad a Sustraer) sean usadas en el calculo.";
 
 @XendraTrl(Identifier="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7")
-public static String es_PE_TAB_CommissionLine_Help="Definir los criterios de selección para el pago de comisiones. Si no se entran parámetros restrictivos (ej. Para Socios de Negocio específicos (grupos) ó productos (Categorías); etc. todas las transacciones para el período serán usadas para el calculo de la comisión. Después de convertir de la moneda de la transacción a la moneda de pago de la comisión; la formula para calcular la comisión es: (Total Convertido - Total a Sustraer) * Multiplicador Total + (Cantidad Real - Cantidad a Sustraer) * Multiplicador Cantidad. Es posible escoger; que solo Totales positivos (Total Convertido - Total a Sustraer) y cantidades positivas (Cantidad Real - Cantidad a Sustraer) sean usadas en el calculo.";
+public static String es_PE_TAB_CommissionLine_Name="Ìtem de Comisión";
 
 @XendraTab(Name="Commission Line",Description="Define your commission calculation rule",
 Help="Define the selection criteria for paying the commission. If you do not enter restricting parameters (e.g. for specific Business Partner (Groups) or Product (Categories), etc. all transactions for the period will be used to calculate the commission.  After converting from the transaction to the commission currency, the formula for calculating the commission is:  (Converted Amount - Subtract Amount) * Amount Multiplier + (Actual Quantity - Subtract Quantity) * Quantity Multiplier  You can choose, that only positive amounts (Converted Amount - Subtract Amount) and positive quantities (Actual Quantity - Subtract Quantity) are used in the calculation.",
@@ -88,11 +88,12 @@ public static final String TABNAME_CommissionLine="7a3c9b6a-9bc8-87fe-47ca-2cef6
 @XendraTrl(Identifier="2552687a-34ed-7b51-998b-a3fc31a41d05")
 public static String es_PE_TABLE_C_CommissionLine_Name="Línea de la comisión";
 
-@XendraTable(Name="Commission Line",Description="Commission Line",Help="",
+@XendraTable(Name="Commission Line",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Commission Line",Help="",
 TableName="C_CommissionLine",AccessLevel="3",AD_Window_ID="714562e3-3fcb-dd06-5bab-6e03249018a6",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="2552687a-34ed-7b51-998b-a3fc31a41d05",Synchronized="2017-08-16 11:41:39.0")
+Identifier="2552687a-34ed-7b51-998b-a3fc31a41d05",Synchronized="2020-03-03 21:36:45.0")
 /** TableName=C_CommissionLine */
 public static final String Table_Name="C_CommissionLine";
 
@@ -148,13 +149,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="4be1ad92-391b-4747-eb94-95afa0cad78c")
+public static String es_PE_FIELD_CommissionLine_MultiplierAmount_Name="Multiplicador";
+
+@XendraTrl(Identifier="4be1ad92-391b-4747-eb94-95afa0cad78c")
 public static String es_PE_FIELD_CommissionLine_MultiplierAmount_Description="Total del multiplicador para generar comisiones";
 
 @XendraTrl(Identifier="4be1ad92-391b-4747-eb94-95afa0cad78c")
 public static String es_PE_FIELD_CommissionLine_MultiplierAmount_Help="El Total Multiplicador indica el total a multiplicar por el total en una corrida de comisiones.";
-
-@XendraTrl(Identifier="4be1ad92-391b-4747-eb94-95afa0cad78c")
-public static String es_PE_FIELD_CommissionLine_MultiplierAmount_Name="Multiplicador";
 
 @XendraField(AD_Column_ID="AmtMultiplier",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Amounts",IsDisplayed=true,
@@ -172,7 +173,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a782aa86-8497-911f-772f-93d96f8afc8a",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name AmtMultiplier */
 public static final String COLUMNNAME_AmtMultiplier = "AmtMultiplier";
 /** Set Subtract Amount.
@@ -192,13 +193,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="07d7c37b-ccf6-0f8c-42a1-6d8133fbca48")
+public static String es_PE_FIELD_CommissionLine_SubtractAmount_Name="Total Restado";
+
+@XendraTrl(Identifier="07d7c37b-ccf6-0f8c-42a1-6d8133fbca48")
 public static String es_PE_FIELD_CommissionLine_SubtractAmount_Description="Total a restar para generar comisiones";
 
 @XendraTrl(Identifier="07d7c37b-ccf6-0f8c-42a1-6d8133fbca48")
 public static String es_PE_FIELD_CommissionLine_SubtractAmount_Help="El Total a restar indica el total a ser restado del total total antes de la multiplicación.";
-
-@XendraTrl(Identifier="07d7c37b-ccf6-0f8c-42a1-6d8133fbca48")
-public static String es_PE_FIELD_CommissionLine_SubtractAmount_Name="Total Restado";
 
 @XendraField(AD_Column_ID="AmtSubtract",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Amounts",IsDisplayed=true,
@@ -216,7 +217,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8074bff-aa97-c5b2-a004-01c1e40e7180",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name AmtSubtract */
 public static final String COLUMNNAME_AmtSubtract = "AmtSubtract";
 /** Set Business Partner .
@@ -237,13 +238,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9d6e6862-8922-f75c-0f40-b8d12b58bf6f")
+public static String es_PE_FIELD_CommissionLine_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="9d6e6862-8922-f75c-0f40-b8d12b58bf6f")
 public static String es_PE_FIELD_CommissionLine_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="9d6e6862-8922-f75c-0f40-b8d12b58bf6f")
 public static String es_PE_FIELD_CommissionLine_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="9d6e6862-8922-f75c-0f40-b8d12b58bf6f")
-public static String es_PE_FIELD_CommissionLine_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -261,7 +262,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f98b455e-e374-cf72-d992-5a591d988ed6",Synchronized="2017-08-05 16:53:30.0")
+Identifier="f98b455e-e374-cf72-d992-5a591d988ed6",Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Business Partner Group.
@@ -282,13 +283,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="61e8d868-17bd-4acd-2220-8060eab4841c")
+public static String es_PE_FIELD_CommissionLine_BusinessPartnerGroup_Name="Grupo de Socio de Negocio";
+
+@XendraTrl(Identifier="61e8d868-17bd-4acd-2220-8060eab4841c")
 public static String es_PE_FIELD_CommissionLine_BusinessPartnerGroup_Description="ID del Grupo de Socio de Negocio";
 
 @XendraTrl(Identifier="61e8d868-17bd-4acd-2220-8060eab4841c")
 public static String es_PE_FIELD_CommissionLine_BusinessPartnerGroup_Help="La ID Grupo del Socio de Negocio proporciona un método de definir valores predeterminados a ser usados para Socios de Negocio individuales.";
-
-@XendraTrl(Identifier="61e8d868-17bd-4acd-2220-8060eab4841c")
-public static String es_PE_FIELD_CommissionLine_BusinessPartnerGroup_Name="Grupo de Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BP_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -306,7 +307,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="324b630d-2d60-a85e-bc35-4ea38278f47e",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_BP_Group_ID */
 public static final String COLUMNNAME_C_BP_Group_ID = "C_BP_Group_ID";
 /** Set Commission.
@@ -332,13 +333,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_Commission_ID()));
 }
 
 @XendraTrl(Identifier="0cda94ad-9cb9-612e-48ff-3fede5fe0dea")
+public static String es_PE_FIELD_CommissionLine_Commission_Name="Comisión";
+
+@XendraTrl(Identifier="0cda94ad-9cb9-612e-48ff-3fede5fe0dea")
 public static String es_PE_FIELD_CommissionLine_Commission_Description="Identificador de comisiones";
 
 @XendraTrl(Identifier="0cda94ad-9cb9-612e-48ff-3fede5fe0dea")
 public static String es_PE_FIELD_CommissionLine_Commission_Help="La ID de Comisiones es un identificador único de un conjunto de reglas de comisiones";
-
-@XendraTrl(Identifier="0cda94ad-9cb9-612e-48ff-3fede5fe0dea")
-public static String es_PE_FIELD_CommissionLine_Commission_Name="Comisión";
 
 @XendraField(AD_Column_ID="C_Commission_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -356,7 +357,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4443e7fa-d7c4-655e-ae89-f674d6132a9b",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_Commission_ID */
 public static final String COLUMNNAME_C_Commission_ID = "C_Commission_ID";
 /** Set Commission Line.
@@ -376,13 +377,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="282ef23a-a47c-2cfb-3108-7d3bf88f4eb6")
+public static String es_PE_FIELD_CommissionLine_CommissionLine_Name="Item de la comisión";
+
+@XendraTrl(Identifier="282ef23a-a47c-2cfb-3108-7d3bf88f4eb6")
 public static String es_PE_FIELD_CommissionLine_CommissionLine_Description="Item de la comisión";
 
 @XendraTrl(Identifier="282ef23a-a47c-2cfb-3108-7d3bf88f4eb6")
 public static String es_PE_FIELD_CommissionLine_CommissionLine_Help="Es un caso único de un funcionamiento de la comisión. Si el funcionamiento de la comisión fue hecho en modo sumario entonces habrá un solo Item que representa los totales seleccionados de los documentos. ";
-
-@XendraTrl(Identifier="282ef23a-a47c-2cfb-3108-7d3bf88f4eb6")
-public static String es_PE_FIELD_CommissionLine_CommissionLine_Name="Item de la comisión";
 
 @XendraField(AD_Column_ID="C_CommissionLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -412,13 +413,13 @@ return false;
 }
 
 @XendraTrl(Identifier="afbd63df-3500-aa64-bc29-da1d4178ebf7")
+public static String es_PE_FIELD_CommissionLine_CommissionOnlySpecifiedOrders_Name="Comisión sólo en Ordenes Específicas";
+
+@XendraTrl(Identifier="afbd63df-3500-aa64-bc29-da1d4178ebf7")
 public static String es_PE_FIELD_CommissionLine_CommissionOnlySpecifiedOrders_Description="Comisiones solamente en órdenes ó facturas; donde este representante de ventas sea registrado";
 
 @XendraTrl(Identifier="afbd63df-3500-aa64-bc29-da1d4178ebf7")
 public static String es_PE_FIELD_CommissionLine_CommissionOnlySpecifiedOrders_Help="Representantes de Ventas son introducidos en las órdenes y facturas. Si son seleccionados; Solamente órdenes y facturas para estos representantes de ventas se incluyen en el cálculo de la comisión";
-
-@XendraTrl(Identifier="afbd63df-3500-aa64-bc29-da1d4178ebf7")
-public static String es_PE_FIELD_CommissionLine_CommissionOnlySpecifiedOrders_Name="Comisión sólo en Ordenes Específicas";
 
 @XendraField(AD_Column_ID="CommissionOrders",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -436,7 +437,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b5ff47ef-04ca-0d77-7787-004b8c9b09a1",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name CommissionOrders */
 public static final String COLUMNNAME_CommissionOrders = "CommissionOrders";
 /** Set Sales Region.
@@ -457,13 +458,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="028f056d-ea8b-55f8-b27f-552ef025f172")
+public static String es_PE_FIELD_CommissionLine_SalesRegion_Name="Región de Ventas";
+
+@XendraTrl(Identifier="028f056d-ea8b-55f8-b27f-552ef025f172")
 public static String es_PE_FIELD_CommissionLine_SalesRegion_Description="Región de cobertura de ventas.";
 
 @XendraTrl(Identifier="028f056d-ea8b-55f8-b27f-552ef025f172")
 public static String es_PE_FIELD_CommissionLine_SalesRegion_Help="La región de ventas indica una área de cobertura de ventas específica.";
-
-@XendraTrl(Identifier="028f056d-ea8b-55f8-b27f-552ef025f172")
-public static String es_PE_FIELD_CommissionLine_SalesRegion_Name="Región de Ventas";
 
 @XendraField(AD_Column_ID="C_SalesRegion_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -481,7 +482,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64264ef5-b609-7913-f3d2-2e2a0111aa74",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name C_SalesRegion_ID */
 public static final String COLUMNNAME_C_SalesRegion_ID = "C_SalesRegion_ID";
 /** Set Description.
@@ -512,13 +513,13 @@ return value;
 }
 
 @XendraTrl(Identifier="6fabb47d-ca66-9a89-16b1-16c168c55811")
+public static String es_PE_FIELD_CommissionLine_Description_Name="Observación";
+
+@XendraTrl(Identifier="6fabb47d-ca66-9a89-16b1-16c168c55811")
 public static String es_PE_FIELD_CommissionLine_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="6fabb47d-ca66-9a89-16b1-16c168c55811")
 public static String es_PE_FIELD_CommissionLine_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="6fabb47d-ca66-9a89-16b1-16c168c55811")
-public static String es_PE_FIELD_CommissionLine_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -536,7 +537,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67b7e459-4752-f7b3-3655-4285ebee1147",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -568,7 +569,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2fd6962b-4143-4fa3-9a9e-4cd9329c8b9c",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Positive only.
@@ -591,13 +592,13 @@ return false;
 }
 
 @XendraTrl(Identifier="987499d9-8aea-a09f-1462-e71f60b8b6b5")
+public static String es_PE_FIELD_CommissionLine_PositiveOnly_Name="Sólo Positivos";
+
+@XendraTrl(Identifier="987499d9-8aea-a09f-1462-e71f60b8b6b5")
 public static String es_PE_FIELD_CommissionLine_PositiveOnly_Description="No generar comisiones negativas";
 
 @XendraTrl(Identifier="987499d9-8aea-a09f-1462-e71f60b8b6b5")
 public static String es_PE_FIELD_CommissionLine_PositiveOnly_Help="El cuadro de verificación solamente cheques positivos indica que si el resultado de la sustracción es negativa; se ignore. Esto significaría que las comisiones negativas no serían calculadas.";
-
-@XendraTrl(Identifier="987499d9-8aea-a09f-1462-e71f60b8b6b5")
-public static String es_PE_FIELD_CommissionLine_PositiveOnly_Name="Sólo Positivos";
 
 @XendraField(AD_Column_ID="IsPositiveOnly",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -615,7 +616,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2bca3065-fc7a-f33d-fa40-c063b57795f7",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name IsPositiveOnly */
 public static final String COLUMNNAME_IsPositiveOnly = "IsPositiveOnly";
 /** Set Line No.
@@ -634,13 +635,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0593ff5b-d760-f459-9a88-89855a19c077")
+public static String es_PE_FIELD_CommissionLine_LineNo_Name="No. Línea";
+
+@XendraTrl(Identifier="0593ff5b-d760-f459-9a88-89855a19c077")
 public static String es_PE_FIELD_CommissionLine_LineNo_Description="No. Línea único para este documento";
 
 @XendraTrl(Identifier="0593ff5b-d760-f459-9a88-89855a19c077")
 public static String es_PE_FIELD_CommissionLine_LineNo_Help="Indica el No. Línea para un documento. También controlará el orden de despliegue de las líneas dentro de un documento";
-
-@XendraTrl(Identifier="0593ff5b-d760-f459-9a88-89855a19c077")
-public static String es_PE_FIELD_CommissionLine_LineNo_Name="No. Línea";
 
 @XendraField(AD_Column_ID="Line",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -659,7 +660,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c67e4949-9b83-d58b-53fd-e685b4b5824f",
-Synchronized="2017-08-05 16:53:30.0")
+Synchronized="2019-08-30 22:21:23.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 /** Set Product Category.
@@ -680,13 +681,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="09723e49-5ab7-1945-b452-aed83e56f638")
+public static String es_PE_FIELD_CommissionLine_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="09723e49-5ab7-1945-b452-aed83e56f638")
 public static String es_PE_FIELD_CommissionLine_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="09723e49-5ab7-1945-b452-aed83e56f638")
 public static String es_PE_FIELD_CommissionLine_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="09723e49-5ab7-1945-b452-aed83e56f638")
-public static String es_PE_FIELD_CommissionLine_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -704,7 +705,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2b0a52da-1386-684f-d74d-c5dd33844621",Synchronized="2017-08-05 16:53:30.0")
+Identifier="2b0a52da-1386-684f-d74d-c5dd33844621",Synchronized="2019-08-30 22:21:23.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Product.
@@ -725,13 +726,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="930c98fe-7c28-a122-afa8-4d49315441be")
+public static String es_PE_FIELD_CommissionLine_Product_Name="Producto";
+
+@XendraTrl(Identifier="930c98fe-7c28-a122-afa8-4d49315441be")
 public static String es_PE_FIELD_CommissionLine_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="930c98fe-7c28-a122-afa8-4d49315441be")
 public static String es_PE_FIELD_CommissionLine_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="930c98fe-7c28-a122-afa8-4d49315441be")
-public static String es_PE_FIELD_CommissionLine_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -749,12 +750,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="97f9cf67-3023-9dc5-1cff-7de265a09cc1",Synchronized="2017-08-05 16:53:30.0")
+Identifier="97f9cf67-3023-9dc5-1cff-7de265a09cc1",Synchronized="2019-08-30 22:21:23.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
-
-/** Org_ID AD_Reference=54e78591-f7f4-c613-ea27-e64b3dac5198 */
-public static final int ORG_ID_AD_Reference_ID=130;
 /** Set Organization.
 @param Org_ID Organizational entity within client */
 public void setOrg_ID (int Org_ID)
@@ -773,13 +771,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="de695738-55a0-bfe7-664e-c97b9dfb92a5")
+public static String es_PE_FIELD_CommissionLine_Organization_Name="Organización";
+
+@XendraTrl(Identifier="de695738-55a0-bfe7-664e-c97b9dfb92a5")
 public static String es_PE_FIELD_CommissionLine_Organization_Description="Entidad organizacional dentro de la empresa.";
 
 @XendraTrl(Identifier="de695738-55a0-bfe7-664e-c97b9dfb92a5")
 public static String es_PE_FIELD_CommissionLine_Organization_Help="Una organización es una unidad de su compañía ó entidad legal. Ej. tiendas; departamentos";
-
-@XendraTrl(Identifier="de695738-55a0-bfe7-664e-c97b9dfb92a5")
-public static String es_PE_FIELD_CommissionLine_Organization_Name="Organización";
 
 @XendraField(AD_Column_ID="Org_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -797,7 +795,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3da77557-4bd3-4c87-5f35-71b0ad291fa0",Synchronized="2017-08-05 16:53:30.0")
+Identifier="3da77557-4bd3-4c87-5f35-71b0ad291fa0",Synchronized="2019-08-30 22:21:23.0")
 /** Column name Org_ID */
 public static final String COLUMNNAME_Org_ID = "Org_ID";
 /** Set Multiplier Quantity.
@@ -817,13 +815,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="81458cf8-ce0e-77df-13df-9bba1795bc0b")
+public static String es_PE_FIELD_CommissionLine_MultiplierQuantity_Name="Cantidad Multiplicadora";
+
+@XendraTrl(Identifier="81458cf8-ce0e-77df-13df-9bba1795bc0b")
 public static String es_PE_FIELD_CommissionLine_MultiplierQuantity_Description="Valor por el cúal se multiplican las cantidades para generar las comisiones";
 
 @XendraTrl(Identifier="81458cf8-ce0e-77df-13df-9bba1795bc0b")
 public static String es_PE_FIELD_CommissionLine_MultiplierQuantity_Help="El campo Cantidad Multiplicadora indica el valor por el cúal multiplicar las cantidades acumuladas para esta corrida de comisiones";
-
-@XendraTrl(Identifier="81458cf8-ce0e-77df-13df-9bba1795bc0b")
-public static String es_PE_FIELD_CommissionLine_MultiplierQuantity_Name="Cantidad Multiplicadora";
 
 @XendraField(AD_Column_ID="QtyMultiplier",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Quantities",IsDisplayed=true,
@@ -841,7 +839,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0aa1823a-349f-aabf-67af-a63f34512587",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:24.0")
 /** Column name QtyMultiplier */
 public static final String COLUMNNAME_QtyMultiplier = "QtyMultiplier";
 /** Set Subtract Quantity.
@@ -861,13 +859,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="8d927e15-5b7b-7069-66e6-1ec39e8aeff9")
+public static String es_PE_FIELD_CommissionLine_SubtractQuantity_Name="Cantidad Restada";
+
+@XendraTrl(Identifier="8d927e15-5b7b-7069-66e6-1ec39e8aeff9")
 public static String es_PE_FIELD_CommissionLine_SubtractQuantity_Description="Cantidad a ser restada cuando se generan las comisiones";
 
 @XendraTrl(Identifier="8d927e15-5b7b-7069-66e6-1ec39e8aeff9")
 public static String es_PE_FIELD_CommissionLine_SubtractQuantity_Help="La cantidad substraida identifica la cantidad a ser restada antes de la multiplicación";
-
-@XendraTrl(Identifier="8d927e15-5b7b-7069-66e6-1ec39e8aeff9")
-public static String es_PE_FIELD_CommissionLine_SubtractQuantity_Name="Cantidad Restada";
 
 @XendraField(AD_Column_ID="QtySubtract",IsCentrallyMaintained=true,
 AD_Tab_ID="7a3c9b6a-9bc8-87fe-47ca-2cef6dc144a7",AD_FieldGroup_ID="Quantities",IsDisplayed=true,
@@ -885,7 +883,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="25947930-9550-6c16-1a85-afd6e885327c",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:24.0")
 /** Column name QtySubtract */
 public static final String COLUMNNAME_QtySubtract = "QtySubtract";
 }

@@ -10,9 +10,9 @@ import javax.jms.JMSException;
 public class ExampleListener implements ExceptionListener
 {
    protected static String lastMessage = null;
-private IRulesServices m_connection;
+private IListener m_connection;
 
-   public ExampleListener(IRulesServices sales) {
+   public ExampleListener(IListener sales) {
 	m_connection = sales;
 }
 

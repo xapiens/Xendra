@@ -25,20 +25,28 @@ public class CreateReportsFromProcess {
 	private File dirreports;
 	
 	public CreateReportsFromProcess() {
-		HashMap props = Env.getMachine().getProperties();
-		String locationreports = (String) props.get(Constants.REPORTS);
-		dirreports = new File(locationreports);
-		if (!dirreports.exists()) {
-			locationreports = Ini.getXendraFolder(Constants.REPORTS);
-			dirreports = new File(locationreports);
-			if (dirreports.exists() || dirreports.mkdirs()) {				
-				props.put(Constants.REPORTS, locationreports);
-				Env.getMachine().setProperties(props);
-				Env.getMachine().save();				
-			}			
-		}		
+		//HashMap props = Env.getMachine().getProperties();
+		//String locationreports  = "";
+		//if (props.containsKey(Constants.REPORTS)) {
+		//	locationreports = (String) props.get(Constants.REPORTS);
+		//} else {
+		//	locationreports = Ini.getXendraFolder(Constants.REPORTS);
+		//}
+		dirreports = Env.getMachine().getReportsFolder();
+		//if (!dirreports.exists()) {
+		//	dirreports = new File(locationreports);
+		//	if (dirreports.exists() || dirreports.mkdirs()) {				
+		//		props.put(Constants.REPORTS, locationreports);
+		//		Env.getMachine().setProperties(props);
+		//		Env.getMachine().save();				
+		//	}			
+		//}							
+		
 		if (dirreports == null || !dirreports.exists())
 		{
+			return;
+		}
+		if (!dirreports.canWrite()) {
 			return;
 		}
 		HashMap files = new HashMap();

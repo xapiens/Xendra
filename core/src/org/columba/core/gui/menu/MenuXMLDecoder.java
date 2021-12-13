@@ -35,9 +35,9 @@ import org.columba.core.gui.action.AbstractColumbaAction;
 import org.columba.core.gui.action.AbstractSelectableAction;
 import org.columba.core.gui.action.CCheckBoxMenuItem;
 import org.columba.core.gui.base.CMenuItem;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
 import org.compiere.apps.WindowMenu;
+import org.compiere.util.CLogMgt;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -121,7 +121,7 @@ public class MenuXMLDecoder {
 						.instanciateExtension(new Object[] { controller });
 		} catch (Exception e) {
 			LOG.severe(e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 
 		}
@@ -224,8 +224,7 @@ public class MenuXMLDecoder {
 	private void parseMenu(ExtendableMenu parentMenu, Element parentElement) {
 		Iterator it = parentElement.getChildren().listIterator();
 		while (it.hasNext()) {
-			Element menuElement = (Element) it.next();
-
+			Element menuElement = (Element) it.next();			
 			if (menuElement.getName().equals(MenuXMLDecoder.MENU)) {
 
 				String menuId = menuElement
@@ -275,17 +274,16 @@ public class MenuXMLDecoder {
 						continue;
 
 					parentMenu.add(imenu);
-				} catch (Exception e) {
+				} catch (Exception e) {					
 					LOG.severe(e.getMessage());
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						e.printStackTrace();
 				}
 			} else if (menuElement.getName().equals(MenuXMLDecoder.PLACEHOLDER)) {
 				String id = menuElement.getAttributeValue(MenuXMLDecoder.ID);
 				parentMenu.addPlaceholder(id);
 			}
-		}
-
+		}		
 	}
 
 	private void parsePopupMenu(ExtendablePopupMenu parentMenu,
@@ -297,8 +295,7 @@ public class MenuXMLDecoder {
 
 				String menuId = menuElement
 						.getAttributeValue(MenuXMLDecoder.ID);
-				String menuName = mediator.getString("menu", "mainframe",
-						menuId);
+				String menuName = mediator.getString("menu", "mainframe",	menuId);
 
 				ExtendableMenu menu = new ExtendableMenu(menuId, menuName);
 				parseMenu(menu, menuElement);
@@ -409,8 +406,7 @@ public class MenuXMLDecoder {
 				String menuId = menuElement
 						.getAttributeValue(MenuXMLDecoder.ID);
 
-				String menuName = mediator.getString("menu", "mainframe",
-						menuId);
+				String menuName = mediator.getString("menu", "mainframe", menuId);
 
 				if (menubar.exists(menuId)) {
 					// extend existing menu
@@ -463,7 +459,7 @@ public class MenuXMLDecoder {
 					parentMenu.insert(imenu, placeholderId);
 				} catch (Exception e) {
 					LOG.severe(e.getMessage());
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						e.printStackTrace();
 				}
 			} else if (menuElement.getName().equals(MenuXMLDecoder.PLACEHOLDER)) {

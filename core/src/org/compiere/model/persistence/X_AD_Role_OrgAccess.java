@@ -60,14 +60,14 @@ public static int Table_ID=MTable.getTable_ID("AD_Role_OrgAccess");
 public static String es_PE_TAB_OrgAccess_Description="Mantener Acceso a Organización";
 
 @XendraTrl(Identifier="5e039afa-cd4b-0892-89b4-03065c0333ac")
-public static String es_PE_TAB_OrgAccess_Name="Acceso a Organización";
-
-@XendraTrl(Identifier="5e039afa-cd4b-0892-89b4-03065c0333ac")
 public static String es_PE_TAB_OrgAccess_Help="Adicionar las organizaciones a las cuales el usuario tiene acceso. Solamente adiciones organizaciones que hagan parte de la compañía a la cual pertenece el rol.";
 
-@XendraTab(Name="Org Access",Description="Maintain Role Org Access",
+@XendraTrl(Identifier="5e039afa-cd4b-0892-89b4-03065c0333ac")
+public static String es_PE_TAB_OrgAccess_Name="Acceso a Organización";
+@XendraTab(Name="Org Access",
+Description="Maintain Role Org Access",
 Help="Add the client and organizations the user has access to. Entries here are ignored, if User Org Access is selected or the role has access to all roles.<br> Note that access information is cached and requires re-login or reset of cache.",
-AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=20,TabLevel=1,IsSingleRow=false,
+AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
 AD_Column_ID="0281d376-abb9-e2bd-38f2-1d9a2e364399",HasTree=false,WhereClause="",OrderByClause="",
 CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",
@@ -79,11 +79,12 @@ public static final String TABNAME_OrgAccess="5e039afa-cd4b-0892-89b4-03065c0333
 @XendraTrl(Identifier="d288e94c-b928-8285-abe0-491846fbd5c3")
 public static String es_PE_TABLE_AD_Role_OrgAccess_Name="AD_Role_OrgAccess";
 
-@XendraTable(Name="AD_Role_OrgAccess",Description="",Help="",TableName="AD_Role_OrgAccess",
-AccessLevel="6",AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.request",
-Identifier="d288e94c-b928-8285-abe0-491846fbd5c3",Synchronized="2017-08-16 11:40:57.0")
+@XendraTable(Name="AD_Role_OrgAccess",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Role_OrgAccess",AccessLevel="6",AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="d288e94c-b928-8285-abe0-491846fbd5c3",Synchronized="2020-03-03 21:35:53.0")
 /** TableName=AD_Role_OrgAccess */
 public static final String Table_Name="AD_Role_OrgAccess";
 
@@ -133,18 +134,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
+public static String es_PE_FIELD_OrgAccess_Role_Name="Rol";
+
+@XendraTrl(Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
 public static String es_PE_FIELD_OrgAccess_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
 public static String es_PE_FIELD_OrgAccess_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
 
-@XendraTrl(Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
-public static String es_PE_FIELD_OrgAccess_Role_Name="Rol";
-@XendraField(AD_Column_ID="AD_Role_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="5e039afa-cd4b-0892-89b4-03065c0333ac",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=30,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
+@XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="5e039afa-cd4b-0892-89b4-03065c0333ac",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=30,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="88af288f-55db-e759-7045-3bd348bdbec4")
 public static final String FIELDNAME_OrgAccess_Role="88af288f-55db-e759-7045-3bd348bdbec4";
 
 @XendraTrl(Identifier="0281d376-abb9-e2bd-38f2-1d9a2e364399")
@@ -156,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0281d376-abb9-e2bd-38f2-1d9a2e364399",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:39.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Identifier.
@@ -188,7 +190,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b980a64a-3810-4b78-a87f-80746a50e820",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Read Only.
@@ -211,13 +213,13 @@ return false;
 }
 
 @XendraTrl(Identifier="e1a27d62-830e-55f3-2d01-f22d2ca9b199")
+public static String es_PE_FIELD_OrgAccess_ReadOnly_Name="Sólo Lectura";
+
+@XendraTrl(Identifier="e1a27d62-830e-55f3-2d01-f22d2ca9b199")
 public static String es_PE_FIELD_OrgAccess_ReadOnly_Description="El campo es de sólo lectura";
 
 @XendraTrl(Identifier="e1a27d62-830e-55f3-2d01-f22d2ca9b199")
 public static String es_PE_FIELD_OrgAccess_ReadOnly_Help="El sólo lectura indica que este campo solamente puede ser leído. No puede ser actualizado.";
-
-@XendraTrl(Identifier="e1a27d62-830e-55f3-2d01-f22d2ca9b199")
-public static String es_PE_FIELD_OrgAccess_ReadOnly_Name="Sólo Lectura";
 
 @XendraField(AD_Column_ID="IsReadOnly",IsCentrallyMaintained=true,
 AD_Tab_ID="5e039afa-cd4b-0892-89b4-03065c0333ac",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9685fc62-b9ae-98cf-adf8-b522a7865d09",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:39.0")
 /** Column name IsReadOnly */
 public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
 }

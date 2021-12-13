@@ -23,7 +23,6 @@ import java.util.*;
 import org.compiere.model.MAccount;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MConversionRate;
-import org.compiere.model.MCostDetail;
 import org.compiere.model.MInOut;
 import org.compiere.model.MInOutLine;
 import org.compiere.model.MInvoice;
@@ -292,10 +291,10 @@ public class Doc_MatchInv extends Doc
 			tQty = tQty.add(getQty());
 	
 		// Set Total Amount and Total Quantity from Matched Invoice 
-		MCostDetail.createInvoice(as, getAD_Org_ID(), 
-				getM_Product_ID(), matchInv.getM_AttributeSetInstance_ID(),
-				m_invoiceLine.getC_InvoiceLine_ID(), 0,		//	No cost element
-				tAmt, tQty,	getDescription(), getTrxName());
+		//MCostDetail.createInvoice(as, getAD_Org_ID(), 
+		//		getM_Product_ID(), matchInv.getM_AttributeSetInstance_ID(),
+		//		m_invoiceLine.getC_InvoiceLine_ID(), 0,		//	No cost element
+		//		tAmt, tQty,	getDescription(), getTrxName());
 		// end MZ
 		
 		//  Update Costing

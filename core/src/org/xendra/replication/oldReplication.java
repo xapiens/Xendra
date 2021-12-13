@@ -60,8 +60,8 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.xendra.Constants;
+import org.xendra.db.Querys;
 import org.xendra.exceptions.XendraException;
-import org.xendra.model.sql;
 
 public class oldReplication {
 	private static CLogger log = CLogger.getCLogger(ReplicationEngine.class);
@@ -155,7 +155,7 @@ public class oldReplication {
 									ResultSet rs = null;
 									try
 									{
-										pstmt = DB.prepareStatement(sql.GETINDEXBYTABLE, null);
+										pstmt = DB.prepareStatement(Querys.GETINDEXBYTABLE, null);
 										pstmt.setString(1, tn.toLowerCase());
 										rs = pstmt.executeQuery();
 										String where = "";
@@ -481,7 +481,7 @@ public class oldReplication {
 													ResultSet rs = null;
 													try
 													{
-														pstmt = DB.prepareStatement(sql.VALIDATIONTYPE_TableIdentifierValidation, null);
+														pstmt = DB.prepareStatement(Querys.VALIDATIONTYPE_TableIdentifierValidation, null);
 														pstmt.setInt(1, reference.getAD_Reference_ID());
 														rs = pstmt.executeQuery();
 														if (rs.next())

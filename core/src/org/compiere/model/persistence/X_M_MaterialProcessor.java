@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__FrequencyType;
 /** Generated Model for M_MaterialProcessor
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -75,11 +74,13 @@ public static final String TABNAME_MaterialProcessor="85b07e20-b2dc-4c0e-8e16-32
 @XendraTrl(Identifier="c61a5195-a7d4-4010-951e-f3693a069012")
 public static String es_PE_TABLE_M_MaterialProcessor_Name="Material Processor";
 
-@XendraTable(Name="Material Processor",Description="",Help="",TableName="M_MaterialProcessor",
-AccessLevel="3",AD_Window_ID="f8deeb00-bafb-48f0-8ec8-7e17fae48c6c",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="c61a5195-a7d4-4010-951e-f3693a069012",Synchronized="2017-10-04 18:38:23.0")
+@XendraTable(Name="Material Processor",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_MaterialProcessor",AccessLevel="3",
+AD_Window_ID="f8deeb00-bafb-48f0-8ec8-7e17fae48c6c",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="c61a5195-a7d4-4010-951e-f3693a069012",
+Synchronized="2020-03-03 21:38:39.0")
 /** TableName=M_MaterialProcessor */
 public static final String Table_Name="M_MaterialProcessor";
 
@@ -148,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="25b916d0-916e-40ae-992e-9d1eca89c057",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name A_Machine_ID */
 public static final String COLUMNNAME_A_Machine_ID = "A_Machine_ID";
 /** Set Date last run.
@@ -189,7 +190,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2c393719-4369-41c8-a2cf-4cf7773cd0af",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set Date next run.
@@ -230,7 +231,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d834813f-3980-44e1-89fd-90a6a14d80d6",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name DateNextRun */
 public static final String COLUMNNAME_DateNextRun = "DateNextRun";
 /** Set Description.
@@ -285,7 +286,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="691c6395-545b-4d51-94a8-62c2a2e6d15b",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Frequency.
@@ -328,7 +329,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eb747541-aedf-42b0-8a95-438ea5427000",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name Frequency */
 public static final String COLUMNNAME_Frequency = "Frequency";
 /** Set FrequencyStartAt.
@@ -355,19 +356,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f8be545c-b63b-4d34-a685-8dd28e7ef9fa",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name FrequencyStartAt */
 public static final String COLUMNNAME_FrequencyStartAt = "FrequencyStartAt";
-
-/** FrequencyType AD_Reference=a8e24598-16fb-a392-7587-12a112938032 */
-public static final int FREQUENCYTYPE_AD_Reference_ID=221;
 /** Set Frequency Type.
 @param FrequencyType Frequency of event */
 public void setFrequencyType (String FrequencyType)
 {
-if (FrequencyType == null) throw new IllegalArgumentException ("FrequencyType is mandatory");
-if (FrequencyType.equals(REF__FrequencyType.Minute) || FrequencyType.equals(REF__FrequencyType.Hour) || FrequencyType.equals(REF__FrequencyType.Day) || FrequencyType.equals(REF__FrequencyType.Once) || FrequencyType.equals(REF__FrequencyType.Notification));
- else throw new IllegalArgumentException ("FrequencyType Invalid value - " + FrequencyType + " - Reference_ID=221 - M - H - D - O - N");
 if (FrequencyType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -407,7 +402,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="01307890-dd6b-4f49-929c-e390ae40e7d4",Synchronized="2017-08-28 09:57:03.0")
+Identifier="01307890-dd6b-4f49-929c-e390ae40e7d4",Synchronized="2019-08-30 22:23:17.0")
 /** Column name FrequencyType */
 public static final String COLUMNNAME_FrequencyType = "FrequencyType";
 /** Set Identifier.
@@ -449,7 +444,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d4a7dfe-40cf-4cd9-a0be-ea856269e0e0",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Days to keep Log.
@@ -492,7 +487,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90329ae2-17a7-469f-8e01-1f764182cba1",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name KeepLogDays */
 public static final String COLUMNNAME_KeepLogDays = "KeepLogDays";
 /** Set Material Processor.
@@ -575,7 +570,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="149da5e9-e676-4ead-8773-708a220d6055",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -616,12 +611,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c28007f5-523f-4880-9d96-b4575743f407",
-Synchronized="2017-08-28 09:57:03.0")
+Synchronized="2019-08-30 22:23:17.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** Supervisor_ID AD_Reference=91f52193-02ab-6545-99f8-d6d30b9d03a1 */
-public static final int SUPERVISOR_ID_AD_Reference_ID=286;
 /** Set Supervisor.
 @param Supervisor_ID Supervisor for this user/organization - used for escalation and approval */
 public void setSupervisor_ID (int Supervisor_ID)
@@ -663,7 +655,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d82c34af-f42d-4319-b672-af5e6d015155",Synchronized="2017-08-28 09:57:03.0")
+Identifier="d82c34af-f42d-4319-b672-af5e6d015155",Synchronized="2019-08-30 22:23:17.0")
 /** Column name Supervisor_ID */
 public static final String COLUMNNAME_Supervisor_ID = "Supervisor_ID";
 }

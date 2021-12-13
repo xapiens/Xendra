@@ -16,18 +16,25 @@
  *****************************************************************************/
 package org.compiere.model;
 
+import java.awt.EventQueue;
 import java.io.*;
-import java.security.KeyStore;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
+import javax.print.attribute.standard.MediaSize;
+
+import org.columba.core.xml.XMLCoreParser;
 import org.compiere.process.*;
 import org.compiere.util.*;
+import org.compiere.apps.ADialog;
+import org.compiere.apps.AEnv;
+import org.compiere.apps.ALogin;
 import org.compiere.apps.ProcessCtl;
 import org.compiere.model.persistence.X_AD_ClientInfo;
 import org.compiere.model.persistence.X_AD_OrgInfo;
 import org.compiere.model.persistence.X_AD_Preference;
+import org.compiere.model.persistence.X_AD_RoleType;
 import org.compiere.model.persistence.X_AD_User;
 import org.compiere.model.persistence.X_AD_User_Roles;
 import org.compiere.model.persistence.X_C_AcctSchema_Default;
@@ -37,17 +44,22 @@ import org.compiere.model.persistence.X_C_BP_Group;
 import org.compiere.model.persistence.X_C_Campaign;
 import org.compiere.model.persistence.X_C_Channel;
 import org.compiere.model.persistence.X_C_Cycle;
+import org.compiere.model.persistence.X_C_DocumentTax;
+import org.compiere.model.persistence.X_C_Element;
 import org.compiere.model.persistence.X_C_Project;
 import org.compiere.model.persistence.X_C_SalesRegion;
 import org.compiere.model.persistence.X_C_Tax;
 import org.compiere.model.persistence.X_C_TaxCategory;
 import org.compiere.model.persistence.X_C_UOM;
 import org.compiere.model.persistence.X_I_BPartner;
+import org.compiere.model.persistence.X_I_ElementSchema;
+import org.compiere.model.persistence.X_I_ElementValue;
 import org.compiere.model.persistence.X_I_Inventory;
 import org.compiere.model.persistence.X_I_PriceList;
 import org.compiere.model.persistence.X_I_Product;
 import org.compiere.model.persistence.X_M_Product_Category;
 import org.compiere.model.reference.REF_AD_RolePreferenceType;
+import org.compiere.model.reference.REF_BaseRoleType;
 import org.compiere.model.reference.REF_C_AcctSchemaElementType;
 import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
 import org.compiere.model.reference.REF_C_DocTypeSubType;
@@ -55,6 +67,8 @@ import org.compiere.model.reference.REF_AD_RoleUserLevel;
 import org.compiere.model.reference.REF_C_ElementType;
 import org.compiere.model.reference.REF_GLCategoryType;
 import org.compiere.model.reference.REF_M_DiscountType;
+import org.jdom.Document;
+import org.jdom.Element;
 import org.xendra.Constants;
 import org.xendra.util.UpdatePO;
 /**
@@ -121,8 +135,13 @@ public final class MSetup
 	 * @param lang 
 	 *  @return true if created
 	 */
-	public boolean createClient (String clientValue, String clientName, String orgName,
-			String userClient, String userOrg, Language lang)
+	public boolean createClient(String clientValue, 
+								String clientName, 
+								String TaxID, 
+								String orgName,
+								String userClient, 
+								String userOrg, 
+								Language lang)
 	{
 		log.info(clientName);
 		m_trx.start();
@@ -144,7 +163,7 @@ public final class MSetup
 			m_clientName = name;
 			m_client = new MClient(Env.getCtx(), 0, true, m_trx.getTrxName());
 			m_client.setValue(clientValue);
-			m_client.setName(clientName);
+			m_client.setName(clientName);			
 			m_client.setPluginUpdate(true);
 			m_client.setAD_Language(lang.getAD_Language());
 			if (!m_client.save())
@@ -168,7 +187,7 @@ public final class MSetup
 
 
 			//  Trees and Client Info
-			if (!m_client.setupClientInfo(m_lang))
+			if (!m_client.setupClientInfo(m_lang, TaxID))
 			{
 				throw new Exception ("Client Info NOT created");
 			}
@@ -180,7 +199,7 @@ public final class MSetup
 			name = orgName;
 			if (name == null || name.length() == 0)
 				name = "newOrg";
-			m_org = new MOrg (m_client, name);
+			m_org = new MOrg (m_client, name);			
 			if (!m_org.save())
 			{
 				throw new Exception("Organization NOT created");
@@ -215,7 +234,11 @@ public final class MSetup
 			MRoleOrgAccess adminOrgAccess = new MRoleOrgAccess (admin, m_org.getAD_Org_ID());
 			if (!adminOrgAccess.save())
 				log.log(Level.SEVERE, "Admin Role_OrgAccess NOT created");
-
+			// Role type
+			X_AD_RoleType adminallrole = new X_AD_RoleType(Env.getCtx(), 0, m_trx.getTrxName());
+			adminallrole.setBaseRole(REF_BaseRoleType.All);
+			adminallrole.setAD_Role_ID(admin.getAD_Role_ID());
+			adminallrole.save();
 			//  Info - Admin Role
 			m_info.append(Msg.translate(m_lang, "AD_Role_ID")).append("=").append(name).append("\n");
 
@@ -233,6 +256,21 @@ public final class MSetup
 			if (!userOrgAccess.save())
 				log.log(Level.SEVERE, "User Role_OrgAccess NOT created");
 
+			// Role type
+			X_AD_RoleType usersalesrole = new X_AD_RoleType(Env.getCtx(), 0, m_trx.getTrxName());
+			usersalesrole.setBaseRole(REF_BaseRoleType.Sales);
+			usersalesrole.setAD_Role_ID(user.getAD_Role_ID());
+			usersalesrole.save();
+			
+			X_AD_RoleType useracctrole = new X_AD_RoleType(Env.getCtx(), 0, m_trx.getTrxName());
+			useracctrole.setBaseRole(REF_BaseRoleType.Account);
+			useracctrole.setAD_Role_ID(user.getAD_Role_ID());
+			useracctrole.save();
+			
+			X_AD_RoleType userlogisticrole = new X_AD_RoleType(Env.getCtx(), 0, m_trx.getTrxName());
+			userlogisticrole.setBaseRole(REF_BaseRoleType.Logistics);
+			userlogisticrole.setAD_Role_ID(user.getAD_Role_ID());
+			userlogisticrole.save();
 			//  Info - Client Role
 			m_info.append(Msg.translate(m_lang, "AD_Role_ID")).append("=").append(name).append("\n");
 
@@ -315,7 +353,7 @@ public final class MSetup
 
 			MRequestProcessor rp = new MRequestProcessor (m_client, AD_User_ID);
 			rp.save();
-
+			
 			log.info("fini");
 		} catch (Exception e) {
 			String err = e.getMessage();
@@ -349,8 +387,7 @@ public final class MSetup
 	 */
 	public boolean createAccounting(KeyNamePair currency,
 			boolean hasProduct, boolean hasBPartner, boolean hasProject,
-			boolean hasMCampaign, boolean hasSRegion,
-			File AccountingFile)
+			boolean hasMCampaign, boolean hasSRegion /*,File AccountingFile*/)
 	{
 		try {
 			log.info(m_client.toString());
@@ -389,23 +426,22 @@ public final class MSetup
 			}
 			int C_Element_ID = element.getC_Element_ID();
 			m_info.append(Msg.translate(m_lang, "C_Element_ID")).append("=").append(name).append("\n");
-
 			//	Create Account Values
-			m_nap = new NaturalAccountMap<String,MElementValue>(Env.getCtx(), m_trx.getTrxName());
-			String errMsg = m_nap.parseFile(AccountingFile);
-			if (errMsg.length() != 0)
-			{
-				throw new Exception(errMsg);
-			}
-			if (m_nap.saveAccounts(getAD_Client_ID(), getAD_Org_ID(), C_Element_ID))
-				m_info.append(Msg.translate(m_lang, "C_ElementValue_ID")).append(" # ").append(m_nap.size()).append("\n");
-			else
-			{
-				throw new Exception("Acct Element Values NOT inserted");
-			}
-
-			int C_ElementValue_ID = m_nap.getC_ElementValue_ID("DEFAULT_ACCT");
-			log.fine("C_ElementValue_ID=" + C_ElementValue_ID);
+//			m_nap = new NaturalAccountMap<String,MElementValue>(Env.getCtx(), m_trx.getTrxName());
+//			String errMsg = m_nap.parseFile(AccountingFile);
+//			if (errMsg.length() != 0)
+//			{
+//				throw new Exception(errMsg);
+//			}
+//			if (m_nap.saveAccounts(getAD_Client_ID(), getAD_Org_ID(), C_Element_ID))
+//				m_info.append(Msg.translate(m_lang, "C_ElementValue_ID")).append(" # ").append(m_nap.size()).append("\n");
+//			else
+//			{
+//				throw new Exception("Acct Element Values NOT inserted");
+//			}
+//
+//			int C_ElementValue_ID = m_nap.getC_ElementValue_ID("DEFAULT_ACCT");
+//			log.fine("C_ElementValue_ID=" + C_ElementValue_ID);
 
 			/**
 			 *  Create AccountingSchema
@@ -415,381 +451,149 @@ public final class MSetup
 			{
 				throw new Exception("AcctSchema NOT inserted");
 			}
+			
+			//String updateclient = "UPDATE %s SET AD_Client_ID = %s,AD_Org_ID = %s WHERE COALESCE(AD_CLIENT_ID,0) = 0";
+			String updateclient = "UPDATE %s SET AD_Client_ID = %s WHERE COALESCE(AD_CLIENT_ID,0) = 0";
+			Savepoint savepoint = savepoint();
+			//DB.executeUpdate(String.format(updateclient, X_I_ElementValue.Table_Name, m_client.getAD_Client_ID(), getAD_Org_ID()), m_trx.getTrxName());
+			//DB.executeUpdate(String.format(updateclient, X_I_ElementSchema.Table_Name, m_client.getAD_Client_ID(), getAD_Org_ID()), m_trx.getTrxName());
+			DB.executeUpdate(String.format(updateclient, X_I_ElementValue.Table_Name, m_client.getAD_Client_ID()), m_trx.getTrxName());
+			DB.executeUpdate(String.format(updateclient, X_I_ElementSchema.Table_Name, m_client.getAD_Client_ID()), m_trx.getTrxName());
+			
+			if (!m_trx.commit()) 			
+				m_trx.rollback(savepoint);			
 			//  Info
 			m_info.append(Msg.translate(m_lang, "C_AcctSchema_ID")).append("=").append(m_as.getName()).append("\n");
 
-			ValueNamePair[] results = MRefList.getList("24957d9a-7342-7c9b-45fa-52d6e887e0d5");
-			int AD_Client_ID = m_client.getAD_Client_ID();
-			int Element_OO=0, Element_AC=0, Element_PR=0, Element_BP=0, Element_PJ=0,
-					Element_MC=0, Element_SR=0;		
-			for (ValueNamePair result:results) {
-				String IsMandatory = null;
-				String IsBalanced = "N";
-				int SeqNo = 0;		
-				int C_AcctSchema_Element_ID = 0;			
-				String ElementType = result.getValue();
-				name = result.getName();
-				if (ElementType.equals(REF_C_AcctSchemaElementType.Organization)) 
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_OO = C_AcctSchema_Element_ID;
-					IsMandatory = "Y";
-					IsBalanced = "Y";
-					SeqNo = 10;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.Account))
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_AC = C_AcctSchema_Element_ID;
-					IsMandatory = "Y";
-					SeqNo = 20;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.Product) && hasProduct)
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_PR = C_AcctSchema_Element_ID;
-					IsMandatory = "N";
-					SeqNo = 30;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.BPartner) && hasBPartner)
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_BP = C_AcctSchema_Element_ID;
-					IsMandatory = "N";
-					SeqNo = 40;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.Project) && hasProject)
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_PJ = C_AcctSchema_Element_ID;
-					IsMandatory = "N";
-					SeqNo = 50;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.Campaign) && hasMCampaign)
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_MC = C_AcctSchema_Element_ID;
-					IsMandatory = "N";
-					SeqNo = 60;
-				}
-				else if (ElementType.equals(REF_C_AcctSchemaElementType.SalesRegion) && hasSRegion)
-				{
-					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
-					Element_SR = C_AcctSchema_Element_ID;
-					IsMandatory = "N";
-					SeqNo = 70;
-				}
-				//	Not OT, LF, LT, U1, U2, AY
-				if (IsMandatory != null)
-				{
-					UpdatePO o = new UpdatePO();
-					o.setTablename(X_C_AcctSchema_Element.Table_Name);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_AcctSchema_Element_ID, C_AcctSchema_Element_ID);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_AcctSchema_ID, m_as.getC_AcctSchema_ID());
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_ElementType, ElementType);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_Name, name);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_SeqNo, SeqNo);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_IsMandatory, IsMandatory);
-					o.setField(X_C_AcctSchema_Element.COLUMNNAME_IsBalanced, IsBalanced);
-					no = o.insert(m_trx.getTrxName());				
-					if (no == 1)
-						m_info.append(Msg.translate(m_lang, "C_AcctSchema_Element_ID")).append("=").append(name).append("\n");
+//			ValueNamePair[] results = MRefList.getList("24957d9a-7342-7c9b-45fa-52d6e887e0d5");
+//			int AD_Client_ID = m_client.getAD_Client_ID();
+//			int Element_OO=0, Element_AC=0, Element_PR=0, Element_BP=0, Element_PJ=0,
+//					Element_MC=0, Element_SR=0;		
+//			for (ValueNamePair result:results) {
+//				String IsMandatory = null;
+//				String IsBalanced = "N";
+//				int SeqNo = 0;		
+//				int C_AcctSchema_Element_ID = 0;			
+//				String ElementType = result.getValue();
+//				name = result.getName();
+//				if (ElementType.equals(REF_C_AcctSchemaElementType.Organization)) 
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_OO = C_AcctSchema_Element_ID;
+//					IsMandatory = "Y";
+//					IsBalanced = "Y";
+//					SeqNo = 10;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.Account))
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_AC = C_AcctSchema_Element_ID;
+//					IsMandatory = "Y";
+//					SeqNo = 20;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.Product) && hasProduct)
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_PR = C_AcctSchema_Element_ID;
+//					IsMandatory = "N";
+//					SeqNo = 30;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.BPartner) && hasBPartner)
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_BP = C_AcctSchema_Element_ID;
+//					IsMandatory = "N";
+//					SeqNo = 40;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.Project) && hasProject)
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_PJ = C_AcctSchema_Element_ID;
+//					IsMandatory = "N";
+//					SeqNo = 50;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.Campaign) && hasMCampaign)
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_MC = C_AcctSchema_Element_ID;
+//					IsMandatory = "N";
+//					SeqNo = 60;
+//				}
+//				else if (ElementType.equals(REF_C_AcctSchemaElementType.SalesRegion) && hasSRegion)
+//				{
+//					C_AcctSchema_Element_ID = getNextID(AD_Client_ID, "C_AcctSchema_Element");
+//					Element_SR = C_AcctSchema_Element_ID;
+//					IsMandatory = "N";
+//					SeqNo = 70;
+//				}
+//				//	Not OT, LF, LT, U1, U2, AY
+//				if (IsMandatory != null)
+//				{
+//					UpdatePO o = new UpdatePO();
+//					o.setClient(AD_Client_ID);
+//					o.setTablename(X_C_AcctSchema_Element.Table_Name);					
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_AcctSchema_Element_ID, C_AcctSchema_Element_ID);
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_AcctSchema_ID, m_as.getC_AcctSchema_ID());
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_ElementType, ElementType);
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_Name, name);
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_SeqNo, SeqNo);
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_IsMandatory, IsMandatory);
+//					o.setField(X_C_AcctSchema_Element.COLUMNNAME_IsBalanced, IsBalanced);
+//					no = o.insert(m_trx.getTrxName());				
+//					if (no == 1)
+//						m_info.append(Msg.translate(m_lang, "C_AcctSchema_Element_ID")).append("=").append(name).append("\n");
+//
+//					/** Default value for mandatory elements: OO and AC */
+//					if (ElementType.equals(REF_C_AcctSchemaElementType.Organization))
+//					{
+//						o = new UpdatePO();
+//						o.setTablename(X_C_AcctSchema_Element.Table_Name);
+//						o.setClient(AD_Client_ID);
+//						o.setField(Constants.COLUMNNAME_AD_Client_ID, AD_Client_ID);
+//						o.setField(Constants.COLUMNNAME_AD_Org_ID, getAD_Org_ID());
+//						no = o.update(String.format("C_AcctSchema_Element_ID='%s'",C_AcctSchema_Element_ID),m_trx.getTrxName());										
+//						if (no != 1)
+//							log.log(Level.SEVERE, "Default Org in AcctSchamaElement NOT updated");
+//					}
+//					if (ElementType.equals(REF_C_AcctSchemaElementType.Account))
+//					{
+//						o = new UpdatePO();
+//						o.setTablename(X_C_AcctSchema_Element.Table_Name);
+//						o.setClient(AD_Client_ID);						
+//						X_I_ElementSchema es = new Query(Env.getCtx(), X_I_ElementSchema.Table_Name, "schemaname = ?", m_trx.getTrxName())
+//							.setParameters("ELEMENT").first();
+//						if (es != null) {
+//							UpdatePO ies = new UpdatePO();
+//							ies.setTablename(X_I_ElementSchema.Table_Name);
+//							ies.setClient(es.getAD_Client_ID());
+//							ies.setAlias("i");
+//							String fieldexpr = "(SELECT C_ElementValue_ID FROM C_ElementValue e WHERE i.Elementname=e.Value AND i.AD_Client_ID=e.AD_Client_ID)"; 
+//							ies.setFieldExpr(X_I_ElementSchema.COLUMNNAME_C_ElementValue_ID, fieldexpr);		
+//							no = ies.update(String.format("I_ElementSchema_ID = %s", es.getI_ElementSchema_ID()), m_trx.getTrxName());
+//							log.info("ElementValue=" + no);
+//							es.load(m_trx.getTrxName());
+//							o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_ElementValue_ID, es.getC_ElementValue_ID());
+//							o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_Element_ID, C_Element_ID);
+//							no = o.update(String.format("C_AcctSchema_Element_ID='%s'", C_AcctSchema_Element_ID), m_trx.getTrxName());
+//							if (no != 1)
+//								log.log(Level.SEVERE, "Default Account in AcctSchamaElement NOT updated");							
+//						}
+//					}
+//				}			
+//			}
+			try {
+				importAccounting(m_client, C_Element_ID);
+				importschemadefault(m_client);				
+				InputStream is = getClass().getResourceAsStream("standard.xml");
+				decode(is);
+			} catch (Exception ex) {
 
-					/** Default value for mandatory elements: OO and AC */
-					if (ElementType.equals(REF_C_AcctSchemaElementType.Organization))
-					{
-						o = new UpdatePO();
-						o.setTablename(X_C_AcctSchema_Element.Table_Name);
-						o.setField(Constants.COLUMNNAME_AD_Org_ID, getAD_Org_ID());
-						no = o.update(String.format("C_AcctSchema_Element_ID='%s'",C_AcctSchema_Element_ID),m_trx.getTrxName());										
-						if (no != 1)
-							log.log(Level.SEVERE, "Default Org in AcctSchamaElement NOT updated");
-					}
-					if (ElementType.equals(REF_C_AcctSchemaElementType.Account))
-					{
-						o = new UpdatePO();
-						o.setTablename(X_C_AcctSchema_Element.Table_Name);
-						o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_ElementValue_ID, C_ElementValue_ID);
-						o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_Element_ID, C_Element_ID);
-						no = o.update(String.format("C_AcctSchema_Element_ID='%s'", C_AcctSchema_Element_ID), m_trx.getTrxName());
-						if (no != 1)
-							log.log(Level.SEVERE, "Default Account in AcctSchamaElement NOT updated");
-					}
-				}			
-			}
+			}				
 
-			//  Create GL Accounts			
-			m_accountsOK = true;
+			int ii = 0;
+			
 			UpdatePO o = new UpdatePO();
-			o.setTablename(X_C_AcctSchema_GL.Table_Name);
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_C_AcctSchema_ID, m_as.getC_AcctSchema_ID());
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_UseSuspenseBalancing, Constants.YES);
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_SuspenseBalancing_Acct, getAcct("SUSPENSEBALANCING_Acct"));
-
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_UseSuspenseError, Constants.YES);
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_SuspenseError_Acct, getAcct("SUSPENSEERROR_Acct"));
-
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_UseCurrencyBalancing, Constants.YES);
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_CurrencyBalancingIncome_Acct, getAcct("CURRENCYBALANCINGINCOME_Acct"));
-
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_CurrencyBalancingLoss_Acct, getAcct("CURRENCYBALANCINGLOSS_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_RetainedEarning_Acct, getAcct("RETAINEDEARNING_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_IncomeSummary_Acct, getAcct("INCOMESUMMARY_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_IntercompanyDueTo_Acct, getAcct("INTERCOMPANYDUETO_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_IntercompanyDueFrom_Acct, getAcct("INTERCOMPANYDUEFROM_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_PPVOffset_Acct, getAcct("PPVOFFSET_Acct"));
-			o.setField(X_C_AcctSchema_GL.COLUMNNAME_CommitmentOffset_Acct, getAcct("CommitmentOffset_Acct"));			
-			if (m_accountsOK)				
-				no = o.insert(m_trx.getTrxName());
-			//no = DB.executeUpdate(sqlCmd.toString(), m_trx.getTrxName());
-			else
-				no = -1;
-			if (no != 1)
-			{
-				throw new Exception("GL Accounts NOT inserted");
-			}
-			//			Create Std Accounts
-			o = new UpdatePO();
-			o.setTablename(X_C_AcctSchema_Default.Table_Name);
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_C_AcctSchema_ID, m_as.getC_AcctSchema_ID());
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_W_Inventory_Acct, getAcct("W_INVENTORY_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_W_Differences_Acct, getAcct("W_DIFFERENCES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_W_Revaluation_Acct, getAcct("W_REVALUATION_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_W_InvActualAdjust_Acct, getAcct("W_INVACTUALADJUST_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_Revenue_Acct, getAcct("P_REVENUE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_Expense_Acct, getAcct("P_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_CostAdjustment_Acct, getAcct("P_CostAdjustment_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_InventoryClearing_Acct, getAcct("P_InventoryClearing_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_Asset_Acct, getAcct("P_ASSET_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_COGS_Acct, getAcct("P_COGS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_PurchasePriceVariance_Acct, getAcct("P_PURCHASEPRICEVARIANCE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_InvoicePriceVariance_Acct, getAcct("P_INVOICEPRICEVARIANCE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountRec_Acct, getAcct("P_TRADEDISCOUNTREC_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_P_TradeDiscountGrant_Acct, getAcct("P_TRADEDISCOUNTGRANT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_C_Receivable_Acct, getAcct("C_RECEIVABLE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_C_Receivable_Services_Acct, getAcct("C_RECEIVABLE_SERVICES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_C_Prepayment_Acct, getAcct("C_PREPAYMENT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Acct, getAcct("V_LIABILITY_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_V_Liability_Services_Acct, getAcct("V_LIABILITY_SERVICES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_V_Prepayment_Acct, getAcct("V_PREPAYMENT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Exp_Acct, getAcct("PAYDISCOUNT_EXP_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_PayDiscount_Rev_Acct, getAcct("PAYDISCOUNT_REV_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_WriteOffGain_Acct, getAcct("WRITEOFFGAIN_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_WriteOffLoss_Acct, getAcct("WRITEOFFLOSS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedGain_Acct, getAcct("UNREALIZEDGAIN_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_UnrealizedLoss_Acct, getAcct("UNREALIZEDLOSS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_RealizedGain_Acct, getAcct("REALIZEDGAIN_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_RealizedLoss_Acct, getAcct("REALIZEDLOSS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_Withholding_Acct, getAcct("WITHHOLDING_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_E_Prepayment_Acct, getAcct("E_PREPAYMENT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_E_Expense_Acct, getAcct("E_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_PJ_Asset_Acct, getAcct("PJ_ASSET_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_PJ_WIP_Acct, getAcct("PJ_WIP_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_T_Expense_Acct, getAcct("T_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_T_Liability_Acct, getAcct("T_LIABILITY_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_T_Receivables_Acct, getAcct("T_RECEIVABLES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_T_Due_Acct, getAcct("T_DUE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_T_Credit_Acct, getAcct("T_CREDIT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_InTransit_Acct, getAcct("B_INTRANSIT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_Asset_Acct, getAcct("B_ASSET_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_Expense_Acct, getAcct("B_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_InterestRev_Acct, getAcct("B_INTERESTREV_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_InterestExp_Acct, getAcct("B_INTERESTEXP_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_Unidentified_Acct, getAcct("B_UNIDENTIFIED_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementGain_Acct, getAcct("B_SETTLEMENTGAIN_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_SettlementLoss_Acct, getAcct("B_SETTLEMENTLOSS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationGain_Acct, getAcct("B_REVALUATIONGAIN_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_RevaluationLoss_Acct, getAcct("B_REVALUATIONLOSS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_PaymentSelect_Acct, getAcct("B_PAYMENTSELECT_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_B_UnallocatedCash_Acct, getAcct("B_UNALLOCATEDCASH_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_Ch_Expense_Acct, getAcct("CH_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_Ch_Revenue_Acct, getAcct("CH_REVENUE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_UnEarnedRevenue_Acct, getAcct("UNEARNEDREVENUE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceivables_Acct, getAcct("NOTINVOICEDRECEIVABLES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedRevenue_Acct, getAcct("NOTINVOICEDREVENUE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_NotInvoicedReceipts_Acct, getAcct("NOTINVOICEDRECEIPTS_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_CB_Asset_Acct, getAcct("CB_ASSET_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_CB_CashTransfer_Acct, getAcct("CB_CASHTRANSFER_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_CB_Differences_Acct, getAcct("CB_DIFFERENCES_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_CB_Expense_Acct, getAcct("CB_EXPENSE_Acct"));
-			o.setField(X_C_AcctSchema_Default.COLUMNNAME_CB_Receipt_Acct, getAcct("CB_RECEIPT_Acct"));			
-			//	Create Std Accounts
-			if (m_accountsOK)
-				no = o.insert(m_trx.getTrxName());
-			else
-				no = -1;
-			if (no != 1)
-			{
-				throw new Exception("Default Accounts NOT inserted");
-			}
-
-			//  GL Categories
-			createGLCategory("Standard",REF_GLCategoryType.Manual, true);
-			int GL_None = createGLCategory("None", REF_GLCategoryType.Document, false);
-			int GL_GL = createGLCategory("Manual", REF_GLCategoryType.Manual, false);
-			int GL_ARI = createGLCategory("AR Invoice", REF_GLCategoryType.Document, false);
-			int GL_ARR = createGLCategory("AR Receipt", REF_GLCategoryType.Document, false);
-			int GL_MM = createGLCategory("Material Management", REF_GLCategoryType.Document, false);
-			int GL_API = createGLCategory("AP Invoice", REF_GLCategoryType.Document, false);
-			int GL_APP = createGLCategory("AP Payment", REF_GLCategoryType.Document, false);
-			int GL_CASH = createGLCategory("Cash/Payments", REF_GLCategoryType.Document, false);
-			int GL_BAT = createGLCategory("Bank Account Transfer", REF_GLCategoryType.Document, false);
-
-			int ii = createDocType("Asiento Diario","Asiento Diario", REF_C_DocTypeDocBaseType.GLJournal, null, 0, 0, 1000, GL_GL);
-			if (ii == 0)
-			{
-				throw new Exception("Document Type not created");
-			}		
-
-			ii = createDocType("Asignación", "Asignación", REF_C_DocTypeDocBaseType.PaymentAllocation, null, 0, 0, 490000, GL_CASH);
-			ii = createDocType("Asunto del Proyecto","Asunto del Proyecto", REF_C_DocTypeDocBaseType.ProjectIssue, null, 0, 0, 640000, GL_None);
-			ii = createDocType("Boleta CxC", "Boleta CxC", REF_C_DocTypeDocBaseType.ARInvoice, null, 0,0,150000, GL_ARI);
-			ii = createDocType("Corresponder Factura","Corresponder Factura", REF_C_DocTypeDocBaseType.MatchInvoice, null, 0, 0, 390000, GL_API);
-			ii = createDocType("Corresponder OC", "Corresponder OC", REF_C_DocTypeDocBaseType.MatchPO, null, 0, 0, 890000, GL_None);
-			ii = createDocType("Cotización","Cotización", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.Quotation, 0, 0, 10000, GL_None); // el original tiene quotation
-			ii = createDocType("Devolución de Material (Cliente)","Devolución de Material (Cliente)", REF_C_DocTypeDocBaseType.MaterialReturnOfCustomer, null, 0,0,570000, GL_API);
-			ii = createDocType("Devolución de Material (Proveedor)","Devolución de Material (Proveedor)", REF_C_DocTypeDocBaseType.MaterialReturnOfVendor, null, 0,0,570000, GL_MM);
-			ii = createDocType("Diario de Efectivo","Diario de Efectivo", REF_C_DocTypeDocBaseType.CashJournal, null, 0, 0, 750000, GL_CASH);
-			ii = createDocType("Entrega de Material","Entrega de Material", REF_C_DocTypeDocBaseType.MaterialDelivery, null, 0,0,500000,GL_MM);		
-			ii = createDocType("Estado Bancario", "Estado Bancario", REF_C_DocTypeDocBaseType.BankStatement, null, 0, 0, 700000, GL_CASH);
-			int DT_I = createDocType("Factura CxC","Factura CxC", REF_C_DocTypeDocBaseType.ARInvoice, null, 0, 0, 100000, GL_None);
-			int DT_S = createDocType("Guia de Remisión (Cliente)", "Guia de Remisión (Cliente)", REF_C_DocTypeDocBaseType.MaterialDelivery, null, 0,0,500000, GL_MM);
-			ii = createDocType("Inventario Físico","Inventario Físico", REF_C_DocTypeDocBaseType.MaterialPhysicalInventory, null, 0,0,620000, GL_MM);		
-			ii = createDocType("Lote de Diario","Lote de Diario", REF_C_DocTypeDocBaseType.GLJournal, null, 0, 0, 100, GL_GL);
-			ii = createDocType("Movimiento c/ Confirmación","Movimiento c/ Confirmación", REF_C_DocTypeDocBaseType.MaterialMovement, null, 0,0,610000, GL_MM);
-			ii = createDocType("Movimiento Directo","Movimiento Directo", REF_C_DocTypeDocBaseType.MaterialMovement, null, 0,0,610000, GL_MM);
-			int DT_IC = createDocType("Nota de Crédito CxC", "Nota de Crédito CxC", REF_C_DocTypeDocBaseType.ARCreditMemo, null, 0,0,170000, GL_ARI);
-			ii = createDocType("Nota de Débito CxC","Nota de Débito CxC", REF_C_DocTypeDocBaseType.ARInvoice, null, 0,0,100000, GL_ARI);
-			ii = createDocType("Orden de Almacén", "Orden de Almacén", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.WarehouseOrder, 0, 0,70000, GL_None);
-			ii = createDocType("Orden de Compra","Orden de Compra", REF_C_DocTypeDocBaseType.PurchaseOrder, null, 0, 0, 800000, GL_None);
-			ii = createDocType("Orden de Crédito","Orden de Crédito", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.OnCreditOrder, 0, 0, 60000, GL_None);
-			ii = createDocType("Orden Devolución","Orden Devolución", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.ReturnMaterial, 0, 0, 30000, GL_None);
-			int DT = createDocType("Orden POS","Orden POS", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.POSOrder, 0,0,80000, GL_None);
-			ii = createDocType("Orden Prepagada","Orden Prepagada", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.PrepayOrder, DT_S, DT_I, 30000, GL_None);
-			ii = createDocType("Order de Venta","Order de Venta", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.StandardOrder, 0,0,50000,GL_None);
-			ii = createDocType("Producción","Producción",REF_C_DocTypeDocBaseType.MaterialProduction, null, 0,0,630000, GL_None);
-			ii = createDocType("Propuesta","Propuesta", REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubType.Proposal, 0, 0, 20000, GL_None);
-			ii = createDocType("Requisición de Material","Requisición de Material", REF_C_DocTypeDocBaseType.PurchaseRequisition, null, 0,0,900000,GL_None);
-			ii = createDocType("Transferencia","Transferencia",REF_C_DocTypeDocBaseType.BankAccountTransfer, null, 0, 0, 760000, GL_BAT);
-
-			ii = createDocType("Egreso","Egreso", REF_C_DocTypeDocBaseType.APPayment, null, 0, 0, 0, GL_APP);
-			ii = createDocType("Ingreso","Ingreso", REF_C_DocTypeDocBaseType.ARReceipt, null, 0, 0, 0, GL_ARR);								
-			ii = createDocType("Letra de Cambio (Poveedor)","Letra de Cambio (Proveedor)", REF_C_DocTypeDocBaseType.BillOfExchange, null, 0,0,0,GL_None);		
-			ii = createDocType("Nota de Crédito CxP", "Nota de Crédito CxP", REF_C_DocTypeDocBaseType.APCreditMemo, null, 0,0,0, GL_API);
-			ii = createDocType("Boleta CxP","Boleta CxP",REF_C_DocTypeDocBaseType.APInvoice, null, 0,0,0, GL_API);
-			ii = createDocType("Factura CxP","Factura CxP", REF_C_DocTypeDocBaseType.APInvoice, null, 0,0,0, GL_API);
-			ii = createDocType("Recibo Servicios CxP", "Recibo Servicios CxP", REF_C_DocTypeDocBaseType.APInvoice, null, 0,0,0, GL_API);
-			ii = createDocType("Ticket CxP","Ticket CxP", REF_C_DocTypeDocBaseType.APInvoice, null, 0,0,0, GL_API);		
-			ii = createDocType("Nota de Débito CxP","Nota de Débito CxP", REF_C_DocTypeDocBaseType.APInvoice, null, 0,0,0, GL_API);		
-			ii = createDocType("Guía de Remisión (Proveedor)","Guía de Remisión (Proveedor)", REF_C_DocTypeDocBaseType.MaterialReceipt, null, 0,0,0, GL_MM);
-			ii = createDocType("Recibo de Material","Recibo de Material",REF_C_DocTypeDocBaseType.MaterialReceipt,null,0,0,0,GL_MM);
-			ii = createDocType("Recibo Honorarios CxP","Recibo Honorarios CxP", REF_C_DocTypeDocBaseType.PersonalFeeShip, null, 0,0,0, GL_None);
-			ii = createDocType("Letra de Cambio (Cliente)","Letra de Cambio (Cliente)", REF_C_DocTypeDocBaseType.BillOfExchange, null, 0,0,0, GL_MM);
-			//		//	Base DocumentTypes
-			//		int ii = createDocType("GL Journal", Msg.getElement(m_ctx, "GL_Journal_ID"), 
-			//			REF_C_DocTypeDocBaseType.GLJournal, null, 0, 0, 1000, GL_GL);
-			//		if (ii == 0)
-			//		{
-			//			String err = "Document Type not created";
-			//			m_info.append(err);
-			//			m_trx.rollback();
-			//			m_trx.close();
-			//			return false;
-			//		}
-			//		createDocType("GL Journal Batch", Msg.getElement(m_ctx, "GL_JournalBatch_ID"), 
-			//			REF_C_DocTypeDocBaseType.GLJournal, null, 0, 0, 100, GL_GL);
-			//		//	REF_C_DocTypeDocBaseType.GLDocument
-			//		//
-			//		int DT_I = createDocType("AR Invoice", Msg.getElement(m_ctx, "C_Invoice_ID", true), 
-			//			REF_C_DocTypeDocBaseType.ARInvoice, null, 0, 0, 100000, GL_ARI);
-			//		int DT_II = createDocType("AR Invoice Indirect", Msg.getElement(m_ctx, "C_Invoice_ID", true), 
-			//			REF_C_DocTypeDocBaseType.ARInvoice, null, 0, 0, 150000, GL_ARI);
-			//		int DT_IC = createDocType("AR Credit Memo", Msg.getMsg(m_ctx, "CreditMemo"), 
-			//			REF_C_DocTypeDocBaseType.ARCreditMemo, null, 0, 0, 170000, GL_ARI);
-			//		//	REF_C_DocTypeDocBaseType.ARProFormaInvoice
-			//		
-			//		createDocType("AP Invoice", Msg.getElement(m_ctx, "C_Invoice_ID", false), 
-			//			REF_C_DocTypeDocBaseType.APInvoice, null, 0, 0, 0, GL_API);
-			//		createDocType("AP CreditMemo", Msg.getMsg(m_ctx, "CreditMemo"), 
-			//			REF_C_DocTypeDocBaseType.APCreditMemo, null, 0, 0, 0, GL_API);
-			//		createDocType("Match Invoice", Msg.getElement(m_ctx, "M_MatchInv_ID", false), 
-			//			REF_C_DocTypeDocBaseType.MatchInvoice, null, 0, 0, 390000, GL_API);
-			//		
-			//		createDocType("AR Receipt", Msg.getElement(m_ctx, "C_Payment_ID", true), 
-			//			REF_C_DocTypeDocBaseType.ARReceipt, null, 0, 0, 0, GL_ARR);
-			//		createDocType("AP Payment", Msg.getElement(m_ctx, "C_Payment_ID", false), 
-			//			REF_C_DocTypeDocBaseType.APPayment, null, 0, 0, 0, GL_APP);
-			//		createDocType("Allocation", "Allocation", 
-			//			REF_C_DocTypeDocBaseType.PaymentAllocation, null, 0, 0, 490000, GL_CASH);
-			//
-			//		int DT_S  = createDocType("MM Shipment", "Delivery Note", 
-			//			REF_C_DocTypeDocBaseType.MaterialDelivery, null, 0, 0, 500000, GL_MM);
-			//		int DT_SI = createDocType("MM Shipment Indirect", "Delivery Note", 
-			//			REF_C_DocTypeDocBaseType.MaterialDelivery, null, 0, 0, 550000, GL_MM);
-			//		
-			//		createDocType("MM Receipt", "Vendor Delivery", 
-			//			REF_C_DocTypeDocBaseType.MaterialReceipt, null, 0, 0, 0, GL_MM);
-			//		
-			//		//int DT_RM = createDocType("MM Returns", "Customer Returns", 
-			//		//	REF_C_DocTypeDocBaseType.MaterialReceipt, null, 0, 0, 570000, GL_MM);
-			//		int DT_RM = createDocType("Custom Returns", "Customer Returns", 
-			//			REF_C_DocTypeDocBaseType.MaterialCustomerReturn, null, 0, 0, 570000, GL_MM);
-			//		createDocType("Vendor Returns", "Vendor Returns", 
-			//			REF_C_DocTypeDocBaseType.MaterialVendorReturn, null, 0, 0, 570000, GL_MM);		
-			//		createDocType("Purchase Order", Msg.getElement(m_ctx, "C_Order_ID", false), 
-			//			REF_C_DocTypeDocBaseType.PurchaseOrder, null, 0, 0, 800000, GL_None);
-			//		createDocType("Match PO", Msg.getElement(m_ctx, "M_MatchPO_ID", false), 
-			//			REF_C_DocTypeDocBaseType.MatchPO, null, 0, 0, 890000, GL_None);
-			//		createDocType("Purchase Requisition", Msg.getElement(m_ctx, "M_Requisition_ID", false), 
-			//			REF_C_DocTypeDocBaseType.PurchaseRequisition, null, 0, 0, 900000, GL_None);
-			//
-			//		createDocType("Bank Statement", Msg.getElement(m_ctx, "C_BankStatemet_ID", true), 
-			//			REF_C_DocTypeDocBaseType.BankStatement, null, 0, 0, 700000, GL_CASH);
-			//		createDocType("Cash Journal", Msg.getElement(m_ctx, "C_Cash_ID", true),
-			//			REF_C_DocTypeDocBaseType.CashJournal, null, 0, 0, 750000, GL_CASH);
-			//		createDocType("Bank Account Transfer", Msg.getElement(m_ctx, "C_Payment_ID", true),
-			//			REF_C_DocTypeDocBaseType.BankAccountTransfer, null, 0, 0, 760000, GL_BAT);
-			//		
-			//		createDocType("Material Movement", Msg.getElement(m_ctx, "M_Movement_ID", false),
-			//			REF_C_DocTypeDocBaseType.MaterialMovement, null, 0, 0, 610000, GL_MM);
-			//		createDocType("Physical Inventory", Msg.getElement(m_ctx, "M_Inventory_ID", false), 
-			//			REF_C_DocTypeDocBaseType.MaterialPhysicalInventory, null, 0, 0, 620000, GL_MM);
-			//		createDocType("Material Production", Msg.getElement(m_ctx, "M_Production_ID", false), 
-			//			REF_C_DocTypeDocBaseType.MaterialProduction, null, 0, 0, 630000, GL_MM);
-			//		createDocType("Project Issue", Msg.getElement(m_ctx, "C_ProjectIssue_ID", false), 
-			//			REF_C_DocTypeDocBaseType.ProjectIssue, null, 0, 0, 640000, GL_MM);
-			//
-			//		//  Order Entry
-			//		createDocType("Binding offer", "Quotation", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.Quotation, 
-			//			0, 0, 10000, GL_None);
-			//		createDocType("Non binding offer", "Proposal", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.Proposal, 
-			//			0, 0, 20000, GL_None);
-			//		createDocType("Prepay Order", "Prepay Order", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.PrepayOrder, 
-			//			DT_S, DT_I, 30000, GL_None);
-			//		createDocType("Return Material", "Return Material Authorization", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.ReturnMaterial, 
-			//			DT_RM, DT_IC, 30000, GL_None);
-			//		createDocType("Standard Order", "Order Confirmation", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.StandardOrder, 
-			//			DT_S, DT_I, 50000, GL_None);
-			//		createDocType("Credit Order", "Order Confirmation", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.OnCreditOrder, 
-			//			DT_SI, DT_I, 60000, GL_None);   //  RE
-			//		createDocType("Warehouse Order", "Order Confirmation", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.WarehouseOrder, 
-			//			DT_S, DT_I,	70000, GL_None);    //  LS
-			//		int DT = createDocType("POS Order", "Order Confirmation", 
-			//			REF_C_DocTypeDocBaseType.SalesOrder, REF_C_DocTypeSubTypeSO.POSOrder, 
-			//			DT_SI, DT_II, 80000, GL_None);    // Bar
-
-			//	POS As Default for window SO
-			createPreference("C_DocTypeTarget_ID", String.valueOf(DT), 143);
-
-			o = new UpdatePO();
-			o.setTablename(X_AD_ClientInfo.Table_Name);
+			o.setTablename(X_AD_ClientInfo.Table_Name);			
 			o.setField(X_AD_ClientInfo.COLUMNNAME_C_AcctSchema1_ID, m_as.getC_AcctSchema_ID());
 			o.setField(X_AD_ClientInfo.COLUMNNAME_C_Calendar_ID, m_calendar.getC_Calendar_ID());
 			no = o.update(String.format("AD_Client_ID=%s",m_client.getAD_Client_ID()), m_trx.getTrxName());
@@ -802,6 +606,7 @@ public final class MSetup
 			DocumentTypeVerify.createDocumentTypes(Env.getCtx(), getAD_Client_ID(), null, m_trx.getTrxName());
 			DocumentTypeVerify.createPeriodControls(Env.getCtx(), getAD_Client_ID(), null, m_trx.getTrxName());			
 		} catch (Exception e) {
+			e.printStackTrace();
 			String err = e.getMessage();
 			log.log(Level.SEVERE, err);
 			m_info.append(err);
@@ -813,6 +618,119 @@ public final class MSetup
 		log.info("fini");
 		return true;
 	}   //  createAccounting
+
+	private void decode(InputStream is) {
+		try {			
+			Document doc = XMLCoreParser.retrieveDocument(is);
+			Element root = doc.getRootElement();
+			Iterator iterator = root.getChildren().listIterator();
+			Element extensionXmlElement;
+			while (iterator.hasNext()) {
+				extensionXmlElement = (Element) iterator.next();
+				if (extensionXmlElement.getName().equals("generalledger")) {
+					Iterator it1 = extensionXmlElement.getChildren().listIterator();
+					while (it1.hasNext() ) {
+						Element e = (Element) it1.next();
+						if (e.getName().equals("category")) {
+							String categoryname = e.getAttributeValue("name");
+							String type = e.getAttributeValue("type");
+							String catdefault = e.getAttributeValue("default");
+							if (catdefault == null) {
+								catdefault = "N";
+							}
+							String catidentifier = e.getAttributeValue("identifier");
+							if (catidentifier == null) {
+								catidentifier = Util.getUUID();
+							}
+							MGLCategory cat = createGLCategory(categoryname, type, catdefault.equals("Y"), catidentifier);
+							Iterator it2 = e.getChildren().listIterator();
+							while (it2.hasNext() ) {
+								Element edt = (Element) it2.next();
+								//<doctype name="Asunto del Proyecto" printname="Asunto del Proyecto" docbasetype="PJI" startno="640000" />
+								String identifier = edt.getAttributeValue("identifier");
+								if (identifier == null) {
+									identifier = Util.getUUID();
+								}
+								String dtname = edt.getAttributeValue("name");
+								String dtprintname = edt.getAttributeValue("printname");
+								String docbasetype = edt.getAttributeValue("docbasetype");
+								String docsubtype = edt.getAttributeValue("docsubtype");
+								if (docsubtype == null)
+									docsubtype = "";
+								String TransactionType = edt.getAttributeValue("transactiontype");								
+								String startno = edt.getAttributeValue("startno");
+								if (startno == null) {
+									startno = "0";
+								}
+								String taxid = edt.getAttributeValue("taxid");
+								if (taxid == null) {
+									taxid = "";
+								}
+								MDocType dt = createDocType(dtname, dtprintname, docbasetype, docsubtype, 0, 0, Integer.valueOf(startno), cat, taxid);
+								if (TransactionType != null) {
+									dt.setTransactionType(TransactionType);
+								}
+								String shipment = edt.getAttributeValue("shipment");
+								if (shipment == null)
+									shipment = "";
+								if (shipment.length() > 0) {
+									MDocType dtship = new Query(Env.getCtx(), MDocType.Table_Name, "identifier = ?", m_trx.getTrxName())
+									.setParameters(shipment).first();
+									if (dtship != null) {
+										dt.setC_DocTypeShipment_ID(dtship.getC_DocType_ID());
+									}
+								}
+								String invoice = edt.getAttributeValue("invoice");
+								if (invoice == null)
+									invoice = "";
+								if (invoice.length() > 0) {
+									MDocType dtinv = new Query(Env.getCtx(), MDocType.Table_Name, "identifier = ?", m_trx.getTrxName())
+									.setParameters(invoice).first();
+									if (dtinv != null) {										
+										dt.setC_DocTypeInvoice_ID(dtinv.getC_DocType_ID());
+									}									
+								}
+								//shipment="0af77d84-3463-49c5-a9f6-395570e35d35" 
+								//ii = createDocType("Asignación", "Asignación", REF_C_DocTypeDocBaseType.PaymentAllocation, null, 0, 0, 490000, GL_CASH);
+								dt.save();
+							}
+						}
+
+					}
+
+				} else if (extensionXmlElement.getName().equals("preferences")) {
+					Iterator it1 = extensionXmlElement.getChildren().listIterator();
+					while (it1.hasNext() ) {
+						Element e = (Element) it1.next();
+						if (e.getName().equals("preference")) {
+							String windowid = e.getAttributeValue("windowid");
+							if (windowid != null) {
+								MWindow w = new Query(Env.getCtx(), MWindow.Table_Name, "Identifier = ?", m_trx.getTrxName())
+									.setParameters(windowid).first();
+								if (w != null) {
+									String table = e.getAttributeValue("table");
+									String value = e.getAttributeValue("value");
+									PO po = new Query(Env.getCtx(), table, "identifier = ?", m_trx.getTrxName())
+										.setParameters(value).first();
+									if (po != null) {
+										String field = e.getAttributeValue("field");							
+										createPreference(field, String.valueOf(po.get_ID()), w.getAD_Window_ID());
+									}
+								}
+							}
+						}
+					}
+					// createPreference("C_DocTypeTarget_ID", String.valueOf(DT), 143);
+					//<preference field="C_DocTypeTarget_ID" value="15539d87-2bc0-425d-85b8-d842be8bfaf1" windowid="c6b21e03-9b7e-a7c6-27ff-50703fd13562" />
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+
 
 	/**
 	 *  Get Account ID for key
@@ -856,19 +774,20 @@ public final class MSetup
 	 *  @param isDefault is default value
 	 *  @return GL_Category_ID
 	 */
-	private int createGLCategory (String Name, String CategoryType, boolean isDefault)
+	private MGLCategory createGLCategory (String Name, String CategoryType, boolean isDefault, String identifier)
 	{
 		MGLCategory cat = new MGLCategory (Env.getCtx(), 0, m_trx.getTrxName());
 		cat.setName(Name);
 		cat.setCategoryType(CategoryType);
 		cat.setIsDefault(isDefault);
+		cat.setIdentifier(identifier);
 		if (!cat.save())
 		{
 			log.log(Level.SEVERE, "GL Category NOT created - " + Name);
-			return 0;
+			return null;
 		}
 		//
-		return cat.getGL_Category_ID();
+		return cat;
 	}   //  createGLCategory
 
 	/**
@@ -880,13 +799,13 @@ public final class MSetup
 	 *  @param C_DocTypeShipment_ID shipment doc
 	 *  @param C_DocTypeInvoice_ID invoice doc
 	 *  @param StartNo start doc no
-	 *  @param GL_Category_ID gl category
+	 *  @param GL_Category gl category
 	 *  @return C_DocType_ID doc type or 0 for error
 	 */
-	private int createDocType (String Name, String PrintName,
+	private MDocType createDocType (String Name, String PrintName,
 			String DocBaseType, String DocSubType,
 			int C_DocTypeShipment_ID, int C_DocTypeInvoice_ID,
-			int StartNo, int GL_Category_ID)
+			int StartNo, MGLCategory GL_Category, String TaxID)
 	{
 		MSequence sequence = null;
 		if (StartNo != 0)
@@ -895,21 +814,21 @@ public final class MSetup
 			if (!sequence.save())
 			{
 				log.log(Level.SEVERE, "Sequence NOT created - " + Name);
-				return 0;
+				return null;
 			}
 		}
 
 		MDocType dt = new MDocType (Env.getCtx(), DocBaseType, Name, m_trx.getTrxName());
 		if (PrintName != null && PrintName.length() > 0)
 			dt.setPrintName(PrintName);	//	Defaults to Name
-		if (DocSubType != null)
+		if (DocSubType != null && DocSubType.length() > 0)
 			dt.setDocSubType(DocSubType);
 		if (C_DocTypeShipment_ID != 0)
 			dt.setC_DocTypeShipment_ID(C_DocTypeShipment_ID);
 		if (C_DocTypeInvoice_ID != 0)
 			dt.setC_DocTypeInvoice_ID(C_DocTypeInvoice_ID);
-		if (GL_Category_ID != 0)
-			dt.setGL_Category_ID(GL_Category_ID);
+		if (GL_Category != null)
+			dt.setGL_Category_ID(GL_Category.getGL_Category_ID());
 		if (sequence == null)
 			dt.setIsDocNoControlled(false);		
 		else
@@ -917,14 +836,19 @@ public final class MSetup
 			dt.setIsDocNoControlled(true);
 			dt.setDocNoSequence_ID(sequence.getAD_Sequence_ID());
 		}
+		X_C_DocumentTax dtax = new Query(Env.getCtx(), X_C_DocumentTax.Table_Name, "value = ?", m_trx.getTrxName())
+			.setParameters(TaxID).first();
+		if (dtax != null) {
+			dt.setC_DocumentTax_ID(dtax.getC_DocumentTax_ID());
+		}		
 		dt.setIsSOTrx();
 		if (!dt.save())
 		{
 			log.log(Level.SEVERE, "DocType NOT created - " + Name);
-			return 0;
+			return null;
 		}
 		//
-		return dt.getC_DocType_ID();
+		return dt;
 	}   //  createDocType
 
 
@@ -940,7 +864,17 @@ public final class MSetup
 	 *  @param C_Currency_ID currency
 	 *  @return true if created
 	 */
-	public boolean createEntities(int C_Country_ID, int C_City_ID, int C_Region_ID, String address, int C_Currency_ID, MBPGroup bpgroup, MBPartner client, MBPartner others)
+	public boolean createEntities(int C_Country_ID, 
+			int C_City_ID,
+			int C_Region_ID, 
+			int C_Currency_ID,
+			MLocation clientaddress,
+			MLocation othersaddress,
+			String BankName, 
+			String BankAccountNo,
+			int BankC_Currency_ID,
+			MBPartner client, 
+			MBPartner others)
 	{
 		try {
 			Savepoint savepoint = null;
@@ -960,8 +894,10 @@ public final class MSetup
 			int no = 0;
 			client.set_TrxName(m_trx.getTrxName());			
 			client.setAD_Client_ID(m_client.getAD_Client_ID());
+			
 			others.set_TrxName(m_trx.getTrxName());
 			others.setAD_Client_ID(m_client.getAD_Client_ID());
+			others.setIsCustomer(true);
 			//	Create Marketing Channel/Campaign
 			int C_Channel_ID = getNextID(getAD_Client_ID(), "C_Channel");
 			UpdatePO o = new UpdatePO();
@@ -1044,15 +980,24 @@ public final class MSetup
 			/**
 			 *  Business Partner
 			 */
+			MBPGroup bpg = new MBPGroup (Env.getCtx(), 0, m_trx.getTrxName());
+			bpg.setValue(defaultName);
+			bpg.setName(defaultName);
+			bpg.setIsDefault(true);
+			if (bpg.save())
+				m_info.append(Msg.translate(m_lang, "C_BP_Group_ID")).append("=").append(defaultName).append("\n");
+			else
+				log.log(Level.SEVERE, "BP Group NOT inserted");
+			
 			//	Create BPartner
-			client.setBPGroup(bpgroup);
+			client.setBPGroup(bpg);
 			if (!client.save())
 				m_trx.rollback(savepoint);
 			else {
 				m_info.append(Msg.translate(m_lang, "C_BPartner_ID")).append("=").append(client.getName()).append("\n");
 			}
 			savepoint = savepoint();											
-			others.setBPGroup(bpgroup);
+			others.setBPGroup(bpg);
 			if (!others.save())
 				m_trx.rollback(savepoint);
 			else {
@@ -1064,17 +1009,24 @@ public final class MSetup
 			}		
 			savepoint = savepoint();
 			//  Location for Standard BP
-			MLocation bpLoc = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
-			if (!bpLoc.save())
-				m_trx.rollback(savepoint);
-			savepoint = savepoint();
+			//MLocation bpLoc = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
+			//if (!bpLoc.save())
+			//	m_trx.rollback(savepoint);
+			//savepoint = savepoint();
 			MBPartnerLocation bpl = new MBPartnerLocation(client);
-			bpl.setC_Location_ID(bpLoc.getC_Location_ID());
+			//bpl.setC_Location_ID(bpLoc.getC_Location_ID());
+			bpl.setC_Location_ID(clientaddress.getC_Location_ID());
 			if (!bpl.save()) {
 				m_trx.rollback(savepoint);
 				log.log(Level.SEVERE, "BP_Location (Standard) NOT inserted");
+			}			
+			savepoint = savepoint();
+			MBPartnerLocation bpothers = new MBPartnerLocation(others);
+			bpothers.setC_Location_ID(othersaddress.getC_Location_ID());
+			if (!bpothers.save()) {
+				m_trx.rollback(savepoint);
+				log.log(Level.SEVERE, "BP_Location (Anothers) NOT inserted");
 			}
-			savepoint = savepoint();			
 			//  Default
 			o = new UpdatePO();
 			o.setTablename(X_C_AcctSchema_Element.Table_Name);
@@ -1130,7 +1082,7 @@ public final class MSetup
 			DB.executeUpdate(String.format(updateclient, X_C_BP_Group.Table_Name, client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());
 			DB.executeUpdate(String.format(updateclient, "C_UOM_TRL", client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());
 			DB.executeUpdate(String.format(updateclient, X_M_Product_Category.Table_Name, client.getAD_Client_ID(), AD_Org_ID), m_trx.getTrxName());
-			DB.executeUpdate(String.format(updateclient, X_I_Product.Table_Name, client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());
+			DB.executeUpdate(String.format(updateclient, X_I_Product.Table_Name, client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());					
 			DB.executeUpdate(String.format(updateclient, X_I_BPartner.Table_Name, client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());
 			DB.executeUpdate(String.format(updateclient, X_I_PriceList.Table_Name,client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());			
 			DB.executeUpdate(String.format(updateclient, X_I_Inventory.Table_Name,client.getAD_Client_ID(),AD_Org_ID), m_trx.getTrxName());
@@ -1138,32 +1090,24 @@ public final class MSetup
 				m_trx.rollback(savepoint);
 			savepoint = savepoint();
 
-			//			MTaxCategory taxcategory = new Query(Env.getCtx(), MTaxCategory.Table_Name, "Name = ?", m_trx.getTrxName())
-			//			.setParameters("Standard").first();
-			//			if (taxcategory == null)
-			//			{
-			//				taxcategory = new MTaxCategory(Env.getCtx(), 0, m_trx.getTrxName());
-			//				taxcategory.setName(defaultName);
-			//				taxcategory.setIsDefault(true);
-			//				taxcategory.save();
-			//			}
-			//
-			//			//  Tax - Zero Rate
-			//			MTax tax = new MTax (m_ctx, "Standard", Env.ZERO, taxcategory.getC_TaxCategory_ID(), m_trx.getTrxName());
-			//			tax.setIsDefault(true);
-			//			if (tax.save()) {
-			//				savepoint = savepoint();
-			//				m_info.append(Msg.translate(m_lang, "C_Tax_ID"))
-			//				.append("=").append(tax.getName()).append("\n");
-			//			} else {
-			//				m_trx.rollback(savepoint);
-			//				log.log(Level.SEVERE, "Tax NOT inserted");
-			//			}
-			//			if (!m_trx.commit())			
-			//				m_trx.rollback(savepoint);
-			//			savepoint = savepoint();
 			MTaxCategory taxcategory = new Query(Env.getCtx(), MTaxCategory.Table_Name, "IsDefault = ?", null)
 			.setParameters(Constants.YES).first();
+			if (taxcategory == null)
+			{
+				taxcategory = new MTaxCategory(Env.getCtx(), 0, m_trx.getTrxName());
+				taxcategory.setName(defaultName);
+				taxcategory.setIsDefault(true);
+				taxcategory.save();
+			}
+			//  Tax - Zero Rate
+//			MTax tax = new MTax (Env.getCtx(), "taxname", Env.ZERO, taxcategory.getC_TaxCategory_ID(), m_trx.getTrxName());
+//			tax.setIsDefault(true);
+//			if (tax.save())
+//				m_info.append(Msg.translate(m_lang, "C_Tax_ID"))
+//					.append("=").append(tax.getName()).append("\n");
+//			else
+//				log.log(Level.SEVERE, "Tax NOT inserted");
+			
 			//	Create Product
 			MProduct product = new MProduct (Env.getCtx(), 0, m_trx.getTrxName());
 			product.setValue(defaultName);
@@ -1199,12 +1143,15 @@ public final class MSetup
 			 *  Location, Warehouse, Locator
 			 */
 			//  Location (Company)
-			MLocation loc = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
-			loc.setAddress1(address);
-			loc.save();
+			//MLocation loc = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
+			//loc.setAddress1(address1);
+			//loc.setAddress2(address2);
+			//loc.setAddress3(address3);
+			//loc.setAddress4(address4);
+			//loc.save();			
 			o = new UpdatePO();
 			o.setTablename(X_AD_OrgInfo.Table_Name);
-			o.setField(X_AD_OrgInfo.COLUMNNAME_C_Location_ID, loc.getC_Location_ID());
+			o.setField(X_AD_OrgInfo.COLUMNNAME_C_Location_ID, clientaddress.getC_Location_ID());
 			o.setField(X_AD_OrgInfo.COLUMNNAME_C_BPartner_ID, client.getC_BPartner_ID());
 			no = o.update(String.format("AD_Org_ID=%s", getAD_Org_ID()), m_trx.getTrxName());		
 			if (no != 1) {
@@ -1221,7 +1168,7 @@ public final class MSetup
 			MWarehouse wh = new MWarehouse(Env.getCtx(), 0, m_trx.getTrxName());
 			wh.setValue(defaultName);
 			wh.setName(defaultName);
-			wh.setC_Location_ID(loc.getC_Location_ID());
+			wh.setC_Location_ID(clientaddress.getC_Location_ID());
 			if (!wh.save()) {
 				m_trx.rollback(savepoint);
 				log.log(Level.SEVERE, "Warehouse NOT inserted");
@@ -1304,7 +1251,7 @@ public final class MSetup
 			MBPartner bpCU = new MBPartner (Env.getCtx(), 0, m_trx.getTrxName());
 			bpCU.setValue(AD_User_U_Name);
 			bpCU.setName(AD_User_U_Name);
-			bpCU.setBPGroup(bpgroup);
+			bpCU.setBPGroup(bpg);
 			//bpCU.setC_BP_DocTypeI(REF_C_BP_DocTypeI.Other);
 			bpCU.setIsEmployee(true);
 			bpCU.setIsSalesRep(true);
@@ -1316,10 +1263,10 @@ public final class MSetup
 			}
 			savepoint = savepoint();
 			//  Location for Client-User
-			MLocation bpLocCU = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
-			bpLocCU.save();
+			//MLocation bpLocCU = new MLocation(Env.getCtx(), C_Country_ID, C_Region_ID, C_City_ID, m_trx.getTrxName());
+			//bpLocCU.save();
 			MBPartnerLocation bplCU = new MBPartnerLocation(bpCU);
-			bplCU.setC_Location_ID(bpLocCU.getC_Location_ID());
+			bplCU.setC_Location_ID(clientaddress.getC_Location_ID());
 			if (!bplCU.save()) {
 				m_trx.rollback(savepoint);
 				log.log(Level.SEVERE, "BP_Location (User) NOT inserted");				
@@ -1342,7 +1289,7 @@ public final class MSetup
 			MBPartner bpCA = new MBPartner (Env.getCtx(), 0, m_trx.getTrxName());
 			bpCA.setValue(AD_User_Name);
 			bpCA.setName(AD_User_Name);
-			bpCA.setBPGroup(bpgroup);
+			bpCA.setBPGroup(bpg);
 			//bpCA.setC_BP_DocTypeI(REF_C_BP_DocTypeI.Other);
 			bpCA.setIsEmployee(true);
 			bpCA.setIsSalesRep(true);
@@ -1377,16 +1324,6 @@ public final class MSetup
 				m_trx.rollback(savepoint);			
 			savepoint = savepoint();
 			//		//  Payment Term
-			//		int C_PaymentTerm_ID = getNextID(getAD_Client_ID(), "C_PaymentTerm");
-			//		sqlCmd = new StringBuffer ("INSERT INTO C_PaymentTerm ");
-			//		sqlCmd.append("(C_PaymentTerm_ID,").append(m_stdColumns).append(",");
-			//		sqlCmd.append("Value,Name,NetDays,GraceDays,DiscountDays,Discount,DiscountDays2,Discount2,IsDefault) VALUES (");
-			//		sqlCmd.append(C_PaymentTerm_ID).append(",").append(m_stdValues).append(",");
-			//		sqlCmd.append("'Immediate','Immediate',0,0,0,0,0,0,'Y')");
-			//		no = DB.executeUpdate(sqlCmd.toString(), m_trx.getTrxName());
-			//		if (no != 1)
-			//			log.log(Level.SEVERE, "PaymentTerm NOT inserted");
-
 			MPaymentTerm pt = new MPaymentTerm(Env.getCtx(), 0, m_trx.getTrxName());
 			pt.setValue("Immediate");
 			pt.setName("Immediate");
@@ -1456,7 +1393,28 @@ public final class MSetup
 			if (!m_trx.commit())
 				m_trx.rollback(savepoint);			
 			savepoint = savepoint();
+			// Charge
+			MCharge charge = new MCharge(Env.getCtx(), 0, m_trx.getTrxName());
+			charge.setName(defaultName);
+			MTaxCategory tc = new Query(Env.getCtx(), MTaxCategory.Table_Name, "IsDefault = ?", m_trx.getTrxName())
+				.setParameters(true).first();
+			if (tc != null)
+				charge.setC_TaxCategory_ID(tc.getC_TaxCategory_ID());
+			charge.save();
+			// Bank
+			MBank bank = new MBank(Env.getCtx(), 0, m_trx.getTrxName());
+			bank.setName(BankName);			
+			bank.save();
+			
+			//String bankacctname,
+			//int bankcurrency,
 
+			// BankAccount 
+			MBankAccount bankaccount = new MBankAccount(Env.getCtx(), 0, m_trx.getTrxName());
+			bankaccount.setC_Bank_ID(bank.getC_Bank_ID());
+			bankaccount.setAccountNo(BankAccountNo);
+			bankaccount.setC_Currency_ID(BankC_Currency_ID);
+			bankaccount.save();
 			//  CashBook
 			MCashBook cb = new MCashBook(Env.getCtx(), 0, m_trx.getTrxName());
 			cb.setName(defaultName);
@@ -1471,11 +1429,12 @@ public final class MSetup
 			//
 			if (!m_trx.commit())	
 				m_trx.rollback(savepoint);			
-			m_trx.close();
+			m_trx.close();						
 			importProducts(client);
 			importBPartners(client);
+			copyAcctSchemaDefault(client);
 			importPriceList(client);
-			importInventory(client);
+			importInventory(client);			
 			log.info("finish");
 			return true;
 		} catch (Exception e) {
@@ -1524,7 +1483,67 @@ public final class MSetup
 			String info = pinfo.getSummary();			
 		}
 	}
+	
+	private void importAccounting(MClient m_client, int C_Element_ID) {
+		MProcess proc = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
+		.setParameters("org.compiere.process.ImportAccount").first();
+		
+		MPInstance instance = new MPInstance(Env.getCtx(), proc.getAD_Process_ID(), 0);
+		if (instance.save()) {
+			ProcessInfo pinfo = new ProcessInfo("ImportAccount", proc.getAD_Process_ID());
+			pinfo.setAD_PInstance_ID(instance.getAD_PInstance_ID());
+			MPInstancePara ipc = new MPInstancePara(instance, 10);
+			ipc.setParameter(Constants.COLUMNNAME_AD_Client_ID,  (Integer) m_client.getAD_Client_ID());
+			ipc.save();
+			MPInstancePara ipe = new MPInstancePara(instance, 20);
+			ipe.setParameter(X_C_Element.COLUMNNAME_C_Element_ID, C_Element_ID);
+			ipe.save();						
+			ProcessCtl worker = new ProcessCtl(null, 0, pinfo, null);
+			worker.run();
+			ProcessInfoUtil.setLogFromDB(pinfo);
+			String info = pinfo.getSummary();			
+		}
+	}
+	
+	private void importschemadefault(MClient m_client) {
+		MProcess proc = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
+		.setParameters("org.compiere.process.ImportAccountSchemaDefault").first();
+		
+		MPInstance instance = new MPInstance(Env.getCtx(), proc.getAD_Process_ID(), 0);
+		if (instance.save()) {
+			ProcessInfo pinfo = new ProcessInfo("ImportSchemaDefault", proc.getAD_Process_ID());
+			pinfo.setAD_PInstance_ID(instance.getAD_PInstance_ID());
+			MPInstancePara ipc = new MPInstancePara(instance, 10);
+			ipc.setParameter(Constants.COLUMNNAME_AD_Client_ID, (Integer) m_client.getAD_Client_ID());
+			ipc.save();
+			ProcessCtl worker = new ProcessCtl(null, 0, pinfo, null);
+			worker.run();
+			ProcessInfoUtil.setLogFromDB(pinfo);
+			String info = pinfo.getSummary();
+		}
+	}
 
+	private void copyAcctSchemaDefault(MBPartner client) {
+		//
+		MProcess proc = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
+		.setParameters("org.compiere.process.C_AcctSchema_Default_Copy").first();
+
+		MPInstance instance = new MPInstance(Env.getCtx(), proc.getAD_Process_ID(), 0);
+		if (instance.save())
+		{
+			ProcessInfo pinfo = new ProcessInfo ("UpdateAcctfromAcctSchema", proc.getAD_Process_ID());
+			pinfo.setAD_PInstance_ID (instance.getAD_PInstance_ID());
+			//pinfo.setRecord_ID(ids[i]);
+			MPInstancePara ip = new MPInstancePara(instance, 10);
+			ip.setParameter(Constants.COLUMNNAME_AD_Client_ID, (Integer) client.getAD_Client_ID());
+			ip.save();
+			ProcessCtl worker = new ProcessCtl(null, 0, pinfo, null);
+			worker.run();     //  complete tasks in unlockUI / generateShipments_complete
+			ProcessInfoUtil.setLogFromDB(pinfo);
+			String info = pinfo.getSummary();
+		}							
+	}
+	
 	private void importProducts(MBPartner client) {
 		MProcess proc = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
 		.setParameters("org.compiere.process.ImportProduct").first();
@@ -1648,25 +1667,75 @@ public final class MSetup
 	}
 
 
-
-	public void createCertificate(String pwd) {
-		String security = (String) Env.getMachine().getProperties().get(Constants.KEYSTORE);
-		if (security == null || security.compareTo(Ini.getXendraFolder(Constants.KEYSTORE)) != 0) {
-			security = Ini.getXendraFolder(Constants.KEYSTORE);
-			HashMap props = Env.getMachine().getProperties();
-			props.put(Constants.KEYSTORE, security);
-			Env.getMachine().setProperties(props);
-			Env.getMachine().save();        	
-		}
-		File secFolder = new File(security);
-		if (!secFolder.exists())
-			secFolder.mkdir();
-		secFolder = new File(String.format("%s%s%s", secFolder, File.separator, Constants.KEYSTORE_NAME));
-		try {
-			//KeyStoreType keyStoreType = KeyStoreType.JKS;
-			//KeyStore newKeyStore = KeyStoreUtil.create(keyStoreType);
-		} catch (Exception e) {
-			
-		}
-	}
+//	public void createCertificate(String pwd) {
+//		String security = (String) Env.getMachine().getProperties().get(Constants.KEYSTORE);
+//		if (security == null || security.compareTo(Ini.getXendraFolder(Constants.KEYSTORE)) != 0) {
+//			security = Ini.getXendraFolder(Constants.KEYSTORE);
+//			HashMap props = Env.getMachine().getProperties();
+//			props.put(Constants.KEYSTORE, security);
+//			Env.getMachine().setProperties(props);
+//			Env.getMachine().save();        	
+//		}
+//		File secFolder = new File(security);
+//		if (!secFolder.exists())
+//			secFolder.mkdir();
+//		secFolder = new File(String.format("%s%s%s", secFolder, File.separator, Constants.KEYSTORE_NAME));
+//		try {
+//			//KeyStoreType keyStoreType = KeyStoreType.JKS;
+//			//KeyStore newKeyStore = KeyStoreUtil.create(keyStoreType);
+//		} catch (Exception e) {
+//
+//		}
+//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					org.compiere.Xendra.startup(true);
+					Splash splash = Splash.getSplash();
+					ALogin login = new ALogin(splash);
+					if (!login.initLogin())		//	no automatic login
+					{
+						//	Center the window
+						try
+						{
+							AEnv.showCenterScreen(login);	//	HTML load errors
+						}
+						catch (Exception ex)
+						{
+							//log.severe(ex.toString());
+							ex.printStackTrace();
+						}
+						if (!login.isConnected() || !login.isOKpressed())
+							AEnv.exit(1);
+					}				
+					splash.dispose();
+					splash = null;
+					MSetup ms = new MSetup(Env.getCtx(), 0);
+					String clientvalue = "test";
+					String clientname = "test";
+					String taxid = "111111";
+					String orgname = "test";
+					String adminname = "admin";
+					String username = "user";
+					Language lang = new Language ("Espa\u00f1ol (Peru)", "es_PE",  new Locale("es","MX"), new Boolean(true), "dd/MM/yyyy", MediaSize.ISO.A4);
+					boolean ok = ms.createClient(clientvalue, clientname, taxid, orgname, adminname, username, lang);
+					String info = ms.getInfo();		
+					if (ok) {			
+						MCurrency currency = MCurrency.get(Env.getCtx(), 308);		
+						KeyNamePair curr = new KeyNamePair(currency.getC_Currency_ID(), currency.getISO_Code());
+						//File fileacct = new File("/home/americas/workspace/Xendra/data/import/AccountingPE.csv");
+						//						//m_glassPane.setMessage("create accounting...");
+						if (!ms.createAccounting(curr,
+								true /* product */ , true /* partner */ , true /* project */,
+								true /* campaign */ ,true /* region , fileacct*/)) {
+							ADialog.error(0, null, "AccountSetupError");
+						}
+					}					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}); 		
+	}		
 }   //  MSetup

@@ -40,7 +40,7 @@ public class ControlFile extends PrintFile implements Cloneable {
 			result.controlFileCommands = (ControlFileCommands)controlFileCommands.clone();
 			result.setContents(this.getContents());
 		} catch(CloneNotSupportedException e) {
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new InternalError(METHOD_NAME + e.getMessage());
 		}
 		return result;

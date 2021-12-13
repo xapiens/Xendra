@@ -63,10 +63,10 @@ public static int Table_ID=MTable.getTable_ID("M_Forecast");
 public static String es_PE_TAB_Forecast_Description="Material pronósticado";
 
 @XendraTrl(Identifier="c1b07917-5ae4-c060-3d05-2acd3cb9eb40")
-public static String es_PE_TAB_Forecast_Name="Pronosticar";
+public static String es_PE_TAB_Forecast_Help="Material pronósticado";
 
 @XendraTrl(Identifier="c1b07917-5ae4-c060-3d05-2acd3cb9eb40")
-public static String es_PE_TAB_Forecast_Help="Material pronósticado";
+public static String es_PE_TAB_Forecast_Name="Pronosticar";
 @XendraTab(Name="Forecast",
 Description="Material Forecast",Help="Material Forecast",
 AD_Window_ID="06d44e37-f9cc-1106-262a-5b7b41954a21",SeqNo=10,TabLevel=0,IsSingleRow=false,
@@ -80,11 +80,12 @@ public static final String TABNAME_Forecast="c1b07917-5ae4-c060-3d05-2acd3cb9eb4
 @XendraTrl(Identifier="c4c43f53-0d27-42b3-5d20-72a9b1311258")
 public static String es_PE_TABLE_M_Forecast_Name="Pronóstico";
 
-@XendraTable(Name="Forecast",Description="Material Forecast",Help="",TableName="M_Forecast",
-AccessLevel="2",AD_Window_ID="06d44e37-f9cc-1106-262a-5b7b41954a21",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="c4c43f53-0d27-42b3-5d20-72a9b1311258",Synchronized="2017-08-16 11:43:11.0")
+@XendraTable(Name="Forecast",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Material Forecast",Help="",
+TableName="M_Forecast",AccessLevel="2",AD_Window_ID="06d44e37-f9cc-1106-262a-5b7b41954a21",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="c4c43f53-0d27-42b3-5d20-72a9b1311258",Synchronized="2020-03-03 21:38:22.0")
 /** TableName=M_Forecast */
 public static final String Table_Name="M_Forecast";
 
@@ -134,13 +135,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="94826572-5d3c-e62e-9117-e86f98fcc2d4")
+public static String es_PE_FIELD_Forecast_Calendar_Name="Calendario";
+
+@XendraTrl(Identifier="94826572-5d3c-e62e-9117-e86f98fcc2d4")
 public static String es_PE_FIELD_Forecast_Calendar_Description="Nombre del Calendario Contable";
 
 @XendraTrl(Identifier="94826572-5d3c-e62e-9117-e86f98fcc2d4")
 public static String es_PE_FIELD_Forecast_Calendar_Help="El calendario únicamente identifica un calendario contable. Múltiples calendarios pueden ser usados. Ej. Ud. puede necesitar un calendario estándar que corre del 1 de enero al 31 de diciembre y un calendario fiscal que corre del 1 de julio al 30 de junio.";
-
-@XendraTrl(Identifier="94826572-5d3c-e62e-9117-e86f98fcc2d4")
-public static String es_PE_FIELD_Forecast_Calendar_Name="Calendario";
 
 @XendraField(AD_Column_ID="C_Calendar_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6add697b-0ca4-b168-994b-3c99623b7f50",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name C_Calendar_ID */
 public static final String COLUMNNAME_C_Calendar_ID = "C_Calendar_ID";
 /** Set Year.
@@ -178,18 +179,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
+public static String es_PE_FIELD_Forecast_Year_Name="Año";
+
+@XendraTrl(Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
 public static String es_PE_FIELD_Forecast_Year_Description="Año del calendario";
 
 @XendraTrl(Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
 public static String es_PE_FIELD_Forecast_Year_Help="El Año identifica únicamente un año contable para un calendario";
 
-@XendraTrl(Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
-public static String es_PE_FIELD_Forecast_Year_Name="Año";
-@XendraField(AD_Column_ID="C_Year_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=100,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
+@XendraField(AD_Column_ID="C_Year_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=100,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="3a561090-d7f8-f219-8620-e89c2fa5ac30")
 public static final String FIELDNAME_Forecast_Year="3a561090-d7f8-f219-8620-e89c2fa5ac30";
 
 @XendraTrl(Identifier="3b0f0cb2-91f2-36b3-ac2c-94030ca0f1b9")
@@ -201,7 +203,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3b0f0cb2-91f2-36b3-ac2c-94030ca0f1b9",Synchronized="2017-08-05 16:55:06.0")
+Identifier="3b0f0cb2-91f2-36b3-ac2c-94030ca0f1b9",Synchronized="2019-08-30 22:23:05.0")
 /** Column name C_Year_ID */
 public static final String COLUMNNAME_C_Year_ID = "C_Year_ID";
 /** Set Description.
@@ -232,13 +234,13 @@ return value;
 }
 
 @XendraTrl(Identifier="2453858a-78e2-dfdc-9803-ea28c2c221d3")
+public static String es_PE_FIELD_Forecast_Description_Name="Observación";
+
+@XendraTrl(Identifier="2453858a-78e2-dfdc-9803-ea28c2c221d3")
 public static String es_PE_FIELD_Forecast_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="2453858a-78e2-dfdc-9803-ea28c2c221d3")
 public static String es_PE_FIELD_Forecast_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="2453858a-78e2-dfdc-9803-ea28c2c221d3")
-public static String es_PE_FIELD_Forecast_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -256,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f25e60e3-7543-5873-1d9a-8385e1f39521",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -287,13 +289,13 @@ return value;
 }
 
 @XendraTrl(Identifier="bfa3ea7d-540f-42fc-e380-e041986d2637")
+public static String es_PE_FIELD_Forecast_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="bfa3ea7d-540f-42fc-e380-e041986d2637")
 public static String es_PE_FIELD_Forecast_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="bfa3ea7d-540f-42fc-e380-e041986d2637")
 public static String es_PE_FIELD_Forecast_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="bfa3ea7d-540f-42fc-e380-e041986d2637")
-public static String es_PE_FIELD_Forecast_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -311,7 +313,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="53bd860d-46e0-29dd-8b39-2dc9f4c3d913",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -343,7 +345,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="71e14d9a-086c-4404-b394-d334fabf8591",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -366,13 +368,13 @@ return false;
 }
 
 @XendraTrl(Identifier="f944399a-6a7b-b162-3bcd-a69f22207998")
+public static String es_PE_FIELD_Forecast_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="f944399a-6a7b-b162-3bcd-a69f22207998")
 public static String es_PE_FIELD_Forecast_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="f944399a-6a7b-b162-3bcd-a69f22207998")
 public static String es_PE_FIELD_Forecast_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="f944399a-6a7b-b162-3bcd-a69f22207998")
-public static String es_PE_FIELD_Forecast_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -390,7 +392,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9496b44-15b0-2e35-fda4-66d998bb28ab",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Forecast.
@@ -410,13 +412,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="03ccce62-0f4c-c7d1-b0ba-451c0b60f652")
+public static String es_PE_FIELD_Forecast_Forecast_Name="Pronóstico";
+
+@XendraTrl(Identifier="03ccce62-0f4c-c7d1-b0ba-451c0b60f652")
 public static String es_PE_FIELD_Forecast_Forecast_Description="Pronóstico de material";
 
 @XendraTrl(Identifier="03ccce62-0f4c-c7d1-b0ba-451c0b60f652")
 public static String es_PE_FIELD_Forecast_Forecast_Help="Pronóstico de material";
-
-@XendraTrl(Identifier="03ccce62-0f4c-c7d1-b0ba-451c0b60f652")
-public static String es_PE_FIELD_Forecast_Forecast_Name="Pronóstico";
 
 @XendraField(AD_Column_ID="M_Forecast_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -455,18 +457,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
+public static String es_PE_FIELD_Forecast_Name_Name="Nombre";
+
+@XendraTrl(Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
 public static String es_PE_FIELD_Forecast_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
 public static String es_PE_FIELD_Forecast_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
-public static String es_PE_FIELD_Forecast_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="c1b07917-5ae4-c060-3d05-2acd3cb9eb40",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="da5a6e27-f6b2-c062-f564-b273bd652f81")
 public static final String FIELDNAME_Forecast_Name="da5a6e27-f6b2-c062-f564-b273bd652f81";
 
 @XendraTrl(Identifier="abf2588a-b9bf-e651-373e-a807d56f1b1a")
@@ -478,7 +481,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="abf2588a-b9bf-e651-373e-a807d56f1b1a",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -519,7 +522,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="377c8aa9-be45-f6f6-f555-90533d2ea7cd",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

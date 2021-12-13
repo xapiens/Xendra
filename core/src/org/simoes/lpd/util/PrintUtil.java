@@ -7,7 +7,7 @@ import org.simoes.util.*;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.compiere.util.Util;
 
 //import org.simoes.lpd.common.Constants;
@@ -16,13 +16,13 @@ import org.compiere.util.Util;
  * This is a utility class to help us print labels.
  */
 public class PrintUtil {
-	static Logger log = Logger.getLogger(PrintUtil.class);
+	static CLogger log = CLogger.getCLogger(PrintUtil.class);
 	static final String CMD;
 	static final String TEMP_PDF = "temp.pdf";
 
 	static {
 		String osName = System.getProperty("os.name" );
-		log.debug("PrintUtil[static]: " + "os.name=" + osName);
+		log.fine("PrintUtil[static]: " + "os.name=" + osName);
 //		 FOR WINDOWS 95 AND 98 USE COMMAND.COM
 		if( osName.equals( "Windows 95" ) || osName.equals( "Windows 98" )){
 		   CMD = "command.com  /C start ";
@@ -54,22 +54,22 @@ public class PrintUtil {
 		
 		//String command = CMD + "\"" + ACROBAT + "\"" + " /t " + filename.getAbsolutePath() + " " + printer;
 		String command = CMD + "\"" + ACROBAT + "\"" + " /p /h " + filename.getAbsolutePath() + " " + printer;
-		log.debug(METHOD_NAME + "About to try:" + command);
+		log.fine(METHOD_NAME + "About to try:" + command);
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			Process pid = runtime.exec(command);
 			int returnValue = pid.waitFor();
 			if(0 == returnValue) {
-				log.debug(METHOD_NAME + "Process successfully completed.");
+				log.fine(METHOD_NAME + "Process successfully completed.");
 			} else {
-				log.warn(METHOD_NAME + "Process terminated abnomally, with an exit code of: " + returnValue);
+				log.warning(METHOD_NAME + "Process terminated abnomally, with an exit code of: " + returnValue);
 			}
 		} catch(InterruptedException e) {
-			log.error(METHOD_NAME + e.getMessage(), e);
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new LPDException(METHOD_NAME + e.getMessage());
 		} catch(IOException e) {
-			log.error(METHOD_NAME + "Tried to exec " + command + " , but we failed.");
-			log.error(METHOD_NAME + e.getMessage(), e);
+			log.severe(METHOD_NAME + "Tried to exec " + command + " , but we failed.");
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new LPDException(METHOD_NAME + e.getMessage());
 		}
 	}
@@ -85,10 +85,10 @@ public class PrintUtil {
 			File tempFile = FileUtil.writeFile(data, tempFilename);
 			printPDF(tempFile, printer);
 			if(!tempFile.delete()) {
-				log.warn(METHOD_NAME + "Could not delete: " + tempFile.getAbsolutePath());
+				log.warning(METHOD_NAME + "Could not delete: " + tempFile.getAbsolutePath());
 			}
 		} catch(IOException e) {
-			log.error(METHOD_NAME + e.getMessage(), e);
+			log.severe(METHOD_NAME + e.getMessage());
 		}
 	}
 

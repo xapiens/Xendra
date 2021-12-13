@@ -1872,7 +1872,7 @@ public final class MPayment extends X_C_Payment
 
 		//	Std Period open?
 		if (!MPeriod.isOpen(getCtx(), getDateAcct(), 
-			isReceipt() ? REF_C_DocTypeDocBaseType.ARReceipt : REF_C_DocTypeDocBaseType.APPayment, getAD_Org_ID()))
+			isReceipt() ? REF_C_DocTypeDocBaseType.ARReceipt : REF_C_DocTypeDocBaseType.APPayment, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -3072,8 +3072,8 @@ public final class MPayment extends X_C_Payment
 			.setOrderBy(" C_AllocationHdr_ID ")
 			.list();
 			MPaymentLine[] paylines = getLines();
-			if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.APPayment, getAD_Org_ID()) && 
-					!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.ARReceipt, getAD_Org_ID()) && 
+			if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.APPayment, getAD_Org_ID(), getAD_Client_ID()) && 
+					!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.ARReceipt, getAD_Org_ID(), getAD_Client_ID()) && 
 					(linesPayment != null || paylines != null) 
 					)
 				throw new XendraException ( "@PeriodClosed@");
@@ -3338,5 +3338,12 @@ public final class MPayment extends X_C_Payment
 	public void setProcessMsg(String msg)
 	{
 		m_processMsg = msg;
+	}
+
+
+	public void setInvoice(MInvoice invoice) {
+		setAD_Org_ID(invoice.getAD_Org_ID());
+		setC_Invoice_ID(invoice.getC_Invoice_ID());
+		
 	}	
 }   //  MPayment

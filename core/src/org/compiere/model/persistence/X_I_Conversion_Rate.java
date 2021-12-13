@@ -73,11 +73,13 @@ public static final String TABNAME_ImportCurrencyRate="8d7bb25a-ca84-6e8d-78d8-2
 public static String es_PE_TABLE_I_Conversion_Rate_Name="Importar Tabla de Equivalencias";
 
 
-@XendraTable(Name="Import Conversion Rate",Description="Import Currency Conversion Rate",Help="",
-TableName="I_Conversion_Rate",AccessLevel="6",AD_Window_ID="a669a6a6-6932-d6ac-6240-918e42bb33ed",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.import",
-Identifier="ba162058-f972-81fd-f80b-c11edc53cee5",Synchronized="2017-08-16 11:42:54.0")
+@XendraTable(Name="Import Conversion Rate",AD_Package_ID="645f34c0-ea3a-ac63-618d-8ca49873c33b",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Import Currency Conversion Rate",
+Help="",TableName="I_Conversion_Rate",AccessLevel="6",
+AD_Window_ID="a669a6a6-6932-d6ac-6240-918e42bb33ed",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.import",Identifier="ba162058-f972-81fd-f80b-c11edc53cee5",
+Synchronized="2020-03-03 21:38:06.0")
 /** TableName=I_Conversion_Rate */
 public static final String Table_Name="I_Conversion_Rate";
 
@@ -128,13 +130,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8fc81ee4-1c97-fcb0-0d95-3459b318169b")
+public static String es_PE_FIELD_ImportCurrencyRate_ConversionRate_Name="Tasa de Cambio";
+
+@XendraTrl(Identifier="8fc81ee4-1c97-fcb0-0d95-3459b318169b")
 public static String es_PE_FIELD_ImportCurrencyRate_ConversionRate_Description="Tasa usada para conversión de monedas";
 
 @XendraTrl(Identifier="8fc81ee4-1c97-fcb0-0d95-3459b318169b")
 public static String es_PE_FIELD_ImportCurrencyRate_ConversionRate_Help="La tasa de cambio define la tasa que se debe usar (multiplicando ó dividiendo) para convertir de una moneda a otra.";
-
-@XendraTrl(Identifier="8fc81ee4-1c97-fcb0-0d95-3459b318169b")
-public static String es_PE_FIELD_ImportCurrencyRate_ConversionRate_Name="Tasa de Cambio";
 
 @XendraField(AD_Column_ID="C_Conversion_Rate_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -152,7 +154,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="574d3cdd-d6dd-145d-77ce-8724554aa20c",Synchronized="2017-08-05 16:54:51.0")
+Identifier="574d3cdd-d6dd-145d-77ce-8724554aa20c",Synchronized="2019-08-30 22:22:47.0")
 /** Column name C_Conversion_Rate_ID */
 public static final String COLUMNNAME_C_Conversion_Rate_ID = "C_Conversion_Rate_ID";
 /** Set Currency Type.
@@ -173,13 +175,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9ff06db2-5683-818e-82cb-f71c3f8c7ca8")
+public static String es_PE_FIELD_ImportCurrencyRate_CurrencyType_Name="Tipo de Moneda";
+
+@XendraTrl(Identifier="9ff06db2-5683-818e-82cb-f71c3f8c7ca8")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyType_Description="Tipo de índice de conversión de moneda ";
 
 @XendraTrl(Identifier="9ff06db2-5683-818e-82cb-f71c3f8c7ca8")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyType_Help="El tipo del índice de conversión de monedas le deja definir diversos tipos de tarifas, tarifas ej. del punto, corporativas y/o de Ventas/Compras.";
-
-@XendraTrl(Identifier="9ff06db2-5683-818e-82cb-f71c3f8c7ca8")
-public static String es_PE_FIELD_ImportCurrencyRate_CurrencyType_Name="Tipo de Moneda";
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -197,7 +199,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="31520e47-9be3-858c-99b4-d51238214207",Synchronized="2017-08-05 16:54:51.0")
+Identifier="31520e47-9be3-858c-99b4-d51238214207",Synchronized="2019-08-30 22:22:47.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -218,13 +220,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="93a37d3d-8fd0-a1d2-51c9-fc179711d765")
+public static String es_PE_FIELD_ImportCurrencyRate_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="93a37d3d-8fd0-a1d2-51c9-fc179711d765")
 public static String es_PE_FIELD_ImportCurrencyRate_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="93a37d3d-8fd0-a1d2-51c9-fc179711d765")
 public static String es_PE_FIELD_ImportCurrencyRate_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="93a37d3d-8fd0-a1d2-51c9-fc179711d765")
-public static String es_PE_FIELD_ImportCurrencyRate_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -242,12 +244,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7aed4fd3-81ff-22df-984b-d1aad88db13f",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
-
-/** C_Currency_ID_To AD_Reference=f518e797-c49f-bc60-667a-48fd618f8ee8 */
-public static final int C_CURRENCY_ID_TO_AD_Reference_ID=112;
 /** Set Currency To.
 @param C_Currency_ID_To Target currency */
 public void setC_Currency_ID_To (int C_Currency_ID_To)
@@ -264,13 +263,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="95c6cf78-d126-a992-b4a5-7e910b7e1e08")
+public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTo_Name="A Moneda";
+
+@XendraTrl(Identifier="95c6cf78-d126-a992-b4a5-7e910b7e1e08")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTo_Description="Moneda a convertir.";
 
 @XendraTrl(Identifier="95c6cf78-d126-a992-b4a5-7e910b7e1e08")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTo_Help="La Moneda A define la moneda destino para esta tasa de conversión.";
-
-@XendraTrl(Identifier="95c6cf78-d126-a992-b4a5-7e910b7e1e08")
-public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTo_Name="A Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID_To",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -288,7 +287,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6f4153af-ecb6-8e2e-5a27-619406e1a8e2",Synchronized="2017-08-05 16:54:51.0")
+Identifier="6f4153af-ecb6-8e2e-5a27-619406e1a8e2",Synchronized="2019-08-30 22:22:47.0")
 /** Column name C_Currency_ID_To */
 public static final String COLUMNNAME_C_Currency_ID_To = "C_Currency_ID_To";
 /** Set Currency Type Key.
@@ -312,13 +311,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d35fdc09-0229-6eeb-11f2-2dfdef7a46ea")
+public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTypeKey_Name="Tipo de llave de Conversión";
+
+@XendraTrl(Identifier="d35fdc09-0229-6eeb-11f2-2dfdef7a46ea")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTypeKey_Description="Valor de la llave para el tipo del indice de conversión.";
 
 @XendraTrl(Identifier="d35fdc09-0229-6eeb-11f2-2dfdef7a46ea")
 public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTypeKey_Help="El valor de tipo de llave para la conversión de las transacciones de moneda extranjera.";
-
-@XendraTrl(Identifier="d35fdc09-0229-6eeb-11f2-2dfdef7a46ea")
-public static String es_PE_FIELD_ImportCurrencyRate_CurrencyTypeKey_Name="Tipo de llave de Conversión";
 
 @XendraField(AD_Column_ID="ConversionTypeValue",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -336,7 +335,7 @@ FieldLength=40,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3f9eb8d1-4bc5-ec52-93d9-d7c527f1b323",Synchronized="2017-08-05 16:54:51.0")
+Identifier="3f9eb8d1-4bc5-ec52-93d9-d7c527f1b323",Synchronized="2019-08-30 22:22:47.0")
 /** Column name ConversionTypeValue */
 public static final String COLUMNNAME_ConversionTypeValue = "ConversionTypeValue";
 /** Set Create Reciprocal Rate.
@@ -359,13 +358,13 @@ return false;
 }
 
 @XendraTrl(Identifier="0e5b6d10-6aec-315e-b2d9-2ad12f430cfa")
+public static String es_PE_FIELD_ImportCurrencyRate_CreateReciprocalRate_Name="Crear Proporción Reciproca";
+
+@XendraTrl(Identifier="0e5b6d10-6aec-315e-b2d9-2ad12f430cfa")
 public static String es_PE_FIELD_ImportCurrencyRate_CreateReciprocalRate_Description="Crear proporción reciproca desde la información actual";
 
 @XendraTrl(Identifier="0e5b6d10-6aec-315e-b2d9-2ad12f430cfa")
 public static String es_PE_FIELD_ImportCurrencyRate_CreateReciprocalRate_Help="Si está seleccionada, la tarifa importada Usd->eur se utiliza para crear/calcular la tarifa recíproca Eur->usd. ";
-
-@XendraTrl(Identifier="0e5b6d10-6aec-315e-b2d9-2ad12f430cfa")
-public static String es_PE_FIELD_ImportCurrencyRate_CreateReciprocalRate_Name="Crear Proporción Reciproca";
 
 @XendraField(AD_Column_ID="CreateReciprocalRate",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -383,7 +382,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a6d0888a-554a-5680-3f82-53326fa4120e",Synchronized="2017-08-05 16:54:51.0")
+Identifier="a6d0888a-554a-5680-3f82-53326fa4120e",Synchronized="2019-08-30 22:22:47.0")
 /** Column name CreateReciprocalRate */
 public static final String COLUMNNAME_CreateReciprocalRate = "CreateReciprocalRate";
 /** Set Divide Rate.
@@ -402,13 +401,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="5f3c69cb-141d-1085-6859-2cf3142b5c8e")
+public static String es_PE_FIELD_ImportCurrencyRate_DivideRate_Name="Tasa Divisora";
+
+@XendraTrl(Identifier="5f3c69cb-141d-1085-6859-2cf3142b5c8e")
 public static String es_PE_FIELD_ImportCurrencyRate_DivideRate_Description="Convierte el número fuente a número destino; el fuente entre el número divisor.";
 
 @XendraTrl(Identifier="5f3c69cb-141d-1085-6859-2cf3142b5c8e")
 public static String es_PE_FIELD_ImportCurrencyRate_DivideRate_Help="Para convertir el número fuente a número destino; la fuente es dividida entre la tasa divisora. Si usted introduce una tasa divisora; la tasa multiplicadora será calculada automáticamente;";
-
-@XendraTrl(Identifier="5f3c69cb-141d-1085-6859-2cf3142b5c8e")
-public static String es_PE_FIELD_ImportCurrencyRate_DivideRate_Name="Tasa Divisora";
 
 @XendraField(AD_Column_ID="DivideRate",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -426,7 +425,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9276b2cd-0331-3d1d-900a-7f32f807cf39",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name DivideRate */
 public static final String COLUMNNAME_DivideRate = "DivideRate";
 /** Set Import Conversion Rate.
@@ -452,10 +451,10 @@ return new KeyNamePair(get_ID(), String.valueOf(getI_Conversion_Rate_ID()));
 }
 
 @XendraTrl(Identifier="5875b7e2-6f79-fdce-15fc-d2397405bfdf")
-public static String es_PE_FIELD_ImportCurrencyRate_ImportConversionRate_Description="Importar moneda de conversión";
+public static String es_PE_FIELD_ImportCurrencyRate_ImportConversionRate_Name="Importar Tabla de Equivalencias";
 
 @XendraTrl(Identifier="5875b7e2-6f79-fdce-15fc-d2397405bfdf")
-public static String es_PE_FIELD_ImportCurrencyRate_ImportConversionRate_Name="Importar Tabla de Equivalencias";
+public static String es_PE_FIELD_ImportCurrencyRate_ImportConversionRate_Description="Importar moneda de conversión";
 
 @XendraField(AD_Column_ID="I_Conversion_Rate_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -494,7 +493,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f147def5-ca7b-412c-bdae-ee3e9aa52e82",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Import Error Message.
@@ -518,13 +517,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="5812d51a-d507-0262-4f6f-845898de2c0a")
+public static String es_PE_FIELD_ImportCurrencyRate_ImportErrorMessage_Name="Mensajes de Error al Importar";
+
+@XendraTrl(Identifier="5812d51a-d507-0262-4f6f-845898de2c0a")
 public static String es_PE_FIELD_ImportCurrencyRate_ImportErrorMessage_Description="Mensajes generados desde procesos de importación";
 
 @XendraTrl(Identifier="5812d51a-d507-0262-4f6f-845898de2c0a")
 public static String es_PE_FIELD_ImportCurrencyRate_ImportErrorMessage_Help="El mensaje de error de Importación despliega cualquier mensaje de error generado durante el proceso de importación.";
-
-@XendraTrl(Identifier="5812d51a-d507-0262-4f6f-845898de2c0a")
-public static String es_PE_FIELD_ImportCurrencyRate_ImportErrorMessage_Name="Mensajes de Error al Importar";
 
 @XendraField(AD_Column_ID="I_ErrorMsg",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -542,7 +541,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="94ca57ca-74a8-a24a-7e71-8792606c06df",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name I_ErrorMsg */
 public static final String COLUMNNAME_I_ErrorMsg = "I_ErrorMsg";
 /** Set Imported.
@@ -565,13 +564,13 @@ return false;
 }
 
 @XendraTrl(Identifier="d40ed691-7b84-7b95-0e70-496c5405c35b")
+public static String es_PE_FIELD_ImportCurrencyRate_Imported_Name="Importar";
+
+@XendraTrl(Identifier="d40ed691-7b84-7b95-0e70-496c5405c35b")
 public static String es_PE_FIELD_ImportCurrencyRate_Imported_Description="Esta importación ha sido procesada";
 
 @XendraTrl(Identifier="d40ed691-7b84-7b95-0e70-496c5405c35b")
 public static String es_PE_FIELD_ImportCurrencyRate_Imported_Help="El cuadro de verificación Importado indica si esta importación ha sido procesada";
-
-@XendraTrl(Identifier="d40ed691-7b84-7b95-0e70-496c5405c35b")
-public static String es_PE_FIELD_ImportCurrencyRate_Imported_Name="Importar";
 
 @XendraField(AD_Column_ID="I_IsImported",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -589,7 +588,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="49116e7d-0082-3980-2071-7a91fae1be9e",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name I_IsImported */
 public static final String COLUMNNAME_I_IsImported = "I_IsImported";
 /** Set ISO Currency Code.
@@ -613,13 +612,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="44527971-58b1-fd02-5c34-9bd66d4d031f")
+public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyCode_Name="Código ISO";
+
+@XendraTrl(Identifier="44527971-58b1-fd02-5c34-9bd66d4d031f")
 public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyCode_Description="Código ISO 4217 de la moneda";
 
 @XendraTrl(Identifier="44527971-58b1-fd02-5c34-9bd66d4d031f")
 public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyCode_Help="Para detalles ver - http://www.unece.org/trade/rec/rec09en.htm";
-
-@XendraTrl(Identifier="44527971-58b1-fd02-5c34-9bd66d4d031f")
-public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyCode_Name="Código ISO";
 
 @XendraField(AD_Column_ID="ISO_Code",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -637,7 +636,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="375e1e51-37ad-e823-29f5-d5ad3ef23f99",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name ISO_Code */
 public static final String COLUMNNAME_ISO_Code = "ISO_Code";
 /** Set ISO Currency To Code.
@@ -661,13 +660,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="0c0f75e2-e76a-7015-11d0-1072d64c182e")
+public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyToCode_Name="Codigo ISO actual de Moneda";
+
+@XendraTrl(Identifier="0c0f75e2-e76a-7015-11d0-1072d64c182e")
 public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyToCode_Description="Tres letras ISO 4217 código actual para la moneda";
 
 @XendraTrl(Identifier="0c0f75e2-e76a-7015-11d0-1072d64c182e")
 public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyToCode_Help="Para detalles ver - http://www.unece.org/trade/rec/rec09en.htm";
-
-@XendraTrl(Identifier="0c0f75e2-e76a-7015-11d0-1072d64c182e")
-public static String es_PE_FIELD_ImportCurrencyRate_ISOCurrencyToCode_Name="Codigo ISO actual de Moneda";
 
 @XendraField(AD_Column_ID="ISO_Code_To",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -685,7 +684,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="78d5d2fd-0a94-1e5a-271f-03684a1d6924",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name ISO_Code_To */
 public static final String COLUMNNAME_ISO_Code_To = "ISO_Code_To";
 /** Set Multiply Rate.
@@ -704,13 +703,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="22d6c368-4436-7209-66ae-e5745daa7282")
+public static String es_PE_FIELD_ImportCurrencyRate_MultiplyRate_Name="Tasa Multiplicadora";
+
+@XendraTrl(Identifier="22d6c368-4436-7209-66ae-e5745daa7282")
 public static String es_PE_FIELD_ImportCurrencyRate_MultiplyRate_Description="Tasa por la que se multiplica la fuente para encontrar el objetivo";
 
 @XendraTrl(Identifier="22d6c368-4436-7209-66ae-e5745daa7282")
 public static String es_PE_FIELD_ImportCurrencyRate_MultiplyRate_Help="Para convertir un número fuente a un número destino el fuente es multiplicado por la tasa multiplicadora. Si la tasa multiplicadora es introducida; entonces la tasa divisora será calculada automáticamente.";
-
-@XendraTrl(Identifier="22d6c368-4436-7209-66ae-e5745daa7282")
-public static String es_PE_FIELD_ImportCurrencyRate_MultiplyRate_Name="Tasa Multiplicadora";
 
 @XendraField(AD_Column_ID="MultiplyRate",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -728,7 +727,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="897deca6-b748-1fb6-3ce0-fc536e930619",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name MultiplyRate */
 public static final String COLUMNNAME_MultiplyRate = "MultiplyRate";
 /** Set Processed.
@@ -751,13 +750,13 @@ return false;
 }
 
 @XendraTrl(Identifier="8296ee57-64b9-dec7-481d-20119d621850")
+public static String es_PE_FIELD_ImportCurrencyRate_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="8296ee57-64b9-dec7-481d-20119d621850")
 public static String es_PE_FIELD_ImportCurrencyRate_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="8296ee57-64b9-dec7-481d-20119d621850")
 public static String es_PE_FIELD_ImportCurrencyRate_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="8296ee57-64b9-dec7-481d-20119d621850")
-public static String es_PE_FIELD_ImportCurrencyRate_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -775,7 +774,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bcf997af-fcdf-3837-04fc-ba83e0bf2a33",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -798,10 +797,10 @@ return false;
 }
 
 @XendraTrl(Identifier="0ea98759-aebd-289e-c383-0ba9bafcd338")
-public static String es_PE_FIELD_ImportCurrencyRate_ProcessNow_Description="Importar Tarifa de Conversión";
+public static String es_PE_FIELD_ImportCurrencyRate_ProcessNow_Name="Importar Tarifa de Conversión";
 
 @XendraTrl(Identifier="0ea98759-aebd-289e-c383-0ba9bafcd338")
-public static String es_PE_FIELD_ImportCurrencyRate_ProcessNow_Name="Importar Tarifa de Conversión";
+public static String es_PE_FIELD_ImportCurrencyRate_ProcessNow_Description="Importar Tarifa de Conversión";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -819,7 +818,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="3c05dbc0-c245-594c-a89d-62bdd49ce0b2",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="fa8e4ce1-c522-94bb-c49b-a9e030e29470",Synchronized="2017-08-05 16:54:51.0")
+Identifier="fa8e4ce1-c522-94bb-c49b-a9e030e29470",Synchronized="2019-08-30 22:22:47.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Valid from.
@@ -836,13 +835,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 }
 
 @XendraTrl(Identifier="dbce78b7-9d4a-f4a6-542c-f60bbf4c217d")
+public static String es_PE_FIELD_ImportCurrencyRate_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="dbce78b7-9d4a-f4a6-542c-f60bbf4c217d")
 public static String es_PE_FIELD_ImportCurrencyRate_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="dbce78b7-9d4a-f4a6-542c-f60bbf4c217d")
 public static String es_PE_FIELD_ImportCurrencyRate_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="dbce78b7-9d4a-f4a6-542c-f60bbf4c217d")
-public static String es_PE_FIELD_ImportCurrencyRate_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -860,7 +859,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="60078be7-0ac0-8300-1c5b-d33caae3ed9d",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -877,13 +876,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidTo);
 }
 
 @XendraTrl(Identifier="86bc0a21-2db5-12fa-e3cb-e470ba100c73")
+public static String es_PE_FIELD_ImportCurrencyRate_ValidTo_Name="Válido Hasta";
+
+@XendraTrl(Identifier="86bc0a21-2db5-12fa-e3cb-e470ba100c73")
 public static String es_PE_FIELD_ImportCurrencyRate_ValidTo_Description="Válido hasta; incluyendo esta fecha (ultimo día)";
 
 @XendraTrl(Identifier="86bc0a21-2db5-12fa-e3cb-e470ba100c73")
 public static String es_PE_FIELD_ImportCurrencyRate_ValidTo_Help="La fecha válida hasta indica el último día de un rango de fechas";
-
-@XendraTrl(Identifier="86bc0a21-2db5-12fa-e3cb-e470ba100c73")
-public static String es_PE_FIELD_ImportCurrencyRate_ValidTo_Name="Válido Hasta";
 
 @XendraField(AD_Column_ID="ValidTo",IsCentrallyMaintained=true,
 AD_Tab_ID="8d7bb25a-ca84-6e8d-78d8-2000c5075175",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -901,7 +900,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b34260e3-3232-cf08-cd80-2a8114e9fa08",
-Synchronized="2017-08-05 16:54:51.0")
+Synchronized="2019-08-30 22:22:47.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

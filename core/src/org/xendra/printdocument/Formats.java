@@ -1,36 +1,21 @@
 package org.xendra.printdocument;
 
-import java.lang.reflect.Constructor;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
-import java.util.logging.Level;
-
-import org.apache.log4j.Logger;
 import org.compiere.model.MColumn;
 import org.compiere.model.MDocType;
-import org.compiere.model.MLookupFactory;
 import org.compiere.model.MPrinterDocumentFormat;
 import org.compiere.model.MQuery;
-import org.compiere.model.MRole;
 import org.compiere.model.MTable;
-import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_AD_Column;
 import org.compiere.model.persistence.X_C_DocType;
 import org.compiere.model.persistence.X_C_Order;
 import org.compiere.model.persistence.X_C_PrinterDocumentFormat;
-import org.compiere.print.PrintData;
-import org.compiere.print.PrintDataColumn;
-import org.compiere.print.TableReference;
-import org.compiere.util.CLogMgt;
+import org.compiere.util.CCache;
+import org.compiere.util.CLogger;
 import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
-import org.compiere.util.Ini;
 import org.compiere.util.KeyNamePair;
-import org.compiere.util.Util;
 
 /**
  * This class maintains all of the Print queues and contains all of the logic
@@ -38,16 +23,16 @@ import org.compiere.util.Util;
  *
  */
 public class Formats {
-	static Logger log = Logger.getLogger(Formats.class);
+	static CLogger log = CLogger.getCLogger(Formats.class);
 
 	private final static Formats INSTANCE = new Formats();
-	private final Hashtable formats = new Hashtable(); 	
+	private final CCache<Integer, X_C_PrinterDocumentFormat> formats = new CCache<Integer, X_C_PrinterDocumentFormat>("format",10); 	
 	/**
 	 * Constructor for LPD.
 	 */
 	private Formats() {
 		super();
-		log.debug("formats(): STARTED");
+		log.fine("formats(): STARTED");
 		String where = "";
 		List<X_C_PrinterDocumentFormat> printdocumentformats = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name, where, null)		
 		.list();		
@@ -107,6 +92,13 @@ public class Formats {
 		{
 			 X_C_PrinterDocumentFormat pdf = (X_C_PrinterDocumentFormat) formats.get(key);
 			 format = pdf.getFormat();
+		} else {
+			X_C_PrinterDocumentFormat pdf = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name, "C_PrinterDocumentFormat_ID = ?", null)
+				.setParameters(key).first();
+			if (pdf != null) {
+				formats.put(key, pdf);
+				format = pdf.getFormat();
+			}
 		}
 		return format;
 	}

@@ -56,10 +56,12 @@ public static int Table_ID=MTable.getTable_ID("AD_ServletList");
 @XendraTrl(Identifier="88e7fc5d-663c-4f82-b716-23480e4db752")
 public static String es_PE_TABLE_AD_ServletList_Name="Servlet List";
 
-@XendraTable(Name="Servlet List",Description="",Help="",TableName="AD_ServletList",AccessLevel="6",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="88e7fc5d-663c-4f82-b716-23480e4db752",Synchronized="2017-08-16 11:40:59.0")
+@XendraTable(Name="Servlet List",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ServletList",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="88e7fc5d-663c-4f82-b716-23480e4db752",
+Synchronized="2020-03-03 21:35:56.0")
 /** TableName=AD_ServletList */
 public static final String Table_Name="AD_ServletList";
 
@@ -118,7 +120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="76153e9f-6d93-4f83-a8f8-175906c22378",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name AD_Plugin_ID */
 public static final String COLUMNNAME_AD_Plugin_ID = "AD_Plugin_ID";
 /** Set Servlet List.
@@ -168,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="898ba012-a68a-4cd1-80e2-21029f4a1b5a",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name context */
 public static final String COLUMNNAME_context = "context";
 /** Set ID.
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="422e1dc8-d749-405e-9b0a-0210595fb374",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name ID */
 public static final String COLUMNNAME_ID = "ID";
 /** Set Name.
@@ -239,7 +241,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="576278c9-0faf-402e-ae7a-a2ef55fad507",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

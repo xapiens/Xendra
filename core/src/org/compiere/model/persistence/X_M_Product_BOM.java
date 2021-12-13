@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_ProductBOMProductTypeX;
 /** Generated Model for M_Product_BOM
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -65,10 +64,10 @@ public static int Table_ID=MTable.getTable_ID("M_Product_BOM");
 public static String es_PE_TAB_BillOfMaterials_Description="Lista de Materiales de líneas de producto";
 
 @XendraTrl(Identifier="311d9f04-4437-45f7-17a4-8672292e30e5")
-public static String es_PE_TAB_BillOfMaterials_Name="Lista de Materiales";
+public static String es_PE_TAB_BillOfMaterials_Help="La pestaña Lista de Matriales define aquellos productos que son generados a partir de otros productos. Una lista de materialess (LDM) consta de uno ó más productos ó LDM`s. Cantidad Disponible: 1. LDM almacenadas tienen que ser creadas via producción. 2. La cantidad disponible de una LDM que no se almacena es calculada dinámicamente. 3. El atributo `Almacenada` que califica a una LDM es definida en la pestaña Producto. Precio: 1. LDM tienen que estar enlistadas en listas de precios. 2. Si el precio es 0.00; el precio es calculado dinámicamente como la suma del precio de cada ítem que compone la LDM. Impresión: 1. Usualmente; solo la información de la LDM es impresa. 2. Para facturas; boletas de despacho y boletas de recolección; se tiene la opción de imprimir los detalles. 3. En los detalles; la cantidad es listada y también el precio si este es calculado dinámicamente.";
 
 @XendraTrl(Identifier="311d9f04-4437-45f7-17a4-8672292e30e5")
-public static String es_PE_TAB_BillOfMaterials_Help="La pestaña Lista de Matriales define aquellos productos que son generados a partir de otros productos. Una lista de materialess (LDM) consta de uno ó más productos ó LDM`s. Cantidad Disponible: 1. LDM almacenadas tienen que ser creadas via producción. 2. La cantidad disponible de una LDM que no se almacena es calculada dinámicamente. 3. El atributo `Almacenada` que califica a una LDM es definida en la pestaña Producto. Precio: 1. LDM tienen que estar enlistadas en listas de precios. 2. Si el precio es 0.00; el precio es calculado dinámicamente como la suma del precio de cada ítem que compone la LDM. Impresión: 1. Usualmente; solo la información de la LDM es impresa. 2. Para facturas; boletas de despacho y boletas de recolección; se tiene la opción de imprimir los detalles. 3. En los detalles; la cantidad es listada y también el precio si este es calculado dinámicamente.";
+public static String es_PE_TAB_BillOfMaterials_Name="Lista de Materiales";
 
 @XendraTab(Name="Bill of Materials",Description="Bill of Material product lines",
 Help="The Bill of Materials tab defines those products that are generated from other products.  A Bill of Material (BOM) is one or more Products or BOMs.  Available Quantity: - Stored BOMs have to be created via 'Production' - The available quantity of a non-stored BOMs is dynamically calculated - The attribute 'Stored' is defined in the 'Product' tab  Price: - BOMs must be listed in Pricelists - If the price is 0.00, the price is dynamically calculated  Printing: - Usually, only the BOM information is printed - For invoices, delivery slips and pick lists, you have the option to print the details - In the details, the quantity is listed - and the price, if this is dynamically calculated",
@@ -83,11 +82,12 @@ public static final String TABNAME_BillOfMaterials="311d9f04-4437-45f7-17a4-8672
 @XendraTrl(Identifier="18a4c14a-3fed-e4a2-acc4-8c55e913a8fa")
 public static String es_PE_TABLE_M_Product_BOM_Name="Línea de Lista de Materiales";
 
-@XendraTable(Name="BOM Line",Description="",Help="",TableName="M_Product_BOM",AccessLevel="3",
-AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.material",Identifier="18a4c14a-3fed-e4a2-acc4-8c55e913a8fa",
-Synchronized="2017-08-16 11:43:27.0")
+@XendraTable(Name="BOM Line",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_Product_BOM",AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="18a4c14a-3fed-e4a2-acc4-8c55e913a8fa",Synchronized="2020-03-03 21:38:49.0")
 /** TableName=M_Product_BOM */
 public static final String Table_Name="M_Product_BOM";
 
@@ -137,13 +137,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="8521e859-d06c-9b49-882d-89daf212c7cc")
+public static String es_PE_FIELD_BillOfMaterials_BOMQuantity_Name="Cantidad en LDM";
+
+@XendraTrl(Identifier="8521e859-d06c-9b49-882d-89daf212c7cc")
 public static String es_PE_FIELD_BillOfMaterials_BOMQuantity_Description="Cantidad en la Lista de Materiales";
 
 @XendraTrl(Identifier="8521e859-d06c-9b49-882d-89daf212c7cc")
 public static String es_PE_FIELD_BillOfMaterials_BOMQuantity_Help="La cantidad de Lista de Materiales indica la cantidad del producto en su unidad de medida (multiplicador)";
-
-@XendraTrl(Identifier="8521e859-d06c-9b49-882d-89daf212c7cc")
-public static String es_PE_FIELD_BillOfMaterials_BOMQuantity_Name="Cantidad en LDM";
 
 @XendraField(AD_Column_ID="BOMQty",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,18 +161,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bf7eacbe-ec9a-8c5a-1f25-45421f77e423",
-Synchronized="2017-08-05 16:55:22.0")
+Synchronized="2019-08-30 22:23:25.0")
 /** Column name BOMQty */
 public static final String COLUMNNAME_BOMQty = "BOMQty";
-
-/** BOMType AD_Reference=b9ae8ee9-425c-da2d-5182-32c62d681f71 */
-public static final int BOMTYPE_AD_Reference_ID=279;
 /** Set BOM Type.
 @param BOMType Type of BOM */
 public void setBOMType (String BOMType)
 {
-if (BOMType == null || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup8) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup9) || BOMType.equals(REF_M_ProductBOMProductTypeX.StandardPart) || BOMType.equals(REF_M_ProductBOMProductTypeX.OptionalPart) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup1) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup2) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternaltveGroup3) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup4) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup5) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup6) || BOMType.equals(REF_M_ProductBOMProductTypeX.InAlternativeGroup7));
- else throw new IllegalArgumentException ("BOMType Invalid value - " + BOMType + " - Reference_ID=279 - 8 - 9 - P - O - 1 - 2 - 3 - 4 - 5 - 6 - 7");
 if (BOMType != null && BOMType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -188,13 +183,13 @@ return (String)get_Value(COLUMNNAME_BOMType);
 }
 
 @XendraTrl(Identifier="46353fb5-e29d-cace-a6f6-eadb089d5420")
+public static String es_PE_FIELD_BillOfMaterials_BOMType_Name="Tipo LDM";
+
+@XendraTrl(Identifier="46353fb5-e29d-cace-a6f6-eadb089d5420")
 public static String es_PE_FIELD_BillOfMaterials_BOMType_Description="Tipo de LDM";
 
 @XendraTrl(Identifier="46353fb5-e29d-cace-a6f6-eadb089d5420")
 public static String es_PE_FIELD_BillOfMaterials_BOMType_Help="Tipo de Lista de Materiales";
-
-@XendraTrl(Identifier="46353fb5-e29d-cace-a6f6-eadb089d5420")
-public static String es_PE_FIELD_BillOfMaterials_BOMType_Name="Tipo LDM";
 
 @XendraField(AD_Column_ID="BOMType",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -212,7 +207,7 @@ FieldLength=1,DefaultValue="P",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7cf7057a-6180-b8d9-3484-a19917490cc3",Synchronized="2017-08-05 16:55:22.0")
+Identifier="7cf7057a-6180-b8d9-3484-a19917490cc3",Synchronized="2019-08-30 22:23:25.0")
 /** Column name BOMType */
 public static final String COLUMNNAME_BOMType = "BOMType";
 /** Set Description.
@@ -243,13 +238,13 @@ return value;
 }
 
 @XendraTrl(Identifier="2e2d665b-e8ae-3aea-63d3-ba76772f8245")
+public static String es_PE_FIELD_BillOfMaterials_Description_Name="Observación";
+
+@XendraTrl(Identifier="2e2d665b-e8ae-3aea-63d3-ba76772f8245")
 public static String es_PE_FIELD_BillOfMaterials_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="2e2d665b-e8ae-3aea-63d3-ba76772f8245")
 public static String es_PE_FIELD_BillOfMaterials_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="2e2d665b-e8ae-3aea-63d3-ba76772f8245")
-public static String es_PE_FIELD_BillOfMaterials_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -267,7 +262,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b6dd2df4-872f-2313-3a32-1a5514ed42f5",
-Synchronized="2017-08-05 16:55:22.0")
+Synchronized="2019-08-30 22:23:25.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -299,7 +294,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fe0eff79-0d6c-40e0-aca7-75f1584669f6",
-Synchronized="2017-08-05 16:55:22.0")
+Synchronized="2019-08-30 22:23:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Line No.
@@ -318,13 +313,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="54e56a5a-d639-c822-e14f-58d6f21039df")
+public static String es_PE_FIELD_BillOfMaterials_LineNo_Name="No. Línea";
+
+@XendraTrl(Identifier="54e56a5a-d639-c822-e14f-58d6f21039df")
 public static String es_PE_FIELD_BillOfMaterials_LineNo_Description="No. Línea único para este documento";
 
 @XendraTrl(Identifier="54e56a5a-d639-c822-e14f-58d6f21039df")
 public static String es_PE_FIELD_BillOfMaterials_LineNo_Help="Indica el No. Línea para un documento. También controlará el orden de despliegue de las líneas dentro de un documento";
-
-@XendraTrl(Identifier="54e56a5a-d639-c822-e14f-58d6f21039df")
-public static String es_PE_FIELD_BillOfMaterials_LineNo_Name="No. Línea";
 
 @XendraField(AD_Column_ID="Line",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -343,7 +338,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="74aba25a-c2a2-2630-e0d2-bf40d67168fa",
-Synchronized="2017-08-05 16:55:22.0")
+Synchronized="2019-08-30 22:23:25.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 /** Set BOM Line.
@@ -373,9 +368,6 @@ Identifier="7b946b20-8228-8ab2-460d-18c53630e4d2")
 public static final String FIELDNAME_BillOfMaterials_BOMLine="7b946b20-8228-8ab2-460d-18c53630e4d2";
 /** Column name M_Product_BOM_ID */
 public static final String COLUMNNAME_M_Product_BOM_ID = "M_Product_BOM_ID";
-
-/** M_ProductBOM_ID AD_Reference=28b49c4d-0409-b2e0-b70e-d686f8d6503f */
-public static final int M_PRODUCTBOM_ID_AD_Reference_ID=162;
 /** Set BOM Product.
 @param M_ProductBOM_ID Bill of Material Component Product */
 public void setM_ProductBOM_ID (int M_ProductBOM_ID)
@@ -399,13 +391,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_ProductBOM_ID()));
 }
 
 @XendraTrl(Identifier="5d1c5e2d-0e31-73cc-b370-9013483195ab")
+public static String es_PE_FIELD_BillOfMaterials_BOMProduct_Name="Producto (Formula)/ LDM";
+
+@XendraTrl(Identifier="5d1c5e2d-0e31-73cc-b370-9013483195ab")
 public static String es_PE_FIELD_BillOfMaterials_BOMProduct_Description="Producto en Lista de Materiales";
 
 @XendraTrl(Identifier="5d1c5e2d-0e31-73cc-b370-9013483195ab")
 public static String es_PE_FIELD_BillOfMaterials_BOMProduct_Help="El Producto en LDM identifica un elemento que es parte de una lista de materiales";
-
-@XendraTrl(Identifier="5d1c5e2d-0e31-73cc-b370-9013483195ab")
-public static String es_PE_FIELD_BillOfMaterials_BOMProduct_Name="Producto (Formula)/ LDM";
 
 @XendraField(AD_Column_ID="M_ProductBOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -423,7 +415,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a5fae782-177d-25ea-1637-16cf178173e8",Synchronized="2017-08-05 16:55:22.0")
+Identifier="a5fae782-177d-25ea-1637-16cf178173e8",Synchronized="2019-08-30 22:23:25.0")
 /** Column name M_ProductBOM_ID */
 public static final String COLUMNNAME_M_ProductBOM_ID = "M_ProductBOM_ID";
 /** Set Product.
@@ -443,13 +435,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0c22c398-59cf-60cc-526e-0e6e9fe4bed5")
+public static String es_PE_FIELD_BillOfMaterials_Product_Name="Producto";
+
+@XendraTrl(Identifier="0c22c398-59cf-60cc-526e-0e6e9fe4bed5")
 public static String es_PE_FIELD_BillOfMaterials_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="0c22c398-59cf-60cc-526e-0e6e9fe4bed5")
 public static String es_PE_FIELD_BillOfMaterials_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="0c22c398-59cf-60cc-526e-0e6e9fe4bed5")
-public static String es_PE_FIELD_BillOfMaterials_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="311d9f04-4437-45f7-17a4-8672292e30e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -467,7 +459,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ab6e3115-78b5-7640-c615-62d4b989fb3c",Synchronized="2017-08-05 16:55:22.0")
+Identifier="ab6e3115-78b5-7640-c615-62d4b989fb3c",Synchronized="2019-08-30 22:23:25.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 }

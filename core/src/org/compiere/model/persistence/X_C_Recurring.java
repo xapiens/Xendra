@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_RecurringFrequency;
-import org.compiere.model.reference.REF_C_RecurringType;
 /** Generated Model for C_Recurring
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -67,12 +65,12 @@ public static int Table_ID=MTable.getTable_ID("C_Recurring");
 public static String es_PE_TAB_Recurring_Description="Documentos Recurrentes";
 
 @XendraTrl(Identifier="b7e4cf11-f3be-a60f-0207-52655e6cba6d")
-public static String es_PE_TAB_Recurring_Name="Recurrente";
-
-@XendraTrl(Identifier="b7e4cf11-f3be-a60f-0207-52655e6cba6d")
 public static String es_PE_TAB_Recurring_Help="Mantener documentos recurrentes. La fecha del funcionamiento siguiente determina el documento (y fecha de contabilidad) de los documentos generados.";
 
-@XendraTab(Name="Recurring",Description="Recurring Document",
+@XendraTrl(Identifier="b7e4cf11-f3be-a60f-0207-52655e6cba6d")
+public static String es_PE_TAB_Recurring_Name="Recurrente";
+@XendraTab(Name="Recurring",
+Description="Recurring Document",
 Help="Maintain Recurring Documents. The Date Next Run determines the Document (and Accounting Date) of the generated documents.",
 AD_Window_ID="400d64df-d42c-2949-456f-60c46aeb68cd",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -85,11 +83,12 @@ public static final String TABNAME_Recurring="b7e4cf11-f3be-a60f-0207-52655e6cba
 @XendraTrl(Identifier="8e00e83f-23b5-03e6-8357-e7ee18139cd6")
 public static String es_PE_TABLE_C_Recurring_Name="Recurrente";
 
-@XendraTable(Name="Recurring",Description="Recurring Document",Help="",TableName="C_Recurring",
-AccessLevel="3",AD_Window_ID="400d64df-d42c-2949-456f-60c46aeb68cd",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="8e00e83f-23b5-03e6-8357-e7ee18139cd6",Synchronized="2017-08-16 11:42:23.0")
+@XendraTable(Name="Recurring",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Recurring Document",Help="",
+TableName="C_Recurring",AccessLevel="3",AD_Window_ID="400d64df-d42c-2949-456f-60c46aeb68cd",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="8e00e83f-23b5-03e6-8357-e7ee18139cd6",Synchronized="2020-03-03 21:37:35.0")
 /** TableName=C_Recurring */
 public static final String Table_Name="C_Recurring";
 
@@ -140,13 +139,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f0d25ae5-60b1-266a-5a47-c1dc99aec884")
+public static String es_PE_FIELD_Recurring_Invoice_Name="Factura";
+
+@XendraTrl(Identifier="f0d25ae5-60b1-266a-5a47-c1dc99aec884")
 public static String es_PE_FIELD_Recurring_Invoice_Description="Identificador de la factura";
 
 @XendraTrl(Identifier="f0d25ae5-60b1-266a-5a47-c1dc99aec884")
 public static String es_PE_FIELD_Recurring_Invoice_Help="La ID de Factura identifica únicamente un documento de Factura.";
-
-@XendraTrl(Identifier="f0d25ae5-60b1-266a-5a47-c1dc99aec884")
-public static String es_PE_FIELD_Recurring_Invoice_Name="Factura";
 
 @XendraField(AD_Column_ID="C_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -164,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bb88b208-536a-d4a2-d691-541b0feccdde",Synchronized="2017-08-05 16:54:19.0")
+Identifier="bb88b208-536a-d4a2-d691-541b0feccdde",Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Order.
@@ -185,13 +184,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8bbd165c-eea3-bfce-9851-f29e0465515c")
+public static String es_PE_FIELD_Recurring_Order_Name="Orden de Venta";
+
+@XendraTrl(Identifier="8bbd165c-eea3-bfce-9851-f29e0465515c")
 public static String es_PE_FIELD_Recurring_Order_Description="Orden de Venta";
 
 @XendraTrl(Identifier="8bbd165c-eea3-bfce-9851-f29e0465515c")
 public static String es_PE_FIELD_Recurring_Order_Help="La ID de la orden de ventas es un identificador único de la orden de ventas; Ésta es controlada por la secuencia del documento para este tipo de documento.";
-
-@XendraTrl(Identifier="8bbd165c-eea3-bfce-9851-f29e0465515c")
-public static String es_PE_FIELD_Recurring_Order_Name="Orden de Venta";
 
 @XendraField(AD_Column_ID="C_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -209,7 +208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3b0d30a4-9be2-7b95-629a-8201239cdbcf",Synchronized="2017-08-05 16:54:19.0")
+Identifier="3b0d30a4-9be2-7b95-629a-8201239cdbcf",Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Payment.
@@ -230,13 +229,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="631e22d0-9758-3452-fd14-c07a5b62a3e7")
+public static String es_PE_FIELD_Recurring_Payment_Name="Pago";
+
+@XendraTrl(Identifier="631e22d0-9758-3452-fd14-c07a5b62a3e7")
 public static String es_PE_FIELD_Recurring_Payment_Description="Identificador del pago";
 
 @XendraTrl(Identifier="631e22d0-9758-3452-fd14-c07a5b62a3e7")
 public static String es_PE_FIELD_Recurring_Payment_Help="El pago es un identificador único de este pago.";
-
-@XendraTrl(Identifier="631e22d0-9758-3452-fd14-c07a5b62a3e7")
-public static String es_PE_FIELD_Recurring_Payment_Name="Pago";
 
 @XendraField(AD_Column_ID="C_Payment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -254,7 +253,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a3c670ce-7c98-9e17-709f-f07ba62c3921",Synchronized="2017-08-05 16:54:19.0")
+Identifier="a3c670ce-7c98-9e17-709f-f07ba62c3921",Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Project.
@@ -275,13 +274,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="466b823d-29f7-6b84-e0b3-0a4b70539869")
+public static String es_PE_FIELD_Recurring_Project_Name="Proyecto";
+
+@XendraTrl(Identifier="466b823d-29f7-6b84-e0b3-0a4b70539869")
 public static String es_PE_FIELD_Recurring_Project_Description="Identifica un proyecto único";
 
 @XendraTrl(Identifier="466b823d-29f7-6b84-e0b3-0a4b70539869")
 public static String es_PE_FIELD_Recurring_Project_Help="La ID de un proyecto es un identificador definido por el usuario para un proyecto";
-
-@XendraTrl(Identifier="466b823d-29f7-6b84-e0b3-0a4b70539869")
-public static String es_PE_FIELD_Recurring_Project_Name="Proyecto";
 
 @XendraField(AD_Column_ID="C_Project_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -299,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d8756ff2-4fc2-4ca9-aa4a-3d3b8f6068d9",Synchronized="2017-08-05 16:54:19.0")
+Identifier="d8756ff2-4fc2-4ca9-aa4a-3d3b8f6068d9",Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Project_ID */
 public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
 /** Set Recurring.
@@ -319,13 +318,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f7df5030-9f78-182d-fc64-80a3364badfc")
+public static String es_PE_FIELD_Recurring_Recurring_Name="Recurrente";
+
+@XendraTrl(Identifier="f7df5030-9f78-182d-fc64-80a3364badfc")
 public static String es_PE_FIELD_Recurring_Recurring_Description="Documento recurrente";
 
 @XendraTrl(Identifier="f7df5030-9f78-182d-fc64-80a3364badfc")
 public static String es_PE_FIELD_Recurring_Recurring_Help="Documento recurrente";
-
-@XendraTrl(Identifier="f7df5030-9f78-182d-fc64-80a3364badfc")
-public static String es_PE_FIELD_Recurring_Recurring_Name="Recurrente";
 
 @XendraField(AD_Column_ID="C_Recurring_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -349,13 +348,13 @@ return (Timestamp)get_Value(COLUMNNAME_DateLastRun);
 }
 
 @XendraTrl(Identifier="8a82e0bd-4bb3-cb77-1565-e1e071eb1bbe")
+public static String es_PE_FIELD_Recurring_DateLastRun_Name="Última Fecha de Corrida";
+
+@XendraTrl(Identifier="8a82e0bd-4bb3-cb77-1565-e1e071eb1bbe")
 public static String es_PE_FIELD_Recurring_DateLastRun_Description="Fecha en que el proceso fue corrido por última vez";
 
 @XendraTrl(Identifier="8a82e0bd-4bb3-cb77-1565-e1e071eb1bbe")
 public static String es_PE_FIELD_Recurring_DateLastRun_Help="La fecha de última corrida indica la última vez que se corrió un proceso";
-
-@XendraTrl(Identifier="8a82e0bd-4bb3-cb77-1565-e1e071eb1bbe")
-public static String es_PE_FIELD_Recurring_DateLastRun_Name="Última Fecha de Corrida";
 
 @XendraField(AD_Column_ID="DateLastRun",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="History",IsDisplayed=true,
@@ -373,7 +372,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3939016a-fa96-eff7-bf1c-23327b96d675",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set Date next run.
@@ -391,13 +390,13 @@ return (Timestamp)get_Value(COLUMNNAME_DateNextRun);
 }
 
 @XendraTrl(Identifier="900cf271-d0d4-b9db-20b1-d4b26b45e7a4")
+public static String es_PE_FIELD_Recurring_DateNextRun_Name="Siguiente Fecha de Corrida";
+
+@XendraTrl(Identifier="900cf271-d0d4-b9db-20b1-d4b26b45e7a4")
 public static String es_PE_FIELD_Recurring_DateNextRun_Description="Fecha en que el proceso será corrido la siguiente vez";
 
 @XendraTrl(Identifier="900cf271-d0d4-b9db-20b1-d4b26b45e7a4")
 public static String es_PE_FIELD_Recurring_DateNextRun_Help="La fecha de la siguiente corrida indica la siguiente vez que este proceso se correrá.";
-
-@XendraTrl(Identifier="900cf271-d0d4-b9db-20b1-d4b26b45e7a4")
-public static String es_PE_FIELD_Recurring_DateNextRun_Name="Siguiente Fecha de Corrida";
 
 @XendraField(AD_Column_ID="DateNextRun",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -415,7 +414,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e20a0f56-0118-b87d-9dac-02aaa368fca5",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name DateNextRun */
 public static final String COLUMNNAME_DateNextRun = "DateNextRun";
 /** Set Description.
@@ -446,13 +445,13 @@ return value;
 }
 
 @XendraTrl(Identifier="30658882-5bb0-9d26-bb4f-7e7e865fb073")
+public static String es_PE_FIELD_Recurring_Description_Name="Observación";
+
+@XendraTrl(Identifier="30658882-5bb0-9d26-bb4f-7e7e865fb073")
 public static String es_PE_FIELD_Recurring_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="30658882-5bb0-9d26-bb4f-7e7e865fb073")
 public static String es_PE_FIELD_Recurring_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="30658882-5bb0-9d26-bb4f-7e7e865fb073")
-public static String es_PE_FIELD_Recurring_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -470,7 +469,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ee10bbdb-69dc-1681-8735-ea9bca93470d",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Frequency.
@@ -489,13 +488,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="81a8386a-eef9-20b6-ce33-f4013b158cb1")
+public static String es_PE_FIELD_Recurring_Frequency_Name="Frecuencia";
+
+@XendraTrl(Identifier="81a8386a-eef9-20b6-ce33-f4013b158cb1")
 public static String es_PE_FIELD_Recurring_Frequency_Description="Frecuencia de proceso del requerimiento";
 
 @XendraTrl(Identifier="81a8386a-eef9-20b6-ce33-f4013b158cb1")
 public static String es_PE_FIELD_Recurring_Frequency_Help="La Frecuencia se usa junto con el tipo de frecuencia para determinar cuando un requerimiento será procesado.";
-
-@XendraTrl(Identifier="81a8386a-eef9-20b6-ce33-f4013b158cb1")
-public static String es_PE_FIELD_Recurring_Frequency_Name="Frecuencia";
 
 @XendraField(AD_Column_ID="Frequency",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -513,19 +512,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fbfe59aa-55b9-185c-2abf-83dc8766ef42",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name Frequency */
 public static final String COLUMNNAME_Frequency = "Frequency";
-
-/** FrequencyType AD_Reference=33cfb9f6-5838-6aab-2851-2f9517251d7e */
-public static final int FREQUENCYTYPE_AD_Reference_ID=283;
 /** Set Frequency Type.
 @param FrequencyType Frequency of event */
 public void setFrequencyType (String FrequencyType)
 {
-if (FrequencyType == null) throw new IllegalArgumentException ("FrequencyType is mandatory");
-if (FrequencyType.equals(REF_C_RecurringFrequency.Daily) || FrequencyType.equals(REF_C_RecurringFrequency.Weekly) || FrequencyType.equals(REF_C_RecurringFrequency.Monthly) || FrequencyType.equals(REF_C_RecurringFrequency.Quarterly));
- else throw new IllegalArgumentException ("FrequencyType Invalid value - " + FrequencyType + " - Reference_ID=283 - D - W - M - Q");
 if (FrequencyType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -541,13 +534,13 @@ return (String)get_Value(COLUMNNAME_FrequencyType);
 }
 
 @XendraTrl(Identifier="4430f1c9-17b8-021d-5070-f2ede8383937")
+public static String es_PE_FIELD_Recurring_FrequencyType_Name="Tipo de Frecuencia";
+
+@XendraTrl(Identifier="4430f1c9-17b8-021d-5070-f2ede8383937")
 public static String es_PE_FIELD_Recurring_FrequencyType_Description="Frecuencia de cálculo";
 
 @XendraTrl(Identifier="4430f1c9-17b8-021d-5070-f2ede8383937")
 public static String es_PE_FIELD_Recurring_FrequencyType_Help="El Tipo de frecuencia se usa para calcular las fechas de inicio y fin del cálculo";
-
-@XendraTrl(Identifier="4430f1c9-17b8-021d-5070-f2ede8383937")
-public static String es_PE_FIELD_Recurring_FrequencyType_Name="Tipo de Frecuencia";
 
 @XendraField(AD_Column_ID="FrequencyType",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -565,7 +558,7 @@ FieldLength=1,DefaultValue="M",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="79b98b9e-2019-c353-f379-e1956f742d0c",Synchronized="2017-08-05 16:54:19.0")
+Identifier="79b98b9e-2019-c353-f379-e1956f742d0c",Synchronized="2019-08-30 22:22:11.0")
 /** Column name FrequencyType */
 public static final String COLUMNNAME_FrequencyType = "FrequencyType";
 /** Set Journal Batch.
@@ -586,13 +579,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cf5cc949-6898-886b-c1f7-ac87cdc9a168")
+public static String es_PE_FIELD_Recurring_JournalBatch_Name="Lote de Diario CG";
+
+@XendraTrl(Identifier="cf5cc949-6898-886b-c1f7-ac87cdc9a168")
 public static String es_PE_FIELD_Recurring_JournalBatch_Description="Lote de Diario CG";
 
 @XendraTrl(Identifier="cf5cc949-6898-886b-c1f7-ac87cdc9a168")
 public static String es_PE_FIELD_Recurring_JournalBatch_Help="El lote de pólizas de la contabilidad general identifica un conjunto de pólizas a ser procesadas como un grupo.";
-
-@XendraTrl(Identifier="cf5cc949-6898-886b-c1f7-ac87cdc9a168")
-public static String es_PE_FIELD_Recurring_JournalBatch_Name="Lote de Diario CG";
 
 @XendraField(AD_Column_ID="GL_JournalBatch_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -610,7 +603,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f44729b9-b5db-ff2e-d3d0-ccf1f6bd661d",Synchronized="2017-08-05 16:54:19.0")
+Identifier="f44729b9-b5db-ff2e-d3d0-ccf1f6bd661d",Synchronized="2019-08-30 22:22:11.0")
 /** Column name GL_JournalBatch_ID */
 public static final String COLUMNNAME_GL_JournalBatch_ID = "GL_JournalBatch_ID";
 /** Set Comment/Help.
@@ -636,13 +629,13 @@ return value;
 }
 
 @XendraTrl(Identifier="cbc2c5c3-5a95-8f92-be5a-fbecfa039bf8")
+public static String es_PE_FIELD_Recurring_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="cbc2c5c3-5a95-8f92-be5a-fbecfa039bf8")
 public static String es_PE_FIELD_Recurring_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="cbc2c5c3-5a95-8f92-be5a-fbecfa039bf8")
 public static String es_PE_FIELD_Recurring_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="cbc2c5c3-5a95-8f92-be5a-fbecfa039bf8")
-public static String es_PE_FIELD_Recurring_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -660,7 +653,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6ab069f6-69df-865f-3881-cbf7a7f4fc1d",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -692,7 +685,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c045c019-a188-4e8c-82ae-325bb54e7771",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -724,18 +717,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
+public static String es_PE_FIELD_Recurring_Name_Name="Nombre";
+
+@XendraTrl(Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
 public static String es_PE_FIELD_Recurring_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
 public static String es_PE_FIELD_Recurring_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
-public static String es_PE_FIELD_Recurring_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="64591951-cb55-e1cd-3534-1c147f7014cd")
 public static final String FIELDNAME_Recurring_Name="64591951-cb55-e1cd-3534-1c147f7014cd";
 
 @XendraTrl(Identifier="35671cda-b484-0fcb-e9cc-36394025d5cf")
@@ -747,7 +741,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="35671cda-b484-0fcb-e9cc-36394025d5cf",
-Synchronized="2017-08-05 16:54:20.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -770,10 +764,10 @@ return false;
 }
 
 @XendraTrl(Identifier="bcac80fb-0d8b-f737-d5c2-41a8bf429d2a")
-public static String es_PE_FIELD_Recurring_ProcessNow_Description="Inicio de Corrida Recurrente ";
+public static String es_PE_FIELD_Recurring_ProcessNow_Name="Inicio de Corrida Recurrente ";
 
 @XendraTrl(Identifier="bcac80fb-0d8b-f737-d5c2-41a8bf429d2a")
-public static String es_PE_FIELD_Recurring_ProcessNow_Name="Inicio de Corrida Recurrente ";
+public static String es_PE_FIELD_Recurring_ProcessNow_Description="Inicio de Corrida Recurrente ";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -791,19 +785,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="d608428f-622c-a288-6951-c97b52590058",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="cd9caa49-42dc-d22a-7bb0-01ea73257f33",Synchronized="2017-08-05 16:54:20.0")
+Identifier="cd9caa49-42dc-d22a-7bb0-01ea73257f33",Synchronized="2019-08-30 22:22:11.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** RecurringType AD_Reference=83cd0595-4907-b096-73bb-781e5da6ede4 */
-public static final int RECURRINGTYPE_AD_Reference_ID=282;
 /** Set Recurring Type.
 @param RecurringType Type of Recurring Document */
 public void setRecurringType (String RecurringType)
 {
-if (RecurringType == null) throw new IllegalArgumentException ("RecurringType is mandatory");
-if (RecurringType.equals(REF_C_RecurringType.Invoice) || RecurringType.equals(REF_C_RecurringType.Order) || RecurringType.equals(REF_C_RecurringType.GLJournal) || RecurringType.equals(REF_C_RecurringType.Project));
- else throw new IllegalArgumentException ("RecurringType Invalid value - " + RecurringType + " - Reference_ID=282 - I - O - G - J");
 if (RecurringType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -819,13 +807,13 @@ return (String)get_Value(COLUMNNAME_RecurringType);
 }
 
 @XendraTrl(Identifier="bdefc4da-1943-1a55-2fa6-d68eee59cc22")
+public static String es_PE_FIELD_Recurring_RecurringType_Name="Tipo de Recurrencia";
+
+@XendraTrl(Identifier="bdefc4da-1943-1a55-2fa6-d68eee59cc22")
 public static String es_PE_FIELD_Recurring_RecurringType_Description="Tipo de recurrencia de documento";
 
 @XendraTrl(Identifier="bdefc4da-1943-1a55-2fa6-d68eee59cc22")
 public static String es_PE_FIELD_Recurring_RecurringType_Help="El tipo de documento que se generará";
-
-@XendraTrl(Identifier="bdefc4da-1943-1a55-2fa6-d68eee59cc22")
-public static String es_PE_FIELD_Recurring_RecurringType_Name="Tipo de Recurrencia";
 
 @XendraField(AD_Column_ID="RecurringType",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -843,7 +831,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="@DateLastRun@!''",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c0849cbe-fa9f-3f29-a17d-a650276a18b4",Synchronized="2017-08-05 16:54:20.0")
+Identifier="c0849cbe-fa9f-3f29-a17d-a650276a18b4",Synchronized="2019-08-30 22:22:11.0")
 /** Column name RecurringType */
 public static final String COLUMNNAME_RecurringType = "RecurringType";
 /** Set Maximum Runs.
@@ -862,13 +850,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6a33e3cc-6d58-059a-9ec4-7d7946f4ceab")
+public static String es_PE_FIELD_Recurring_MaximumRuns_Name="Máximo de Corridas";
+
+@XendraTrl(Identifier="6a33e3cc-6d58-059a-9ec4-7d7946f4ceab")
 public static String es_PE_FIELD_Recurring_MaximumRuns_Description="Número de funcionamientos que se repiten.";
 
 @XendraTrl(Identifier="6a33e3cc-6d58-059a-9ec4-7d7946f4ceab")
 public static String es_PE_FIELD_Recurring_MaximumRuns_Help="Número de los documentos que se repiten y que se generarán en total.";
-
-@XendraTrl(Identifier="6a33e3cc-6d58-059a-9ec4-7d7946f4ceab")
-public static String es_PE_FIELD_Recurring_MaximumRuns_Name="Máximo de Corridas";
 
 @XendraField(AD_Column_ID="RunsMax",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -886,7 +874,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f8c08d30-c40a-46c4-8550-61c73d5b1dad",
-Synchronized="2017-08-05 16:54:20.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name RunsMax */
 public static final String COLUMNNAME_RunsMax = "RunsMax";
 /** Set Remaining Runs.
@@ -905,13 +893,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e9bd55be-f26b-f619-fcdb-4adfe32eabd1")
+public static String es_PE_FIELD_Recurring_RemainingRuns_Name="Corridas Restantes";
+
+@XendraTrl(Identifier="e9bd55be-f26b-f619-fcdb-4adfe32eabd1")
 public static String es_PE_FIELD_Recurring_RemainingRuns_Description="Número de los funcionamientos restantes que se repiten ";
 
 @XendraTrl(Identifier="e9bd55be-f26b-f619-fcdb-4adfe32eabd1")
 public static String es_PE_FIELD_Recurring_RemainingRuns_Help="Número de los documentos que se repiten y que se generarán ";
-
-@XendraTrl(Identifier="e9bd55be-f26b-f619-fcdb-4adfe32eabd1")
-public static String es_PE_FIELD_Recurring_RemainingRuns_Name="Corridas Restantes";
 
 @XendraField(AD_Column_ID="RunsRemaining",IsCentrallyMaintained=true,
 AD_Tab_ID="b7e4cf11-f3be-a60f-0207-52655e6cba6d",AD_FieldGroup_ID="History",IsDisplayed=true,
@@ -929,7 +917,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5042b48b-85a6-0db9-1a80-4b3f7617969a",
-Synchronized="2017-08-05 16:54:20.0")
+Synchronized="2019-08-30 22:22:11.0")
 /** Column name RunsRemaining */
 public static final String COLUMNNAME_RunsRemaining = "RunsRemaining";
 }

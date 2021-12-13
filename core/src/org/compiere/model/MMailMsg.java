@@ -68,7 +68,7 @@ public class MMailMsg extends X_W_MailMsg
 	 *	@param Message2 message
 	 *	@param Message3 message
 	 */
-	public MMailMsg (MStore parent, String MailMsgType, 
+	public MMailMsg (MWebStore parent, String MailMsgType, 
 		String Name, String Subject, String Message, String Message2, String Message3)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());;

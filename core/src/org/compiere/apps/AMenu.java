@@ -39,15 +39,8 @@ import org.compiere.model.MSession;
 import org.compiere.model.MSystem;
 import org.compiere.model.MTreeNode;
 import org.compiere.model.MUser;
-import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.swing.*;
 import org.compiere.util.*;
-//import org.xendra.holon.HolonWebServer;
-//import org.xendra.holon.WebServer;
-//import org.xendra.holon.XServices;
-//import org.xendra.message.MessagePanel;
-//import org.xendra.pos.*;
-//import org.xendra.store.StorePanel;
 import org.columba.core.main.Bootstrap;
 import org.columba.core.main.Main;
 import org.columba.core.plugin.PluginManager;
@@ -80,11 +73,6 @@ public final class AMenu extends CFrame
 		//
 		if (!Xendra.startupEnvironment(true)) // Load Environment
 			System.exit(1);		
-		if (Env.getServerWeb() != null)
-		{
-			if (PluginManager.getInstance().Sync())
-				System.exit(2);
-		}
 		MSession.get (Env.getCtx(), true);		//	Start Session
 
 		//	Preparation

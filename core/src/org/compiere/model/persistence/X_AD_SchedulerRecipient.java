@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("AD_SchedulerRecipient");
 public static String es_PE_TAB_SchedulerRecipient_Description="Recipiente de la notificación de agenda";
 
 @XendraTrl(Identifier="9570eec2-9583-06a0-9c2b-5054e0aa33ec")
-public static String es_PE_TAB_SchedulerRecipient_Name="Recipiente de Agenda";
+public static String es_PE_TAB_SchedulerRecipient_Help="Usted puede enviar las notificaciones a los usuarios ó roles.";
 
 @XendraTrl(Identifier="9570eec2-9583-06a0-9c2b-5054e0aa33ec")
-public static String es_PE_TAB_SchedulerRecipient_Help="Usted puede enviar las notificaciones a los usuarios ó roles.";
+public static String es_PE_TAB_SchedulerRecipient_Name="Recipiente de Agenda";
 
 @XendraTab(Name="Scheduler Recipient",Description="Recipient of the Scheduler Notification",
 Help="You can send the notifications to users or roles",
@@ -78,12 +78,13 @@ public static final String TABNAME_SchedulerRecipient="9570eec2-9583-06a0-9c2b-5
 public static String es_PE_TABLE_AD_SchedulerRecipient_Name="Recipiente del Programador";
 
 
-@XendraTable(Name="Scheduler Recipient",Description="Recipient of the Scheduler Notification",
-Help="",TableName="AD_SchedulerRecipient",AccessLevel="6",
-AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.dictionary",Identifier="a5bcc2a5-66a2-dd85-e3af-d6f81dc20356",
-Synchronized="2017-08-16 11:40:59.0")
+@XendraTable(Name="Scheduler Recipient",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Recipient of the Scheduler Notification",Help="",TableName="AD_SchedulerRecipient",
+AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="a5bcc2a5-66a2-dd85-e3af-d6f81dc20356",Synchronized="2020-03-03 21:35:55.0")
 /** TableName=AD_SchedulerRecipient */
 public static final String Table_Name="AD_SchedulerRecipient";
 
@@ -134,13 +135,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="58344c98-a1aa-71d0-0b77-bd333b1139b3")
+public static String es_PE_FIELD_SchedulerRecipient_Role_Name="Rol";
+
+@XendraTrl(Identifier="58344c98-a1aa-71d0-0b77-bd333b1139b3")
 public static String es_PE_FIELD_SchedulerRecipient_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="58344c98-a1aa-71d0-0b77-bd333b1139b3")
 public static String es_PE_FIELD_SchedulerRecipient_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="58344c98-a1aa-71d0-0b77-bd333b1139b3")
-public static String es_PE_FIELD_SchedulerRecipient_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9570eec2-9583-06a0-9c2b-5054e0aa33ec",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ca848180-8698-5e3d-e468-4f1dc74e8872",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Scheduler.
@@ -178,13 +179,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="eab2961b-9551-2d36-00a0-d428e3c5b58d")
+public static String es_PE_FIELD_SchedulerRecipient_Scheduler_Name="Programación";
+
+@XendraTrl(Identifier="eab2961b-9551-2d36-00a0-d428e3c5b58d")
 public static String es_PE_FIELD_SchedulerRecipient_Scheduler_Description="Programación de procesos";
 
 @XendraTrl(Identifier="eab2961b-9551-2d36-00a0-d428e3c5b58d")
 public static String es_PE_FIELD_SchedulerRecipient_Scheduler_Help="Programación de procesos para ser ejecutada la sincronización.";
-
-@XendraTrl(Identifier="eab2961b-9551-2d36-00a0-d428e3c5b58d")
-public static String es_PE_FIELD_SchedulerRecipient_Scheduler_Name="Programación";
 
 @XendraField(AD_Column_ID="AD_Scheduler_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9570eec2-9583-06a0-9c2b-5054e0aa33ec",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9ae28967-4f92-6498-05a6-1dfcb542ab68",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Scheduler_ID */
 public static final String COLUMNNAME_AD_Scheduler_ID = "AD_Scheduler_ID";
 /** Set Scheduler Recipient.
@@ -222,13 +223,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7a6def77-261a-bf9f-1e58-34a9640780ec")
+public static String es_PE_FIELD_SchedulerRecipient_SchedulerRecipient_Name="Recipiente del Programador";
+
+@XendraTrl(Identifier="7a6def77-261a-bf9f-1e58-34a9640780ec")
 public static String es_PE_FIELD_SchedulerRecipient_SchedulerRecipient_Description="Recipiente de la notificación del programador";
 
 @XendraTrl(Identifier="7a6def77-261a-bf9f-1e58-34a9640780ec")
 public static String es_PE_FIELD_SchedulerRecipient_SchedulerRecipient_Help="Usted puede enviar las notificaciones para usuarios ó roles.";
-
-@XendraTrl(Identifier="7a6def77-261a-bf9f-1e58-34a9640780ec")
-public static String es_PE_FIELD_SchedulerRecipient_SchedulerRecipient_Name="Recipiente del Programador";
 
 @XendraField(AD_Column_ID="AD_SchedulerRecipient_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9570eec2-9583-06a0-9c2b-5054e0aa33ec",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -262,13 +263,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="d61bef55-a097-36ae-19d0-1f2f458c3563")
+public static String es_PE_FIELD_SchedulerRecipient_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="d61bef55-a097-36ae-19d0-1f2f458c3563")
 public static String es_PE_FIELD_SchedulerRecipient_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="d61bef55-a097-36ae-19d0-1f2f458c3563")
 public static String es_PE_FIELD_SchedulerRecipient_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="d61bef55-a097-36ae-19d0-1f2f458c3563")
-public static String es_PE_FIELD_SchedulerRecipient_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9570eec2-9583-06a0-9c2b-5054e0aa33ec",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -286,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2b5947a8-58b3-786e-30d4-01931e0ddd9d",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -318,7 +319,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e4de2e86-e46b-4232-b0c8-bc128cbaf7a7",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

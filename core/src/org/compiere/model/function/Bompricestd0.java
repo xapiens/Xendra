@@ -9,7 +9,7 @@ public class Bompricestd0
 @XendraFunction(Name="bompricestd",Output="numeric",Owner="xendra",Language="plpgsql",
 Identifier="4979eef3-6cae-4d11-71f6-3d07897fb637",
 Arguments="product_id numeric, pricelist_version_id numeric",Extension="",
-Synchronized="2013-09-29 01:27:28.0")
+Synchronized="2020-02-08 13:53:28.0")
 	public static final String Identifier = "4979eef3-6cae-4d11-71f6-3d07897fb637";
 
 	public static final String getCode() 
@@ -39,13 +39,15 @@ Synchronized="2013-09-29 01:27:28.0")
 	sb.appendln("END IF;");
 	sb.appendln("--");
 	sb.appendln("RETURN v_Price;");
+	sb.appendln("EXCEPTION WHEN OTHERS THEN");
+	sb.appendln("RETURN v_Price;");
 	sb.appendln("END;");
 	return sb.toString();
 }
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2013-09-29 01:27:28.0");
+ 	sb.appendln("@Synchronized=2020-02-08 13:53:28.0");
 	sb.appendln("@Identifier=4979eef3-6cae-4d11-71f6-3d07897fb637");
 	return sb.toString();
 }

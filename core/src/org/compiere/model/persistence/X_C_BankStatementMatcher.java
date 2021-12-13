@@ -61,10 +61,10 @@ public static int Table_ID=MTable.getTable_ID("C_BankStatementMatcher");
 public static String es_PE_TAB_BankStatementMatcher_Description="Algoritmo para emparejar el estado de cuenta que es Información a los socios de negocio, las facturas y los pagos.";
 
 @XendraTrl(Identifier="f2d2569e-4950-ce16-8399-cecca720907d")
-public static String es_PE_TAB_BankStatementMatcher_Name="Estado de Cuenta";
+public static String es_PE_TAB_BankStatementMatcher_Help="Un algoritmo para encontrar a socios de negocio, facturas, pagos en estados de cuenta importados. La necesidad de poner la clase del interfaz en ejecución, org.compiere.impexp.BankStatementMatcherInterface";
 
 @XendraTrl(Identifier="f2d2569e-4950-ce16-8399-cecca720907d")
-public static String es_PE_TAB_BankStatementMatcher_Help="Un algoritmo para encontrar a socios de negocio, facturas, pagos en estados de cuenta importados. La necesidad de poner la clase del interfaz en ejecución, org.compiere.impexp.BankStatementMatcherInterface";
+public static String es_PE_TAB_BankStatementMatcher_Name="Estado de Cuenta";
 
 @XendraTab(Name="Bank Statement Matcher",
 Description="Algorithm to match Bank Statement Info to Business Partners, Invoices and Payments",
@@ -81,13 +81,14 @@ public static final String TABNAME_BankStatementMatcher="f2d2569e-4950-ce16-8399
 public static String es_PE_TABLE_C_BankStatementMatcher_Name="Conciliación de estado de cuenta";
 
 
-@XendraTable(Name="Bank Statement Matcher",
+@XendraTable(Name="Bank Statement Matcher",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Algorithm to match Bank Statement Info to Business Partners, Invoices and Payments",
 Help="",TableName="C_BankStatementMatcher",AccessLevel="2",
 AD_Window_ID="28206c86-ec77-b21b-2f4a-34bad0048c29",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="cf6d5264-2dc8-4dae-acc8-fe8c07d50216",
-Synchronized="2017-08-16 11:41:24.0")
+Synchronized="2020-03-03 21:36:27.0")
 /** TableName=C_BankStatementMatcher */
 public static final String Table_Name="C_BankStatementMatcher";
 
@@ -137,13 +138,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5b4ec33b-3d45-9155-d26f-fd489d68c8bd")
+public static String es_PE_FIELD_BankStatementMatcher_BankStatementMatcher_Name="Conciliación de estado de cuenta";
+
+@XendraTrl(Identifier="5b4ec33b-3d45-9155-d26f-fd489d68c8bd")
 public static String es_PE_FIELD_BankStatementMatcher_BankStatementMatcher_Description="Algoritmo para conciliar el estado de cuenta, Información a los socios, a las facturas y pagos de negocio";
 
 @XendraTrl(Identifier="5b4ec33b-3d45-9155-d26f-fd489d68c8bd")
 public static String es_PE_FIELD_BankStatementMatcher_BankStatementMatcher_Help="Un algoritmo para encontrar a socios de negocio, facturas, pagos en estados de cuenta importados";
-
-@XendraTrl(Identifier="5b4ec33b-3d45-9155-d26f-fd489d68c8bd")
-public static String es_PE_FIELD_BankStatementMatcher_BankStatementMatcher_Name="Conciliación de estado de cuenta";
 
 @XendraField(AD_Column_ID="C_BankStatementMatcher_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f2d2569e-4950-ce16-8399-cecca720907d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -175,13 +176,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="eb548ce1-e7d0-a669-3979-54ed1b856d02")
+public static String es_PE_FIELD_BankStatementMatcher_Classname_Name="Nombre de Clase";
+
+@XendraTrl(Identifier="eb548ce1-e7d0-a669-3979-54ed1b856d02")
 public static String es_PE_FIELD_BankStatementMatcher_Classname_Description="Nombre de la clase Java";
 
 @XendraTrl(Identifier="eb548ce1-e7d0-a669-3979-54ed1b856d02")
 public static String es_PE_FIELD_BankStatementMatcher_Classname_Help="El nombre de clase identifica el nombre de la clase Java usada por este Informe ó proceso.";
-
-@XendraTrl(Identifier="eb548ce1-e7d0-a669-3979-54ed1b856d02")
-public static String es_PE_FIELD_BankStatementMatcher_Classname_Name="Nombre de Clase";
 
 @XendraField(AD_Column_ID="Classname",IsCentrallyMaintained=true,
 AD_Tab_ID="f2d2569e-4950-ce16-8399-cecca720907d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="819a576d-81d4-8df5-634b-f2d7a3cde957",
-Synchronized="2017-08-05 16:53:16.0")
+Synchronized="2019-08-30 22:21:05.0")
 /** Column name Classname */
 public static final String COLUMNNAME_Classname = "Classname";
 /** Set Description.
@@ -230,13 +231,13 @@ return value;
 }
 
 @XendraTrl(Identifier="dd18d647-0432-b4e8-dce2-cdd812426468")
+public static String es_PE_FIELD_BankStatementMatcher_Description_Name="Observación";
+
+@XendraTrl(Identifier="dd18d647-0432-b4e8-dce2-cdd812426468")
 public static String es_PE_FIELD_BankStatementMatcher_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="dd18d647-0432-b4e8-dce2-cdd812426468")
 public static String es_PE_FIELD_BankStatementMatcher_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="dd18d647-0432-b4e8-dce2-cdd812426468")
-public static String es_PE_FIELD_BankStatementMatcher_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="f2d2569e-4950-ce16-8399-cecca720907d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -254,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7161d9ad-988b-9c4f-88bb-f2ec517e4df2",
-Synchronized="2017-08-05 16:53:16.0")
+Synchronized="2019-08-30 22:21:05.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -286,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c201811a-528d-4541-a7c5-33c674a7fff0",
-Synchronized="2017-08-05 16:53:16.0")
+Synchronized="2019-08-30 22:21:05.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -318,13 +319,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="f46a4a55-fe30-689a-3886-6cce6c0bf210")
+public static String es_PE_FIELD_BankStatementMatcher_Name_Name="Nombre";
+
+@XendraTrl(Identifier="f46a4a55-fe30-689a-3886-6cce6c0bf210")
 public static String es_PE_FIELD_BankStatementMatcher_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="f46a4a55-fe30-689a-3886-6cce6c0bf210")
 public static String es_PE_FIELD_BankStatementMatcher_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="f46a4a55-fe30-689a-3886-6cce6c0bf210")
-public static String es_PE_FIELD_BankStatementMatcher_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="f2d2569e-4950-ce16-8399-cecca720907d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -342,7 +343,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="96145a1a-a96d-f605-c21d-53bf2c5db28f",
-Synchronized="2017-08-05 16:53:16.0")
+Synchronized="2019-08-30 22:21:05.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sequence.
@@ -361,13 +362,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="42b7e2f1-1379-8a2b-e15c-987a5994aae2")
+public static String es_PE_FIELD_BankStatementMatcher_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="42b7e2f1-1379-8a2b-e15c-987a5994aae2")
 public static String es_PE_FIELD_BankStatementMatcher_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="42b7e2f1-1379-8a2b-e15c-987a5994aae2")
 public static String es_PE_FIELD_BankStatementMatcher_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="42b7e2f1-1379-8a2b-e15c-987a5994aae2")
-public static String es_PE_FIELD_BankStatementMatcher_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="f2d2569e-4950-ce16-8399-cecca720907d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -385,7 +386,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4a3cc945-91d2-90cc-e42c-26b049a062f4",
-Synchronized="2017-08-05 16:53:16.0")
+Synchronized="2019-08-30 22:21:05.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

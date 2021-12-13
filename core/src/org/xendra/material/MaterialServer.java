@@ -21,8 +21,8 @@ public class MaterialServer implements Runnable {
 			serverSocket = new ServerSocket(Constants.materialport);			
 			while(true) {
 				Socket connection = serverSocket.accept();
-				Runnable connectionHandler = new ConnectionHandler(connection);
-				new Thread(connectionHandler).start();
+				//Runnable connectionHandler = new ConnectionHandler(connection);
+				//new Thread(connectionHandler).start();
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

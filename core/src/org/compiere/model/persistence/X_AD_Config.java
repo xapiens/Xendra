@@ -71,10 +71,12 @@ public static final String TABNAME_UserConfiguration="156dcdf1-0b79-4e07-b957-83
 @XendraTrl(Identifier="0f754335-6a36-4955-ae7d-51113dcca08e")
 public static String es_PE_TABLE_AD_Config_Name="AD_Config";
 
-@XendraTable(Name="AD_Config",Description="",Help="",TableName="AD_Config",AccessLevel="7",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="0f754335-6a36-4955-ae7d-51113dcca08e",Synchronized="2017-09-13 22:07:57.0")
+@XendraTable(Name="AD_Config",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Config",
+AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="0f754335-6a36-4955-ae7d-51113dcca08e",
+Synchronized="2020-03-03 21:34:58.0")
 /** TableName=AD_Config */
 public static final String Table_Name="AD_Config";
 
@@ -140,6 +142,35 @@ Identifier="4d54b878-2c6c-4206-bfb2-95652bc2e3f2")
 public static final String FIELDNAME_UserConfiguration_AD_Config_ID="4d54b878-2c6c-4206-bfb2-95652bc2e3f2";
 /** Column name AD_Config_ID */
 public static final String COLUMNNAME_AD_Config_ID = "AD_Config_ID";
+/** Set Plugin.
+@param AD_Plugin_ID Plugin */
+public void setAD_Plugin_ID (int AD_Plugin_ID)
+{
+if (AD_Plugin_ID <= 0) set_Value (COLUMNNAME_AD_Plugin_ID, null);
+ else 
+set_Value (COLUMNNAME_AD_Plugin_ID, Integer.valueOf(AD_Plugin_ID));
+}
+/** Get Plugin.
+@return Plugin */
+public int getAD_Plugin_ID() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_AD_Plugin_ID);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="265c4e78-f01b-4dd1-9cfc-8aaca967ea8c")
+public static String es_PE_COLUMN_AD_Plugin_ID_Name="Plugin";
+
+@XendraColumn(AD_Element_ID="895f0c3e-fa52-48b7-8fce-f9b2dc637774",ColumnName="AD_Plugin_ID",
+AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="265c4e78-f01b-4dd1-9cfc-8aaca967ea8c",
+Synchronized="2019-08-30 22:20:18.0")
+/** Column name AD_Plugin_ID */
+public static final String COLUMNNAME_AD_Plugin_ID = "AD_Plugin_ID";
 /** Set User/Contact.
 @param AD_User_ID User within the system - Internal or Business Partner Contact */
 public void setAD_User_ID (int AD_User_ID)
@@ -181,7 +212,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9ce712f5-b4b8-4218-8be7-a9709f8fba8f",
-Synchronized="2017-09-13 21:44:56.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Content.
@@ -218,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2be1d004-0d2d-40ea-a3dc-52b157f1058c",
-Synchronized="2017-09-13 21:44:56.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name Content */
 public static final String COLUMNNAME_Content = "Content";
 /** Set Identifier.
@@ -260,17 +291,17 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7374be10-7909-49ca-bb30-2a6f34f64fe2",
-Synchronized="2017-09-13 21:44:56.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set ModuleName.
 @param ModuleName ModuleName */
 public void setModuleName (String ModuleName)
 {
-if (ModuleName != null && ModuleName.length() > 20)
+if (ModuleName != null && ModuleName.length() > 100)
 {
-log.warning("Length > 20 - truncated");
-ModuleName = ModuleName.substring(0,19);
+log.warning("Length > 100 - truncated");
+ModuleName = ModuleName.substring(0,99);
 }
 set_Value (COLUMNNAME_ModuleName, ModuleName);
 }
@@ -297,12 +328,12 @@ public static final String FIELDNAME_UserConfiguration_ModuleName="f5e73485-453c
 public static String es_PE_COLUMN_ModuleName_Name="ModuleName";
 
 @XendraColumn(AD_Element_ID="3f839e25-1735-4503-b90a-218e787645b4",ColumnName="ModuleName",
-AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=20,DefaultValue="",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=100,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="db9355fb-f60e-4f09-ac24-54181ee7ab3a",
-Synchronized="2017-09-13 21:44:56.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name ModuleName */
 public static final String COLUMNNAME_ModuleName = "ModuleName";
 }

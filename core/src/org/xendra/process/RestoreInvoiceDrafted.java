@@ -46,7 +46,7 @@ public class RestoreInvoiceDrafted extends SvrProcess {
 		MInvoice invoice = new MInvoice(getCtx(), m_C_Invoice_ID, get_TrxName());
 		MDocType dt = MDocType.get(getCtx(), invoice.getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), invoice.getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), invoice.getDateAcct(), dt.getDocBaseType(), invoice.getAD_Org_ID(), invoice.getAD_Client_ID()))
 		{
 			return "@PeriodClosed@";
 		}				

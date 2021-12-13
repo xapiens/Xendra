@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("AD_Error");
 public static String es_PE_TAB_ErrorMessage_Description="Mensaje de error";
 
 @XendraTrl(Identifier="22c4fff6-af72-4fe2-4de6-fc5ef7c44366")
-public static String es_PE_TAB_ErrorMessage_Name="Mensaje de Error";
+public static String es_PE_TAB_ErrorMessage_Help="La pestaña Mensaje de Error despliega mensajes de error que han sido generados. Estos mensajes pueden ser borrados con un proceso automatizado de limpieza.";
 
 @XendraTrl(Identifier="22c4fff6-af72-4fe2-4de6-fc5ef7c44366")
-public static String es_PE_TAB_ErrorMessage_Help="La pestaña Mensaje de Error despliega mensajes de error que han sido generados. Estos mensajes pueden ser borrados con un proceso automatizado de limpieza.";
+public static String es_PE_TAB_ErrorMessage_Name="Mensaje de Error";
 
 @XendraTab(Name="Error Message",Description="Error Message",
 Help="The Error Message Tab displays error messages that have been generated.  They can be deleted with an automated clean up process.",
@@ -77,11 +77,12 @@ public static final String TABNAME_ErrorMessage="22c4fff6-af72-4fe2-4de6-fc5ef7c
 @XendraTrl(Identifier="b846e359-418d-ec1f-eba9-f2e55d90e198")
 public static String es_PE_TABLE_AD_Error_Name="ID de Error";
 
-@XendraTable(Name="Error",Description="",Help="",TableName="AD_Error",AccessLevel="6",
-AD_Window_ID="4cd0b114-5e3f-ef45-0d24-353865d47509",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.dictionary",Identifier="b846e359-418d-ec1f-eba9-f2e55d90e198",
-Synchronized="2017-08-16 11:40:11.0")
+@XendraTable(Name="Error",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Error",
+AccessLevel="6",AD_Window_ID="4cd0b114-5e3f-ef45-0d24-353865d47509",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="b846e359-418d-ec1f-eba9-f2e55d90e198",Synchronized="2020-03-03 21:35:00.0")
 /** TableName=AD_Error */
 public static final String Table_Name="AD_Error";
 
@@ -141,9 +142,6 @@ Identifier="a23b88ce-ff0a-6fca-4494-86d6f492cb49")
 public static final String FIELDNAME_ErrorMessage_Error="a23b88ce-ff0a-6fca-4494-86d6f492cb49";
 /** Column name AD_Error_ID */
 public static final String COLUMNNAME_AD_Error_ID = "AD_Error_ID";
-
-/** AD_Language AD_Reference=136e26cd-6ffa-f76c-1e63-cce5ed2025b9 */
-public static final int AD_LANGUAGE_AD_Reference_ID=106;
 /** Set Language.
 @param AD_Language Language for this entity */
 public void setAD_Language (String AD_Language)
@@ -163,13 +161,13 @@ return (String)get_Value(COLUMNNAME_AD_Language);
 }
 
 @XendraTrl(Identifier="9322e531-d0d4-70ad-f211-3b89ec103d4b")
+public static String es_PE_FIELD_ErrorMessage_Language_Name="Lenguaje";
+
+@XendraTrl(Identifier="9322e531-d0d4-70ad-f211-3b89ec103d4b")
 public static String es_PE_FIELD_ErrorMessage_Language_Description="Lenguaje para esta aplicación";
 
 @XendraTrl(Identifier="9322e531-d0d4-70ad-f211-3b89ec103d4b")
 public static String es_PE_FIELD_ErrorMessage_Language_Help="El lenguaje identifica el lenguaje a usar para el despliegue";
-
-@XendraTrl(Identifier="9322e531-d0d4-70ad-f211-3b89ec103d4b")
-public static String es_PE_FIELD_ErrorMessage_Language_Name="Lenguaje";
 
 @XendraField(AD_Column_ID="AD_Language",IsCentrallyMaintained=true,
 AD_Tab_ID="22c4fff6-af72-4fe2-4de6-fc5ef7c44366",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -187,7 +185,7 @@ FieldLength=6,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="cf7c819b-3c2b-840a-49fd-ff5e806b719c",Synchronized="2017-08-05 16:52:30.0")
+Identifier="cf7c819b-3c2b-840a-49fd-ff5e806b719c",Synchronized="2019-08-30 22:20:19.0")
 /** Column name AD_Language */
 public static final String COLUMNNAME_AD_Language = "AD_Language";
 /** Set Validation code.
@@ -211,13 +209,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="e32729cf-47db-fd16-eee7-89a25a84816a")
+public static String es_PE_FIELD_ErrorMessage_ValidationCode_Name="Código de Validación";
+
+@XendraTrl(Identifier="e32729cf-47db-fd16-eee7-89a25a84816a")
 public static String es_PE_FIELD_ErrorMessage_ValidationCode_Description="Código de Validación";
 
 @XendraTrl(Identifier="e32729cf-47db-fd16-eee7-89a25a84816a")
 public static String es_PE_FIELD_ErrorMessage_ValidationCode_Help="El código validación despliega la fecha; hora y mensaje del error";
-
-@XendraTrl(Identifier="e32729cf-47db-fd16-eee7-89a25a84816a")
-public static String es_PE_FIELD_ErrorMessage_ValidationCode_Name="Código de Validación";
 
 @XendraField(AD_Column_ID="Code",IsCentrallyMaintained=true,
 AD_Tab_ID="22c4fff6-af72-4fe2-4de6-fc5ef7c44366",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="45ecc764-02d3-f642-91bc-dc623b67e4e5",
-Synchronized="2017-08-05 16:52:30.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name Code */
 public static final String COLUMNNAME_Code = "Code";
 /** Set Identifier.
@@ -267,7 +265,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e14314f9-adaf-4a6c-b005-5c053076ed70",
-Synchronized="2017-08-05 16:52:30.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -299,18 +297,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
+public static String es_PE_FIELD_ErrorMessage_Name_Name="Nombre";
+
+@XendraTrl(Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
 public static String es_PE_FIELD_ErrorMessage_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
 public static String es_PE_FIELD_ErrorMessage_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
-public static String es_PE_FIELD_ErrorMessage_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="22c4fff6-af72-4fe2-4de6-fc5ef7c44366",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="22c4fff6-af72-4fe2-4de6-fc5ef7c44366",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="a162aa2a-5552-837c-38c2-fa41493c0794")
 public static final String FIELDNAME_ErrorMessage_Name="a162aa2a-5552-837c-38c2-fa41493c0794";
 
 @XendraTrl(Identifier="e4a7ecbb-7dce-fd25-dd06-6135c4ca753e")
@@ -322,7 +321,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e4a7ecbb-7dce-fd25-dd06-6135c4ca753e",
-Synchronized="2017-08-05 16:52:30.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

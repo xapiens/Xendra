@@ -27,6 +27,8 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.TransferHandler;
 
+import org.compiere.util.CLogger;
+
 
 /**
  * A TransferHandler that creates dynamic file lists during a drag and drop action.
@@ -60,7 +62,7 @@ import javax.swing.TransferHandler;
  * @see javax.swing.TransferHandler
  */
 public class DynamicFileTransferHandler extends TransferHandler {
-    private static final Logger LOG = Logger.getLogger("org.frappucino.swing;");
+    private static final CLogger LOG = CLogger.getCLogger("org.frappucino.swing;");
 
     /** The files are generated early in the DnD action. */
     public static final int EARLY_GENERATION = 1;

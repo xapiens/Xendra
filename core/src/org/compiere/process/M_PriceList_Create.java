@@ -361,8 +361,7 @@ public class M_PriceList_Create extends SvrProcess {
 							+ ",pricelastinv,vendorproductno,upc,vendorcategory,discontinued"
 							+ ",discontinuedby,order_min,order_pack,costperorder"
 							+ ",deliverytime_promised,deliverytime_actual,qualityrating"
-							+ ",royaltyamt,group1,group2"
-							+ ",manufacturer FROM M_Product_PO po WHERE po.M_Product_ID=p.M_Product_ID"
+							+ ",royaltyamt,manufacturer FROM M_Product_PO po WHERE po.M_Product_ID=p.M_Product_ID"
 							+ " AND po.C_BPartner_ID=" + dl.getC_BPartner_ID() + "))" 
 							+ " AND	(NULLIF(" + dl.getM_Product_ID() + ",0) IS NULL "
 							+ "   OR p.M_Product_ID=" + dl.getM_Product_ID() + ")";
@@ -388,7 +387,7 @@ public class M_PriceList_Create extends SvrProcess {
 				V_temp = v.getInt("M_PriceList_Version_Base_ID");
 				if (v.wasNull() || V_temp != p_PriceList_Version_ID) {
 
-					sqldel = "DELETE M_ProductPrice pp"
+					sqldel = "DELETE FROM M_ProductPrice pp"
 							+ " WHERE pp.M_PriceList_Version_ID = "
 							+ p_PriceList_Version_ID
 							+ " AND EXISTS (SELECT t_selection_id FROM T_Selection s WHERE pp.M_Product_ID=s.T_Selection_ID" 

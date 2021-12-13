@@ -1,14 +1,12 @@
 package org.compiere.model;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import org.compiere.model.persistence.X_M_Product_Acct;
 import org.compiere.util.CLogger;
-import org.compiere.util.DB;
+import org.compiere.util.Env;
 
 public class MProductAcct extends X_M_Product_Acct {
 
@@ -47,40 +45,12 @@ public class MProductAcct extends X_M_Product_Acct {
 	 */
 	public static MProductAcct[] getOfProduct (Properties ctx, int M_Product_ID, String trxName)
 	{
-		String sql = "SELECT * FROM M_Product_Acct WHERE M_Product_ID=?";
-		ArrayList<MProductAcct> list = new ArrayList<MProductAcct>();
-		PreparedStatement pstmt = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, trxName);
-			pstmt.setInt (1, M_Product_ID);
-			ResultSet rs = pstmt.executeQuery ();
-			while (rs.next ())
-			{
-				list.add (new MProductAcct (ctx, rs, trxName));
-			}
-			rs.close ();
-			pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			s_log.log(Level.SEVERE, sql, e); 
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
-		//
+		List<MProductAcct> list = new Query(Env.getCtx(), MProductAcct.Table_Name, "M_Product_ID = ?", trxName)
+			.setParameters(M_Product_ID).list();
 		MProductAcct[] retValue = new MProductAcct[list.size()];
 		list.toArray(retValue);
 		return retValue;
+		//
 	}	//	getOfProduct
 
 	/**	Logger	*/

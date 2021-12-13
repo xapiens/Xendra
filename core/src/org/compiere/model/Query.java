@@ -56,6 +56,8 @@ import org.compiere.util.Util;
  * @author Redhuan D. Oon
  * 			<li>FR: [ 2214883 ] Remove SQL code and Replace for Query // introducing SQL String prompt in log.info 
  *			<li>FR: [ 2214883 ] - to introduce .setClient_ID
+ * @author xapiens
+ * 			<li>added limit
  */
 public class Query
 {
@@ -79,6 +81,7 @@ public class Query
 	private boolean onlyActiveRecords = false;
 	private boolean onlyClient_ID = false;
 	private int onlySelection_ID = -1;
+	private int Limit = 0;
 	
 //	/**
 //	 * 
@@ -120,7 +123,7 @@ public class Query
 	{
 		this(ctx, MTable.get(ctx, tableName), whereClause, trxName);
 		if (this.table == null)
-			throw new IllegalArgumentException("Table Name Not Found - "+tableName);
+			throw new IllegalArgumentException("Table Name Not Found - you need Synchronize "+tableName);
 	}
 	
 	/**
@@ -695,6 +698,10 @@ public class Query
 			MRole role = MRole.getDefault(this.ctx, false);
 			sql = role.addAccessSQL(sql, table.getTableName(), applyAccessFilterFullyQualified, applyAccessFilterRW);
 		}
+		if (this.Limit > 0) 
+		{
+			sql += String.format(" LIMIT %s ", this.Limit);
+		}		
 		if (CLogMgt.isLevelFinest()) log.finest("TableName = "+table.getTableName()+"... SQL = " +sql); //red1  - to assist in debugging SQL
 		return sql;
 	}
@@ -769,5 +776,10 @@ public class Query
 		}
 		return retValue;
 	}	//	get_IDs
+
+	public Query setLimit(int limit) {
+		Limit  = limit;
+		return this;
+	}
 
 }

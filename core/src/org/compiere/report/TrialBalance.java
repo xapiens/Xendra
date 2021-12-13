@@ -21,6 +21,7 @@ import java.sql.*;
 import java.util.*;
 
 import org.compiere.model.MElementValue;
+import org.compiere.model.MOrg;
 import org.compiere.model.MPeriod;
 import org.compiere.model.reference.REF_C_AcctSchemaElementType;
 import org.compiere.process.*;
@@ -279,81 +280,6 @@ public class TrialBalance extends SvrProcess
 	 *  Perform process.
 	 *  @return Message to be translated
 	 */
-//	@XendraProcess(value="FinTrialBalance",
-//	name="Trial Balance",
-//	description="Trial Balance for a period or date range",
-//	help="Select a Period (current period if empty) or enter a Account Date Range. If an account is selected, the balance is calculated based on the account type and the primary calendar of the client (i.e. for revenue/expense accounts from the beginning of the year). If no account is selected, the balance is the sum of all transactions before the selected account range or first day of the period selected. You can select an alternative Reporting Hierarchy.",
-//	id="ad95555e-a87f-3f6d-af01-355741f4098e",
-//	ParametersName={"C_AcctSchema_ID",
-//	"C_Period_ID",
-//	"DateAcct",
-//	"AD_Org_ID",
-//	"Account_ID",
-//	"AccountValue",
-//	"C_BPartner_ID",
-//	"M_Product_ID",
-//	"C_Project_ID",
-//	"C_Activity_ID",
-//	"C_SalesRegion_ID",
-//	"C_Campaign_ID",
-//	"PostingType",
-//	"PA_Hierarchy_ID",
-//	"IsOnlyOpen"},
-//	ParametersType={DisplayType.TableDir,
-//	DisplayType.Table,
-//	DisplayType.Date,
-//	DisplayType.TableDir,
-//	DisplayType.Table,
-//	DisplayType.String,
-//	DisplayType.TableDir,
-//	DisplayType.TableDir,
-//	DisplayType.TableDir,
-//	DisplayType.TableDir,
-//	DisplayType.TableDir,
-//	DisplayType.TableDir,
-//	DisplayType.List,
-//	DisplayType.TableDir,
-//	DisplayType.YesNo},
-//	ParametersSeqNo={10,20,30,40,50,55,60,70,80,90,100,110,120,130,140},
-//	ParametersReference={"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"bd8e8e9c-9386-f903-747b-145acdb28168",
-//	"ecebf9e6-f3bc-656f-7e58-c16d3719068b",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"bd8e8e9c-9386-f903-747b-145acdb28168",
-//	"dc109434-dc5c-098b-4f9f-2ceec7b0f812",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"8846760d-b892-c47e-5f24-cbfc1d7dcb31",
-//	"3cefd939-fdfe-f99a-8105-07955b81a4cd",
-//	"bcbf94d0-aa1b-b784-dcb0-6961408b2d83"},
-//	ParametersReferenceValue={"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	"",
-//	""},
-//	ParametersIsMandatory={"Y","N","N","N","N","N","N","N","N","N","N","N","Y","N","N"},
-//	ParametersIsRange={"N","N","Y","N","N","Y","N","N","N","N","N","N","N","N","N"},
-//	ParametersDefaultValue={"","","","","","","","","","","","","A","","N"},
-//	ParametersDefaultValue2={"","","","","","","","","","","","","","",""},
-//	ParametersvFormat={"","","","","","","","","","","","","","",""},
-//	ParametersvalueMin={"","","","","","","","","","","","","","",""},
-//	ParametersvalueMax={"","","","","","","","","","","","","","",""},
-//	ParametersDisplayLogic={"","","","","","","","","","","","","","",""},
-//	ParametersReadOnlyLogic={"","","","","","","","","","","","","","",""})	
 	protected String doIt()
 	{
 		String err = createBalanceLine();
@@ -489,7 +415,8 @@ public class TrialBalance extends SvrProcess
 			m_acct = new MElementValue (getCtx(), p_Account_ID, get_TrxName());
 			if (!m_acct.isBalanceSheet())
 			{
-				MPeriod first = MPeriod.getFirstInYear (getCtx(), p_DateAcct_From);
+				MOrg o = MOrg.get(Env.getCtx(), p_AD_Org_ID);
+				MPeriod first = MPeriod.getFirstInYear (getCtx(), p_DateAcct_From, p_AD_Org_ID, o.getAD_Client_ID());
 				if (first != null)
 					sql.append(" AND DateAcct >= ").append(DB.TO_DATE(first.getStartDate(), true));
 				else

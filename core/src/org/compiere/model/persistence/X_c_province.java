@@ -60,10 +60,12 @@ public static int Table_ID=MTable.getTable_ID("c_province");
 @XendraTrl(Identifier="7a81f13f-30a9-b7c5-60e9-5bc9950d96b9")
 public static String es_PE_TABLE_c_province_Name="c_province";
 
-@XendraTable(Name="c_province",Description="",Help="",TableName="c_province",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="7a81f13f-30a9-b7c5-60e9-5bc9950d96b9",Synchronized="2017-08-16 11:42:22.0")
+@XendraTable(Name="c_province",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="c_province",
+AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.standard",Identifier="7a81f13f-30a9-b7c5-60e9-5bc9950d96b9",
+Synchronized="2020-03-03 21:37:34.0")
 /** TableName=c_province */
 public static final String Table_Name="c_province";
 
@@ -121,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1698091-17f2-b2c1-717d-dc165d6c0878",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Country_ID */
 public static final String COLUMNNAME_C_Country_ID = "C_Country_ID";
 /** Set C_Province_ID.
@@ -166,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="679fb819-8499-f20c-92fa-70596f4c53d5",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Region_ID */
 public static final String COLUMNNAME_C_Region_ID = "C_Region_ID";
 /** Set Description.
@@ -205,7 +207,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1fdd3f04-dc80-e445-0fba-6c67ff4fe416",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -237,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64ff08f3-13c4-45b1-b8e7-39bd1477b6e5",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -277,7 +279,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c99ecb27-92bb-c91f-3dc4-d0065b53d6ec",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

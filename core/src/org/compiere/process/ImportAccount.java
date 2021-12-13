@@ -25,14 +25,17 @@ import org.compiere.model.MAccount;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MElementValue;
 import org.compiere.model.Query;
-import org.compiere.model.persistence.X_C_UOM;
+import org.compiere.model.persistence.X_AD_TreeNode;
+import org.compiere.model.persistence.X_C_AcctSchema_Element;
+import org.compiere.model.persistence.X_C_ValidCombination;
+import org.compiere.model.persistence.X_Fact_Acct;
 import org.compiere.model.persistence.X_I_ElementValue;
-import org.compiere.model.persistence.X_I_Product;
-import org.compiere.model.persistence.X_C_Subject;
 import org.compiere.util.*;
 
+import org.xendra.Constants;
 import org.xendra.annotations.XendraProcess;
 import org.xendra.annotations.XendraProcessParameter;
+import org.xendra.util.UpdatePO;
 
 /**
  *	Import Accounts from I_ElementValue
@@ -197,6 +200,7 @@ public class ImportAccount extends SvrProcess
 	protected String doIt() throws java.lang.Exception
 	{
 		StringBuffer sql = null;
+		UpdatePO o = new UpdatePO();
 		int no = 0;
 		String clientCheck = " AND AD_Client_ID=" + m_AD_Client_ID;
 
@@ -205,25 +209,25 @@ public class ImportAccount extends SvrProcess
 		//	Delete Old Imported
 		if (m_deleteOldImported)
 		{
-			sql = new StringBuffer ("DELETE FROM I_ElementValue "
-				+ "WHERE I_IsImported='Y'").append(clientCheck);
-			no = DB.executeUpdate(sql.toString(), get_TrxName());
+			o.setTablename(X_I_ElementValue.Table_Name);
+			o.setClient(m_AD_Client_ID);
+			no = o.delete("I_IsImported='Y'", get_TrxName());
 			System.out.println("Delete Old Impored =" + no);
 		}
 		
 		//	Set Client, Org, IsActive, Created/Updated
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET AD_Client_ID = COALESCE (AD_Client_ID, ").append(m_AD_Client_ID).append("),"
-			+ " AD_Org_ID = COALESCE (AD_Org_ID, 0),"
-			+ " IsActive = COALESCE (IsActive, 'Y'),"
-			+ " Created = COALESCE (Created, CURRENT_TIMESTAMP),"
-			+ " CreatedBy = COALESCE (CreatedBy, 0),"
-			+ " Updated = COALESCE (Updated, CURRENT_TIMESTAMP),"
-			+ " UpdatedBy = COALESCE (UpdatedBy, 0),"
-			+ " I_ErrorMsg = ' ',"
-			+ " I_IsImported = 'N' "
-			+ "WHERE I_IsImported<>'Y' OR I_IsImported IS NULL");
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setFieldExpr(Constants.COLUMNNAME_AD_Org_ID, "COALESCE (AD_Org_ID, 0)");		
+		o.setFieldExpr(Constants.COLUMNNAME_IsActive, "COALESCE (IsActive, 'Y')");
+		o.setFieldExpr(Constants.COLUMNNAME_Created, "COALESCE (Created, CURRENT_TIMESTAMP)");
+		o.setFieldExpr(Constants.COLUMNNAME_CreatedBy, "COALESCE (CreatedBy, 0)");
+		o.setFieldExpr(Constants.COLUMNNAME_Updated, "COALESCE (Created, CURRENT_TIMESTAMP)");
+		o.setFieldExpr(Constants.COLUMNNAME_UpdatedBy, "COALESCE (UpdatedBy, 0)");
+		o.setField(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "");
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, Constants.NO);
+		no = o.update("I_IsImported<>'Y' OR I_IsImported IS NULL", get_TrxName());
 		System.out.println("Reset=" + no);
 
 		//	****	Prepare	****
@@ -231,125 +235,123 @@ public class ImportAccount extends SvrProcess
 		//	Set Element
 		if (m_C_Element_ID != 0)
 		{
-			sql = new StringBuffer ("UPDATE I_ElementValue "
-				+ "SET ElementName=(SELECT Name FROM C_Element WHERE C_Element_ID=").append(m_C_Element_ID).append(") "
-				+ "WHERE ElementName IS NULL AND C_Element_ID IS NULL"
-				+ " AND I_IsImported<>'Y'").append(clientCheck);
-			no = DB.executeUpdate(sql.toString(), get_TrxName());
+			o = new UpdatePO();
+			o.setTablename(X_I_ElementValue.Table_Name);
+			o.setClient(m_AD_Client_ID);
+			o.setFieldExpr(X_I_ElementValue.COLUMNNAME_ElementName, String.format("(SELECT Name FROM C_Element WHERE C_Element_ID=%s)",m_C_Element_ID));			
+			no = o.update("ElementName IS NULL AND C_Element_ID IS NULL", get_TrxName());
 			System.out.println("Set Element Default=" + no);
 		}
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue i "
-			+ "SET C_Element_ID = (SELECT C_Element_ID FROM C_Element e"
-			+ " WHERE i.ElementName=e.Name AND i.AD_Client_ID=e.AD_Client_ID)"
-			+ "WHERE C_Element_ID IS NULL"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setAlias("i");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_C_Element_ID, "(SELECT C_Element_ID FROM C_Element e WHERE i.ElementName=e.Name AND i.AD_Client_ID=e.AD_Client_ID)");
+		no = o.update("C_Element_ID IS NULL AND I_IsImported<>'Y'", get_TrxName());
 		System.out.println("Set Element=" + no);
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='E', I_ErrorMsg='ERR=Invalid Element, ' "
-			+ "WHERE C_Element_ID IS NULL"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+		o.setField(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "ERR=Invalid Element");
+		no = o.update("C_Element_ID IS NULL AND I_IsImported<>'Y'", get_TrxName());
 		log.config("Invalid Element=" + no);
 
 		//	Set Column
-		sql = new StringBuffer ("UPDATE I_ElementValue i "
-			+ "SET AD_Column_ID = (SELECT AD_Column_ID FROM AD_Column c"
-			+ " WHERE UPPER(i.Default_Account)=UPPER(c.ColumnName)"
-			+ " AND c.AD_Table_ID IN (315,266) AND AD_Reference_ID=25) "
-			+ "WHERE Default_Account IS NOT NULL AND AD_Column_ID IS NULL"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setAlias("i");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_AD_Column_ID, "(SELECT AD_Column_ID FROM AD_Column c WHERE UPPER(i.Default_Account)=UPPER(c.ColumnName) AND c.AD_Table_ID IN (315,266) AND AD_Reference_ID=25)");
+		no = o.update("Default_Account IS NOT NULL AND AD_Column_ID IS NULL AND I_IsImported<>'Y'", get_TrxName());
 		System.out.println("Set Column=" + no);
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||'ERR=Invalid Column, ' "
-			+ "WHERE AD_Column_ID IS NULL AND Default_Account IS NOT NULL"
-			+ " AND " 
-			+ "	UPPER(Default_Account)<>'DEFAULT_ACCT' " //	ignore default account
-			+ "	AND " 
-			+ "	LENGTH(TRIM(DEFAULT_ACCOUNT))>0 "
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'ERR=Invalid Column, '");
+		no = o.update("AD_Column_ID IS NULL AND Default_Account IS NOT NULL AND UPPER(Default_Account)<>'DEFAULT_ACCT'	AND	LENGTH(TRIM(DEFAULT_ACCOUNT))>0 AND I_IsImported<>'Y'", get_TrxName());		 
 		log.config("Invalid Column=" + no);
 
 		//	Set Post* Defaults (ignore errors)
 		String[] yColumns = new String[] {"PostActual", "PostBudget", "PostStatistical", "PostEncumbrance"};
 		for (int i = 0; i < yColumns.length; i++)
 		{
-			sql = new StringBuffer ("UPDATE I_ElementValue SET ")
-				.append(yColumns[i]).append("='Y' WHERE ")
-				.append(yColumns[i]).append(" IS NULL OR ")
-				.append(yColumns[i]).append(" NOT IN ('Y','N')"
-				+ " AND I_IsImported<>'Y'").append(clientCheck);
-			no = DB.executeUpdate(sql.toString(), get_TrxName());
+			o = new UpdatePO();
+			o.setTablename(X_I_ElementValue.Table_Name);
+			o.setClient(m_AD_Client_ID);
+			o.setField(yColumns[i], Constants.YES);
+			no = o.update(String.format("%s IS NULL OR %s NOT IN ('Y','N') AND I_IsImported<>'Y'", yColumns[i],yColumns[i]),get_TrxName());
 			System.out.println("Set " + yColumns[i] + " Default=" + no);
 		}
 		//	Summary
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET IsSummary='N' "
-			+ "WHERE IsSummary IS NULL OR IsSummary NOT IN ('Y','N')"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_IsSummary, Constants.NO);
+		no = o.update("IsSummary IS NULL OR IsSummary NOT IN ('Y','N') AND I_IsImported<>'Y'", get_TrxName());
 		System.out.println("Set IsSummary Default=" + no);
 
 		//	Doc Controlled
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET IsDocControlled = CASE WHEN AD_Column_ID IS NOT NULL THEN 'Y' ELSE 'N' END "
-			+ "WHERE IsDocControlled IS NULL OR IsDocControlled NOT IN ('Y','N')"
-			+ " AND I_IsImported='N'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_IsDocControlled, "CASE WHEN AD_Column_ID IS NOT NULL THEN 'Y' ELSE 'N' END");
+		no = o.update(" IsDocControlled IS NULL OR IsDocControlled NOT IN ('Y','N') AND I_IsImported='N'", get_TrxName());
 		System.out.println("Set IsDocumentControlled Default=" + no);
 
 		//	Check Account Type A (E) L M O R
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET AccountType='E' "
-			+ "WHERE AccountType IS NULL"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_AccountType, "E");
+		no = o.update("AccountType IS NULL AND I_IsImported<>'Y'", get_TrxName());
 		System.out.println("Set AccountType Default=" + no);
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||'ERR=Invalid AccountType, ' "
-			+ "WHERE AccountType NOT IN ('A','E','L','M','O','R')"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'ERR=Invalid AccountType,'");
+		no = o.update("AccountType NOT IN ('A','E','L','M','O','R') AND I_IsImported<>'Y'", get_TrxName());		
 		log.config("Invalid AccountType=" + no);
 
 		//	Check Account Sign (N) C B
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET AccountSign='N' "
-			+ "WHERE AccountSign IS NULL"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_AccountSign, Constants.NO);
+		no = o.update("AccountSign IS NULL AND I_IsImported<>'Y'", get_TrxName());
 		System.out.println("Set AccountSign Default=" + no);
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||'ERR=Invalid AccountSign, ' "
-			+ "WHERE AccountSign NOT IN ('N','C','D')"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'ERR=Invalid AccountSign, '");
+		no = o.update("AccountSign NOT IN ('N','C','D') AND I_IsImported<>'Y'", get_TrxName());
 		log.config("Invalid AccountSign=" + no);
 
 		//	No Value
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||'ERR=No Key, ' "
-			+ "WHERE (Value IS NULL OR Value='')"
-			+ " AND I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'ERR=No Key, '");
+		no = o.update("(Value IS NULL OR Value='') AND I_IsImported<>'Y'", get_TrxName());
 		log.config("Invalid Key=" + no);
 
 		//	****	Update ElementValue from existing
-		sql = new StringBuffer ("UPDATE I_ElementValue i "
-			+ "SET C_ElementValue_ID=(SELECT C_ElementValue_ID FROM C_ElementValue ev"
-			+ " INNER JOIN C_Element e ON (ev.C_Element_ID=e.C_Element_ID)"
-			+ " WHERE i.C_Element_ID=e.C_Element_ID AND i.AD_Client_ID=e.AD_Client_ID"
-			+ " AND i.Value=ev.Value) "
-			+ "WHERE C_ElementValue_ID IS NULL"
-			+ " AND I_IsImported='N'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setAlias("i");
+		String fieldexpr = "(SELECT C_ElementValue_ID FROM C_ElementValue ev INNER JOIN C_Element e ON (ev.C_Element_ID=e.C_Element_ID) WHERE i.C_Element_ID=e.C_Element_ID AND i.AD_Client_ID=e.AD_Client_ID  AND i.Value=ev.Value) "; 
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_C_ElementValue_ID, fieldexpr); 
+		no = o.update("C_ElementValue_ID IS NULL AND I_IsImported='N'", get_TrxName());
 		System.out.println("Found ElementValue=" + no);
 
 		commit();
@@ -357,84 +359,153 @@ public class ImportAccount extends SvrProcess
 		//	-------------------------------------------------------------------
 		int noInsert = 0;
 		int noUpdate = 0;
-
-		//	Go through Records
-		sql = new StringBuffer ("SELECT * "
-			+ "FROM I_ElementValue "
-			+ "WHERE I_IsImported='N'").append(clientCheck)
-			.append(" ORDER BY I_ElementValue_ID");
-		try
-		{
-			PreparedStatement pstmt = DB.prepareStatement(sql.toString(), get_TrxName());
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next())
+		
+		//		Go through Records
+		List<X_I_ElementValue> impEValues = new Query(Env.getCtx(), X_I_ElementValue.Table_Name, 
+					String.format("I_IsImported='N' AND AD_Client_ID = %s",m_AD_Client_ID), get_TrxName()).list();
+		for (X_I_ElementValue impEV:impEValues) {
+			int C_ElementValue_ID = impEV.getC_ElementValue_ID();
+			int I_ElementValue_ID = impEV.getI_ElementValue_ID();
+			if (C_ElementValue_ID == 0)		//	New
 			{
-				X_I_ElementValue impEV = new X_I_ElementValue(getCtx(), rs, get_TrxName());
-				int C_ElementValue_ID = impEV.getC_ElementValue_ID();
-				int I_ElementValue_ID = impEV.getI_ElementValue_ID();
-				if (C_ElementValue_ID == 0)		//	New
+				MElementValue oimpEV = new Query(Env.getCtx(), MElementValue.Table_Name,"value=?",get_TrxName())
+					.setParameters(impEV.getValue()).first();
+				if (oimpEV != null)
 				{
-					MElementValue oimpEV = new Query(Env.getCtx(), MElementValue.Table_Name,"value=?",get_TrxName()).setParameters(impEV.getValue()).first();
-					if (oimpEV != null)
-					{
-						System.out.println("X");
-					}
+					System.out.println("X");
+					C_ElementValue_ID = oimpEV.getC_ElementValue_ID();
 				}
-				//	****	Create/Update ElementValue
-				if (C_ElementValue_ID == 0)		//	New
+			}
+			//	****	Create/Update ElementValue
+			if (C_ElementValue_ID == 0)		//	New
+			{
+				MElementValue ev = new MElementValue(impEV);
+				if (ev.save())
 				{
-					MElementValue ev = new MElementValue(impEV);
-					if (ev.save())
-					{
-						noInsert++;
-						impEV.setC_ElementValue_ID(ev.getC_ElementValue_ID());
-						impEV.setI_IsImported(true);
-						impEV.save();
-					}
-					else
-					{
-						sql = new StringBuffer ("UPDATE I_ElementValue i "
-							+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||").append(DB.TO_STRING("Insert ElementValue "))
-							.append("WHERE I_ElementValue_ID=").append(I_ElementValue_ID);
-						DB.executeUpdate(sql.toString(), get_TrxName());
-					}
+					noInsert++;
+					impEV.setC_ElementValue_ID(ev.getC_ElementValue_ID());
+					impEV.setI_IsImported(true);
+					impEV.save();
 				}
-				else							//	Update existing
+				else
 				{
-					MElementValue ev = new MElementValue (getCtx(), C_ElementValue_ID, null);
-					if (ev.get_ID() != C_ElementValue_ID)
-					{
-						
-					}
-					ev.set(impEV);
-					if (ev.save())
-					{
-						noUpdate++;
-						impEV.setI_IsImported(true);
-						impEV.save();
-					}
-					else
-					{
-						sql = new StringBuffer ("UPDATE I_ElementValue i "
-							+ "SET I_IsImported='E', I_ErrorMsg=I_ErrorMsg||").append(DB.TO_STRING("Update ElementValue"))
-							.append("WHERE I_ElementValue_ID=").append(I_ElementValue_ID);
-						DB.executeUpdate(sql.toString(), get_TrxName());
-					}
+					o = new UpdatePO();
+					o.setTablename(X_I_ElementValue.Table_Name);
+					o.setClient(m_AD_Client_ID);
+					o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+					o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'Insert ElementValue '");
+					o.update(String.format("I_ElementValue_ID=%s", I_ElementValue_ID), get_TrxName());
 				}
-			}	//	for all I_Product
-			rs.close();
-			pstmt.close();
+			}
+			else							//	Update existing
+			{
+				MElementValue ev = new MElementValue (getCtx(), C_ElementValue_ID, null);
+				if (ev.get_ID() != C_ElementValue_ID)
+				{
+					
+				}
+				ev.set(impEV);
+				if (ev.save())
+				{
+					noUpdate++;
+					impEV.setI_IsImported(true);
+					impEV.save();
+				}
+				else
+				{
+					o = new UpdatePO();
+					o.setTablename(X_I_ElementValue.Table_Name);
+					o.setClient(m_AD_Client_ID);
+					o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+					o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'Update ElementValue'");
+					o.update(String.format("I_ElementValue_ID=%s", I_ElementValue_ID), get_TrxName());
+				}
+			}			
 		}
-		catch (SQLException e)
-		{
-			throw new Exception ("create", e);
-		}
+//		//	Go through Records
+//		sql = new StringBuffer ("SELECT * "
+//			+ "FROM I_ElementValue "
+//			+ "WHERE I_IsImported='N'").append(clientCheck)
+//			.append(" ORDER BY I_ElementValue_ID");
+//		try
+//		{
+//			PreparedStatement pstmt = DB.prepareStatement(sql.toString(), get_TrxName());
+//			ResultSet rs = pstmt.executeQuery();
+//			while (rs.next())
+//			{
+//				X_I_ElementValue impEV = new X_I_ElementValue(getCtx(), rs, get_TrxName());
+//				int C_ElementValue_ID = impEV.getC_ElementValue_ID();
+//				int I_ElementValue_ID = impEV.getI_ElementValue_ID();
+//				if (C_ElementValue_ID == 0)		//	New
+//				{
+//					MElementValue oimpEV = new Query(Env.getCtx(), MElementValue.Table_Name,"value=?",get_TrxName())
+//						.setParameters(impEV.getValue()).first();
+//					if (oimpEV != null)
+//					{
+//						System.out.println("X");
+//					}
+//				}
+//				//	****	Create/Update ElementValue
+//				if (C_ElementValue_ID == 0)		//	New
+//				{
+//					MElementValue ev = new MElementValue(impEV);
+//					if (ev.save())
+//					{
+//						noInsert++;
+//						impEV.setC_ElementValue_ID(ev.getC_ElementValue_ID());
+//						impEV.setI_IsImported(true);
+//						impEV.save();
+//					}
+//					else
+//					{
+//						o = new UpdatePO();
+//						o.setTablename(X_I_ElementValue.Table_Name);
+//						o.setClient(m_AD_Client_ID);
+//						o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+//						o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'Insert ElementValue '");
+//						o.update(String.format("I_ElementValue_ID=%s", I_ElementValue_ID), get_TrxName());
+//					}
+//				}
+//				else							//	Update existing
+//				{
+//					MElementValue ev = new MElementValue (getCtx(), C_ElementValue_ID, null);
+//					if (ev.get_ID() != C_ElementValue_ID)
+//					{
+//						
+//					}
+//					ev.set(impEV);
+//					if (ev.save())
+//					{
+//						noUpdate++;
+//						impEV.setI_IsImported(true);
+//						impEV.save();
+//					}
+//					else
+//					{
+//						o = new UpdatePO();
+//						o.setTablename(X_I_ElementValue.Table_Name);
+//						o.setClient(m_AD_Client_ID);
+//						o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "E");
+//						o.setField(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'Update ElementValue'");
+//						o.update(String.format("I_ElementValue_ID=%s", I_ElementValue_ID), get_TrxName());
+//					}
+//				}
+//			}	//	for all I_Product
+//			rs.close();
+//			pstmt.close();
+//		}
+//		catch (SQLException e)
+//		{
+//			throw new Exception ("create", e);
+//		}
 
 		//	Set Error to indicator to not imported
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_IsImported='N', Updated=CURRENT_TIMESTAMP "
-			+ "WHERE I_IsImported<>'Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_I_IsImported, "N");
+		o.setFieldExpr(Constants.COLUMNNAME_Updated, "now()");
+		no = o.update("I_IsImported<>'Y'", get_TrxName());		
 		addLog (0, null, new BigDecimal (no), "@Errors@");
 		addLog (0, null, new BigDecimal (noInsert), "@C_ElementValue_ID@: @Inserted@");
 		addLog (0, null, new BigDecimal (noUpdate), "@C_ElementValue_ID@: @Updated@");
@@ -442,20 +513,21 @@ public class ImportAccount extends SvrProcess
 		commit();
 
 		//	*****	Set Parent
-		sql = new StringBuffer ("UPDATE I_ElementValue i "
-			+ "SET ParentElementValue_ID=(SELECT C_ElementValue_ID"
-			+ " FROM C_ElementValue ev WHERE i.C_Element_ID=ev.C_Element_ID"
-			+ " AND i.ParentValue=ev.Value AND i.AD_Client_ID=ev.AD_Client_ID) "
-			+ "WHERE ParentElementValue_ID IS NULL"
-			+ " AND I_IsImported='Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setAlias("i");
+		o.setClient(m_AD_Client_ID);
+		fieldexpr = "(SELECT C_ElementValue_ID FROM C_ElementValue ev WHERE i.C_Element_ID=ev.C_Element_ID AND i.ParentValue=ev.Value AND i.AD_Client_ID=ev.AD_Client_ID)";
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_ParentElementValue_ID, fieldexpr);
+		no = o.update("ParentElementValue_ID IS NULL AND I_IsImported='Y'", get_TrxName());
 		System.out.println("Found Parent ElementValue=" + no);
 		//
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET I_ErrorMsg=I_ErrorMsg||'Info=ParentNotFound, ' "
-			+ "WHERE ParentElementValue_ID IS NULL AND ParentValue IS NOT NULL"
-			+ " AND I_IsImported='Y'").append(clientCheck);
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setAlias("i");
+		o.setClient(m_AD_Client_ID);
+		o.setFieldExpr(X_I_ElementValue.COLUMNNAME_I_ErrorMsg, "I_ErrorMsg||'Info=ParentNotFound, '");
+		no = o.update("ParentElementValue_ID IS NULL AND ParentValue IS NOT NULL AND I_IsImported='Y'", get_TrxName());		
 		log.config("Not Found Patent ElementValue=" + no);
 		//
 		sql = new StringBuffer ("SELECT i.ParentElementValue_ID, i.I_ElementValue_ID,"
@@ -470,30 +542,16 @@ public class ImportAccount extends SvrProcess
 		{
 			PreparedStatement pstmt = DB.prepareStatement(sql.toString(), get_TrxName());
 			ResultSet rs = pstmt.executeQuery();
-			//
-			String updateSQL = "UPDATE AD_TreeNode SET Parent_ID=?, SeqNo=? "
-				+ "WHERE AD_Tree_ID=? AND Node_ID=?";
-			//begin e-evolution vpj-cd 15 nov 2005 PostgreSQL
-			//PreparedStatement updateStmt = DB.prepareStatement(updateSQL, get_TrxName());
-			PreparedStatement updateStmt = DB.prepareStatement(updateSQL, ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE, get_TrxName());
-			//end	
-			//
 			while (rs.next())
 			{
-				updateStmt.setInt(1, rs.getInt(1));		//	Parent
-				updateStmt.setInt(2, rs.getInt(2));		//	SeqNo (assume sequenec in import is the same)
-				updateStmt.setInt(3, rs.getInt(3));		//	Tree
-				updateStmt.setInt(4, rs.getInt(4));		//	Node
-				try
-				{
-					no = updateStmt.executeUpdate();
-					noParentUpdate += no;
-				}
-				catch (SQLException ex)
-				{
-					log.log(Level.SEVERE, "(ParentUpdate)", ex);
-					no = 0;
-				}
+				o = new UpdatePO();
+				o.setTablename(X_AD_TreeNode.Table_Name);
+				o.setClient(m_AD_Client_ID);
+				o.setField(X_AD_TreeNode.COLUMNNAME_Parent_ID, rs.getInt(1));
+				o.setField(X_AD_TreeNode.COLUMNNAME_SeqNo, rs.getInt(2));
+				String where = String.format("AD_Tree_ID=%s AND Node_ID=%s", rs.getInt(3), rs.getInt(4));
+				no = o.update(where, get_TrxName());
+				noParentUpdate += no;
 				if (no == 0)
 					log.info("Parent not found for " + rs.getString(5));
 			}
@@ -507,14 +565,14 @@ public class ImportAccount extends SvrProcess
 		addLog (0, null, new BigDecimal (noParentUpdate), "@ParentElementValue_ID@: @Updated@");
 
 		//	Reset Processing Flag
-		sql = new StringBuffer ("UPDATE I_ElementValue "
-			+ "SET Processing='-'"
-			+ "WHERE I_IsImported='Y' AND Processed='Y' AND Processing='Y'"
-			+ " AND C_ElementValue_ID IS NOT NULL")
-			.append(clientCheck);
+		o = new UpdatePO();
+		o.setTablename(X_I_ElementValue.Table_Name);
+		o.setClient(m_AD_Client_ID);
+		o.setField(X_I_ElementValue.COLUMNNAME_Processing, "-");		
+		String updatecondition = "I_IsImported='Y' AND Processed='Y' AND Processing='Y' AND C_ElementValue_ID IS NOT NULL";
 		if (m_updateDefaultAccounts)
-			sql.append(" AND AD_Column_ID IS NULL");
-		no = DB.executeUpdate(sql.toString(), get_TrxName());
+			updatecondition += " AND AD_Column_ID IS NULL";
+		no = o.update(updatecondition, get_TrxName());
 		System.out.println("Reset Processing Flag=" + no);
 
 		if (m_updateDefaultAccounts)
@@ -557,16 +615,19 @@ public class ImportAccount extends SvrProcess
 		}
 
 		//	Default Account		DEFAULT_ACCT
-		sql = new StringBuffer ("UPDATE C_AcctSchema_Element e "
-			+ "SET C_ElementValue_ID=(SELECT C_ElementValue_ID FROM I_ElementValue i"
-			+ " WHERE e.C_Element_ID=i.C_Element_ID AND i.C_ElementValue_ID IS NOT NULL"
-			+ " AND UPPER(i.Default_Account)='DEFAULT_ACCT') "
-			+ "WHERE EXISTS (SELECT * FROM I_ElementValue i"
-			+ " WHERE e.C_Element_ID=i.C_Element_ID AND i.C_ElementValue_ID IS NOT NULL"
-			+ " AND UPPER(i.Default_Account)='DEFAULT_ACCT' "
-			+ "	AND i.I_IsImported='Y')")
-			.append(clientCheck);
-		int no = DB.executeUpdate(sql.toString(), get_TrxName());
+		UpdatePO o = new UpdatePO();
+		o.setTablename(X_C_AcctSchema_Element.Table_Name);
+		o.setAlias("e");
+		o.setClient(m_AD_Client_ID);	
+		StringBuilder fieldexpr = new StringBuilder("(SELECT C_ElementValue_ID FROM I_ElementValue i")
+		.append(" WHERE e.C_Element_ID=i.C_Element_ID AND i.C_ElementValue_ID IS NOT NULL")
+		.append( " AND UPPER(i.Default_Account)='DEFAULT_ACCT') ");
+		StringBuilder whereexpr = new StringBuilder("EXISTS (SELECT * FROM I_ElementValue i")
+			.append(" WHERE e.C_Element_ID=i.C_Element_ID AND i.C_ElementValue_ID IS NOT NULL")
+			.append(" AND UPPER(i.Default_Account)='DEFAULT_ACCT' ")
+			.append("	AND i.I_IsImported='Y')");
+		o.setField(X_C_AcctSchema_Element.COLUMNNAME_C_ElementValue_ID,fieldexpr.toString());		
+		int no = o.update(whereexpr.toString(), get_TrxName());
 		addLog (0, null, new BigDecimal (no), "@C_AcctSchema_Element_ID@: @Updated@");
 	}	//	updateDefaults
 
@@ -610,9 +671,11 @@ public class ImportAccount extends SvrProcess
 				counts[u]++;
 				if (u != UPDATE_ERROR)
 				{
-					sql = "UPDATE I_ElementValue SET Processing='N' "
-						+ "WHERE I_ElementValue_ID=" + I_ElementValue_ID;
-					int no = DB.executeUpdate(sql.toString(), get_TrxName());
+					UpdatePO o = new UpdatePO();
+					o.setTablename(X_I_ElementValue.Table_Name);					
+					o.setClient(m_AD_Client_ID);
+					o.setField(X_I_ElementValue.COLUMNNAME_Processing, Constants.NO);
+					int no = o.update(String.format("I_ElementValue_ID=%s", I_ElementValue_ID), get_TrxName());
 					if (no != 1)
 						log.log(Level.SEVERE, "Updated=" + no);
 				}
@@ -683,10 +746,10 @@ public class ImportAccount extends SvrProcess
 							int newC_ValidCombination_ID = acct.getC_ValidCombination_ID();
 							if (C_ValidCombination_ID != newC_ValidCombination_ID)
 							{
-								sql = new StringBuffer ("UPDATE ").append(TableName)
-									.append(" SET ").append(ColumnName).append("=").append(newC_ValidCombination_ID)
-									.append(" WHERE C_AcctSchema_ID=").append(C_AcctSchema_ID);
-								int no = DB.executeUpdate(sql.toString(), get_TrxName());
+								UpdatePO o = new UpdatePO();
+								o.setTablename(TableName);					
+								o.setField(ColumnName, newC_ValidCombination_ID);
+								int no = o.update(String.format("C_AcctSchema_ID=%s", C_AcctSchema_ID), get_TrxName());								
 								System.out.println("ImportAccount.updateDefaultAccount - #" + no + " - "
 									+ TableName + "." + ColumnName + " - " + C_ElementValue_ID
 									+ " -- " + C_ValidCombination_ID + " -> " + newC_ValidCombination_ID);
@@ -700,23 +763,26 @@ public class ImportAccount extends SvrProcess
 					else	//	Replace Combination
 					{
 						//	Only Acct Combination directly
-						sql = new StringBuffer ("UPDATE C_ValidCombination SET Account_ID=")
-							.append(C_ElementValue_ID).append(" WHERE C_ValidCombination_ID=").append(C_ValidCombination_ID);
-						int no = DB.executeUpdate(sql.toString(), get_TrxName());
+						UpdatePO o = new UpdatePO();
+						o.setTablename(X_C_ValidCombination.Table_Name);
+						o.setField(X_C_ValidCombination.COLUMNNAME_Account_ID, C_ElementValue_ID);
+						int no = o.update(String.format("C_ValidCombination_ID = ?", C_ValidCombination_ID), get_TrxName());
 						System.out.println("ImportAccount.updateDefaultAccount - Replace #" + no + " - "
 								+ "C_ValidCombination_ID=" + C_ValidCombination_ID + ", New Account_ID=" + C_ElementValue_ID);
 						if (no == 1)
 						{
 							retValue = UPDATE_YES;
 							//	Where Acct was used
-							sql = new StringBuffer ("UPDATE C_ValidCombination SET Account_ID=")
-								.append(C_ElementValue_ID).append(" WHERE Account_ID=").append(Account_ID);
-							no = DB.executeUpdate(sql.toString(), get_TrxName());
+							o = new UpdatePO();
+							o.setTablename(X_C_ValidCombination.Table_Name);
+							o.setField(X_C_ValidCombination.COLUMNNAME_Account_ID, C_ElementValue_ID);
+							no = o.update(String.format("Account_ID=%s", Account_ID), get_TrxName());
 							System.out.println("ImportAccount.updateDefaultAccount - Replace VC #" + no + " - "
 									+ "Account_ID=" + Account_ID + ", New Account_ID=" + C_ElementValue_ID);
-							sql = new StringBuffer ("UPDATE Fact_Acct SET Account_ID=")
-								.append(C_ElementValue_ID).append(" WHERE Account_ID=").append(Account_ID);
-							no = DB.executeUpdate(sql.toString(), get_TrxName());
+							o = new UpdatePO();
+							o.setTablename(X_Fact_Acct.Table_Name);
+							o.setField(X_Fact_Acct.COLUMNNAME_Account_ID, C_ElementValue_ID);
+							o.update(String.format("Account_ID=%s",Account_ID), get_TrxName());
 							System.out.println("ImportAccount.updateDefaultAccount - Replace Fact #" + no + " - "
 									+ "Account_ID=" + Account_ID + ", New Account_ID=" + C_ElementValue_ID);
 						}
@@ -732,8 +798,6 @@ public class ImportAccount extends SvrProcess
 		{
 			log.log(Level.SEVERE, sql.toString(), e);
 		}
-
 		return retValue;
 	}	//	updateDefaultAccount
-
 }	//	ImportAccount

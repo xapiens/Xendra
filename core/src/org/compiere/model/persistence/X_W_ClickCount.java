@@ -74,11 +74,12 @@ public static final String TABNAME_Click="ca86b416-4ac9-bdd7-c084-9f25719cbffb";
 @XendraTrl(Identifier="c9055321-f2d7-ecab-1856-6762c7a262ed")
 public static String es_PE_TABLE_W_ClickCount_Name="Contador Clic";
 
-@XendraTable(Name="Click Count",Description="Web Click Management",Help="",
+@XendraTable(Name="Click Count",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Web Click Management",Help="",
 TableName="W_ClickCount",AccessLevel="3",AD_Window_ID="03db8034-9fa0-fcc4-bab8-b9e48ee18661",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="c9055321-f2d7-ecab-1856-6762c7a262ed",Synchronized="2017-08-16 11:44:28.0")
+Identifier="c9055321-f2d7-ecab-1856-6762c7a262ed",Synchronized="2020-03-03 21:40:32.0")
 /** TableName=W_ClickCount */
 public static final String Table_Name="W_ClickCount";
 
@@ -117,9 +118,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_W_ClickCount[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** C_BPartner_ID AD_Reference=60ae0c61-2010-74a0-d56f-a6f27933c4c4 */
-public static final int C_BPARTNER_ID_AD_Reference_ID=232;
 /** Set Business Partner .
 @param C_BPartner_ID Identifies a Business Partner */
 public void setC_BPartner_ID (int C_BPartner_ID)
@@ -138,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fca9c757-f33a-2f16-287b-70bef25cb01f")
+public static String es_PE_FIELD_Click_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="fca9c757-f33a-2f16-287b-70bef25cb01f")
 public static String es_PE_FIELD_Click_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="fca9c757-f33a-2f16-287b-70bef25cb01f")
 public static String es_PE_FIELD_Click_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="fca9c757-f33a-2f16-287b-70bef25cb01f")
-public static String es_PE_FIELD_Click_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -162,7 +160,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="cf34d088-6b15-8201-1b76-5e34c2e03211",Synchronized="2017-08-05 16:56:32.0")
+Identifier="cf34d088-6b15-8201-1b76-5e34c2e03211",Synchronized="2019-08-30 22:24:30.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Counter.
@@ -181,18 +179,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
+public static String es_PE_FIELD_Click_Counter_Name="Contador";
+
+@XendraTrl(Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
 public static String es_PE_FIELD_Click_Counter_Description="Valor de contador";
 
 @XendraTrl(Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
 public static String es_PE_FIELD_Click_Counter_Help="Numero de contador";
 
-@XendraTrl(Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
-public static String es_PE_FIELD_Click_Counter_Name="Contador";
-@XendraField(AD_Column_ID="Counter",
-IsCentrallyMaintained=true,AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=true,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
+@XendraField(AD_Column_ID="Counter",IsCentrallyMaintained=true,
+AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=true,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="42ca0ef7-c591-9c33-3190-8e5424649fa8")
 public static final String FIELDNAME_Click_Counter="42ca0ef7-c591-9c33-3190-8e5424649fa8";
 
 @XendraTrl(Identifier="8e3ee082-b5e6-be10-775e-88ca5f0e4ce5")
@@ -205,7 +204,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT COUNT(*) FROM W_Click c WHERE W_ClickCount.W_ClickCount_ID=c.W_ClickCount_ID)",
 IsAllowLogging=false,Identifier="8e3ee082-b5e6-be10-775e-88ca5f0e4ce5",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Counter */
 public static final String COLUMNNAME_Counter = "Counter";
 /** Set Description.
@@ -236,13 +235,13 @@ return value;
 }
 
 @XendraTrl(Identifier="8040125d-bac4-edd3-5b5e-3204b25ba251")
+public static String es_PE_FIELD_Click_Description_Name="Observación";
+
+@XendraTrl(Identifier="8040125d-bac4-edd3-5b5e-3204b25ba251")
 public static String es_PE_FIELD_Click_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="8040125d-bac4-edd3-5b5e-3204b25ba251")
 public static String es_PE_FIELD_Click_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="8040125d-bac4-edd3-5b5e-3204b25ba251")
-public static String es_PE_FIELD_Click_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -260,7 +259,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a7508dd5-fff5-43d6-e3f2-f1ae26488ad2",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -292,7 +291,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d239739-9b08-4596-ab6a-a315b32d2a68",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -324,18 +323,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
+public static String es_PE_FIELD_Click_Name_Name="Nombre";
+
+@XendraTrl(Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
 public static String es_PE_FIELD_Click_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
 public static String es_PE_FIELD_Click_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
-public static String es_PE_FIELD_Click_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b0e54afa-ea66-b3c5-b2f8-82b04ee03405")
 public static final String FIELDNAME_Click_Name="b0e54afa-ea66-b3c5-b2f8-82b04ee03405";
 
 @XendraTrl(Identifier="3c23df9f-6496-c44e-b8f3-facd39d8249d")
@@ -347,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c23df9f-6496-c44e-b8f3-facd39d8249d",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Target URL.
@@ -372,13 +372,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="aadde66e-3773-d9b7-5cea-1d96ec72bf1e")
+public static String es_PE_FIELD_Click_TargetURL_Name="Destino URL";
+
+@XendraTrl(Identifier="aadde66e-3773-d9b7-5cea-1d96ec72bf1e")
 public static String es_PE_FIELD_Click_TargetURL_Description="URL para la tarjeta";
 
 @XendraTrl(Identifier="aadde66e-3773-d9b7-5cea-1d96ec72bf1e")
 public static String es_PE_FIELD_Click_TargetURL_Help="URL de el sitio de la tarjeta";
-
-@XendraTrl(Identifier="aadde66e-3773-d9b7-5cea-1d96ec72bf1e")
-public static String es_PE_FIELD_Click_TargetURL_Name="Destino URL";
 
 @XendraField(AD_Column_ID="TargetURL",IsCentrallyMaintained=true,
 AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -396,7 +396,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8e959e6a-c6a0-4e71-e733-affd21f4b215",
-Synchronized="2017-08-05 16:56:32.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name TargetURL */
 public static final String COLUMNNAME_TargetURL = "TargetURL";
 /** Set Click Count.
@@ -416,13 +416,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a5b0bdf8-b4df-da36-7161-286334dc96bf")
+public static String es_PE_FIELD_Click_ClickCount_Name="Contador Clic";
+
+@XendraTrl(Identifier="a5b0bdf8-b4df-da36-7161-286334dc96bf")
 public static String es_PE_FIELD_Click_ClickCount_Description="Gerencia de tecleo Web";
 
 @XendraTrl(Identifier="a5b0bdf8-b4df-da36-7161-286334dc96bf")
 public static String es_PE_FIELD_Click_ClickCount_Help="Gerencia de tecleo Web";
-
-@XendraTrl(Identifier="a5b0bdf8-b4df-da36-7161-286334dc96bf")
-public static String es_PE_FIELD_Click_ClickCount_Name="Contador Clic";
 
 @XendraField(AD_Column_ID="W_ClickCount_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ca86b416-4ac9-bdd7-c084-9f25719cbffb",AD_FieldGroup_ID="",IsDisplayed=false,

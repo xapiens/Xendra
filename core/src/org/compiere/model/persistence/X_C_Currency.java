@@ -68,12 +68,12 @@ public static int Table_ID=MTable.getTable_ID("C_Currency");
 public static String es_PE_TAB_Currency_Description="Definir Moneda";
 
 @XendraTrl(Identifier="4a091abb-fd70-0087-ec7c-2aadbf47713e")
-public static String es_PE_TAB_Currency_Name="Moneda";
-
-@XendraTrl(Identifier="4a091abb-fd70-0087-ec7c-2aadbf47713e")
 public static String es_PE_TAB_Currency_Help="La pestaña de moneda define cualquier moneda con la que se crearán transacciones ó Informes.";
 
-@XendraTab(Name="Currency",Description="Define Currency",
+@XendraTrl(Identifier="4a091abb-fd70-0087-ec7c-2aadbf47713e")
+public static String es_PE_TAB_Currency_Name="Moneda";
+@XendraTab(Name="Currency",
+Description="Define Currency",
 Help="The Currency Tab defines any currency you will transact with or report in.",
 AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -86,11 +86,12 @@ public static final String TABNAME_Currency="4a091abb-fd70-0087-ec7c-2aadbf47713
 @XendraTrl(Identifier="f2f949e3-3dff-d89d-3a45-f54d3553dd98")
 public static String es_PE_TABLE_C_Currency_Name="Moneda";
 
-@XendraTable(Name="Currency",Description="The Currency for this record",Help="",
-TableName="C_Currency",AccessLevel="6",AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",
+@XendraTable(Name="Currency",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="The Currency for this record",
+Help="",TableName="C_Currency",AccessLevel="6",AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=50,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="f2f949e3-3dff-d89d-3a45-f54d3553dd98",Synchronized="2017-08-16 11:41:42.0")
+Identifier="f2f949e3-3dff-d89d-3a45-f54d3553dd98",Synchronized="2020-11-02 17:50:56.0")
 /** TableName=C_Currency */
 public static final String Table_Name="C_Currency";
 
@@ -99,6 +100,12 @@ public static final String Table_Name="C_Currency";
 Column_Names="iso_code",IsUnique="true",TableIdentifier="e7157f26-d749-371b-eba7-2000313f6707",
 Synchronized="2014-06-01 19:03:58.0")
 public static final String INDEXNAME_c_currencyisocode = "e7157f26-d749-371b-eba7-2000313f6707";
+
+
+@XendraIndex(Name="c_currency_identifier",Identifier="e91ebfa0-110f-43fa-9fcc-892bf52882aa",
+Column_Names="identifier",IsUnique="false",TableIdentifier="e91ebfa0-110f-43fa-9fcc-892bf52882aa",
+Synchronized="2020-11-02 17:50:56.0")
+public static final String INDEXNAME_c_currency_identifier = "e91ebfa0-110f-43fa-9fcc-892bf52882aa";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"C_Currency");
 
@@ -146,13 +153,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="629b2ee8-e672-b6ce-baf7-8f8a176e5135")
+public static String es_PE_FIELD_Currency_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="629b2ee8-e672-b6ce-baf7-8f8a176e5135")
 public static String es_PE_FIELD_Currency_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="629b2ee8-e672-b6ce-baf7-8f8a176e5135")
 public static String es_PE_FIELD_Currency_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="629b2ee8-e672-b6ce-baf7-8f8a176e5135")
-public static String es_PE_FIELD_Currency_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -162,38 +169,6 @@ Identifier="629b2ee8-e672-b6ce-baf7-8f8a176e5135")
 public static final String FIELDNAME_Currency_Currency="629b2ee8-e672-b6ce-baf7-8f8a176e5135";
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
-/** Set Sunat Document Code.
-@param CodSunat Sunat Document Code */
-public void setCodSunat (String CodSunat)
-{
-if (CodSunat != null && CodSunat.length() > 2)
-{
-log.warning("Length > 2 - truncated");
-CodSunat = CodSunat.substring(0,1);
-}
-set_Value (COLUMNNAME_CodSunat, CodSunat);
-}
-/** Get Sunat Document Code.
-@return Sunat Document Code */
-public String getCodSunat() 
-{
-String value = (String)get_Value(COLUMNNAME_CodSunat);
-if (value == null)
-  return "";
-return value;
-}
-@XendraTrl(Identifier="d3a75029-e91d-79e6-e028-1d26d1cdbec4")
-public static String es_PE_COLUMN_CodSunat_Name="Código Sunat";
-
-@XendraColumn(AD_Element_ID="84884f14-1f72-b5d2-c38f-d807ef550fd4",ColumnName="CodSunat",
-AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=2,DefaultValue="",
-IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
-Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
-IsAllowLogging=false,Identifier="d3a75029-e91d-79e6-e028-1d26d1cdbec4",
-Synchronized="2017-08-05 16:53:34.0")
-/** Column name CodSunat */
-public static final String COLUMNNAME_CodSunat = "CodSunat";
 /** Set Costing Precision.
 @param CostingPrecision Rounding used costing calculations */
 public void setCostingPrecision (int CostingPrecision)
@@ -210,13 +185,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="02dda9bf-efca-3c69-1bbe-5d191888bfbb")
+public static String es_PE_FIELD_Currency_CostingPrecision_Name="Redondeo del Costo";
+
+@XendraTrl(Identifier="02dda9bf-efca-3c69-1bbe-5d191888bfbb")
 public static String es_PE_FIELD_Currency_CostingPrecision_Description="Redondeo usado en el cálculo de costos";
 
 @XendraTrl(Identifier="02dda9bf-efca-3c69-1bbe-5d191888bfbb")
 public static String es_PE_FIELD_Currency_CostingPrecision_Help="La precisión del costeo define el número de lugares decimales en que los totales serán redondeados cuando se ejecuten los cálculos de costeo.";
-
-@XendraTrl(Identifier="02dda9bf-efca-3c69-1bbe-5d191888bfbb")
-public static String es_PE_FIELD_Currency_CostingPrecision_Name="Redondeo del Costo";
 
 @XendraField(AD_Column_ID="CostingPrecision",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -234,7 +209,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c3053016-a9ef-948e-5b1e-6db3d4a12fb1",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name CostingPrecision */
 public static final String COLUMNNAME_CostingPrecision = "CostingPrecision";
 /** Set Symbol.
@@ -258,13 +233,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="37062061-ca00-95c1-1f43-5271c29f5249")
+public static String es_PE_FIELD_Currency_Symbol_Name="Símbolo";
+
+@XendraTrl(Identifier="37062061-ca00-95c1-1f43-5271c29f5249")
 public static String es_PE_FIELD_Currency_Symbol_Description="Símbolo de la moneda (opción usada sólo para impresión)";
 
 @XendraTrl(Identifier="37062061-ca00-95c1-1f43-5271c29f5249")
 public static String es_PE_FIELD_Currency_Symbol_Help="El símbolo de moneda define el símbolo que se imprimirá cuando esta moneda se use.";
-
-@XendraTrl(Identifier="37062061-ca00-95c1-1f43-5271c29f5249")
-public static String es_PE_FIELD_Currency_Symbol_Name="Símbolo";
 
 @XendraField(AD_Column_ID="CurSymbol",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -282,7 +257,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d9d967ed-8333-a41a-e86d-adafea79d33b",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name CurSymbol */
 public static final String COLUMNNAME_CurSymbol = "CurSymbol";
 /** Set Description.
@@ -314,13 +289,13 @@ return value;
 }
 
 @XendraTrl(Identifier="dd601ee6-a1d9-e8ce-9dfc-ca54d5551355")
+public static String es_PE_FIELD_Currency_Description_Name="Observación";
+
+@XendraTrl(Identifier="dd601ee6-a1d9-e8ce-9dfc-ca54d5551355")
 public static String es_PE_FIELD_Currency_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="dd601ee6-a1d9-e8ce-9dfc-ca54d5551355")
 public static String es_PE_FIELD_Currency_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="dd601ee6-a1d9-e8ce-9dfc-ca54d5551355")
-public static String es_PE_FIELD_Currency_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -338,7 +313,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54f4f17f-1f22-0512-99d0-cd09f3521f00",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set EMU Entry Date.
@@ -355,13 +330,13 @@ return (Timestamp)get_Value(COLUMNNAME_EMUEntryDate);
 }
 
 @XendraTrl(Identifier="ded56b1f-8dfd-dc9d-50a9-e791fc0a611d")
+public static String es_PE_FIELD_Currency_EMUEntryDate_Name="Fecha de inicio EMU";
+
+@XendraTrl(Identifier="ded56b1f-8dfd-dc9d-50a9-e791fc0a611d")
 public static String es_PE_FIELD_Currency_EMUEntryDate_Description="Fecha en que la moneda se unió / unirá a la EMU";
 
 @XendraTrl(Identifier="ded56b1f-8dfd-dc9d-50a9-e791fc0a611d")
 public static String es_PE_FIELD_Currency_EMUEntryDate_Help="La fecha de Ingreso EMU define la fecha en que esta moneda ingresó; ó ingresará a la Unión Monetaria Económica";
-
-@XendraTrl(Identifier="ded56b1f-8dfd-dc9d-50a9-e791fc0a611d")
-public static String es_PE_FIELD_Currency_EMUEntryDate_Name="Fecha de inicio EMU";
 
 @XendraField(AD_Column_ID="EMUEntryDate",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -379,7 +354,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dfeee17e-ca24-d7c5-1a5f-6767d067f0e6",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name EMUEntryDate */
 public static final String COLUMNNAME_EMUEntryDate = "EMUEntryDate";
 /** Set EMU Rate.
@@ -398,13 +373,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="df6a9e09-e7f1-7466-7b31-eafaf7f79ef1")
+public static String es_PE_FIELD_Currency_EMURate_Name="Tasa EMU";
+
+@XendraTrl(Identifier="df6a9e09-e7f1-7466-7b31-eafaf7f79ef1")
 public static String es_PE_FIELD_Currency_EMURate_Description="Tasa oficial para convertir al Euro";
 
 @XendraTrl(Identifier="df6a9e09-e7f1-7466-7b31-eafaf7f79ef1")
 public static String es_PE_FIELD_Currency_EMURate_Help="La Tasa EMU define la tasa oficial a ser usada cuando convierte desde esta moneda al Euro";
-
-@XendraTrl(Identifier="df6a9e09-e7f1-7466-7b31-eafaf7f79ef1")
-public static String es_PE_FIELD_Currency_EMURate_Name="Tasa EMU";
 
 @XendraField(AD_Column_ID="EMURate",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -422,7 +397,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="83d7f327-b774-d13e-a5b5-a010a1898608",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name EMURate */
 public static final String COLUMNNAME_EMURate = "EMURate";
 /** Set Identifier.
@@ -454,7 +429,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5972a2f6-345c-4944-aac5-5d4dbbd39fb5",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsDolar.
@@ -495,7 +470,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6c56d404-830d-d752-148c-4f1914d622ae",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name IsDolar */
 public static final String COLUMNNAME_IsDolar = "IsDolar";
 /** Set EMU Member.
@@ -518,13 +493,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b593fc5c-211e-20d4-372f-b8bc60003c82")
+public static String es_PE_FIELD_Currency_EMUMember_Name="Miembro EMU";
+
+@XendraTrl(Identifier="b593fc5c-211e-20d4-372f-b8bc60003c82")
 public static String es_PE_FIELD_Currency_EMUMember_Description="La moneda es una moneda de la Unión Monetaria Europea";
 
 @XendraTrl(Identifier="b593fc5c-211e-20d4-372f-b8bc60003c82")
 public static String es_PE_FIELD_Currency_EMUMember_Help="El cuadro de verificación EMU se usa para indicar si esta moneda es un miembro de la Unión Económica Europea.";
-
-@XendraTrl(Identifier="b593fc5c-211e-20d4-372f-b8bc60003c82")
-public static String es_PE_FIELD_Currency_EMUMember_Name="Miembro EMU";
 
 @XendraField(AD_Column_ID="IsEMUMember",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -542,7 +517,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b0821f38-c24a-6a5e-812c-00e4f84ea5bf",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name IsEMUMember */
 public static final String COLUMNNAME_IsEMUMember = "IsEMUMember";
 /** Set The Euro Currency.
@@ -565,13 +540,13 @@ return false;
 }
 
 @XendraTrl(Identifier="33ddb15d-7584-892e-0b1b-0bc9bdf84ec7")
+public static String es_PE_FIELD_Currency_TheEuroCurrency_Name="La Moneda Euro";
+
+@XendraTrl(Identifier="33ddb15d-7584-892e-0b1b-0bc9bdf84ec7")
 public static String es_PE_FIELD_Currency_TheEuroCurrency_Description="La moneda es el euro";
 
 @XendraTrl(Identifier="33ddb15d-7584-892e-0b1b-0bc9bdf84ec7")
 public static String es_PE_FIELD_Currency_TheEuroCurrency_Help="El cuadro de verificación moneda euro es usado para indicar si ésta moneda es moneda euro.";
-
-@XendraTrl(Identifier="33ddb15d-7584-892e-0b1b-0bc9bdf84ec7")
-public static String es_PE_FIELD_Currency_TheEuroCurrency_Name="La Moneda Euro";
 
 @XendraField(AD_Column_ID="IsEuro",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -589,7 +564,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="96be63e1-09c8-3e1b-7a04-69ba2d878b37",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name IsEuro */
 public static final String COLUMNNAME_IsEuro = "IsEuro";
 /** Set Mandatory.
@@ -612,13 +587,13 @@ return false;
 }
 
 @XendraTrl(Identifier="33505cb4-90dd-add1-730f-5e21b87ea8db")
+public static String es_PE_FIELD_Currency_Mandatory_Name="Entrada Obligatoria";
+
+@XendraTrl(Identifier="33505cb4-90dd-add1-730f-5e21b87ea8db")
 public static String es_PE_FIELD_Currency_Mandatory_Description="Entrada de datos es requerida en esta columna";
 
 @XendraTrl(Identifier="33505cb4-90dd-add1-730f-5e21b87ea8db")
 public static String es_PE_FIELD_Currency_Mandatory_Help="El cuadro de verificación obligatorio indica si el campo es requerido para que un registro sea salvado a la base de datos.";
-
-@XendraTrl(Identifier="33505cb4-90dd-add1-730f-5e21b87ea8db")
-public static String es_PE_FIELD_Currency_Mandatory_Name="Entrada Obligatoria";
 
 @XendraField(AD_Column_ID="IsMandatory",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -636,7 +611,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b2a96ea0-60bd-631e-bea8-1591d007195e",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name IsMandatory */
 public static final String COLUMNNAME_IsMandatory = "IsMandatory";
 /** Set ISO Currency Code.
@@ -668,13 +643,13 @@ return new KeyNamePair(get_ID(), getISO_Code());
 }
 
 @XendraTrl(Identifier="191800a6-8ec5-c969-b06a-d2587b24a410")
+public static String es_PE_FIELD_Currency_ISOCurrencyCode_Name="Código ISO";
+
+@XendraTrl(Identifier="191800a6-8ec5-c969-b06a-d2587b24a410")
 public static String es_PE_FIELD_Currency_ISOCurrencyCode_Description="Código ISO 4217 de la moneda";
 
 @XendraTrl(Identifier="191800a6-8ec5-c969-b06a-d2587b24a410")
 public static String es_PE_FIELD_Currency_ISOCurrencyCode_Help="Para detalles ver - http://www.unece.org/trade/rec/rec09en.htm";
-
-@XendraTrl(Identifier="191800a6-8ec5-c969-b06a-d2587b24a410")
-public static String es_PE_FIELD_Currency_ISOCurrencyCode_Name="Código ISO";
 
 @XendraField(AD_Column_ID="ISO_Code",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -692,7 +667,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5712f135-c6a5-9f6e-9ac1-c5867e87c673",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name ISO_Code */
 public static final String COLUMNNAME_ISO_Code = "ISO_Code";
 /** Set Standard Precision.
@@ -711,13 +686,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b8de996b-b881-b13d-2d78-fbd03fe4f41c")
+public static String es_PE_FIELD_Currency_StandardPrecision_Name="Redondeo Estándar";
+
+@XendraTrl(Identifier="b8de996b-b881-b13d-2d78-fbd03fe4f41c")
 public static String es_PE_FIELD_Currency_StandardPrecision_Description="Regla de redondeo para los totales calculados";
 
 @XendraTrl(Identifier="b8de996b-b881-b13d-2d78-fbd03fe4f41c")
 public static String es_PE_FIELD_Currency_StandardPrecision_Help="La precisión estándar define el número de lugares decimales que serán redondeados los totales para transacciones contables y documentos";
-
-@XendraTrl(Identifier="b8de996b-b881-b13d-2d78-fbd03fe4f41c")
-public static String es_PE_FIELD_Currency_StandardPrecision_Name="Redondeo Estándar";
 
 @XendraField(AD_Column_ID="StdPrecision",IsCentrallyMaintained=true,
 AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -735,7 +710,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="abdebe2a-4623-8156-3706-4420521d3f01",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name StdPrecision */
 public static final String COLUMNNAME_StdPrecision = "StdPrecision";
 /** Set Tax ID.
@@ -759,18 +734,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
+public static String es_PE_FIELD_Currency_TaxID_Name="RFC";
+
+@XendraTrl(Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
 public static String es_PE_FIELD_Currency_TaxID_Description="Código de Identificación";
 
 @XendraTrl(Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
 public static String es_PE_FIELD_Currency_TaxID_Help="El código de Identificación es el número de identificación gubernamental de esta entidad";
 
-@XendraTrl(Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
-public static String es_PE_FIELD_Currency_TaxID_Name="RFC";
-@XendraField(AD_Column_ID="TaxID",
-IsCentrallyMaintained=true,AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-08-12 00:00:00.0",Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
+@XendraField(AD_Column_ID="TaxID",IsCentrallyMaintained=true,
+AD_Tab_ID="4a091abb-fd70-0087-ec7c-2aadbf47713e",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-08-12 00:00:00.0",
+Identifier="f22a60fa-10fc-4ebb-9d9f-d33e414a7953")
 public static final String FIELDNAME_Currency_TaxID="f22a60fa-10fc-4ebb-9d9f-d33e414a7953";
 
 @XendraTrl(Identifier="255716c3-42c5-becb-981d-85a2039be06a")
@@ -782,7 +758,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="255716c3-42c5-becb-981d-85a2039be06a",
-Synchronized="2012-07-11 00:00:00.0")
+Synchronized="2020-03-03 21:36:48.0")
 /** Column name TaxID */
 public static final String COLUMNNAME_TaxID = "TaxID";
 }

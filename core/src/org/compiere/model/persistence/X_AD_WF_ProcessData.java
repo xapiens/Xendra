@@ -60,12 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_WF_ProcessData");
 public static String es_PE_TAB_Data_Description="Contexto de proceso de flujo de trabajo";
 
 @XendraTrl(Identifier="217d9b2c-da78-ad27-ed93-b0e2a7267679")
-public static String es_PE_TAB_Data_Name="Dato";
-
-@XendraTrl(Identifier="217d9b2c-da78-ad27-ed93-b0e2a7267679")
 public static String es_PE_TAB_Data_Help="Contexto de información del proceso y actividad de flujo de trabajo.";
 
-@XendraTab(Name="Data",Description="Workflow Process Context",
+@XendraTrl(Identifier="217d9b2c-da78-ad27-ed93-b0e2a7267679")
+public static String es_PE_TAB_Data_Name="Dato";
+@XendraTab(Name="Data",
+Description="Workflow Process Context",
 Help="Context information of the workflow process and activity",
 AD_Window_ID="5ec6ab47-c7c3-71bd-469d-29013c9621c7",SeqNo=50,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_Data="217d9b2c-da78-ad27-ed93-b0e2a7267679";
 public static String es_PE_TABLE_AD_WF_ProcessData_Name="Fecha de Proceso de Flujo de Trabajo";
 
 
-@XendraTable(Name="Workflow Process Data",Description="Workflow Process Context",Help="",
+@XendraTable(Name="Workflow Process Data",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Workflow Process Context",Help="",
 TableName="AD_WF_ProcessData",AccessLevel="7",AD_Window_ID="5ec6ab47-c7c3-71bd-469d-29013c9621c7",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="64c2a3ac-2251-59c0-5a64-daa9ca5a8a77",Synchronized="2017-08-16 11:41:12.0")
+Identifier="64c2a3ac-2251-59c0-5a64-daa9ca5a8a77",Synchronized="2020-03-03 21:36:10.0")
 /** TableName=AD_WF_ProcessData */
 public static final String Table_Name="AD_WF_ProcessData";
 
@@ -139,13 +140,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="19b5d08a-b2f5-5af7-2550-e6f215eefef7")
+public static String es_PE_FIELD_Data_WorkflowProcessData_Name="Fecha de Proceso de Flujo de Trabajo";
+
+@XendraTrl(Identifier="19b5d08a-b2f5-5af7-2550-e6f215eefef7")
 public static String es_PE_FIELD_Data_WorkflowProcessData_Description="Contexto de proceso flujo de trabajo";
 
 @XendraTrl(Identifier="19b5d08a-b2f5-5af7-2550-e6f215eefef7")
 public static String es_PE_FIELD_Data_WorkflowProcessData_Help="Contexto de información del proceso y actividad de el flujo de trabajo.";
-
-@XendraTrl(Identifier="19b5d08a-b2f5-5af7-2550-e6f215eefef7")
-public static String es_PE_FIELD_Data_WorkflowProcessData_Name="Fecha de Proceso de Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_WF_ProcessData_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="217d9b2c-da78-ad27-ed93-b0e2a7267679",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -178,13 +179,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_WF_Process_ID()));
 }
 
 @XendraTrl(Identifier="f81d680c-1ccd-6aed-f001-bc06d965cbec")
+public static String es_PE_FIELD_Data_WorkflowProcess_Name="Proceso de Flujo de Trabajo";
+
+@XendraTrl(Identifier="f81d680c-1ccd-6aed-f001-bc06d965cbec")
 public static String es_PE_FIELD_Data_WorkflowProcess_Description="Proceso actual del flujo de trabajo.";
 
 @XendraTrl(Identifier="f81d680c-1ccd-6aed-f001-bc06d965cbec")
 public static String es_PE_FIELD_Data_WorkflowProcess_Help="Actual ejecución de un flujo de trabajo.";
-
-@XendraTrl(Identifier="f81d680c-1ccd-6aed-f001-bc06d965cbec")
-public static String es_PE_FIELD_Data_WorkflowProcess_Name="Proceso de Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_WF_Process_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="217d9b2c-da78-ad27-ed93-b0e2a7267679",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="022774f7-cd49-6c9c-1497-f72b5a7bed2d",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AD_WF_Process_ID */
 public static final String COLUMNNAME_AD_WF_Process_ID = "AD_WF_Process_ID";
 /** Set Attribute Name.
@@ -227,13 +228,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="bf927c3d-1da2-bbcf-8d63-9c2b61eca62e")
+public static String es_PE_FIELD_Data_AttributeName_Name="Nombre del Atributo";
+
+@XendraTrl(Identifier="bf927c3d-1da2-bbcf-8d63-9c2b61eca62e")
 public static String es_PE_FIELD_Data_AttributeName_Description="Nombre del atributo";
 
 @XendraTrl(Identifier="bf927c3d-1da2-bbcf-8d63-9c2b61eca62e")
 public static String es_PE_FIELD_Data_AttributeName_Help="Identificación del atributo";
-
-@XendraTrl(Identifier="bf927c3d-1da2-bbcf-8d63-9c2b61eca62e")
-public static String es_PE_FIELD_Data_AttributeName_Name="Nombre del Atributo";
 
 @XendraField(AD_Column_ID="AttributeName",IsCentrallyMaintained=true,
 AD_Tab_ID="217d9b2c-da78-ad27-ed93-b0e2a7267679",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -251,7 +252,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b50e777-2db7-a356-42b7-3b3ef997254f",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AttributeName */
 public static final String COLUMNNAME_AttributeName = "AttributeName";
 /** Set Attribute Value.
@@ -275,10 +276,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="fc19d4ba-e8f8-6816-1232-d87753146c88")
-public static String es_PE_FIELD_Data_AttributeValue_Description="Valor de el atributo";
+public static String es_PE_FIELD_Data_AttributeValue_Name="Valor de Atributo";
 
 @XendraTrl(Identifier="fc19d4ba-e8f8-6816-1232-d87753146c88")
-public static String es_PE_FIELD_Data_AttributeValue_Name="Valor de Atributo";
+public static String es_PE_FIELD_Data_AttributeValue_Description="Valor de el atributo";
 
 @XendraField(AD_Column_ID="AttributeValue",IsCentrallyMaintained=true,
 AD_Tab_ID="217d9b2c-da78-ad27-ed93-b0e2a7267679",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -296,7 +297,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5978dfac-1294-80d6-7ee2-730b8e091de4",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name AttributeValue */
 public static final String COLUMNNAME_AttributeValue = "AttributeValue";
 /** Set Identifier.
@@ -328,7 +329,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f5eaf54-7233-45f8-af69-aa0810565629",
-Synchronized="2017-08-05 16:53:02.0")
+Synchronized="2019-08-30 22:20:53.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

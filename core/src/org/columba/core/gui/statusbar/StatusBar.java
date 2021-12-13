@@ -21,9 +21,6 @@ import java.awt.Insets;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -32,7 +29,6 @@ import javax.swing.JProgressBar;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import org.columba.api.command.IWorkerStatusController;
 import org.columba.api.statusbar.IStatusBar;
 import org.columba.api.statusbar.IStatusBarExtension;
@@ -42,16 +38,15 @@ import org.columba.core.command.TaskManagerListener;
 import org.columba.core.command.Worker;
 import org.columba.core.connectionstate.ConnectionStateImpl;
 import org.columba.core.gui.base.JStatusBar;
+import org.columba.core.gui.plugin.PluginManagerDialog;
+import org.columba.core.gui.processmanager.ProcessManagerDialog;
+import org.columba.core.plugin.PluginManager;
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
-import org.compiere.model.Query;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
+import org.compiere.model.MRole;
+import org.xendra.chat.Client;
+import org.xendra.chat.Server;
 import org.xendra.printdocument.PrintDocumentManager;
-import org.xendra.rules.ProcessManager;
-import org.xendra.xendrian.MessageManager;
-import org.xendra.xendrian.MessageManagerDialog;
-
 import com.dravios.openvpn.VpnClient;
 
 /**
@@ -84,7 +79,7 @@ import com.dravios.openvpn.VpnClient;
  * statusbar after a delay of 2000 ms.
  */
 public class StatusBar extends JStatusBar implements TaskManagerListener,
-		ActionListener, ChangeListener, IStatusBar {
+ActionListener, ChangeListener, IStatusBar {
 
 	/**
 	 * update status every 10 ms
@@ -102,13 +97,16 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 	 */
 	private static final int ADDWORKER_TIMER_INTERVAL = 2000;
 
+	protected static Icon chatIcon 	    = ImageLoader.getSmallIcon("chat.png");
 	protected static Icon onlineIcon	= ImageLoader.getSmallIcon(IconKeys.ONLINE);
 	protected static Icon databaseIcon 	= ImageLoader.getSmallIcon("database.png");
 	protected static Icon printerIcon	= ImageLoader.getSmallIcon("printer.png");
 	protected static Icon openvpnIcon 	= ImageLoader.getSmallIcon("openvpn.png");
-	protected static Icon rulesIcon 	= ImageLoader.getSmallIcon("brain.png");
+	protected static Icon processIcon 	= ImageLoader.getSmallIcon("brain.png");
+	protected static Icon pluginIcon 	= ImageLoader.getSmallIcon("plugin.png");
+	protected static Icon syncIcon 		= ImageLoader.getSmallIcon("view-refresh.png");
 	protected static Icon offlineIcon	= ImageLoader.getSmallIcon(IconKeys.OFFLINE);
-	protected static Icon queueIcon		= ImageLoader.getSmallIcon("queue.png");
+	protected static Icon workflowIcon  = ImageLoader.getSmallIcon("condition.png");
 	/**
 	 * showing status messages
 	 */
@@ -119,16 +117,19 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 	 */
 	private JProgressBar progressBar;
 
-	
+
 
 	/**
 	 * button opening task manager dialog
 	 */
+	private JButton chatButton;
 	private JButton printerButton;
-	private JButton rulesButton;
-	private JButton queueButton;
+	private JButton pluginButton;
+	private JButton processButton;
 	private JButton openvpnButton;
 	private JButton databaseButton;
+	private JButton workflowButton;
+	private JButton syncButton;
 	/**
 	 * Currently displayed worker
 	 */
@@ -137,11 +138,10 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 	/**
 	 * manager of all running tasks
 	 */
-    private TaskManager taskManager;
-    
-    private PrintDocumentManager printManager = PrintDocumentManager.getInstance();
-    private MessageManager messageManager = MessageManager.getInstance();
-    private ProcessManager processManager = ProcessManager.getInstance();
+	private TaskManager taskManager;
+
+	private PrintDocumentManager printManager = PrintDocumentManager.getInstance();
+	//private MessageManager messageManager = MessageManager.getInstance();
 	/**
 	 * connection state button
 	 */
@@ -170,25 +170,12 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 
 		taskManager = tm;
 		tm.addTaskManagerListener(this);
-				
-		
 		ConnectionStateImpl.getInstance().addChangeListener(this);
-
-		// setBorder(BorderFactory.createEmptyBorder(1, 2, 1, 2));
-
 		initComponents();
-
-		// layoutComponents();
-
-		// update connection state
 		stateChanged(null);
-
 		clearTextTimer = new Timer(CLEAR_TIMER_DELAY, this);
-
 		// init update timer
 		updateTimer = new Timer(UPDATE_TIMER_INTERVAL, this);
-		// updateTimer.start();
-
 		addWorkerTimer = new Timer(ADDWORKER_TIMER_INTERVAL, this);
 
 	}
@@ -201,7 +188,7 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 		label = new JLabel("");
 		label.setAlignmentX(Component.LEFT_ALIGNMENT);
 		setMainLeftComponent(label);
-		
+
 		onlineButton = new JButton();
 		onlineButton.setMargin(new Insets(0,0,0,0));
 		onlineButton.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -215,21 +202,35 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 		progressBar.setBorderPainted(false);
 		progressBar.setValue(0);
 		addRightComponent(progressBar, 100);
-		
-		openvpnButton = createButton(openvpnIcon, "openvpn", "OPENVPNMANAGER");							
-		addRightComponent(openvpnButton, 30);
-		
-		queueButton = createButton(queueIcon, "show Messages", "QUEUEMANAGER");
-		addRightComponent(queueButton,30);
-		
+		MRole role = MRole.getDefault();
+		if (role != null && role.isSuperUser()) {
+			pluginButton = createButton(pluginIcon, "plugin", "PLUGINMANAGER");
+			addRightComponent(pluginButton, 30);
+		}
+		if (role != null && role.isSuperUser()) {
+			openvpnButton = createButton(openvpnIcon, "openvpn", "OPENVPNMANAGER");							
+			addRightComponent(openvpnButton, 30);
+		}
+
 		printerButton = createButton(printerIcon, "Show list of running tasks", "PRINTMANAGER");
 		addRightComponent(printerButton, 30);
 
-		rulesButton = createButton(rulesIcon, "show rules", "RULESMANAGER");
-		addRightComponent(rulesButton, 30);
-		
+		if (role != null && role.isSuperUser()) {
+			processButton = createButton(processIcon, "show process network", "PROCESSMANAGER");
+			addRightComponent(processButton, 30);
+		}
+
 		databaseButton = createButton(databaseIcon, "show database status", "DATABASESTATUS");
 		addRightComponent(databaseButton, 30);
+
+		workflowButton = createButton(workflowIcon, "show workflow status", "WORKFLOWMANAGER");
+		addRightComponent(workflowButton, 30);
+
+		syncButton = createButton(syncIcon, "Synchronize plugins", "SYNCPLUGINS");
+		addRightComponent(syncButton, 30);
+		
+		chatButton = createButton(chatIcon, "Chat", "CHAT");
+		addRightComponent(chatButton, 30);
 		
 		addRightComponent(onlineButton, 30);
 	}
@@ -252,64 +253,6 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 		addRightComponent(ext.getView());
 	}
 
-	/**
-	 * layout components
-	 */
-	// protected void layoutComponents() {
-	// setLayout(new BorderLayout());
-	//
-	// leftMainPanel = new JPanel();
-	// leftMainPanel.setLayout(new BorderLayout());
-	//
-	// JPanel taskPanel = new JPanel();
-	// taskPanel.setLayout(new BorderLayout());
-	//
-	// // Border border = getDefaultBorder();
-	// //Border margin = new EmptyBorder(0, 0, 0, 2);
-	//
-	// // taskPanel.setBorder(new CompoundBorder(border, margin));
-	//
-	// taskPanel.add(taskButton, BorderLayout.CENTER);
-	//
-	// leftMainPanel.add(taskPanel, BorderLayout.WEST);
-	// JPanel labelPanel = new JPanel();
-	// labelPanel.setLayout(new BorderLayout());
-	// // margin = new EmptyBorder(0, 10, 0, 10);
-	// // labelPanel.setBorder(new CompoundBorder(border, margin));
-	//
-	// // margin = new EmptyBorder(0, 0, 0, 2);
-	// labelPanel.add(label, BorderLayout.CENTER);
-	//
-	// leftMainPanel.add(labelPanel, BorderLayout.CENTER);
-	//
-	// add(leftMainPanel, BorderLayout.CENTER);
-	//
-	// mainRightPanel = new JPanel();
-	// mainRightPanel.setLayout(new BorderLayout());
-	//
-	// JPanel progressPanel = new JPanel();
-	// progressPanel.setLayout(new BorderLayout());
-	// // progressPanel.setBorder(new CompoundBorder(border, margin));
-	//
-	// progressPanel.add(progressBar, BorderLayout.CENTER);
-	//
-	// JPanel rightPanel = new JPanel();
-	// rightPanel.setLayout(new BorderLayout());
-	//
-	// rightPanel.add(progressPanel, BorderLayout.CENTER);
-	//
-	// JPanel onlinePanel = new JPanel();
-	// onlinePanel.setLayout(new BorderLayout());
-	// // onlinePanel.setBorder(new CompoundBorder(border, margin));
-	//
-	// onlinePanel.add(onlineButton, BorderLayout.CENTER);
-	//
-	// rightPanel.add(onlinePanel, BorderLayout.EAST);
-	// add(rightPanel, BorderLayout.EAST);
-	// }
-	// public Border getDefaultBorder() {
-	// return UIManager.getBorder("TableHeader.cellBorder");
-	// }
 	/**
 	 * @see org.columba.api.statusbar.IStatusBar#displayTooltipMessage(java.lang.String)
 	 */
@@ -412,22 +355,28 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 			ConnectionStateImpl.getInstance().setOnline(!ConnectionStateImpl.getInstance().isOnline());
 		} else if (command.equals("TASKMANAGER")) {
 			TaskManagerDialog.createInstance();
-		} else if (command.equals("OPENVPNMANAGER")) {
-			
+		} else if (command.equals("PLUGINMANAGER")) {
+			PluginManagerDialog.getInstance();
+		} else if (command.equals("OPENVPNMANAGER")) {			
 			//openvpnButton.add(VpnClient.getInstance().getMenu());			
 			VpnClient.getInstance().getMenu().setLocation(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
 			VpnClient.getInstance().getMenu().setInvoker(VpnClient.getInstance().getMenu());
 			VpnClient.getInstance().getMenu().setVisible(true);			
 		} else if (command.equals("PRINTMANAGER")) {
 			PrintManagerDialog.createInstance();
-		} else if (command.equals("QUEUEMANAGER")) {
-			MessageManagerDialog.createInstance(messageManager);
 		} else if (command.equals("CANCEL_ACTION")) {
 			displayedWorker.cancel();
 		} else if (command.equals("DATABASESTATUS")) {
 			DatabaseStatusDialog.createInstance();
-		} else if (command.equals("RULESMANAGER")) {
-			ProcessManagerDialog.createInstance(processManager);
+		} else if (command.equals("PROCESSMANAGER")) {
+			ProcessManagerDialog.createInstance();
+		} else if (command.equals("WORKFLOWMANAGER")) {
+			WorkflowActivitiesDialog.createInstance();
+		} else if (command.equals("SYNCPLUGINS")) {			
+			PluginManager.getInstance().Sync();				
+		} else if (command.equals("CHAT")) {
+			Server.getInstance();
+			Client.getInstance();
 		}
 	}
 
@@ -437,8 +386,6 @@ public class StatusBar extends JStatusBar implements TaskManagerListener,
 	 * Runs in awt-event dispatcher thread
 	 */
 	private void updateGui() {
-		// System.out.println("update-gui");
-
 		if (displayedWorker != null) {			
 			label.setText(displayedWorker.getDisplayText());
 			progressBar.setValue(displayedWorker.getProgressBarValue());			

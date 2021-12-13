@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("AD_PrintColor");
 public static String es_PE_TAB_PrintColor_Description="Mantener Color de Impresión";
 
 @XendraTrl(Identifier="427db742-7069-31fb-b945-598dae90a13f")
-public static String es_PE_TAB_PrintColor_Name="Color de Impresión";
-
-@XendraTrl(Identifier="427db742-7069-31fb-b945-598dae90a13f")
 public static String es_PE_TAB_PrintColor_Help="Colores usados para impresión.";
 
-@XendraTab(Name="Print Color",Description="Maintain Print Color",Help="Colors used for printing",
+@XendraTrl(Identifier="427db742-7069-31fb-b945-598dae90a13f")
+public static String es_PE_TAB_PrintColor_Name="Color de Impresión";
+@XendraTab(Name="Print Color",
+Description="Maintain Print Color",Help="Colors used for printing",
 AD_Window_ID="cf4c135d-c497-9be4-eb0e-5d7d2b792433",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -79,11 +79,13 @@ public static final String TABNAME_PrintColor="427db742-7069-31fb-b945-598dae90a
 @XendraTrl(Identifier="51503408-de06-788a-fd7d-184221f7e3e5")
 public static String es_PE_TABLE_AD_PrintColor_Name="Impresión a Color";
 
-@XendraTable(Name="Print Color",Description="Color used for printing and display",Help="",
-TableName="AD_PrintColor",AccessLevel="6",AD_Window_ID="cf4c135d-c497-9be4-eb0e-5d7d2b792433",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=55,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="51503408-de06-788a-fd7d-184221f7e3e5",Synchronized="2017-08-16 11:40:38.0")
+@XendraTable(Name="Print Color",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Color used for printing and display",Help="",TableName="AD_PrintColor",
+AccessLevel="6",AD_Window_ID="cf4c135d-c497-9be4-eb0e-5d7d2b792433",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=55,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="51503408-de06-788a-fd7d-184221f7e3e5",Synchronized="2020-03-03 21:35:19.0")
 /** TableName=AD_PrintColor */
 public static final String Table_Name="AD_PrintColor";
 
@@ -139,13 +141,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b581ccc7-db8b-88a1-5115-fde0c080616f")
+public static String es_PE_FIELD_PrintColor_PrintColor_Name="Impresión a Color";
+
+@XendraTrl(Identifier="b581ccc7-db8b-88a1-5115-fde0c080616f")
 public static String es_PE_FIELD_PrintColor_PrintColor_Description="Color usado para imprimir";
 
 @XendraTrl(Identifier="b581ccc7-db8b-88a1-5115-fde0c080616f")
 public static String es_PE_FIELD_PrintColor_PrintColor_Help="Color usado para imprimir";
-
-@XendraTrl(Identifier="b581ccc7-db8b-88a1-5115-fde0c080616f")
-public static String es_PE_FIELD_PrintColor_PrintColor_Name="Impresión a Color";
 
 @XendraField(AD_Column_ID="AD_PrintColor_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="427db742-7069-31fb-b945-598dae90a13f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -177,13 +179,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="e7b9b483-131a-b0f0-3317-fa6da767730b")
+public static String es_PE_FIELD_PrintColor_ValidationCode_Name="Código de Validación";
+
+@XendraTrl(Identifier="e7b9b483-131a-b0f0-3317-fa6da767730b")
 public static String es_PE_FIELD_PrintColor_ValidationCode_Description="Código de Validación";
 
 @XendraTrl(Identifier="e7b9b483-131a-b0f0-3317-fa6da767730b")
 public static String es_PE_FIELD_PrintColor_ValidationCode_Help="El código validación despliega la fecha; hora y mensaje del error";
-
-@XendraTrl(Identifier="e7b9b483-131a-b0f0-3317-fa6da767730b")
-public static String es_PE_FIELD_PrintColor_ValidationCode_Name="Código de Validación";
 
 @XendraField(AD_Column_ID="Code",IsCentrallyMaintained=true,
 AD_Tab_ID="427db742-7069-31fb-b945-598dae90a13f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -201,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e38b373e-6f86-d74f-be61-f39fccc278b0",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Code */
 public static final String COLUMNNAME_Code = "Code";
 /** Set Identifier.
@@ -233,7 +235,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c1084a8c-8a08-4f07-bb76-a676ae7039e4",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -256,13 +258,13 @@ return false;
 }
 
 @XendraTrl(Identifier="3c763db1-b6b8-13c2-f801-6d02ed870302")
+public static String es_PE_FIELD_PrintColor_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="3c763db1-b6b8-13c2-f801-6d02ed870302")
 public static String es_PE_FIELD_PrintColor_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="3c763db1-b6b8-13c2-f801-6d02ed870302")
 public static String es_PE_FIELD_PrintColor_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="3c763db1-b6b8-13c2-f801-6d02ed870302")
-public static String es_PE_FIELD_PrintColor_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="427db742-7069-31fb-b945-598dae90a13f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -280,7 +282,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="89168e25-061f-7fbd-962f-9ccf15a67ed1",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -312,18 +314,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
+public static String es_PE_FIELD_PrintColor_Name_Name="Nombre";
+
+@XendraTrl(Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
 public static String es_PE_FIELD_PrintColor_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
 public static String es_PE_FIELD_PrintColor_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
-public static String es_PE_FIELD_PrintColor_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="427db742-7069-31fb-b945-598dae90a13f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="427db742-7069-31fb-b945-598dae90a13f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="871f155e-8b90-236f-e9d2-731eb990d336")
 public static final String FIELDNAME_PrintColor_Name="871f155e-8b90-236f-e9d2-731eb990d336";
 
 @XendraTrl(Identifier="5a38e89d-02c9-a5fe-f65d-7f125b156e3c")
@@ -335,7 +338,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5a38e89d-02c9-a5fe-f65d-7f125b156e3c",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

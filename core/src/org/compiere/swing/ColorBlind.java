@@ -21,6 +21,8 @@ import java.util.logging.*;
 
 import javax.swing.plaf.ColorUIResource;
 
+import org.compiere.util.CLogger;
+
 /**
  *  Color Blind Utilities.
  *  These utilities help to show how color blind/challenged see colors.
@@ -75,7 +77,7 @@ public class ColorBlind
 	private static int          s_colorType = NORMAL;
 	
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(ColorBlind.class.getName());
+	private static CLogger log = CLogger.getCLogger(ColorBlind.class.getName());
 
 
 	/**

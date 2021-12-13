@@ -43,38 +43,8 @@ public class MCurrencyAcct extends X_C_Currency_Acct
 	 */
 	public static MCurrencyAcct get (MAcctSchemaDefault as, int C_Currency_ID)
 	{
-		MCurrencyAcct retValue = null;
-		String sql = "SELECT * FROM C_Currency_Acct "
-			+ "WHERE C_AcctSchema_ID=? AND C_Currency_ID=?";
-		PreparedStatement pstmt = null;
-		try
-		{
-			pstmt = DB.prepareStatement(sql, null);
-			pstmt.setInt(1, as.getC_AcctSchema_ID());
-			pstmt.setInt(2, C_Currency_ID);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next())
-			{
-				retValue = new MCurrencyAcct (as.getCtx(), rs, null);
-			}
-			rs.close();
-			pstmt.close();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			s_log.log(Level.SEVERE, "get", e);
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
+		MCurrencyAcct retValue = new Query(Env.getCtx(), MCurrencyAcct.Table_Name, "C_AcctSchema_ID = ? AND C_Currency_ID = ?", null)
+			.setParameters(as.getC_AcctSchema_ID(), C_Currency_ID).first();
 		return retValue;
 	}	//	get
 	

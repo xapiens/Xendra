@@ -27,8 +27,7 @@ public class ShowHideViewSubmenu extends IMenu {
 
 	public ShowHideViewSubmenu(IFrameMediator controller) {
 		super(controller, "Show/Hide View",
-				((DefaultFrameController) controller).getViewItem().getId());
-				//((DefaultFrameController) controller).getViewItem().get("id"));
+				((DefaultFrameController) controller).getViewConfig().getId());
 
 		// register for change of the frame mediator
 		controller.addListener(new MyListener());

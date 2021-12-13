@@ -37,7 +37,7 @@ public class RestoreJournalDrafted extends SvrProcess {
 	@Override
 	protected String doIt() throws Exception {
 		MJournalBatch batch = new MJournalBatch(getCtx(), m_GL_JournalBatch_ID, get_TrxName());
-		if (!MPeriod.isOpen(getCtx(), batch.getDateAcct(), REF_C_DocTypeDocBaseType.GLJournal, Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), batch.getDateAcct(), REF_C_DocTypeDocBaseType.GLJournal, batch.getAD_Org_ID(), batch.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}				

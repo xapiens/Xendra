@@ -1,6 +1,6 @@
 package org.simoes.util;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * Utility class for manipulating bytes in Java
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * @author Chris Simoes
  */
 public class ByteUtil {
-	static Logger log = Logger.getLogger(ByteUtil.class);
+	static CLogger log = CLogger.getCLogger(ByteUtil.class);
 	
 	public static byte[] copyByteArray(byte[] a) {
 		int size = a.length;

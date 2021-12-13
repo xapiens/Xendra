@@ -7,6 +7,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 
 import org.xendra.swing.ProgressCircleUI;
 
@@ -35,9 +38,13 @@ public class ProgressCircle extends JPanel {
 		    }
 		};
     	progress1.setForeground(new Color(0xAAFFAAAA));   
-    	JPanel p = new JPanel(new BorderLayout());
-        p.add(title, BorderLayout.NORTH);
-        p.add(progress1, BorderLayout.SOUTH);
+    	//JPanel p = new JPanel(new BorderLayout());    	
+        //p.add(title, BorderLayout.NORTH);
+        //p.add(progress1, BorderLayout.SOUTH);    	
+    	JPanel p = new JPanel(new MigLayout());
+    	//title.setAlignmentX(SwingConstants.CENTER	);
+        p.add(title,"wrap, north, width 100%");
+        p.add(progress1);    	
         add(p);
         //setPreferredSize(new Dimension(320, 240));        
         setPreferredSize(new Dimension(width, height));        

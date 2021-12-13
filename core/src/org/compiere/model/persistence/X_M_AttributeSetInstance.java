@@ -73,14 +73,27 @@ public static final String TABNAME_Instance="6adfbe5e-3e5f-999e-9314-a1ea63106eb
 public static String es_PE_TABLE_M_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 
-@XendraTable(Name="Attribute Set Instance",Description="Product Attribute Set Instance",Help="",
-TableName="M_AttributeSetInstance",AccessLevel="3",
+@XendraTable(Name="Attribute Set Instance",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product Attribute Set Instance",
+Help="",TableName="M_AttributeSetInstance",AccessLevel="3",
 AD_Window_ID="bd7ab262-ffdb-76d6-f9af-ce93739d8ed8",AD_Val_Rule_ID="",IsKey=1,LoadSeq=110,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.material",Identifier="b1918d10-9089-5261-9f63-57b8dfe43311",
-Synchronized="2017-08-16 11:43:06.0")
+Synchronized="2020-11-02 21:18:43.0")
 /** TableName=M_AttributeSetInstance */
 public static final String Table_Name="M_AttributeSetInstance";
+
+
+@XendraIndex(Name="asi_lot",Identifier="896680e9-157b-44ee-bac1-919ed50e0f06",
+Column_Names="ad_org_id, guaranteedate, serno, lot",IsUnique="false",
+TableIdentifier="896680e9-157b-44ee-bac1-919ed50e0f06",Synchronized="2020-11-02 17:57:34.0")
+public static final String INDEXNAME_asi_lot = "896680e9-157b-44ee-bac1-919ed50e0f06";
+
+
+@XendraIndex(Name="mas_guaranteedate",Identifier="aca9e8e2-b1f8-4353-9395-e53bd59ebedd",
+Column_Names="guaranteedate",IsUnique="false",
+TableIdentifier="aca9e8e2-b1f8-4353-9395-e53bd59ebedd",Synchronized="2020-11-02 21:18:43.0")
+public static final String INDEXNAME_mas_guaranteedate = "aca9e8e2-b1f8-4353-9395-e53bd59ebedd";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"M_AttributeSetInstance");
 
@@ -139,13 +152,13 @@ return value;
 }
 
 @XendraTrl(Identifier="5e71637c-87a5-9120-7ea9-faa23e003e08")
+public static String es_PE_FIELD_Instance_Description_Name="Observación";
+
+@XendraTrl(Identifier="5e71637c-87a5-9120-7ea9-faa23e003e08")
 public static String es_PE_FIELD_Instance_Description_Description="Observación";
 
 @XendraTrl(Identifier="5e71637c-87a5-9120-7ea9-faa23e003e08")
 public static String es_PE_FIELD_Instance_Description_Help="Observación";
-
-@XendraTrl(Identifier="5e71637c-87a5-9120-7ea9-faa23e003e08")
-public static String es_PE_FIELD_Instance_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -163,7 +176,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e0602761-de58-524f-eb73-3f4a232eac00",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Guarantee Date.
@@ -180,13 +193,13 @@ return (Timestamp)get_Value(COLUMNNAME_GuaranteeDate);
 }
 
 @XendraTrl(Identifier="cdecac04-4988-65f7-9c82-387e9cb1e083")
+public static String es_PE_FIELD_Instance_GuaranteeDate_Name="Fecha de Vencimiento";
+
+@XendraTrl(Identifier="cdecac04-4988-65f7-9c82-387e9cb1e083")
 public static String es_PE_FIELD_Instance_GuaranteeDate_Description="Fecha cuando la garantía expira";
 
 @XendraTrl(Identifier="cdecac04-4988-65f7-9c82-387e9cb1e083")
 public static String es_PE_FIELD_Instance_GuaranteeDate_Help="Fecha cuando la garantía ó disponibilidad normal expira";
-
-@XendraTrl(Identifier="cdecac04-4988-65f7-9c82-387e9cb1e083")
-public static String es_PE_FIELD_Instance_GuaranteeDate_Name="Fecha de Vencimiento";
 
 @XendraField(AD_Column_ID="GuaranteeDate",IsCentrallyMaintained=true,
 AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -204,7 +217,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cc22d36d-a846-8675-bb53-23af8e4dc0f3",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name GuaranteeDate */
 public static final String COLUMNNAME_GuaranteeDate = "GuaranteeDate";
 /** Set Identifier.
@@ -236,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6755dc88-749f-44de-8816-6f7c9b99d1cb",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Lot No.
@@ -260,18 +273,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
+public static String es_PE_FIELD_Instance_LotNo_Name="No. Lote";
+
+@XendraTrl(Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
 public static String es_PE_FIELD_Instance_LotNo_Description="Número de Lote";
 
 @XendraTrl(Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
 public static String es_PE_FIELD_Instance_LotNo_Help="Indica el número de lote específico del que un producto fue parte.";
 
-@XendraTrl(Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
-public static String es_PE_FIELD_Instance_LotNo_Name="No. Lote";
-@XendraField(AD_Column_ID="Lot",
-IsCentrallyMaintained=true,AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=70,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
+@XendraField(AD_Column_ID="Lot",IsCentrallyMaintained=true,
+AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=70,SortNo=0,IsSameLine=true,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="1b0f9dbc-1924-2a14-9e65-7e5f8462e956")
 public static final String FIELDNAME_Instance_LotNo="1b0f9dbc-1924-2a14-9e65-7e5f8462e956";
 
 @XendraTrl(Identifier="8fe94bba-2ce4-7395-daab-d2d787a85dbd")
@@ -283,7 +297,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8fe94bba-2ce4-7395-daab-d2d787a85dbd",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name Lot */
 public static final String COLUMNNAME_Lot = "Lot";
 /** Set Attribute Set.
@@ -303,13 +317,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="562b3ac2-1d15-362e-56c4-4f64cf9bcdb4")
+public static String es_PE_FIELD_Instance_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="562b3ac2-1d15-362e-56c4-4f64cf9bcdb4")
 public static String es_PE_FIELD_Instance_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="562b3ac2-1d15-362e-56c4-4f64cf9bcdb4")
 public static String es_PE_FIELD_Instance_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="562b3ac2-1d15-362e-56c4-4f64cf9bcdb4")
-public static String es_PE_FIELD_Instance_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -327,7 +341,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b5b0f7b6-e0aa-c202-8dfb-84dabc5b4c32",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name M_AttributeSet_ID */
 public static final String COLUMNNAME_M_AttributeSet_ID = "M_AttributeSet_ID";
 /** Set Attribute Set Instance.
@@ -353,13 +367,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_AttributeSetInstance_ID()))
 }
 
 @XendraTrl(Identifier="9e425290-cd54-1cfa-7528-7e5c89eb7348")
+public static String es_PE_FIELD_Instance_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="9e425290-cd54-1cfa-7528-7e5c89eb7348")
 public static String es_PE_FIELD_Instance_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="9e425290-cd54-1cfa-7528-7e5c89eb7348")
 public static String es_PE_FIELD_Instance_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="9e425290-cd54-1cfa-7528-7e5c89eb7348")
-public static String es_PE_FIELD_Instance_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -387,18 +401,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
+public static String es_PE_FIELD_Instance_Lot_Name="Lote";
+
+@XendraTrl(Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
 public static String es_PE_FIELD_Instance_Lot_Description="Definición de lote de producto.";
 
 @XendraTrl(Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
 public static String es_PE_FIELD_Instance_Lot_Help="El lote individual de un producto. ";
 
-@XendraTrl(Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
-public static String es_PE_FIELD_Instance_Lot_Name="Lote";
-@XendraField(AD_Column_ID="M_Lot_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=22,IsReadOnly=true,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
+@XendraField(AD_Column_ID="M_Lot_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=22,IsReadOnly=true,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d8564a5d-e619-fb9a-81f1-a5a8c296f576")
 public static final String FIELDNAME_Instance_Lot="d8564a5d-e619-fb9a-81f1-a5a8c296f576";
 
 @XendraTrl(Identifier="bc0dd463-3c35-2e7c-df1c-6c52d4dd95f2")
@@ -410,12 +425,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bc0dd463-3c35-2e7c-df1c-6c52d4dd95f2",Synchronized="2017-08-05 16:55:00.0")
+Identifier="bc0dd463-3c35-2e7c-df1c-6c52d4dd95f2",Synchronized="2020-11-02 17:57:34.0")
 /** Column name M_Lot_ID */
 public static final String COLUMNNAME_M_Lot_ID = "M_Lot_ID";
-
-/** Ref_AttributeSetInstance_ID AD_Reference=bb57b2f2-25be-b966-04c4-2e0c6ea9b4e2 */
-public static final int REF_ATTRIBUTESETINSTANCE_ID_AD_Reference_ID=1000046;
 /** Set Ref Attribute Set Instance.
 @param Ref_AttributeSetInstance_ID Product Attribute Set Instance */
 public void setRef_AttributeSetInstance_ID (int Ref_AttributeSetInstance_ID)
@@ -443,7 +455,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="6e954bbf-03af-a00b-9f6b-0ff815c2ebcf",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name Ref_AttributeSetInstance_ID */
 public static final String COLUMNNAME_Ref_AttributeSetInstance_ID = "Ref_AttributeSetInstance_ID";
 /** Set Serial No.
@@ -467,13 +479,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="096813c2-a95a-ef54-d8bb-384e3c5b91c3")
+public static String es_PE_FIELD_Instance_SerialNo_Name="No. de Serie";
+
+@XendraTrl(Identifier="096813c2-a95a-ef54-d8bb-384e3c5b91c3")
 public static String es_PE_FIELD_Instance_SerialNo_Description="Número de serie del producto";
 
 @XendraTrl(Identifier="096813c2-a95a-ef54-d8bb-384e3c5b91c3")
 public static String es_PE_FIELD_Instance_SerialNo_Help="El número de serie identifica un producto garantizado; monitoreado. Puede solamente ser usado cuando la cantidad es 1.";
-
-@XendraTrl(Identifier="096813c2-a95a-ef54-d8bb-384e3c5b91c3")
-public static String es_PE_FIELD_Instance_SerialNo_Name="No. de Serie";
 
 @XendraField(AD_Column_ID="SerNo",IsCentrallyMaintained=true,
 AD_Tab_ID="6adfbe5e-3e5f-999e-9314-a1ea63106eb7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -491,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b8f8f348-1459-ae25-081d-99621c0d0f09",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2020-11-02 17:57:34.0")
 /** Column name SerNo */
 public static final String COLUMNNAME_SerNo = "SerNo";
 }

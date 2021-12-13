@@ -56,10 +56,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Servlet");
 @XendraTrl(Identifier="633dbb27-c83d-4a8a-b59f-fda6a3d3a3ae")
 public static String es_PE_TABLE_AD_Servlet_Name="Servlet";
 
-@XendraTable(Name="Servlet",Description="",Help="",TableName="AD_Servlet",AccessLevel="6",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="633dbb27-c83d-4a8a-b59f-fda6a3d3a3ae",Synchronized="2017-08-16 11:40:59.0")
+@XendraTable(Name="Servlet",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Servlet",
+AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="633dbb27-c83d-4a8a-b59f-fda6a3d3a3ae",
+Synchronized="2020-10-12 16:21:38.0")
 /** TableName=AD_Servlet */
 public static final String Table_Name="AD_Servlet";
 
@@ -136,7 +138,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a7eb8e0d-d908-4985-82a1-b677a680b858",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2020-10-12 16:17:37.0")
 /** Column name AD_ServletList_ID */
 public static final String COLUMNNAME_AD_ServletList_ID = "AD_ServletList_ID";
 /** Set Classname.
@@ -168,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6016f162-1d92-4f14-ba19-b03820fc095c",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2020-10-12 16:17:37.0")
 /** Column name Classname */
 public static final String COLUMNNAME_Classname = "Classname";
 /** Set Mapping.
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="159d011c-f558-42c5-9345-3be46921e4cf",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2020-10-12 16:17:37.0")
 /** Column name Mapping */
 public static final String COLUMNNAME_Mapping = "Mapping";
 /** Set Name.
@@ -239,7 +241,63 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6694f61b-e0da-4061-8a7e-784914cb9156",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2020-10-12 16:17:37.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
+/** Set Properties.
+@param Properties Properties */
+public void setProperties (HashMap Properties)
+{
+set_Value (COLUMNNAME_Properties, Properties);
+}
+/** Get Properties.
+@return Properties */
+public HashMap getProperties() 
+{
+HashMap propsrc = (HashMap)get_Value(COLUMNNAME_Properties);
+if (propsrc == null) return new HashMap();
+ HashMap propdst = (HashMap) propsrc.clone();
+return propdst;
+}
+
+@XendraTrl(Identifier="730a355f-814f-4364-a163-4c93a34815f0")
+public static String es_PE_COLUMN_Properties_Name="Properties";
+
+@XendraColumn(AD_Element_ID="acc3987b-292c-475a-86b5-5104970a96f3",ColumnName="Properties",
+AD_Reference_ID=46,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="730a355f-814f-4364-a163-4c93a34815f0",
+Synchronized="2020-10-12 16:17:37.0")
+/** Column name Properties */
+public static final String COLUMNNAME_Properties = "Properties";
+/** Set UrlFormat.
+@param UrlFormat UrlFormat */
+public void setUrlFormat (HashMap UrlFormat)
+{
+set_Value (COLUMNNAME_UrlFormat, UrlFormat);
+}
+/** Get UrlFormat.
+@return UrlFormat */
+public HashMap getUrlFormat() 
+{
+HashMap propsrc = (HashMap)get_Value(COLUMNNAME_UrlFormat);
+if (propsrc == null) return new HashMap();
+ HashMap propdst = (HashMap) propsrc.clone();
+return propdst;
+}
+
+@XendraTrl(Identifier="cb8c5488-1613-4399-80a5-93f43538235c")
+public static String es_PE_COLUMN_UrlFormat_Name="urlformat";
+
+@XendraColumn(AD_Element_ID="269e533c-a432-4d57-ac77-bd03b553d06e",ColumnName="urlformat",
+AD_Reference_ID=46,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="cb8c5488-1613-4399-80a5-93f43538235c",
+Synchronized="2020-10-12 16:21:16.0")
+/** Column name UrlFormat */
+public static final String COLUMNNAME_UrlFormat = "UrlFormat";
 }

@@ -39,7 +39,7 @@ public class RestoreBankStatementDrafted extends SvrProcess {
 	@Override
 	protected String doIt() throws Exception {
 		MBankStatement statement = new MBankStatement(getCtx(), m_C_BankStatement_ID, get_TrxName());
-		if (!MPeriod.isOpen(getCtx(), statement.getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, Env.getAD_Org_ID(Env.getCtx()))) {
+		if (!MPeriod.isOpen(getCtx(), statement.getStatementDate(), REF_C_DocTypeDocBaseType.BankStatement, statement.getAD_Org_ID(), statement.getAD_Client_ID())) {
 			return "@Error@: @PeriodClosed@";
 		}
 		

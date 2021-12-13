@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentAction;
-import org.compiere.model.reference.REF__DocumentStatus;
 /** Generated Model for S_TimeExpense
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -89,11 +87,12 @@ public static final String TABNAME_ExpenseReport="88de64c5-b965-6215-1164-4bf93c
 @XendraTrl(Identifier="d112ad22-9a7c-cbc5-a9fb-f71ad3d0eded")
 public static String es_PE_TABLE_S_TimeExpense_Name="Informe de Gasto";
 
-@XendraTable(Name="Expense Report",Description="Time and Expense Report",Help="",
+@XendraTable(Name="Expense Report",AD_Package_ID="4bb6f0e4-f72d-dcbb-9183-88af0357143f",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Time and Expense Report",Help="",
 TableName="S_TimeExpense",AccessLevel="1",AD_Window_ID="34a30f99-cf17-9a6b-fa47-63536a0d865c",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.services",
-Identifier="d112ad22-9a7c-cbc5-a9fb-f71ad3d0eded",Synchronized="2017-08-16 11:44:15.0")
+Identifier="d112ad22-9a7c-cbc5-a9fb-f71ad3d0eded",Synchronized="2020-03-03 21:40:12.0")
 /** TableName=S_TimeExpense */
 public static final String Table_Name="S_TimeExpense";
 
@@ -142,13 +141,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="947ee0b6-bd42-a401-fc1c-109e6fe06c80")
+public static String es_PE_FIELD_ExpenseReport_ApprovalAmount_Name="Importe Aprobado";
+
+@XendraTrl(Identifier="947ee0b6-bd42-a401-fc1c-109e6fe06c80")
 public static String es_PE_FIELD_ExpenseReport_ApprovalAmount_Description="Documento de importe aprobado";
 
 @XendraTrl(Identifier="947ee0b6-bd42-a401-fc1c-109e6fe06c80")
 public static String es_PE_FIELD_ExpenseReport_ApprovalAmount_Help="Cantidad de la aprobación para el Flujo de trabajo";
-
-@XendraTrl(Identifier="947ee0b6-bd42-a401-fc1c-109e6fe06c80")
-public static String es_PE_FIELD_ExpenseReport_ApprovalAmount_Name="Importe Aprobado";
 
 @XendraField(AD_Column_ID="ApprovalAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,12 +165,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1054214e-8d56-da27-8229-f62fe9cb69d2",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name ApprovalAmt */
 public static final String COLUMNNAME_ApprovalAmt = "ApprovalAmt";
-
-/** C_BPartner_ID AD_Reference=ceb38c30-de7a-46bb-35b0-014c0684ff8d */
-public static final int C_BPARTNER_ID_AD_Reference_ID=277;
 /** Set Business Partner .
 @param C_BPartner_ID Identifies a Business Partner */
 public void setC_BPartner_ID (int C_BPartner_ID)
@@ -189,13 +185,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="88687db4-76a4-c5f3-2e00-f03c3c1e922b")
+public static String es_PE_FIELD_ExpenseReport_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="88687db4-76a4-c5f3-2e00-f03c3c1e922b")
 public static String es_PE_FIELD_ExpenseReport_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="88687db4-76a4-c5f3-2e00-f03c3c1e922b")
 public static String es_PE_FIELD_ExpenseReport_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="88687db4-76a4-c5f3-2e00-f03c3c1e922b")
-public static String es_PE_FIELD_ExpenseReport_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -213,7 +209,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="dfae3337-e58d-8423-931e-c908627bbc5d",Synchronized="2017-08-05 16:56:20.0")
+Identifier="dfae3337-e58d-8423-931e-c908627bbc5d",Synchronized="2019-08-30 22:24:17.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Report Date.
@@ -231,13 +227,13 @@ return (Timestamp)get_Value(COLUMNNAME_DateReport);
 }
 
 @XendraTrl(Identifier="61b73069-1685-de26-2cef-20d44cba1ebb")
+public static String es_PE_FIELD_ExpenseReport_ReportDate_Name="Fecha de Informe";
+
+@XendraTrl(Identifier="61b73069-1685-de26-2cef-20d44cba1ebb")
 public static String es_PE_FIELD_ExpenseReport_ReportDate_Description="Fecha del Informe de gasto y tiempo";
 
 @XendraTrl(Identifier="61b73069-1685-de26-2cef-20d44cba1ebb")
 public static String es_PE_FIELD_ExpenseReport_ReportDate_Help="Fecha del Informe de tiempo y gastos";
-
-@XendraTrl(Identifier="61b73069-1685-de26-2cef-20d44cba1ebb")
-public static String es_PE_FIELD_ExpenseReport_ReportDate_Name="Fecha de Informe";
 
 @XendraField(AD_Column_ID="DateReport",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d720616-082c-d42d-4aab-092c782a67aa",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name DateReport */
 public static final String COLUMNNAME_DateReport = "DateReport";
 /** Set Description.
@@ -286,13 +282,13 @@ return value;
 }
 
 @XendraTrl(Identifier="c944cd99-665a-d715-0c2e-44a28c93a240")
+public static String es_PE_FIELD_ExpenseReport_Description_Name="Observación";
+
+@XendraTrl(Identifier="c944cd99-665a-d715-0c2e-44a28c93a240")
 public static String es_PE_FIELD_ExpenseReport_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="c944cd99-665a-d715-0c2e-44a28c93a240")
 public static String es_PE_FIELD_ExpenseReport_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="c944cd99-665a-d715-0c2e-44a28c93a240")
-public static String es_PE_FIELD_ExpenseReport_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -310,19 +306,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="66427f1f-8752-961e-031b-4b99e6994663",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** DocAction AD_Reference=e397c9b0-c643-d1cd-8380-20bee13b2a6e */
-public static final int DOCACTION_AD_Reference_ID=135;
 /** Set Document Action.
 @param DocAction The targeted status of the document */
 public void setDocAction (String DocAction)
 {
-if (DocAction == null) throw new IllegalArgumentException ("DocAction is mandatory");
-if (DocAction.equals(REF__DocumentAction.Complete) || DocAction.equals(REF__DocumentAction.Approve) || DocAction.equals(REF__DocumentAction.Reject) || DocAction.equals(REF__DocumentAction.Post) || DocAction.equals(REF__DocumentAction.WaitComplete) || DocAction.equals(REF__DocumentAction.Prepare) || DocAction.equals(REF__DocumentAction.Close) || DocAction.equals(REF__DocumentAction.Placed) || DocAction.equals(REF__DocumentAction.Discount) || DocAction.equals(REF__DocumentAction.Portofolio) || DocAction.equals(REF__DocumentAction.Warranty) || DocAction.equals(REF__DocumentAction.Reverse_Correct) || DocAction.equals(REF__DocumentAction.Reverse_Accrual) || DocAction.equals(REF__DocumentAction.Invalidate) || DocAction.equals(REF__DocumentAction.Re_Activate) || DocAction.equals(REF__DocumentAction.None) || DocAction.equals(REF__DocumentAction.Unlock) || DocAction.equals(REF__DocumentAction.Returned) || DocAction.equals(REF__DocumentAction.Apply) || DocAction.equals(REF__DocumentAction.Collect) || DocAction.equals(REF__DocumentAction.ToCollect) || DocAction.equals(REF__DocumentAction.Restore) || DocAction.equals(REF__DocumentAction.Protested) || DocAction.equals(REF__DocumentAction.Receivables) || DocAction.equals(REF__DocumentAction.Void) || DocAction.equals(REF__DocumentAction.Draft) || DocAction.equals(REF__DocumentAction.InProgress) || DocAction.equals(REF__DocumentAction.WaitingPayment));
- else throw new IllegalArgumentException ("DocAction Invalid value - " + DocAction + " - Reference_ID=135 - CO - AP - RJ - PO - WC - PR - CL - PL - DS - PT - WR - RC - RA - IN - RE - -- - XL - RT - AY - CT - TC - RR - PD - RV - VO - DR - IP - WP");
 if (DocAction.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -357,19 +347,13 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,
 AD_Process_ID="7a3f79dc-ac88-81ed-3535-c1ffaaee2e85",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e0a34d2-5e64-4c13-9990-a49c3d6bfd5d",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name DocAction */
 public static final String COLUMNNAME_DocAction = "DocAction";
-
-/** DocStatus AD_Reference=7627125d-fefe-e6bc-bb7d-4a6c772172dc */
-public static final int DOCSTATUS_AD_Reference_ID=131;
 /** Set Document Status.
 @param DocStatus The current status of the document */
 public void setDocStatus (String DocStatus)
 {
-if (DocStatus == null) throw new IllegalArgumentException ("DocStatus is mandatory");
-if (DocStatus.equals(REF__DocumentStatus.InProgress) || DocStatus.equals(REF__DocumentStatus.WaitingConfirmation) || DocStatus.equals(REF__DocumentStatus.Drafted) || DocStatus.equals(REF__DocumentStatus.Completed) || DocStatus.equals(REF__DocumentStatus.Approved) || DocStatus.equals(REF__DocumentStatus.WaitingPayment) || DocStatus.equals(REF__DocumentStatus.Placed) || DocStatus.equals(REF__DocumentStatus.Returned) || DocStatus.equals(REF__DocumentStatus.Discount) || DocStatus.equals(REF__DocumentStatus.Protested) || DocStatus.equals(REF__DocumentStatus.NotApproved) || DocStatus.equals(REF__DocumentStatus.Voided) || DocStatus.equals(REF__DocumentStatus.Invalid) || DocStatus.equals(REF__DocumentStatus.Reversed) || DocStatus.equals(REF__DocumentStatus.Closed) || DocStatus.equals(REF__DocumentStatus.Unknown) || DocStatus.equals(REF__DocumentStatus.Portfolio) || DocStatus.equals(REF__DocumentStatus.Warranty) || DocStatus.equals(REF__DocumentStatus.ToCollect) || DocStatus.equals(REF__DocumentStatus.Collect) || DocStatus.equals(REF__DocumentStatus.Receivables) || DocStatus.equals(REF__DocumentStatus.Apply));
- else throw new IllegalArgumentException ("DocStatus Invalid value - " + DocStatus + " - Reference_ID=131 - IP - WC - DR - CO - AP - WP - PL - RT - DS - PD - NA - VO - IN - RE - CL - ?? - PT - WR - TC - CT - RV - AY");
 if (DocStatus.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -385,13 +369,13 @@ return (String)get_Value(COLUMNNAME_DocStatus);
 }
 
 @XendraTrl(Identifier="195ef41c-2a1c-6961-08a9-8db0d46088a8")
+public static String es_PE_FIELD_ExpenseReport_DocumentStatus_Name="Estado del Documento";
+
+@XendraTrl(Identifier="195ef41c-2a1c-6961-08a9-8db0d46088a8")
 public static String es_PE_FIELD_ExpenseReport_DocumentStatus_Description="El estado actual del documento";
 
 @XendraTrl(Identifier="195ef41c-2a1c-6961-08a9-8db0d46088a8")
 public static String es_PE_FIELD_ExpenseReport_DocumentStatus_Help="El estado del documento indica el estado del documento en este momento. Si usted quiere cambiar el estado de Documento; use el campo acción de documento";
-
-@XendraTrl(Identifier="195ef41c-2a1c-6961-08a9-8db0d46088a8")
-public static String es_PE_FIELD_ExpenseReport_DocumentStatus_Name="Estado del Documento";
 
 @XendraField(AD_Column_ID="DocStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -409,7 +393,7 @@ FieldLength=2,DefaultValue="DR",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="04e15215-0447-bfbb-1078-4493528aa440",Synchronized="2017-08-05 16:56:20.0")
+Identifier="04e15215-0447-bfbb-1078-4493528aa440",Synchronized="2019-08-30 22:24:17.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Document No.
@@ -441,13 +425,13 @@ return new KeyNamePair(get_ID(), getDocumentNo());
 }
 
 @XendraTrl(Identifier="641f6a9d-1abf-2cd1-fb27-1081a5d4e5d6")
+public static String es_PE_FIELD_ExpenseReport_DocumentNo_Name="No. del Documento";
+
+@XendraTrl(Identifier="641f6a9d-1abf-2cd1-fb27-1081a5d4e5d6")
 public static String es_PE_FIELD_ExpenseReport_DocumentNo_Description="Número de secuencia del documento para cada documento";
 
 @XendraTrl(Identifier="641f6a9d-1abf-2cd1-fb27-1081a5d4e5d6")
 public static String es_PE_FIELD_ExpenseReport_DocumentNo_Help="El número del documento es usualmente generado en automático por el sistema y determinado por el tipo del documento. Si el documento no se salva; el número preliminar se despliega entre \"<>\"";
-
-@XendraTrl(Identifier="641f6a9d-1abf-2cd1-fb27-1081a5d4e5d6")
-public static String es_PE_FIELD_ExpenseReport_DocumentNo_Name="No. del Documento";
 
 @XendraField(AD_Column_ID="DocumentNo",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -465,7 +449,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a5bf724e-bbcd-3209-d919-c9b812d5729a",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Identifier.
@@ -497,7 +481,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6ec76b07-6f97-40ff-9cd1-f5afb35d1219",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Approved.
@@ -520,13 +504,13 @@ return false;
 }
 
 @XendraTrl(Identifier="c4f9ffc6-c65e-d931-86c8-d6488313f722")
+public static String es_PE_FIELD_ExpenseReport_Approved_Name="Aprobación";
+
+@XendraTrl(Identifier="c4f9ffc6-c65e-d931-86c8-d6488313f722")
 public static String es_PE_FIELD_ExpenseReport_Approved_Description="Indica si este documento requiere aprobación";
 
 @XendraTrl(Identifier="c4f9ffc6-c65e-d931-86c8-d6488313f722")
 public static String es_PE_FIELD_ExpenseReport_Approved_Help="El Cuadro de Verificación  Aprobado indica si este documento requiere aprobación antes de que pueda ser procesado";
-
-@XendraTrl(Identifier="c4f9ffc6-c65e-d931-86c8-d6488313f722")
-public static String es_PE_FIELD_ExpenseReport_Approved_Name="Aprobación";
 
 @XendraField(AD_Column_ID="IsApproved",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -544,7 +528,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5ceca12f-1044-e6bd-6d6a-17ce4e299ed0",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name IsApproved */
 public static final String COLUMNNAME_IsApproved = "IsApproved";
 /** Set M_PriceList_ID.
@@ -564,13 +548,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5f4d8581-82dd-7b91-f8d6-27dd9f08eed8")
+public static String es_PE_FIELD_ExpenseReport_M_PriceList_ID_Name="Lista de Precios";
+
+@XendraTrl(Identifier="5f4d8581-82dd-7b91-f8d6-27dd9f08eed8")
 public static String es_PE_FIELD_ExpenseReport_M_PriceList_ID_Description="Identificador único de mi lista de precios";
 
 @XendraTrl(Identifier="5f4d8581-82dd-7b91-f8d6-27dd9f08eed8")
 public static String es_PE_FIELD_ExpenseReport_M_PriceList_ID_Help="Listas de precios son usadas para determinar el precio; margen y costo de artículos comprados ó vendidos.";
-
-@XendraTrl(Identifier="5f4d8581-82dd-7b91-f8d6-27dd9f08eed8")
-public static String es_PE_FIELD_ExpenseReport_M_PriceList_ID_Name="Lista de Precios";
 
 @XendraField(AD_Column_ID="M_PriceList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -588,7 +572,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ab8100f-03f4-a077-ac9a-c82cace39371",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name M_PriceList_ID */
 public static final String COLUMNNAME_M_PriceList_ID = "M_PriceList_ID";
 /** Set Warehouse.
@@ -608,13 +592,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5baa49f1-3575-503c-8944-c6283d40e22a")
+public static String es_PE_FIELD_ExpenseReport_Warehouse_Name="Almacén";
+
+@XendraTrl(Identifier="5baa49f1-3575-503c-8944-c6283d40e22a")
 public static String es_PE_FIELD_ExpenseReport_Warehouse_Description="Almacén";
 
 @XendraTrl(Identifier="5baa49f1-3575-503c-8944-c6283d40e22a")
 public static String es_PE_FIELD_ExpenseReport_Warehouse_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="5baa49f1-3575-503c-8944-c6283d40e22a")
-public static String es_PE_FIELD_ExpenseReport_Warehouse_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -632,7 +616,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fae16531-c8fd-28aa-1a45-25b8cb07cc2a",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 /** Set Processed.
@@ -655,13 +639,13 @@ return false;
 }
 
 @XendraTrl(Identifier="550c8e64-9b00-d429-b3a4-e20fd907c86f")
+public static String es_PE_FIELD_ExpenseReport_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="550c8e64-9b00-d429-b3a4-e20fd907c86f")
 public static String es_PE_FIELD_ExpenseReport_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="550c8e64-9b00-d429-b3a4-e20fd907c86f")
 public static String es_PE_FIELD_ExpenseReport_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="550c8e64-9b00-d429-b3a4-e20fd907c86f")
-public static String es_PE_FIELD_ExpenseReport_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -679,7 +663,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9eac2933-8404-99b9-d949-783b842dc461",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -720,7 +704,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8f68e412-f141-667d-7a4a-e7b34787a54d",
-Synchronized="2017-08-05 16:56:20.0")
+Synchronized="2019-08-30 22:24:17.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Expense Report.
@@ -740,10 +724,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4263d6fa-86d5-14d0-b92d-4768f10b65a5")
-public static String es_PE_FIELD_ExpenseReport_ExpenseReport_Description="Informe de tiempo y gasto";
+public static String es_PE_FIELD_ExpenseReport_ExpenseReport_Name="Informe de Gasto";
 
 @XendraTrl(Identifier="4263d6fa-86d5-14d0-b92d-4768f10b65a5")
-public static String es_PE_FIELD_ExpenseReport_ExpenseReport_Name="Informe de Gasto";
+public static String es_PE_FIELD_ExpenseReport_ExpenseReport_Description="Informe de tiempo y gasto";
 
 @XendraField(AD_Column_ID="S_TimeExpense_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="88de64c5-b965-6215-1164-4bf93ce70f32",AD_FieldGroup_ID="",IsDisplayed=false,

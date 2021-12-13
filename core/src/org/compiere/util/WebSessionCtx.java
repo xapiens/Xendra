@@ -23,7 +23,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.compiere.model.MClient;
-import org.compiere.model.MStore;
+import org.compiere.model.MWebStore;
 
 
 
@@ -197,7 +197,7 @@ public class WebSessionCtx implements Serializable
 	/** Login Info					*/
 	public String			loginInfo = "";
 	/** Web Store					*/
-	public MStore			wstore = null;
+	public MWebStore			wstore = null;
 	
 	/**
 	 * 	Set Web Store
@@ -209,7 +209,7 @@ public class WebSessionCtx implements Serializable
 		int W_Store_ID = Env.getContextAsInt(ctx, "W_Store_ID");
 		if (W_Store_ID != 0)
 		{
-			wstore = MStore.get(ctx, W_Store_ID);
+			wstore = MWebStore.get(ctx, W_Store_ID);
 			if (wstore.getW_Store_ID() != 0)
 			{
 				log.info("From web.xml - " + wstore);
@@ -219,7 +219,7 @@ public class WebSessionCtx implements Serializable
 		if ("/adempiere".equals(contextPath))	//	HTML UI
 			return;
 		//
-		wstore = MStore.get(ctx, contextPath);
+		wstore = MWebStore.get(ctx, contextPath);
 		if (wstore == null)
 			throw new IllegalStateException("No Web Store found - " + contextPath);
 	}	//	setWStore
@@ -234,7 +234,7 @@ public class WebSessionCtx implements Serializable
 		//	get from context
 		if (W_Store_ID != 0)
 		{
-			wstore = MStore.get(ctx, W_Store_ID);
+			wstore = MWebStore.get(ctx, W_Store_ID);
 			if (wstore.getW_Store_ID() != 0)
 			{
 				log.info("From web.xml - " + wstore);

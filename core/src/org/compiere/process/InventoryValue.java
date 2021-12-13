@@ -21,10 +21,12 @@ import java.sql.*;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MClient;
 import org.compiere.model.MWarehouse;
+import org.compiere.model.persistence.X_T_InventoryValue;
 import org.compiere.util.*;
 
 import org.xendra.annotations.XendraProcess;
 import org.xendra.annotations.XendraProcessParameter;
+import org.xendra.util.UpdatePO;
 /**
  *  Inventory Valuation.
  *  Process to fill T_InventoryValue

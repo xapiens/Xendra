@@ -297,7 +297,7 @@ public class MTimeExpense extends X_S_TimeExpense implements DocAction
 			return DocAction.STATUS_Invalid;
 
 		//	Std Period open? - AP (Reimbursement) Invoice
-		if (!MPeriod.isOpen(getCtx(), getDateReport(), REF_C_DocTypeDocBaseType.APInvoice, getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateReport(), REF_C_DocTypeDocBaseType.APInvoice, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;

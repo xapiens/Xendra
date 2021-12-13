@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_ImpFormat_RowType;
 /** Generated Model for AD_ImpFormat_Row
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -69,12 +68,12 @@ public static int Table_ID=MTable.getTable_ID("AD_ImpFormat_Row");
 public static String es_PE_TAB_FormatField_Description="Mantener Campos de Formato";
 
 @XendraTrl(Identifier="e0b2d6ba-e8a2-2395-2b40-d97178c51d72")
-public static String es_PE_TAB_FormatField_Name="Campo de Formato";
-
-@XendraTrl(Identifier="e0b2d6ba-e8a2-2395-2b40-d97178c51d72")
 public static String es_PE_TAB_FormatField_Help="Define los Campos individuales basado en la definición de la tabla. Asegúrese que una constante tenga el tipo de dato SQL correcto. (ej. Si es una cadena de texto; esta debe estar entre apóstrofes como `estos`).  <p> Traz del Producto (Para los detalles vea la documentación): <pre> H_Item => Valor H_ItemDesc => Nombre / Descripción; H_ItemDefn => Help H_Item Tipo => Categoria de Producto H_PartnrID => Valor de Socios de Negocio H_Commodity1 => Vendor Product No H_Commodity2 => SKU H_ItemClass => Clasificación (A;B;C..) V_OperAmt_T_Cur => Currency V_OperAmt_T => Precio  </pre>";
 
-@XendraTab(Name="Format Field",Description="Maintain Format Fields",
+@XendraTrl(Identifier="e0b2d6ba-e8a2-2395-2b40-d97178c51d72")
+public static String es_PE_TAB_FormatField_Name="Campo de Formato";
+@XendraTab(Name="Format Field",
+Description="Maintain Format Fields",
 Help="Define the individual field based on the table definition.  Please note that you have to make sure that a Constant has the correct  SQL data type (i.e. if it is a 'string', you need to enclose it like 'this'). <p>Product mapping (for details see documentation): <pre> H_Item => Value H_ItemDesc => Name / Description H_ItemDefn => Help H_ItemType => ProductCategory H_PartnrID => Value of Business Partner H_Commodity1 => Vendor Product No H_Commodity2 => SKU H_ItemClass => Classification (A,B,C..) V_OperAmt_T_Cur => Currency V_OperAmt_T => Price  </pre>",
 AD_Window_ID="68101bd1-27c7-50e5-b950-c55d071f1f43",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -87,11 +86,12 @@ public static final String TABNAME_FormatField="e0b2d6ba-e8a2-2395-2b40-d97178c5
 @XendraTrl(Identifier="1e9d16ba-b5b3-0752-0fbc-855aec614b26")
 public static String es_PE_TABLE_AD_ImpFormat_Row_Name="Campos del Formato";
 
-@XendraTable(Name="Format Field",Description="",Help="",TableName="AD_ImpFormat_Row",
-AccessLevel="6",AD_Window_ID="68101bd1-27c7-50e5-b950-c55d071f1f43",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="1e9d16ba-b5b3-0752-0fbc-855aec614b26",Synchronized="2017-08-16 11:40:20.0")
+@XendraTable(Name="Format Field",AD_Package_ID="645f34c0-ea3a-ac63-618d-8ca49873c33b",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ImpFormat_Row",AccessLevel="6",AD_Window_ID="68101bd1-27c7-50e5-b950-c55d071f1f43",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.import",
+Identifier="1e9d16ba-b5b3-0752-0fbc-855aec614b26",Synchronized="2020-03-03 21:35:04.0")
 /** TableName=AD_ImpFormat_Row */
 public static final String Table_Name="AD_ImpFormat_Row";
 
@@ -141,13 +141,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1cd6e0f5-ee40-57c7-52c5-d1f4aef2ea20")
+public static String es_PE_FIELD_FormatField_Column_Name="Columna";
+
+@XendraTrl(Identifier="1cd6e0f5-ee40-57c7-52c5-d1f4aef2ea20")
 public static String es_PE_FIELD_FormatField_Column_Description="Columna en la tabla";
 
 @XendraTrl(Identifier="1cd6e0f5-ee40-57c7-52c5-d1f4aef2ea20")
 public static String es_PE_FIELD_FormatField_Column_Help="Enlace a la columna base de datos de la tabla";
-
-@XendraTrl(Identifier="1cd6e0f5-ee40-57c7-52c5-d1f4aef2ea20")
-public static String es_PE_FIELD_FormatField_Column_Name="Columna";
 
 @XendraField(AD_Column_ID="AD_Column_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -165,7 +165,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="41761ffa-f0bb-b9c8-be73-02331efcccb0",Synchronized="2017-08-05 16:52:33.0")
+Identifier="41761ffa-f0bb-b9c8-be73-02331efcccb0",Synchronized="2019-08-30 22:20:23.0")
 /** Column name AD_Column_ID */
 public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
 /** Set Import Format.
@@ -203,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e01b5416-b6ed-4e18-1064-a8f2628c8beb",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name AD_ImpFormat_ID */
 public static final String COLUMNNAME_AD_ImpFormat_ID = "AD_ImpFormat_ID";
 /** Set Format Field.
@@ -254,13 +254,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="3976afcc-3e5e-e1e1-9dfd-7c41d4847d65")
+public static String es_PE_FIELD_FormatField_Callout_Name="Llamada";
+
+@XendraTrl(Identifier="3976afcc-3e5e-e1e1-9dfd-7c41d4847d65")
 public static String es_PE_FIELD_FormatField_Callout_Description="Llamadas de función separadas por punto y coma; SE_/SL_/UE_/UL_ - 1st: System / User; 2nd: Enter / Leave; 3rd: _ Unserscore; - then function name.";
 
 @XendraTrl(Identifier="3976afcc-3e5e-e1e1-9dfd-7c41d4847d65")
 public static String es_PE_FIELD_FormatField_Callout_Help="Llamadas de función separadas por punto y coma; SE_/SL_/UE_/UL_ - 1st: System / User; 2nd: Enter / Leave; 3rd: _ Unserscore; - then Function Name";
-
-@XendraTrl(Identifier="3976afcc-3e5e-e1e1-9dfd-7c41d4847d65")
-public static String es_PE_FIELD_FormatField_Callout_Name="Llamada";
 
 @XendraField(AD_Column_ID="Callout",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -278,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9be51318-4dd3-913f-de9e-5344fa8d6466",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Callout */
 public static final String COLUMNNAME_Callout = "Callout";
 /** Set Constant Value.
@@ -320,7 +320,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b514f3bf-8777-bcf0-5156-1fc62a817863",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name ConstantValue */
 public static final String COLUMNNAME_ConstantValue = "ConstantValue";
 /** Set Data Format.
@@ -344,13 +344,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="36034e00-03fc-01da-b389-ac8fc67cb3c8")
+public static String es_PE_FIELD_FormatField_DataFormat_Name="Formato de Datos";
+
+@XendraTrl(Identifier="36034e00-03fc-01da-b389-ac8fc67cb3c8")
 public static String es_PE_FIELD_FormatField_DataFormat_Description="Formato de cadena en notación Java; Ej. ddMMyy";
 
 @XendraTrl(Identifier="36034e00-03fc-01da-b389-ac8fc67cb3c8")
 public static String es_PE_FIELD_FormatField_DataFormat_Help="El formato fecha indica como las fechas son definidas en el registro a ser importado. Debe estar en notación Java";
-
-@XendraTrl(Identifier="36034e00-03fc-01da-b389-ac8fc67cb3c8")
-public static String es_PE_FIELD_FormatField_DataFormat_Name="Formato de Datos";
 
 @XendraField(AD_Column_ID="DataFormat",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -368,19 +368,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f08c1010-8da3-94e7-1dd2-1fe21ac6d601",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name DataFormat */
 public static final String COLUMNNAME_DataFormat = "DataFormat";
-
-/** DataType AD_Reference=581876b5-c8de-c960-e396-a6cb7c8d52a1 */
-public static final int DATATYPE_AD_Reference_ID=210;
 /** Set Data Type.
 @param DataType Type of data */
 public void setDataType (String DataType)
 {
-if (DataType == null) throw new IllegalArgumentException ("DataType is mandatory");
-if (DataType.equals(REF_AD_ImpFormat_RowType.String) || DataType.equals(REF_AD_ImpFormat_RowType.Number) || DataType.equals(REF_AD_ImpFormat_RowType.Date) || DataType.equals(REF_AD_ImpFormat_RowType.Constant));
- else throw new IllegalArgumentException ("DataType Invalid value - " + DataType + " - Reference_ID=210 - S - N - D - C");
 if (DataType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -396,10 +390,10 @@ return (String)get_Value(COLUMNNAME_DataType);
 }
 
 @XendraTrl(Identifier="d646cec8-fe2c-b8f1-1067-97836e69c3d9")
-public static String es_PE_FIELD_FormatField_DataType_Description="Tipo de datos";
+public static String es_PE_FIELD_FormatField_DataType_Name="Tipo de Datos";
 
 @XendraTrl(Identifier="d646cec8-fe2c-b8f1-1067-97836e69c3d9")
-public static String es_PE_FIELD_FormatField_DataType_Name="Tipo de Datos";
+public static String es_PE_FIELD_FormatField_DataType_Description="Tipo de datos";
 
 @XendraField(AD_Column_ID="DataType",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -417,7 +411,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5e4710ca-20ae-fbae-882e-30986164508b",Synchronized="2017-08-05 16:52:33.0")
+Identifier="5e4710ca-20ae-fbae-882e-30986164508b",Synchronized="2019-08-30 22:20:23.0")
 /** Column name DataType */
 public static final String COLUMNNAME_DataType = "DataType";
 /** Set Decimal Point.
@@ -442,10 +436,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="4dfba6fd-969f-44ac-86c7-2cbbc1047237")
-public static String es_PE_FIELD_FormatField_DecimalPoint_Description="Punto decimal en el archivo de datos - si hay alguno";
+public static String es_PE_FIELD_FormatField_DecimalPoint_Name="Punto Decimal";
 
 @XendraTrl(Identifier="4dfba6fd-969f-44ac-86c7-2cbbc1047237")
-public static String es_PE_FIELD_FormatField_DecimalPoint_Name="Punto Decimal";
+public static String es_PE_FIELD_FormatField_DecimalPoint_Description="Punto decimal en el archivo de datos - si hay alguno";
 
 @XendraField(AD_Column_ID="DecimalPoint",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -463,7 +457,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7a64e638-7aba-4b8e-06cd-55c42225e57c",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name DecimalPoint */
 public static final String COLUMNNAME_DecimalPoint = "DecimalPoint";
 /** Set Divide by 100.
@@ -486,10 +480,10 @@ return false;
 }
 
 @XendraTrl(Identifier="bff53771-4c53-1ae7-98f4-01fa9a3ed439")
-public static String es_PE_FIELD_FormatField_DivideBy10_Description="Divide el número entre 100 para obtener el total correcto";
+public static String es_PE_FIELD_FormatField_DivideBy10_Name="Dividir entre 100";
 
 @XendraTrl(Identifier="bff53771-4c53-1ae7-98f4-01fa9a3ed439")
-public static String es_PE_FIELD_FormatField_DivideBy10_Name="Dividir entre 100";
+public static String es_PE_FIELD_FormatField_DivideBy10_Description="Divide el número entre 100 para obtener el total correcto";
 
 @XendraField(AD_Column_ID="DivideBy100",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -507,7 +501,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd27d57d-ec3a-7882-44c9-2cd9be9a431e",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name DivideBy100 */
 public static final String COLUMNNAME_DivideBy100 = "DivideBy100";
 /** Set End No.
@@ -544,7 +538,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38165176-d8b9-039c-6eca-ec1fa432fc2f",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name EndNo */
 public static final String COLUMNNAME_EndNo = "EndNo";
 /** Set Identifier.
@@ -576,7 +570,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3167ed32-f55c-491d-bd36-2e300b4f86f6",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -608,18 +602,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
+public static String es_PE_FIELD_FormatField_Name_Name="Nombre";
+
+@XendraTrl(Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
 public static String es_PE_FIELD_FormatField_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
 public static String es_PE_FIELD_FormatField_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
-public static String es_PE_FIELD_FormatField_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="0f0db6ec-9600-196a-15fe-7569a8c76994")
 public static final String FIELDNAME_FormatField_Name="0f0db6ec-9600-196a-15fe-7569a8c76994";
 
 @XendraTrl(Identifier="bb5e7061-e5e1-ce19-4a99-e449cb525548")
@@ -631,7 +626,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bb5e7061-e5e1-ce19-4a99-e449cb525548",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Script.
@@ -650,13 +645,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="7846dd62-fcf4-4080-b6d0-b8e6cefdc9b0")
+public static String es_PE_FIELD_FormatField_Script_Name="Escritura";
+
+@XendraTrl(Identifier="7846dd62-fcf4-4080-b6d0-b8e6cefdc9b0")
 public static String es_PE_FIELD_FormatField_Script_Description="Escritura de lenguaje Java para calcular resultados";
 
 @XendraTrl(Identifier="7846dd62-fcf4-4080-b6d0-b8e6cefdc9b0")
 public static String es_PE_FIELD_FormatField_Script_Help="Usar constructores del lenguaje Java para definir el resultado del calculo";
-
-@XendraTrl(Identifier="7846dd62-fcf4-4080-b6d0-b8e6cefdc9b0")
-public static String es_PE_FIELD_FormatField_Script_Name="Escritura";
 
 @XendraField(AD_Column_ID="Script",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -674,7 +669,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="919bbe93-c434-0580-6ace-afba7ba2ed9a",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Script */
 public static final String COLUMNNAME_Script = "Script";
 /** Set Sequence.
@@ -693,13 +688,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fa472151-1cde-429b-597d-60e643cb4935")
+public static String es_PE_FIELD_FormatField_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="fa472151-1cde-429b-597d-60e643cb4935")
 public static String es_PE_FIELD_FormatField_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="fa472151-1cde-429b-597d-60e643cb4935")
 public static String es_PE_FIELD_FormatField_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="fa472151-1cde-429b-597d-60e643cb4935")
-public static String es_PE_FIELD_FormatField_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -718,7 +713,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e008a0b5-dcc1-aa3f-0f5a-76e92caf1ef8",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set Start No.
@@ -737,13 +732,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1d70b5d3-95da-75da-e9de-7a324a98eb29")
+public static String es_PE_FIELD_FormatField_StartNo_Name="No. de Inicio";
+
+@XendraTrl(Identifier="1d70b5d3-95da-75da-e9de-7a324a98eb29")
 public static String es_PE_FIELD_FormatField_StartNo_Description="Número de inicio / posición";
 
 @XendraTrl(Identifier="1d70b5d3-95da-75da-e9de-7a324a98eb29")
 public static String es_PE_FIELD_FormatField_StartNo_Help="El Número de Inicio indica el número inicial del documento ó posición";
-
-@XendraTrl(Identifier="1d70b5d3-95da-75da-e9de-7a324a98eb29")
-public static String es_PE_FIELD_FormatField_StartNo_Name="No. de Inicio";
 
 @XendraField(AD_Column_ID="StartNo",IsCentrallyMaintained=true,
 AD_Tab_ID="e0b2d6ba-e8a2-2395-2b40-d97178c51d72",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -761,7 +756,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9c5d13b2-d517-b34b-815e-3ef8850a7ff1",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name StartNo */
 public static final String COLUMNNAME_StartNo = "StartNo";
 }

@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -36,6 +37,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
@@ -61,8 +63,15 @@ import org.columba.core.gui.util.FontProperties;
 import org.columba.core.help.HelpManager;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.resourceloader.GlobalResourceLoader;
-import org.columba.core.xml.XmlElement;
+import org.compiere.model.MRole;
+import org.compiere.print.CPrinter;
+import org.compiere.swing.CCheckBox;
+import org.compiere.swing.CComboBox;
+import org.compiere.swing.CLabel;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.Env;
 import org.compiere.util.Ini;
+import org.compiere.util.Msg;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -115,6 +124,33 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 	// ID of configuration plugin of this theme plugin
 	protected String configID;
 
+	// Login
+	private CCheckBox autoLogin;
+	private CCheckBox storePassword;
+	
+	// Window
+	private CCheckBox showAcct;
+	private CCheckBox showTrl;
+	private CCheckBox showAdvanced;
+	private CCheckBox autoCommit;
+	private CCheckBox autoNew;
+	private CCheckBox cacheWindow;
+	private CCheckBox openWindowMaximized;
+	private CCheckBox singleInstancePerWindow;
+	
+	// Connection
+	private CCheckBox validateConnectionOnStartup;
+	
+	// Trace
+	private CComboBox traceLevel;
+	private CCheckBox traceFile;
+	private CCheckBox debug;
+
+	// Print
+	private CLabel lPrinter;
+	private CPrinter fPrinter;
+	private CCheckBox printPreview;
+	
 	private boolean restartRequired = false;
 
 	private String oldLookAndFeelName;
@@ -180,7 +216,7 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 			//boolean overwrite = item.getBooleanWithDefault(GuiItem.FONT, GuiItem.OVERWRITE_BOOL, false);
 			boolean overwrite = item.getFonts().getOverwrite();
 
-			overwriteCheckBox.setSelected(overwrite);
+			overwriteCheckBox.setSelected(overwrite);				
 
 			// enable/disable button, too
 			textFontButton.setEnabled(overwrite);
@@ -239,7 +275,45 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 			// look and feel
 			//item.setString(GuiItem.THEME, GuiItem.NAME, (String) lfComboBox.getSelectedItem());
 			item.getTheme().setName((String) lfComboBox.getSelectedItem());
-			Ini.setProperty(Ini.P_UI_THEME, (String) lfComboBox.getSelectedItem());	
+			Ini.setProperty(Ini.P_A_COMMIT, (autoCommit.isSelected()));
+			Env.setAutoCommit(Env.getCtx(), autoCommit.isSelected());
+			Ini.setProperty(Ini.P_A_NEW, (autoNew.isSelected()));
+			Env.setAutoNew(Env.getCtx(), autoNew.isSelected());
+			//	AutoLogin
+			Ini.setProperty(Ini.P_A_LOGIN, (autoLogin.isSelected()));
+			//	Save Password
+			Ini.setProperty(Ini.P_STORE_PWD, (storePassword.isSelected()));
+			//	Show Acct Tab
+			Ini.setProperty(Ini.P_SHOW_ACCT, (showAcct.isSelected()));
+			Env.setContext(Env.getCtx(), "#ShowAcct", (showAcct.isSelected()));
+			//	Show Trl Tab
+			Ini.setProperty(Ini.P_SHOW_TRL, (showTrl.isSelected()));
+			Env.setContext(Env.getCtx(), "#ShowTrl", (showTrl.isSelected()));
+			//	Show Advanced Tab
+			Ini.setProperty(Ini.P_SHOW_ADVANCED, (showAdvanced.isSelected()));
+			Env.setContext(Env.getCtx(), "#ShowAdvanced", (showAdvanced.isSelected()));
+			Ini.setProperty(Ini.P_CACHE_WINDOW, cacheWindow.isSelected());
+			//  Print Preview
+			Ini.setProperty(Ini.P_PRINTPREVIEW, (printPreview.isSelected()));
+
+			Ini.setProperty(Ini.P_UI_THEME, (String) lfComboBox.getSelectedItem());			
+			//  Validate Connection on Startup
+			Ini.setProperty(Ini.P_VALIDATE_CONNECTION_ON_STARTUP, (validateConnectionOnStartup.isSelected()));
+			//  Single Instance per Window
+			Ini.setProperty(Ini.P_SINGLE_INSTANCE_PER_WINDOW, (singleInstancePerWindow.isSelected()));
+			//  Open Window Maximized
+			Ini.setProperty(Ini.P_OPEN_WINDOW_MAXIMIZED, (openWindowMaximized.isSelected()));
+			//	TraceLevel/File
+			Level level = (Level)traceLevel.getSelectedItem();
+			CLogMgt.setLevel(level);
+			CLogMgt.DEBUG = debug.isSelected();
+			Ini.setProperty(Ini.P_TRACELEVEL, level.getName());
+			Ini.setProperty(Ini.P_TRACEFILE, traceFile.isSelected());
+			//  Printer
+			String printer = (String)fPrinter.getSelectedItem();
+			Env.setContext(Env.getCtx(), "#Printer", printer);
+			Ini.setProperty(Ini.P_PRINTER, printer);
+			
 			Ini.saveProperties(true);
 			//Ini.setProperty(Ini.P_UI_LOOK, );
 
@@ -298,7 +372,7 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 
 	protected void layoutComponents() {
 		JPanel contentPane = new JPanel(new BorderLayout());
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
 
 		// Create a FormLayout instance.
 		FormLayout layout = new FormLayout("12dlu, pref, 3dlu, max(40dlu;pref), 3dlu, pref",/* 3 columns*/ "");
@@ -345,6 +419,49 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 		builder.append(textFontButton, 3);
 		builder.nextLine();
 
+		// 
+		builder.appendSeparator(Msg.getMsg(Env.getCtx(), "Login"));
+		builder.nextLine();		
+		builder.append(autoLogin);
+		builder.append(storePassword);
+		builder.nextLine();
+		//
+		builder.appendSeparator(Msg.getMsg(Env.getCtx(), "Window"));
+		builder.nextLine();
+		builder.append(showAcct);
+		builder.append(showTrl);
+		builder.append(showAdvanced);
+		builder.nextLine();
+		builder.append(autoCommit);		
+		builder.append(autoNew);
+		builder.append(cacheWindow);
+		builder.nextLine();
+		builder.append(openWindowMaximized);
+		builder.append(singleInstancePerWindow);
+		builder.nextLine();
+		//
+		builder.appendSeparator(Msg.getMsg(Env.getCtx(), "Connection"));
+		builder.nextLine();
+		builder.append(validateConnectionOnStartup);
+		builder.nextLine();
+		//
+		builder.appendSeparator(Msg.getMsg(Env.getCtx(), "TraceInfo"));
+		builder.nextLine();
+		builder.append(traceLevel);
+		builder.append(traceFile, debug);		
+		//
+		builder.appendSeparator(Msg.getMsg(Env.getCtx(), "Printing"));
+		builder.nextLine();
+		builder.append(lPrinter);
+		builder.append(fPrinter);
+		builder.append(printPreview);
+		//
+		JScrollPane scrollPane_4 = new JScrollPane();
+		   scrollPane_4.setBorder(BorderFactory.createEmptyBorder());
+		this.add(scrollPane_4);
+		
+		scrollPane_4.setViewportView(contentPane);
+		   
 		contentPane.add(builder.getPanel(), BorderLayout.CENTER);
 
 		// init bottom panel with OK, Cancel buttons
@@ -390,6 +507,92 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 				.getString(RESOURCE_PATH, "general", "override_fonts"));
 		overwriteCheckBox.addActionListener(this);
 
+		autoLogin = new CCheckBox();
+		autoLogin.setText(Msg.getMsg(Env.getCtx(), "AutoLogin", true));
+		autoLogin.setToolTipText(Msg.getMsg(Env.getCtx(), "AutoLogin", false));
+		autoLogin.setSelected(Ini.isPropertyBool(Ini.P_A_LOGIN));
+		
+		storePassword = new CCheckBox();
+		storePassword.setText(Msg.getMsg(Env.getCtx(), "StorePassword", true));
+		storePassword.setToolTipText(Msg.getMsg(Env.getCtx(), "StorePassword", false));
+		storePassword.setSelected(Ini.isPropertyBool(Ini.P_STORE_PWD));
+		
+		showAcct = new CCheckBox();
+		showAcct.setText(Msg.getMsg(Env.getCtx(), "ShowAcctTab", true));
+		showAcct.setToolTipText(Msg.getMsg(Env.getCtx(), "ShowAcctTab", false));
+		if (MRole.getDefault().isShowAcct())
+			showAcct.setSelected(Ini.isPropertyBool(Ini.P_SHOW_ACCT));
+		else
+		{
+			showAcct.setSelected(false);
+			showAcct.setReadWrite(false);
+		}
+
+		showTrl = new CCheckBox();
+		showTrl.setText(Msg.getMsg(Env.getCtx(), "ShowTrlTab", true));
+		showTrl.setToolTipText(Msg.getMsg(Env.getCtx(), "ShowTrlTab", false));
+		showTrl.setSelected(Ini.isPropertyBool(Ini.P_SHOW_TRL));
+
+		showAdvanced = new CCheckBox();
+		showAdvanced.setText(Msg.getMsg(Env.getCtx(), "ShowAdvancedTab", true));
+		showAdvanced.setToolTipText(Msg.getMsg(Env.getCtx(), "ShowAdvancedTab", false));
+		showAdvanced.setSelected(Ini.isPropertyBool(Ini.P_SHOW_ADVANCED));
+		
+		autoCommit = new CCheckBox();
+		autoCommit.setText(Msg.getMsg(Env.getCtx(), "AutoCommit", true));
+		autoCommit.setToolTipText(Msg.getMsg(Env.getCtx(), "AutoCommit", false));
+		autoCommit.setSelected(Env.isAutoCommit(Env.getCtx()));
+		
+		autoNew = new CCheckBox();
+		autoNew.setText(Msg.getMsg(Env.getCtx(), "AutoNew", true));
+		autoNew.setToolTipText(Msg.getMsg(Env.getCtx(), "AutoNew", false));
+		autoNew.setSelected(Env.isAutoNew(Env.getCtx()));
+		
+		cacheWindow = new CCheckBox();
+		cacheWindow.setText(Msg.getMsg(Env.getCtx(), "CacheWindow", true));
+		cacheWindow.setToolTipText(Msg.getMsg(Env.getCtx(), "CacheWindow", false));
+		cacheWindow.setSelected(Ini.isCacheWindow());
+		
+		openWindowMaximized = new CCheckBox();
+		openWindowMaximized.setText(Msg.getMsg(Env.getCtx(), "OpenWindowMaximized", true));
+		openWindowMaximized.setToolTipText(Msg.getMsg(Env.getCtx(), "OpenWindowMaximized", false));		
+		openWindowMaximized.setSelected(Ini.isPropertyBool(Ini.P_OPEN_WINDOW_MAXIMIZED));
+		
+		singleInstancePerWindow = new CCheckBox();
+		singleInstancePerWindow.setText(Msg.getMsg(Env.getCtx(), "SingleInstancePerWindow", true));
+		singleInstancePerWindow.setToolTipText(Msg.getMsg(Env.getCtx(), "SingleInstancePerWindow", false));
+		singleInstancePerWindow.setSelected(Ini.isPropertyBool(Ini.P_SINGLE_INSTANCE_PER_WINDOW));
+		
+		validateConnectionOnStartup = new CCheckBox();
+		validateConnectionOnStartup.setText(Msg.getMsg(Env.getCtx(), "ValidateConnectionOnStartup", true));
+		validateConnectionOnStartup.setToolTipText(Msg.getMsg(Env.getCtx(), "ValidateConnectionOnStartup", false));
+		validateConnectionOnStartup.setSelected(Ini.isPropertyBool(Ini.P_VALIDATE_CONNECTION_ON_STARTUP));
+		
+		traceLevel = new CComboBox(CLogMgt.LEVELS);
+		traceLevel.setSelectedItem(CLogMgt.getLevel());
+
+		traceFile = new CCheckBox();
+		traceFile.setText(Msg.getMsg(Env.getCtx(), "TraceFile", true));
+		traceFile.setToolTipText(Msg.getMsg(Env.getCtx(), "TraceFile", false));
+		traceFile.setSelected(Ini.isPropertyBool(Ini.P_TRACEFILE));
+		
+		debug = new CCheckBox();
+		String debugmsg = Msg.getMsg(Env.getCtx(), "Debug", true); 
+		debug.setText(debugmsg);
+		debug.setToolTipText(debugmsg);
+		debug.setSelected(CLogMgt.DEBUG);
+
+		lPrinter = new CLabel();		
+		lPrinter.setText(Msg.getMsg(Env.getCtx(), "Printer"));
+
+		fPrinter= new CPrinter();
+		fPrinter.setValue(Env.getContext(Env.getCtx(), "#Printer"));
+		
+		printPreview = new CCheckBox();
+		printPreview.setText(Msg.getMsg(Env.getCtx(), "AlwaysPrintPreview", true));
+		printPreview.setToolTipText(Msg.getMsg(Env.getCtx(), "AlwaysPrintPreview", false));
+		printPreview.setSelected(Ini.isPropertyBool(Ini.P_PRINTPREVIEW));
+		
 		mainFontLabel = new LabelWithMnemonic(GlobalResourceLoader.getString(
 				RESOURCE_PATH, "general", "main_font"));
 		mainFontButton = new JButton("main font");
@@ -445,7 +648,7 @@ public class GeneralOptionsDialog extends JDialog implements ActionListener {
 			// immediately
 			// we just open a message box, telling the user to restart
 			if (restartRequired) {
-				JOptionPane.showMessageDialog(this, "You have to restart Columba for the changes to take effect!");
+				JOptionPane.showMessageDialog(this, "You have to restart Xendra for the changes to take effect!");
 				// switch to new theme
 				ThemeSwitcher.setTheme();
 			}

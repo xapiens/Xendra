@@ -72,10 +72,10 @@ public static int Table_ID=MTable.getTable_ID("C_InvoiceBatch");
 public static String es_PE_TAB_InvoiceBatch_Description="De entrada en el Jefe de la Lote de la factura del costo.";
 
 @XendraTrl(Identifier="7e5b26fe-1d4a-c962-a8ec-f06019ce3918")
-public static String es_PE_TAB_InvoiceBatch_Name="Lote de Facturas";
+public static String es_PE_TAB_InvoiceBatch_Help="Fije la modernidad y decida si esto para las facturas ó AP (vendedor) de AR (ventas) factura. Incorpore opcionalmente una cantidad del control.";
 
 @XendraTrl(Identifier="7e5b26fe-1d4a-c962-a8ec-f06019ce3918")
-public static String es_PE_TAB_InvoiceBatch_Help="Fije la modernidad y decida si esto para las facturas ó AP (vendedor) de AR (ventas) factura. Incorpore opcionalmente una cantidad del control.";
+public static String es_PE_TAB_InvoiceBatch_Name="Lote de Facturas";
 
 @XendraTab(Name="Invoice Batch",Description="Enter Expense Invoice Batch Header",
 Help="Set Currency and decide if this for AR (sales) Invoices or AP (vendor) invoices. Optionally enter a Control amount.",
@@ -90,11 +90,13 @@ public static final String TABNAME_InvoiceBatch="7e5b26fe-1d4a-c962-a8ec-f06019c
 @XendraTrl(Identifier="d0a921c4-99a8-ff6e-51ba-28d555e48824")
 public static String es_PE_TABLE_C_InvoiceBatch_Name="Facturas en Lote";
 
-@XendraTable(Name="Invoice Batch",Description="Expense Invoice Batch Header",Help="",
-TableName="C_InvoiceBatch",AccessLevel="1",AD_Window_ID="7230d536-ef19-160d-ca94-4a751924cb94",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="d0a921c4-99a8-ff6e-51ba-28d555e48824",Synchronized="2017-08-16 11:41:50.0")
+@XendraTable(Name="Invoice Batch",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Expense Invoice Batch Header",
+Help="",TableName="C_InvoiceBatch",AccessLevel="1",
+AD_Window_ID="7230d536-ef19-160d-ca94-4a751924cb94",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="d0a921c4-99a8-ff6e-51ba-28d555e48824",
+Synchronized="2020-03-03 21:36:59.0")
 /** TableName=C_InvoiceBatch */
 public static final String Table_Name="C_InvoiceBatch";
 
@@ -145,13 +147,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8f2ab9b3-a413-807f-311c-338850082f5b")
+public static String es_PE_FIELD_InvoiceBatch_CurrencyType_Name="Tipo de Moneda";
+
+@XendraTrl(Identifier="8f2ab9b3-a413-807f-311c-338850082f5b")
 public static String es_PE_FIELD_InvoiceBatch_CurrencyType_Description="Tipo de índice de conversión de moneda ";
 
 @XendraTrl(Identifier="8f2ab9b3-a413-807f-311c-338850082f5b")
 public static String es_PE_FIELD_InvoiceBatch_CurrencyType_Help="El tipo del índice de conversión de monedas le deja definir diversos tipos de tarifas, tarifas ej. del punto, corporativas y/o de Ventas/Compras.";
-
-@XendraTrl(Identifier="8f2ab9b3-a413-807f-311c-338850082f5b")
-public static String es_PE_FIELD_InvoiceBatch_CurrencyType_Name="Tipo de Moneda";
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -169,7 +171,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c982e9e4-b953-e7dc-6e5c-0e2fbe492735",Synchronized="2017-08-05 16:53:43.0")
+Identifier="c982e9e4-b953-e7dc-6e5c-0e2fbe492735",Synchronized="2019-08-30 22:21:39.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -189,13 +191,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fa47a57a-b328-806d-c15f-6869fcac88ea")
+public static String es_PE_FIELD_InvoiceBatch_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="fa47a57a-b328-806d-c15f-6869fcac88ea")
 public static String es_PE_FIELD_InvoiceBatch_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="fa47a57a-b328-806d-c15f-6869fcac88ea")
 public static String es_PE_FIELD_InvoiceBatch_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="fa47a57a-b328-806d-c15f-6869fcac88ea")
-public static String es_PE_FIELD_InvoiceBatch_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -213,7 +215,7 @@ DefaultValue="@$C_Currency_ID@",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c72a5830-5351-b5fc-6a54-881ac131fcb9",Synchronized="2017-08-05 16:53:43.0")
+Identifier="c72a5830-5351-b5fc-6a54-881ac131fcb9",Synchronized="2019-08-30 22:21:39.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Invoice Batch.
@@ -233,10 +235,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="51bca604-f3c1-f657-7f5a-617c5c420059")
-public static String es_PE_FIELD_InvoiceBatch_InvoiceBatch_Description="Costo de la factura en lote";
+public static String es_PE_FIELD_InvoiceBatch_InvoiceBatch_Name="Facturas en Lote";
 
 @XendraTrl(Identifier="51bca604-f3c1-f657-7f5a-617c5c420059")
-public static String es_PE_FIELD_InvoiceBatch_InvoiceBatch_Name="Facturas en Lote";
+public static String es_PE_FIELD_InvoiceBatch_InvoiceBatch_Description="Costo de la factura en lote";
 
 @XendraField(AD_Column_ID="C_InvoiceBatch_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -263,13 +265,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="6c30d3a4-e7d7-e70b-73ec-04433e898fcc")
+public static String es_PE_FIELD_InvoiceBatch_ControlAmount_Name="Cifra de Control";
+
+@XendraTrl(Identifier="6c30d3a4-e7d7-e70b-73ec-04433e898fcc")
 public static String es_PE_FIELD_InvoiceBatch_ControlAmount_Description="Si no es cero; el total del débito del documento debe ser igual a este total";
 
 @XendraTrl(Identifier="6c30d3a4-e7d7-e70b-73ec-04433e898fcc")
 public static String es_PE_FIELD_InvoiceBatch_ControlAmount_Help="Si el total de control es cero; ninguna verificación es ejecutada";
-
-@XendraTrl(Identifier="6c30d3a4-e7d7-e70b-73ec-04433e898fcc")
-public static String es_PE_FIELD_InvoiceBatch_ControlAmount_Name="Cifra de Control";
 
 @XendraField(AD_Column_ID="ControlAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="Status",IsDisplayed=true,
@@ -287,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1af23a87-e9f7-f66e-6254-fa6c4f300519",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name ControlAmt */
 public static final String COLUMNNAME_ControlAmt = "ControlAmt";
 /** Set DateDoc.
@@ -305,13 +307,13 @@ return (Timestamp)get_Value(COLUMNNAME_DateDoc);
 }
 
 @XendraTrl(Identifier="52e64a6c-fff9-5c36-f7e4-ee0cdd48e39c")
+public static String es_PE_FIELD_InvoiceBatch_DateDoc_Name="F. Documento";
+
+@XendraTrl(Identifier="52e64a6c-fff9-5c36-f7e4-ee0cdd48e39c")
 public static String es_PE_FIELD_InvoiceBatch_DateDoc_Description="Fecha del documento";
 
 @XendraTrl(Identifier="52e64a6c-fff9-5c36-f7e4-ee0cdd48e39c")
 public static String es_PE_FIELD_InvoiceBatch_DateDoc_Help="La fecha del documento indica la fecha en que el documento fue generado. Puede ó no ser la misma que la fecha contable. ";
-
-@XendraTrl(Identifier="52e64a6c-fff9-5c36-f7e4-ee0cdd48e39c")
-public static String es_PE_FIELD_InvoiceBatch_DateDoc_Name="F. Documento";
 
 @XendraField(AD_Column_ID="DateDoc",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -329,7 +331,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="17155881-4345-4b8d-ae13-0e9e0dbd0755",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name DateDoc */
 public static final String COLUMNNAME_DateDoc = "DateDoc";
 /** Set Description.
@@ -360,13 +362,13 @@ return value;
 }
 
 @XendraTrl(Identifier="cced31e0-5dc2-b991-91a9-1610099a47de")
+public static String es_PE_FIELD_InvoiceBatch_Description_Name="Observación";
+
+@XendraTrl(Identifier="cced31e0-5dc2-b991-91a9-1610099a47de")
 public static String es_PE_FIELD_InvoiceBatch_Description_Description="Observación";
 
 @XendraTrl(Identifier="cced31e0-5dc2-b991-91a9-1610099a47de")
 public static String es_PE_FIELD_InvoiceBatch_Description_Help="Observación";
-
-@XendraTrl(Identifier="cced31e0-5dc2-b991-91a9-1610099a47de")
-public static String es_PE_FIELD_InvoiceBatch_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -384,7 +386,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="872fc263-6fe1-839a-be91-78ebd69d5c5b",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Document Amt.
@@ -404,10 +406,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="55a5641b-9722-17c2-4355-79db2fc4fb79")
-public static String es_PE_FIELD_InvoiceBatch_DocumentAmt_Description="Importe del Documento";
+public static String es_PE_FIELD_InvoiceBatch_DocumentAmt_Name="Importe del Documento";
 
 @XendraTrl(Identifier="55a5641b-9722-17c2-4355-79db2fc4fb79")
-public static String es_PE_FIELD_InvoiceBatch_DocumentAmt_Name="Importe del Documento";
+public static String es_PE_FIELD_InvoiceBatch_DocumentAmt_Description="Importe del Documento";
 
 @XendraField(AD_Column_ID="DocumentAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="Status",IsDisplayed=true,
@@ -425,7 +427,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ac8dc511-e68c-6762-73aa-cae77aeef08c",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name DocumentAmt */
 public static final String COLUMNNAME_DocumentAmt = "DocumentAmt";
 /** Set Document No.
@@ -457,13 +459,13 @@ return new KeyNamePair(get_ID(), getDocumentNo());
 }
 
 @XendraTrl(Identifier="cb6a136e-183c-91d2-ce74-15726c40c01f")
+public static String es_PE_FIELD_InvoiceBatch_DocumentNo_Name="No. del Documento";
+
+@XendraTrl(Identifier="cb6a136e-183c-91d2-ce74-15726c40c01f")
 public static String es_PE_FIELD_InvoiceBatch_DocumentNo_Description="Número de secuencia del documento para cada documento";
 
 @XendraTrl(Identifier="cb6a136e-183c-91d2-ce74-15726c40c01f")
 public static String es_PE_FIELD_InvoiceBatch_DocumentNo_Help="El número del documento es usualmente generado en automático por el sistema y determinado por el tipo del documento. Si el documento no se salva; el número preliminar se despliega entre \"<>\"";
-
-@XendraTrl(Identifier="cb6a136e-183c-91d2-ce74-15726c40c01f")
-public static String es_PE_FIELD_InvoiceBatch_DocumentNo_Name="No. del Documento";
 
 @XendraField(AD_Column_ID="DocumentNo",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -481,7 +483,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e84847d-bcfa-bcdf-dec1-a4230b6b4e97",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Identifier.
@@ -513,7 +515,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="331de0f8-8c4a-4304-8a05-ecd9d72e4b8b",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sales Transaction.
@@ -536,13 +538,13 @@ return false;
 }
 
 @XendraTrl(Identifier="4c3c7c07-5726-6b5e-513e-d6c88294c2f8")
+public static String es_PE_FIELD_InvoiceBatch_SalesTransaction_Name="Transacción de Ventas";
+
+@XendraTrl(Identifier="4c3c7c07-5726-6b5e-513e-d6c88294c2f8")
 public static String es_PE_FIELD_InvoiceBatch_SalesTransaction_Description="Esta es una transacción de ventas";
 
 @XendraTrl(Identifier="4c3c7c07-5726-6b5e-513e-d6c88294c2f8")
 public static String es_PE_FIELD_InvoiceBatch_SalesTransaction_Help="El cuadro de verificación Transacción de Ventas indica si este ítem es una transacción de ventas";
-
-@XendraTrl(Identifier="4c3c7c07-5726-6b5e-513e-d6c88294c2f8")
-public static String es_PE_FIELD_InvoiceBatch_SalesTransaction_Name="Transacción de Ventas";
 
 @XendraField(AD_Column_ID="IsSOTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -560,7 +562,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f6a8069a-98ef-f2d5-908d-c8e9cdd3e794",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Processed.
@@ -583,13 +585,13 @@ return false;
 }
 
 @XendraTrl(Identifier="583f085c-50ff-5eef-738b-3d31a603175b")
+public static String es_PE_FIELD_InvoiceBatch_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="583f085c-50ff-5eef-738b-3d31a603175b")
 public static String es_PE_FIELD_InvoiceBatch_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="583f085c-50ff-5eef-738b-3d31a603175b")
 public static String es_PE_FIELD_InvoiceBatch_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="583f085c-50ff-5eef-738b-3d31a603175b")
-public static String es_PE_FIELD_InvoiceBatch_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -607,7 +609,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8724b888-1de3-1f6d-38a1-86f778701137",
-Synchronized="2017-08-05 16:53:44.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -649,12 +651,9 @@ ReadOnlyLogic="@Processed@=Y",IsIdentifier=false,SeqNo=0,IsTranslated=false,Call
 ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,
 AD_Process_ID="7fde260f-2445-279f-8a5b-4c3b84d2fa07",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f6cd4086-d54f-f529-2bc8-1604612fc285",
-Synchronized="2017-08-05 16:53:44.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** SalesRep_ID AD_Reference=15251147-a1b6-4a83-a3a5-2d3ae7db69d9 */
-public static final int SALESREP_ID_AD_Reference_ID=190;
 /** Set Sales Representative.
 @param SalesRep_ID Sales Representative or Company Agent */
 public void setSalesRep_ID (int SalesRep_ID)
@@ -672,13 +671,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="579e2d21-83cc-b659-871e-38a319fa9489")
+public static String es_PE_FIELD_InvoiceBatch_CompanyAgent_Name="Comprador";
+
+@XendraTrl(Identifier="579e2d21-83cc-b659-871e-38a319fa9489")
 public static String es_PE_FIELD_InvoiceBatch_CompanyAgent_Description="Comprador/ Agente";
 
 @XendraTrl(Identifier="579e2d21-83cc-b659-871e-38a319fa9489")
 public static String es_PE_FIELD_InvoiceBatch_CompanyAgent_Help="Agente de compras para el documento.";
-
-@XendraTrl(Identifier="579e2d21-83cc-b659-871e-38a319fa9489")
-public static String es_PE_FIELD_InvoiceBatch_CompanyAgent_Name="Comprador";
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7e5b26fe-1d4a-c962-a8ec-f06019ce3918",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -696,7 +695,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="08e69054-d423-5591-9739-64425e0009b5",Synchronized="2017-08-05 16:53:44.0")
+Identifier="08e69054-d423-5591-9739-64425e0009b5",Synchronized="2019-08-30 22:21:39.0")
 /** Column name SalesRep_ID */
 public static final String COLUMNNAME_SalesRep_ID = "SalesRep_ID";
 }

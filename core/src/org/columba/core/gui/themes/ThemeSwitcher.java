@@ -31,9 +31,8 @@ import org.columba.core.config.Config;
 import org.columba.core.config.Theme;
 import org.columba.core.gui.frame.FrameManager;
 import org.columba.core.gui.themes.plugin.AbstractThemePlugin;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
-import org.columba.core.xml.XmlElement;
+import org.compiere.util.CLogMgt;
 import org.compiere.util.Ini;
 
 /**
@@ -97,7 +96,7 @@ public class ThemeSwitcher {
 			theme.setLookAndFeel();
 		} catch (Exception ex) {
 
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				ex.printStackTrace();
 
 			JOptionPane.showMessageDialog(FrameManager.getInstance()

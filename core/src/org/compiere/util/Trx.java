@@ -337,6 +337,7 @@ public class Trx implements VetoableChangeListener
 		catch (SQLException e)
 		{
 			log.log(Level.SEVERE, m_trxName, e);
+			DB.setLastError(e.getMessage());
 			if (throwException) 
 			{
 				m_active = false;

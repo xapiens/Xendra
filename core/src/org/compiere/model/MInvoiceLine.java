@@ -21,9 +21,11 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
+import org.compiere.apps.ALogin;
 import org.compiere.model.persistence.X_C_InvoiceLine;
 import org.compiere.util.*;
 import org.xendra.exceptions.XendraException;
+import org.xendra.replication.ReplicationEngine;
 
 /**
  *	Invoice Line Model Line
@@ -33,6 +35,8 @@ import org.xendra.exceptions.XendraException;
  */
 public class MInvoiceLine extends X_C_InvoiceLine
 {
+	/**	Static Logger	*/
+	private static CLogger	s_log	= CLogger.getCLogger (MInvoiceLine.class);	
 	/**
 	 * 	Get Invoice Line referencing InOut Line
 	 *	@param sLine shipment line
@@ -77,9 +81,6 @@ public class MInvoiceLine extends X_C_InvoiceLine
 		return retValue;
 	}	//	getOfInOutLine
 	
-	/**	Static Logger	*/
-	private static CLogger	s_log	= CLogger.getCLogger (MInvoiceLine.class);
-
 	
 	/**************************************************************************
 	 * 	Invoice Line Constructor

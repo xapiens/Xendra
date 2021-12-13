@@ -79,11 +79,12 @@ public static final String TABNAME_ExpenseType="66614c8c-a644-598f-e571-5d9a1918
 @XendraTrl(Identifier="29395c6b-bbef-c856-b5c7-89dcfb18a443")
 public static String es_PE_TABLE_S_ExpenseType_Name="Tipo de Gasto";
 
-@XendraTable(Name="Expense Type",Description="Expense report type",Help="",
+@XendraTable(Name="Expense Type",AD_Package_ID="4bb6f0e4-f72d-dcbb-9183-88af0357143f",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Expense report type",Help="",
 TableName="S_ExpenseType",AccessLevel="3",AD_Window_ID="e37c684c-2fb9-31f4-b025-d8ef9933998c",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.services",
-Identifier="29395c6b-bbef-c856-b5c7-89dcfb18a443",Synchronized="2017-08-16 11:44:14.0")
+Identifier="29395c6b-bbef-c856-b5c7-89dcfb18a443",Synchronized="2020-03-03 21:40:10.0")
 /** TableName=S_ExpenseType */
 public static final String Table_Name="S_ExpenseType";
 
@@ -133,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9cf3beb4-ec90-691b-1bf3-7fa51b8f0dea")
+public static String es_PE_FIELD_ExpenseType_TaxCategory_Name="Categoría del Impuesto";
+
+@XendraTrl(Identifier="9cf3beb4-ec90-691b-1bf3-7fa51b8f0dea")
 public static String es_PE_FIELD_ExpenseType_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraTrl(Identifier="9cf3beb4-ec90-691b-1bf3-7fa51b8f0dea")
 public static String es_PE_FIELD_ExpenseType_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
-
-@XendraTrl(Identifier="9cf3beb4-ec90-691b-1bf3-7fa51b8f0dea")
-public static String es_PE_FIELD_ExpenseType_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -157,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e89ae737-6fa8-0be6-8327-9066b83f3164",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:15.0")
 /** Column name C_TaxCategory_ID */
 public static final String COLUMNNAME_C_TaxCategory_ID = "C_TaxCategory_ID";
 /** Set UOM.
@@ -177,18 +178,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
+public static String es_PE_FIELD_ExpenseType_UOM_Name="UM";
+
+@XendraTrl(Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
 public static String es_PE_FIELD_ExpenseType_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
 public static String es_PE_FIELD_ExpenseType_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
-public static String es_PE_FIELD_ExpenseType_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=80,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="f7fefd7a-4f2d-5533-abfb-27ff9b10c585")
 public static final String FIELDNAME_ExpenseType_UOM="f7fefd7a-4f2d-5533-abfb-27ff9b10c585";
 
 @XendraTrl(Identifier="e23df2a9-1f89-fb12-c40c-5f78971fc7ca")
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e23df2a9-1f89-fb12-c40c-5f78971fc7ca",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set Description.
@@ -231,13 +233,13 @@ return value;
 }
 
 @XendraTrl(Identifier="4d548554-acfc-9bf5-3d18-fa6be34c2741")
+public static String es_PE_FIELD_ExpenseType_Description_Name="Observación";
+
+@XendraTrl(Identifier="4d548554-acfc-9bf5-3d18-fa6be34c2741")
 public static String es_PE_FIELD_ExpenseType_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="4d548554-acfc-9bf5-3d18-fa6be34c2741")
 public static String es_PE_FIELD_ExpenseType_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="4d548554-acfc-9bf5-3d18-fa6be34c2741")
-public static String es_PE_FIELD_ExpenseType_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +257,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2b1593e4-1c78-1c8b-a6e1-90e567887a96",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -287,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a137dd8-7028-4c41-8e82-2a0005c2d9d6",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Invoiced.
@@ -328,7 +330,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c38ab42-4471-4236-5ea0-ff2dfcfa3f1e",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name IsInvoiced */
 public static final String COLUMNNAME_IsInvoiced = "IsInvoiced";
 /** Set Product Category.
@@ -348,13 +350,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="47afaac3-075e-6bd7-02b5-0921d93e4b56")
+public static String es_PE_FIELD_ExpenseType_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="47afaac3-075e-6bd7-02b5-0921d93e4b56")
 public static String es_PE_FIELD_ExpenseType_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="47afaac3-075e-6bd7-02b5-0921d93e4b56")
 public static String es_PE_FIELD_ExpenseType_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="47afaac3-075e-6bd7-02b5-0921d93e4b56")
-public static String es_PE_FIELD_ExpenseType_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -372,7 +374,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3b1c0f61-dcc1-6fff-ab56-ebda81261540",Synchronized="2017-08-05 16:56:19.0")
+Identifier="3b1c0f61-dcc1-6fff-ab56-ebda81261540",Synchronized="2019-08-30 22:24:16.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Name.
@@ -404,18 +406,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
+public static String es_PE_FIELD_ExpenseType_Name_Name="Nombre";
+
+@XendraTrl(Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
 public static String es_PE_FIELD_ExpenseType_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
 public static String es_PE_FIELD_ExpenseType_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
-public static String es_PE_FIELD_ExpenseType_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="3a175742-cb11-409d-5332-f7115d038fbf")
 public static final String FIELDNAME_ExpenseType_Name="3a175742-cb11-409d-5332-f7115d038fbf";
 
 @XendraTrl(Identifier="5d670e67-ec01-7dbd-bcce-d7d8b263d0cc")
@@ -427,7 +430,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d670e67-ec01-7dbd-bcce-d7d8b263d0cc",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Expense Type.
@@ -447,10 +450,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6a5cd655-2dcc-5e9a-ea41-6b07c1350777")
-public static String es_PE_FIELD_ExpenseType_ExpenseType_Description="Tipo de Informe de gasto";
+public static String es_PE_FIELD_ExpenseType_ExpenseType_Name="Tipo de Gasto";
 
 @XendraTrl(Identifier="6a5cd655-2dcc-5e9a-ea41-6b07c1350777")
-public static String es_PE_FIELD_ExpenseType_ExpenseType_Name="Tipo de Gasto";
+public static String es_PE_FIELD_ExpenseType_ExpenseType_Description="Tipo de Informe de gasto";
 
 @XendraField(AD_Column_ID="S_ExpenseType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -482,13 +485,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="633ab9b6-7cc2-a204-7948-27c708d3386b")
+public static String es_PE_FIELD_ExpenseType_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="633ab9b6-7cc2-a204-7948-27c708d3386b")
 public static String es_PE_FIELD_ExpenseType_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="633ab9b6-7cc2-a204-7948-27c708d3386b")
 public static String es_PE_FIELD_ExpenseType_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="633ab9b6-7cc2-a204-7948-27c708d3386b")
-public static String es_PE_FIELD_ExpenseType_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="66614c8c-a644-598f-e571-5d9a19182c32",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -506,7 +509,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="430949ea-4485-68e0-36eb-bf214f675ed3",
-Synchronized="2017-08-05 16:56:19.0")
+Synchronized="2019-08-30 22:24:16.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

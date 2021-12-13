@@ -56,16 +56,26 @@ import org.xendra.xendrian.FormatMessage;
 public class MessageFactory {
 
 	HashMap hashdoc	= new HashMap();
-	private static String identifier = "";
+	private String identifier = "";
 	List<HashMap> hashvalue = new ArrayList<HashMap>();
 	List<HashMap> hashname = new ArrayList<HashMap>();
+	private MessageFactory instance;
 	private static TransformerFactory tFactory = TransformerFactory.newInstance();
 
+	public MessageFactory getInstance() {
+		if (instance == null) {
+			instance = new MessageFactory();
+		}
+		return instance;
+	}
 	/**
 	 * @param args
 	 */
 	public String get(String name) {
 		return "value";
+	}
+	public void setField(String groupid, String columnName, Integer ii) {
+		AddProperty(groupid, columnName, ii);		
 	}
 	
 	public void setField(String groupid, String columnName, Object ii) {
@@ -77,7 +87,8 @@ public class MessageFactory {
 			org.compiere.Xendra.startupEnvironment(false);
 			MessageFactory mvel = new MessageFactory();
 			MMovement m = new Query(Env.getCtx(), MMovement.Table_Name, "IsActive = 'Y' ", null)
-			.first();			
+			.first();
+			mvel.sendMessage(m, "/queue/movement");
 			//setHeader(m);
 			List<MMovementLine> lines = new Query(Env.getCtx(), MMovementLine.Table_Name, "M_Movement_ID = ?", null)
 			.setParameters(m.getM_Movement_ID()).list();			
@@ -94,6 +105,10 @@ public class MessageFactory {
 		}
 	}
 
+	private void sendMessage(PO po, String string) {
+		
+		
+	}
 	public void setIdentifier(String id) {
 		identifier = id;
 	}

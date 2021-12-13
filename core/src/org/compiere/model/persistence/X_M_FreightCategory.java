@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("M_FreightCategory");
 public static String es_PE_TAB_FreightCategory_Description="Categoria de Fletes";
 
 @XendraTrl(Identifier="6d01c853-294a-ae12-5bbb-bd008c7ba790")
-public static String es_PE_TAB_FreightCategory_Name="Categoría Fletes";
+public static String es_PE_TAB_FreightCategory_Help="Las Categorías de la Fletes se utilizan para calcular los fletes para el expedidor seleccionado";
 
 @XendraTrl(Identifier="6d01c853-294a-ae12-5bbb-bd008c7ba790")
-public static String es_PE_TAB_FreightCategory_Help="Las Categorías de la Fletes se utilizan para calcular los fletes para el expedidor seleccionado";
+public static String es_PE_TAB_FreightCategory_Name="Categoría Fletes";
 
 @XendraTab(Name="Freight Category",Description="Category of the Freight",
 Help="Freight Categories are used to calculate the Freight for the Shipper selected",
@@ -78,11 +78,12 @@ public static final String TABNAME_FreightCategory="6d01c853-294a-ae12-5bbb-bd00
 @XendraTrl(Identifier="c041757e-71f0-8c1f-f1ba-1cc068f2cffe")
 public static String es_PE_TABLE_M_FreightCategory_Name="Categoría de Fletes";
 
-@XendraTable(Name="Freight Category",Description="Category of the Freight",Help="",
+@XendraTable(Name="Freight Category",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Category of the Freight",Help="",
 TableName="M_FreightCategory",AccessLevel="3",AD_Window_ID="6538ebf5-2abc-9321-4c7a-36cdbbfe77aa",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="c041757e-71f0-8c1f-f1ba-1cc068f2cffe",Synchronized="2017-08-16 11:43:12.0")
+Identifier="c041757e-71f0-8c1f-f1ba-1cc068f2cffe",Synchronized="2020-03-03 21:38:23.0")
 /** TableName=M_FreightCategory */
 public static final String Table_Name="M_FreightCategory";
 
@@ -143,13 +144,13 @@ return value;
 }
 
 @XendraTrl(Identifier="1a535d0e-da2d-70d7-7b02-af70981701bb")
+public static String es_PE_FIELD_FreightCategory_Description_Name="Observación";
+
+@XendraTrl(Identifier="1a535d0e-da2d-70d7-7b02-af70981701bb")
 public static String es_PE_FIELD_FreightCategory_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="1a535d0e-da2d-70d7-7b02-af70981701bb")
 public static String es_PE_FIELD_FreightCategory_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="1a535d0e-da2d-70d7-7b02-af70981701bb")
-public static String es_PE_FIELD_FreightCategory_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="6d01c853-294a-ae12-5bbb-bd008c7ba790",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8a094930-3a1a-295f-4548-ebe7b44cdf4c",
-Synchronized="2017-08-05 16:55:07.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -193,13 +194,13 @@ return value;
 }
 
 @XendraTrl(Identifier="a3f0b087-4d28-57b2-903e-b06ca5eaf6ab")
+public static String es_PE_FIELD_FreightCategory_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="a3f0b087-4d28-57b2-903e-b06ca5eaf6ab")
 public static String es_PE_FIELD_FreightCategory_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="a3f0b087-4d28-57b2-903e-b06ca5eaf6ab")
 public static String es_PE_FIELD_FreightCategory_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="a3f0b087-4d28-57b2-903e-b06ca5eaf6ab")
-public static String es_PE_FIELD_FreightCategory_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="6d01c853-294a-ae12-5bbb-bd008c7ba790",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -217,7 +218,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f18c1bf2-9086-b372-00f9-433d4380f263",
-Synchronized="2017-08-05 16:55:07.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -249,7 +250,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4ffd69f5-81b1-4b64-b4e8-7780f745e720",
-Synchronized="2017-08-05 16:55:07.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Freight Category.
@@ -269,13 +270,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="996353ac-d393-557c-e068-0a5bf35f4700")
+public static String es_PE_FIELD_FreightCategory_FreightCategory_Name="Categoría de Fletes";
+
+@XendraTrl(Identifier="996353ac-d393-557c-e068-0a5bf35f4700")
 public static String es_PE_FIELD_FreightCategory_FreightCategory_Description="Categoría de Fletes";
 
 @XendraTrl(Identifier="996353ac-d393-557c-e068-0a5bf35f4700")
 public static String es_PE_FIELD_FreightCategory_FreightCategory_Help="Las categorías de fletes se utilizan para calcular los fletes del expedidor seleccionado";
-
-@XendraTrl(Identifier="996353ac-d393-557c-e068-0a5bf35f4700")
-public static String es_PE_FIELD_FreightCategory_FreightCategory_Name="Categoría de Fletes";
 
 @XendraField(AD_Column_ID="M_FreightCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6d01c853-294a-ae12-5bbb-bd008c7ba790",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -314,13 +315,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="be5476d8-34dc-533f-ee84-7245cd1d433e")
+public static String es_PE_FIELD_FreightCategory_Name_Name="Nombre";
+
+@XendraTrl(Identifier="be5476d8-34dc-533f-ee84-7245cd1d433e")
 public static String es_PE_FIELD_FreightCategory_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="be5476d8-34dc-533f-ee84-7245cd1d433e")
 public static String es_PE_FIELD_FreightCategory_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="be5476d8-34dc-533f-ee84-7245cd1d433e")
-public static String es_PE_FIELD_FreightCategory_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="6d01c853-294a-ae12-5bbb-bd008c7ba790",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -338,7 +339,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e1e4338f-4f7a-42cb-8a31-abc70fd58ccc",
-Synchronized="2017-08-05 16:55:07.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Search Key.
@@ -363,13 +364,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="6ee8b6e6-e3a1-cac1-e473-9a8bba0a648f")
+public static String es_PE_FIELD_FreightCategory_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="6ee8b6e6-e3a1-cac1-e473-9a8bba0a648f")
 public static String es_PE_FIELD_FreightCategory_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="6ee8b6e6-e3a1-cac1-e473-9a8bba0a648f")
 public static String es_PE_FIELD_FreightCategory_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="6ee8b6e6-e3a1-cac1-e473-9a8bba0a648f")
-public static String es_PE_FIELD_FreightCategory_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="6d01c853-294a-ae12-5bbb-bd008c7ba790",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -387,7 +388,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c8145609-4be1-39d9-f477-f3e6aee33692",
-Synchronized="2017-08-05 16:55:07.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

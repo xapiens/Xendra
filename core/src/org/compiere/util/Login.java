@@ -159,7 +159,7 @@ public class Login
 	{
 		//	Establish connection
 		DB.setDBTarget(cc);
-		Env.setContext(m_ctx, "#Host", cc.getAppsHost());
+		//Env.setContext(m_ctx, "#Host", cc.getAppsHost());
 		Env.setContext(m_ctx, "#Database", cc.getDbName());
 		
 		if (DB.getConnectionRO() == null)

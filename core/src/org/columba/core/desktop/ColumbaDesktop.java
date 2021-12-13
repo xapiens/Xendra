@@ -19,9 +19,8 @@ import java.io.File;
 import java.net.URL;
 
 import org.columba.api.desktop.IDesktop;
-import org.columba.core.base.OSInfo;
 import org.columba.core.io.DefaultMimeTypeTable;
-import org.columba.core.logging.Logging;
+import org.compiere.util.CLogMgt;
 
 public class ColumbaDesktop implements IDesktop {
 
@@ -104,7 +103,7 @@ public class ColumbaDesktop implements IDesktop {
 			
 			activeDesktop = new ColumbaDesktop();
 		} catch (Error e) {
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 			
 			activeDesktop = new ColumbaDesktop();

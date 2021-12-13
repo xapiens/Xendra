@@ -1,25 +1,12 @@
 package org.xendra.newclient.wizard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;

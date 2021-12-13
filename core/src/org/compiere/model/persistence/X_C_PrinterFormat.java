@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_PrinterFormat");
 @XendraTrl(Identifier="79c87692-f8cb-4a87-a665-14de72ecdeec")
 public static String es_PE_TABLE_C_PrinterFormat_Name="Printer Format";
 
-@XendraTable(Name="Printer Format",Description="",Help="",TableName="C_PrinterFormat",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="79c87692-f8cb-4a87-a665-14de72ecdeec",
-Synchronized="2017-08-16 11:42:17.0")
+@XendraTable(Name="Printer Format",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_PrinterFormat",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="79c87692-f8cb-4a87-a665-14de72ecdeec",
+Synchronized="2020-03-03 21:37:30.0")
 /** TableName=C_PrinterFormat */
 public static final String Table_Name="C_PrinterFormat";
 
@@ -120,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8a17a7e5-3875-4473-b053-9563a72adc02",
-Synchronized="2015-04-29 13:35:14.0")
+Synchronized="2020-01-05 20:28:23.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Machine Printers.
@@ -149,7 +150,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3a744cf1-3aa9-46ab-9975-f9ce6be6e020",Synchronized="2017-08-05 16:54:13.0")
+Identifier="3a744cf1-3aa9-46ab-9975-f9ce6be6e020",Synchronized="2020-01-05 20:28:24.0")
 /** Column name A_MachinePrinter_ID */
 public static final String COLUMNNAME_A_MachinePrinter_ID = "A_MachinePrinter_ID";
 /** Set C_PrinterDocumentFormat_ID.
@@ -178,7 +179,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6306e9ce-9b95-4854-bd0a-dc7c08c05243",Synchronized="2015-04-29 13:35:14.0")
+Identifier="6306e9ce-9b95-4854-bd0a-dc7c08c05243",Synchronized="2020-01-05 20:28:24.0")
 /** Column name C_PrinterDocumentFormat_ID */
 public static final String COLUMNNAME_C_PrinterDocumentFormat_ID = "C_PrinterDocumentFormat_ID";
 /** Set Printer Format.
@@ -198,38 +199,6 @@ return ii.intValue();
 }
 /** Column name C_PrinterFormat_ID */
 public static final String COLUMNNAME_C_PrinterFormat_ID = "C_PrinterFormat_ID";
-/** Set C_PrinterFormatType.
-@param C_PrinterFormatType C_PrinterFormatType */
-public void setC_PrinterFormatType (String C_PrinterFormatType)
-{
-if (C_PrinterFormatType != null && C_PrinterFormatType.length() > 3)
-{
-log.warning("Length > 3 - truncated");
-C_PrinterFormatType = C_PrinterFormatType.substring(0,2);
-}
-set_Value (COLUMNNAME_C_PrinterFormatType, C_PrinterFormatType);
-}
-/** Get C_PrinterFormatType.
-@return C_PrinterFormatType */
-public String getC_PrinterFormatType() 
-{
-String value = (String)get_Value(COLUMNNAME_C_PrinterFormatType);
-if (value == null)
-  return "";
-return value;
-}
-@XendraTrl(Identifier="3f593dfc-e96b-47a3-9080-aa2b0341d53f")
-public static String es_PE_COLUMN_C_PrinterFormatType_Name="C_PrinterFormatType";
-
-@XendraColumn(AD_Element_ID="fd1cf9ac-afd8-455d-bcab-8cb939b4389c",
-ColumnName="C_PrinterFormatType",AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",
-FieldLength=3,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
-IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
-VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
-IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3f593dfc-e96b-47a3-9080-aa2b0341d53f",Synchronized="2015-04-29 13:35:14.0")
-/** Column name C_PrinterFormatType */
-public static final String COLUMNNAME_C_PrinterFormatType = "C_PrinterFormatType";
 /** Set Record ID.
 @param Record_ID Direct internal record ID */
 public void setRecord_ID (int Record_ID)
@@ -256,7 +225,66 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="36e877fe-4cf2-4c66-8bd4-30ae2aa7a572",
-Synchronized="2015-04-29 13:35:14.0")
+Synchronized="2020-01-05 20:28:24.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
+/** Set Source.
+@param Source Source */
+public void setSource (String Source)
+{
+set_Value (COLUMNNAME_Source, Source);
+}
+/** Get Source.
+@return Source */
+public String getSource() 
+{
+String value = (String)get_Value(COLUMNNAME_Source);
+if (value == null)
+  return "";
+return value;
+}
+@XendraTrl(Identifier="059f51a7-786e-48e8-a7ac-8c6ea37b205d")
+public static String es_PE_COLUMN_Source_Name="Source";
+
+@XendraColumn(AD_Element_ID="0196dfe8-dc27-4c5c-9891-1a6c15182944",ColumnName="Source",
+AD_Reference_ID=14,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=2147483647,
+DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
+ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
+ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
+ColumnSQL="",IsAllowLogging=false,Identifier="059f51a7-786e-48e8-a7ac-8c6ea37b205d",
+Synchronized="2020-01-05 20:28:24.0")
+/** Column name Source */
+public static final String COLUMNNAME_Source = "Source";
+/** Set Search Key.
+@param Value Search key for the record in the format required - must be unique */
+public void setValue (String Value)
+{
+if (Value != null && Value.length() > 10)
+{
+log.warning("Length > 10 - truncated");
+Value = Value.substring(0,9);
+}
+set_Value (COLUMNNAME_Value, Value);
+}
+/** Get Search Key.
+@return Search key for the record in the format required - must be unique */
+public String getValue() 
+{
+String value = (String)get_Value(COLUMNNAME_Value);
+if (value == null)
+  return "";
+return value;
+}
+@XendraTrl(Identifier="616db173-2c34-428d-8e21-35ce7e6f1384")
+public static String es_PE_COLUMN_Value_Name="Search Key";
+
+@XendraColumn(AD_Element_ID="e75e100c-9b41-a643-2cb3-46eeced683d8",ColumnName="Value",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="616db173-2c34-428d-8e21-35ce7e6f1384",
+Synchronized="2020-01-05 20:28:24.0")
+/** Column name Value */
+public static final String COLUMNNAME_Value = "Value";
 }

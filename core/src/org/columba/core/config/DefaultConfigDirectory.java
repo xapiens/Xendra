@@ -43,6 +43,6 @@ public class DefaultConfigDirectory {
 	 * underlying operating system. This method must never return null.
 	 */
 	public static File getDefaultPath() {
-		return new File(Ini.getXendraFolder("config"));
+		return new File(Ini.getXendraFolder("conf"));
 	}
 }

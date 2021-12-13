@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_Subscription_Delivery");
 public static String es_PE_TAB_Delivery_Description="Expediente opcional de la entrega para una suscripción.";
 
 @XendraTrl(Identifier="9ccce7b5-cd18-4298-2e31-cd13a26a2a5f")
-public static String es_PE_TAB_Delivery_Name="Entrega";
-
-@XendraTrl(Identifier="9ccce7b5-cd18-4298-2e31-cd13a26a2a5f")
 public static String es_PE_TAB_Delivery_Help="Expediente de las entregas para una suscripción.";
 
-@XendraTab(Name="Delivery",Description="Optional Delivery Record for a Subscription",
+@XendraTrl(Identifier="9ccce7b5-cd18-4298-2e31-cd13a26a2a5f")
+public static String es_PE_TAB_Delivery_Name="Entrega";
+@XendraTab(Name="Delivery",
+Description="Optional Delivery Record for a Subscription",
 Help="Record of deliveries for a subscription",AD_Window_ID="373de6ec-d5d0-3388-abbd-f4ba4739d419",
 SeqNo=20,TabLevel=1,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
 AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
@@ -77,13 +77,14 @@ public static final String TABNAME_Delivery="9ccce7b5-cd18-4298-2e31-cd13a26a2a5
 public static String es_PE_TABLE_C_Subscription_Delivery_Name="Liberación de Suscripción ";
 
 
-@XendraTable(Name="Subscription Delivery",
+@XendraTable(Name="Subscription Delivery",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Optional Delivery Record for a Subscription",Help="",
 TableName="C_Subscription_Delivery",AccessLevel="3",
 AD_Window_ID="373de6ec-d5d0-3388-abbd-f4ba4739d419",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="f20ab1b1-3c23-4c8c-1037-ced03f6dd960",
-Synchronized="2017-08-16 11:42:30.0")
+Synchronized="2020-03-03 21:37:42.0")
 /** TableName=C_Subscription_Delivery */
 public static final String Table_Name="C_Subscription_Delivery";
 
@@ -139,10 +140,10 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_Subscription_Delivery_ID())
 }
 
 @XendraTrl(Identifier="c55540e2-1868-968f-2ef1-910d21234994")
-public static String es_PE_FIELD_Delivery_SubscriptionDelivery_Description="Campo opcional para suscripción";
+public static String es_PE_FIELD_Delivery_SubscriptionDelivery_Name="Liberación de Suscripción ";
 
 @XendraTrl(Identifier="c55540e2-1868-968f-2ef1-910d21234994")
-public static String es_PE_FIELD_Delivery_SubscriptionDelivery_Name="Liberación de Suscripción ";
+public static String es_PE_FIELD_Delivery_SubscriptionDelivery_Description="Campo opcional para suscripción";
 
 @XendraField(AD_Column_ID="C_Subscription_Delivery_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9ccce7b5-cd18-4298-2e31-cd13a26a2a5f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -169,13 +170,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9cda2a2d-6843-1417-631e-82ced18d0266")
+public static String es_PE_FIELD_Delivery_Subscription_Name="Suscripción";
+
+@XendraTrl(Identifier="9cda2a2d-6843-1417-631e-82ced18d0266")
 public static String es_PE_FIELD_Delivery_Subscription_Description="Suscripción del socio de negocio para renovar producto.";
 
 @XendraTrl(Identifier="9cda2a2d-6843-1417-631e-82ced18d0266")
 public static String es_PE_FIELD_Delivery_Subscription_Help="Suscripción del socio de negocio para renovar producto.";
-
-@XendraTrl(Identifier="9cda2a2d-6843-1417-631e-82ced18d0266")
-public static String es_PE_FIELD_Delivery_Subscription_Name="Suscripción";
 
 @XendraField(AD_Column_ID="C_Subscription_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9ccce7b5-cd18-4298-2e31-cd13a26a2a5f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7bed0171-c8f9-976d-f843-aa70030515b3",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name C_Subscription_ID */
 public static final String COLUMNNAME_C_Subscription_ID = "C_Subscription_ID";
 /** Set Identifier.
@@ -225,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="62d358e3-3215-43c7-9546-c628d5a00aa6",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

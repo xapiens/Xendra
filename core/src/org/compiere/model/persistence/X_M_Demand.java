@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("M_Demand");
 public static String es_PE_TAB_Demand_Description="Demanda de material";
 
 @XendraTrl(Identifier="fc07746b-303b-3dfe-64a1-7a15c98a60af")
-public static String es_PE_TAB_Demand_Name="Solicitud";
-
-@XendraTrl(Identifier="fc07746b-303b-3dfe-64a1-7a15c98a60af")
 public static String es_PE_TAB_Demand_Help="La demanda de material se puede basar en el pronóstico, demandas, órdenes abiertas.";
 
-@XendraTab(Name="Demand",Description="Material Demand",
+@XendraTrl(Identifier="fc07746b-303b-3dfe-64a1-7a15c98a60af")
+public static String es_PE_TAB_Demand_Name="Solicitud";
+@XendraTab(Name="Demand",
+Description="Material Demand",
 Help="Material Demand can be based on Forecast, Requisitions, Open Orders",
 AD_Window_ID="6538f96e-bc28-b93f-fb99-b3302e2c3a01",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,11 +81,12 @@ public static final String TABNAME_Demand="fc07746b-303b-3dfe-64a1-7a15c98a60af"
 @XendraTrl(Identifier="50011c3e-f491-6df0-400d-b636adf221ed")
 public static String es_PE_TABLE_M_Demand_Name="Demanda";
 
-@XendraTable(Name="Demand",Description="Material Demand",Help="",TableName="M_Demand",
-AccessLevel="2",AD_Window_ID="6538f96e-bc28-b93f-fb99-b3302e2c3a01",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="50011c3e-f491-6df0-400d-b636adf221ed",Synchronized="2017-08-16 11:43:09.0")
+@XendraTable(Name="Demand",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Material Demand",Help="",
+TableName="M_Demand",AccessLevel="2",AD_Window_ID="6538f96e-bc28-b93f-fb99-b3302e2c3a01",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="50011c3e-f491-6df0-400d-b636adf221ed",Synchronized="2020-03-03 21:38:19.0")
 /** TableName=M_Demand */
 public static final String Table_Name="M_Demand";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="902d431c-5e82-f00d-f7ba-1257a58abb75")
+public static String es_PE_FIELD_Demand_Calendar_Name="Calendario";
+
+@XendraTrl(Identifier="902d431c-5e82-f00d-f7ba-1257a58abb75")
 public static String es_PE_FIELD_Demand_Calendar_Description="Nombre del Calendario Contable";
 
 @XendraTrl(Identifier="902d431c-5e82-f00d-f7ba-1257a58abb75")
 public static String es_PE_FIELD_Demand_Calendar_Help="El calendario únicamente identifica un calendario contable. Múltiples calendarios pueden ser usados. Ej. Ud. puede necesitar un calendario estándar que corre del 1 de enero al 31 de diciembre y un calendario fiscal que corre del 1 de julio al 30 de junio.";
-
-@XendraTrl(Identifier="902d431c-5e82-f00d-f7ba-1257a58abb75")
-public static String es_PE_FIELD_Demand_Calendar_Name="Calendario";
 
 @XendraField(AD_Column_ID="C_Calendar_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5f336a7b-fb67-e7ef-3dd2-4d9a00110d6a",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name C_Calendar_ID */
 public static final String COLUMNNAME_C_Calendar_ID = "C_Calendar_ID";
 /** Set Year.
@@ -179,18 +180,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
+public static String es_PE_FIELD_Demand_Year_Name="Año";
+
+@XendraTrl(Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
 public static String es_PE_FIELD_Demand_Year_Description="Año del calendario";
 
 @XendraTrl(Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
 public static String es_PE_FIELD_Demand_Year_Help="El Año identifica únicamente un año contable para un calendario";
 
-@XendraTrl(Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
-public static String es_PE_FIELD_Demand_Year_Name="Año";
-@XendraField(AD_Column_ID="C_Year_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=100,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
+@XendraField(AD_Column_ID="C_Year_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=100,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="c6dcbc65-8262-8d3d-2f19-7c838a1727d4")
 public static final String FIELDNAME_Demand_Year="c6dcbc65-8262-8d3d-2f19-7c838a1727d4";
 
 @XendraTrl(Identifier="f223835b-7244-b6b3-9c62-4bd1d24931b8")
@@ -202,7 +204,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f223835b-7244-b6b3-9c62-4bd1d24931b8",Synchronized="2017-08-05 16:55:04.0")
+Identifier="f223835b-7244-b6b3-9c62-4bd1d24931b8",Synchronized="2019-08-30 22:23:01.0")
 /** Column name C_Year_ID */
 public static final String COLUMNNAME_C_Year_ID = "C_Year_ID";
 /** Set Description.
@@ -233,13 +235,13 @@ return value;
 }
 
 @XendraTrl(Identifier="e9e10c74-7a33-00d3-1985-972d302b0d11")
+public static String es_PE_FIELD_Demand_Description_Name="Observación";
+
+@XendraTrl(Identifier="e9e10c74-7a33-00d3-1985-972d302b0d11")
 public static String es_PE_FIELD_Demand_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="e9e10c74-7a33-00d3-1985-972d302b0d11")
 public static String es_PE_FIELD_Demand_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="e9e10c74-7a33-00d3-1985-972d302b0d11")
-public static String es_PE_FIELD_Demand_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -257,7 +259,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6f5d1ba8-1842-8f40-7ced-6e6c09665e31",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -288,18 +290,19 @@ return value;
 }
 
 @XendraTrl(Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
+public static String es_PE_FIELD_Demand_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
 public static String es_PE_FIELD_Demand_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
 public static String es_PE_FIELD_Demand_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
 
-@XendraTrl(Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
-public static String es_PE_FIELD_Demand_CommentHelp_Name="Ayuda";
-@XendraField(AD_Column_ID="Help",
-IsCentrallyMaintained=true,AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
+@XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
+AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="fd2c27d7-439d-e135-54a7-ddeda48b38fa")
 public static final String FIELDNAME_Demand_CommentHelp="fd2c27d7-439d-e135-54a7-ddeda48b38fa";
 
 @XendraTrl(Identifier="d14319dc-73ca-875a-785c-6c497a44ee3f")
@@ -311,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d14319dc-73ca-875a-785c-6c497a44ee3f",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -343,7 +346,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cc28087c-1bf6-4ac6-8504-4e685cfacdfd",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -366,13 +369,13 @@ return false;
 }
 
 @XendraTrl(Identifier="65f943c3-9800-af6c-fbfe-817d9aba4b9d")
+public static String es_PE_FIELD_Demand_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="65f943c3-9800-af6c-fbfe-817d9aba4b9d")
 public static String es_PE_FIELD_Demand_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="65f943c3-9800-af6c-fbfe-817d9aba4b9d")
 public static String es_PE_FIELD_Demand_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="65f943c3-9800-af6c-fbfe-817d9aba4b9d")
-public static String es_PE_FIELD_Demand_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -390,7 +393,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8ae2083c-8e66-887f-6c03-94b28239bbd1",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Demand.
@@ -410,13 +413,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c8d4a3da-ca10-e7a4-ac65-897d3d62e013")
+public static String es_PE_FIELD_Demand_Demand_Name="Demanda";
+
+@XendraTrl(Identifier="c8d4a3da-ca10-e7a4-ac65-897d3d62e013")
 public static String es_PE_FIELD_Demand_Demand_Description="Demanda material";
 
 @XendraTrl(Identifier="c8d4a3da-ca10-e7a4-ac65-897d3d62e013")
 public static String es_PE_FIELD_Demand_Demand_Help="La demanda material se puede basar en el pronóstico, demandas, órdenes abiertas.";
-
-@XendraTrl(Identifier="c8d4a3da-ca10-e7a4-ac65-897d3d62e013")
-public static String es_PE_FIELD_Demand_Demand_Name="Demanda";
 
 @XendraField(AD_Column_ID="M_Demand_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -455,18 +458,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
+public static String es_PE_FIELD_Demand_Name_Name="Nombre";
+
+@XendraTrl(Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
 public static String es_PE_FIELD_Demand_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
 public static String es_PE_FIELD_Demand_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
-public static String es_PE_FIELD_Demand_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="fc07746b-303b-3dfe-64a1-7a15c98a60af",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="243d0edd-6a5c-d3bb-a40c-5eb4c300415e")
 public static final String FIELDNAME_Demand_Name="243d0edd-6a5c-d3bb-a40c-5eb4c300415e";
 
 @XendraTrl(Identifier="beb4ff17-07c4-a1be-943d-55f1dd1af96b")
@@ -478,7 +482,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="beb4ff17-07c4-a1be-943d-55f1dd1af96b",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -519,7 +523,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="307140b1-5233-acc6-0333-8db3dfec3c70",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

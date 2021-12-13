@@ -70,11 +70,12 @@ public static final String TABNAME_MaterialPolicy="c36a1379-55e7-4870-b786-ecb2b
 @XendraTrl(Identifier="7a453f82-3cd1-4856-a378-b1bce7259a7d")
 public static String es_PE_TABLE_M_MaterialPolicy_Name="Material Policy";
 
-@XendraTable(Name="Material Policy",Description="",Help="",TableName="M_MaterialPolicy",
-AccessLevel="6",AD_Window_ID="f58996b7-5de2-486f-b975-b739ccf34b84",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="7a453f82-3cd1-4856-a378-b1bce7259a7d",Synchronized="2017-10-05 10:54:21.0")
+@XendraTable(Name="Material Policy",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_MaterialPolicy",AccessLevel="6",AD_Window_ID="f58996b7-5de2-486f-b975-b739ccf34b84",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="7a453f82-3cd1-4856-a378-b1bce7259a7d",Synchronized="2020-03-03 21:38:38.0")
 /** TableName=M_MaterialPolicy */
 public static final String Table_Name="M_MaterialPolicy";
 
@@ -146,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bfa66884-743c-4973-a98c-10ca7e4d7c0f",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsSynchStorage.
@@ -187,7 +188,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a689318c-0035-4dae-a9dd-cc1e5d934c86",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name IsSynchStorage */
 public static final String COLUMNNAME_IsSynchStorage = "IsSynchStorage";
 /** Set LoadPeriod_ID.
@@ -216,9 +217,38 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8c7f7f4b-5e47-482b-b643-a001add8ba7f",
-Synchronized="2017-10-05 10:50:51.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name LoadPeriod_ID */
 public static final String COLUMNNAME_LoadPeriod_ID = "LoadPeriod_ID";
+/** Set Cost Element.
+@param M_CostElement_ID Product Cost Element */
+public void setM_CostElement_ID (int M_CostElement_ID)
+{
+if (M_CostElement_ID <= 0) set_Value (COLUMNNAME_M_CostElement_ID, null);
+ else 
+set_Value (COLUMNNAME_M_CostElement_ID, Integer.valueOf(M_CostElement_ID));
+}
+/** Get Cost Element.
+@return Product Cost Element */
+public int getM_CostElement_ID() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_M_CostElement_ID);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="f5dd4c73-8aa8-4f04-8b27-a582f3eef79c")
+public static String es_PE_COLUMN_M_CostElement_ID_Name="Cost Element";
+
+@XendraColumn(AD_Element_ID="1b5355ae-f799-dbe3-d07b-17cb2162e976",ColumnName="M_CostElement_ID",
+AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="f5dd4c73-8aa8-4f04-8b27-a582f3eef79c",
+Synchronized="2019-08-30 22:23:16.0")
+/** Column name M_CostElement_ID */
+public static final String COLUMNNAME_M_CostElement_ID = "M_CostElement_ID";
 /** Set Phys.Inventory.
 @param M_Inventory_ID Parameters for a Physical Inventory */
 public void setM_Inventory_ID (int M_Inventory_ID)
@@ -261,7 +291,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1c189f72-3f42-4f0c-abb7-00ffaf79713c",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name M_Inventory_ID */
 public static final String COLUMNNAME_M_Inventory_ID = "M_Inventory_ID";
 /** Set Material Policy.
@@ -291,6 +321,35 @@ Identifier="7aa74e0e-38c3-446c-9fa9-61f61b0ab71a")
 public static final String FIELDNAME_MaterialPolicy_MaterialPolicy="7aa74e0e-38c3-446c-9fa9-61f61b0ab71a";
 /** Column name M_MaterialPolicy_ID */
 public static final String COLUMNNAME_M_MaterialPolicy_ID = "M_MaterialPolicy_ID";
+/** Set Material Processor.
+@param M_MaterialProcessor_ID Material Processor */
+public void setM_MaterialProcessor_ID (int M_MaterialProcessor_ID)
+{
+if (M_MaterialProcessor_ID <= 0) set_Value (COLUMNNAME_M_MaterialProcessor_ID, null);
+ else 
+set_Value (COLUMNNAME_M_MaterialProcessor_ID, Integer.valueOf(M_MaterialProcessor_ID));
+}
+/** Get Material Processor.
+@return Material Processor */
+public int getM_MaterialProcessor_ID() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_M_MaterialProcessor_ID);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="94e5cff1-6ba0-4657-b21b-20882448efb3")
+public static String es_PE_COLUMN_M_MaterialProcessor_ID_Name="Material Processor";
+
+@XendraColumn(AD_Element_ID="e22a780c-073e-4226-9c5c-59d70068d2a1",
+ColumnName="M_MaterialProcessor_ID",AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",
+FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="94e5cff1-6ba0-4657-b21b-20882448efb3",Synchronized="2019-08-30 22:23:16.0")
+/** Column name M_MaterialProcessor_ID */
+public static final String COLUMNNAME_M_MaterialProcessor_ID = "M_MaterialProcessor_ID";
 /** Set Name.
 @param Name Alphanumeric identifier of the entity */
 public void setName (String Name)
@@ -344,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3cfd7c71-91cb-4b95-b358-5f7462d24adb",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set ProcessPeriod_ID.
@@ -373,7 +432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="be143441-6346-4c57-ad54-12ab669c7397",
-Synchronized="2017-10-05 10:48:35.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name ProcessPeriod_ID */
 public static final String COLUMNNAME_ProcessPeriod_ID = "ProcessPeriod_ID";
 /** Set Properties.
@@ -411,7 +470,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8641ba75-d072-4573-87e4-1393550d61da",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name Properties */
 public static final String COLUMNNAME_Properties = "Properties";
 /** Set Start Date.
@@ -452,7 +511,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3281e04a-5ec9-4fc5-b1d5-2f5da142ef5a",
-Synchronized="2017-10-04 17:21:30.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name StartDate */
 public static final String COLUMNNAME_StartDate = "StartDate";
 /** Set Synchronized.
@@ -493,12 +552,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8b138cc9-b84f-4db2-ba7c-de861b0d88f9",
-Synchronized="2017-10-04 17:21:31.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name Synchronized */
 public static final String COLUMNNAME_Synchronized = "Synchronized";
-
-/** TransferenceRule_ID AD_Reference=1b6b7fa4-6b3f-164d-6151-85d9a2225bea */
-public static final int TRANSFERENCERULE_ID_AD_Reference_ID=1000063;
 /** Set TransferenceRule_ID.
 @param TransferenceRule_ID TransferenceRule_ID */
 public void setTransferenceRule_ID (int TransferenceRule_ID)
@@ -536,7 +592,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="a26318c2-4243-4228-b5c4-cc54af905ffe",
-Synchronized="2017-10-04 17:21:31.0")
+Synchronized="2019-08-30 22:23:16.0")
 /** Column name TransferenceRule_ID */
 public static final String COLUMNNAME_TransferenceRule_ID = "TransferenceRule_ID";
 }

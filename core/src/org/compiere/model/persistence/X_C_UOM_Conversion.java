@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("C_UOM_Conversion");
 public static String es_PE_TAB_Conversion_Description="Definir conversión de unidad de medida estándar";
 
 @XendraTrl(Identifier="b69dd96c-d1ac-bbb3-5129-032ce7568377")
-public static String es_PE_TAB_Conversion_Name="Conversión";
-
-@XendraTrl(Identifier="b69dd96c-d1ac-bbb3-5129-032ce7568377")
 public static String es_PE_TAB_Conversion_Help="La pestaña de conversión define las tasas para convertir una unidad de medida. El sistema provee algunas conversiones de forma automática (ej. Día; hora; minuto;) si estas conversiones no son definidas en forma explicita aquí. Las conversiones solo pueden ser directas (ej. Si se definen las conversiones A-B y B-C; el sistema no puede calcular la conversión A-C a menos que se defina una tasa de conversión específica para A-C).";
 
-@XendraTab(Name="Conversion",Description="Define standard Unit of Measure Conversion",
+@XendraTrl(Identifier="b69dd96c-d1ac-bbb3-5129-032ce7568377")
+public static String es_PE_TAB_Conversion_Name="Conversión";
+@XendraTab(Name="Conversion",
+Description="Define standard Unit of Measure Conversion",
 Help="The Conversion Tab defines the rates for converting a Unit of Measure. The system provides some automatic conversions between units of measures (e.g. minute, hour, day, working day, etc.) if they are not explicitly defined here. Conversions need to be direct (i.e. if you have only a conversion between A-B and B-C, the system cannot convert A-C, you need to define it explicitly).",
 AD_Window_ID="4cb6f057-709d-8cf0-3914-7a771cf787e9",SeqNo=30,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -81,11 +81,13 @@ public static final String TABNAME_Conversion="b69dd96c-d1ac-bbb3-5129-032ce7568
 @XendraTrl(Identifier="7de5be8f-cb6d-5283-322e-7a5220d4afac")
 public static String es_PE_TABLE_C_UOM_Conversion_Name="UM de Conversión";
 
-@XendraTable(Name="UOM Conversion",Description="Unit of Measure Conversion",Help="",
-TableName="C_UOM_Conversion",AccessLevel="6",AD_Window_ID="4cb6f057-709d-8cf0-3914-7a771cf787e9",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="7de5be8f-cb6d-5283-322e-7a5220d4afac",Synchronized="2017-08-16 11:42:32.0")
+@XendraTable(Name="UOM Conversion",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Unit of Measure Conversion",
+Help="",TableName="C_UOM_Conversion",AccessLevel="6",
+AD_Window_ID="4cb6f057-709d-8cf0-3914-7a771cf787e9",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="7de5be8f-cb6d-5283-322e-7a5220d4afac",
+Synchronized="2020-03-03 21:37:44.0")
 /** TableName=C_UOM_Conversion */
 public static final String Table_Name="C_UOM_Conversion";
 
@@ -147,13 +149,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_UOM_Conversion_ID()));
 }
 
 @XendraTrl(Identifier="385cf374-34c0-81aa-ddca-12a14495a957")
+public static String es_PE_FIELD_Conversion_UOMConversion_Name="UM de Conversión";
+
+@XendraTrl(Identifier="385cf374-34c0-81aa-ddca-12a14495a957")
 public static String es_PE_FIELD_Conversion_UOMConversion_Description="Unidad de medida para conversión";
 
 @XendraTrl(Identifier="385cf374-34c0-81aa-ddca-12a14495a957")
 public static String es_PE_FIELD_Conversion_UOMConversion_Help="La conversión de UM identifica una unidad de medida única A y Desde; una tasa de conversión y un rango de fechas";
-
-@XendraTrl(Identifier="385cf374-34c0-81aa-ddca-12a14495a957")
-public static String es_PE_FIELD_Conversion_UOMConversion_Name="UM de Conversión";
 
 @XendraField(AD_Column_ID="C_UOM_Conversion_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -163,9 +165,6 @@ Identifier="385cf374-34c0-81aa-ddca-12a14495a957")
 public static final String FIELDNAME_Conversion_UOMConversion="385cf374-34c0-81aa-ddca-12a14495a957";
 /** Column name C_UOM_Conversion_ID */
 public static final String COLUMNNAME_C_UOM_Conversion_ID = "C_UOM_Conversion_ID";
-
-/** C_UOM_ID AD_Reference=723d7831-ccf2-1634-fe46-62dbc58e9a8e */
-public static final int C_UOM_ID_AD_Reference_ID=114;
 /** Set UOM.
 @param C_UOM_ID Unit of Measure */
 public void setC_UOM_ID (int C_UOM_ID)
@@ -183,18 +182,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
+public static String es_PE_FIELD_Conversion_UOM_Name="UM";
+
+@XendraTrl(Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
 public static String es_PE_FIELD_Conversion_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
 public static String es_PE_FIELD_Conversion_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
-public static String es_PE_FIELD_Conversion_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=30,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=30,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="97f6fb89-c039-c11a-9e82-7d288cbca72e")
 public static final String FIELDNAME_Conversion_UOM="97f6fb89-c039-c11a-9e82-7d288cbca72e";
 
 @XendraTrl(Identifier="dac0810d-3304-1039-99f1-d747267bfaa1")
@@ -206,12 +206,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="dac0810d-3304-1039-99f1-d747267bfaa1",Synchronized="2017-08-05 16:54:30.0")
+Identifier="dac0810d-3304-1039-99f1-d747267bfaa1",Synchronized="2019-08-30 22:22:21.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
-
-/** C_UOM_To_ID AD_Reference=723d7831-ccf2-1634-fe46-62dbc58e9a8e */
-public static final int C_UOM_TO_ID_AD_Reference_ID=114;
 /** Set UoM To.
 @param C_UOM_To_ID Target or destination Unit of Measure */
 public void setC_UOM_To_ID (int C_UOM_To_ID)
@@ -229,13 +226,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5c82d59d-1d04-647f-693c-08fdd6fa1577")
+public static String es_PE_FIELD_Conversion_UoMTo_Name="A UM";
+
+@XendraTrl(Identifier="5c82d59d-1d04-647f-693c-08fdd6fa1577")
 public static String es_PE_FIELD_Conversion_UoMTo_Description="Unidad de Medida destino u objetivo.";
 
 @XendraTrl(Identifier="5c82d59d-1d04-647f-693c-08fdd6fa1577")
 public static String es_PE_FIELD_Conversion_UoMTo_Help="La UM A indica la Unidad de Medida destino para una conversión de un par de UM";
-
-@XendraTrl(Identifier="5c82d59d-1d04-647f-693c-08fdd6fa1577")
-public static String es_PE_FIELD_Conversion_UoMTo_Name="A UM";
 
 @XendraField(AD_Column_ID="C_UOM_To_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -253,7 +250,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="fa9345c8-5e79-6d93-5af0-1537f9038fec",Synchronized="2017-08-05 16:54:30.0")
+Identifier="fa9345c8-5e79-6d93-5af0-1537f9038fec",Synchronized="2019-08-30 22:22:21.0")
 /** Column name C_UOM_To_ID */
 public static final String COLUMNNAME_C_UOM_To_ID = "C_UOM_To_ID";
 /** Set Divide Rate.
@@ -273,13 +270,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="f11638c6-b0c8-b928-d440-5353adf87e60")
+public static String es_PE_FIELD_Conversion_DivideRate_Name="Tasa Divisora";
+
+@XendraTrl(Identifier="f11638c6-b0c8-b928-d440-5353adf87e60")
 public static String es_PE_FIELD_Conversion_DivideRate_Description="Convierte el número fuente a número destino; el fuente entre el número divisor.";
 
 @XendraTrl(Identifier="f11638c6-b0c8-b928-d440-5353adf87e60")
 public static String es_PE_FIELD_Conversion_DivideRate_Help="Para convertir el número fuente a número destino; la fuente es dividida entre la tasa divisora. Si usted introduce una tasa divisora; la tasa multiplicadora será calculada automáticamente;";
-
-@XendraTrl(Identifier="f11638c6-b0c8-b928-d440-5353adf87e60")
-public static String es_PE_FIELD_Conversion_DivideRate_Name="Tasa Divisora";
 
 @XendraField(AD_Column_ID="DivideRate",IsCentrallyMaintained=true,
 AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -297,7 +294,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutEngine.rate",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8488da09-925f-e04b-816e-e4b1364f05fb",Synchronized="2017-08-05 16:54:30.0")
+Identifier="8488da09-925f-e04b-816e-e4b1364f05fb",Synchronized="2019-08-30 22:22:21.0")
 /** Column name DivideRate */
 public static final String COLUMNNAME_DivideRate = "DivideRate";
 /** Set Identifier.
@@ -329,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="43fbb4f0-5a23-4924-b422-2ceb6f52d9cc",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -350,13 +347,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d3e549d0-aee0-253f-e41b-caf1bfe42004")
+public static String es_PE_FIELD_Conversion_Product_Name="Producto";
+
+@XendraTrl(Identifier="d3e549d0-aee0-253f-e41b-caf1bfe42004")
 public static String es_PE_FIELD_Conversion_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="d3e549d0-aee0-253f-e41b-caf1bfe42004")
 public static String es_PE_FIELD_Conversion_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="d3e549d0-aee0-253f-e41b-caf1bfe42004")
-public static String es_PE_FIELD_Conversion_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -374,7 +371,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="97632278-8ab1-7d90-3e48-2ea26c44fd9a",Synchronized="2017-08-05 16:54:30.0")
+Identifier="97632278-8ab1-7d90-3e48-2ea26c44fd9a",Synchronized="2019-08-30 22:22:21.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Multiply Rate.
@@ -394,13 +391,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="203947a0-6ace-5d6f-2c53-27e75353dcc5")
+public static String es_PE_FIELD_Conversion_MultiplyRate_Name="Tasa Multiplicadora";
+
+@XendraTrl(Identifier="203947a0-6ace-5d6f-2c53-27e75353dcc5")
 public static String es_PE_FIELD_Conversion_MultiplyRate_Description="Tasa por la que se multiplica la fuente para encontrar el objetivo";
 
 @XendraTrl(Identifier="203947a0-6ace-5d6f-2c53-27e75353dcc5")
 public static String es_PE_FIELD_Conversion_MultiplyRate_Help="Para convertir un número fuente a un número destino el fuente es multiplicado por la tasa multiplicadora. Si la tasa multiplicadora es introducida; entonces la tasa divisora será calculada automáticamente.";
-
-@XendraTrl(Identifier="203947a0-6ace-5d6f-2c53-27e75353dcc5")
-public static String es_PE_FIELD_Conversion_MultiplyRate_Name="Tasa Multiplicadora";
 
 @XendraField(AD_Column_ID="MultiplyRate",IsCentrallyMaintained=true,
 AD_Tab_ID="b69dd96c-d1ac-bbb3-5129-032ce7568377",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -418,7 +415,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutEngine.rate",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7546c2cb-6182-e4a5-0870-6382b1093018",Synchronized="2017-08-05 16:54:30.0")
+Identifier="7546c2cb-6182-e4a5-0870-6382b1093018",Synchronized="2019-08-30 22:22:21.0")
 /** Column name MultiplyRate */
 public static final String COLUMNNAME_MultiplyRate = "MultiplyRate";
 }

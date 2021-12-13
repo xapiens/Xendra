@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("M_AttributeSetExclude");
 public static String es_PE_TAB_Exclude_Description="Excluye la capacidad de ingresar Ajustes en los Atributos";
 
 @XendraTrl(Identifier="72dad031-5b8a-a899-b14e-c0288550373e")
-public static String es_PE_TAB_Exclude_Name="Excluir";
-
-@XendraTrl(Identifier="72dad031-5b8a-a899-b14e-c0288550373e")
 public static String es_PE_TAB_Exclude_Help="Crear un registro. si desea excluir la capacidad de ingresar Información en Ajustes Atributos de Producto.Note que la información es almacenada. Para que los cambios sean considerados debe re-ingresar o restaurar el cache. ";
 
-@XendraTab(Name="Exclude",Description="Exclude the ability to enter Attribute Sets",
+@XendraTrl(Identifier="72dad031-5b8a-a899-b14e-c0288550373e")
+public static String es_PE_TAB_Exclude_Name="Excluir";
+@XendraTab(Name="Exclude",
+Description="Exclude the ability to enter Attribute Sets",
 Help="Create a record, if you want to exclude the ability to enter Product Attribute Set information.  Note that the information is cached. To have effect you may have to re-login or reset cache.",
 AD_Window_ID="c776058b-1056-0bc4-3e42-f91c200f5ade",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,13 +81,14 @@ public static final String TABNAME_Exclude="72dad031-5b8a-a899-b14e-c0288550373e
 public static String es_PE_TABLE_M_AttributeSetExclude_Name="Excluir Configuración de Atributos";
 
 
-@XendraTable(Name="Exclude Attribute Set",
+@XendraTable(Name="Exclude Attribute Set",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Exclude the ability to enter Attribute Sets",Help="",
 TableName="M_AttributeSetExclude",AccessLevel="2",
 AD_Window_ID="c776058b-1056-0bc4-3e42-f91c200f5ade",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.material",Identifier="c3cd5860-f5f8-20ad-b9f0-60a6df4a6a18",
-Synchronized="2017-08-16 11:43:06.0")
+Synchronized="2020-03-03 21:38:16.0")
 /** TableName=M_AttributeSetExclude */
 public static final String Table_Name="M_AttributeSetExclude";
 
@@ -137,13 +138,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ccf8f465-a44b-bd88-dc05-847120d1ce9d")
+public static String es_PE_FIELD_Exclude_Table_Name="Tabla";
+
+@XendraTrl(Identifier="ccf8f465-a44b-bd88-dc05-847120d1ce9d")
 public static String es_PE_FIELD_Exclude_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="ccf8f465-a44b-bd88-dc05-847120d1ce9d")
 public static String es_PE_FIELD_Exclude_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="ccf8f465-a44b-bd88-dc05-847120d1ce9d")
-public static String es_PE_FIELD_Exclude_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="72dad031-5b8a-a899-b14e-c0288550373e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,7 +162,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="73d07323-2c5b-5ee2-a853-d107e7acd73f",Synchronized="2017-08-05 16:55:00.0")
+Identifier="73d07323-2c5b-5ee2-a853-d107e7acd73f",Synchronized="2019-08-30 22:22:57.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Identifier.
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="87c69c21-122c-4fc6-8a5a-516c80c8d1a5",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sales Transaction.
@@ -216,13 +217,13 @@ return false;
 }
 
 @XendraTrl(Identifier="38f3d18b-5aa9-9ad6-fd03-bb224301f205")
+public static String es_PE_FIELD_Exclude_SalesTransaction_Name="Transacción de Ventas";
+
+@XendraTrl(Identifier="38f3d18b-5aa9-9ad6-fd03-bb224301f205")
 public static String es_PE_FIELD_Exclude_SalesTransaction_Description="Esta es una transacción de ventas";
 
 @XendraTrl(Identifier="38f3d18b-5aa9-9ad6-fd03-bb224301f205")
 public static String es_PE_FIELD_Exclude_SalesTransaction_Help="El cuadro de verificación Transacción de Ventas indica si este ítem es una transacción de ventas";
-
-@XendraTrl(Identifier="38f3d18b-5aa9-9ad6-fd03-bb224301f205")
-public static String es_PE_FIELD_Exclude_SalesTransaction_Name="Transacción de Ventas";
 
 @XendraField(AD_Column_ID="IsSOTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="72dad031-5b8a-a899-b14e-c0288550373e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -240,7 +241,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2166a31c-f58a-f45f-6ce3-0c37342134a0",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Exclude Attribute Set.
@@ -260,10 +261,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="231f2bca-8779-3988-0c41-0f4cabee0640")
-public static String es_PE_FIELD_Exclude_ExcludeAttributeSet_Description="Excluir capacidad de Ingresar configuraciones en los atributos";
+public static String es_PE_FIELD_Exclude_ExcludeAttributeSet_Name="Excluir Configuración de Atributos";
 
 @XendraTrl(Identifier="231f2bca-8779-3988-0c41-0f4cabee0640")
-public static String es_PE_FIELD_Exclude_ExcludeAttributeSet_Name="Excluir Configuración de Atributos";
+public static String es_PE_FIELD_Exclude_ExcludeAttributeSet_Description="Excluir capacidad de Ingresar configuraciones en los atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetExclude_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="72dad031-5b8a-a899-b14e-c0288550373e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -290,13 +291,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a5cb954f-248a-f8f2-a63a-3bd6fbdaca70")
+public static String es_PE_FIELD_Exclude_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="a5cb954f-248a-f8f2-a63a-3bd6fbdaca70")
 public static String es_PE_FIELD_Exclude_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="a5cb954f-248a-f8f2-a63a-3bd6fbdaca70")
 public static String es_PE_FIELD_Exclude_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="a5cb954f-248a-f8f2-a63a-3bd6fbdaca70")
-public static String es_PE_FIELD_Exclude_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="72dad031-5b8a-a899-b14e-c0288550373e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -314,7 +315,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="878c5fc6-9e19-0394-ea2d-7d4bf4274cd6",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name M_AttributeSet_ID */
 public static final String COLUMNNAME_M_AttributeSet_ID = "M_AttributeSet_ID";
 }

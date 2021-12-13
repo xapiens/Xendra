@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_Calendar");
 public static String es_PE_TAB_Calendar_Description="Definir Calendario";
 
 @XendraTrl(Identifier="92986bce-9bec-b92b-5635-48f1c4d1011a")
-public static String es_PE_TAB_Calendar_Name="Calendario";
-
-@XendraTrl(Identifier="92986bce-9bec-b92b-5635-48f1c4d1011a")
 public static String es_PE_TAB_Calendar_Help="La pestaña de Calendario define cada calendario que será usado por una organización.";
 
-@XendraTab(Name="Calendar",Description="Define your calendar",
+@XendraTrl(Identifier="92986bce-9bec-b92b-5635-48f1c4d1011a")
+public static String es_PE_TAB_Calendar_Name="Calendario";
+@XendraTab(Name="Calendar",
+Description="Define your calendar",
 Help="The Calendar Tab defines each calendar that will be used by an Organization.",
 AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -77,11 +77,12 @@ public static final String TABNAME_Calendar="92986bce-9bec-b92b-5635-48f1c4d1011
 @XendraTrl(Identifier="36f19f3b-e0fc-9a47-97f4-49d5b2a33741")
 public static String es_PE_TABLE_C_Calendar_Name="Calendario";
 
-@XendraTable(Name="Calendar",Description="Accounting Calendar Name",Help="",TableName="C_Calendar",
-AccessLevel="2",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=110,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="36f19f3b-e0fc-9a47-97f4-49d5b2a33741",Synchronized="2017-08-16 11:41:34.0")
+@XendraTable(Name="Calendar",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Accounting Calendar Name",Help="",
+TableName="C_Calendar",AccessLevel="2",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=110,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="36f19f3b-e0fc-9a47-97f4-49d5b2a33741",Synchronized="2020-03-03 21:36:40.0")
 /** TableName=C_Calendar */
 public static final String Table_Name="C_Calendar";
 
@@ -137,13 +138,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cf663fb5-d2a4-8ed1-9473-615e2cd4a319")
+public static String es_PE_FIELD_Calendar_Calendar_Name="Calendario";
+
+@XendraTrl(Identifier="cf663fb5-d2a4-8ed1-9473-615e2cd4a319")
 public static String es_PE_FIELD_Calendar_Calendar_Description="Nombre del Calendario Contable";
 
 @XendraTrl(Identifier="cf663fb5-d2a4-8ed1-9473-615e2cd4a319")
 public static String es_PE_FIELD_Calendar_Calendar_Help="El calendario únicamente identifica un calendario contable. Múltiples calendarios pueden ser usados. Ej. Ud. puede necesitar un calendario estándar que corre del 1 de enero al 31 de diciembre y un calendario fiscal que corre del 1 de julio al 30 de junio.";
-
-@XendraTrl(Identifier="cf663fb5-d2a4-8ed1-9473-615e2cd4a319")
-public static String es_PE_FIELD_Calendar_Calendar_Name="Calendario";
 
 @XendraField(AD_Column_ID="C_Calendar_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="92986bce-9bec-b92b-5635-48f1c4d1011a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -181,13 +182,13 @@ return value;
 }
 
 @XendraTrl(Identifier="60b23a38-067d-e3e5-9762-4e3120f62e77")
+public static String es_PE_FIELD_Calendar_Description_Name="Observación";
+
+@XendraTrl(Identifier="60b23a38-067d-e3e5-9762-4e3120f62e77")
 public static String es_PE_FIELD_Calendar_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="60b23a38-067d-e3e5-9762-4e3120f62e77")
 public static String es_PE_FIELD_Calendar_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="60b23a38-067d-e3e5-9762-4e3120f62e77")
-public static String es_PE_FIELD_Calendar_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="92986bce-9bec-b92b-5635-48f1c4d1011a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -205,7 +206,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="805904d7-a546-81ef-a5c4-899baaa9e68b",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -237,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13923d61-bd84-40ac-99c3-a04ddc7b4c9d",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -269,18 +270,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
+public static String es_PE_FIELD_Calendar_Name_Name="Nombre";
+
+@XendraTrl(Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
 public static String es_PE_FIELD_Calendar_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
 public static String es_PE_FIELD_Calendar_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
-public static String es_PE_FIELD_Calendar_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="92986bce-9bec-b92b-5635-48f1c4d1011a",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="92986bce-9bec-b92b-5635-48f1c4d1011a",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="00d09751-4a00-6762-3ec7-6dc01b3e75f3")
 public static final String FIELDNAME_Calendar_Name="00d09751-4a00-6762-3ec7-6dc01b3e75f3";
 
 @XendraTrl(Identifier="0c29d962-cd95-fc5c-49b1-75e3d2b0026b")
@@ -292,7 +294,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0c29d962-cd95-fc5c-49b1-75e3d2b0026b",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

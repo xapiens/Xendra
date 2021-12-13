@@ -8,11 +8,12 @@ import org.compiere.model.View;
 public class VIEW_C_invoice_candidate_v 
 {
  
-@XendraTable(Name="C_Invoice_Candidate_v",Description="",Help="",TableName="C_Invoice_Candidate_v",
-AccessLevel="1",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=150,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=true,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="a40bac19-d495-635d-46d4-dadf1b9d8a9f",
-Synchronized="2017-08-28 09:55:42.0")
+@XendraTable(Name="C_Invoice_Candidate_v",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Invoice_Candidate_v",AccessLevel="1",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=150,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
+IsView=true,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="a40bac19-d495-635d-46d4-dadf1b9d8a9f",Synchronized="2020-03-03 21:37:00.0")
 /** TableName=C_Invoice_Candidate_v */
 public static final String Table_Name="C_Invoice_Candidate_v";
 
@@ -25,7 +26,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="639997b5-7ba0-675d-f166-eb12bef6ef5b",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 
@@ -38,7 +39,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9874fb60-de9c-67b3-da30-25259c94b50c",Synchronized="2017-08-28 09:55:42.0")
+Identifier="9874fb60-de9c-67b3-da30-25259c94b50c",Synchronized="2020-03-03 21:37:00.0")
 /** Column name C_BPartner_Location_ID */
 public static final String COLUMNNAME_C_BPartner_Location_ID = "C_BPartner_Location_ID";
 
@@ -51,7 +52,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4e03111f-dbdb-7739-4054-e3888abc47b4",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 
@@ -64,7 +65,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d73b92f6-d64b-a09d-b183-9bb473693e47",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 
@@ -77,7 +78,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="208a1df8-b9b1-e715-84bd-253ec5083f7d",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name DateOrdered */
 public static final String COLUMNNAME_DateOrdered = "DateOrdered";
 
@@ -90,7 +91,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3884473e-f854-9d20-5218-09628bb38017",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 
@@ -103,7 +104,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="706d4618-5480-f18f-a973-6b6295b8e1c8",
-Synchronized="2017-08-28 09:55:42.0")
+Synchronized="2020-03-03 21:37:00.0")
 /** Column name TotalLines */
 public static final String COLUMNNAME_TotalLines = "TotalLines";
 	@XendraView(Identifier="a40bac19-d495-635d-46d4-dadf1b9d8a9f",

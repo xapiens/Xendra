@@ -358,8 +358,7 @@ public class Doc_BOEStatement extends Doc
 		MAccount gain = MAccount.get (as.getCtx(), as.getAcctSchemaDefault().getRealizedGain_Acct());
 		MAccount loss = MAccount.get (as.getCtx(), as.getAcctSchemaDefault().getRealizedLoss_Acct());
 
-		FactLine fl = new FactLine (getCtx(), get_Table_ID(), 
-				get_ID(), 0, getFact_ID(), getTrxName());
+		FactLine fl = new FactLine (getCtx(), get_Table_ID(), get_ID(), 0, getGL_Book_ID(),  getFact_ID(), getTrxName());
 
 		BigDecimal diff = boeAmount.subtract(payAmount).abs();
 
@@ -391,6 +390,14 @@ public class Doc_BOEStatement extends Doc
 										0, 
 										isSOTrx()==true ? "Y":"N", 
 										boestatement.getDateAcct())
+					);
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(boestatement.getAD_Org_ID(),
+							boestatement.getAD_Client_ID(),
+							boestatement.Table_ID, 
+							0, 
+							isSOTrx()==true ? "Y":"N", 
+							boestatement.getDateAcct())					
 					);
 		}
 		else
@@ -426,10 +433,18 @@ public class Doc_BOEStatement extends Doc
 											isSOTrx()==true ? "Y":"N", 
 											boestatement.getDateAcct())
 						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(boestatement.getAD_Org_ID(),
+								boestatement.getAD_Client_ID(),
+								boestatement.Table_ID, 
+								0, 
+								isSOTrx()==true ? "Y":"N", 
+								boestatement.getDateAcct())
+						);
 				return;
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
-			{
+			{				
 				setFact_ID (
 						MGLBookPeriod.getID(boestatement.getAD_Org_ID(),
 											boestatement.getAD_Client_ID(),
@@ -438,9 +453,15 @@ public class Doc_BOEStatement extends Doc
 											isSOTrx()==true ? "Y":"N", 
 											boestatement.getDateAcct())
 						);
+				setGL_Book_ID(
+						MGLBookPeriod.getGLBookID(boestatement.getAD_Org_ID(),
+								boestatement.getAD_Client_ID(),
+								boestatement.Table_ID, 
+								0, 
+								isSOTrx()==true ? "Y":"N", 
+								boestatement.getDateAcct())						
+						);
 			}
 		}
-		
 	}
-
 }   //  Doc_BOEStatement

@@ -54,9 +54,11 @@ public final class FactLine extends X_Fact_Acct
 	 *  @param AD_Table_ID  - Table of Document Source
 	 *  @param Record_ID    - Record of document
 	 *  @param Line_ID      - Optional line id
+	 *  @param GL_Book_ID 	- GL Book ID
+	 *  @param Fact_ID		- Fact ID GL Book
 	 *  @param trxName transaction
 	 */
-	public FactLine (Properties ctx, int AD_Table_ID, int Record_ID, int Line_ID, String Fact_ID, String trxName)
+	public FactLine (Properties ctx, int AD_Table_ID, int Record_ID, int Line_ID, int GL_Book_ID, String Fact_ID, String trxName)
 	{
 		super(ctx, 0, trxName);
 		setAD_Client_ID(0);							//	do not derive
@@ -70,7 +72,8 @@ public final class FactLine extends X_Fact_Acct
 		setAD_Table_ID (AD_Table_ID);
 		setRecord_ID (Record_ID);
 		setLine_ID (Line_ID);
-		setFact_ID (Fact_ID);
+		setGL_Book_ID(GL_Book_ID);
+		setFact_ID (Fact_ID);		
 	}   //  FactLine
 
 	/**	Account					*/
@@ -89,7 +92,7 @@ public final class FactLine extends X_Fact_Acct
 	 */
 	public FactLine reverse (String description)
 	{
-		FactLine reversal = new FactLine (getCtx(), getAD_Table_ID(), getRecord_ID(), getLine_ID(), getFact_ID(), get_TrxName());
+		FactLine reversal = new FactLine (getCtx(), getAD_Table_ID(), getRecord_ID(), getLine_ID(), getGL_Book_ID(), getFact_ID(), get_TrxName());
 		reversal.setClientOrg(this);	//	needs to be set explicitly
 		reversal.setDocumentInfo(m_doc, m_docLine);
 		reversal.setAccount(m_acctSchema, m_acct);
@@ -108,7 +111,7 @@ public final class FactLine extends X_Fact_Acct
 	 */
 	public FactLine accrue (String description)
 	{
-		FactLine accrual = new FactLine (getCtx(), getAD_Table_ID(), getRecord_ID(), getLine_ID(), getFact_ID(), get_TrxName());
+		FactLine accrual = new FactLine (getCtx(), getAD_Table_ID(), getRecord_ID(), getLine_ID(), getGL_Book_ID(), getFact_ID(), get_TrxName());
 		accrual.setClientOrg(this);	//	needs to be set explicitly
 		accrual.setDocumentInfo(m_doc, m_docLine);
 		accrual.setAccount(m_acctSchema, m_acct);

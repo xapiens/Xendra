@@ -59,10 +59,12 @@ public static int Table_ID=MTable.getTable_ID("HR_Attribute");
 @XendraTrl(Identifier="64fec9da-cff4-4c6d-be4e-a252310626b2")
 public static String es_PE_TABLE_HR_Attribute_Name="hr_attribute";
 
-@XendraTable(Name="HR_Attribute",Description="",Help="",TableName="HR_Attribute",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.humanresource",
-Identifier="64fec9da-cff4-4c6d-be4e-a252310626b2",Synchronized="2017-08-16 11:42:47.0")
+@XendraTable(Name="HR_Attribute",AD_Package_ID="95f9a029-eaee-0747-b1a5-58cfdd8f8ae5",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="HR_Attribute",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.humanresource",Identifier="64fec9da-cff4-4c6d-be4e-a252310626b2",
+Synchronized="2020-03-03 21:37:59.0")
 /** TableName=HR_Attribute */
 public static final String Table_Name="HR_Attribute";
 
@@ -121,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="22aa9736-f689-4538-97e0-4ef2c0663a52",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name AD_Rule_ID */
 public static final String COLUMNNAME_AD_Rule_ID = "AD_Rule_ID";
 /** Set Amount.
@@ -148,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="93593bf1-286a-4cec-9fde-6ab327f4751b",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set Business Partner .
@@ -177,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8a7ddf13-183b-438a-bf14-d5b2cd6e4ec0",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Charge.
@@ -206,7 +208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b995a206-111e-491f-920b-b762dda6ab1f",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set Document Type.
@@ -235,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a32681f9-ce00-4c33-9f4a-2c1e3794c64d",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 /** Set Invoice.
@@ -264,7 +266,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ddbc905e-70b2-4e05-b31a-4d5234a7386c",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Column Type.
@@ -295,7 +297,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0aadcde4-71e8-4c3b-81cc-b62c8c4336bb",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name ColumnType */
 public static final String COLUMNNAME_ColumnType = "ColumnType";
 /** Set Description.
@@ -334,7 +336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="86d1d6ff-33c8-45e5-8836-4baaffbc8581",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set HR_Attribute_Acct.
@@ -361,7 +363,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eca50a04-c397-4f42-87f8-6c0bc95b5222",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Attribute_Acct */
 public static final String COLUMNNAME_HR_Attribute_Acct = "HR_Attribute_Acct";
 /** Set HR_Attribute.
@@ -406,7 +408,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b12dd677-90a8-4b3e-9274-0f2e2db43ee8",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Concept_ID */
 public static final String COLUMNNAME_HR_Concept_ID = "HR_Concept_ID";
 /** Set Payroll Department.
@@ -435,7 +437,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eb072983-5772-4cf8-b53f-1bd5f88cd6ef",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Department_ID */
 public static final String COLUMNNAME_HR_Department_ID = "HR_Department_ID";
 /** Set HR_Employee_ID.
@@ -464,7 +466,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7033da28-f91b-4224-9a80-e2a63fd96639",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Employee_ID */
 public static final String COLUMNNAME_HR_Employee_ID = "HR_Employee_ID";
 /** Set HR_Job_ID.
@@ -493,7 +495,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1bc6869f-3c11-4a27-a887-1053946dd982",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Job_ID */
 public static final String COLUMNNAME_HR_Job_ID = "HR_Job_ID";
 /** Set HR_Payroll_ID.
@@ -522,7 +524,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1406b2b9-a8dc-4375-8ecb-34572082af81",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name HR_Payroll_ID */
 public static final String COLUMNNAME_HR_Payroll_ID = "HR_Payroll_ID";
 /** Set Identifier.
@@ -554,7 +556,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="06d64baf-378f-4d97-9080-77204a29e22d",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Printed.
@@ -585,7 +587,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8109fee-55a8-4d76-ae8b-35e37d64dd27",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name IsPrinted */
 public static final String COLUMNNAME_IsPrinted = "IsPrinted";
 /** Set MaxValue.
@@ -612,7 +614,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f5be2182-057e-465c-a9f7-0e5a5933dea0",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name MaxValue */
 public static final String COLUMNNAME_MaxValue = "MaxValue";
 /** Set MinValue.
@@ -639,7 +641,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b977f454-7bec-4615-bf10-dc84e9f797f7",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name MinValue */
 public static final String COLUMNNAME_MinValue = "MinValue";
 /** Set Quantity.
@@ -666,7 +668,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ebd5f7fe-d214-4356-903f-010bd8471e41",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name Qty */
 public static final String COLUMNNAME_Qty = "Qty";
 /** Set Service date.
@@ -691,7 +693,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1ad1e86-99f4-4a38-838b-438d1b19a200",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name ServiceDate */
 public static final String COLUMNNAME_ServiceDate = "ServiceDate";
 /** Set Text Message.
@@ -723,7 +725,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="35c96f59-b7e2-40c5-a8f6-3545f805c849",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name TextMsg */
 public static final String COLUMNNAME_TextMsg = "TextMsg";
 /** Set Valid from.
@@ -749,7 +751,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2701760d-3db1-4eaf-a4c8-07e8ca58df79",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -774,7 +776,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d9084f2d-5453-4baa-9856-a80119b9b0f6",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:39.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

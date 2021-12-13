@@ -26,7 +26,7 @@ import org.compiere.util.CLogMgt;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
-import org.xendra.model.sql;
+import org.xendra.db.Querys;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +77,7 @@ public class operatorstoAnnotation extends SvrProcess {
 		PreparedStatement pstmt = null;
 		try
 		{
-			pstmt = DB.prepareStatement(sql.GETOPERATORS, get_TrxName());
+			pstmt = DB.prepareStatement(Querys.GETOPERATORS, get_TrxName());
 			ResultSet rs = pstmt.executeQuery();
 			StringBuffer sbcontainer = new StringBuffer();
 			while (rs.next ())

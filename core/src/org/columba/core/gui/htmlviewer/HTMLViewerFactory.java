@@ -11,8 +11,8 @@ import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginHandlerNotFoundException;
 import org.columba.core.gui.frame.FrameManager;
 import org.columba.core.gui.htmlviewer.api.IHTMLViewerPlugin;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
+import org.compiere.util.CLogMgt;
 
 
 public class HTMLViewerFactory {
@@ -44,12 +44,12 @@ public class HTMLViewerFactory {
 		} catch (Exception e) {
 			viewerPlugin = createHTMLViewerPluginInstance("Default");
 
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		} catch (Error e) {
 			viewerPlugin = createHTMLViewerPluginInstance("Default");
 
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 
@@ -74,11 +74,11 @@ public class HTMLViewerFactory {
 			return plugin;
 		} catch (PluginHandlerNotFoundException e) {
 			LOG.severe("Error while loading viewer plugin: " + e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		} catch (PluginException e) {
 			LOG.severe("Error while loading viewer plugin: " + e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 

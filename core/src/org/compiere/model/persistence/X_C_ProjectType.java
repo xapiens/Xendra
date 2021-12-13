@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_ProjectTypeCategory;
 /** Generated Model for C_ProjectType
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -62,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_ProjectType");
 public static String es_PE_TAB_ProjectType_Description="Mantener Tipo de Proyecto";
 
 @XendraTrl(Identifier="c507b2a5-865f-0385-dba2-87eb1e74f84c")
-public static String es_PE_TAB_ProjectType_Name="Tipo de Proyecto";
-
-@XendraTrl(Identifier="c507b2a5-865f-0385-dba2-87eb1e74f84c")
 public static String es_PE_TAB_ProjectType_Help="Tipo del Proyecto con fases y tareas opcionales de proyecto con la información estándar del funcionamiento";
 
-@XendraTab(Name="Project Type",Description="Maintain Type of a Project",
+@XendraTrl(Identifier="c507b2a5-865f-0385-dba2-87eb1e74f84c")
+public static String es_PE_TAB_ProjectType_Name="Tipo de Proyecto";
+@XendraTab(Name="Project Type",
+Description="Maintain Type of a Project",
 Help="Type of the project with optional phases and tasks of the project with standard performance information",
 AD_Window_ID="2e1a4ba2-daf5-c92e-d63d-46cbad48833e",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,11 +79,12 @@ public static final String TABNAME_ProjectType="c507b2a5-865f-0385-dba2-87eb1e74
 @XendraTrl(Identifier="beeffc8b-3e1f-8376-56ce-cdca8ccf6ce3")
 public static String es_PE_TABLE_C_ProjectType_Name="Tipo de Proyecto";
 
-@XendraTable(Name="Project Type",Description="Type of the project",Help="",
+@XendraTable(Name="Project Type",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Type of the project",Help="",
 TableName="C_ProjectType",AccessLevel="3",AD_Window_ID="2e1a4ba2-daf5-c92e-d63d-46cbad48833e",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="beeffc8b-3e1f-8376-56ce-cdca8ccf6ce3",Synchronized="2017-08-16 11:42:22.0")
+Identifier="beeffc8b-3e1f-8376-56ce-cdca8ccf6ce3",Synchronized="2020-03-03 21:37:34.0")
 /** TableName=C_ProjectType */
 public static final String Table_Name="C_ProjectType";
 
@@ -134,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c0cd86c2-453f-d72e-57b6-f2b8fb34eb24")
+public static String es_PE_FIELD_ProjectType_ProjectType_Name="Tipo de Proyecto";
+
+@XendraTrl(Identifier="c0cd86c2-453f-d72e-57b6-f2b8fb34eb24")
 public static String es_PE_FIELD_ProjectType_ProjectType_Description="Tipo de proyecto";
 
 @XendraTrl(Identifier="c0cd86c2-453f-d72e-57b6-f2b8fb34eb24")
 public static String es_PE_FIELD_ProjectType_ProjectType_Help="Tipo de proyecto con las fases opcionales del proyecto y la información estándar de funcionamiento";
-
-@XendraTrl(Identifier="c0cd86c2-453f-d72e-57b6-f2b8fb34eb24")
-public static String es_PE_FIELD_ProjectType_ProjectType_Name="Tipo de Proyecto";
 
 @XendraField(AD_Column_ID="C_ProjectType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -178,13 +178,13 @@ return value;
 }
 
 @XendraTrl(Identifier="c6f7dc4c-cf1f-4053-0c02-d30b5ab8d53b")
+public static String es_PE_FIELD_ProjectType_Description_Name="Observación";
+
+@XendraTrl(Identifier="c6f7dc4c-cf1f-4053-0c02-d30b5ab8d53b")
 public static String es_PE_FIELD_ProjectType_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="c6f7dc4c-cf1f-4053-0c02-d30b5ab8d53b")
 public static String es_PE_FIELD_ProjectType_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="c6f7dc4c-cf1f-4053-0c02-d30b5ab8d53b")
-public static String es_PE_FIELD_ProjectType_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1e77e3c0-82e4-25d6-2317-bd3aec5f7d3a",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -228,13 +228,13 @@ return value;
 }
 
 @XendraTrl(Identifier="67316ce0-3583-612c-5ed1-ac9745f19287")
+public static String es_PE_FIELD_ProjectType_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="67316ce0-3583-612c-5ed1-ac9745f19287")
 public static String es_PE_FIELD_ProjectType_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="67316ce0-3583-612c-5ed1-ac9745f19287")
 public static String es_PE_FIELD_ProjectType_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="67316ce0-3583-612c-5ed1-ac9745f19287")
-public static String es_PE_FIELD_ProjectType_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -252,7 +252,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e0fe2134-1f8e-546e-be5d-9abbe216b726",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -284,7 +284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="11b4c533-40ac-47a8-ad6d-ee2058776636",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -316,18 +316,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
+public static String es_PE_FIELD_ProjectType_Name_Name="Nombre";
+
+@XendraTrl(Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
 public static String es_PE_FIELD_ProjectType_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
 public static String es_PE_FIELD_ProjectType_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
-public static String es_PE_FIELD_ProjectType_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="128b4d06-78d5-6bc1-e093-10a0139852d6")
 public static final String FIELDNAME_ProjectType_Name="128b4d06-78d5-6bc1-e093-10a0139852d6";
 
 @XendraTrl(Identifier="3ed929b5-36e8-0fc1-0273-3b0fb22335a5")
@@ -339,19 +340,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ed929b5-36e8-0fc1-0273-3b0fb22335a5",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** ProjectCategory AD_Reference=dd876d4c-6a7f-9d8e-4f7c-480645f3079a */
-public static final int PROJECTCATEGORY_AD_Reference_ID=288;
 /** Set Project Category.
 @param ProjectCategory Project Category */
 public void setProjectCategory (String ProjectCategory)
 {
-if (ProjectCategory == null) throw new IllegalArgumentException ("ProjectCategory is mandatory");
-if (ProjectCategory.equals(REF_C_ProjectTypeCategory.General) || ProjectCategory.equals(REF_C_ProjectTypeCategory.AssetProject) || ProjectCategory.equals(REF_C_ProjectTypeCategory.WorkOrderJob) || ProjectCategory.equals(REF_C_ProjectTypeCategory.ServiceChargeProject));
- else throw new IllegalArgumentException ("ProjectCategory Invalid value - " + ProjectCategory + " - Reference_ID=288 - N - A - W - S");
 if (ProjectCategory.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -367,13 +362,13 @@ return (String)get_Value(COLUMNNAME_ProjectCategory);
 }
 
 @XendraTrl(Identifier="66b4563c-70ef-6e17-27c5-a9b3c80ea645")
+public static String es_PE_FIELD_ProjectType_ProjectCategory_Name="Categoría del Proyecto";
+
+@XendraTrl(Identifier="66b4563c-70ef-6e17-27c5-a9b3c80ea645")
 public static String es_PE_FIELD_ProjectType_ProjectCategory_Description="Categoría del Proyecto";
 
 @XendraTrl(Identifier="66b4563c-70ef-6e17-27c5-a9b3c80ea645")
 public static String es_PE_FIELD_ProjectType_ProjectCategory_Help="La categoría del proyecto determina el comportamiento del proyecto:General - ninguna contabilidad especial, ej. para las pre-ventas ó seguir generalEl servicio - ninguna contabilidad especial, ej. para la orden de trabajo de los proyectos de Servicio/carga - crea las transacciones de Proyecto/Job WIP - capacidad de publicar activo material - crea las transacciones del activode proyecto - capacidad de publicar el material";
-
-@XendraTrl(Identifier="66b4563c-70ef-6e17-27c5-a9b3c80ea645")
-public static String es_PE_FIELD_ProjectType_ProjectCategory_Name="Categoría del Proyecto";
 
 @XendraField(AD_Column_ID="ProjectCategory",IsCentrallyMaintained=true,
 AD_Tab_ID="c507b2a5-865f-0385-dba2-87eb1e74f84c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -391,7 +386,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e30574e9-e0df-695e-b6f1-7558a8d39df1",Synchronized="2017-08-05 16:54:19.0")
+Identifier="e30574e9-e0df-695e-b6f1-7558a8d39df1",Synchronized="2019-08-30 22:22:10.0")
 /** Column name ProjectCategory */
 public static final String COLUMNNAME_ProjectCategory = "ProjectCategory";
 }

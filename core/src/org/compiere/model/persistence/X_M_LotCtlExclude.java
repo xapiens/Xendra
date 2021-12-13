@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("M_LotCtlExclude");
 public static String es_PE_TAB_Exclude_Description="Excluir capacidad de crear Lotes en Ajustar Atributos";
 
 @XendraTrl(Identifier="170a3ed5-fa75-2603-28dd-785188c621a1")
-public static String es_PE_TAB_Exclude_Name="Excluir";
-
-@XendraTrl(Identifier="170a3ed5-fa75-2603-28dd-785188c621a1")
 public static String es_PE_TAB_Exclude_Help="Crear un registro, si desea excluir capacidad de crear lotes en Información Ajustar Atributo de Producto Note que la información es alamacenada. Para que tenga efecto debe ingresar nuevamente al sistema o reiniciar el caché.";
 
-@XendraTab(Name="Exclude",Description="Exclude the ability to create Lots in Attribute Sets",
+@XendraTrl(Identifier="170a3ed5-fa75-2603-28dd-785188c621a1")
+public static String es_PE_TAB_Exclude_Name="Excluir";
+@XendraTab(Name="Exclude",
+Description="Exclude the ability to create Lots in Attribute Sets",
 Help="Create a record, if you want to exclude the ability to create Lots in Product Attribute Set information. Note that the information is cached. To have effect you may have to re-login or reset cache.",
 AD_Window_ID="8e36c673-4582-effe-d6a4-d690c65293bb",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,12 +80,13 @@ public static final String TABNAME_Exclude="170a3ed5-fa75-2603-28dd-785188c621a1
 @XendraTrl(Identifier="9f42c2f9-7fdd-f677-9e02-401ca8e5fa4a")
 public static String es_PE_TABLE_M_LotCtlExclude_Name="Exclur Lote";
 
-@XendraTable(Name="Exclude Lot",Description="Exclude the ability to create Lots in Attribute Sets",
-Help="",TableName="M_LotCtlExclude",AccessLevel="2",
-AD_Window_ID="8e36c673-4582-effe-d6a4-d690c65293bb",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.material",Identifier="9f42c2f9-7fdd-f677-9e02-401ca8e5fa4a",
-Synchronized="2017-08-16 11:43:19.0")
+@XendraTable(Name="Exclude Lot",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Exclude the ability to create Lots in Attribute Sets",Help="",
+TableName="M_LotCtlExclude",AccessLevel="2",AD_Window_ID="8e36c673-4582-effe-d6a4-d690c65293bb",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="9f42c2f9-7fdd-f677-9e02-401ca8e5fa4a",Synchronized="2020-03-03 21:38:35.0")
 /** TableName=M_LotCtlExclude */
 public static final String Table_Name="M_LotCtlExclude";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b06d2ed7-26bf-97c4-2de5-c484d08539dd")
+public static String es_PE_FIELD_Exclude_Table_Name="Tabla";
+
+@XendraTrl(Identifier="b06d2ed7-26bf-97c4-2de5-c484d08539dd")
 public static String es_PE_FIELD_Exclude_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="b06d2ed7-26bf-97c4-2de5-c484d08539dd")
 public static String es_PE_FIELD_Exclude_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="b06d2ed7-26bf-97c4-2de5-c484d08539dd")
-public static String es_PE_FIELD_Exclude_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="170a3ed5-fa75-2603-28dd-785188c621a1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="74c46d7f-b39b-15c2-6c2b-8a0ed1863e1c",Synchronized="2017-08-05 16:55:14.0")
+Identifier="74c46d7f-b39b-15c2-6c2b-8a0ed1863e1c",Synchronized="2019-08-30 22:23:15.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Identifier.
@@ -191,7 +192,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b1f0207a-682f-4ab2-9b1d-08acdba0ad66",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sales Transaction.
@@ -214,13 +215,13 @@ return false;
 }
 
 @XendraTrl(Identifier="3d12bffe-97a8-4b09-eefd-39d2360318fa")
+public static String es_PE_FIELD_Exclude_SalesTransaction_Name="Transacción de Ventas";
+
+@XendraTrl(Identifier="3d12bffe-97a8-4b09-eefd-39d2360318fa")
 public static String es_PE_FIELD_Exclude_SalesTransaction_Description="Esta es una transacción de ventas";
 
 @XendraTrl(Identifier="3d12bffe-97a8-4b09-eefd-39d2360318fa")
 public static String es_PE_FIELD_Exclude_SalesTransaction_Help="El cuadro de verificación Transacción de Ventas indica si este ítem es una transacción de ventas";
-
-@XendraTrl(Identifier="3d12bffe-97a8-4b09-eefd-39d2360318fa")
-public static String es_PE_FIELD_Exclude_SalesTransaction_Name="Transacción de Ventas";
 
 @XendraField(AD_Column_ID="IsSOTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="170a3ed5-fa75-2603-28dd-785188c621a1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -238,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="06145459-8bf7-7653-51bc-5abd0ba916af",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Exclude Lot.
@@ -258,10 +259,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2ec776c8-378e-32b6-45f6-3dcc55acefc1")
-public static String es_PE_FIELD_Exclude_ExcludeLot_Description="Excluir la capacidad de crear Lotes en Configurar Atributos";
+public static String es_PE_FIELD_Exclude_ExcludeLot_Name="Exclur Lote";
 
 @XendraTrl(Identifier="2ec776c8-378e-32b6-45f6-3dcc55acefc1")
-public static String es_PE_FIELD_Exclude_ExcludeLot_Name="Exclur Lote";
+public static String es_PE_FIELD_Exclude_ExcludeLot_Description="Excluir la capacidad de crear Lotes en Configurar Atributos";
 
 @XendraField(AD_Column_ID="M_LotCtlExclude_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="170a3ed5-fa75-2603-28dd-785188c621a1",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -288,13 +289,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1cf7d1f8-afcc-736b-4f63-5a1dfa9983e9")
+public static String es_PE_FIELD_Exclude_LotControl_Name="Control de Lote";
+
+@XendraTrl(Identifier="1cf7d1f8-afcc-736b-4f63-5a1dfa9983e9")
 public static String es_PE_FIELD_Exclude_LotControl_Description="Control del lote del producto";
 
 @XendraTrl(Identifier="1cf7d1f8-afcc-736b-4f63-5a1dfa9983e9")
 public static String es_PE_FIELD_Exclude_LotControl_Help="Definición para crear los números de lote para los productos";
-
-@XendraTrl(Identifier="1cf7d1f8-afcc-736b-4f63-5a1dfa9983e9")
-public static String es_PE_FIELD_Exclude_LotControl_Name="Control de Lote";
 
 @XendraField(AD_Column_ID="M_LotCtl_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="170a3ed5-fa75-2603-28dd-785188c621a1",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -312,7 +313,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7388dd53-7a4e-32ed-c964-e236ea49b916",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name M_LotCtl_ID */
 public static final String COLUMNNAME_M_LotCtl_ID = "M_LotCtl_ID";
 }

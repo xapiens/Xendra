@@ -63,10 +63,10 @@ public static int Table_ID=MTable.getTable_ID("AD_Column_Access");
 public static String es_PE_TAB_ColumnAccess_Description="Mantener el acceso a columnas";
 
 @XendraTrl(Identifier="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c")
-public static String es_PE_TAB_ColumnAccess_Name="Acceso a columnas";
+public static String es_PE_TAB_ColumnAccess_Help="Si está enumerado aquí, el acceso del rol can(not) es la columna de esta tabla, iguala si el rol tiene acceso a la funcionalidad";
 
 @XendraTrl(Identifier="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c")
-public static String es_PE_TAB_ColumnAccess_Help="Si está enumerado aquí, el acceso del rol can(not) es la columna de esta tabla, iguala si el rol tiene acceso a la funcionalidad";
+public static String es_PE_TAB_ColumnAccess_Name="Acceso a columnas";
 
 @XendraTab(Name="Column Access",Description="Maintain Column Access",
 Help="If listed here, the Role can(not) access the column of this table, even if the role has access to the functionality. <br>If you Include Access to a column and select Read Only, you can only read data (otherwise full access). <br>If you Exclude Access to a column and select Read Only, you can only read data (otherwise no access). Note that access information is cached and requires re-login or reset of cache.",
@@ -82,11 +82,12 @@ public static final String TABNAME_ColumnAccess="9ebfa86f-be6e-169b-e30e-9bba66b
 @XendraTrl(Identifier="06021a6e-6c1d-9b25-4dc0-aa94edb61a38")
 public static String es_PE_TABLE_AD_Column_Access_Name="AD_Column_Access";
 
-@XendraTable(Name="AD_Column_Access",Description="",Help="",TableName="AD_Column_Access",
-AccessLevel="6",AD_Window_ID="c927d42d-2145-4004-dbd3-51f85f9cab5e",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="06021a6e-6c1d-9b25-4dc0-aa94edb61a38",Synchronized="2017-08-16 11:40:08.0")
+@XendraTable(Name="AD_Column_Access",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Column_Access",AccessLevel="6",AD_Window_ID="c927d42d-2145-4004-dbd3-51f85f9cab5e",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="06021a6e-6c1d-9b25-4dc0-aa94edb61a38",Synchronized="2020-03-03 21:34:58.0")
 /** TableName=AD_Column_Access */
 public static final String Table_Name="AD_Column_Access";
 
@@ -142,13 +143,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_Column_ID()));
 }
 
 @XendraTrl(Identifier="4ba16fff-36a3-c887-790c-44d91c8d4b59")
+public static String es_PE_FIELD_ColumnAccess_Column_Name="Columna";
+
+@XendraTrl(Identifier="4ba16fff-36a3-c887-790c-44d91c8d4b59")
 public static String es_PE_FIELD_ColumnAccess_Column_Description="Columna en la tabla";
 
 @XendraTrl(Identifier="4ba16fff-36a3-c887-790c-44d91c8d4b59")
 public static String es_PE_FIELD_ColumnAccess_Column_Help="Enlace a la columna base de datos de la tabla";
-
-@XendraTrl(Identifier="4ba16fff-36a3-c887-790c-44d91c8d4b59")
-public static String es_PE_FIELD_ColumnAccess_Column_Name="Columna";
 
 @XendraField(AD_Column_ID="AD_Column_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +167,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ea6362aa-5cf7-b1c6-3539-ff88c1069068",Synchronized="2017-08-05 16:52:28.0")
+Identifier="ea6362aa-5cf7-b1c6-3539-ff88c1069068",Synchronized="2019-08-30 22:20:17.0")
 /** Column name AD_Column_ID */
 public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
 /** Set Role.
@@ -186,13 +187,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e65e1696-6806-4cef-4d20-f2d4b0dea0db")
+public static String es_PE_FIELD_ColumnAccess_Role_Name="Rol";
+
+@XendraTrl(Identifier="e65e1696-6806-4cef-4d20-f2d4b0dea0db")
 public static String es_PE_FIELD_ColumnAccess_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="e65e1696-6806-4cef-4d20-f2d4b0dea0db")
 public static String es_PE_FIELD_ColumnAccess_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="e65e1696-6806-4cef-4d20-f2d4b0dea0db")
-public static String es_PE_FIELD_ColumnAccess_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -210,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="34225c02-b6bb-5938-2f8e-0dac0ae8d4a1",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Table.
@@ -231,13 +232,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8851b425-756d-4953-280a-e19814de01d3")
+public static String es_PE_FIELD_ColumnAccess_Table_Name="Tabla";
+
+@XendraTrl(Identifier="8851b425-756d-4953-280a-e19814de01d3")
 public static String es_PE_FIELD_ColumnAccess_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="8851b425-756d-4953-280a-e19814de01d3")
 public static String es_PE_FIELD_ColumnAccess_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="8851b425-756d-4953-280a-e19814de01d3")
-public static String es_PE_FIELD_ColumnAccess_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cddb9171-6a7d-127a-1ced-53e4e004fea2",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Identifier.
@@ -287,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a40cbbcd-9cd2-4538-a6ea-b7d8e20de187",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Exclude.
@@ -310,13 +311,13 @@ return false;
 }
 
 @XendraTrl(Identifier="2a3f8fdd-0fb9-e7bc-17d5-d5329da19a92")
+public static String es_PE_FIELD_ColumnAccess_Exclude_Name="Excluir";
+
+@XendraTrl(Identifier="2a3f8fdd-0fb9-e7bc-17d5-d5329da19a92")
 public static String es_PE_FIELD_ColumnAccess_Exclude_Description="Excluir el acceso a los datos";
 
 @XendraTrl(Identifier="2a3f8fdd-0fb9-e7bc-17d5-d5329da19a92")
 public static String es_PE_FIELD_ColumnAccess_Exclude_Help="Si está seleccionado, el Rol no puede tener acceso a los datos especificos. Si no esta seleccionado, el Rol puede tener acceso SOLAMENTE a los datos especificos.";
-
-@XendraTrl(Identifier="2a3f8fdd-0fb9-e7bc-17d5-d5329da19a92")
-public static String es_PE_FIELD_ColumnAccess_Exclude_Name="Excluir";
 
 @XendraField(AD_Column_ID="IsExclude",IsCentrallyMaintained=true,
 AD_Tab_ID="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -334,7 +335,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c9b771cb-b8c6-6cd9-97d9-d9660c88e328",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name IsExclude */
 public static final String COLUMNNAME_IsExclude = "IsExclude";
 /** Set Read Only.
@@ -357,13 +358,13 @@ return false;
 }
 
 @XendraTrl(Identifier="cd33a15f-b937-fd3e-2643-c12ad3dd06c5")
+public static String es_PE_FIELD_ColumnAccess_ReadOnly_Name="Sólo Lectura";
+
+@XendraTrl(Identifier="cd33a15f-b937-fd3e-2643-c12ad3dd06c5")
 public static String es_PE_FIELD_ColumnAccess_ReadOnly_Description="El campo es de sólo lectura";
 
 @XendraTrl(Identifier="cd33a15f-b937-fd3e-2643-c12ad3dd06c5")
 public static String es_PE_FIELD_ColumnAccess_ReadOnly_Help="El sólo lectura indica que este campo solamente puede ser leído. No puede ser actualizado.";
-
-@XendraTrl(Identifier="cd33a15f-b937-fd3e-2643-c12ad3dd06c5")
-public static String es_PE_FIELD_ColumnAccess_ReadOnly_Name="Sólo Lectura";
 
 @XendraField(AD_Column_ID="IsReadOnly",IsCentrallyMaintained=true,
 AD_Tab_ID="9ebfa86f-be6e-169b-e30e-9bba66bb1d7c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -381,7 +382,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0bbade4d-ad63-34ef-05c3-8861e941eef8",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name IsReadOnly */
 public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
 /** Set Synchronized.
@@ -406,7 +407,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="da9fe34a-89fc-8eff-85a7-093b22727c22",
-Synchronized="2017-08-05 16:52:28.0")
+Synchronized="2019-08-30 22:20:17.0")
 /** Column name Synchronized */
 public static final String COLUMNNAME_Synchronized = "Synchronized";
 }

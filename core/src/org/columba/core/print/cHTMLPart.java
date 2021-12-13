@@ -30,6 +30,8 @@ import javax.swing.text.View;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
+import org.compiere.util.CLogger;
+
 
 /**
  * Class for representing a HTML print object. Objects of this
@@ -41,7 +43,7 @@ import javax.swing.text.html.HTMLEditorKit;
  */
 public class cHTMLPart extends cPrintObject {
 
-    private static final Logger LOG = Logger.getLogger("org.columba.core.print");
+    private static final CLogger LOG = CLogger.getCLogger("org.columba.core.print");
 
     /** IContainer holding the HTML to be printed (used to control layout etc. */
     private JTextPane mPane = null;

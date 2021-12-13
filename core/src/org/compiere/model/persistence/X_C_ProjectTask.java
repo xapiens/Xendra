@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_ProjectInvoiceRule;
 /** Generated Model for C_ProjectTask
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -69,12 +68,12 @@ public static int Table_ID=MTable.getTable_ID("C_ProjectTask");
 public static String es_PE_TAB_Task_Description="Tarea actual del proyecto";
 
 @XendraTrl(Identifier="f66b758b-d281-9c6c-9773-19b67bcf1145")
-public static String es_PE_TAB_Task_Name="Tarea";
-
-@XendraTrl(Identifier="f66b758b-d281-9c6c-9773-19b67bcf1145")
 public static String es_PE_TAB_Task_Help="Una tarea del proyecto en una fase del proyecto representa el trabajo real.";
 
-@XendraTab(Name="Task",Description="Actual Project Task",
+@XendraTrl(Identifier="f66b758b-d281-9c6c-9773-19b67bcf1145")
+public static String es_PE_TAB_Task_Name="Tarea";
+@XendraTab(Name="Task",
+Description="Actual Project Task",
 Help="A Project Task in a Project Phase represents the actual work.",
 AD_Window_ID="402bdf68-d0df-64fe-b670-0ca668710aa1",SeqNo=30,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -87,11 +86,13 @@ public static final String TABNAME_Task="f66b758b-d281-9c6c-9773-19b67bcf1145";
 @XendraTrl(Identifier="e3b48cec-f2ee-f47b-39d9-eadb93dd779f")
 public static String es_PE_TABLE_C_ProjectTask_Name="Tarea del Proyecto";
 
-@XendraTable(Name="Project Task",Description="Actual Project Task in a Phase",Help="",
-TableName="C_ProjectTask",AccessLevel="3",AD_Window_ID="402bdf68-d0df-64fe-b670-0ca668710aa1",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="e3b48cec-f2ee-f47b-39d9-eadb93dd779f",Synchronized="2017-08-16 11:42:22.0")
+@XendraTable(Name="Project Task",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Actual Project Task in a Phase",
+Help="",TableName="C_ProjectTask",AccessLevel="3",
+AD_Window_ID="402bdf68-d0df-64fe-b670-0ca668710aa1",AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="e3b48cec-f2ee-f47b-39d9-eadb93dd779f",
+Synchronized="2020-03-03 21:37:34.0")
 /** TableName=C_ProjectTask */
 public static final String Table_Name="C_ProjectTask";
 
@@ -141,13 +142,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="d9eb8373-d65e-4bfd-8f53-589fd3b9d8a5")
+public static String es_PE_FIELD_Task_CommittedAmount_Name="Total Comprometido";
+
+@XendraTrl(Identifier="d9eb8373-d65e-4bfd-8f53-589fd3b9d8a5")
 public static String es_PE_FIELD_Task_CommittedAmount_Description="Total Comprometido (legal)";
 
 @XendraTrl(Identifier="d9eb8373-d65e-4bfd-8f53-589fd3b9d8a5")
 public static String es_PE_FIELD_Task_CommittedAmount_Help="El Total comprometido es independiente del total planeado, usted usaría el total planeado para su estimación realista; esta podría ser mayor ó menor que el total comprometido.";
-
-@XendraTrl(Identifier="d9eb8373-d65e-4bfd-8f53-589fd3b9d8a5")
-public static String es_PE_FIELD_Task_CommittedAmount_Name="Total Comprometido";
 
 @XendraField(AD_Column_ID="CommittedAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -165,7 +166,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="176407ff-a01a-55bc-9e22-5fd575368222",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name CommittedAmt */
 public static final String COLUMNNAME_CommittedAmt = "CommittedAmt";
 /** Set Project Phase.
@@ -185,10 +186,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0aa32547-8d26-850c-34fa-6300b8fefb8e")
-public static String es_PE_FIELD_Task_ProjectPhase_Description="Fase del Proyecto";
+public static String es_PE_FIELD_Task_ProjectPhase_Name="Fase del Proyecto";
 
 @XendraTrl(Identifier="0aa32547-8d26-850c-34fa-6300b8fefb8e")
-public static String es_PE_FIELD_Task_ProjectPhase_Name="Fase del Proyecto";
+public static String es_PE_FIELD_Task_ProjectPhase_Description="Fase del Proyecto";
 
 @XendraField(AD_Column_ID="C_ProjectPhase_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -206,7 +207,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="723936a2-3fa0-c6a6-e072-6152b187396c",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_ProjectPhase_ID */
 public static final String COLUMNNAME_C_ProjectPhase_ID = "C_ProjectPhase_ID";
 /** Set Project Task.
@@ -226,13 +227,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e5c84ed0-6fff-2cde-41b3-6c8f5c9fdd33")
+public static String es_PE_FIELD_Task_ProjectTask_Name="Tarea del Proyecto";
+
+@XendraTrl(Identifier="e5c84ed0-6fff-2cde-41b3-6c8f5c9fdd33")
 public static String es_PE_FIELD_Task_ProjectTask_Description="Actual tarea en la fase del proyecto.";
 
 @XendraTrl(Identifier="e5c84ed0-6fff-2cde-41b3-6c8f5c9fdd33")
 public static String es_PE_FIELD_Task_ProjectTask_Help="Una tarea de proyecto en una fase de proyecto representa el trabajo real.";
-
-@XendraTrl(Identifier="e5c84ed0-6fff-2cde-41b3-6c8f5c9fdd33")
-public static String es_PE_FIELD_Task_ProjectTask_Name="Tarea del Proyecto";
 
 @XendraField(AD_Column_ID="C_ProjectTask_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -260,13 +261,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="72b75ee7-aa3f-a53a-5349-c4e956da9d00")
+public static String es_PE_FIELD_Task_StandardTask_Name="Tarea Estándar";
+
+@XendraTrl(Identifier="72b75ee7-aa3f-a53a-5349-c4e956da9d00")
 public static String es_PE_FIELD_Task_StandardTask_Description="Tarea estandar en tipo de proyecto.";
 
 @XendraTrl(Identifier="72b75ee7-aa3f-a53a-5349-c4e956da9d00")
 public static String es_PE_FIELD_Task_StandardTask_Help="Tarea estándar del proyecto de una fase del proyecto con esfuerzo estándar.";
-
-@XendraTrl(Identifier="72b75ee7-aa3f-a53a-5349-c4e956da9d00")
-public static String es_PE_FIELD_Task_StandardTask_Name="Tarea Estándar";
 
 @XendraField(AD_Column_ID="C_Task_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cfa494d2-6992-15b5-806b-7a07654ac37a",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name C_Task_ID */
 public static final String COLUMNNAME_C_Task_ID = "C_Task_ID";
 /** Set Description.
@@ -310,13 +311,13 @@ return value;
 }
 
 @XendraTrl(Identifier="6262c8de-699b-f8ac-bd7f-19cf2805b306")
+public static String es_PE_FIELD_Task_Description_Name="Observación";
+
+@XendraTrl(Identifier="6262c8de-699b-f8ac-bd7f-19cf2805b306")
 public static String es_PE_FIELD_Task_Description_Description="Observación";
 
 @XendraTrl(Identifier="6262c8de-699b-f8ac-bd7f-19cf2805b306")
 public static String es_PE_FIELD_Task_Description_Help="Observación";
-
-@XendraTrl(Identifier="6262c8de-699b-f8ac-bd7f-19cf2805b306")
-public static String es_PE_FIELD_Task_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -334,7 +335,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19ece3a8-a26c-4d24-77e4-b80a1521c04f",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -360,18 +361,19 @@ return value;
 }
 
 @XendraTrl(Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
+public static String es_PE_FIELD_Task_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
 public static String es_PE_FIELD_Task_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
 public static String es_PE_FIELD_Task_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
 
-@XendraTrl(Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
-public static String es_PE_FIELD_Task_CommentHelp_Name="Ayuda";
-@XendraField(AD_Column_ID="Help",
-IsCentrallyMaintained=true,AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
+@XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
+AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa")
 public static final String FIELDNAME_Task_CommentHelp="34bf70f8-1c64-b2be-8c81-5b8e0f76f8aa";
 
 @XendraTrl(Identifier="bcf3c0c8-dc30-2c82-4bca-9698de74172c")
@@ -383,7 +385,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bcf3c0c8-dc30-2c82-4bca-9698de74172c",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -415,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a68171e1-0b67-423c-878d-9810fc3429a4",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -436,13 +438,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b19179a8-4754-d184-dfb2-4c8e9782cbe6")
+public static String es_PE_FIELD_Task_Product_Name="Producto";
+
+@XendraTrl(Identifier="b19179a8-4754-d184-dfb2-4c8e9782cbe6")
 public static String es_PE_FIELD_Task_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="b19179a8-4754-d184-dfb2-4c8e9782cbe6")
 public static String es_PE_FIELD_Task_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="b19179a8-4754-d184-dfb2-4c8e9782cbe6")
-public static String es_PE_FIELD_Task_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -460,7 +462,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="28f17600-ee55-7ce5-542b-d9228493a382",Synchronized="2017-08-05 16:54:19.0")
+Identifier="28f17600-ee55-7ce5-542b-d9228493a382",Synchronized="2019-08-30 22:22:10.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Name.
@@ -485,18 +487,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
+public static String es_PE_FIELD_Task_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
 public static String es_PE_FIELD_Task_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
 public static String es_PE_FIELD_Task_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
-public static String es_PE_FIELD_Task_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d4b800af-43fa-9786-345e-0a6c487ceec5")
 public static final String FIELDNAME_Task_Name="d4b800af-43fa-9786-345e-0a6c487ceec5";
 
 @XendraTrl(Identifier="ecd63f81-9894-fa7a-8ad9-fbdef1632f3c")
@@ -508,7 +511,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ecd63f81-9894-fa7a-8ad9-fbdef1632f3c",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Planned Amount.
@@ -528,13 +531,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="87cc7cf2-8df9-3f3a-6b67-0e511e15e2b2")
+public static String es_PE_FIELD_Task_PlannedAmount_Name="Total Planeado";
+
+@XendraTrl(Identifier="87cc7cf2-8df9-3f3a-6b67-0e511e15e2b2")
 public static String es_PE_FIELD_Task_PlannedAmount_Description="Total planeado para este proyecto";
 
 @XendraTrl(Identifier="87cc7cf2-8df9-3f3a-6b67-0e511e15e2b2")
 public static String es_PE_FIELD_Task_PlannedAmount_Help="El Total planeado indica el total anticipado para este proyecto ó linea de proyecto";
-
-@XendraTrl(Identifier="87cc7cf2-8df9-3f3a-6b67-0e511e15e2b2")
-public static String es_PE_FIELD_Task_PlannedAmount_Name="Total Planeado";
 
 @XendraField(AD_Column_ID="PlannedAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -552,19 +555,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8ffb3b7-b639-8e66-cb20-4144073a3952",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name PlannedAmt */
 public static final String COLUMNNAME_PlannedAmt = "PlannedAmt";
-
-/** ProjInvoiceRule AD_Reference=d99f06b4-e2f5-c1c0-def9-657548c5f17d */
-public static final int PROJINVOICERULE_AD_Reference_ID=383;
 /** Set Invoice Rule.
 @param ProjInvoiceRule Invoice Rule for the project */
 public void setProjInvoiceRule (String ProjInvoiceRule)
 {
-if (ProjInvoiceRule == null) throw new IllegalArgumentException ("ProjInvoiceRule is mandatory");
-if (ProjInvoiceRule.equals(REF_C_ProjectInvoiceRule.None) || ProjInvoiceRule.equals(REF_C_ProjectInvoiceRule.CommittedAmount) || ProjInvoiceRule.equals(REF_C_ProjectInvoiceRule.TimeMaterialMaxComitted) || ProjInvoiceRule.equals(REF_C_ProjectInvoiceRule.TimeMaterial) || ProjInvoiceRule.equals(REF_C_ProjectInvoiceRule.ProductQuantity));
- else throw new IllegalArgumentException ("ProjInvoiceRule Invalid value - " + ProjInvoiceRule + " - Reference_ID=383 - - - C - c - T - P");
 if (ProjInvoiceRule.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -580,13 +577,13 @@ return (String)get_Value(COLUMNNAME_ProjInvoiceRule);
 }
 
 @XendraTrl(Identifier="8ef75f1f-3ec0-e6fc-83e2-903ae2f9487c")
+public static String es_PE_FIELD_Task_InvoiceRule_Name="Invoice Rule";
+
+@XendraTrl(Identifier="8ef75f1f-3ec0-e6fc-83e2-903ae2f9487c")
 public static String es_PE_FIELD_Task_InvoiceRule_Description="Invoice Rule for the project";
 
 @XendraTrl(Identifier="8ef75f1f-3ec0-e6fc-83e2-903ae2f9487c")
 public static String es_PE_FIELD_Task_InvoiceRule_Help="The Invoice Rule for the project determines how orders (and consequently invoices) are created.  The selection on project level can be overwritten on Phase or Task";
-
-@XendraTrl(Identifier="8ef75f1f-3ec0-e6fc-83e2-903ae2f9487c")
-public static String es_PE_FIELD_Task_InvoiceRule_Name="Invoice Rule";
 
 @XendraField(AD_Column_ID="ProjInvoiceRule",IsCentrallyMaintained=true,
 AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -604,7 +601,7 @@ FieldLength=1,DefaultValue="@ProjInvoiceRule@",IsKey=false,IsInternal=false,IsPa
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0c43ff19-c7e3-630d-ec2a-30e83f119185",Synchronized="2017-08-05 16:54:19.0")
+Identifier="0c43ff19-c7e3-630d-ec2a-30e83f119185",Synchronized="2019-08-30 22:22:10.0")
 /** Column name ProjInvoiceRule */
 public static final String COLUMNNAME_ProjInvoiceRule = "ProjInvoiceRule";
 /** Set Quantity.
@@ -623,17 +620,18 @@ return bd;
 }
 
 @XendraTrl(Identifier="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7")
+public static String es_PE_FIELD_Task_Quantity_Name="Cantidad";
+
+@XendraTrl(Identifier="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7")
 public static String es_PE_FIELD_Task_Quantity_Description="Cantidad";
 
 @XendraTrl(Identifier="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7")
 public static String es_PE_FIELD_Task_Quantity_Help="La Cantidad indica el número de un producto específico o artículo para este documento";
 
-@XendraTrl(Identifier="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7")
-public static String es_PE_FIELD_Task_Quantity_Name="Cantidad";
-@XendraField(AD_Column_ID="Qty",
-IsCentrallyMaintained=true,AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="@ProjInvoiceRule@=P",DisplayLength=26,IsReadOnly=false,SeqNo=130,
-SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+@XendraField(AD_Column_ID="Qty",IsCentrallyMaintained=true,
+AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="@ProjInvoiceRule@=P",DisplayLength=26,IsReadOnly=false,SeqNo=130,SortNo=0,
+IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7")
 public static final String FIELDNAME_Task_Quantity="cf621ef2-5a82-e8f5-6e28-153fe4ba42c7";
 
@@ -646,7 +644,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="de910967-c1a3-7d0e-a690-cd243a221497",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name Qty */
 public static final String COLUMNNAME_Qty = "Qty";
 /** Set Sequence.
@@ -671,18 +669,19 @@ return new KeyNamePair(get_ID(), String.valueOf(getSeqNo()));
 }
 
 @XendraTrl(Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
+public static String es_PE_FIELD_Task_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
 public static String es_PE_FIELD_Task_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
 public static String es_PE_FIELD_Task_Sequence_Help="La Secuencia indica el orden de los registros";
 
-@XendraTrl(Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
-public static String es_PE_FIELD_Task_Sequence_Name="Secuencia";
-@XendraField(AD_Column_ID="SeqNo",
-IsCentrallyMaintained=true,AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
+@XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
+AD_Tab_ID="f66b758b-d281-9c6c-9773-19b67bcf1145",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="196d5898-5d0f-d928-4f62-b6b3716b9013")
 public static final String FIELDNAME_Task_Sequence="196d5898-5d0f-d928-4f62-b6b3716b9013";
 
 @XendraTrl(Identifier="42624bc3-f1b5-206b-6217-3a3068bfda86")
@@ -695,7 +694,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="42624bc3-f1b5-206b-6217-3a3068bfda86",
-Synchronized="2017-08-05 16:54:19.0")
+Synchronized="2019-08-30 22:22:10.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

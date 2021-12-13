@@ -51,6 +51,7 @@ import org.columba.core.gui.base.ButtonWithMnemonic;
 import org.columba.core.gui.base.SingleSideEtchedBorder;
 import org.columba.core.scripting.ScriptLogger;
 import org.columba.core.scripting.model.ColumbaScript;
+import org.compiere.util.CLogger;
 
 /**
     @author Celso Pinto (cpinto@yimports.com)
@@ -60,7 +61,7 @@ public class ScriptManager
     implements ActionListener
 {
 
-    private static final Logger LOG = Logger.getLogger(ScriptManager.class.getName());
+    private static final CLogger LOG = CLogger.getCLogger(ScriptManager.class.getName());
 
 
     /*TODO move resources to a resource file */

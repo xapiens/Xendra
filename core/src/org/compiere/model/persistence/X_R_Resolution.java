@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("R_Resolution");
 public static String es_PE_TAB_RequestResolution_Description="Mantener respuesta de solicitud ";
 
 @XendraTrl(Identifier="6724cc79-1f58-b31a-2ff8-507d7a14e1b5")
-public static String es_PE_TAB_RequestResolution_Name="Respuesta de Solicitud";
+public static String es_PE_TAB_RequestResolution_Help="Estado de la respuesta (ej. fijo, rechazado..)";
 
 @XendraTrl(Identifier="6724cc79-1f58-b31a-2ff8-507d7a14e1b5")
-public static String es_PE_TAB_RequestResolution_Help="Estado de la respuesta (ej. fijo, rechazado..)";
+public static String es_PE_TAB_RequestResolution_Name="Respuesta de Solicitud";
 
 @XendraTab(Name="Request Resolution",Description="Maintain Request Resolutions",
 Help="Resolution status (e.g. Fixed, Rejected, ..)",
@@ -77,11 +77,12 @@ public static final String TABNAME_RequestResolution="6724cc79-1f58-b31a-2ff8-50
 @XendraTrl(Identifier="b2fa71fb-0b65-4350-0b36-1e78d883c6e9")
 public static String es_PE_TABLE_R_Resolution_Name="Resolución";
 
-@XendraTable(Name="Resolution",Description="Request Resolution",Help="",TableName="R_Resolution",
-AccessLevel="6",AD_Window_ID="f52d5f04-e984-2510-2215-f3498a31d58b",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="b2fa71fb-0b65-4350-0b36-1e78d883c6e9",Synchronized="2017-08-16 11:43:53.0")
+@XendraTable(Name="Resolution",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Request Resolution",Help="",
+TableName="R_Resolution",AccessLevel="6",AD_Window_ID="f52d5f04-e984-2510-2215-f3498a31d58b",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="b2fa71fb-0b65-4350-0b36-1e78d883c6e9",Synchronized="2020-03-03 21:39:42.0")
 /** TableName=R_Resolution */
 public static final String Table_Name="R_Resolution";
 
@@ -142,13 +143,13 @@ return value;
 }
 
 @XendraTrl(Identifier="f27f83e8-5d77-421a-5136-d234769f7564")
+public static String es_PE_FIELD_RequestResolution_Description_Name="Observación";
+
+@XendraTrl(Identifier="f27f83e8-5d77-421a-5136-d234769f7564")
 public static String es_PE_FIELD_RequestResolution_Description_Description="Observación";
 
 @XendraTrl(Identifier="f27f83e8-5d77-421a-5136-d234769f7564")
 public static String es_PE_FIELD_RequestResolution_Description_Help="Observación";
-
-@XendraTrl(Identifier="f27f83e8-5d77-421a-5136-d234769f7564")
-public static String es_PE_FIELD_RequestResolution_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="6724cc79-1f58-b31a-2ff8-507d7a14e1b5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fb460db5-fe1c-0225-a862-cabe32097eff",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -192,13 +193,13 @@ return value;
 }
 
 @XendraTrl(Identifier="08be3639-08ff-ba4f-fad1-c79163dde0f9")
+public static String es_PE_FIELD_RequestResolution_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="08be3639-08ff-ba4f-fad1-c79163dde0f9")
 public static String es_PE_FIELD_RequestResolution_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="08be3639-08ff-ba4f-fad1-c79163dde0f9")
 public static String es_PE_FIELD_RequestResolution_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="08be3639-08ff-ba4f-fad1-c79163dde0f9")
-public static String es_PE_FIELD_RequestResolution_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="6724cc79-1f58-b31a-2ff8-507d7a14e1b5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -216,7 +217,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d0408e6e-12ea-3c8c-b406-5f897c23c08b",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -248,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2e12d21e-2dc6-45f1-b21a-c7134da39b93",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -280,13 +281,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="09236d94-32f7-4b58-fecd-b2bbfa5fd7ac")
+public static String es_PE_FIELD_RequestResolution_Name_Name="Nombre";
+
+@XendraTrl(Identifier="09236d94-32f7-4b58-fecd-b2bbfa5fd7ac")
 public static String es_PE_FIELD_RequestResolution_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="09236d94-32f7-4b58-fecd-b2bbfa5fd7ac")
 public static String es_PE_FIELD_RequestResolution_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="09236d94-32f7-4b58-fecd-b2bbfa5fd7ac")
-public static String es_PE_FIELD_RequestResolution_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="6724cc79-1f58-b31a-2ff8-507d7a14e1b5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -304,7 +305,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ffe17772-70ae-737e-5c96-f8541e5c8759",
-Synchronized="2017-08-05 16:55:59.0")
+Synchronized="2019-08-30 22:23:52.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Resolution.
@@ -324,13 +325,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6f2a68cc-cecf-72e8-bb5c-3c3032d1173d")
+public static String es_PE_FIELD_RequestResolution_Resolution_Name="Resolución";
+
+@XendraTrl(Identifier="6f2a68cc-cecf-72e8-bb5c-3c3032d1173d")
 public static String es_PE_FIELD_RequestResolution_Resolution_Description="Resolución de la solicitud.";
 
 @XendraTrl(Identifier="6f2a68cc-cecf-72e8-bb5c-3c3032d1173d")
 public static String es_PE_FIELD_RequestResolution_Resolution_Help="Estado de la resolución (ej. Corregida, Rechazada).";
-
-@XendraTrl(Identifier="6f2a68cc-cecf-72e8-bb5c-3c3032d1173d")
-public static String es_PE_FIELD_RequestResolution_Resolution_Name="Resolución";
 
 @XendraField(AD_Column_ID="R_Resolution_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6724cc79-1f58-b31a-2ff8-507d7a14e1b5",AD_FieldGroup_ID="",IsDisplayed=false,

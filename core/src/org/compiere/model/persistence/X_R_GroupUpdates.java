@@ -76,11 +76,12 @@ public static final String TABNAME_RequestUpdates="af5fd037-aad7-e3dd-75e5-caf71
 @XendraTrl(Identifier="5930a967-85c5-f255-1923-460fc9b98177")
 public static String es_PE_TABLE_R_GroupUpdates_Name="R_GroupUpdates";
 
-@XendraTable(Name="R_GroupUpdates",Description="",Help="",TableName="R_GroupUpdates",
-AccessLevel="7",AD_Window_ID="48b04170-f7f3-e7b8-2750-b4787c524f8a",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="5930a967-85c5-f255-1923-460fc9b98177",Synchronized="2017-08-16 11:43:47.0")
+@XendraTable(Name="R_GroupUpdates",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="R_GroupUpdates",AccessLevel="7",AD_Window_ID="48b04170-f7f3-e7b8-2750-b4787c524f8a",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="5930a967-85c5-f255-1923-460fc9b98177",Synchronized="2020-03-03 21:39:31.0")
 /** TableName=R_GroupUpdates */
 public static final String Table_Name="R_GroupUpdates";
 
@@ -130,13 +131,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c6e08373-77c7-b8a6-00bf-48c051a39d59")
+public static String es_PE_FIELD_RequestUpdates_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="c6e08373-77c7-b8a6-00bf-48c051a39d59")
 public static String es_PE_FIELD_RequestUpdates_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="c6e08373-77c7-b8a6-00bf-48c051a39d59")
 public static String es_PE_FIELD_RequestUpdates_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="c6e08373-77c7-b8a6-00bf-48c051a39d59")
-public static String es_PE_FIELD_RequestUpdates_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="af5fd037-aad7-e3dd-75e5-caf711491769",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="53625efd-7eec-2eae-4d03-2851a69b8ba5",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -186,7 +187,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c27d4476-f643-460c-bf4d-baf3d9f4ca34",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Self-Service.
@@ -209,13 +210,13 @@ return false;
 }
 
 @XendraTrl(Identifier="a7ed79f9-b6ab-a220-53e5-5cb151dd0319")
+public static String es_PE_FIELD_RequestUpdates_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="a7ed79f9-b6ab-a220-53e5-5cb151dd0319")
 public static String es_PE_FIELD_RequestUpdates_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="a7ed79f9-b6ab-a220-53e5-5cb151dd0319")
 public static String es_PE_FIELD_RequestUpdates_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="a7ed79f9-b6ab-a220-53e5-5cb151dd0319")
-public static String es_PE_FIELD_RequestUpdates_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="af5fd037-aad7-e3dd-75e5-caf711491769",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -233,7 +234,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8db477e-26b3-585b-7d8f-7106d1194d76",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Group.
@@ -253,13 +254,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6b0350d9-bb83-d39d-270a-fefcc76b2d6b")
+public static String es_PE_FIELD_RequestUpdates_Group_Name="Grupo";
+
+@XendraTrl(Identifier="6b0350d9-bb83-d39d-270a-fefcc76b2d6b")
 public static String es_PE_FIELD_RequestUpdates_Group_Description="Grupo de solicitud";
 
 @XendraTrl(Identifier="6b0350d9-bb83-d39d-270a-fefcc76b2d6b")
 public static String es_PE_FIELD_RequestUpdates_Group_Help="Grupo de solicitud (ej. versión de números, responsabilidad, ...)";
-
-@XendraTrl(Identifier="6b0350d9-bb83-d39d-270a-fefcc76b2d6b")
-public static String es_PE_FIELD_RequestUpdates_Group_Name="Grupo";
 
 @XendraField(AD_Column_ID="R_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="af5fd037-aad7-e3dd-75e5-caf711491769",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -277,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f4172f99-b732-1504-d8f7-8c874cf8d661",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_Group_ID */
 public static final String COLUMNNAME_R_Group_ID = "R_Group_ID";
 }

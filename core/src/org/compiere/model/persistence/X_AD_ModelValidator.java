@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_ModelValidator");
 @XendraTrl(Identifier="59ac1c46-abdc-45c1-0928-e1814ded2d39")
 public static String es_PE_TABLE_AD_ModelValidator_Name="AD_ModelValidator";
 
-@XendraTable(Name="AD_ModelValidator",Description="",Help="",TableName="AD_ModelValidator",
-AccessLevel="3",AD_Window_ID="53561d65-4ae5-81a3-c14b-9b09382be0fe",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="59ac1c46-abdc-45c1-0928-e1814ded2d39",Synchronized="2017-08-16 11:40:29.0")
+@XendraTable(Name="AD_ModelValidator",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ModelValidator",AccessLevel="3",AD_Window_ID="53561d65-4ae5-81a3-c14b-9b09382be0fe",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="59ac1c46-abdc-45c1-0928-e1814ded2d39",Synchronized="2020-03-03 21:35:08.0")
 /** TableName=AD_ModelValidator */
 public static final String Table_Name="AD_ModelValidator";
 
@@ -150,12 +151,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4bfa44a7-6d8e-0ba4-351a-cdd551c733ef",
-Synchronized="2017-08-05 16:52:37.0")
+Synchronized="2019-08-30 22:20:27.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -183,7 +181,7 @@ FieldLength=40,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6cd99a31-09fc-940d-d44b-aaa6bea18485",Synchronized="2017-08-05 16:52:37.0")
+Identifier="6cd99a31-09fc-940d-d44b-aaa6bea18485",Synchronized="2019-08-30 22:20:27.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Comment/Help.
@@ -217,7 +215,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6b3a8a53-5f3e-45c5-6310-fa44da63ebab",
-Synchronized="2017-08-05 16:52:37.0")
+Synchronized="2019-08-30 22:20:27.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -249,7 +247,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f328bbde-5b4d-4229-b01d-2e8d806e9c75",
-Synchronized="2017-08-05 16:52:37.0")
+Synchronized="2019-08-30 22:20:27.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set ModelValidationClass.
@@ -282,7 +280,7 @@ FieldLength=255,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="30fd4272-d69f-a63a-d710-c4f2f2f4eef0",Synchronized="2017-08-05 16:52:37.0")
+Identifier="30fd4272-d69f-a63a-d710-c4f2f2f4eef0",Synchronized="2019-08-30 22:20:27.0")
 /** Column name ModelValidationClass */
 public static final String COLUMNNAME_ModelValidationClass = "ModelValidationClass";
 /** Set Name.
@@ -322,7 +320,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e3495b3c-3e05-fd01-5825-1b1069850f31",
-Synchronized="2017-08-05 16:52:37.0")
+Synchronized="2019-08-30 22:20:27.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sequence.
@@ -349,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd711e80-bcc0-0341-34f2-f2544390c42d",
-Synchronized="2017-08-05 16:52:37.0")
+Synchronized="2019-08-30 22:20:28.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

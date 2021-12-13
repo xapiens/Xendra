@@ -42,7 +42,7 @@ import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xendra.model.sql;
+import org.xendra.db.Querys;
 
 import java.io.File;
 import java.sql.PreparedStatement;
@@ -305,7 +305,7 @@ public class DBtoxml extends SvrProcess {
 			ResultSet rs = null;
 			try
 			{
-				pstmt = DB.prepareStatement(sql.VALIDATIONTYPE_TableValidation, null);
+				pstmt = DB.prepareStatement(Querys.VALIDATIONTYPE_TableValidation, null);
 				pstmt.setInt(1, reference.getAD_Reference_ID());
 				rs = pstmt.executeQuery();
 				if (rs.next())

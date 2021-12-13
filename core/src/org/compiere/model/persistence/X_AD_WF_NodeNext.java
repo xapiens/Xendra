@@ -78,12 +78,12 @@ public static final String TABNAME_PreviousNode="a77161b3-95b0-797c-a940-3117b83
 public static String es_PE_TAB_Transition_Description="Próximo nodo";
 
 @XendraTrl(Identifier="0a776048-b2cd-3383-44a7-884c5cc2b83a")
-public static String es_PE_TAB_Transition_Name="Próximo Nodo";
-
-@XendraTrl(Identifier="0a776048-b2cd-3383-44a7-884c5cc2b83a")
 public static String es_PE_TAB_Transition_Help="La pestaña de próximos pasos define el orden, nodos ó pasos en un flujo de trabajo";
 
-@XendraTab(Name="Transition",Description="Workflow Node Transition",
+@XendraTrl(Identifier="0a776048-b2cd-3383-44a7-884c5cc2b83a")
+public static String es_PE_TAB_Transition_Name="Próximo Nodo";
+@XendraTab(Name="Transition",
+Description="Workflow Node Transition",
 Help="The Next Nodes Tab defines the order or Nodes or Steps in a Workflow.",
 AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",SeqNo=80,TabLevel=2,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -96,11 +96,12 @@ public static final String TABNAME_Transition="0a776048-b2cd-3383-44a7-884c5cc2b
 @XendraTrl(Identifier="addef420-f6b4-22fb-eedb-4543059f5e41")
 public static String es_PE_TABLE_AD_WF_NodeNext_Name="Nodo de Transición";
 
-@XendraTable(Name="Node Transition",Description="Workflow Node Transition",Help="",
+@XendraTable(Name="Node Transition",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Workflow Node Transition",Help="",
 TableName="AD_WF_NodeNext",AccessLevel="6",AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="addef420-f6b4-22fb-eedb-4543059f5e41",Synchronized="2017-08-16 11:41:11.0")
+Identifier="addef420-f6b4-22fb-eedb-4543059f5e41",Synchronized="2020-03-03 21:36:09.0")
 /** TableName=AD_WF_NodeNext */
 public static final String Table_Name="AD_WF_NodeNext";
 
@@ -133,9 +134,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_AD_WF_NodeNext[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_WF_Next_ID AD_Reference=b83d1e02-d8f3-33c4-a60e-09af92bdcc12 */
-public static final int AD_WF_NEXT_ID_AD_Reference_ID=109;
 /** Set Next Node.
 @param AD_WF_Next_ID Next Node in workflow */
 public void setAD_WF_Next_ID (int AD_WF_Next_ID)
@@ -153,13 +151,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c91b3b6d-5bec-9e15-af65-e9a9f89390d0")
+public static String es_PE_FIELD_Transition_NextNode_Name="Nodo Siguiente";
+
+@XendraTrl(Identifier="c91b3b6d-5bec-9e15-af65-e9a9f89390d0")
 public static String es_PE_FIELD_Transition_NextNode_Description="Siguiente nodo en el flujo de trabajo.";
 
 @XendraTrl(Identifier="c91b3b6d-5bec-9e15-af65-e9a9f89390d0")
 public static String es_PE_FIELD_Transition_NextNode_Help="El nodo siguiente indica el siguiente paso ó tarea en este flujo de trabajo.";
-
-@XendraTrl(Identifier="c91b3b6d-5bec-9e15-af65-e9a9f89390d0")
-public static String es_PE_FIELD_Transition_NextNode_Name="Nodo Siguiente";
 
 @XendraField(AD_Column_ID="AD_WF_Next_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -169,13 +167,13 @@ Identifier="c91b3b6d-5bec-9e15-af65-e9a9f89390d0")
 public static final String FIELDNAME_Transition_NextNode="c91b3b6d-5bec-9e15-af65-e9a9f89390d0";
 
 @XendraTrl(Identifier="105a015b-281e-1b6f-906e-229faa40a2ac")
+public static String es_PE_FIELD_PreviousNode_NextNode_Name="Nodo Siguiente";
+
+@XendraTrl(Identifier="105a015b-281e-1b6f-906e-229faa40a2ac")
 public static String es_PE_FIELD_PreviousNode_NextNode_Description="Siguiente nodo en el flujo de trabajo.";
 
 @XendraTrl(Identifier="105a015b-281e-1b6f-906e-229faa40a2ac")
 public static String es_PE_FIELD_PreviousNode_NextNode_Help="El nodo siguiente indica el siguiente paso ó tarea en este flujo de trabajo.";
-
-@XendraTrl(Identifier="105a015b-281e-1b6f-906e-229faa40a2ac")
-public static String es_PE_FIELD_PreviousNode_NextNode_Name="Nodo Siguiente";
 
 @XendraField(AD_Column_ID="AD_WF_Next_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -194,7 +192,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="81ecb9f5-3a1b-78fa-1403-176ea414c991",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:51.0")
 /** Column name AD_WF_Next_ID */
 public static final String COLUMNNAME_AD_WF_Next_ID = "AD_WF_Next_ID";
 /** Set Node.
@@ -220,13 +218,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_WF_Node_ID()));
 }
 
 @XendraTrl(Identifier="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e")
+public static String es_PE_FIELD_Transition_Node_Name="Nodo";
+
+@XendraTrl(Identifier="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e")
 public static String es_PE_FIELD_Transition_Node_Description="Nodo de flujo de trabajo; paso ó proceso";
 
 @XendraTrl(Identifier="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e")
 public static String es_PE_FIELD_Transition_Node_Help="El nodo de flujo de trabajo indica un paso ó proceso único en este flujo de trabajo.";
-
-@XendraTrl(Identifier="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e")
-public static String es_PE_FIELD_Transition_Node_Name="Nodo";
 
 @XendraField(AD_Column_ID="AD_WF_Node_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -236,13 +234,13 @@ Identifier="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e")
 public static final String FIELDNAME_Transition_Node="ac71c769-5ac8-5b32-3e9b-0b7d6c13354e";
 
 @XendraTrl(Identifier="22d8c1e1-321b-c350-6987-527945e05b15")
+public static String es_PE_FIELD_PreviousNode_Node_Name="Nodo";
+
+@XendraTrl(Identifier="22d8c1e1-321b-c350-6987-527945e05b15")
 public static String es_PE_FIELD_PreviousNode_Node_Description="Nodo de flujo de trabajo; paso ó proceso";
 
 @XendraTrl(Identifier="22d8c1e1-321b-c350-6987-527945e05b15")
 public static String es_PE_FIELD_PreviousNode_Node_Help="El nodo de flujo de trabajo indica un paso ó proceso único en este flujo de trabajo.";
-
-@XendraTrl(Identifier="22d8c1e1-321b-c350-6987-527945e05b15")
-public static String es_PE_FIELD_PreviousNode_Node_Name="Nodo";
 
 @XendraField(AD_Column_ID="AD_WF_Node_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -260,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9809b8e8-4c7e-7328-3ba3-953fabf53a15",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:51.0")
 /** Column name AD_WF_Node_ID */
 public static final String COLUMNNAME_AD_WF_Node_ID = "AD_WF_Node_ID";
 /** Set Node Transition.
@@ -280,13 +278,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010")
+public static String es_PE_FIELD_Transition_NodeTransition_Name="Nodo de Transición";
+
+@XendraTrl(Identifier="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010")
 public static String es_PE_FIELD_Transition_NodeTransition_Description="Flujo de trabajo del nodo de transición.";
 
 @XendraTrl(Identifier="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010")
 public static String es_PE_FIELD_Transition_NodeTransition_Help="La siguiente tabla de los nodos define la orden ó pasos de un flujo de trabajo.";
-
-@XendraTrl(Identifier="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010")
-public static String es_PE_FIELD_Transition_NodeTransition_Name="Nodo de Transición";
 
 @XendraField(AD_Column_ID="AD_WF_NodeNext_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -296,13 +294,13 @@ Identifier="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010")
 public static final String FIELDNAME_Transition_NodeTransition="f2d0bdbe-7e1b-37fc-e063-4ac2f5520010";
 
 @XendraTrl(Identifier="5f922499-859a-0628-7cf1-5040f0c859ad")
+public static String es_PE_FIELD_PreviousNode_NodeTransition_Name="Nodo de Transición";
+
+@XendraTrl(Identifier="5f922499-859a-0628-7cf1-5040f0c859ad")
 public static String es_PE_FIELD_PreviousNode_NodeTransition_Description="Flujo de trabajo del nodo de transición.";
 
 @XendraTrl(Identifier="5f922499-859a-0628-7cf1-5040f0c859ad")
 public static String es_PE_FIELD_PreviousNode_NodeTransition_Help="La siguiente tabla de los nodos define la orden ó pasos de un flujo de trabajo.";
-
-@XendraTrl(Identifier="5f922499-859a-0628-7cf1-5040f0c859ad")
-public static String es_PE_FIELD_PreviousNode_NodeTransition_Name="Nodo de Transición";
 
 @XendraField(AD_Column_ID="AD_WF_NodeNext_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -340,13 +338,13 @@ return value;
 }
 
 @XendraTrl(Identifier="81650dee-2507-7e71-9f09-30f5e273c8bc")
+public static String es_PE_FIELD_Transition_Description_Name="Observación";
+
+@XendraTrl(Identifier="81650dee-2507-7e71-9f09-30f5e273c8bc")
 public static String es_PE_FIELD_Transition_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="81650dee-2507-7e71-9f09-30f5e273c8bc")
 public static String es_PE_FIELD_Transition_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="81650dee-2507-7e71-9f09-30f5e273c8bc")
-public static String es_PE_FIELD_Transition_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -356,13 +354,13 @@ Identifier="81650dee-2507-7e71-9f09-30f5e273c8bc")
 public static final String FIELDNAME_Transition_Description="81650dee-2507-7e71-9f09-30f5e273c8bc";
 
 @XendraTrl(Identifier="d759b84b-a5dc-ef77-c494-e9428b29d379")
+public static String es_PE_FIELD_PreviousNode_Description_Name="Observación";
+
+@XendraTrl(Identifier="d759b84b-a5dc-ef77-c494-e9428b29d379")
 public static String es_PE_FIELD_PreviousNode_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="d759b84b-a5dc-ef77-c494-e9428b29d379")
 public static String es_PE_FIELD_PreviousNode_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="d759b84b-a5dc-ef77-c494-e9428b29d379")
-public static String es_PE_FIELD_PreviousNode_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -380,12 +378,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="506cc3c6-5b8e-2948-0c95-0f9638ed7c49",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:51.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -405,13 +400,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="284d59e4-38ff-6ef2-6613-347117cc755c")
+public static String es_PE_FIELD_Transition_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="284d59e4-38ff-6ef2-6613-347117cc755c")
 public static String es_PE_FIELD_Transition_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="284d59e4-38ff-6ef2-6613-347117cc755c")
 public static String es_PE_FIELD_Transition_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="284d59e4-38ff-6ef2-6613-347117cc755c")
-public static String es_PE_FIELD_Transition_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -421,13 +416,13 @@ Identifier="284d59e4-38ff-6ef2-6613-347117cc755c")
 public static final String FIELDNAME_Transition_EntityType="284d59e4-38ff-6ef2-6613-347117cc755c";
 
 @XendraTrl(Identifier="a4a23bad-713b-c30e-fac8-a2f26b7a7700")
+public static String es_PE_FIELD_PreviousNode_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="a4a23bad-713b-c30e-fac8-a2f26b7a7700")
 public static String es_PE_FIELD_PreviousNode_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="a4a23bad-713b-c30e-fac8-a2f26b7a7700")
 public static String es_PE_FIELD_PreviousNode_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="a4a23bad-713b-c30e-fac8-a2f26b7a7700")
-public static String es_PE_FIELD_PreviousNode_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -445,7 +440,7 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="872e98f6-a2ad-af9c-3f23-c4ae920d41ca",Synchronized="2017-08-05 16:53:01.0")
+Identifier="872e98f6-a2ad-af9c-3f23-c4ae920d41ca",Synchronized="2019-08-30 22:20:52.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Identifier.
@@ -477,7 +472,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4de7a58d-b932-4140-96d5-ae004e005c6f",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:52.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Std User Workflow.
@@ -500,13 +495,13 @@ return false;
 }
 
 @XendraTrl(Identifier="914bb38d-56d9-46d8-c206-f152ef319363")
+public static String es_PE_FIELD_Transition_StdUserWorkflow_Name="Usuario Estandar Flujo de Trabajo";
+
+@XendraTrl(Identifier="914bb38d-56d9-46d8-c206-f152ef319363")
 public static String es_PE_FIELD_Transition_StdUserWorkflow_Description="Aprobación manual del usuario para flujo de trabajo";
 
 @XendraTrl(Identifier="914bb38d-56d9-46d8-c206-f152ef319363")
 public static String es_PE_FIELD_Transition_StdUserWorkflow_Help="Si están seleccionados, solamente los documentos con un estado abierto (bosquejado, en marcha, aprobado, rechazado, inválido) y las acciones estándares del usuario (prepárese, termine, apruebe, rechazo) se permiten continuar. Utilice esto para evitar el tener que definir los detalles en cómo los procesos automáticos (abra, invalide, fije, reactivaron) y cuando el documento es cerrado para la acción normal del usuario (terminado, el esperar, cerrado, anulado, invertido).";
-
-@XendraTrl(Identifier="914bb38d-56d9-46d8-c206-f152ef319363")
-public static String es_PE_FIELD_Transition_StdUserWorkflow_Name="Usuario Estandar Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="IsStdUserWorkflow",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -516,13 +511,13 @@ Identifier="914bb38d-56d9-46d8-c206-f152ef319363")
 public static final String FIELDNAME_Transition_StdUserWorkflow="914bb38d-56d9-46d8-c206-f152ef319363";
 
 @XendraTrl(Identifier="8fa9ccf1-421c-7ee0-99e0-c0660a5542c4")
+public static String es_PE_FIELD_PreviousNode_StdUserWorkflow_Name="Usuario Estandar Flujo de Trabajo";
+
+@XendraTrl(Identifier="8fa9ccf1-421c-7ee0-99e0-c0660a5542c4")
 public static String es_PE_FIELD_PreviousNode_StdUserWorkflow_Description="Aprobación manual del usuario para flujo de trabajo";
 
 @XendraTrl(Identifier="8fa9ccf1-421c-7ee0-99e0-c0660a5542c4")
 public static String es_PE_FIELD_PreviousNode_StdUserWorkflow_Help="Si están seleccionados, solamente los documentos con un estado abierto (bosquejado, en marcha, aprobado, rechazado, inválido) y las acciones estándares del usuario (prepárese, termine, apruebe, rechazo) se permiten continuar. Utilice esto para evitar el tener que definir los detalles en cómo los procesos automáticos (abra, invalide, fije, reactivaron) y cuando el documento es cerrado para la acción normal del usuario (terminado, el esperar, cerrado, anulado, invertido).";
-
-@XendraTrl(Identifier="8fa9ccf1-421c-7ee0-99e0-c0660a5542c4")
-public static String es_PE_FIELD_PreviousNode_StdUserWorkflow_Name="Usuario Estandar Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="IsStdUserWorkflow",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -540,7 +535,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f26d2b04-1444-5e96-83fa-8475cd811b86",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:52.0")
 /** Column name IsStdUserWorkflow */
 public static final String COLUMNNAME_IsStdUserWorkflow = "IsStdUserWorkflow";
 /** Set Sequence.
@@ -559,13 +554,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0c5ae026-1e67-ff78-f6dd-87f14b1443c4")
+public static String es_PE_FIELD_Transition_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="0c5ae026-1e67-ff78-f6dd-87f14b1443c4")
 public static String es_PE_FIELD_Transition_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="0c5ae026-1e67-ff78-f6dd-87f14b1443c4")
 public static String es_PE_FIELD_Transition_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="0c5ae026-1e67-ff78-f6dd-87f14b1443c4")
-public static String es_PE_FIELD_Transition_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -575,13 +570,13 @@ Identifier="0c5ae026-1e67-ff78-f6dd-87f14b1443c4")
 public static final String FIELDNAME_Transition_Sequence="0c5ae026-1e67-ff78-f6dd-87f14b1443c4";
 
 @XendraTrl(Identifier="25eb5f3a-978b-cb10-717a-5aa61adb7f1e")
+public static String es_PE_FIELD_PreviousNode_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="25eb5f3a-978b-cb10-717a-5aa61adb7f1e")
 public static String es_PE_FIELD_PreviousNode_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="25eb5f3a-978b-cb10-717a-5aa61adb7f1e")
 public static String es_PE_FIELD_PreviousNode_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="25eb5f3a-978b-cb10-717a-5aa61adb7f1e")
-public static String es_PE_FIELD_PreviousNode_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -599,7 +594,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="57687881-b038-3664-6601-70b07dea74f1",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:52.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set Transition Code.
@@ -618,13 +613,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="599b86be-a964-e2a0-a837-6906c4c7786d")
+public static String es_PE_FIELD_Transition_TransitionCode_Name="Código de Transacción";
+
+@XendraTrl(Identifier="599b86be-a964-e2a0-a837-6906c4c7786d")
 public static String es_PE_FIELD_Transition_TransitionCode_Description="Código dando por resultado VERDADERO ó FALSO";
 
 @XendraTrl(Identifier="599b86be-a964-e2a0-a837-6906c4c7786d")
 public static String es_PE_FIELD_Transition_TransitionCode_Help="Se ejecuta la transacción, si el código da lugar a VERDADERO (ó es vacío)";
-
-@XendraTrl(Identifier="599b86be-a964-e2a0-a837-6906c4c7786d")
-public static String es_PE_FIELD_Transition_TransitionCode_Name="Código de Transacción";
 
 @XendraField(AD_Column_ID="TransitionCode",IsCentrallyMaintained=true,
 AD_Tab_ID="0a776048-b2cd-3383-44a7-884c5cc2b83a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -634,13 +629,13 @@ Identifier="599b86be-a964-e2a0-a837-6906c4c7786d")
 public static final String FIELDNAME_Transition_TransitionCode="599b86be-a964-e2a0-a837-6906c4c7786d";
 
 @XendraTrl(Identifier="88f26bfb-e09a-e791-a6ef-060b804d44bf")
+public static String es_PE_FIELD_PreviousNode_TransitionCode_Name="Código de Transacción";
+
+@XendraTrl(Identifier="88f26bfb-e09a-e791-a6ef-060b804d44bf")
 public static String es_PE_FIELD_PreviousNode_TransitionCode_Description="Código dando por resultado VERDADERO ó FALSO";
 
 @XendraTrl(Identifier="88f26bfb-e09a-e791-a6ef-060b804d44bf")
 public static String es_PE_FIELD_PreviousNode_TransitionCode_Help="Se ejecuta la transacción, si el código da lugar a VERDADERO (ó es vacío)";
-
-@XendraTrl(Identifier="88f26bfb-e09a-e791-a6ef-060b804d44bf")
-public static String es_PE_FIELD_PreviousNode_TransitionCode_Name="Código de Transacción";
 
 @XendraField(AD_Column_ID="TransitionCode",IsCentrallyMaintained=true,
 AD_Tab_ID="a77161b3-95b0-797c-a940-3117b8311275",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -658,7 +653,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="330c87e9-1efe-349b-24ee-08dffdfeaac2",
-Synchronized="2017-08-05 16:53:01.0")
+Synchronized="2019-08-30 22:20:52.0")
 /** Column name TransitionCode */
 public static final String COLUMNNAME_TransitionCode = "TransitionCode";
 }

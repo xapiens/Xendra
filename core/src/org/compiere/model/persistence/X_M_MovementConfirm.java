@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentAction;
-import org.compiere.model.reference.REF__DocumentStatus;
 /** Generated Model for M_MovementConfirm
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -68,12 +66,12 @@ public static int Table_ID=MTable.getTable_ID("M_MovementConfirm");
 public static String es_PE_TAB_Confirmation_Description="Confirme los Movimientos del Inventario";
 
 @XendraTrl(Identifier="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d")
-public static String es_PE_TAB_Confirmation_Name="Confirmación";
-
-@XendraTrl(Identifier="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d")
 public static String es_PE_TAB_Confirmation_Help="El documento es creado automáticamente cuando el tipo de documento del movimiento indica en tránsito.";
 
-@XendraTab(Name="Confirmation",Description="Confirm Inventory Moves",
+@XendraTrl(Identifier="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d")
+public static String es_PE_TAB_Confirmation_Name="Confirmación";
+@XendraTab(Name="Confirmation",
+Description="Confirm Inventory Moves",
 Help="The document is automatically created when the document type of the movement indicates In Transit.",
 AD_Window_ID="2d3ecb03-6da6-cacc-a299-b3fab0fb6a3c",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -86,11 +84,13 @@ public static final String TABNAME_Confirmation="edd7ca29-fd1f-c1e4-bc28-83f1c8f
 @XendraTrl(Identifier="1502876a-ae99-0acb-8695-41e0f79f2a14")
 public static String es_PE_TABLE_M_MovementConfirm_Name="Confirma Movimiento";
 
-@XendraTable(Name="Move Confirm",Description="Inventory Move Confirmation",Help="",
-TableName="M_MovementConfirm",AccessLevel="1",AD_Window_ID="2d3ecb03-6da6-cacc-a299-b3fab0fb6a3c",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="1502876a-ae99-0acb-8695-41e0f79f2a14",Synchronized="2017-08-16 11:43:21.0")
+@XendraTable(Name="Move Confirm",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Inventory Move Confirmation",
+Help="",TableName="M_MovementConfirm",AccessLevel="1",
+AD_Window_ID="2d3ecb03-6da6-cacc-a299-b3fab0fb6a3c",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="1502876a-ae99-0acb-8695-41e0f79f2a14",
+Synchronized="2020-03-03 21:38:42.0")
 /** TableName=M_MovementConfirm */
 public static final String Table_Name="M_MovementConfirm";
 
@@ -139,13 +139,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="79e694e7-c644-649d-3fad-833cbca412dc")
+public static String es_PE_FIELD_Confirmation_ApprovalAmount_Name="Importe Aprobado";
+
+@XendraTrl(Identifier="79e694e7-c644-649d-3fad-833cbca412dc")
 public static String es_PE_FIELD_Confirmation_ApprovalAmount_Description="Documento de importe aprobado";
 
 @XendraTrl(Identifier="79e694e7-c644-649d-3fad-833cbca412dc")
 public static String es_PE_FIELD_Confirmation_ApprovalAmount_Help="Cantidad de la aprobación para el Flujo de trabajo";
-
-@XendraTrl(Identifier="79e694e7-c644-649d-3fad-833cbca412dc")
-public static String es_PE_FIELD_Confirmation_ApprovalAmount_Name="Importe Aprobado";
 
 @XendraField(AD_Column_ID="ApprovalAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -163,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a582be74-ad27-9c0e-9c80-e851e9f8386d",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name ApprovalAmt */
 public static final String COLUMNNAME_ApprovalAmt = "ApprovalAmt";
 /** Set Description.
@@ -194,13 +194,13 @@ return value;
 }
 
 @XendraTrl(Identifier="de75ae80-8779-8730-40b2-1cb8b9cc3cca")
+public static String es_PE_FIELD_Confirmation_Description_Name="Observación";
+
+@XendraTrl(Identifier="de75ae80-8779-8730-40b2-1cb8b9cc3cca")
 public static String es_PE_FIELD_Confirmation_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="de75ae80-8779-8730-40b2-1cb8b9cc3cca")
 public static String es_PE_FIELD_Confirmation_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="de75ae80-8779-8730-40b2-1cb8b9cc3cca")
-public static String es_PE_FIELD_Confirmation_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -218,19 +218,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="f7ceb1ba-7cd6-d3c0-0828-43c0cd7a720f",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** DocAction AD_Reference=e397c9b0-c643-d1cd-8380-20bee13b2a6e */
-public static final int DOCACTION_AD_Reference_ID=135;
 /** Set Document Action.
 @param DocAction The targeted status of the document */
 public void setDocAction (String DocAction)
 {
-if (DocAction == null) throw new IllegalArgumentException ("DocAction is mandatory");
-if (DocAction.equals(REF__DocumentAction.Complete) || DocAction.equals(REF__DocumentAction.Approve) || DocAction.equals(REF__DocumentAction.Reject) || DocAction.equals(REF__DocumentAction.Post) || DocAction.equals(REF__DocumentAction.WaitComplete) || DocAction.equals(REF__DocumentAction.Prepare) || DocAction.equals(REF__DocumentAction.Close) || DocAction.equals(REF__DocumentAction.Placed) || DocAction.equals(REF__DocumentAction.Discount) || DocAction.equals(REF__DocumentAction.Portofolio) || DocAction.equals(REF__DocumentAction.Warranty) || DocAction.equals(REF__DocumentAction.Reverse_Correct) || DocAction.equals(REF__DocumentAction.Reverse_Accrual) || DocAction.equals(REF__DocumentAction.Invalidate) || DocAction.equals(REF__DocumentAction.Re_Activate) || DocAction.equals(REF__DocumentAction.None) || DocAction.equals(REF__DocumentAction.Unlock) || DocAction.equals(REF__DocumentAction.Returned) || DocAction.equals(REF__DocumentAction.Apply) || DocAction.equals(REF__DocumentAction.Collect) || DocAction.equals(REF__DocumentAction.ToCollect) || DocAction.equals(REF__DocumentAction.Restore) || DocAction.equals(REF__DocumentAction.Protested) || DocAction.equals(REF__DocumentAction.Receivables) || DocAction.equals(REF__DocumentAction.Void) || DocAction.equals(REF__DocumentAction.Draft) || DocAction.equals(REF__DocumentAction.InProgress) || DocAction.equals(REF__DocumentAction.WaitingPayment));
- else throw new IllegalArgumentException ("DocAction Invalid value - " + DocAction + " - Reference_ID=135 - CO - AP - RJ - PO - WC - PR - CL - PL - DS - PT - WR - RC - RA - IN - RE - -- - XL - RT - AY - CT - TC - RR - PD - RV - VO - DR - IP - WP");
 if (DocAction.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -246,10 +240,10 @@ return (String)get_Value(COLUMNNAME_DocAction);
 }
 
 @XendraTrl(Identifier="e433b323-71c6-749c-f74c-5eb25a689e8f")
-public static String es_PE_FIELD_Confirmation_ProcessConfirmation_Description="Confirmación de proceso del Movimiento de Inventario";
+public static String es_PE_FIELD_Confirmation_ProcessConfirmation_Name="Procesa Confirmación";
 
 @XendraTrl(Identifier="e433b323-71c6-749c-f74c-5eb25a689e8f")
-public static String es_PE_FIELD_Confirmation_ProcessConfirmation_Name="Procesa Confirmación";
+public static String es_PE_FIELD_Confirmation_ProcessConfirmation_Description="Confirmación de proceso del Movimiento de Inventario";
 
 @XendraField(AD_Column_ID="DocAction",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -268,19 +262,13 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,
 AD_Process_ID="78a82872-1cf9-8407-cbcc-437f59c5b9f4",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="880790cd-561e-4445-819a-551efae694c1",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name DocAction */
 public static final String COLUMNNAME_DocAction = "DocAction";
-
-/** DocStatus AD_Reference=7627125d-fefe-e6bc-bb7d-4a6c772172dc */
-public static final int DOCSTATUS_AD_Reference_ID=131;
 /** Set Document Status.
 @param DocStatus The current status of the document */
 public void setDocStatus (String DocStatus)
 {
-if (DocStatus == null) throw new IllegalArgumentException ("DocStatus is mandatory");
-if (DocStatus.equals(REF__DocumentStatus.InProgress) || DocStatus.equals(REF__DocumentStatus.WaitingConfirmation) || DocStatus.equals(REF__DocumentStatus.Drafted) || DocStatus.equals(REF__DocumentStatus.Completed) || DocStatus.equals(REF__DocumentStatus.Approved) || DocStatus.equals(REF__DocumentStatus.WaitingPayment) || DocStatus.equals(REF__DocumentStatus.Placed) || DocStatus.equals(REF__DocumentStatus.Returned) || DocStatus.equals(REF__DocumentStatus.Discount) || DocStatus.equals(REF__DocumentStatus.Protested) || DocStatus.equals(REF__DocumentStatus.NotApproved) || DocStatus.equals(REF__DocumentStatus.Voided) || DocStatus.equals(REF__DocumentStatus.Invalid) || DocStatus.equals(REF__DocumentStatus.Reversed) || DocStatus.equals(REF__DocumentStatus.Closed) || DocStatus.equals(REF__DocumentStatus.Unknown) || DocStatus.equals(REF__DocumentStatus.Portfolio) || DocStatus.equals(REF__DocumentStatus.Warranty) || DocStatus.equals(REF__DocumentStatus.ToCollect) || DocStatus.equals(REF__DocumentStatus.Collect) || DocStatus.equals(REF__DocumentStatus.Receivables) || DocStatus.equals(REF__DocumentStatus.Apply));
- else throw new IllegalArgumentException ("DocStatus Invalid value - " + DocStatus + " - Reference_ID=131 - IP - WC - DR - CO - AP - WP - PL - RT - DS - PD - NA - VO - IN - RE - CL - ?? - PT - WR - TC - CT - RV - AY");
 if (DocStatus.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -296,13 +284,13 @@ return (String)get_Value(COLUMNNAME_DocStatus);
 }
 
 @XendraTrl(Identifier="14b1be61-b1d2-120c-5d12-790ce4976444")
+public static String es_PE_FIELD_Confirmation_DocumentStatus_Name="Estado del Documento";
+
+@XendraTrl(Identifier="14b1be61-b1d2-120c-5d12-790ce4976444")
 public static String es_PE_FIELD_Confirmation_DocumentStatus_Description="El estado actual del documento";
 
 @XendraTrl(Identifier="14b1be61-b1d2-120c-5d12-790ce4976444")
 public static String es_PE_FIELD_Confirmation_DocumentStatus_Help="El estado del documento indica el estado del documento en este momento. Si usted quiere cambiar el estado de Documento; use el campo acción de documento";
-
-@XendraTrl(Identifier="14b1be61-b1d2-120c-5d12-790ce4976444")
-public static String es_PE_FIELD_Confirmation_DocumentStatus_Name="Estado del Documento";
 
 @XendraField(AD_Column_ID="DocStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -320,7 +308,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f3e30b83-c3cc-3f50-b742-38a980018709",Synchronized="2017-08-05 16:55:16.0")
+Identifier="f3e30b83-c3cc-3f50-b742-38a980018709",Synchronized="2019-08-30 22:23:18.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Document No.
@@ -352,13 +340,13 @@ return new KeyNamePair(get_ID(), getDocumentNo());
 }
 
 @XendraTrl(Identifier="0ad74b70-ed5f-13bd-5866-e94752afd4fd")
+public static String es_PE_FIELD_Confirmation_DocumentNo_Name="No. del Documento";
+
+@XendraTrl(Identifier="0ad74b70-ed5f-13bd-5866-e94752afd4fd")
 public static String es_PE_FIELD_Confirmation_DocumentNo_Description="Número de secuencia del documento para cada documento";
 
 @XendraTrl(Identifier="0ad74b70-ed5f-13bd-5866-e94752afd4fd")
 public static String es_PE_FIELD_Confirmation_DocumentNo_Help="El número del documento es usualmente generado en automático por el sistema y determinado por el tipo del documento. Si el documento no se salva; el número preliminar se despliega entre \"<>\"";
-
-@XendraTrl(Identifier="0ad74b70-ed5f-13bd-5866-e94752afd4fd")
-public static String es_PE_FIELD_Confirmation_DocumentNo_Name="No. del Documento";
 
 @XendraField(AD_Column_ID="DocumentNo",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -376,7 +364,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4fc8c6c0-da39-fc78-4d43-35e3d967d180",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Identifier.
@@ -408,7 +396,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="03b33635-c7f8-490a-8dd1-c795e48606ef",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Approved.
@@ -431,13 +419,13 @@ return false;
 }
 
 @XendraTrl(Identifier="226d1652-47ab-2515-29af-197591aadbe3")
+public static String es_PE_FIELD_Confirmation_Approved_Name="Aprobación";
+
+@XendraTrl(Identifier="226d1652-47ab-2515-29af-197591aadbe3")
 public static String es_PE_FIELD_Confirmation_Approved_Description="Indica si este documento requiere aprobación";
 
 @XendraTrl(Identifier="226d1652-47ab-2515-29af-197591aadbe3")
 public static String es_PE_FIELD_Confirmation_Approved_Help="El Cuadro de Verificación  Aprobado indica si este documento requiere aprobación antes de que pueda ser procesado";
-
-@XendraTrl(Identifier="226d1652-47ab-2515-29af-197591aadbe3")
-public static String es_PE_FIELD_Confirmation_Approved_Name="Aprobación";
 
 @XendraField(AD_Column_ID="IsApproved",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="Status",IsDisplayed=true,
@@ -455,7 +443,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fabdb728-5a01-f1d8-e404-575a1a8fee28",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name IsApproved */
 public static final String COLUMNNAME_IsApproved = "IsApproved";
 /** Set Phys.Inventory.
@@ -476,13 +464,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="db7aa6d8-4dd7-7277-b096-45cf546db8d7")
+public static String es_PE_FIELD_Confirmation_PhysInventory_Name="Inventario Físico";
+
+@XendraTrl(Identifier="db7aa6d8-4dd7-7277-b096-45cf546db8d7")
 public static String es_PE_FIELD_Confirmation_PhysInventory_Description="Parámetros para el inventario físico.";
 
 @XendraTrl(Identifier="db7aa6d8-4dd7-7277-b096-45cf546db8d7")
 public static String es_PE_FIELD_Confirmation_PhysInventory_Help="El inventario físico indica parámetros únicos para el inventario físico.";
-
-@XendraTrl(Identifier="db7aa6d8-4dd7-7277-b096-45cf546db8d7")
-public static String es_PE_FIELD_Confirmation_PhysInventory_Name="Inventario Físico";
 
 @XendraField(AD_Column_ID="M_Inventory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -500,7 +488,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d9a9f875-a775-c4cf-7562-14dde34a7e73",
-Synchronized="2017-08-05 16:55:16.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name M_Inventory_ID */
 public static final String COLUMNNAME_M_Inventory_ID = "M_Inventory_ID";
 /** Set Move Confirm.
@@ -520,13 +508,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c1833130-7a88-f27f-30b6-1258d471e29d")
+public static String es_PE_FIELD_Confirmation_MoveConfirm_Name="Confirma Movimiento";
+
+@XendraTrl(Identifier="c1833130-7a88-f27f-30b6-1258d471e29d")
 public static String es_PE_FIELD_Confirmation_MoveConfirm_Description="Confirmación de Movimientos de Inventario";
 
 @XendraTrl(Identifier="c1833130-7a88-f27f-30b6-1258d471e29d")
 public static String es_PE_FIELD_Confirmation_MoveConfirm_Help="El documento se crea automáticamente cuando el tipo del documento del movimiento indica en tránsito.";
-
-@XendraTrl(Identifier="c1833130-7a88-f27f-30b6-1258d471e29d")
-public static String es_PE_FIELD_Confirmation_MoveConfirm_Name="Confirma Movimiento";
 
 @XendraField(AD_Column_ID="M_MovementConfirm_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -553,13 +541,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="dbf90d28-f6a3-b65a-c5ed-3a738b5a6315")
+public static String es_PE_FIELD_Confirmation_InventoryMove_Name="Movimiento";
+
+@XendraTrl(Identifier="dbf90d28-f6a3-b65a-c5ed-3a738b5a6315")
 public static String es_PE_FIELD_Confirmation_InventoryMove_Description="Movimiento de inventario";
 
 @XendraTrl(Identifier="dbf90d28-f6a3-b65a-c5ed-3a738b5a6315")
 public static String es_PE_FIELD_Confirmation_InventoryMove_Help="El Movimiento de Inventario identifica únicamente un grupo de líneas de movimiento";
-
-@XendraTrl(Identifier="dbf90d28-f6a3-b65a-c5ed-3a738b5a6315")
-public static String es_PE_FIELD_Confirmation_InventoryMove_Name="Movimiento";
 
 @XendraField(AD_Column_ID="M_Movement_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -577,7 +565,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c78dc9ad-87be-4d23-eafa-bd7c1c35bb7e",
-Synchronized="2017-08-05 16:55:17.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name M_Movement_ID */
 public static final String COLUMNNAME_M_Movement_ID = "M_Movement_ID";
 /** Set Processed.
@@ -600,13 +588,13 @@ return false;
 }
 
 @XendraTrl(Identifier="40778cdf-97ab-744f-3db5-5171659fb91a")
+public static String es_PE_FIELD_Confirmation_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="40778cdf-97ab-744f-3db5-5171659fb91a")
 public static String es_PE_FIELD_Confirmation_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="40778cdf-97ab-744f-3db5-5171659fb91a")
 public static String es_PE_FIELD_Confirmation_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="40778cdf-97ab-744f-3db5-5171659fb91a")
-public static String es_PE_FIELD_Confirmation_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="edd7ca29-fd1f-c1e4-bc28-83f1c8fedb2d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -624,7 +612,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4205994b-bc54-d2df-343c-011d552a677a",
-Synchronized="2017-08-05 16:55:17.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -665,7 +653,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="51be39f3-7948-f104-5723-8b60ace7da25",
-Synchronized="2017-08-05 16:55:17.0")
+Synchronized="2019-08-30 22:23:18.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

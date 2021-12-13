@@ -20,9 +20,13 @@ import java.util.logging.Level;
 
 import javax.swing.ComboBoxModel;
 
+import org.compiere.model.Lookup;
+import org.compiere.model.MColumn;
 import org.compiere.model.MLocator;
+import org.compiere.model.MLookupFactory;
 import org.compiere.swing.CComboBox;
 import org.compiere.util.CLogger;
+import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.NamePair;
 
@@ -59,6 +63,16 @@ public class VComboBox extends CComboBox
 		super(model);
 //		common_init();
 	}	//	VComboBox
+
+	public VComboBox(String tablename, String columnname) {		
+		int AD_Column_ID = MColumn.getColumn_ID(tablename, columnname, null);
+		MColumn column = MColumn.get(Env.getCtx(), AD_Column_ID);
+		Lookup lookup = MLookupFactory.get (Env.getCtx(), 0, 0, AD_Column_ID, column.getAD_Reference_ID());
+		Object[] values = lookup.getData(false, false, true, false).toArray();
+		for (Object value:values) {
+			addItem(value);
+		}
+	}
 
 	/**	Logger			*/
 	private static CLogger log = CLogger.getCLogger(VComboBox.class);

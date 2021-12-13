@@ -21,12 +21,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -35,56 +32,38 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
-import java.util.logging.Logger;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 import org.columba.api.plugin.ExtensionHandlerMetadata;
 import org.columba.api.plugin.ExtensionMetadata;
-import org.columba.api.plugin.IExtension;
 import org.columba.api.plugin.IExtensionHandler;
+import org.columba.api.plugin.IExtensionHandlerKeys;
 import org.columba.api.plugin.IPluginManager;
-import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginHandlerNotFoundException;
-import org.columba.api.plugin.PluginLoadingFailedException;
 import org.columba.api.plugin.PluginMetadata;
-import org.columba.core.component.api.IComponentPlugin;
 import org.columba.core.config.Config;
 import org.columba.core.config.View;
 import org.columba.core.config.ViewList;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.io.DiskIO;
-import org.columba.core.io.ZipFileIO;
-import org.columba.core.logging.Logging;
 import org.columba.core.xml.XmlElement;
 import org.columba.core.xml.XmlIO;
 import org.compiere.apps.ADialog;
-import org.compiere.model.MConfig;
+import org.compiere.model.MRole;
 import org.compiere.model.Query;
-import org.compiere.model.persistence.X_AD_Extension;
-import org.compiere.model.persistence.X_AD_ExtensionList;
 import org.compiere.model.persistence.X_AD_Plugin;
 import org.compiere.model.persistence.X_AD_Plugin_Access;
-import org.compiere.model.persistence.X_A_Machine;
-import org.compiere.model.persistence.X_A_MachineServer;
-import org.compiere.model.reference.REF_ServerType;
+import org.compiere.util.CLogger;
 import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.xendra.Constants;
+import org.xendra.api.XendrianServer;
 
 /**
  * Plugin manager is a singleton registry for all plugins and all extension handlers.
  * @author fdietz
  */
 public class PluginManager implements IPluginManager {
-	private static final Logger LOG = Logger.getLogger("org.columba.core.plugin");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.plugin");
 	private Hashtable<String, IExtensionHandler> handlerMap = new Hashtable<String, IExtensionHandler>();
 	private Hashtable<String, PluginMetadata> pluginMap = new Hashtable<String, PluginMetadata>();
 	private static PluginManager instance = new PluginManager();
@@ -118,8 +97,9 @@ public class PluginManager implements IPluginManager {
 	/**
 	 * @see org.columba.api.plugin.IPluginManager#addPlugin(java.io.File)
 	 */
-	public String addPlugin(File xmlFile) {
+	public String addPlugin(File xmlFile) {				
 		Hashtable hashtable = new Hashtable();
+		HashMap properties = new HashMap();
 		// parse "/plugin.xml" file
 		BufferedInputStream buf;
 		try {
@@ -131,57 +111,60 @@ public class PluginManager implements IPluginManager {
 		}
 		//addExtensionHandlers(buf);
 		ExtensionXMLParser extension = new ExtensionXMLParser();
-		HashMap map = extension.parsePlugin(buf);
+		HashMap map = extension.parsePlugin(xmlFile.getName(), buf);
 		PluginMetadata pluginMetadata = (PluginMetadata) map.get("metadata");		
-		hashtable = (Hashtable) map.get("extensionlist");
-		
+		hashtable = (Hashtable) map.get(Constants.XML_ELEMENT_EXTENSIONLIST);
+		properties = (HashMap) map.get(Constants.XML_ELEMENT_PROPERTIES);
+		if (properties == null) {
+			properties = new HashMap();
+		}
+		properties.put("directory", xmlFile.getParentFile().toString());
 		Enumeration<ExtensionHandlerMetadata> e = extension.getExtensionHandler();
 		while (e.hasMoreElements()) {
 			ExtensionHandlerMetadata metadata = e.nextElement();
 			IExtensionHandler handler = new ExtensionHandler(metadata.getId(), metadata.getParent());
 			addExtensionHandler(metadata.getId(), handler);
 		}
-		pluginMetadata.setDirectory(xmlFile.getParentFile());		
+		pluginMetadata.setProperties(properties);
 		String id = pluginMetadata.getId();
 		System.out.println("pluginManager::addplugin->"+id);
 		pluginMap.put(id, pluginMetadata);
-		// register all extensions
 		parseExtensions(hashtable, pluginMetadata, false);
-		return id;
+		return id;		
 	}
 
 	/**
-	 * @param hashtable
+	 * @param extensionhandler
 	 *            hashtable with String id and Vector of
 	 *            <code>ExtensionMetadata</code>
-	 * @param pluginMetadata
+	 * @param plugin
 	 */
-	private void parseExtensions(Hashtable hashtable, PluginMetadata pluginMetadata, boolean internal) {
+	private void parseExtensions(Hashtable extensionhandler, PluginMetadata plugin, boolean internal) {
 		// loop through all extensions this plugin uses
 		// -> search the corresponding extension handler
 		// -> register the extension at the extension handler
-		if (hashtable == null)
+		if (extensionhandler == null)
 			return;
-		Enumeration e = hashtable.keys();
+		Enumeration e = extensionhandler.keys();
 		while (e.hasMoreElements()) {
-			String extensionpointId = (String) e.nextElement();
-			Vector extensionVector = (Vector) hashtable.get(extensionpointId);
+			String extensionhandlerId = (String) e.nextElement();
+			Vector extensions = (Vector) extensionhandler.get(extensionhandlerId);
 			IExtensionHandler handler = null;
 			// we have a plugin-handler for this kind of extension
 			try {
-				handler = getExtensionHandler(extensionpointId);
-				Enumeration e2 = extensionVector.elements();
-				while (e2.hasMoreElements()) {
-					ExtensionMetadata extensionMetadata = (ExtensionMetadata) e2.nextElement();
-					Extension pluginExtension = new Extension(pluginMetadata, extensionMetadata);
+				handler = getExtensionHandler(extensionhandlerId);
+				Enumeration extensionlist = extensions.elements();
+				while (extensionlist.hasMoreElements()) {
+					ExtensionMetadata extension = (ExtensionMetadata) extensionlist.nextElement();
+					Extension pluginExtension = new Extension(plugin, extension);
 					pluginExtension.setInternal(internal);
 					String extensionId = pluginExtension.getMetadata().getId();
 					// if extension wasn't already registered
-					if (handler.exists(extensionId) == false)
+					if (!handler.exists(extensionId))
 						handler.addExtension(extensionId, pluginExtension);
 				}
 			} catch (PluginHandlerNotFoundException e2) {
-				LOG.severe("No suitable extension handler with name " + extensionpointId + " found");
+				LOG.severe("No suitable extension handler with name " + extensionhandlerId + " found");
 			}
 		}
 	}
@@ -202,11 +185,6 @@ public class PluginManager implements IPluginManager {
 		{
 			id = view.getId();
 		}
-//		for (int i = 0; i < viewList.count(); i++) {
-//			XmlElement view = viewList.getElement(i);
-//			ViewItem item = new ViewItem(view);
-//			id = item.get("id");
-//		}					
 		List<X_AD_Plugin> plugins = new ArrayList<X_AD_Plugin>();
 		List<X_AD_Plugin_Access> pluginaccess = new Query(Env.getCtx(), X_AD_Plugin_Access.Table_Name, "AD_Role_ID = ?", null)
 		.setParameters(Integer.valueOf(Env.getAD_Role_ID(Env.getCtx()))).list();
@@ -216,18 +194,6 @@ public class PluginManager implements IPluginManager {
 			if (plugin != null)
 				plugins.add(plugin);
 		}							
-//		for (X_AD_Plugin plugin:plugins)
-//		{
-//			String plugincontent = plugin.getplugin();
-//			if (plugincontent.contains(String.format("extension id=\"%s\"", id)))
-//			{
-//				resetFrame = false;
-//			}
-//		}
-//		if (resetFrame)
-//		{			
-//			MConfig.reset(Constants.CORE,"views");
-//		}
 		// try to load all plugins
 		for (int i = 0; i < pluginFolders.length; i++) {
 			File folder = pluginFolders[i];
@@ -243,6 +209,10 @@ public class PluginManager implements IPluginManager {
 				{
 					LOG.fine("registering plugin: " + folder);
 					System.out.println("PluginManager::initExternalPlugins registering plugin: " + folder.getAbsolutePath());
+					HashMap properties = (HashMap) plugin.getProperties();
+					if (properties == null) {
+						properties = new HashMap();
+					}
 					addPlugin(xmlFile);					
 				}
 			}
@@ -253,8 +223,12 @@ public class PluginManager implements IPluginManager {
 	 * @see org.columba.api.plugin.IPluginManager#getPluginConfigFile(java.lang.String)
 	 */
 	public File getPluginConfigFile(String id) {
-		PluginMetadata metadata = (PluginMetadata) pluginMap.get(id);
-		File directory = metadata.getDirectory();
+		PluginMetadata metadata = (PluginMetadata) pluginMap.get(id);		
+		File directory = null;
+		String directorypath = (String) metadata.getProperties().get("directory");
+		if (directorypath != null) {
+			directory = new File(directorypath);
+		}				
 		File configFile = new File(directory, Constants.FILENAME_CONFIG_XML);
 		return configFile;
 	}
@@ -273,29 +247,6 @@ public class PluginManager implements IPluginManager {
 	 * @see org.columba.api.plugin.IPluginManager#getInfoURL(java.lang.String)
 	 */
 	public URL getInfoURL(String id) {
-		PluginMetadata metadata = (PluginMetadata) pluginMap.get(id);
-		File pluginDirectory = metadata.getDirectory();
-		if (pluginDirectory == null) {
-			return null;
-		}
-		try {
-			// try all possible version of readme files...
-			File infoFile = new File(pluginDirectory, "readme.html");
-			if (!infoFile.exists()) {
-				infoFile = new File(pluginDirectory, "readme.txt");
-			}
-			if (!infoFile.exists()) {
-				infoFile = new File(pluginDirectory, "Readme.html");
-			}
-			if (!infoFile.exists()) {
-				infoFile = new File(pluginDirectory, "Readme.txt");
-			}
-			if (infoFile.exists()) {
-				LOG.fine("infofile-URL=" + infoFile.toURL());
-				return infoFile.toURL();
-			}
-		} catch (MalformedURLException ex) {
-		} // does not occur
 		return null;
 	}
 
@@ -312,9 +263,6 @@ public class PluginManager implements IPluginManager {
 	public String addPlugin(String resourcePath) {
 		if (resourcePath == null)
 			throw new IllegalArgumentException("resourcePath == null");
-
-//		if (!role.isTableAccess(vo.AD_Table_ID, true))
-//		error error
 		// retrieve inputstream from resource
 		InputStream is;
 		try {
@@ -327,9 +275,10 @@ public class PluginManager implements IPluginManager {
 
 		// parse plugin metadata
 		Hashtable hashtable = new Hashtable();
-		HashMap map = new ExtensionXMLParser().parsePlugin(new BufferedInputStream(is));
-		PluginMetadata pluginMetadata = (PluginMetadata) map.get("metadata");		
-		hashtable = (Hashtable) map.get("extensionlist");		
+		HashMap map = new ExtensionXMLParser().parsePlugin(resourcePath, new BufferedInputStream(is));
+		PluginMetadata pluginMetadata = (PluginMetadata) map.get("metadata");
+		pluginMetadata.setInstalled(true);
+		hashtable = (Hashtable) map.get(Constants.XML_ELEMENT_EXTENSIONLIST);		
 		String id = pluginMetadata.getId();
 		// 
 		// Note: We intentionally don't remember internal plugins, because
@@ -400,7 +349,7 @@ public class PluginManager implements IPluginManager {
 		if (handler == null)
 			throw new IllegalArgumentException("handler == null");
 		LOG.fine("adding extension handler " + id);
-		handlerMap.put(id, handler);
+		handlerMap.put(id, handler);		
 	}
 	/**
 	 * @see org.columba.api.plugin.IPluginManager#addExtensionHandlers(java.lang.String)
@@ -419,26 +368,14 @@ public class PluginManager implements IPluginManager {
 		addExtensionHandlers(is);
 	}	
 
-	public boolean Sync() {
+	public boolean Sync() {		
 		if (pluginFolders == null) 
 			return false;		
 		List<PluginMetadata> plugins = new ArrayList<PluginMetadata>();
 		List<PluginMetadata> localplugins = new ArrayList<PluginMetadata>();
 		List<PluginMetadata> toUpdate = new ArrayList<PluginMetadata>();
-		X_A_MachineServer ms = new Query(Env.getCtx(), X_A_MachineServer.Table_Name, "A_Machine_ID = ? AND servertype = ?", null)
-		.setParameters(Env.getServerWeb().getA_Machine_ID(), REF_ServerType.WebServer).first();
-		if (ms == null)
-			return false;
-		int port = ms.getHostPort();
-		// actualizamos el core
-		String url = String.format("http://%s:%s/plugin?type=core", Env.getServerWeb().getName(),port);
-		System.out.println(url);
-		OkHttpClient client = new OkHttpClient();
-		Request request = new Request.Builder().url(url).build();
 		try {
-			Response response = client.newCall(request).execute();
-			String result = response.body().string();
-			System.out.println(result);
+			String result = new XendrianServer().setServlet("plugin").setType("core").start();
 			XmlIO io = new XmlIO();
 			io.load(new ByteArrayInputStream(result.getBytes("UTF-8")));						
 			List childs = io.getRoot().getElement(0).getElements();
@@ -446,17 +383,30 @@ public class PluginManager implements IPluginManager {
 				XmlElement child = (XmlElement) it.next();
 				String id = child.getAttribute(Constants.XML_ATTRIBUTE_ID);
 				String name = child.getAttribute(Constants.XML_ATTRIBUTE_NAME);
+				String description = child.getAttribute(Constants.XML_ATTRIBUTE_DESCRIPTION);
+				String categoryname = child.getAttribute(Constants.XML_ATTRIBUTE_CATEGORY);
 				String version = child.getAttribute(Constants.XML_ATTRIBUTE_VERSION);
+				String enabled = child.getAttribute(Constants.XML_ATTRIBUTE_ENABLED);
+				String installed = child.getAttribute(Constants.XML_ATTRIBUTE_INSTALLED);
 				String filename = child.getAttribute("filename");
 				String filesize = child.getAttribute("filesize");
 				String synchro = child.getAttribute(Constants.XML_ATTRIBUTE_SYNCHRONIZED);
-				Timestamp sync = Timestamp.valueOf(synchro);
+				Timestamp sync = null;
+				if (synchro != null)
+					sync = Timestamp.valueOf(synchro);
+				else
+					sync = new Timestamp(System.currentTimeMillis());
+				//
+				PluginMetadata pm = new PluginMetadata(id, 
+						name, 
+						description,
+						version,
+						categoryname,
+						synchro,
+						enabled.equals("Y"),
+						installed.equals("Y"));								
 				//				
-				PluginMetadata pm = new PluginMetadata(id, name, true);
 				pm.setFilename(filename);
-				pm.setFilesize(filesize);
-				pm.setVersion(version);
-				pm.setSynchronized(sync);
 				plugins.add(pm);
 			}			
 		}
@@ -464,15 +414,8 @@ public class PluginManager implements IPluginManager {
 		{
 			e.printStackTrace();
 		}		
-		// aca tenemos lo que deberiamos tener instalado 
-		X_A_Machine mach = Env.getServerWeb();
-		url = String.format("http://%s:%s/plugin?ad_role_id=%s&type=list", Env.getServerWeb().getName(),port, Env.getAD_Role_ID(Env.getCtx()));
-		System.out.println(url);
-		client = new OkHttpClient();
-		request = new Request.Builder().url(url).build();
 		try {
-			Response response = client.newCall(request).execute();
-			String result = response.body().string();
+			String result = new XendrianServer().setServlet("plugin").setType("list").setRole(MRole.getDefault().getIdentifier()).start(); 
 			XmlIO io = new XmlIO();
 			io.load(new ByteArrayInputStream(result.getBytes("UTF-8")));						
 			List childs = io.getRoot().getElement(0).getElements();
@@ -480,17 +423,22 @@ public class PluginManager implements IPluginManager {
 				XmlElement child = (XmlElement) it.next();
 				String id = child.getAttribute(Constants.XML_ATTRIBUTE_ID);
 				String name = child.getAttribute(Constants.XML_ATTRIBUTE_NAME);
+				String description = child.getAttribute(Constants.XML_ATTRIBUTE_DESCRIPTION);
+				String categoryname = child.getAttribute(Constants.XML_ATTRIBUTE_CATEGORY);
+				String enabled = child.getAttribute(Constants.XML_ATTRIBUTE_ENABLED);
+				String installed = child.getAttribute(Constants.XML_ATTRIBUTE_INSTALLED);
 				String version = child.getAttribute(Constants.XML_ATTRIBUTE_VERSION);
-				String filename = child.getAttribute("filename");
-				String filesize = child.getAttribute("filesize");
+				String filename = child.getAttribute(Constants.XML_ATTRIBUTE_FILENAME);
 				String synchro = child.getAttribute(Constants.XML_ATTRIBUTE_SYNCHRONIZED);
-				Timestamp sync = Timestamp.valueOf(synchro);
-				//				
-				PluginMetadata pm = new PluginMetadata(id, name, true);
+				PluginMetadata pm = new PluginMetadata(id, 
+						name, 
+						description,
+						version,
+						categoryname,
+						synchro,
+						enabled.equals("true"),
+						installed.equals("true"));												
 				pm.setFilename(filename);
-				pm.setFilesize(filesize);
-				pm.setVersion(version);
-				pm.setSynchronized(sync);
 				plugins.add(pm);
 			}			
 		}
@@ -498,13 +446,17 @@ public class PluginManager implements IPluginManager {
 		{
 			e.printStackTrace();
 		}
-		
+
 		// try to load all plugins
 		for (int i = 0; i < pluginFolders.length; i++) {
 			File folder = pluginFolders[i];
+			System.out.println(String.format("pluginfolder=>%s", folder.getAbsolutePath()));
 			File xmlFile = new File(folder, Constants.FILENAME_PLUGIN_XML);
 			if (xmlFile == null || !xmlFile.exists()) {
 				// skip if it doesn't exist
+				if (xmlFile != null) {
+					System.out.println(String.format("%s don't exist", xmlFile.getAbsoluteFile()));
+				}
 				continue;
 			}			
 			BufferedInputStream buf;
@@ -515,13 +467,13 @@ public class PluginManager implements IPluginManager {
 				PluginMetadata pluginMetadata = new ExtensionXMLParser().parsePluginMetadata(pluginElement);
 				//
 				X_AD_Plugin plugin = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "id = ? AND version = ?", null)
-					.setParameters(pluginMetadata.getId(), new BigDecimal(pluginMetadata.getVersion())).first();
-				
+				.setParameters(pluginMetadata.getId(), new BigDecimal(pluginMetadata.getVersion())).first();
+
 				if (plugin == null)
 					continue;
-				
+
 				X_AD_Plugin_Access access = new Query(Env.getCtx(), X_AD_Plugin_Access.Table_Name, "AD_Role_ID = ? AND AD_Plugin_ID = ?", null)
-					.setParameters(Env.getAD_Role_ID(Env.getCtx()), plugin.getAD_Plugin_ID()).first();
+				.setParameters(Env.getAD_Role_ID(Env.getCtx()), plugin.getAD_Plugin_ID()).first();
 				if (access != null)
 				{
 					localplugins.add(pluginMetadata);
@@ -542,8 +494,22 @@ public class PluginManager implements IPluginManager {
 				if (localplugin.getId().equals(plugin.getId()))
 				{
 					found = true;
-					if (!localplugin.getVersion().equals(plugin.getVersion()) || !localplugin.getSynchronized().equals(plugin.getSynchronized()))
+					String localversion = localplugin.getVersion();
+					String version = plugin.getVersion();
+					Timestamp localsync = localplugin.getSynchronized();
+					Timestamp sync = plugin.getSynchronized();
+					if (localversion == null)
+						localversion = "";					
+					if (version == null)
+						version ="";
+					if (localsync == null) 
+						localsync = new Timestamp(System.currentTimeMillis());
+					if (sync == null)
+						sync = new Timestamp(System.currentTimeMillis());
+					if (!localversion.equals(version) || !localsync.equals(sync))
 					{
+						System.out.println(String.format("localversion=%s, version=%s", localversion, version));
+						System.out.println(String.format("localsync=%s, sync=%s", localsync, sync));
 						toUpdate.add(plugin);
 					}							
 				}
@@ -555,10 +521,10 @@ public class PluginManager implements IPluginManager {
 		}
 		boolean updated = false;
 		if (toUpdate.size() > 0)
-		{
-			String message = String.format("Desea actualizar desde %s", Env.getServerWeb().getName());
-			if (ADialog.ask(0, null, message))
-				updated = UpdatePlugin.getInstance().setPlugin(toUpdate);
+		{			
+			String message = String.format("Desea actualizar desde %s", XendrianServer.getWebServerName());
+			if (ADialog.ask(0, null, message)) 
+				UpdatePlugin.getInstance().setPlugin(toUpdate);							
 		}
 		return updated;
 	}

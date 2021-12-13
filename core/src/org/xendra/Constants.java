@@ -66,7 +66,7 @@ public interface Constants {
 	//
 	public final static String Client = "AD_Client_ID";
 	public final static String Org = "AD_Org_ID";
-	public static final String SalesMargin = "SalesMargin";
+	//public static final String SalesMargin = "SalesMargin";
 	public static final String SalesPrice = "SalesPrice";
 	//public static final String PriceAcquisition2 = "PriceAcquisition2";
 	public static final String ChangePrice = "ChangePrice";
@@ -109,6 +109,7 @@ public interface Constants {
 	public final static String T_VOID = "voidAction";
 	public final static String T_VOIDDOC = "voidDocAction";
 	public final static String T_LOAD = "loadAction";
+	public final static String T_IMPORT = "ImportAction";
 	public final static String T_SAVE = "saveAction";
 	public final static String T_PRINT = "printAction";
 	public final static String T_USER = "userAction";
@@ -125,6 +126,7 @@ public interface Constants {
 	public static final String A_COUPON = "Coupon";	
 	public static final String A_BONUS = "Bonus";
 	public static final String A_CONFIG = "Config";
+	public static final String A_DEBUG = "Debug";
 	public static final String A_SHIPPING = "Shipping";
 	public static final String A_GLOBALDISCOUNT = "Discount";
 	public static final String A_COLLECTION = "Collection";
@@ -145,14 +147,15 @@ public interface Constants {
 	public static final String CLOSE = "CLOSE"; 
 	public static final String CANCEL = "CANCEL";
 	
-	public static final String SALESHOSTMESSENGER = "SalesHostMessenger";	
-	public static final String BUYHOSTMESSENGER = "BuyHostMessenger";
+	//public static final String SALESHOSTMESSENGER = "SalesHostMessenger";	
+	//public static final String BUYHOSTMESSENGER = "BuyHostMessenger";
 	public static final String QPOSQUEUE = "/queue/pos";
 	public static final String QPOPQUEUE = "/queue/pop";
 	public static final String QVOIDQUEUE = "/queue/void";
 	public static final String QCONFIRMQUEUE = "/queue/confirm";
 	public static final String QTRANSFERQUEUE = "/queue/transfer";
-	public static final String QREPLICATIONMERGEQUEUE = "/queue/merge";
+	//public static final String QREPLICATIONMERGEQUEUE = "/queue/merge";
+	public static final String QUEUEMERGE = "merge";
 	public static final String QREPLICATIONREFERENCEQUEUE = "/queue/reference";
 	public static final String QDEMAND   = "/queue/demand";	
 	public static final String QConnectionFactory = "/ConnectionFactory";
@@ -167,6 +170,7 @@ public interface Constants {
 	public static final String COLUMNNAME_Updated = "Updated";
 	public static final String COLUMNNAME_CreatedBy = "CreatedBy";
 	public static final String COLUMNNAME_UpdatedBy = "UpdatedBy";
+	public static final String COLUMNNAME_IsActive = "IsActive";
 	public static final String HASH = "Hash";
 	public static final String SALESMESSAGE = "SALESMESSAGE";
 	public static final String BUYMESSAGE = "BUYMESSAGE";
@@ -194,7 +198,7 @@ public interface Constants {
 	public static final String FIELDALIGNMENTTYPE_Center = "C";
 	public static final String FIELDALIGNMENTTYPE_Default = "D";
 
-	public static final String COLUMNNAME_IsActive = "IsActive";
+	public static final String General = "General";
 
 	public static final int ServerPortNumber = 6666;
 
@@ -203,18 +207,16 @@ public interface Constants {
 	public static final String Language_Text = "Lang_Text";
 	
 	public static final String REPORTS = "reports";
-	//public static final String COREPLUGINS = "coreplugins";
-	//public static final String CORETRASH = "coretrash";
 	public static final String TRASH = "trash";
 	public static final String PLUGINS = "plugins";
+	public static final String WEB = "web";
 	public static final String XENDRIAN = "xendrian";
 	public static final String STORE = "xendrastore";
 	public static final String KEYSTORE = "keystore";
 	public static final String KEYSTORE_NAME = "myKeystore";
-	//public static final String COREINSTALLED = "coreinstalled";
-	//public static final String COREREPLICATION = "corereplication";
 	public static final String REPLICATION = "replication";
 	public static final String INSTALLED = "installed";
+	public static final String DOWNLOAD = "download";
 
 	public static final String MAIL_UPDATED = "mail_updated";
 	public static final String MAIL_SERVER = "mail_server";
@@ -222,14 +224,22 @@ public interface Constants {
 	public static final String MAIL_USER = "mail_user";
 	public static final String MAIL_PASSWORD = "mail_pwd";	
 	
-	public static final String CORE = "core"; //$NON-NLS-1$;
+	public static final String CORE = "org.columba.core"; //$NON-NLS-1$;
 	public static final String XML_ELEMENT_EXTENSION = "extension";
 	public static final String XML_ELEMENT_PRINTDOCUMENTFORMAT = "printdocumentformat";
 	public static final String XML_ELEMENT_EXTENSIONLIST = "extensionlist";
 	public static final String XML_ELEMENT_SERVLETLIST = "servletlist";
 	public static final String XML_ELEMENT_SERVLET = "servlet";
+	public static final String XML_ELEMENT_GUI = "gui";
 	public static final String XML_ELEMENT_MENU = "menu";
+	public static final String XML_ELEMENT_MENUITEM = "menuitem";
 	public static final String XML_ELEMENT_FORM = "form";
+	public static final String XML_ELEMENT_WINDOW = "window";
+	public static final String XML_ELEMENT_WEB = "web";
+	public static final String XML_ELEMENT_PROPERTIES = "properties";
+	public static final String XML_ELEMENT_DIRECTORY = "directory";
+	public static final String XML_ELEMENT_LOCATION = "location";
+	
 	public static final String XML_ATTRIBUTE_DESCRIPTION = "description";
 	public static final String XML_ATTRIBUTE_CATEGORY = "category";
 	public static final String XML_ATTRIBUTE_SYNCHRONIZED = "synchronized";
@@ -238,37 +248,47 @@ public interface Constants {
 	public static final String XML_ATTRIBUTE_NAME = "name";
 	public static final String XML_ATTRIBUTE_CONTEXT = "context";
 	public static final String XML_ATTRIBUTE_FILE = "file";
+	public static final String XML_ATTRIBUTE_FILENAME = "filename";
+	//public static final String XML_ATTRIBUTE_FILESIZE = "filesize";
 	public static final String XML_ATTRIBUTE_TYPE = "type";
 	//public static final String XML_ATTRIBUTE_CLIENT = "client";
 	public static final String XML_ELEMENT_HANDLERLIST = "handlerlist";
 	public static final String XML_ATTRIBUTE_SINGLETON = "singleton";
 	public static final String XML_ATTRIBUTE_ENABLED = "enabled";
+	public static final String XML_ATTRIBUTE_INSTALLED = "installed";
 	public static final String XML_ATTRIBUTE_CLASS = "class";
 	public static final String XML_ATTRIBUTE_MAPPING = "mapping";
 	public static final String XML_ATTRIBUTE_PARENT = "parent";
 	public static final String XML_ATTRIBUTE_ID = "id";
-	public static final String XML_ATTRIBUTE_IDENTIFIER = "identifier";
+	public static final String XML_ATTRIBUTE_IDENTIFIER = "Identifier";
 	public static final String XML_ATTRIBUTE_ACCESSLEVEL = "accesslevel";
 	public static final String XML_ATTRIBUTE_FREQUENCYTYPE = "frequencytype";
 	public static final String XML_ATTRIBUTE_FREQUENCY = "frequency";
 	public static final String XML_ATTRIBUTE_FREQUENCY_STARTAT = "frequencystartat";
 	public static final String XML_ATTRIBUTE_KEEPLOGDAYS = "keeplogdays";
-	public static final String XML_ATTRIBUTE_DIR = "dir";
-	public static final String XML_ELEMENT_PROPERTIES = "properties";
+	public static final String XML_ATTRIBUTE_DIR = "dir";	
 	// RULE
 	public static final String XML_ATTRIBUTE_AGENDA = "agenda";
 	public static final String XML_ATTRIBUTE_DEFAULT = "default";
 	public static final String XML_ATTRIBUTE_PACKAGE = "package";
-	public static final String XML_ATTRIBUTE_ENTRYPOINT = "EntryPoint";
-	public static final String XML_ATTRIBUTE_SESSIONNAME = "SessionName";
+	public static final String XML_ATTRIBUTE_ENTRYPOINT = "entrypoint";
+	public static final String XML_ATTRIBUTE_SESSIONNAME = "sessionname";
 	public static final String XML_ATTRIBUTE_EQUALSBEHAVIOR = "EqualsBehavior";
 	public static final String XML_ATTRIBUTE_EVENTPROCESSINGMODE = "EventProcessingMode";
 	public static final String XML_ATTRIBUTE_QUEUENAME = "queuename";
+	public static final String XML_ATTRIBUTE_RULETYPE = "ruletype";
 	public static final String XML_ATTRIBUTE_QUEUELISTENERCLASS = "queuelistenerclass";
 	public static final String XML_ATTRIBUTE_DOCBASETYPE = "docbasetype";
 	public static final String XML_ATTRIBUTE_DOCSUBTYPE = "docsubtype";
 	public static final String XML_ATTRIBUTE_FIELD = "field";
+	public static final String XML_ATTRIBUTE_GROUP = "group";
 	public static final String XML_ATTRIBUTE_TAG = "Tag";
+	public static final String XML_ATTRIBUTE_TAGS = "tags";
+	
+	public static final String DROOLS_KIEBASE = "kiebase";
+	public static final String DROOLS_RULE = "rule";
+	public static final String DROOLS_MODEL = "model";
+	public static final String DROOLS_CHANNEL = "channel";
 	
 	public static final String FILENAME_PLUGIN_XML = "plugin.xml";
 	public static final String FILENAME_CONFIG_XML = "config.xml";
@@ -284,4 +304,5 @@ public interface Constants {
 	public static final String YES = "Y";
 	public static final String NO = "N";
 	public static final String ERROR = "E";
+	public static final int SuperUser = 100;
 } 

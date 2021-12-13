@@ -307,7 +307,7 @@ public final class InfoProduct extends Info implements ActionListener
 			M_PriceList_Version_ID = findPLV (M_PriceList_ID);
 		//	Set Value or Name
 		if (value.startsWith("@")) //&& value.endsWith("@"))
-			fieldName.setText(value.substring(1,value.length()-1));
+			fieldName.setText(value.substring(1));
 		else
 			fieldValue.setText(value);
 		//	Set Warehouse
@@ -535,8 +535,22 @@ public final class InfoProduct extends Info implements ActionListener
 
 		//  => Name
 		String name = fieldName.getText().toUpperCase();
-		if (!(name.equals("") || name.equals("%")))
-			where.append(" AND UPPER(p.Name) LIKE ?");
+		if (!(name.equals("") || name.equals("%"))) {
+			String strname = "";
+			java.util.List<String> pos = new ArrayList<String>();
+			StringTokenizer str = new StringTokenizer(name, " ");
+			while (str.hasMoreElements()) {
+				String key = str.nextElement().toString();
+				if (strname.length() > 1) 
+					strname += " AND ";
+				else 
+					strname += " AND (";
+				strname +=" p.NAME ~? ";
+			}
+			strname += ")";
+			//where.append(" AND UPPER(p.Name) LIKE ?");
+			where.append(strname);
+		}
 		
 		//  => ShortName
 		String shortname = fielShortdName.getText().toUpperCase();
@@ -631,15 +645,16 @@ public final class InfoProduct extends Info implements ActionListener
 			pstmt.setString(index++, value);
 			log.fine("Value: " + value);
 		}
-
+		
 		//  => Name
 		String name = fieldName.getText().toUpperCase();
 		if (!(name.equals("") || name.equals("%")))
 		{
-			if (!name.endsWith("%"))
-				name += "%";
-			pstmt.setString(index++, name);
-			log.fine("Name: " + name);
+			StringTokenizer str = new StringTokenizer(name, " ");
+			while (str.hasMoreElements()) {
+				String key = str.nextElement().toString();
+				pstmt.setString(index++, key);
+			}
 		}
 
 		String shortname = fielShortdName.getText().toUpperCase();

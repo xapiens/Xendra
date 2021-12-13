@@ -8,7 +8,7 @@ public class Loaddocumentmovement0
  
 @XendraFunction(Name="loaddocumentmovement",Output="void",Owner="xendra",Language="plpgsql",
 Identifier="3a86bce5-2a7c-cc3c-b74c-a507a100b619",Arguments="id numeric, p_period_id numeric",
-Extension="",Synchronized="2017-10-11 11:12:28.0")
+Extension="",Synchronized="2019-04-15 00:00:28.0")
 	public static final String Identifier = "3a86bce5-2a7c-cc3c-b74c-a507a100b619";
 
 	public static final String getCode() 
@@ -26,7 +26,7 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	sb.appendln("		m.documentno,m.c_doctype_id,l.m_warehouse_id,ml.identifier, ");
 	sb.appendln("		ml.movementqty, ml.m_movementline_id, ");
 	sb.appendln("		ml.m_attributesetinstance_id, m.ad_org_id, m.docstatus,ml.m_product_id,");
-	sb.appendln("		ml.m_locator_id, m.movementdate,ml.line, dt.transactiontype");
+	sb.appendln("		ml.m_locator_id, m.movementdate,ml.line, dt.transactiontype, ml.line		");
 	sb.appendln("		from m_movementline ml join m_movement m on m.m_movement_id = ml.m_movement_id ");
 	sb.appendln("		JOIN c_doctype dt on m.c_doctype_id = dt.c_doctype_id");
 	sb.appendln("		JOIN m_locator l ON l.m_locator_id = ml.m_locator_id		");
@@ -75,6 +75,7 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	sb.appendln("		carding.updated := now();");
 	sb.appendln("		carding.updatedby := ar.updatedby;							");
 	sb.appendln("		carding.transactiontype := ar.transactiontype;");
+	sb.appendln("		carding.seqno := ar.line;");
 	sb.appendln("		insert into m_transaction select (x).* from (select carding as x) ss;			");
 	sb.appendln("		carding.movementtype := 'M-';");
 	sb.appendln("		carding.DocumentNo := ar.documentno;");
@@ -111,8 +112,10 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	sb.appendln("		carding.created := now();");
 	sb.appendln("		carding.createdby := ar.createdby;");
 	sb.appendln("		carding.updated := now();");
-	sb.appendln("		carding.updatedby := ar.updatedby;			");
-	sb.appendln("		carding.identifier := ar.identifier;				");
+	sb.appendln("		carding.updatedby := ar.updatedby;	");
+	sb.appendln("		carding.seqno := ar.line;		");
+	sb.appendln("		carding.identifier := ar.identifier;	");
+	sb.appendln("		carding.processed = 'N';			");
 	sb.appendln("		insert into m_transaction select (x).* from (select carding as x) ss;					");
 	sb.appendln("	end loop;");
 	sb.appendln("	update m_movement set iscosted = 'Y' where m_movement_id = id;");
@@ -122,7 +125,7 @@ Extension="",Synchronized="2017-10-11 11:12:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-10-11 11:12:28.0");
+ 	sb.appendln("@Synchronized=2019-04-15 00:00:28.0");
 	sb.appendln("@Identifier=3a86bce5-2a7c-cc3c-b74c-a507a100b619");
 	return sb.toString();
 }

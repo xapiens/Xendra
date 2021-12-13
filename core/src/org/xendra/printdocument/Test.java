@@ -16,7 +16,7 @@ public class Test {
 			PrintWorker obj = new PrintWorker();
 			//obj.setQueueName("factura");
 			obj.setQueueName("document");
-			obj.setPrinterDocumentFormat_ID(1);
+			//obj.AssignPrinterDocumentFormat(1);
 			obj.setCommand(PrintWorker.ReceiveJob);
 			obj.AddProperty("name", "nombre");
 			obj.AddProperty("tema", 1);

@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_C_InvoiceScheduleInvoiceFrequency;
-import org.compiere.model.reference.REF_Weekdays;
 /** Generated Model for C_InvoiceSchedule
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -71,10 +69,10 @@ public static int Table_ID=MTable.getTable_ID("C_InvoiceSchedule");
 public static String es_PE_TAB_InvoiceSchedule_Description="Definir Programa de Facturación";
 
 @XendraTrl(Identifier="c6b53d53-e99b-1572-66eb-fbec2fc71806")
-public static String es_PE_TAB_InvoiceSchedule_Name="Programa de Facturas";
+public static String es_PE_TAB_InvoiceSchedule_Help="La planilla de programa de facturación define la frecuencia con la cual los lotes de facturas serán generados para un socio de negocio.";
 
 @XendraTrl(Identifier="c6b53d53-e99b-1572-66eb-fbec2fc71806")
-public static String es_PE_TAB_InvoiceSchedule_Help="La planilla de programa de facturación define la frecuencia con la cual los lotes de facturas serán generados para un socio de negocio.";
+public static String es_PE_TAB_InvoiceSchedule_Name="Programa de Facturas";
 
 @XendraTab(Name="Invoice Schedule",Description="Define Invoice Schedule",
 Help="The Invoice Schedule Tab defines the frequency for which batch invoices will be generated for a Business Partner.",
@@ -89,11 +87,13 @@ public static final String TABNAME_InvoiceSchedule="c6b53d53-e99b-1572-66eb-fbec
 @XendraTrl(Identifier="fcdd7fa5-0ff8-5060-b7fe-db67e91e4ec8")
 public static String es_PE_TABLE_C_InvoiceSchedule_Name="Programa de Facturación";
 
-@XendraTable(Name="Invoice Schedule",Description="Schedule for generating Invoices",Help="",
-TableName="C_InvoiceSchedule",AccessLevel="3",AD_Window_ID="9d4cb53b-a08d-6979-3454-3db6a6453f60",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=65,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="fcdd7fa5-0ff8-5060-b7fe-db67e91e4ec8",Synchronized="2017-08-16 11:41:56.0")
+@XendraTable(Name="Invoice Schedule",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Schedule for generating Invoices",
+Help="",TableName="C_InvoiceSchedule",AccessLevel="3",
+AD_Window_ID="9d4cb53b-a08d-6979-3454-3db6a6453f60",AD_Val_Rule_ID="",IsKey=1,LoadSeq=65,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="fcdd7fa5-0ff8-5060-b7fe-db67e91e4ec8",
+Synchronized="2020-03-03 21:37:05.0")
 /** TableName=C_InvoiceSchedule */
 public static final String Table_Name="C_InvoiceSchedule";
 
@@ -143,13 +143,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="fd98dd24-64c7-9b87-172e-7728fe32dbe4")
+public static String es_PE_FIELD_InvoiceSchedule_Amount_Name="Total";
+
+@XendraTrl(Identifier="fd98dd24-64c7-9b87-172e-7728fe32dbe4")
 public static String es_PE_FIELD_InvoiceSchedule_Amount_Description="Total límite para el envío de facturas";
 
 @XendraTrl(Identifier="fd98dd24-64c7-9b87-172e-7728fe32dbe4")
 public static String es_PE_FIELD_InvoiceSchedule_Amount_Help="El campo total indica el límite en el que las facturas no serán generadas. Si el total total de la factura esta por debajo de este total; la factura  no será enviada en esta corrida programada. Este campo es solamente desplegado si el cuadro de verificación de total límite es seleccionado";
-
-@XendraTrl(Identifier="fd98dd24-64c7-9b87-172e-7728fe32dbe4")
-public static String es_PE_FIELD_InvoiceSchedule_Amount_Name="Total";
 
 @XendraField(AD_Column_ID="Amt",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -167,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9124d734-be41-1931-326d-3ece6fbcf934",
-Synchronized="2017-08-05 16:53:48.0")
+Synchronized="2019-08-30 22:21:43.0")
 /** Column name Amt */
 public static final String COLUMNNAME_Amt = "Amt";
 /** Set Invoice Schedule.
@@ -187,13 +187,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="078f70df-df99-2e5c-fdea-a404c95230d6")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceSchedule_Name="Programa de Facturación";
+
+@XendraTrl(Identifier="078f70df-df99-2e5c-fdea-a404c95230d6")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceSchedule_Description="Programa para generar facturas";
 
 @XendraTrl(Identifier="078f70df-df99-2e5c-fdea-a404c95230d6")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceSchedule_Help="El programa de facturación identifica la frecuencia usada cuando se generan facturas.";
-
-@XendraTrl(Identifier="078f70df-df99-2e5c-fdea-a404c95230d6")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceSchedule_Name="Programa de Facturación";
 
 @XendraField(AD_Column_ID="C_InvoiceSchedule_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -231,13 +231,13 @@ return value;
 }
 
 @XendraTrl(Identifier="79dc48ea-1900-33c4-78ba-743b8731e2c3")
+public static String es_PE_FIELD_InvoiceSchedule_Description_Name="Observación";
+
+@XendraTrl(Identifier="79dc48ea-1900-33c4-78ba-743b8731e2c3")
 public static String es_PE_FIELD_InvoiceSchedule_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="79dc48ea-1900-33c4-78ba-743b8731e2c3")
 public static String es_PE_FIELD_InvoiceSchedule_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="79dc48ea-1900-33c4-78ba-743b8731e2c3")
-public static String es_PE_FIELD_InvoiceSchedule_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="58d692ec-a38a-69fc-709e-2bd87529296f",
-Synchronized="2017-08-05 16:53:48.0")
+Synchronized="2019-08-30 22:21:43.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Invoice on even weeks.
@@ -278,13 +278,13 @@ return false;
 }
 
 @XendraTrl(Identifier="5d4730fa-9078-d4ac-47bb-137ca8acc041")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceOnEvenWeeks_Name="Factura en Semanas Pares";
+
+@XendraTrl(Identifier="5d4730fa-9078-d4ac-47bb-137ca8acc041")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceOnEvenWeeks_Description="Enviar facturas en semanas pares";
 
 @XendraTrl(Identifier="5d4730fa-9078-d4ac-47bb-137ca8acc041")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceOnEvenWeeks_Help="El cuadro de verificación factura en semanas pares indica si las facturas bisemanales deben ser enviadas en números pares de semanas.";
-
-@XendraTrl(Identifier="5d4730fa-9078-d4ac-47bb-137ca8acc041")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceOnEvenWeeks_Name="Factura en Semanas Pares";
 
 @XendraField(AD_Column_ID="EvenInvoiceWeek",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -302,7 +302,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="45090adc-7176-30a7-8beb-3e4de46cedea",
-Synchronized="2017-08-05 16:53:48.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name EvenInvoiceWeek */
 public static final String COLUMNNAME_EvenInvoiceWeek = "EvenInvoiceWeek";
 /** Set Identifier.
@@ -334,7 +334,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="103f06cd-f8f5-4c56-99a2-8a975d3e2009",
-Synchronized="2017-08-05 16:53:48.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Invoice Day.
@@ -353,13 +353,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d12bdc25-f010-5739-08ab-40e0d4689710")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceDay_Name="Día de la Factura";
+
+@XendraTrl(Identifier="d12bdc25-f010-5739-08ab-40e0d4689710")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceDay_Description="Día de generación de la factura";
 
 @XendraTrl(Identifier="d12bdc25-f010-5739-08ab-40e0d4689710")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceDay_Help="El día de facturación indica el día de generación de las facturas. Si es dos veces al mes el segundo día es 15 días después de este día";
-
-@XendraTrl(Identifier="d12bdc25-f010-5739-08ab-40e0d4689710")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceDay_Name="Día de la Factura";
 
 @XendraField(AD_Column_ID="InvoiceDay",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -377,7 +377,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="1",ValueMax="31",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f19b0cf9-ad2a-5065-79ae-62dd022e2fc6",
-Synchronized="2017-08-05 16:53:48.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name InvoiceDay */
 public static final String COLUMNNAME_InvoiceDay = "InvoiceDay";
 /** Set Invoice day cut-off.
@@ -396,13 +396,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b8d26299-bd1b-e34c-9487-946d44b73c7d")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceDayCut_Off_Name="Día de Corte para Factura";
+
+@XendraTrl(Identifier="b8d26299-bd1b-e34c-9487-946d44b73c7d")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceDayCut_Off_Description="Último día para que las entregas sean incluidas";
 
 @XendraTrl(Identifier="b8d26299-bd1b-e34c-9487-946d44b73c7d")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceDayCut_Off_Help="El Corte del día de factura indica el último día para que las entregas sean incluidas en el programa de facturas actual . Por ej. Si el programa de facturación se define para el primer día del mes ; día del corte puede ser el 25 del mes.";
-
-@XendraTrl(Identifier="b8d26299-bd1b-e34c-9487-946d44b73c7d")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceDayCut_Off_Name="Día de Corte para Factura";
 
 @XendraField(AD_Column_ID="InvoiceDayCutoff",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -420,19 +420,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="1",ValueMax="31",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="da9d2bb5-0bc5-65aa-45f3-56f6daa45de9",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name InvoiceDayCutoff */
 public static final String COLUMNNAME_InvoiceDayCutoff = "InvoiceDayCutoff";
-
-/** InvoiceFrequency AD_Reference=67d6fd18-7cd1-74b1-b3fb-3a7a52814403 */
-public static final int INVOICEFREQUENCY_AD_Reference_ID=168;
 /** Set Invoice Frequency.
 @param InvoiceFrequency How often invoices will be generated */
 public void setInvoiceFrequency (String InvoiceFrequency)
 {
-if (InvoiceFrequency == null) throw new IllegalArgumentException ("InvoiceFrequency is mandatory");
-if (InvoiceFrequency.equals(REF_C_InvoiceScheduleInvoiceFrequency.Monthly) || InvoiceFrequency.equals(REF_C_InvoiceScheduleInvoiceFrequency.TwiceMonthly) || InvoiceFrequency.equals(REF_C_InvoiceScheduleInvoiceFrequency.Daily) || InvoiceFrequency.equals(REF_C_InvoiceScheduleInvoiceFrequency.Weekly));
- else throw new IllegalArgumentException ("InvoiceFrequency Invalid value - " + InvoiceFrequency + " - Reference_ID=168 - M - T - D - W");
 if (InvoiceFrequency.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -448,13 +442,13 @@ return (String)get_Value(COLUMNNAME_InvoiceFrequency);
 }
 
 @XendraTrl(Identifier="a6bb7914-9222-46a1-0054-9ea89b6361c2")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceFrequency_Name="Frecuencia de Factura";
+
+@XendraTrl(Identifier="a6bb7914-9222-46a1-0054-9ea89b6361c2")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceFrequency_Description="Frecuencia con que las facturas serán generadas";
 
 @XendraTrl(Identifier="a6bb7914-9222-46a1-0054-9ea89b6361c2")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceFrequency_Help="La frecuencia de facturación indica la frecuencia de generación de facturas para un socio de negocio";
-
-@XendraTrl(Identifier="a6bb7914-9222-46a1-0054-9ea89b6361c2")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceFrequency_Name="Frecuencia de Factura";
 
 @XendraField(AD_Column_ID="InvoiceFrequency",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -472,19 +466,13 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7ab1c775-acdb-a3f8-d9de-187dc471a126",Synchronized="2017-08-05 16:53:49.0")
+Identifier="7ab1c775-acdb-a3f8-d9de-187dc471a126",Synchronized="2019-08-30 22:21:44.0")
 /** Column name InvoiceFrequency */
 public static final String COLUMNNAME_InvoiceFrequency = "InvoiceFrequency";
-
-/** InvoiceWeekDay AD_Reference=83e938bc-4a87-77a1-cbb0-83c31065e487 */
-public static final int INVOICEWEEKDAY_AD_Reference_ID=167;
 /** Set Invoice Week Day.
 @param InvoiceWeekDay Day to generate invoices */
 public void setInvoiceWeekDay (String InvoiceWeekDay)
 {
-if (InvoiceWeekDay == null) throw new IllegalArgumentException ("InvoiceWeekDay is mandatory");
-if (InvoiceWeekDay.equals(REF_Weekdays.Sunday) || InvoiceWeekDay.equals(REF_Weekdays.Monday) || InvoiceWeekDay.equals(REF_Weekdays.Tuesday) || InvoiceWeekDay.equals(REF_Weekdays.Wednesday) || InvoiceWeekDay.equals(REF_Weekdays.Thursday) || InvoiceWeekDay.equals(REF_Weekdays.Friday) || InvoiceWeekDay.equals(REF_Weekdays.Saturday));
- else throw new IllegalArgumentException ("InvoiceWeekDay Invalid value - " + InvoiceWeekDay + " - Reference_ID=167 - 7 - 1 - 2 - 3 - 4 - 5 - 6");
 if (InvoiceWeekDay.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -500,13 +488,13 @@ return (String)get_Value(COLUMNNAME_InvoiceWeekDay);
 }
 
 @XendraTrl(Identifier="848f84b4-61c9-a4d2-6202-287abc3914ce")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekDay_Name="Día de la Semana para Facturar";
+
+@XendraTrl(Identifier="848f84b4-61c9-a4d2-6202-287abc3914ce")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekDay_Description="Día de la semana para generar facturas";
 
 @XendraTrl(Identifier="848f84b4-61c9-a4d2-6202-287abc3914ce")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekDay_Help="El día de la semana de facturación indica el día de la semana para generar facturas";
-
-@XendraTrl(Identifier="848f84b4-61c9-a4d2-6202-287abc3914ce")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekDay_Name="Día de la Semana para Facturar";
 
 @XendraField(AD_Column_ID="InvoiceWeekDay",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -524,18 +512,13 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1d31ce0f-4df5-57e7-49ee-202109b91000",Synchronized="2017-08-05 16:53:49.0")
+Identifier="1d31ce0f-4df5-57e7-49ee-202109b91000",Synchronized="2019-08-30 22:21:44.0")
 /** Column name InvoiceWeekDay */
 public static final String COLUMNNAME_InvoiceWeekDay = "InvoiceWeekDay";
-
-/** InvoiceWeekDayCutoff AD_Reference=83e938bc-4a87-77a1-cbb0-83c31065e487 */
-public static final int INVOICEWEEKDAYCUTOFF_AD_Reference_ID=167;
 /** Set Invoice weekday cutoff.
 @param InvoiceWeekDayCutoff Last day in the week for shipments to be included */
 public void setInvoiceWeekDayCutoff (String InvoiceWeekDayCutoff)
 {
-if (InvoiceWeekDayCutoff == null || InvoiceWeekDayCutoff.equals(REF_Weekdays.Sunday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Monday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Tuesday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Wednesday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Thursday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Friday) || InvoiceWeekDayCutoff.equals(REF_Weekdays.Saturday));
- else throw new IllegalArgumentException ("InvoiceWeekDayCutoff Invalid value - " + InvoiceWeekDayCutoff + " - Reference_ID=167 - 7 - 1 - 2 - 3 - 4 - 5 - 6");
 if (InvoiceWeekDayCutoff != null && InvoiceWeekDayCutoff.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -551,13 +534,13 @@ return (String)get_Value(COLUMNNAME_InvoiceWeekDayCutoff);
 }
 
 @XendraTrl(Identifier="780448ba-f9d2-6edf-1b38-ae2235f7158e")
+public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekdayCutoff_Name="Día de la Semana de Corte para Factura";
+
+@XendraTrl(Identifier="780448ba-f9d2-6edf-1b38-ae2235f7158e")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekdayCutoff_Description="Último día en la semana para que las entregas sean incluidas";
 
 @XendraTrl(Identifier="780448ba-f9d2-6edf-1b38-ae2235f7158e")
 public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekdayCutoff_Help="El corte del día de la semana para facturación indica el último día de la semana en que una entrega pueda ser hecha para ser incluida en el programa de facturación";
-
-@XendraTrl(Identifier="780448ba-f9d2-6edf-1b38-ae2235f7158e")
-public static String es_PE_FIELD_InvoiceSchedule_InvoiceWeekdayCutoff_Name="Día de la Semana de Corte para Factura";
 
 @XendraField(AD_Column_ID="InvoiceWeekDayCutoff",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -576,7 +559,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="f9a121b6-7ab4-5be2-c59f-70f514cc2122",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name InvoiceWeekDayCutoff */
 public static final String COLUMNNAME_InvoiceWeekDayCutoff = "InvoiceWeekDayCutoff";
 /** Set Amount Limit.
@@ -599,13 +582,13 @@ return false;
 }
 
 @XendraTrl(Identifier="d3bc3587-5587-2a2c-768e-9d9aeefbdff2")
+public static String es_PE_FIELD_InvoiceSchedule_AmountLimit_Name="Total Límite";
+
+@XendraTrl(Identifier="d3bc3587-5587-2a2c-768e-9d9aeefbdff2")
 public static String es_PE_FIELD_InvoiceSchedule_AmountLimit_Description="Enviar facturas solamente si el total excede el límite";
 
 @XendraTrl(Identifier="d3bc3587-5587-2a2c-768e-9d9aeefbdff2")
 public static String es_PE_FIELD_InvoiceSchedule_AmountLimit_Help="El cuadro de verificación total límite indica si las facturas serán enviadas si ellas están por debajo del límite introducido";
-
-@XendraTrl(Identifier="d3bc3587-5587-2a2c-768e-9d9aeefbdff2")
-public static String es_PE_FIELD_InvoiceSchedule_AmountLimit_Name="Total Límite";
 
 @XendraField(AD_Column_ID="IsAmount",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -623,7 +606,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9eed1fba-eca9-57cc-9fff-90bba55f9e74",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name IsAmount */
 public static final String COLUMNNAME_IsAmount = "IsAmount";
 /** Set Default.
@@ -646,13 +629,13 @@ return false;
 }
 
 @XendraTrl(Identifier="a67e62dc-3132-54a4-1c22-0eb0e3edfb6f")
+public static String es_PE_FIELD_InvoiceSchedule_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="a67e62dc-3132-54a4-1c22-0eb0e3edfb6f")
 public static String es_PE_FIELD_InvoiceSchedule_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="a67e62dc-3132-54a4-1c22-0eb0e3edfb6f")
 public static String es_PE_FIELD_InvoiceSchedule_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="a67e62dc-3132-54a4-1c22-0eb0e3edfb6f")
-public static String es_PE_FIELD_InvoiceSchedule_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -670,7 +653,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="07016b93-0c54-eb1b-3e22-e1a3d6bf0dfb",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -702,13 +685,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="2ffeca3b-567d-483d-4e74-63428495d4bb")
+public static String es_PE_FIELD_InvoiceSchedule_Name_Name="Nombre";
+
+@XendraTrl(Identifier="2ffeca3b-567d-483d-4e74-63428495d4bb")
 public static String es_PE_FIELD_InvoiceSchedule_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="2ffeca3b-567d-483d-4e74-63428495d4bb")
 public static String es_PE_FIELD_InvoiceSchedule_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="2ffeca3b-567d-483d-4e74-63428495d4bb")
-public static String es_PE_FIELD_InvoiceSchedule_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="c6b53d53-e99b-1572-66eb-fbec2fc71806",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -726,7 +709,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a03c280e-bdb9-1cd3-4517-77410a82dc6f",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

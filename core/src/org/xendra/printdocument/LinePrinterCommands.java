@@ -2,12 +2,13 @@ package org.xendra.printdocument;
 
 import java.io.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
+
 
 /**
  */
 public class LinePrinterCommands {
-	static Logger log = Logger.getLogger(LinePrinterCommands.class);
+	static CLogger log = CLogger.getCLogger(LinePrinterCommands.class);
 
 	public LinePrinterCommands() {
 		super();
@@ -30,8 +31,8 @@ public class LinePrinterCommands {
 			if (commandHandler != null)
 				commandHandler.execute();
 		} catch(Exception e) {
-			log.error(METHOD_NAME + "Could not properly handle command:" + is.getCommand());
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + "Could not properly handle command:" + is.getCommand());
+			log.severe(METHOD_NAME + e.getMessage());
 		}
 	}
 
@@ -60,8 +61,8 @@ public class LinePrinterCommands {
 					throw new Exception(METHOD_NAME + "We do not support command:" + is.getCommand());
 				}
 		} catch(Exception e) {
-			log.error(METHOD_NAME + "Could not properly handle command:" + is.getCommand());
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + "Could not properly handle command:" + is.getCommand());
+			log.severe(METHOD_NAME + e.getMessage());
 		}
 		return result;
 	}

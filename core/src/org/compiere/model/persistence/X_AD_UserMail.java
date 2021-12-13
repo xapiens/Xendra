@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__YesNo;
 /** Generated Model for AD_UserMail
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -75,28 +74,29 @@ public static final String TABNAME_UserMail="fae19742-c3d2-8d4f-af2a-f7944346d11
 public static String es_PE_TAB_UserMail2_Description="Mail enviado para el usuario";
 
 @XendraTrl(Identifier="3777fd79-705a-ae18-7f4b-c68790b5470e")
-public static String es_PE_TAB_UserMail2_Name="Usuario de Mail";
-
-@XendraTrl(Identifier="3777fd79-705a-ae18-7f4b-c68790b5470e")
 public static String es_PE_TAB_UserMail2_Help="Archivos de mails enviados para usuarios";
 
-@XendraTab(Name="User Mail",Description="Mail sent to the user",
-Help="Archive of mails sent to users",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",SeqNo=60,
-TabLevel=1,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
-AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
-AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",
-ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=false,IsAdvancedTab=true,Parent_Column_ID="",
+@XendraTrl(Identifier="3777fd79-705a-ae18-7f4b-c68790b5470e")
+public static String es_PE_TAB_UserMail2_Name="Usuario de Mail";
+@XendraTab(Name="User Mail",
+Description="Mail sent to the user",Help="Archive of mails sent to users",
+AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",SeqNo=60,TabLevel=1,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,AD_Column_ID="",HasTree=false,
+WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
+AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",
+IsInsertRecord=false,IsAdvancedTab=true,Parent_Column_ID="",
 Identifier="3777fd79-705a-ae18-7f4b-c68790b5470e",Synchronized="2012-03-17 18:47:08.603")
 public static final String TABNAME_UserMail2="3777fd79-705a-ae18-7f4b-c68790b5470e";
 
 @XendraTrl(Identifier="24fd7b26-d24d-720e-7679-56aa76355283")
 public static String es_PE_TABLE_AD_UserMail_Name="Mail para Usuario";
 
-@XendraTable(Name="User Mail",Description="Mail sent to the user",Help="",TableName="AD_UserMail",
-AccessLevel="7",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="24fd7b26-d24d-720e-7679-56aa76355283",Synchronized="2017-08-16 11:41:07.0")
+@XendraTable(Name="User Mail",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Mail sent to the user",Help="",
+TableName="AD_UserMail",AccessLevel="7",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="24fd7b26-d24d-720e-7679-56aa76355283",Synchronized="2020-03-03 21:36:05.0")
 /** TableName=AD_UserMail */
 public static final String Table_Name="AD_UserMail";
 
@@ -152,13 +152,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="07e92d9f-a977-d118-9fd8-ecee2d6d64c2")
+public static String es_PE_FIELD_UserMail_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="07e92d9f-a977-d118-9fd8-ecee2d6d64c2")
 public static String es_PE_FIELD_UserMail_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="07e92d9f-a977-d118-9fd8-ecee2d6d64c2")
 public static String es_PE_FIELD_UserMail_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="07e92d9f-a977-d118-9fd8-ecee2d6d64c2")
-public static String es_PE_FIELD_UserMail_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -168,13 +168,13 @@ Identifier="07e92d9f-a977-d118-9fd8-ecee2d6d64c2")
 public static final String FIELDNAME_UserMail_UserContact="07e92d9f-a977-d118-9fd8-ecee2d6d64c2";
 
 @XendraTrl(Identifier="632a60e3-8a40-f456-28c2-6ca0ef1b0402")
+public static String es_PE_FIELD_UserMail_UserContact2_Name="Usuario";
+
+@XendraTrl(Identifier="632a60e3-8a40-f456-28c2-6ca0ef1b0402")
 public static String es_PE_FIELD_UserMail_UserContact2_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="632a60e3-8a40-f456-28c2-6ca0ef1b0402")
 public static String es_PE_FIELD_UserMail_UserContact2_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="632a60e3-8a40-f456-28c2-6ca0ef1b0402")
-public static String es_PE_FIELD_UserMail_UserContact2_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -192,7 +192,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9704fcad-8e19-c901-bc04-40bcbbcf3793",
-Synchronized="2017-08-05 16:52:57.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set User Mail.
@@ -212,13 +212,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cc9b76c4-1087-1479-5e88-794f1cffaf2e")
+public static String es_PE_FIELD_UserMail_UserMail_Name="Mail para Usuario";
+
+@XendraTrl(Identifier="cc9b76c4-1087-1479-5e88-794f1cffaf2e")
 public static String es_PE_FIELD_UserMail_UserMail_Description="Mail enviado a usuario";
 
 @XendraTrl(Identifier="cc9b76c4-1087-1479-5e88-794f1cffaf2e")
 public static String es_PE_FIELD_UserMail_UserMail_Help="Control de mails enviados a usuarios";
-
-@XendraTrl(Identifier="cc9b76c4-1087-1479-5e88-794f1cffaf2e")
-public static String es_PE_FIELD_UserMail_UserMail_Name="Mail para Usuario";
 
 @XendraField(AD_Column_ID="AD_UserMail_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -228,13 +228,13 @@ Identifier="cc9b76c4-1087-1479-5e88-794f1cffaf2e")
 public static final String FIELDNAME_UserMail_UserMail="cc9b76c4-1087-1479-5e88-794f1cffaf2e";
 
 @XendraTrl(Identifier="642367d9-5ddd-eb31-8097-52b91bf90c4f")
+public static String es_PE_FIELD_UserMail_UserMail2_Name="Mail para Usuario";
+
+@XendraTrl(Identifier="642367d9-5ddd-eb31-8097-52b91bf90c4f")
 public static String es_PE_FIELD_UserMail_UserMail2_Description="Mail enviado a usuario";
 
 @XendraTrl(Identifier="642367d9-5ddd-eb31-8097-52b91bf90c4f")
 public static String es_PE_FIELD_UserMail_UserMail2_Help="Control de mails enviados a usuarios";
-
-@XendraTrl(Identifier="642367d9-5ddd-eb31-8097-52b91bf90c4f")
-public static String es_PE_FIELD_UserMail_UserMail2_Name="Mail para Usuario";
 
 @XendraField(AD_Column_ID="AD_UserMail_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -265,10 +265,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="c5be66a2-35ac-11aa-9099-2b551fc9c8ec")
-public static String es_PE_FIELD_UserMail_DeliveryConfirmation_Description="Confirmación de Entrega de Email";
+public static String es_PE_FIELD_UserMail_DeliveryConfirmation_Name="Confirmación de Entrega";
 
 @XendraTrl(Identifier="c5be66a2-35ac-11aa-9099-2b551fc9c8ec")
-public static String es_PE_FIELD_UserMail_DeliveryConfirmation_Name="Confirmación de Entrega";
+public static String es_PE_FIELD_UserMail_DeliveryConfirmation_Description="Confirmación de Entrega de Email";
 
 @XendraField(AD_Column_ID="DeliveryConfirmation",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -278,10 +278,10 @@ Identifier="c5be66a2-35ac-11aa-9099-2b551fc9c8ec")
 public static final String FIELDNAME_UserMail_DeliveryConfirmation="c5be66a2-35ac-11aa-9099-2b551fc9c8ec";
 
 @XendraTrl(Identifier="65628b06-b7b4-9214-bb7e-3179bb37874a")
-public static String es_PE_FIELD_UserMail_DeliveryConfirmation2_Description="Confirmación de Entrega de Email";
+public static String es_PE_FIELD_UserMail_DeliveryConfirmation2_Name="Confirmación de Entrega";
 
 @XendraTrl(Identifier="65628b06-b7b4-9214-bb7e-3179bb37874a")
-public static String es_PE_FIELD_UserMail_DeliveryConfirmation2_Name="Confirmación de Entrega";
+public static String es_PE_FIELD_UserMail_DeliveryConfirmation2_Description="Confirmación de Entrega de Email";
 
 @XendraField(AD_Column_ID="DeliveryConfirmation",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -299,7 +299,7 @@ FieldLength=120,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="49b193e1-4aa9-a2d6-2771-128498413b4a",Synchronized="2017-08-05 16:52:57.0")
+Identifier="49b193e1-4aa9-a2d6-2771-128498413b4a",Synchronized="2019-08-30 22:20:48.0")
 /** Column name DeliveryConfirmation */
 public static final String COLUMNNAME_DeliveryConfirmation = "DeliveryConfirmation";
 /** Set Identifier.
@@ -331,18 +331,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f29d270-dda8-46b6-8036-b0a90f7f8d9c",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** IsDelivered AD_Reference=9d5d423d-1f38-e653-2094-21cc989d1234 */
-public static final int ISDELIVERED_AD_Reference_ID=319;
 /** Set Delivered.
 @param IsDelivered Delivered */
 public void setIsDelivered (String IsDelivered)
 {
-if (IsDelivered == null || IsDelivered.equals(REF__YesNo.Yes) || IsDelivered.equals(REF__YesNo.No));
- else throw new IllegalArgumentException ("IsDelivered Invalid value - " + IsDelivered + " - Reference_ID=319 - Y - N");
 if (IsDelivered != null && IsDelivered.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -386,7 +381,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9b785079-67f1-d37f-9667-be0cb1bbaee3",Synchronized="2017-08-05 16:52:58.0")
+Identifier="9b785079-67f1-d37f-9667-be0cb1bbaee3",Synchronized="2019-08-30 22:20:48.0")
 /** Column name IsDelivered */
 public static final String COLUMNNAME_IsDelivered = "IsDelivered";
 /** Set Mail Text.
@@ -405,13 +400,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="623c3bfe-9113-b41d-ef09-58ad83081fd1")
+public static String es_PE_FIELD_UserMail_MailText_Name="Texto del Correo";
+
+@XendraTrl(Identifier="623c3bfe-9113-b41d-ef09-58ad83081fd1")
 public static String es_PE_FIELD_UserMail_MailText_Description="Texto usado para mensajes de correo";
 
 @XendraTrl(Identifier="623c3bfe-9113-b41d-ef09-58ad83081fd1")
 public static String es_PE_FIELD_UserMail_MailText_Help="El texto de correo indica el texto usado para mensajes de correo.";
-
-@XendraTrl(Identifier="623c3bfe-9113-b41d-ef09-58ad83081fd1")
-public static String es_PE_FIELD_UserMail_MailText_Name="Texto del Correo";
 
 @XendraField(AD_Column_ID="MailText",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -429,7 +424,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a4479d77-dde2-b340-678d-5f6a829388aa",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name MailText */
 public static final String COLUMNNAME_MailText = "MailText";
 /** Set Message ID.
@@ -453,13 +448,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="2b6643af-8206-9639-decf-9169ead0f3ee")
+public static String es_PE_FIELD_UserMail_MessageID_Name="ID Mensaje";
+
+@XendraTrl(Identifier="2b6643af-8206-9639-decf-9169ead0f3ee")
 public static String es_PE_FIELD_UserMail_MessageID_Description="ID del mensaje de Email";
 
 @XendraTrl(Identifier="2b6643af-8206-9639-decf-9169ead0f3ee")
 public static String es_PE_FIELD_UserMail_MessageID_Help="SMTP de ID del mensaje para los propósitos siguientes.";
-
-@XendraTrl(Identifier="2b6643af-8206-9639-decf-9169ead0f3ee")
-public static String es_PE_FIELD_UserMail_MessageID_Name="ID Mensaje";
 
 @XendraField(AD_Column_ID="MessageID",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -469,13 +464,13 @@ Identifier="2b6643af-8206-9639-decf-9169ead0f3ee")
 public static final String FIELDNAME_UserMail_MessageID="2b6643af-8206-9639-decf-9169ead0f3ee";
 
 @XendraTrl(Identifier="0224e371-b61e-aec8-d61e-38f6d3994b0f")
+public static String es_PE_FIELD_UserMail_MessageID2_Name="ID Mensaje";
+
+@XendraTrl(Identifier="0224e371-b61e-aec8-d61e-38f6d3994b0f")
 public static String es_PE_FIELD_UserMail_MessageID2_Description="ID del mensaje de Email";
 
 @XendraTrl(Identifier="0224e371-b61e-aec8-d61e-38f6d3994b0f")
 public static String es_PE_FIELD_UserMail_MessageID2_Help="SMTP de ID del mensaje para los propósitos siguientes.";
-
-@XendraTrl(Identifier="0224e371-b61e-aec8-d61e-38f6d3994b0f")
-public static String es_PE_FIELD_UserMail_MessageID2_Name="ID Mensaje";
 
 @XendraField(AD_Column_ID="MessageID",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -493,7 +488,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b3a592f1-d1d2-0fab-df92-ecbbe4f8ff82",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name MessageID */
 public static final String COLUMNNAME_MessageID = "MessageID";
 /** Set Mail Template.
@@ -514,13 +509,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e8e571ae-28c4-0a4f-aa4c-11898cbc1698")
+public static String es_PE_FIELD_UserMail_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="e8e571ae-28c4-0a4f-aa4c-11898cbc1698")
 public static String es_PE_FIELD_UserMail_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="e8e571ae-28c4-0a4f-aa4c-11898cbc1698")
 public static String es_PE_FIELD_UserMail_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="e8e571ae-28c4-0a4f-aa4c-11898cbc1698")
-public static String es_PE_FIELD_UserMail_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -530,13 +525,13 @@ Identifier="e8e571ae-28c4-0a4f-aa4c-11898cbc1698")
 public static final String FIELDNAME_UserMail_MailTemplate="e8e571ae-28c4-0a4f-aa4c-11898cbc1698";
 
 @XendraTrl(Identifier="ed9481bd-e0e3-7dfc-ffc9-613c4b1c5cb4")
+public static String es_PE_FIELD_UserMail_MailTemplate2_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="ed9481bd-e0e3-7dfc-ffc9-613c4b1c5cb4")
 public static String es_PE_FIELD_UserMail_MailTemplate2_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="ed9481bd-e0e3-7dfc-ffc9-613c4b1c5cb4")
 public static String es_PE_FIELD_UserMail_MailTemplate2_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="ed9481bd-e0e3-7dfc-ffc9-613c4b1c5cb4")
-public static String es_PE_FIELD_UserMail_MailTemplate2_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -554,7 +549,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="40c4d38e-d885-9bb9-c747-c4fbb36a322c",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name R_MailText_ID */
 public static final String COLUMNNAME_R_MailText_ID = "R_MailText_ID";
 /** Set Subject.
@@ -578,13 +573,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="7ee69da2-3640-5981-139d-c044ccc8a509")
+public static String es_PE_FIELD_UserMail_Subject_Name="Asunto";
+
+@XendraTrl(Identifier="7ee69da2-3640-5981-139d-c044ccc8a509")
 public static String es_PE_FIELD_UserMail_Subject_Description="Asunto del mensaje de Email";
 
 @XendraTrl(Identifier="7ee69da2-3640-5981-139d-c044ccc8a509")
 public static String es_PE_FIELD_UserMail_Subject_Help="Asunto del mensaje de Email";
-
-@XendraTrl(Identifier="7ee69da2-3640-5981-139d-c044ccc8a509")
-public static String es_PE_FIELD_UserMail_Subject_Name="Asunto";
 
 @XendraField(AD_Column_ID="Subject",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -602,7 +597,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="912d4d78-6968-3fb7-aa75-b5767fe9d8b0",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name Subject */
 public static final String COLUMNNAME_Subject = "Subject";
 /** Set Mail Message.
@@ -623,10 +618,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c1142881-381c-d3ef-6a95-dc7190faab78")
-public static String es_PE_FIELD_UserMail_MailMessage_Description="Almacen de la Web plantilla del mensaje del mail";
+public static String es_PE_FIELD_UserMail_MailMessage_Name="Mensaje de Correo";
 
 @XendraTrl(Identifier="c1142881-381c-d3ef-6a95-dc7190faab78")
-public static String es_PE_FIELD_UserMail_MailMessage_Name="Mensaje de Correo";
+public static String es_PE_FIELD_UserMail_MailMessage_Description="Almacen de la Web plantilla del mensaje del mail";
 
 @XendraField(AD_Column_ID="W_MailMsg_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="fae19742-c3d2-8d4f-af2a-f7944346d11f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -636,10 +631,10 @@ Identifier="c1142881-381c-d3ef-6a95-dc7190faab78")
 public static final String FIELDNAME_UserMail_MailMessage="c1142881-381c-d3ef-6a95-dc7190faab78";
 
 @XendraTrl(Identifier="a3644e5f-7f87-7378-2410-81bc859a5bdf")
-public static String es_PE_FIELD_UserMail_MailMessage2_Description="Almacen de la Web plantilla del mensaje del mail";
+public static String es_PE_FIELD_UserMail_MailMessage2_Name="Mensaje de Correo";
 
 @XendraTrl(Identifier="a3644e5f-7f87-7378-2410-81bc859a5bdf")
-public static String es_PE_FIELD_UserMail_MailMessage2_Name="Mensaje de Correo";
+public static String es_PE_FIELD_UserMail_MailMessage2_Description="Almacen de la Web plantilla del mensaje del mail";
 
 @XendraField(AD_Column_ID="W_MailMsg_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3777fd79-705a-ae18-7f4b-c68790b5470e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -657,7 +652,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a04e2fd-a540-e611-d26f-2d00e4f4877b",
-Synchronized="2017-08-05 16:52:58.0")
+Synchronized="2019-08-30 22:20:48.0")
 /** Column name W_MailMsg_ID */
 public static final String COLUMNNAME_W_MailMsg_ID = "W_MailMsg_ID";
 }

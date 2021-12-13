@@ -1,6 +1,6 @@
 package org.xendra.printdocument;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * 
@@ -11,14 +11,14 @@ import org.apache.log4j.Logger;
  *
  */
 public abstract class PrintFile {
-	static Logger log = Logger.getLogger(PrintFile.class);
+	static CLogger log = CLogger.getCLogger(PrintFile.class);
 	private String jobNumber;
 	private String hostName;
 	private String count;
 	private String m_type;
 	private String m_Error;
 	private Integer A_MachinePrinter_ID;
-	private Integer C_PrinterDocumentFormat_ID;
+	//private Integer C_PrinterDocumentFormat_ID;
 	private Integer NumberCopy; 
 	private Integer NumberLines;
 	private PrintWorker contents;	
@@ -60,13 +60,13 @@ public abstract class PrintFile {
 	{
 		m_type = type;
 	}
-	public Integer getC_PrinterDocumentFormat_ID() {
-		return C_PrinterDocumentFormat_ID;
-	}
-	public void setC_PrinterDocumentFormat_ID(Integer format)
-	{
-		C_PrinterDocumentFormat_ID = format;
-	}
+//	public Integer getC_PrinterDocumentFormat_ID() {
+//		return C_PrinterDocumentFormat_ID;
+//	}
+//	public void setC_PrinterDocumentFormat_ID(Integer format)
+//	{
+//		C_PrinterDocumentFormat_ID = format;
+//	}
 	public Integer getA_MachinePrinter_ID() {
 		return A_MachinePrinter_ID;
 	}

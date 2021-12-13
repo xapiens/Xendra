@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("C_OrgAssignment");
 public static String es_PE_TAB_OrgAssignment_Description="Usuario asignado para la organización";
 
 @XendraTrl(Identifier="f956a9d9-9d8b-efce-ae48-f56cb208ce5a")
-public static String es_PE_TAB_OrgAssignment_Name="Asignación Org";
+public static String es_PE_TAB_OrgAssignment_Help="Asignación de usuario para la organización";
 
 @XendraTrl(Identifier="f956a9d9-9d8b-efce-ae48-f56cb208ce5a")
-public static String es_PE_TAB_OrgAssignment_Help="Asignación de usuario para la organización";
+public static String es_PE_TAB_OrgAssignment_Name="Asignación Org";
 
 @XendraTab(Name="Org Assignment",Description="User Assigment to Organization",
 Help="Assign Users to Organizations",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",SeqNo=40,
@@ -79,10 +79,10 @@ public static final String TABNAME_OrgAssignment="f956a9d9-9d8b-efce-ae48-f56cb2
 public static String es_PE_TAB_OrgAssignment2_Description="Usuario asignado para la organización";
 
 @XendraTrl(Identifier="8f423a8f-2c63-89cd-2310-1a61fc47dd3e")
-public static String es_PE_TAB_OrgAssignment2_Name="Asignación Org";
+public static String es_PE_TAB_OrgAssignment2_Help="Usuario asignado para la organización";
 
 @XendraTrl(Identifier="8f423a8f-2c63-89cd-2310-1a61fc47dd3e")
-public static String es_PE_TAB_OrgAssignment2_Help="Usuario asignado para la organización";
+public static String es_PE_TAB_OrgAssignment2_Name="Asignación Org";
 
 @XendraTab(Name="Org Assignment",Description="User Assigment to Organization",
 Help="Assign Users to Organizations",AD_Window_ID="b18505b0-64f9-9322-2e8a-0daf80e326cb",SeqNo=40,
@@ -97,11 +97,13 @@ public static final String TABNAME_OrgAssignment2="8f423a8f-2c63-89cd-2310-1a61f
 @XendraTrl(Identifier="8e4fd8b4-93d9-47b2-fb2c-2a516c47c29b")
 public static String es_PE_TABLE_C_OrgAssignment_Name="Organización Asignado ";
 
-@XendraTable(Name="Org Assignment",Description="Assigment to (transaction) Organization",Help="",
-TableName="C_OrgAssignment",AccessLevel="2",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="8e4fd8b4-93d9-47b2-fb2c-2a516c47c29b",Synchronized="2017-08-16 11:42:05.0")
+@XendraTable(Name="Org Assignment",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Assigment to (transaction) Organization",Help="",TableName="C_OrgAssignment",
+AccessLevel="2",AD_Window_ID="9f3c1c3a-ab4f-0018-8a1e-b6cfbdbe8e7b",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="8e4fd8b4-93d9-47b2-fb2c-2a516c47c29b",Synchronized="2020-03-03 21:37:16.0")
 /** TableName=C_OrgAssignment */
 public static final String Table_Name="C_OrgAssignment";
 
@@ -151,13 +153,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a73a124b-065a-aa98-7cca-6770cd3bcd5b")
+public static String es_PE_FIELD_OrgAssignment_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="a73a124b-065a-aa98-7cca-6770cd3bcd5b")
 public static String es_PE_FIELD_OrgAssignment_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="a73a124b-065a-aa98-7cca-6770cd3bcd5b")
 public static String es_PE_FIELD_OrgAssignment_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="a73a124b-065a-aa98-7cca-6770cd3bcd5b")
-public static String es_PE_FIELD_OrgAssignment_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f956a9d9-9d8b-efce-ae48-f56cb208ce5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -167,13 +169,13 @@ Identifier="a73a124b-065a-aa98-7cca-6770cd3bcd5b")
 public static final String FIELDNAME_OrgAssignment_UserContact="a73a124b-065a-aa98-7cca-6770cd3bcd5b";
 
 @XendraTrl(Identifier="7bacaaa5-448d-7951-fb74-104c9da7979b")
+public static String es_PE_FIELD_OrgAssignment_UserContact2_Name="Usuario";
+
+@XendraTrl(Identifier="7bacaaa5-448d-7951-fb74-104c9da7979b")
 public static String es_PE_FIELD_OrgAssignment_UserContact2_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="7bacaaa5-448d-7951-fb74-104c9da7979b")
 public static String es_PE_FIELD_OrgAssignment_UserContact2_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="7bacaaa5-448d-7951-fb74-104c9da7979b")
-public static String es_PE_FIELD_OrgAssignment_UserContact2_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8f423a8f-2c63-89cd-2310-1a61fc47dd3e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -191,7 +193,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="81b5e228-a8e9-3929-15ee-72ba16e1c73d",Synchronized="2017-08-05 16:53:59.0")
+Identifier="81b5e228-a8e9-3929-15ee-72ba16e1c73d",Synchronized="2019-08-30 22:21:54.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Org Assignment.
@@ -211,13 +213,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82")
+public static String es_PE_FIELD_OrgAssignment_OrgAssignment_Name="Organización Asignado ";
+
+@XendraTrl(Identifier="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82")
 public static String es_PE_FIELD_OrgAssignment_OrgAssignment_Description="Asignado a (transición) la organización.";
 
 @XendraTrl(Identifier="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82")
 public static String es_PE_FIELD_OrgAssignment_OrgAssignment_Help="Asignado para la transición de organización (centro de costo).";
-
-@XendraTrl(Identifier="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82")
-public static String es_PE_FIELD_OrgAssignment_OrgAssignment_Name="Organización Asignado ";
 
 @XendraField(AD_Column_ID="C_OrgAssignment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f956a9d9-9d8b-efce-ae48-f56cb208ce5a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -227,13 +229,13 @@ Identifier="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82")
 public static final String FIELDNAME_OrgAssignment_OrgAssignment="9c4a50cb-10e3-1293-6dc6-2ea69ba7fd82";
 
 @XendraTrl(Identifier="0f51b3ff-55e8-b69a-638c-f1ffad2ff8c3")
+public static String es_PE_FIELD_OrgAssignment_OrgAssignment2_Name="Organización Asignado ";
+
+@XendraTrl(Identifier="0f51b3ff-55e8-b69a-638c-f1ffad2ff8c3")
 public static String es_PE_FIELD_OrgAssignment_OrgAssignment2_Description="Asignado a (transición) la organización.";
 
 @XendraTrl(Identifier="0f51b3ff-55e8-b69a-638c-f1ffad2ff8c3")
 public static String es_PE_FIELD_OrgAssignment_OrgAssignment2_Help="Asignado para la transición de organización (centro de costo).";
-
-@XendraTrl(Identifier="0f51b3ff-55e8-b69a-638c-f1ffad2ff8c3")
-public static String es_PE_FIELD_OrgAssignment_OrgAssignment2_Name="Organización Asignado ";
 
 @XendraField(AD_Column_ID="C_OrgAssignment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8f423a8f-2c63-89cd-2310-1a61fc47dd3e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -271,13 +273,13 @@ return value;
 }
 
 @XendraTrl(Identifier="5bda26db-ad6f-eabe-eb22-38b5cd556eec")
+public static String es_PE_FIELD_OrgAssignment_Description_Name="Observación";
+
+@XendraTrl(Identifier="5bda26db-ad6f-eabe-eb22-38b5cd556eec")
 public static String es_PE_FIELD_OrgAssignment_Description_Description="Observación";
 
 @XendraTrl(Identifier="5bda26db-ad6f-eabe-eb22-38b5cd556eec")
 public static String es_PE_FIELD_OrgAssignment_Description_Help="Observación";
-
-@XendraTrl(Identifier="5bda26db-ad6f-eabe-eb22-38b5cd556eec")
-public static String es_PE_FIELD_OrgAssignment_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="f956a9d9-9d8b-efce-ae48-f56cb208ce5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -295,7 +297,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="08c3b3a9-8357-716b-c008-4224abe7e053",
-Synchronized="2017-08-05 16:53:59.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -327,7 +329,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a4300371-c659-4c8d-a172-32f032efc76e",
-Synchronized="2017-08-05 16:53:59.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Valid from.
@@ -345,13 +347,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 }
 
 @XendraTrl(Identifier="9f879f34-f509-de36-a630-654c9179647a")
+public static String es_PE_FIELD_OrgAssignment_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="9f879f34-f509-de36-a630-654c9179647a")
 public static String es_PE_FIELD_OrgAssignment_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="9f879f34-f509-de36-a630-654c9179647a")
 public static String es_PE_FIELD_OrgAssignment_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="9f879f34-f509-de36-a630-654c9179647a")
-public static String es_PE_FIELD_OrgAssignment_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="f956a9d9-9d8b-efce-ae48-f56cb208ce5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -361,13 +363,13 @@ Identifier="9f879f34-f509-de36-a630-654c9179647a")
 public static final String FIELDNAME_OrgAssignment_ValidFrom="9f879f34-f509-de36-a630-654c9179647a";
 
 @XendraTrl(Identifier="3ff3ca35-46f3-7972-497a-6873246fc686")
+public static String es_PE_FIELD_OrgAssignment_ValidFrom2_Name="Válido Desde";
+
+@XendraTrl(Identifier="3ff3ca35-46f3-7972-497a-6873246fc686")
 public static String es_PE_FIELD_OrgAssignment_ValidFrom2_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="3ff3ca35-46f3-7972-497a-6873246fc686")
 public static String es_PE_FIELD_OrgAssignment_ValidFrom2_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="3ff3ca35-46f3-7972-497a-6873246fc686")
-public static String es_PE_FIELD_OrgAssignment_ValidFrom2_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="8f423a8f-2c63-89cd-2310-1a61fc47dd3e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -385,7 +387,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f81f25e0-b612-b9e1-64cf-05d898099767",
-Synchronized="2017-08-05 16:53:59.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -402,13 +404,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidTo);
 }
 
 @XendraTrl(Identifier="50c2d81e-93f7-804e-1b60-eb3ed7b44185")
+public static String es_PE_FIELD_OrgAssignment_ValidTo_Name="Válido Hasta";
+
+@XendraTrl(Identifier="50c2d81e-93f7-804e-1b60-eb3ed7b44185")
 public static String es_PE_FIELD_OrgAssignment_ValidTo_Description="Válido hasta; incluyendo esta fecha (ultimo día)";
 
 @XendraTrl(Identifier="50c2d81e-93f7-804e-1b60-eb3ed7b44185")
 public static String es_PE_FIELD_OrgAssignment_ValidTo_Help="La fecha válida hasta indica el último día de un rango de fechas";
-
-@XendraTrl(Identifier="50c2d81e-93f7-804e-1b60-eb3ed7b44185")
-public static String es_PE_FIELD_OrgAssignment_ValidTo_Name="Válido Hasta";
 
 @XendraField(AD_Column_ID="ValidTo",IsCentrallyMaintained=true,
 AD_Tab_ID="f956a9d9-9d8b-efce-ae48-f56cb208ce5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -418,13 +420,13 @@ Identifier="50c2d81e-93f7-804e-1b60-eb3ed7b44185")
 public static final String FIELDNAME_OrgAssignment_ValidTo="50c2d81e-93f7-804e-1b60-eb3ed7b44185";
 
 @XendraTrl(Identifier="97fece8f-2e6a-6b6d-ceb2-45b57640fbbf")
+public static String es_PE_FIELD_OrgAssignment_ValidTo2_Name="Válido Hasta";
+
+@XendraTrl(Identifier="97fece8f-2e6a-6b6d-ceb2-45b57640fbbf")
 public static String es_PE_FIELD_OrgAssignment_ValidTo2_Description="Válido hasta; incluyendo esta fecha (ultimo día)";
 
 @XendraTrl(Identifier="97fece8f-2e6a-6b6d-ceb2-45b57640fbbf")
 public static String es_PE_FIELD_OrgAssignment_ValidTo2_Help="La fecha válida hasta indica el último día de un rango de fechas";
-
-@XendraTrl(Identifier="97fece8f-2e6a-6b6d-ceb2-45b57640fbbf")
-public static String es_PE_FIELD_OrgAssignment_ValidTo2_Name="Válido Hasta";
 
 @XendraField(AD_Column_ID="ValidTo",IsCentrallyMaintained=true,
 AD_Tab_ID="8f423a8f-2c63-89cd-2310-1a61fc47dd3e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -442,7 +444,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="29bf6620-78a3-62a4-67b8-c29ac839a9e6",
-Synchronized="2017-08-05 16:53:59.0")
+Synchronized="2019-08-30 22:21:54.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

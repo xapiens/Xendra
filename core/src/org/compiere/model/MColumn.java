@@ -582,6 +582,17 @@ public class MColumn extends X_AD_Column
 	}
 	//end vpj-cd e-evolution
 	
+	public static MColumn getColumn(String TableName, String columnName, String trxName) {
+		int m_table_id = MTable.getTable_ID(TableName, trxName);
+		if (m_table_id == 0)
+			return null;
+		String whereClause = "AD_Table_ID = ? AND lower(columnname) = ?";
+		MColumn retValue =  new Query(Env.getCtx(), X_AD_Column.Table_Name, whereClause, trxName)
+		.setParameters(m_table_id, columnName.toLowerCase())
+		.first();				
+		return retValue;	
+	}
+	
 	/**
 	* Get Table Id for a column
 	* @param ctx context

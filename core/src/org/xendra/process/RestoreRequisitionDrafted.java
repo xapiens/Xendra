@@ -35,7 +35,7 @@ public class RestoreRequisitionDrafted extends SvrProcess {
 	@Override
 	protected String doIt() throws Exception {
 		MRequisition requisition = new MRequisition(getCtx(), m_M_Requisition_ID, get_TrxName());
-		if (!MPeriod.isOpen(getCtx(), requisition.getDateDoc(), REF_C_DocTypeDocBaseType.PurchaseRequisition, Env.getAD_Org_ID(Env.getCtx()))) {
+		if (!MPeriod.isOpen(getCtx(), requisition.getDateDoc(), REF_C_DocTypeDocBaseType.PurchaseRequisition, requisition.getAD_Org_ID(), requisition.getAD_Client_ID())) {
 			return "@Error@: @PeriodClosed@";
 		}
 

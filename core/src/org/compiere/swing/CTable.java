@@ -49,6 +49,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import org.xendra.plaf.XendraPLAF;
+import org.compiere.util.CLogger;
 import org.compiere.util.MSort;
 import org.jdesktop.swingx.icon.ColumnControlIcon;
 
@@ -112,7 +113,7 @@ public class CTable extends JTable
 	protected boolean sorting;
 	
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(CTable.class.getName());
+	private static CLogger log = CLogger.getCLogger(CTable.class.getName());
 
 	/**
      * ScrollPane's original vertical scroll policy. If the column control is

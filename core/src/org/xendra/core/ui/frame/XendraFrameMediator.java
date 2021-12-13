@@ -33,7 +33,6 @@ import org.columba.api.gui.frame.IDockable;
 import org.columba.core.command.Command;
 import org.columba.core.command.CommandProcessor;
 import org.columba.core.config.View;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.gui.frame.DockFrameController;
 import org.compiere.apps.graph.PAPanel;
 import org.compiere.grid.tree.VTreePanel;
@@ -372,5 +371,8 @@ public class XendraFrameMediator extends DockFrameController implements	Property
 //		(new AMenuStartItem(cmd, true, sta, (DockFrameController) this)).start();		//	async load
 		//hengsin, updateInfo is call again in AMenuStartItem
 		//updateInfo();
+	}
+	public void loadPositions() {		
+		super.loadPositions("org.xendra.core");		
 	}
 }

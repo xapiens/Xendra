@@ -487,8 +487,8 @@ public class MAcctSchema extends X_C_AcctSchema
 		//  Create Cost Element
 		if (getM_CostElement_ID() == 0)
 		{
-			MCostElement ce = MCostElement.getMaterialCostElement(this, REF_C_AcctSchemaCostingMethod.AveragePO);
-			setM_CostElement_ID(ce.getM_CostElement_ID());
+			//MCostElement ce = MCostElement.getMaterialCostElement(this, REF_C_AcctSchemaCostingMethod.AveragePO);
+			//setM_CostElement_ID(ce.getM_CostElement_ID());
 			setCostingMethod (REF_C_AcctSchemaCostingMethod.AveragePO);			
 		}
 		if (getCostedFrom() == null)

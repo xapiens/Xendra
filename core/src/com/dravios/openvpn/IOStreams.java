@@ -50,7 +50,7 @@ public class IOStreams  {
 //		control = c;
 //	}
 
-	public void start () {
+	public void start() {
 		InputStreamReader isr = new InputStreamReader (is);
 		BufferedReader br = new BufferedReader (isr);
 		stopped = false;		

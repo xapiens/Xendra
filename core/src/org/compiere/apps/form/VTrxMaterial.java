@@ -23,12 +23,16 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
+
+import net.miginfocom.swing.MigLayout;
+
 import org.compiere.apps.*;
 import org.compiere.grid.*;
 import org.compiere.grid.ed.*;
 import org.compiere.model.GridTab;
 import org.compiere.model.GridWindow;
 import org.compiere.model.GridWindowVO;
+import org.compiere.model.MColumn;
 import org.compiere.model.MLocatorLookup;
 import org.compiere.model.MLookup;
 import org.compiere.model.MLookupFactory;
@@ -40,6 +44,7 @@ import org.compiere.model.persistence.X_M_Inventory;
 import org.compiere.model.persistence.X_M_InventoryLine;
 import org.compiere.model.persistence.X_M_Movement;
 import org.compiere.model.persistence.X_M_MovementLine;
+import org.compiere.model.persistence.X_M_Product;
 import org.compiere.model.persistence.X_M_Production;
 import org.compiere.model.persistence.X_M_ProductionLine;
 import org.compiere.plaf.*;
@@ -65,10 +70,14 @@ public class VTrxMaterial extends CPanel
 		// dynparameter
 		Properties ctx = Env.getCtx();
 		//  Product
-		MLookup productLookup = MLookupFactory.get (ctx, m_WindowNo, 0, 3668, DisplayType.Search);
-		productField = new VLookup("M_Product_ID", true, false, true, productLookup);
-		productField.addVetoableChangeListener(this);
-		confirmPanel.addActionListener(this);
+		// 3668
+		int AD_Column_ID = MColumn.getColumn_ID(X_M_Product.Table_Name, X_M_Product.COLUMNNAME_M_Product_ID, null);
+		MLookup productLookup = MLookupFactory.get (ctx, m_WindowNo, 0, AD_Column_ID, DisplayType.Search);
+		if (productField == null) { 
+			productField = new VLookup("M_Product_ID", true, false, true, productLookup);
+			productField.addVetoableChangeListener(this);
+			confirmPanel.addActionListener(this);
+		}
 		statusBar.setStatusLine("");
 		// dyninit
 		m_staticQuery = new MQuery();
@@ -95,7 +104,13 @@ public class VTrxMaterial extends CPanel
 		m_gridController = new GridController();
 		m_gridController.initGrid(m_mTab, true, m_WindowNo, null, null);
 		mainPanel.add(m_gridController, BorderLayout.CENTER);
-		//
+		/* 
+		 * 
+		 * 
+		 * se agrego esto para optimizar carga
+		 * 
+		 * 
+		 * */					
 		m_mTab.setQuery(MQuery.getEqualQuery("1", "2"));
 		m_mTab.query(false);
 		statusBar.setStatusLine(" ", false);
@@ -114,31 +129,18 @@ public class VTrxMaterial extends CPanel
 		mtypeLabel.setText(Msg.translate(Env.getCtx(), "MovementType"));
 		//
 		mainPanel.add(parameterPanel, BorderLayout.NORTH);
-		parameterPanel.add(orgLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(orgField, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
-		parameterPanel.add(mtypeLabel, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(mtypeField, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
-		parameterPanel.add(dateFLabel, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(dateFField, new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
-
-		parameterPanel.add(locatorLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(locatorField, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
-		parameterPanel.add(productLabel, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(productField, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
-		parameterPanel.add(dateTLabel, new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-		parameterPanel.add(dateTField, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 0, 0, 5), 0, 0));
+		parameterPanel.add(orgLabel, "cell 0 0, span 1 1, push 0 0, gap 5 5 0 5");
+		parameterPanel.add(orgField, "cell 1 0, span 1 1, push 0 0, gap 5 0 0 5");
+		parameterPanel.add(mtypeLabel, "cell 2 0, span 1 1, push 0 0, gap 5 5 0 5");
+		parameterPanel.add(mtypeField, "cell 3 0, span 1 1, push 0 0, gap 5 0 0 5");
+		parameterPanel.add(dateFLabel, "cell 4 0, span 1 1, push 0 0, gap 5 5 0 5");
+		parameterPanel.add(dateFField,"cell 5 0, span 1 1, push 0 0, gap 5 0 0 5");
+		parameterPanel.add(locatorLabel,"cell 0 1, span 1 0 push 0 0,gap 5 5 0 5");
+		parameterPanel.add(locatorField,"cell 1 1, span 1 1, push 0 0, gap 5 0 0 5");
+		parameterPanel.add(productLabel,"cell 2 1, span 1 1, push 0 0,gap 5 5 0 5");
+		parameterPanel.add(productField,"cell 3 1, span 1 1, push 0 0,gap 5 0 0 5");
+		parameterPanel.add(dateTLabel, "cell 4 1, span 1 0, push 0 0, gap 5 5 0 5");
+		parameterPanel.add(dateTField, "cell 5 1, span 1 0, push 0 0, gap 5 0 0 5");
 		//
 		southPanel.setLayout(southLayout);
 		southPanel.add(confirmPanel, BorderLayout.NORTH);
@@ -175,7 +177,8 @@ public class VTrxMaterial extends CPanel
 	private JLabel dateTLabel = new JLabel();
 	private JLabel mtypeLabel = new JLabel();
 	private VLookup mtypeField = new VLookup("MovementType", false, false, true, MLookupFactory.get (Env.getCtx(), m_WindowNo, 0, 3666, DisplayType.List));;
-	private GridBagLayout parameterLayout = new GridBagLayout();
+	//private GridBagLayout parameterLayout = new GridBagLayout();
+	private MigLayout parameterLayout = new MigLayout();
 	private CPanel southPanel = new CPanel();
 	private BorderLayout southLayout = new BorderLayout();
 	private ConfirmPanel confirmPanel = new ConfirmPanel(true, true, false, false, false, true, true);

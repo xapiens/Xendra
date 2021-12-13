@@ -60,13 +60,12 @@ public static int Table_ID=MTable.getTable_ID("PA_Ratio");
 public static String es_PE_TAB_Ratio_Description="Relación de Desempeño";
 
 @XendraTrl(Identifier="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6")
-public static String es_PE_TAB_Ratio_Name="Relación";
-
-@XendraTrl(Identifier="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6")
 public static String es_PE_TAB_Ratio_Help="Ajusta instrucción de cálculo para una Relación de Desempeño.";
 
-@XendraTab(Name="Ratio",Description="Performance Ratio",
-Help="Calculation instruction set  for a performance ratio",
+@XendraTrl(Identifier="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6")
+public static String es_PE_TAB_Ratio_Name="Relación";
+@XendraTab(Name="Ratio",
+Description="Performance Ratio",Help="Calculation instruction set  for a performance ratio",
 AD_Window_ID="55c355a0-9ecc-670d-480c-5315b8c95dd3",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -78,11 +77,12 @@ public static final String TABNAME_Ratio="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6";
 @XendraTrl(Identifier="7a886d87-0a1b-f3a3-f4c0-177583e1f270")
 public static String es_PE_TABLE_PA_Ratio_Name="Razón";
 
-@XendraTable(Name="Ratio",Description="Performace Ratio",Help="",TableName="PA_Ratio",
-AccessLevel="2",AD_Window_ID="55c355a0-9ecc-670d-480c-5315b8c95dd3",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="7a886d87-0a1b-f3a3-f4c0-177583e1f270",Synchronized="2017-08-16 11:43:41.0")
+@XendraTable(Name="Ratio",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Performace Ratio",Help="",
+TableName="PA_Ratio",AccessLevel="2",AD_Window_ID="55c355a0-9ecc-670d-480c-5315b8c95dd3",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="7a886d87-0a1b-f3a3-f4c0-177583e1f270",Synchronized="2020-03-03 21:39:07.0")
 /** TableName=PA_Ratio */
 public static final String Table_Name="PA_Ratio";
 
@@ -132,13 +132,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b1d72f1a-e5f0-a1bb-9c76-a22b80f567b3")
+public static String es_PE_FIELD_Ratio_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="b1d72f1a-e5f0-a1bb-9c76-a22b80f567b3")
 public static String es_PE_FIELD_Ratio_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="b1d72f1a-e5f0-a1bb-9c76-a22b80f567b3")
 public static String es_PE_FIELD_Ratio_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="b1d72f1a-e5f0-a1bb-9c76-a22b80f567b3")
-public static String es_PE_FIELD_Ratio_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -156,7 +156,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="beef3456-2046-9b11-a62b-87eadd938165",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:38.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Description.
@@ -187,13 +187,13 @@ return value;
 }
 
 @XendraTrl(Identifier="38193731-1c8d-9ec5-d99f-19fc8d36b0b2")
+public static String es_PE_FIELD_Ratio_Description_Name="Observación";
+
+@XendraTrl(Identifier="38193731-1c8d-9ec5-d99f-19fc8d36b0b2")
 public static String es_PE_FIELD_Ratio_Description_Description="Observación";
 
 @XendraTrl(Identifier="38193731-1c8d-9ec5-d99f-19fc8d36b0b2")
 public static String es_PE_FIELD_Ratio_Description_Help="Observación";
-
-@XendraTrl(Identifier="38193731-1c8d-9ec5-d99f-19fc8d36b0b2")
-public static String es_PE_FIELD_Ratio_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -211,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6883c21b-47a9-4b8c-f1d6-049542feb578",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:38.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -237,18 +237,19 @@ return value;
 }
 
 @XendraTrl(Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
+public static String es_PE_FIELD_Ratio_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
 public static String es_PE_FIELD_Ratio_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
 public static String es_PE_FIELD_Ratio_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
 
-@XendraTrl(Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
-public static String es_PE_FIELD_Ratio_CommentHelp_Name="Ayuda";
-@XendraField(AD_Column_ID="Help",
-IsCentrallyMaintained=true,AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=2000,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
+@XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
+AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=2000,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="7c5db80d-1904-b3a2-bce0-3dc735790a67")
 public static final String FIELDNAME_Ratio_CommentHelp="7c5db80d-1904-b3a2-bce0-3dc735790a67";
 
 @XendraTrl(Identifier="a26f856a-a390-bc5c-35a1-2de22377d569")
@@ -260,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a26f856a-a390-bc5c-35a1-2de22377d569",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:38.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -292,7 +293,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7b9b219-1c34-4dff-945f-f01d08583d22",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:38.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -324,18 +325,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="92e36213-6474-0401-53fe-3801775d9381")
+public static String es_PE_FIELD_Ratio_Name_Name="Nombre";
+
+@XendraTrl(Identifier="92e36213-6474-0401-53fe-3801775d9381")
 public static String es_PE_FIELD_Ratio_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="92e36213-6474-0401-53fe-3801775d9381")
 public static String es_PE_FIELD_Ratio_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="92e36213-6474-0401-53fe-3801775d9381")
-public static String es_PE_FIELD_Ratio_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=30,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="92e36213-6474-0401-53fe-3801775d9381")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=30,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="92e36213-6474-0401-53fe-3801775d9381")
 public static final String FIELDNAME_Ratio_Name="92e36213-6474-0401-53fe-3801775d9381";
 
 @XendraTrl(Identifier="e16f7c3a-65e2-b306-8706-749c2d00155d")
@@ -347,7 +349,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e16f7c3a-65e2-b306-8706-749c2d00155d",
-Synchronized="2017-08-05 16:55:42.0")
+Synchronized="2019-08-30 22:23:38.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Ratio.
@@ -367,18 +369,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
+public static String es_PE_FIELD_Ratio_Ratio_Name="Razón";
+
+@XendraTrl(Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
 public static String es_PE_FIELD_Ratio_Ratio_Description="Razón de Desempeño";
 
 @XendraTrl(Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
 public static String es_PE_FIELD_Ratio_Ratio_Help="Ajusta instrucción de cálculo para Razón de Desempeño.";
 
-@XendraTrl(Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
-public static String es_PE_FIELD_Ratio_Ratio_Name="Razón";
-@XendraField(AD_Column_ID="PA_Ratio_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=0,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
+@XendraField(AD_Column_ID="PA_Ratio_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="2e8b7bb4-7acc-3c90-196c-1c83fccfe5a6",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5")
 public static final String FIELDNAME_Ratio_Ratio="24c05f70-bb09-6393-0ab4-a5ed6fa89eb5";
 /** Column name PA_Ratio_ID */
 public static final String COLUMNNAME_PA_Ratio_ID = "PA_Ratio_ID";

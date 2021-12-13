@@ -1,8 +1,5 @@
 package org.columba.core.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)

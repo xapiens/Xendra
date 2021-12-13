@@ -15,6 +15,8 @@ import org.compiere.model.MJournalBatch;
 import org.compiere.model.MJournal;
 import org.compiere.model.MJournalLine;
 import org.compiere.model.MPeriod;
+import org.compiere.model.persistence.X_C_AcctSchema;
+import org.compiere.model.persistence.X_C_DocType;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.CLogger;
@@ -22,6 +24,7 @@ import org.compiere.util.DB;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
+import org.xendra.Constants;
 import org.xendra.annotations.*;
 
 @XendraProcess(value="YearEndClose",
@@ -30,7 +33,7 @@ description="",
 help="",
 Identifier="d7e5fb02-61b4-2513-d2cb-c6ff44c1678e",
 classname="org.xendra.process.YearEndClose",
-updated="2015-06-20 10:10:12")
+updated="2018-01-27 22:26:12")
 public class YearEndClose extends SvrProcess {
 	@XendraProcessParameter(Name="Client",
 			                ColumnName="AD_Client_ID",
@@ -78,7 +81,7 @@ public class YearEndClose extends SvrProcess {
 			                Help="The Posting Type indicates the type of amount (Actual, Budget, Reservation, Commitment, Statistical) the transaction.",
 			                AD_Reference_ID=DisplayType.List,
 			                SeqNo=30,
-			                ReferenceValueID="",
+			                ReferenceValueID="1ad48d23-2ec9-09d0-cb68-38688c5e6ce0",
 			                ValRuleID="",
 			                FieldLength=1,
 			                IsMandatory=true,
@@ -116,7 +119,7 @@ public class YearEndClose extends SvrProcess {
 			                ColumnName="AccountValue",
 			                Description="Key of Account Element",
 			                Help="",
-			                AD_Reference_ID=DisplayType.String,
+			                AD_Reference_ID=DisplayType.Account,
 			                SeqNo=50,
 			                ReferenceValueID="",
 			                ValRuleID="",
@@ -202,9 +205,9 @@ public class YearEndClose extends SvrProcess {
 			String name = para[i].getParameterName();
 			if (para[i].getParameter() == null)
 				;
-			else if (name.equals("AD_Client_ID"))
+			else if (name.equals(Constants.COLUMNNAME_AD_Client_ID))
 				m_AD_Client_ID = para[i].getParameterAsInt();
-			else if (name.equals("C_AcctSchema_ID"))
+			else if (name.equals(X_C_AcctSchema.COLUMNNAME_C_AcctSchema_ID))
 				m_C_AcctSchema_ID = para[i].getParameterAsInt();
 			else if (name.equals("PostingType")) {
 				m_PostingType = (String)para[i].getParameter();
@@ -222,7 +225,7 @@ public class YearEndClose extends SvrProcess {
 			else if (name.equals("DateAcctOpen")) {
 				m_DateAcctOpen = (Timestamp)para[i].getParameter();
 			}
-			else if (name.equals("C_DocType_ID")) {
+			else if (name.equals(X_C_DocType.COLUMNNAME_C_DocType_ID)) {
 				m_C_DocType_ID = para[i].getParameterAsInt();
 			}
 			else
@@ -251,6 +254,7 @@ public class YearEndClose extends SvrProcess {
 			"serial," +
 			"invoicedocumentno, " +						
 			"M_Product_ID," +
+			"Qty," +
 			"C_BPartner_ID " ;
 			
 		
@@ -267,6 +271,7 @@ public class YearEndClose extends SvrProcess {
                 	 " 	f.InvoiceDocumentNo," + 
                 	 " 	f.C_BPartner_ID, " +
                 	 " 	0 AS M_Product_ID," +
+                	 " 	0 AS Qty," +
                 	 " 	typegroupingclose " +
                 	 " 	FROM Fact_Acct f INNER JOIN C_ElementValue ev " + 
                 	 " 	ON (f.Account_ID=ev.C_ElementValue_ID) " +
@@ -296,6 +301,7 @@ public class YearEndClose extends SvrProcess {
                 	 " 	'' AS InvoiceDocumentNo, " +
                 	 " 	f.C_BPartner_ID, " +
                 	 " 	0 AS M_Product_ID, " +
+                	 " 	0 AS Qty," +
                 	 " 	typegroupingclose " +
                 	 " 	FROM Fact_Acct f INNER JOIN C_ElementValue ev " + 
                 	 " 	ON (f.Account_ID=ev.C_ElementValue_ID) " +
@@ -322,6 +328,7 @@ public class YearEndClose extends SvrProcess {
                 	 " 	'' AS InvoiceDocumentNo, " + 
                 	 " 	0 AS C_BPartner_ID, " +
                 	 " 	f.M_Product_ID, " +
+                	 " 	CASE WHEN f.M_Product_ID > 0 THEN f.Qty ELSE 0 END AS Qty," +
                 	 " 	typegroupingclose  " +
                 	 " 	FROM Fact_Acct f INNER JOIN C_ElementValue ev " + 
                 	 " 	ON (f.Account_ID=ev.C_ElementValue_ID) " +
@@ -335,6 +342,7 @@ public class YearEndClose extends SvrProcess {
                 	 " 	AND typegroupingclose = 'P' " +
                 	 " 	GROUP BY f.Account_ID, " +
                 	 " 	f.M_Product_ID, " +
+                	 " 	f.Qty, " +
                 	 " 	typegroupingclose, " +
                 	 " 	f.AD_Org_ID " +
                 	 "" +
@@ -348,6 +356,7 @@ public class YearEndClose extends SvrProcess {
                 	 " 	'' AS InvoiceDocumentNo, " + 
                 	 " 	0 AS C_BPartner_ID,  " +
                 	 " 	0 AS M_Product_ID, " +
+                	 " 	0 AS Qty," +
                 	 " 	typegroupingclose " +
                 	 " 	FROM Fact_Acct f INNER JOIN C_ElementValue ev " + 
                 	 " 	ON (f.Account_ID=ev.C_ElementValue_ID) " +
@@ -366,11 +375,6 @@ public class YearEndClose extends SvrProcess {
                 	 " AS foo WHERE AmtAcctDr!=AmtAcctCr ";                      			
 		
 		PreparedStatement pstmt = DB.prepareStatement(sqlcount.concat(sqlfrom), get_TrxName());
-		//pstmt.setInt(1, m_AD_Client_ID);
-		//pstmt.setInt(2, m_C_AcctSchema_ID);
-		//pstmt.setString(3, m_PostingType);
-		//pstmt.setString(4, acctFrom.getAccount().getValue());
-		//pstmt.setString(5, acctTo.getAccount().getValue());
 		
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -385,16 +389,11 @@ public class YearEndClose extends SvrProcess {
 			return "En el rango seleccionado no se encontraron saldos a trasladar";
 		
 		pstmt = DB.prepareStatement(sqlfields.concat(sqlfrom), get_TrxName());
-//		pstmt.setInt(1, m_AD_Client_ID);
-//		pstmt.setInt(2, m_C_AcctSchema_ID);
-//		pstmt.setString(3, m_PostingType);
-//		pstmt.setString(4, acctFrom.getAccount().getValue());
-//		pstmt.setString(5, acctTo.getAccount().getValue());
 		
 		rs = pstmt.executeQuery();
 		
-		MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose);
-		MPeriod periodOpen = MPeriod.get(getCtx(), m_DateAcctOpen);
+		MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose, 0, m_AD_Client_ID);
+		MPeriod periodOpen = MPeriod.get(getCtx(), m_DateAcctOpen, 0, m_AD_Client_ID);
 		MDocType docType = new MDocType(getCtx(), m_C_DocType_ID, get_TrxName());
 		MAcctSchema schema = new MAcctSchema(getCtx(), m_C_AcctSchema_ID, get_TrxName());
 
@@ -446,6 +445,7 @@ public class YearEndClose extends SvrProcess {
 			String Serial = rs.getString("serial");
 			String DocumentNo = rs.getString("invoicedocumentno");
 			int M_Product_ID = rs.getInt("M_Product_ID");
+			BigDecimal Qty = rs.getBigDecimal("Qty");
 			
 			acct = MAccount.get(getCtx(), m_AD_Client_ID, AD_Org_ID, m_C_AcctSchema_ID, C_ElementValue_ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 			
@@ -460,6 +460,8 @@ public class YearEndClose extends SvrProcess {
 			lineClose.setC_BPartner_ID(C_BPartner_ID);
 			if (M_Product_ID > 0)
 				lineClose.setM_Product_ID(M_Product_ID);
+			if (Qty.compareTo(BigDecimal.ZERO) > 0)
+				lineClose.setQty(Qty);
 			if (!lineClose.save()) return "@Error@ "+CLogger.retrieveErrorString(null);
 
 			
@@ -474,6 +476,8 @@ public class YearEndClose extends SvrProcess {
 			lineOpen.setC_BPartner_ID(C_BPartner_ID);
 			if (M_Product_ID > 0)
 				lineOpen.setM_Product_ID(M_Product_ID);
+			if (Qty.compareTo(BigDecimal.ZERO) > 0)
+				lineOpen.setQty(Qty);			
 			if (!lineOpen.save()) return "@Error@ "+CLogger.retrieveErrorString(null);
 
 			diff = diff.add(rs.getBigDecimal("diff"));

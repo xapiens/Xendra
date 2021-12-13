@@ -84,7 +84,7 @@ public class MRefList extends X_AD_Ref_List
 		boolean isBaseLanguage = Env.isBaseLanguage(AD_Language, "AD_Ref_List");
 		String sql = "";
 		if (isBaseLanguage) {
-			sql = "SELECT Name FROM AD_Ref_List r";
+			sql = "SELECT r.Name FROM AD_Ref_List r";
 			sql += " JOIN ad_reference ar ON r.ad_reference_id = ar.ad_reference_id ";
 			sql += "WHERE ar.Identifier=? AND r.Value=?";
 		} 

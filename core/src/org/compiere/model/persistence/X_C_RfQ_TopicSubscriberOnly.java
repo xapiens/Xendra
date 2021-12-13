@@ -59,11 +59,10 @@ public static int Table_ID=MTable.getTable_ID("C_RfQ_TopicSubscriberOnly");
 public static String es_PE_TAB_Restriction_Description="Incluya a suscriptor solamente para ciertos productos ó las categorías del producto";
 
 @XendraTrl(Identifier="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6")
-public static String es_PE_TAB_Restriction_Name="Restricción";
-
-@XendraTrl(Identifier="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6")
 public static String es_PE_TAB_Restriction_Help="Incorpore las categorías de los productos/del producto para las cuales el suscriptor debe ser incluido. Si no se incorpora ningún producto/categoría, solicitan el suscriptor contestar a las peticiones para todas las líneas en un RfQ. ";
 
+@XendraTrl(Identifier="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6")
+public static String es_PE_TAB_Restriction_Name="Restricción";
 @XendraTab(Name="Restriction",
 Description="Include Subscriber Only for certain products or product categories",
 Help="Enter the products / product categories for which the subscriber should be included.  If no product / category is entered, the subscriber is requested to answer requests for all lines in a RfQ",
@@ -80,12 +79,14 @@ public static String es_PE_TABLE_C_RfQ_TopicSubscriberOnly_Name="SPC Restriccion
 
 
 @XendraTable(Name="RfQ Topic Subscriber Restriction",
+AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Include Subscriber only for certain products or product categories",Help="",
 TableName="C_RfQ_TopicSubscriberOnly",AccessLevel="2",
 AD_Window_ID="84f4c768-9e31-b7c2-85a4-97fc1fd84d22",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="da270a77-1921-9667-1620-125499123949",
-Synchronized="2017-08-16 11:42:27.0")
+Synchronized="2020-03-03 21:37:40.0")
 /** TableName=C_RfQ_TopicSubscriberOnly */
 public static final String Table_Name="C_RfQ_TopicSubscriberOnly";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="23b5ec7e-fbec-6d5c-40ef-d934942b94d6")
+public static String es_PE_FIELD_Restriction_RfQSubscriber_Name="Suscripción de Solicitudes de Cotización";
+
+@XendraTrl(Identifier="23b5ec7e-fbec-6d5c-40ef-d934942b94d6")
 public static String es_PE_FIELD_Restriction_RfQSubscriber_Description="Solicitud para la cita de tipo de subscripción.";
 
 @XendraTrl(Identifier="23b5ec7e-fbec-6d5c-40ef-d934942b94d6")
 public static String es_PE_FIELD_Restriction_RfQSubscriber_Help="Subscriptor para invitar responder a RfQs.";
-
-@XendraTrl(Identifier="23b5ec7e-fbec-6d5c-40ef-d934942b94d6")
-public static String es_PE_FIELD_Restriction_RfQSubscriber_Name="Suscripción de Solicitudes de Cotización";
 
 @XendraField(AD_Column_ID="C_RfQ_TopicSubscriber_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1565dd58-a601-e5ef-c0c1-76137efeb6fe",Synchronized="2017-08-05 16:54:25.0")
+Identifier="1565dd58-a601-e5ef-c0c1-76137efeb6fe",Synchronized="2019-08-30 22:22:16.0")
 /** Column name C_RfQ_TopicSubscriber_ID */
 public static final String COLUMNNAME_C_RfQ_TopicSubscriber_ID = "C_RfQ_TopicSubscriber_ID";
 /** Set RfQ Topic Subscriber Restriction.
@@ -179,13 +180,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="90ebeb86-4eff-c2e1-7b49-6ba968506d02")
+public static String es_PE_FIELD_Restriction_RfQTopicSubscriberRestriction_Name="SPC Restricciones en el asunto al subscriptor";
+
+@XendraTrl(Identifier="90ebeb86-4eff-c2e1-7b49-6ba968506d02")
 public static String es_PE_FIELD_Restriction_RfQTopicSubscriberRestriction_Description="Incluya a suscriptor solamente para ciertos productos ó las categorías del producto.";
 
 @XendraTrl(Identifier="90ebeb86-4eff-c2e1-7b49-6ba968506d02")
 public static String es_PE_FIELD_Restriction_RfQTopicSubscriberRestriction_Help="Productos y/o categorías del producto para los cuales el suscriptor debe ser incluido. Si no se incorpora ningún producto/categoría, solicitan el suscriptor contestar a las peticiones para todas las líneas en un RfQ";
-
-@XendraTrl(Identifier="90ebeb86-4eff-c2e1-7b49-6ba968506d02")
-public static String es_PE_FIELD_Restriction_RfQTopicSubscriberRestriction_Name="SPC Restricciones en el asunto al subscriptor";
 
 @XendraField(AD_Column_ID="C_RfQ_TopicSubscriberOnly_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -223,13 +224,13 @@ return value;
 }
 
 @XendraTrl(Identifier="c5ee6bfc-c0d7-2b90-2037-8612513ea769")
+public static String es_PE_FIELD_Restriction_Description_Name="Observación";
+
+@XendraTrl(Identifier="c5ee6bfc-c0d7-2b90-2037-8612513ea769")
 public static String es_PE_FIELD_Restriction_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="c5ee6bfc-c0d7-2b90-2037-8612513ea769")
 public static String es_PE_FIELD_Restriction_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="c5ee6bfc-c0d7-2b90-2037-8612513ea769")
-public static String es_PE_FIELD_Restriction_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -247,7 +248,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="126b305f-e787-eba8-3997-c39c2eb681be",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -279,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="83205353-de76-4e5c-9b73-c5611afe95f6",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product Category.
@@ -306,13 +307,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_Product_Category_ID()));
 }
 
 @XendraTrl(Identifier="bc9765bd-b006-5b0b-8354-395a476d849c")
+public static String es_PE_FIELD_Restriction_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="bc9765bd-b006-5b0b-8354-395a476d849c")
 public static String es_PE_FIELD_Restriction_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="bc9765bd-b006-5b0b-8354-395a476d849c")
 public static String es_PE_FIELD_Restriction_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="bc9765bd-b006-5b0b-8354-395a476d849c")
-public static String es_PE_FIELD_Restriction_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -330,7 +331,7 @@ FieldLength=22,DefaultValue="-1",IsKey=false,IsInternal=false,IsParent=false,IsM
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4f452f5e-cc83-b9df-50e3-13163560ee37",Synchronized="2017-08-05 16:54:25.0")
+Identifier="4f452f5e-cc83-b9df-50e3-13163560ee37",Synchronized="2019-08-30 22:22:16.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Product.
@@ -351,13 +352,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7ded1c5f-e726-dad9-a53a-f854fac4aa66")
+public static String es_PE_FIELD_Restriction_Product_Name="Producto";
+
+@XendraTrl(Identifier="7ded1c5f-e726-dad9-a53a-f854fac4aa66")
 public static String es_PE_FIELD_Restriction_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="7ded1c5f-e726-dad9-a53a-f854fac4aa66")
 public static String es_PE_FIELD_Restriction_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="7ded1c5f-e726-dad9-a53a-f854fac4aa66")
-public static String es_PE_FIELD_Restriction_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="11f25e6f-cd9a-0ccd-9434-dbe7b65cd4b6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -375,7 +376,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="021667a7-2afd-8c3c-488e-bd6b0c8aa7a8",Synchronized="2017-08-05 16:54:25.0")
+Identifier="021667a7-2afd-8c3c-488e-bd6b0c8aa7a8",Synchronized="2019-08-30 22:22:16.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 }

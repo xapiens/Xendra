@@ -72,11 +72,12 @@ public static final String TABNAME_Log="af7c7915-561a-802c-6551-07de0aef7d02";
 @XendraTrl(Identifier="8d839d1b-4ce1-1b4a-750f-63dc074e17cc")
 public static String es_PE_TABLE_AD_PInstance_Log_Name="AD_PInstance_Log";
 
-@XendraTable(Name="AD_PInstance_Log",Description="(Non Standard Table)",Help="",
+@XendraTable(Name="AD_PInstance_Log",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="(Non Standard Table)",Help="",
 TableName="AD_PInstance_Log",AccessLevel="6",AD_Window_ID="08dcb8f3-54eb-187f-4e28-3d300e974ac2",
 AD_Val_Rule_ID="",IsKey=2,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="8d839d1b-4ce1-1b4a-750f-63dc074e17cc",Synchronized="2017-08-16 11:40:35.0")
+Identifier="8d839d1b-4ce1-1b4a-750f-63dc074e17cc",Synchronized="2020-03-03 21:35:13.0")
 /** TableName=AD_PInstance_Log */
 public static final String Table_Name="AD_PInstance_Log";
 
@@ -165,7 +166,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b76bf5f4-ec8b-4f77-b006-b8d581499834",
-Synchronized="2017-08-05 16:52:39.0")
+Synchronized="2019-08-30 22:20:29.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Log.
@@ -225,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d46a540-1617-4b3f-4e1d-dfc00d9ceae4",
-Synchronized="2017-08-05 16:52:39.0")
+Synchronized="2019-08-30 22:20:29.0")
 /** Column name P_Date */
 public static final String COLUMNNAME_P_Date = "P_Date";
 /** Set Process ID.
@@ -263,7 +264,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a5083745-cc2b-373e-d58f-ae0a3eb5d0a8",
-Synchronized="2017-08-05 16:52:39.0")
+Synchronized="2019-08-30 22:20:30.0")
 /** Column name P_ID */
 public static final String COLUMNNAME_P_ID = "P_ID";
 /** Set Process Message.
@@ -305,7 +306,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="471d9b42-fb80-dbb9-73ca-3a4ba662fd6d",
-Synchronized="2017-08-05 16:52:39.0")
+Synchronized="2019-08-30 22:20:30.0")
 /** Column name P_Msg */
 public static final String COLUMNNAME_P_Msg = "P_Msg";
 /** Set Process Number.
@@ -342,7 +343,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f0b095db-fd30-0cc0-8874-7cdc6b06160c",
-Synchronized="2017-08-05 16:52:39.0")
+Synchronized="2019-08-30 22:20:30.0")
 /** Column name P_Number */
 public static final String COLUMNNAME_P_Number = "P_Number";
 }

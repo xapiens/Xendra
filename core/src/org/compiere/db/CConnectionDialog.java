@@ -29,10 +29,14 @@ import java.util.logging.Level;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JLayer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import net.miginfocom.swing.MigLayout;
+
+import org.xendra.controls.WaitLayerUI;
 import org.xendra.newclient.wizard.NewClientWizardLauncher;
 import org.xendra.plaf.XendraPLAF;
 import org.compiere.apps.ADialog;
@@ -101,7 +105,7 @@ public class CConnectionDialog extends CDialog implements ActionListener
 	public static final String  APPS_PORT_JMS = "5445";
 	/** Connection							*/
 	private CConnection 	m_cc = null;
-	private CConnection 	m_ccResult = null;
+	//private CConnection 	m_ccResult = null;
 	private boolean 		m_updating = false;
 	private boolean     	m_saved = false;
 
@@ -136,6 +140,10 @@ public class CConnectionDialog extends CDialog implements ActionListener
 	private DB_PostgreSQL	p_db = new DB_PostgreSQL();
 
 	private ArrayList<String> fillfiles;
+	
+	final WaitLayerUI layerUI = new WaitLayerUI();
+
+	private String dbname;
 
 
 	/**
@@ -146,6 +154,7 @@ public class CConnectionDialog extends CDialog implements ActionListener
 	{		
 		this.setTitle(res.getString("CConnectionDialog"));
 		mainPanel.setLayout(mainLayout);
+		JLayer<JPanel> jlayer = new JLayer<JPanel>(mainPanel, layerUI);
 		southPanel.setLayout(southLayout);
 		southLayout.setAlignment(FlowLayout.RIGHT);
 		//centerLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0};
@@ -163,7 +172,8 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		dbUidLabel.setText(res.getString("DBUid"));		
 		dbUidField.setColumns(10);
 		dbpwdLabel.setText(res.getString("DBPwd"));
-		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		//this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		this.getContentPane().add(jlayer, BorderLayout.CENTER);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(southPanel,  BorderLayout.SOUTH);
 		southPanel.add(bCancel, null);
@@ -222,12 +232,12 @@ public class CConnectionDialog extends CDialog implements ActionListener
 
 		}
 		//	Should copy values
-		try {
-			m_ccResult = (CConnection)m_cc.clone();
-		} catch (CloneNotSupportedException e) {
-			// should not happen
-			e.printStackTrace();
-		}
+//		try {
+//			m_ccResult = (CConnection)m_cc.clone();
+//		} catch (CloneNotSupportedException e) {
+//			// should not happen
+//			e.printStackTrace();
+//		}
 		//
 		//String type = m_cc.getType();
 		//if (type == null || type.length() == 0)
@@ -243,7 +253,8 @@ public class CConnectionDialog extends CDialog implements ActionListener
 	 */
 	public CConnection getConnection()
 	{
-		return m_ccResult;
+		//return m_ccResult;
+		return m_cc;
 	}   //  getConnection;
 
 	/**
@@ -260,7 +271,8 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		{
 			updateCConnection();
 			m_cc.setName();			
-			m_ccResult = m_cc;
+			//m_ccResult = m_cc;
+			cmd_testDB();
 			dispose();
 			isCancel = false;
 			return;
@@ -282,7 +294,7 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		//
 		//if (src == bTestApps)
 		//	cmd_testApps();
-		updateApp();
+		//updateApp();
 
 		//  Database Selection Changed
 		//		else if (src == dbTypeField)
@@ -304,16 +316,16 @@ public class CConnectionDialog extends CDialog implements ActionListener
 	}   //  actionPerformed
 
 	private void updateCConnection() {
-		if (Ini.isClient())
-		{
+		//if (Ini.isClient())
+		//{
 			//hengsin: avoid unnecessary requery of application server status
 			//if (!appsHostField.getText().equals(m_cc.getAppsHost()))
 			//	m_cc.setAppsHost(appsHostField.getText());
 			//if (!appsPortField.getText().equals(Integer.toString(m_cc.getAppsPort())))
 			//	m_cc.setAppsPort(appsPortField.getText());
-		}
-		else
-			m_cc.setAppsHost("localhost");
+		//}
+		//else
+		//	m_cc.setAppsHost("localhost");
 		//
 		m_cc.setDbHost(hostField.getText());
 		m_cc.setDbPort(dbHostPortField.getText());
@@ -337,7 +349,8 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		//	bTestApps.setToolTipText(m_cc.getRmiUri());
 
 		//cbOverwrite.setVisible(m_cc.isAppsServerOK(false));
-		boolean rw = CConnection.isServerEmbedded() ? true : !m_cc.isAppsServerOK(false);
+		//boolean rw = CConnection.isServerEmbedded() ? true : !m_cc.isAppsServerOK(false);
+		boolean rw = CConnection.isServerEmbedded();
 		//dbTypeField.setReadWrite(rw);
 		//dbTypeField.setSelectedItem(m_cc.getType());
 		//
@@ -386,12 +399,11 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		Exception e = m_cc.testDatabase(true);
 		if (e != null)
 		{
-			String msg = e.toString();
-			msg += " Start a new Xendra App?";
+			String msg = "Desea crear un nuevo cliente?";
 			if (JOptionPane.showConfirmDialog(this, msg) == JOptionPane.YES_OPTION)
 			{				
 				CConnection finalcc = m_cc.get();
-				String dbname = m_cc.getDbName();
+				dbname = m_cc.getDbName();
 				m_cc.setDbName("postgres");
 				e = m_cc.testDatabase(true); 
 				if (e == null)
@@ -401,15 +413,27 @@ public class CConnectionDialog extends CDialog implements ActionListener
 					{
 						msg = String.format("esta seguro de crear %s para empezar?",dbname);					
 						if (JOptionPane.showConfirmDialog(this, msg) == JOptionPane.YES_OPTION)
-						{
-							NewClientWizardLauncher nn = new NewClientWizardLauncher();							
-							nn.setConnection(m_cc);							
-							nn.setDBName(dbname);
-							nn.launchWizard();
+						{							
+							org.compiere.apps.SwingWorker worker = new org.compiere.apps.SwingWorker()
+							{				
+								public Object construct()
+								{
+									layerUI.start();		
+									NewClientWizardLauncher nn = new NewClientWizardLauncher();							
+									nn.setConnection(m_cc);							
+									nn.setDBName(dbname);
+									nn.setWaitLayer(layerUI);
+									nn.launchWizard();																		
+									sidField.setText(dbname);
+									updateCConnection();
+									cmd_testDB();
+									layerUI.stop();
+									return Boolean.TRUE;
+								}
+							};
+							worker.start();													
 						}
 					}
-					//m_cc.setDbName(dbname);
-					//e = m_cc.testDatabase(true); 					
 				}
 				else
 				{
@@ -423,7 +447,7 @@ public class CConnectionDialog extends CDialog implements ActionListener
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			updateApp();
+			//updateApp();
 		}
 		setBusy (false);
 	}   //  cmd_testDB
@@ -450,46 +474,46 @@ public class CConnectionDialog extends CDialog implements ActionListener
 		return true;
 	}	//	testJDBC
 
-	private void updateApp()
-	{
-
-	}
-	/**
-	 *  Test Application connection
-	 */
-	private void cmd_testApps()
-	{
-		setBusy (true);
-		Exception e = m_cc.testAppsServer();
-		if (e != null)
-		{
-			if (e.getLocalizedMessage() != null)
-				JOptionPane.showMessageDialog(this,
-						e.getLocalizedMessage(),
-						res.getString("ServerNotActive") + " - " + m_cc.getAppsHost(),
-						JOptionPane.ERROR_MESSAGE);
-
-			Object[] options = {"Yes","No"};
-			String msg = e.getLocalizedMessage();
-			if (msg == null)
-				msg = "";
-			msg += res.getString("ServerLocal");
-			if (JOptionPane.showOptionDialog(this, msg , 
-					res.getString("ServerNotActive") + " - " + m_cc.getAppsHost(),
-					JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE,
-					null, options, options[1]) == 0)			
-			{
-				//Env.setContext(Env.getCtx(), Env.HOLON, true);
-				//				XendraHolon holon = XendraHolon.getInstance();
-				//				if (holon.isRunning())
-				//				{
-				//					appsHostField.setText("localhost");
-				//				}
-			}
-		}
-		setBusy (false);
-	}   //  cmd_testApps
+//	private void updateApp()
+//	{
+//
+//	}
+//	/**
+//	 *  Test Application connection
+//	 */
+//	private void cmd_testApps()
+//	{
+//		setBusy (true);
+//		Exception e = m_cc.testAppsServer();
+//		if (e != null)
+//		{
+//			if (e.getLocalizedMessage() != null)
+//				JOptionPane.showMessageDialog(this,
+//						e.getLocalizedMessage(),
+//						res.getString("ServerNotActive") + " - " + m_cc.getAppsHost(),
+//						JOptionPane.ERROR_MESSAGE);
+//
+//			Object[] options = {"Yes","No"};
+//			String msg = e.getLocalizedMessage();
+//			if (msg == null)
+//				msg = "";
+//			msg += res.getString("ServerLocal");
+//			if (JOptionPane.showOptionDialog(this, msg , 
+//					res.getString("ServerNotActive") + " - " + m_cc.getAppsHost(),
+//					JOptionPane.YES_NO_OPTION,
+//					JOptionPane.WARNING_MESSAGE,
+//					null, options, options[1]) == 0)			
+//			{
+//				//Env.setContext(Env.getCtx(), Env.HOLON, true);
+//				//				XendraHolon holon = XendraHolon.getInstance();
+//				//				if (holon.isRunning())
+//				//				{
+//				//					appsHostField.setText("localhost");
+//				//				}
+//			}
+//		}
+//		setBusy (false);
+//	}   //  cmd_testApps
 
 	public boolean isCancel() {
 		return isCancel;

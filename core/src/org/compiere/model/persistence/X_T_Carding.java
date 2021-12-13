@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_TransactionMovementType;
 /** Generated Model for T_Carding
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -57,10 +56,12 @@ public static int Table_ID=MTable.getTable_ID("T_Carding");
 @XendraTrl(Identifier="22fc163f-b7b5-d33b-9e63-00ebfacc350f")
 public static String es_PE_TABLE_T_Carding_Name="Carding Stock";
 
-@XendraTable(Name="Carding Stock",Description="",Help="",TableName="T_Carding",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="22fc163f-b7b5-d33b-9e63-00ebfacc350f",Synchronized="2017-08-16 11:44:19.0")
+@XendraTable(Name="Carding Stock",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="T_Carding",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.standard",Identifier="22fc163f-b7b5-d33b-9e63-00ebfacc350f",
+Synchronized="2020-03-03 21:40:21.0")
 /** TableName=T_Carding */
 public static final String Table_Name="T_Carding";
 
@@ -125,7 +126,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bc463f3e-af96-45b6-32f7-8611fdaeb503",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Project Issue.
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e32fac37-6713-99c4-ed47-a915a6078f61",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name C_ProjectIssue_ID */
 public static final String COLUMNNAME_C_ProjectIssue_ID = "C_ProjectIssue_ID";
 /** Set Shipment/Receipt.
@@ -183,7 +184,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1ffc27b-ebe3-82e1-5999-d5243ec082b1",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_InOut_ID */
 public static final String COLUMNNAME_M_InOut_ID = "M_InOut_ID";
 /** Set Phys.Inventory Line.
@@ -212,7 +213,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d5fab13-0420-126e-2108-a41e3af99ca1",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_InventoryLine_ID */
 public static final String COLUMNNAME_M_InventoryLine_ID = "M_InventoryLine_ID";
 /** Set Locator.
@@ -241,7 +242,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8651fa9b-abad-2861-1b84-eb3fbcff47e8",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Move Line.
@@ -270,7 +271,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c044dcbd-e962-56e2-07ba-981845868fd4",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_MovementLine_ID */
 public static final String COLUMNNAME_M_MovementLine_ID = "M_MovementLine_ID";
 /** Set Movement Date.
@@ -295,7 +296,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d06d558f-37fa-1ca9-0d0d-8fa9ad70f954",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name MovementDate */
 public static final String COLUMNNAME_MovementDate = "MovementDate";
 /** Set Movement Quantity.
@@ -322,7 +323,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="61d7d7d5-e326-71d6-1f13-e8d770f58df5",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
 /** Set Movement Quantity Balance.
@@ -349,18 +350,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1c2a0b45-cfe7-f65c-b496-b712fb5c5059",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name MovementQtyBalance */
 public static final String COLUMNNAME_MovementQtyBalance = "MovementQtyBalance";
-
-/** MovementType AD_Reference=0455b4db-004d-594c-a505-3e493bfda9ad */
-public static final int MOVEMENTTYPE_AD_Reference_ID=189;
 /** Set Movement Type.
 @param MovementType Method of moving the inventory */
 public void setMovementType (String MovementType)
 {
-if (MovementType == null || MovementType.equals(REF_M_TransactionMovementType.WorkOrderPlus) || MovementType.equals(REF_M_TransactionMovementType.WorkOrder_) || MovementType.equals(REF_M_TransactionMovementType.ProductionPlus) || MovementType.equals(REF_M_TransactionMovementType.InventoryIn) || MovementType.equals(REF_M_TransactionMovementType.VendorReturns) || MovementType.equals(REF_M_TransactionMovementType.MovementFrom) || MovementType.equals(REF_M_TransactionMovementType.Production_) || MovementType.equals(REF_M_TransactionMovementType.CustomerShipment) || MovementType.equals(REF_M_TransactionMovementType.VendorReceipts) || MovementType.equals(REF_M_TransactionMovementType.InventoryOut) || MovementType.equals(REF_M_TransactionMovementType.MovementTo) || MovementType.equals(REF_M_TransactionMovementType.CustomerReturns) || MovementType.equals(REF_M_TransactionMovementType.NotApply));
- else throw new IllegalArgumentException ("MovementType Invalid value - " + MovementType + " - Reference_ID=189 - W+ - W- - P+ - I+ - R- - M- - P- - C- - V+ - I- - M+ - R+ - NA");
 if (MovementType != null && MovementType.length() > 10)
 {
 log.warning("Length > 10 - truncated");
@@ -384,7 +380,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="39f709f2-9bde-8b8b-c36a-b6f968bbe3c9",Synchronized="2017-08-05 16:56:24.0")
+Identifier="39f709f2-9bde-8b8b-c36a-b6f968bbe3c9",Synchronized="2019-08-30 22:24:22.0")
 /** Column name MovementType */
 public static final String COLUMNNAME_MovementType = "MovementType";
 /** Set Product.
@@ -413,7 +409,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="722f018c-b2a8-9c49-f1e8-d36e18d168d9",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Production Line.
@@ -442,7 +438,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7490ef0c-5fee-38a2-4b08-5eb7a648d0b3",Synchronized="2017-08-05 16:56:24.0")
+Identifier="7490ef0c-5fee-38a2-4b08-5eb7a648d0b3",Synchronized="2019-08-30 22:24:22.0")
 /** Column name M_ProductionLine_ID */
 public static final String COLUMNNAME_M_ProductionLine_ID = "M_ProductionLine_ID";
 /** Set Cost Price.
@@ -469,7 +465,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="46c67183-1088-074f-57f4-2379b81e15e8",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name PriceCost */
 public static final String COLUMNNAME_PriceCost = "PriceCost";
 /** Set Total Cost.
@@ -496,7 +492,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="59cc4a86-807b-4750-294d-7606803fb1da",
-Synchronized="2017-08-05 16:56:24.0")
+Synchronized="2019-08-30 22:24:22.0")
 /** Column name TotalCost */
 public static final String COLUMNNAME_TotalCost = "TotalCost";
 }

@@ -60,11 +60,13 @@ public static int Table_ID=MTable.getTable_ID("r_issuekcurrent_timestampn");
 public static String es_PE_TABLE_r_issuekcurrent_timestampn_Name="r_issuekcurrent_timestampn";
 
 
-@XendraTable(Name="r_issuekcurrent_timestampn",Description="",Help="",
+@XendraTable(Name="r_issuekcurrent_timestampn",
+AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="r_issuekcurrent_timestampn",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="fa942815-c033-c4a4-496a-b6e27a7733bb",Synchronized="2017-08-16 11:43:48.0")
+Identifier="fa942815-c033-c4a4-496a-b6e27a7733bb",Synchronized="2020-03-03 21:39:31.0")
 /** TableName=r_issuekcurrent_timestampn */
 public static final String Table_Name="r_issuekcurrent_timestampn";
 
@@ -141,7 +143,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b6f29075-52b0-7460-0bc7-b5e50cb56a69",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -173,7 +175,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1cdc6055-ae0c-4834-aff8-e45ee4feeb20",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Issue Status.
@@ -200,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="55058f50-b5e9-56c1-85f8-5fa00270740d",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name IssueStatus */
 public static final String COLUMNNAME_IssueStatus = "IssueStatus";
 /** Set Issue Summary.
@@ -233,7 +235,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5958f8b9-1519-e9d9-86d3-32c9d67e2fa0",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name IssueSummary */
 public static final String COLUMNNAME_IssueSummary = "IssueSummary";
 /** Set Line.
@@ -260,7 +262,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7a5166d2-69ae-8934-a8f3-20525df37c69",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name LineNo */
 public static final String COLUMNNAME_LineNo = "LineNo";
 /** Set Logger.
@@ -292,7 +294,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aea3c381-56d5-209f-7f42-576439adc46e",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name LoggerName */
 public static final String COLUMNNAME_LoggerName = "LoggerName";
 /** Set Process Now.
@@ -323,7 +325,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e376e19d-5041-39d1-a892-0da56547fb57",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Release No.
@@ -356,7 +358,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="34b2dba1-3ddc-b784-ca35-f0c0017e73ed",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name ReleaseNo */
 public static final String COLUMNNAME_ReleaseNo = "ReleaseNo";
 /** Set r_issuekcurrent_timestampn_id.
@@ -401,7 +403,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4ecc84ba-dc44-292d-6e85-5079b94a2487",Synchronized="2017-08-05 16:55:49.0")
+Identifier="4ecc84ba-dc44-292d-6e85-5079b94a2487",Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_IssueRecommendation_ID */
 public static final String COLUMNNAME_R_IssueRecommendation_ID = "R_IssueRecommendation_ID";
 /** Set Issue Status.
@@ -430,7 +432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9c37edd7-23df-b6fa-9284-d43bb1d2815a",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_IssueStatus_ID */
 public static final String COLUMNNAME_R_IssueStatus_ID = "R_IssueStatus_ID";
 /** Set Request.
@@ -459,7 +461,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="60356a2b-fde0-a35d-30bd-af3d3e4d2ff7",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_Request_ID */
 public static final String COLUMNNAME_R_Request_ID = "R_Request_ID";
 /** Set Source Class.
@@ -491,7 +493,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27e03c4c-2f6b-d652-bba5-46f3608d2ffd",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name SourceClassName */
 public static final String COLUMNNAME_SourceClassName = "SourceClassName";
 /** Set Source Method.
@@ -523,7 +525,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8136fddf-aafd-cb17-2a8d-70ae887b18bd",
-Synchronized="2017-08-05 16:55:49.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name SourceMethodName */
 public static final String COLUMNNAME_SourceMethodName = "SourceMethodName";
 }

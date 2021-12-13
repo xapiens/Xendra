@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Private_Access");
 @XendraTrl(Identifier="8e34aa35-7c71-a0bf-84ce-f013b0a857f7")
 public static String es_PE_TABLE_AD_Private_Access_Name="AD_Private_Access";
 
-@XendraTable(Name="AD_Private_Access",Description="",Help="",TableName="AD_Private_Access",
-AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="8e34aa35-7c71-a0bf-84ce-f013b0a857f7",
-Synchronized="2017-08-16 11:40:53.0")
+@XendraTable(Name="AD_Private_Access",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Private_Access",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="8e34aa35-7c71-a0bf-84ce-f013b0a857f7",Synchronized="2020-03-03 21:35:47.0")
 /** TableName=AD_Private_Access */
 public static final String Table_Name="AD_Private_Access";
 
@@ -121,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1b7e65d-8783-65b9-aa8e-898b1a217f1b",
-Synchronized="2017-08-05 16:52:44.0")
+Synchronized="2019-08-30 22:20:35.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set User/Contact.
@@ -149,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6730b9d9-1dd3-bd22-4ba9-36bc3eb00010",
-Synchronized="2017-08-05 16:52:44.0")
+Synchronized="2019-08-30 22:20:35.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -181,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b0f425ae-1576-42d0-bdd9-55201f19de45",
-Synchronized="2017-08-05 16:52:44.0")
+Synchronized="2019-08-30 22:20:35.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Record ID.
@@ -209,7 +210,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef267666-31e7-94dd-b505-ae0a879188eb",
-Synchronized="2017-08-05 16:52:44.0")
+Synchronized="2019-08-30 22:20:35.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
 }

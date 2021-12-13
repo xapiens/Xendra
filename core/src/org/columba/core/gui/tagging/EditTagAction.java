@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 import org.columba.api.exception.StoreException;
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.core.gui.action.AbstractColumbaAction;
-import org.columba.core.logging.Logging;
 import org.columba.core.resourceloader.GlobalResourceLoader;
 import org.columba.core.tagging.TagManager;
 import org.columba.core.tagging.api.ITag;
+import org.compiere.util.CLogMgt;
 
 public class EditTagAction extends AbstractColumbaAction {
 
@@ -49,7 +49,7 @@ public class EditTagAction extends AbstractColumbaAction {
 			try {
 				TagManager.getInstance().replaceTag(tag);
 			} catch (StoreException e) {
-				if (Logging.DEBUG)
+				if (CLogMgt.DEBUG)
 					e.printStackTrace();
 				JOptionPane.showMessageDialog(frame, GlobalResourceLoader.getString(
 								"org.columba.core.i18n.dialog", "tagging", "EditTagAction.error_edit"));

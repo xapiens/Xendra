@@ -72,10 +72,12 @@ public static final String TABNAME_StockPicker="39cecb55-73ef-4ed7-b8b4-7a31593a
 @XendraTrl(Identifier="318cbf81-543f-4140-a825-3be2d8368dbc")
 public static String es_PE_TABLE_M_Stock_Picker_Name="Stock Picker";
 
-@XendraTable(Name="Stock Picker",Description="",Help="",TableName="M_Stock_Picker",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="318cbf81-543f-4140-a825-3be2d8368dbc",Synchronized="2017-08-16 11:43:35.0")
+@XendraTable(Name="Stock Picker",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_Stock_Picker",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="318cbf81-543f-4140-a825-3be2d8368dbc",
+Synchronized="2020-03-03 21:38:56.0")
 /** TableName=M_Stock_Picker */
 public static final String Table_Name="M_Stock_Picker";
 
@@ -125,13 +127,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e7439c7d-0ca0-4e89-aa60-492531753c7b")
+public static String es_PE_FIELD_StockPicker_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="e7439c7d-0ca0-4e89-aa60-492531753c7b")
 public static String es_PE_FIELD_StockPicker_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="e7439c7d-0ca0-4e89-aa60-492531753c7b")
 public static String es_PE_FIELD_StockPicker_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="e7439c7d-0ca0-4e89-aa60-492531753c7b")
-public static String es_PE_FIELD_StockPicker_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39cecb55-73ef-4ed7-b8b4-7a31593a8c6b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -149,7 +151,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6fd4a64c-a9ab-44a1-bda6-2d5a13337363",
-Synchronized="2017-08-05 16:55:34.0")
+Synchronized="2019-08-30 22:23:32.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -191,7 +193,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf757734-b9e0-4843-ab1f-54589874dd8d",
-Synchronized="2017-08-05 16:55:34.0")
+Synchronized="2019-08-30 22:23:32.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Locator.
@@ -211,13 +213,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0a29dcae-38e7-4f27-a51e-26a08a86f213")
+public static String es_PE_FIELD_StockPicker_Locator_Name="Ubicación";
+
+@XendraTrl(Identifier="0a29dcae-38e7-4f27-a51e-26a08a86f213")
 public static String es_PE_FIELD_StockPicker_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="0a29dcae-38e7-4f27-a51e-26a08a86f213")
 public static String es_PE_FIELD_StockPicker_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
-
-@XendraTrl(Identifier="0a29dcae-38e7-4f27-a51e-26a08a86f213")
-public static String es_PE_FIELD_StockPicker_Locator_Name="Ubicación";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39cecb55-73ef-4ed7-b8b4-7a31593a8c6b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b097b4e5-6783-4db2-b2fc-0e3b19de3b4f",
-Synchronized="2017-08-05 16:55:34.0")
+Synchronized="2019-08-30 22:23:32.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Product Brand.
@@ -255,13 +257,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="796e4944-e259-4e49-a8be-29d8bffb04b4")
+public static String es_PE_FIELD_StockPicker_ProductBrand_Name="Linea";
+
+@XendraTrl(Identifier="796e4944-e259-4e49-a8be-29d8bffb04b4")
 public static String es_PE_FIELD_StockPicker_ProductBrand_Description="";
 
 @XendraTrl(Identifier="796e4944-e259-4e49-a8be-29d8bffb04b4")
 public static String es_PE_FIELD_StockPicker_ProductBrand_Help="";
-
-@XendraTrl(Identifier="796e4944-e259-4e49-a8be-29d8bffb04b4")
-public static String es_PE_FIELD_StockPicker_ProductBrand_Name="Linea";
 
 @XendraField(AD_Column_ID="M_Product_Brand_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39cecb55-73ef-4ed7-b8b4-7a31593a8c6b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -279,7 +281,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="31bd5010-fc4c-4dbd-a8f2-8e437ac145d5",
-Synchronized="2017-08-05 16:55:34.0")
+Synchronized="2019-08-30 22:23:32.0")
 /** Column name M_Product_Brand_ID */
 public static final String COLUMNNAME_M_Product_Brand_ID = "M_Product_Brand_ID";
 /** Set Stock Picker.
@@ -326,13 +328,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cec18535-ba30-472d-bed7-4bdca10b029f")
+public static String es_PE_FIELD_StockPicker_Warehouse_Name="Almacén";
+
+@XendraTrl(Identifier="cec18535-ba30-472d-bed7-4bdca10b029f")
 public static String es_PE_FIELD_StockPicker_Warehouse_Description="Almacén";
 
 @XendraTrl(Identifier="cec18535-ba30-472d-bed7-4bdca10b029f")
 public static String es_PE_FIELD_StockPicker_Warehouse_Help="El Almacén indica un Almacén único donde los productos son almacenados";
-
-@XendraTrl(Identifier="cec18535-ba30-472d-bed7-4bdca10b029f")
-public static String es_PE_FIELD_StockPicker_Warehouse_Name="Almacén";
 
 @XendraField(AD_Column_ID="M_Warehouse_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="39cecb55-73ef-4ed7-b8b4-7a31593a8c6b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -350,7 +352,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="91a8e6de-3a80-4aa2-a4df-8b95128b1502",
-Synchronized="2017-08-05 16:55:34.0")
+Synchronized="2019-08-30 22:23:32.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 }

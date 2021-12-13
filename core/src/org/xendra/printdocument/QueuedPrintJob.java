@@ -2,7 +2,7 @@ package org.xendra.printdocument;
 
 import org.simoes.lpd.common.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * A copy of a printJob plus the jobId used by the PrintQueue
@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
  * @author Chris Simoes
  */
 public class QueuedPrintJob {
-	static Logger log = Logger.getLogger(QueuedPrintJob.class);
+	static CLogger log = CLogger.getCLogger(QueuedPrintJob.class);
 
 	private long jobId;
 	private PrintJob printJob;

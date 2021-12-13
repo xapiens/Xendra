@@ -51,17 +51,18 @@ public X_E_CalendarActivity (Properties ctx, ResultSet rs, String trxName)
 {
 super (ctx, rs, trxName);
 }
-/** AD_Table_ID=1000412 */
+/** AD_Table_ID=1000388 */
 public static int Table_ID=MTable.getTable_ID("E_CalendarActivity");
 
 @XendraTrl(Identifier="6739dfa3-c85e-4cc1-a1b4-2289f022bf10")
 public static String es_PE_TABLE_E_CalendarActivity_Name="Calendar Activity";
 
-@XendraTable(Name="Calendar Activity",Description="",Help="",TableName="E_CalendarActivity",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="6739dfa3-c85e-4cc1-a1b4-2289f022bf10",
-Synchronized="2017-09-15 18:48:08.0")
+@XendraTable(Name="Calendar Activity",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="E_CalendarActivity",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="6739dfa3-c85e-4cc1-a1b4-2289f022bf10",
+Synchronized="2020-03-03 21:37:46.0")
 /** TableName=E_CalendarActivity */
 public static final String Table_Name="E_CalendarActivity";
 
@@ -94,15 +95,15 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_E_CalendarActivity[").append(get_ID()).append("]");
 return sb.toString();
 }
-/** Set E_CalendarActivity_ID.
-@param E_CalendarActivity_ID E_CalendarActivity_ID */
+/** Set Calendar Activity.
+@param E_CalendarActivity_ID Calendar Activity */
 public void setE_CalendarActivity_ID (int E_CalendarActivity_ID)
 {
 if (E_CalendarActivity_ID < 1) throw new IllegalArgumentException ("E_CalendarActivity_ID is mandatory.");
 set_ValueNoCheck (COLUMNNAME_E_CalendarActivity_ID, Integer.valueOf(E_CalendarActivity_ID));
 }
-/** Get E_CalendarActivity_ID.
-@return E_CalendarActivity_ID */
+/** Get Calendar Activity.
+@return Calendar Activity */
 public int getE_CalendarActivity_ID() 
 {
 Integer ii = (Integer)get_Value(COLUMNNAME_E_CalendarActivity_ID);
@@ -137,7 +138,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=false,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0b708fbb-8285-47ff-b04d-0636ca684bbd",
-Synchronized="2017-09-15 14:43:41.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name E_CalendarItem_ID */
 public static final String COLUMNNAME_E_CalendarItem_ID = "E_CalendarItem_ID";
 /** Set Identifier.
@@ -169,17 +170,17 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1167d466-17c0-4cf7-9c85-6466083fb30d",
-Synchronized="2017-09-15 14:43:42.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-/** Set IsReadOnly.
-@param IsReadOnly IsReadOnly */
+/** Set Read Only.
+@param IsReadOnly Field is read only */
 public void setIsReadOnly (boolean IsReadOnly)
 {
 set_Value (COLUMNNAME_IsReadOnly, Boolean.valueOf(IsReadOnly));
 }
-/** Get IsReadOnly.
-@return IsReadOnly */
+/** Get Read Only.
+@return Field is read only */
 public boolean isReadOnly() 
 {
 Object oo = get_Value(COLUMNNAME_IsReadOnly);
@@ -200,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d9bf971-c128-430f-83ab-c05076a3ab14",
-Synchronized="2017-09-15 18:47:37.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name IsReadOnly */
 public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
 }

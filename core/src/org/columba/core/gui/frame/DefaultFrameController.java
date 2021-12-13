@@ -30,7 +30,6 @@ import org.columba.api.gui.frame.event.IFrameMediatorListener;
 import org.columba.api.selection.ISelectionManager;
 import org.columba.core.config.Config;
 import org.columba.core.config.View;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.context.semantic.SemanticContext;
 import org.columba.core.context.semantic.api.ISemanticContext;
 import org.columba.core.gui.search.SearchPanel;
@@ -48,8 +47,7 @@ public class DefaultFrameController implements IFrameMediator {
 	/**
 	 * Saves view information like position, size and maximization state
 	 */
-	//protected ViewItem viewItem;
-	protected View viewItem;
+	protected View view;
 
 	/**
 	 * Selection handler
@@ -75,12 +73,9 @@ public class DefaultFrameController implements IFrameMediator {
 	/**
 	 * 
 	 */
-	//public DefaultFrameController(ViewItem viewItem) {
-	public DefaultFrameController(View viewItem) {
+	public DefaultFrameController(View view) {
 		super();
-		this.viewItem = viewItem;
-		//this.id = viewItem.get("id");
-		// init selection handler
+		this.view = view;
 		selectionManager = new SelectionManager();
 		searchPanel = new SearchPanel(this);
 		semanticContext = new SemanticContext();
@@ -89,17 +84,14 @@ public class DefaultFrameController implements IFrameMediator {
 	}
 
 	public DefaultFrameController(String id) {
-		//this(ViewItem.createDefault(id));	
-		//this(viewItem);
 		this(Config.getInstance().getViews().getDefaultviewlist().add(id));
 	}
 
 	/**
-	 * @return ViewItem
+	 * @return View
 	 */
-	//public ViewItem getViewItem() {
-	public View getViewItem() {
-		return viewItem;
+	public View getViewConfig() {
+		return view;
 	}
 
 	/**
@@ -108,9 +100,8 @@ public class DefaultFrameController implements IFrameMediator {
 	 * @param item
 	 *            The item to set
 	 */
-	//public void setViewItem(ViewItem item) {
-	public void setViewItem(View item) {
-		this.viewItem = item;
+	public void setView(View item) {
+		this.view = item;
 	}
 
 	/**
@@ -138,17 +129,17 @@ public class DefaultFrameController implements IFrameMediator {
 	}
 
 	/**
-	 * @see org.columba.api.gui.frame.IFrameMediator#loadPositions(org.columba.core.config.ViewItem)
+	 * @see org.columba.api.gui.frame.IFrameMediator#loadPositions(org.columba.core.config.View)
 	 */
-	// public void loadPositions(ViewItem viewItem) {
-	//
-	// }
+	 public void loadPositions(View view) {
+	
+	 }
 	/**
-	 * @see org.columba.api.gui.frame.IFrameMediator#savePositions(org.columba.core.config.ViewItem)
+	 * @see org.columba.api.gui.frame.IFrameMediator#savePositions(org.columba.core.config.View)
 	 */
-	// public void savePositions(ViewItem viewItem) {
-	//
-	// }
+	 public void savePositions(View view) {
+	
+	 }
 	/**
 	 * @see org.columba.api.gui.frame.IFrameMediator#setContainer(org.columba.api.gui.frame.IContainer)
 	 */
@@ -200,8 +191,7 @@ public class DefaultFrameController implements IFrameMediator {
      * @return iD of controller
      */
     public String getId() {
-    	return viewItem.getId();
-        //return id;
+    	return view.getId();
 	}
 
 	class MyMouseAdapter extends MouseAdapter {
@@ -373,10 +363,7 @@ public class DefaultFrameController implements IFrameMediator {
 		return searchPanel;
 	}
 
-
 	public ISemanticContext getSemanticContext() {
 		return semanticContext;
 	}
-
-
 }

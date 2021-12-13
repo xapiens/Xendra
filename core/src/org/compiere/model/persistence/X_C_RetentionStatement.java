@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentStatus;
 /** Generated Model for C_RetentionStatement
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -64,12 +63,13 @@ public static int Table_ID=MTable.getTable_ID("C_RetentionStatement");
 @XendraTrl(Identifier="0f8ae0d3-2cc7-dd69-276e-0374ea5ed645")
 public static String es_PE_TABLE_C_RetentionStatement_Name="Retention Statement";
 
-@XendraTable(Name="Retention Statement",Description="Retention Statement",Help="",
+@XendraTable(Name="Retention Statement",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Retention Statement",Help="",
 TableName="C_RetentionStatement",AccessLevel="3",
 AD_Window_ID="c6137a14-4674-f989-635d-5d6f5fb46473",AD_Val_Rule_ID="",IsKey=1,LoadSeq=120,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="0f8ae0d3-2cc7-dd69-276e-0374ea5ed645",
-Synchronized="2017-08-16 11:42:24.0")
+Synchronized="2020-03-03 21:37:36.0")
 /** TableName=C_RetentionStatement */
 public static final String Table_Name="C_RetentionStatement";
 
@@ -128,7 +128,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="33ffc558-1b93-c286-52ce-1de65a4fb96c",Synchronized="2017-08-05 16:54:21.0")
+Identifier="33ffc558-1b93-c286-52ce-1de65a4fb96c",Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -156,7 +156,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d2a40cf-648c-2b10-5e26-1be57e13768d",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set C_Retention_ID.
@@ -184,7 +184,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cdd80279-03a5-6fbe-e49e-617a86e60a65",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_Retention_ID */
 public static final String COLUMNNAME_C_Retention_ID = "C_Retention_ID";
 /** Set Retention Statement.
@@ -226,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d85d029d-7067-e4e4-02e4-0c85618a8793",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 /** Set DateDoc.
@@ -251,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5bc86d41-3936-ffca-5811-1c936500e0ef",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name DateDoc */
 public static final String COLUMNNAME_DateDoc = "DateDoc";
 /** Set Document Status.
@@ -283,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2b9d2107-9c77-35a9-0a1e-201488a189bd",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Document No.
@@ -315,7 +315,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b5cafaa-51d0-b2b3-62fd-590a8cd5ff8d",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Accounting Fact ID (per document).
@@ -347,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e4e5e2e7-ad4b-1124-9379-befeea134064",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Fact_ID */
 public static final String COLUMNNAME_Fact_ID = "Fact_ID";
 /** Set Identifier.
@@ -379,7 +379,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b6029970-be34-47e7-805a-55f252e1c8f7",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Posted.
@@ -410,18 +410,13 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="52b80394-b415-ca12-1ec7-29d8b1179646",Synchronized="2017-08-05 16:54:21.0")
+Identifier="52b80394-b415-ca12-1ec7-29d8b1179646",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Posted */
 public static final String COLUMNNAME_Posted = "Posted";
-
-/** PreStatus AD_Reference=7627125d-fefe-e6bc-bb7d-4a6c772172dc */
-public static final int PRESTATUS_AD_Reference_ID=131;
 /** Set PreStatus.
 @param PreStatus PreStatus */
 public void setPreStatus (String PreStatus)
 {
-if (PreStatus == null || PreStatus.equals(REF__DocumentStatus.InProgress) || PreStatus.equals(REF__DocumentStatus.WaitingConfirmation) || PreStatus.equals(REF__DocumentStatus.Drafted) || PreStatus.equals(REF__DocumentStatus.Completed) || PreStatus.equals(REF__DocumentStatus.Approved) || PreStatus.equals(REF__DocumentStatus.WaitingPayment) || PreStatus.equals(REF__DocumentStatus.Placed) || PreStatus.equals(REF__DocumentStatus.Returned) || PreStatus.equals(REF__DocumentStatus.Discount) || PreStatus.equals(REF__DocumentStatus.Protested) || PreStatus.equals(REF__DocumentStatus.NotApproved) || PreStatus.equals(REF__DocumentStatus.Voided) || PreStatus.equals(REF__DocumentStatus.Invalid) || PreStatus.equals(REF__DocumentStatus.Reversed) || PreStatus.equals(REF__DocumentStatus.Closed) || PreStatus.equals(REF__DocumentStatus.Unknown) || PreStatus.equals(REF__DocumentStatus.Portfolio) || PreStatus.equals(REF__DocumentStatus.Warranty) || PreStatus.equals(REF__DocumentStatus.ToCollect) || PreStatus.equals(REF__DocumentStatus.Collect) || PreStatus.equals(REF__DocumentStatus.Receivables) || PreStatus.equals(REF__DocumentStatus.Apply));
- else throw new IllegalArgumentException ("PreStatus Invalid value - " + PreStatus + " - Reference_ID=131 - IP - WC - DR - CO - AP - WP - PL - RT - DS - PD - NA - VO - IN - RE - CL - ?? - PT - WR - TC - CT - RV - AY");
 if (PreStatus != null && PreStatus.length() > 5)
 {
 log.warning("Length > 5 - truncated");
@@ -445,7 +440,7 @@ FieldLength=5,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="352043a0-ce03-5173-d096-2b8e9478630e",Synchronized="2017-08-05 16:54:21.0")
+Identifier="352043a0-ce03-5173-d096-2b8e9478630e",Synchronized="2019-08-30 22:22:13.0")
 /** Column name PreStatus */
 public static final String COLUMNNAME_PreStatus = "PreStatus";
 /** Set Processed.
@@ -476,7 +471,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="577175e1-da8c-0b4d-9d02-b237c689edcd",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -507,18 +502,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="4f905d82-68c2-0327-9f54-ab5ae7594958",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="64743c0c-f118-474d-87a3-6d74b80ae9fe",Synchronized="2017-08-05 16:54:21.0")
+Identifier="64743c0c-f118-474d-87a3-6d74b80ae9fe",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** Status AD_Reference=7627125d-fefe-e6bc-bb7d-4a6c772172dc */
-public static final int STATUS_AD_Reference_ID=131;
 /** Set Status.
 @param Status Status of the currently running check */
 public void setStatus (String Status)
 {
-if (Status == null || Status.equals(REF__DocumentStatus.InProgress) || Status.equals(REF__DocumentStatus.WaitingConfirmation) || Status.equals(REF__DocumentStatus.Drafted) || Status.equals(REF__DocumentStatus.Completed) || Status.equals(REF__DocumentStatus.Approved) || Status.equals(REF__DocumentStatus.WaitingPayment) || Status.equals(REF__DocumentStatus.Placed) || Status.equals(REF__DocumentStatus.Returned) || Status.equals(REF__DocumentStatus.Discount) || Status.equals(REF__DocumentStatus.Protested) || Status.equals(REF__DocumentStatus.NotApproved) || Status.equals(REF__DocumentStatus.Voided) || Status.equals(REF__DocumentStatus.Invalid) || Status.equals(REF__DocumentStatus.Reversed) || Status.equals(REF__DocumentStatus.Closed) || Status.equals(REF__DocumentStatus.Unknown) || Status.equals(REF__DocumentStatus.Portfolio) || Status.equals(REF__DocumentStatus.Warranty) || Status.equals(REF__DocumentStatus.ToCollect) || Status.equals(REF__DocumentStatus.Collect) || Status.equals(REF__DocumentStatus.Receivables) || Status.equals(REF__DocumentStatus.Apply));
- else throw new IllegalArgumentException ("Status Invalid value - " + Status + " - Reference_ID=131 - IP - WC - DR - CO - AP - WP - PL - RT - DS - PD - NA - VO - IN - RE - CL - ?? - PT - WR - TC - CT - RV - AY");
 if (Status != null && Status.length() > 5)
 {
 log.warning("Length > 5 - truncated");
@@ -542,7 +532,7 @@ FieldLength=5,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="dd4087c9-84f0-522d-96aa-ef6e88b08485",Synchronized="2017-08-05 16:54:21.0")
+Identifier="dd4087c9-84f0-522d-96aa-ef6e88b08485",Synchronized="2019-08-30 22:22:13.0")
 /** Column name Status */
 public static final String COLUMNNAME_Status = "Status";
 /** Set StatusDate.
@@ -567,7 +557,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6ec99f74-95cd-7077-74ef-8352e98e6512",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name StatusDate */
 public static final String COLUMNNAME_StatusDate = "StatusDate";
 /** Set Tax Amount.
@@ -595,7 +585,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b325bc2c-7b1e-821b-949f-e44b0d6b2116",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name TaxAmt */
 public static final String COLUMNNAME_TaxAmt = "TaxAmt";
 /** Set Tax base Amount.
@@ -623,7 +613,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f77b717c-c564-137d-ee52-3187430ee243",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name TaxBaseAmt */
 public static final String COLUMNNAME_TaxBaseAmt = "TaxBaseAmt";
 }

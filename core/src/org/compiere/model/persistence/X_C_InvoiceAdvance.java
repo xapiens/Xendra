@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("C_InvoiceAdvance");
 @XendraTrl(Identifier="583fb048-0c06-782b-0655-c98b7dcea840")
 public static String es_PE_TABLE_C_InvoiceAdvance_Name="C_InvoiceAdvance";
 
-@XendraTable(Name="C_InvoiceAdvance",Description="",Help="",TableName="C_InvoiceAdvance",
-AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="583fb048-0c06-782b-0655-c98b7dcea840",
-Synchronized="2017-08-16 11:41:50.0")
+@XendraTable(Name="C_InvoiceAdvance",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_InvoiceAdvance",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="583fb048-0c06-782b-0655-c98b7dcea840",
+Synchronized="2020-03-03 21:36:59.0")
 /** TableName=C_InvoiceAdvance */
 public static final String Table_Name="C_InvoiceAdvance";
 
@@ -121,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67008b1a-17fc-0ace-ce0b-2e9bf547ca06",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set C_InvoiceAdvance.
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="561d0e94-c19c-1a6d-babf-037e2a70f2b8",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Identifier.
@@ -198,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fce302fe-0dd9-42f7-955b-aed02a7813ee",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Processed.
@@ -229,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="66426872-8abc-41ea-6c0f-3d33b588014d",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 }

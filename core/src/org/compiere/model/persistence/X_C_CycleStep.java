@@ -64,12 +64,12 @@ public static int Table_ID=MTable.getTable_ID("C_CycleStep");
 public static String es_PE_TAB_Step_Description="Pasos Cliclo del Proyecto";
 
 @XendraTrl(Identifier="a523752a-6f1a-fabf-6d17-e0249d83a759")
-public static String es_PE_TAB_Step_Name="Paso";
-
-@XendraTrl(Identifier="a523752a-6f1a-fabf-6d17-e0249d83a759")
 public static String es_PE_TAB_Step_Help="El paso del ciclo determina la secuencia de evento lógica dentro de su ciclo. Es el campo común de las fases similares del proyecto que hacen diversos tipos del proyecto comparables.";
 
-@XendraTab(Name="Step",Description="Project Cycle Step",
+@XendraTrl(Identifier="a523752a-6f1a-fabf-6d17-e0249d83a759")
+public static String es_PE_TAB_Step_Name="Paso";
+@XendraTab(Name="Step",
+Description="Project Cycle Step",
 Help="The Cycle Step determines the logical sequence of events within your cycle. It is the common of similar Project Phases making different project types comparable.",
 AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -82,11 +82,12 @@ public static final String TABNAME_Step="a523752a-6f1a-fabf-6d17-e0249d83a759";
 @XendraTrl(Identifier="a1040db6-2d09-6752-c2d3-ded6f41f174c")
 public static String es_PE_TABLE_C_CycleStep_Name="Etapa del Ciclo";
 
-@XendraTable(Name="Cycle Step",Description="The step for this Cycle",Help="",
+@XendraTable(Name="Cycle Step",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="The step for this Cycle",Help="",
 TableName="C_CycleStep",AccessLevel="3",AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="a1040db6-2d09-6752-c2d3-ded6f41f174c",Synchronized="2017-08-16 11:41:42.0")
+Identifier="a1040db6-2d09-6752-c2d3-ded6f41f174c",Synchronized="2020-03-03 21:36:49.0")
 /** TableName=C_CycleStep */
 public static final String Table_Name="C_CycleStep";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2ae2014e-c905-6fe9-2642-a507a5f6b471")
+public static String es_PE_FIELD_Step_ProjectCycle_Name="Ciclo del Proyecto";
+
+@XendraTrl(Identifier="2ae2014e-c905-6fe9-2642-a507a5f6b471")
 public static String es_PE_FIELD_Step_ProjectCycle_Description="Identificador de este ciclo del proyecto";
 
 @XendraTrl(Identifier="2ae2014e-c905-6fe9-2642-a507a5f6b471")
 public static String es_PE_FIELD_Step_ProjectCycle_Help="Identifica un ciclo del proyecto que se pueda componer de uno ó más pasos ó estados.";
-
-@XendraTrl(Identifier="2ae2014e-c905-6fe9-2642-a507a5f6b471")
-public static String es_PE_FIELD_Step_ProjectCycle_Name="Ciclo del Proyecto";
 
 @XendraField(AD_Column_ID="C_Cycle_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="97206540-5d44-156e-ae1d-ec31cdc10c5b",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name C_Cycle_ID */
 public static final String COLUMNNAME_C_Cycle_ID = "C_Cycle_ID";
 /** Set Cycle Step.
@@ -180,13 +181,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4cd605a0-ad2c-ab8b-ec01-8af8469e254a")
+public static String es_PE_FIELD_Step_CycleStep_Name="Etapa del Ciclo";
+
+@XendraTrl(Identifier="4cd605a0-ad2c-ab8b-ec01-8af8469e254a")
 public static String es_PE_FIELD_Step_CycleStep_Description="El paso para este ciclo";
 
 @XendraTrl(Identifier="4cd605a0-ad2c-ab8b-ec01-8af8469e254a")
 public static String es_PE_FIELD_Step_CycleStep_Help="Identifica unos ó más pasos dentro de un ciclo del proyecto.";
-
-@XendraTrl(Identifier="4cd605a0-ad2c-ab8b-ec01-8af8469e254a")
-public static String es_PE_FIELD_Step_CycleStep_Name="Etapa del Ciclo";
 
 @XendraField(AD_Column_ID="C_CycleStep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -225,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3b3a945c-fabd-43df-9f8d-7594fa83fffe",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -257,18 +258,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
+public static String es_PE_FIELD_Step_Name_Name="Nombre";
+
+@XendraTrl(Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
 public static String es_PE_FIELD_Step_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
 public static String es_PE_FIELD_Step_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
-public static String es_PE_FIELD_Step_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="87c51db5-4d10-805c-6012-75c019652b0a")
 public static final String FIELDNAME_Step_Name="87c51db5-4d10-805c-6012-75c019652b0a";
 
 @XendraTrl(Identifier="47977be4-98d6-30b3-f0dc-616e898cf7b1")
@@ -280,7 +282,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47977be4-98d6-30b3-f0dc-616e898cf7b1",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Relative Weight.
@@ -300,13 +302,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="9abb52f0-0fd0-e619-5fee-22456c79d47c")
+public static String es_PE_FIELD_Step_RelativeWeight_Name="Peso Relativo";
+
+@XendraTrl(Identifier="9abb52f0-0fd0-e619-5fee-22456c79d47c")
 public static String es_PE_FIELD_Step_RelativeWeight_Description="Peso relativo de este paso (0=ignorado)";
 
 @XendraTrl(Identifier="9abb52f0-0fd0-e619-5fee-22456c79d47c")
 public static String es_PE_FIELD_Step_RelativeWeight_Help="El peso relativo le permite ajustar el Informe basado en probabilidades. Por Ej. Si usted tiene 1:10 de oportunidades de cerrar un contrato cuando está en la etapa de prospecto y 1:2 de oportunidades cuando está en la etapa de contrato; usted puede poner un peso de 0.1 y 0.5";
-
-@XendraTrl(Identifier="9abb52f0-0fd0-e619-5fee-22456c79d47c")
-public static String es_PE_FIELD_Step_RelativeWeight_Name="Peso Relativo";
 
 @XendraField(AD_Column_ID="RelativeWeight",IsCentrallyMaintained=true,
 AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -324,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d71b4e5a-a772-ab73-bd0a-b3fd0ca135c5",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name RelativeWeight */
 public static final String COLUMNNAME_RelativeWeight = "RelativeWeight";
 /** Set Sequence.
@@ -343,18 +345,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
+public static String es_PE_FIELD_Step_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
 public static String es_PE_FIELD_Step_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
 public static String es_PE_FIELD_Step_Sequence_Help="La Secuencia indica el orden de los registros";
 
-@XendraTrl(Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
-public static String es_PE_FIELD_Step_Sequence_Name="Secuencia";
-@XendraField(AD_Column_ID="SeqNo",
-IsCentrallyMaintained=true,AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
+@XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
+AD_Tab_ID="a523752a-6f1a-fabf-6d17-e0249d83a759",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac")
 public static final String FIELDNAME_Step_Sequence="847d1ebb-9942-9ddc-a7cd-27cc7b3c56ac";
 
 @XendraTrl(Identifier="98c3dded-fde0-c414-47d0-0608b59334e5")
@@ -367,7 +370,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="98c3dded-fde0-c414-47d0-0608b59334e5",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MLookupFactory;
+import org.compiere.model.MOrder;
+import org.compiere.model.MPrinterDocumentFormat;
 import org.compiere.model.MQuery;
 import org.compiere.model.MRole;
 import org.compiere.model.MTable;
@@ -26,6 +28,8 @@ import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.model.persistence.X_A_MachinePrinter;
 import org.compiere.model.persistence.X_C_Invoice;
 import org.compiere.model.persistence.X_C_InvoiceLine;
+import org.compiere.model.persistence.X_C_Order;
+import org.compiere.model.persistence.X_C_OrderLine;
 import org.compiere.print.DataEngine;
 import org.compiere.print.PrintData;
 import org.compiere.print.PrintDataColumn;
@@ -410,7 +414,7 @@ public class PrintWorkerPO {
 
 		if (columns.size() == 0)
 		{
-			log.log(Level.SEVERE, "No Colums -  start again");
+			log.log(Level.SEVERE, String.format("No Colums -  start again some field(s) %s not exists in %s", fields, tableName));
 			log.finest("No Colums - SQL=" + sql);
 			return null;
 		}
@@ -724,7 +728,7 @@ public class PrintWorkerPO {
 			else if (obj instanceof PrintDataElement)
 			{				
 				PrintDataElement pde = (PrintDataElement)obj;
-				if (fields.contains(pde.getColumnName()))
+				if (fields == null || fields.contains(pde.getColumnName()))
 				{
 					if (pde.isID() || pde.isYesNo())
 					{
@@ -760,9 +764,11 @@ public class PrintWorkerPO {
 
 	public void fill(Properties ctx, MQuery query, String tableName, List<String> fields) {
 		PrintData pd = getPrintDataInfo (ctx, query, tableName, fields);
-		loadPrintData(pd);
-		pd.setRowIndex(0);
-		load(pd, true, fields);
+		if (pd != null) {
+			loadPrintData(pd);
+			pd.setRowIndex(0);
+			load(pd, true, fields);
+		}
 	}
 	
 //	public boolean startlines(Properties ctx, MQuery query, String tableName, List<String> fields)
@@ -885,29 +891,45 @@ public class PrintWorkerPO {
 		}
 		return kp;
 	}
-	
 	public static void main(String[] args) {
 		org.compiere.Xendra.startupEnvironment(false);
-		PrintWorker pw = new PrintWorker();
-		//FormatMessage s = new FormatMessage(Constants.SALESMESSAGE);		
+		//
+		MOrder order = new Query(Env.getCtx(), MOrder.Table_Name, "C_Order_ID = ?", null)
+		.setParameters(1046293).first();
+		MDocType dt = MDocType.get(Env.getCtx(), order.getC_DocType_ID());
+		MPrinterDocumentFormat pf = new Query(Env.getCtx(), MPrinterDocumentFormat.Table_Name, "C_PrinterDocumentFormat_ID = ?", null)
+			.setParameters(dt.getC_PrinterDocumentFormat_ID()).first();
+		//
 		MQuery query = new MQuery();
-		query.addRestriction("C_Invoice_ID", MQuery.EQUAL, 2142593);		
+		query.addRestriction("C_Order_ID", MQuery.EQUAL, 1046293);				
+		PrinterDocumentCtrl pdfc = new PrinterDocumentCtrl(Env.getCtx(), pf, query);
+		//pdfc.setWhereExtended(m_whereExtended);
+		pdfc.setWindowNo(0);
+		PrintWorker pw = pdfc.getPrintWorker();
+		pdfc.print(pw);		
+	}
+	public static void main2(String[] args) {
+		org.compiere.Xendra.startupEnvironment(false);
+		PrintWorker pw = new PrintWorker();
+		MQuery query = new MQuery();
+		query.addRestriction("C_Order_ID", MQuery.EQUAL, 1046293);		
 		PrintWorkerPO pow = new PrintWorkerPO(Language.getLanguage("es_PE"),pw, null);
-		pow.fill(Env.getCtx(), query, X_C_Invoice.Table_Name, null);		
-		List<X_C_InvoiceLine> lines = new Query(Env.getCtx(), X_C_InvoiceLine.Table_Name, "C_Invoice_ID = ?", null)
-			.setParameters(2142593).list();
+		pow.fill(Env.getCtx(), query, X_C_Order.Table_Name, null);		
+		List<X_C_OrderLine> lines = new Query(Env.getCtx(), X_C_OrderLine.Table_Name, "C_Order_ID = ?", null)
+			.setParameters(1046293).list();
 		int i = 0;
-		for (X_C_InvoiceLine line:lines)
+		for (X_C_OrderLine line:lines)
 		{
 			String lineno = String.format("Line%d", i);
 			query = new MQuery();
-			query.addRestriction("C_InvoiceLine_ID", MQuery.EQUAL, line.getC_InvoiceLine_ID());		
+			query.addRestriction("C_OrderLine_ID", MQuery.EQUAL, line.getC_OrderLine_ID());		
 			pow.fillline(Env.getCtx(), query, X_C_InvoiceLine.Table_Name, null);
 			i++;
 		}
 		//
-		MInvoice invoice = MInvoice.get(Env.getCtx(), 2142593);
-		MDocType dt = MDocType.get(Env.getCtx(), invoice.getC_DocType_ID());
+		MOrder order = new Query(Env.getCtx(), MOrder.Table_Name, "C_Order_ID = ?", null)
+			.setParameters(1046293).first();
+		MDocType dt = MDocType.get(Env.getCtx(), order.getC_DocType_ID());
 		
 		X_A_MachinePrinter mp = new Query(Env.getCtx(), X_A_MachinePrinter.Table_Name, "A_MachinePrinter_ID = ?", null)
 		.setParameters(dt.getA_MachinePrinter_ID()).first();		
@@ -915,11 +937,14 @@ public class PrintWorkerPO {
 		X_A_Machine machine = new Query(Env.getCtx(), X_A_Machine.Table_Name, "A_Machine_ID = ?", null)
 		.setParameters(mp.getA_Machine_ID()).first();
 		if (machine != null)
-		{				
-			pw.setPrinterDocumentFormat_ID(296);
+		{		
+			MPrinterDocumentFormat pdf = new MPrinterDocumentFormat(Env.getCtx(), dt.getC_PrinterDocumentFormat_ID(), null);
+			PrintDocument pd = MVELParseFormat.getInstance().parse(pdf);
+			String error = pw.setPrintDocument(pd);						
+			//String error = pw.AssignPrinterDocumentFormat(dt.getC_PrinterDocumentFormat_ID());
 			pw.setJobName((String) pow.getProperty(Constants.HEADER, X_C_Invoice.COLUMNNAME_DocumentNo));
 			pw.setPrintServer(machine);
-			String error = pw.Print(PrintWorker.ReceiveJob);
+			error = pw.Print(PrintWorker.ReceiveJob);
 			if (error.length() == 0) {
 				
 			}			

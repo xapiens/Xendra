@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("AD_ExtensionList");
 @XendraTrl(Identifier="2cd3c527-fa85-48f6-b7cf-20ed48a65c85")
 public static String es_PE_TABLE_AD_ExtensionList_Name="Plugin Extension List";
 
-@XendraTable(Name="Plugin Extension List",Description="",Help="",TableName="AD_ExtensionList",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="2cd3c527-fa85-48f6-b7cf-20ed48a65c85",
-Synchronized="2017-08-16 11:40:11.0")
+@XendraTable(Name="Plugin Extension List",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ExtensionList",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="2cd3c527-fa85-48f6-b7cf-20ed48a65c85",
+Synchronized="2020-03-03 21:35:00.0")
 /** TableName=AD_ExtensionList */
 public static final String Table_Name="AD_ExtensionList";
 
@@ -111,35 +112,6 @@ return ii.intValue();
 }
 /** Column name AD_ExtensionList_ID */
 public static final String COLUMNNAME_AD_ExtensionList_ID = "AD_ExtensionList_ID";
-/** Set Plugin.
-@param AD_Plugin_ID Plugin */
-public void setAD_Plugin_ID (int AD_Plugin_ID)
-{
-if (AD_Plugin_ID <= 0) set_Value (COLUMNNAME_AD_Plugin_ID, null);
- else 
-set_Value (COLUMNNAME_AD_Plugin_ID, Integer.valueOf(AD_Plugin_ID));
-}
-/** Get Plugin.
-@return Plugin */
-public int getAD_Plugin_ID() 
-{
-Integer ii = (Integer)get_Value(COLUMNNAME_AD_Plugin_ID);
-if (ii == null) return 0;
-return ii.intValue();
-}
-
-@XendraTrl(Identifier="a43bfacc-89a0-45e5-a297-b62c54284a95")
-public static String es_PE_COLUMN_AD_Plugin_ID_Name="Plugin";
-
-@XendraColumn(AD_Element_ID="895f0c3e-fa52-48b7-8fce-f9b2dc637774",ColumnName="AD_Plugin_ID",
-AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
-IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
-Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
-IsAllowLogging=false,Identifier="a43bfacc-89a0-45e5-a297-b62c54284a95",
-Synchronized="2015-11-20 16:27:33.0")
-/** Column name AD_Plugin_ID */
-public static final String COLUMNNAME_AD_Plugin_ID = "AD_Plugin_ID";
 /** Set ID.
 @param ID ID */
 public void setID (String ID)
@@ -169,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0e330bec-5511-47a2-ac3c-ab7c046377d1",
-Synchronized="2015-11-20 16:27:33.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name ID */
 public static final String COLUMNNAME_ID = "ID";
 }

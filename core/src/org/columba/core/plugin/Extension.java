@@ -21,6 +21,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,8 +30,8 @@ import org.columba.api.plugin.IExtension;
 import org.columba.api.plugin.IExtensionInterface;
 import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginMetadata;
-import org.columba.core.logging.Logging;
 import org.columba.core.main.Main;
+import org.compiere.util.CLogMgt;
 
 /**
  * An extension providing the metadata of an extension and the runtime context
@@ -100,14 +101,16 @@ public class Extension implements IExtension {
 			throw new PluginException("Extension <" + getMetadata().getId() + "> was disabled due to a former instanciation error");
 
 		String id = null;
-		File pluginDirectory = null;
+		//File pluginDirectory = null;
+		HashMap Properties = null;
 
 		String className = metadata.getClassname();		
-		
+
 		if (pluginMetadata != null) {
 			id = pluginMetadata.getId();
 			// if external plugin, we need the directory of it
-			pluginDirectory = pluginMetadata.getDirectory();
+			//pluginDirectory = pluginMetadata.getDirectory();
+			Properties = pluginMetadata.getProperties();
 		}
 
 		IExtensionInterface plugin = null;
@@ -120,12 +123,10 @@ public class Extension implements IExtension {
 
 			try {
 
-				if (isInternal())
-
+				if (isInternal()) {
 					// use default Java classlodaer
 					plugin = instanciateJavaClass(className, arguments);
-
-				else {
+				} else {
 					//
 					// external plugin
 					//				
@@ -147,8 +148,21 @@ public class Extension implements IExtension {
 					// } catch (Error e) {
 					// //handleException(e);
 					// }
-
 					// use external Java URL classloader
+					File pluginDirectory = null;
+					if (Properties != null) {
+						String directorypath = (String) Properties.get("directory");
+						if (directorypath != null) {
+							pluginDirectory = new File(directorypath);
+						}
+					}
+					System.out.println(String.format("pluginDirectory %s", pluginDirectory));
+					if (arguments != null) {
+						for (int i=0; i < arguments.length; i++) {
+							System.out.println(String.format("argument %s: %s", i, arguments[i]));
+						}
+					}
+					System.out.println(String.format("pluginDirectory: %s className: %s", pluginDirectory, className));
 					plugin = instanciateExternalJavaClass(arguments, pluginDirectory, className);
 
 				}
@@ -185,11 +199,11 @@ public class Extension implements IExtension {
 	private void logErrorMessage(Throwable e) {
 		if (e.getCause() != null) {
 			LOG.severe(e.getCause().getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.getCause().printStackTrace();
 		} else {
 			LOG.severe(e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 	}
@@ -211,7 +225,7 @@ public class Extension implements IExtension {
 	 */
 	private IExtensionInterface instanciateExternalJavaClass(
 			Object[] arguments, File pluginDirectory, String className)
-			throws Exception {
+					throws Exception {
 		IExtensionInterface plugin;
 		URL[] urls = null;
 
@@ -241,8 +255,8 @@ public class Extension implements IExtension {
 		//plugin = instanciateJavaClass(className, arguments);
 
 		// create new class loader using the global class loader as parent
-		 ExternalClassLoader loader = new ExternalClassLoader(urls, Main.mainClassLoader);
-		 plugin = (IExtensionInterface) loader.instanciate(className, arguments);
+		ExternalClassLoader loader = new ExternalClassLoader(urls, Main.mainClassLoader);
+		plugin = (IExtensionInterface) loader.instanciate(className, arguments);
 
 		return plugin;
 	}
@@ -257,7 +271,7 @@ public class Extension implements IExtension {
 
 		// use our global class loader
 		ClassLoader loader = Main.mainClassLoader;
-		
+
 		Class actClass;
 
 		actClass = loader.loadClass(className);
@@ -371,7 +385,7 @@ public class Extension implements IExtension {
 			url[i] = (URL) urlList.get(i);
 		}
 
-		if (Logging.DEBUG) {
+		if (CLogMgt.DEBUG) {
 			for (int i = 0; i < url.length; i++) {
 				LOG.finest("url[" + i + "]=" + url[i]);
 			}
@@ -384,18 +398,18 @@ public class Extension implements IExtension {
 		this.internalPlugin = internal;
 	}
 
-    /**
-     * Returns enabled by default. But, in case of an error on instanciation its
-     * disabled.
-     *
-     * @return enabled by default. But, in case of an error on instanciation its
-     */
-    public boolean isEnabled() {
-    	return enabled;
+	/**
+	 * Returns enabled by default. But, in case of an error on instanciation its
+	 * disabled.
+	 *
+	 * @return enabled by default. But, in case of an error on instanciation its
+	 */
+	public boolean isEnabled() {
+		return enabled;
 	}
-    public void setEnabled(boolean value) {
-    	enabled = value;
-    	if (!enabled)
-    		System.out.println("X");
-    }
+	public void setEnabled(boolean value) {
+		enabled = value;
+		if (!enabled)
+			System.out.println("org.columba.core.plugin.Extension.setEnabled");
+	}
 }

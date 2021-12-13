@@ -15,9 +15,7 @@
  *****************************************************************************/
 package org.compiere.process;
 
-import java.sql.*;
 import java.util.logging.*;
-import org.compiere.db.*;
 import org.compiere.model.MColumn;
 import org.compiere.model.MTable;
 import org.compiere.model.M_Element;

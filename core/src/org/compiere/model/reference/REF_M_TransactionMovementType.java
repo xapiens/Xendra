@@ -92,7 +92,7 @@ public class REF_M_TransactionMovementType implements Reference
 		VFormat=" ",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2015-10-03 08:57:57.691",
+		Synchronized="2018-06-25 17:17:11.094",
 		Extension="",
 		Identifier="0455b4db-004d-594c-a505-3e493bfda9ad")
 	public static final String Identifier = "0455b4db-004d-594c-a505-3e493bfda9ad";

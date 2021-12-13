@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_ReplenishmentCreate;
-import org.compiere.model.reference.REF_M_ReplenishType;
 /** Generated Model for T_Replenish
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -65,10 +63,12 @@ public static int Table_ID=MTable.getTable_ID("T_Replenish");
 @XendraTrl(Identifier="007ab784-cbc6-db6c-befc-582dcb0a6c51")
 public static String es_PE_TABLE_T_Replenish_Name="T_Replenish";
 
-@XendraTable(Name="T_Replenish",Description="",Help="",TableName="T_Replenish",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="007ab784-cbc6-db6c-befc-582dcb0a6c51",Synchronized="2017-08-16 11:44:25.0")
+@XendraTable(Name="T_Replenish",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="T_Replenish",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.standard",Identifier="007ab784-cbc6-db6c-befc-582dcb0a6c51",
+Synchronized="2020-03-03 21:40:28.0")
 /** TableName=T_Replenish */
 public static final String Table_Name="T_Replenish";
 
@@ -126,7 +126,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1f449209-b92b-7752-f126-42f5cdd6863f",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Business Partner .
@@ -154,7 +154,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f80776e1-0969-4dbc-51e6-5530781e355d",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Document Type.
@@ -183,7 +183,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="714ce150-d5b2-a4d4-8c0a-260eacf4a10b",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 /** Set Maximum Level.
@@ -211,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d43e2d8e-f3d7-b215-f73e-179007abe231",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name Level_Max */
 public static final String COLUMNNAME_Level_Max = "Level_Max";
 /** Set Minimum Level.
@@ -239,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="df2b197b-677e-2099-77d7-76c623ee093f",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name Level_Min */
 public static final String COLUMNNAME_Level_Min = "Level_Min";
 /** Set Product.
@@ -267,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eb2efe7b-7b8b-c605-a68e-ed3dbc601641",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Warehouse.
@@ -295,12 +295,9 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3e6f0ae4-1909-d09c-629f-f5615a53ea2b",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
-
-/** M_WarehouseSource_ID AD_Reference=e3999c76-66f0-38b0-a95e-fb0d580cde7a */
-public static final int M_WAREHOUSESOURCE_ID_AD_Reference_ID=197;
 /** Set Source Warehouse.
 @param M_WarehouseSource_ID Optional Warehouse to replenish from */
 public void setM_WarehouseSource_ID (int M_WarehouseSource_ID)
@@ -328,7 +325,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="cf018c6f-dc0c-67d1-b0a9-233e294c33ae",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name M_WarehouseSource_ID */
 public static final String COLUMNNAME_M_WarehouseSource_ID = "M_WarehouseSource_ID";
 /** Set Minimum Order Qty.
@@ -355,7 +352,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80a5528c-f453-0579-29fa-a21fdd1e20cc",
-Synchronized="2017-08-05 16:56:28.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name Order_Min */
 public static final String COLUMNNAME_Order_Min = "Order_Min";
 /** Set Order Pack Qty.
@@ -382,7 +379,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cca7536-cc13-0d0a-036d-4f1bbd1fe41f",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name Order_Pack */
 public static final String COLUMNNAME_Order_Pack = "Order_Pack";
 /** Set On Hand Quantity.
@@ -409,7 +406,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dbc0b7db-d40c-6182-2e8c-ef9446fc752c",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name QtyOnHand */
 public static final String COLUMNNAME_QtyOnHand = "QtyOnHand";
 /** Set Ordered Quantity.
@@ -436,7 +433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="85fe9354-d647-aad3-b11f-4992fa87d8b0",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name QtyOrdered */
 public static final String COLUMNNAME_QtyOrdered = "QtyOrdered";
 /** Set Reserved Quantity.
@@ -463,7 +460,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fbe20976-2624-0b6c-def8-2c9afbec0e53",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:26.0")
 /** Column name QtyReserved */
 public static final String COLUMNNAME_QtyReserved = "QtyReserved";
 /** Set Quantity to Order.
@@ -490,18 +487,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8521adb7-e43d-5702-466d-9a5b95996a8f",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:27.0")
 /** Column name QtyToOrder */
 public static final String COLUMNNAME_QtyToOrder = "QtyToOrder";
-
-/** ReplenishmentCreate AD_Reference=3a4e4a72-6e97-5638-22ad-655b0c1e671c */
-public static final int REPLENISHMENTCREATE_AD_Reference_ID=329;
 /** Set Create.
 @param ReplenishmentCreate Create from Replenishment */
 public void setReplenishmentCreate (String ReplenishmentCreate)
 {
-if (ReplenishmentCreate == null || ReplenishmentCreate.equals(REF_M_ReplenishmentCreate.PurchaseOrder) || ReplenishmentCreate.equals(REF_M_ReplenishmentCreate.InventoryMove) || ReplenishmentCreate.equals(REF_M_ReplenishmentCreate.Requisition));
- else throw new IllegalArgumentException ("ReplenishmentCreate Invalid value - " + ReplenishmentCreate + " - Reference_ID=329 - POO - MMM - POR");
 if (ReplenishmentCreate != null && ReplenishmentCreate.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -526,19 +518,13 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="c81a1150-b53e-3b9a-602f-778a5bac3fa3",
-Synchronized="2017-08-05 16:56:29.0")
+Synchronized="2019-08-30 22:24:27.0")
 /** Column name ReplenishmentCreate */
 public static final String COLUMNNAME_ReplenishmentCreate = "ReplenishmentCreate";
-
-/** ReplenishType AD_Reference=4ae23d3a-7913-5665-971c-430591c605b3 */
-public static final int REPLENISHTYPE_AD_Reference_ID=164;
 /** Set Replenish Type.
 @param ReplenishType Method for re-ordering a product */
 public void setReplenishType (String ReplenishType)
 {
-if (ReplenishType == null) throw new IllegalArgumentException ("ReplenishType is mandatory");
-if (ReplenishType.equals(REF_M_ReplenishType.MaintainMaximumLevel) || ReplenishType.equals(REF_M_ReplenishType.Manual) || ReplenishType.equals(REF_M_ReplenishType.ReorderBelowMinimumLevel) || ReplenishType.equals(REF_M_ReplenishType.Custom));
- else throw new IllegalArgumentException ("ReplenishType Invalid value - " + ReplenishType + " - Reference_ID=164 - 2 - 0 - 1 - 9");
 if (ReplenishType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -562,7 +548,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d7ebe059-9cf9-5e16-4ced-c3e9ad053d60",Synchronized="2017-08-05 16:56:29.0")
+Identifier="d7ebe059-9cf9-5e16-4ced-c3e9ad053d60",Synchronized="2019-08-30 22:24:27.0")
 /** Column name ReplenishType */
 public static final String COLUMNNAME_ReplenishType = "ReplenishType";
 }

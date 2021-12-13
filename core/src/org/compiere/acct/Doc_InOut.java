@@ -412,13 +412,20 @@ public class Doc_InOut extends Doc {
 	public void createFact_ID() {
 		MInOut inout = (MInOut) getPO();
 		/* Fact ID */
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID(MGLBookPeriod.getID(inout.getAD_Org_ID(), 
 					inout.getAD_Client_ID(), 
 					inout.Table_ID,
 					inout.getC_DocType_ID(), 
 					inout.isSOTrx() ? "Y" : "N", 
 					inout.getDateAcct()));
+			setGL_Book_ID(MGLBookPeriod.getGLBookID(inout.getAD_Org_ID(), 
+					inout.getAD_Client_ID(), 
+					inout.Table_ID,
+					inout.getC_DocType_ID(), 
+					inout.isSOTrx() ? "Y" : "N", 
+					inout.getDateAcct()));			
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), inout.getDateAcct(), inout.getAD_Org_ID() , inout.getAD_Client_ID());
@@ -456,6 +463,12 @@ public class Doc_InOut extends Doc {
 							inout.getC_DocType_ID(), 
 							inout.isSOTrx() ? "Y" : "N", 
 							inout.getDateAcct()));
+					setGL_Book_ID(MGLBookPeriod.getGLBookID(inout.getAD_Org_ID(), 
+							inout.getAD_Client_ID(), 
+							inout.Table_ID, 
+							inout.getC_DocType_ID(), 
+							inout.isSOTrx() ? "Y" : "N", 
+							inout.getDateAcct()));					
 				}
 			}
 			else // change the oldformat to new format
@@ -466,6 +479,12 @@ public class Doc_InOut extends Doc {
 						inout.getC_DocType_ID(), 
 						inout.isSOTrx() ? "Y" : "N", 
 						inout.getDateAcct()));
+				setGL_Book_ID(MGLBookPeriod.getGLBookID(inout.getAD_Org_ID(), 
+						inout.getAD_Client_ID(), 
+						inout.Table_ID, 
+						inout.getC_DocType_ID(), 
+						inout.isSOTrx() ? "Y" : "N", 
+						inout.getDateAcct()));				
 			}
 		}
 	}

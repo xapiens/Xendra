@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("C_NonBusinessDay");
 public static String es_PE_TAB_NonBusinessDay_Description="Definir días no laborales";
 
 @XendraTrl(Identifier="a43b7db7-d59c-24e8-5138-93de34a642a4")
-public static String es_PE_TAB_NonBusinessDay_Name="Día no laboral";
+public static String es_PE_TAB_NonBusinessDay_Help="La pestaña de días no laborales define los días que serán excluidos cuando se calcule el día de pago basado en los términos de pago.";
 
 @XendraTrl(Identifier="a43b7db7-d59c-24e8-5138-93de34a642a4")
-public static String es_PE_TAB_NonBusinessDay_Help="La pestaña de días no laborales define los días que serán excluidos cuando se calcule el día de pago basado en los términos de pago.";
+public static String es_PE_TAB_NonBusinessDay_Name="Día no laboral";
 
 @XendraTab(Name="Non Business Day",Description="Define Non Business Days",
 Help="The Non Business Days Tab defines those days to exclude when calculating the due date for given payment terms.  For example, if an invoice terms was Net 10 days and the Invoice Date was 2/17/2000 the due date would be 2/27/2000.  If 2/27/2000 was defined as a non business day then the due date  on the Invoice would be 2/28/2000.",
@@ -78,11 +78,13 @@ public static final String TABNAME_NonBusinessDay="a43b7db7-d59c-24e8-5138-93de3
 @XendraTrl(Identifier="481328e7-ab64-0669-a6fb-bef707a0ba88")
 public static String es_PE_TABLE_C_NonBusinessDay_Name="Día Inhábil";
 
-@XendraTable(Name="Non Business Day",Description="Day on which business is not transacted",Help="",
-TableName="C_NonBusinessDay",AccessLevel="6",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="481328e7-ab64-0669-a6fb-bef707a0ba88",Synchronized="2017-08-16 11:41:59.0")
+@XendraTable(Name="Non Business Day",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Day on which business is not transacted",Help="",TableName="C_NonBusinessDay",
+AccessLevel="6",AD_Window_ID="54524f0d-f1a4-460b-d2f8-1eff9aea350e",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="481328e7-ab64-0669-a6fb-bef707a0ba88",Synchronized="2020-03-03 21:37:09.0")
 /** TableName=C_NonBusinessDay */
 public static final String Table_Name="C_NonBusinessDay";
 
@@ -132,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="04320041-20e6-62e4-c3ce-c55bbc1d5c28")
+public static String es_PE_FIELD_NonBusinessDay_Calendar_Name="Calendario";
+
+@XendraTrl(Identifier="04320041-20e6-62e4-c3ce-c55bbc1d5c28")
 public static String es_PE_FIELD_NonBusinessDay_Calendar_Description="Nombre del Calendario Contable";
 
 @XendraTrl(Identifier="04320041-20e6-62e4-c3ce-c55bbc1d5c28")
 public static String es_PE_FIELD_NonBusinessDay_Calendar_Help="El calendario únicamente identifica un calendario contable. Múltiples calendarios pueden ser usados. Ej. Ud. puede necesitar un calendario estándar que corre del 1 de enero al 31 de diciembre y un calendario fiscal que corre del 1 de julio al 30 de junio.";
-
-@XendraTrl(Identifier="04320041-20e6-62e4-c3ce-c55bbc1d5c28")
-public static String es_PE_FIELD_NonBusinessDay_Calendar_Name="Calendario";
 
 @XendraField(AD_Column_ID="C_Calendar_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a43b7db7-d59c-24e8-5138-93de34a642a4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -156,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f5d1d11-006b-ce80-05f7-eefb6b3d1bac",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name C_Calendar_ID */
 public static final String COLUMNNAME_C_Calendar_ID = "C_Calendar_ID";
 /** Set Non Business Day.
@@ -176,10 +178,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e5c713e7-56d7-93e0-0cbd-d61654e3e05f")
-public static String es_PE_FIELD_NonBusinessDay_NonBusinessDay_Description="Día en el cual no se hacen transacciones del negocio";
+public static String es_PE_FIELD_NonBusinessDay_NonBusinessDay_Name="Día Inhábil";
 
 @XendraTrl(Identifier="e5c713e7-56d7-93e0-0cbd-d61654e3e05f")
-public static String es_PE_FIELD_NonBusinessDay_NonBusinessDay_Name="Día Inhábil";
+public static String es_PE_FIELD_NonBusinessDay_NonBusinessDay_Description="Día en el cual no se hacen transacciones del negocio";
 
 @XendraField(AD_Column_ID="C_NonBusinessDay_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a43b7db7-d59c-24e8-5138-93de34a642a4",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -204,13 +206,13 @@ return (Timestamp)get_Value(COLUMNNAME_Date1);
 }
 
 @XendraTrl(Identifier="329fb928-1d5f-f00c-69ee-b14ed3b2ad59")
+public static String es_PE_FIELD_NonBusinessDay_Date_Name="Fecha";
+
+@XendraTrl(Identifier="329fb928-1d5f-f00c-69ee-b14ed3b2ad59")
 public static String es_PE_FIELD_NonBusinessDay_Date_Description="Fecha cuando el negocio no procede";
 
 @XendraTrl(Identifier="329fb928-1d5f-f00c-69ee-b14ed3b2ad59")
 public static String es_PE_FIELD_NonBusinessDay_Date_Help="El campo fecha identifica una fecha calendario en la cúal los negocios no proceden.";
-
-@XendraTrl(Identifier="329fb928-1d5f-f00c-69ee-b14ed3b2ad59")
-public static String es_PE_FIELD_NonBusinessDay_Date_Name="Fecha";
 
 @XendraField(AD_Column_ID="Date1",IsCentrallyMaintained=true,
 AD_Tab_ID="a43b7db7-d59c-24e8-5138-93de34a642a4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -228,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bc742ecb-2a27-2d18-ff79-3231554b3ed0",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Date1 */
 public static final String COLUMNNAME_Date1 = "Date1";
 /** Set Identifier.
@@ -260,7 +262,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c20622cf-cd7a-4820-81e0-3abcda7130f7",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:47.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -291,13 +293,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="ecccfc21-8231-652f-6d60-f408ebc5a17c")
+public static String es_PE_FIELD_NonBusinessDay_Name_Name="Nombre";
+
+@XendraTrl(Identifier="ecccfc21-8231-652f-6d60-f408ebc5a17c")
 public static String es_PE_FIELD_NonBusinessDay_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="ecccfc21-8231-652f-6d60-f408ebc5a17c")
 public static String es_PE_FIELD_NonBusinessDay_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="ecccfc21-8231-652f-6d60-f408ebc5a17c")
-public static String es_PE_FIELD_NonBusinessDay_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="a43b7db7-d59c-24e8-5138-93de34a642a4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -315,7 +317,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d1732ef-a672-ab38-a22e-e2b0961dcc48",
-Synchronized="2017-08-05 16:53:53.0")
+Synchronized="2019-08-30 22:21:48.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

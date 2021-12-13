@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_Project_Acct");
 public static String es_PE_TAB_Accounting_Description="Definir Contabilidad del Proyecto";
 
 @XendraTrl(Identifier="36ca20f5-d936-6013-2269-4a9afbd3b989")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="36ca20f5-d936-6013-2269-4a9afbd3b989")
 public static String es_PE_TAB_Accounting_Help="La pestaña de Contabilidad es usada para definir la cuenta de activos que se usa cuando un proyecto es completado y el activo asociado es colocado en libros.";
 
-@XendraTab(Name="Accounting",Description="Define Project Accounting",
+@XendraTrl(Identifier="36ca20f5-d936-6013-2269-4a9afbd3b989")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Define Project Accounting",
 Help="The Accounting Tab is used to define the Asset Account to use when a project is completed and the associated asset realized.",
 AD_Window_ID="402bdf68-d0df-64fe-b670-0ca668710aa1",SeqNo=50,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,12 +80,12 @@ public static final String TABNAME_Accounting="36ca20f5-d936-6013-2269-4a9afbd3b
 public static String es_PE_TAB_Accounting2_Description="Defina las Cuentas Contables del Proyecto";
 
 @XendraTrl(Identifier="85979e0b-85bf-89f8-acd7-7d50fabc6499")
-public static String es_PE_TAB_Accounting2_Name="Cuentas Contables";
-
-@XendraTrl(Identifier="85979e0b-85bf-89f8-acd7-7d50fabc6499")
 public static String es_PE_TAB_Accounting2_Help="La tabla de la contabilidad se utiliza para definir la cuenta de activo para utilizar cuando se termina un proyecto y el activo asociado observado.";
 
-@XendraTab(Name="Accounting",Description="Define Project Accounting",
+@XendraTrl(Identifier="85979e0b-85bf-89f8-acd7-7d50fabc6499")
+public static String es_PE_TAB_Accounting2_Name="Cuentas Contables";
+@XendraTab(Name="Accounting",
+Description="Define Project Accounting",
 Help="The Accounting Tab is used to define the Asset Account to use when a project is completed and the associated asset realized.",
 AD_Window_ID="3d408be2-c806-9eca-e379-2876dfbbec6d",SeqNo=40,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -98,11 +98,12 @@ public static final String TABNAME_Accounting2="85979e0b-85bf-89f8-acd7-7d50fabc
 @XendraTrl(Identifier="5412859e-9ab9-c683-fcd3-656b502864cd")
 public static String es_PE_TABLE_C_Project_Acct_Name="C_Project_Acct";
 
-@XendraTable(Name="C_Project_Acct",Description="",Help="",TableName="C_Project_Acct",
-AccessLevel="3",AD_Window_ID="3d408be2-c806-9eca-e379-2876dfbbec6d",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="5412859e-9ab9-c683-fcd3-656b502864cd",Synchronized="2017-08-16 11:42:19.0")
+@XendraTable(Name="C_Project_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Project_Acct",AccessLevel="3",AD_Window_ID="3d408be2-c806-9eca-e379-2876dfbbec6d",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="5412859e-9ab9-c683-fcd3-656b502864cd",Synchronized="2020-03-03 21:37:31.0")
 /** TableName=C_Project_Acct */
 public static final String Table_Name="C_Project_Acct";
 
@@ -152,13 +153,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8735067b-9a38-ac84-411f-62cc914c9325")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="8735067b-9a38-ac84-411f-62cc914c9325")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="8735067b-9a38-ac84-411f-62cc914c9325")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="8735067b-9a38-ac84-411f-62cc914c9325")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="36ca20f5-d936-6013-2269-4a9afbd3b989",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -168,13 +169,13 @@ Identifier="8735067b-9a38-ac84-411f-62cc914c9325")
 public static final String FIELDNAME_Accounting_AccountingSchema="8735067b-9a38-ac84-411f-62cc914c9325";
 
 @XendraTrl(Identifier="78359fcf-7ecb-4aa0-51da-11099644e693")
+public static String es_PE_FIELD_Accounting_AccountingSchema2_Name="Esquema Contable";
+
+@XendraTrl(Identifier="78359fcf-7ecb-4aa0-51da-11099644e693")
 public static String es_PE_FIELD_Accounting_AccountingSchema2_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="78359fcf-7ecb-4aa0-51da-11099644e693")
 public static String es_PE_FIELD_Accounting_AccountingSchema2_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="78359fcf-7ecb-4aa0-51da-11099644e693")
-public static String es_PE_FIELD_Accounting_AccountingSchema2_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="85979e0b-85bf-89f8-acd7-7d50fabc6499",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -192,7 +193,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="05829f16-6ce2-f321-ec99-98b1ebd2ffb5",
-Synchronized="2017-08-05 16:54:15.0")
+Synchronized="2019-08-30 22:22:07.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Project.
@@ -212,13 +213,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="940acae1-ab01-3299-994b-2d346ce6de55")
+public static String es_PE_FIELD_Accounting_Project_Name="Proyecto";
+
+@XendraTrl(Identifier="940acae1-ab01-3299-994b-2d346ce6de55")
 public static String es_PE_FIELD_Accounting_Project_Description="Identifica un proyecto único";
 
 @XendraTrl(Identifier="940acae1-ab01-3299-994b-2d346ce6de55")
 public static String es_PE_FIELD_Accounting_Project_Help="La ID de un proyecto es un identificador definido por el usuario para un proyecto";
-
-@XendraTrl(Identifier="940acae1-ab01-3299-994b-2d346ce6de55")
-public static String es_PE_FIELD_Accounting_Project_Name="Proyecto";
 
 @XendraField(AD_Column_ID="C_Project_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="36ca20f5-d936-6013-2269-4a9afbd3b989",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -228,13 +229,13 @@ Identifier="940acae1-ab01-3299-994b-2d346ce6de55")
 public static final String FIELDNAME_Accounting_Project="940acae1-ab01-3299-994b-2d346ce6de55";
 
 @XendraTrl(Identifier="4a938040-dad6-e9a9-10f0-0d9e71370b44")
+public static String es_PE_FIELD_Accounting_Project2_Name="Proyecto";
+
+@XendraTrl(Identifier="4a938040-dad6-e9a9-10f0-0d9e71370b44")
 public static String es_PE_FIELD_Accounting_Project2_Description="Identifica un proyecto único";
 
 @XendraTrl(Identifier="4a938040-dad6-e9a9-10f0-0d9e71370b44")
 public static String es_PE_FIELD_Accounting_Project2_Help="La ID de un proyecto es un identificador definido por el usuario para un proyecto";
-
-@XendraTrl(Identifier="4a938040-dad6-e9a9-10f0-0d9e71370b44")
-public static String es_PE_FIELD_Accounting_Project2_Name="Proyecto";
 
 @XendraField(AD_Column_ID="C_Project_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="85979e0b-85bf-89f8-acd7-7d50fabc6499",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -252,7 +253,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c2b63f77-eac1-dcb2-d0e8-8b4a35fade23",
-Synchronized="2017-08-05 16:54:16.0")
+Synchronized="2019-08-30 22:22:07.0")
 /** Column name C_Project_ID */
 public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
 /** Set Identifier.
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bffd2555-5a4e-4cef-9405-112823ce6fcc",
-Synchronized="2017-08-05 16:54:16.0")
+Synchronized="2019-08-30 22:22:07.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Project Asset.
@@ -303,13 +304,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ce7bd954-5593-ba90-0c4d-85fb92a274ff")
+public static String es_PE_FIELD_Accounting_ProjectAsset_Name="Activos de Proyecto";
+
+@XendraTrl(Identifier="ce7bd954-5593-ba90-0c4d-85fb92a274ff")
 public static String es_PE_FIELD_Accounting_ProjectAsset_Description="Cuenta de Activos de Proyecto";
 
 @XendraTrl(Identifier="ce7bd954-5593-ba90-0c4d-85fb92a274ff")
 public static String es_PE_FIELD_Accounting_ProjectAsset_Help="La cuenta de Activos de Proyecto es la cuenta usada como la cuenta final de capitalización de activos en proyectos de capital";
-
-@XendraTrl(Identifier="ce7bd954-5593-ba90-0c4d-85fb92a274ff")
-public static String es_PE_FIELD_Accounting_ProjectAsset_Name="Activos de Proyecto";
 
 @XendraField(AD_Column_ID="PJ_Asset_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="36ca20f5-d936-6013-2269-4a9afbd3b989",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -319,13 +320,13 @@ Identifier="ce7bd954-5593-ba90-0c4d-85fb92a274ff")
 public static final String FIELDNAME_Accounting_ProjectAsset="ce7bd954-5593-ba90-0c4d-85fb92a274ff";
 
 @XendraTrl(Identifier="c88a1a65-11d4-3317-6677-3f0902d3cd88")
+public static String es_PE_FIELD_Accounting_ProjectAsset2_Name="Activos de Proyecto";
+
+@XendraTrl(Identifier="c88a1a65-11d4-3317-6677-3f0902d3cd88")
 public static String es_PE_FIELD_Accounting_ProjectAsset2_Description="Cuenta de Activos de Proyecto";
 
 @XendraTrl(Identifier="c88a1a65-11d4-3317-6677-3f0902d3cd88")
 public static String es_PE_FIELD_Accounting_ProjectAsset2_Help="La cuenta de Activos de Proyecto es la cuenta usada como la cuenta final de capitalización de activos en proyectos de capital";
-
-@XendraTrl(Identifier="c88a1a65-11d4-3317-6677-3f0902d3cd88")
-public static String es_PE_FIELD_Accounting_ProjectAsset2_Name="Activos de Proyecto";
 
 @XendraField(AD_Column_ID="PJ_Asset_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="85979e0b-85bf-89f8-acd7-7d50fabc6499",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -343,7 +344,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="94d56fa7-64d0-7791-d0ff-c16cf824060f",
-Synchronized="2017-08-05 16:54:16.0")
+Synchronized="2019-08-30 22:22:07.0")
 /** Column name PJ_Asset_Acct */
 public static final String COLUMNNAME_PJ_Asset_Acct = "PJ_Asset_Acct";
 /** Set Work In Progress.
@@ -362,13 +363,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3151e9cf-12cb-b03e-972e-67bd5d5e89be")
+public static String es_PE_FIELD_Accounting_WorkInProgress_Name="Cuenta de Trabajo en Proceso";
+
+@XendraTrl(Identifier="3151e9cf-12cb-b03e-972e-67bd5d5e89be")
 public static String es_PE_FIELD_Accounting_WorkInProgress_Description="Cuenta de trabajo en proceso";
 
 @XendraTrl(Identifier="3151e9cf-12cb-b03e-972e-67bd5d5e89be")
 public static String es_PE_FIELD_Accounting_WorkInProgress_Help="La cuenta de trabajo en proceso es la cuenta usada en proyectos capitales hasta que el proyecto se completa";
-
-@XendraTrl(Identifier="3151e9cf-12cb-b03e-972e-67bd5d5e89be")
-public static String es_PE_FIELD_Accounting_WorkInProgress_Name="Cuenta de Trabajo en Proceso";
 
 @XendraField(AD_Column_ID="PJ_WIP_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="36ca20f5-d936-6013-2269-4a9afbd3b989",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -378,13 +379,13 @@ Identifier="3151e9cf-12cb-b03e-972e-67bd5d5e89be")
 public static final String FIELDNAME_Accounting_WorkInProgress="3151e9cf-12cb-b03e-972e-67bd5d5e89be";
 
 @XendraTrl(Identifier="1cc5e0dd-ad24-0436-9512-45f254007ec7")
+public static String es_PE_FIELD_Accounting_WorkInProgress2_Name="Cuenta de Trabajo en Proceso";
+
+@XendraTrl(Identifier="1cc5e0dd-ad24-0436-9512-45f254007ec7")
 public static String es_PE_FIELD_Accounting_WorkInProgress2_Description="Cuenta de trabajo en proceso";
 
 @XendraTrl(Identifier="1cc5e0dd-ad24-0436-9512-45f254007ec7")
 public static String es_PE_FIELD_Accounting_WorkInProgress2_Help="La cuenta de trabajo en proceso es la cuenta usada en proyectos capitales hasta que el proyecto se completa";
-
-@XendraTrl(Identifier="1cc5e0dd-ad24-0436-9512-45f254007ec7")
-public static String es_PE_FIELD_Accounting_WorkInProgress2_Name="Cuenta de Trabajo en Proceso";
 
 @XendraField(AD_Column_ID="PJ_WIP_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="85979e0b-85bf-89f8-acd7-7d50fabc6499",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -402,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="966d0086-32e5-5ef4-9163-e35d142dc4fc",
-Synchronized="2017-08-05 16:54:16.0")
+Synchronized="2019-08-30 22:22:07.0")
 /** Column name PJ_WIP_Acct */
 public static final String COLUMNNAME_PJ_WIP_Acct = "PJ_WIP_Acct";
 }

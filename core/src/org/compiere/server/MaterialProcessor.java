@@ -17,12 +17,20 @@
 package org.compiere.server;
 
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+
+import org.compiere.model.MAlertProcessorLog;
 import org.compiere.model.MClient;
+import org.compiere.model.MMaterialPolicy;
 import org.compiere.model.MMaterialProcessor;
-import org.compiere.model.persistence.X_A_MachineServer;
+import org.compiere.model.MMaterialProcessorLog;
+import org.compiere.model.Query;
 import org.compiere.util.Env;
-import org.xendra.material.MaterialManager;
-import org.xendra.material.MaterialServer;
+import org.compiere.util.TimeUtil;
+
 
 /**
  * Material Processor
@@ -32,7 +40,7 @@ import org.xendra.material.MaterialServer;
  * @version $Id: CostProcessor.java,v 2.0 2010/06/27 05:36:56 xapiens
  */
 public class MaterialProcessor extends XendraServer {
-		
+
 	/**
 	 * Storage Processor
 	 * 
@@ -43,7 +51,7 @@ public class MaterialProcessor extends XendraServer {
 		super(model, 0); // 30 seconds delay
 		m_model = model;
 		m_client = MClient.get(model.getCtx(), model.getAD_Client_ID());
-		Env.setContext(getCtx(), "#AD_Client_ID", model.getAD_Client_ID());			 
+		//Env.setContext(getCtx(), "#AD_Client_ID", model.getAD_Client_ID());			 
 	} // MaterialProcessor
 
 	private boolean start = false;
@@ -54,24 +62,56 @@ public class MaterialProcessor extends XendraServer {
 	/** Client onfo */
 	private MClient m_client = null;
 
+	private HashMap<String, Thread> m_materialpolicy = new HashMap<String, Thread>();
 	/**
 	 * Work
 	 */
 	protected void doWork() {
 		m_summary = new StringBuffer();
-		Env.setContext(Env.getCtx(), "#AD_Client_ID", m_model.getAD_Client_ID());		
-		//postSession();		
-		Env.getMaterialManager(m_client, m_model.getFrequencyStartAt());		
+		//Env.setContext(Env.getCtx(), "#AD_Client_ID", m_model.getAD_Client_ID());		
+		postSession();		
 	}
 
-//	/**
-//	 * Post Session
-//	 */
-//	private void postSession() {		
-////		m_kernel = MaterialKernel.getInstance();
-////		m_kernel.setClient(m_client);
-//	}
+	//	/**
+	//	 * Post Session
+	//	 */
+	private void postSession() {		
+		List<MMaterialPolicy> policies = new Query(Env.getCtx(), MMaterialPolicy.Table_Name, "M_MaterialProcessor_ID = ?", null)
+		.setParameters(m_model.getM_MaterialProcessor_ID()).list();
+		if (policies.size() == 0) {
+			log.log(Level.WARNING, String.format("no policies found for %s", m_model.getName()));
+		}
+		for (MMaterialPolicy policy:policies) {
+			if (!m_materialpolicy.containsKey(policy.getIdentifier())) {			
+				policy.setFrequencyStartAt(m_model.getFrequencyStartAt());
+				policy.setMaterialProcessor(this);
+				policy.setClient(m_client);
+				Thread threadpolicy = new Thread(policy);
+				threadpolicy.setName(String.format("MaterialPolicy %s",m_client.getName()));
+				m_materialpolicy.put(policy.getIdentifier(),threadpolicy);
+				log.log(Level.WARNING, String.format("running material policy para %s", m_client.getName()));
+				threadpolicy.start();
+			} else {
+				Thread threadpolicy = m_materialpolicy.get(policy.getIdentifier());								
+				State state = threadpolicy.getState();
+				if (state.name().equals("TERMINATED")) {
+					policy.setClient(m_client);
+					threadpolicy = new Thread(policy);
+					threadpolicy.setName(String.format("MaterialPolicy %s",m_client.getName()));
+					m_materialpolicy.put(policy.getIdentifier(),threadpolicy);
+					log.log(Level.WARNING, String.format("running material policy para %s", m_client.getName()));
+					threadpolicy.start();
+				}				
+			}			
+		}
+	}
 
+	public void sessionlog() {
+		MMaterialProcessorLog pLog = new MMaterialProcessorLog(m_model, m_summary.toString());
+		pLog.setReference("#" + String.valueOf(p_runCount) 
+			+ " - " + TimeUtil.formatElapsed(new Timestamp(p_startWork)));
+		pLog.save();		
+	}
 	/**
 	 * Get Server Info
 	 * 
@@ -81,7 +121,7 @@ public class MaterialProcessor extends XendraServer {
 		return "#" + p_runCount + " - Last=" + m_summary.toString();
 	} // getServerInfo
 
-	public void setKernel(MaterialManager stockKernel) {
-		// TODO Auto-generated method stub	
+	public void setSummary(String summary) {
+		m_summary = new StringBuffer(summary);
 	}
 } // MaterialProcessor

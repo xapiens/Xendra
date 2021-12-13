@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_AttributeValueType;
 /** Generated Model for M_Attribute
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -66,12 +65,12 @@ public static int Table_ID=MTable.getTable_ID("M_Attribute");
 public static String es_PE_TAB_Attribute_Description="Atributos de Producto";
 
 @XendraTrl(Identifier="8104d925-fdad-894e-6a45-92fe31d21262")
-public static String es_PE_TAB_Attribute_Name="Atributos";
-
-@XendraTrl(Identifier="8104d925-fdad-894e-6a45-92fe31d21262")
 public static String es_PE_TAB_Attribute_Help="Cualidad de producto como color, tamaño, etc. Si es una cualidad del caso, todos los productos tienen el mismo valor.";
 
-@XendraTab(Name="Attribute",Description="Product Attribute",
+@XendraTrl(Identifier="8104d925-fdad-894e-6a45-92fe31d21262")
+public static String es_PE_TAB_Attribute_Name="Atributos";
+@XendraTab(Name="Attribute",
+Description="Product Attribute",
 Help="Product Attribute like Color, Size, etc.  If it is an Instance Attribute, all products have the same value.",
 AD_Window_ID="1b6bcb89-ad62-5249-c6bc-bf851e4e624f",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -100,11 +99,12 @@ public static final String TABNAME_AssignedAttributes="d44a957c-5efe-179e-611b-d
 @XendraTrl(Identifier="a84b519b-8bea-3c45-a753-f426e334afcb")
 public static String es_PE_TABLE_M_Attribute_Name="Atributo";
 
-@XendraTable(Name="Attribute",Description="Product Attribute",Help="",TableName="M_Attribute",
-AccessLevel="3",AD_Window_ID="1b6bcb89-ad62-5249-c6bc-bf851e4e624f",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="a84b519b-8bea-3c45-a753-f426e334afcb",Synchronized="2017-08-16 11:43:05.0")
+@XendraTable(Name="Attribute",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product Attribute",Help="",
+TableName="M_Attribute",AccessLevel="3",AD_Window_ID="1b6bcb89-ad62-5249-c6bc-bf851e4e624f",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="a84b519b-8bea-3c45-a753-f426e334afcb",Synchronized="2020-03-03 21:38:15.0")
 /** TableName=M_Attribute */
 public static final String Table_Name="M_Attribute";
 
@@ -137,16 +137,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_M_Attribute[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AttributeValueType AD_Reference=854efd47-6512-02f8-a5e7-323541c0863c */
-public static final int ATTRIBUTEVALUETYPE_AD_Reference_ID=326;
 /** Set Attribute Value Type.
 @param AttributeValueType Type of Attribute Value */
 public void setAttributeValueType (String AttributeValueType)
 {
-if (AttributeValueType == null) throw new IllegalArgumentException ("AttributeValueType is mandatory");
-if (AttributeValueType.equals(REF_M_AttributeValueType.StringMax40) || AttributeValueType.equals(REF_M_AttributeValueType.Number) || AttributeValueType.equals(REF_M_AttributeValueType.List));
- else throw new IllegalArgumentException ("AttributeValueType Invalid value - " + AttributeValueType + " - Reference_ID=326 - S - N - L");
 if (AttributeValueType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -162,13 +156,13 @@ return (String)get_Value(COLUMNNAME_AttributeValueType);
 }
 
 @XendraTrl(Identifier="8840c7c4-dc77-faa4-940b-1a76b07fc5ef")
+public static String es_PE_FIELD_Attribute_AttributeValueType_Name="Tipo del valor del atributo ";
+
+@XendraTrl(Identifier="8840c7c4-dc77-faa4-940b-1a76b07fc5ef")
 public static String es_PE_FIELD_Attribute_AttributeValueType_Description="Tipo del valor del atributo ";
 
 @XendraTrl(Identifier="8840c7c4-dc77-faa4-940b-1a76b07fc5ef")
 public static String es_PE_FIELD_Attribute_AttributeValueType_Help="Tipo del valor del atributo determina la calidad del dato/ tipo de validación";
-
-@XendraTrl(Identifier="8840c7c4-dc77-faa4-940b-1a76b07fc5ef")
-public static String es_PE_FIELD_Attribute_AttributeValueType_Name="Tipo del valor del atributo ";
 
 @XendraField(AD_Column_ID="AttributeValueType",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -178,13 +172,13 @@ Identifier="8840c7c4-dc77-faa4-940b-1a76b07fc5ef")
 public static final String FIELDNAME_Attribute_AttributeValueType="8840c7c4-dc77-faa4-940b-1a76b07fc5ef";
 
 @XendraTrl(Identifier="bd80e7b6-cf5d-30a9-f854-b3d9bb4b70b4")
+public static String es_PE_FIELD_AssignedAttributes_AttributeValueType_Name="Tipo del valor del atributo ";
+
+@XendraTrl(Identifier="bd80e7b6-cf5d-30a9-f854-b3d9bb4b70b4")
 public static String es_PE_FIELD_AssignedAttributes_AttributeValueType_Description="Tipo del valor del atributo ";
 
 @XendraTrl(Identifier="bd80e7b6-cf5d-30a9-f854-b3d9bb4b70b4")
 public static String es_PE_FIELD_AssignedAttributes_AttributeValueType_Help="Tipo del valor del atributo determina la calidad del dato/ tipo de validación";
-
-@XendraTrl(Identifier="bd80e7b6-cf5d-30a9-f854-b3d9bb4b70b4")
-public static String es_PE_FIELD_AssignedAttributes_AttributeValueType_Name="Tipo del valor del atributo ";
 
 @XendraField(AD_Column_ID="AttributeValueType",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +196,7 @@ FieldLength=1,DefaultValue="S",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6537a2a6-1ad8-2063-15b7-812fee3cc41f",Synchronized="2017-08-05 16:54:59.0")
+Identifier="6537a2a6-1ad8-2063-15b7-812fee3cc41f",Synchronized="2019-08-30 22:22:57.0")
 /** Column name AttributeValueType */
 public static final String COLUMNNAME_AttributeValueType = "AttributeValueType";
 /** Set Description.
@@ -233,13 +227,13 @@ return value;
 }
 
 @XendraTrl(Identifier="43b49a87-7eba-cdcd-9a99-1ec86615557c")
+public static String es_PE_FIELD_Attribute_Description_Name="Observación";
+
+@XendraTrl(Identifier="43b49a87-7eba-cdcd-9a99-1ec86615557c")
 public static String es_PE_FIELD_Attribute_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="43b49a87-7eba-cdcd-9a99-1ec86615557c")
 public static String es_PE_FIELD_Attribute_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="43b49a87-7eba-cdcd-9a99-1ec86615557c")
-public static String es_PE_FIELD_Attribute_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -249,13 +243,13 @@ Identifier="43b49a87-7eba-cdcd-9a99-1ec86615557c")
 public static final String FIELDNAME_Attribute_Description="43b49a87-7eba-cdcd-9a99-1ec86615557c";
 
 @XendraTrl(Identifier="89884613-ee6c-29fa-059e-a06eea5dafc1")
+public static String es_PE_FIELD_AssignedAttributes_Description_Name="Observación";
+
+@XendraTrl(Identifier="89884613-ee6c-29fa-059e-a06eea5dafc1")
 public static String es_PE_FIELD_AssignedAttributes_Description_Description="Observación";
 
 @XendraTrl(Identifier="89884613-ee6c-29fa-059e-a06eea5dafc1")
 public static String es_PE_FIELD_AssignedAttributes_Description_Help="Observación";
-
-@XendraTrl(Identifier="89884613-ee6c-29fa-059e-a06eea5dafc1")
-public static String es_PE_FIELD_AssignedAttributes_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -273,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc27a5b4-4815-e632-12dc-17201d5c1e78",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -305,7 +299,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="51c89cbd-db52-4a11-bb0f-ebf3abd9eed9",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Instance Attribute.
@@ -328,13 +322,13 @@ return false;
 }
 
 @XendraTrl(Identifier="05e11d3a-aa2c-0823-1f8b-db2eb5927ced")
+public static String es_PE_FIELD_Attribute_InstanceAttribute_Name="Instancia del Atributo";
+
+@XendraTrl(Identifier="05e11d3a-aa2c-0823-1f8b-db2eb5927ced")
 public static String es_PE_FIELD_Attribute_InstanceAttribute_Description="Los atributos del producto son especificados por una instancia (como No. serie, lote o la fecha de garantía)      ";
 
 @XendraTrl(Identifier="05e11d3a-aa2c-0823-1f8b-db2eb5927ced")
 public static String es_PE_FIELD_Attribute_InstanceAttribute_Help="Si está seleccionado, la instancia del producto tiene este atributo - como los números de serie, lote o fecha de garantía de una instancia de producto. Si no esta seleccionado, todos las instancias del producto comparten los atributos (p.ej. color = verde).";
-
-@XendraTrl(Identifier="05e11d3a-aa2c-0823-1f8b-db2eb5927ced")
-public static String es_PE_FIELD_Attribute_InstanceAttribute_Name="Instancia del Atributo";
 
 @XendraField(AD_Column_ID="IsInstanceAttribute",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -344,13 +338,13 @@ Identifier="05e11d3a-aa2c-0823-1f8b-db2eb5927ced")
 public static final String FIELDNAME_Attribute_InstanceAttribute="05e11d3a-aa2c-0823-1f8b-db2eb5927ced";
 
 @XendraTrl(Identifier="c5082eb3-504e-e064-2304-2aa570058022")
+public static String es_PE_FIELD_AssignedAttributes_InstanceAttribute_Name="Instancia del Atributo";
+
+@XendraTrl(Identifier="c5082eb3-504e-e064-2304-2aa570058022")
 public static String es_PE_FIELD_AssignedAttributes_InstanceAttribute_Description="Los atributos del producto son especificados por una instancia (como No. serie, lote o la fecha de garantía)      ";
 
 @XendraTrl(Identifier="c5082eb3-504e-e064-2304-2aa570058022")
 public static String es_PE_FIELD_AssignedAttributes_InstanceAttribute_Help="Si está seleccionado, la instancia del producto tiene este atributo - como los números de serie, lote o fecha de garantía de una instancia de producto. Si no esta seleccionado, todos las instancias del producto comparten los atributos (p.ej. color = verde).";
-
-@XendraTrl(Identifier="c5082eb3-504e-e064-2304-2aa570058022")
-public static String es_PE_FIELD_AssignedAttributes_InstanceAttribute_Name="Instancia del Atributo";
 
 @XendraField(AD_Column_ID="IsInstanceAttribute",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -368,7 +362,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9a0c35d5-2fec-6695-7f25-5852a59ead26",Synchronized="2017-08-05 16:54:59.0")
+Identifier="9a0c35d5-2fec-6695-7f25-5852a59ead26",Synchronized="2019-08-30 22:22:57.0")
 /** Column name IsInstanceAttribute */
 public static final String COLUMNNAME_IsInstanceAttribute = "IsInstanceAttribute";
 /** Set Mandatory.
@@ -391,13 +385,13 @@ return false;
 }
 
 @XendraTrl(Identifier="078c4085-f0fd-42e4-7c8c-782db8bc403f")
+public static String es_PE_FIELD_Attribute_Mandatory_Name="Entrada Obligatoria";
+
+@XendraTrl(Identifier="078c4085-f0fd-42e4-7c8c-782db8bc403f")
 public static String es_PE_FIELD_Attribute_Mandatory_Description="Entrada de datos es requerida en esta columna";
 
 @XendraTrl(Identifier="078c4085-f0fd-42e4-7c8c-782db8bc403f")
 public static String es_PE_FIELD_Attribute_Mandatory_Help="El cuadro de verificación obligatorio indica si el campo es requerido para que un registro sea salvado a la base de datos.";
-
-@XendraTrl(Identifier="078c4085-f0fd-42e4-7c8c-782db8bc403f")
-public static String es_PE_FIELD_Attribute_Mandatory_Name="Entrada Obligatoria";
 
 @XendraField(AD_Column_ID="IsMandatory",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -407,13 +401,13 @@ Identifier="078c4085-f0fd-42e4-7c8c-782db8bc403f")
 public static final String FIELDNAME_Attribute_Mandatory="078c4085-f0fd-42e4-7c8c-782db8bc403f";
 
 @XendraTrl(Identifier="0cbbba68-8fd4-5bd8-2ad1-4f81565827d1")
+public static String es_PE_FIELD_AssignedAttributes_Mandatory_Name="Entrada Obligatoria";
+
+@XendraTrl(Identifier="0cbbba68-8fd4-5bd8-2ad1-4f81565827d1")
 public static String es_PE_FIELD_AssignedAttributes_Mandatory_Description="Entrada de datos es requerida en esta columna";
 
 @XendraTrl(Identifier="0cbbba68-8fd4-5bd8-2ad1-4f81565827d1")
 public static String es_PE_FIELD_AssignedAttributes_Mandatory_Help="El cuadro de verificación obligatorio indica si el campo es requerido para que un registro sea salvado a la base de datos.";
-
-@XendraTrl(Identifier="0cbbba68-8fd4-5bd8-2ad1-4f81565827d1")
-public static String es_PE_FIELD_AssignedAttributes_Mandatory_Name="Entrada Obligatoria";
 
 @XendraField(AD_Column_ID="IsMandatory",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -431,7 +425,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e99768d9-4d40-b607-c597-cb4f9a494016",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name IsMandatory */
 public static final String COLUMNNAME_IsMandatory = "IsMandatory";
 /** Set Attribute.
@@ -451,13 +445,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c29ea749-68a4-d076-82b8-f07a2082c236")
+public static String es_PE_FIELD_Attribute_Attribute_Name="Atributo";
+
+@XendraTrl(Identifier="c29ea749-68a4-d076-82b8-f07a2082c236")
 public static String es_PE_FIELD_Attribute_Attribute_Description="Atributo del Producto";
 
 @XendraTrl(Identifier="c29ea749-68a4-d076-82b8-f07a2082c236")
 public static String es_PE_FIELD_Attribute_Attribute_Help="Cualidad del producto como el color y tamaño";
-
-@XendraTrl(Identifier="c29ea749-68a4-d076-82b8-f07a2082c236")
-public static String es_PE_FIELD_Attribute_Attribute_Name="Atributo";
 
 @XendraField(AD_Column_ID="M_Attribute_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -467,13 +461,13 @@ Identifier="c29ea749-68a4-d076-82b8-f07a2082c236")
 public static final String FIELDNAME_Attribute_Attribute="c29ea749-68a4-d076-82b8-f07a2082c236";
 
 @XendraTrl(Identifier="3efb2d3a-b329-3832-6afc-0f4e28fe5893")
+public static String es_PE_FIELD_AssignedAttributes_Attribute_Name="Atributo";
+
+@XendraTrl(Identifier="3efb2d3a-b329-3832-6afc-0f4e28fe5893")
 public static String es_PE_FIELD_AssignedAttributes_Attribute_Description="Atributo del Producto";
 
 @XendraTrl(Identifier="3efb2d3a-b329-3832-6afc-0f4e28fe5893")
 public static String es_PE_FIELD_AssignedAttributes_Attribute_Help="Cualidad del producto como el color y tamaño";
-
-@XendraTrl(Identifier="3efb2d3a-b329-3832-6afc-0f4e28fe5893")
-public static String es_PE_FIELD_AssignedAttributes_Attribute_Name="Atributo";
 
 @XendraField(AD_Column_ID="M_Attribute_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -501,13 +495,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3c1695d3-5277-a5c7-0f5d-7951c88bca5c")
+public static String es_PE_FIELD_Attribute_AttributeSearch_Name="Búsqueda de Atributos";
+
+@XendraTrl(Identifier="3c1695d3-5277-a5c7-0f5d-7951c88bca5c")
 public static String es_PE_FIELD_Attribute_AttributeSearch_Description="Cualidad común de la busqueda";
 
 @XendraTrl(Identifier="3c1695d3-5277-a5c7-0f5d-7951c88bca5c")
 public static String es_PE_FIELD_Attribute_AttributeSearch_Help="Los atributos son especificos para una configuración de producto. (ej. Tamaño para las camisetas: G,M,CH). Si usted tiene cualidades multiples y desea buscar bajo atributo común, usted define un atributo de la busqueda. Ejemplo: tenga una cualidad de la búsqueda del tamaño el combinar de los valores de todos los diversos tamaños (tamaño para la camisa XL, l, m, s, xs del vestido).  La búsqueda de la cualidad permite que usted tenga todos los valores disponibles para la selección. Esto facilita el mantenimiento de la cualidad de producto individual.";
-
-@XendraTrl(Identifier="3c1695d3-5277-a5c7-0f5d-7951c88bca5c")
-public static String es_PE_FIELD_Attribute_AttributeSearch_Name="Búsqueda de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSearch_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -517,13 +511,13 @@ Identifier="3c1695d3-5277-a5c7-0f5d-7951c88bca5c")
 public static final String FIELDNAME_Attribute_AttributeSearch="3c1695d3-5277-a5c7-0f5d-7951c88bca5c";
 
 @XendraTrl(Identifier="90c44977-50da-6f30-05bf-d70f49f32be3")
+public static String es_PE_FIELD_AssignedAttributes_AttributeSearch_Name="Búsqueda de Atributos";
+
+@XendraTrl(Identifier="90c44977-50da-6f30-05bf-d70f49f32be3")
 public static String es_PE_FIELD_AssignedAttributes_AttributeSearch_Description="Cualidad común de la busqueda";
 
 @XendraTrl(Identifier="90c44977-50da-6f30-05bf-d70f49f32be3")
 public static String es_PE_FIELD_AssignedAttributes_AttributeSearch_Help="Los atributos son especificos para una configuración de producto. (ej. Tamaño para las camisetas: G,M,CH). Si usted tiene cualidades multiples y desea buscar bajo atributo común, usted define un atributo de la busqueda. Ejemplo: tenga una cualidad de la búsqueda del tamaño el combinar de los valores de todos los diversos tamaños (tamaño para la camisa XL, l, m, s, xs del vestido).  La búsqueda de la cualidad permite que usted tenga todos los valores disponibles para la selección. Esto facilita el mantenimiento de la cualidad de producto individual.";
-
-@XendraTrl(Identifier="90c44977-50da-6f30-05bf-d70f49f32be3")
-public static String es_PE_FIELD_AssignedAttributes_AttributeSearch_Name="Búsqueda de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSearch_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -541,7 +535,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d980ec51-8134-bef3-1af5-060e22102dcd",Synchronized="2017-08-05 16:54:59.0")
+Identifier="d980ec51-8134-bef3-1af5-060e22102dcd",Synchronized="2019-08-30 22:22:57.0")
 /** Column name M_AttributeSearch_ID */
 public static final String COLUMNNAME_M_AttributeSearch_ID = "M_AttributeSearch_ID";
 /** Set Name.
@@ -573,28 +567,29 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
+public static String es_PE_FIELD_Attribute_Name_Name="Nombre";
+
+@XendraTrl(Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
 public static String es_PE_FIELD_Attribute_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
 public static String es_PE_FIELD_Attribute_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
-public static String es_PE_FIELD_Attribute_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="8104d925-fdad-894e-6a45-92fe31d21262",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e69cd5c9-416b-edbb-1109-46b9573d140d")
 public static final String FIELDNAME_Attribute_Name="e69cd5c9-416b-edbb-1109-46b9573d140d";
+
+@XendraTrl(Identifier="66f8d104-4f18-68f1-5b6f-0454ccb7cb14")
+public static String es_PE_FIELD_AssignedAttributes_Name_Name="Nombre";
 
 @XendraTrl(Identifier="66f8d104-4f18-68f1-5b6f-0454ccb7cb14")
 public static String es_PE_FIELD_AssignedAttributes_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="66f8d104-4f18-68f1-5b6f-0454ccb7cb14")
 public static String es_PE_FIELD_AssignedAttributes_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="66f8d104-4f18-68f1-5b6f-0454ccb7cb14")
-public static String es_PE_FIELD_AssignedAttributes_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="d44a957c-5efe-179e-611b-d15be1f0ff4f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -612,7 +607,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e43b9fd7-0ecf-2a70-90dd-ca2249e9fced",
-Synchronized="2017-08-05 16:54:59.0")
+Synchronized="2019-08-30 22:22:57.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

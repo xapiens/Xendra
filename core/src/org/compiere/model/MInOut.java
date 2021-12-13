@@ -60,7 +60,8 @@ import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieSession;
 import org.xendra.Constants;
 import org.xendra.exceptions.XendraException;
-import org.xendra.material.StockWorker;
+import org.xendra.rules.CustomAgendaEventListener;
+import org.xendra.rules.CustomWorkingMemoryEventListener;
 
 /**
  * Shipment Model
@@ -1208,8 +1209,8 @@ public class MInOut extends X_M_InOut implements DocAction {
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -1447,7 +1448,8 @@ public class MInOut extends X_M_InOut implements DocAction {
 	
 	public boolean pick() {
 		StringBuffer info = new StringBuffer();
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();
+		MPeriod p = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID());
+		Integer C_Period_ID = p.getC_Period_ID();
 		MInOutLine[] lines = getLines(false);
 		for (MInOutLine sLine:lines)
 		{
@@ -1725,8 +1727,8 @@ public class MInOut extends X_M_InOut implements DocAction {
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -2247,8 +2249,8 @@ public class MInOut extends X_M_InOut implements DocAction {
 		boolean ok = true;		
 		try {
 			MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-			Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();			
-			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx()))) {
+			Integer C_Period_ID = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();			
+			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID())) {
 				throw new Exception ("@PeriodClosed@");
 			}
 
@@ -2516,7 +2518,7 @@ public class MInOut extends X_M_InOut implements DocAction {
 		} else {
 			// return reverseCorrectIt();
 			MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx()))) {
+			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID())) {
 				setProcessMsg("@PeriodClosed@");
 				return false;
 			}
@@ -2614,7 +2616,7 @@ public class MInOut extends X_M_InOut implements DocAction {
 			return false;
 
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx()))) {
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID())) {
 			setProcessMsg("@PeriodClosed@");
 			return false;
 		}
@@ -2842,8 +2844,8 @@ public class MInOut extends X_M_InOut implements DocAction {
 		boolean IsOK = true;		
 		try {
 			MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-			Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();
-			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx()))) {
+			Integer C_Period_ID = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
+			if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID())) {
 				throw new Exception ("@PeriodClosed@");
 			}
 			setIsCosted(false);
@@ -2865,16 +2867,6 @@ public class MInOut extends X_M_InOut implements DocAction {
 						BigDecimal QtyPOMA = Env.ZERO;
 						int reservationAttributeSetInstance_ID = 0;
 						//
-//						String qry = String.format("%s=?", X_M_Transaction.COLUMNNAME_M_InOutLine_ID);
-//						X_M_Transaction t = new Query(Env.getCtx(), X_M_Transaction.Table_Name, qry, get_TrxName())
-//							.setParameters(lines[i].getM_InOutLine_ID()).first();																	
-//						if ( t != null)
-//						{
-//							t.setProcessed(false);
-//							t.setDocStatus(DocAction.STATUS_Drafted);							
-//							if (!t.save())
-//								System.out.println("X");
-//						}
 						if (lines[i].getC_OrderLine_ID() != 0 ) {
 							/* Update delivered number */
 							MOrderLine oLine = new MOrderLine(getCtx(), lines[i].getC_OrderLine_ID(), get_TrxName());
@@ -2887,11 +2879,6 @@ public class MInOut extends X_M_InOut implements DocAction {
 							if (!oLine.save())
 								throw new Exception ("oLine failed");
 							
-//							if (isSOTrx()) {
-//								QtySOMA = lines[i].getMovementQty();
-//							} else {
-//								QtyPOMA = lines[i].getMovementQty();
-//							}							
 						}
 						
 						// Update Storage - see also VMatch.createMatchRecord
@@ -3016,10 +3003,6 @@ public class MInOut extends X_M_InOut implements DocAction {
 										get_TrxName());						
 							}
 						}
-						// Finally invalidate stocks for each involved product.and each costing method.
-//						if (product.isCostable() ) {
-//							ce.invalidateCostForProduct(X_M_InOutLine.Table_ID, lines[i].getM_InOutLine_ID(),lines[i].getM_Product_ID(), get_TrxName());
-//						}
 					} // if (product.isStocked()) 
 				}
 				X_M_Transaction t = new Query(Env.getCtx(), X_M_Transaction.Table_Name, "M_InOutLine_ID = ?", null)
@@ -3055,18 +3038,7 @@ public class MInOut extends X_M_InOut implements DocAction {
 			setPosted(false);
 			setIsApproved(false);			
 			setIsCosted(false);
-			MPeriod period = MPeriod.get(Env.getCtx(), getMovementDate(), 0);
-			//List<Integer> periodids = period.ToEnd();
-			StockWorker sw = new StockWorker();
-			sw.setCommand(StockWorker.Document);
-			sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, getAD_Client_ID());
-			sw.addProperty(X_M_InOut.COLUMNNAME_M_InOut_ID, get_ID());
-			sw.addProperty(X_AD_Table.COLUMNNAME_AD_Table_ID, X_M_InOut.Table_ID);
-			sw.addProperty(X_C_Period.COLUMNNAME_C_Period_ID, period.ToEnd());
-			sw.addProperty(X_C_Order.COLUMNNAME_DocStatus, DocAction.STATUS_Drafted);							
-			sw.setMachine(Env.getServerMaterial());
-			sw.Pull();			
-			//MStorage.CheckPeriod(C_Period_ID);			
+			MPeriod period = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID());
 		}
 		catch (Exception e)
 		{

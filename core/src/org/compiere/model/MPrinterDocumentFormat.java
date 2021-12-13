@@ -1,11 +1,8 @@
 package org.compiere.model;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +11,8 @@ import java.util.logging.Level;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
-
-import org.compiere.model.persistence.X_C_Invoice;
+import org.columba.core.xml.XmlElement;
+import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.persistence.X_C_PrinterDocumentFormat;
 import org.compiere.print.PrintData;
 import org.compiere.print.PrintDataElement;
@@ -23,15 +20,15 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.Msg;
-import org.compiere.util.Util;
-import org.xendra.Constants;
+import org.xendra.printdocument.MVELParseFormat;
 import org.xendra.printdocument.ParseFormat;
+import org.xendra.printdocument.PrintDocument;
 import org.xendra.printdocument.PrintWorker;
 import org.xendra.printdocument.PrintWorkerPO;
 
 public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 
-	private Boolean compiled = false;
+	//private Boolean compiled = false;
 	private String m_processMsg;
 
 	public MPrinterDocumentFormat(Properties ctx, int C_PrinterDocumentFormat_ID, String trxName) {
@@ -43,31 +40,26 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 	}
 	public String toString()
 	{
-	StringBuffer sb = new StringBuffer (this.getName());
-	return sb.toString();
+		StringBuffer sb = new StringBuffer (this.getName());
+		return sb.toString();
 	}
-	public String compile()
+	public HashMap compile()
 	{
-		String error = "";
-		HashMap properties = getProperties();
-		String scompiled = (String) properties.get(ParseFormat.COMPILED);
-		if (scompiled == null)
-			scompiled = "N";
-		compiled  = scompiled.equals("Y");
-		if (!compiled)
+		//HashMap error = new HashMap(); 		
+		HashMap parameters = getParameters();		
+		//error = MVELParseFormat.getInstance().parse(this);
+		PrintDocument pd = MVELParseFormat.getInstance().parse(this);
+		HashMap error = pd.getErrors();
+		if (error.size() == 0)
 		{
-			error = ParseFormat.getInstance().parse(this);
-			if (error.length() == 0)
-			{
-				properties = getProperties();
-				properties.put(ParseFormat.COMPILED, "Y");
-				setProperties(properties);
-				if (save())
-				{
-					compiled = true;
-				}
-			}
+			parameters.put(ParseFormat.COMPILED, "Y");
+		} 
+		else 
+		{
+			parameters.remove(ParseFormat.COMPILED);
 		}
+		setParameters(parameters);
+		save();
 		return error;
 	}
 
@@ -83,53 +75,72 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 	{
 		return m_processMsg;
 	}	//	getProcessMsg
-	
+
 	public PrintWorker getPrintWorker(MQuery query) {
-		m_processMsg = compile(); 
-		if (m_processMsg.length() > 0)
-		{
-			return null;
+		PrintWorker pw = new PrintWorker();
+		try {		
+			//String compiled = (String) this.getProperties().get(VelocityParseFormat.COMPILED);
+			String compiled = (String) this.getParameters().get(ParseFormat.COMPILED);
+			if (compiled == null)
+				compiled = "N";
+			if (!compiled.equals("Y")) {
+				throw new Exception("format not compiled");
+			}
+			String errmsg = "";
+			PrintDocument pd = MVELParseFormat.getInstance().parse(this);
+			errmsg = pw.setPrintDocument(pd);						
+			//errmsg = pw.AssignPrinterDocumentFormat(getC_PrinterDocumentFormat_ID());
+			if (errmsg.length() > 0) 
+				throw new Exception(errmsg);
+			pw.setJobName("JobName");
+			errmsg = setQuerys(pw);
+			if (errmsg.length() > 0) 
+				throw new Exception(errmsg);
+			errmsg = setData(pw, query);
+			if (errmsg.length() > 0) 
+				throw new Exception(errmsg);
+			errmsg = setFunction(pw);
+			if (errmsg.length() > 0) 
+				throw new Exception(errmsg);
+		} catch (Exception e) {
+			m_processMsg = e.getMessage();
+			pw = null;
 		}
-		PrintWorker pw = new PrintWorker();			
-		m_processMsg = pw.setPrinterDocumentFormat_ID(getC_PrinterDocumentFormat_ID());
-		pw.setJobName("JobName");
-		setQuerys(pw);
-		pw = setData(pw, query);
-		pw = setFunction(pw);
 		return pw;
 	}
 
-	public PrintWorker setFunction(PrintWorker pw)
+	public String setFunction(PrintWorker pw)
 	{
+		String error = "";		
 		String functions = (String) getProperties().get(ParseFormat.FUNCTIONS);
-		if (functions == null)
-		{
-			return pw;
-		}
-		functions = functions.replace("{", "");
-		functions = functions.replace("}", "");		
-		StringTokenizer st = new StringTokenizer( functions , "," );		
-		while ( st.hasMoreTokens()) {			
-			String token = (String) st.nextElement();
-			StringTokenizer st2 = new StringTokenizer( functions , "=" );
-			String funcvar = "";
-			String funcval = "";
-			while (st2.hasMoreTokens())
-			{
-				if (funcvar.length() == 0)
-					funcvar = st2.nextToken();
-				else
-					funcval = st2.nextToken();
+		if (functions != null)
+		{		
+
+			functions = functions.replace("{", "");
+			functions = functions.replace("}", "");		
+			StringTokenizer st = new StringTokenizer( functions , "," );		
+			while ( st.hasMoreTokens()) {			
+				String token = (String) st.nextElement();
+				StringTokenizer st2 = new StringTokenizer( functions , "=" );
+				String funcvar = "";
+				String funcval = "";
+				while (st2.hasMoreTokens())
+				{
+					if (funcvar.length() == 0)
+						funcvar = st2.nextToken();
+					else
+						funcval = st2.nextToken();
+				}
+				if (funcvar.length()>0 && funcval.length() > 0)
+				{
+					String retval = getFunctionValue(pw, funcval);
+					pw.AddProperty(funcvar, retval);
+				}			
 			}
-			if (funcvar.length()>0 && funcval.length() > 0)
-			{
-				String retval = getFunctionValue(pw, funcval);
-				pw.AddProperty(funcvar, retval);
-			}			
-		}			
-		return pw;
+		}
+		return error;
 	}
-	
+
 	public String getFunctionValue(PrintWorker pw, String funcval) 
 	{
 		String defStr = "";
@@ -169,7 +180,7 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		}
 		return defStr;
 	}
-	
+
 	public String parseContext (PrintWorker pw, String value)
 	{
 		if (value == null || value.length() == 0)
@@ -206,11 +217,12 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		outStr.append(inStr);						// add the rest of the string
 		return outStr.toString();
 	}	//	parseContext
-	
-	public void setQuerys(PrintWorker pw)
+
+	public String setQuerys(PrintWorker pw)
 	{
+		return "";
 	}
-	
+
 	private HashMap getQuerys()
 	{
 		HashMap querymap = new HashMap();
@@ -231,13 +243,13 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 				qval = token.substring(qvar.length()+1);
 				qvar = qvar.trim();
 				if (qvar.length()>0 && qval.length() > 0)
-				if (!querymap.containsKey(qvar))				
-					querymap.put(qvar, qval);					
+					if (!querymap.containsKey(qvar))				
+						querymap.put(qvar, qval);					
 			}
 		}		
 		return querymap;
 	}	
-	
+
 	public HashMap getIndexQuery(HashMap querys, List<String> fields, String relationid)
 	{
 		HashMap mapindex = new HashMap();
@@ -275,7 +287,7 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		}
 		return mapindex;
 	}
-	
+
 	public List<String> parseIndexContext(String sql) 
 	{
 		List<String> index = new ArrayList<String>();
@@ -298,12 +310,20 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		}		
 		return index;
 	}
-	
-	public PrintWorker setData(PrintWorker pw, MQuery query)
+
+	//public PrintWorker setData(PrintWorker pw, MQuery query)
+	public String setData(PrintWorker pw, MQuery query)
 	{
+		String error = "";
 		HashMap querys = getQuerys();				
 		boolean isheader = true;
-		String maintable = getHeaderTable();	
+		String maintable = getHeaderTable();
+		if (maintable.length() > 0) {
+			X_AD_Table t = new Query(Env.getCtx(), X_AD_Table.Table_Name, "Identifier = ?", get_TrxName())
+			.setParameters(maintable).first();
+			if (t != null) 
+				maintable = t.getTableName();
+		}
 		while (maintable.length() > 0)
 		{
 			List<String> fields = getFields(maintable);			
@@ -342,8 +362,12 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 				{
 					pow.load(pd, false, fields);				
 					HashMap indexquery = getIndexQuery(querys, fields, pow.getName_ID());
-					if (indexquery.size() > 0)					
-						fillqueryindex(pw, pd, indexquery,isheader);					
+					if (indexquery.size() > 0) {					
+						error = fillqueryindex(pw, pd, indexquery,isheader);
+						if (error.length() > 0) {
+							break;
+						}
+					}
 					//pow.fill(pd, fields, isheader);
 					for (String relation:relations)
 					{			
@@ -375,10 +399,11 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 				isheader = false;
 			}
 		}
-		return pw;		
+		return error;		
 	}
 
-	private void fillqueryindex(PrintWorker pw, PrintData pd, HashMap indexquery, boolean header) {
+	private String fillqueryindex(PrintWorker pw, PrintData pd, HashMap indexquery, boolean header) {
+		String error = "";
 		Iterator it = indexquery.entrySet().iterator();
 		while (it.hasNext())
 		{
@@ -394,7 +419,13 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 					String token = (String) vector.firstElement();
 					String sql = (String) vector.lastElement();
 					sql = sql.replaceAll(String.format("@%s@", index), String.valueOf(value));
-					Object result = DB.getSQLValueString(null, sql);			
+					Object result = null;
+					try {
+						result = DB.getSQLValueStringEx(null, sql);
+					} catch (Exception e) {
+						error = String.format("%s\n%s\n%s", token, vector.lastElement(), e.getMessage());
+						break;
+					}
 					if (header)
 						pw.AddProperty(token, result);
 					else
@@ -402,16 +433,17 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 				}
 			}
 		}
+		return error;
 	}
 
 	public String getHeaderTable() {
-		String table = (String) getProperties().get(ParseFormat.HEADER);
+		String table = (String) getParameters().get(ParseFormat.HEADER);
 		if (table == null)
 			table = "";
 		return table;
 	}
 	public String getLineTable() {
-		String table = (String) getProperties().get(ParseFormat.LINES);
+		String table = (String) getParameters().get(ParseFormat.LINES);
 		if (table == null)
 			table = "";
 		return table;
@@ -456,7 +488,7 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		}		
 		return tablefields;
 	}
-	
+
 	private List<String> getFields(String table) {		
 		HashMap<String, List<String>> fields = getHashMapFromHstore(ParseFormat.FIELDS);
 		List<String> fieldlist = fields.get(table);
@@ -464,7 +496,7 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 			fieldlist = new ArrayList<String>();
 		return fieldlist;
 	}
-	
+
 	private List<String> getTables(String table) {
 		HashMap<String, List<String>> tables = getHashMapFromHstore(ParseFormat.RELATIONS);
 		List<String> tablelist = tables.get(table);
@@ -473,5 +505,28 @@ public class MPrinterDocumentFormat extends X_C_PrinterDocumentFormat {
 		return tablelist;
 	}
 
-
+	public static XmlElement getAll() {
+		XmlElement root = new XmlElement();
+		List<X_C_PrinterDocumentFormat> formats = new Query(Env.getCtx(), X_C_PrinterDocumentFormat.Table_Name, "IsActive = 'Y'", null)
+		.list();
+		for (X_C_PrinterDocumentFormat format:formats) {
+			XmlElement xmlformat = new XmlElement("format");
+			xmlformat.addAttribute("uid", String.valueOf(format.getC_PrinterDocumentFormat_ID()));
+			xmlformat.addAttribute("AD_Plugin_ID", String.valueOf(format.getAD_Plugin_ID()));
+			xmlformat.addAttribute("type", "format");
+			xmlformat.addAttribute("name", format.getName());
+			//			HashMap Properties = format.getProperties();
+			//			Iterator it = Properties.keySet().iterator();
+			//			while (it.hasNext()) {
+			//				String key = (String) it.next();
+			//				String value = (String) Properties.get(key);
+			//				XmlElement field = new XmlElement("field");
+			//				field.addAttribute("name", key);
+			//				field.addAttribute("value", value);
+			//				xmlformat.addElement(field);
+			//			}
+			root.addElement(xmlformat);
+		}		
+		return root;
+	}
 }

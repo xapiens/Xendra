@@ -29,11 +29,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
 import org.columba.core.config.Config;
 import org.columba.core.config.DefaultConfigDirectory;
-import org.columba.core.xml.XmlElement;
+import org.compiere.apps.ADialog;
+import org.compiere.util.CLogger;
+import org.compiere.util.Language;
 
 /**
  * This is the core class to handle i18n in columba, loading, handling and
@@ -63,7 +63,7 @@ import org.columba.core.xml.XmlElement;
  */
 public class GlobalResourceLoader {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.util");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.util");
 
 	protected static ClassLoader classLoader;
 
@@ -72,6 +72,7 @@ public class GlobalResourceLoader {
 	protected static ResourceBundle globalBundle;
 
 	private static final String GLOBAL_BUNDLE_PATH = "org.columba.core.i18n.global.global";
+	//private static final String GLOBAL_BUNDLE_PATH = "org.columba.core.i18n.global";
 
 	static {
 		initClassLoader();
@@ -111,8 +112,7 @@ public class GlobalResourceLoader {
 		locales.add(new Locale("en", ""));
 
 		FileFilter langpackFileFilter = new LangPackFileFilter();
-		File[] langpacks = DefaultConfigDirectory.getInstance().getCurrentPath().listFiles(
-				langpackFileFilter);
+		File[] langpacks = DefaultConfigDirectory.getInstance().getCurrentPath().listFiles(langpackFileFilter);
 
 		for (int i = 0; i < langpacks.length; i++) {
 			locales.add(extractLocaleFromFilename(langpacks[i].getName()));
@@ -151,47 +151,28 @@ public class GlobalResourceLoader {
 	}
 
 	protected static void initClassLoader() {
-		File langpack = null;
-		try {
-			langpack = lookupLanguagePackFile(Locale.getDefault(), DefaultConfigDirectory.getInstance().getCurrentPath());
-		} catch (RuntimeException ex) {
-			// this is ok
-		}
+		// using default english language, shipped with Columba
 
-		if (langpack == null) {
-			langpack = lookupLanguagePackFile(Locale.getDefault(), new File("."));
-		}
-
-		if (langpack != null) {
-			LOG.fine("Creating new i18n class loader for "	+ langpack.getPath());
-
-			try {
-				classLoader = new URLClassLoader(new URL[] { langpack.toURL() });
-			} catch (MalformedURLException mue) {
-			}
-			//does not occur
-		} else {
-			// using default english language, shipped with Columba
-
-			// we can't use SystemClassLoader here, because that
-			// wouldn't work with java webstart,
-			// ResourceBundle uses its own internal classloader
-			// if no classloader is given
-			//  -> set classloader = null
-			/*
-			 * classLoader = ClassLoader.getSystemClassLoader();
-			 */
-			classLoader = null;
-		}
-
+		// we can't use SystemClassLoader here, because that
+		// wouldn't work with java webstart,webswing
+		// ResourceBundle uses its own internal classloader
+		// if no classloader is given
+		//  -> set classloader = null
+		/*
+		 * classLoader = ClassLoader.getSystemClassLoader();
+		 */
+		classLoader = null;
+		
 		try {
 			// use ResourceBundle's internal classloader
 			if (classLoader == null) {
 				globalBundle = ResourceBundle.getBundle(GLOBAL_BUNDLE_PATH,	Locale.getDefault());
-			} else {
+			} else {			
+				LOG.warning(String.format("global bundle path %s Locale %s classloader %s", GLOBAL_BUNDLE_PATH, Locale.getDefault() , classLoader));
 				globalBundle = ResourceBundle.getBundle(GLOBAL_BUNDLE_PATH,	Locale.getDefault(), classLoader);
 			}
 		} catch (MissingResourceException mre) {
+			mre.printStackTrace();
 			throw new RuntimeException(
 					"Global resource bundle not found, Columba cannot start.");
 		}
@@ -248,11 +229,16 @@ public class GlobalResourceLoader {
 		if ((bundle == null) && (sBundlePath != null)) {
 			try {
 				// use ResourceBundle's internal classloader
-				if (classLoader == null) {
-					bundle = ResourceBundle.getBundle(sBundlePath, Locale.getDefault());
-				} else {
-					bundle = ResourceBundle.getBundle(sBundlePath, Locale.getDefault(), classLoader);
-				}
+				//if (classLoader == null) {
+					LOG.warning("GlobalResource sin classloader");					
+					bundle = ResourceBundle.getBundle(sBundlePath, Language.getLoginLanguage().getLocale());
+				//} 
+				//else {
+				//	LOG.warning("GlobalResource CON classloader");
+				//	URL xx  = classLoader.getResource(sBundlePath);				
+					//URL[] urls = {sBundlePath.
+				//	bundle = ResourceBundle.getBundle(sBundlePath, Language.getLoginLanguage().getLocale(), classLoader);
+				//}
 
 				htBundles.put(sBundlePath, bundle);
 			} catch (MissingResourceException mre) {
@@ -269,7 +255,7 @@ public class GlobalResourceLoader {
 		try {
 			return globalBundle.getString(sID);
 		} catch (MissingResourceException mre) {
-			LOG.severe("'" + sID + "' in '" + sBundlePath	+ "' could not be found.");
+			LOG.fine("'" + sID + "' in '" + sBundlePath	+ "' could not be found.");
 			return sID;
 		}
 	}

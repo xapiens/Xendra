@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("T_InventoryValue");
 @XendraTrl(Identifier="ecf189c9-f134-4c26-a884-ac92a3c9a7f4")
 public static String es_PE_TABLE_T_InventoryValue_Name="T_InventoryValue";
 
-@XendraTable(Name="T_InventoryValue",Description="",Help="",TableName="T_InventoryValue",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="ecf189c9-f134-4c26-a884-ac92a3c9a7f4",
-Synchronized="2017-08-16 11:44:22.0")
+@XendraTable(Name="T_InventoryValue",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="T_InventoryValue",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="ecf189c9-f134-4c26-a884-ac92a3c9a7f4",
+Synchronized="2020-03-03 21:40:25.0")
 /** TableName=T_InventoryValue */
 public static final String Table_Name="T_InventoryValue";
 
@@ -122,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9d1865e5-96ab-7f09-5249-c922e93893f7",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Currency.
@@ -151,7 +152,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b98eece-696c-6fd3-283d-c1ea98a6ff88",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Cost.
@@ -178,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8797d758-afc0-95fe-c766-9798564a8195",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name Cost */
 public static final String COLUMNNAME_Cost = "Cost";
 /** Set Cost Value.
@@ -205,7 +206,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="604be097-0a0f-6437-2c6c-30429e732167",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name CostAmt */
 public static final String COLUMNNAME_CostAmt = "CostAmt";
 /** Set Standard Cost.
@@ -232,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf2abf6e-3614-b2ef-76c6-69bfcc50691d",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name CostStandard */
 public static final String COLUMNNAME_CostStandard = "CostStandard";
 /** Set Standard Cost Value.
@@ -259,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bb8cf26f-56cf-8bc0-ec24-91ad3aa6b7a9",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name CostStandardAmt */
 public static final String COLUMNNAME_CostStandardAmt = "CostStandardAmt";
 /** Set Valuation Date.
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="41115353-d8a9-a39f-89b3-50fb930758c7",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name DateValue */
 public static final String COLUMNNAME_DateValue = "DateValue";
 /** Set Attribute Set Instance.
@@ -312,7 +313,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0d4e0cfd-b418-1759-e242-174af37e7f17",Synchronized="2017-08-05 16:56:25.0")
+Identifier="0d4e0cfd-b418-1759-e242-174af37e7f17",Synchronized="2019-08-30 22:24:24.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Cost Element.
@@ -341,7 +342,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1a1980ea-b744-2baf-e07f-ad7357995dc9",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name M_CostElement_ID */
 public static final String COLUMNNAME_M_CostElement_ID = "M_CostElement_ID";
 /** Set Price List Version.
@@ -370,7 +371,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ffa1ef54-a3aa-eb34-0d4e-863510308267",Synchronized="2017-08-05 16:56:25.0")
+Identifier="ffa1ef54-a3aa-eb34-0d4e-863510308267",Synchronized="2019-08-30 22:24:24.0")
 /** Column name M_PriceList_Version_ID */
 public static final String COLUMNNAME_M_PriceList_Version_ID = "M_PriceList_Version_ID";
 /** Set Product.
@@ -398,7 +399,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b278d93-adfa-e5b5-b82e-49d9344297d3",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Warehouse.
@@ -426,7 +427,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7763911e-4e28-6e6d-62e1-0d74fffdb3ac",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name M_Warehouse_ID */
 public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 /** Set Limit Price.
@@ -453,7 +454,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7820f836-4103-f795-cbf4-5fe50372cf5b",
-Synchronized="2017-08-05 16:56:25.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceLimit */
 public static final String COLUMNNAME_PriceLimit = "PriceLimit";
 /** Set Limit price Value.
@@ -480,7 +481,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="85d4846c-7cdc-e709-e630-989404920a1a",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceLimitAmt */
 public static final String COLUMNNAME_PriceLimitAmt = "PriceLimitAmt";
 /** Set List Price.
@@ -507,7 +508,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9616276e-638c-de65-49c5-9c7082d3325e",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceList */
 public static final String COLUMNNAME_PriceList = "PriceList";
 /** Set List price Value.
@@ -534,7 +535,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10483e9f-e393-081a-1fcc-c30570ef9b5e",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceListAmt */
 public static final String COLUMNNAME_PriceListAmt = "PriceListAmt";
 /** Set PO Price.
@@ -561,7 +562,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10717f22-3d78-1164-6372-de9cedcb6a1a",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PricePO */
 public static final String COLUMNNAME_PricePO = "PricePO";
 /** Set PO Price Value.
@@ -588,7 +589,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0348f0f2-67a7-0bc2-fd4b-9596e16d3495",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PricePOAmt */
 public static final String COLUMNNAME_PricePOAmt = "PricePOAmt";
 /** Set Standard Price.
@@ -615,7 +616,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="234a642a-3b38-7764-973d-314e418545eb",
-Synchronized="2017-08-05 16:56:26.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceStd */
 public static final String COLUMNNAME_PriceStd = "PriceStd";
 /** Set Std Price Value.
@@ -642,7 +643,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="00f43670-0c03-677c-be13-e39977d66d03",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name PriceStdAmt */
 public static final String COLUMNNAME_PriceStdAmt = "PriceStdAmt";
 /** Set On Hand Quantity.
@@ -669,7 +670,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64538781-45b7-8ff0-d658-271895f2fb84",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name QtyOnHand */
 public static final String COLUMNNAME_QtyOnHand = "QtyOnHand";
 }

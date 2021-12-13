@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_W_MailMsgType;
 /** Generated Model for W_MailMsg
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -76,11 +75,12 @@ public static final String TABNAME_WebStoreMessage="ebe3c8b3-8a94-1a4a-d39e-3cd3
 @XendraTrl(Identifier="01d66223-b161-240e-72b4-e2f039cd5835")
 public static String es_PE_TABLE_W_MailMsg_Name="Mensaje de Correo";
 
-@XendraTable(Name="Mail Message",Description="Web Store Mail Message Template",Help="",
-TableName="W_MailMsg",AccessLevel="2",AD_Window_ID="786c7197-5b64-f3eb-5d2b-a3422ae70868",
+@XendraTable(Name="Mail Message",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Web Store Mail Message Template",
+Help="",TableName="W_MailMsg",AccessLevel="2",AD_Window_ID="786c7197-5b64-f3eb-5d2b-a3422ae70868",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="01d66223-b161-240e-72b4-e2f039cd5835",Synchronized="2017-08-16 11:44:29.0")
+Identifier="01d66223-b161-240e-72b4-e2f039cd5835",Synchronized="2020-03-03 21:40:33.0")
 /** TableName=W_MailMsg */
 public static final String Table_Name="W_MailMsg";
 
@@ -147,13 +147,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ba5fb765-570a-e901-ae9f-efa9f700d098")
+public static String es_PE_FIELD_WebStoreMessage_Description_Name="Observación";
+
+@XendraTrl(Identifier="ba5fb765-570a-e901-ae9f-efa9f700d098")
 public static String es_PE_FIELD_WebStoreMessage_Description_Description="Observación";
 
 @XendraTrl(Identifier="ba5fb765-570a-e901-ae9f-efa9f700d098")
 public static String es_PE_FIELD_WebStoreMessage_Description_Help="Observación";
-
-@XendraTrl(Identifier="ba5fb765-570a-e901-ae9f-efa9f700d098")
-public static String es_PE_FIELD_WebStoreMessage_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -171,7 +171,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7425a6bb-1d72-8645-587e-9ce0a90eb2ba",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -203,19 +203,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="779cc00d-94c6-40c7-8728-a77393d2e5f0",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** MailMsgType AD_Reference=738f4b78-ea64-b3f0-1d8f-e975090d8848 */
-public static final int MAILMSGTYPE_AD_Reference_ID=342;
 /** Set Message Type.
 @param MailMsgType Mail Message Type */
 public void setMailMsgType (String MailMsgType)
 {
-if (MailMsgType == null) throw new IllegalArgumentException ("MailMsgType is mandatory");
-if (MailMsgType.equals(REF_W_MailMsgType.Subscribe) || MailMsgType.equals(REF_W_MailMsgType.UnSubscribe) || MailMsgType.equals(REF_W_MailMsgType.UserAccount) || MailMsgType.equals(REF_W_MailMsgType.Request) || MailMsgType.equals(REF_W_MailMsgType.OrderAcknowledgement) || MailMsgType.equals(REF_W_MailMsgType.PaymentAcknowledgement) || MailMsgType.equals(REF_W_MailMsgType.PaymentError) || MailMsgType.equals(REF_W_MailMsgType.UserVerification) || MailMsgType.equals(REF_W_MailMsgType.UserPassword));
- else throw new IllegalArgumentException ("MailMsgType Invalid value - " + MailMsgType + " - Reference_ID=342 - LS - LU - UA - WR - OA - PA - PE - UV - UP");
 if (MailMsgType.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -231,10 +225,10 @@ return (String)get_Value(COLUMNNAME_MailMsgType);
 }
 
 @XendraTrl(Identifier="f06e3fd8-7f7f-cd18-5141-d24e05e81f42")
-public static String es_PE_FIELD_WebStoreMessage_MessageType_Description="Tipo de Mensaje de Email";
+public static String es_PE_FIELD_WebStoreMessage_MessageType_Name="Tipo de Mensaje";
 
 @XendraTrl(Identifier="f06e3fd8-7f7f-cd18-5141-d24e05e81f42")
-public static String es_PE_FIELD_WebStoreMessage_MessageType_Name="Tipo de Mensaje";
+public static String es_PE_FIELD_WebStoreMessage_MessageType_Description="Tipo de Mensaje de Email";
 
 @XendraField(AD_Column_ID="MailMsgType",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -252,7 +246,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="eee73e93-2975-3d30-d620-4e36b0d6997d",Synchronized="2017-08-05 16:56:33.0")
+Identifier="eee73e93-2975-3d30-d620-4e36b0d6997d",Synchronized="2019-08-30 22:24:31.0")
 /** Column name MailMsgType */
 public static final String COLUMNNAME_MailMsgType = "MailMsgType";
 /** Set Message.
@@ -272,13 +266,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="0fe9de72-2edf-e9b7-9f9e-a7befb7e0314")
+public static String es_PE_FIELD_WebStoreMessage_Message_Name="Mensaje";
+
+@XendraTrl(Identifier="0fe9de72-2edf-e9b7-9f9e-a7befb7e0314")
 public static String es_PE_FIELD_WebStoreMessage_Message_Description="Mensaje email";
 
 @XendraTrl(Identifier="0fe9de72-2edf-e9b7-9f9e-a7befb7e0314")
 public static String es_PE_FIELD_WebStoreMessage_Message_Help="Mensaje de email";
-
-@XendraTrl(Identifier="0fe9de72-2edf-e9b7-9f9e-a7befb7e0314")
-public static String es_PE_FIELD_WebStoreMessage_Message_Name="Mensaje";
 
 @XendraField(AD_Column_ID="Message",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -296,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1d918f2b-92bf-0e3c-a8c1-b68af5e80c49",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 /** Set Message 2.
@@ -315,13 +309,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="66873e98-7cbe-80ff-28fa-216e68b1eab7")
+public static String es_PE_FIELD_WebStoreMessage_Message22_Name="Mensaje 2";
+
+@XendraTrl(Identifier="66873e98-7cbe-80ff-28fa-216e68b1eab7")
 public static String es_PE_FIELD_WebStoreMessage_Message22_Description="Segunda parte opcional para mensaje de email";
 
 @XendraTrl(Identifier="66873e98-7cbe-80ff-28fa-216e68b1eab7")
 public static String es_PE_FIELD_WebStoreMessage_Message22_Help="Segunda parte opcional para mensaje de email";
-
-@XendraTrl(Identifier="66873e98-7cbe-80ff-28fa-216e68b1eab7")
-public static String es_PE_FIELD_WebStoreMessage_Message22_Name="Mensaje 2";
 
 @XendraField(AD_Column_ID="Message2",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -339,7 +333,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="82efa131-3df6-5077-f66a-8f54f79c5f3b",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Message2 */
 public static final String COLUMNNAME_Message2 = "Message2";
 /** Set Message 3.
@@ -358,13 +352,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="61490701-890b-c0de-3317-d83ac5a9d9ee")
+public static String es_PE_FIELD_WebStoreMessage_Message33_Name="Mensaje 3";
+
+@XendraTrl(Identifier="61490701-890b-c0de-3317-d83ac5a9d9ee")
 public static String es_PE_FIELD_WebStoreMessage_Message33_Description="Tercera parte opcional para mensaje de email";
 
 @XendraTrl(Identifier="61490701-890b-c0de-3317-d83ac5a9d9ee")
 public static String es_PE_FIELD_WebStoreMessage_Message33_Help="Tercera parte opcional para mensaje de email";
-
-@XendraTrl(Identifier="61490701-890b-c0de-3317-d83ac5a9d9ee")
-public static String es_PE_FIELD_WebStoreMessage_Message33_Name="Mensaje 3";
 
 @XendraField(AD_Column_ID="Message3",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -382,7 +376,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d64d6070-f814-2225-1c6e-f19d738831ce",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Message3 */
 public static final String COLUMNNAME_Message3 = "Message3";
 /** Set Name.
@@ -414,13 +408,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="b37c006f-615f-66de-aa4d-e9354789f1f1")
+public static String es_PE_FIELD_WebStoreMessage_Name_Name="Nombre";
+
+@XendraTrl(Identifier="b37c006f-615f-66de-aa4d-e9354789f1f1")
 public static String es_PE_FIELD_WebStoreMessage_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="b37c006f-615f-66de-aa4d-e9354789f1f1")
 public static String es_PE_FIELD_WebStoreMessage_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="b37c006f-615f-66de-aa4d-e9354789f1f1")
-public static String es_PE_FIELD_WebStoreMessage_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -438,7 +432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27fc724e-2879-fb4d-1443-e9dabbd20a00",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Subject.
@@ -458,13 +452,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="aa9170d6-4824-76f4-ead8-aa2f2ceb91ef")
+public static String es_PE_FIELD_WebStoreMessage_Subject_Name="Asunto";
+
+@XendraTrl(Identifier="aa9170d6-4824-76f4-ead8-aa2f2ceb91ef")
 public static String es_PE_FIELD_WebStoreMessage_Subject_Description="Asunto del mensaje de Email";
 
 @XendraTrl(Identifier="aa9170d6-4824-76f4-ead8-aa2f2ceb91ef")
 public static String es_PE_FIELD_WebStoreMessage_Subject_Help="Asunto del mensaje de Email";
-
-@XendraTrl(Identifier="aa9170d6-4824-76f4-ead8-aa2f2ceb91ef")
-public static String es_PE_FIELD_WebStoreMessage_Subject_Name="Asunto";
 
 @XendraField(AD_Column_ID="Subject",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -482,7 +476,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d820280-8015-7547-d709-f73c39c1c064",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name Subject */
 public static final String COLUMNNAME_Subject = "Subject";
 /** Set Mail Message.
@@ -502,10 +496,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6992373e-7fcd-6e39-41cc-63de3d636a72")
-public static String es_PE_FIELD_WebStoreMessage_MailMessage_Description="Almacen de la Web plantilla del mensaje del mail";
+public static String es_PE_FIELD_WebStoreMessage_MailMessage_Name="Mensaje de Correo";
 
 @XendraTrl(Identifier="6992373e-7fcd-6e39-41cc-63de3d636a72")
-public static String es_PE_FIELD_WebStoreMessage_MailMessage_Name="Mensaje de Correo";
+public static String es_PE_FIELD_WebStoreMessage_MailMessage_Description="Almacen de la Web plantilla del mensaje del mail";
 
 @XendraField(AD_Column_ID="W_MailMsg_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -532,10 +526,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5cfd1d01-e7db-c2c8-8757-edcfb0e1b78b")
-public static String es_PE_FIELD_WebStoreMessage_WebStore_Description="Una tienda Web del cliente.";
+public static String es_PE_FIELD_WebStoreMessage_WebStore_Name="Tienda Web";
 
 @XendraTrl(Identifier="5cfd1d01-e7db-c2c8-8757-edcfb0e1b78b")
-public static String es_PE_FIELD_WebStoreMessage_WebStore_Name="Tienda Web";
+public static String es_PE_FIELD_WebStoreMessage_WebStore_Description="Una tienda Web del cliente.";
 
 @XendraField(AD_Column_ID="W_Store_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ebe3c8b3-8a94-1a4a-d39e-3cd3bcc6a3bd",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -553,7 +547,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f9ed5511-d203-28b1-1cc4-a5a19318bc8e",
-Synchronized="2017-08-05 16:56:33.0")
+Synchronized="2019-08-30 22:24:31.0")
 /** Column name W_Store_ID */
 public static final String COLUMNNAME_W_Store_ID = "W_Store_ID";
 }

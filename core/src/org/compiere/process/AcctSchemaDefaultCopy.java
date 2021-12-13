@@ -446,10 +446,10 @@ public class AcctSchemaDefaultCopy extends SvrProcess
 				+ ", B_RevaluationGain_Acct=" + acct.getB_RevaluationGain_Acct()
 				+ ", B_RevaluationLoss_Acct=" + acct.getB_RevaluationLoss_Acct()
 				+ ", BOE_confirm_acct=" + acct.getBOE_Confirm_Acct()
-				+ ", BOE_wr_acct=" + acct.getBOE_WR_Acct()
-				+ ", BOE_rv_acct=" + acct.getBOE_RV_Acct()
-				+ ", BOE_ds_acct=" + acct.getBOE_DS_Acct()
-				+ ", BOE_pd_acct=" + acct.getBOE_PD_Acct()
+				+ ", BOE_wr_acct=" + acct.getBOE_Warranty_Acct()
+				+ ", BOE_rv_acct=" + acct.getBOE_Receivables_Acct()
+				+ ", BOE_ds_acct=" + acct.getBOE_Discount_Acct()
+				+ ", BOE_pd_acct=" + acct.getBOE_Protested_Acct()
 				+ ", Updated=CURRENT_TIMESTAMP, UpdatedBy=0 "
 				+ "WHERE a.C_AcctSchema_ID=" + p_C_AcctSchema_ID
 				+ " AND EXISTS (SELECT * FROM C_BankAccount_Acct x "

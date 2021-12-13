@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.xendra.Constants;
 
 /**
@@ -20,7 +20,7 @@ import org.xendra.Constants;
  *
  */
 public class PrintJobJFrame extends javax.swing.JFrame {
-	static Logger log = Logger.getLogger(PrintJobJFrame.class);
+	static CLogger log = CLogger.getCLogger(PrintJobJFrame.class);
 
 	SymMouse aSymMouse = new SymMouse();
 	// Used by addNotify
@@ -181,7 +181,7 @@ public class PrintJobJFrame extends javax.swing.JFrame {
 	class LpdMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			final String METHOD_NAME = "LpdMenuListener.actionPerformed(): ";
-			log.debug(METHOD_NAME + "Action command: " + e.getActionCommand());
+			log.severe(METHOD_NAME + "Action command: " + e.getActionCommand());
 			if(Constants.MENU_ITEM_DELETE_ALL == e.getActionCommand()) {
 				JMenuItem sourceItem = (JMenuItem) e.getSource();
 				deleteAll();
@@ -189,7 +189,7 @@ public class PrintJobJFrame extends javax.swing.JFrame {
 				JMenuItem sourceItem = (JMenuItem) e.getSource();
 				showDialog("LPDspooler", "Thanks for trying lpdspooler.");
 			} else {
-				log.warn(METHOD_NAME + "Action Command:" + e.getActionCommand() + ", is not supported.");
+				log.warning(METHOD_NAME + "Action Command:" + e.getActionCommand() + ", is not supported.");
 			}
 		 }
 	}

@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_InvoiceAdvanceLine");
 @XendraTrl(Identifier="fcf2e43a-3d97-5a49-15f2-6b39042a6a16")
 public static String es_PE_TABLE_C_InvoiceAdvanceLine_Name="C_InvoiceAdvanceLine";
 
-@XendraTable(Name="C_InvoiceAdvanceLine",Description="",Help="",TableName="C_InvoiceAdvanceLine",
-AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="fcf2e43a-3d97-5a49-15f2-6b39042a6a16",
-Synchronized="2017-08-16 11:41:50.0")
+@XendraTable(Name="C_InvoiceAdvanceLine",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_InvoiceAdvanceLine",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="fcf2e43a-3d97-5a49-15f2-6b39042a6a16",Synchronized="2020-03-03 21:36:59.0")
 /** TableName=C_InvoiceAdvanceLine */
 public static final String Table_Name="C_InvoiceAdvanceLine";
 
@@ -118,7 +119,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="854f3171-ede8-485f-83e1-ff921f490e4f",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set C_InvoiceAdvance.
@@ -147,7 +148,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="53bba05d-2d67-e00b-2a7c-3fa935d9a92b",Synchronized="2017-08-05 16:53:43.0")
+Identifier="53bba05d-2d67-e00b-2a7c-3fa935d9a92b",Synchronized="2019-08-30 22:21:38.0")
 /** Column name C_InvoiceAdvance_ID */
 public static final String COLUMNNAME_C_InvoiceAdvance_ID = "C_InvoiceAdvance_ID";
 /** Set C_InvoiceAdvanceLine_ID.
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cb5dac56-c8b2-4afa-bd33-38ff402301fa",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:38.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Invoice Line.
@@ -222,7 +223,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="843c12f1-2d58-ac4c-917f-a2d5528827f3",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name C_InvoiceLine_ID */
 public static final String COLUMNNAME_C_InvoiceLine_ID = "C_InvoiceLine_ID";
 /** Set Identifier.
@@ -254,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bc4d9f9a-3df5-4710-9a6b-7299a1dfc0c5",
-Synchronized="2017-08-05 16:53:43.0")
+Synchronized="2019-08-30 22:21:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

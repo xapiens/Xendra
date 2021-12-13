@@ -103,7 +103,8 @@ public final class MLookup extends Lookup implements Serializable
 	private long				m_nextRead = 0;
 	/** Tab No **/
 	private int m_TabNo = 0;
-	
+
+	public String m_filter  = "";
 	/**
 	 *  Dispose
 	 */
@@ -596,7 +597,7 @@ public final class MLookup extends Lookup implements Serializable
 		if (validation.equals(info.parsedValidationCode)) return true;
 		return false;
 	}
-	
+
 	/**************************************************************************
 	 *	MLookup Loader
 	 */
@@ -623,7 +624,10 @@ public final class MLookup extends Lookup implements Serializable
 			MLookupCache.loadStart (m_info);
 			//String sql = m_info.Query;
 			String sql = m_info.getQuery();
-
+			System.out.println(sql);
+			if (m_filter.length() > 0) { 
+				System.out.println(m_filter);
+			}
 			//	not validated
 			if (!m_info.IsValidated)
 			{
@@ -638,10 +642,13 @@ public final class MLookup extends Lookup implements Serializable
 					return;
 				}
 				else
-				{					
+				{
 					log.fine(m_info.KeyColumn + ": Loader Validated: " + validation);
 					int posFrom = sql.lastIndexOf(" FROM ");
 					boolean hasWhere = sql.indexOf(" WHERE ", posFrom) != -1;
+					if (m_filter.length() > 0) {
+						validation = String.format("%s%s", validation, m_filter);
+					}
 					//
 					int posOrder = sql.lastIndexOf(" ORDER BY ");
 					if (posOrder != -1)
@@ -650,8 +657,7 @@ public final class MLookup extends Lookup implements Serializable
 							+ validation
 							+ sql.substring(posOrder);
 					else
-						sql += (hasWhere ? " AND " : " WHERE ") 
- 
+						sql += (hasWhere ? " AND " : " WHERE ")  
 							+ validation;
 					if (CLogMgt.isLevelFinest())
 						log.fine(m_info.KeyColumn + ": Validation=" + validation);

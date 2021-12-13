@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("M_AttributeUse");
 public static String es_PE_TAB_AttributeUse_Description="Atributos usados para el sistema de atributo de producto.";
 
 @XendraTrl(Identifier="be20e9b7-fd01-ca77-ecef-d588e48c9ef8")
-public static String es_PE_TAB_AttributeUse_Name="Uso de Atributo";
-
-@XendraTrl(Identifier="be20e9b7-fd01-ca77-ecef-d588e48c9ef8")
 public static String es_PE_TAB_AttributeUse_Help="Atributo y valor de atributos usados para el producto";
 
-@XendraTab(Name="Attribute Use",Description="Attributes Used for the Product Attribute Set",
+@XendraTrl(Identifier="be20e9b7-fd01-ca77-ecef-d588e48c9ef8")
+public static String es_PE_TAB_AttributeUse_Name="Uso de Atributo";
+@XendraTab(Name="Attribute Use",
+Description="Attributes Used for the Product Attribute Set",
 Help="Attributes and Attribute Values used for the product",
 AD_Window_ID="c776058b-1056-0bc4-3e42-f91c200f5ade",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -80,11 +80,12 @@ public static final String TABNAME_AttributeUse="be20e9b7-fd01-ca77-ecef-d588e48
 @XendraTrl(Identifier="2424e70a-3980-39de-7fc3-400f47eef477")
 public static String es_PE_TABLE_M_AttributeUse_Name="M_AttributeUse";
 
-@XendraTable(Name="M_AttributeUse",Description="",Help="",TableName="M_AttributeUse",
-AccessLevel="3",AD_Window_ID="c776058b-1056-0bc4-3e42-f91c200f5ade",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="2424e70a-3980-39de-7fc3-400f47eef477",Synchronized="2017-08-16 11:43:06.0")
+@XendraTable(Name="M_AttributeUse",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_AttributeUse",AccessLevel="3",AD_Window_ID="c776058b-1056-0bc4-3e42-f91c200f5ade",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="2424e70a-3980-39de-7fc3-400f47eef477",Synchronized="2020-03-03 21:38:16.0")
 /** TableName=M_AttributeUse */
 public static final String Table_Name="M_AttributeUse";
 
@@ -146,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7e648043-1bd6-4aa5-995e-eba30a64351d",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute.
@@ -166,13 +167,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="bfa2b5c1-1ef4-5632-c2ca-c27a64e297de")
+public static String es_PE_FIELD_AttributeUse_Attribute_Name="Atributo";
+
+@XendraTrl(Identifier="bfa2b5c1-1ef4-5632-c2ca-c27a64e297de")
 public static String es_PE_FIELD_AttributeUse_Attribute_Description="Atributo del Producto";
 
 @XendraTrl(Identifier="bfa2b5c1-1ef4-5632-c2ca-c27a64e297de")
 public static String es_PE_FIELD_AttributeUse_Attribute_Help="Cualidad del producto como el color y tamaño";
-
-@XendraTrl(Identifier="bfa2b5c1-1ef4-5632-c2ca-c27a64e297de")
-public static String es_PE_FIELD_AttributeUse_Attribute_Name="Atributo";
 
 @XendraField(AD_Column_ID="M_Attribute_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="be20e9b7-fd01-ca77-ecef-d588e48c9ef8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -190,7 +191,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4b2f29aa-1c5b-429d-eeb4-9018baca8580",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name M_Attribute_ID */
 public static final String COLUMNNAME_M_Attribute_ID = "M_Attribute_ID";
 /** Set Attribute Set.
@@ -216,13 +217,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_AttributeSet_ID()));
 }
 
 @XendraTrl(Identifier="ecb1dc8e-5291-4b0b-86d4-4231aead8d73")
+public static String es_PE_FIELD_AttributeUse_AttributeSet_Name="Conjunto de Atributos";
+
+@XendraTrl(Identifier="ecb1dc8e-5291-4b0b-86d4-4231aead8d73")
 public static String es_PE_FIELD_AttributeUse_AttributeSet_Description="Conjunto de Atributos de Producto";
 
 @XendraTrl(Identifier="ecb1dc8e-5291-4b0b-86d4-4231aead8d73")
 public static String es_PE_FIELD_AttributeUse_AttributeSet_Help="Defina los sistemas de la cualidad de producto para agregar cualidades y valores adicionales al producto. Usted necesita definir una cualidad fijada si desea seguir el número de conteo por entregas y de porción.";
-
-@XendraTrl(Identifier="ecb1dc8e-5291-4b0b-86d4-4231aead8d73")
-public static String es_PE_FIELD_AttributeUse_AttributeSet_Name="Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="be20e9b7-fd01-ca77-ecef-d588e48c9ef8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -240,7 +241,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7ebbff09-fc0f-792e-2b00-2cd16e3cccbe",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name M_AttributeSet_ID */
 public static final String COLUMNNAME_M_AttributeSet_ID = "M_AttributeSet_ID";
 /** Set Sequence.
@@ -259,13 +260,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="18737871-da1d-933a-7b2a-4a06833de378")
+public static String es_PE_FIELD_AttributeUse_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="18737871-da1d-933a-7b2a-4a06833de378")
 public static String es_PE_FIELD_AttributeUse_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="18737871-da1d-933a-7b2a-4a06833de378")
 public static String es_PE_FIELD_AttributeUse_Sequence_Help="La Secuencia indica el orden de los registros";
-
-@XendraTrl(Identifier="18737871-da1d-933a-7b2a-4a06833de378")
-public static String es_PE_FIELD_AttributeUse_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="be20e9b7-fd01-ca77-ecef-d588e48c9ef8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="610694ac-35c8-0d9d-090a-6e9f8b1e00ed",
-Synchronized="2017-08-05 16:55:00.0")
+Synchronized="2019-08-30 22:22:58.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

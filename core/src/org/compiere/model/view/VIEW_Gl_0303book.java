@@ -8,10 +8,12 @@ import org.compiere.model.View;
 public class VIEW_Gl_0303book 
 {
  
-@XendraTable(Name="GL_0303Book",Description="",Help="",TableName="GL_0303Book",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=true,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="c4150ac2-44d2-4fbe-86f9-747300e569f3",Synchronized="2017-08-16 12:37:21.0")
+@XendraTable(Name="GL_0303Book",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="GL_0303Book",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=true,PO_Window_ID="",
+ID="org.xendra.accounting",Identifier="c4150ac2-44d2-4fbe-86f9-747300e569f3",
+Synchronized="2020-03-03 21:37:51.0")
 /** TableName=GL_0303Book */
 public static final String Table_Name="GL_0303Book";
 

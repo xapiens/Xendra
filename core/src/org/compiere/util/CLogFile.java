@@ -63,7 +63,15 @@ public class CLogFile extends Handler
 		if (adempiereHome != null && adempiereHome.length() > 0)
 			m_adempiereHome = adempiereHome;
 		else
-			m_adempiereHome = Ini.findXendraHome();
+		{
+			//m_adempiereHome = Ini.getXendraHome();
+			String xdir =System.getProperty ("XENDRA_HOME");
+			if (xdir == null)	//	Fallback
+				xdir = System.getProperty ("user.dir");
+			if (xdir == null)
+				xdir = System.getProperty ("HOME");	
+			m_adempiereHome = xdir;
+		}
 		initialize(m_adempiereHome, createLogDir, isClient);
 	}	//	CLogFile
 
@@ -112,7 +120,13 @@ public class CLogFile extends Handler
     	//	Foratting
 		setFormatter(CLogFormatter.get());
 		//	Level
-		setLevel(Level.ALL);
+		String levelString = Ini.getProperty(Ini.P_TRACELEVEL);
+		for (int i = 0; i < CLogMgt.LEVELS.length; i++) {
+			if (CLogMgt.LEVELS[i].getName().equals(levelString)) { 
+				setLevel(CLogMgt.LEVELS[i]);
+				break;
+			}
+		}
 		//	Filter
 		setFilter(CLogFilter.get());
 	}	//	initialize

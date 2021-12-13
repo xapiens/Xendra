@@ -349,7 +349,7 @@ public class GridFieldVO implements Serializable
 	 *  @param ad_Tab_ID tab
 	 *  @param TabReadOnly tab read only
 	 */
-	private GridFieldVO (Properties Ctx, int windowNo, int tabNo, 
+	public GridFieldVO (Properties Ctx, int windowNo, int tabNo, 
 		int ad_Window_ID, int ad_Tab_ID, boolean TabReadOnly)
 	{
 		ctx = Ctx;
@@ -496,7 +496,7 @@ public class GridFieldVO implements Serializable
 	/**
 	 *  Validate Fields and create LookupInfo if required
 	 */
-	protected void initFinish()
+	public void initFinish()
 	{
 		//  Not null fields
 		if (DisplayLogic == null)
@@ -511,6 +511,8 @@ public class GridFieldVO implements Serializable
 			Description = "";
 		if (Help == null)
 			Help = "";
+		if (Agenda == null)
+			Agenda = "";
 		if (Callout == null)
 			Callout = "";
 		if (ReadOnlyLogic == null)

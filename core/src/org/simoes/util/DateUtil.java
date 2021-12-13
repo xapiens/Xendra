@@ -3,7 +3,7 @@ package org.simoes.util;
 import java.text.*;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.compiere.util.Util;
 
 /**
@@ -14,7 +14,7 @@ import org.compiere.util.Util;
  * @author Chris Simoes
  */
 public class DateUtil {
-	static Logger log = Logger.getLogger(DateUtil.class);
+	static CLogger log = CLogger.getCLogger(DateUtil.class);
     
 	public static java.sql.Date utilDate2SQLDate(java.util.Date d) {
 		java.sql.Date result = null;
@@ -69,7 +69,7 @@ public class DateUtil {
 				Date myDate = df.parse(d);
 				result = createDateString(myDate);
 			} catch(ParseException e) {
-				log.error(METHOD_NAME + "String = " + d+ ", was not a valid date.");
+				log.severe(METHOD_NAME + "String = " + d+ ", was not a valid date.");
 			}
 		}
 		return result;

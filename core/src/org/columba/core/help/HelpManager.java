@@ -157,7 +157,7 @@ public class HelpManager {
 //	 */
 	public void enableHelpOnButton(Component c, String helpID) {
 //		getHelpBroker().enableHelpOnButton(c, helpID, hs);
-		System.out.println("X");
+		System.out.println("X13");
 	}
 //
 //	/**
@@ -165,7 +165,7 @@ public class HelpManager {
 //	 */
 	public void enableHelpKey(Component c, String helpID) {
 //		getHelpBroker().enableHelpKey(c, helpID, hs);
-		System.out.println("X");
+		System.out.println("X14");
 	}
 //
 //	/**

@@ -759,7 +759,7 @@ public class VMatch extends CPanel
 		boolean success = false;
 		MInOutLine sLine = new MInOutLine (Env.getCtx(), M_InOutLine_ID, null);
 		MInOut inout = new MInOut(Env.getCtx(), sLine.getM_InOut_ID(),  null);
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), inout.getMovementDate()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), inout.getMovementDate(), inout.getAD_Org_ID(), inout.getAD_Client_ID()).getC_Period_ID();
 		if (invoice)	//	Shipment - Invoice
 		{
 			//	Update Invoice Line

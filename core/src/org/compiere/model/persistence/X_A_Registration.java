@@ -66,28 +66,29 @@ public static int Table_ID=MTable.getTable_ID("A_Registration");
 public static String es_PE_TAB_Registration_Description="Registro de usuario activo";
 
 @XendraTrl(Identifier="591cabb2-373a-40d2-6662-757cd8d87e0c")
-public static String es_PE_TAB_Registration_Name="Registro";
-
-@XendraTrl(Identifier="591cabb2-373a-40d2-6662-757cd8d87e0c")
 public static String es_PE_TAB_Registration_Help="Registro de un usuario activo";
 
-@XendraTab(Name="Registration",Description="Asset User Registration",
-Help="User Registration of an Asset",AD_Window_ID="ca233263-48b6-c157-cd25-6ffa7446944f",SeqNo=10,
-TabLevel=0,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
-AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
-AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",
-ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
+@XendraTrl(Identifier="591cabb2-373a-40d2-6662-757cd8d87e0c")
+public static String es_PE_TAB_Registration_Name="Registro";
+@XendraTab(Name="Registration",
+Description="Asset User Registration",Help="User Registration of an Asset",
+AD_Window_ID="ca233263-48b6-c157-cd25-6ffa7446944f",SeqNo=10,TabLevel=0,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
+WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
+AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",
+IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
 Identifier="591cabb2-373a-40d2-6662-757cd8d87e0c",Synchronized="2012-03-17 18:47:08.603")
 public static final String TABNAME_Registration="591cabb2-373a-40d2-6662-757cd8d87e0c";
 
 @XendraTrl(Identifier="a05d8a93-9491-133b-edd0-95f99f065990")
 public static String es_PE_TABLE_A_Registration_Name="Registro";
 
-@XendraTable(Name="Registration",Description="User Asset Registration",Help="",
+@XendraTable(Name="Registration",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="User Asset Registration",Help="",
 TableName="A_Registration",AccessLevel="3",AD_Window_ID="ca233263-48b6-c157-cd25-6ffa7446944f",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="a05d8a93-9491-133b-edd0-95f99f065990",Synchronized="2017-08-16 11:41:15.0")
+Identifier="a05d8a93-9491-133b-edd0-95f99f065990",Synchronized="2020-03-03 21:36:15.0")
 /** TableName=A_Registration */
 public static final String Table_Name="A_Registration";
 
@@ -138,13 +139,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="281fe816-83a6-bf71-c5b7-d0259f77b58e")
+public static String es_PE_FIELD_Registration_Asset_Name="Activo";
+
+@XendraTrl(Identifier="281fe816-83a6-bf71-c5b7-d0259f77b58e")
 public static String es_PE_FIELD_Registration_Asset_Description="Activo usado por la compañía o sus clientes";
 
 @XendraTrl(Identifier="281fe816-83a6-bf71-c5b7-d0259f77b58e")
 public static String es_PE_FIELD_Registration_Asset_Help="Indica si es usado por la compañia o sus clientes";
-
-@XendraTrl(Identifier="281fe816-83a6-bf71-c5b7-d0259f77b58e")
-public static String es_PE_FIELD_Registration_Asset_Name="Activo";
 
 @XendraField(AD_Column_ID="A_Asset_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -162,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6df7e415-ea2b-9e11-369b-3d33b1c1f6c9",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name A_Asset_ID */
 public static final String COLUMNNAME_A_Asset_ID = "A_Asset_ID";
 /** Set User/Contact.
@@ -183,13 +184,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9fc77935-ceef-4770-f177-95931ce1153f")
+public static String es_PE_FIELD_Registration_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="9fc77935-ceef-4770-f177-95931ce1153f")
 public static String es_PE_FIELD_Registration_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="9fc77935-ceef-4770-f177-95931ce1153f")
 public static String es_PE_FIELD_Registration_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="9fc77935-ceef-4770-f177-95931ce1153f")
-public static String es_PE_FIELD_Registration_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -207,7 +208,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="00d5116c-6cfc-52b5-5289-12355f925c7d",Synchronized="2017-08-05 16:53:05.0")
+Identifier="00d5116c-6cfc-52b5-5289-12355f925c7d",Synchronized="2019-08-30 22:20:56.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Registration.
@@ -227,13 +228,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="387c4c8e-fd64-fb24-c44d-b26243800aaf")
+public static String es_PE_FIELD_Registration_Registration_Name="Registro";
+
+@XendraTrl(Identifier="387c4c8e-fd64-fb24-c44d-b26243800aaf")
 public static String es_PE_FIELD_Registration_Registration_Description="Usar registro activo";
 
 @XendraTrl(Identifier="387c4c8e-fd64-fb24-c44d-b26243800aaf")
 public static String es_PE_FIELD_Registration_Registration_Help="Usar registro de un activo.";
-
-@XendraTrl(Identifier="387c4c8e-fd64-fb24-c44d-b26243800aaf")
-public static String es_PE_FIELD_Registration_Registration_Name="Registro";
 
 @XendraField(AD_Column_ID="A_Registration_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -258,13 +259,13 @@ return (Timestamp)get_Value(COLUMNNAME_AssetServiceDate);
 }
 
 @XendraTrl(Identifier="b4bef35a-6c16-adc1-64a5-a3e58e5c5fce")
+public static String es_PE_FIELD_Registration_InServiceDate_Name="En Fecha de Servicio";
+
+@XendraTrl(Identifier="b4bef35a-6c16-adc1-64a5-a3e58e5c5fce")
 public static String es_PE_FIELD_Registration_InServiceDate_Description="Fecha cuando el activo ha sido puesto en servicio";
 
 @XendraTrl(Identifier="b4bef35a-6c16-adc1-64a5-a3e58e5c5fce")
 public static String es_PE_FIELD_Registration_InServiceDate_Help="La fecha en que el activo fue puesto en servicio - usado generalmente como fecha del comienzo para la depreciación.";
-
-@XendraTrl(Identifier="b4bef35a-6c16-adc1-64a5-a3e58e5c5fce")
-public static String es_PE_FIELD_Registration_InServiceDate_Name="En Fecha de Servicio";
 
 @XendraField(AD_Column_ID="AssetServiceDate",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -282,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1e63285-67e5-d9db-689a-84ad77ce735c",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name AssetServiceDate */
 public static final String COLUMNNAME_AssetServiceDate = "AssetServiceDate";
 /** Set Business Partner .
@@ -303,13 +304,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="321fe998-4efa-b2d7-6349-f54baf372274")
+public static String es_PE_FIELD_Registration_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="321fe998-4efa-b2d7-6349-f54baf372274")
 public static String es_PE_FIELD_Registration_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="321fe998-4efa-b2d7-6349-f54baf372274")
 public static String es_PE_FIELD_Registration_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="321fe998-4efa-b2d7-6349-f54baf372274")
-public static String es_PE_FIELD_Registration_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -327,7 +328,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ec8bc184-e94b-6007-7d5b-9d96204e6428",Synchronized="2017-08-05 16:53:05.0")
+Identifier="ec8bc184-e94b-6007-7d5b-9d96204e6428",Synchronized="2019-08-30 22:20:56.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Description.
@@ -358,13 +359,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ec990135-d62c-9651-f473-f3d9024d1acc")
+public static String es_PE_FIELD_Registration_Description_Name="Observación";
+
+@XendraTrl(Identifier="ec990135-d62c-9651-f473-f3d9024d1acc")
 public static String es_PE_FIELD_Registration_Description_Description="Observación";
 
 @XendraTrl(Identifier="ec990135-d62c-9651-f473-f3d9024d1acc")
 public static String es_PE_FIELD_Registration_Description_Help="Observación";
-
-@XendraTrl(Identifier="ec990135-d62c-9651-f473-f3d9024d1acc")
-public static String es_PE_FIELD_Registration_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -382,7 +383,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ac013812-146c-ed34-692c-590373f07ae5",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -408,13 +409,13 @@ return value;
 }
 
 @XendraTrl(Identifier="fe5cd56f-e2da-d51c-f1d9-bcd9ec83badd")
+public static String es_PE_FIELD_Registration_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="fe5cd56f-e2da-d51c-f1d9-bcd9ec83badd")
 public static String es_PE_FIELD_Registration_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="fe5cd56f-e2da-d51c-f1d9-bcd9ec83badd")
 public static String es_PE_FIELD_Registration_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="fe5cd56f-e2da-d51c-f1d9-bcd9ec83badd")
-public static String es_PE_FIELD_Registration_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -432,7 +433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ed536192-30bf-c5f5-e444-816e40a64f35",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -464,7 +465,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3051729a-1026-4fb9-b591-e973be531562",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Allowed to be Published.
@@ -487,10 +488,10 @@ return false;
 }
 
 @XendraTrl(Identifier="d7663691-6dc7-7b0c-4d84-806344954035")
-public static String es_PE_FIELD_Registration_AllowedToBePublished_Description="Usted permite publicar la información, no resumen estadístico de Información.";
+public static String es_PE_FIELD_Registration_AllowedToBePublished_Name="Mostrar lo Publicado";
 
 @XendraTrl(Identifier="d7663691-6dc7-7b0c-4d84-806344954035")
-public static String es_PE_FIELD_Registration_AllowedToBePublished_Name="Mostrar lo Publicado";
+public static String es_PE_FIELD_Registration_AllowedToBePublished_Description="Usted permite publicar la información, no resumen estadístico de Información.";
 
 @XendraField(AD_Column_ID="IsAllowPublish",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -508,7 +509,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d2fe3492-0c1a-5363-166a-f2abd179646d",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name IsAllowPublish */
 public static final String COLUMNNAME_IsAllowPublish = "IsAllowPublish";
 /** Set In Production.
@@ -531,10 +532,10 @@ return false;
 }
 
 @XendraTrl(Identifier="f245ef0a-196b-de62-90e2-d2c50c061f2d")
-public static String es_PE_FIELD_Registration_InProduction_Description="El Sistema está en producción";
+public static String es_PE_FIELD_Registration_InProduction_Name="En Producción";
 
 @XendraTrl(Identifier="f245ef0a-196b-de62-90e2-d2c50c061f2d")
-public static String es_PE_FIELD_Registration_InProduction_Name="En Producción";
+public static String es_PE_FIELD_Registration_InProduction_Description="El Sistema está en producción";
 
 @XendraField(AD_Column_ID="IsInProduction",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -552,7 +553,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1971572d-4c09-5369-613f-8be0a0fd04a3",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name IsInProduction */
 public static final String COLUMNNAME_IsInProduction = "IsInProduction";
 /** Set Registered.
@@ -575,10 +576,10 @@ return false;
 }
 
 @XendraTrl(Identifier="3b3e3a44-e718-ed6f-117d-65741f57285e")
-public static String es_PE_FIELD_Registration_Registered_Description="La aplicación es registrada.";
+public static String es_PE_FIELD_Registration_Registered_Name="Registrado";
 
 @XendraTrl(Identifier="3b3e3a44-e718-ed6f-117d-65741f57285e")
-public static String es_PE_FIELD_Registration_Registered_Name="Registrado";
+public static String es_PE_FIELD_Registration_Registered_Description="La aplicación es registrada.";
 
 @XendraField(AD_Column_ID="IsRegistered",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -596,7 +597,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="42ecdc92-5c01-db62-cb8e-d7fa2eb8e540",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name IsRegistered */
 public static final String COLUMNNAME_IsRegistered = "IsRegistered";
 /** Set Product.
@@ -617,13 +618,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="722f598b-283a-00e8-0c2e-a162fc1c92f8")
+public static String es_PE_FIELD_Registration_Product_Name="Producto";
+
+@XendraTrl(Identifier="722f598b-283a-00e8-0c2e-a162fc1c92f8")
 public static String es_PE_FIELD_Registration_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="722f598b-283a-00e8-0c2e-a162fc1c92f8")
 public static String es_PE_FIELD_Registration_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="722f598b-283a-00e8-0c2e-a162fc1c92f8")
-public static String es_PE_FIELD_Registration_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -641,7 +642,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1e7c51db-9e1d-ee11-de3e-cb3bfbc84567",Synchronized="2017-08-05 16:53:05.0")
+Identifier="1e7c51db-9e1d-ee11-de3e-cb3bfbc84567",Synchronized="2019-08-30 22:20:56.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Name.
@@ -673,18 +674,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
+public static String es_PE_FIELD_Registration_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
 public static String es_PE_FIELD_Registration_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
 public static String es_PE_FIELD_Registration_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
-public static String es_PE_FIELD_Registration_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d24fca4b-758f-8b8b-eb7d-7591490486f5")
 public static final String FIELDNAME_Registration_Name="d24fca4b-758f-8b8b-eb7d-7591490486f5";
 
 @XendraTrl(Identifier="2d3c38e3-aaee-31a4-fd38-8e1cd3b1c67d")
@@ -696,7 +698,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2d3c38e3-aaee-31a4-fd38-8e1cd3b1c67d",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Note.
@@ -720,18 +722,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
+public static String es_PE_FIELD_Registration_Note_Name="Nota";
+
+@XendraTrl(Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
 public static String es_PE_FIELD_Registration_Note_Description="Información adicional opcional definida por el usuario";
 
 @XendraTrl(Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
 public static String es_PE_FIELD_Registration_Note_Help="El campo Nota permite una entrada opcional de información definida por el usuario considerando este registro";
 
-@XendraTrl(Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
-public static String es_PE_FIELD_Registration_Note_Name="Nota";
-@XendraField(AD_Column_ID="Note",
-IsCentrallyMaintained=true,AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=170,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
+@XendraField(AD_Column_ID="Note",IsCentrallyMaintained=true,
+AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="ef8e21f3-beca-6947-8df8-2f792723fcb4")
 public static final String FIELDNAME_Registration_Note="ef8e21f3-beca-6947-8df8-2f792723fcb4";
 
 @XendraTrl(Identifier="14567229-7ba8-2f66-c930-79bcbebe283a")
@@ -743,7 +746,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="14567229-7ba8-2f66-c930-79bcbebe283a",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Note */
 public static final String COLUMNNAME_Note = "Note";
 /** Set Process Now.
@@ -784,7 +787,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="58411aa7-52ca-7a74-9aa2-877917dcb8d9",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Remote Addr.
@@ -808,13 +811,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d47fce1f-be5b-0fbb-cbcd-400a3ccd37a5")
+public static String es_PE_FIELD_Registration_RemoteAddr_Name="Dirección Remota";
+
+@XendraTrl(Identifier="d47fce1f-be5b-0fbb-cbcd-400a3ccd37a5")
 public static String es_PE_FIELD_Registration_RemoteAddr_Description="Dirección remota";
 
 @XendraTrl(Identifier="d47fce1f-be5b-0fbb-cbcd-400a3ccd37a5")
 public static String es_PE_FIELD_Registration_RemoteAddr_Help="La dirección remota indica una dirección alternativa ó externa";
-
-@XendraTrl(Identifier="d47fce1f-be5b-0fbb-cbcd-400a3ccd37a5")
-public static String es_PE_FIELD_Registration_RemoteAddr_Name="Dirección Remota";
 
 @XendraField(AD_Column_ID="Remote_Addr",IsCentrallyMaintained=true,
 AD_Tab_ID="591cabb2-373a-40d2-6662-757cd8d87e0c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -832,7 +835,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="adc465c3-54ab-8752-703d-a9304fd14b73",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Remote_Addr */
 public static final String COLUMNNAME_Remote_Addr = "Remote_Addr";
 /** Set Remote Host.
@@ -874,7 +877,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b771520-1bcd-3e4c-4e82-4ec4f4ea49fe",
-Synchronized="2017-08-05 16:53:05.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Remote_Host */
 public static final String COLUMNNAME_Remote_Host = "Remote_Host";
 }

@@ -28,7 +28,10 @@ import javax.swing.LookAndFeel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeModel;
-
+//
+//
+// remember the columnof tree  [0]  must be editable, otherwise you can't collapse/expand tree nodes
+//
 public class TreeTable extends JTable {
 	private TreeModel model;
 	private CustomTreeTableCellRenderer tree;

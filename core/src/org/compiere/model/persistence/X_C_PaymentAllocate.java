@@ -68,12 +68,12 @@ public static int Table_ID=MTable.getTable_ID("C_PaymentAllocate");
 public static String es_PE_TAB_Allocate_Description="Asignación de Pagos a Facturas";
 
 @XendraTrl(Identifier="db1aeabf-42d4-7a16-91c2-8c0debeba787")
-public static String es_PE_TAB_Allocate_Name="Varias Facturas";
-
-@XendraTrl(Identifier="db1aeabf-42d4-7a16-91c2-8c0debeba787")
 public static String es_PE_TAB_Allocate_Help="Usted puede asignar pagos a Facturas directamente con lamisma monéda al crear el pago.Note que usted puede sobe asignar o sub asignar un pago. La asignación es creada al momento de procesar el pago.";
 
-@XendraTab(Name="Allocate",Description="Allocate Payments to Invoices",
+@XendraTrl(Identifier="db1aeabf-42d4-7a16-91c2-8c0debeba787")
+public static String es_PE_TAB_Allocate_Name="Varias Facturas";
+@XendraTab(Name="Allocate",
+Description="Allocate Payments to Invoices",
 Help="You can directly allocate payments to invoices with the same currency when creating the Payment.  Note that you can over- or under-allocate the payment.<b> When processing the payment, the allocation is created.<b> The Organization is set to the invoice organization",
 AD_Window_ID="a5526dd3-69bf-661f-67ed-fa8a6962a00e",SeqNo=20,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=true,AD_Column_ID="",HasTree=false,WhereClause="",
@@ -86,11 +86,13 @@ public static final String TABNAME_Allocate="db1aeabf-42d4-7a16-91c2-8c0debeba78
 @XendraTrl(Identifier="d78052b7-df45-a916-721e-45fddf65b0c4")
 public static String es_PE_TABLE_C_PaymentAllocate_Name="Asignación de Pago";
 
-@XendraTable(Name="Allocate Payment",Description="Allocate Payment to Invoices",Help="",
-TableName="C_PaymentAllocate",AccessLevel="1",AD_Window_ID="a5526dd3-69bf-661f-67ed-fa8a6962a00e",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="d78052b7-df45-a916-721e-45fddf65b0c4",Synchronized="2017-08-16 11:42:08.0")
+@XendraTable(Name="Allocate Payment",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Allocate Payment to Invoices",
+Help="",TableName="C_PaymentAllocate",AccessLevel="1",
+AD_Window_ID="a5526dd3-69bf-661f-67ed-fa8a6962a00e",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="d78052b7-df45-a916-721e-45fddf65b0c4",
+Synchronized="2020-03-03 21:37:20.0")
 /** TableName=C_PaymentAllocate */
 public static final String Table_Name="C_PaymentAllocate";
 
@@ -140,18 +142,19 @@ return bd;
 }
 
 @XendraTrl(Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
+public static String es_PE_FIELD_Allocate_Amount_Name="Total";
+
+@XendraTrl(Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
 public static String es_PE_FIELD_Allocate_Amount_Description="Total en una moneda definida";
 
 @XendraTrl(Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
 public static String es_PE_FIELD_Allocate_Amount_Help="Indica el total para esta línea del documento";
 
-@XendraTrl(Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
-public static String es_PE_FIELD_Allocate_Amount_Name="Total";
-@XendraField(AD_Column_ID="Amount",
-IsCentrallyMaintained=true,AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=70,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
+@XendraField(AD_Column_ID="Amount",IsCentrallyMaintained=true,
+AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89")
 public static final String FIELDNAME_Allocate_Amount="745ddb5f-0dc1-abb7-8de0-fb8bbf49cd89";
 
 @XendraTrl(Identifier="26d08c16-8b39-d5b8-e166-cff5ed01e9aa")
@@ -164,7 +167,7 @@ IsIdentifier=true,SeqNo=2,IsTranslated=false,
 Callout="org.compiere.model.CalloutPaymentAllocate.amounts",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="26d08c16-8b39-d5b8-e166-cff5ed01e9aa",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set Allocation Line.
@@ -185,13 +188,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d952203e-d4f5-96d9-a69b-bd9ec4adbfce")
+public static String es_PE_FIELD_Allocate_AllocationLine_Name="Item de Asignación";
+
+@XendraTrl(Identifier="d952203e-d4f5-96d9-a69b-bd9ec4adbfce")
 public static String es_PE_FIELD_Allocate_AllocationLine_Description="Item de Asignación";
 
 @XendraTrl(Identifier="d952203e-d4f5-96d9-a69b-bd9ec4adbfce")
 public static String es_PE_FIELD_Allocate_AllocationLine_Help="Asignación de Efectivo/Pagos a facturas";
-
-@XendraTrl(Identifier="d952203e-d4f5-96d9-a69b-bd9ec4adbfce")
-public static String es_PE_FIELD_Allocate_AllocationLine_Name="Item de Asignación";
 
 @XendraField(AD_Column_ID="C_AllocationLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -209,7 +212,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3603be68-d723-c713-792f-b1704ef32806",Synchronized="2017-08-05 16:54:01.0")
+Identifier="3603be68-d723-c713-792f-b1704ef32806",Synchronized="2019-08-30 22:21:57.0")
 /** Column name C_AllocationLine_ID */
 public static final String COLUMNNAME_C_AllocationLine_ID = "C_AllocationLine_ID";
 /** Set Invoice.
@@ -235,13 +238,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_Invoice_ID()));
 }
 
 @XendraTrl(Identifier="8e02cd41-e174-5062-ba11-0a57b88ef464")
+public static String es_PE_FIELD_Allocate_Invoice_Name="Factura";
+
+@XendraTrl(Identifier="8e02cd41-e174-5062-ba11-0a57b88ef464")
 public static String es_PE_FIELD_Allocate_Invoice_Description="Identificador de la factura";
 
 @XendraTrl(Identifier="8e02cd41-e174-5062-ba11-0a57b88ef464")
 public static String es_PE_FIELD_Allocate_Invoice_Help="La ID de Factura identifica únicamente un documento de Factura.";
-
-@XendraTrl(Identifier="8e02cd41-e174-5062-ba11-0a57b88ef464")
-public static String es_PE_FIELD_Allocate_Invoice_Name="Factura";
 
 @XendraField(AD_Column_ID="C_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -260,7 +263,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,
 Callout="org.compiere.model.CalloutPaymentAllocate.invoice",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bd9f8344-2939-27a9-7cff-9f48ecc9fd27",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Allocate Payment.
@@ -280,13 +283,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2d056e38-5ae2-aa3c-8136-dab08ffd19d0")
+public static String es_PE_FIELD_Allocate_AllocatePayment_Name="Asignación de Pago";
+
+@XendraTrl(Identifier="2d056e38-5ae2-aa3c-8136-dab08ffd19d0")
 public static String es_PE_FIELD_Allocate_AllocatePayment_Description="Asignación de Pagos a Facturas";
 
 @XendraTrl(Identifier="2d056e38-5ae2-aa3c-8136-dab08ffd19d0")
 public static String es_PE_FIELD_Allocate_AllocatePayment_Help="Usted puede asignar directamente los pagos a Facturas cuando esta creando el PagoNote que usted puede  Sobre o Sub Asignar el Pago.Durante el procesamiento  del Pago, es creada la asignación. ";
-
-@XendraTrl(Identifier="2d056e38-5ae2-aa3c-8136-dab08ffd19d0")
-public static String es_PE_FIELD_Allocate_AllocatePayment_Name="Asignación de Pago";
 
 @XendraField(AD_Column_ID="C_PaymentAllocate_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -313,13 +316,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2b70c55b-3248-2d3f-f4f0-a737a862b55d")
+public static String es_PE_FIELD_Allocate_Payment_Name="Pago";
+
+@XendraTrl(Identifier="2b70c55b-3248-2d3f-f4f0-a737a862b55d")
 public static String es_PE_FIELD_Allocate_Payment_Description="Identificador del pago";
 
 @XendraTrl(Identifier="2b70c55b-3248-2d3f-f4f0-a737a862b55d")
 public static String es_PE_FIELD_Allocate_Payment_Help="El pago es un identificador único de este pago.";
-
-@XendraTrl(Identifier="2b70c55b-3248-2d3f-f4f0-a737a862b55d")
-public static String es_PE_FIELD_Allocate_Payment_Name="Pago";
 
 @XendraField(AD_Column_ID="C_Payment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -337,7 +340,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4cd7fc58-0c30-31a9-fe4b-24c551c01a0d",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Discount Amount.
@@ -357,13 +360,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="59e7dc28-0966-be0c-223b-e2f67dc68edd")
+public static String es_PE_FIELD_Allocate_DiscountAmount_Name="Total del Descuento";
+
+@XendraTrl(Identifier="59e7dc28-0966-be0c-223b-e2f67dc68edd")
 public static String es_PE_FIELD_Allocate_DiscountAmount_Description="Total de descuento calculado";
 
 @XendraTrl(Identifier="59e7dc28-0966-be0c-223b-e2f67dc68edd")
 public static String es_PE_FIELD_Allocate_DiscountAmount_Help="El Total descuento indica el total de descuento para un documento ó línea";
-
-@XendraTrl(Identifier="59e7dc28-0966-be0c-223b-e2f67dc68edd")
-public static String es_PE_FIELD_Allocate_DiscountAmount_Name="Total del Descuento";
 
 @XendraField(AD_Column_ID="DiscountAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -382,7 +385,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPaymentAllocate.amounts",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8860421d-2c70-c9f0-fbf7-b3111f28ee54",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name DiscountAmt */
 public static final String COLUMNNAME_DiscountAmt = "DiscountAmt";
 /** Set Identifier.
@@ -414,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1d082aec-8429-4faf-9107-d7323c2b095a",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Invoice Amt.
@@ -451,7 +454,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10a05461-54f9-ae3d-43f9-9dfdda21fce8",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name InvoiceAmt */
 public static final String COLUMNNAME_InvoiceAmt = "InvoiceAmt";
 /** Set Over/Under Payment.
@@ -471,13 +474,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="d8169d82-9ddd-04f5-ae83-6ab8dc1de6cf")
+public static String es_PE_FIELD_Allocate_OverUnderPayment_Name="Totales con sobre/sub pago";
+
+@XendraTrl(Identifier="d8169d82-9ddd-04f5-ae83-6ab8dc1de6cf")
 public static String es_PE_FIELD_Allocate_OverUnderPayment_Description="Total de sobre pago (no contabilizado) ó sub pago (pago parcial)";
 
 @XendraTrl(Identifier="d8169d82-9ddd-04f5-ae83-6ab8dc1de6cf")
 public static String es_PE_FIELD_Allocate_OverUnderPayment_Help="Sobre pagos (negativos) son totales no contabilizados y permiten recibir dinero por totales superiores a una factura particular. Sub pagos (positivo) es un pago parcial de una factura. No se saca de libros la cantidad no pagada.";
-
-@XendraTrl(Identifier="d8169d82-9ddd-04f5-ae83-6ab8dc1de6cf")
-public static String es_PE_FIELD_Allocate_OverUnderPayment_Name="Totales con sobre/sub pago";
 
 @XendraField(AD_Column_ID="OverUnderAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -496,7 +499,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPaymentAllocate.amounts",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7cf3e7c-cc59-e212-eb7b-de0dc107864b",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name OverUnderAmt */
 public static final String COLUMNNAME_OverUnderAmt = "OverUnderAmt";
 /** Set Remaining Amt.
@@ -515,10 +518,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="90beb2fa-765a-7c3d-3ad8-730a3642ea13")
-public static String es_PE_FIELD_Allocate_RemainingAmt_Description="Importe Remanente";
+public static String es_PE_FIELD_Allocate_RemainingAmt_Name="Importe Remanente";
 
 @XendraTrl(Identifier="90beb2fa-765a-7c3d-3ad8-730a3642ea13")
-public static String es_PE_FIELD_Allocate_RemainingAmt_Name="Importe Remanente";
+public static String es_PE_FIELD_Allocate_RemainingAmt_Description="Importe Remanente";
 
 @XendraField(AD_Column_ID="RemainingAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -538,7 +541,7 @@ VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Proces
 IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT MAX(p.PayAmt)-COALESCE(SUM(a.Amount),0) FROM C_Payment p  LEFT OUTER JOIN C_PaymentAllocate a ON (p.C_Payment_ID=a.C_Payment_ID) WHERE p.C_Payment_ID=C_PaymentAllocate.C_Payment_ID)",
 IsAllowLogging=false,Identifier="b9845627-1e02-9087-27f7-2592a60a6b4b",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name RemainingAmt */
 public static final String COLUMNNAME_RemainingAmt = "RemainingAmt";
 /** Set Write-off Amount.
@@ -558,13 +561,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="ce4e0fb9-a121-a5fa-91fd-f16ad3f9873e")
+public static String es_PE_FIELD_Allocate_Write_OffAmount_Name="Total del Ajuste";
+
+@XendraTrl(Identifier="ce4e0fb9-a121-a5fa-91fd-f16ad3f9873e")
 public static String es_PE_FIELD_Allocate_Write_OffAmount_Description="Total por ajustar";
 
 @XendraTrl(Identifier="ce4e0fb9-a121-a5fa-91fd-f16ad3f9873e")
 public static String es_PE_FIELD_Allocate_Write_OffAmount_Help="El Total de ajuste indica el total a ser ajustado como incobrable";
-
-@XendraTrl(Identifier="ce4e0fb9-a121-a5fa-91fd-f16ad3f9873e")
-public static String es_PE_FIELD_Allocate_Write_OffAmount_Name="Total del Ajuste";
 
 @XendraField(AD_Column_ID="WriteOffAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="db1aeabf-42d4-7a16-91c2-8c0debeba787",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -583,7 +586,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPaymentAllocate.amounts",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3750211c-22d0-784c-4da6-7811c6d5b4d0",
-Synchronized="2017-08-05 16:54:01.0")
+Synchronized="2019-08-30 22:21:57.0")
 /** Column name WriteOffAmt */
 public static final String COLUMNNAME_WriteOffAmt = "WriteOffAmt";
 }

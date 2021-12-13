@@ -63,6 +63,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ListSelectionModel;
@@ -80,18 +82,13 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 	private static PrintManagerDialog instance;
 	private ButtonWithMnemonic printButton;
 	private ButtonWithMnemonic infoButton;
-	//private PrintDocumentManager pm;
 	private PrintJob m_elementToPrint;
 	private PrintJob m_elementInfo;
 	private List<String> queues = new ArrayList<String>();
-	//private int m_size;
 	private CTabbedPane maintab;
 	private PrintDocumentManager pm = PrintDocumentManager.getInstance(); 
-	//public PrintManagerDialog(PrintDocumentManager printManager) {
 	public PrintManagerDialog() {
 		super((JFrame) null, "Print Manager", false);		
-		//pm = printManager;
-		//m_size = pm.getSize();
 		initComponents();
 		pack();
 		setLocationRelativeTo(null);		
@@ -99,26 +96,16 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 
 	public static PrintManagerDialog createInstance() {
 		if (instance == null) {
-			//instance = new PrintManagerDialog(printManager);
 			instance = new PrintManagerDialog();
 		}
 		if (!instance.isVisible()) {
 			instance.update();
-			//instance.pack();
 			instance.setVisible(true);
 		}
 		instance.toFront();
 
 		return instance;
 	}
-
-//	private void update() {		
-//		if (m_size != pm.getSize())
-//		{
-//			//pm.build();
-//			buildqueues();
-//		}
-//	}
 
 	public void initComponents() {
 		JPanel mainPanel = new JPanel(new BorderLayout());
@@ -169,18 +156,20 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 		getContentPane().add(mainPanel);
 	}
 
-	private void AddQueue(int j) {		
+	//private void AddQueue(int j) {		
+	private void AddQueue(int mpid) {
 		JPanel tab = new JPanel(new BorderLayout());				
 		CTabbedPane tabbedPane = new CTabbedPane(JTabbedPane.BOTTOM);
-		maintab.addTab(pm.getrawQueue().get(j), null, tabbedPane, null);
+		String titlepm = String.format("%s (%s)", pm.getrawQueue().get(mpid), pm.getMachinePrinter(mpid).getDeviceName());		
+		maintab.addTab(titlepm, null, tabbedPane, null);
 		tabbedPane.addTab("pendiente", null, tab, null);
 		tab.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 6));
 		//
 		// trabajos en cola
 		JTable currentPrintJobs = new JTable();				
 		currentPrintJobs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		currentPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(j,"info"));
-		currentPrintJobs.setModel(pm.getPrint().get(j));
+		currentPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(mpid,"info"));
+		currentPrintJobs.setModel(pm.getPrint().get(mpid));
 		JScrollPane scrollPaneCurrent = new JScrollPane(currentPrintJobs);
 		scrollPaneCurrent.setPreferredSize(new Dimension(500, 250));
 		scrollPaneCurrent.getViewport().setBackground(Color.white);
@@ -192,8 +181,8 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 		// trabajos impresos
 		JTable printedPrintJobs = new JTable();
 		printedPrintJobs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		printedPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(j, "print"));
-		printedPrintJobs.setModel(pm.getPrinted().get(j));
+		printedPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(mpid, "print"));
+		printedPrintJobs.setModel(pm.getPrinted().get(mpid));
 		JScrollPane scrollPanePrinted = new JScrollPane(printedPrintJobs);
 		secondTab.add(scrollPanePrinted);		
 		JPanel panel_1 = new JPanel();
@@ -206,66 +195,22 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 		printButton.addActionListener(this);
 		panel_1.add(printButton);
 		printButton.setEnabled(false);
-		queues.add(pm.getrawQueue().get(j));		
+		queues.add(pm.getrawQueue().get(mpid));		
 	}
 	
 	private void update() {
 		//PrintDocumentManager pm = PrintDocumentManager.getInstance();
 		pm.build();
-		for (int k=0; k < pm.getSize(); k++)
-		{
-			if (!queues.contains(pm.getrawQueue().get(k)))
-			{
-				AddQueue(k);
+		HashMap printers = pm.getPrinters();
+		Iterator it = printers.keySet().iterator();
+		while (it.hasNext()) {
+			Integer printid = (Integer) it.next();
+			String queue = (String) pm.getrawQueue().get(printid);
+			if (!queues.contains(queue)) {
+				AddQueue(printid);
 			}
 		}
 		pack();
-//		if (pm.getSize() > 0)
-//		{
-//			for (int j=0; j < pm.getSize(); j++)
-//			{
-//				if (!queues.contains(pm.getrawQueue().get(j)))
-//				{
-//					JPanel tab = new JPanel(new BorderLayout());				
-//					CTabbedPane tabbedPane = new CTabbedPane(JTabbedPane.BOTTOM);
-//					maintab.addTab(pm.getrawQueue().get(j), null, tabbedPane, null);
-//					tabbedPane.addTab("pendiente", null, tab, null);
-//					tab.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 6));
-//					//
-//					// trabajos en cola
-//					JTable currentPrintJobs = new JTable();				
-//					currentPrintJobs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//					currentPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(j,"info"));
-//					currentPrintJobs.setModel(pm.getPrint().get(j));
-//					JScrollPane scrollPaneCurrent = new JScrollPane(currentPrintJobs);
-//					scrollPaneCurrent.setPreferredSize(new Dimension(500, 250));
-//					scrollPaneCurrent.getViewport().setBackground(Color.white);
-//					tab.add(scrollPaneCurrent);		
-//					//
-//					JPanel secondTab = new JPanel();
-//					tabbedPane.addTab(Msg.getMsg(Env.getCtx(), "impreso"), null, secondTab, null);
-//					secondTab.setLayout(new BorderLayout(0, 0));				
-//					// trabajos impresos
-//					JTable printedPrintJobs = new JTable();
-//					printedPrintJobs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//					printedPrintJobs.getSelectionModel().addListSelectionListener(new PrintListSelectionListener(j, "print"));
-//					printedPrintJobs.setModel(pm.getPrinted().get(j));
-//					JScrollPane scrollPanePrinted = new JScrollPane(printedPrintJobs);
-//					secondTab.add(scrollPanePrinted);		
-//					JPanel panel_1 = new JPanel();
-//					FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
-//					flowLayout.setAlignment(FlowLayout.RIGHT);
-//					secondTab.add(panel_1, BorderLayout.SOUTH);
-//					//				
-//					printButton = new ButtonWithMnemonic("&Print");		
-//					printButton.setActionCommand(Constants.PRINT);
-//					printButton.addActionListener(this);
-//					panel_1.add(printButton);
-//					printButton.setEnabled(false);
-//					queues.add(pm.getrawQueue().get(j));
-//				}
-//			}
-//		}		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -287,12 +232,6 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 			PrinterWizardLauncher nn = new PrinterWizardLauncher();
 			nn.launchWizard();				
 			update();
-//			List<X_A_MachinePrinter>  printers = new Query(Env.getCtx(), X_A_MachinePrinter.Table_Name, "A_Machine_ID = ?", null)
-//				.setParameters(Env.getMachine().getA_Machine_ID()).list();
-//			if (printers != null)
-//			{
-//				m_size = printers.size();
-//			}
 		}
 			
 	}
@@ -303,7 +242,6 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 			 int machineprinterid = m_elementInfo.getControlFile().getA_MachinePrinter_ID();
 			 X_A_MachinePrinter mp = new X_A_MachinePrinter(Env.getCtx(), machineprinterid, null);
 			 String destination = mp.getDeviceName();			
-			//ADialog.info(0, null, destination);
 		}
 	}
 	private void Print() {
@@ -354,11 +292,11 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 	
 	class PrintListSelectionListener implements ListSelectionListener
 	{
-		private int m_numberofmodel = 0; 
+		private int m_mpid = 0;
 		private String m_command = ""; 
-		PrintListSelectionListener(int numberofmodel, String command)
+		PrintListSelectionListener(int mpid, String command)
 		{
-			m_numberofmodel = numberofmodel;
+			m_mpid = mpid;
 			m_command = command;
 		}
 		public void valueChanged(ListSelectionEvent evt)
@@ -375,11 +313,11 @@ public class PrintManagerDialog extends JDialog implements ActionListener, IWork
 	        	int maxIndex = lsm.getMaxSelectionIndex();
 	        	if (m_command.equals("info"))
 	        	{
-	        		m_elementInfo = pm.getQueueList().get(m_numberofmodel).getJob(maxIndex);
+	        		m_elementInfo = pm.getQueueList().get(m_mpid).getJob(maxIndex);
 	        	}	
 	        	else if (m_command.equals("print"))
 	        	{	        		
-	        		m_elementToPrint = pm.getQueueList().get(m_numberofmodel).getPrintedJob(maxIndex);
+	        		m_elementToPrint = pm.getQueueList().get(m_mpid).getPrintedJob(maxIndex);
 	        	}
 	        }														
         	infoButton.setEnabled(m_elementInfo != null);

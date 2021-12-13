@@ -148,7 +148,7 @@ public class MProjectIssue extends X_C_ProjectIssue
 		}
 
 		/** @todo Transaction */
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getMovementDate()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), getMovementDate(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
 		//	**	Create Material Transactions **
 		// 10/09/07 el_man
 		MLocator loc = MLocator.get(getCtx(), getM_Locator_ID());

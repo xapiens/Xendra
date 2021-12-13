@@ -3,7 +3,7 @@ package org.simoes.util;
 import java.io.*;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * 
@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
  * @author Chris Simoes
  */
 public class ConfigResources {
-	static Logger log = Logger.getLogger(ConfigResources.class);
+	static CLogger log = CLogger.getCLogger(ConfigResources.class);
 	
 	private static PropertyResourceBundle resourceBundle;
 	
@@ -32,8 +32,8 @@ public class ConfigResources {
 				resourceBundle = new PropertyResourceBundle(is);
 			} catch(IOException e) {
 				System.err.println("LPD is not configured properly.");
-				log.error(METHOD_NAME + "Could not find properties file:" + FILE_NAME);
-				log.error(METHOD_NAME + e.getMessage(), e);
+				log.severe(METHOD_NAME + "Could not find properties file:" + FILE_NAME);
+				log.severe(METHOD_NAME + e.getMessage());
 			}
 		}
 	}

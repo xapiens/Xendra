@@ -74,11 +74,12 @@ public static final String TABNAME_MailTemplate="c62d157f-8b9d-f492-7726-7d98ce1
 @XendraTrl(Identifier="ae336a08-c26a-a644-3df1-153fb5f11098")
 public static String es_PE_TABLE_R_MailText_Name="Patrón de Correo";
 
-@XendraTable(Name="Mail Template",Description="Text templates for mailings",Help="",
-TableName="R_MailText",AccessLevel="7",AD_Window_ID="ea9f92ec-2db4-81ea-5d61-b74093404bad",
+@XendraTable(Name="Mail Template",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Text templates for mailings",
+Help="",TableName="R_MailText",AccessLevel="7",AD_Window_ID="ea9f92ec-2db4-81ea-5d61-b74093404bad",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="ae336a08-c26a-a644-3df1-153fb5f11098",Synchronized="2017-08-16 11:43:49.0")
+Identifier="ae336a08-c26a-a644-3df1-153fb5f11098",Synchronized="2020-03-03 21:39:33.0")
 /** TableName=R_MailText */
 public static final String Table_Name="R_MailText";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4a4422e4-d796-412b-8ce2-06ac2bacda8e",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set HTML.
@@ -163,15 +164,16 @@ return false;
 }
 
 @XendraTrl(Identifier="395aab4d-3ef8-b5a2-1491-0963e5d8fa94")
-public static String es_PE_FIELD_MailTemplate_HTML_Description="Texto con etiquetas HTML";
+public static String es_PE_FIELD_MailTemplate_HTML_Name="HTML";
 
 @XendraTrl(Identifier="395aab4d-3ef8-b5a2-1491-0963e5d8fa94")
-public static String es_PE_FIELD_MailTemplate_HTML_Name="HTML";
-@XendraField(AD_Column_ID="IsHtml",
-IsCentrallyMaintained=true,AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="395aab4d-3ef8-b5a2-1491-0963e5d8fa94")
+public static String es_PE_FIELD_MailTemplate_HTML_Description="Texto con etiquetas HTML";
+
+@XendraField(AD_Column_ID="IsHtml",IsCentrallyMaintained=true,
+AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="395aab4d-3ef8-b5a2-1491-0963e5d8fa94")
 public static final String FIELDNAME_MailTemplate_HTML="395aab4d-3ef8-b5a2-1491-0963e5d8fa94";
 
 @XendraTrl(Identifier="e1ddea37-ab68-7a4a-4404-e053f02d6c11")
@@ -183,7 +185,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e1ddea37-ab68-7a4a-4404-e053f02d6c11",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name IsHtml */
 public static final String COLUMNNAME_IsHtml = "IsHtml";
 /** Set Subject.
@@ -225,7 +227,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="693139dc-3f24-8a5b-61f7-b06e98c8ad64",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name MailHeader */
 public static final String COLUMNNAME_MailHeader = "MailHeader";
 /** Set Mail Text.
@@ -245,13 +247,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="336ccde5-5905-80ac-6eda-18adbfc395b5")
+public static String es_PE_FIELD_MailTemplate_MailText_Name="Texto del Correo";
+
+@XendraTrl(Identifier="336ccde5-5905-80ac-6eda-18adbfc395b5")
 public static String es_PE_FIELD_MailTemplate_MailText_Description="Texto usado para mensajes de correo";
 
 @XendraTrl(Identifier="336ccde5-5905-80ac-6eda-18adbfc395b5")
 public static String es_PE_FIELD_MailTemplate_MailText_Help="El texto de correo indica el texto usado para mensajes de correo.";
-
-@XendraTrl(Identifier="336ccde5-5905-80ac-6eda-18adbfc395b5")
-public static String es_PE_FIELD_MailTemplate_MailText_Name="Texto del Correo";
 
 @XendraField(AD_Column_ID="MailText",IsCentrallyMaintained=true,
 AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -269,7 +271,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e55b8adc-974c-68e2-e70b-44c9af781e65",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name MailText */
 public static final String COLUMNNAME_MailText = "MailText";
 /** Set Mail Text 2.
@@ -288,13 +290,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="a37bcaa1-b46a-2a95-5759-3770eda809d7")
+public static String es_PE_FIELD_MailTemplate_MailText22_Name="Texto 2 de Mail";
+
+@XendraTrl(Identifier="a37bcaa1-b46a-2a95-5759-3770eda809d7")
 public static String es_PE_FIELD_MailTemplate_MailText22_Description="Segunda parte opcional de texto usada para el mensaje del correo.";
 
 @XendraTrl(Identifier="a37bcaa1-b46a-2a95-5759-3770eda809d7")
 public static String es_PE_FIELD_MailTemplate_MailText22_Help="El texto del correo indica el texto usado para los mensajes del correo.";
-
-@XendraTrl(Identifier="a37bcaa1-b46a-2a95-5759-3770eda809d7")
-public static String es_PE_FIELD_MailTemplate_MailText22_Name="Texto 2 de Mail";
 
 @XendraField(AD_Column_ID="MailText2",IsCentrallyMaintained=true,
 AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -312,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6b27f9ea-cd54-fc9e-8691-c514285d21ba",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name MailText2 */
 public static final String COLUMNNAME_MailText2 = "MailText2";
 /** Set Mail Text 3.
@@ -331,13 +333,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="b4996f3d-a7e9-10f9-ae9f-5f4f87128612")
+public static String es_PE_FIELD_MailTemplate_MailText33_Name="Texto 3 de Mail";
+
+@XendraTrl(Identifier="b4996f3d-a7e9-10f9-ae9f-5f4f87128612")
 public static String es_PE_FIELD_MailTemplate_MailText33_Description="Tercera parte opcional del texto usada para el mensaje del correo.";
 
 @XendraTrl(Identifier="b4996f3d-a7e9-10f9-ae9f-5f4f87128612")
 public static String es_PE_FIELD_MailTemplate_MailText33_Help="El texto del correo indica el texto usado para los mensajes del correo.";
-
-@XendraTrl(Identifier="b4996f3d-a7e9-10f9-ae9f-5f4f87128612")
-public static String es_PE_FIELD_MailTemplate_MailText33_Name="Texto 3 de Mail";
 
 @XendraField(AD_Column_ID="MailText3",IsCentrallyMaintained=true,
 AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -355,7 +357,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a3932f39-f93a-d1bc-379f-52242faffc13",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name MailText3 */
 public static final String COLUMNNAME_MailText3 = "MailText3";
 /** Set Name.
@@ -387,18 +389,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
+public static String es_PE_FIELD_MailTemplate_Name_Name="Nombre";
+
+@XendraTrl(Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
 public static String es_PE_FIELD_MailTemplate_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
 public static String es_PE_FIELD_MailTemplate_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
-public static String es_PE_FIELD_MailTemplate_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="3fa20cbd-6740-e759-5123-540d65b386a7")
 public static final String FIELDNAME_MailTemplate_Name="3fa20cbd-6740-e759-5123-540d65b386a7";
 
 @XendraTrl(Identifier="0a24b505-67c2-f74f-41cc-82854328ebb5")
@@ -410,7 +413,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a24b505-67c2-f74f-41cc-82854328ebb5",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:46.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Mail Template.
@@ -430,13 +433,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a7a1010f-10e9-08d1-e8bd-079005f7e750")
+public static String es_PE_FIELD_MailTemplate_MailTemplate_Name="Patrón de Correo";
+
+@XendraTrl(Identifier="a7a1010f-10e9-08d1-e8bd-079005f7e750")
 public static String es_PE_FIELD_MailTemplate_MailTemplate_Description="Patrón de texto para correos.";
 
 @XendraTrl(Identifier="a7a1010f-10e9-08d1-e8bd-079005f7e750")
 public static String es_PE_FIELD_MailTemplate_MailTemplate_Help="El patrón de correo indica el patrón de correo para mensajes de retorno.";
-
-@XendraTrl(Identifier="a7a1010f-10e9-08d1-e8bd-079005f7e750")
-public static String es_PE_FIELD_MailTemplate_MailTemplate_Name="Patrón de Correo";
 
 @XendraField(AD_Column_ID="R_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c62d157f-8b9d-f492-7726-7d98ce1d9292",AD_FieldGroup_ID="",IsDisplayed=false,

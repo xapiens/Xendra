@@ -86,7 +86,8 @@ public class CLogErrorBuffer extends Handler
     	//	Foratting
 		setFormatter(CLogFormatter.get());
 		//	Default Level
-		super.setLevel(Level.INFO);
+		//super.setLevel(Level.INFO);
+		super.setLevel(Level.WARNING);
 		//	Filter
 		setFilter(CLogFilter.get());
     }	//	initialize

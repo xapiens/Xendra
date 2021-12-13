@@ -74,11 +74,12 @@ public static final String TABNAME_ScheduleMachine="ee25549e-746f-4ff9-8ea2-bd55
 @XendraTrl(Identifier="b1313058-cda4-434d-a39a-0ce29e39302e")
 public static String es_PE_TABLE_AD_SchedulerMachine_Name="Scheduler by Machine";
 
-@XendraTable(Name="Scheduler by Machine",Description="",Help="",TableName="AD_SchedulerMachine",
-AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="b1313058-cda4-434d-a39a-0ce29e39302e",
-Synchronized="2017-08-16 11:40:58.0")
+@XendraTable(Name="Scheduler by Machine",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_SchedulerMachine",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="b1313058-cda4-434d-a39a-0ce29e39302e",Synchronized="2020-03-03 21:35:54.0")
 /** TableName=AD_SchedulerMachine */
 public static final String Table_Name="AD_SchedulerMachine";
 
@@ -128,13 +129,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a59f8300-496d-44ca-84b9-30543edfbe98")
+public static String es_PE_FIELD_ScheduleMachine_Scheduler_Name="Programación";
+
+@XendraTrl(Identifier="a59f8300-496d-44ca-84b9-30543edfbe98")
 public static String es_PE_FIELD_ScheduleMachine_Scheduler_Description="Programación de procesos";
 
 @XendraTrl(Identifier="a59f8300-496d-44ca-84b9-30543edfbe98")
 public static String es_PE_FIELD_ScheduleMachine_Scheduler_Help="Programación de procesos para ser ejecutada la sincronización.";
-
-@XendraTrl(Identifier="a59f8300-496d-44ca-84b9-30543edfbe98")
-public static String es_PE_FIELD_ScheduleMachine_Scheduler_Name="Programación";
 
 @XendraField(AD_Column_ID="AD_Scheduler_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ee25549e-746f-4ff9-8ea2-bd55425c29c5",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -152,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="43bc57db-5c98-4aca-9baf-45ec8451d272",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Scheduler_ID */
 public static final String COLUMNNAME_AD_Scheduler_ID = "AD_Scheduler_ID";
 /** Set Machine .
@@ -190,7 +191,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3cec5a51-c7e3-42f5-83c0-a30ffb55caf0",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name A_Machine_ID */
 public static final String COLUMNNAME_A_Machine_ID = "A_Machine_ID";
 /** Set Identifier.
@@ -232,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="82508c77-ce8b-4495-b84e-df076ac078d0",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Read Write.
@@ -255,13 +256,13 @@ return false;
 }
 
 @XendraTrl(Identifier="e24814ff-098d-4e9c-bc0b-f4e4d096e5b8")
+public static String es_PE_FIELD_ScheduleMachine_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="e24814ff-098d-4e9c-bc0b-f4e4d096e5b8")
 public static String es_PE_FIELD_ScheduleMachine_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="e24814ff-098d-4e9c-bc0b-f4e4d096e5b8")
 public static String es_PE_FIELD_ScheduleMachine_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="e24814ff-098d-4e9c-bc0b-f4e4d096e5b8")
-public static String es_PE_FIELD_ScheduleMachine_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="ee25549e-746f-4ff9-8ea2-bd55425c29c5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -279,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="75cbdc4a-ff1e-40e3-b1ad-378be3232786",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name IsReadWrite */
 public static final String COLUMNNAME_IsReadWrite = "IsReadWrite";
 }

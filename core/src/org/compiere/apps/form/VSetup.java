@@ -461,7 +461,7 @@ implements FormPanel, ActionListener, Runnable
 		MSetup ms = new MSetup(Env.getCtx(), m_WindowNo);
 		m_frame.setBusyTimer(45);
 		//  Step 1
-		boolean ok = ms.createClient(fClientValue.getText(), fClientName.getText(), fOrgName.getText(),
+		boolean ok = ms.createClient(fClientValue.getText(), fClientName.getText(), "TaxID", fOrgName.getText(),
 				fUserClient.getText(), fUserOrg.getText(), Language.getBaseLanguage());
 		String info = ms.getInfo();
 
@@ -471,8 +471,7 @@ implements FormPanel, ActionListener, Runnable
 			KeyNamePair currency = (KeyNamePair)fCurrency.getSelectedItem();
 			if (!ms.createAccounting(currency,
 					fProduct.isSelected(), fBPartner.isSelected(), fProject.isSelected(),
-					fMCampaign.isSelected(), fSRegion.isSelected(),
-					m_file))
+					fMCampaign.isSelected(), fSRegion.isSelected()/*,	m_file*/))
 			{
 				ADialog.error(m_WindowNo, this, "AccountSetupError");
 				dispose();
@@ -484,8 +483,8 @@ implements FormPanel, ActionListener, Runnable
 			int C_Region_ID = p.getKey();
 			p = (KeyNamePair) fCity.getSelectedItem();
 			int C_City_ID = p.getKey();
-			//ms.createEntities(C_Country_ID, C_City_ID, C_Region_ID, currency.getKey(), fTaxID.getText());
-			ms.createEntities(C_Country_ID, C_City_ID, C_Region_ID, "Address1", currency.getKey(), null, null, null);
+			//ms.createEntities(C_Country_ID, C_City_ID, C_Region_ID, "Address1","Address2","Address3","Address4", currency.getKey(), null, null, null);
+			ms.createEntities(C_Country_ID, C_City_ID, C_Region_ID,  currency.getKey(), null, null, null, null, 0, null, null);
 			info += ms.getInfo();
 			//	Create Print Documents
 			PrintUtil.setupPrintForm(ms.getAD_Client_ID());

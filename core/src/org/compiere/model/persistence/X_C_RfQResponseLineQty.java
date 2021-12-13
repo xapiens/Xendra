@@ -61,10 +61,10 @@ public static int Table_ID=MTable.getTable_ID("C_RfQResponseLineQty");
 public static String es_PE_TAB_ResponseQuantity_Description="Línea de la Cantidad de Respuestas RfQ ";
 
 @XendraTrl(Identifier="d483a0da-c957-eed3-870b-405e58dfbf90")
-public static String es_PE_TAB_ResponseQuantity_Name="Cantidad Respuesta";
+public static String es_PE_TAB_ResponseQuantity_Help="Pedido de Cantidad de la Línea de Respuesta de la cita de un proveedor potencial";
 
 @XendraTrl(Identifier="d483a0da-c957-eed3-870b-405e58dfbf90")
-public static String es_PE_TAB_ResponseQuantity_Help="Pedido de Cantidad de la Línea de Respuesta de la cita de un proveedor potencial";
+public static String es_PE_TAB_ResponseQuantity_Name="Cantidad Respuesta";
 
 @XendraTab(Name="Response Quantity",Description="RfQ Line Quantity Response",
 Help="Request for Quotation Response Line Quantity from a potential Vendor",
@@ -80,13 +80,14 @@ public static final String TABNAME_ResponseQuantity="d483a0da-c957-eed3-870b-405
 public static String es_PE_TABLE_C_RfQResponseLineQty_Name="Cantidad Línea Respuesta SPC (RfQ)";
 
 
-@XendraTable(Name="RfQ Response Line Qty",
+@XendraTable(Name="RfQ Response Line Qty",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Request for Quotation Response Line Quantity",Help="",
 TableName="C_RfQResponseLineQty",AccessLevel="1",
 AD_Window_ID="00321465-3813-5160-b116-f76e77af89f6",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="489491e4-db4d-8162-c6a8-ac49091aec8b",
-Synchronized="2017-08-16 11:42:26.0")
+Synchronized="2020-03-03 21:37:38.0")
 /** TableName=C_RfQResponseLineQty */
 public static final String Table_Name="C_RfQResponseLineQty";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c92ad721-136a-a4ad-5436-b71433ddc26b")
+public static String es_PE_FIELD_ResponseQuantity_RfQLineQuantity_Name="Cantidad Línea";
+
+@XendraTrl(Identifier="c92ad721-136a-a4ad-5436-b71433ddc26b")
 public static String es_PE_FIELD_ResponseQuantity_RfQLineQuantity_Description="Solicitud para la cita de la cantida de la linea";
 
 @XendraTrl(Identifier="c92ad721-136a-a4ad-5436-b71433ddc26b")
 public static String es_PE_FIELD_ResponseQuantity_RfQLineQuantity_Help="Usted puede solicitar una cita para diversas cantidades";
-
-@XendraTrl(Identifier="c92ad721-136a-a4ad-5436-b71433ddc26b")
-public static String es_PE_FIELD_ResponseQuantity_RfQLineQuantity_Name="Cantidad Línea";
 
 @XendraField(AD_Column_ID="C_RfQLineQty_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9369ca0b-544e-c177-905e-15971afc58b8",
-Synchronized="2017-08-05 16:54:23.0")
+Synchronized="2019-08-30 22:22:15.0")
 /** Column name C_RfQLineQty_ID */
 public static final String COLUMNNAME_C_RfQLineQty_ID = "C_RfQLineQty_ID";
 /** Set RfQ Response Line.
@@ -186,13 +187,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_RfQResponseLine_ID()));
 }
 
 @XendraTrl(Identifier="75e570c0-5e75-d254-21ac-ef2f67a8b369")
+public static String es_PE_FIELD_ResponseQuantity_RfQResponseLine_Name="Item Respuesta";
+
+@XendraTrl(Identifier="75e570c0-5e75-d254-21ac-ef2f67a8b369")
 public static String es_PE_FIELD_ResponseQuantity_RfQResponseLine_Description="Solicitud para el Item de respuesta.";
 
 @XendraTrl(Identifier="75e570c0-5e75-d254-21ac-ef2f67a8b369")
 public static String es_PE_FIELD_ResponseQuantity_RfQResponseLine_Help="Solicitud para línea de respuesta de la cita de un vendedor potencial.";
-
-@XendraTrl(Identifier="75e570c0-5e75-d254-21ac-ef2f67a8b369")
-public static String es_PE_FIELD_ResponseQuantity_RfQResponseLine_Name="Item Respuesta";
 
 @XendraField(AD_Column_ID="C_RfQResponseLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -210,7 +211,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="09950ddd-f023-c418-49d9-250a8abc0c88",Synchronized="2017-08-05 16:54:23.0")
+Identifier="09950ddd-f023-c418-49d9-250a8abc0c88",Synchronized="2019-08-30 22:22:15.0")
 /** Column name C_RfQResponseLine_ID */
 public static final String COLUMNNAME_C_RfQResponseLine_ID = "C_RfQResponseLine_ID";
 /** Set RfQ Response Line Qty.
@@ -230,13 +231,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="10fbac0c-186b-88ed-3411-ddfd61b8643e")
+public static String es_PE_FIELD_ResponseQuantity_RfQResponseLineQty_Name="Cantidad Línea Respuesta SPC (RfQ)";
+
+@XendraTrl(Identifier="10fbac0c-186b-88ed-3411-ddfd61b8643e")
 public static String es_PE_FIELD_ResponseQuantity_RfQResponseLineQty_Description="Petición de la cita para la cantidad de la línea de la respuesta";
 
 @XendraTrl(Identifier="10fbac0c-186b-88ed-3411-ddfd61b8643e")
 public static String es_PE_FIELD_ResponseQuantity_RfQResponseLineQty_Help="Petición de la cita para la cantidad de la línea de la respuesta de un vendedor potencial";
-
-@XendraTrl(Identifier="10fbac0c-186b-88ed-3411-ddfd61b8643e")
-public static String es_PE_FIELD_ResponseQuantity_RfQResponseLineQty_Name="Cantidad Línea Respuesta SPC (RfQ)";
 
 @XendraField(AD_Column_ID="C_RfQResponseLineQty_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -262,13 +263,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="39b9b53f-8f91-9db0-e189-e3750b198daa")
+public static String es_PE_FIELD_ResponseQuantity_Discount_Name="% Descuento";
+
+@XendraTrl(Identifier="39b9b53f-8f91-9db0-e189-e3750b198daa")
 public static String es_PE_FIELD_ResponseQuantity_Discount_Description="Descuento en porcentaje";
 
 @XendraTrl(Identifier="39b9b53f-8f91-9db0-e189-e3750b198daa")
 public static String es_PE_FIELD_ResponseQuantity_Discount_Help="El Descuento indica el descuento aplicado o tomado como un porcentaje.";
-
-@XendraTrl(Identifier="39b9b53f-8f91-9db0-e189-e3750b198daa")
-public static String es_PE_FIELD_ResponseQuantity_Discount_Name="% Descuento";
 
 @XendraField(AD_Column_ID="Discount",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -286,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ad1e2930-bdea-4ef5-c206-350f5fa91352",
-Synchronized="2017-08-05 16:54:23.0")
+Synchronized="2019-08-30 22:22:15.0")
 /** Column name Discount */
 public static final String COLUMNNAME_Discount = "Discount";
 /** Set Identifier.
@@ -318,7 +319,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4477224a-7864-43f5-b33c-02dcd4b34c0d",
-Synchronized="2017-08-05 16:54:23.0")
+Synchronized="2019-08-30 22:22:15.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Price.
@@ -338,13 +339,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="98b1eaa9-0ab2-6b09-103a-1b3839366706")
+public static String es_PE_FIELD_ResponseQuantity_Price_Name="Precio";
+
+@XendraTrl(Identifier="98b1eaa9-0ab2-6b09-103a-1b3839366706")
 public static String es_PE_FIELD_ResponseQuantity_Price_Description="Precio";
 
 @XendraTrl(Identifier="98b1eaa9-0ab2-6b09-103a-1b3839366706")
 public static String es_PE_FIELD_ResponseQuantity_Price_Help="El Precio indica el precio de un producto ó servicio";
-
-@XendraTrl(Identifier="98b1eaa9-0ab2-6b09-103a-1b3839366706")
-public static String es_PE_FIELD_ResponseQuantity_Price_Name="Precio";
 
 @XendraField(AD_Column_ID="Price",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -362,7 +363,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d51f8096-c83c-5f79-785a-5a731988b228",
-Synchronized="2017-08-05 16:54:23.0")
+Synchronized="2019-08-30 22:22:15.0")
 /** Column name Price */
 public static final String COLUMNNAME_Price = "Price";
 /** Set Ranking.
@@ -381,13 +382,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d58ab3c8-48d8-0b0f-76ac-e8e6e4dac417")
+public static String es_PE_FIELD_ResponseQuantity_Ranking_Name="Evaluación";
+
+@XendraTrl(Identifier="d58ab3c8-48d8-0b0f-76ac-e8e6e4dac417")
 public static String es_PE_FIELD_ResponseQuantity_Ranking_Description="Numero relativo de fila";
 
 @XendraTrl(Identifier="d58ab3c8-48d8-0b0f-76ac-e8e6e4dac417")
 public static String es_PE_FIELD_ResponseQuantity_Ranking_Help="Uno es la fila más alta";
-
-@XendraTrl(Identifier="d58ab3c8-48d8-0b0f-76ac-e8e6e4dac417")
-public static String es_PE_FIELD_ResponseQuantity_Ranking_Name="Evaluación";
 
 @XendraField(AD_Column_ID="Ranking",IsCentrallyMaintained=true,
 AD_Tab_ID="d483a0da-c957-eed3-870b-405e58dfbf90",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -405,7 +406,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f26aa3be-6438-60b9-d894-e84ba2df259c",
-Synchronized="2017-08-05 16:54:23.0")
+Synchronized="2019-08-30 22:22:15.0")
 /** Column name Ranking */
 public static final String COLUMNNAME_Ranking = "Ranking";
 }

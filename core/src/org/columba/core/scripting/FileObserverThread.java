@@ -34,6 +34,7 @@ import org.columba.core.scripting.config.BeanshellConfig;
 import org.columba.core.scripting.config.OptionsObserver;
 import org.columba.core.scripting.interpreter.InterpreterManager;
 import org.columba.core.scripting.model.ColumbaScript;
+import org.compiere.util.CLogger;
 
 /**
  The FileObserverThread is a timer that polls the file system to check if any
@@ -53,7 +54,7 @@ public class FileObserverThread
                 ScriptManagerDocument
 {
 
-    private static final Logger LOG = Logger.getLogger(FileObserverThread.class.getName());
+    private static final CLogger LOG = CLogger.getCLogger(FileObserverThread.class.getName());
 
     private final BeanshellConfig config;
     private final ScriptFileFilter fileFilter;

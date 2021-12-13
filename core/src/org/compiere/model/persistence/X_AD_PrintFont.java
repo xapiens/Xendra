@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("AD_PrintFont");
 public static String es_PE_TAB_PrintFont_Description="Mantener Fuente de Impresión";
 
 @XendraTrl(Identifier="6150de68-2e31-10bf-7466-09efbeab1a55")
-public static String es_PE_TAB_PrintFont_Name="Fuente de Impresión";
-
-@XendraTrl(Identifier="6150de68-2e31-10bf-7466-09efbeab1a55")
 public static String es_PE_TAB_PrintFont_Help="Fuentes usadas para impresión.";
 
-@XendraTab(Name="Print Font",Description="Maintain Print Font",Help="Font used for printing",
+@XendraTrl(Identifier="6150de68-2e31-10bf-7466-09efbeab1a55")
+public static String es_PE_TAB_PrintFont_Name="Fuente de Impresión";
+@XendraTab(Name="Print Font",
+Description="Maintain Print Font",Help="Font used for printing",
 AD_Window_ID="fa7b9d5b-b388-9020-de37-49d253bee908",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -79,11 +79,12 @@ public static final String TABNAME_PrintFont="6150de68-2e31-10bf-7466-09efbeab1a
 @XendraTrl(Identifier="c80dcae2-ebd1-38ff-9774-8e06e883dbb6")
 public static String es_PE_TABLE_AD_PrintFont_Name="Fuente de Impresión";
 
-@XendraTable(Name="Print Font",Description="Maintain Print Font",Help="",TableName="AD_PrintFont",
-AccessLevel="6",AD_Window_ID="fa7b9d5b-b388-9020-de37-49d253bee908",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=55,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="c80dcae2-ebd1-38ff-9774-8e06e883dbb6",Synchronized="2017-08-16 11:40:38.0")
+@XendraTable(Name="Print Font",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Maintain Print Font",Help="",
+TableName="AD_PrintFont",AccessLevel="6",AD_Window_ID="fa7b9d5b-b388-9020-de37-49d253bee908",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=55,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="c80dcae2-ebd1-38ff-9774-8e06e883dbb6",Synchronized="2020-03-03 21:35:19.0")
 /** TableName=AD_PrintFont */
 public static final String Table_Name="AD_PrintFont";
 
@@ -139,13 +140,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="375d115d-65d5-f036-65fc-2a6fc44231a0")
+public static String es_PE_FIELD_PrintFont_PrintFont_Name="Fuente de Impresión";
+
+@XendraTrl(Identifier="375d115d-65d5-f036-65fc-2a6fc44231a0")
 public static String es_PE_FIELD_PrintFont_PrintFont_Description="Mantener fuentes de impresión";
 
 @XendraTrl(Identifier="375d115d-65d5-f036-65fc-2a6fc44231a0")
 public static String es_PE_FIELD_PrintFont_PrintFont_Help="Fuente usado para imprimir";
-
-@XendraTrl(Identifier="375d115d-65d5-f036-65fc-2a6fc44231a0")
-public static String es_PE_FIELD_PrintFont_PrintFont_Name="Fuente de Impresión";
 
 @XendraField(AD_Column_ID="AD_PrintFont_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6150de68-2e31-10bf-7466-09efbeab1a55",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -177,13 +178,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="a4c7ee97-1920-3473-ce1b-108fd46c8134")
+public static String es_PE_FIELD_PrintFont_ValidationCode_Name="Código de Validación";
+
+@XendraTrl(Identifier="a4c7ee97-1920-3473-ce1b-108fd46c8134")
 public static String es_PE_FIELD_PrintFont_ValidationCode_Description="Código de Validación";
 
 @XendraTrl(Identifier="a4c7ee97-1920-3473-ce1b-108fd46c8134")
 public static String es_PE_FIELD_PrintFont_ValidationCode_Help="El código validación despliega la fecha; hora y mensaje del error";
-
-@XendraTrl(Identifier="a4c7ee97-1920-3473-ce1b-108fd46c8134")
-public static String es_PE_FIELD_PrintFont_ValidationCode_Name="Código de Validación";
 
 @XendraField(AD_Column_ID="Code",IsCentrallyMaintained=true,
 AD_Tab_ID="6150de68-2e31-10bf-7466-09efbeab1a55",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -201,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="15b72900-c6ac-e7fe-54a0-366f98f68e5b",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Code */
 public static final String COLUMNNAME_Code = "Code";
 /** Set Identifier.
@@ -233,7 +234,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54a1b3a3-f3f6-4992-ba82-7286836b5c11",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -256,13 +257,13 @@ return false;
 }
 
 @XendraTrl(Identifier="306d7761-6226-0f09-7cd2-417bdbe294f2")
+public static String es_PE_FIELD_PrintFont_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="306d7761-6226-0f09-7cd2-417bdbe294f2")
 public static String es_PE_FIELD_PrintFont_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="306d7761-6226-0f09-7cd2-417bdbe294f2")
 public static String es_PE_FIELD_PrintFont_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="306d7761-6226-0f09-7cd2-417bdbe294f2")
-public static String es_PE_FIELD_PrintFont_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="6150de68-2e31-10bf-7466-09efbeab1a55",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -280,7 +281,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a4d3150-bb21-45ca-527f-706e27636577",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -312,18 +313,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
+public static String es_PE_FIELD_PrintFont_Name_Name="Nombre";
+
+@XendraTrl(Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
 public static String es_PE_FIELD_PrintFont_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
 public static String es_PE_FIELD_PrintFont_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
-public static String es_PE_FIELD_PrintFont_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="6150de68-2e31-10bf-7466-09efbeab1a55",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="6150de68-2e31-10bf-7466-09efbeab1a55",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="c55db977-b643-a90c-fc91-f2a5938dc593")
 public static final String FIELDNAME_PrintFont_Name="c55db977-b643-a90c-fc91-f2a5938dc593";
 
 @XendraTrl(Identifier="5b43203b-5907-290a-6dc2-e7e01ee17a8f")
@@ -335,7 +337,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5b43203b-5907-290a-6dc2-e7e01ee17a8f",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

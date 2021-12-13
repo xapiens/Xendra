@@ -167,7 +167,7 @@ public class MTab extends X_AD_Tab
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("X");
+			System.out.println("X22");
 		}
 		return retValue;
 	}

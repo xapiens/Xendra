@@ -73,6 +73,19 @@ public class WFActivity extends CPanel
 		m_menu = menu;
 	}	//	WFActivity
 
+	public WFActivity (JDialog dialog) {
+		super ();
+		log.config("");
+		try 
+		{
+			dynInit(0);
+			jbInit();
+		}
+		catch(Exception e) 
+		{
+			log.log(Level.SEVERE, "", e);
+		}		
+	}
 
 	/**	Window No					*/
 	private int         		m_WindowNo = 0;

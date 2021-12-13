@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_PA_GoalRestrictionType;
 /** Generated Model for PA_GoalRestriction
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -62,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("PA_GoalRestriction");
 public static String es_PE_TAB_Restriction_Description="Restricción de Meta del Desempeño ";
 
 @XendraTrl(Identifier="8aaec98f-a29d-2d00-9362-ba3791d46eb9")
-public static String es_PE_TAB_Restriction_Name="Restricción";
-
-@XendraTrl(Identifier="8aaec98f-a29d-2d00-9362-ba3791d46eb9")
 public static String es_PE_TAB_Restriction_Help="Restricción de  la medida de desempeño para la Organización, Socio del Negocio o Producto definido.Ejemplo: El desempeño solo es medido para HQ.La medida debe soportar la información, sino es ignorada.";
 
-@XendraTab(Name="Restriction",Description="Performance Goal Restriction",
+@XendraTrl(Identifier="8aaec98f-a29d-2d00-9362-ba3791d46eb9")
+public static String es_PE_TAB_Restriction_Name="Restricción";
+@XendraTab(Name="Restriction",
+Description="Performance Goal Restriction",
 Help="Restriction of the performance measure to the Organization, Business Partner or Product defined. Example: The performance is only measured for HQ The measure must support the data, otherwise it is ignored.",
 AD_Window_ID="862a0f62-314c-f80f-95c1-8aa84c5ab9f8",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,11 +79,13 @@ public static final String TABNAME_Restriction="8aaec98f-a29d-2d00-9362-ba3791d4
 @XendraTrl(Identifier="ffe43043-3e97-52f8-30cd-6c64e5364de6")
 public static String es_PE_TABLE_PA_GoalRestriction_Name="Goal Restriction";
 
-@XendraTable(Name="Goal Restriction",Description="Performance Goal Restriction",Help="",
-TableName="PA_GoalRestriction",AccessLevel="6",AD_Window_ID="862a0f62-314c-f80f-95c1-8aa84c5ab9f8",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="ffe43043-3e97-52f8-30cd-6c64e5364de6",Synchronized="2017-08-16 11:43:39.0")
+@XendraTable(Name="Goal Restriction",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Performance Goal Restriction",
+Help="",TableName="PA_GoalRestriction",AccessLevel="6",
+AD_Window_ID="862a0f62-314c-f80f-95c1-8aa84c5ab9f8",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="ffe43043-3e97-52f8-30cd-6c64e5364de6",Synchronized="2020-03-03 21:39:02.0")
 /** TableName=PA_GoalRestriction */
 public static final String Table_Name="PA_GoalRestriction";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e15d0ccc-a4fb-c92e-5301-cc0d4044c5f9")
+public static String es_PE_FIELD_Restriction_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="e15d0ccc-a4fb-c92e-5301-cc0d4044c5f9")
 public static String es_PE_FIELD_Restriction_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="e15d0ccc-a4fb-c92e-5301-cc0d4044c5f9")
 public static String es_PE_FIELD_Restriction_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="e15d0ccc-a4fb-c92e-5301-cc0d4044c5f9")
-public static String es_PE_FIELD_Restriction_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2b400c30-6414-810b-4d37-03494b3d41ec",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Business Partner Group.
@@ -180,13 +181,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e3a86d9b-79af-4245-9090-5079c4074641")
+public static String es_PE_FIELD_Restriction_BusinessPartnerGroup_Name="Grupo de Socio de Negocio";
+
+@XendraTrl(Identifier="e3a86d9b-79af-4245-9090-5079c4074641")
 public static String es_PE_FIELD_Restriction_BusinessPartnerGroup_Description="ID del Grupo de Socio de Negocio";
 
 @XendraTrl(Identifier="e3a86d9b-79af-4245-9090-5079c4074641")
 public static String es_PE_FIELD_Restriction_BusinessPartnerGroup_Help="La ID Grupo del Socio de Negocio proporciona un método de definir valores predeterminados a ser usados para Socios de Negocio individuales.";
-
-@XendraTrl(Identifier="e3a86d9b-79af-4245-9090-5079c4074641")
-public static String es_PE_FIELD_Restriction_BusinessPartnerGroup_Name="Grupo de Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BP_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -204,19 +205,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5fcd7969-856c-4398-c1e1-0b0b5dcef87b",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name C_BP_Group_ID */
 public static final String COLUMNNAME_C_BP_Group_ID = "C_BP_Group_ID";
-
-/** GoalRestrictionType AD_Reference=1bf6024a-4612-c6c4-ca75-eaf7b4295b7f */
-public static final int GOALRESTRICTIONTYPE_AD_Reference_ID=368;
 /** Set Restriction Type.
 @param GoalRestrictionType Goal Restriction Type */
 public void setGoalRestrictionType (String GoalRestrictionType)
 {
-if (GoalRestrictionType == null) throw new IllegalArgumentException ("GoalRestrictionType is mandatory");
-if (GoalRestrictionType.equals(REF_PA_GoalRestrictionType.Organization) || GoalRestrictionType.equals(REF_PA_GoalRestrictionType.BusinessPartner) || GoalRestrictionType.equals(REF_PA_GoalRestrictionType.Product) || GoalRestrictionType.equals(REF_PA_GoalRestrictionType.BusPartnerGroup) || GoalRestrictionType.equals(REF_PA_GoalRestrictionType.ProductCategory));
- else throw new IllegalArgumentException ("GoalRestrictionType Invalid value - " + GoalRestrictionType + " - Reference_ID=368 - O - B - P - G - C");
 if (GoalRestrictionType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -232,13 +227,13 @@ return (String)get_Value(COLUMNNAME_GoalRestrictionType);
 }
 
 @XendraTrl(Identifier="eaa4d1e3-e224-efab-9c56-99d721398630")
+public static String es_PE_FIELD_Restriction_RestrictionType_Name="Tipo de Restricción";
+
+@XendraTrl(Identifier="eaa4d1e3-e224-efab-9c56-99d721398630")
 public static String es_PE_FIELD_Restriction_RestrictionType_Description="Tipo de Restricción Meta";
 
 @XendraTrl(Identifier="eaa4d1e3-e224-efab-9c56-99d721398630")
 public static String es_PE_FIELD_Restriction_RestrictionType_Help="Ingrese uno o más registros por Tipo de Restricción Meta (ej. Org o1, o2)";
-
-@XendraTrl(Identifier="eaa4d1e3-e224-efab-9c56-99d721398630")
-public static String es_PE_FIELD_Restriction_RestrictionType_Name="Tipo de Restricción";
 
 @XendraField(AD_Column_ID="GoalRestrictionType",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -257,7 +252,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="0218c2e6-11d6-1eee-d1ba-8d78e11e6976",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name GoalRestrictionType */
 public static final String COLUMNNAME_GoalRestrictionType = "GoalRestrictionType";
 /** Set Identifier.
@@ -289,7 +284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cc30151b-5927-472e-94e6-916408d3261f",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product Category.
@@ -310,13 +305,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="717d104d-7473-a2de-f701-126f825ab72c")
+public static String es_PE_FIELD_Restriction_ProductCategory_Name="Categoría del Producto";
+
+@XendraTrl(Identifier="717d104d-7473-a2de-f701-126f825ab72c")
 public static String es_PE_FIELD_Restriction_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraTrl(Identifier="717d104d-7473-a2de-f701-126f825ab72c")
 public static String es_PE_FIELD_Restriction_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
-
-@XendraTrl(Identifier="717d104d-7473-a2de-f701-126f825ab72c")
-public static String es_PE_FIELD_Restriction_ProductCategory_Name="Categoría del Producto";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -334,7 +329,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9c79e22c-9816-6b1c-eb92-3e0aba497b22",Synchronized="2017-08-05 16:55:40.0")
+Identifier="9c79e22c-9816-6b1c-eb92-3e0aba497b22",Synchronized="2019-08-30 22:23:37.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Product.
@@ -355,13 +350,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cc72d982-5e47-9761-469c-d28d0500950e")
+public static String es_PE_FIELD_Restriction_Product_Name="Producto";
+
+@XendraTrl(Identifier="cc72d982-5e47-9761-469c-d28d0500950e")
 public static String es_PE_FIELD_Restriction_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="cc72d982-5e47-9761-469c-d28d0500950e")
 public static String es_PE_FIELD_Restriction_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="cc72d982-5e47-9761-469c-d28d0500950e")
-public static String es_PE_FIELD_Restriction_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -379,7 +374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="82d5207c-6b15-768a-b9d8-f037983c35f1",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Name.
@@ -411,18 +406,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
+public static String es_PE_FIELD_Restriction_Name_Name="Nombre";
+
+@XendraTrl(Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
 public static String es_PE_FIELD_Restriction_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
 public static String es_PE_FIELD_Restriction_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
-public static String es_PE_FIELD_Restriction_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="73ac3f1f-bb4b-0136-159c-8c277a1fdd29")
 public static final String FIELDNAME_Restriction_Name="73ac3f1f-bb4b-0136-159c-8c277a1fdd29";
 
 @XendraTrl(Identifier="b52f2dba-5f52-9a91-1088-106cabb43f2b")
@@ -434,12 +430,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b52f2dba-5f52-9a91-1088-106cabb43f2b",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** Org_ID AD_Reference=03b73d55-8464-9bbd-df2b-d10ff9f3913f */
-public static final int ORG_ID_AD_Reference_ID=322;
 /** Set Organization.
 @param Org_ID Organizational entity within client */
 public void setOrg_ID (int Org_ID)
@@ -458,13 +451,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fa04442b-b0d7-b092-08ef-622d2d2b717c")
+public static String es_PE_FIELD_Restriction_Organization_Name="Organización";
+
+@XendraTrl(Identifier="fa04442b-b0d7-b092-08ef-622d2d2b717c")
 public static String es_PE_FIELD_Restriction_Organization_Description="Entidad organizacional dentro de la empresa.";
 
 @XendraTrl(Identifier="fa04442b-b0d7-b092-08ef-622d2d2b717c")
 public static String es_PE_FIELD_Restriction_Organization_Help="Una organización es una unidad de su compañía ó entidad legal. Ej. tiendas; departamentos";
-
-@XendraTrl(Identifier="fa04442b-b0d7-b092-08ef-622d2d2b717c")
-public static String es_PE_FIELD_Restriction_Organization_Name="Organización";
 
 @XendraField(AD_Column_ID="Org_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -482,7 +475,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="91beb3e3-5b0b-7345-8767-61a66733a120",Synchronized="2017-08-05 16:55:40.0")
+Identifier="91beb3e3-5b0b-7345-8767-61a66733a120",Synchronized="2019-08-30 22:23:37.0")
 /** Column name Org_ID */
 public static final String COLUMNNAME_Org_ID = "Org_ID";
 /** Set Goal.
@@ -502,13 +495,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="12182edb-a714-5b02-7cf5-17ec2b22c18c")
+public static String es_PE_FIELD_Restriction_Goal_Name="Objetivo";
+
+@XendraTrl(Identifier="12182edb-a714-5b02-7cf5-17ec2b22c18c")
 public static String es_PE_FIELD_Restriction_Goal_Description="Objetivo de desempeño";
 
 @XendraTrl(Identifier="12182edb-a714-5b02-7cf5-17ec2b22c18c")
 public static String es_PE_FIELD_Restriction_Goal_Help="La meta de desempeño indica contra que será medido este desempeño de usuarios.";
-
-@XendraTrl(Identifier="12182edb-a714-5b02-7cf5-17ec2b22c18c")
-public static String es_PE_FIELD_Restriction_Goal_Name="Objetivo";
 
 @XendraField(AD_Column_ID="PA_Goal_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -526,7 +519,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b10baf9c-1275-7127-0bcd-86218527c754",
-Synchronized="2017-08-05 16:55:40.0")
+Synchronized="2019-08-30 22:23:37.0")
 /** Column name PA_Goal_ID */
 public static final String COLUMNNAME_PA_Goal_ID = "PA_Goal_ID";
 /** Set Goal Restriction.
@@ -546,13 +539,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="afb457f8-b113-34d7-7f90-2138182dbedb")
+public static String es_PE_FIELD_Restriction_GoalRestriction_Name="Goal Restriction";
+
+@XendraTrl(Identifier="afb457f8-b113-34d7-7f90-2138182dbedb")
 public static String es_PE_FIELD_Restriction_GoalRestriction_Description="Performance Goal Restriction";
 
 @XendraTrl(Identifier="afb457f8-b113-34d7-7f90-2138182dbedb")
 public static String es_PE_FIELD_Restriction_GoalRestriction_Help="Restriction of the performance measure to the Organization, Business Partner or Product defined.Example: The performance is only measured for HQThe measure must support the data, otherwise it is ignored.";
-
-@XendraTrl(Identifier="afb457f8-b113-34d7-7f90-2138182dbedb")
-public static String es_PE_FIELD_Restriction_GoalRestriction_Name="Goal Restriction";
 
 @XendraField(AD_Column_ID="PA_GoalRestriction_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8aaec98f-a29d-2d00-9362-ba3791d46eb9",AD_FieldGroup_ID="",IsDisplayed=false,

@@ -12,16 +12,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,7 +24,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import net.javaprog.ui.wizard.AbstractStep;
 import net.miginfocom.swing.MigLayout;
 
 import org.columba.core.base.SwingWorker;
@@ -43,11 +37,9 @@ import org.compiere.model.persistence.X_AD_ImpFormat;
 import org.compiere.swing.CButton;
 import org.compiere.swing.CComboBox;
 import org.compiere.swing.CPanel;
-import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
 import org.compiere.util.Msg;
-import org.xendra.newclient.wizard.NewDatabase.Task;
 
 public class FileImportPanel extends JPanel implements ActionListener {	
 	private static final String s_none = "----";	//	no format indicator
@@ -150,7 +142,8 @@ public class FileImportPanel extends JPanel implements ActionListener {
 			cmd_applyFormat(true);
 		else if (e.getSource() == bPrevious)
 			cmd_applyFormat(false);
-		else if (e.getSource() == bOk) { 
+		else if (e.getSource() == bOk) {
+			bOk.setEnabled(false);
 			Task tsk = new Task(null);
 			tsk.start();
 		}		
@@ -321,6 +314,7 @@ public class FileImportPanel extends JPanel implements ActionListener {
 					imported++;
 			//
 			ADialog.info(0, null, "FileImportR/I", row + " / " + imported + "#");
+			bOk.setEnabled(true);
 			return null;
 		}
 

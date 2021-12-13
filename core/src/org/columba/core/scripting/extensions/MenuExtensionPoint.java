@@ -25,6 +25,7 @@ import org.columba.api.gui.frame.IContainer;
 import org.columba.core.gui.action.AbstractColumbaAction;
 import org.columba.core.gui.frame.FrameManager;
 import org.columba.core.gui.menu.ExtendableMenuBar;
+import org.compiere.util.CLogger;
 
 /**
  * Insert action in menu.
@@ -42,7 +43,7 @@ public class MenuExtensionPoint extends AbstractExtensionPoint {
 
 	public static final String EXTENSION_POINT_ID = "main_menu";
 
-	private static final Logger LOG = Logger.getLogger(MenuExtensionPoint.class
+	private static final CLogger LOG = CLogger.getCLogger(MenuExtensionPoint.class
 			.getName());
 
 	public MenuExtensionPoint() {

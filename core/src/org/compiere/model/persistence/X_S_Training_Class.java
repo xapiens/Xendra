@@ -62,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("S_Training_Class");
 public static String es_PE_TAB_Class_Description="El Actual ";
 
 @XendraTrl(Identifier="70cb612b-a413-3da1-5dbf-d352d1a85eaa")
-public static String es_PE_TAB_Class_Name="Clase";
+public static String es_PE_TAB_Class_Help="Un Programador de Clase";
 
 @XendraTrl(Identifier="70cb612b-a413-3da1-5dbf-d352d1a85eaa")
-public static String es_PE_TAB_Class_Help="Un Programador de Clase";
+public static String es_PE_TAB_Class_Name="Clase";
 @XendraTab(Name="Class",
 Description="The actual training class instance",Help="A scheduled class",
 AD_Window_ID="14c204f8-5dfb-ff0b-b3f7-8445e3bd66d5",SeqNo=20,TabLevel=1,IsSingleRow=false,
@@ -79,11 +79,13 @@ public static final String TABNAME_Class="70cb612b-a413-3da1-5dbf-d352d1a85eaa";
 @XendraTrl(Identifier="167df0af-8d98-3468-1a85-7b3980084a8f")
 public static String es_PE_TABLE_S_Training_Class_Name="Clase de entrenamiento";
 
-@XendraTable(Name="Training Class",Description="The actual training class instance",Help="",
-TableName="S_Training_Class",AccessLevel="3",AD_Window_ID="14c204f8-5dfb-ff0b-b3f7-8445e3bd66d5",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.services",
-Identifier="167df0af-8d98-3468-1a85-7b3980084a8f",Synchronized="2017-08-16 11:44:16.0")
+@XendraTable(Name="Training Class",AD_Package_ID="4bb6f0e4-f72d-dcbb-9183-88af0357143f",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="The actual training class instance",Help="",TableName="S_Training_Class",
+AccessLevel="3",AD_Window_ID="14c204f8-5dfb-ff0b-b3f7-8445e3bd66d5",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.services",
+Identifier="167df0af-8d98-3468-1a85-7b3980084a8f",Synchronized="2020-03-03 21:40:15.0")
 /** TableName=S_Training_Class */
 public static final String Table_Name="S_Training_Class";
 
@@ -131,13 +133,13 @@ return (Timestamp)get_Value(COLUMNNAME_EndDate);
 }
 
 @XendraTrl(Identifier="0d4b096a-de27-a2a4-4772-838ce30d5161")
+public static String es_PE_FIELD_Class_EndDate_Name="Fecha Final";
+
+@XendraTrl(Identifier="0d4b096a-de27-a2a4-4772-838ce30d5161")
 public static String es_PE_FIELD_Class_EndDate_Description="Última fecha efectiva (inclusive)";
 
 @XendraTrl(Identifier="0d4b096a-de27-a2a4-4772-838ce30d5161")
 public static String es_PE_FIELD_Class_EndDate_Help="La fecha final indica la última fecha en este rango.";
-
-@XendraTrl(Identifier="0d4b096a-de27-a2a4-4772-838ce30d5161")
-public static String es_PE_FIELD_Class_EndDate_Name="Fecha Final";
 
 @XendraField(AD_Column_ID="EndDate",IsCentrallyMaintained=true,
 AD_Tab_ID="70cb612b-a413-3da1-5dbf-d352d1a85eaa",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -155,7 +157,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54ffa8b2-42db-c075-72ae-e809624b8c8b",
-Synchronized="2017-08-05 16:56:22.0")
+Synchronized="2019-08-30 22:24:19.0")
 /** Column name EndDate */
 public static final String COLUMNNAME_EndDate = "EndDate";
 /** Set Identifier.
@@ -187,7 +189,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="39dc0d12-e1e3-4914-a85b-6a080001e59d",
-Synchronized="2017-08-05 16:56:22.0")
+Synchronized="2019-08-30 22:24:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -207,13 +209,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ce3c4329-91ea-52c3-27f8-74bfce8a94c8")
+public static String es_PE_FIELD_Class_Product_Name="Producto";
+
+@XendraTrl(Identifier="ce3c4329-91ea-52c3-27f8-74bfce8a94c8")
 public static String es_PE_FIELD_Class_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="ce3c4329-91ea-52c3-27f8-74bfce8a94c8")
 public static String es_PE_FIELD_Class_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="ce3c4329-91ea-52c3-27f8-74bfce8a94c8")
-public static String es_PE_FIELD_Class_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="70cb612b-a413-3da1-5dbf-d352d1a85eaa",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -231,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fb4a9e98-4b58-dd3f-a477-0a1d93da1e5d",
-Synchronized="2017-08-05 16:56:22.0")
+Synchronized="2019-08-30 22:24:19.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Start Date.
@@ -255,13 +257,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getStartDate()));
 }
 
 @XendraTrl(Identifier="7f1a450e-65e2-46a0-3995-7fa18db21e21")
+public static String es_PE_FIELD_Class_StartDate_Name="Fecha de Inicio";
+
+@XendraTrl(Identifier="7f1a450e-65e2-46a0-3995-7fa18db21e21")
 public static String es_PE_FIELD_Class_StartDate_Description="Primer día efectivo (inclusive)";
 
 @XendraTrl(Identifier="7f1a450e-65e2-46a0-3995-7fa18db21e21")
 public static String es_PE_FIELD_Class_StartDate_Help="La fecha de Inicio indica la primera fecha ó fecha inicial de un rango";
-
-@XendraTrl(Identifier="7f1a450e-65e2-46a0-3995-7fa18db21e21")
-public static String es_PE_FIELD_Class_StartDate_Name="Fecha de Inicio";
 
 @XendraField(AD_Column_ID="StartDate",IsCentrallyMaintained=true,
 AD_Tab_ID="70cb612b-a413-3da1-5dbf-d352d1a85eaa",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -279,7 +281,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="09701a84-b1fb-b8c8-85cb-825f68c297a1",
-Synchronized="2017-08-05 16:56:22.0")
+Synchronized="2019-08-30 22:24:19.0")
 /** Column name StartDate */
 public static final String COLUMNNAME_StartDate = "StartDate";
 /** Set Training Class.
@@ -299,13 +301,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9d58fd36-23d9-f33b-7005-4526b5a5ce66")
+public static String es_PE_FIELD_Class_TrainingClass_Name="Clase de entrenamiento";
+
+@XendraTrl(Identifier="9d58fd36-23d9-f33b-7005-4526b5a5ce66")
 public static String es_PE_FIELD_Class_TrainingClass_Description="El caso real de la clase del entrenamiento";
 
 @XendraTrl(Identifier="9d58fd36-23d9-f33b-7005-4526b5a5ce66")
 public static String es_PE_FIELD_Class_TrainingClass_Help="Programación de una clase";
-
-@XendraTrl(Identifier="9d58fd36-23d9-f33b-7005-4526b5a5ce66")
-public static String es_PE_FIELD_Class_TrainingClass_Name="Clase de entrenamiento";
 
 @XendraField(AD_Column_ID="S_Training_Class_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="70cb612b-a413-3da1-5dbf-d352d1a85eaa",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -332,13 +334,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="601f15eb-0a58-636a-3bcf-4bb81b5162d5")
+public static String es_PE_FIELD_Class_Training_Name="Entrenamiento";
+
+@XendraTrl(Identifier="601f15eb-0a58-636a-3bcf-4bb81b5162d5")
 public static String es_PE_FIELD_Class_Training_Description="Entrenamiento repetido";
 
 @XendraTrl(Identifier="601f15eb-0a58-636a-3bcf-4bb81b5162d5")
 public static String es_PE_FIELD_Class_Training_Help="El entrenamiento puede tener clases reales múltiples";
-
-@XendraTrl(Identifier="601f15eb-0a58-636a-3bcf-4bb81b5162d5")
-public static String es_PE_FIELD_Class_Training_Name="Entrenamiento";
 
 @XendraField(AD_Column_ID="S_Training_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="70cb612b-a413-3da1-5dbf-d352d1a85eaa",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -356,7 +358,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ffb7d32d-2bfc-d3d6-872d-9b2f29e75a7e",
-Synchronized="2017-08-05 16:56:22.0")
+Synchronized="2019-08-30 22:24:19.0")
 /** Column name S_Training_ID */
 public static final String COLUMNNAME_S_Training_ID = "S_Training_ID";
 }

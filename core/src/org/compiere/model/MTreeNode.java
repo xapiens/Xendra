@@ -54,6 +54,9 @@ public final class MTreeNode extends DefaultMutableTreeNode
 		int parent_ID, boolean isSummary, String imageIndicator, boolean onBar, Color color)
 	{
 		super();
+		if (node_ID == 1000570) {
+			System.out.println("X");
+		} 
 	//	log.fine( "MTreeNode Node_ID=" + node_ID + ", Parent_ID=" + parent_ID + " - " + name);
 		m_node_ID = node_ID;
 		m_seqNo = seqNo;

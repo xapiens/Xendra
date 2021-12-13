@@ -205,5 +205,5 @@ public interface IContainer {
 	 *            automatically.
 	 */
 	void setCloseOperation(boolean close);
-
+	void setBusy (boolean busy);
 }

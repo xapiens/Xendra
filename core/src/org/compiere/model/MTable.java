@@ -18,19 +18,16 @@
 package org.compiere.model;
 
 import java.lang.reflect.Constructor;
-import java.math.BigDecimal;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
 import org.adempiere.model.GenericPO;
-import org.columba.core.xml.XmlElement;
 import org.compiere.model.element.ELE_AD_Client_ID;
 import org.compiere.model.element.ELE_AD_Org_ID;
 import org.compiere.model.element.ELE_Created;
@@ -39,7 +36,6 @@ import org.compiere.model.element.ELE_IsActive;
 import org.compiere.model.element.ELE_Updated;
 import org.compiere.model.element.ELE_UpdatedBy;
 import org.compiere.model.persistence.X_AD_Column;
-import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.reference.REF_AD_TableAccessLevels;
 import org.compiere.model.reference.REF_AD_User;
@@ -54,7 +50,7 @@ import org.compiere.util.DB;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
-import org.xendra.model.sql;
+import org.xendra.db.Querys;
 
 /**
  *	Persistent Table Model
@@ -106,7 +102,7 @@ public class MTable extends X_AD_Table
 		}
 		return retValue;
 	}	//	get
-	
+
 	public static MTable get (Properties ctx, String tableName)
 	{
 		return get(ctx, tableName, null);
@@ -123,16 +119,20 @@ public class MTable extends X_AD_Table
 			return null;
 		if (s_cache != null)
 		{
-			Iterator<MTable> it = s_cache.values().iterator();
-			while (it.hasNext())
-			{
-				MTable retValue = it.next();
-				if (tableName.equalsIgnoreCase(retValue.getTableName()) 
-						&& retValue.getCtx() == ctx 
-						) 
+			try {
+				Iterator<MTable> it = s_cache.values().iterator();
+				while (it.hasNext())
 				{
-					return retValue;
+					MTable retValue = it.next();
+					if (tableName.equalsIgnoreCase(retValue.getTableName()) 
+							&& retValue.getCtx() == ctx 
+							) 
+					{
+						return retValue;
+					}
 				}
+			} catch (Exception e) {
+
 			}
 		}
 		//		
@@ -141,15 +141,15 @@ public class MTable extends X_AD_Table
 		PreparedStatement pstmt = null;
 		try
 		{
-				pstmt = DB.prepareStatement (sql, trxName);
-				pstmt.setString(1, tableName.toUpperCase());
-				ResultSet rs = pstmt.executeQuery ();
-				if (rs.next ())
-					retValue = new MTable (ctx, rs, null);
-				rs.close ();
-				pstmt.close ();
-				pstmt = null;
-			
+			pstmt = DB.prepareStatement (sql, trxName);
+			pstmt.setString(1, tableName.toUpperCase());
+			ResultSet rs = pstmt.executeQuery ();
+			if (rs.next ())
+				retValue = new MTable (ctx, rs, null);
+			rs.close ();
+			pstmt.close ();
+			pstmt = null;
+
 		}
 		catch (Exception e)
 		{
@@ -167,7 +167,7 @@ public class MTable extends X_AD_Table
 		{
 			pstmt = null;
 		}
-		
+
 		if (retValue != null)
 		{
 			Integer key = new Integer (retValue.getAD_Table_ID());
@@ -175,7 +175,7 @@ public class MTable extends X_AD_Table
 		}
 		return retValue;
 	}	//	get
-	
+
 	/**
 	 * 	Get Table Name
 	 *	@param ctx context
@@ -186,15 +186,15 @@ public class MTable extends X_AD_Table
 	{
 		return MTable.get(ctx, AD_Table_ID).getTableName();
 	}	//	getTableName
-	
-	
+
+
 	/**	Cache						*/
 	private static CCache<Integer,MTable> s_cache = new CCache<Integer,MTable>("AD_Table", 20);
 	private static CCache<String,Class<?>> s_classCache = new CCache<String,Class<?>>("PO_Class", 20);
-	
+
 	/**	Static Logger	*/
 	private static CLogger	s_log	= CLogger.getCLogger (MTable.class);	
-	
+
 	/**	Packages for Model Classes	*/
 	private static final String[]	s_packages = new String[] {
 
@@ -204,9 +204,10 @@ public class MTable extends X_AD_Table
 		"adempiere.model",			//	Extensions
 		"org.adempiere.model"
 	};
-	
+
 	/**	Special Classes				*/
 	private static final String[]	s_special = new String[] {
+		"AD_Package", "org.compiere.model.persistence.X_AD_Package",
 		"AD_Element", "org.compiere.model.M_Element",
 		"AD_Registration", "org.compiere.model.M_Registration",
 		"AD_Tree", "org.compiere.model.MTree_Base",
@@ -216,9 +217,9 @@ public class MTable extends X_AD_Table
 		"C_Phase", "org.compiere.model.MProjectTypePhase",
 		"C_Task", "org.compiere.model.MProjectTypeTask",
 		"E_Message","org.compiere.model.persistence.X_E_Message"
-	//	AD_Attribute_Value, AD_TreeNode
+		//	AD_Attribute_Value, AD_TreeNode
 	};
-	
+
 	/** EntityType */
 	private static final  MEntityType[] entityTypes = MEntityType.getEntityTypes(Env.getCtx());
 
@@ -232,7 +233,7 @@ public class MTable extends X_AD_Table
 		//	Not supported
 		if (tableName == null || tableName.endsWith("_Trl"))
 			return null;
-		
+
 		//	Import Tables (Name conflict)
 		if (tableName.startsWith("I_") )
 		{
@@ -242,9 +243,9 @@ public class MTable extends X_AD_Table
 			s_log.warning("No class for table: " + tableName);
 			return null;
 		}
-			
 
-		
+
+
 		//check cache
 		Class<?> cache = s_classCache.get(tableName);
 		if (cache != null) 
@@ -270,7 +271,7 @@ public class MTable extends X_AD_Table
 				break;
 			}
 		}
-		
+
 		//begin [ 1784588 ] Use ModelPackage of EntityType to Find Model Class - vpj-cd 
 		MTable table = MTable.get(Env.getCtx(), tableName);
 		String entityType = table.getEntityType();
@@ -306,7 +307,7 @@ public class MTable extends X_AD_Table
 		if (index > 0)
 		{
 			if (index < 3)		//	AD_, A_
-				 className = className.substring(index+1);
+				className = className.substring(index+1);
 			/* DELETEME: this part is useless - teo_sarca, [ 1648850 ]
 			else
 			{
@@ -314,11 +315,11 @@ public class MTable extends X_AD_Table
 				if (prefix.equals("Fact"))		//	keep custom prefix
 					className = className.substring(index+1);
 			}
-			*/
+			 */
 		}
 		//	Remove underlines
 		className = Util.replace(className, "_", "");
-	
+
 		//	Search packages
 		for (int i = 0; i < s_packages.length; i++)
 		{
@@ -330,8 +331,8 @@ public class MTable extends X_AD_Table
 				return clazz;
 			}
 		}
-		
-		
+
+
 		//	Adempiere Extension
 		Class<?> clazz = getPOclass("adempiere.model.X_" + tableName);
 		if (clazz != null)
@@ -339,7 +340,7 @@ public class MTable extends X_AD_Table
 			s_classCache.put(tableName, clazz);
 			return clazz;
 		}
-		
+
 		//hengsin - allow compatibility with compiere plugins
 		//Compiere Extension
 		clazz = getPOclass("compiere.model.X_" + tableName);
@@ -361,7 +362,7 @@ public class MTable extends X_AD_Table
 		s_classCache.put(tableName, Object.class);
 		return null;
 	}	//	getClass
-	
+
 	/**
 	 * 	Get PO class
 	 *	@param className fully qualified class name
@@ -391,7 +392,7 @@ public class MTable extends X_AD_Table
 		return null;
 	}	//	getPOclass
 
-	
+
 	/**************************************************************************
 	 * 	Standard Constructor
 	 *	@param ctx context
@@ -403,8 +404,8 @@ public class MTable extends X_AD_Table
 		super (ctx, AD_Table_ID, trxName);
 		if (AD_Table_ID == 0)
 		{
-		//	setName (null);
-		//	setTableName (null);
+			//	setName (null);
+			//	setTableName (null);
 			setAccessLevel (REF_AD_TableAccessLevels.SystemOnly);	// 4
 			setEntityType (ENTITYTYPE_UserMaintained);	// U
 			setIsChangeLog (false);
@@ -426,10 +427,10 @@ public class MTable extends X_AD_Table
 	{
 		super(ctx, rs, trxName);
 	}	//	MTable
-	
+
 	/**	Columns				*/
 	private MColumn[]	m_columns = null;
-	
+
 	/**
 	 * 	Get Columns
 	 *	@param requery requery
@@ -475,49 +476,49 @@ public class MTable extends X_AD_Table
 		return m_columns;
 	}	//	getColumns
 
-//	/**
-//	 * 	Get Columns
-//	 *	@param requery requery
-//	 *	@return array of columns
-//	 */
-//	public MColumn[] getColumnsWithReplication (boolean requery)
-//	{
-//		if (m_columns != null && !requery)
-//			return m_columns;
-//		String sql = "SELECT * FROM AD_Column WHERE AD_Table_ID=?  ORDER BY ColumnName";
-//		ArrayList<MColumn> list = new ArrayList<MColumn>();
-//		PreparedStatement pstmt = null;
-//		try
-//		{
-//			pstmt = DB.prepareStatement (sql, get_TrxName());
-//			pstmt.setInt (1, getAD_Table_ID());
-//			ResultSet rs = pstmt.executeQuery ();
-//			while (rs.next ())
-//				list.add (new MColumn (getCtx(), rs, get_TrxName()));
-//			rs.close ();
-//			pstmt.close ();
-//			pstmt = null;
-//		}
-//		catch (Exception e)
-//		{
-//			log.log(Level.SEVERE, sql, e);
-//		}
-//		try
-//		{
-//			if (pstmt != null)
-//				pstmt.close ();
-//			pstmt = null;
-//		}
-//		catch (Exception e)
-//		{
-//			pstmt = null;
-//		}
-//		//
-//		m_columns = new MColumn[list.size ()];
-//		list.toArray (m_columns);
-//		return m_columns;
-//	}	//	getColumns
-//	
+	//	/**
+	//	 * 	Get Columns
+	//	 *	@param requery requery
+	//	 *	@return array of columns
+	//	 */
+	//	public MColumn[] getColumnsWithReplication (boolean requery)
+	//	{
+	//		if (m_columns != null && !requery)
+	//			return m_columns;
+	//		String sql = "SELECT * FROM AD_Column WHERE AD_Table_ID=?  ORDER BY ColumnName";
+	//		ArrayList<MColumn> list = new ArrayList<MColumn>();
+	//		PreparedStatement pstmt = null;
+	//		try
+	//		{
+	//			pstmt = DB.prepareStatement (sql, get_TrxName());
+	//			pstmt.setInt (1, getAD_Table_ID());
+	//			ResultSet rs = pstmt.executeQuery ();
+	//			while (rs.next ())
+	//				list.add (new MColumn (getCtx(), rs, get_TrxName()));
+	//			rs.close ();
+	//			pstmt.close ();
+	//			pstmt = null;
+	//		}
+	//		catch (Exception e)
+	//		{
+	//			log.log(Level.SEVERE, sql, e);
+	//		}
+	//		try
+	//		{
+	//			if (pstmt != null)
+	//				pstmt.close ();
+	//			pstmt = null;
+	//		}
+	//		catch (Exception e)
+	//		{
+	//			pstmt = null;
+	//		}
+	//		//
+	//		m_columns = new MColumn[list.size ()];
+	//		list.toArray (m_columns);
+	//		return m_columns;
+	//	}	//	getColumns
+	//	
 	/**
 	 * 	Get Column
 	 *	@param columnName (case insensitive)
@@ -536,7 +537,7 @@ public class MTable extends X_AD_Table
 		}
 		return null;
 	}	//	getColumn
-	
+
 	/**
 	 * 	Table has a single Key
 	 *	@return true if table has single key column
@@ -546,7 +547,7 @@ public class MTable extends X_AD_Table
 		String[] keys = getKeyColumns();
 		return keys.length == 1;
 	}	//	isSingleKey
-	
+
 	/**
 	 * 	Get Key Columns of Table
 	 *	@return key columns
@@ -568,7 +569,7 @@ public class MTable extends X_AD_Table
 		retValue = list.toArray(retValue);
 		return retValue;
 	}	//	getKeyColumns
-	
+
 	/**************************************************************************
 	 * 	Get PO Class Instance
 	 *	@param Record_ID record
@@ -592,7 +593,7 @@ public class MTable extends X_AD_Table
 			GenericPO po = new GenericPO(tableName, getCtx(), new Integer(Record_ID), trxName);
 			return po;
 		}
-		
+
 		boolean errorLogged = false;
 		try
 		{
@@ -608,7 +609,7 @@ public class MTable extends X_AD_Table
 					msg = e.toString();
 				log.warning("No transaction Constructor for " + clazz + " (" + msg + ")");
 			}
-			
+
 			PO po = (PO)constructor.newInstance(new Object[] {getCtx(), new Integer(Record_ID), trxName});
 			if (po != null && po.get_ID() != Record_ID && Record_ID > 0)
 				return null;
@@ -635,10 +636,10 @@ public class MTable extends X_AD_Table
 		}
 		if (!errorLogged)
 			log.log(Level.SEVERE, "(id) - Not found - Table=" + tableName 
-				+ ", Record_ID=" + Record_ID);
+					+ ", Record_ID=" + Record_ID);
 		return null;
 	}	//	getPO
-	
+
 	/**
 	 * 	Get PO Class Instance
 	 *	@param rs result set
@@ -657,7 +658,7 @@ public class MTable extends X_AD_Table
 			GenericPO po = new GenericPO(tableName, getCtx(), rs, trxName);
 			return po;
 		}
-		
+
 		boolean errorLogged = false;
 		try
 		{
@@ -686,7 +687,7 @@ public class MTable extends X_AD_Table
 	{
 		return getPO(whereClause, null, trxName);
 	}	//	getPO
-	
+
 	/**
 	 * Get PO class instance
 	 * @param whereClause
@@ -740,10 +741,10 @@ public class MTable extends X_AD_Table
 		{
 			pstmt = null;
 		}
-		
+
 		return po;
 	}
-	
+
 	/**
 	 * 	Before Save
 	 *	@param newRecord new
@@ -756,7 +757,7 @@ public class MTable extends X_AD_Table
 		//
 		return true;
 	}	//	beforeSave
-	
+
 	/**
 	 * 	After Save
 	 *	@param newRecord new
@@ -767,27 +768,27 @@ public class MTable extends X_AD_Table
 	{
 		//DB.getNextID(getAD_Client_ID(), getTableName(), get_TrxName());
 		//	Sync Table ID
-//		if (newRecord)
-//		{
-//			MSequence seq = MSequence.get(getCtx(), getTableName(), get_TrxName());
-//			if (seq == null || seq.get_ID() == 0)
-//				MSequence.createTableSequence(getCtx(), getTableName(), get_TrxName());
-//		}
-//		else
-//		{
-//			MSequence seq = MSequence.get(getCtx(), getTableName(), get_TrxName());
-//			if (seq == null || seq.get_ID() == 0)
-//				MSequence.createTableSequence(getCtx(), getTableName(), get_TrxName());
-//			else if (!seq.getName().equals(getTableName()))
-//			{
-//				seq.setName(getTableName());
-//				seq.save();
-//			}
-//		}	
-		
+		//		if (newRecord)
+		//		{
+		//			MSequence seq = MSequence.get(getCtx(), getTableName(), get_TrxName());
+		//			if (seq == null || seq.get_ID() == 0)
+		//				MSequence.createTableSequence(getCtx(), getTableName(), get_TrxName());
+		//		}
+		//		else
+		//		{
+		//			MSequence seq = MSequence.get(getCtx(), getTableName(), get_TrxName());
+		//			if (seq == null || seq.get_ID() == 0)
+		//				MSequence.createTableSequence(getCtx(), getTableName(), get_TrxName());
+		//			else if (!seq.getName().equals(getTableName()))
+		//			{
+		//				seq.setName(getTableName());
+		//				seq.save();
+		//			}
+		//		}	
+
 		return success;
 	}	//	afterSave
-	
+
 	/**
 	 * 	Get SQL Create
 	 *	@return create table DDL
@@ -797,17 +798,17 @@ public class MTable extends X_AD_Table
 		StringBuffer sequence = new StringBuffer("");
 		StringBuffer translate = new StringBuffer("");
 		StringBuffer sbct = new StringBuffer("CREATE TABLE xendra.")
-			.append(getTableName()).append(" (");
-		
+		.append(getTableName()).append(" (");
+
 		StringBuffer sb = new StringBuffer("");
 		//
 		//boolean hasPK = false;
 		boolean hasParents = false;
 		//StringBuffer constraints = new StringBuffer();
 		getColumns(true);
-		
+
 		List<MColumn> PKcolumn = new ArrayList<MColumn>();
-		
+
 		for (int i = 0; i < m_columns.length; i++)
 		{
 			MColumn column = m_columns[i];
@@ -816,15 +817,15 @@ public class MTable extends X_AD_Table
 			{
 				if (i > 0 && sb.length() > 0)
 					sb.append(", ");
-					sb.append(column.getSQLDDL());
+				sb.append(column.getSQLDDL());
 			}
 			else // virtual column
 				continue;
 			//
 			if ( column.getAD_Reference_ID() == DisplayType.ID 
-				 && 
-				 String.format("%s_ID", getTableName()).toLowerCase().equals(column.getColumnName().toLowerCase())
-			   )							
+					&& 
+					String.format("%s_ID", getTableName()).toLowerCase().equals(column.getColumnName().toLowerCase())
+					)							
 			{
 				PKcolumn.add(column);
 				//System.out.println("X");
@@ -836,9 +837,9 @@ public class MTable extends X_AD_Table
 				if (no != 1)
 				{
 					sequence.append(String.format("CREATE SEQUENCE xendra.%s;",seqname));
-					sequence.append(String.format(sql.OWNERTOXENDRA,seqname));			
+					sequence.append(String.format(Querys.OWNERTOXENDRA,seqname));			
 				}
-				
+
 			}
 			else if (column.isKey())
 			{
@@ -846,29 +847,29 @@ public class MTable extends X_AD_Table
 			}
 			// if (column.isKey())
 			//{
-//				hasPK = true;
-//				//String seqname = getTableName()+"_"+getTableName()+"_id_seq";
-//				String seqname = getTableName()+"_seq";
-//				seqname = seqname.toLowerCase();
-//				int no = DB.getSQLValue(null, String.format("SELECT 1 FROM pg_class where relname = '%s'",seqname));
-//				if (no != 1)
-//				{
-//					sequence.append(String.format("CREATE SEQUENCE xendra.%s;",seqname));
-//					sequence.append(String.format(sql.OWNERTOXENDRA,seqname));			
-//				}
-				
+			//				hasPK = true;
+			//				//String seqname = getTableName()+"_"+getTableName()+"_id_seq";
+			//				String seqname = getTableName()+"_seq";
+			//				seqname = seqname.toLowerCase();
+			//				int no = DB.getSQLValue(null, String.format("SELECT 1 FROM pg_class where relname = '%s'",seqname));
+			//				if (no != 1)
+			//				{
+			//					sequence.append(String.format("CREATE SEQUENCE xendra.%s;",seqname));
+			//					sequence.append(String.format(sql.OWNERTOXENDRA,seqname));			
+			//				}
+
 			//}
 			if (column.isTranslated())
 			{
 				if (translate.length() > 0)
 					translate.append(", ");
-					translate.append(column.getSQLDDL());									
+				translate.append(column.getSQLDDL());									
 			}
 			if (column.isParent())
 				hasParents = true;
-//			String constraint = column.getConstraint(getTableName());
-//			if (constraint != null && constraint.length() > 0)
-//				constraints.append(", ").append(constraint);
+			//			String constraint = column.getConstraint(getTableName());
+			//			if (constraint != null && constraint.length() > 0)
+			//				constraints.append(", ").append(constraint);
 		}
 		//	Multi Column PK 
 		//if (!hasPK && hasParents)
@@ -907,8 +908,8 @@ public class MTable extends X_AD_Table
 				cols.append(column.getColumnName());
 			}
 			sb.append(", CONSTRAINT ")
-				.append(getTableName()).append("_Key PRIMARY KEY (")
-				.append(cols).append(")");
+			.append(getTableName()).append("_Key PRIMARY KEY (")
+			.append(cols).append(")");
 		}
 		if (sequence.length() > 0)
 		{
@@ -918,8 +919,8 @@ public class MTable extends X_AD_Table
 		{
 			sb = sbct.append(sb);
 			//sb.append(constraints)
-				sb.append(");")
-				.append(String.format(sql.OWNERTOXENDRA, getTableName()));
+			sb.append(");")
+			.append(String.format(Querys.OWNERTOXENDRA, getTableName()));
 			if (translate.length() > 0)
 			{
 				translate = getSQLCreateTranslate(translate);
@@ -929,7 +930,7 @@ public class MTable extends X_AD_Table
 		}
 		return null;
 	}	//	getSQLCreate
-	
+
 	public StringBuffer getSQLCreateTranslate(StringBuffer translate) {
 		StringBuffer sb = new StringBuffer("CREATE TABLE IF NOT EXISTS xendra.").append(getTableName()).append("_trl").append(" (");		
 		//
@@ -959,10 +960,10 @@ public class MTable extends X_AD_Table
 		.append("WITH (")
 		.append("OIDS=FALSE")
 		.append(");")
-		.append(String.format(sql.OWNERTOXENDRA, getTableName()+"_trl"));
+		.append(String.format(Querys.OWNERTOXENDRA, getTableName()+"_trl"));
 		return sb;
 	}	
-	
+
 	// globalqss
 	public static int getTable_ID(String tableName) {
 		return getTable_ID(tableName, null);
@@ -977,14 +978,14 @@ public class MTable extends X_AD_Table
 		String SQL = "";
 		try
 		{
-				SQL = "SELECT AD_Table_ID FROM xendra.AD_Table WHERE tablename = ?";
-				PreparedStatement pstmt = DB.prepareStatement(SQL, trxName);
-				pstmt.setString(1, tableName);
-				ResultSet rs = pstmt.executeQuery();
-				if (rs.next())
-					retValue = rs.getInt(1);
-				rs.close();
-				pstmt.close();
+			SQL = "SELECT AD_Table_ID FROM xendra.AD_Table WHERE tablename = ?";
+			PreparedStatement pstmt = DB.prepareStatement(SQL, trxName);
+			pstmt.setString(1, tableName);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				retValue = rs.getInt(1);
+			rs.close();
+			pstmt.close();
 		}
 		catch (Exception e)
 		{
@@ -993,7 +994,7 @@ public class MTable extends X_AD_Table
 		}		
 		return retValue;
 	}
-	
+
 	/**
 	 * Create query to retrieve one or more PO.
 	 * @param whereClause
@@ -1015,7 +1016,7 @@ public class MTable extends X_AD_Table
 		sb.append (get_ID()).append ("-").append (getTableName()).append ("]");
 		return sb.toString ();
 	}	//	toString
-	
+
 	public void checkdefaults(int keycnt) {
 		M_Element element = null;
 		MColumn column = null;
@@ -1036,6 +1037,10 @@ public class MTable extends X_AD_Table
 			column = getColumn(element);
 			if (column == null)
 				AddColumn(element, REF_ID.Identifier, true, true, true, 22);
+			else {
+				column.setIsKey(true);
+				column.save();
+			}
 		}
 		//
 		element = M_Element.getbyIdentifier(ELE_AD_Org_ID.Identifier, get_TrxName());
@@ -1120,7 +1125,7 @@ public class MTable extends X_AD_Table
 		M_Element element = null;
 		MColumn column = null;
 		String query = "ColumnName = ? AND AD_Table_ID = ?";
-		
+
 		if (keycnt == 1)
 		{
 			String ID = getTableName()+"_ID";
@@ -1154,9 +1159,9 @@ public class MTable extends X_AD_Table
 		}
 		else
 		{
-			System.out.println("X");
+			System.out.println("X23");
 		}
-		
+
 		element = M_Element.getbyIdentifier(ELE_AD_Org_ID.Identifier, get_TrxName());
 		column = new Query(Env.getCtx(), X_AD_Column.Table_Name, query, null)
 		.setParameters(element.getColumnName(), getAD_Table_ID()).first();
@@ -1173,7 +1178,7 @@ public class MTable extends X_AD_Table
 		column.setAD_Reference_ID(Util.getDataReferenceID(REF_TableDir.Identifier));
 		column.setIsMandatory(true);
 		column.save();
-		
+
 		element = M_Element.getbyIdentifier(ELE_AD_Client_ID.Identifier, get_TrxName());
 		column = new Query(Env.getCtx(), X_AD_Column.Table_Name, query, null)
 		.setParameters(element.getColumnName(), getAD_Table_ID()).first();
@@ -1297,36 +1302,27 @@ public class MTable extends X_AD_Table
 		return retValue;
 	}
 
-	public static XmlElement getAll() {
-		XmlElement root = new XmlElement();
-		String where = "IsActive = 'Y' ";
-		String id = "";
-		List<X_AD_Table> tables = null;
-		try {
-		tables  = new Query(Env.getCtx(), X_AD_Table.Table_Name, where, null)
-			.setOrderBy("id, name").list();
-		} catch (Exception e) {
-			return null;
-		}		
-		XmlElement idcontainer = null;
-		for (X_AD_Table table:tables)
-		{
-			//String type = "";
-			if (id.compareTo(table.getID()) != 0)
-			{
-				id = table.getID();
-				idcontainer = new XmlElement("id");			
-				idcontainer.addAttribute("uid", "0");
-				idcontainer.addAttribute("type", "plugin");
-				idcontainer.addAttribute("name", id);
-				root.addElement(idcontainer);
-			}			
-			//XmlElement defaultElement = new XmlElement("folder");		
-			//defaultElement.addAttribute("uid", String.valueOf(table.getAD_Table_ID()));
-			//defaultElement.addAttribute("type", "table");
-			//defaultElement.addAttribute("name", table.getTableName());
-			//idcontainer.addElement(defaultElement);
+	public HashMap<String, Double> getDimension() {
+		HashMap props = getProperties();
+		if (!props.containsKey("x")) {
+			props.put("x", "20");
 		}
-		return root;
-	}	
+		if (!props.containsKey("y")) {
+			props.put("y", "20");
+		}
+		if (!props.containsKey("width")) {
+			props.put("width", "150");					
+		}
+		if (!props.containsKey("height")) {
+			props.put("height", "200");
+		}					
+		setProperties(props);
+		save();
+		HashMap<String, Double> dimension = new HashMap<String, Double>();
+		dimension.put("x", Double.parseDouble((String) props.get("x")));
+		dimension.put("y", Double.parseDouble((String) props.get("y")));
+		dimension.put("width", Double.parseDouble((String) props.get("width")));
+		dimension.put("height", Double.parseDouble((String) props.get("height")));
+		return dimension;
+	}
 }	//	MTable

@@ -34,19 +34,20 @@ import org.columba.core.gui.context.ContextResultBox;
 import org.columba.core.gui.frame.api.IComponentBox;
 import org.columba.core.gui.search.api.IResultPanel;
 import org.columba.core.gui.search.api.ISearchPanel;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.search.SearchManager;
 import org.columba.core.search.api.ISearchCriteria;
 import org.columba.core.search.api.ISearchManager;
 import org.columba.core.search.api.ISearchProvider;
 import org.columba.core.search.api.ISearchRequest;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 import org.jdesktop.swingx.VerticalLayout;
 
 public class SearchPanel extends JPanel implements ISearchPanel {
 
 	private static final int RESULT_COUNT = 20;
-	private static final Logger LOG = Logger.getLogger("org.columba.core.search.gui.SearchPanel");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.search.gui.SearchPanel");
 	private IFrameMediator frameMediator;
 	// private SearchResultView searchResultView;
 	//private StackedBox box;
@@ -105,7 +106,7 @@ public class SearchPanel extends JPanel implements ISearchPanel {
 
 	private void initContextProvider() {
 		// if in debug mode, register context debugger view
-		if (Logging.DEBUG)
+		if (CLogMgt.DEBUG)
 			contextSearchManager.register(new ContextDebugProvider());
 
 		try {
@@ -120,14 +121,14 @@ public class SearchPanel extends JPanel implements ISearchPanel {
 					contextSearchManager.register(provider);
 				} catch (PluginException e) {
 					LOG.severe("Error while loading plugin: " + e.getMessage());
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						e.printStackTrace();
 				}
 			}
 
 		} catch (PluginHandlerNotFoundException e) {
 			LOG.severe("Error while loading plugin: " + e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 	}
@@ -146,14 +147,14 @@ public class SearchPanel extends JPanel implements ISearchPanel {
 					searchManager.registerProvider(provider);
 				} catch (PluginException e) {
 					LOG.severe("Error while loading plugin: " + e.getMessage());
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						e.printStackTrace();
 				}
 			}
 
 		} catch (PluginHandlerNotFoundException e) {
 			LOG.severe("Error while loading plugin: " + e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 	}
@@ -261,14 +262,14 @@ public class SearchPanel extends JPanel implements ISearchPanel {
 					defaultBox.add(new ComponentBoxContainer(compBox));
 				} catch (PluginException ex) {
 					LOG.severe("Error while loading plugin: " + ex.getMessage());
-					if (Logging.DEBUG)
+					if (CLogMgt.DEBUG)
 						ex.printStackTrace();
 				}
 			}
 
 		} catch (PluginHandlerNotFoundException e) {
 			LOG.severe("Error while loading plugin: " + e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 		Iterator<IContextProvider> it = contextSearchManager.getAllProviders().iterator();

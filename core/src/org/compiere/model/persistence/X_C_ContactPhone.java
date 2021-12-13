@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_PhoneType;
 /** Generated Model for C_ContactPhone
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_ContactPhone");
 @XendraTrl(Identifier="f09eba4d-6058-49a2-9714-ae761d22002a")
 public static String es_PE_TABLE_C_ContactPhone_Name="Contact Phone";
 
-@XendraTable(Name="Contact Phone",Description="",Help="",TableName="C_ContactPhone",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="f09eba4d-6058-49a2-9714-ae761d22002a",
-Synchronized="2017-08-16 11:41:40.0")
+@XendraTable(Name="Contact Phone",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_ContactPhone",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="f09eba4d-6058-49a2-9714-ae761d22002a",
+Synchronized="2020-03-03 21:36:46.0")
 /** TableName=C_ContactPhone */
 public static final String Table_Name="C_ContactPhone";
 
@@ -121,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b2dbc02-a8cf-407f-9fd5-a557df2bae6b",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name C_Contact_ID */
 public static final String COLUMNNAME_C_Contact_ID = "C_Contact_ID";
 /** Set Contact Phone.
@@ -170,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4cbae456-a871-40fb-bd3b-1fda134f355c",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Phone.
@@ -202,18 +202,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="99fc8f43-78d1-42a8-9ff7-a90e40a30488",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Phone */
 public static final String COLUMNNAME_Phone = "Phone";
-
-/** PhoneType AD_Reference=00eee77e-a2e4-475c-b217-bbae5e2be026 */
-public static final int PHONETYPE_AD_Reference_ID=1000060;
 /** Set PhoneType.
 @param PhoneType PhoneType */
 public void setPhoneType (String PhoneType)
 {
-if (PhoneType == null || PhoneType.equals(REF_PhoneType.BusinessPhone) || PhoneType.equals(REF_PhoneType.AssistantPhone) || PhoneType.equals(REF_PhoneType.BusinessFax) || PhoneType.equals(REF_PhoneType.CallBackPhone) || PhoneType.equals(REF_PhoneType.CarPhone) || PhoneType.equals(REF_PhoneType.CompanyPhone) || PhoneType.equals(REF_PhoneType.HomePhone) || PhoneType.equals(REF_PhoneType.HomeFax) || PhoneType.equals(REF_PhoneType.ISDN) || PhoneType.equals(REF_PhoneType.MobilePhone) || PhoneType.equals(REF_PhoneType.OtherPhone) || PhoneType.equals(REF_PhoneType.OtherFax) || PhoneType.equals(REF_PhoneType.Pager) || PhoneType.equals(REF_PhoneType.Radio) || PhoneType.equals(REF_PhoneType.Telex) || PhoneType.equals(REF_PhoneType.PrimaryPhone) || PhoneType.equals(REF_PhoneType.TTY));
- else throw new IllegalArgumentException ("PhoneType Invalid value - " + PhoneType + " - Reference_ID=1000060 - 0 - 1 - 2 - 3 - 4  - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 12 - 14 - 15 - 13 - 16");
 if (PhoneType != null && PhoneType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -237,7 +232,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d45bf54e-66cd-4baf-9b56-e589e855bb24",Synchronized="2017-08-05 16:53:32.0")
+Identifier="d45bf54e-66cd-4baf-9b56-e589e855bb24",Synchronized="2019-08-30 22:21:26.0")
 /** Column name PhoneType */
 public static final String COLUMNNAME_PhoneType = "PhoneType";
 }

@@ -1,6 +1,6 @@
 package org.xendra.printdocument;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.compiere.util.Util;
 import org.xendra.Constants;
 
@@ -12,7 +12,7 @@ import org.xendra.Constants;
  * @author Chris Simoes
  */
 public class HandlerFactory {
-	static Logger log = Logger.getLogger(HandlerFactory.class);
+	static CLogger log = CLogger.getCLogger(HandlerFactory.class);
 
 	private final static HandlerFactory INSTANCE = new HandlerFactory();
 	
@@ -22,7 +22,7 @@ public class HandlerFactory {
 	private HandlerFactory() {
 		super();
 		final String METHOD_NAME = "HandlerFactory(): ";
-		log.debug(METHOD_NAME + "STARTED");
+		log.fine(METHOD_NAME + "STARTED");
 		//handler = ConfigResources.getProperty(Constants.KEY_PRINT_JOB_HANDLER);
 		//handler = "PRINT";
 		//if(Util.isEmpty(handler)) {
@@ -57,12 +57,12 @@ public class HandlerFactory {
 		} else if(Constants.VALUE_FILE.equals(cf.getType().trim())) {
 			result = new FileHandler();
 		} else if(Constants.VALUE_NETWORK.equals(cf.getType().trim())) {
-			log.error(METHOD_NAME + "No Handler implemented yet for:" + Constants.VALUE_NETWORK);
+			log.severe(METHOD_NAME + "No Handler implemented yet for:" + Constants.VALUE_NETWORK);
 		} else if(Constants.VALUE_DATABASE.equals(cf.getType().trim())) {
-			log.error(METHOD_NAME + "No Handler implemented yet for:" + Constants.VALUE_DATABASE);
+			log.severe(METHOD_NAME + "No Handler implemented yet for:" + Constants.VALUE_DATABASE);
 		} else { // if some how it did not get set then default is FILE
-			log.error(METHOD_NAME + "The handler is not set.");
-			log.error(METHOD_NAME + "Using the default of: " + Constants.VALUE_FILE);
+			log.severe(METHOD_NAME + "The handler is not set.");
+			log.severe(METHOD_NAME + "Using the default of: " + Constants.VALUE_FILE);
 			result = new FileHandler();
 		}
 		return result;

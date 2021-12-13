@@ -31,7 +31,9 @@ import org.compiere.model.MRule;
 import org.compiere.model.MScheduler;
 import org.compiere.model.MSession;
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_MessageFormat;
 import org.compiere.model.persistence.X_AD_Plugin;
+import org.compiere.model.persistence.X_AD_Process;
 import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.model.persistence.X_AD_Scheduler;
 import org.compiere.model.persistence.X_A_MachineServer;
@@ -40,7 +42,6 @@ import org.compiere.model.reference.REF_ServerType;
 import org.compiere.util.*;
 import org.compiere.wf.*;
 
-import org.xendra.material.MaterialManager;
 import org.xendra.xendrian.Listener;
 
 /**
@@ -66,12 +67,12 @@ public class XendraServerMgr
 		}
 		return m_serverMgr;
 	}	//	get
-	
+
 	/**	Singleton					*/
 	private static	XendraServerMgr	m_serverMgr = null;
 	/**	Logger			*/
 	protected CLogger	log = CLogger.getCLogger(getClass());
-	
+
 	/**************************************************************************
 	 * 	Adempiere Server Manager
 	 */
@@ -79,7 +80,7 @@ public class XendraServerMgr
 	{
 		super();
 		startEnvironment();
-	//	m_serverMgr.startServers();
+		//	m_serverMgr.startServers();
 	}	//	XendraServerMgr
 
 	/**	The Servers				*/
@@ -99,7 +100,7 @@ public class XendraServerMgr
 	{
 		Xendra.startup(false);
 		log.info("");
-		
+
 		//	Set Session
 		MSession session = MSession.get(getCtx(), true);
 		session.setWebStoreSession(false);
@@ -108,7 +109,7 @@ public class XendraServerMgr
 		//
 		return true;
 	}	//	startEnvironment
-	
+
 	/**
 	 * 	Start Environment
 	 *	@return true if started
@@ -129,13 +130,13 @@ public class XendraServerMgr
 		//	Request
 		MRequestProcessor[] requestModels = MRequestProcessor.getActive(m_ctx);
 		if (requestModels != null)
-		for (MRequestProcessor pModel:requestModels)
-		{
-			XendraServer server = XendraServer.create(pModel);
-			server.start();
-			server.setPriority(Thread.NORM_PRIORITY-2);
-			m_servers.add(server);
-		}
+			for (MRequestProcessor pModel:requestModels)
+			{
+				XendraServer server = XendraServer.create(pModel);
+				server.start();
+				server.setPriority(Thread.NORM_PRIORITY-2);
+				m_servers.add(server);
+			}
 		//	Workflow
 		MWorkflowProcessor[] workflowModels = MWorkflowProcessor.getActive(m_ctx);		
 		for (MWorkflowProcessor pModel:workflowModels)
@@ -148,13 +149,13 @@ public class XendraServerMgr
 		//	Alert
 		MAlertProcessor[] alertModels = MAlertProcessor.getActive(m_ctx);
 		if (alertModels != null)
-		for (MAlertProcessor pModel:alertModels)
-		{
-			XendraServer server = XendraServer.create(pModel);
-			server.start();
-			server.setPriority(Thread.NORM_PRIORITY-2);
-			m_servers.add(server);
-		}		
+			for (MAlertProcessor pModel:alertModels)
+			{
+				XendraServer server = XendraServer.create(pModel);
+				server.start();
+				server.setPriority(Thread.NORM_PRIORITY-2);
+				m_servers.add(server);
+			}		
 		//	Scheduler
 		MScheduler[] schedulerModels = MScheduler.getActive(m_ctx);
 		Acceptors = new ArrayList<Integer>();
@@ -169,20 +170,20 @@ public class XendraServerMgr
 		log.log(Level.WARNING, String.format("%d Acceptor(s) found(s)", Acceptors.size()));
 		if (incomplete > 0)
 			log.log(Level.WARNING, String.format("%d Listener(s) pending(s)", incomplete));
-//		if (schedulerModels.length > 0)
-//		{
-//			MScheduler.startRules(Listeners, Acceptors);			
-//		}
+		//		if (schedulerModels.length > 0)
+		//		{
+		//			MScheduler.startRules(Listeners, Acceptors);			
+		//		}
 		//	LDAP
-//		MLdapProcessor[] ldapModels = MLdapProcessor.getActive(m_ctx);
-//		for (int i = 0; i < ldapModels.length; i++)
-//		{
-//			MLdapProcessor lp = ldapModels[i];
-//			XendraServer server = XendraServer.create(lp);
-//			server.start();
-//			server.setPriority(Thread.NORM_PRIORITY-1);
-//			m_servers.add(server);
-//		}
+		//		MLdapProcessor[] ldapModels = MLdapProcessor.getActive(m_ctx);
+		//		for (int i = 0; i < ldapModels.length; i++)
+		//		{
+		//			MLdapProcessor lp = ldapModels[i];
+		//			XendraServer server = XendraServer.create(lp);
+		//			server.start();
+		//			server.setPriority(Thread.NORM_PRIORITY-1);
+		//			m_servers.add(server);
+		//		}
 		// Cash Flow
 		MCashFlowProcessor[] cashflowModels = MCashFlowProcessor.getActive(m_ctx);
 		for (MCashFlowProcessor pModel:cashflowModels)		
@@ -215,116 +216,109 @@ public class XendraServerMgr
 		if (proc.getID() != null && proc.getID().length() > 0)
 		{
 			X_AD_Plugin plugin = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "id = ?", null).setParameters(proc.getID()).first();			
-			if (!plugin.isCompleted())
+			//if (!plugin.isCompleted())
+			if (!plugin.isInstalled())
 			{
 				//incomplete++;
 				return false;
 			}
 		}
+		Boolean goahead = true; 
 		if (proc.getRuleType() != null)
 		{
-			startRule(proc.getAD_Rule_ID(), proc.getRuleType(), tag);
+			goahead = startRule(proc.getAD_Rule_ID(), proc.getRuleType(), tag);
 		}
-//		if (proc.getRuleType() == null)
-//		{}
-//		else if (proc.getRuleType().equals(REF_RuleType.Listener))
-//		{
-//			//Listeners.add(proc.getAD_Rule_ID());
-//			startRule(proc.getAD_Rule_ID(), REF_RuleType.Listener);
-//		}
-//			
-//		else if (proc.getRuleType().equals(REF_RuleType.Acceptor))
-//			Acceptors.add(proc.getAD_Rule_ID());							
-		log.log(Level.WARNING, String.format("starting %s", pModel.getName()));
-		XendraServer server = XendraServer.create(pModel);
-		server.start();
-		server.setPriority(Thread.NORM_PRIORITY-2);
-		m_servers.add(server);		
+		if (goahead) {
+			log.log(Level.WARNING, String.format("starting %s", pModel.getName()));
+			XendraServer server = XendraServer.create(pModel);
+			server.start();
+			server.setPriority(Thread.NORM_PRIORITY-2);
+			m_servers.add(server);
+		}
 		return true;
 	}
-	public void startRule(int AD_Rule_ID, String RuleType, String tag)
+	public boolean startRule(int AD_Rule_ID, String RuleType, String tag)
 	{
-		HashMap properties = new HashMap();		
-		if (RuleType.equals(REF_RuleType.Listener))
-		{
-		//for (Integer listener:listeners)
-		//{
-			//
-			String queuename = "";
-			String listenerclass = "";
-			X_AD_Rule rule = new Query(Env.getCtx(), X_AD_Rule.Table_Name, "AD_Rule_ID = ?", null)
+		Boolean isok = true;
+		try {
+			HashMap properties = new HashMap();		
+			if (RuleType.equals(REF_RuleType.Listener))
+			{
+				String listenerclass = "";
+				X_AD_Rule rule = new Query(Env.getCtx(), X_AD_Rule.Table_Name, "AD_Rule_ID = ?", null)
 				.setParameters(AD_Rule_ID).first();
-			if (rule == null)
-			{
-				System.out.println("Rule not exists");
-				log.log(Level.WARNING, String.format("%s Rule not exists", AD_Rule_ID));
-				return;
+				if (rule == null)
+				{
+					throw new Exception(String.format("%s Rule not exists", AD_Rule_ID));
+				}
+				properties = (HashMap) rule.getProperties();
+				String type = (String) properties.get("type");		
+				System.out.println("type->"+type);
+				if (type.equals("kiebase"))
+				{
+					//queuename = (String) properties.get("queuename");
+					listenerclass = (String) properties.get("queuelistenerclass");
+				}
+				else if (type.equals("listen"))
+				{
+					//queuename = (String) properties.get("queuename");
+					listenerclass = (String) properties.get("queuelistenerclass");				
+				}
+				if (listenerclass.equals("org.xendra.replication.messages.replmessageListener")) {
+					String queuename = (String) properties.get("queuename");
+					HashMap map = new HashMap();
+					map.put(X_AD_Process.COLUMNNAME_Classname, listenerclass);
+					map.put(X_AD_Rule.COLUMNNAME_AD_Rule_ID, AD_Rule_ID);
+					map.put(X_AD_MessageFormat.COLUMNNAME_AD_MessageFormat_ID, 0);
+					Listener listener = new Listener(queuename, map, tag);				
+					Thread lpdThread = new Thread(listener);
+					lpdThread.start();											
+				}
+				else 
+				{
+					List<X_AD_MessageFormat> mfs = new Query(Env.getCtx(), X_AD_MessageFormat.Table_Name, "AD_Rule_ID = ? AND IsActive = 'Y'", null)
+					.setParameters(rule.getAD_Rule_ID()).list();
+					if (mfs.size() == 0) {						
+						throw new Exception(String.format("MessageFormat not exists for %s ", rule.getName()));
+					}
+					for (X_AD_MessageFormat mf:mfs) {
+						int AD_MessageFormat_ID = mf.getAD_MessageFormat_ID();				
+						log.log(Level.WARNING, String.format("queuename-> %s listenerclass-> %s", mf.getQueueName(), listenerclass));
+						if (mf.getQueueName() == null || mf.getQueueName().length() == 0) {
+							log.log(Level.WARNING, String.format("ERROR: queuename para %s no especificado", rule.getName()));
+							continue;
+						}
+						if (mf.getQueueName().length() > 0)
+						{				
+							log.log(Level.WARNING, String.format("Adding Listener %s to %s", listenerclass, mf.getQueueName()));
+							HashMap map = new HashMap();
+							map.put(X_AD_Process.COLUMNNAME_Classname, listenerclass);
+							map.put(X_AD_Rule.COLUMNNAME_AD_Rule_ID, AD_Rule_ID);
+							map.put(X_AD_MessageFormat.COLUMNNAME_AD_MessageFormat_ID, AD_MessageFormat_ID);
+							Listener listener = new Listener(mf.getQueueName(), map, tag);				
+							Thread lpdThread = new Thread(listener);
+							lpdThread.start();								
+						}							
+					}
+				}
 			}
-			properties = (HashMap) rule.getProperties();
-			String type = (String) properties.get("type");		
-			System.out.println("type->"+type);
-			if (type.equals("kiebase"))
+			else if (RuleType.equals(REF_RuleType.Acceptor))
 			{
-				queuename = (String) properties.get("queuename");
-				listenerclass = (String) properties.get("queuelistenerclass");
+				X_AD_Rule startrule = new X_AD_Rule(Env.getCtx(), AD_Rule_ID, null);			
+				List<MRule> rulelist = new Query(Env.getCtx(), X_AD_Rule.Table_Name,"AD_Rule_ID = ? OR Parent_ID = ?", null)
+				.setParameters(startrule.getAD_Rule_ID(), startrule.getAD_Rule_ID()).list();
+				if (rulelist != null)
+				{
+					Env.setRules(rulelist, startrule.getAD_Rule_ID());
+					log.log(Level.WARNING, String.format("XendraServerMgr::startRule->Adding Acceptor %s", startrule.getName()));					
+				}						
 			}
-			else if (type.equals("listen"))
-			{
-				queuename = (String) properties.get("queuename");
-				listenerclass = (String) properties.get("queuelistenerclass");				
-			}
-			log.log(Level.WARNING, String.format("queuename-> %s listenerclass-> %s", queuename, listenerclass));
-			if (queuename == null || queuename.length() == 0)
-				log.log(Level.WARNING, String.format("ERROR: queuename para %s no especificado", rule.getName()));
-			if (queuename.length() > 0)
-			{				
-				log.log(Level.WARNING, String.format("Adding Listener %s", listenerclass));
-				//Env.addlistener(queuename, listenerclass, rule.getAD_Rule_ID());
-				Vector vector = new Vector();
-				vector.add(listenerclass);
-				vector.add(AD_Rule_ID);								
-				//Vector vector = (Vector) Env.getlistener().get(key);
-				Listener listener2 = new Listener(queuename, vector, tag);		
-				Thread lpdThread = new Thread(listener2);
-				//lpdThread.setName("Listener ");
-				lpdThread.start();								
-			}			
-		//}
-		//boolean startRules = false;
+		} catch (Exception e) {
+			String error = e.getMessage();
+			log.log(Level.WARNING, error);
+			isok = false;
 		}
-		else if (RuleType.equals(REF_RuleType.Acceptor))
-		{
-			X_AD_Rule startrule = new X_AD_Rule(Env.getCtx(), AD_Rule_ID, null);			
-			List<MRule> rulelist = new Query(Env.getCtx(), X_AD_Rule.Table_Name,"AD_Rule_ID = ? OR Parent_ID = ?", null)
-			.setParameters(startrule.getAD_Rule_ID(), startrule.getAD_Rule_ID()).list();
-			if (rulelist != null)
-			{
-				Env.setRules(rulelist, startrule.getAD_Rule_ID());
-				log.log(Level.WARNING, String.format("XendraServerMgr::startRule->Adding Acceptor %s", startrule.getName()));
-			}						
-		}
-//		for (Integer acceptor:acceptors)
-//		{
-//			X_AD_Rule startrule = new X_AD_Rule(Env.getCtx(), acceptor, null);			
-//			List<MRule> rulelist = new Query(Env.getCtx(), X_AD_Rule.Table_Name,"AD_Rule_ID = ? OR Parent_ID = ?", null)
-//			.setParameters(startrule.getAD_Rule_ID(), startrule.getAD_Rule_ID()).list();
-//			if (rulelist != null)
-//			{
-//				Env.setRules(rulelist, startrule.getAD_Rule_ID());
-//				s_log.log(Level.WARNING, String.format("Adding Acceptor %s", startrule.getName()));
-//			}			
-//		}
-//		if (listeners != null && listeners.size() > 0)
-//		{
-//			for (Object key : Env.getlistener().keySet()) {
-//				String queuename = (String) key;
-//				Vector vector = (Vector) Env.getlistener().get(key);
-//				Listener listener = new Listener(key, vector);		
-//				Thread lpdThread = new Thread(listener);
-//				//lpdThread.setName("Listener ");
-//				lpdThread.start();				
-//			}
-//		}		
+		return isok;
 	}
 	/**
 	 * 	Get Server Context
@@ -334,7 +328,7 @@ public class XendraServerMgr
 	{
 		return m_ctx;
 	}	//	getCtx
-	
+
 	/**
 	 * 	Start all servers
 	 *	@return true if started
@@ -389,7 +383,7 @@ public class XendraServerMgr
 				log.log(Level.SEVERE, "Server: " + server, e);
 			}
 		}	//	for all servers
-		
+
 		//	Final Check
 		int noRunning = 0;
 		int noStopped = 0;
@@ -432,7 +426,7 @@ public class XendraServerMgr
 			return false;
 		if (server.isAlive())
 			return true;
-		
+
 		try
 		{
 			//	replace
@@ -457,7 +451,7 @@ public class XendraServerMgr
 			return false;
 		return server.isAlive();
 	}	//	startIt
-	
+
 	/**
 	 * 	Stop all Servers
 	 *	@return true if stopped
@@ -484,7 +478,7 @@ public class XendraServerMgr
 			}
 		}	//	for all servers
 		Thread.yield();
-		
+
 		//	Wait for death
 		for (int i = 0; i < servers.length; i++)
 		{
@@ -507,7 +501,7 @@ public class XendraServerMgr
 				log.log(Level.SEVERE, "(waiting) - " + server, e);
 			}
 		}	//	for all servers
-		
+
 		//	Final Check
 		int noRunning = 0;
 		int noStopped = 0;
@@ -566,7 +560,7 @@ public class XendraServerMgr
 		return !server.isAlive();
 	}	//	stop
 
-	
+
 	/**
 	 * 	Destroy
 	 */
@@ -594,7 +588,7 @@ public class XendraServerMgr
 		list.toArray (retValue);
 		return retValue;
 	}	//	getActive
-	
+
 	/**
 	 * 	Get InActive Servers
 	 *	@return array of inactive servers
@@ -623,7 +617,7 @@ public class XendraServerMgr
 		m_servers.toArray (retValue);
 		return retValue;
 	}	//	getAll
-	
+
 	/**
 	 * 	Get Server with ID
 	 *	@param serverID server id
@@ -641,7 +635,7 @@ public class XendraServerMgr
 		}
 		return null;
 	}	//	getServer
-	
+
 	/**
 	 * 	String Representation
 	 *	@return info
@@ -650,12 +644,12 @@ public class XendraServerMgr
 	{
 		StringBuffer sb = new StringBuffer ("XendraServerMgr[");
 		sb.append("Servers=").append(m_servers.size())
-			.append(",ContextSize=").append(m_ctx.size())
-			.append(",Started=").append(m_start)
-			.append ("]");
+		.append(",ContextSize=").append(m_ctx.size())
+		.append(",Started=").append(m_start)
+		.append ("]");
 		return sb.toString ();
 	}	//	toString
-	
+
 	/**
 	 * 	Get Description
 	 *	@return description
@@ -664,7 +658,7 @@ public class XendraServerMgr
 	{
 		return "$Revision: 1.1 $";
 	}	//	getDescription
-	
+
 	/**
 	 * 	Get Number Servers
 	 *	@return no of servers
@@ -682,11 +676,11 @@ public class XendraServerMgr
 				noStopped++;
 		}
 		String info = String.valueOf(m_servers.size())
-			+ " - Running=" + noRunning
-			+ " - Stopped=" + noStopped;
+				+ " - Running=" + noRunning
+				+ " - Stopped=" + noStopped;
 		return info;
 	}	//	getServerCount
-	
+
 	/**
 	 * 	Get start date
 	 *	@return start date
@@ -695,7 +689,7 @@ public class XendraServerMgr
 	{
 		return m_start;
 	}	//	getStartTime
-	
+
 	public static void main(String[] args)
 	{
 		org.compiere.Xendra.startupEnvironment(true);

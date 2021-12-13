@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("AD_SchedulerLog");
 public static String es_PE_TAB_Log_Description="Planificador de Log";
 
 @XendraTrl(Identifier="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a")
-public static String es_PE_TAB_Log_Name="Log";
-
-@XendraTrl(Identifier="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a")
 public static String es_PE_TAB_Log_Help="Resultado de la ejecución de el planificador";
 
-@XendraTab(Name="Log",Description="Scheduler Log",Help="Result of the execution of the Scheduler",
+@XendraTrl(Identifier="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a")
+public static String es_PE_TAB_Log_Name="Log";
+@XendraTab(Name="Log",Description="Scheduler Log",
+Help="Result of the execution of the Scheduler",
 AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",SeqNo=50,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -78,11 +78,13 @@ public static final String TABNAME_Log="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a";
 @XendraTrl(Identifier="5b7b4f05-0c40-3963-b8c6-1aaf00a7ab16")
 public static String es_PE_TABLE_AD_SchedulerLog_Name="Log Programación";
 
-@XendraTable(Name="Scheduler Log",Description="Result of the execution of the Scheduler",Help="",
-TableName="AD_SchedulerLog",AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="5b7b4f05-0c40-3963-b8c6-1aaf00a7ab16",Synchronized="2017-08-16 11:40:58.0")
+@XendraTable(Name="Scheduler Log",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Result of the execution of the Scheduler",Help="",TableName="AD_SchedulerLog",
+AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="5b7b4f05-0c40-3963-b8c6-1aaf00a7ab16",Synchronized="2020-03-03 21:35:54.0")
 /** TableName=AD_SchedulerLog */
 public static final String Table_Name="AD_SchedulerLog";
 
@@ -132,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d436a2c6-deff-2e0e-3d4b-f7dddc0328b2")
+public static String es_PE_FIELD_Log_Scheduler_Name="Programación";
+
+@XendraTrl(Identifier="d436a2c6-deff-2e0e-3d4b-f7dddc0328b2")
 public static String es_PE_FIELD_Log_Scheduler_Description="Programación de procesos";
 
 @XendraTrl(Identifier="d436a2c6-deff-2e0e-3d4b-f7dddc0328b2")
 public static String es_PE_FIELD_Log_Scheduler_Help="Programación de procesos para ser ejecutada la sincronización.";
-
-@XendraTrl(Identifier="d436a2c6-deff-2e0e-3d4b-f7dddc0328b2")
-public static String es_PE_FIELD_Log_Scheduler_Name="Programación";
 
 @XendraField(AD_Column_ID="AD_Scheduler_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -156,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d4250c2-d1a6-1aaa-653d-916a7d86a08f",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Scheduler_ID */
 public static final String COLUMNNAME_AD_Scheduler_ID = "AD_Scheduler_ID";
 /** Set Scheduler Log.
@@ -176,13 +178,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="174c1783-b7ac-3ae5-aa4a-305bbb241f06")
+public static String es_PE_FIELD_Log_SchedulerLog_Name="Log Programación";
+
+@XendraTrl(Identifier="174c1783-b7ac-3ae5-aa4a-305bbb241f06")
 public static String es_PE_FIELD_Log_SchedulerLog_Description="Resultado de la ejecución de la programación.";
 
 @XendraTrl(Identifier="174c1783-b7ac-3ae5-aa4a-305bbb241f06")
 public static String es_PE_FIELD_Log_SchedulerLog_Help="Resultado de la ejecución de la programación.";
-
-@XendraTrl(Identifier="174c1783-b7ac-3ae5-aa4a-305bbb241f06")
-public static String es_PE_FIELD_Log_SchedulerLog_Name="Log Programación";
 
 @XendraField(AD_Column_ID="AD_SchedulerLog_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -220,13 +222,13 @@ return value;
 }
 
 @XendraTrl(Identifier="22910761-e7b2-e69d-b4f9-242037a2eb93")
+public static String es_PE_FIELD_Log_Description_Name="Observación";
+
+@XendraTrl(Identifier="22910761-e7b2-e69d-b4f9-242037a2eb93")
 public static String es_PE_FIELD_Log_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="22910761-e7b2-e69d-b4f9-242037a2eb93")
 public static String es_PE_FIELD_Log_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="22910761-e7b2-e69d-b4f9-242037a2eb93")
-public static String es_PE_FIELD_Log_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -244,7 +246,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="42074916-4ccf-6ade-8662-86e3948da450",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -276,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a6a4a3d4-e3b3-4b99-b88b-3c2fbf826879",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Error.
@@ -299,15 +301,16 @@ return false;
 }
 
 @XendraTrl(Identifier="86ab67ab-be25-e173-ee7a-694a0b756616")
-public static String es_PE_FIELD_Log_Error_Description="Un error ocurrío en la ejecución.";
+public static String es_PE_FIELD_Log_Error_Name="Error";
 
 @XendraTrl(Identifier="86ab67ab-be25-e173-ee7a-694a0b756616")
-public static String es_PE_FIELD_Log_Error_Name="Error";
-@XendraField(AD_Column_ID="IsError",
-IsCentrallyMaintained=true,AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="86ab67ab-be25-e173-ee7a-694a0b756616")
+public static String es_PE_FIELD_Log_Error_Description="Un error ocurrío en la ejecución.";
+
+@XendraField(AD_Column_ID="IsError",IsCentrallyMaintained=true,
+AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=60,SortNo=0,IsSameLine=false,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="86ab67ab-be25-e173-ee7a-694a0b756616")
 public static final String FIELDNAME_Log_Error="86ab67ab-be25-e173-ee7a-694a0b756616";
 
 @XendraTrl(Identifier="4a505033-50aa-e46d-c4d8-c6582420b633")
@@ -319,7 +322,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4a505033-50aa-e46d-c4d8-c6582420b633",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name IsError */
 public static final String COLUMNNAME_IsError = "IsError";
 /** Set Reference.
@@ -343,13 +346,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="373c38df-c8b4-d721-71a6-2b3a3ba96e26")
+public static String es_PE_FIELD_Log_Reference_Name="Referencia";
+
+@XendraTrl(Identifier="373c38df-c8b4-d721-71a6-2b3a3ba96e26")
 public static String es_PE_FIELD_Log_Reference_Description="Referencia para este registro";
 
 @XendraTrl(Identifier="373c38df-c8b4-d721-71a6-2b3a3ba96e26")
 public static String es_PE_FIELD_Log_Reference_Help="La referencia despliega el número del documento fuente";
-
-@XendraTrl(Identifier="373c38df-c8b4-d721-71a6-2b3a3ba96e26")
-public static String es_PE_FIELD_Log_Reference_Name="Referencia";
 
 @XendraField(AD_Column_ID="Reference",IsCentrallyMaintained=true,
 AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -367,7 +370,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="59710d25-d1e7-de35-8a77-e863beecd989",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Reference */
 public static final String COLUMNNAME_Reference = "Reference";
 /** Set Summary.
@@ -386,18 +389,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
+public static String es_PE_FIELD_Log_Summary_Name="Resúmen";
+
+@XendraTrl(Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
 public static String es_PE_FIELD_Log_Summary_Description="Resúmen textual de esta solicitud";
 
 @XendraTrl(Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
 public static String es_PE_FIELD_Log_Summary_Help="El resúmen permite texto en formato libre sobre esta solicitud.";
 
-@XendraTrl(Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
-public static String es_PE_FIELD_Log_Summary_Name="Resúmen";
-@XendraField(AD_Column_ID="Summary",
-IsCentrallyMaintained=true,AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=true,SeqNo=50,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
+@XendraField(AD_Column_ID="Summary",IsCentrallyMaintained=true,
+AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=true,SeqNo=50,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="078cf96d-b71b-614e-6404-4238b77a9c69")
 public static final String FIELDNAME_Log_Summary="078cf96d-b71b-614e-6404-4238b77a9c69";
 
 @XendraTrl(Identifier="9e1f479e-7e1b-5a77-32c9-eecb4fdd60ca")
@@ -409,7 +413,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9e1f479e-7e1b-5a77-32c9-eecb4fdd60ca",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Summary */
 public static final String COLUMNNAME_Summary = "Summary";
 /** Set Text Message.
@@ -428,10 +432,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="6dfdaaf6-5e61-8268-ad72-c2488262173c")
-public static String es_PE_FIELD_Log_TextMessage_Description="Mensaje de texto";
+public static String es_PE_FIELD_Log_TextMessage_Name="Mensaje de texto";
 
 @XendraTrl(Identifier="6dfdaaf6-5e61-8268-ad72-c2488262173c")
-public static String es_PE_FIELD_Log_TextMessage_Name="Mensaje de texto";
+public static String es_PE_FIELD_Log_TextMessage_Description="Mensaje de texto";
 
 @XendraField(AD_Column_ID="TextMsg",IsCentrallyMaintained=true,
 AD_Tab_ID="bb248a39-d3d8-88f0-0390-b45d4d8e9c8a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -449,7 +453,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a8259b9a-f8f1-4fa4-5e9e-72fec7912b4c",
-Synchronized="2017-08-05 16:52:49.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name TextMsg */
 public static final String COLUMNNAME_TextMsg = "TextMsg";
 }

@@ -40,6 +40,8 @@ import org.kie.api.KieBase;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieSession;
+import org.xendra.rules.CustomAgendaEventListener;
+import org.xendra.rules.CustomWorkingMemoryEventListener;
 
 
 /**
@@ -511,6 +513,8 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		setSendEMail(order.isSendEMail());
 		//
 		setM_PriceList_ID(order.getM_PriceList_ID());
+		//
+		setM_PriceList_ID(order.getM_PriceList_ID());
 		setIsTaxIncluded(order.isTaxIncluded());
 		setC_Currency_ID(order.getC_Currency_ID());
 		setC_ConversionType_ID(order.getC_ConversionType_ID());
@@ -537,6 +541,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		setC_POS_ID(order.getC_POS_ID());
 		setPrinterSerial(order.getPrinterSerial());
 		setMachineSerial(order.getMachineSerial());
+		setRef_Invoice_ID(order.getRef_Invoice_ID());
 		if (order.getDocumentNoToInvoice().length() > 0)
 			setDocumentNo(order.getDocumentNoToInvoice());
 		if (order.getSerialToInvoice().length() > 0)
@@ -1447,8 +1452,8 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -1639,7 +1644,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 			this.setProcessMsg(String.format("en info organizacion %s se debe especificar el socio de negocio vinculado para el calculo de impuestos", org.getName()));
 			return false;
 		}
-		MBPartner partner = MBPartner.get(Env.getCtx(), C_BPartner_ID);		
+		MBPartner partner = MBPartner.get(Env.getCtx(), C_BPartner_ID);
 		MWithholding[] withholdings = partner.getWithholdings(isSOTrx());
 		MWithholding withholding = null;
 		for (MWithholding holding:withholdings)
@@ -2174,8 +2179,8 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -2543,7 +2548,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 	{
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 		boolean AlreadyPaid = false;
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "No se pudo restaurar @PeriodClosed@";
 			return false;
@@ -2800,7 +2805,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 			return false;
 				
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return false;
@@ -3158,7 +3163,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 	public boolean RestoreIt() {
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 		boolean AlreadyPaid = false;
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "No se pudo restaurar @PeriodClosed@";
 			return false;

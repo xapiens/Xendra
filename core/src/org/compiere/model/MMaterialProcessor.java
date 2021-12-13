@@ -2,16 +2,11 @@ package org.compiere.model;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.model.persistence.X_A_Machine;
-import org.compiere.model.persistence.X_A_MachineServer;
 import org.compiere.model.persistence.X_M_MaterialProcessor;
-import org.compiere.model.reference.REF_ServerType;
 import org.compiere.util.Env;
-import org.compiere.util.Util;
 
 public class MMaterialProcessor extends X_M_MaterialProcessor implements XendraProcessor {
 
@@ -43,7 +38,7 @@ public class MMaterialProcessor extends X_M_MaterialProcessor implements XendraP
 
 	@Override
 	public String getServerID() {
-		return "MaterialProcessor" + get_ID();
+		return "M_MaterialProcessor" + get_ID();
 	}
 
 	@Override

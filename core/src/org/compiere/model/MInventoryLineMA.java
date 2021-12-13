@@ -42,38 +42,11 @@ public class MInventoryLineMA extends X_M_InventoryLineMA
 	 */
 	public static MInventoryLineMA[] get (Properties ctx, int M_InventoryLine_ID, String trxName)
 	{
-		ArrayList<MInventoryLineMA> list = new ArrayList<MInventoryLineMA>();
-		String sql = "SELECT * FROM M_InventoryLineMA WHERE M_InventoryLine_ID=?";
-		PreparedStatement pstmt = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, trxName);
-			pstmt.setInt (1, M_InventoryLine_ID);
-			ResultSet rs = pstmt.executeQuery ();
-			while (rs.next ())
-				list.add (new MInventoryLineMA (ctx, rs, trxName));
-			rs.close ();
-			pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			s_log.log (Level.SEVERE, sql, e);
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
-		
+		List<MInventoryLineMA> list = new Query(Env.getCtx(), MInventoryLineMA.Table_Name, "M_InventoryLine_ID=?", trxName)
+			.setParameters(M_InventoryLine_ID).list();
 		MInventoryLineMA[] retValue = new MInventoryLineMA[list.size ()];
 		list.toArray (retValue);
-		return retValue;
+		return retValue;		
 	}	//	get
 	
 	/**

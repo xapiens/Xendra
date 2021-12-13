@@ -45,7 +45,7 @@ public class RestoreOrderDrafted extends SvrProcess {
 		MOrder order = new MOrder(getCtx(), m_C_Order_ID, get_TrxName());
 		MDocType dt = MDocType.get(getCtx(), order.getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), order.getDateAcct(), dt.getDocBaseType(), Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), order.getDateAcct(), dt.getDocBaseType(), order.getAD_Org_ID(), order.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}				
@@ -101,7 +101,7 @@ public class RestoreOrderDrafted extends SvrProcess {
 		boolean isSOTrx = order.isSOTrx();
 		log.fine("Binding=" + binding + " - IsSOTrx=" + isSOTrx);
 		
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), order.getDateOrdered()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), order.getDateOrdered(), order.getAD_Org_ID(), order.getAD_Client_ID()).getC_Period_ID();
 		
 		//	Always check and (un) Reserve Inventory		
 		for (int i = 0; i < lines.length; i++)

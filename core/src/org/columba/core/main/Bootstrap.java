@@ -29,6 +29,8 @@ import java.net.URLClassLoader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+//import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -59,30 +61,27 @@ import org.columba.core.gui.util.FontProperties;
 import org.columba.core.gui.util.ProgressCircle;
 import org.columba.core.gui.util.StartUpFrame;
 import org.columba.core.io.ZipFileIO;
-import org.columba.core.logging.Logging;
+//import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
-import org.columba.core.plugin.XendrianPlugin;
 import org.columba.core.resourceloader.GlobalResourceLoader;
 import org.columba.core.scripting.service.ServiceManager;
 import org.columba.core.shutdown.ShutdownManager;
 import org.columba.core.util.StackProfiler;
 import org.columba.core.versioninfo.VersionInfo;
-import org.compiere.util.Ini;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 import org.frapuccino.swing.ActiveWindowTracker;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import sun.misc.URLClassPath;
 
 public class Bootstrap {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.main"); //$NON-NLS-1$
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.main"); //$NON-NLS-1$
 	private static final String RESOURCE_PATH = "org.columba.core.i18n.global"; //$NON-NLS-1$
 	// TODO @author hubms have this flags, until the speed of the entitymanager
 	// is improved
 	public static boolean ENABLE_TAGS = false;
 	private String path;
 	private boolean showSplashScreen = false;
-	private static CloseableHttpClient httpclient = HttpClients.createDefault();;
 
 	public void run(String args[]) throws Exception {
 		addNativeJarsToClasspath();
@@ -94,7 +93,7 @@ public class Bootstrap {
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			System.setProperty("com.apple.mrj.application.apple.menu.about.name","Columba");
 		}
-		Logging.createDefaultHandler();
+		//Logging.createDefaultHandler();
 		registerCommandLineArguments();
 		StackProfiler profiler = new StackProfiler();
 		profiler.push("main");
@@ -111,15 +110,16 @@ public class Bootstrap {
 		// just initialize default logging
 		// Logging.createDefaultHandler();
 		//Logging.createDefaultFileHandler(DefaultConfigDirectory.getDefaultPath());
-		Logging.createDefaultFileHandler(new File(Ini.getXendraHome()));
+		//Logging.createDefaultFileHandler(new File(Ini.getXendraHome()));
 		for (int i = 0; i < args.length; i++) {
 			LOG.info("arg[" + i + "]=" + args[i]);
 		}
 		SessionController.passToRunningSessionAndExit(args);
 		// enable debugging of repaint manager to track down swing gui
 		// access from outside the awt-event dispatcher thread
-		if (Logging.DEBUG)
+		if (CLogMgt.getLevel().equals(Level.FINEST)) {
 			RepaintManager.setCurrentManager(new DebugRepaintManager());
+		}							
 		// use heavy-weight popups to ensure they are always on top
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		// keep track of active windows (used by dialogs which don't have a
@@ -357,9 +357,10 @@ public class Bootstrap {
 			path = path.substring(1, path.length() - 1);
 		}
 
-		if (commandLine.hasOption("debug")) {
-			Logging.DEBUG = true;
-			Logging.setDebugging(true);
+		if (commandLine.hasOption("debug")) {			
+			//Logging.DEBUG = true;
+			CLogMgt.DEBUG = true;
+			CLogMgt.setDebugging(true);
 		}
 
 		if (commandLine.hasOption("nosplash")) {

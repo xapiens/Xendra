@@ -26,6 +26,7 @@ import javax.swing.plaf.FontUIResource;
 //import org.compiere.plaf.ColorBlind;
 import org.compiere.swing.ColorBlind;
 import org.compiere.swing.ExtendedTheme;
+import org.compiere.util.CLogger;
 import org.compiere.util.Ini;
 
 import com.jgoodies.looks.plastic.PlasticScrollBarUI;
@@ -78,7 +79,7 @@ public class AdempiereTheme extends com.jgoodies.looks.plastic.PlasticTheme {
 	protected static String			s_name = "Adempiere Theme";
         public static final String	NAME = s_name;
 	/**	Logger					*/
-	protected static Logger 	log = Logger.getLogger(org.adempiere.plaf.AdempiereTheme.class.getName());
+	protected static CLogger 	log = CLogger.getCLogger(org.adempiere.plaf.AdempiereTheme.class.getName());
 	/** Active Theme			*/
 	protected static AdempiereTheme	s_theme = null;
     

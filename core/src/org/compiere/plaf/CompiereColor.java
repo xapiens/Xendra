@@ -373,7 +373,7 @@ public class CompiereColor implements Serializable
 	/** Diry marker for repaining Background    */
 	private boolean m_dirty = true;
 	/**	Logger			*/
-	private static Logger 	log = Logger.getLogger(CompiereColor.class.getName());
+	private static CLogger 	log = CLogger.getCLogger(CompiereColor.class.getName());
 
 	/**************************************************************************
 	 *  Get BackgroundType (Flat, Gradient, Lines, Texture)

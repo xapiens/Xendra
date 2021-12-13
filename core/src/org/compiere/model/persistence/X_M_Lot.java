@@ -60,13 +60,12 @@ public static int Table_ID=MTable.getTable_ID("M_Lot");
 public static String es_PE_TAB_Lot_Description="Definición Lote de Producción";
 
 @XendraTrl(Identifier="088a4d45-9a95-80e8-86bf-1fc9692fe080")
-public static String es_PE_TAB_Lot_Name="Lote";
-
-@XendraTrl(Identifier="088a4d45-9a95-80e8-86bf-1fc9692fe080")
 public static String es_PE_TAB_Lot_Help="Mantener el Lote Individual de un Producto";
 
-@XendraTab(Name="Lot",Description="Product Lot Definition",
-Help="Maintain the individual Lot of a Product",
+@XendraTrl(Identifier="088a4d45-9a95-80e8-86bf-1fc9692fe080")
+public static String es_PE_TAB_Lot_Name="Lote";
+@XendraTab(Name="Lot",
+Description="Product Lot Definition",Help="Maintain the individual Lot of a Product",
 AD_Window_ID="2dad6553-3785-ddce-6dcf-8096c3e87f0e",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -78,11 +77,12 @@ public static final String TABNAME_Lot="088a4d45-9a95-80e8-86bf-1fc9692fe080";
 @XendraTrl(Identifier="10523ec5-e455-e6ca-4994-10031f9b499c")
 public static String es_PE_TABLE_M_Lot_Name="Lote";
 
-@XendraTable(Name="Lot",Description="Product Lot Definition",Help="",TableName="M_Lot",
-AccessLevel="3",AD_Window_ID="2dad6553-3785-ddce-6dcf-8096c3e87f0e",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=105,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="10523ec5-e455-e6ca-4994-10031f9b499c",Synchronized="2017-08-16 11:43:18.0")
+@XendraTable(Name="Lot",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product Lot Definition",Help="",
+TableName="M_Lot",AccessLevel="3",AD_Window_ID="2dad6553-3785-ddce-6dcf-8096c3e87f0e",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=105,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="10523ec5-e455-e6ca-4994-10031f9b499c",Synchronized="2020-03-03 21:38:34.0")
 /** TableName=M_Lot */
 public static final String Table_Name="M_Lot";
 
@@ -129,13 +129,13 @@ return (Timestamp)get_Value(COLUMNNAME_DateFrom);
 }
 
 @XendraTrl(Identifier="4b0c5146-6dac-85a6-77bb-112b0c91b5dd")
+public static String es_PE_FIELD_Lot_DateFrom_Name="Desde Fecha";
+
+@XendraTrl(Identifier="4b0c5146-6dac-85a6-77bb-112b0c91b5dd")
 public static String es_PE_FIELD_Lot_DateFrom_Description="Fecha de inicio para un rango";
 
 @XendraTrl(Identifier="4b0c5146-6dac-85a6-77bb-112b0c91b5dd")
 public static String es_PE_FIELD_Lot_DateFrom_Help="La Fecha desde indica la fecha inicial de un rango";
-
-@XendraTrl(Identifier="4b0c5146-6dac-85a6-77bb-112b0c91b5dd")
-public static String es_PE_FIELD_Lot_DateFrom_Name="Desde Fecha";
 
 @XendraField(AD_Column_ID="DateFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -153,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38412736-d54e-ac72-7677-6589c290ad7d",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name DateFrom */
 public static final String COLUMNNAME_DateFrom = "DateFrom";
 /** Set Date To.
@@ -170,18 +170,19 @@ return (Timestamp)get_Value(COLUMNNAME_DateTo);
 }
 
 @XendraTrl(Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
+public static String es_PE_FIELD_Lot_DateTo_Name="A Fecha";
+
+@XendraTrl(Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
 public static String es_PE_FIELD_Lot_DateTo_Description="Fecha final de un rango (inclusive)";
 
 @XendraTrl(Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
 public static String es_PE_FIELD_Lot_DateTo_Help="La Fecha A indica la fecha final de un rango (inclusive)";
 
-@XendraTrl(Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
-public static String es_PE_FIELD_Lot_DateTo_Name="A Fecha";
-@XendraField(AD_Column_ID="DateTo",
-IsCentrallyMaintained=true,AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=110,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
+@XendraField(AD_Column_ID="DateTo",IsCentrallyMaintained=true,
+AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b")
 public static final String FIELDNAME_Lot_DateTo="d375a2f1-1d7f-dc96-e4c2-7bcd0836005b";
 
 @XendraTrl(Identifier="8292fc38-aa4c-d34d-232b-4fa40dc5bc96")
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8292fc38-aa4c-d34d-232b-4fa40dc5bc96",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name DateTo */
 public static final String COLUMNNAME_DateTo = "DateTo";
 /** Set Description.
@@ -219,13 +220,13 @@ return value;
 }
 
 @XendraTrl(Identifier="48337ce0-0e2b-e2a1-78ce-3b0b6446770c")
+public static String es_PE_FIELD_Lot_Description_Name="Observación";
+
+@XendraTrl(Identifier="48337ce0-0e2b-e2a1-78ce-3b0b6446770c")
 public static String es_PE_FIELD_Lot_Description_Description="Observación";
 
 @XendraTrl(Identifier="48337ce0-0e2b-e2a1-78ce-3b0b6446770c")
 public static String es_PE_FIELD_Lot_Description_Help="Observación";
-
-@XendraTrl(Identifier="48337ce0-0e2b-e2a1-78ce-3b0b6446770c")
-public static String es_PE_FIELD_Lot_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -243,7 +244,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2ecf06a6-2ce3-0785-9f66-30521e414ff8",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -269,18 +270,19 @@ return value;
 }
 
 @XendraTrl(Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
+public static String es_PE_FIELD_Lot_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
 public static String es_PE_FIELD_Lot_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
 public static String es_PE_FIELD_Lot_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
 
-@XendraTrl(Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
-public static String es_PE_FIELD_Lot_CommentHelp_Name="Ayuda";
-@XendraField(AD_Column_ID="Help",
-IsCentrallyMaintained=true,AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
+@XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
+AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b1a22b75-ef74-fe95-b473-b800aa365435")
 public static final String FIELDNAME_Lot_CommentHelp="b1a22b75-ef74-fe95-b473-b800aa365435";
 
 @XendraTrl(Identifier="a5613822-4a23-70fa-65a3-28c3a884ca95")
@@ -292,7 +294,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a5613822-4a23-70fa-65a3-28c3a884ca95",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -324,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f5429437-fc9c-4224-a5e4-f8145dfc743a",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Lot Control.
@@ -345,13 +347,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0dce5bf8-1d3b-8a79-91b8-950502e41a2d")
+public static String es_PE_FIELD_Lot_LotControl_Name="Control de Lote";
+
+@XendraTrl(Identifier="0dce5bf8-1d3b-8a79-91b8-950502e41a2d")
 public static String es_PE_FIELD_Lot_LotControl_Description="Control del lote del producto";
 
 @XendraTrl(Identifier="0dce5bf8-1d3b-8a79-91b8-950502e41a2d")
 public static String es_PE_FIELD_Lot_LotControl_Help="Definición para crear los números de lote para los productos";
-
-@XendraTrl(Identifier="0dce5bf8-1d3b-8a79-91b8-950502e41a2d")
-public static String es_PE_FIELD_Lot_LotControl_Name="Control de Lote";
 
 @XendraField(AD_Column_ID="M_LotCtl_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -369,7 +371,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="51d362e8-5578-aba2-75ff-7401114d0daf",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name M_LotCtl_ID */
 public static final String COLUMNNAME_M_LotCtl_ID = "M_LotCtl_ID";
 /** Set Lot.
@@ -389,18 +391,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
+public static String es_PE_FIELD_Lot_Lot_Name="Lote";
+
+@XendraTrl(Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
 public static String es_PE_FIELD_Lot_Lot_Description="Definición de lote de producto.";
 
 @XendraTrl(Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
 public static String es_PE_FIELD_Lot_Lot_Help="El lote individual de un producto. ";
 
-@XendraTrl(Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
-public static String es_PE_FIELD_Lot_Lot_Name="Lote";
-@XendraField(AD_Column_ID="M_Lot_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
+@XendraField(AD_Column_ID="M_Lot_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7")
 public static final String FIELDNAME_Lot_Lot="a5f3f982-2e0f-dffa-ab6d-ea327dfd16a7";
 /** Column name M_Lot_ID */
 public static final String COLUMNNAME_M_Lot_ID = "M_Lot_ID";
@@ -427,13 +430,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_Product_ID()));
 }
 
 @XendraTrl(Identifier="9144c0d7-dea0-cac3-3b44-db96807bb1fe")
+public static String es_PE_FIELD_Lot_Product_Name="Producto";
+
+@XendraTrl(Identifier="9144c0d7-dea0-cac3-3b44-db96807bb1fe")
 public static String es_PE_FIELD_Lot_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="9144c0d7-dea0-cac3-3b44-db96807bb1fe")
 public static String es_PE_FIELD_Lot_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="9144c0d7-dea0-cac3-3b44-db96807bb1fe")
-public static String es_PE_FIELD_Lot_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -451,7 +454,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d63252cd-8688-1a20-6f79-3165e09e26b0",Synchronized="2017-08-05 16:55:14.0")
+Identifier="d63252cd-8688-1a20-6f79-3165e09e26b0",Synchronized="2019-08-30 22:23:15.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Name.
@@ -476,18 +479,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
+public static String es_PE_FIELD_Lot_Name_Name="Nombre";
+
+@XendraTrl(Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
 public static String es_PE_FIELD_Lot_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
 public static String es_PE_FIELD_Lot_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
-public static String es_PE_FIELD_Lot_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=2,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="088a4d45-9a95-80e8-86bf-1fc9692fe080",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=2,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0")
 public static final String FIELDNAME_Lot_Name="6c4c247c-7bf3-3b52-64ff-a9a4020f8bb0";
 
 @XendraTrl(Identifier="e013c97b-dd5a-b2e4-38f0-28b12af39859")
@@ -499,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e013c97b-dd5a-b2e4-38f0-28b12af39859",
-Synchronized="2017-08-05 16:55:14.0")
+Synchronized="2019-08-30 22:23:15.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

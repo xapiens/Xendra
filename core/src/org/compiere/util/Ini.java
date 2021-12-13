@@ -17,7 +17,6 @@
 package org.compiere.util;
 
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,39 +29,9 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-
-//import javax.jnlp.BasicService;
-//import javax.jnlp.FileContents;
-//import javax.jnlp.PersistenceService;
-//import javax.jnlp.ServiceManager;
-//import javax.jnlp.UnavailableServiceException;
-
-//import org.adempiere.plaf.XendraLookAndFeel;
-//import org.adempiere.plaf.XendraThemeInnova;
-import org.compiere.plaf.*;
 import org.xendra.plaf.*;
 
 import org.compiere.model.ModelValidationEngine;
-import org.compiere.model.persistence.X_R_RequestProcessor;
-
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.gui2.BasicWindow;
-import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.DefaultWindowManager;
-import com.googlecode.lanterna.gui2.EmptySpace;
-import com.googlecode.lanterna.gui2.GridLayout;
-import com.googlecode.lanterna.gui2.Label;
-import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
-import com.googlecode.lanterna.gui2.Panel;
-import com.googlecode.lanterna.gui2.TextBox;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-
 
 /**
  *	Load & Save INI Settings from property file
@@ -104,31 +73,38 @@ public final class Ini implements Serializable
 	/** Language			*/
 	public static final String 	P_LANGUAGE = 		"Language";
 	private static final String DEFAULT_LANGUAGE = 	Language.getName
-		(System.getProperty("user.language") + "_" + System.getProperty("user.country"));
+			(System.getProperty("user.language") + "_" + System.getProperty("user.country"));
 	/** Ini File Name		*/
 	public static final String 	P_INI = 			"FileNameINI";
 	private static final String DEFAULT_INI = 		"";
+	public static final String P_DatabaseServer = "server";
+	public static final String P_DatabaseName = "database";
+	public static final String P_DatabasePort = "port";
+	public static final String P_DatabaseUser = "dbUid";
+	public static final String P_DatabasePassword = "dbpwd";
 	/** Connection Details	*/
-	public static final String	P_CONNECTION =		"Connection";
-	private static final String	DEFAULT_CONNECTION = "";
+	//public static final String	P_CONNECTION =		"Connection";
+	//private static final String	DEFAULT_CONNECTION = "";
 	/** Data Source			*/
 	public static final String  P_CONTEXT = 		"DataSource";
 	private static final String	DEFAULT_CONTEXT	= 	"java:xendraDB";
 	/** Look & Feel			*/
 	public static final String	P_UI_LOOK =			"UILookFeel";
 
-    private static final String	DEFAULT_UI_LOOK =	"Plastic";
+	private static final String	DEFAULT_UI_LOOK =	"Plastic";
 	/** UI Theme			*/
-        
+
 	private static final String	DEFAULT_UI_THEME =	XendraThemeInnova.NAME;        
 	/** UI Theme			*/
 	public static final String	P_UI_THEME =		"UITheme";
-	
+
 	/** Flat Color UI		
 	public static final String	P_UI_FLAT =			"UIFlat";
 	private static final boolean DEFAULT_UI_FLAT =	false;
-	*/
-	
+	 */
+	private static final String P_XENDRA_DIR = "XendraDir";
+	private static final String DEFAULT_XENDRA_DIR = "";
+
 	/** Auto Save			*/
 	public static final String  P_A_COMMIT =		"AutoCommit";
 	private static final boolean DEFAULT_A_COMMIT =	true;
@@ -171,7 +147,7 @@ public final class Ini implements Serializable
 	/** Printer Name			*/
 	public static final String  P_PRINTER =			"Printer";
 	private static final String  DEFAULT_PRINTER =	"";
-		
+
 	/** Warehouse Name			*/
 	public static final String  P_WAREHOUSE =		"Warehouse";
 	private static final String  DEFAULT_WAREHOUSE = "";
@@ -184,32 +160,23 @@ public final class Ini implements Serializable
 	/** Validate connection on startup */
 	public static final String P_VALIDATE_CONNECTION_ON_STARTUP = "ValidateConnectionOnStartup";
 	private static final boolean DEFAULT_VALIDATE_CONNECTION_ON_STARTUP = false;
-	
+
 	/** Single instance per window id **/
 	public static final String P_SINGLE_INSTANCE_PER_WINDOW = "SingleInstancePerWindow";
 	public static final boolean DEFAULT_SINGLE_INSTANCE_PER_WINDOW = false;
-		
+
 	/** Open new windows as maximized **/
 	public static final String P_OPEN_WINDOW_MAXIMIZED = "OpenWindowMaximized";
 	public static final boolean DEFAULT_OPEN_WINDOW_MAXIMIZED = false;
-	
+
 	public static final String P_POOLCLIENT = "POOLClient";
 	private static final Integer DEFAULT_POOLCLIENT = 10;
-	
-	public static final String P_HOLONWEBPORT = "HolonWebPort";
-	private static final Integer DEFAULT_HOLONWEBPORT = 8080;
-	
-	//public static final String P_HOLON_REPORT_DIR = "HolonJasperHome";
-	//private static final String DEFAULT_HOLON_REPORT_DIR = Ini.getXendraHome()+File.separator+"reports";
-	
-	//public static final String P_HOLON_CONFIG_DIR = "HolonConfigDir";
-	//private static final String DEFAULT_HOLON_CONFIG_DIR = Ini.getXendraHome()+File.separator+"holon";
-		
+
 	private static final String P_WARNING =	    	"Warning";
 	private static final String DEFAULT_WARNING =	"Do_not_change_any_of_the_data_as_they_will_have_undocumented_side_effects.";
 	private static final String P_WARNING_de =		"WarningD";
 	private static final String DEFAULT_WARNING_de ="Einstellungen_nicht_aendern,_da_diese_undokumentierte_Nebenwirkungen_haben.";
-	
+
 	/** Charset */
 	public static final String P_CHARSET = "Charset";
 	/** Charser Default Value */
@@ -217,17 +184,23 @@ public final class Ini implements Serializable
 
 	/** Load tab fields meta data using background thread **/
 	public static final String P_LOAD_TAB_META_DATA_BG = "LoadTabMetaDataBackground";
-	
+
 	public static final String DEFAULT_LOAD_TAB_META_DATA_BG = "N";	
-		
+
 	//public static final String P_STARTWEBSERVER = "AutoStartWebServer";
 	//public static final boolean DEFAULT_STARTWEBSERVER = false;		
-			
+
 	/** Ini Properties		*/
 	private static final String[]   PROPERTIES = new String[] {
 		P_UID, P_PWD, P_TRACELEVEL, P_TRACEFILE, 
 		P_LANGUAGE, P_INI,
-		P_CONNECTION, P_STORE_PWD,
+		//P_CONNECTION, 
+		P_DatabaseServer,
+		P_DatabaseName,
+		P_DatabasePort,
+		P_DatabaseUser,
+		P_DatabasePassword,
+		P_STORE_PWD,
 		P_UI_LOOK, P_UI_THEME, /* P_UI_FLAT,*/
 		P_A_COMMIT, P_A_LOGIN, P_A_NEW, 
 		P_XENDRASYS, P_LOGMIGRATIONSCRIPT, P_SHOW_ACCT, P_SHOW_TRL, 
@@ -240,37 +213,37 @@ public final class Ini implements Serializable
 		P_OPEN_WINDOW_MAXIMIZED,
 		P_WARNING, P_WARNING_de,
 		P_CHARSET, P_LOAD_TAB_META_DATA_BG, 
-		P_POOLCLIENT,		 		
-		P_HOLONWEBPORT		
+		P_POOLCLIENT, P_XENDRA_DIR		 				
 	};
 	/** Ini Property Values	*/
 	private static final String[]   VALUES = new String[] {
 		DEFAULT_UID, DEFAULT_PWD, DEFAULT_TRACELEVEL, DEFAULT_TRACEFILE?"Y":"N",
-		DEFAULT_LANGUAGE, DEFAULT_INI,
-		DEFAULT_CONNECTION, DEFAULT_STORE_PWD?"Y":"N",
-		DEFAULT_UI_LOOK, DEFAULT_UI_THEME, /* DEFAULT_UI_FLAT?"Y":"N", */
-		DEFAULT_A_COMMIT?"Y":"N", DEFAULT_A_LOGIN?"Y":"N", DEFAULT_A_NEW?"Y":"N",
-		DEFAULT_XENDRASYS?"Y":"N", DEFAULT_LOGMIGRATIONSCRIPT?"Y":"N", DEFAULT_SHOW_ACCT?"Y":"N", DEFAULT_SHOW_TRL?"Y":"N", 
-		DEFAULT_SHOW_ADVANCED?"Y":"N", DEFAULT_CACHE_WINDOW?"Y":"N",
-		DEFAULT_CONTEXT, DEFAULT_TEMP_DIR,
-		DEFAULT_ROLE, DEFAULT_CLIENT, DEFAULT_ORG, DEFAULT_PRINTER, DEFAULT_WAREHOUSE, DEFAULT_TODAY.toString(), 
-		DEFAULT_PRINTPREVIEW?"Y":"N", 
-		DEFAULT_VALIDATE_CONNECTION_ON_STARTUP?"Y":"N",
-		DEFAULT_SINGLE_INSTANCE_PER_WINDOW?"Y":"N",
-		DEFAULT_OPEN_WINDOW_MAXIMIZED?"Y":"N",
-		DEFAULT_WARNING, DEFAULT_WARNING_de,
-		DEFAULT_CHARSET, DEFAULT_LOAD_TAB_META_DATA_BG, 
-		DEFAULT_POOLCLIENT.toString(),		
-		DEFAULT_HOLONWEBPORT.toString()
+				DEFAULT_LANGUAGE, DEFAULT_INI,
+				//DEFAULT_CONNECTION, 
+				"","","","","",
+				DEFAULT_STORE_PWD?"Y":"N",
+						DEFAULT_UI_LOOK, DEFAULT_UI_THEME, /* DEFAULT_UI_FLAT?"Y":"N", */
+						DEFAULT_A_COMMIT?"Y":"N", DEFAULT_A_LOGIN?"Y":"N", DEFAULT_A_NEW?"Y":"N",
+								DEFAULT_XENDRASYS?"Y":"N", DEFAULT_LOGMIGRATIONSCRIPT?"Y":"N", DEFAULT_SHOW_ACCT?"Y":"N", DEFAULT_SHOW_TRL?"Y":"N", 
+										DEFAULT_SHOW_ADVANCED?"Y":"N", DEFAULT_CACHE_WINDOW?"Y":"N",
+												DEFAULT_CONTEXT, DEFAULT_TEMP_DIR,
+												DEFAULT_ROLE, DEFAULT_CLIENT, DEFAULT_ORG, DEFAULT_PRINTER, DEFAULT_WAREHOUSE, DEFAULT_TODAY.toString(), 
+												DEFAULT_PRINTPREVIEW?"Y":"N", 
+														DEFAULT_VALIDATE_CONNECTION_ON_STARTUP?"Y":"N",
+																DEFAULT_SINGLE_INSTANCE_PER_WINDOW?"Y":"N",
+																		DEFAULT_OPEN_WINDOW_MAXIMIZED?"Y":"N",
+																				DEFAULT_WARNING, DEFAULT_WARNING_de,
+																				DEFAULT_CHARSET, DEFAULT_LOAD_TAB_META_DATA_BG, 
+																				DEFAULT_POOLCLIENT.toString(), DEFAULT_XENDRA_DIR 		
 	};
 
 	/**	Container for Properties    */
 	private static Properties 		s_prop = new Properties();
-	
+
 	private static String s_propertyFileName = null;
-	
+
 	/**	Logger						*/
-	private static Logger			log = Logger.getLogger(Ini.class.getName());
+	private static CLogger			log = CLogger.getCLogger(Ini.class.getName());
 
 	/**
 	 *	Save INI parameters to disk
@@ -282,36 +255,29 @@ public final class Ini implements Serializable
 			// Call ModelValidators beforeSaveProperties
 			ModelValidationEngine.get().beforeSaveProperties();
 		}
-
-//		if (isWebStartClient())
-//		{
-//			saveWebStartProperties();
-//		}
-//		else
-//		{
-			String fileName = getFileName (tryUserHome);
-			FileOutputStream fos = null;
-			try
-			{
-				File f = new File(fileName);
-				f.getParentFile().mkdirs(); // Create all dirs if not exist - teo_sarca FR [ 2406123 ]
-				fos = new FileOutputStream(f);
-				s_prop.store(fos, "Xendra");
-				fos.flush();
-				fos.close();
-			}
-			catch (Exception e)
-			{
-				log.log(Level.SEVERE, "Cannot save Properties to " + fileName + " - " + e.toString());
-				return;
-			}
-			catch (Throwable t)
-			{
-				log.log(Level.SEVERE, "Cannot save Properties to " + fileName + " - " + t.toString());
-				return;
-			}
-			log.finer(fileName);
-		//}
+		String fileName = getFileName (tryUserHome);
+		File f = null;
+		FileOutputStream fos = null;
+		try
+		{
+			f = new File(fileName);
+			f.getParentFile().mkdirs(); // Create all dirs if not exist - teo_sarca FR [ 2406123 ]
+			fos = new FileOutputStream(f);
+			s_prop.store(fos, "Xendra");
+			fos.flush();
+			fos.close();
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, "Cannot save Properties to " + f.getAbsolutePath() + " - " + e.toString());
+			return;
+		}
+		catch (Throwable t)
+		{
+			log.log(Level.SEVERE, "Cannot save Properties to " + f.getAbsolutePath() + " - " + t.toString());
+			return;
+		}
+		log.finer(fileName);
 	}	//	save
 
 	/**
@@ -322,140 +288,10 @@ public final class Ini implements Serializable
 	{
 		if (reload || s_prop.size() == 0)
 		{
-//			if (isWebStartClient())
-//			{
-//				loadWebStartProperties();
-//			}
-//			else
-//			{
-				if (loadProperties(getFileName(s_client)))
-				{
-					// la tienda
-			        // MainFrame frame = TransitionManager.createMainFrame();
-					// frame.setLocationRelativeTo(null);
-					// frame.setVisible(true);							
-				}			
-//			}
+			loadProperties(getFileName(s_client));										
 		}
 	}	//	loadProperties
 
-//	private static boolean loadWebStartProperties() {
-//		boolean loadOK = true;
-//		boolean firstTime = false;
-//		s_prop = new Properties();
-//		
-//		PersistenceService ps; 
-//
-//	    try { 
-//	        ps = (PersistenceService)ServiceManager.lookup("javax.jnlp.PersistenceService"); 
-//	    } catch (UnavailableServiceException e) {	    	
-//	        ps = null; 
-//	        log.log(Level.SEVERE, e.toString());
-//	        return false;
-//	    } 
-//
-//	    FileContents fc = null;
-//	    try {
-//			fc = ps.get(getCodeBase());
-//		} catch (MalformedURLException e) {
-//			log.log(Level.SEVERE, e.toString());
-//			return false;
-//		} catch (FileNotFoundException e) {
-//			try {
-//				ps.create(getCodeBase(), 16 * 1024);
-//				ps.setTag(getCodeBase(), PersistenceService.DIRTY);
-//				fc = ps.get(getCodeBase());
-//			} catch (Exception e1) {
-//				
-//			}
-//		} catch (IOException e) {
-//			log.log(Level.SEVERE, e.toString());
-//			return false;
-//		}
-//	    
-//		try
-//		{
-//			InputStream is = fc.getInputStream(); 
-//			s_prop.load(is);
-//			is.close();
-//		}
-//		catch (Throwable t)
-//		{
-//			log.log(Level.SEVERE, t.toString());
-//			loadOK = false;
-//		}
-//		if (!loadOK || s_prop.getProperty(P_TODAY, "").equals(""))
-//		{
-//			firstTime = true;
-//			if (isShowLicenseDialog())
-//				if (!IniDialog.accept())
-//					System.exit(-1);
-//		}
-//
-//		checkProperties();
-//		
-//		//  Save if not exist or could not be read
-//		if (!loadOK || firstTime)
-//			saveWebStartProperties();
-//		s_loaded = true;
-//		s_propertyFileName = getCodeBase().toString();
-//		
-//		return firstTime;
-//		
-//	}
-
-//	private static void saveWebStartProperties() {
-//		PersistenceService ps; 
-//
-//	    try { 
-//	        ps = (PersistenceService)ServiceManager.lookup("javax.jnlp.PersistenceService"); 
-//	    } catch (UnavailableServiceException e) { 
-//	        ps = null; 
-//	        log.log(Level.SEVERE, e.toString());
-//	        return;
-//	    } 
-//	    
-//	    try
-//		{
-//	    	OutputStream os = ps.get(getCodeBase()).getOutputStream(true);
-//			s_prop.store(os, "Xendra");
-//			os.flush();
-//			os.close();
-//		}
-//		catch (Throwable t)
-//		{
-//			log.log(Level.SEVERE, "Cannot save Properties to " + getCodeBase() + " - " + t.toString());
-//			return;
-//		}
-//		
-//	}
-
-//	/**
-//	 * 	Get JNLP CodeBase
-//	 *	@return code base or null
-//	 */
-//	public static URL getCodeBase()
-//	{
-//		try
-//		{
-//			BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService"); 
-//			URL url = bs.getCodeBase();
-//	        return url;
-//		} 
-//		catch(UnavailableServiceException ue) 
-//		{
-//			return null; 
-//		} 
-//	}	//	getCodeBase
-	
-//	/**
-//	 * @return True if client is started using web start
-//	 */
-//	public static boolean isWebStartClient()
-//	{
-//		return getCodeBase() != null;
-//	}
-	
 	/**
 	 *  Load INI parameters from filename.
 	 *  Logger is on default level (INFO)
@@ -493,34 +329,26 @@ public final class Ini implements Serializable
 		{			
 			firstTime = true;
 			log.config(filename);
-			if (GraphicsEnvironment.isHeadless())
-			{
-				if (isShowLicenseDialog())
-					if (!TerminalLicenseDialog.accept())
-						System.exit(-1);				
-			}
-			else {												
-				if (isShowLicenseDialog())
-					if (!IniDialog.accept())
-						System.exit(-1);
-			}
+			//			if (Env.isHeadless())
+			//			{
+			//				if (isShowLicenseDialog())
+			//					if (!TerminalLicenseDialog.accept())
+			//						System.exit(-1);				
+			//			}
+			//			else {												
+			//				if (isShowLicenseDialog())
+			//					if (!IniDialog.accept())
+			//						System.exit(-1);
+			//			}
 		}
 		checkProperties();
-		if (!loadOK || firstTime && GraphicsEnvironment.isHeadless())
-		{
-			if (GraphicsEnvironment.isHeadless())
-			{
-				if (!TerminalDatabaseDialog.accept())
-					System.exit(-1);
-			}
-		}
 		if (!loadOK || firstTime)
 			saveProperties(true);
 		s_loaded = true;
 		//  Save if not exist or could not be read
 		log.info(filename + " #" + s_prop.size());
 		s_propertyFileName = filename;
-		
+
 		return firstTime;
 	}	//	loadProperties
 
@@ -531,7 +359,15 @@ public final class Ini implements Serializable
 			if (VALUES[i].length() > 0)
 				checkProperty(PROPERTIES[i], VALUES[i]);
 		}
-
+		//
+		String xdir = System.getProperty (ENV_PREFIX + XENDRA_HOME);	
+		if (xdir == null)
+			xdir = System.getProperty ("XENDRA_HOME");
+		if (xdir == null)	//	Fallback
+			xdir = System.getProperty ("user.dir");
+		if (xdir == null)
+			xdir = System.getProperty ("HOME");
+		checkProperty(P_XENDRA_DIR, xdir);
 		//
 		String tempDir = System.getProperty("java.io.tmpdir");
 		if (tempDir == null || tempDir.length() == 1)
@@ -563,7 +399,7 @@ public final class Ini implements Serializable
 			}
 		}
 	}	//	deleteProperties
-	
+
 	/**
 	 *	Load property and set to default, if not existing
 	 *
@@ -599,8 +435,10 @@ public final class Ini implements Serializable
 	 */
 	private static String getFileName (boolean tryUserHome)
 	{
-		if (System.getProperty("PropertyFile") != null)
+		if (System.getProperty("PropertyFile") != null) {
+			log.warning(System.getProperty("PropertyFile"));
 			return System.getProperty("PropertyFile");
+		}
 		//
 		String base = null;
 		if (tryUserHome && s_client)
@@ -621,7 +459,7 @@ public final class Ini implements Serializable
 		return base + XENDRA_PROPERTY_FILE;
 	}	//	getFileName
 
-	
+
 	/**************************************************************************
 	 *	Set Property
 	 *  @param key   Key
@@ -629,7 +467,7 @@ public final class Ini implements Serializable
 	 */
 	public static void setProperty (String key, String value)
 	{
-	//	log.finer(key + "=" + value);
+		//	log.finer(key + "=" + value);
 		if (s_prop == null)
 			s_prop = new Properties();
 		if (key.equals(P_WARNING) || key.equals(P_WARNING_de))
@@ -685,7 +523,7 @@ public final class Ini implements Serializable
 			return "";
 		//
 		String value = SecureEngine.decrypt(retStr); 
-	//	log.finer(key + "=" + value);
+		//	log.finer(key + "=" + value);
 		if (value == null)
 			return "";
 		return value;
@@ -709,7 +547,7 @@ public final class Ini implements Serializable
 	{
 		return getProperty (P_CACHE_WINDOW).equals("Y");
 	}	//	isCacheWindow
-	
+
 	/**************************************************************************
 	 *  Get Properties
 	 *
@@ -738,7 +576,7 @@ public final class Ini implements Serializable
 		return buf.toString();
 	}   //  toString
 
-	
+
 	/*************************************************************************/
 
 	/** System environment prefix                                       */
@@ -772,7 +610,7 @@ public final class Ini implements Serializable
 	{
 		s_client = client;
 	}   //  setClient
-	
+
 	/**
 	 * Set show license dialog for new setup
 	 * @param b
@@ -781,7 +619,7 @@ public final class Ini implements Serializable
 	{
 		s_license_dialog = b;
 	}
-	
+
 	/**
 	 * Is show license dialog for new setup
 	 * @return boolean
@@ -790,7 +628,7 @@ public final class Ini implements Serializable
 	{
 		return s_license_dialog;
 	}	
-	
+
 	/**
 	 *  Are the properties loaded?
 	 *  @return true if properties loaded.
@@ -805,16 +643,22 @@ public final class Ini implements Serializable
 	 *  @return XendraHome or null
 	 */
 	public static String getXendraHome()
-	{		
-		String env = System.getProperty (ENV_PREFIX + XENDRA_HOME);		
-		if (env == null)
-			env = System.getProperty ("XENDRA_HOME");
-		if (env == null)	//	Fallback
-			env = System.getProperty ("user.dir");
-		if (env == null)
-			env = System.getProperty ("HOME");
-		System.out.println("env: "+env);
-		return env;
+	{						
+		String home = getProperty (Ini.P_XENDRA_DIR);
+		File fhome = new File(home);
+		if (!fhome.exists()) {
+			String xdir = System.getProperty (ENV_PREFIX + XENDRA_HOME);	
+			if (xdir == null)
+				xdir = System.getProperty ("XENDRA_HOME");
+			if (xdir == null)	//	Fallback
+				xdir = System.getProperty ("user.dir");
+			if (xdir == null)
+				xdir = System.getProperty ("HOME");
+			setProperty(P_XENDRA_DIR, xdir);			
+			Ini.saveProperties(true);
+			fhome = new File(home);
+		}
+		return home;
 	}   //  getXendraHome
 
 	/**
@@ -827,11 +671,12 @@ public final class Ini implements Serializable
 		env += File.separator + "resource" + File.separator;
 		return env;
 	}   //  getXendraHome
-	
+
 	public static String getXendraResource(String folder) 
-	{
+	{		
 		String env = getXendraHome();
 		env += File.separator + "resource" + File.separator + folder + File.separator;
+		log.warning(String.format("Ini.XendraResource %s",env));		
 		return env;
 	}
 
@@ -861,14 +706,14 @@ public final class Ini implements Serializable
 	{
 		return getXendraFolder(folder, false);
 	}
-	
-   	public static boolean isWindows()
-   	{
-   		String osName = System.getProperty ("os.name");
-   		osName = osName.toLowerCase();
-   		return osName.indexOf ("windows") != -1;
-   	}	//	isWindows
-	
+
+	public static boolean isWindows()
+	{
+		String osName = System.getProperty ("os.name");
+		osName = osName.toLowerCase();
+		return osName.indexOf ("windows") != -1;
+	}	//	isWindows
+
 	/**
 	 *  Set Xendra Home
 	 *  @param XendraHome XENDRA_HOME
@@ -879,42 +724,42 @@ public final class Ini implements Serializable
 			System.setProperty (XENDRA_HOME, XendraHome);
 	}   //  setXendraHome
 
-	/**
-	 * 	Find Xendra Home
-	 *	@return xendra home or null
-	 */
-	public static String findXendraHome()
-	{
-		String ch = getXendraHome();
-		if (ch != null)
-			return ch;
-		
-		File[] roots = File.listRoots();
-		for (int i = 0; i < roots.length; i++)
-		{
-			if (roots[i].getAbsolutePath().startsWith("A:"))
-				continue;
-			File[] subs = roots[i].listFiles();
-			if (subs == null)
-				continue;
-			for (int j = 0; j < subs.length; j++) 
-			{
-				if (!subs[j].isDirectory())
-					continue;
-				String fileName = subs[j].getAbsolutePath();
-				// globalqss, it's leaving log in first directory with lib subdirectory. i.e. Oracle
-				if (fileName.indexOf("Xendra") != -1)
-				{
-					String libDir = fileName + File.separator + "lib";
-					File lib = new File(libDir);
-					if (lib.exists() && lib.isDirectory())
-						return fileName;
-				}
-			}
-		}
-		return ch;
-	}	//	findXendraHome
-	
+	//	/**
+	//	 * 	Find Xendra Home
+	//	 *	@return xendra home or null
+	//	 */
+	//	public static String findXendraHome()
+	//	{
+	//		String ch = getXendraHome();
+	//		if (ch != null && ch.length() > 0)
+	//			return ch;
+	//		
+	//		File[] roots = File.listRoots();
+	//		for (int i = 0; i < roots.length; i++)
+	//		{
+	//			if (roots[i].getAbsolutePath().startsWith("A:"))
+	//				continue;
+	//			File[] subs = roots[i].listFiles();
+	//			if (subs == null)
+	//				continue;
+	//			for (int j = 0; j < subs.length; j++) 
+	//			{
+	//				if (!subs[j].isDirectory())
+	//					continue;
+	//				String fileName = subs[j].getAbsolutePath();
+	//				// globalqss, it's leaving log in first directory with lib subdirectory. i.e. Oracle
+	//				if (fileName.indexOf("Xendra") != -1)
+	//				{
+	//					String libDir = fileName + File.separator + "lib";
+	//					File lib = new File(libDir);
+	//					if (lib.exists() && lib.isDirectory())
+	//						return fileName;
+	//				}
+	//			}
+	//		}
+	//		return ch;
+	//	}	//	findXendraHome
+
 	/**************************************************************************
 	 * 	Get Window Dimension
 	 *	@param AD_Window_ID window no
@@ -940,7 +785,7 @@ public final class Ini implements Serializable
 		}
 		return null;
 	}	//	getWindowDimension
-	
+
 	/**
 	 * 	Set Window Dimension 
 	 *	@param AD_Window_ID window
@@ -957,7 +802,7 @@ public final class Ini implements Serializable
 		else
 			s_prop.remove(key);
 	}	//	setWindowDimension
-	
+
 	/**
 	 * 	Get Window Location
 	 *	@param AD_Window_ID window id
@@ -983,7 +828,7 @@ public final class Ini implements Serializable
 		}
 		return null;
 	}	//	getWindowLocation
-	
+
 	/**
 	 * 	Set Window Location
 	 *	@param AD_Window_ID window
@@ -1000,7 +845,7 @@ public final class Ini implements Serializable
 		else
 			s_prop.remove(key);
 	}	//	setWindowLocation
-	
+
 	/**
 	 * 	Get Divider Location
 	 *	@return location
@@ -1020,7 +865,7 @@ public final class Ini implements Serializable
 		}
 		return 0;
 	}	//	getDividerLocation
-	
+
 	/**
 	 * 	Set Divider Location
 	 *	@param dividerLocation location
@@ -1043,7 +888,7 @@ public final class Ini implements Serializable
 		col.toArray(arr);
 		return arr;
 	}
-	
+
 	/**
 	 * Get current charset
 	 * @return current charset
@@ -1059,7 +904,7 @@ public final class Ini implements Serializable
 		}
 		return Charset.defaultCharset();
 	}
-	
+
 	public static String getPropertyFileName() 
 	{
 		return s_propertyFileName;

@@ -11,12 +11,13 @@ import org.columba.api.plugin.IPluginManager;
 import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginHandlerNotFoundException;
 import org.columba.core.component.api.IComponentPlugin;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 
 public class ComponentManager implements IComponentPlugin {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.main"); //$NON-NLS-1$
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.main"); //$NON-NLS-1$
 
 	private static final ComponentManager instance = new ComponentManager();
 
@@ -38,7 +39,7 @@ public class ComponentManager implements IComponentPlugin {
 				extensionHandler = pm.getExtensionHandler(IExtensionHandlerKeys.ORG_COLUMBA_CORE_COMPONENT);
 			} catch (final PluginHandlerNotFoundException e) {
 				LOG.severe(e.getMessage());
-				if (Logging.DEBUG) {
+				if (CLogMgt.DEBUG) {
 					e.printStackTrace();
 				}
 			}
@@ -56,7 +57,7 @@ public class ComponentManager implements IComponentPlugin {
 		} catch (final PluginException e) {
 			LOG.severe(e.getMessage());
 
-			if (Logging.DEBUG) {
+			if (CLogMgt.DEBUG) {
 				e.printStackTrace();
 			}
 		}
@@ -80,7 +81,7 @@ public class ComponentManager implements IComponentPlugin {
 			} catch (final PluginException e) {
 				LOG.severe(e.getMessage());
 
-				if (Logging.DEBUG) {
+				if (CLogMgt.DEBUG) {
 					e.printStackTrace();
 				}
 				
@@ -104,7 +105,7 @@ public class ComponentManager implements IComponentPlugin {
 			} catch (final PluginException e) {
 				LOG.severe(e.getMessage());
 
-				if (Logging.DEBUG) {
+				if (CLogMgt.DEBUG) {
 					e.printStackTrace();
 				}
 			}
@@ -128,7 +129,7 @@ public class ComponentManager implements IComponentPlugin {
 			} catch (final PluginException e) {
 				LOG.severe(e.getMessage());
 
-				if (Logging.DEBUG) {
+				if (CLogMgt.DEBUG) {
 					e.printStackTrace();
 				}
 			}
@@ -151,7 +152,7 @@ public class ComponentManager implements IComponentPlugin {
 			} catch (final PluginException e) {
 				LOG.severe(e.getMessage());
 
-				if (Logging.DEBUG) {
+				if (CLogMgt.DEBUG) {
 					e.printStackTrace();
 				}
 			}

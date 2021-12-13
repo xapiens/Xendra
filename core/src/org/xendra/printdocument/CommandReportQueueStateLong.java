@@ -4,12 +4,12 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.simoes.util.StringUtil;
 import org.xendra.Constants;
 
 public class CommandReportQueueStateLong extends CommandHandler {
-	static Logger log = Logger.getLogger(CommandReportQueueStateLong.class);
+	static CLogger log = CLogger.getCLogger(CommandReportQueueStateLong.class);
 	protected CommandReportQueueStateLong(PrintWorker i,	OutputStream o) {
 		super(i, o);
 		// TODO Auto-generated constructor stub
@@ -45,7 +45,7 @@ public class CommandReportQueueStateLong extends CommandHandler {
 					// close os connection (handled in LPDCommands.java)
 				
 			} catch(Exception e) {
-				log.error(METHOD_NAME + e.getMessage());
+				log.severe(METHOD_NAME + e.getMessage());
 				throw new Exception(e);
 			}
 	}

@@ -16,19 +16,12 @@ import org.compiere.model.MCostElement;
 import org.compiere.model.MCurrency;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
-import org.compiere.model.MPInstance;
 import org.compiere.model.MPeriod;
 import org.compiere.model.MProduct;
-import org.compiere.model.MStorage;
 import org.compiere.model.Query;
-import org.compiere.model.persistence.X_AD_Client;
-import org.compiere.model.persistence.X_AD_Process;
-import org.compiere.model.persistence.X_AD_WF_Node;
 import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.model.persistence.X_C_Invoice;
-import org.compiere.model.persistence.X_C_PaySelection;
 import org.compiere.model.persistence.X_C_Period;
-import org.compiere.model.persistence.X_M_CostCalc;
 import org.compiere.model.persistence.X_M_InOut;
 import org.compiere.model.persistence.X_M_MaterialPolicy;
 import org.compiere.model.persistence.X_M_Movement;
@@ -50,8 +43,6 @@ import org.compiere.util.Trx;
 import org.xendra.Constants;
 import org.xendra.cost.CostAverageCalc;
 import org.xendra.cost.ICostCalcMethod;
-import org.xendra.material.MaterialPolicy;
-import org.xendra.material.StockWorker;
 import org.xendra.annotations.XendraProcess;
 
 public class CostUpdate extends SvrProcess {
@@ -116,20 +107,20 @@ public class CostUpdate extends SvrProcess {
 				throw new Exception("MaterialServer not defined");
 			else
 			{
-				addLog(String.format("Try to connect to %s", machine.getName()));
-				StockWorker sw = new StockWorker();
-				sw.setMachine(machine);
-				sw.setCommand(StockWorker.IsAlive);
-				error = sw.Pull();		
-				if (error.length() > 0)
-				{
-					addLog(error);
-					throw new Exception(error);
-				}
-				else
-				{
-					addLog("Sucessfully");
-				}
+//				addLog(String.format("Try to connect to %s", machine.getName()));
+//				StockWorker sw = new StockWorker();
+//				sw.setMachine(machine);
+//				sw.setCommand(StockWorker.IsAlive);
+//				error = sw.Pull();		
+//				if (error.length() > 0)
+//				{
+//					addLog(error);
+//					throw new Exception(error);
+//				}
+//				else
+//				{
+//					addLog("Sucessfully");
+//				}
 			}
 			//addLog(0, null, BigDecimal.ZERO, "@Updated@ @M_Product_Category_ID@");					
 			m_client = MClient.get(Env.getCtx(), getAD_Client_ID());
@@ -263,20 +254,20 @@ public class CostUpdate extends SvrProcess {
 				}
 				for (int product:products)
 				{
-					StockWorker sw = new StockWorker();
-					sw.setMachine(machine);
-					sw.setCommand(StockWorker.Product);
-					sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(Env.getCtx()));
-					sw.addProperty(X_M_Transaction.COLUMNNAME_C_Period_ID, periodids);
-					sw.addProperty(X_M_Transaction.COLUMNNAME_M_Product_ID, product);
-					sw.addProperty(Constants.RESET, true);
-					//sw.addProperty(X_AD_WF_Node.COLUMNNAME_StartMode, REF_WF_Start_FinishMode.Manual);
-					error = sw.Pull();
-					if (error.length() == 0)
-					{
-						MProduct p = MProduct.get(Env.getCtx(), product, get_TrxName());
-						addLog(String.format("%s %s",p.getValue(), p.getName()));						
-					}
+//					StockWorker sw = new StockWorker();
+//					sw.setMachine(machine);
+//					sw.setCommand(StockWorker.Product);
+//					sw.addProperty(Constants.COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(Env.getCtx()));
+//					sw.addProperty(X_M_Transaction.COLUMNNAME_C_Period_ID, periodids);
+//					sw.addProperty(X_M_Transaction.COLUMNNAME_M_Product_ID, product);
+//					sw.addProperty(Constants.RESET, true);
+//					//sw.addProperty(X_AD_WF_Node.COLUMNNAME_StartMode, REF_WF_Start_FinishMode.Manual);
+//					error = sw.Pull();
+//					if (error.length() == 0)
+//					{
+//						MProduct p = MProduct.get(Env.getCtx(), product, get_TrxName());
+//						addLog(String.format("%s %s",p.getValue(), p.getName()));						
+//					}
 				}
 			}
 		} catch (Exception e) {

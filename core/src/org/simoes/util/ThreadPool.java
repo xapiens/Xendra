@@ -2,7 +2,7 @@ package org.simoes.util;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * The Thread Pool will execute any threads passed in in a FIFO order.
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class ThreadPool {
     // all files need a static Category object for error logging
-	static Logger log = Logger.getLogger(ThreadPool.class);
+	static CLogger log = CLogger.getCLogger(ThreadPool.class);
 
 	Vector objects; 
 	ThreadPoolThread[] poolThreads;

@@ -60,11 +60,13 @@ public static int Table_ID=MTable.getTable_ID("M_TransactionPeriod");
 public static String es_PE_TABLE_M_TransactionPeriod_Name="Transaction Period Control";
 
 
-@XendraTable(Name="Transaction Period Control",Description="",Help="",
+@XendraTable(Name="Transaction Period Control",
+AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="M_TransactionPeriod",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="49e69137-80c7-4b8f-94e5-7f49d9a5b6db",Synchronized="2017-08-16 11:43:38.0")
+Identifier="49e69137-80c7-4b8f-94e5-7f49d9a5b6db",Synchronized="2020-03-03 21:38:59.0")
 /** TableName=M_TransactionPeriod */
 public static final String Table_Name="M_TransactionPeriod";
 
@@ -122,7 +124,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0431ddfc-22c0-472c-80cc-a57550812bd4",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
 /** Set Date last run.
@@ -147,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="828704f1-9730-4d8b-a269-4a32ef2401b6",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set Identifier.
@@ -179,7 +181,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="25518785-2a3a-4443-8375-9188f826d18d",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -208,7 +210,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ea555b06-282e-4492-9564-65c03fbbe420",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Transaction Period Control.
@@ -253,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a0459772-1d21-4404-a0d7-482a18ffadcc",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name Percentage */
 public static final String COLUMNNAME_Percentage = "Percentage";
 /** Set Signature.
@@ -285,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f5544917-23e6-481e-a114-6dfdd3b86760",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name Signature */
 public static final String COLUMNNAME_Signature = "Signature";
 /** Set TotalTransactions.
@@ -312,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80c317de-db72-48eb-b333-5741823aa900",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name TotalTransactions */
 public static final String COLUMNNAME_TotalTransactions = "TotalTransactions";
 }

@@ -60,10 +60,12 @@ public static int Table_ID=MTable.getTable_ID("r_issuesource");
 @XendraTrl(Identifier="a464dc2e-9376-f51d-7d23-9eb1f1f41fad")
 public static String es_PE_TABLE_r_issuesource_Name="r_issuesource";
 
-@XendraTable(Name="r_issuesource",Description="",Help="",TableName="r_issuesource",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="a464dc2e-9376-f51d-7d23-9eb1f1f41fad",Synchronized="2017-08-16 11:43:48.0")
+@XendraTable(Name="r_issuesource",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="r_issuesource",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="a464dc2e-9376-f51d-7d23-9eb1f1f41fad",
+Synchronized="2020-03-03 21:39:32.0")
 /** TableName=r_issuesource */
 public static final String Table_Name="r_issuesource";
 
@@ -131,7 +133,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="664923f7-7ab4-497d-8582-4bc775c650b4",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Profile.
@@ -163,7 +165,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a486549d-6ccd-7b89-6bd5-8af70ab20500",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name ProfileInfo */
 public static final String COLUMNNAME_ProfileInfo = "ProfileInfo";
 /** Set Issue Project.
@@ -191,7 +193,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7eb50ecd-7fe7-6b62-ac96-811b06bdbea3",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name R_IssueProject_ID */
 public static final String COLUMNNAME_R_IssueProject_ID = "R_IssueProject_ID";
 /** Set r_issuesource.
@@ -236,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a35085e8-f508-c053-ae03-6f3f56afc91f",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name R_IssueSystem_ID */
 public static final String COLUMNNAME_R_IssueSystem_ID = "R_IssueSystem_ID";
 /** Set IssueUser.
@@ -264,7 +266,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="85cefe75-ad64-5c04-549f-cd703ea8c317",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name R_IssueUser_ID */
 public static final String COLUMNNAME_R_IssueUser_ID = "R_IssueUser_ID";
 /** Set Statistics.
@@ -296,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="734cc89b-c3a6-5245-b41b-d9a9b3fac121",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name StatisticsInfo */
 public static final String COLUMNNAME_StatisticsInfo = "StatisticsInfo";
 }

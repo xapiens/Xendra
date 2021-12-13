@@ -32,6 +32,17 @@ import org.compiere.grid.ed.*;
 import org.compiere.minigrid.*;
 import org.compiere.model.MQuery;
 import org.compiere.model.MRole;
+import org.compiere.model.persistence.X_A_Asset;
+import org.compiere.model.persistence.X_C_BOE;
+import org.compiere.model.persistence.X_C_BPartner;
+import org.compiere.model.persistence.X_C_Cash;
+import org.compiere.model.persistence.X_C_CashFlow;
+import org.compiere.model.persistence.X_C_CashLine;
+import org.compiere.model.persistence.X_C_Invoice;
+import org.compiere.model.persistence.X_C_Order;
+import org.compiere.model.persistence.X_C_Payment;
+import org.compiere.model.persistence.X_M_InOut;
+import org.compiere.model.persistence.X_M_Product;
 import org.compiere.swing.*;
 import org.compiere.util.*;
 
@@ -71,48 +82,48 @@ public abstract class Info extends CDialog
 	{
 		Info info = null;
 
-		if (tableName.equals("C_BPartner"))
+		if (tableName.equals(X_C_BPartner.Table_Name))
 			info = new InfoBPartner (frame, modal, WindowNo,  value, !Env.getContext(Env.getCtx(),"IsSOTrx").equals("N"),
 					multiSelection, whereClause);
-		else if (tableName.equals("M_Product"))
+		else if (tableName.equals(X_M_Product.Table_Name))
 			info = new InfoProduct (frame, modal, WindowNo,  0,0, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_Invoice"))
+		else if (tableName.equals(X_C_Invoice.Table_Name))
 			info = new InfoInvoice (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_BOE"))
+		else if (tableName.equals(X_C_BOE.Table_Name))
 			info = new InfoBOE (frame, modal, WindowNo, value,
 					multiSelection, whereClause);		
-		else if (tableName.equals("A_Asset"))
+		else if (tableName.equals(X_A_Asset.Table_Name))
 			info = new InfoAsset (frame, modal, WindowNo, 0, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_CashFlow"))
+		else if (tableName.equals(X_C_CashFlow.Table_Name))
 			info = new InfoCashFlow(frame, modal, WindowNo, 0, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_Order"))
+		else if (tableName.equals(X_C_Order.Table_Name))
 			info = new InfoOrder (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("M_InOut"))
+		else if (tableName.equals(X_M_InOut.Table_Name))
 			info = new InfoInOut (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_Payment"))
+		else if (tableName.equals(X_C_Payment.Table_Name))
 			info = new InfoPayment (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("C_CashLine"))
+		else if (tableName.equals(X_C_CashLine.Table_Name))
 			info = new InfoCashLine (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("S_ResourceAssigment"))
-			info = new InfoAssignment (frame, modal, WindowNo, value,
-					multiSelection, whereClause);
-		else if (tableName.equals("C_Cash"))
+		//else if (tableName.equals(X_S_ResourceAssigment.))
+		//	info = new InfoAssignment (frame, modal, WindowNo, value,
+		//			multiSelection, whereClause);
+		else if (tableName.equals(X_C_Cash.Table_Name))
 			info = new InfoCash (frame, modal, WindowNo, value,
 					multiSelection, whereClause);
-		else if (tableName.equals("Q_Equipment"))
-			info = new InfoEquipment (frame, modal, WindowNo,   value,
-					multiSelection, whereClause);		
-		else if (tableName.equals("C_PreOrder"))
-			info = new InfoPreOrder (frame, modal, WindowNo, value, !Env.getContext(Env.getCtx(),"IsSOTrx").equals("N"),
-					multiSelection, whereClause);	
+		//else if (tableName.equals(X_Q_Equipment.t))
+		//	info = new InfoEquipment (frame, modal, WindowNo,   value,
+		//			multiSelection, whereClause);		
+		//else if (tableName.equals("X_C_PreOrder.))
+		//	info = new InfoPreOrder (frame, modal, WindowNo, value, !Env.getContext(Env.getCtx(),"IsSOTrx").equals("N"),
+		//			multiSelection, whereClause);	
 		else
 			info = new InfoGeneral (frame, modal, WindowNo, value, 
 				tableName, keyColumn, 

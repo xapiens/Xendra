@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Sequence_Audit");
 @XendraTrl(Identifier="d900abea-087d-1086-a017-46a5f8867b03")
 public static String es_PE_TABLE_AD_Sequence_Audit_Name="AD_Sequence_Audit";
 
-@XendraTable(Name="AD_Sequence_Audit",Description="",Help="",TableName="AD_Sequence_Audit",
-AccessLevel="6",AD_Window_ID="c20f0a4a-33e9-82a3-2cc2-3b602cd050d2",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="d900abea-087d-1086-a017-46a5f8867b03",Synchronized="2017-08-16 11:40:59.0")
+@XendraTable(Name="AD_Sequence_Audit",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Sequence_Audit",AccessLevel="6",AD_Window_ID="c20f0a4a-33e9-82a3-2cc2-3b602cd050d2",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="d900abea-087d-1086-a017-46a5f8867b03",Synchronized="2020-03-03 21:35:55.0")
 /** TableName=AD_Sequence_Audit */
 public static final String Table_Name="AD_Sequence_Audit";
 
@@ -122,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56d73eea-19e7-d21e-6b3a-cd2951aa20c6",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name AD_Sequence_ID */
 public static final String COLUMNNAME_AD_Sequence_ID = "AD_Sequence_ID";
 /** Set Table.
@@ -150,7 +151,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2c544cfa-3803-f871-5a0f-fcaf9f16d62f",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Document No.
@@ -183,7 +184,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4aa47249-66dc-e97f-f7d8-043598f050e7",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Identifier.
@@ -215,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9e6bf002-7812-4563-bda5-a021a6ad9809",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Record ID.
@@ -243,7 +244,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="29954ed7-52e9-450f-523a-0ac77d5be9ad",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
 }

@@ -50,11 +50,9 @@ public class SwitchPerspectiveSubmenu extends IMenu implements ActionListener {
 	 * @param caption
 	 */
 	public SwitchPerspectiveSubmenu(IFrameMediator controller) {
-		//super(controller, "Window", ((DefaultFrameController) controller).getViewItem().get("id"));
-		super(controller, "Window", ((DefaultFrameController) controller).getViewItem().getId());
+		super(controller, "Window", ((DefaultFrameController) controller).getViewConfig().getId());
 
-		//String id = ((DefaultFrameController) getFrameMediator()).getViewItem().get("id");
-		String id = ((DefaultFrameController) getFrameMediator()).getViewItem().getId();
+		String id = ((DefaultFrameController) getFrameMediator()).getViewConfig().getId();
 
 		// check if this is a management frame instance
 		// -> if so create submenu to switch perspectives

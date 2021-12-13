@@ -9,7 +9,7 @@ public class Getavgcostforproductinput0
 @XendraFunction(Name="getavgcostforproductinput",Output="numeric",Owner="xendra",
 Language="plpgsql",Identifier="1257af5b-e8bd-bf89-4fad-1dcd4ea23592",
 Arguments="client_id numeric, org_id numeric, costelement_id numeric, product_id numeric, pline numeric, table_id numeric, recordid numeric",
-Extension="",Synchronized="2015-12-08 15:10:28.0")
+Extension="",Synchronized="2018-03-22 08:54:28.0")
 	public static final String Identifier = "1257af5b-e8bd-bf89-4fad-1dcd4ea23592";
 
 	public static final String getCode() 
@@ -26,6 +26,16 @@ Extension="",Synchronized="2015-12-08 15:10:28.0")
 	sb.appendln("	and CASE WHEN pline > 0 THEN line = pline ELSE true END");
 	sb.appendln("	and m_costelement_id = costelement_id");
 	sb.appendln("	into v_Cost;				");
+	sb.appendln("v_Cost := coalesce(v_Cost,0);");
+	sb.appendln("-- in case the cost is 0, try without line");
+	sb.appendln("if v_Cost = 0 AND pline > 0 then");
+	sb.appendln("	SELECT incost from m_costcalc WHERE ad_table_id = table_id AND record_id = recordid");
+	sb.appendln("		and m_product_id = product_id");
+	sb.appendln("		and ad_client_id = client_id");
+	sb.appendln("		and ad_org_id = 0		");
+	sb.appendln("		and m_costelement_id = costelement_id");
+	sb.appendln("		into v_Cost;				");
+	sb.appendln("end if;");
 	sb.appendln("return coalesce(v_Cost,0);");
 	sb.appendln("END;");
 	return sb.toString();
@@ -33,7 +43,7 @@ Extension="",Synchronized="2015-12-08 15:10:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2015-12-08 15:10:28.0");
+ 	sb.appendln("@Synchronized=2018-03-22 08:54:28.0");
 	sb.appendln("@Identifier=1257af5b-e8bd-bf89-4fad-1dcd4ea23592");
 	return sb.toString();
 }

@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("C_BP_Withholding");
 public static String es_PE_TAB_Withholding_Description="Definir Retención";
 
 @XendraTrl(Identifier="406c643d-c9a0-bc23-bdd7-ecb946a08352")
-public static String es_PE_TAB_Withholding_Name="Retención";
-
-@XendraTrl(Identifier="406c643d-c9a0-bc23-bdd7-ecb946a08352")
 public static String es_PE_TAB_Withholding_Help="La pestaña Retención define información sobre retenciones para este socio de negocio.";
 
-@XendraTab(Name="Withholding",Description="Define Withholding (Beta)",
+@XendraTrl(Identifier="406c643d-c9a0-bc23-bdd7-ecb946a08352")
+public static String es_PE_TAB_Withholding_Name="Retención";
+@XendraTab(Name="Withholding",
+Description="Define Withholding (Beta)",
 Help="The Withholding Tab defines any withholding information for this business partner.",
 AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",SeqNo=120,TabLevel=1,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
@@ -82,11 +82,12 @@ public static final String TABNAME_Withholding="406c643d-c9a0-bc23-bdd7-ecb946a0
 @XendraTrl(Identifier="261aad01-5210-fc7b-b524-fdeb568ba4b0")
 public static String es_PE_TABLE_C_BP_Withholding_Name="C_BP_Withholding";
 
-@XendraTable(Name="C_BP_Withholding",Description="",Help="",TableName="C_BP_Withholding",
-AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="261aad01-5210-fc7b-b524-fdeb568ba4b0",Synchronized="2017-08-16 11:41:34.0")
+@XendraTable(Name="C_BP_Withholding",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_BP_Withholding",AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="261aad01-5210-fc7b-b524-fdeb568ba4b0",Synchronized="2020-03-03 21:36:39.0")
 /** TableName=C_BP_Withholding */
 public static final String Table_Name="C_BP_Withholding";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f49b2fef-b7ad-0279-fe0c-77b3df9d9e5b")
+public static String es_PE_FIELD_Withholding_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="f49b2fef-b7ad-0279-fe0c-77b3df9d9e5b")
 public static String es_PE_FIELD_Withholding_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="f49b2fef-b7ad-0279-fe0c-77b3df9d9e5b")
 public static String es_PE_FIELD_Withholding_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="f49b2fef-b7ad-0279-fe0c-77b3df9d9e5b")
-public static String es_PE_FIELD_Withholding_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="406c643d-c9a0-bc23-bdd7-ecb946a08352",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3e7ac839-0b6f-245f-1105-3808c714aa3c",Synchronized="2017-08-05 16:53:26.0")
+Identifier="3e7ac839-0b6f-245f-1105-3808c714aa3c",Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Withholding.
@@ -180,13 +181,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="adeed944-bc0c-cb22-7a4e-9f354a0a2a2b")
+public static String es_PE_FIELD_Withholding_Withholding_Name="Retención";
+
+@XendraTrl(Identifier="adeed944-bc0c-cb22-7a4e-9f354a0a2a2b")
 public static String es_PE_FIELD_Withholding_Withholding_Description="Tipo de retención definida";
 
 @XendraTrl(Identifier="adeed944-bc0c-cb22-7a4e-9f354a0a2a2b")
 public static String es_PE_FIELD_Withholding_Withholding_Help="La Retención indica el tipo de retención a ser calculada";
-
-@XendraTrl(Identifier="adeed944-bc0c-cb22-7a4e-9f354a0a2a2b")
-public static String es_PE_FIELD_Withholding_Withholding_Name="Retención";
 
 @XendraField(AD_Column_ID="C_Withholding_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="406c643d-c9a0-bc23-bdd7-ecb946a08352",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -204,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2ebd8a93-880b-8d79-d398-78d5925d04c9",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_Withholding_ID */
 public static final String COLUMNNAME_C_Withholding_ID = "C_Withholding_ID";
 /** Set Exempt reason.
@@ -228,13 +229,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="80eaecc7-7ad2-8277-040d-4ae012b536ab")
+public static String es_PE_FIELD_Withholding_ExemptReason_Name="Razón de Excepción";
+
+@XendraTrl(Identifier="80eaecc7-7ad2-8277-040d-4ae012b536ab")
 public static String es_PE_FIELD_Withholding_ExemptReason_Description="Razón para no retener";
 
 @XendraTrl(Identifier="80eaecc7-7ad2-8277-040d-4ae012b536ab")
 public static String es_PE_FIELD_Withholding_ExemptReason_Help="Razón de excepción indica la razón por la que el dinero no es retenido para este empleado";
-
-@XendraTrl(Identifier="80eaecc7-7ad2-8277-040d-4ae012b536ab")
-public static String es_PE_FIELD_Withholding_ExemptReason_Name="Razón de Excepción";
 
 @XendraField(AD_Column_ID="ExemptReason",IsCentrallyMaintained=true,
 AD_Tab_ID="406c643d-c9a0-bc23-bdd7-ecb946a08352",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -252,7 +253,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e22ade05-c426-28f5-f341-622b67e6eee6",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name ExemptReason */
 public static final String COLUMNNAME_ExemptReason = "ExemptReason";
 /** Set Identifier.
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a84c9dac-d10b-4ea0-ba32-efda59ed1c15",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Mandatory Withholding.
@@ -307,13 +308,13 @@ return false;
 }
 
 @XendraTrl(Identifier="6526fe57-f675-26d0-aefc-71c6a86a2447")
+public static String es_PE_FIELD_Withholding_MandatoryWithholding_Name="Retención Obligatoria";
+
+@XendraTrl(Identifier="6526fe57-f675-26d0-aefc-71c6a86a2447")
 public static String es_PE_FIELD_Withholding_MandatoryWithholding_Description="El dinero debe ser retenido";
 
 @XendraTrl(Identifier="6526fe57-f675-26d0-aefc-71c6a86a2447")
 public static String es_PE_FIELD_Withholding_MandatoryWithholding_Help="El cuadro de verificación Retención Obligatoria indica que el dinero debe ser retenido para este empleado";
-
-@XendraTrl(Identifier="6526fe57-f675-26d0-aefc-71c6a86a2447")
-public static String es_PE_FIELD_Withholding_MandatoryWithholding_Name="Retención Obligatoria";
 
 @XendraField(AD_Column_ID="IsMandatoryWithholding",IsCentrallyMaintained=true,
 AD_Tab_ID="406c643d-c9a0-bc23-bdd7-ecb946a08352",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -331,7 +332,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b639b2b8-f6fb-c44c-ca7f-79a6a4d67827",Synchronized="2017-08-05 16:53:26.0")
+Identifier="b639b2b8-f6fb-c44c-ca7f-79a6a4d67827",Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsMandatoryWithholding */
 public static final String COLUMNNAME_IsMandatoryWithholding = "IsMandatoryWithholding";
 /** Set Sales Transaction.
@@ -362,7 +363,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="14e61f9e-e0b1-4511-b055-f53220f4838b",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Temporary exempt.
@@ -385,13 +386,13 @@ return false;
 }
 
 @XendraTrl(Identifier="5cf33c36-2a2c-7516-e17b-873b8dc1c156")
+public static String es_PE_FIELD_Withholding_TemporaryExempt_Name="Exención temporal";
+
+@XendraTrl(Identifier="5cf33c36-2a2c-7516-e17b-873b8dc1c156")
 public static String es_PE_FIELD_Withholding_TemporaryExempt_Description="Temporalmente no retener impuestos";
 
 @XendraTrl(Identifier="5cf33c36-2a2c-7516-e17b-873b8dc1c156")
 public static String es_PE_FIELD_Withholding_TemporaryExempt_Help="El cuadro de verificación exento temporalmente indica que por un tiempo limitado ; los impuestos no serán retenidos para este empleado.";
-
-@XendraTrl(Identifier="5cf33c36-2a2c-7516-e17b-873b8dc1c156")
-public static String es_PE_FIELD_Withholding_TemporaryExempt_Name="Exención temporal";
 
 @XendraField(AD_Column_ID="IsTemporaryExempt",IsCentrallyMaintained=true,
 AD_Tab_ID="406c643d-c9a0-bc23-bdd7-ecb946a08352",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -409,7 +410,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3d4b070f-6709-ce09-9476-4ccb0e012bfd",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsTemporaryExempt */
 public static final String COLUMNNAME_IsTemporaryExempt = "IsTemporaryExempt";
 }

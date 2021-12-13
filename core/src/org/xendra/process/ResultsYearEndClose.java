@@ -166,7 +166,7 @@ public class ResultsYearEndClose extends SvrProcess {
 
                rs = pstmt.executeQuery();
 
-               MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose);
+               MPeriod periodClose = MPeriod.get(getCtx(), m_DateAcctClose, 0, m_AD_Client_ID);
                /*MPeriod periodOpen = MPeriod.get(getCtx(), m_DateAcctOpen);*/
                MDocType docType = new MDocType(getCtx(), m_C_DocType_ID,get_TrxName());
                MAcctSchema schema = new MAcctSchema(getCtx(), m_C_AcctSchema_ID,get_TrxName());

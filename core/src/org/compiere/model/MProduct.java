@@ -607,7 +607,8 @@ public class MProduct extends X_M_Product
 				errMsg += " - @QtyReserved@" + Reserved;
 			if (errMsg.length() > 0)
 			{
-				log.saveError("Error", Msg.parseTranslation(getCtx(), errMsg)); 
+				log.saveError("Error", Msg.parseTranslation(getCtx(), errMsg));
+				super.setLastError(Msg.parseTranslation(getCtx(), errMsg));
 				return false;
 			}
 		}	//	storage

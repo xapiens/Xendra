@@ -185,6 +185,10 @@ public class LineNumbersTextPane extends JXTextPane {
             _editor = editor;
         }
 
+        public LineNumbersTextPane getEditor() {
+        	return _editor;
+        }
+        
         void fontChanged() {
             updateFont = true;
         }

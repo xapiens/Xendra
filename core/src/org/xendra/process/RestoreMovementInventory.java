@@ -48,11 +48,11 @@ public class RestoreMovementInventory extends SvrProcess {
 		
 		MDocType dt = MDocType.get(getCtx(), movement.getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), movement.getMovementDate(), dt.getDocBaseType(), Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), movement.getMovementDate(), dt.getDocBaseType(), movement.getAD_Org_ID(), movement.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}				
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), movement.getMovementDate()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), movement.getMovementDate(), movement.getAD_Org_ID(), movement.getAD_Client_ID()).getC_Period_ID();
 		movement.setDocStatus("DR");
 		movement.setDocAction("CO");
 		movement.setProcessing(false);

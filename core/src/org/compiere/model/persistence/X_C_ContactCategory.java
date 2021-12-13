@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_ContactCategory");
 @XendraTrl(Identifier="af93a7ba-4675-4a08-92d5-a303863891d5")
 public static String es_PE_TABLE_C_ContactCategory_Name="Contact Category";
 
-@XendraTable(Name="Contact Category",Description="",Help="",TableName="C_ContactCategory",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="af93a7ba-4675-4a08-92d5-a303863891d5",
-Synchronized="2017-08-16 11:41:40.0")
+@XendraTable(Name="Contact Category",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_ContactCategory",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="af93a7ba-4675-4a08-92d5-a303863891d5",
+Synchronized="2020-03-03 21:36:46.0")
 /** TableName=C_ContactCategory */
 public static final String Table_Name="C_ContactCategory";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="273465e0-8cae-4325-8b67-5cfbe702566d",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -179,7 +180,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="44a96c6a-b3fc-426d-bb46-241c5a700969",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

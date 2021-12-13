@@ -70,11 +70,12 @@ public static final String TABNAME_EDILog="d7c2d12f-7c20-a4f0-14dd-04e453ff1dde"
 @XendraTrl(Identifier="f7474e27-2025-aaa1-e6c8-9a4b1607eaa4")
 public static String es_PE_TABLE_M_EDI_Info_Name="Histórico EDI";
 
-@XendraTable(Name="EDI Log",Description="",Help="",TableName="M_EDI_Info",AccessLevel="3",
-AD_Window_ID="acfebec3-98c6-9441-ca9a-73cb2afaf512",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.material",Identifier="f7474e27-2025-aaa1-e6c8-9a4b1607eaa4",
-Synchronized="2017-08-16 11:43:11.0")
+@XendraTable(Name="EDI Log",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="M_EDI_Info",
+AccessLevel="3",AD_Window_ID="acfebec3-98c6-9441-ca9a-73cb2afaf512",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="f7474e27-2025-aaa1-e6c8-9a4b1607eaa4",Synchronized="2020-03-03 21:38:22.0")
 /** TableName=M_EDI_Info */
 public static final String Table_Name="M_EDI_Info";
 
@@ -136,7 +137,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="088caf1a-5cd2-4acc-a584-01b34ed35262",
-Synchronized="2015-08-11 20:39:28.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Info.
@@ -156,18 +157,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
+public static String es_PE_FIELD_EDILog_Info_Name="Información";
+
+@XendraTrl(Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
 public static String es_PE_FIELD_EDILog_Info_Description="Información";
 
 @XendraTrl(Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
 public static String es_PE_FIELD_EDILog_Info_Help="La Información despliega datos desde la línea del documento fuente";
 
-@XendraTrl(Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
-public static String es_PE_FIELD_EDILog_Info_Name="Información";
-@XendraField(AD_Column_ID="Info",
-IsCentrallyMaintained=true,AD_Tab_ID="d7c2d12f-7c20-a4f0-14dd-04e453ff1dde",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
+@XendraField(AD_Column_ID="Info",IsCentrallyMaintained=true,
+AD_Tab_ID="d7c2d12f-7c20-a4f0-14dd-04e453ff1dde",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8")
 public static final String FIELDNAME_EDILog_Info="65a3da49-48bb-d3ff-cde2-5eb25d6a11e8";
 
 @XendraTrl(Identifier="dffee33d-fa2e-141e-4faf-a27521321a4c")
@@ -179,7 +181,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dffee33d-fa2e-141e-4faf-a27521321a4c",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name Info */
 public static final String COLUMNNAME_Info = "Info";
 /** Set EDI Transaction.
@@ -223,7 +225,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a6dc82b6-d3b7-7829-d057-44b6edf04a96",
-Synchronized="2017-08-05 16:55:06.0")
+Synchronized="2019-08-30 22:23:05.0")
 /** Column name M_EDI_ID */
 public static final String COLUMNNAME_M_EDI_ID = "M_EDI_ID";
 /** Set EDI Log.

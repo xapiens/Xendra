@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_Weekdays;
 /** Generated Model for C_PaySchedule
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -80,11 +79,13 @@ public static final String TABNAME_Schedule="824512e7-9cba-c09e-7cf0-ef7ac3ee494
 @XendraTrl(Identifier="6d33c952-52c9-f795-3e52-25fa725f99db")
 public static String es_PE_TABLE_C_PaySchedule_Name="Programa de Pagos";
 
-@XendraTable(Name="Payment Schedule",Description="Payment Schedule Template",Help="",
-TableName="C_PaySchedule",AccessLevel="3",AD_Window_ID="176da775-8ea3-bf34-d8a9-178e4ce29d42",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="6d33c952-52c9-f795-3e52-25fa725f99db",Synchronized="2017-08-16 11:42:11.0")
+@XendraTable(Name="Payment Schedule",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Payment Schedule Template",
+Help="",TableName="C_PaySchedule",AccessLevel="3",
+AD_Window_ID="176da775-8ea3-bf34-d8a9-178e4ce29d42",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="6d33c952-52c9-f795-3e52-25fa725f99db",
+Synchronized="2020-03-03 21:37:24.0")
 /** TableName=C_PaySchedule */
 public static final String Table_Name="C_PaySchedule";
 
@@ -140,13 +141,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_PaymentTerm_ID()));
 }
 
 @XendraTrl(Identifier="aa658573-f169-671f-ebb0-0c2ad255b6a0")
+public static String es_PE_FIELD_Schedule_PaymentTerm_Name="Término de Pago";
+
+@XendraTrl(Identifier="aa658573-f169-671f-ebb0-0c2ad255b6a0")
 public static String es_PE_FIELD_Schedule_PaymentTerm_Description="Condiciones de pago de esta transacción";
 
 @XendraTrl(Identifier="aa658573-f169-671f-ebb0-0c2ad255b6a0")
 public static String es_PE_FIELD_Schedule_PaymentTerm_Help="Las condiciones de pago indican el método y tiempo de pago para esta transacción.";
-
-@XendraTrl(Identifier="aa658573-f169-671f-ebb0-0c2ad255b6a0")
-public static String es_PE_FIELD_Schedule_PaymentTerm_Name="Término de Pago";
 
 @XendraField(AD_Column_ID="C_PaymentTerm_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -164,7 +165,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ab021f32-6ceb-ec37-eb0c-4fc1ef48ec72",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name C_PaymentTerm_ID */
 public static final String COLUMNNAME_C_PaymentTerm_ID = "C_PaymentTerm_ID";
 /** Set Payment Schedule.
@@ -184,13 +185,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f110ce28-eb74-ad65-85b3-cf4c638ebbe1")
+public static String es_PE_FIELD_Schedule_PaymentSchedule_Name="Programa de Pagos";
+
+@XendraTrl(Identifier="f110ce28-eb74-ad65-85b3-cf4c638ebbe1")
 public static String es_PE_FIELD_Schedule_PaymentSchedule_Description="Plantilla de agenda de pagos.";
 
 @XendraTrl(Identifier="f110ce28-eb74-ad65-85b3-cf4c638ebbe1")
 public static String es_PE_FIELD_Schedule_PaymentSchedule_Help="Información cuando las partes del pago son debidas.";
-
-@XendraTrl(Identifier="f110ce28-eb74-ad65-85b3-cf4c638ebbe1")
-public static String es_PE_FIELD_Schedule_PaymentSchedule_Name="Programa de Pagos";
 
 @XendraField(AD_Column_ID="C_PaySchedule_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -217,13 +218,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="c9c38cf2-f469-2cd4-3b3d-1fc697794aee")
+public static String es_PE_FIELD_Schedule_Discount_Name="% Descuento";
+
+@XendraTrl(Identifier="c9c38cf2-f469-2cd4-3b3d-1fc697794aee")
 public static String es_PE_FIELD_Schedule_Discount_Description="Descuento en porcentaje";
 
 @XendraTrl(Identifier="c9c38cf2-f469-2cd4-3b3d-1fc697794aee")
 public static String es_PE_FIELD_Schedule_Discount_Help="El Descuento indica el descuento aplicado o tomado como un porcentaje.";
-
-@XendraTrl(Identifier="c9c38cf2-f469-2cd4-3b3d-1fc697794aee")
-public static String es_PE_FIELD_Schedule_Discount_Name="% Descuento";
 
 @XendraField(AD_Column_ID="Discount",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -241,7 +242,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3915de02-ceb0-0e75-3dea-106eceec80f4",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name Discount */
 public static final String COLUMNNAME_Discount = "Discount";
 /** Set Discount Days.
@@ -260,13 +261,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="62ebce82-e775-6f2f-6fc1-1bae8c052147")
+public static String es_PE_FIELD_Schedule_DiscountDays_Name="Días de Descuento";
+
+@XendraTrl(Identifier="62ebce82-e775-6f2f-6fc1-1bae8c052147")
 public static String es_PE_FIELD_Schedule_DiscountDays_Description="Número de días desde la fecha de la factura hasta la fecha de descuento";
 
 @XendraTrl(Identifier="62ebce82-e775-6f2f-6fc1-1bae8c052147")
 public static String es_PE_FIELD_Schedule_DiscountDays_Help="El día de descuento indica el número de días en que el pago debe ser hecho para ser elegible al descuento establecido";
-
-@XendraTrl(Identifier="62ebce82-e775-6f2f-6fc1-1bae8c052147")
-public static String es_PE_FIELD_Schedule_DiscountDays_Name="Días de Descuento";
 
 @XendraField(AD_Column_ID="DiscountDays",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -284,7 +285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="263b7477-17b9-ef95-b7eb-6d401ffb54c4",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name DiscountDays */
 public static final String COLUMNNAME_DiscountDays = "DiscountDays";
 /** Set Grace Days.
@@ -303,13 +304,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="850b5e32-5b68-bfe2-1896-17d4e89b2c3e")
+public static String es_PE_FIELD_Schedule_GraceDays_Name="Días de Gracia";
+
+@XendraTrl(Identifier="850b5e32-5b68-bfe2-1896-17d4e89b2c3e")
 public static String es_PE_FIELD_Schedule_GraceDays_Description="Días después de la fecha de vencimiento para enviar la primera carta de morosidad";
 
 @XendraTrl(Identifier="850b5e32-5b68-bfe2-1896-17d4e89b2c3e")
 public static String es_PE_FIELD_Schedule_GraceDays_Help="Días de gracia indica el número de días después de la fecha de vencimiento para enviar la primera carta de morosidad. Este campo se desplegará solamente si el cuadro de verificación enviar cartas de morosidad ha sido seleccionado";
-
-@XendraTrl(Identifier="850b5e32-5b68-bfe2-1896-17d4e89b2c3e")
-public static String es_PE_FIELD_Schedule_GraceDays_Name="Días de Gracia";
 
 @XendraField(AD_Column_ID="GraceDays",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -327,7 +328,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="66085624-7edc-79d7-b17e-45d810fc2a0f",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name GraceDays */
 public static final String COLUMNNAME_GraceDays = "GraceDays";
 /** Set Identifier.
@@ -359,7 +360,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d82278b9-3867-4a8c-9fe7-ed354059a0c7",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Valid.
@@ -382,17 +383,18 @@ return false;
 }
 
 @XendraTrl(Identifier="65578c5d-524c-6c9b-ef61-62a57441313b")
+public static String es_PE_FIELD_Schedule_Valid_Name="Valido";
+
+@XendraTrl(Identifier="65578c5d-524c-6c9b-ef61-62a57441313b")
 public static String es_PE_FIELD_Schedule_Valid_Description="El elemento es valido";
 
 @XendraTrl(Identifier="65578c5d-524c-6c9b-ef61-62a57441313b")
 public static String es_PE_FIELD_Schedule_Valid_Help="El elemento pasado es el cheque de la validación";
 
-@XendraTrl(Identifier="65578c5d-524c-6c9b-ef61-62a57441313b")
-public static String es_PE_FIELD_Schedule_Valid_Name="Valido";
-@XendraField(AD_Column_ID="IsValid",
-IsCentrallyMaintained=true,AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=50,SortNo=0,IsSameLine=true,
-IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+@XendraField(AD_Column_ID="IsValid",IsCentrallyMaintained=true,
+AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=50,SortNo=0,IsSameLine=true,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="65578c5d-524c-6c9b-ef61-62a57441313b")
 public static final String FIELDNAME_Schedule_Valid="65578c5d-524c-6c9b-ef61-62a57441313b";
 
@@ -405,18 +407,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bfc724d4-6cd6-4c49-3497-6f24a702e3fa",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name IsValid */
 public static final String COLUMNNAME_IsValid = "IsValid";
-
-/** NetDay AD_Reference=83e938bc-4a87-77a1-cbb0-83c31065e487 */
-public static final int NETDAY_AD_Reference_ID=167;
 /** Set Net Day.
 @param NetDay Day when payment is due net */
 public void setNetDay (String NetDay)
 {
-if (NetDay == null || NetDay.equals(REF_Weekdays.Sunday) || NetDay.equals(REF_Weekdays.Monday) || NetDay.equals(REF_Weekdays.Tuesday) || NetDay.equals(REF_Weekdays.Wednesday) || NetDay.equals(REF_Weekdays.Thursday) || NetDay.equals(REF_Weekdays.Friday) || NetDay.equals(REF_Weekdays.Saturday));
- else throw new IllegalArgumentException ("NetDay Invalid value - " + NetDay + " - Reference_ID=167 - 7 - 1 - 2 - 3 - 4 - 5 - 6");
 if (NetDay != null && NetDay.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -432,13 +429,13 @@ return (String)get_Value(COLUMNNAME_NetDay);
 }
 
 @XendraTrl(Identifier="5384065d-839b-014f-2ff7-a1e9265213e8")
+public static String es_PE_FIELD_Schedule_NetDay_Name="Día Neto";
+
+@XendraTrl(Identifier="5384065d-839b-014f-2ff7-a1e9265213e8")
 public static String es_PE_FIELD_Schedule_NetDay_Description="Día cuando se efectuará el pago";
 
 @XendraTrl(Identifier="5384065d-839b-014f-2ff7-a1e9265213e8")
 public static String es_PE_FIELD_Schedule_NetDay_Help="Cuando está definido, sobreescribe el número de los días netos con el número relativo de días el día definido.";
-
-@XendraTrl(Identifier="5384065d-839b-014f-2ff7-a1e9265213e8")
-public static String es_PE_FIELD_Schedule_NetDay_Name="Día Neto";
 
 @XendraField(AD_Column_ID="NetDay",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -456,7 +453,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5c44512b-37d0-95d1-c2e3-2475b6789ac0",Synchronized="2017-08-05 16:54:04.0")
+Identifier="5c44512b-37d0-95d1-c2e3-2475b6789ac0",Synchronized="2019-08-30 22:22:00.0")
 /** Column name NetDay */
 public static final String COLUMNNAME_NetDay = "NetDay";
 /** Set Net Days.
@@ -475,13 +472,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1eb3b85c-679a-d635-43ac-3b562ec9ee3e")
+public static String es_PE_FIELD_Schedule_NetDays_Name="Días Neto";
+
+@XendraTrl(Identifier="1eb3b85c-679a-d635-43ac-3b562ec9ee3e")
 public static String es_PE_FIELD_Schedule_NetDays_Description="Días netos en los cuales el pago se vence";
 
 @XendraTrl(Identifier="1eb3b85c-679a-d635-43ac-3b562ec9ee3e")
 public static String es_PE_FIELD_Schedule_NetDays_Help="Indica el número de días después de la fecha de la factura en que el pago se vence";
-
-@XendraTrl(Identifier="1eb3b85c-679a-d635-43ac-3b562ec9ee3e")
-public static String es_PE_FIELD_Schedule_NetDays_Name="Días Neto";
 
 @XendraField(AD_Column_ID="NetDays",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -499,7 +496,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="986b2398-3ca8-2d61-761d-336358a38399",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name NetDays */
 public static final String COLUMNNAME_NetDays = "NetDays";
 /** Set Percentage.
@@ -519,13 +516,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="237586e5-b8ca-11a4-f89a-d81df2ebe2d2")
+public static String es_PE_FIELD_Schedule_Percentage_Name="Porcentaje";
+
+@XendraTrl(Identifier="237586e5-b8ca-11a4-f89a-d81df2ebe2d2")
 public static String es_PE_FIELD_Schedule_Percentage_Description="Porcentaje sobre la cantidad total";
 
 @XendraTrl(Identifier="237586e5-b8ca-11a4-f89a-d81df2ebe2d2")
 public static String es_PE_FIELD_Schedule_Percentage_Help="Porcentaje de una cantidad (hasta 100)";
-
-@XendraTrl(Identifier="237586e5-b8ca-11a4-f89a-d81df2ebe2d2")
-public static String es_PE_FIELD_Schedule_Percentage_Name="Porcentaje";
 
 @XendraField(AD_Column_ID="Percentage",IsCentrallyMaintained=true,
 AD_Tab_ID="824512e7-9cba-c09e-7cf0-ef7ac3ee4947",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -543,7 +540,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="885dee6a-e313-9e81-33c3-b681d68d4df7",
-Synchronized="2017-08-05 16:54:04.0")
+Synchronized="2019-08-30 22:22:00.0")
 /** Column name Percentage */
 public static final String COLUMNNAME_Percentage = "Percentage";
 }

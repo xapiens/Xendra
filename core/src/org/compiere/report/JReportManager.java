@@ -28,7 +28,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
@@ -42,7 +44,9 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.compiere.Xendra;
 import org.compiere.db.CConnection;
+import org.compiere.db.DB_PostgreSQL;
 import org.compiere.model.persistence.X_A_Machine;
+import org.compiere.model.reference.REF_ServerType;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -77,14 +81,14 @@ public class JReportManager
 	private static JRViewerProvider viewerProvider = new SwingJRViewerProvider();
 
 
-    static {
-        String reportPath = System.getProperty("org.compiere.report.path");
-        if (reportPath == null) {
-        	REPORT_HOME = new File(Ini.getXendraHome() + File.separator + "reports");
-        } else {
+	static {
+		String reportPath = System.getProperty("org.compiere.report.path");
+		if (reportPath == null) {
+			REPORT_HOME = new File(Ini.getXendraHome() + File.separator + "reports");
+		} else {
 			REPORT_HOME = new File(reportPath);
-        }
-    }
+		}
+	}
 
 
 
@@ -120,34 +124,34 @@ public class JReportManager
 	}
 
 
-    /**
-     * Returns the Server Connection if direct connection is not available
-     * (VPN, WAN, Terminal) and thus query has to be run on server only else return
-     * a direct connection to DB.
-     *
-     * Notes: Need to refactor and integrate in DB if confirmed to be working as
-     * expected.
-     *
-     * @author Ashley Ramdass
-     * @return Connection DB Connection
-     */
-    protected Connection getConnection()
-    {
-    	return DB.getConnectionRW(true);
-    }
+	/**
+	 * Returns the Server Connection if direct connection is not available
+	 * (VPN, WAN, Terminal) and thus query has to be run on server only else return
+	 * a direct connection to DB.
+	 *
+	 * Notes: Need to refactor and integrate in DB if confirmed to be working as
+	 * expected.
+	 *
+	 * @author Ashley Ramdass
+	 * @return Connection DB Connection
+	 */
+	protected Connection getConnection()
+	{
+		return DB.getConnectionRW(true);
+	}
 
- 
+
 
 
 
 	/**
-     * Get .property resource file from resources
-     * @param jasperName
-     * @param currLang
-     * @return File
-     */
-    protected File getResourcesForResourceFile(String jasperName, Language currLang) {
-    	File resFile = null;
+	 * Get .property resource file from resources
+	 * @param jasperName
+	 * @param currLang
+	 * @return File
+	 */
+	protected File getResourcesForResourceFile(String jasperName, Language currLang) {
+		File resFile = null;
 		try {
 			resFile = getFileAsResource(jasperName+currLang.getLocale().getLanguage()+".properties");
 		} catch (Exception e) {
@@ -185,18 +189,18 @@ public class JReportManager
 
 			subreports.add(subreport);
 		}
-		
+
 		File[] subreportsTemp = new File[subreports.size()];
 		subreportsTemp = subreports.toArray(subreportsTemp);
 		return subreportsTemp;
 	}
 
 	/**
-     * @author alinv
-     * @param reportPath
-     * @param reportType
-     * @return the abstract file corresponding to typed report
-     */
+	 * @author alinv
+	 * @param reportPath
+	 * @param reportType
+	 * @return the abstract file corresponding to typed report
+	 */
 	protected File getReportFile(String reportPath, String reportType) {
 
 		if (reportType != null)
@@ -281,49 +285,49 @@ public class JReportManager
 
 
 
-    /**
-     * @author rlemeill
-     * @param reportFile
-     * @return
-     */
-    protected JasperData processReport( File reportFile) {
-        log.info( "reportFile.getAbsolutePath() = "+reportFile.getAbsolutePath());
-        JasperReport jasperReport = null;
+	/**
+	 * @author rlemeill
+	 * @param reportFile
+	 * @return
+	 */
+	protected JasperData processReport( File reportFile) {
+		log.info( "reportFile.getAbsolutePath() = "+reportFile.getAbsolutePath());
+		JasperReport jasperReport = null;
 
-        String jasperName = reportFile.getName();
-        int pos = jasperName.indexOf('.');
-        if (pos!=-1) jasperName = jasperName.substring(0, pos);
-        File reportDir = reportFile.getParentFile();
+		String jasperName = reportFile.getName();
+		int pos = jasperName.indexOf('.');
+		if (pos!=-1) jasperName = jasperName.substring(0, pos);
+		File reportDir = reportFile.getParentFile();
 
-        //test if the compiled report exists
-        File jasperFile = new File( reportDir.getAbsolutePath(), jasperName+".jasper");
-        if (jasperFile.exists()) { // test time
-            if (reportFile.lastModified() == jasperFile.lastModified()) {
-            	log.info(" no need to compile use "+jasperFile.getAbsolutePath());
-                try {
-                    jasperReport = (JasperReport)JRLoader.loadObject(jasperFile.getAbsolutePath());
-                } catch (JRException e) {
-                    jasperReport = null;
-                    log.severe("Can not load report - "+ e.getMessage());
-                }
-            } else {
-                jasperReport = compileReport( reportFile, jasperFile);
-            }
-        } else { // create new jasper file
-            jasperReport = compileReport( reportFile, jasperFile);
-        }
+		//test if the compiled report exists
+		File jasperFile = new File( reportDir.getAbsolutePath(), jasperName+".jasper");
+		if (jasperFile.exists()) { // test time
+			if (reportFile.lastModified() == jasperFile.lastModified()) {
+				log.info(" no need to compile use "+jasperFile.getAbsolutePath());
+				try {
+					jasperReport = (JasperReport)JRLoader.loadObject(jasperFile.getAbsolutePath());
+				} catch (JRException e) {
+					jasperReport = null;
+					log.severe("Can not load report - "+ e.getMessage());
+				}
+			} else {
+				jasperReport = compileReport( reportFile, jasperFile);
+			}
+		} else { // create new jasper file
+			jasperReport = compileReport( reportFile, jasperFile);
+		}
 
-        return new JasperData( jasperReport, reportDir, jasperName, jasperFile);
-    }
+		return new JasperData( jasperReport, reportDir, jasperName, jasperFile);
+	}
 
-  
-  
-    /**
-     * @author rlemeill
-     * Correct the class path if loaded from java web start
-     */
-    private void JWScorrectClassPath()
-    {
+
+
+	/**
+	 * @author rlemeill
+	 * Correct the class path if loaded from java web start
+	 */
+	private void JWScorrectClassPath()
+	{
 		URL jasperreportsAbsoluteURL = Thread.currentThread().getContextClassLoader().getResource("net/sf/jasperreports/engine");
 		String jasperreportsAbsolutePath = "";
 
@@ -376,146 +380,168 @@ public class JReportManager
 			// jasper libraries and dependencies or not.
 			if(System.getProperty("java.class.path").indexOf(jasperreportsAbsolutePath) < 0)
 			{
-			System.setProperty("java.class.path",
-					System.getProperty("java.class.path") +
-					System.getProperty("path.separator") +
-					jasperreportsAbsolutePath);
-			log.info("Classpath has been corrected to " + System.getProperty("java.class.path"));
+				System.setProperty("java.class.path",
+						System.getProperty("java.class.path") +
+						System.getProperty("path.separator") +
+						jasperreportsAbsolutePath);
+				log.info("Classpath has been corrected to " + System.getProperty("java.class.path"));
 			}
 		}
-    }
+	}
 
-    /**
-     * @author rlemeill
-     * @param reportFile
-     * @param jasperFile
-     * @return compiled JasperReport
-     */
-    private JasperReport compileReport( File reportFile, File jasperFile)
-    {
-    	JWScorrectClassPath();
-        JasperReport compiledJasperReport = null;
-        try {
-          	JasperCompileManager.compileReportToFile ( reportFile.getAbsolutePath(), jasperFile.getAbsolutePath() );
-            jasperFile.setLastModified( reportFile.lastModified()); //Synchronize Dates
-            compiledJasperReport =  (JasperReport)JRLoader.loadObject(jasperFile);
-        } catch (JRException e) {
-            log.log(Level.SEVERE, "Error", e);
-        }
-        return compiledJasperReport;
-    }
+	/**
+	 * @author rlemeill
+	 * @param reportFile
+	 * @param jasperFile
+	 * @return compiled JasperReport
+	 */
+	private JasperReport compileReport( File reportFile, File jasperFile)
+	{
+		JWScorrectClassPath();
+		JasperReport compiledJasperReport = null;
+		try {
+			JasperCompileManager.compileReportToFile ( reportFile.getAbsolutePath(), jasperFile.getAbsolutePath() );
+			jasperFile.setLastModified( reportFile.lastModified()); //Synchronize Dates
+			compiledJasperReport =  (JasperReport)JRLoader.loadObject(jasperFile);
+		} catch (JRException e) {
+			log.log(Level.SEVERE, "Error", e);
+		}
+		return compiledJasperReport;
+	}
 
 
-    protected ReportData getReportDataInstance(String reportFilePath, boolean directPrint) {
-    	return new ReportData(reportFilePath, directPrint);
-    }
-    
-    protected FileFilter getFileFilterInstance(String reportStart, File directory, String extension) {
-    	return new FileFilter(reportStart, directory, extension);
-    }
+	protected ReportData getReportDataInstance(String reportFilePath, boolean directPrint, HashMap properties) {
+		return new ReportData(reportFilePath, directPrint, properties);
+	}
 
-    /**
-     * Set jasper report viewer provider.
-     * @param provider
-     */
-    public static void setReportViewerProvider(JRViewerProvider provider) {
-    	if (provider == null)
-    		throw new IllegalArgumentException("Cannot set report viewer provider to null");
-    	viewerProvider = provider;
-    }
+	protected FileFilter getFileFilterInstance(String reportStart, File directory, String extension) {
+		return new FileFilter(reportStart, directory, extension);
+	}
 
-    /**
-     * Get the current jasper report viewer provider
-     * @return JRViewerProvider
-     */
-    public static JRViewerProvider getReportViewerProvider() {
-    	return viewerProvider;
-    }
+	/**
+	 * Set jasper report viewer provider.
+	 * @param provider
+	 */
+	public static void setReportViewerProvider(JRViewerProvider provider) {
+		if (provider == null)
+			throw new IllegalArgumentException("Cannot set report viewer provider to null");
+		viewerProvider = provider;
+	}
 
-    protected class ReportData {
-        private String reportFilePath;
-        private boolean directPrint;
+	/**
+	 * Get the current jasper report viewer provider
+	 * @return JRViewerProvider
+	 */
+	public static JRViewerProvider getReportViewerProvider() {
+		return viewerProvider;
+	}
 
-        public ReportData(String reportFilePath, boolean directPrint) {
-        	X_A_Machine web = Env.getServerWeb();
-        	if (web != null)
-        	{
-	        	//CConnection cc = CConnection.get(Xendra.getCodeBaseHost())        		
-        		int port = Env.getServerWebPort();
-        		if (reportFilePath == null)
-        			reportFilePath = "";
-        		reportFilePath  = String.format("http://%s:%s/reports/%s",web.getName(),port,reportFilePath);
-	        	//if (reportFilePath.contains("http://localhost"))
-	        	//	reportFilePath = reportFilePath.replace("http://localhost", server);
-	            this.reportFilePath = reportFilePath;
-	            this.directPrint = directPrint;
-        	}
-        }
+	protected class ReportData {
+		private String reportFilePath;
+		private boolean directPrint;
+		private HashMap Properties;
+		private DB_PostgreSQL	p_db = new DB_PostgreSQL();
+		public ReportData(String reportFilePath, boolean directPrint, HashMap properties) {
+			X_A_Machine web = Env.getServerWeb(Env.getMachine());
+			if (web != null)
+			{
+				if (properties == null)
+					properties = new HashMap();
+				this.Properties = properties;
+				HashMap props = Env.getServerProperties(web.getA_Machine_ID(), REF_ServerType.WebServer); 
+				int port = 0;
+				if (props.containsKey("port")) {
+					port = Integer.valueOf(props.get("port").toString());
+				}        		
+				if (reportFilePath == null)
+					reportFilePath = "";
+				if (!reportFilePath.startsWith("http")) 
+					reportFilePath  = String.format("http://%s:%s/reports/%s",web.getName(),port,reportFilePath);
+				//if (reportFilePath.contains("http://localhost"))
+				//	reportFilePath = reportFilePath.replace("http://localhost", server);
+				this.reportFilePath = reportFilePath;
+				this.directPrint = directPrint;
+			}
+		}
 
-        public String getReportFilePath() {
-            return reportFilePath;
-        }
+		public String getReportFilePath() {
+			return reportFilePath;
+		}
 
-        public boolean isDirectPrint() {
-            return directPrint;
-        }
-    }
+		public boolean isDirectPrint() {
+			return directPrint;
+		}
 
-    protected class JasperData  implements Serializable
-    {
+		public Connection getConnection() {
+			Connection conn = null;
+			if (Properties.containsKey("url")) {
+				String url = (String) Properties.get("url");
+				try {					
+					CConnection cc = CConnection.get(null);
+					conn = p_db.getDriverConnection(url, cc.getDbUid(), cc.getDbPwd());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}			
+			}
+			return conn;
+		}
+	}
+
+	protected class JasperData  implements Serializable
+	{
 		/**
 		 *
 		 */
 		private static final long serialVersionUID = 4375195020654531202L;
 		private JasperReport jasperReport;
-        private File reportDir;
-        private String jasperName;
-        private File jasperFile;
+		private File reportDir;
+		private String jasperName;
+		private File jasperFile;
 
-        public JasperData(JasperReport jasperReport, File reportDir, String jasperName, File jasperFile) {
-            this.jasperReport = jasperReport;
-            this.reportDir = reportDir;
-            this.jasperName = jasperName;
-            this.jasperFile = jasperFile;
-        }
+		public JasperData(JasperReport jasperReport, File reportDir, String jasperName, File jasperFile) {
+			this.jasperReport = jasperReport;
+			this.reportDir = reportDir;
+			this.jasperName = jasperName;
+			this.jasperFile = jasperFile;
+		}
 
-        public JasperReport getJasperReport() {
-            return jasperReport;
-        }
+		public JasperReport getJasperReport() {
+			return jasperReport;
+		}
 
-        public File getReportDir() {
-            return reportDir;
-        }
+		public File getReportDir() {
+			return reportDir;
+		}
 
-        public String getJasperName() {
-            return jasperName;
-        }
+		public String getJasperName() {
+			return jasperName;
+		}
 
-        public File getJasperFile() {
-            return jasperFile;
-        }
-    }
+		public File getJasperFile() {
+			return jasperFile;
+		}
+	}
 
-    protected class FileFilter implements FilenameFilter {
-        private String reportStart;
-        private File directory;
-        private String extension;
+	protected class FileFilter implements FilenameFilter {
+		private String reportStart;
+		private File directory;
+		private String extension;
 
-        public FileFilter(String reportStart, File directory, String extension) {
-            this.reportStart = reportStart;
-            this.directory = directory;
-            this.extension = extension;
-        }
+		public FileFilter(String reportStart, File directory, String extension) {
+			this.reportStart = reportStart;
+			this.directory = directory;
+			this.extension = extension;
+		}
 
-        public boolean accept(File file, String name) {
-            if (file.equals( directory)) {
-                if (name.startsWith( reportStart)) {
-                    int pos = name.lastIndexOf( extension);
-                    if ( (pos!=-1) && (pos==(name.length()-extension.length()))) return true;
-                }
-            }
-            return false;
-        }
-    }
+		public boolean accept(File file, String name) {
+			if (file.equals( directory)) {
+				if (name.startsWith( reportStart)) {
+					int pos = name.lastIndexOf( extension);
+					if ( (pos!=-1) && (pos==(name.length()-extension.length()))) return true;
+				}
+			}
+			return false;
+		}
+	}
 
 }

@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_FindAndOr;
-import org.compiere.model.reference.REF_AD_FindOperation;
 /** Generated Model for AD_Find
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -77,10 +75,12 @@ public static final String TABNAME_Find="e879e467-f15f-e030-fe1c-d511422d8fa3";
 @XendraTrl(Identifier="dfcd1db0-6c10-c80b-53de-dd11711f2be7")
 public static String es_PE_TABLE_AD_Find_Name="ID de hallazgo";
 
-@XendraTable(Name="Find",Description="",Help="",TableName="AD_Find",AccessLevel="7",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="dfcd1db0-6c10-c80b-53de-dd11711f2be7",Synchronized="2017-08-16 11:40:17.0")
+@XendraTable(Name="Find",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Find",
+AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="dfcd1db0-6c10-c80b-53de-dd11711f2be7",
+Synchronized="2020-03-03 21:35:02.0")
 /** TableName=AD_Find */
 public static final String Table_Name="AD_Find";
 
@@ -113,9 +113,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_AD_Find[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_Column_ID AD_Reference=06ce5e33-2936-71a4-56b8-5876a5a39218 */
-public static final int AD_COLUMN_ID_AD_Reference_ID=251;
 /** Set Column.
 @param AD_Column_ID Column in the table */
 public void setAD_Column_ID (int AD_Column_ID)
@@ -133,13 +130,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5f23d70b-830e-1101-4dde-527c304bbda8")
+public static String es_PE_FIELD_Find_Column_Name="Columna";
+
+@XendraTrl(Identifier="5f23d70b-830e-1101-4dde-527c304bbda8")
 public static String es_PE_FIELD_Find_Column_Description="Columna en la tabla";
 
 @XendraTrl(Identifier="5f23d70b-830e-1101-4dde-527c304bbda8")
 public static String es_PE_FIELD_Find_Column_Help="Enlace a la columna base de datos de la tabla";
-
-@XendraTrl(Identifier="5f23d70b-830e-1101-4dde-527c304bbda8")
-public static String es_PE_FIELD_Find_Column_Name="Columna";
 
 @XendraField(AD_Column_ID="AD_Column_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e879e467-f15f-e030-fe1c-d511422d8fa3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +155,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="48e88583-f9ec-ca67-354b-ba6228542943",
-Synchronized="2017-08-05 16:52:32.0")
+Synchronized="2019-08-30 22:20:21.0")
 /** Column name AD_Column_ID */
 public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
 /** Set Find.
@@ -194,16 +191,10 @@ Identifier="172c1cd9-1c70-d59c-6524-a74ce08d7452")
 public static final String FIELDNAME_Find_Find="172c1cd9-1c70-d59c-6524-a74ce08d7452";
 /** Column name AD_Find_ID */
 public static final String COLUMNNAME_AD_Find_ID = "AD_Find_ID";
-
-/** AndOr AD_Reference=115d4f2d-61de-0b53-83b8-d9a24fa54f5b */
-public static final int ANDOR_AD_Reference_ID=204;
 /** Set And/Or.
 @param AndOr Logical operation: AND or OR */
 public void setAndOr (String AndOr)
 {
-if (AndOr == null) throw new IllegalArgumentException ("AndOr is mandatory");
-if (AndOr.equals(REF_AD_FindAndOr.And) || AndOr.equals(REF_AD_FindAndOr.Or));
- else throw new IllegalArgumentException ("AndOr Invalid value - " + AndOr + " - Reference_ID=204 - A - O");
 if (AndOr.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -219,15 +210,16 @@ return (String)get_Value(COLUMNNAME_AndOr);
 }
 
 @XendraTrl(Identifier="553cad8b-bd3a-1fb2-0941-7f14d3d19965")
-public static String es_PE_FIELD_Find_AndOr_Description="Operador lógico; Y u O";
+public static String es_PE_FIELD_Find_AndOr_Name="Y/O";
 
 @XendraTrl(Identifier="553cad8b-bd3a-1fb2-0941-7f14d3d19965")
-public static String es_PE_FIELD_Find_AndOr_Name="Y/O";
-@XendraField(AD_Column_ID="AndOr",
-IsCentrallyMaintained=true,AD_Tab_ID="e879e467-f15f-e030-fe1c-d511422d8fa3",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="553cad8b-bd3a-1fb2-0941-7f14d3d19965")
+public static String es_PE_FIELD_Find_AndOr_Description="Operador lógico; Y u O";
+
+@XendraField(AD_Column_ID="AndOr",IsCentrallyMaintained=true,
+AD_Tab_ID="e879e467-f15f-e030-fe1c-d511422d8fa3",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="553cad8b-bd3a-1fb2-0941-7f14d3d19965")
 public static final String FIELDNAME_Find_AndOr="553cad8b-bd3a-1fb2-0941-7f14d3d19965";
 
 @XendraTrl(Identifier="c32c0b38-585d-7cdf-52e5-6e23331bd7ad")
@@ -239,7 +231,7 @@ FieldLength=1,DefaultValue="A",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c32c0b38-585d-7cdf-52e5-6e23331bd7ad",Synchronized="2017-08-05 16:52:32.0")
+Identifier="c32c0b38-585d-7cdf-52e5-6e23331bd7ad",Synchronized="2019-08-30 22:20:21.0")
 /** Column name AndOr */
 public static final String COLUMNNAME_AndOr = "AndOr";
 /** Set Find_ID.
@@ -277,7 +269,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="666a1749-0f4b-68a4-591d-c99e837eb7fb",
-Synchronized="2017-08-05 16:52:32.0")
+Synchronized="2019-08-30 22:20:22.0")
 /** Column name Find_ID */
 public static final String COLUMNNAME_Find_ID = "Find_ID";
 /** Set Identifier.
@@ -309,19 +301,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4946b1b2-5482-492b-bca4-0716f744ff61",
-Synchronized="2017-08-05 16:52:32.0")
+Synchronized="2019-08-30 22:20:22.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** Operation AD_Reference=68e96930-8512-7806-25cd-2cce2a5d79e9 */
-public static final int OPERATION_AD_Reference_ID=205;
 /** Set Operation.
 @param Operation Compare Operation */
 public void setOperation (String Operation)
 {
-if (Operation == null) throw new IllegalArgumentException ("Operation is mandatory");
-if (Operation.equals(REF_AD_FindOperation.Eq) || Operation.equals(REF_AD_FindOperation.GtEq) || Operation.equals(REF_AD_FindOperation.NotEq) || Operation.equals(REF_AD_FindOperation.Gt) || Operation.equals(REF_AD_FindOperation.Le) || Operation.equals(REF_AD_FindOperation.Like) || Operation.equals(REF_AD_FindOperation.LeEq) || Operation.equals(REF_AD_FindOperation.X) || Operation.equals(REF_AD_FindOperation.Sql));
- else throw new IllegalArgumentException ("Operation Invalid value - " + Operation + " - Reference_ID=205 - == - >= - != - >> - << - ~~ - <= - AB - SQ");
 if (Operation.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -355,7 +341,7 @@ FieldLength=2,DefaultValue="==",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="16f25881-2e56-f6a1-0298-bec6004b2b1a",Synchronized="2017-08-05 16:52:32.0")
+Identifier="16f25881-2e56-f6a1-0298-bec6004b2b1a",Synchronized="2019-08-30 22:20:22.0")
 /** Column name Operation */
 public static final String COLUMNNAME_Operation = "Operation";
 /** Set Search Key.
@@ -380,13 +366,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d7113009-c45e-028d-6c63-bc2445d45067")
+public static String es_PE_FIELD_Find_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="d7113009-c45e-028d-6c63-bc2445d45067")
 public static String es_PE_FIELD_Find_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="d7113009-c45e-028d-6c63-bc2445d45067")
 public static String es_PE_FIELD_Find_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="d7113009-c45e-028d-6c63-bc2445d45067")
-public static String es_PE_FIELD_Find_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="e879e467-f15f-e030-fe1c-d511422d8fa3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -404,7 +390,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2fe78abe-c2a2-6d87-f470-b1fa4ee9a0dd",
-Synchronized="2017-08-05 16:52:32.0")
+Synchronized="2019-08-30 22:20:22.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Value To.
@@ -445,7 +431,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e10a59ba-0246-8c1f-1c10-c25ffed8f863",
-Synchronized="2017-08-05 16:52:32.0")
+Synchronized="2019-08-30 22:20:22.0")
 /** Column name Value2 */
 public static final String COLUMNNAME_Value2 = "Value2";
 }

@@ -1,7 +1,6 @@
 package org.xendra.printdocument;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.compiere.model.Query;
@@ -9,17 +8,10 @@ import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.model.persistence.X_A_MachinePrinter;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
-import org.xendra.Constants;
 
 public class PrintDocumentManager {
 
 	private static PrintDocumentManager instance = new PrintDocumentManager();
-	//private boolean Initialized = false;
-	
-//	public boolean isInitialized()
-//	{
-//		return Initialized;
-//	}
 	
 	private PrintDocumentManager()
 	{	
@@ -30,25 +22,19 @@ public class PrintDocumentManager {
     	return instance;
     }
 	private Queues queues;
-	private List<PrintJobTableModel> listpjtm = new ArrayList<PrintJobTableModel>();
-	private List<PrintedJobTableModel> listpdjtm = new ArrayList<PrintedJobTableModel>();
-	private List<String> m_QueueName = new ArrayList<String>();
-	private List<PrintQueue> m_rawQueue = new ArrayList<PrintQueue>();	
-	private String localhost = Util.getLocalHostName();
-	private int size = 0;
-	private Thread lpdThread;
-	private Hashtable<Integer, X_A_MachinePrinter> printers = new Hashtable();
+	private HashMap<Integer, PrintJobTableModel> listpjtm = new HashMap<Integer, PrintJobTableModel>();
+	private HashMap<Integer, PrintedJobTableModel> listpdjtm = new HashMap<Integer, PrintedJobTableModel>();
+	private HashMap<Integer, String> m_QueueName = new HashMap<Integer, String>();
+	private HashMap<Integer, PrintQueue> m_rawQueue = new HashMap<Integer, PrintQueue>();
+	private String localhost = Util.getLocalHostName();	
+	private Thread lpdThread;	
+	private HashMap printers = new HashMap();
 	
 	public String getLocalHost()
 	{
 		return localhost;
 	}
-	
-	public int getSize()
-	{
-		return size;
-	}
-	
+		
 	public void build()
 	{
 		List<X_A_MachinePrinter> printerlist = null;
@@ -60,7 +46,7 @@ public class PrintDocumentManager {
 			
 			if (printerlist.size() > 0)
 			{
-				size = printerlist.size();
+				//size = printerlist.size();
 				if (lpdThread == null)
 				{
 					lpdThread = new Thread(LinePrinterServer.getInstance());
@@ -75,14 +61,18 @@ public class PrintDocumentManager {
 					{							
 						PrintJobTableModel pjtm = new PrintJobTableModel();
 						PrintedJobTableModel pdjtm = new PrintedJobTableModel();
-						m_QueueName.add(print.getQueueName());
+						//m_QueueName.add(print.getQueueName());
+						m_QueueName.put(print.getA_MachinePrinter_ID(), print.getQueueName());
 						//PrintQueue rawQueue = queues.createQueueWithTableModel(print.getQueueName(),print.getDeviceName(), pjtm, pdjtm);
 						PrintQueue rawQueue = queues.createQueueWithTableModel(print, pjtm, pdjtm);
 						pjtm.setPrintQueueDataModel(rawQueue);
 						pdjtm.setPrintedQueueDataModel(rawQueue);
-						listpjtm.add(pjtm);
-						listpdjtm.add(pdjtm);				
-						m_rawQueue.add(rawQueue); 
+						//listpjtm.add(pjtm);
+						listpjtm.put(print.getA_MachinePrinter_ID(), pjtm);
+						//listpdjtm.add(pdjtm);
+						listpdjtm.put(print.getA_MachinePrinter_ID(), pdjtm);
+						//m_rawQueue.add(rawQueue);
+						m_rawQueue.put(print.getA_MachinePrinter_ID(), rawQueue);
 						QueueMonitor rawQueueMonitor = new QueueMonitor(print.getQueueName());
 						Thread rawQueueMonitorThread = new Thread(rawQueueMonitor);
 						rawQueueMonitorThread.setName("QueueMonitor -"+print.getQueueName());
@@ -102,90 +92,32 @@ public class PrintDocumentManager {
 		}
 	}
 		
-//	public void build()
-//	{
-//		List<X_A_MachinePrinter>  printers = checkAndcreatePrintServer();		
-//		if (buildPrintDocumentServer(printers))
-//		{
-//			Initialized = true;
-//		}		
-//	}
-//
-//	public static List<X_A_MachinePrinter> checkAndcreatePrintServer()
-//	{
-//		List<X_A_MachinePrinter> printers = null;
-//		try {			
-//			String where = "A_Machine_ID = ? AND isActive = 'Y'";
-//			printers = new Query(Env.getCtx(), X_A_MachinePrinter.Table_Name, where, null)
-//			.setParameters(Env.getMachine().getA_Machine_ID()).list();
-//		}
-//		catch (Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		//
-//		return printers;
-//	}
-//	
-//	private boolean buildPrintDocumentServer(List<X_A_MachinePrinter> printerlist) {			
-//		if (printerlist == null)
-//			return false;
-//		queues = Queues.getInstance();
-//		if (printerlist.size() > 0)
-//		{
-//			size = printerlist.size();
-//			if (lpdThread == null)
-//			{
-//				lpdThread = new Thread(LinePrinterServer.getInstance());
-//				lpdThread.setName("LinePrinterServer");
-//				lpdThread.start();
-//			}
-//		}
-//		for (X_A_MachinePrinter print:printerlist)
-//		{
-//			try {
-//				if (!printers.contains(print.getA_MachinePrinter_ID()))
-//				{							
-//					PrintJobTableModel pjtm = new PrintJobTableModel();
-//					PrintedJobTableModel pdjtm = new PrintedJobTableModel();
-//					m_QueueName.add(print.getQueueName());
-//					//PrintQueue rawQueue = queues.createQueueWithTableModel(print.getQueueName(),print.getDeviceName(), pjtm, pdjtm);
-//					PrintQueue rawQueue = queues.createQueueWithTableModel(print, pjtm, pdjtm);
-//					pjtm.setPrintQueueDataModel(rawQueue);
-//					pdjtm.setPrintedQueueDataModel(rawQueue);
-//					listpjtm.add(pjtm);
-//					listpdjtm.add(pdjtm);				
-//					m_rawQueue.add(rawQueue); 
-//					QueueMonitor rawQueueMonitor = new QueueMonitor(print.getQueueName());
-//					Thread rawQueueMonitorThread = new Thread(rawQueueMonitor);
-//					rawQueueMonitorThread.setName("QueueMonitor -"+print.getQueueName());
-//					rawQueueMonitorThread.start();
-//					printers.put(print.getA_MachinePrinter_ID(), print);
-//				}
-//			}
-//			catch (Exception e)
-//			{
-//				e.printStackTrace();
-//			}				
-//		}
-//		return printerlist.size() > 0;
-//	}
+	public X_A_MachinePrinter getMachinePrinter(Integer mpid) {
+		X_A_MachinePrinter mp = null;
+		if (printers.containsKey(mpid)) {
+			mp = (X_A_MachinePrinter) printers.get(mpid);
+		} 
+		return mp;
+	}
 	
-	public List<String> getrawQueue()
+	public HashMap<Integer, String> getrawQueue()
 	{
 		return m_QueueName;
 	}
-	
-	public List<PrintJobTableModel>	getPrint()
+
+	public HashMap<Integer, PrintJobTableModel>	getPrint()
 	{
 		return listpjtm;
 	}
-
-	public List<PrintQueue> getQueueList()
-	{
+	
+	public HashMap<Integer, PrintQueue> getQueueList() {
 		return m_rawQueue;
 	}
-	public List<PrintedJobTableModel> getPrinted()
+	public HashMap getPrinters() {
+		return printers;
+	}
+
+	public HashMap<Integer, PrintedJobTableModel> getPrinted()
 	{
 		return listpdjtm; 
 	}

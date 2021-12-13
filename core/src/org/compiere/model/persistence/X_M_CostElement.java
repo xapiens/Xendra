@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_CostElementType;
-import org.compiere.model.reference.REF_C_AcctSchemaCostingMethod;
 /** Generated Model for M_CostElement
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -65,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("M_CostElement");
 public static String es_PE_TAB_CostElement_Description="Mantenga los elementos de costo del producto";
 
 @XendraTrl(Identifier="2b4d05ba-72f8-8539-454c-8e9c23cafc8b")
-public static String es_PE_TAB_CostElement_Name="Elemento de Costo";
-
-@XendraTrl(Identifier="2b4d05ba-72f8-8539-454c-8e9c23cafc8b")
 public static String es_PE_TAB_CostElement_Help="Usted puede mantener multiples costos de materiales. Cuando el costo de material mecanografía se utiliza para la contabilidad es determinado por metodo de costeo .<br > defina un método de costo (para los elementos materiales) solamente si usted desea el costo calculado para ese método de costo. Para la contabilidad, el método de costo definido en la categoría de cuenta del esquema ó del producto de la contabilidad se utiliza.";
 
-@XendraTab(Name="Cost Element",Description="Maintain product cost elements",
+@XendraTrl(Identifier="2b4d05ba-72f8-8539-454c-8e9c23cafc8b")
+public static String es_PE_TAB_CostElement_Name="Elemento de Costo";
+@XendraTab(Name="Cost Element",
+Description="Maintain product cost elements",
 Help="You can maintain multiple Material Costs. Which of the Material Cost Types is used for accounting is determined by the costing method.<br> Define a Costing Method (for Material Elements) only if you want the cost calculated for that costing method. For accounting, the costing method defined in the Accounting Schema or Product Category Acct is used.",
 AD_Window_ID="8f43274c-668e-5d6f-3ea4-33063cdc818b",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -83,11 +81,12 @@ public static final String TABNAME_CostElement="2b4d05ba-72f8-8539-454c-8e9c23ca
 @XendraTrl(Identifier="e592055d-e73a-5625-2311-cd197c5a2db1")
 public static String es_PE_TABLE_M_CostElement_Name="Elemento de Costo";
 
-@XendraTable(Name="Cost Element",Description="",Help="",TableName="M_CostElement",AccessLevel="2",
-AD_Window_ID="8f43274c-668e-5d6f-3ea4-33063cdc818b",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.material",Identifier="e592055d-e73a-5625-2311-cd197c5a2db1",
-Synchronized="2017-08-16 11:43:08.0")
+@XendraTable(Name="Cost Element",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_CostElement",AccessLevel="2",AD_Window_ID="8f43274c-668e-5d6f-3ea4-33063cdc818b",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="e592055d-e73a-5625-2311-cd197c5a2db1",Synchronized="2020-03-03 21:38:19.0")
 /** TableName=M_CostElement */
 public static final String Table_Name="M_CostElement";
 
@@ -137,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="affc75cf-086a-4d96-864f-80a9c8f9ad97")
+public static String es_PE_FIELD_CostElement_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="affc75cf-086a-4d96-864f-80a9c8f9ad97")
 public static String es_PE_FIELD_CostElement_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="affc75cf-086a-4d96-864f-80a9c8f9ad97")
 public static String es_PE_FIELD_CostElement_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="affc75cf-086a-4d96-864f-80a9c8f9ad97")
-public static String es_PE_FIELD_CostElement_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,19 +160,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1ee40440-72c4-4b90-8504-5c771e33de25",
-Synchronized="2017-08-05 16:55:03.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
-
-/** CostElementType AD_Reference=c39dbce7-fd9c-ebfe-db45-4538a1812270 */
-public static final int COSTELEMENTTYPE_AD_Reference_ID=338;
 /** Set Cost Element Type.
 @param CostElementType Type of Cost Element */
 public void setCostElementType (String CostElementType)
 {
-if (CostElementType == null) throw new IllegalArgumentException ("CostElementType is mandatory");
-if (CostElementType.equals(REF_M_CostElementType.BurdenMOverhead) || CostElementType.equals(REF_M_CostElementType.Material) || CostElementType.equals(REF_M_CostElementType.Overhead) || CostElementType.equals(REF_M_CostElementType.OutsideProcessing) || CostElementType.equals(REF_M_CostElementType.Resource));
- else throw new IllegalArgumentException ("CostElementType Invalid value - " + CostElementType + " - Reference_ID=338 - B - M - O - X - R");
 if (CostElementType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -189,10 +182,10 @@ return (String)get_Value(COLUMNNAME_CostElementType);
 }
 
 @XendraTrl(Identifier="442dee54-04f7-4b38-f480-673ddac4c9b0")
-public static String es_PE_FIELD_CostElement_CostElementType_Description="Tipo de costo del elemento";
+public static String es_PE_FIELD_CostElement_CostElementType_Name="Tipo de Costo del Elemento";
 
 @XendraTrl(Identifier="442dee54-04f7-4b38-f480-673ddac4c9b0")
-public static String es_PE_FIELD_CostElement_CostElementType_Name="Tipo de Costo del Elemento";
+public static String es_PE_FIELD_CostElement_CostElementType_Description="Tipo de costo del elemento";
 
 @XendraField(AD_Column_ID="CostElementType",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -210,18 +203,13 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="@IsCalculated@=Y",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e7c01e56-5ea0-7a55-86a5-5afe69851ef7",Synchronized="2017-08-05 16:55:03.0")
+Identifier="e7c01e56-5ea0-7a55-86a5-5afe69851ef7",Synchronized="2019-08-30 22:23:01.0")
 /** Column name CostElementType */
 public static final String COLUMNNAME_CostElementType = "CostElementType";
-
-/** CostingMethod AD_Reference=f784bd15-8b38-c388-3a0e-a0ae23b717ec */
-public static final int COSTINGMETHOD_AD_Reference_ID=122;
 /** Set Costing Method.
 @param CostingMethod Indicates how Costs will be calculated */
 public void setCostingMethod (String CostingMethod)
 {
-if (CostingMethod == null || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.LastPOPrice) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod._) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.StandardCosting) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.AveragePO) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.Lifo) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.Fifo) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.AverageInvoice) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.AverageWarehouse) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.LastInvoice) || CostingMethod.equals(REF_C_AcctSchemaCostingMethod.UserDefined));
- else throw new IllegalArgumentException ("CostingMethod Invalid value - " + CostingMethod + " - Reference_ID=122 - p - x - S - A - L - F - I - W - i - U");
 if (CostingMethod != null && CostingMethod.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -237,13 +225,13 @@ return (String)get_Value(COLUMNNAME_CostingMethod);
 }
 
 @XendraTrl(Identifier="83272e2a-5abc-27ad-946b-00314ac9f82c")
+public static String es_PE_FIELD_CostElement_CostingMethod_Name="Método de Costeo";
+
+@XendraTrl(Identifier="83272e2a-5abc-27ad-946b-00314ac9f82c")
 public static String es_PE_FIELD_CostElement_CostingMethod_Description="Indica cómo serán calculados los costos";
 
 @XendraTrl(Identifier="83272e2a-5abc-27ad-946b-00314ac9f82c")
 public static String es_PE_FIELD_CostElement_CostingMethod_Help="El método de costeo indica cómo se calcularán los costos (Estándar; promedio)";
-
-@XendraTrl(Identifier="83272e2a-5abc-27ad-946b-00314ac9f82c")
-public static String es_PE_FIELD_CostElement_CostingMethod_Name="Método de Costeo";
 
 @XendraField(AD_Column_ID="CostingMethod",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -262,7 +250,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@IsCalculated@=Y",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0f999935-bee0-0a50-590b-419387ec191d",Synchronized="2017-08-05 16:55:03.0")
+Identifier="0f999935-bee0-0a50-590b-419387ec191d",Synchronized="2019-08-30 22:23:01.0")
 /** Column name CostingMethod */
 public static final String COLUMNNAME_CostingMethod = "CostingMethod";
 /** Set Description.
@@ -288,13 +276,13 @@ return value;
 }
 
 @XendraTrl(Identifier="73052d0b-d23b-fabf-564e-2e7a56b8aa56")
+public static String es_PE_FIELD_CostElement_Description_Name="Observación";
+
+@XendraTrl(Identifier="73052d0b-d23b-fabf-564e-2e7a56b8aa56")
 public static String es_PE_FIELD_CostElement_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="73052d0b-d23b-fabf-564e-2e7a56b8aa56")
 public static String es_PE_FIELD_CostElement_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="73052d0b-d23b-fabf-564e-2e7a56b8aa56")
-public static String es_PE_FIELD_CostElement_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -312,7 +300,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bce69383-7987-d414-59cb-6b7430daeb10",
-Synchronized="2017-08-05 16:55:03.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -354,7 +342,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c4877ff3-f402-4a06-a906-a3d9242631f5",
-Synchronized="2017-08-05 16:55:03.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Calculated.
@@ -377,10 +365,10 @@ return false;
 }
 
 @XendraTrl(Identifier="c6161ed0-fa51-8cbf-b9b6-31f9002d83d9")
-public static String es_PE_FIELD_CostElement_Calculated_Description="El valor es calculado por el sistema";
+public static String es_PE_FIELD_CostElement_Calculated_Name="Calculado";
 
 @XendraTrl(Identifier="c6161ed0-fa51-8cbf-b9b6-31f9002d83d9")
-public static String es_PE_FIELD_CostElement_Calculated_Name="Calculado";
+public static String es_PE_FIELD_CostElement_Calculated_Description="El valor es calculado por el sistema";
 
 @XendraField(AD_Column_ID="IsCalculated",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -398,7 +386,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@IsCalculated@=Y",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6440f3be-b906-f7a7-d041-cabe20900b81",Synchronized="2017-08-05 16:55:03.0")
+Identifier="6440f3be-b906-f7a7-d041-cabe20900b81",Synchronized="2019-08-30 22:23:01.0")
 /** Column name IsCalculated */
 public static final String COLUMNNAME_IsCalculated = "IsCalculated";
 /** Set Cost Element.
@@ -418,10 +406,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="40174ac6-0c23-7895-af3c-aac6ae94d4b0")
-public static String es_PE_FIELD_CostElement_CostElement_Description="Elemento de costo de producto";
+public static String es_PE_FIELD_CostElement_CostElement_Name="Elemento de Costo";
 
 @XendraTrl(Identifier="40174ac6-0c23-7895-af3c-aac6ae94d4b0")
-public static String es_PE_FIELD_CostElement_CostElement_Name="Elemento de Costo";
+public static String es_PE_FIELD_CostElement_CostElement_Description="Elemento de costo de producto";
 
 @XendraField(AD_Column_ID="M_CostElement_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -460,18 +448,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
+public static String es_PE_FIELD_CostElement_Name_Name="Nombre";
+
+@XendraTrl(Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
 public static String es_PE_FIELD_CostElement_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
 public static String es_PE_FIELD_CostElement_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
-public static String es_PE_FIELD_CostElement_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="2b4d05ba-72f8-8539-454c-8e9c23cafc8b",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91")
 public static final String FIELDNAME_CostElement_Name="eab88095-3bd9-ebab-1d62-f1cf1cc2ee91";
 
 @XendraTrl(Identifier="c0329818-ceb4-9f60-e5ba-a5f52bad1e7f")
@@ -483,7 +472,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c0329818-ceb4-9f60-e5ba-a5f52bad1e7f",
-Synchronized="2017-08-05 16:55:03.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Properties.
@@ -521,7 +510,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f63a4ee-c610-452a-917b-84c056281f8c",
-Synchronized="2015-09-20 20:14:38.0")
+Synchronized="2019-08-30 22:23:01.0")
 /** Column name Properties */
 public static final String COLUMNNAME_Properties = "Properties";
 }

@@ -64,12 +64,12 @@ public static int Table_ID=MTable.getTable_ID("B_Bid");
 public static String es_PE_TAB_Bid_Description="Oferta para un asunto";
 
 @XendraTrl(Identifier="1748399b-1718-0f1d-87c0-78c2940e317f")
-public static String es_PE_TAB_Bid_Name="Oferta";
-
-@XendraTrl(Identifier="1748399b-1718-0f1d-87c0-78c2940e317f")
 public static String es_PE_TAB_Bid_Help="Usted puede crear una oferta para un asunto. Dependiendo del tipo, el licitador más alto gana el asunto - ó usted participa en el financiamiento para un asunto.";
 
-@XendraTab(Name="Bid",Description="Bid for a Topic",
+@XendraTrl(Identifier="1748399b-1718-0f1d-87c0-78c2940e317f")
+public static String es_PE_TAB_Bid_Name="Oferta";
+@XendraTab(Name="Bid",
+Description="Bid for a Topic",
 Help="You can create a bid for a topic.  Depening on the type, the highest bidder wins the Topic - or you participate in funding for a Topic.",
 AD_Window_ID="e626cef7-46c4-d631-a4c7-d98c05c67a58",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -84,12 +84,12 @@ public static final String TABNAME_Bid="1748399b-1718-0f1d-87c0-78c2940e317f";
 public static String es_PE_TAB_Bid2_Description="Ofertas de la visión para un asunto.";
 
 @XendraTrl(Identifier="d43f43ae-f5ba-3b08-d1c9-5b713096355e")
-public static String es_PE_TAB_Bid2_Name="Oferta";
-
-@XendraTrl(Identifier="d43f43ae-f5ba-3b08-d1c9-5b713096355e")
 public static String es_PE_TAB_Bid2_Help="Usted puede crear una oferta para un asunto. Dependiendo del tipo, el licitador más alto gana el asunto - ó usted participa en el financiamiento para un asunto.";
 
-@XendraTab(Name="Bid",Description="View bids for a Topic",
+@XendraTrl(Identifier="d43f43ae-f5ba-3b08-d1c9-5b713096355e")
+public static String es_PE_TAB_Bid2_Name="Oferta";
+@XendraTab(Name="Bid",
+Description="View bids for a Topic",
 Help="You can create a bid for a topic.  Depening on the type, the highest bidder wins the Topic - or you participate in funding for a Topic.",
 AD_Window_ID="b526b654-eee4-ce2f-a903-14ef1f1b7296",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
@@ -103,11 +103,12 @@ public static final String TABNAME_Bid2="d43f43ae-f5ba-3b08-d1c9-5b713096355e";
 @XendraTrl(Identifier="05927238-e9d7-d91c-a005-67210739ba6e")
 public static String es_PE_TABLE_B_Bid_Name="Oferta";
 
-@XendraTable(Name="Bid",Description="Bid for a Topic",Help="",TableName="B_Bid",AccessLevel="3",
-AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.bids",Identifier="05927238-e9d7-d91c-a005-67210739ba6e",
-Synchronized="2017-08-16 11:41:16.0")
+@XendraTable(Name="Bid",AD_Package_ID="a0ba5f31-73ac-fb58-5a46-04ff03d1a8c1",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Bid for a Topic",Help="",
+TableName="B_Bid",AccessLevel="3",AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.bids",
+Identifier="05927238-e9d7-d91c-a005-67210739ba6e",Synchronized="2020-03-03 21:36:16.0")
 /** TableName=B_Bid */
 public static final String Table_Name="B_Bid";
 
@@ -157,13 +158,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b")
+public static String es_PE_FIELD_Bid_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b")
 public static String es_PE_FIELD_Bid_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b")
 public static String es_PE_FIELD_Bid_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b")
-public static String es_PE_FIELD_Bid_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -173,13 +174,13 @@ Identifier="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b")
 public static final String FIELDNAME_Bid_UserContact="4ec858c0-3cb1-fd79-cf1a-0127a6d8583b";
 
 @XendraTrl(Identifier="b5bcb8fb-53f5-3c52-c7af-21dc6ecb6327")
+public static String es_PE_FIELD_Bid_UserContact2_Name="Usuario";
+
+@XendraTrl(Identifier="b5bcb8fb-53f5-3c52-c7af-21dc6ecb6327")
 public static String es_PE_FIELD_Bid_UserContact2_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="b5bcb8fb-53f5-3c52-c7af-21dc6ecb6327")
 public static String es_PE_FIELD_Bid_UserContact2_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="b5bcb8fb-53f5-3c52-c7af-21dc6ecb6327")
-public static String es_PE_FIELD_Bid_UserContact2_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -197,7 +198,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eed62ba2-10aa-8bf3-9d6e-8d4ebc6761cb",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Bid.
@@ -217,19 +218,23 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
+public static String es_PE_FIELD_Bid_Bid_Name="Oferta";
+
+@XendraTrl(Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
 public static String es_PE_FIELD_Bid_Bid_Description="Oferta para un asunto";
 
 @XendraTrl(Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
 public static String es_PE_FIELD_Bid_Bid_Help="Usted puede crear una oferta para un asunto. Dependiendo del tipo, El licitador más alto gana el asunto - ó usted participa en el financiamiento de un asunto.";
 
-@XendraTrl(Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
-public static String es_PE_FIELD_Bid_Bid_Name="Oferta";
-@XendraField(AD_Column_ID="B_Bid_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
+@XendraField(AD_Column_ID="B_Bid_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="3523f45a-a96d-edc0-c2aa-8b0368093c4c")
 public static final String FIELDNAME_Bid_Bid="3523f45a-a96d-edc0-c2aa-8b0368093c4c";
+
+@XendraTrl(Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
+public static String es_PE_FIELD_Bid_Bid2_Name="Oferta";
 
 @XendraTrl(Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
 public static String es_PE_FIELD_Bid_Bid2_Description="Oferta para un asunto";
@@ -237,13 +242,11 @@ public static String es_PE_FIELD_Bid_Bid2_Description="Oferta para un asunto";
 @XendraTrl(Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
 public static String es_PE_FIELD_Bid_Bid2_Help="Usted puede crear una oferta para un asunto. Dependiendo del tipo, El licitador más alto gana el asunto - ó usted participa en el financiamiento de un asunto.";
 
-@XendraTrl(Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
-public static String es_PE_FIELD_Bid_Bid2_Name="Oferta";
-@XendraField(AD_Column_ID="B_Bid_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",
-IsDisplayed=false,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
+@XendraField(AD_Column_ID="B_Bid_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=10,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="35b0f20a-d18a-9b49-f051-e6413c2c8a5d")
 public static final String FIELDNAME_Bid_Bid2="35b0f20a-d18a-9b49-f051-e6413c2c8a5d";
 /** Column name B_Bid_ID */
 public static final String COLUMNNAME_B_Bid_ID = "B_Bid_ID";
@@ -264,13 +267,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6ae47503-3bf6-aec9-f3ad-dcca0312b95c")
+public static String es_PE_FIELD_Bid_BuyerFunds_Name="Fondos del Comprador";
+
+@XendraTrl(Identifier="6ae47503-3bf6-aec9-f3ad-dcca0312b95c")
 public static String es_PE_FIELD_Bid_BuyerFunds_Description="Fondos del comprador para las ofertas en asuntos.";
 
 @XendraTrl(Identifier="6ae47503-3bf6-aec9-f3ad-dcca0312b95c")
 public static String es_PE_FIELD_Bid_BuyerFunds_Help="Fondos disponibles (de pagos) y fondos destinados para las ofertas.";
-
-@XendraTrl(Identifier="6ae47503-3bf6-aec9-f3ad-dcca0312b95c")
-public static String es_PE_FIELD_Bid_BuyerFunds_Name="Fondos del Comprador";
 
 @XendraField(AD_Column_ID="B_BuyerFunds_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -280,13 +283,13 @@ Identifier="6ae47503-3bf6-aec9-f3ad-dcca0312b95c")
 public static final String FIELDNAME_Bid_BuyerFunds="6ae47503-3bf6-aec9-f3ad-dcca0312b95c";
 
 @XendraTrl(Identifier="10dc8d4c-5e9f-652f-3481-ac9bed93c1b1")
+public static String es_PE_FIELD_Bid_BuyerFunds2_Name="Fondos del Comprador";
+
+@XendraTrl(Identifier="10dc8d4c-5e9f-652f-3481-ac9bed93c1b1")
 public static String es_PE_FIELD_Bid_BuyerFunds2_Description="Fondos del comprador para las ofertas en asuntos.";
 
 @XendraTrl(Identifier="10dc8d4c-5e9f-652f-3481-ac9bed93c1b1")
 public static String es_PE_FIELD_Bid_BuyerFunds2_Help="Fondos disponibles (de pagos) y fondos destinados para las ofertas.";
-
-@XendraTrl(Identifier="10dc8d4c-5e9f-652f-3481-ac9bed93c1b1")
-public static String es_PE_FIELD_Bid_BuyerFunds2_Name="Fondos del Comprador";
 
 @XendraField(AD_Column_ID="B_BuyerFunds_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -304,7 +307,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ead252bc-c68d-37b4-d1b8-fac4be93c597",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name B_BuyerFunds_ID */
 public static final String COLUMNNAME_B_BuyerFunds_ID = "B_BuyerFunds_ID";
 /** Set Topic.
@@ -324,19 +327,23 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
+public static String es_PE_FIELD_Bid_Topic_Name="Asunto";
+
+@XendraTrl(Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
 public static String es_PE_FIELD_Bid_Topic_Description="Asunto de la subasta.";
 
 @XendraTrl(Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
 public static String es_PE_FIELD_Bid_Topic_Help="Decripción del articulo a vender ó a crear.";
 
-@XendraTrl(Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
-public static String es_PE_FIELD_Bid_Topic_Name="Asunto";
-@XendraField(AD_Column_ID="B_Topic_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
+@XendraField(AD_Column_ID="B_Topic_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="a0f56f75-7a20-b35d-d73b-07cc36766416")
 public static final String FIELDNAME_Bid_Topic="a0f56f75-7a20-b35d-d73b-07cc36766416";
+
+@XendraTrl(Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
+public static String es_PE_FIELD_Bid_Topic2_Name="Asunto";
 
 @XendraTrl(Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
 public static String es_PE_FIELD_Bid_Topic2_Description="Asunto de la subasta.";
@@ -344,13 +351,11 @@ public static String es_PE_FIELD_Bid_Topic2_Description="Asunto de la subasta.";
 @XendraTrl(Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
 public static String es_PE_FIELD_Bid_Topic2_Help="Decripción del articulo a vender ó a crear.";
 
-@XendraTrl(Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
-public static String es_PE_FIELD_Bid_Topic2_Name="Asunto";
-@XendraField(AD_Column_ID="B_Topic_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=60,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
+@XendraField(AD_Column_ID="B_Topic_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=60,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="288263d5-11c7-ec6b-626f-5559f15d667c")
 public static final String FIELDNAME_Bid_Topic2="288263d5-11c7-ec6b-626f-5559f15d667c";
 
 @XendraTrl(Identifier="9c943bb0-04e0-5686-54bd-5dd9fe122059")
@@ -362,7 +367,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9c943bb0-04e0-5686-54bd-5dd9fe122059",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name B_Topic_ID */
 public static final String COLUMNNAME_B_Topic_ID = "B_Topic_ID";
 /** Set Identifier.
@@ -394,7 +399,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="249f1642-6d4e-4ecf-8324-bfcfdc7700b2",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Willing to commit.
@@ -445,7 +450,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="94a570df-3f58-7331-f5d0-c19a70566d82",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name IsWillingToCommit */
 public static final String COLUMNNAME_IsWillingToCommit = "IsWillingToCommit";
 /** Set Name.
@@ -477,19 +482,23 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
+public static String es_PE_FIELD_Bid_Name_Name="Nombre";
+
+@XendraTrl(Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
 public static String es_PE_FIELD_Bid_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
 public static String es_PE_FIELD_Bid_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
-public static String es_PE_FIELD_Bid_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="ce2addd6-5b06-ddf9-3654-0a8d9419b905")
 public static final String FIELDNAME_Bid_Name="ce2addd6-5b06-ddf9-3654-0a8d9419b905";
+
+@XendraTrl(Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
+public static String es_PE_FIELD_Bid_Name2_Name="Nombre";
 
 @XendraTrl(Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
 public static String es_PE_FIELD_Bid_Name2_Description="Identificador alfanumérico de la entidad.";
@@ -497,13 +506,11 @@ public static String es_PE_FIELD_Bid_Name2_Description="Identificador alfanumér
 @XendraTrl(Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
 public static String es_PE_FIELD_Bid_Name2_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
-public static String es_PE_FIELD_Bid_Name2_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=2,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=2,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="316e80e3-48b2-4f87-b972-bd332d97db65")
 public static final String FIELDNAME_Bid_Name2="316e80e3-48b2-4f87-b972-bd332d97db65";
 
 @XendraTrl(Identifier="f209801d-3c8f-ae80-8b0c-89cb44322534")
@@ -515,7 +522,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f209801d-3c8f-ae80-8b0c-89cb44322534",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Private Note.
@@ -534,10 +541,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="84a69c7b-769a-a4e2-c66c-3e2e1e5dd658")
-public static String es_PE_FIELD_Bid_PrivateNote_Description="Nota privada - no visible a las otras partidas.";
+public static String es_PE_FIELD_Bid_PrivateNote_Name="Nota Privada";
 
 @XendraTrl(Identifier="84a69c7b-769a-a4e2-c66c-3e2e1e5dd658")
-public static String es_PE_FIELD_Bid_PrivateNote_Name="Nota Privada";
+public static String es_PE_FIELD_Bid_PrivateNote_Description="Nota privada - no visible a las otras partidas.";
 
 @XendraField(AD_Column_ID="PrivateNote",IsCentrallyMaintained=true,
 AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -547,10 +554,10 @@ Identifier="84a69c7b-769a-a4e2-c66c-3e2e1e5dd658")
 public static final String FIELDNAME_Bid_PrivateNote="84a69c7b-769a-a4e2-c66c-3e2e1e5dd658";
 
 @XendraTrl(Identifier="cb74831c-3300-c079-40b0-a70feb662dc6")
-public static String es_PE_FIELD_Bid_PrivateNote2_Description="Nota privada - no visible a las otras partidas.";
+public static String es_PE_FIELD_Bid_PrivateNote2_Name="Nota Privada";
 
 @XendraTrl(Identifier="cb74831c-3300-c079-40b0-a70feb662dc6")
-public static String es_PE_FIELD_Bid_PrivateNote2_Name="Nota Privada";
+public static String es_PE_FIELD_Bid_PrivateNote2_Description="Nota privada - no visible a las otras partidas.";
 
 @XendraField(AD_Column_ID="PrivateNote",IsCentrallyMaintained=true,
 AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -568,7 +575,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf9e91b2-cb59-6fc2-fe28-a16c4e5b5af5",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name PrivateNote */
 public static final String COLUMNNAME_PrivateNote = "PrivateNote";
 /** Set Text Message.
@@ -587,10 +594,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="7b31e8cd-82e9-be66-093c-8e2a79ec2ad5")
-public static String es_PE_FIELD_Bid_TextMessage_Description="Mensaje de texto";
+public static String es_PE_FIELD_Bid_TextMessage_Name="Mensaje de texto";
 
 @XendraTrl(Identifier="7b31e8cd-82e9-be66-093c-8e2a79ec2ad5")
-public static String es_PE_FIELD_Bid_TextMessage_Name="Mensaje de texto";
+public static String es_PE_FIELD_Bid_TextMessage_Description="Mensaje de texto";
 
 @XendraField(AD_Column_ID="TextMsg",IsCentrallyMaintained=true,
 AD_Tab_ID="d43f43ae-f5ba-3b08-d1c9-5b713096355e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -600,10 +607,10 @@ Identifier="7b31e8cd-82e9-be66-093c-8e2a79ec2ad5")
 public static final String FIELDNAME_Bid_TextMessage="7b31e8cd-82e9-be66-093c-8e2a79ec2ad5";
 
 @XendraTrl(Identifier="d27427f8-321c-29f2-64ed-9a63dfedf93d")
-public static String es_PE_FIELD_Bid_TextMessage2_Description="Mensaje de texto";
+public static String es_PE_FIELD_Bid_TextMessage2_Name="Mensaje de texto";
 
 @XendraTrl(Identifier="d27427f8-321c-29f2-64ed-9a63dfedf93d")
-public static String es_PE_FIELD_Bid_TextMessage2_Name="Mensaje de texto";
+public static String es_PE_FIELD_Bid_TextMessage2_Description="Mensaje de texto";
 
 @XendraField(AD_Column_ID="TextMsg",IsCentrallyMaintained=true,
 AD_Tab_ID="1748399b-1718-0f1d-87c0-78c2940e317f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -621,7 +628,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="88f6ec05-3d80-1795-ae52-4d9b6ea194ff",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name TextMsg */
 public static final String COLUMNNAME_TextMsg = "TextMsg";
 }

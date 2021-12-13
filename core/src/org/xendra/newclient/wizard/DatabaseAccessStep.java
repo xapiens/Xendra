@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.columba.core.gui.base.LabelWithMnemonic;
@@ -36,8 +37,8 @@ public class DatabaseAccessStep extends AbstractStep implements ActionListener {
 	private String m_dbname;
 	private CConnection m_cc;
 	public DatabaseAccessStep(DataModel data, String dbname, CConnection cc) {
-		super(ResourceLoader.getString("dialog", "newclient", "superuser"),
-				ResourceLoader.getString("dialog", "newclient",   "superuser_description"));
+		super(ResourceLoader.getString("dialog", "newclient", "database"),
+				ResourceLoader.getString("dialog", "newclient",   "database_description"));
 		setCanGoNext(false);	
 		m_cc = cc;
 		m_dbname = dbname;
@@ -46,7 +47,7 @@ public class DatabaseAccessStep extends AbstractStep implements ActionListener {
 	protected JComponent createComponent() {
 		JComponent component = new JPanel();
 		component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "newclient", "superuser_text")));
+		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "newclient", "database_text")));
 		component.add(Box.createVerticalStrut(40));
 		superusername = new CTextField(20);
 		superuserpass = new CPassword(20);
@@ -99,28 +100,40 @@ public class DatabaseAccessStep extends AbstractStep implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(cmd)) {
-			int no = DB.getSQLValue(null, String.format("SELECT 1 FROM pg_database WHERE datname = '%s'",m_dbname));
-			if (no < 0) {
-				// validate user
-				setCanGoNext(false);
-				String user = username.getText();
-				String pwd = String.valueOf(userpass.getPassword());
-				CConnection user_cc = CConnection.get(m_cc.getDbHost(), m_cc.getDbPort(), m_cc.getDbName(), user, pwd);
-				DB.setDBTarget(user_cc);
-				Exception ex = user_cc.testDatabase(true); 
-				if (ex == null) {				
-					// validate superuser
-					String superuser = superusername.getText();
-					String superpwd = String.valueOf(superuserpass.getPassword());
-					CConnection new_cc = CConnection.get(m_cc.getDbHost(), m_cc.getDbPort(), m_cc.getDbName(), superuser, superpwd);
-					DB.setDBTarget(new_cc);
-					ex = new_cc.testDatabase(true); 
-					if (ex == null) {
-						setCanGoNext(true);									
-					}				
+			String xendra_schema = "xendra";
+			String current_schema = DB.getSQLValueStringEx(null, "SHOW search_path");
+			int index = current_schema.toLowerCase().indexOf(xendra_schema);
+			if (index == -1) {
+				JOptionPane.showMessageDialog(null,
+						"el search_path debe contener el schema xendra",
+						"ERROR",
+						JOptionPane.ERROR_MESSAGE);
+				setCanGoNext(false);					
+			}
+			else {
+				int no = DB.getSQLValue(null, String.format("SELECT 1 FROM pg_database WHERE datname = '%s'",m_dbname));
+				if (no < 0) {
+					// validate user
+					setCanGoNext(false);
+					String user = username.getText();
+					String pwd = String.valueOf(userpass.getPassword());
+					CConnection user_cc = CConnection.get(m_cc.getDbHost(), m_cc.getDbPort(), m_cc.getDbName(), user, pwd);
+					DB.setDBTarget(user_cc);
+					Exception ex = user_cc.testDatabase(true); 
+					if (ex == null) {				
+						// validate superuser
+						String superuser = superusername.getText();
+						String superpwd = String.valueOf(superuserpass.getPassword());
+						CConnection new_cc = CConnection.get(m_cc.getDbHost(), m_cc.getDbPort(), m_cc.getDbName(), superuser, superpwd);
+						DB.setDBTarget(new_cc);
+						ex = new_cc.testDatabase(true); 
+						if (ex == null) {
+							setCanGoNext(true);									
+						}				
+					}
+				} else {
+					ADialog.error(0, null, ResourceLoader.getString("dialog", "newclient", "DatabaseExists"));
 				}
-			} else {
-				ADialog.error(0, null, ResourceLoader.getString("dialog", "newclient", "DatabaseExists"));
 			}
 		}		
 	}

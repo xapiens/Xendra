@@ -62,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("C_BP_Customer_Acct");
 public static String es_PE_TAB_CustomerAccounting_Description="Definir Contabilidad del Cliente";
 
 @XendraTrl(Identifier="120cca52-7b58-5ccd-a155-f2ed356b61a3")
-public static String es_PE_TAB_CustomerAccounting_Name="Contabilidad del Cliente";
+public static String es_PE_TAB_CustomerAccounting_Help="La pestaña Contabilidad del Cliente define los valores predeterminados usados cuando este socio de negocio es seleccionado en una transacción de cuentas por recibir.";
 
 @XendraTrl(Identifier="120cca52-7b58-5ccd-a155-f2ed356b61a3")
-public static String es_PE_TAB_CustomerAccounting_Help="La pestaña Contabilidad del Cliente define los valores predeterminados usados cuando este socio de negocio es seleccionado en una transacción de cuentas por recibir.";
+public static String es_PE_TAB_CustomerAccounting_Name="Contabilidad del Cliente";
 
 @XendraTab(Name="Customer Accounting",Description="Define Customer Accounting",
 Help="The Customer Accounting Tab defines the default accounts to use when this business partner is referenced on an accounts receivable transaction.",
@@ -81,11 +81,12 @@ public static final String TABNAME_CustomerAccounting="120cca52-7b58-5ccd-a155-f
 @XendraTrl(Identifier="40047b7f-f64a-de82-5f42-397d3427f66a")
 public static String es_PE_TABLE_C_BP_Customer_Acct_Name="C_BP_Customer_Acct";
 
-@XendraTable(Name="C_BP_Customer_Acct",Description="",Help="",TableName="C_BP_Customer_Acct",
-AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="40047b7f-f64a-de82-5f42-397d3427f66a",Synchronized="2017-08-16 11:41:32.0")
+@XendraTable(Name="C_BP_Customer_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_BP_Customer_Acct",AccessLevel="3",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="40047b7f-f64a-de82-5f42-397d3427f66a",Synchronized="2020-03-03 21:36:36.0")
 /** TableName=C_BP_Customer_Acct */
 public static final String Table_Name="C_BP_Customer_Acct";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="dbbd3427-5abb-6b26-2489-27981a17abf2")
+public static String es_PE_FIELD_CustomerAccounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="dbbd3427-5abb-6b26-2489-27981a17abf2")
 public static String es_PE_FIELD_CustomerAccounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="dbbd3427-5abb-6b26-2489-27981a17abf2")
 public static String es_PE_FIELD_CustomerAccounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="dbbd3427-5abb-6b26-2489-27981a17abf2")
-public static String es_PE_FIELD_CustomerAccounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="120cca52-7b58-5ccd-a155-f2ed356b61a3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="07b028d3-2908-6526-181e-9ead4177e0f8",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:14.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Business Partner .
@@ -179,13 +180,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="97cf80c0-d74d-f2bc-c09d-0c5190552f34")
+public static String es_PE_FIELD_CustomerAccounting_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="97cf80c0-d74d-f2bc-c09d-0c5190552f34")
 public static String es_PE_FIELD_CustomerAccounting_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="97cf80c0-d74d-f2bc-c09d-0c5190552f34")
 public static String es_PE_FIELD_CustomerAccounting_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="97cf80c0-d74d-f2bc-c09d-0c5190552f34")
-public static String es_PE_FIELD_CustomerAccounting_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="120cca52-7b58-5ccd-a155-f2ed356b61a3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -203,7 +204,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd50a4df-5a54-348f-2614-b94b2eef1867",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:14.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Customer Prepayment.
@@ -222,13 +223,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e6e4b4c7-48a8-83ab-9049-29faeeb8bf49")
+public static String es_PE_FIELD_CustomerAccounting_CustomerPrepayment_Name="Pago Anticipado de Clientes";
+
+@XendraTrl(Identifier="e6e4b4c7-48a8-83ab-9049-29faeeb8bf49")
 public static String es_PE_FIELD_CustomerAccounting_CustomerPrepayment_Description="Cuenta para pagos anticipados de clientes.";
 
 @XendraTrl(Identifier="e6e4b4c7-48a8-83ab-9049-29faeeb8bf49")
 public static String es_PE_FIELD_CustomerAccounting_CustomerPrepayment_Help="La cuenta para pagos anticipados de clientes indica la cuenta a ser usada para registrar pagos anticipados de clientes.";
-
-@XendraTrl(Identifier="e6e4b4c7-48a8-83ab-9049-29faeeb8bf49")
-public static String es_PE_FIELD_CustomerAccounting_CustomerPrepayment_Name="Pago Anticipado de Clientes";
 
 @XendraField(AD_Column_ID="C_Prepayment_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="120cca52-7b58-5ccd-a155-f2ed356b61a3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -246,7 +247,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f64f26d2-c5b3-4a7d-183a-edf968e8bf2f",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:14.0")
 /** Column name C_Prepayment_Acct */
 public static final String COLUMNNAME_C_Prepayment_Acct = "C_Prepayment_Acct";
 /** Set Customer Receivables.
@@ -265,13 +266,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2b4ed994-2c3e-333b-05f9-d84653c1a16c")
+public static String es_PE_FIELD_CustomerAccounting_CustomerReceivables_Name="CxC de Clientes";
+
+@XendraTrl(Identifier="2b4ed994-2c3e-333b-05f9-d84653c1a16c")
 public static String es_PE_FIELD_CustomerAccounting_CustomerReceivables_Description="Cuenta por cobrar de clientes";
 
 @XendraTrl(Identifier="2b4ed994-2c3e-333b-05f9-d84653c1a16c")
 public static String es_PE_FIELD_CustomerAccounting_CustomerReceivables_Help="La cuenta por cobrar de clientes indica la cuenta a ser usada para registrar transacciones de cobros a clientes";
-
-@XendraTrl(Identifier="2b4ed994-2c3e-333b-05f9-d84653c1a16c")
-public static String es_PE_FIELD_CustomerAccounting_CustomerReceivables_Name="CxC de Clientes";
 
 @XendraField(AD_Column_ID="C_Receivable_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="120cca52-7b58-5ccd-a155-f2ed356b61a3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -289,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2007f658-24dd-fc85-7873-a0302c906bc2",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:14.0")
 /** Column name C_Receivable_Acct */
 public static final String COLUMNNAME_C_Receivable_Acct = "C_Receivable_Acct";
 /** Set Receivable Services.
@@ -308,13 +309,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e912ab7b-b2d2-a4e8-199c-23dfa85a6aea")
+public static String es_PE_FIELD_CustomerAccounting_ReceivableServices_Name="CxC Servicios";
+
+@XendraTrl(Identifier="e912ab7b-b2d2-a4e8-199c-23dfa85a6aea")
 public static String es_PE_FIELD_CustomerAccounting_ReceivableServices_Description="Cuenta Clientes CxC Servicios ";
 
 @XendraTrl(Identifier="e912ab7b-b2d2-a4e8-199c-23dfa85a6aea")
 public static String es_PE_FIELD_CustomerAccounting_ReceivableServices_Help="Cuenta para aplicar servicios relacionados CxC. Si desea diferenciar ingresos por Productos y Servicios. Esta cuenta solamente es empleada, si la aplicación para la cuenta servicios está habilitado en el esquema contable.";
-
-@XendraTrl(Identifier="e912ab7b-b2d2-a4e8-199c-23dfa85a6aea")
-public static String es_PE_FIELD_CustomerAccounting_ReceivableServices_Name="CxC Servicios";
 
 @XendraField(AD_Column_ID="C_Receivable_Services_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="120cca52-7b58-5ccd-a155-f2ed356b61a3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -332,7 +333,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4a3a7558-46b7-8fb0-1a71-072c65bc1676",Synchronized="2017-08-05 16:53:24.0")
+Identifier="4a3a7558-46b7-8fb0-1a71-072c65bc1676",Synchronized="2019-08-30 22:21:14.0")
 /** Column name C_Receivable_Services_Acct */
 public static final String COLUMNNAME_C_Receivable_Services_Acct = "C_Receivable_Services_Acct";
 /** Set Identifier.
@@ -364,7 +365,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="744fea63-9a76-42fe-8376-0d0327f220e8",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:14.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

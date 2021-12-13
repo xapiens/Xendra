@@ -1,9 +1,3 @@
-/*
- * Created on 06.08.2003
- *
- * To change the template for this generated file go to
- * Window>Preferences>Java>Code Generation>Code and Comments
- */
 package org.columba.core.gui.plugin;
 
 import java.awt.Component;
@@ -33,27 +27,33 @@ public class EnabledRenderer extends DefaultTableCellRenderer {
  * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
  */
     public Component getTableCellRendererComponent(JTable table, Object value,
-        boolean isSelected, boolean hasFocus, int row, int column) {
-        PluginNode node = (PluginNode) value;
+    		boolean isSelected, boolean hasFocus, int row, int column) {
+    	if (value instanceof PluginNode) {
+    		PluginNode node = (PluginNode) value;
 
-        if (node.isCategory()) {
-            // this node is category folder
-            // -> don't make it editable
-            return super.getTableCellRendererComponent(table, "", isSelected,
-                hasFocus, row, column);
-        } else {
-            boolean b = node.isEnabled();
+    		if (node.isCategory()) {
+    			// this node is category folder
+    			// -> don't make it editable
+    			return super.getTableCellRendererComponent(table, "", isSelected,
+    					hasFocus, row, column);
+    		} else {
+    			boolean b = node.isEnabled();
 
-            checkBox.setSelected(b);
-            checkBox.setHorizontalAlignment(JLabel.CENTER);
+    			checkBox.setSelected(b);
+    			checkBox.setHorizontalAlignment(JLabel.CENTER);
 
-            if (isSelected) {
-                checkBox.setBackground(table.getSelectionBackground());
-            } else {
-                checkBox.setBackground(table.getBackground());
-            }
+    			if (isSelected) {
+    				checkBox.setBackground(table.getSelectionBackground());
+    			} else {
+    				checkBox.setBackground(table.getBackground());
+    			}
 
-            return checkBox;
-        }
+    			return checkBox;
+    		}
+    	}
+    	else
+    	{
+    		return this;
+    	}
     }
 }

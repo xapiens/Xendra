@@ -63,13 +63,12 @@ public static int Table_ID=MTable.getTable_ID("B_SellerFunds");
 public static String es_PE_TAB_OfferFunds_Description="Fondos del vendedor de ofertas en asuntos.";
 
 @XendraTrl(Identifier="9b6d2852-c66f-c1d2-639f-493dddbc9e26")
-public static String es_PE_TAB_OfferFunds_Name="Oferta Fondos";
-
-@XendraTrl(Identifier="9b6d2852-c66f-c1d2-639f-493dddbc9e26")
 public static String es_PE_TAB_OfferFunds_Help="Fondos destinados ó sin compromiso de ofertas";
 
-@XendraTab(Name="Offer Funds",Description="Seller Funds from Offers on Topics",
-Help="Committed or Uncommited funds from Offers",
+@XendraTrl(Identifier="9b6d2852-c66f-c1d2-639f-493dddbc9e26")
+public static String es_PE_TAB_OfferFunds_Name="Oferta Fondos";
+@XendraTab(Name="Offer Funds",
+Description="Seller Funds from Offers on Topics",Help="Committed or Uncommited funds from Offers",
 AD_Window_ID="b526b654-eee4-ce2f-a903-14ef1f1b7296",SeqNo=50,TabLevel=2,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
 AD_Column_ID="14aac80c-400c-e982-7f35-1b535e59fc2f",HasTree=false,WhereClause="",OrderByClause="",
@@ -82,11 +81,13 @@ public static final String TABNAME_OfferFunds="9b6d2852-c66f-c1d2-639f-493dddbc9
 @XendraTrl(Identifier="f3b39c28-95da-f9aa-f25f-ce48b461d831")
 public static String es_PE_TABLE_B_SellerFunds_Name="Fondos del Vendedor";
 
-@XendraTable(Name="Seller Funds",Description="Seller Funds from Offers on Topics",Help="",
-TableName="B_SellerFunds",AccessLevel="3",AD_Window_ID="45a49f39-e720-7227-5a91-7c0178b269a7",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.bids",
-Identifier="f3b39c28-95da-f9aa-f25f-ce48b461d831",Synchronized="2017-08-16 11:41:17.0")
+@XendraTable(Name="Seller Funds",AD_Package_ID="a0ba5f31-73ac-fb58-5a46-04ff03d1a8c1",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Seller Funds from Offers on Topics",Help="",TableName="B_SellerFunds",AccessLevel="3",
+AD_Window_ID="45a49f39-e720-7227-5a91-7c0178b269a7",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.bids",Identifier="f3b39c28-95da-f9aa-f25f-ce48b461d831",
+Synchronized="2020-03-03 21:36:17.0")
 /** TableName=B_SellerFunds */
 public static final String Table_Name="B_SellerFunds";
 
@@ -142,13 +143,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="8259ef96-6ca1-e0c6-7f51-fd778ce174c0")
+public static String es_PE_FIELD_OfferFunds_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="8259ef96-6ca1-e0c6-7f51-fd778ce174c0")
 public static String es_PE_FIELD_OfferFunds_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="8259ef96-6ca1-e0c6-7f51-fd778ce174c0")
 public static String es_PE_FIELD_OfferFunds_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="8259ef96-6ca1-e0c6-7f51-fd778ce174c0")
-public static String es_PE_FIELD_OfferFunds_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c089654f-e0b1-049d-73ad-cb54afdf9b85",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Seller Funds.
@@ -186,13 +187,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1fe4a287-ba5d-b00a-fa32-d951f2de89da")
+public static String es_PE_FIELD_OfferFunds_SellerFunds_Name="Fondos del Vendedor";
+
+@XendraTrl(Identifier="1fe4a287-ba5d-b00a-fa32-d951f2de89da")
 public static String es_PE_FIELD_OfferFunds_SellerFunds_Description="Fondos del vendedor en asuntos de ofertas.";
 
 @XendraTrl(Identifier="1fe4a287-ba5d-b00a-fa32-d951f2de89da")
 public static String es_PE_FIELD_OfferFunds_SellerFunds_Help="Fondos disponibles (para los pagos) y fondos destinados de ofertas.";
-
-@XendraTrl(Identifier="1fe4a287-ba5d-b00a-fa32-d951f2de89da")
-public static String es_PE_FIELD_OfferFunds_SellerFunds_Name="Fondos del Vendedor";
 
 @XendraField(AD_Column_ID="B_SellerFunds_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -219,13 +220,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="08164797-1461-23ef-8df5-9f6925a4beba")
+public static String es_PE_FIELD_OfferFunds_CommittedAmount_Name="Total Comprometido";
+
+@XendraTrl(Identifier="08164797-1461-23ef-8df5-9f6925a4beba")
 public static String es_PE_FIELD_OfferFunds_CommittedAmount_Description="Total Comprometido (legal)";
 
 @XendraTrl(Identifier="08164797-1461-23ef-8df5-9f6925a4beba")
 public static String es_PE_FIELD_OfferFunds_CommittedAmount_Help="El Total comprometido es independiente del total planeado, usted usaría el total planeado para su estimación realista; esta podría ser mayor ó menor que el total comprometido.";
-
-@XendraTrl(Identifier="08164797-1461-23ef-8df5-9f6925a4beba")
-public static String es_PE_FIELD_OfferFunds_CommittedAmount_Name="Total Comprometido";
 
 @XendraField(AD_Column_ID="CommittedAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -243,7 +244,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13216d62-6cfe-6be7-c8c1-571b192b0afa",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name CommittedAmt */
 public static final String COLUMNNAME_CommittedAmt = "CommittedAmt";
 /** Set Order.
@@ -264,13 +265,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d8f6f4f2-6371-1c64-b6dc-cd148c9eaa7c")
+public static String es_PE_FIELD_OfferFunds_Order_Name="Orden de Venta";
+
+@XendraTrl(Identifier="d8f6f4f2-6371-1c64-b6dc-cd148c9eaa7c")
 public static String es_PE_FIELD_OfferFunds_Order_Description="Orden de Venta";
 
 @XendraTrl(Identifier="d8f6f4f2-6371-1c64-b6dc-cd148c9eaa7c")
 public static String es_PE_FIELD_OfferFunds_Order_Help="La ID de la orden de ventas es un identificador único de la orden de ventas; Ésta es controlada por la secuencia del documento para este tipo de documento.";
-
-@XendraTrl(Identifier="d8f6f4f2-6371-1c64-b6dc-cd148c9eaa7c")
-public static String es_PE_FIELD_OfferFunds_Order_Name="Orden de Venta";
 
 @XendraField(AD_Column_ID="C_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -288,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b9c06380-5095-9b27-4820-15d69af0ff06",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Payment.
@@ -309,13 +310,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="73e05b66-66f2-5fab-a8d8-c8bae3d3af7d")
+public static String es_PE_FIELD_OfferFunds_Payment_Name="Pago";
+
+@XendraTrl(Identifier="73e05b66-66f2-5fab-a8d8-c8bae3d3af7d")
 public static String es_PE_FIELD_OfferFunds_Payment_Description="Identificador del pago";
 
 @XendraTrl(Identifier="73e05b66-66f2-5fab-a8d8-c8bae3d3af7d")
 public static String es_PE_FIELD_OfferFunds_Payment_Help="El pago es un identificador único de este pago.";
-
-@XendraTrl(Identifier="73e05b66-66f2-5fab-a8d8-c8bae3d3af7d")
-public static String es_PE_FIELD_OfferFunds_Payment_Name="Pago";
 
 @XendraField(AD_Column_ID="C_Payment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -333,7 +334,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9d00a8f1-cf89-4d73-dff2-eec96843ee04",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Identifier.
@@ -365,7 +366,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c74eadd7-15ca-459c-9cf0-ee4a764b01c6",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Not Committed Aount.
@@ -385,10 +386,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="f5abd509-f27c-5062-f3c9-1ca5089a4584")
-public static String es_PE_FIELD_OfferFunds_NotCommittedAount_Description="Cantidad todavia no asegurada..";
+public static String es_PE_FIELD_OfferFunds_NotCommittedAount_Name="Importe no Asegurado";
 
 @XendraTrl(Identifier="f5abd509-f27c-5062-f3c9-1ca5089a4584")
-public static String es_PE_FIELD_OfferFunds_NotCommittedAount_Name="Importe no Asegurado";
+public static String es_PE_FIELD_OfferFunds_NotCommittedAount_Description="Cantidad todavia no asegurada..";
 
 @XendraField(AD_Column_ID="NonCommittedAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9b6d2852-c66f-c1d2-639f-493dddbc9e26",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -406,7 +407,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f392ef3-f570-6653-e492-b018ee70294e",
-Synchronized="2017-08-05 16:53:07.0")
+Synchronized="2019-08-30 22:20:58.0")
 /** Column name NonCommittedAmt */
 public static final String COLUMNNAME_NonCommittedAmt = "NonCommittedAmt";
 }

@@ -37,8 +37,8 @@ import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xendra.db.Querys;
 import org.xendra.exceptions.XendraException;
-import org.xendra.model.sql;
 
 public class FormatMessage implements Serializable {	
 	/**

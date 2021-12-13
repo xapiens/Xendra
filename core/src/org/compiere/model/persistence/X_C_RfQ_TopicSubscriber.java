@@ -61,29 +61,30 @@ public static int Table_ID=MTable.getTable_ID("C_RfQ_TopicSubscriber");
 public static String es_PE_TAB_Subscriber_Description="Solicitud para el asunto de la cita del suscriptor";
 
 @XendraTrl(Identifier="852893f9-8eff-8fef-fb05-0ae7614924c3")
-public static String es_PE_TAB_Subscriber_Name="Suscriptor";
-
-@XendraTrl(Identifier="852893f9-8eff-8fef-fb05-0ae7614924c3")
 public static String es_PE_TAB_Subscriber_Help="Suscribir para invitar a responder a RfQs";
 
-@XendraTab(Name="Subscriber",Description="Request for Quotation Topic Subscriber",
-Help="Subcriber to invite to respond to RfQs",AD_Window_ID="84f4c768-9e31-b7c2-85a4-97fc1fd84d22",
-SeqNo=20,TabLevel=1,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
-AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
-AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",
-ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
+@XendraTrl(Identifier="852893f9-8eff-8fef-fb05-0ae7614924c3")
+public static String es_PE_TAB_Subscriber_Name="Suscriptor";
+@XendraTab(Name="Subscriber",
+Description="Request for Quotation Topic Subscriber",Help="Subcriber to invite to respond to RfQs",
+AD_Window_ID="84f4c768-9e31-b7c2-85a4-97fc1fd84d22",SeqNo=20,TabLevel=1,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
+WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
+AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",
+IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
 Identifier="852893f9-8eff-8fef-fb05-0ae7614924c3",Synchronized="2012-03-17 18:47:08.603")
 public static final String TABNAME_Subscriber="852893f9-8eff-8fef-fb05-0ae7614924c3";
 
 @XendraTrl(Identifier="061d6fd6-6e14-2e05-2951-23408ab87068")
 public static String es_PE_TABLE_C_RfQ_TopicSubscriber_Name="Subscriptor SPC (RfQ)";
 
-@XendraTable(Name="RfQ Subscriber",Description="Request for Quotation Topic Subscriber",Help="",
-TableName="C_RfQ_TopicSubscriber",AccessLevel="3",
-AD_Window_ID="84f4c768-9e31-b7c2-85a4-97fc1fd84d22",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="061d6fd6-6e14-2e05-2951-23408ab87068",
-Synchronized="2017-08-16 11:42:27.0")
+@XendraTable(Name="RfQ Subscriber",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Request for Quotation Topic Subscriber",Help="",TableName="C_RfQ_TopicSubscriber",
+AccessLevel="3",AD_Window_ID="84f4c768-9e31-b7c2-85a4-97fc1fd84d22",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="061d6fd6-6e14-2e05-2951-23408ab87068",Synchronized="2020-03-03 21:37:40.0")
 /** TableName=C_RfQ_TopicSubscriber */
 public static final String Table_Name="C_RfQ_TopicSubscriber";
 
@@ -134,13 +135,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b29ce4ee-5b7f-142e-b68f-fede0b5afbac")
+public static String es_PE_FIELD_Subscriber_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="b29ce4ee-5b7f-142e-b68f-fede0b5afbac")
 public static String es_PE_FIELD_Subscriber_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="b29ce4ee-5b7f-142e-b68f-fede0b5afbac")
 public static String es_PE_FIELD_Subscriber_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="b29ce4ee-5b7f-142e-b68f-fede0b5afbac")
-public static String es_PE_FIELD_Subscriber_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +159,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="aa5c64e3-5448-8400-3cda-b383833dfaa2",Synchronized="2017-08-05 16:54:25.0")
+Identifier="aa5c64e3-5448-8400-3cda-b383833dfaa2",Synchronized="2019-08-30 22:22:16.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Business Partner .
@@ -178,13 +179,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a6beb9e9-07de-9135-84ed-77cdbffb5cdb")
+public static String es_PE_FIELD_Subscriber_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="a6beb9e9-07de-9135-84ed-77cdbffb5cdb")
 public static String es_PE_FIELD_Subscriber_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="a6beb9e9-07de-9135-84ed-77cdbffb5cdb")
 public static String es_PE_FIELD_Subscriber_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="a6beb9e9-07de-9135-84ed-77cdbffb5cdb")
-public static String es_PE_FIELD_Subscriber_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +203,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="092bbe35-3ffc-0b21-01cc-3bdbc58fd1c6",Synchronized="2017-08-05 16:54:25.0")
+Identifier="092bbe35-3ffc-0b21-01cc-3bdbc58fd1c6",Synchronized="2019-08-30 22:22:16.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Partner Location.
@@ -222,13 +223,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="66429b43-aa90-5a0c-3cee-69841d14d29b")
+public static String es_PE_FIELD_Subscriber_PartnerLocation_Name="Dirección del Socio del Negocio";
+
+@XendraTrl(Identifier="66429b43-aa90-5a0c-3cee-69841d14d29b")
 public static String es_PE_FIELD_Subscriber_PartnerLocation_Description="Identifica la dirección para este socio de negocio";
 
 @XendraTrl(Identifier="66429b43-aa90-5a0c-3cee-69841d14d29b")
 public static String es_PE_FIELD_Subscriber_PartnerLocation_Help="La dirección de un socio indica la ubicación de un socio de negocio";
-
-@XendraTrl(Identifier="66429b43-aa90-5a0c-3cee-69841d14d29b")
-public static String es_PE_FIELD_Subscriber_PartnerLocation_Name="Dirección del Socio del Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -247,7 +248,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="59ae8b8f-82f3-0a05-dae1-7a7263cb29e6",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name C_BPartner_Location_ID */
 public static final String COLUMNNAME_C_BPartner_Location_ID = "C_BPartner_Location_ID";
 /** Set RfQ Topic.
@@ -273,13 +274,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_RfQ_Topic_ID()));
 }
 
 @XendraTrl(Identifier="019d9baa-1cf8-8678-427f-ed4c1dad7f19")
+public static String es_PE_FIELD_Subscriber_RfQTopic_Name="Asunto de Solicitudes de Cotización";
+
+@XendraTrl(Identifier="019d9baa-1cf8-8678-427f-ed4c1dad7f19")
 public static String es_PE_FIELD_Subscriber_RfQTopic_Description="Asunto para la petición de citas";
 
 @XendraTrl(Identifier="019d9baa-1cf8-8678-427f-ed4c1dad7f19")
 public static String es_PE_FIELD_Subscriber_RfQTopic_Help="Un asunto para la petición de citas permite que usted mantenga una lista del suscriptor de vendedores potenciales para responder a RfQs";
-
-@XendraTrl(Identifier="019d9baa-1cf8-8678-427f-ed4c1dad7f19")
-public static String es_PE_FIELD_Subscriber_RfQTopic_Name="Asunto de Solicitudes de Cotización";
 
 @XendraField(AD_Column_ID="C_RfQ_Topic_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -297,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cdd74cfd-c1e2-0f16-ae36-88582bd316a2",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name C_RfQ_Topic_ID */
 public static final String COLUMNNAME_C_RfQ_Topic_ID = "C_RfQ_Topic_ID";
 /** Set RfQ Subscriber.
@@ -317,13 +318,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1a3404fb-0c44-8d63-d94c-0f81a08ec768")
+public static String es_PE_FIELD_Subscriber_RfQSubscriber_Name="Subscriptor SPC (RfQ)";
+
+@XendraTrl(Identifier="1a3404fb-0c44-8d63-d94c-0f81a08ec768")
 public static String es_PE_FIELD_Subscriber_RfQSubscriber_Description="Solicitud para la cita de tipo de subscripción.";
 
 @XendraTrl(Identifier="1a3404fb-0c44-8d63-d94c-0f81a08ec768")
 public static String es_PE_FIELD_Subscriber_RfQSubscriber_Help="Subscriptor para invitar responder a RfQs.";
-
-@XendraTrl(Identifier="1a3404fb-0c44-8d63-d94c-0f81a08ec768")
-public static String es_PE_FIELD_Subscriber_RfQSubscriber_Name="Subscriptor SPC (RfQ)";
 
 @XendraField(AD_Column_ID="C_RfQ_TopicSubscriber_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -362,7 +363,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5558910d-1ddb-4660-afe5-3ac3f41532a5",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Opt-out Date.
@@ -379,13 +380,13 @@ return (Timestamp)get_Value(COLUMNNAME_OptOutDate);
 }
 
 @XendraTrl(Identifier="60eeea39-2ba3-2c29-387b-f0a276f27492")
+public static String es_PE_FIELD_Subscriber_Opt_OutDate_Name="Fecha de Baja";
+
+@XendraTrl(Identifier="60eeea39-2ba3-2c29-387b-f0a276f27492")
 public static String es_PE_FIELD_Subscriber_Opt_OutDate_Description="Fecha en que el contacto se dio de baja";
 
 @XendraTrl(Identifier="60eeea39-2ba3-2c29-387b-f0a276f27492")
 public static String es_PE_FIELD_Subscriber_Opt_OutDate_Help="Si el campo tiene una fecha; el cliente ha decidido cancelar su suscripción y no puede recibir correo sobre el área de interés.";
-
-@XendraTrl(Identifier="60eeea39-2ba3-2c29-387b-f0a276f27492")
-public static String es_PE_FIELD_Subscriber_Opt_OutDate_Name="Fecha de Baja";
 
 @XendraField(AD_Column_ID="OptOutDate",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -403,7 +404,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9f87b4dc-29b0-6831-f35d-5c5dbef6a809",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name OptOutDate */
 public static final String COLUMNNAME_OptOutDate = "OptOutDate";
 /** Set Subscribe Date.
@@ -420,13 +421,13 @@ return (Timestamp)get_Value(COLUMNNAME_SubscribeDate);
 }
 
 @XendraTrl(Identifier="fa6cb99d-af89-00f0-810d-2220367b706e")
+public static String es_PE_FIELD_Subscriber_SubscribeDate_Name="Fecha de Alta";
+
+@XendraTrl(Identifier="fa6cb99d-af89-00f0-810d-2220367b706e")
 public static String es_PE_FIELD_Subscriber_SubscribeDate_Description="Fecha en la que el contacto se suscribió";
 
 @XendraTrl(Identifier="fa6cb99d-af89-00f0-810d-2220367b706e")
 public static String es_PE_FIELD_Subscriber_SubscribeDate_Help="Fecha en la que el contacto se suscribió a un área de interés";
-
-@XendraTrl(Identifier="fa6cb99d-af89-00f0-810d-2220367b706e")
-public static String es_PE_FIELD_Subscriber_SubscribeDate_Name="Fecha de Alta";
 
 @XendraField(AD_Column_ID="SubscribeDate",IsCentrallyMaintained=true,
 AD_Tab_ID="852893f9-8eff-8fef-fb05-0ae7614924c3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -444,7 +445,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0e0de5e9-795b-e2d2-8d01-dba7ab664873",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name SubscribeDate */
 public static final String COLUMNNAME_SubscribeDate = "SubscribeDate";
 }

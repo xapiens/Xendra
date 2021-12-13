@@ -65,12 +65,12 @@ public static int Table_ID=MTable.getTable_ID("PA_ColorSchema");
 public static String es_PE_TAB_ColorSchema_Description="Desmpeño Esquema de Color";
 
 @XendraTrl(Identifier="1fec93db-cd16-fde1-b4d5-b723b995b0b2")
-public static String es_PE_TAB_ColorSchema_Name="Esquema de Color";
-
-@XendraTrl(Identifier="1fec93db-cd16-fde1-b4d5-b723b995b0b2")
 public static String es_PE_TAB_ColorSchema_Help="Representación Visual del desempeño mediante colores. Frecuentemente el esquema tiene tres niveles (ej. rojo - amarillo - verde). Adempiere soporta dos niveles (ej. rojo - verde) o cuatro niveles (ej. gris - bronce - plata - oro). Note que las medidasd sin límite son representadas en Blanco. Los porcentajes pueden ser entre 0 y sin límite (ej. superior a 100%).";
 
-@XendraTab(Name="Color Schema",Description="Performance Color Schema",
+@XendraTrl(Identifier="1fec93db-cd16-fde1-b4d5-b723b995b0b2")
+public static String es_PE_TAB_ColorSchema_Name="Esquema de Color";
+@XendraTab(Name="Color Schema",
+Description="Performance Color Schema",
 Help="Visual representation of performance by color.  The Schema has often three levels (e.g. red-yellow-green).  Adempiere support two levels (e.g. red-green) or four levels (e.g. gray-bronce-silver-gold).  Note that Measures without a goal are represented white.  The percentages could be beween 0 and unlimited (i.e. above 100%).",
 AD_Window_ID="01ccb45d-46e4-2670-a5c0-b48d1c47cbc4",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -83,11 +83,12 @@ public static final String TABNAME_ColorSchema="1fec93db-cd16-fde1-b4d5-b723b995
 @XendraTrl(Identifier="b683b16f-4e65-7222-5a9e-d119f4f5e71a")
 public static String es_PE_TABLE_PA_ColorSchema_Name="Esquema de Color ";
 
-@XendraTable(Name="Color Schema",Description="Performance Color Schema",Help="",
+@XendraTable(Name="Color Schema",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Performance Color Schema",Help="",
 TableName="PA_ColorSchema",AccessLevel="6",AD_Window_ID="01ccb45d-46e4-2670-a5c0-b48d1c47cbc4",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="b683b16f-4e65-7222-5a9e-d119f4f5e71a",Synchronized="2017-08-16 11:43:39.0")
+Identifier="b683b16f-4e65-7222-5a9e-d119f4f5e71a",Synchronized="2020-03-03 21:39:00.0")
 /** TableName=PA_ColorSchema */
 public static final String Table_Name="PA_ColorSchema";
 
@@ -120,9 +121,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_PA_ColorSchema[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_PrintColor1_ID AD_Reference=a7e43a27-3ce0-e9aa-8f3c-78e2921fc1cd */
-public static final int AD_PRINTCOLOR1_ID_AD_Reference_ID=266;
 /** Set Color 1.
 @param AD_PrintColor1_ID First color used */
 public void setAD_PrintColor1_ID (int AD_PrintColor1_ID)
@@ -140,10 +138,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3f971c73-4362-1c8c-b609-4242c0d8f239")
-public static String es_PE_FIELD_ColorSchema_Color_Description="Primer color empleado";
+public static String es_PE_FIELD_ColorSchema_Color_Name="Color 1";
 
 @XendraTrl(Identifier="3f971c73-4362-1c8c-b609-4242c0d8f239")
-public static String es_PE_FIELD_ColorSchema_Color_Name="Color 1";
+public static String es_PE_FIELD_ColorSchema_Color_Description="Primer color empleado";
 
 @XendraField(AD_Column_ID="AD_PrintColor1_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,12 +159,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5d092102-8ed0-45d6-3bd5-ccdbe10f43a0",Synchronized="2017-08-05 16:55:39.0")
+Identifier="5d092102-8ed0-45d6-3bd5-ccdbe10f43a0",Synchronized="2019-08-30 22:23:36.0")
 /** Column name AD_PrintColor1_ID */
 public static final String COLUMNNAME_AD_PrintColor1_ID = "AD_PrintColor1_ID";
-
-/** AD_PrintColor2_ID AD_Reference=a7e43a27-3ce0-e9aa-8f3c-78e2921fc1cd */
-public static final int AD_PRINTCOLOR2_ID_AD_Reference_ID=266;
 /** Set Color 2.
 @param AD_PrintColor2_ID Second color used */
 public void setAD_PrintColor2_ID (int AD_PrintColor2_ID)
@@ -184,10 +179,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0af5475a-51da-c9e8-0861-efe5801df76c")
-public static String es_PE_FIELD_ColorSchema_Color22_Description="Segundo color empleado";
+public static String es_PE_FIELD_ColorSchema_Color22_Name="Color 2";
 
 @XendraTrl(Identifier="0af5475a-51da-c9e8-0861-efe5801df76c")
-public static String es_PE_FIELD_ColorSchema_Color22_Name="Color 2";
+public static String es_PE_FIELD_ColorSchema_Color22_Description="Segundo color empleado";
 
 @XendraField(AD_Column_ID="AD_PrintColor2_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -205,12 +200,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b9173b56-3eec-f46f-0c87-96c6ca112295",Synchronized="2017-08-05 16:55:39.0")
+Identifier="b9173b56-3eec-f46f-0c87-96c6ca112295",Synchronized="2019-08-30 22:23:36.0")
 /** Column name AD_PrintColor2_ID */
 public static final String COLUMNNAME_AD_PrintColor2_ID = "AD_PrintColor2_ID";
-
-/** AD_PrintColor3_ID AD_Reference=a7e43a27-3ce0-e9aa-8f3c-78e2921fc1cd */
-public static final int AD_PRINTCOLOR3_ID_AD_Reference_ID=266;
 /** Set Color 3.
 @param AD_PrintColor3_ID Third color used */
 public void setAD_PrintColor3_ID (int AD_PrintColor3_ID)
@@ -229,10 +221,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b3f0fee4-02bc-1fd5-c879-bb03302214ae")
-public static String es_PE_FIELD_ColorSchema_Color33_Description="Tercer color empleado";
+public static String es_PE_FIELD_ColorSchema_Color33_Name="Color 3";
 
 @XendraTrl(Identifier="b3f0fee4-02bc-1fd5-c879-bb03302214ae")
-public static String es_PE_FIELD_ColorSchema_Color33_Name="Color 3";
+public static String es_PE_FIELD_ColorSchema_Color33_Description="Tercer color empleado";
 
 @XendraField(AD_Column_ID="AD_PrintColor3_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -250,12 +242,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a70527b0-c604-7273-31d5-b1a7237ddd07",Synchronized="2017-08-05 16:55:39.0")
+Identifier="a70527b0-c604-7273-31d5-b1a7237ddd07",Synchronized="2019-08-30 22:23:36.0")
 /** Column name AD_PrintColor3_ID */
 public static final String COLUMNNAME_AD_PrintColor3_ID = "AD_PrintColor3_ID";
-
-/** AD_PrintColor4_ID AD_Reference=a7e43a27-3ce0-e9aa-8f3c-78e2921fc1cd */
-public static final int AD_PRINTCOLOR4_ID_AD_Reference_ID=266;
 /** Set Color 4.
 @param AD_PrintColor4_ID Forth color used */
 public void setAD_PrintColor4_ID (int AD_PrintColor4_ID)
@@ -274,10 +263,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9e1911d2-a34f-cb45-3244-109a8159d54a")
-public static String es_PE_FIELD_ColorSchema_Color44_Description="Cuarto  color empleado";
+public static String es_PE_FIELD_ColorSchema_Color44_Name="Color 4";
 
 @XendraTrl(Identifier="9e1911d2-a34f-cb45-3244-109a8159d54a")
-public static String es_PE_FIELD_ColorSchema_Color44_Name="Color 4";
+public static String es_PE_FIELD_ColorSchema_Color44_Description="Cuarto  color empleado";
 
 @XendraField(AD_Column_ID="AD_PrintColor4_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -295,7 +284,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="45d370ba-b21f-e79e-1b89-fb6bc46725e1",Synchronized="2017-08-05 16:55:39.0")
+Identifier="45d370ba-b21f-e79e-1b89-fb6bc46725e1",Synchronized="2019-08-30 22:23:36.0")
 /** Column name AD_PrintColor4_ID */
 public static final String COLUMNNAME_AD_PrintColor4_ID = "AD_PrintColor4_ID";
 /** Set Description.
@@ -326,13 +315,13 @@ return value;
 }
 
 @XendraTrl(Identifier="31da9f21-fa06-3dd2-64a3-ce236c662b69")
+public static String es_PE_FIELD_ColorSchema_Description_Name="Observación";
+
+@XendraTrl(Identifier="31da9f21-fa06-3dd2-64a3-ce236c662b69")
 public static String es_PE_FIELD_ColorSchema_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="31da9f21-fa06-3dd2-64a3-ce236c662b69")
 public static String es_PE_FIELD_ColorSchema_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="31da9f21-fa06-3dd2-64a3-ce236c662b69")
-public static String es_PE_FIELD_ColorSchema_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -350,12 +339,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3778a3fb-b8f4-738c-a2d0-dd4cbec78886",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -375,13 +361,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="7543f098-c435-9e3a-d167-325928637f9a")
+public static String es_PE_FIELD_ColorSchema_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="7543f098-c435-9e3a-d167-325928637f9a")
 public static String es_PE_FIELD_ColorSchema_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="7543f098-c435-9e3a-d167-325928637f9a")
 public static String es_PE_FIELD_ColorSchema_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="7543f098-c435-9e3a-d167-325928637f9a")
-public static String es_PE_FIELD_ColorSchema_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -399,7 +385,7 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="245e7fd3-a919-4565-67be-a62579efac91",Synchronized="2017-08-05 16:55:39.0")
+Identifier="245e7fd3-a919-4565-67be-a62579efac91",Synchronized="2019-08-30 22:23:36.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Identifier.
@@ -431,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c5e0caf-0210-48e6-ab65-205212b2e0c0",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Mark 1 Percent.
@@ -450,13 +436,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cfc365fa-a8c5-a46a-25de-2e6ff20079a6")
+public static String es_PE_FIELD_ColorSchema_Mark1Percent_Name="Porcentaje Marca 1";
+
+@XendraTrl(Identifier="cfc365fa-a8c5-a46a-25de-2e6ff20079a6")
 public static String es_PE_FIELD_ColorSchema_Mark1Percent_Description="Porcentaje máximo de este color";
 
 @XendraTrl(Identifier="cfc365fa-a8c5-a46a-25de-2e6ff20079a6")
 public static String es_PE_FIELD_ColorSchema_Mark1Percent_Help="Ejemplo 50 - ej. debajo del 50% se utiliza este color.";
-
-@XendraTrl(Identifier="cfc365fa-a8c5-a46a-25de-2e6ff20079a6")
-public static String es_PE_FIELD_ColorSchema_Mark1Percent_Name="Porcentaje Marca 1";
 
 @XendraField(AD_Column_ID="Mark1Percent",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -474,7 +460,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9e95d2fa-726a-f5d6-48b0-b57a844ef92e",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Mark1Percent */
 public static final String COLUMNNAME_Mark1Percent = "Mark1Percent";
 /** Set Mark 2 Percent.
@@ -493,13 +479,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="76eea616-3e5d-1afd-5ec7-04285f0ef856")
+public static String es_PE_FIELD_ColorSchema_Mark2Percent_Name="Porcentaje Marca 2 ";
+
+@XendraTrl(Identifier="76eea616-3e5d-1afd-5ec7-04285f0ef856")
 public static String es_PE_FIELD_ColorSchema_Mark2Percent_Description="Porcentaje máximo de este color";
 
 @XendraTrl(Identifier="76eea616-3e5d-1afd-5ec7-04285f0ef856")
 public static String es_PE_FIELD_ColorSchema_Mark2Percent_Help="Ejemplo 80 - ej Si Marca 1 es 50  - se emplea este color entre 50% y 80%.";
-
-@XendraTrl(Identifier="76eea616-3e5d-1afd-5ec7-04285f0ef856")
-public static String es_PE_FIELD_ColorSchema_Mark2Percent_Name="Porcentaje Marca 2 ";
 
 @XendraField(AD_Column_ID="Mark2Percent",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -517,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0ba32aee-c052-00ea-c1f1-23cf60f23990",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Mark2Percent */
 public static final String COLUMNNAME_Mark2Percent = "Mark2Percent";
 /** Set Mark 3 Percent.
@@ -536,13 +522,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d9803e27-17cf-9ce5-952c-27adb8270c6f")
+public static String es_PE_FIELD_ColorSchema_Mark3Percent_Name="Porcentaje Marca 3";
+
+@XendraTrl(Identifier="d9803e27-17cf-9ce5-952c-27adb8270c6f")
 public static String es_PE_FIELD_ColorSchema_Mark3Percent_Description="Porcentaje máximo de este color";
 
 @XendraTrl(Identifier="d9803e27-17cf-9ce5-952c-27adb8270c6f")
 public static String es_PE_FIELD_ColorSchema_Mark3Percent_Help="Ejemplo 100 - ej. Si Marca 2 es 80 - este color es empleado entre 80% y 100%.";
-
-@XendraTrl(Identifier="d9803e27-17cf-9ce5-952c-27adb8270c6f")
-public static String es_PE_FIELD_ColorSchema_Mark3Percent_Name="Porcentaje Marca 3";
 
 @XendraField(AD_Column_ID="Mark3Percent",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -560,7 +546,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0cef3bbb-b2ff-047a-a1dd-088f78444f6f",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Mark3Percent */
 public static final String COLUMNNAME_Mark3Percent = "Mark3Percent";
 /** Set Mark 4 Percent.
@@ -579,13 +565,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="65b4974e-0e66-b3fa-8a3f-469082471d2d")
+public static String es_PE_FIELD_ColorSchema_Mark4Percent_Name="Porcentaje Marca 4";
+
+@XendraTrl(Identifier="65b4974e-0e66-b3fa-8a3f-469082471d2d")
 public static String es_PE_FIELD_ColorSchema_Mark4Percent_Description="Porcentaje máximo de este color";
 
 @XendraTrl(Identifier="65b4974e-0e66-b3fa-8a3f-469082471d2d")
 public static String es_PE_FIELD_ColorSchema_Mark4Percent_Help="Ejemplo 9999 - ej Si Marca 3 es 100 - este color es empleado por arriba de 100%.";
-
-@XendraTrl(Identifier="65b4974e-0e66-b3fa-8a3f-469082471d2d")
-public static String es_PE_FIELD_ColorSchema_Mark4Percent_Name="Porcentaje Marca 4";
 
 @XendraField(AD_Column_ID="Mark4Percent",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -603,7 +589,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d6ff4823-6db9-6fa4-e026-ae6194cd5b92",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Mark4Percent */
 public static final String COLUMNNAME_Mark4Percent = "Mark4Percent";
 /** Set Name.
@@ -635,18 +621,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
+public static String es_PE_FIELD_ColorSchema_Name_Name="Nombre";
+
+@XendraTrl(Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
 public static String es_PE_FIELD_ColorSchema_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
 public static String es_PE_FIELD_ColorSchema_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
-public static String es_PE_FIELD_ColorSchema_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=30,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=30,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f")
 public static final String FIELDNAME_ColorSchema_Name="6d8649f8-cb31-03cf-4a0a-92fb8e593f4f";
 
 @XendraTrl(Identifier="ba4d0e1f-ecb0-fa9c-dd8b-b1f17294fa19")
@@ -658,7 +645,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ba4d0e1f-ecb0-fa9c-dd8b-b1f17294fa19",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Color Schema.
@@ -678,13 +665,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7ba863f6-c688-0849-2d55-6f2e76e1854d")
+public static String es_PE_FIELD_ColorSchema_ColorSchema_Name="Esquema de Color ";
+
+@XendraTrl(Identifier="7ba863f6-c688-0849-2d55-6f2e76e1854d")
 public static String es_PE_FIELD_ColorSchema_ColorSchema_Description="Desempeño Esquema de Colores";
 
 @XendraTrl(Identifier="7ba863f6-c688-0849-2d55-6f2e76e1854d")
 public static String es_PE_FIELD_ColorSchema_ColorSchema_Help="Representación visual del Desempeño mediante colores.  El esquema frrecuentemente tiene 3 niveles (ej. rojo-amarillo-verde).  Adempiere soporta dos niveles (ej. rojo-verde) o cuatro noveles (ej. gris-bronce-plata-oro).  Note que una Meta sin Medida es representada en Blanco.  El  porcentaje puede ser entre 0 y  sin limite  (ej. sobre 100%).";
-
-@XendraTrl(Identifier="7ba863f6-c688-0849-2d55-6f2e76e1854d")
-public static String es_PE_FIELD_ColorSchema_ColorSchema_Name="Esquema de Color ";
 
 @XendraField(AD_Column_ID="PA_ColorSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="1fec93db-cd16-fde1-b4d5-b723b995b0b2",AD_FieldGroup_ID="",IsDisplayed=false,

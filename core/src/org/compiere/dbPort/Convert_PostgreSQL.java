@@ -97,7 +97,7 @@ public class Convert_PostgreSQL extends Convert_SQL92 {
 			   int separator = function_start.indexOf("'") + 1;
 			   String next = function_start.substring(separator);
 			   if (next.indexOf("'") == -1)
-				   System.out.println("X");
+				   System.out.println("org.compiere.dbport.convert_PostgreSQL");
 			   String system = next.substring(0,next.indexOf("'"));
 			   if (system.equals("N"))
 			   {	   

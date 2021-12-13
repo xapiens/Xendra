@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_CalendarType");
 @XendraTrl(Identifier="fc853e2e-2f26-4084-b168-275be4f1f866")
 public static String es_PE_TABLE_E_CalendarType_Name="E_CalendarType";
 
-@XendraTable(Name="E_CalendarType",Description="",Help="",TableName="E_CalendarType",
-AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="fc853e2e-2f26-4084-b168-275be4f1f866",
-Synchronized="2017-09-13 11:49:22.0")
+@XendraTable(Name="E_CalendarType",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="E_CalendarType",AccessLevel="6",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="fc853e2e-2f26-4084-b168-275be4f1f866",
+Synchronized="2020-03-03 21:37:47.0")
 /** TableName=E_CalendarType */
 public static final String Table_Name="E_CalendarType";
 
@@ -118,7 +119,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="85ab737d-ef29-4226-ac76-cbf90fa29f0b",
-Synchronized="2017-09-11 17:13:37.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name color */
 public static final String COLUMNNAME_color = "color";
 /** Set E_CalendarType_ID.
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b57dd44-23a0-41c7-ae7c-166949058115",
-Synchronized="2017-09-11 17:13:37.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6da75109-a698-4f94-adaa-88ab69ff4db9",
-Synchronized="2017-09-11 17:13:37.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Type.
@@ -231,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ae8b12b1-bfba-4936-9644-6170128a3360",
-Synchronized="2017-09-11 17:13:37.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name Type */
 public static final String COLUMNNAME_Type = "Type";
 /** Set URL.
@@ -263,7 +264,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="837f676a-aac3-4539-bf91-2226238c36c2",
-Synchronized="2017-09-11 17:13:37.0")
+Synchronized="2019-08-30 22:22:24.0")
 /** Column name URL */
 public static final String COLUMNNAME_URL = "URL";
 }

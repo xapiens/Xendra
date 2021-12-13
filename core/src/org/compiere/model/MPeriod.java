@@ -29,6 +29,7 @@ import java.util.logging.Level;
 
 import org.xendra.exceptions.PeriodClosedException;
 import org.compiere.model.persistence.X_C_Period;
+import org.compiere.model.reference.REF_C_PeriodControlStatus;
 import org.compiere.model.reference.REF_C_PeriodType;
 import org.compiere.util.CCache;
 import org.compiere.util.CLogger;
@@ -82,22 +83,22 @@ public class MPeriod extends X_C_Period
 		return retValue;
 	} 	//	get
 
-	/**
-	 * 	Find standard Period of DateAcct based on Client Calendar
-	 *	@param ctx context
-	 *	@param DateAcct date
-	 *	@return active Period or null
-	 *  @deprecated
-	 */
-	public static MPeriod get (Properties ctx, Timestamp DateAcct)
-	{	
-		return get(ctx, DateAcct, 0);
-	}	//	get
+//	/**
+//	 * 	Find standard Period of DateAcct based on Client Calendar
+//	 *	@param ctx context
+//	 *	@param DateAcct date
+//	 *	@return active Period or null
+//	 *  @deprecated
+//	 */
+//	public static MPeriod get (Properties ctx, Timestamp DateAcct)
+//	{	
+//		return get(ctx, DateAcct, 0);
+//	}	//	get
 	
-	public static MPeriod get (Properties ctx, Timestamp DateAcct, int AD_Org_ID)
-	{
-		return get (ctx, DateAcct,AD_Org_ID, 0);
-	}
+//	public static MPeriod get (Properties ctx, Timestamp DateAcct, int AD_Org_ID)
+//	{
+//		return get (ctx, DateAcct,AD_Org_ID, 0);
+//	}
 	/**
 	 * Find standard Period of DateAcct based on Client Calendar
 	 * @param ctx context
@@ -111,7 +112,7 @@ public class MPeriod extends X_C_Period
 		if (DateAcct == null)
 			return null;
 		
-        int C_Calendar_ID = getC_Calendar_ID(ctx,AD_Org_ID);
+        int C_Calendar_ID = getC_Calendar_ID(ctx,AD_Org_ID, AD_Client_ID);
         
         if (C_Calendar_ID == 0)
         	return null;
@@ -184,20 +185,20 @@ public class MPeriod extends X_C_Period
 		return retValue;
 	}
 
-	/**
-	 * 	Find valid standard Period of DateAcct based on Client Calendar
-	 *	@param ctx context
-	 *	@param DateAcct date
-	 *	@return C_Period_ID or 0
-	 *  @deprecated
-	 */
-	public static int getC_Period_ID (Properties ctx, Timestamp DateAcct)
-	{
-		MPeriod period = get (ctx, DateAcct);
-		if (period == null)
-			return 0;
-		return period.getC_Period_ID();
-	}	//	getC_Period_ID
+//	/**
+//	 * 	Find valid standard Period of DateAcct based on Client Calendar
+//	 *	@param ctx context
+//	 *	@param DateAcct date
+//	 *	@return C_Period_ID or 0
+//	 *  @deprecated
+//	 */
+//	public static int getC_Period_ID (Properties ctx, Timestamp DateAcct)
+//	{
+//		MPeriod period = get (ctx, DateAcct);
+//		if (period == null)
+//			return 0;
+//		return period.getC_Period_ID();
+//	}	//	getC_Period_ID
 	
 	/**
 	 * 	Find valid standard Period of DateAcct based on Client Calendar
@@ -206,9 +207,9 @@ public class MPeriod extends X_C_Period
 	 * @param AD_Org_ID Organization
 	 *	@return C_Period_ID or 0
 	 */
-	public static int getC_Period_ID (Properties ctx, Timestamp DateAcct, int AD_Org_ID)
+	public static int getC_Period_ID (Properties ctx, Timestamp DateAcct, int AD_Org_ID, int AD_Client_ID)
 	{
-		MPeriod period = get (ctx, DateAcct, AD_Org_ID);
+		MPeriod period = get (ctx, DateAcct, AD_Org_ID, AD_Client_ID);
 		if (period == null)
 			return 0;
 		return period.getC_Period_ID();
@@ -222,7 +223,7 @@ public class MPeriod extends X_C_Period
 	 * @param AD_Org_ID Organization
 	 *	@return true if open
 	 */
-	public static boolean isOpen (Properties ctx, Timestamp DateAcct, String DocBaseType, int AD_Org_ID)
+	public static boolean isOpen (Properties ctx, Timestamp DateAcct, String DocBaseType, int AD_Org_ID, int AD_Client_ID)
 	{
 		if (DateAcct == null)
 		{
@@ -234,7 +235,7 @@ public class MPeriod extends X_C_Period
 			s_log.warning("No DocBaseType");
 			return false;
 		}
-		MPeriod period = MPeriod.get (ctx, DateAcct, AD_Org_ID);
+		MPeriod period = MPeriod.get (ctx, DateAcct, AD_Org_ID, AD_Client_ID);
 		if (period == null)
 		{
 			s_log.warning("No Period for " + DateAcct + " (" + DocBaseType + ")");
@@ -247,30 +248,34 @@ public class MPeriod extends X_C_Period
 		return open;
 	}	//	isOpen
 
-	/**
-	 * 	Find first Year Period of DateAcct based on Client Calendar
-	 *	@param ctx context
-	 *	@param DateAcct date
-	 *	@return active first Period
-	 *  @deprecated
-	 */
-	public static MPeriod getFirstInYear (Properties ctx, Timestamp DateAcct)
-	{
-		return getFirstInYear(ctx , DateAcct, 0);
-	}	//	getFirstInYear
+//	/**
+//	 * 	Find first Year Period of DateAcct based on Client Calendar
+//	 *	@param ctx context
+//	 *	@param DateAcct date
+//	 *	@return active first Period
+//	 *  @deprecated
+//	 */
+//	public static MPeriod getFirstInYear (Properties ctx, Timestamp DateAcct)
+//	{
+//		return getFirstInYear(ctx , DateAcct, 0);
+//	}	//	getFirstInYear
 		
-	/**
-	 * 	Find first Year Period of DateAcct based on Client Calendar
-	 *	@param ctx context
-	 * @param DateAcct date
-	 * @param AD_Org_ID TODO
-	 *	@return active first Period
-	 */
-	public static MPeriod getFirstInYear (Properties ctx, Timestamp DateAcct, int AD_Org_ID)
+//	/**
+//	 * 	Find first Year Period of DateAcct based on Client Calendar
+//	 *	@param ctx context
+//	 * @param DateAcct date
+//	 * @param AD_Org_ID TODO
+//	 *	@return active first Period
+//	 */
+	public static MPeriod getFirstInYear (Properties ctx, Timestamp DateAcct, int AD_Org_ID, int AD_Client_ID)
 	{
 		MPeriod retValue = null;
-		int C_Calendar_ID = MPeriod.get(ctx, DateAcct, AD_Org_ID).getC_Calendar_ID();
-
+		int C_Calendar_ID = 0;
+		MPeriod p = MPeriod.get(ctx, DateAcct, AD_Org_ID, AD_Client_ID);		
+		if (p != null)
+			C_Calendar_ID = p.getC_Calendar_ID();
+		if (C_Calendar_ID == 0)
+			return retValue;
         String sql = "SELECT * "
                     + "FROM C_Period "
                     + "WHERE C_Year_ID IN "
@@ -666,10 +671,9 @@ public class MPeriod extends X_C_Period
 	 * @throws PeriodClosedException if period is closed
 	 * @see #isOpen(Properties, Timestamp, String, int)
 	 */
-	public static void testPeriodOpen(Properties ctx, Timestamp dateAcct, String docBaseType, int AD_Org_ID)
-	throws PeriodClosedException 
+	public static void testPeriodOpen(Properties ctx, Timestamp dateAcct, String docBaseType, int AD_Org_ID, int AD_Client_ID) throws PeriodClosedException 
 	{
-		if (!MPeriod.isOpen(ctx, dateAcct, docBaseType, AD_Org_ID)) {
+		if (!MPeriod.isOpen(ctx, dateAcct, docBaseType, AD_Org_ID, AD_Client_ID)) {
 			throw new PeriodClosedException(dateAcct, docBaseType);
 		}
 	}
@@ -699,11 +703,10 @@ public class MPeriod extends X_C_Period
 	 * @throws PeriodClosedException
 	 * @see {@link #isOpen(Properties, Timestamp, String, int)}
 	 */
-	public static void testPeriodOpen(Properties ctx, Timestamp dateAcct, int C_DocType_ID, int AD_Org_ID)
-	throws PeriodClosedException
+	public static void testPeriodOpen(Properties ctx, Timestamp dateAcct, int C_DocType_ID, int AD_Org_ID, int AD_Client_ID) throws PeriodClosedException
 	{
 		MDocType dt = MDocType.get(ctx, C_DocType_ID);
-		testPeriodOpen(ctx, dateAcct, dt.getDocBaseType(),  AD_Org_ID);
+		testPeriodOpen(ctx, dateAcct, dt.getDocBaseType(),  AD_Org_ID, AD_Client_ID);
 	}
 	
 	/**
@@ -730,7 +733,7 @@ public class MPeriod extends X_C_Period
 	 * @param AD_Org_ID Organization
 	 * @return
 	 */
-    public static int getC_Calendar_ID(Properties ctx,int AD_Org_ID)
+    public static int getC_Calendar_ID(Properties ctx,int AD_Org_ID, int AD_Client_ID)
     {	
         int C_Calendar_ID = 0;
         if (AD_Org_ID != 0)
@@ -740,8 +743,8 @@ public class MPeriod extends X_C_Period
         }
         
         if (C_Calendar_ID == 0)
-        {
-            MClientInfo cInfo = MClientInfo.get(ctx);
+        {        	
+            MClientInfo cInfo = MClientInfo.get(ctx, AD_Client_ID);
             C_Calendar_ID = cInfo.getC_Calendar_ID();
         }
         
@@ -793,5 +796,13 @@ public class MPeriod extends X_C_Period
 			period = getNextPeriod(period.getC_Period_ID());
 		}		
 		return ids;
+	}
+
+	public boolean isClose() {
+		String periodstatus = DB.getSQLValueString(null, "SELECT periodstatus from C_PeriodControl where ad_client_id = ? and c_period_id = ? group by periodstatus", Env.getAD_Client_ID(Env.getCtx()), getC_Period_ID());
+		if (periodstatus == null) {
+			periodstatus ="";
+		}
+		return periodstatus.equals(REF_C_PeriodControlStatus.Closed);
 	}
 }	//	MPeriod

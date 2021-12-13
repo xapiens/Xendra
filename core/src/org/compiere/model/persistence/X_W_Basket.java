@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("W_Basket");
 @XendraTrl(Identifier="1eaaffbf-d211-8c09-ec46-6c88b9ab7bb3")
 public static String es_PE_TABLE_W_Basket_Name="ID de almacenado";
 
-@XendraTable(Name="W_Basket_ID",Description="Web Basket",Help="",TableName="W_Basket",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="1eaaffbf-d211-8c09-ec46-6c88b9ab7bb3",
-Synchronized="2017-08-16 11:44:27.0")
+@XendraTable(Name="W_Basket_ID",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Web Basket",Help="",
+TableName="W_Basket",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="1eaaffbf-d211-8c09-ec46-6c88b9ab7bb3",
+Synchronized="2020-03-03 21:40:31.0")
 /** TableName=W_Basket */
 public static final String Table_Name="W_Basket";
 
@@ -133,7 +134,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="34a4bb58-0d1c-4899-e3ec-628b0be96ea7",Synchronized="2017-08-05 16:56:31.0")
+Identifier="34a4bb58-0d1c-4899-e3ec-628b0be96ea7",Synchronized="2019-08-30 22:24:30.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Business Partner .
@@ -162,7 +163,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1d055b66-ea6f-1209-64de-39577fc21a37",Synchronized="2017-08-05 16:56:31.0")
+Identifier="1d055b66-ea6f-1209-64de-39577fc21a37",Synchronized="2019-08-30 22:24:30.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set EMail Address.
@@ -194,7 +195,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ead6e1ad-b6f2-7e5b-cd02-6a463c36cb68",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name EMail */
 public static final String COLUMNNAME_EMail = "EMail";
 /** Set Identifier.
@@ -226,7 +227,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ead590e3-a631-48d6-880c-6f33f7959dd6",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set M_PriceList_ID.
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="021cd108-533b-8815-ed50-1eee30e5de19",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name M_PriceList_ID */
 public static final String COLUMNNAME_M_PriceList_ID = "M_PriceList_ID";
 /** Set Session ID.
@@ -289,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="01f71d7d-4279-4ffc-2e45-34c6b6b7385d",
-Synchronized="2017-08-05 16:56:31.0")
+Synchronized="2019-08-30 22:24:30.0")
 /** Column name Session_ID */
 public static final String COLUMNNAME_Session_ID = "Session_ID";
 /** Set W_Basket_ID.

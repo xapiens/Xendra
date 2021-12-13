@@ -198,7 +198,7 @@ public class Doc_GLJournal extends Doc
 
 	public void createFact_ID() {
 		MJournal journal = (MJournal)getPO();
-		if (getFact_ID().length()==0)
+		if (getFact_ID().length()==0) {
 			setFact_ID (
 					MGLBookPeriod.getID(journal.getAD_Org_ID(),
 										journal.getAD_Client_ID(),
@@ -206,7 +206,16 @@ public class Doc_GLJournal extends Doc
 										journal.getC_DocType_ID(), 
 										"", 
 										journal.getDateAcct())
-					);		
+					);
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(journal.getAD_Org_ID(),
+										journal.getAD_Client_ID(),
+										journal.Table_ID, 
+										journal.getC_DocType_ID(), 
+										"", 
+										journal.getDateAcct())
+					);					
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), journal.getDateAcct(), journal.getAD_Org_ID() , journal.getAD_Client_ID());
@@ -230,6 +239,14 @@ public class Doc_GLJournal extends Doc
 			int month = pos != -1 ? Integer.parseInt(getFact_ID().substring(pos, pos + 2)) : 0;
 			if (pos == -1) // año fiscal no encontrado, otro año, regenerar.
 			{
+				setGL_Book_ID(
+						MGLBookPeriod.getGLBookID(journal.getAD_Org_ID(),
+								journal.getAD_Client_ID(),
+								journal.Table_ID, 
+								journal.getC_DocType_ID(), 
+								"", 
+								journal.getDateAcct())
+						);
 				setFact_ID (
 						MGLBookPeriod.getID(journal.getAD_Org_ID(),
 											journal.getAD_Client_ID(),
@@ -242,6 +259,14 @@ public class Doc_GLJournal extends Doc
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
 			{
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(journal.getAD_Org_ID(),
+								journal.getAD_Client_ID(),
+								journal.Table_ID, 
+								journal.getC_DocType_ID(), 
+								"", 
+								journal.getDateAcct())						
+						);
 				setFact_ID (
 						MGLBookPeriod.getID(journal.getAD_Org_ID(),
 											journal.getAD_Client_ID(),
@@ -252,7 +277,5 @@ public class Doc_GLJournal extends Doc
 						);		
 			}
 		}
-		
 	}
-
 }   //  Doc_GLJournal

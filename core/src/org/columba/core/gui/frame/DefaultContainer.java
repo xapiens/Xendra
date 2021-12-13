@@ -38,9 +38,7 @@ import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 import javax.swing.event.EventListenerList;
 
-//import org.apache.tools.ant.filters.StringInputStream;
 import org.columba.api.gui.frame.IContainer;
-import org.columba.api.gui.frame.IDock;
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.api.gui.frame.event.FrameEvent;
 import org.columba.api.gui.frame.event.IContainerListener;
@@ -55,7 +53,6 @@ import org.columba.api.statusbar.IStatusBar;
 import org.columba.api.statusbar.IStatusBarExtension;
 import org.columba.core.command.TaskManager;
 import org.columba.core.config.View;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.gui.action.AbstractColumbaAction;
 import org.columba.core.gui.menu.ExtendableMenuBar;
 import org.columba.core.gui.menu.MenuXMLDecoder;
@@ -65,18 +62,18 @@ import org.columba.core.gui.toolbar.ExtendableToolBar;
 import org.columba.core.gui.toolbar.ToolBarXMLDecoder;
 import org.columba.core.gui.util.MenuThrobber;
 import org.columba.core.io.DiskIO;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.Extension;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.resourceloader.ImageLoader;
 import org.compiere.apps.AGlassPane;
 import org.compiere.model.MConfig;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 import org.flexdock.docking.DockingManager;
 import org.flexdock.docking.drag.effects.EffectsManager;
 import org.flexdock.docking.drag.preview.GhostPreview;
 import org.flexdock.perspective.PerspectiveManager;
-import org.xendra.printdocument.PrintDocumentManager;
-import org.xendra.swing.ToastMessage;
+import org.xendra.Constants;
 
 /**
  * @author fdietz
@@ -90,10 +87,9 @@ public class DefaultContainer extends JFrame implements IContainer,
 	protected static final int DEFAULT_HEIGHT = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().height * .66);
 	private static final int DEFAULT_X = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width * .16);
 	private static final int DEFAULT_Y = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().height * .16);
-	private static final Logger LOG = Logger.getLogger("org.columba.core.gui.frame");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.gui.frame");
 	private DefaultFrameController mediator;
-	//private ViewItem viewItem;
-	private View viewItem;
+	private View view;
 	protected ExtendableMenuBar menubar;
 	protected ExtendableToolBar toolbar;
 	protected StatusBar statusBar;
@@ -109,7 +105,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 		if (mediator == null)
 			throw new IllegalArgumentException("mediator == null");
 		setGlassPane(m_glassPane);
-		this.viewItem = mediator.getViewItem();
+		this.view = mediator.getViewConfig();
 		this.mediator = mediator;
 		defaultCloseOperation = true;
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -191,14 +187,13 @@ public class DefaultContainer extends JFrame implements IContainer,
 	/**
 	 * 
 	 */
-	//public DefaultContainer(ViewItem viewItem) {
-	public DefaultContainer(View viewItem) {
+	public DefaultContainer(View view) {
 		super();
-		this.viewItem = viewItem;
+		this.view = view;
 		defaultCloseOperation = true;
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		// create new default frame controller
-		mediator = new DefaultFrameController(viewItem);
+		mediator = new DefaultFrameController(view);
 		initComponents();
 		mediator.setContainer(this);
 		createMenuBar();
@@ -249,7 +244,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 		try {
 			//InputStream is = DiskIO
 			//		.getResourceStream("org/columba/core/action/menu.xml");			
-			MConfig config = MConfig.getbyIdentifier("core", "menu");				
+			MConfig config = MConfig.getbyIdentifier(Constants.CORE, "menu");				
 //			if (config.getContent().length() == 0)
 //			{
 //				String hstr = "org/columba/core/action/menu.xml";
@@ -263,6 +258,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 				setJMenuBar(menubar);
 			}
 		} catch (Exception e) {
+			LOG.warning(e.getMessage());
 			LOG.severe(e.getMessage());
 		}
 	}
@@ -279,13 +275,12 @@ public class DefaultContainer extends JFrame implements IContainer,
 	 * @see org.columba.api.gui.frame.IContainer#setFrameMediator(org.columba.api.gui.frame.IFrameMediator)
 	 */
 	public void setFrameMediator(final IFrameMediator m) {
-		LOG.fine("set framemediator to " + m.getClass());
+		LOG.warning("set framemediator to " + m.getClass());
 		// remove from old mediator's listener list
 		this.mediator.removeListener(this);
 		this.mediator = (DefaultFrameController) m;
 		m.setContainer(this);
-		// use new viewitem
-		viewItem = mediator.getViewItem();
+		view = mediator.getViewConfig();
 		switchedFrameMediator = false;
 		mediator.extendMenu(this);
 		mediator.extendToolBar(this);
@@ -321,8 +316,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 		this.mediator.removeListener(this);
 		this.mediator = (DefaultFrameController) m;
 		m.setContainer(this);
-		// use new viewitem
-		viewItem = mediator.getViewItem();
+		view = mediator.getViewConfig();
 		switchedFrameMediator = true;
 		try {
 			InputStream is = DiskIO.getResourceStream("org/columba/core/config/menu.xml");
@@ -373,13 +367,10 @@ public class DefaultContainer extends JFrame implements IContainer,
 	}
 
 	/**
-	 * @see org.columba.api.gui.frame.IContainer#getViewItem()
+	 * @see org.columba.api.gui.frame.IContainer#getView()
 	 */
-	//public ViewItem getViewItem() {
-	//	return viewItem;
-	//}
-	public View getViewItem() {
-		return viewItem;
+	public View getView() {
+		return view;
 	}
 	/**
 	 * Enable/Disable toolbar configuration
@@ -390,22 +381,8 @@ public class DefaultContainer extends JFrame implements IContainer,
 	 *            true/false
 	 */
 	public void enableToolBar(String id, boolean enable) {
-		//getViewItem().setBoolean("toolbars", id, enable);
-		getViewItem().getToolbars().set(id, enable);		
+		getView().getToolbars().set(id, enable);		
 		getToolBar().setVisible(enable);
-		// toolbarPane.removeAll();
-		//
-		// if (enable) {
-		// toolbarPane.add(getToolBar());
-		//
-		// }
-
-		// awt-event-thread
-		// javax.swing.SwingUtilities.invokeLater(new Runnable() {
-		// public void run() {
-		// validate();
-		// }
-		// });
 	}
 
 	/**
@@ -416,28 +393,25 @@ public class DefaultContainer extends JFrame implements IContainer,
 	 * @return true, if toolbar is enabled, false otherwise
 	 */
 	public boolean isToolBarEnabled(String id) {
-		//return getViewItem().getBooleanWithDefault("toolbars", id, true);
-		return getViewItem().getToolbars().get(id);
+		return getView().getToolbars().get(id);
 	}
 
 	/**
 	 * Load the window position, size and maximization state
 	 * 
 	 */
-	//public void loadPositions(ViewItem viewItem) {
-	public void loadPositions(View viewItem) {
+	public void loadPositions(View view) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		// *20030831, karlpeder* Also location is restored
-		//int x = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_X_INT, DEFAULT_X);
-		int x = viewItem.getWindow().getX();
-		//int y = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_Y_INT, DEFAULT_Y);
-		int y = viewItem.getWindow().getY();
-		//int w = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.WIDTH_INT, DEFAULT_WIDTH);
-		int w = viewItem.getWindow().getWidth();
-		//int h = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.HEIGHT_INT, DEFAULT_HEIGHT);
-		int h = viewItem.getWindow().getHeight();
-		//final boolean maximized = viewItem.getBooleanWithDefault(ViewItem.WINDOW, ViewItem.MAXIMIZED_BOOL, false);
-		final boolean maximized = viewItem.getWindow().getMaximized();
+		//int x = view.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_X_INT, DEFAULT_X);
+		int x = view.getWindow().getX();
+		//int y = view.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_Y_INT, DEFAULT_Y);
+		int y = view.getWindow().getY();
+		//int w = view.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.WIDTH_INT, DEFAULT_WIDTH);
+		int w = view.getWindow().getWidth();
+		//int h = view.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.HEIGHT_INT, DEFAULT_HEIGHT);
+		int h = view.getWindow().getHeight();
+		final boolean maximized = view.getWindow().getMaximized();
 		// if window is maximized -> ignore the window size properties
 		// otherwise, use window size property
 		// but ensure that the window is completly visible on the
@@ -475,18 +449,18 @@ public class DefaultContainer extends JFrame implements IContainer,
 		java.awt.Point loc = getLocation();
 		//ViewItem item = getViewItem();
 		boolean isMaximized = WindowMaximizer.isWindowMaximized(this);
-		//item.setBoolean(ViewItem.WINDOW, ViewItem.MAXIMIZED_BOOL, isMaximized);
-		getViewItem().getWindow().setMaximized(isMaximized);
+		//item.setBoolean(View.WINDOW, ViewItem.MAXIMIZED_BOOL, isMaximized);
+		getView().getWindow().setMaximized(isMaximized);
 		if (!isMaximized) {
 			// *20030831, karlpeder* Now also location is stored			
-			//item.setInteger(ViewItem.WINDOW, ViewItem.POSITION_X_INT, loc.x);
-			getViewItem().getWindow().setX(loc.x);
-			//item.setInteger(ViewItem.WINDOW, ViewItem.POSITION_Y_INT, loc.y);
-			getViewItem().getWindow().setY(loc.y);
-			//item.setInteger(ViewItem.WINDOW, ViewItem.WIDTH_INT, d.width);
-			getViewItem().getWindow().setWidth(d.width);
-			//item.setInteger(ViewItem.WINDOW, ViewItem.HEIGHT_INT, d.height);
-			getViewItem().getWindow().setHeight(d.height);
+			//item.setInteger(View.WINDOW, View.POSITION_X_INT, loc.x);
+			getView().getWindow().setX(loc.x);
+			//item.setInteger(View.WINDOW, View.POSITION_Y_INT, loc.y);
+			getView().getWindow().setY(loc.y);
+			//item.setInteger(View.WINDOW, View.WIDTH_INT, d.width);
+			getView().getWindow().setWidth(d.width);
+			//item.setInteger(View.WINDOW, View.HEIGHT_INT, d.height);
+			getView().getWindow().setHeight(d.height);
 		}
 		mediator.savePositions();
 	}
@@ -584,17 +558,15 @@ public class DefaultContainer extends JFrame implements IContainer,
 	/**
 	 * @see org.columba.api.gui.frame.Gui#setContentPane(org.columba.api.gui.frame.Gui.FrameView)
 	 */
-	public void setContentPane(JPanel view) {
+	public void setContentPane(JPanel panelview) {
 		LOG.finest("setting content-pane");
 		getContentPane().removeAll();
-		// remove old content pane
 		contentPane.removeAll();
-		// contentPane.remove(mediator.getContentPane());
 		setJMenuBar(menubar);	
 		// add animated icon to right-hand side corner of menubar
 		MenuThrobber.setThrobber(menubar);
 		// // add new componnet
-		contentPane.add(view, BorderLayout.CENTER);
+		contentPane.add(panelview, BorderLayout.CENTER);
 		getContentPane().add(toolBarPanel, BorderLayout.NORTH);
 		contentPane.add(statusBar, BorderLayout.SOUTH);
 		getContentPane().add(contentPane, BorderLayout.CENTER);
@@ -604,16 +576,11 @@ public class DefaultContainer extends JFrame implements IContainer,
 		if (!switchedFrameMediator) {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			// *20030831, karlpeder* Also location is restored
-			//int x = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_X_INT, DEFAULT_X);
-			int x = viewItem.getWindow().getX();
-			//int y = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.POSITION_Y_INT, DEFAULT_Y);
-			int y = viewItem.getWindow().getY();
-			//int w = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.WIDTH_INT, DEFAULT_WIDTH);
-			int w = viewItem.getWindow().getWidth();
-			//int h = viewItem.getIntegerWithDefault(ViewItem.WINDOW,	ViewItem.HEIGHT_INT, DEFAULT_HEIGHT);
-			int h = viewItem.getWindow().getHeight();
-			//final boolean maximized = viewItem.getBooleanWithDefault(ViewItem.WINDOW, ViewItem.MAXIMIZED_BOOL, false);
-			final boolean maximized = viewItem.getWindow().getMaximized();
+			int x = view.getWindow().getX();
+			int y = view.getWindow().getY();
+			int w = view.getWindow().getWidth();
+			int h = view.getWindow().getHeight();
+			final boolean maximized = view.getWindow().getMaximized();
 			// if window is maximized -> ignore the window size properties
 			// otherwise, use window size property
 			// but ensure that the window is completly visible on the
@@ -656,7 +623,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 			//     validateTree();
 			//}
 			validate();
-			view.repaint();
+			panelview.repaint();
 		}
 		switchedFrameMediator = false;
 	}
@@ -744,7 +711,7 @@ public class DefaultContainer extends JFrame implements IContainer,
 	 */
 	public void setTitle(String arg0) {
 		String title = windowname;
-		if (Logging.DEBUG) {
+		if (CLogMgt.DEBUG) {
 			title += " DEBUG MODE";
 		}
 		if (arg0.length() > 0) {

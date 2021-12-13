@@ -58,11 +58,12 @@ public static int Table_ID=MTable.getTable_ID("HR_Concept_Category");
 @XendraTrl(Identifier="7831378f-36d4-4451-af39-07286125b9db")
 public static String es_PE_TABLE_HR_Concept_Category_Name="Categ";
 
-@XendraTable(Name="Concept Category",Description="",Help="",TableName="HR_Concept_Category",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.humanresource",Identifier="7831378f-36d4-4451-af39-07286125b9db",
-Synchronized="2017-08-16 11:42:47.0")
+@XendraTable(Name="Concept Category",AD_Package_ID="95f9a029-eaee-0747-b1a5-58cfdd8f8ae5",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="HR_Concept_Category",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.humanresource",
+Identifier="7831378f-36d4-4451-af39-07286125b9db",Synchronized="2020-03-03 21:38:00.0")
 /** TableName=HR_Concept_Category */
 public static final String Table_Name="HR_Concept_Category";
 
@@ -131,7 +132,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4a0e1c6b-8776-443f-9f72-6698ecd2b608",
-Synchronized="2017-08-05 16:54:45.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set HR_Concept_Acct.
@@ -158,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dae3721f-e340-4092-85f2-ac0c4b745b5d",
-Synchronized="2017-08-05 16:54:46.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name HR_Concept_Acct */
 public static final String COLUMNNAME_HR_Concept_Acct = "HR_Concept_Acct";
 /** Set HR_Concept_Category_ID.
@@ -207,7 +208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="46aa9b8f-0ff7-4629-b276-68e769a2f741",
-Synchronized="2017-08-05 16:54:46.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -238,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="44021a16-1eb7-4f4f-87c5-1be9b9c3e97e",
-Synchronized="2017-08-05 16:54:46.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -278,7 +279,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bbb8017c-8c58-4697-b8b8-8d9fcbce7659",
-Synchronized="2017-08-05 16:54:46.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Search Key.
@@ -310,7 +311,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="568c0c75-3759-41bc-92c5-6c48a0f1a6bf",
-Synchronized="2017-08-05 16:54:46.0")
+Synchronized="2019-08-30 22:22:40.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

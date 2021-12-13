@@ -137,6 +137,7 @@ public abstract class SvrProcess implements ProcessCall
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			msg = e.getMessage();
 			if (msg == null)
 				msg = e.toString();

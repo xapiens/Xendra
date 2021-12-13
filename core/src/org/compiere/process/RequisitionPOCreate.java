@@ -473,6 +473,7 @@ public class RequisitionPOCreate extends SvrProcess
 		m_order = new MOrder(getCtx(), 0, get_TrxName());
 		m_order.setIsSOTrx(false);
 		m_order.setC_DocTypeTarget_ID();
+		m_order.setC_DocType_ID(m_order.getC_DocTypeTarget_ID());
 		m_order.setBPartner(m_bpartner);
 		//	default po document type
 		if (!p_ConsolidateDocument)

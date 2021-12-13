@@ -195,7 +195,7 @@ public class MPriceList extends X_M_PriceList
 		String sql = "SELECT * FROM M_PriceList_Version "
 			+ "WHERE M_PriceList_ID=?"
 			+ " AND TRUNC(ValidFrom)<=? AND IsActive='Y'"
-			+ "ORDER BY ValidFrom DESC";
+			+ " ORDER BY ValidFrom DESC";
 		PreparedStatement pstmt = null;
 		try
 		{

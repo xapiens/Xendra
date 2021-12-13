@@ -49,11 +49,11 @@ import javax.swing.UIManager;
 
 import org.columba.core.gui.base.ButtonWithMnemonic;
 import org.columba.core.io.DiskIO;
-import org.columba.core.logging.Logging;
 import org.columba.core.resourceloader.GlobalResourceLoader;
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
 import org.columba.core.versioninfo.VersionInfo;
+import org.compiere.util.CLogMgt;
 
 /**
  * This dialog shows information about Columba.
@@ -99,8 +99,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		authorPanel.add(imageLabel, c);
 
-		JLabel versionLabel = new JLabel(GlobalResourceLoader.getString(
-				RESOURCE_BUNDLE_PATH, "about", "version"));
+		JLabel versionLabel = new JLabel(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "version"));
 
 		if (font != null) {
 			font = font.deriveFont(Font.BOLD);
@@ -129,8 +128,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		authorPanel.add(version, c);
 
-		JLabel buildDateLabel = new JLabel(GlobalResourceLoader.getString(
-				RESOURCE_BUNDLE_PATH, "about", "build_date"));
+		JLabel buildDateLabel = new JLabel(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "build_date"));
 
 		if (font != null) {
 			font = font.deriveFont(Font.BOLD);
@@ -158,8 +156,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		authorPanel.add(buildDate, c);
 
-		JLabel authorLabel = new JLabel(GlobalResourceLoader.getString(
-				RESOURCE_BUNDLE_PATH, "about", "authors"));
+		JLabel authorLabel = new JLabel(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "authors"));
 
 		if (font != null) {
 			font = font.deriveFont(Font.BOLD);
@@ -179,19 +176,12 @@ public class AboutDialog extends JDialog implements ActionListener {
 		box = Box.createRigidArea(new Dimension(5, 15));
 		authorPanel.add(box, c);
 
-		AddressLabel a1 = new AddressLabel(
-				"Frederik Dietz <fdietz@users.sourceforge.net>");
+		AddressLabel a1 = new AddressLabel("xapiens <xapiens@users.sourceforge.net>");
 		c.gridx = 2;
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		authorPanel.add(a1, c);
 
-		AddressLabel a2 = new AddressLabel(
-				"Timo Stich <tstich@users.sourceforge.net>");
-		c.gridy = 5;
-		authorPanel.add(a2, c);
-
-		JLabel websiteLabel = new JLabel(GlobalResourceLoader.getString(
-				RESOURCE_BUNDLE_PATH, "about", "website"));
+		JLabel websiteLabel = new JLabel(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "website"));
 
 		if (font != null) {
 			websiteLabel.setFont(font);
@@ -205,7 +195,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 		URLLabel websiteUrl = null;
 
 		try {
-			websiteUrl = new URLLabel(new URL("http://columbamail.org"));
+			websiteUrl = new URLLabel(new URL("http://xendra.sourceforge.io"));
 		} catch (MalformedURLException mue) {
 		}
 		// does not occur
@@ -214,15 +204,12 @@ public class AboutDialog extends JDialog implements ActionListener {
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		authorPanel.add(websiteUrl, c);
 
-		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,
-				"about", "authorsPane"), authorPanel);
+		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "authorsPane"), authorPanel);
 
 		JPanel contributorPanel = new JPanel(new BorderLayout(0, 5));
-		contributorPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 11,
-				11));
+		contributorPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 11, 11));
 
-		JLabel contributorLabel = new JLabel(GlobalResourceLoader.getString(
-				RESOURCE_BUNDLE_PATH, "about", "contributorLabel"));
+		JLabel contributorLabel = new JLabel(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH, "about", "contributorLabel"));
 		contributorPanel.add(contributorLabel, BorderLayout.NORTH);
 
 		InfoViewTextPane textPane = new InfoViewTextPane();
@@ -232,8 +219,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 			textPane.setText(ioe.getLocalizedMessage());
 		}
 		contributorPanel.add(new JScrollPane(textPane));
-		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,
-				"about", "contributorPane"), contributorPanel);
+		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,"about", "contributorPane"), contributorPanel);
 
 		JPanel licensePanel = new JPanel(new BorderLayout());
 		licensePanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 11, 11));
@@ -244,8 +230,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 			textPane.setText(ioe.getLocalizedMessage());
 		}
 		licensePanel.add(new JScrollPane(textPane));
-		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,
-				"about", "license"), licensePanel);
+		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,"about", "license"), licensePanel);
 
 		JPanel ackPanel = new JPanel(new BorderLayout());
 		ackPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 11, 11));
@@ -259,10 +244,9 @@ public class AboutDialog extends JDialog implements ActionListener {
 			textPane.setText(ioe.getLocalizedMessage());
 		}
 		ackPanel.add(new JScrollPane(textPane));
-		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,
-				"about", "ackPane"), ackPanel);
+		tabbedPane.addTab(GlobalResourceLoader.getString(RESOURCE_BUNDLE_PATH,"about", "ackPane"), ackPanel);
 
-		if (Logging.DEBUG) {
+		if (CLogMgt.DEBUG) {
 			tabbedPane.addTab("Memory", new MemoryPanel());
 		}
 

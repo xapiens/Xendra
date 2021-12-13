@@ -1,9 +1,3 @@
-/*
- * Created on 06.08.2003
- *
- * To change the template for this generated file go to
- * Window>Preferences>Java>Code Generation>Code and Comments
- */
 package org.columba.core.gui.plugin;
 
 import javax.swing.tree.DefaultTreeModel;
@@ -47,9 +41,18 @@ public class PluginTreeTableModel extends AbstractTreeTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        PluginNode node = (PluginNode) tree.getPathForRow(row)
-                                           .getLastPathComponent();
-
+    	TreePath path = tree.getPathForRow(row);
+    	Object node = null;
+    	if (path != null) {
+    		node = path.getLastPathComponent();
+    	}
+//    	Object node = tree.getPathForRow(row)
+//    					  .getLastPathComponent();
+//    	if (node instanceof PluginNode) {
+//    		
+//    	}
+//        PluginNode node = (PluginNode) tree.getPathForRow(row)
+//                                           .getLastPathComponent();
         return node;
     }
 

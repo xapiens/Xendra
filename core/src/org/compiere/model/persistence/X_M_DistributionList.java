@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("M_DistributionList");
 public static String es_PE_TAB_DistributionList_Description="Las listas de distribución permiten para distribuir productos a una lista seleccionada de socios.";
 
 @XendraTrl(Identifier="61b8bec4-f938-2127-9632-aca1368da9c0")
-public static String es_PE_TAB_DistributionList_Name="Lista Distribución";
+public static String es_PE_TAB_DistributionList_Help="La lista de distribución contiene socios de negocio y una cantidad ó un cociente de la distribución para crear órdenes";
 
 @XendraTrl(Identifier="61b8bec4-f938-2127-9632-aca1368da9c0")
-public static String es_PE_TAB_DistributionList_Help="La lista de distribución contiene socios de negocio y una cantidad ó un cociente de la distribución para crear órdenes";
+public static String es_PE_TAB_DistributionList_Name="Lista Distribución";
 
 @XendraTab(Name="Distribution List",
 Description="Distribution Lists allow to distribute products to a selected list of partners",
@@ -78,13 +78,14 @@ public static final String TABNAME_DistributionList="61b8bec4-f938-2127-9632-aca
 @XendraTrl(Identifier="0e408cd3-4810-13af-9d9f-49aa24eb78e8")
 public static String es_PE_TABLE_M_DistributionList_Name="Lista de Distribución";
 
-@XendraTable(Name="Distribution List",
+@XendraTable(Name="Distribution List",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Distribution Lists allow to distribute products to a selected list of partners",
 Help="",TableName="M_DistributionList",AccessLevel="3",
 AD_Window_ID="03fdd9ab-3028-a4cb-326c-022a2d5cadfe",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.material",Identifier="0e408cd3-4810-13af-9d9f-49aa24eb78e8",
-Synchronized="2017-08-16 11:43:10.0")
+Synchronized="2020-03-03 21:38:21.0")
 /** TableName=M_DistributionList */
 public static final String Table_Name="M_DistributionList";
 
@@ -145,13 +146,13 @@ return value;
 }
 
 @XendraTrl(Identifier="989ea697-dc25-b35a-3e9e-c1545a78eeb0")
+public static String es_PE_FIELD_DistributionList_Description_Name="Observación";
+
+@XendraTrl(Identifier="989ea697-dc25-b35a-3e9e-c1545a78eeb0")
 public static String es_PE_FIELD_DistributionList_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="989ea697-dc25-b35a-3e9e-c1545a78eeb0")
 public static String es_PE_FIELD_DistributionList_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="989ea697-dc25-b35a-3e9e-c1545a78eeb0")
-public static String es_PE_FIELD_DistributionList_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0dbd10ed-8ec2-5e35-650e-c2890bc710f9",
-Synchronized="2017-08-05 16:55:05.0")
+Synchronized="2019-08-30 22:23:03.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -195,13 +196,13 @@ return value;
 }
 
 @XendraTrl(Identifier="55bada8d-423f-0362-acd1-788bc0919398")
+public static String es_PE_FIELD_DistributionList_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="55bada8d-423f-0362-acd1-788bc0919398")
 public static String es_PE_FIELD_DistributionList_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="55bada8d-423f-0362-acd1-788bc0919398")
 public static String es_PE_FIELD_DistributionList_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="55bada8d-423f-0362-acd1-788bc0919398")
-public static String es_PE_FIELD_DistributionList_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -219,7 +220,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a189a7d4-6524-20d5-4230-a958144b7422",
-Synchronized="2017-08-05 16:55:05.0")
+Synchronized="2019-08-30 22:23:03.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -251,7 +252,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="569e43f3-4982-44f9-ae39-026b3d2d744c",
-Synchronized="2017-08-05 16:55:05.0")
+Synchronized="2019-08-30 22:23:03.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Distribution List.
@@ -271,13 +272,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="214d66d9-f09f-031c-2543-e0a772b6b20a")
+public static String es_PE_FIELD_DistributionList_DistributionList_Name="Lista de Distribución";
+
+@XendraTrl(Identifier="214d66d9-f09f-031c-2543-e0a772b6b20a")
 public static String es_PE_FIELD_DistributionList_DistributionList_Description="Las listas de distribución permiten para distribuir productos a una lista seleccionada de socios.";
 
 @XendraTrl(Identifier="214d66d9-f09f-031c-2543-e0a772b6b20a")
 public static String es_PE_FIELD_DistributionList_DistributionList_Help="La lista de distribución contiene socios de negocio y una cantidad ó un cociente de la distribución para crear órdenes.";
-
-@XendraTrl(Identifier="214d66d9-f09f-031c-2543-e0a772b6b20a")
-public static String es_PE_FIELD_DistributionList_DistributionList_Name="Lista de Distribución";
 
 @XendraField(AD_Column_ID="M_DistributionList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -316,13 +317,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="107ecff7-fff5-a7da-8c28-63acf2d1a4ce")
+public static String es_PE_FIELD_DistributionList_Name_Name="Nombre";
+
+@XendraTrl(Identifier="107ecff7-fff5-a7da-8c28-63acf2d1a4ce")
 public static String es_PE_FIELD_DistributionList_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="107ecff7-fff5-a7da-8c28-63acf2d1a4ce")
 public static String es_PE_FIELD_DistributionList_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="107ecff7-fff5-a7da-8c28-63acf2d1a4ce")
-public static String es_PE_FIELD_DistributionList_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -340,7 +341,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19f26025-d662-2795-64bc-3cf04d7090dd",
-Synchronized="2017-08-05 16:55:05.0")
+Synchronized="2019-08-30 22:23:03.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -363,13 +364,13 @@ return false;
 }
 
 @XendraTrl(Identifier="37b4b3ca-708b-1854-cd20-769129b44a55")
+public static String es_PE_FIELD_DistributionList_ProcessNow_Name="Crea Ordenes";
+
+@XendraTrl(Identifier="37b4b3ca-708b-1854-cd20-769129b44a55")
 public static String es_PE_FIELD_DistributionList_ProcessNow_Description="Cree las órdenes basadas en la línea de artículos de la lista de distribución";
 
 @XendraTrl(Identifier="37b4b3ca-708b-1854-cd20-769129b44a55")
 public static String es_PE_FIELD_DistributionList_ProcessNow_Help="Observe al hacer el redondeo, la cantidad total de orden(es) es probable ser más alto a la cantidad incorporada.";
-
-@XendraTrl(Identifier="37b4b3ca-708b-1854-cd20-769129b44a55")
-public static String es_PE_FIELD_DistributionList_ProcessNow_Name="Crea Ordenes";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -387,7 +388,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="46e83f6f-4a63-888d-70e4-f0ee08ad5c98",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2465f4ed-16d8-0bb9-7e65-fbc9cc0667b8",Synchronized="2017-08-05 16:55:05.0")
+Identifier="2465f4ed-16d8-0bb9-7e65-fbc9cc0667b8",Synchronized="2019-08-30 22:23:03.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Total Ratio.
@@ -406,10 +407,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="7438769b-ed27-f185-fc06-ff6d9cac6ca3")
-public static String es_PE_FIELD_DistributionList_TotalRatio_Help="El total de peso relativo de una distribución. Si el total de todos los cocientes es 100, es igual que por ciento.";
+public static String es_PE_FIELD_DistributionList_TotalRatio_Name="Cociente total";
 
 @XendraTrl(Identifier="7438769b-ed27-f185-fc06-ff6d9cac6ca3")
-public static String es_PE_FIELD_DistributionList_TotalRatio_Name="Cociente total";
+public static String es_PE_FIELD_DistributionList_TotalRatio_Help="El total de peso relativo de una distribución. Si el total de todos los cocientes es 100, es igual que por ciento.";
 
 @XendraField(AD_Column_ID="RatioTotal",IsCentrallyMaintained=true,
 AD_Tab_ID="61b8bec4-f938-2127-9632-aca1368da9c0",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -427,7 +428,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b2e880ca-6ed0-be63-7d62-7354cd52b7a3",
-Synchronized="2017-08-05 16:55:05.0")
+Synchronized="2019-08-30 22:23:03.0")
 /** Column name RatioTotal */
 public static final String COLUMNNAME_RatioTotal = "RatioTotal";
 }

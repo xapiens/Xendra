@@ -53,6 +53,8 @@ import org.xendra.plaf.XendraPLAF;
 import org.compiere.apps.ADialog;
 import org.compiere.apps.APanel;
 import org.compiere.apps.AppsAction;
+import org.compiere.apps.GridPanel;
+import org.compiere.apps.IFrontPanel;
 import org.compiere.grid.ed.VCellEditor;
 import org.compiere.grid.ed.VCellRenderer;
 import org.compiere.grid.ed.VEditor;
@@ -180,7 +182,7 @@ public class GridController extends CPanel
 	 */
 	public String toString()
 	{
-		return "GridController for " + m_mTab;
+		return "GridController for " + getMTab();
 	}   //  toString
 
 	/**	Logger			*/
@@ -261,24 +263,24 @@ public class GridController extends CPanel
 	 */
 	public void dispose()
 	{
-		log.config( "(" + m_mTab.toString() + ")");
+		log.config( "(" + getMTab().toString() + ")");
 		//  clear info
 		stopEditor(false);
-		if (m_mTab.isLoadComplete())
+		if (getMTab().isLoadComplete())
 		{
-			if (m_mTab.needSave(true, false))
-				m_mTab.dataIgnore();
+			if (getMTab().needSave(true, false))
+				getMTab().dataIgnore();
 		}
 		//FR [ 1757088 ] vIncludedGC = null;
 
 		//  Listeners
-		if (m_mTab.isLoadComplete())
+		if (getMTab().isLoadComplete())
 		{
-			m_mTab.getTableModel().removeDataStatusListener(this);
-			m_mTab.getTableModel().removeVetoableChangeListener(this);
+			getMTab().getTableModel().removeDataStatusListener(this);
+			getMTab().getTableModel().removeVetoableChangeListener(this);
 		}
 		vTable.getSelectionModel().removeListSelectionListener(this);
-		m_mTab.removePropertyChangeListener(vTable);
+		getMTab().removePropertyChangeListener(vTable);
 
 		//  editors
 		Component[] comp = vPanel.getComponentsRecursive();
@@ -289,7 +291,7 @@ public class GridController extends CPanel
 				VEditor vEditor = (VEditor)comp[i];
 				vEditor.removeVetoableChangeListener(this);
 				String columnName = comp[i].getName();
-				GridField mField = m_mTab.getField(columnName);
+				GridField mField = getMTab().getField(columnName);
 				if (mField != null)
 					mField.removePropertyChangeListener(vEditor);
 				vEditor.dispose();
@@ -306,7 +308,8 @@ public class GridController extends CPanel
 		//srPane = null;
 		splitPane.removeAll();
 		splitPane = null;
-		m_mTab = null;
+		//m_mTab = null;
+		setTab(null);
 		m_tree = null;
 		this.removeAll();
 	}   //  dispose
@@ -324,14 +327,14 @@ public class GridController extends CPanel
 	/** Tree Panel (optional)       */
 	private VTreePanel  m_tree;
 
-	private APanel m_aPanel;
+	//private APanel m_aPanel;
+	private GridPanel m_aPanel;
 
 	private boolean init;
 
 	private ArrayList<GridSynchronizer> synchronizerList = new ArrayList<GridSynchronizer>();
-
-	public boolean initGrid (GridTab mTab, boolean onlyMultiRow,
-			int WindowNo, APanel aPanel, GridWindow mWindow)
+	
+	public boolean initGrid (GridTab mTab, boolean onlyMultiRow, int WindowNo, GridPanel aPanel, GridWindow mWindow)
 	{
 		return initGrid(mTab, onlyMultiRow, WindowNo, aPanel, mWindow, false);
 	}
@@ -351,11 +354,10 @@ public class GridController extends CPanel
 	 * 	@param mWindow parent Window Model
 	 *  @return true if initialized
 	 */
-	public boolean initGrid (GridTab mTab, boolean onlyMultiRow,
-		int WindowNo, APanel aPanel, GridWindow mWindow, boolean lazy)
+	public boolean initGrid (GridTab mTab, boolean onlyMultiRow, int WindowNo, GridPanel aPanel, GridWindow mWindow, boolean lazy)
 	{
 		log.config( "(" + mTab.toString() + ")");
-		m_mTab = mTab;
+		setTab(mTab);
 		m_WindowNo = WindowNo;
 		m_onlyMultiRow = onlyMultiRow;
 		m_aPanel = aPanel;
@@ -370,14 +372,14 @@ public class GridController extends CPanel
 		vPane.getViewport().add(xPanel, null);
 		xPanel.add(vPanel, BorderLayout.CENTER);
 
-		setTabLevel(m_mTab.getTabLevel());
+		setTabLevel(getMTab().getTabLevel());
 
 		if (!lazy)
 			init();
 		else
 		{
 			//Load tab meta data, needed for includeTab to work
-			m_mTab.initTab(false);
+			getMTab().initTab(false);
 		}
 
 
@@ -388,10 +390,10 @@ public class GridController extends CPanel
 	private void init()
 	{
 		//  Set up Multi Row Table
-		vTable.setModel(m_mTab.getTableModel());
+		vTable.setModel(getMTab().getTableModel());
 
 		//  Update Table Info -------------------------------------------------
-		int size = setupVTable (m_aPanel, m_mTab, vTable);
+		int size = setupVTable (m_aPanel, getMTab(), vTable);
 
 		//  Set Color on Tab Level
 		//  this.setBackgroundColor (mTab.getColor());
@@ -402,7 +404,7 @@ public class GridController extends CPanel
 			//	Set Softcoded Mnemonic &x
 			for (int i = 0; i < size; i++)
 			{
-				GridField mField = m_mTab.getField(i);
+				GridField mField = getMTab().getField(i);
 				if (mField.isDisplayed())
 					vPanel.setMnemonic(mField);
 			}   //  for all fields
@@ -410,10 +412,10 @@ public class GridController extends CPanel
 			//	Add Fields
 			for (int i = 0; i < size; i++)
 			{
-				GridField mField = m_mTab.getField(i);
+				GridField mField = getMTab().getField(i);
 				if (mField.isDisplayed())
 				{
-					VEditor vEditor = VEditorFactory.getEditor(m_mTab, mField, false);
+					VEditor vEditor = VEditorFactory.getEditor(getMTab(), mField, false);
 					if (vEditor == null)
 					{
 						log.warning("Editor not created for " + mField.getColumnName());
@@ -444,12 +446,12 @@ public class GridController extends CPanel
 
 		//  Tree Graphics Layout
 		int AD_Tree_ID = 0;
-		if (m_mTab.isTreeTab())
-			AD_Tree_ID = MTree.getDefaultAD_Tree_ID (Env.getAD_Client_ID(Env.getCtx()), m_mTab.getKeyColumnName());
-		if (m_mTab.isTreeTab() && AD_Tree_ID != 0)
+		if (getMTab().isTreeTab())
+			AD_Tree_ID = MTree.getDefaultAD_Tree_ID (Env.getAD_Client_ID(Env.getCtx()), getMTab().getKeyColumnName());
+		if (getMTab().isTreeTab() && AD_Tree_ID != 0)
 		{
 			m_tree = new VTreePanel(m_WindowNo, false, true);
-			if (m_mTab.getTabNo() == 0)	//	initialize other tabs later
+			if (getMTab().getTabNo() == 0)	//	initialize other tabs later
 				m_tree.initTree(AD_Tree_ID);
 			m_tree.addPropertyChangeListener(VTreePanel.NODE_SELECTION, this);
 			graphPanel.add(m_tree, BorderLayout.CENTER);
@@ -464,19 +466,19 @@ public class GridController extends CPanel
 		}
 
 		//  Receive DataStatusChanged info from MTab
-		m_mTab.addDataStatusListener(this);
+		getMTab().addDataStatusListener(this);
 		//  Receive vetoableChange info from MTable when saving
-		m_mTab.getTableModel().addVetoableChangeListener(this);
+		getMTab().getTableModel().addVetoableChangeListener(this);
 		//	Selection Listener -> valueChanged
 		vTable.getSelectionModel().addListSelectionListener(this);
 		//  Navigation (RowChanged)
-		m_mTab.addPropertyChangeListener(vTable);
+		getMTab().addPropertyChangeListener(vTable);
 
 		//  Update UI
 		vTable.autoSize(true);
 
 				//  Set initial presentation
-		if (m_onlyMultiRow || !m_mTab.isSingleRow())
+		if (m_onlyMultiRow || !getMTab().isSingleRow())
 			switchMultiRow();
 		else
 			switchSingleRow();
@@ -532,7 +534,7 @@ public class GridController extends CPanel
 	 */
 	public String getTitle ()
 	{
-		return m_mTab.getName();
+		return getMTab().getName();
 	}	//	getTitle
 
 	/**
@@ -542,7 +544,8 @@ public class GridController extends CPanel
 	 * 	@param table JTable
 	 * 	@return size
 	 */
-	private int setupVTable (APanel aPanel, GridTab mTab, VTable table)
+	//private int setupVTable (APanel aPanel, GridTab mTab, VTable table)
+	private int setupVTable (GridPanel aPanel, GridTab mTab, VTable table)
 	{
 		if (!mTab.isDisplayed())
 			return 0;
@@ -633,9 +636,9 @@ public class GridController extends CPanel
 		if (!init) init();
 
 		//	Tree to be initiated on second/.. tab
-		if (m_mTab.isTreeTab() && m_mTab.getTabNo() != 0)
+		if (getMTab().isTreeTab() && getMTab().getTabNo() != 0)
 		{
-			String keyColumnName = m_mTab.getKeyColumnName();
+			String keyColumnName = getMTab().getKeyColumnName();
 			String treeName = "AD_Tree_ID";
 			if (keyColumnName.startsWith("CM"))
 			{
@@ -652,7 +655,7 @@ public class GridController extends CPanel
 			log.config(keyColumnName + " -> " + treeName + " = " + AD_Tree_ID);
 			if (AD_Tree_ID == 0)
 				AD_Tree_ID = MTree.getDefaultAD_Tree_ID (
-					Env.getAD_Client_ID(Env.getCtx()), m_mTab.getKeyColumnName());
+					Env.getAD_Client_ID(Env.getCtx()), getMTab().getKeyColumnName());
 			if (m_tree != null)
 				m_tree.initTree (AD_Tree_ID);
 		}
@@ -709,7 +712,7 @@ public class GridController extends CPanel
 	public void query (boolean onlyCurrentRows, int onlyCurrentDays, int maxRows)
 	{
 		//  start loading while building screen
-		m_mTab.query(onlyCurrentRows, onlyCurrentDays, maxRows);
+		getMTab().query(onlyCurrentRows, onlyCurrentDays, maxRows);
 		//  Update UI
 		if (!isSingleRow())
 			vTable.autoSize(true);
@@ -774,7 +777,7 @@ public class GridController extends CPanel
 	 */
 	public synchronized void removeDataStatusListener(DataStatusListener l)
 	{
-		m_mTab.removeDataStatusListener(l);
+		getMTab().removeDataStatusListener(l);
 	}   //  removeDataStatusListener
 
 	/**
@@ -783,7 +786,7 @@ public class GridController extends CPanel
 	 */
 	public synchronized void addDataStatusListener(DataStatusListener l)
 	{
-		m_mTab.addDataStatusListener(l);
+		getMTab().addDataStatusListener(l);
 	}
 
 	/**
@@ -800,14 +803,16 @@ public class GridController extends CPanel
 	//	if (e.getChangedColumn() == 0)
 	//		return;
 		int col = e.getChangedColumn();
-		log.config("(" + m_mTab + ") Col=" + col + ": " + e.toString());
+		log.config("(" + getMTab() + ") Col=" + col + ": " + e.toString());
 
-		//  Process Callout
-		GridField mField = m_mTab.getField(col);
+		//  Process Callout		
+		GridField mField = getMTab().getField(col);
 		if (mField != null
-			&& (mField.getCallout().length() > 0 || m_mTab.hasDependants(mField.getColumnName())))
+			&& (mField.getCallout().length() > 0 ||
+				mField.getAgenda().length() > 0 	
+			|| getMTab().hasDependants(mField.getColumnName())))
 		{
-			String msg = m_mTab.processFieldChange(mField);     //  Dependencies & Callout
+			String msg = getMTab().processFieldChange(mField);     //  Dependencies & Callout
 			if (msg.length() > 0)
 				ADialog.error(m_WindowNo, this, msg);
 		}
@@ -823,13 +828,13 @@ public class GridController extends CPanel
 	public void valueChanged(ListSelectionEvent e)
 	{
 		//  no rows
-		if (m_mTab.getRowCount() == 0)
+		if (getMTab().getRowCount() == 0)
 			return;
 
 	//	vTable.stopEditor(graphPanel);
 		int rowTable = vTable.getSelectedRow();
-		int rowCurrent = m_mTab.getCurrentRow();
-		log.config("(" + m_mTab.toString() + ") Row in Table=" + rowTable + ", in Model=" + rowCurrent);
+		int rowCurrent = getMTab().getCurrentRow();
+		log.config("(" + getMTab().toString() + ") Row in Table=" + rowTable + ", in Model=" + rowCurrent);
 		/* BT [ 1972495 ] Multirow Automatic New Record loses context
 		// FR [ 1757088 ]
 		if(rowCurrent + 1 == vTable.getRowCount() && !isSingleRow() && Env.isAutoNew(Env.getCtx()) && m_mTab.getRecord_ID() != -1)
@@ -853,7 +858,7 @@ public class GridController extends CPanel
 		{
 			if (rowTable != rowCurrent) {
 				//make sure table selection is consistent with model
-				int t = m_mTab.navigate(rowTable);
+				int t = getMTab().navigate(rowTable);
 				if (t != rowTable) {
 					rowTable = t;
 					vTable.setRowSelectionInterval(rowTable, rowTable);
@@ -864,7 +869,7 @@ public class GridController extends CPanel
 
 		//	TreeNavigation - Synchronize 	-- select node in tree
 		if (m_tree != null)
-			m_tree.setSelectedNode (m_mTab.getRecord_ID());	//	ignores new (-1)
+			m_tree.setSelectedNode (getMTab().getRecord_ID());	//	ignores new (-1)
 
 	//	log.config( "GridController.valueChanged (" + m_mTab.toString() + ") - fini",
 	//		"Row in Table=" + rowTable + ", in Model=" + rowCurrent);
@@ -896,11 +901,11 @@ public class GridController extends CPanel
 			//return;
 
 		//  Search all rows for mode id
-		int size = m_mTab.getRowCount();
+		int size = getMTab().getRowCount();
 		int row = -1;
 		for (int i = 0; i < size; i++)
 		{
-			if (m_mTab.getKeyID(i) == nodeID)
+			if (getMTab().getKeyID(i) == nodeID)
 			{
 				row = i;
 				break;
@@ -914,7 +919,7 @@ public class GridController extends CPanel
 		}
 
 		//  Navigate to node row
-		m_mTab.navigate(row);
+		getMTab().navigate(row);
 	}   //  propertyChange
 
 	/**
@@ -951,15 +956,15 @@ public class GridController extends CPanel
 		//	Don't update if multi-row
 		if (!isSingleRow() || m_onlyMultiRow)
 			return;
-		if (!m_mTab.isOpen())
+		if (!getMTab().isOpen())
 			return;
 		//  Selective
 		if (col > 0)
 		{
-			GridField changedField = m_mTab.getField(col);
+			GridField changedField = getMTab().getField(col);
 			String columnName = changedField.getColumnName();
-			ArrayList<GridField> dependants = m_mTab.getDependantFields(columnName);
-			log.config("(" + m_mTab.toString() + ") "
+			ArrayList<GridField> dependants = getMTab().getDependantFields(columnName);
+			log.config("(" + getMTab().toString() + ") "
 				+ columnName + " - Dependents=" + dependants.size());
 			//	No Dependents and no Callout - Set just Background
 			if (dependants.size() == 0 && changedField.getCallout().length() > 0)
@@ -984,8 +989,8 @@ public class GridController extends CPanel
 
 
 		//  complete single row re-display
-		boolean noData = m_mTab.getRowCount() == 0;
-		log.config(m_mTab.toString() + " - Rows=" + m_mTab.getRowCount());
+		boolean noData = getMTab().getRowCount() == 0;
+		log.config(getMTab().toString() + " - Rows=" + getMTab().getRowCount());
 		//  All Components in vPanel (Single Row)
 
 		Set<String> hiddens = new HashSet<String>();
@@ -996,7 +1001,7 @@ public class GridController extends CPanel
 			String columnName = comp.getName();
 			if (columnName != null && columnName.length() > 0)
 			{
-				GridField mField = m_mTab.getField(columnName);
+				GridField mField = getMTab().getField(columnName);
 				if (mField != null)
 				{
 					if (mField.isDisplayed(true))		//  check context
@@ -1063,7 +1068,7 @@ public class GridController extends CPanel
 							String columnName = childs[j].getName();
 							if (columnName != null && columnName.length() > 0)
 							{
-								GridField mField = m_mTab.getField(columnName);
+								GridField mField = getMTab().getField(columnName);
 								if (mField != null)
 								{
 									hasVisible = true;
@@ -1080,7 +1085,7 @@ public class GridController extends CPanel
 
 		//
 
-		log.config(m_mTab.toString() + " - fini - "
+		log.config(getMTab().toString() + " - fini - "
 				+ (col <= 0 ? "complete" : "seletive"));
 	}   //  dynamicDisplay
 
@@ -1094,11 +1099,11 @@ public class GridController extends CPanel
 	{
 		if (m_tree == null || keyID <= 0)
 			return;
-		String name = (String)m_mTab.getValue("Name");
-		String description = (String)m_mTab.getValue("Description");
-		Boolean IsSummary = (Boolean)m_mTab.getValue("IsSummary");
+		String name = (String)getMTab().getValue("Name");
+		String description = (String)getMTab().getValue("Description");
+		Boolean IsSummary = (Boolean)getMTab().getValue("IsSummary");
 		boolean summary = IsSummary != null && IsSummary.booleanValue();
-		String imageIndicator = (String)m_mTab.getValue("Action");  //  Menu - Action
+		String imageIndicator = (String)getMTab().getValue("Action");  //  Menu - Action
 		//
 		m_tree.nodeChanged(save, keyID, name, description,
 			summary, imageIndicator);
@@ -1127,29 +1132,29 @@ public class GridController extends CPanel
 			return ;
 		}
 
-		int oldRow = m_mTab.getCurrentRow();
-		GridField lineField = m_mTab.getField("Line");
+		int oldRow = getMTab().getCurrentRow();
+		GridField lineField = getMTab().getField("Line");
 
 		for (int i = 0; i < values.length; i++)
 		{
-			if (!m_mTab.dataNew(true))
+			if (!getMTab().dataNew(true))
 			{
 				throw new IllegalStateException("Could not clone tab");
 			}
 
-			m_mTab.setValue(columnName, values[i]);
+			getMTab().setValue(columnName, values[i]);
 
 			if (lineField != null)
 			{
-				m_mTab.setValue(lineField, 0);
+				getMTab().setValue(lineField, 0);
 			}
 
-			if (!m_mTab.dataSave(false))
+			if (!getMTab().dataSave(false))
 			{
 				throw new IllegalStateException("Could not update tab");
 			}
 
-			m_mTab.setCurrentRow(oldRow);
+			getMTab().setCurrentRow(oldRow);
 		}
 	}
 
@@ -1165,24 +1170,24 @@ public class GridController extends CPanel
 	 */
 	public void vetoableChange(PropertyChangeEvent e) throws PropertyVetoException
 	{
-		if (m_mTab.isProcessed() || !m_mTab.isActive())		//	only active records
+		if (getMTab().isProcessed() || !getMTab().isActive())		//	only active records
 		{
 			Object source = e.getSource();
 			if (source instanceof VEditor)
 			{
 				if (!((VEditor)source).isReadWrite())
 				{
-					log.config("(" + m_mTab.toString() + ") " + e.getPropertyName());
+					log.config("(" + getMTab().toString() + ") " + e.getPropertyName());
 					return;
 				}
 			}
 			else
 			{
-				log.config("(" + m_mTab.toString() + ") " + e.getPropertyName());
+				log.config("(" + getMTab().toString() + ") " + e.getPropertyName());
 				return;
 			}
 		}	//	processed
-		log.config("(" + m_mTab.toString() + ") "
+		log.config("(" + getMTab().toString() + ") "
 			+ e.getPropertyName() + "=" + e.getNewValue() + " (" + e.getOldValue() + ") "
 			+ (e.getOldValue() == null ? "" : e.getOldValue().getClass().getName()));
 
@@ -1197,9 +1202,9 @@ public class GridController extends CPanel
 				m_vetoActive = false;
 				return;
 			}
-			if (!Env.isAutoCommit(Env.getCtx(), m_WindowNo) || m_mTab.getCommitWarning().length() > 0)
+			if (!Env.isAutoCommit(Env.getCtx(), m_WindowNo) || getMTab().getCommitWarning().length() > 0)
 			{
-				if (!ADialog.ask(m_WindowNo, this, "SaveChanges?", m_mTab.getCommitWarning()))
+				if (!ADialog.ask(m_WindowNo, this, "SaveChanges?", getMTab().getCommitWarning()))
 				{
 					m_vetoActive = true;
 					throw new PropertyVetoException ("UserDeniedSave", e);
@@ -1210,8 +1215,8 @@ public class GridController extends CPanel
 
 
 		//  Get Row/Col Info
-		GridTable mTable = m_mTab.getTableModel();
-		int row = m_mTab.getCurrentRow();
+		GridTable mTable = getMTab().getTableModel();
+		int row = getMTab().getCurrentRow();
 		int col = mTable.findColumn(e.getPropertyName());
 		//
 		if (e.getNewValue() == null && e.getOldValue() != null
@@ -1255,21 +1260,21 @@ public class GridController extends CPanel
 			//	Force Callout
 			if (e.getPropertyName().equals("S_ResourceAssignment_ID"))
 			{
-				GridField mField = m_mTab.getField(col);
+				GridField mField = getMTab().getField(col);
 				if (mField != null && mField.getCallout().length() > 0)
-					m_mTab.processFieldChange(mField);     //  Dependencies & Callout
+					getMTab().processFieldChange(mField);     //  Dependencies & Callout
 			}
 
 			if (newValues != null && newValues.length > 0)
 			{
 				// Save data, since record need to be used for generating clones.
-				if (!m_mTab.dataSave(false))
+				if (!getMTab().dataSave(false))
 				{
 					throw new PropertyVetoException("SaveError", e);
 				}
 
 				// Retrieve the current record ID
-				int recordId = m_mTab.getKeyID(m_mTab.getCurrentRow());
+				int recordId = getMTab().getKeyID(getMTab().getCurrentRow());
 
 				Trx trx = Trx.get(Trx.createTrxName(), true);
 				trx.start();
@@ -1277,7 +1282,7 @@ public class GridController extends CPanel
 				{
 					saveMultipleRecords(Env.getCtx(), mTable.getTableName(), e.getPropertyName(), recordId, newValues, trx.getTrxName());
 					trx.commit();
-					m_mTab.dataRefreshAll();
+					getMTab().dataRefreshAll();
 				}
 				catch(Exception ex)
 				{
@@ -1295,7 +1300,9 @@ public class GridController extends CPanel
 	//	log.config( "GridController.vetoableChange (" + m_mTab.toString() + ") - fini", e.getPropertyName() + "=" + e.getNewValue());
 	}   //  vetoableChange
 
-
+	public void setTab(GridTab tab) {
+		m_mTab = tab;
+	}
 	/**************************************************************************
 	 *  Get Model Tab
 	 *  @return Model Tab
@@ -1311,7 +1318,11 @@ public class GridController extends CPanel
 	 */
 	public String getDisplayLogic()
 	{
-		return m_mTab.getDisplayLogic();
+		String val = null;
+		if (getMTab() != null) {
+			val = getMTab().getDisplayLogic(); 
+		}
+		return val;
 	}	//	getDisplayLogic
 
 	/**
@@ -1340,7 +1351,7 @@ public class GridController extends CPanel
 	 */
 	public void stopEditor (boolean saveValue)
 	{
-		log.config("(" + m_mTab.toString() + ") TableEditing=" + vTable.isEditing());
+		log.config("(" + getMTab().toString() + ") TableEditing=" + vTable.isEditing());
 
 		//  MultiRow - remove editors
 		vTable.stopEditor(saveValue);
@@ -1416,7 +1427,7 @@ public class GridController extends CPanel
 	 */
 	public boolean isCurrent()
 	{
-		return m_mTab != null ? m_mTab.isCurrent() : false;
+		return getMTab() != null ? getMTab().isCurrent() : false;
 	}
 
      //FR [ 1757088 ]
@@ -1434,9 +1445,9 @@ public class GridController extends CPanel
 		return m_Parent;
 	}
 	public void refreshMTab(GridController includedTab){
-		int m_CurrentRowBeforeSave = includedTab.m_mTab.getCurrentRow();
-		m_mTab.dataRefresh(m_mTab.getCurrentRow());
-		includedTab.m_mTab.setCurrentRow(m_CurrentRowBeforeSave);
+		int m_CurrentRowBeforeSave = includedTab.getMTab().getCurrentRow();
+		getMTab().dataRefresh(getMTab().getCurrentRow());
+		includedTab.getMTab().setCurrentRow(m_CurrentRowBeforeSave);
 	}
 	//END - [FR 1953734]
 

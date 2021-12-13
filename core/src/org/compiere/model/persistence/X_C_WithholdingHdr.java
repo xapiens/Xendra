@@ -58,11 +58,12 @@ public static int Table_ID=MTable.getTable_ID("C_WithholdingHdr");
 @XendraTrl(Identifier="30c5e8de-d802-4fd3-8057-40150c715f5c")
 public static String es_PE_TABLE_C_WithholdingHdr_Name="Withholding Header";
 
-@XendraTable(Name="Withholding Header",Description="",Help="",TableName="C_WithholdingHdr",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="30c5e8de-d802-4fd3-8057-40150c715f5c",
-Synchronized="2017-08-16 11:42:34.0")
+@XendraTable(Name="Withholding Header",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_WithholdingHdr",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="30c5e8de-d802-4fd3-8057-40150c715f5c",
+Synchronized="2020-03-03 21:37:46.0")
 /** TableName=C_WithholdingHdr */
 public static final String Table_Name="C_WithholdingHdr";
 
@@ -120,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27def022-a341-4bcc-84c6-8d7b62ea04cb",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Document Type.
@@ -146,10 +147,10 @@ public static String es_PE_COLUMN_C_DocType_ID_Name="Document Type";
 @XendraColumn(AD_Element_ID="099a4147-1a72-cdd0-81e0-8bdbc8c0b883",ColumnName="C_DocType_ID",
 AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6aa3842d-e175-4b01-a4d1-c8fe501e9d75",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 /** Set Withholding Header.
@@ -191,7 +192,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e75fbb0e-96b2-4dca-bd2d-474413e21b63",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 /** Set DateDoc.
@@ -213,10 +214,10 @@ public static String es_PE_COLUMN_DateDoc_Name="DateDoc";
 @XendraColumn(AD_Element_ID="68f87a38-0b7e-cc52-6990-3b5d2d120d9d",ColumnName="DateDoc",
 AD_Reference_ID=16,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=29,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0b10468f-dbfc-4eba-a948-91614ce6b749",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DateDoc */
 public static final String COLUMNNAME_DateDoc = "DateDoc";
 /** Set Description.
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3e5bf0d2-c211-4abb-90c2-588f33cf97ea",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Document Action.
@@ -285,7 +286,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="35bd71b2-24d4-472d-a048-3dc26a705a3f",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DocAction */
 public static final String COLUMNNAME_DocAction = "DocAction";
 /** Set Document Status.
@@ -315,7 +316,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4efc21d1-861d-4cf7-96f8-b7af07326b64",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Document No.
@@ -338,16 +339,23 @@ if (value == null)
   return "";
 return value;
 }
+/** Get Record ID/ColumnName
+@return ID/ColumnName pair
+*/public KeyNamePair getKeyNamePair() 
+{
+return new KeyNamePair(get_ID(), getDocumentNo());
+}
+
 @XendraTrl(Identifier="5a13a653-1be3-4b4c-b006-3077ddd7c820")
 public static String es_PE_COLUMN_DocumentNo_Name="Document No";
 
 @XendraColumn(AD_Element_ID="e3ca6e28-702a-2722-d941-b2072a0de9cb",ColumnName="DocumentNo",
 AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=30,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5a13a653-1be3-4b4c-b006-3077ddd7c820",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Accounting Fact ID (per document).
@@ -379,7 +387,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e82e678-0c3f-4ce0-b759-2da21d2b9beb",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Fact_ID */
 public static final String COLUMNNAME_Fact_ID = "Fact_ID";
 /** Set Identifier.
@@ -411,7 +419,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2e05bd84-7c58-456a-9716-9c3a1ec19eea",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sales Transaction.
@@ -442,7 +450,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="491ba09b-829d-40ee-95e9-2b08211e6e33",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Name.
@@ -465,23 +473,16 @@ if (value == null)
   return "";
 return value;
 }
-/** Get Record ID/ColumnName
-@return ID/ColumnName pair
-*/public KeyNamePair getKeyNamePair() 
-{
-return new KeyNamePair(get_ID(), getName());
-}
-
 @XendraTrl(Identifier="f62906a4-e605-4bc6-9eee-caf9508773d6")
 public static String es_PE_COLUMN_Name_Name="Name";
 
 @XendraColumn(AD_Element_ID="c0b362bf-e56d-aa8a-9021-c8c580f635de",ColumnName="Name",
 AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=60,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
-IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f62906a4-e605-4bc6-9eee-caf9508773d6",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Posted.
@@ -512,7 +513,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="66a9d6d2-5841-4a00-aa4a-25ec618c5ee8",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Posted */
 public static final String COLUMNNAME_Posted = "Posted";
 /** Set Processed.
@@ -543,7 +544,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e2443def-39ba-4362-b6f9-3095c8ad52b2",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -574,7 +575,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="946c72c1-bf42-4f59-b17f-fe604d6b48a1",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Document Serial.
@@ -606,7 +607,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6e9dac8f-14f3-4160-8f6d-28ca7a6facdf",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name Serial */
 public static final String COLUMNNAME_Serial = "Serial";
 /** Set StatusDate.
@@ -631,7 +632,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c3001a84-d7f4-40bf-a199-87809e67a28c",
-Synchronized="2017-08-05 16:54:31.0")
+Synchronized="2019-08-30 22:22:23.0")
 /** Column name StatusDate */
 public static final String COLUMNNAME_StatusDate = "StatusDate";
 }

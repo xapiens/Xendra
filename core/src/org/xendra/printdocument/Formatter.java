@@ -36,12 +36,22 @@ public class Formatter {
 			string = "";
 		return Util.pad(string, width, null, ' ' );
 	}
+//	public String amt(String amount)
+//	{
+//		if (amount == null)
+//			amount = "0";
+//		return m_amtFormat.format(new BigDecimal(amount));
+//	}
 	public String amt(String amount)
 	{
-		if (amount == null)
-			amount = "0";
-		return m_amtFormat.format(new BigDecimal(amount));
-	}
+		BigDecimal result = null;
+		try {
+			result = new BigDecimal(amount);
+		} catch (Exception e) {
+			result = BigDecimal.ZERO;
+		}
+		return m_amtFormat.format(result);
+	}	
 	public String amt(String amount, int width) 
 	{
 		return Util.pad(amt(amount), width, FIELDALIGNMENTTYPE_TrailingRight, ' ');

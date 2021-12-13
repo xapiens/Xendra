@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("AD_PrintForm");
 public static String es_PE_TAB_PrintForm_Description="Mantener información de formas de impresión (facturas; cheques;...)";
 
 @XendraTrl(Identifier="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f")
-public static String es_PE_TAB_PrintForm_Name="Forma de Impresión";
-
-@XendraTrl(Identifier="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f")
 public static String es_PE_TAB_PrintForm_Help="La selección determina que formato de impresión es usado para imprimir una forma particular para su organización.";
 
-@XendraTab(Name="Print Form",Description="Maintain Print Form (Invoices, Checks, ..) information",
+@XendraTrl(Identifier="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f")
+public static String es_PE_TAB_PrintForm_Name="Forma de Impresión";
+@XendraTab(Name="Print Form",
+Description="Maintain Print Form (Invoices, Checks, ..) information",
 Help="The selection determines what Print Format is used to print a particular Form for your Organization.",
 AD_Window_ID="3696eb29-48f6-fd4c-c4cc-b5eba9fbb0be",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -77,11 +77,12 @@ public static final String TABNAME_PrintForm="7fd4508b-1b06-5121-22dc-f7e49fdd6f
 @XendraTrl(Identifier="af0cd8c0-da92-532c-bf99-bee4874f4e50")
 public static String es_PE_TABLE_AD_PrintForm_Name="Formato de Impresión";
 
-@XendraTable(Name="Print Form",Description="Form",Help="",TableName="AD_PrintForm",AccessLevel="6",
-AD_Window_ID="3696eb29-48f6-fd4c-c4cc-b5eba9fbb0be",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.dictionary",Identifier="af0cd8c0-da92-532c-bf99-bee4874f4e50",
-Synchronized="2017-08-16 11:40:40.0")
+@XendraTable(Name="Print Form",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Form",Help="",
+TableName="AD_PrintForm",AccessLevel="6",AD_Window_ID="3696eb29-48f6-fd4c-c4cc-b5eba9fbb0be",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="af0cd8c0-da92-532c-bf99-bee4874f4e50",Synchronized="2020-03-03 21:35:21.0")
 /** TableName=AD_PrintForm */
 public static final String Table_Name="AD_PrintForm";
 
@@ -147,9 +148,6 @@ Identifier="1184ff46-bd28-85a8-72aa-754619fbad9b")
 public static final String FIELDNAME_PrintForm_PrintForm="1184ff46-bd28-85a8-72aa-754619fbad9b";
 /** Column name AD_PrintForm_ID */
 public static final String COLUMNNAME_AD_PrintForm_ID = "AD_PrintForm_ID";
-
-/** BOE_PrintFormat_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int BOE_PRINTFORMAT_ID_AD_Reference_ID=259;
 /** Set BOE_PrintFormat_ID.
 @param BOE_PrintFormat_ID BOE_PrintFormat_ID */
 public void setBOE_PrintFormat_ID (int BOE_PrintFormat_ID)
@@ -186,12 +184,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="123e8f29-412d-35bf-9fb0-7084c59f0983",Synchronized="2017-08-05 16:52:40.0")
+Identifier="123e8f29-412d-35bf-9fb0-7084c59f0983",Synchronized="2019-08-30 22:20:31.0")
 /** Column name BOE_PrintFormat_ID */
 public static final String COLUMNNAME_BOE_PrintFormat_ID = "BOE_PrintFormat_ID";
-
-/** BOE_Process_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int BOE_PROCESS_ID_AD_Reference_ID=259;
 /** Set BOE_Process_ID.
 @param BOE_Process_ID BOE_Process_ID */
 public void setBOE_Process_ID (int BOE_Process_ID)
@@ -228,7 +223,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="26304f7e-b995-0a10-9b28-c107ea474ef0",Synchronized="2017-08-05 16:52:40.0")
+Identifier="26304f7e-b995-0a10-9b28-c107ea474ef0",Synchronized="2019-08-30 22:20:31.0")
 /** Column name BOE_Process_ID */
 public static final String COLUMNNAME_BOE_Process_ID = "BOE_Process_ID";
 /** Set Description.
@@ -259,13 +254,13 @@ return value;
 }
 
 @XendraTrl(Identifier="cdfdfe8a-1085-63f0-9cb9-39185af594d6")
+public static String es_PE_FIELD_PrintForm_Description_Name="Observación";
+
+@XendraTrl(Identifier="cdfdfe8a-1085-63f0-9cb9-39185af594d6")
 public static String es_PE_FIELD_PrintForm_Description_Description="Observación";
 
 @XendraTrl(Identifier="cdfdfe8a-1085-63f0-9cb9-39185af594d6")
 public static String es_PE_FIELD_PrintForm_Description_Help="Observación";
-
-@XendraTrl(Identifier="cdfdfe8a-1085-63f0-9cb9-39185af594d6")
-public static String es_PE_FIELD_PrintForm_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -283,12 +278,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="449b497a-bb3d-7f33-cfd1-4fd0b76c4052",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** Distrib_Order_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int DISTRIB_ORDER_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Distrib_Order_MailText_ID.
 @param Distrib_Order_MailText_ID Distrib_Order_MailText_ID */
 public void setDistrib_Order_MailText_ID (int Distrib_Order_MailText_ID)
@@ -326,12 +318,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="4ca84d4f-5eeb-543d-1dbb-81ff88ec77c6",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Distrib_Order_MailText_ID */
 public static final String COLUMNNAME_Distrib_Order_MailText_ID = "Distrib_Order_MailText_ID";
-
-/** Distrib_Order_PrintFormat_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int DISTRIB_ORDER_PRINTFORMAT_ID_AD_Reference_ID=259;
 /** Set Distrib_Order_PrintFormat_ID.
 @param Distrib_Order_PrintFormat_ID Distrib_Order_PrintFormat_ID */
 public void setDistrib_Order_PrintFormat_ID (int Distrib_Order_PrintFormat_ID)
@@ -369,7 +358,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="5c570090-fe4a-c983-bfae-e25a995fff66",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Distrib_Order_PrintFormat_ID */
 public static final String COLUMNNAME_Distrib_Order_PrintFormat_ID = "Distrib_Order_PrintFormat_ID";
 /** Set Identifier.
@@ -401,12 +390,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="33cd5082-39b1-4258-ab52-e0c07c2fbbee",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** Invoice_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int INVOICE_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Invoice Mail Text.
 @param Invoice_MailText_ID Email text used for sending invoices */
 public void setInvoice_MailText_ID (int Invoice_MailText_ID)
@@ -425,13 +411,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b1f6adc5-1e06-65d7-5d0f-bae87f4f1b15")
+public static String es_PE_FIELD_PrintForm_InvoiceMailText_Name="Texto de Correo para Factura";
+
+@XendraTrl(Identifier="b1f6adc5-1e06-65d7-5d0f-bae87f4f1b15")
 public static String es_PE_FIELD_PrintForm_InvoiceMailText_Description="Texto usado en los emails para enviar facturas";
 
 @XendraTrl(Identifier="b1f6adc5-1e06-65d7-5d0f-bae87f4f1b15")
 public static String es_PE_FIELD_PrintForm_InvoiceMailText_Help="La plantilla estándar del email envía facturas como accesorios.";
-
-@XendraTrl(Identifier="b1f6adc5-1e06-65d7-5d0f-bae87f4f1b15")
-public static String es_PE_FIELD_PrintForm_InvoiceMailText_Name="Texto de Correo para Factura";
 
 @XendraField(AD_Column_ID="Invoice_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -450,12 +436,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="b3d5a1cc-b215-1f86-75f6-f0ee9d55dc70",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Invoice_MailText_ID */
 public static final String COLUMNNAME_Invoice_MailText_ID = "Invoice_MailText_ID";
-
-/** Invoice_PrintFormat_ID AD_Reference=3fb04288-4549-80e8-1969-6c95b48c8b1a */
-public static final int INVOICE_PRINTFORMAT_ID_AD_Reference_ID=261;
 /** Set Invoice Print Format.
 @param Invoice_PrintFormat_ID Print Format for printing Invoices */
 public void setInvoice_PrintFormat_ID (int Invoice_PrintFormat_ID)
@@ -474,13 +457,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5d373e04-854e-c8b2-b328-f5c4af3221bc")
+public static String es_PE_FIELD_PrintForm_InvoicePrintFormat_Name="Formato de Impresión de Facturas";
+
+@XendraTrl(Identifier="5d373e04-854e-c8b2-b328-f5c4af3221bc")
 public static String es_PE_FIELD_PrintForm_InvoicePrintFormat_Description="Formato de impresión usado para imprimir facturas";
 
 @XendraTrl(Identifier="5d373e04-854e-c8b2-b328-f5c4af3221bc")
 public static String es_PE_FIELD_PrintForm_InvoicePrintFormat_Help="Es necesario definir un formato para imprimir el documento";
-
-@XendraTrl(Identifier="5d373e04-854e-c8b2-b328-f5c4af3221bc")
-public static String es_PE_FIELD_PrintForm_InvoicePrintFormat_Name="Formato de Impresión de Facturas";
 
 @XendraField(AD_Column_ID="Invoice_PrintFormat_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -499,12 +482,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="077e073d-969b-4ab8-91e4-fc210df608bc",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Invoice_PrintFormat_ID */
 public static final String COLUMNNAME_Invoice_PrintFormat_ID = "Invoice_PrintFormat_ID";
-
-/** Manuf_Order_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int MANUF_ORDER_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Manuf_Order_MailText_ID.
 @param Manuf_Order_MailText_ID Manuf_Order_MailText_ID */
 public void setManuf_Order_MailText_ID (int Manuf_Order_MailText_ID)
@@ -542,12 +522,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="4bb9d766-232b-bff8-7b1b-ec48a352b8af",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Manuf_Order_MailText_ID */
 public static final String COLUMNNAME_Manuf_Order_MailText_ID = "Manuf_Order_MailText_ID";
-
-/** Manuf_Order_PrintFormat_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int MANUF_ORDER_PRINTFORMAT_ID_AD_Reference_ID=259;
 /** Set Manuf_Order_PrintFormat_ID.
 @param Manuf_Order_PrintFormat_ID Manuf_Order_PrintFormat_ID */
 public void setManuf_Order_PrintFormat_ID (int Manuf_Order_PrintFormat_ID)
@@ -585,12 +562,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="a069cca6-b75e-c2ae-7ef4-08c274390f73",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Manuf_Order_PrintFormat_ID */
 public static final String COLUMNNAME_Manuf_Order_PrintFormat_ID = "Manuf_Order_PrintFormat_ID";
-
-/** Movement_PrintFormat_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int MOVEMENT_PRINTFORMAT_ID_AD_Reference_ID=259;
 /** Set Movement_PrintFormat_ID.
 @param Movement_PrintFormat_ID Movement_PrintFormat_ID */
 public void setMovement_PrintFormat_ID (int Movement_PrintFormat_ID)
@@ -628,7 +602,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="51f58acf-7107-d6a4-5e1d-0cd9c799a822",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Movement_PrintFormat_ID */
 public static final String COLUMNNAME_Movement_PrintFormat_ID = "Movement_PrintFormat_ID";
 /** Set Name.
@@ -660,18 +634,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="09a81a13-f722-e43c-d797-23da09f80439")
+public static String es_PE_FIELD_PrintForm_Name_Name="Nombre";
+
+@XendraTrl(Identifier="09a81a13-f722-e43c-d797-23da09f80439")
 public static String es_PE_FIELD_PrintForm_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="09a81a13-f722-e43c-d797-23da09f80439")
 public static String es_PE_FIELD_PrintForm_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="09a81a13-f722-e43c-d797-23da09f80439")
-public static String es_PE_FIELD_PrintForm_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="09a81a13-f722-e43c-d797-23da09f80439")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="09a81a13-f722-e43c-d797-23da09f80439")
 public static final String FIELDNAME_PrintForm_Name="09a81a13-f722-e43c-d797-23da09f80439";
 
 @XendraTrl(Identifier="3517f193-6bd2-21d7-6473-7be485de6da8")
@@ -683,12 +658,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3517f193-6bd2-21d7-6473-7be485de6da8",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** Order_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int ORDER_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Order Mail Text.
 @param Order_MailText_ID Email text used for sending order acknowledgements or quotations */
 public void setOrder_MailText_ID (int Order_MailText_ID)
@@ -707,13 +679,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d13dcd41-6651-eea4-4a77-17d1d31f9ee2")
+public static String es_PE_FIELD_PrintForm_OrderMailText_Name="Texto de Correo para Orden";
+
+@XendraTrl(Identifier="d13dcd41-6651-eea4-4a77-17d1d31f9ee2")
 public static String es_PE_FIELD_PrintForm_OrderMailText_Description="Texto del email usado para enviar reconocimientos ó citas de la orden.";
 
 @XendraTrl(Identifier="d13dcd41-6651-eea4-4a77-17d1d31f9ee2")
 public static String es_PE_FIELD_PrintForm_OrderMailText_Help="La plantilla estándar del email para enviar reconocimientos ó citas como accesorios.";
-
-@XendraTrl(Identifier="d13dcd41-6651-eea4-4a77-17d1d31f9ee2")
-public static String es_PE_FIELD_PrintForm_OrderMailText_Name="Texto de Correo para Orden";
 
 @XendraField(AD_Column_ID="Order_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -731,12 +703,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="83f7aedb-b00b-401f-9dd2-4dc058f95d1a",Synchronized="2017-08-05 16:52:40.0")
+Identifier="83f7aedb-b00b-401f-9dd2-4dc058f95d1a",Synchronized="2019-08-30 22:20:31.0")
 /** Column name Order_MailText_ID */
 public static final String COLUMNNAME_Order_MailText_ID = "Order_MailText_ID";
-
-/** Order_PrintFormat_ID AD_Reference=0110e526-2029-dac7-1867-335aaa97f67b */
-public static final int ORDER_PRINTFORMAT_ID_AD_Reference_ID=262;
 /** Set Order Print Format.
 @param Order_PrintFormat_ID Print Format for Orders, Quotes, Offers */
 public void setOrder_PrintFormat_ID (int Order_PrintFormat_ID)
@@ -755,13 +724,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c52938a7-0798-d806-1b73-b06f34570f43")
+public static String es_PE_FIELD_PrintForm_OrderPrintFormat_Name="Formato de Impresión de Ordenes";
+
+@XendraTrl(Identifier="c52938a7-0798-d806-1b73-b06f34570f43")
 public static String es_PE_FIELD_PrintForm_OrderPrintFormat_Description="Formato de impresión usado para imprimir ordenes; cotizaciones; ofertas";
 
 @XendraTrl(Identifier="c52938a7-0798-d806-1b73-b06f34570f43")
 public static String es_PE_FIELD_PrintForm_OrderPrintFormat_Help="Es necesario definir un formato para imprimir el documento";
-
-@XendraTrl(Identifier="c52938a7-0798-d806-1b73-b06f34570f43")
-public static String es_PE_FIELD_PrintForm_OrderPrintFormat_Name="Formato de Impresión de Ordenes";
 
 @XendraField(AD_Column_ID="Order_PrintFormat_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -780,12 +749,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="eba08482-c6f4-a843-83f3-0f245738ed65",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Order_PrintFormat_ID */
 public static final String COLUMNNAME_Order_PrintFormat_ID = "Order_PrintFormat_ID";
-
-/** Project_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int PROJECT_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Project Mail Text.
 @param Project_MailText_ID Standard text for Project EMails */
 public void setProject_MailText_ID (int Project_MailText_ID)
@@ -804,13 +770,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="57f01322-c7b9-d9f2-f714-0f8c471abcf8")
+public static String es_PE_FIELD_PrintForm_ProjectMailText_Name="Texto de Correo para Proyecto";
+
+@XendraTrl(Identifier="57f01322-c7b9-d9f2-f714-0f8c471abcf8")
 public static String es_PE_FIELD_PrintForm_ProjectMailText_Description="Texto estandar para correos del proyecto";
 
 @XendraTrl(Identifier="57f01322-c7b9-d9f2-f714-0f8c471abcf8")
 public static String es_PE_FIELD_PrintForm_ProjectMailText_Help="Texto estandar para correos del proyecto";
-
-@XendraTrl(Identifier="57f01322-c7b9-d9f2-f714-0f8c471abcf8")
-public static String es_PE_FIELD_PrintForm_ProjectMailText_Name="Texto de Correo para Proyecto";
 
 @XendraField(AD_Column_ID="Project_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -829,12 +795,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="5f10d98d-55e6-377a-64f0-641d8b784589",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Project_MailText_ID */
 public static final String COLUMNNAME_Project_MailText_ID = "Project_MailText_ID";
-
-/** Project_PrintFormat_ID AD_Reference=377b8075-d154-6c3b-1cc0-dea545937fae */
-public static final int PROJECT_PRINTFORMAT_ID_AD_Reference_ID=259;
 /** Set Project Print Format.
 @param Project_PrintFormat_ID Standard Project Print Format */
 public void setProject_PrintFormat_ID (int Project_PrintFormat_ID)
@@ -853,13 +816,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c8c05dfa-d6ad-74b5-3e8a-8189a4c0a6a0")
+public static String es_PE_FIELD_PrintForm_ProjectPrintFormat_Name="Formato de Impresion del Proyectos";
+
+@XendraTrl(Identifier="c8c05dfa-d6ad-74b5-3e8a-8189a4c0a6a0")
 public static String es_PE_FIELD_PrintForm_ProjectPrintFormat_Description="Formato estándar de la impresión del proyecto";
 
 @XendraTrl(Identifier="c8c05dfa-d6ad-74b5-3e8a-8189a4c0a6a0")
 public static String es_PE_FIELD_PrintForm_ProjectPrintFormat_Help="Formato estándar de la impresión del proyecto";
-
-@XendraTrl(Identifier="c8c05dfa-d6ad-74b5-3e8a-8189a4c0a6a0")
-public static String es_PE_FIELD_PrintForm_ProjectPrintFormat_Name="Formato de Impresion del Proyectos";
 
 @XendraField(AD_Column_ID="Project_PrintFormat_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -878,12 +841,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="f1757064-edde-8ad8-952a-2aa543733caf",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Project_PrintFormat_ID */
 public static final String COLUMNNAME_Project_PrintFormat_ID = "Project_PrintFormat_ID";
-
-/** Remittance_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int REMITTANCE_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Remittance Mail Text.
 @param Remittance_MailText_ID Email text used for sending payment remittances */
 public void setRemittance_MailText_ID (int Remittance_MailText_ID)
@@ -902,13 +862,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f9cfb6cc-004a-cddc-8a30-4e6456e56ae5")
+public static String es_PE_FIELD_PrintForm_RemittanceMailText_Name="Texto de Correo para Remesas";
+
+@XendraTrl(Identifier="f9cfb6cc-004a-cddc-8a30-4e6456e56ae5")
 public static String es_PE_FIELD_PrintForm_RemittanceMailText_Description="Texto del mail usado para enviar remitentes del pago.";
 
 @XendraTrl(Identifier="f9cfb6cc-004a-cddc-8a30-4e6456e56ae5")
 public static String es_PE_FIELD_PrintForm_RemittanceMailText_Help="La plantilla estándar del email envia remitentes como accesorios.";
-
-@XendraTrl(Identifier="f9cfb6cc-004a-cddc-8a30-4e6456e56ae5")
-public static String es_PE_FIELD_PrintForm_RemittanceMailText_Name="Texto de Correo para Remesas";
 
 @XendraField(AD_Column_ID="Remittance_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -927,12 +887,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="2b798188-11ca-fc09-31ea-531fdb46c7bf",
-Synchronized="2017-08-05 16:52:41.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Remittance_MailText_ID */
 public static final String COLUMNNAME_Remittance_MailText_ID = "Remittance_MailText_ID";
-
-/** Remittance_PrintFormat_ID AD_Reference=c6373860-2da1-9b9a-fb99-6ddafee99e3f */
-public static final int REMITTANCE_PRINTFORMAT_ID_AD_Reference_ID=268;
 /** Set Remittance Print Format.
 @param Remittance_PrintFormat_ID Print Format for separate Remittances */
 public void setRemittance_PrintFormat_ID (int Remittance_PrintFormat_ID)
@@ -951,13 +908,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b2fe7695-37ac-2059-9960-e96acf1a9f1b")
+public static String es_PE_FIELD_PrintForm_RemittancePrintFormat_Name="Formato de Impresión de Remesas";
+
+@XendraTrl(Identifier="b2fe7695-37ac-2059-9960-e96acf1a9f1b")
 public static String es_PE_FIELD_PrintForm_RemittancePrintFormat_Description="Formato de impresión usado para imprimir remesas separadas";
 
 @XendraTrl(Identifier="b2fe7695-37ac-2059-9960-e96acf1a9f1b")
 public static String es_PE_FIELD_PrintForm_RemittancePrintFormat_Help="Es necesario definir un formato para imprimir el documento";
-
-@XendraTrl(Identifier="b2fe7695-37ac-2059-9960-e96acf1a9f1b")
-public static String es_PE_FIELD_PrintForm_RemittancePrintFormat_Name="Formato de Impresión de Remesas";
 
 @XendraField(AD_Column_ID="Remittance_PrintFormat_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -976,12 +933,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="7d2f5f18-b099-0edb-f66c-7fbba869bd6a",
-Synchronized="2017-08-05 16:52:41.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Remittance_PrintFormat_ID */
 public static final String COLUMNNAME_Remittance_PrintFormat_ID = "Remittance_PrintFormat_ID";
-
-/** Shipment_MailText_ID AD_Reference=989c9ac3-aa0d-186e-5762-5668871e42e4 */
-public static final int SHIPMENT_MAILTEXT_ID_AD_Reference_ID=274;
 /** Set Shipment Mail Text.
 @param Shipment_MailText_ID Email text used for sending delivery notes */
 public void setShipment_MailText_ID (int Shipment_MailText_ID)
@@ -1000,13 +954,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6ae370e0-9cc2-7054-a08e-b459f62d6512")
+public static String es_PE_FIELD_PrintForm_ShipmentMailText_Name="Texto de Correo para Despacho";
+
+@XendraTrl(Identifier="6ae370e0-9cc2-7054-a08e-b459f62d6512")
 public static String es_PE_FIELD_PrintForm_ShipmentMailText_Description="Texto de email usado para enviar notas de entrega";
 
 @XendraTrl(Identifier="6ae370e0-9cc2-7054-a08e-b459f62d6512")
 public static String es_PE_FIELD_PrintForm_ShipmentMailText_Help="La plantilla estándar del email envía notas de entrega como accesorios.";
-
-@XendraTrl(Identifier="6ae370e0-9cc2-7054-a08e-b459f62d6512")
-public static String es_PE_FIELD_PrintForm_ShipmentMailText_Name="Texto de Correo para Despacho";
 
 @XendraField(AD_Column_ID="Shipment_MailText_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1025,12 +979,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="df97791f-c757-5c08-e312-54a49335e94b",
-Synchronized="2017-08-05 16:52:41.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Shipment_MailText_ID */
 public static final String COLUMNNAME_Shipment_MailText_ID = "Shipment_MailText_ID";
-
-/** Shipment_PrintFormat_ID AD_Reference=ba7f9e3d-8c96-f5ba-cce3-6cafecf6ef8f */
-public static final int SHIPMENT_PRINTFORMAT_ID_AD_Reference_ID=263;
 /** Set Shipment Print Format.
 @param Shipment_PrintFormat_ID Print Format for Shipments, Receipts, Pick Lists */
 public void setShipment_PrintFormat_ID (int Shipment_PrintFormat_ID)
@@ -1049,13 +1000,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2b66bd45-1ea3-f61c-35af-1c445b26ab17")
+public static String es_PE_FIELD_PrintForm_ShipmentPrintFormat_Name="Formato de Impresión de Despachos";
+
+@XendraTrl(Identifier="2b66bd45-1ea3-f61c-35af-1c445b26ab17")
 public static String es_PE_FIELD_PrintForm_ShipmentPrintFormat_Description="Formato de impresión usado para imprimir despachos; recibos y listas de recolección.";
 
 @XendraTrl(Identifier="2b66bd45-1ea3-f61c-35af-1c445b26ab17")
 public static String es_PE_FIELD_PrintForm_ShipmentPrintFormat_Help="Es necesario definir un formato para imprimir el documento.";
-
-@XendraTrl(Identifier="2b66bd45-1ea3-f61c-35af-1c445b26ab17")
-public static String es_PE_FIELD_PrintForm_ShipmentPrintFormat_Name="Formato de Impresión de Despachos";
 
 @XendraField(AD_Column_ID="Shipment_PrintFormat_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7fd4508b-1b06-5121-22dc-f7e49fdd6f2f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1074,7 +1025,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="c3f6b53d-9888-662a-b5e3-6232f2a90528",
-Synchronized="2017-08-05 16:52:41.0")
+Synchronized="2019-08-30 22:20:32.0")
 /** Column name Shipment_PrintFormat_ID */
 public static final String COLUMNNAME_Shipment_PrintFormat_ID = "Shipment_PrintFormat_ID";
 }

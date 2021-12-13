@@ -60,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("C_Cycle");
 public static String es_PE_TAB_ProjectCycle_Description="Definir Ciclos de Proyecto";
 
 @XendraTrl(Identifier="8fd8bb49-02fa-999b-c363-381a0cbcab07")
-public static String es_PE_TAB_ProjectCycle_Name="Ciclo de Proyecto";
+public static String es_PE_TAB_ProjectCycle_Help="Definir la moneda en la cual los proyectos son reportados. Los proyectos en si mismos pueden usar una moneda diferente.";
 
 @XendraTrl(Identifier="8fd8bb49-02fa-999b-c363-381a0cbcab07")
-public static String es_PE_TAB_ProjectCycle_Help="Definir la moneda en la cual los proyectos son reportados. Los proyectos en si mismos pueden usar una moneda diferente.";
+public static String es_PE_TAB_ProjectCycle_Name="Ciclo de Proyecto";
 
 @XendraTab(Name="Project Cycle",Description="Define Project Report Cycle",
 Help="Define the currency that projects Project are reported. The projects themselves could be in a different currency.",
@@ -78,11 +78,13 @@ public static final String TABNAME_ProjectCycle="8fd8bb49-02fa-999b-c363-381a0cb
 @XendraTrl(Identifier="ce7029de-e4fb-9894-d8fb-3009a75c06c6")
 public static String es_PE_TABLE_C_Cycle_Name="Ciclo del Proyecto";
 
-@XendraTable(Name="Project Cycle",Description="Identifier for this Project Reporting Cycle",
-Help="",TableName="C_Cycle",AccessLevel="3",AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="ce7029de-e4fb-9894-d8fb-3009a75c06c6",Synchronized="2017-08-16 11:41:42.0")
+@XendraTable(Name="Project Cycle",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Identifier for this Project Reporting Cycle",Help="",TableName="C_Cycle",
+AccessLevel="3",AD_Window_ID="1d686c87-4250-cd4c-c787-342ca8921a79",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="ce7029de-e4fb-9894-d8fb-3009a75c06c6",Synchronized="2020-03-03 21:36:49.0")
 /** TableName=C_Cycle */
 public static final String Table_Name="C_Cycle";
 
@@ -138,13 +140,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ed5b92a3-fc03-e1e8-1c02-f9389f4de665")
+public static String es_PE_FIELD_ProjectCycle_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="ed5b92a3-fc03-e1e8-1c02-f9389f4de665")
 public static String es_PE_FIELD_ProjectCycle_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="ed5b92a3-fc03-e1e8-1c02-f9389f4de665")
 public static String es_PE_FIELD_ProjectCycle_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="ed5b92a3-fc03-e1e8-1c02-f9389f4de665")
-public static String es_PE_FIELD_ProjectCycle_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8fd8bb49-02fa-999b-c363-381a0cbcab07",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -162,7 +164,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="42282f0d-9e18-1df3-de82-026d2e705fe3",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Project Cycle.
@@ -182,13 +184,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5574254a-d28f-796b-c518-8d3aea189d3d")
+public static String es_PE_FIELD_ProjectCycle_ProjectCycle_Name="Ciclo del Proyecto";
+
+@XendraTrl(Identifier="5574254a-d28f-796b-c518-8d3aea189d3d")
 public static String es_PE_FIELD_ProjectCycle_ProjectCycle_Description="Identificador de este ciclo del proyecto";
 
 @XendraTrl(Identifier="5574254a-d28f-796b-c518-8d3aea189d3d")
 public static String es_PE_FIELD_ProjectCycle_ProjectCycle_Help="Identifica un ciclo del proyecto que se pueda componer de uno ó más pasos ó estados.";
-
-@XendraTrl(Identifier="5574254a-d28f-796b-c518-8d3aea189d3d")
-public static String es_PE_FIELD_ProjectCycle_ProjectCycle_Name="Ciclo del Proyecto";
 
 @XendraField(AD_Column_ID="C_Cycle_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8fd8bb49-02fa-999b-c363-381a0cbcab07",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -226,13 +228,13 @@ return value;
 }
 
 @XendraTrl(Identifier="54ce9be6-d735-c86d-ae45-c135efab32e9")
+public static String es_PE_FIELD_ProjectCycle_Description_Name="Observación";
+
+@XendraTrl(Identifier="54ce9be6-d735-c86d-ae45-c135efab32e9")
 public static String es_PE_FIELD_ProjectCycle_Description_Description="Observación";
 
 @XendraTrl(Identifier="54ce9be6-d735-c86d-ae45-c135efab32e9")
 public static String es_PE_FIELD_ProjectCycle_Description_Help="Observación";
-
-@XendraTrl(Identifier="54ce9be6-d735-c86d-ae45-c135efab32e9")
-public static String es_PE_FIELD_ProjectCycle_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="8fd8bb49-02fa-999b-c363-381a0cbcab07",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -250,7 +252,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5afd54cb-3437-c95b-8146-5b86b8d96403",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -282,7 +284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd998208-55c6-4bd7-842b-ead71ed221b5",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -314,18 +316,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
+public static String es_PE_FIELD_ProjectCycle_Name_Name="Nombre";
+
+@XendraTrl(Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
 public static String es_PE_FIELD_ProjectCycle_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
 public static String es_PE_FIELD_ProjectCycle_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
-public static String es_PE_FIELD_ProjectCycle_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="8fd8bb49-02fa-999b-c363-381a0cbcab07",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="8fd8bb49-02fa-999b-c363-381a0cbcab07",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e006c15d-7d34-48e4-5647-1cb330d08a4c")
 public static final String FIELDNAME_ProjectCycle_Name="e006c15d-7d34-48e4-5647-1cb330d08a4c";
 
 @XendraTrl(Identifier="4c693a30-8b1b-bb5f-91f3-09c04e63a392")
@@ -337,7 +340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4c693a30-8b1b-bb5f-91f3-09c04e63a392",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:29.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

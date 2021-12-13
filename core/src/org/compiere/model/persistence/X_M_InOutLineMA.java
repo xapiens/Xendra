@@ -74,11 +74,13 @@ public static final String TABNAME_Attributes="8bf369fb-b07d-8c2d-0f5a-7723492b9
 @XendraTrl(Identifier="f9ed3211-c6af-c277-bf64-47e2d025a41e")
 public static String es_PE_TABLE_M_InOutLineMA_Name="M_InOutLineMA";
 
-@XendraTable(Name="M_InOutLineMA",Description="",Help="",TableName="M_InOutLineMA",AccessLevel="1",
-AD_Window_ID="e6e007b8-22d0-0418-baa2-2de7b38251fb",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="6856bd55-6f78-c775-449b-ef4aa2d1e170",ID="org.xendra.material",
-Identifier="f9ed3211-c6af-c277-bf64-47e2d025a41e",Synchronized="2017-08-16 11:43:16.0")
+@XendraTable(Name="M_InOutLineMA",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_InOutLineMA",AccessLevel="1",AD_Window_ID="e6e007b8-22d0-0418-baa2-2de7b38251fb",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="6856bd55-6f78-c775-449b-ef4aa2d1e170",
+ID="org.xendra.material",Identifier="f9ed3211-c6af-c277-bf64-47e2d025a41e",
+Synchronized="2020-03-03 21:38:28.0")
 /** TableName=M_InOutLineMA */
 public static final String Table_Name="M_InOutLineMA";
 
@@ -140,7 +142,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3fdeb15e-0607-4ce5-92fa-020abf018346",
-Synchronized="2017-08-05 16:55:12.0")
+Synchronized="2019-08-30 22:23:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute Set Instance.
@@ -160,13 +162,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="dd2334d8-4916-2d25-07eb-ccd4d190e789")
+public static String es_PE_FIELD_Attributes_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
+
+@XendraTrl(Identifier="dd2334d8-4916-2d25-07eb-ccd4d190e789")
 public static String es_PE_FIELD_Attributes_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="dd2334d8-4916-2d25-07eb-ccd4d190e789")
 public static String es_PE_FIELD_Attributes_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
-
-@XendraTrl(Identifier="dd2334d8-4916-2d25-07eb-ccd4d190e789")
-public static String es_PE_FIELD_Attributes_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8bf369fb-b07d-8c2d-0f5a-7723492b90c5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -184,7 +186,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9b93ba38-c383-f20a-f3a9-831216b4301f",Synchronized="2017-08-05 16:55:12.0")
+Identifier="9b93ba38-c383-f20a-f3a9-831216b4301f",Synchronized="2019-08-30 22:23:13.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Shipment/Receipt Line.
@@ -210,13 +212,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getM_InOutLine_ID()));
 }
 
 @XendraTrl(Identifier="7ce67273-3b88-c7d7-1bae-cf553f77fd93")
+public static String es_PE_FIELD_Attributes_ShipmentReceiptLine_Name="Item Entrega / Recibo";
+
+@XendraTrl(Identifier="7ce67273-3b88-c7d7-1bae-cf553f77fd93")
 public static String es_PE_FIELD_Attributes_ShipmentReceiptLine_Description="Item de entrega ó documento de recibo.";
 
 @XendraTrl(Identifier="7ce67273-3b88-c7d7-1bae-cf553f77fd93")
 public static String es_PE_FIELD_Attributes_ShipmentReceiptLine_Help="Indica un Item único en un documento de entrega / recibo";
-
-@XendraTrl(Identifier="7ce67273-3b88-c7d7-1bae-cf553f77fd93")
-public static String es_PE_FIELD_Attributes_ShipmentReceiptLine_Name="Item Entrega / Recibo";
 
 @XendraField(AD_Column_ID="M_InOutLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8bf369fb-b07d-8c2d-0f5a-7723492b90c5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -234,7 +236,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5dd03d22-f5ab-c5c1-e157-5b24884bd240",
-Synchronized="2017-08-05 16:55:12.0")
+Synchronized="2019-08-30 22:23:13.0")
 /** Column name M_InOutLine_ID */
 public static final String COLUMNNAME_M_InOutLine_ID = "M_InOutLine_ID";
 /** Set Movement Quantity.
@@ -254,13 +256,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="3daf5b36-d8f4-c338-8d31-91f2c1bcc8a5")
+public static String es_PE_FIELD_Attributes_MovementQuantity_Name="Cantidad del Movimiento";
+
+@XendraTrl(Identifier="3daf5b36-d8f4-c338-8d31-91f2c1bcc8a5")
 public static String es_PE_FIELD_Attributes_MovementQuantity_Description="Cantidad de un producto movido";
 
 @XendraTrl(Identifier="3daf5b36-d8f4-c338-8d31-91f2c1bcc8a5")
 public static String es_PE_FIELD_Attributes_MovementQuantity_Help="La Cantidad del Movimiento indica la cantidad de un producto que ha sido movido";
-
-@XendraTrl(Identifier="3daf5b36-d8f4-c338-8d31-91f2c1bcc8a5")
-public static String es_PE_FIELD_Attributes_MovementQuantity_Name="Cantidad del Movimiento";
 
 @XendraField(AD_Column_ID="MovementQty",IsCentrallyMaintained=true,
 AD_Tab_ID="8bf369fb-b07d-8c2d-0f5a-7723492b90c5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -278,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="68fd836c-030a-5b38-6e84-95d89a6e95b1",
-Synchronized="2017-08-05 16:55:12.0")
+Synchronized="2019-08-30 22:23:13.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
 }

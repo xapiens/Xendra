@@ -1,9 +1,7 @@
 package org.simoes.util;
 
 import java.io.*;
-//import java.util.*;
-
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * 
@@ -15,7 +13,7 @@ import org.apache.log4j.Logger;
 public class FileUtil
 {
 	// error logging variables //
-	static Logger log = Logger.getLogger(FileUtil.class);
+	static CLogger log = CLogger.getCLogger(FileUtil.class);
 	private static final String METHOD_writeFile = "writeFile(): ";
 	private static final String METHOD_deleteFiles = "deleteFiles(): ";
 	private static final String METHOD_runProgram = "runProgram(): ";
@@ -36,7 +34,7 @@ public class FileUtil
 	public static File writeFile(InputStream inputStream, String filename)
 		throws IOException
 	{
-		log.debug(METHOD_writeFile + STARTED);
+		log.fine(METHOD_writeFile + STARTED);
 		File result = null;
 		int byteCount = -1;
 		byte[] data = new byte[1024];
@@ -123,16 +121,16 @@ public class FileUtil
 		try
 		{
 			if(file.delete())  {
-				log.debug(METHOD_deleteFiles + filename + " was successfully deleted");
+				log.fine(METHOD_deleteFiles + filename + " was successfully deleted");
 			}
 			else  {
-				log.error(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
+				log.severe(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
 			}
 		}
 		catch(SecurityException e)
 		{
-			log.error(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
-			log.error(METHOD_deleteFiles + e.getMessage());
+			log.severe(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
+			log.severe(METHOD_deleteFiles + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -147,16 +145,16 @@ public class FileUtil
 		try
 		{
 			if(filename.delete())  {
-				log.debug(METHOD_deleteFiles + filename + " was successfully deleted");
+				log.fine(METHOD_deleteFiles + filename + " was successfully deleted");
 			}
 			else  {
-				log.error(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
+				log.severe(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
 			}
 		}
 		catch(SecurityException e)
 		{
-			log.error(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
-			log.error(METHOD_deleteFiles + e.getMessage());
+			log.severe(METHOD_deleteFiles + "Error deleting \"" + filename + "\"");
+			log.severe(METHOD_deleteFiles + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -180,12 +178,12 @@ public class FileUtil
 		}
 		catch(InterruptedException e)
 		{
-			log.error(METHOD_runProgram + e.getMessage());
+			log.severe(METHOD_runProgram + e.getMessage());
 			e.printStackTrace();
 		}
 		catch(IOException e)
 		{
-			log.error(METHOD_runProgram + e.getMessage());
+			log.severe(METHOD_runProgram + e.getMessage());
 			e.printStackTrace();
 		}
 		finally
@@ -240,7 +238,7 @@ public class FileUtil
 		}
 		catch(IOException e)
 		{
-			log.error(METHOD_readInputStream + e.getMessage());
+			log.severe(METHOD_readInputStream + e.getMessage());
 			e.printStackTrace();
 		}
 	}

@@ -265,11 +265,9 @@ public class TaskManagerDialog extends JDialog implements TaskManagerListener,
 	public void valueChanged(ListSelectionEvent ev) {
 		if (ev.getValueIsAdjusting())
 			return;
-
 		if (list.getSelectedIndex() != -1)
 			cancelButton.setEnabled(true);
 		else
 			cancelButton.setEnabled(false);
-
 	}
 }

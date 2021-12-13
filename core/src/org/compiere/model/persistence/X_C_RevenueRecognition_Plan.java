@@ -68,10 +68,10 @@ public static int Table_ID=MTable.getTable_ID("C_RevenueRecognition_Plan");
 public static String es_PE_TAB_RevenueRecognitionPlan_Description="Ver plan de reconocimiento de ingresos";
 
 @XendraTrl(Identifier="9314684d-72ca-d161-a53c-12a0a67be9e5")
-public static String es_PE_TAB_RevenueRecognitionPlan_Name="Plan de Reconocimiento de Ingresos";
+public static String es_PE_TAB_RevenueRecognitionPlan_Help="El plan de reconocimiento de ingresos es generado cuando se factura por un producto que tenga reconocimiento de ingresos. Con reconocimiento de ingresos; el Total es registrado en libros como Ingresos sin reconocer y a través del tiempo ó basado en el nivel de servicio; se registra como Ingreso Ganado.";
 
 @XendraTrl(Identifier="9314684d-72ca-d161-a53c-12a0a67be9e5")
-public static String es_PE_TAB_RevenueRecognitionPlan_Help="El plan de reconocimiento de ingresos es generado cuando se factura por un producto que tenga reconocimiento de ingresos. Con reconocimiento de ingresos; el Total es registrado en libros como Ingresos sin reconocer y a través del tiempo ó basado en el nivel de servicio; se registra como Ingreso Ganado.";
+public static String es_PE_TAB_RevenueRecognitionPlan_Name="Plan de Reconocimiento de Ingresos";
 
 @XendraTab(Name="Revenue Recognition Plan",Description="View Revenue Recognition Plan",
 Help="The Revenue Recognition plan is generated then invoicing a product with revenue recognition.  With Revenue Recognition, the amount is posted to the Unrecognized revenue and over time or based on Service Level booked to Earned Revenue.",
@@ -87,13 +87,14 @@ public static final String TABNAME_RevenueRecognitionPlan="9314684d-72ca-d161-a5
 public static String es_PE_TABLE_C_RevenueRecognition_Plan_Name="Plan de Reconocimiento de ingresos";
 
 
-@XendraTable(Name="Revenue Recognition Plan",
+@XendraTable(Name="Revenue Recognition Plan",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Plan for recognizing or recording revenue",Help="",
 TableName="C_RevenueRecognition_Plan",AccessLevel="1",
 AD_Window_ID="733a8f19-500f-50a8-f39f-40d4949bd162",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="b40ae36a-229f-158f-2976-2a8977d7397c",
-Synchronized="2017-08-16 11:42:24.0")
+Synchronized="2020-03-03 21:37:36.0")
 /** TableName=C_RevenueRecognition_Plan */
 public static final String Table_Name="C_RevenueRecognition_Plan";
 
@@ -143,13 +144,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5dae02bc-7f7e-2e01-29e8-04015e1faccd")
+public static String es_PE_FIELD_RevenueRecognitionPlan_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="5dae02bc-7f7e-2e01-29e8-04015e1faccd")
 public static String es_PE_FIELD_RevenueRecognitionPlan_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="5dae02bc-7f7e-2e01-29e8-04015e1faccd")
 public static String es_PE_FIELD_RevenueRecognitionPlan_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="5dae02bc-7f7e-2e01-29e8-04015e1faccd")
-public static String es_PE_FIELD_RevenueRecognitionPlan_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d6128cd-8a87-10d1-5097-0ef532487e84",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Currency.
@@ -187,13 +188,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="735b4d53-f06b-61fd-c4ab-b0d7c7ce1b41")
+public static String es_PE_FIELD_RevenueRecognitionPlan_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="735b4d53-f06b-61fd-c4ab-b0d7c7ce1b41")
 public static String es_PE_FIELD_RevenueRecognitionPlan_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="735b4d53-f06b-61fd-c4ab-b0d7c7ce1b41")
 public static String es_PE_FIELD_RevenueRecognitionPlan_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="735b4d53-f06b-61fd-c4ab-b0d7c7ce1b41")
-public static String es_PE_FIELD_RevenueRecognitionPlan_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -211,7 +212,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9f85f88b-411c-17cc-cd15-6a17e3d87421",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Invoice Line.
@@ -231,13 +232,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b4d8e619-8ebd-5237-9755-d4c6902cd418")
+public static String es_PE_FIELD_RevenueRecognitionPlan_InvoiceLine_Name="Item de Factura";
+
+@XendraTrl(Identifier="b4d8e619-8ebd-5237-9755-d4c6902cd418")
 public static String es_PE_FIELD_RevenueRecognitionPlan_InvoiceLine_Description="Item de detalle de factura";
 
 @XendraTrl(Identifier="b4d8e619-8ebd-5237-9755-d4c6902cd418")
 public static String es_PE_FIELD_RevenueRecognitionPlan_InvoiceLine_Help="Identifica de manera única un Item de la factura";
-
-@XendraTrl(Identifier="b4d8e619-8ebd-5237-9755-d4c6902cd418")
-public static String es_PE_FIELD_RevenueRecognitionPlan_InvoiceLine_Name="Item de Factura";
 
 @XendraField(AD_Column_ID="C_InvoiceLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +256,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc1dd7de-d718-3c34-fac3-0760eaf66335",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_InvoiceLine_ID */
 public static final String COLUMNNAME_C_InvoiceLine_ID = "C_InvoiceLine_ID";
 /** Set Revenue Recognition.
@@ -281,13 +282,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_RevenueRecognition_ID()));
 }
 
 @XendraTrl(Identifier="cc2b2e13-a0da-81a9-1431-0e0c2292c1e1")
+public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognition_Name="Reconocimiento de Ingreso";
+
+@XendraTrl(Identifier="cc2b2e13-a0da-81a9-1431-0e0c2292c1e1")
 public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognition_Description="Método para registro de ingresos";
 
 @XendraTrl(Identifier="cc2b2e13-a0da-81a9-1431-0e0c2292c1e1")
 public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognition_Help="El Reconocimiento de Ingresos indica como los ingresos serán reconocidos para este producto.";
-
-@XendraTrl(Identifier="cc2b2e13-a0da-81a9-1431-0e0c2292c1e1")
-public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognition_Name="Reconocimiento de Ingreso";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -305,7 +306,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="802bf66e-e11f-7b50-9988-bc3cfda5c365",Synchronized="2017-08-05 16:54:21.0")
+Identifier="802bf66e-e11f-7b50-9988-bc3cfda5c365",Synchronized="2019-08-30 22:22:13.0")
 /** Column name C_RevenueRecognition_ID */
 public static final String COLUMNNAME_C_RevenueRecognition_ID = "C_RevenueRecognition_ID";
 /** Set Revenue Recognition Plan.
@@ -325,13 +326,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="20c197c5-ae5f-de36-5d6c-3f93dcdd868b")
+public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognitionPlan_Name="Plan de Reconocimiento de ingresos";
+
+@XendraTrl(Identifier="20c197c5-ae5f-de36-5d6c-3f93dcdd868b")
 public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognitionPlan_Description="Plan para reconocer ó registrar ingresos";
 
 @XendraTrl(Identifier="20c197c5-ae5f-de36-5d6c-3f93dcdd868b")
 public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognitionPlan_Help="El plan de reconocimiento de Ingresos identifica un plan de reconocimiento de Ingresos único.";
-
-@XendraTrl(Identifier="20c197c5-ae5f-de36-5d6c-3f93dcdd868b")
-public static String es_PE_FIELD_RevenueRecognitionPlan_RevenueRecognitionPlan_Name="Plan de Reconocimiento de ingresos";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_Plan_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -370,7 +371,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ae14eb44-47c3-40a5-a981-4ef06ef861ef",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product Revenue.
@@ -389,13 +390,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2838c966-8718-5fd4-78b8-3bea609f0c6d")
+public static String es_PE_FIELD_RevenueRecognitionPlan_ProductRevenue_Name="Ventas";
+
+@XendraTrl(Identifier="2838c966-8718-5fd4-78b8-3bea609f0c6d")
 public static String es_PE_FIELD_RevenueRecognitionPlan_ProductRevenue_Description="Cuenta de Ingresos por el producto (Cuenta de Ventas)";
 
 @XendraTrl(Identifier="2838c966-8718-5fd4-78b8-3bea609f0c6d")
 public static String es_PE_FIELD_RevenueRecognitionPlan_ProductRevenue_Help="Cuenta de Ingresos por el producto (Cuenta de Ventas)  indica la cuenta usada para registrar ingresos de ventas para este producto";
-
-@XendraTrl(Identifier="2838c966-8718-5fd4-78b8-3bea609f0c6d")
-public static String es_PE_FIELD_RevenueRecognitionPlan_ProductRevenue_Name="Ventas";
 
 @XendraField(AD_Column_ID="P_Revenue_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -413,7 +414,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47a44f2d-c38d-6680-4864-e491a460dfc3",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name P_Revenue_Acct */
 public static final String COLUMNNAME_P_Revenue_Acct = "P_Revenue_Acct";
 /** Set Recognized Amount.
@@ -451,7 +452,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="be3a6872-c620-6130-11b9-4d460e3f06b6",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name RecognizedAmt */
 public static final String COLUMNNAME_RecognizedAmt = "RecognizedAmt";
 /** Set Total Amount.
@@ -471,13 +472,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="f7e6e392-ae60-bd0c-930f-40be2979fb69")
+public static String es_PE_FIELD_RevenueRecognitionPlan_TotalAmount_Name="Total Total";
+
+@XendraTrl(Identifier="f7e6e392-ae60-bd0c-930f-40be2979fb69")
 public static String es_PE_FIELD_RevenueRecognitionPlan_TotalAmount_Description="Total Total";
 
 @XendraTrl(Identifier="f7e6e392-ae60-bd0c-930f-40be2979fb69")
 public static String es_PE_FIELD_RevenueRecognitionPlan_TotalAmount_Help="Indica el total total del documento";
-
-@XendraTrl(Identifier="f7e6e392-ae60-bd0c-930f-40be2979fb69")
-public static String es_PE_FIELD_RevenueRecognitionPlan_TotalAmount_Name="Total Total";
 
 @XendraField(AD_Column_ID="TotalAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -495,7 +496,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4fe5623f-aef5-3097-dd12-c386920c16be",
-Synchronized="2017-08-05 16:54:21.0")
+Synchronized="2019-08-30 22:22:13.0")
 /** Column name TotalAmt */
 public static final String COLUMNNAME_TotalAmt = "TotalAmt";
 /** Set Unearned Revenue.
@@ -514,13 +515,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="003db2b3-3cc7-8b69-5274-836becf5fe23")
+public static String es_PE_FIELD_RevenueRecognitionPlan_UnearnedRevenue_Name="Ingresos no Devengados";
+
+@XendraTrl(Identifier="003db2b3-3cc7-8b69-5274-836becf5fe23")
 public static String es_PE_FIELD_RevenueRecognitionPlan_UnearnedRevenue_Description="Cuenta para ingresos no devengados";
 
 @XendraTrl(Identifier="003db2b3-3cc7-8b69-5274-836becf5fe23")
 public static String es_PE_FIELD_RevenueRecognitionPlan_UnearnedRevenue_Help="El Ingreso no devengado indica la cuenta usada para registrar facturas enviadas por productos ó servicios que aún no han sido entregados. Es usado en reconocimiento de ingresos.";
-
-@XendraTrl(Identifier="003db2b3-3cc7-8b69-5274-836becf5fe23")
-public static String es_PE_FIELD_RevenueRecognitionPlan_UnearnedRevenue_Name="Ingresos no Devengados";
 
 @XendraField(AD_Column_ID="UnEarnedRevenue_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="9314684d-72ca-d161-a53c-12a0a67be9e5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -538,7 +539,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6c6c8bcb-4898-11a7-aa0e-d4b52d34a711",Synchronized="2017-08-05 16:54:21.0")
+Identifier="6c6c8bcb-4898-11a7-aa0e-d4b52d34a711",Synchronized="2019-08-30 22:22:13.0")
 /** Column name UnEarnedRevenue_Acct */
 public static final String COLUMNNAME_UnEarnedRevenue_Acct = "UnEarnedRevenue_Acct";
 }

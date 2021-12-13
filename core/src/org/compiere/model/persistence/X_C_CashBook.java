@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("C_CashBook");
 public static String es_PE_TAB_Cashbook_Description="Mantener Libro de Efectivo";
 
 @XendraTrl(Identifier="29e338b6-943f-f41c-3329-e0d98f5de8f6")
-public static String es_PE_TAB_Cashbook_Name="Libro de Efectivo";
-
-@XendraTrl(Identifier="29e338b6-943f-f41c-3329-e0d98f5de8f6")
 public static String es_PE_TAB_Cashbook_Help="La pestaña Libro de Efectivo define un libro de efectivo para una organización.";
 
-@XendraTab(Name="Cashbook",Description="Maintain Cashbook",
+@XendraTrl(Identifier="29e338b6-943f-f41c-3329-e0d98f5de8f6")
+public static String es_PE_TAB_Cashbook_Name="Libro de Efectivo";
+@XendraTab(Name="Cashbook",
+Description="Maintain Cashbook",
 Help="The Cashbook Tab defines a unique cashbook for an organization.",
 AD_Window_ID="9f80de58-8dfb-e022-030e-4507c96bb137",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,11 +81,13 @@ public static final String TABNAME_Cashbook="29e338b6-943f-f41c-3329-e0d98f5de8f
 @XendraTrl(Identifier="ab44027e-b361-a2a7-e816-a5279dbc771d")
 public static String es_PE_TABLE_C_CashBook_Name="Libro de Efectivo";
 
-@XendraTable(Name="Cash Book",Description="Cash Book for recording petty cash transactions",
-Help="",TableName="C_CashBook",AccessLevel="3",AD_Window_ID="9f80de58-8dfb-e022-030e-4507c96bb137",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="ab44027e-b361-a2a7-e816-a5279dbc771d",Synchronized="2017-08-16 11:41:35.0")
+@XendraTable(Name="Cash Book",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Cash Book for recording petty cash transactions",Help="",TableName="C_CashBook",
+AccessLevel="3",AD_Window_ID="9f80de58-8dfb-e022-030e-4507c96bb137",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="ab44027e-b361-a2a7-e816-a5279dbc771d",Synchronized="2020-03-03 21:36:41.0")
 /** TableName=C_CashBook */
 public static final String Table_Name="C_CashBook";
 
@@ -135,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="aca73dde-fbbb-d91d-f4b3-5cc988d7d29f")
+public static String es_PE_FIELD_Cashbook_CashBook_Name="Libro de Efectivo";
+
+@XendraTrl(Identifier="aca73dde-fbbb-d91d-f4b3-5cc988d7d29f")
 public static String es_PE_FIELD_Cashbook_CashBook_Description="Libro de efectivo para registrar transacciones de caja chica.";
 
 @XendraTrl(Identifier="aca73dde-fbbb-d91d-f4b3-5cc988d7d29f")
 public static String es_PE_FIELD_Cashbook_CashBook_Help="El libro de efectivo identifica un libro de efectivo único. El libro de efectivo se usa para registrar transacciones de efectivo.";
-
-@XendraTrl(Identifier="aca73dde-fbbb-d91d-f4b3-5cc988d7d29f")
-public static String es_PE_FIELD_Cashbook_CashBook_Name="Libro de Efectivo";
 
 @XendraField(AD_Column_ID="C_CashBook_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -169,13 +171,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d9eb5dc4-50a7-4253-f945-aa23972f8b9f")
+public static String es_PE_FIELD_Cashbook_CurrencyType_Name="Tipo de Moneda";
+
+@XendraTrl(Identifier="d9eb5dc4-50a7-4253-f945-aa23972f8b9f")
 public static String es_PE_FIELD_Cashbook_CurrencyType_Description="Tipo de índice de conversión de moneda ";
 
 @XendraTrl(Identifier="d9eb5dc4-50a7-4253-f945-aa23972f8b9f")
 public static String es_PE_FIELD_Cashbook_CurrencyType_Help="El tipo del índice de conversión de monedas le deja definir diversos tipos de tarifas, tarifas ej. del punto, corporativas y/o de Ventas/Compras.";
-
-@XendraTrl(Identifier="d9eb5dc4-50a7-4253-f945-aa23972f8b9f")
-public static String es_PE_FIELD_Cashbook_CurrencyType_Name="Tipo de Moneda";
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -193,7 +195,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d3975799-5eb4-9f8d-3a10-cbcf7e5c3bc1",Synchronized="2017-08-05 16:53:27.0")
+Identifier="d3975799-5eb4-9f8d-3a10-cbcf7e5c3bc1",Synchronized="2019-08-30 22:21:19.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -213,13 +215,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9d2878e4-e006-91ac-b936-4b2433170e98")
+public static String es_PE_FIELD_Cashbook_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="9d2878e4-e006-91ac-b936-4b2433170e98")
 public static String es_PE_FIELD_Cashbook_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="9d2878e4-e006-91ac-b936-4b2433170e98")
 public static String es_PE_FIELD_Cashbook_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="9d2878e4-e006-91ac-b936-4b2433170e98")
-public static String es_PE_FIELD_Cashbook_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -238,7 +240,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d8ccb9b-2737-c5b9-4c5d-db8e5f0bf26f",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Description.
@@ -269,13 +271,13 @@ return value;
 }
 
 @XendraTrl(Identifier="80c62fbf-aff2-777a-6f11-7d3c41287dc5")
+public static String es_PE_FIELD_Cashbook_Description_Name="Observación";
+
+@XendraTrl(Identifier="80c62fbf-aff2-777a-6f11-7d3c41287dc5")
 public static String es_PE_FIELD_Cashbook_Description_Description="Observación";
 
 @XendraTrl(Identifier="80c62fbf-aff2-777a-6f11-7d3c41287dc5")
 public static String es_PE_FIELD_Cashbook_Description_Help="Observación";
-
-@XendraTrl(Identifier="80c62fbf-aff2-777a-6f11-7d3c41287dc5")
-public static String es_PE_FIELD_Cashbook_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -293,7 +295,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b40e0700-489f-09e2-e563-570f67c0b3a4",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -325,7 +327,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2a5d9fec-85d6-406c-929f-4a8a1553b14a",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -348,13 +350,13 @@ return false;
 }
 
 @XendraTrl(Identifier="74161a2b-b597-2d0e-f85d-df9ef231dbc2")
+public static String es_PE_FIELD_Cashbook_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="74161a2b-b597-2d0e-f85d-df9ef231dbc2")
 public static String es_PE_FIELD_Cashbook_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="74161a2b-b597-2d0e-f85d-df9ef231dbc2")
 public static String es_PE_FIELD_Cashbook_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="74161a2b-b597-2d0e-f85d-df9ef231dbc2")
-public static String es_PE_FIELD_Cashbook_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -372,7 +374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4d4e6ea4-46e0-7fab-4480-e7b06ddf2de3",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Name.
@@ -404,18 +406,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
+public static String es_PE_FIELD_Cashbook_Name_Name="Nombre";
+
+@XendraTrl(Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
 public static String es_PE_FIELD_Cashbook_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
 public static String es_PE_FIELD_Cashbook_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
-public static String es_PE_FIELD_Cashbook_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="992c0ac1-015d-4446-1ff3-115856245ce1")
 public static final String FIELDNAME_Cashbook_Name="992c0ac1-015d-4446-1ff3-115856245ce1";
 
 @XendraTrl(Identifier="4039ae97-51d7-6220-4a06-1635ce3998f9")
@@ -427,7 +430,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4039ae97-51d7-6220-4a06-1635ce3998f9",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Search Key.
@@ -451,13 +454,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="6a451943-1de4-1d43-0aaf-a7d2a02a740b")
+public static String es_PE_FIELD_Cashbook_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="6a451943-1de4-1d43-0aaf-a7d2a02a740b")
 public static String es_PE_FIELD_Cashbook_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="6a451943-1de4-1d43-0aaf-a7d2a02a740b")
 public static String es_PE_FIELD_Cashbook_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="6a451943-1de4-1d43-0aaf-a7d2a02a740b")
-public static String es_PE_FIELD_Cashbook_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="29e338b6-943f-f41c-3329-e0d98f5de8f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -475,7 +478,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19d1d92c-5ccb-c551-49fc-fc986bc380c3",
-Synchronized="2017-08-05 16:53:27.0")
+Synchronized="2019-08-30 22:21:19.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

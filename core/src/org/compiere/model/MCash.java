@@ -23,15 +23,16 @@ import java.util.*;
 import java.util.logging.*;
 
 import org.compiere.acct.Doc;
-import org.compiere.acct.Doc_Cash;
-import org.compiere.model.persistence.X_C_AllocationHdr;
 import org.compiere.model.persistence.X_C_Cash;
-import org.compiere.model.reference.REF_C_CashTrxType;
 import org.compiere.model.reference.REF__DocumentAction;
 import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
 import org.compiere.model.reference.REF__DocumentStatus;
 import org.compiere.process.*;
 import org.compiere.util.*;
+import org.kie.api.KieBase;
+import org.kie.api.runtime.KieSession;
+import org.xendra.rules.CustomAgendaEventListener;
+import org.xendra.rules.CustomWorkingMemoryEventListener;
 
 /**
  *	Cash Journal Model
@@ -41,6 +42,28 @@ import org.compiere.util.*;
  */
 public class MCash extends X_C_Cash implements DocAction
 {
+	public static MCash get(Properties ctx, int C_CashBook_ID, int C_DocType_ID, int HR_WorkShift_ID, Timestamp dateAcct, String trxName) {
+		String where = "C_CashBook_ID=? AND C_DocType_ID = ? AND HR_WorkShift_ID = ? AND TRUNC(StatementDate)=? AND Processed='N'";
+		MCash cash = new Query(Env.getCtx(), MCash.Table_Name, where, trxName)
+			.setParameters(C_CashBook_ID, C_DocType_ID, HR_WorkShift_ID, TimeUtil.getDay(dateAcct)).setOrderBy("Created").first();
+		if (cash != null)
+			return cash;
+
+		//	Get CashBook
+		MCashBook cb = new MCashBook (ctx, C_CashBook_ID, trxName);
+		if (cb.get_ID() ==0)
+		{
+			s_log.warning("Not found C_CashBook_ID=" + C_CashBook_ID);
+			return null;
+		}
+
+		//	Create New Journal
+		cash = new MCash (cb, dateAcct);
+		cash.setC_DocType_ID(C_DocType_ID);
+		cash.setHR_WorkShift_ID(HR_WorkShift_ID);
+		cash.save(trxName);
+		return cash;		
+	}	
 	/**
 	 * 	Get Cash Journal for currency, org and date
 	 *	@param ctx context
@@ -50,50 +73,53 @@ public class MCash extends X_C_Cash implements DocAction
 	 *	@param trxName transaction
 	 *	@return cash
 	 */
-	public static MCash get (Properties ctx, int AD_Org_ID, 
-			Timestamp dateAcct, int C_Currency_ID, String trxName)
+	public static MCash get (Properties ctx, int AD_Org_ID,	Timestamp dateAcct, int C_Currency_ID, String trxName)
 	{
-		MCash retValue = null;
-		//	Existing Journal
-		String sql =
-			"SELECT * FROM C_Cash c "
-			+ "WHERE c.AD_Org_ID=?"						//	#1
-			+ " AND TRUNC(c.StatementDate)=?"			//	#2
-			+ " AND c.Processed='N'"
-			+ " AND EXISTS (SELECT * FROM C_CashBook cb "
-			+ "WHERE c.C_CashBook_ID=cb.C_CashBook_ID AND cb.AD_Org_ID=c.AD_Org_ID"
-			+ " AND cb.C_Currency_ID=?)";			//	#3
-		PreparedStatement pstmt = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, trxName);
-			pstmt.setInt (1, AD_Org_ID);
-			pstmt.setTimestamp (2, TimeUtil.getDay(dateAcct));
-			pstmt.setInt (3, C_Currency_ID);
-			ResultSet rs = pstmt.executeQuery ();
-			if (rs.next ())
-				retValue = new MCash (ctx, rs, trxName);
-			rs.close ();
-			pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			s_log.log(Level.SEVERE, sql, e);
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
+		String where = "AD_Org_ID = ? AND TRUNC(StatementDate)=? AND Processed = 'N' ";
+		where +=" AND EXISTS( SELECT * FROM C_CashBook cb WHERE C_CashBook_ID=cb.C_CashBook_ID AND cb.AD_Org_ID=AD_Org_ID AND cb.C_Currency_ID=?)";		
+		MCash retValue = new Query(Env.getCtx(), MCash.Table_Name, where, trxName).setParameters(AD_Org_ID, TimeUtil.getDay(dateAcct)).first();
+//		MCash retValue = null;
+//		//	Existing Journal
+//		String sql =
+//			"SELECT * FROM C_Cash c "
+//			+ "WHERE c.AD_Org_ID=?"						//	#1
+//			+ " AND TRUNC(c.StatementDate)=?"			//	#2
+//			+ " AND c.Processed='N'"
+//			+ " AND EXISTS (SELECT * FROM C_CashBook cb "
+//			+ "WHERE c.C_CashBook_ID=cb.C_CashBook_ID AND cb.AD_Org_ID=c.AD_Org_ID"
+//			+ " AND cb.C_Currency_ID=?)";			//	#3
+//		PreparedStatement pstmt = null;
+//		try
+//		{
+//			pstmt = DB.prepareStatement (sql, trxName);
+//			pstmt.setInt (1, AD_Org_ID);
+//			pstmt.setTimestamp (2, TimeUtil.getDay(dateAcct));
+//			pstmt.setInt (3, C_Currency_ID);
+//			ResultSet rs = pstmt.executeQuery ();
+//			if (rs.next ())
+//				retValue = new MCash (ctx, rs, trxName);
+//			rs.close ();
+//			pstmt.close ();
+//			pstmt = null;
+//		}
+//		catch (Exception e)
+//		{
+//			s_log.log(Level.SEVERE, sql, e);
+//		}
+//		try
+//		{
+//			if (pstmt != null)
+//				pstmt.close ();
+//			pstmt = null;
+//		}
+//		catch (Exception e)
+//		{
+//			pstmt = null;
+//		}
 		if (retValue != null)
 			return retValue;
-
+		
+		
 		//	Get CashBook
 		MCashBook cb = MCashBook.get (ctx, AD_Org_ID, C_Currency_ID);
 		if (cb == null)
@@ -116,44 +142,13 @@ public class MCash extends X_C_Cash implements DocAction
 	 *	@param trxName transaction
 	 *	@return cash
 	 */
-	public static MCash get (Properties ctx, int C_CashBook_ID, 
-			Timestamp dateAcct, String trxName)
+	public static MCash get (Properties ctx, int C_CashBook_ID, Timestamp dateAcct, String trxName)
 	{
-		MCash retValue = null;
-		//	Existing Journal
-		String sql = "SELECT * FROM C_Cash c "
-			+ "WHERE c.C_CashBook_ID=?"					//	#1
-			+ " AND TRUNC(c.StatementDate)=?"			//	#2
-			+ " AND c.Processed='N' ORDER BY CREATED ";
-		PreparedStatement pstmt = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, trxName);
-			pstmt.setInt (1, C_CashBook_ID);
-			pstmt.setTimestamp (2, TimeUtil.getDay(dateAcct));
-			ResultSet rs = pstmt.executeQuery ();
-			if (rs.next ())
-				retValue = new MCash (ctx, rs, trxName);
-			rs.close ();
-			pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			s_log.log(Level.SEVERE, sql, e);
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
-		if (retValue != null)
-			return retValue;
+		String where = "C_CashBook_ID=? AND TRUNC(StatementDate)=? AND Processed='N'";
+		MCash cash = new Query(Env.getCtx(), MCash.Table_Name, where, trxName)
+			.setParameters(C_CashBook_ID, TimeUtil.getDay(dateAcct)).setOrderBy("Created").first();			
+		if (cash != null)
+			return cash;
 
 		//	Get CashBook
 		MCashBook cb = new MCashBook (ctx, C_CashBook_ID, trxName);
@@ -164,9 +159,9 @@ public class MCash extends X_C_Cash implements DocAction
 		}
 
 		//	Create New Journal
-		retValue = new MCash (cb, dateAcct);
-		retValue.save(trxName);
-		return retValue;
+		cash = new MCash (cb, dateAcct);		
+		cash.save(trxName);
+		return cash;
 	}	//	get
 
 	/**	Static Logger	*/
@@ -361,6 +356,64 @@ public class MCash extends X_C_Cash implements DocAction
 		return true;
 	}	//	beforeSave
 
+	/**************************************************************************
+	 * 	Before Delete
+	 *	@return true/false
+	 */
+	protected boolean beforeDelete ()
+	{
+		/* saguayo: 10/03/2007 Integrate the delete cash process here */
+		try {
+			String sql = "UPDATE " +
+			"C_Order " +
+			"SET " +
+			"C_CashLine_ID=null " +
+			"WHERE " +
+			"C_CashLine_ID IN (" +
+			"SELECT " +
+			"C_CashLine_ID " +
+			"FROM " +
+			"C_CashLine " +
+			"WHERE " +
+			"C_Cash_ID=?" +
+			")";
+			int no = DB.executeUpdate(sql, get_ID(), get_TrxName());
+			if (no == -1) return false;
+
+			sql = "UPDATE " +
+			"C_Invoice " +
+			"SET " +
+			"C_CashLine_ID=null " +
+			"WHERE " +
+			"C_CashLine_ID IN (" +
+			"SELECT " +
+			"C_CashLine_ID " +
+			"FROM " +
+			"C_CashLine " +
+			"WHERE " +
+			"C_Cash_ID=?" +
+			")";
+			no = DB.executeUpdate(sql, get_ID(), get_TrxName());
+			if (no == -1) return false;
+		}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	protected boolean afterDelete (boolean success)
+	{
+		if (!success)
+			return success;
+		MCashLine lines[] = getLines(false);		
+		for (int i = 0; i < lines.length; i++) {
+			lines[i].delete(true);
+		}
+		return success;
+	}	//	afterDelete
+	
+
 
 	/**************************************************************************
 	 * 	Process document
@@ -384,7 +437,10 @@ public class MCash extends X_C_Cash implements DocAction
 	/**	Process Message 			*/
 	private String		m_processMsg = null;
 	/**	Just Prepared Flag			*/
-	private boolean		m_justPrepared = false;
+	private boolean		m_justPrepared = false;	
+	private String rulestatus;
+	private KieSession ksession;
+
 
 	/**
 	 * 	Unlock Document.
@@ -408,63 +464,92 @@ public class MCash extends X_C_Cash implements DocAction
 		return true;
 	}	//	invalidateIt
 
+	public int getLength()
+	{
+		MCashLine[] lines = getLines(false);
+		return lines.length;
+	}	
 	/**
 	 *	Prepare Document
 	 * 	@return new status (In Progress or Invalid) 
 	 */
 	public String prepareIt()
-	{
+	{		
 		log.info(toString());
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
 
-		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, Env.getAD_Org_ID(getCtx())))
+		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
+		int AD_Rule_ID = dt.getAD_Rule_ID();		
+		KieBase kb = Env.startRule(AD_Rule_ID);
+		if (kb != null)
 		{
-			m_processMsg = "@PeriodClosed@";
-			return DocAction.STATUS_Invalid;
-		}
-		MCashLine[] lines = getLines(false);
-		if (lines.length == 0)
+			ksession = kb.newKieSession();
+			//ksession.addEventListener(new DebugAgendaEventListener());
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());
+			ksession.setGlobal("ctx", Env.getCtx());								
+			ksession.insert(this);			
+		}		
+		else
 		{
-			m_processMsg = "@NoLines@";
-			return DocAction.STATUS_Invalid;
-		}
-		//	Add up Amounts
-		BigDecimal difference = Env.ZERO;
-		int C_Currency_ID = getC_Currency_ID();
-		for (int i = 0; i < lines.length; i++)
-		{
-			MCashLine line = lines[i];
-			if (!line.isActive())
-				continue;
-			if (C_Currency_ID == line.getC_Currency_ID())
-				difference = difference.add(line.getAmount().add(line.getWithholdingAmt()));
-			else
-			{
-				BigDecimal amt = MConversionRate.convert(getCtx(),line.getAmount().add(line.getWithholdingAmt()), 
-						line.getC_Currency_ID(), C_Currency_ID, getStatementDate(), line.getC_ConversionType_ID(), 
-						getAD_Client_ID(), getAD_Org_ID());
-				if (amt == null)
-				{
-					m_processMsg = "No Conversion Rate found - @C_CashLine_ID@= " + line.getLine();
-					return DocAction.STATUS_Invalid;
-				}
-				difference = difference.add(amt);
-			}
-		}
-		setStatementDifference(difference);
-		//	setEndingBalance(getBeginningBalance().add(getStatementDifference()));
-
-		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_PREPARE);
-		if (m_processMsg != null)
-			return DocAction.STATUS_Invalid;
-
-		m_justPrepared = true;
-		if (!REF__DocumentAction.Complete.equals(getDocAction()))
-			setDocAction(REF__DocumentAction.Complete);
-		return DocAction.STATUS_InProgress;
+			setProcessMsg(String.format("%s %s %s", Env.getKieError(AD_Rule_ID), dt.getC_DocType_ID(), dt.getName()));
+			if (getProcessMsg() != null)
+				return DocAction.STATUS_Invalid;
+		}		
+		ksession.getAgenda().getAgendaGroup( "prepare" ).setFocus();
+		ksession.fireAllRules();		
+		ksession.dispose();
+		return rulestatus;
+		
+//		//	Std Period open?
+//		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, Env.getAD_Org_ID(getCtx())))
+//		{
+//			m_processMsg = "@PeriodClosed@";
+//			return DocAction.STATUS_Invalid;
+//		}
+//		MCashLine[] lines = getLines(false);
+//		if (lines.length == 0)
+//		{
+//			m_processMsg = "@NoLines@";
+//			return DocAction.STATUS_Invalid;
+//		}
+//		//	Add up Amounts
+//		BigDecimal difference = Env.ZERO;
+//		int C_Currency_ID = getC_Currency_ID();
+//		for (int i = 0; i < lines.length; i++)
+//		{
+//			MCashLine line = lines[i];
+//			if (!line.isActive())
+//				continue;
+//			if (C_Currency_ID == line.getC_Currency_ID())
+//				difference = difference.add(line.getAmount().add(line.getWithholdingAmt()));
+//			else
+//			{
+//				BigDecimal amt = MConversionRate.convert(getCtx(),line.getAmount().add(line.getWithholdingAmt()), 
+//						line.getC_Currency_ID(), C_Currency_ID, getStatementDate(), line.getC_ConversionType_ID(), 
+//						getAD_Client_ID(), getAD_Org_ID());
+//				if (amt == null)
+//				{
+//					m_processMsg = "No Conversion Rate found - @C_CashLine_ID@= " + line.getLine();
+//					return DocAction.STATUS_Invalid;
+//				}
+//				difference = difference.add(amt);
+//			}
+//		}
+//		setStatementDifference(difference);
+//		//	setEndingBalance(getBeginningBalance().add(getStatementDifference()));
+//
+//		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_PREPARE);
+//		if (m_processMsg != null)
+//			return DocAction.STATUS_Invalid;
+//
+//		m_justPrepared = true;
+//		if (!REF__DocumentAction.Complete.equals(getDocAction()))
+//			setDocAction(REF__DocumentAction.Complete);
+//		return DocAction.STATUS_InProgress;
 	}	//	prepareIt
 
 	/**
@@ -515,275 +600,313 @@ public class MCash extends X_C_Cash implements DocAction
 	 */
 	public String completeIt()
 	{
-		//	Re-Check
-		if (!m_justPrepared)
-		{
+		if (!m_justPrepared) {
 			String status = prepareIt();
 			if (!DocAction.STATUS_InProgress.equals(status))
 				return status;
-		}
-
-		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_COMPLETE);
-		if (m_processMsg != null)
+		}		
+		setProcessMsg(ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_COMPLETE));
+		if (getProcessMsg() != null)
+		{
+			System.out.println("status invalid");
 			return DocAction.STATUS_Invalid;
-
-
-		//	Implicit Approval
-		if (!isApproved())
-			approveIt();
-		//
-		log.info(toString());
-
-		if ( getC_Payment_ID() >  0 )
+		}		
+		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
+		int AD_Rule_ID = dt.getAD_Rule_ID();	
+		log.log(Level.WARNING, String.format("ruling cash <%s>", getDocumentNo()));
+		//System.out.println(String.format("ruling order <%s>", getDocumentNo()));
+		KieBase kb = Env.startRule(AD_Rule_ID);
+		if (kb != null)
 		{
-			MPayment pay = new MPayment (getCtx(), getC_Payment_ID(), get_TrxName());
-			pay.setC_Cash_ID(this.getC_Cash_ID());
-			pay.setC_CashBook_ID(this.getC_CashBook_ID());
-			pay.save();
-		}
-
-		MCashLine[] lines = getLines(false);
-
-		int allocatelines = 0; 
-
-		//ArrayList<MAllocationHdr>	allocations  = new ArrayList<MAllocationHdr>();
-		ArrayList<MAllocation>	allocations  = new ArrayList<MAllocation>();
-
-		for (int i = 0; i < lines.length; i++)
+			ksession = kb.newKieSession();
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
+			ksession.setGlobal("ctx", Env.getCtx());								
+			ksession.insert(this);			
+		}		
+		else
 		{
-			System.out.println(i+" line(s) de "+lines.length);
-			MCashLine line = lines[i];
-			MAllocation hdr = null;
-			Boolean found = false; 
-			for (MAllocation allochdr:allocations)
-			{
-				if (allochdr.getC_Currency_ID() ==  line.getC_Currency_ID())
-				{
-					hdr = allochdr;
-					found = true;
-					break;					
-				}
-			}		
-			if (hdr == null)
-				hdr = new MAllocation();		
-			if (!found)
-			{				
-				if (!hdr.addHeader(this, getStatementDate(), getDateAcct(), line.getC_Currency_ID(), get_TrxName()))
-				{
-					m_processMsg = "Could not create Allocation Hdr";
-					return DocAction.STATUS_Invalid;
-				}					
-				allocations.add(hdr);
-			}			
-			if (REF_C_CashTrxType.Invoice.equals(line.getCashType()))
-			{
-				if ( line.getC_Invoice_ID() > 0 )
-				{					
-					MInvoice invoice = MInvoice.get(getCtx(), line.getC_Invoice_ID());
-					if (invoice.getWithholdingAmt().signum() > 0)
-					{
-						MWithholdingLine wline = MWithholdingLine.get(Env.getCtx(), MCashLine.Table_ID, line.getC_CashLine_ID(), get_TrxName());
-						if (wline != null)
-						{
-							if (wline.getWithholdingAmt().compareTo(line.getWithholdingAmt()) != 0 
-									&& wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed))
-							{
-								m_processMsg = "no se puede alterar una percepcion ya completada Factura : "+invoice.getDocumentNo();
-								return DocAction.STATUS_Invalid;
-							}
-							else if (wline.getParent() == null)
-							{
-								wline.delete(true);
-							}
-							else if (!wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed))
-							{
-								wline.delete(true);
-							}
-						}	
-					}
-					/* sergioaguayo (10/18/2007): do not complete if already paid */
-					if (invoice.getOpenAmt().signum()==0) {
-						m_processMsg = "@Error@ Invoice " + invoice.getSerial() + "-" + invoice.getDocumentNo() + "  @AlreadyPaid@";
-						return DocAction.STATUS_Invalid;
-					}
-					BigDecimal OverUnderAmt;
-					if (invoice.isSOTrx()) {
-						OverUnderAmt = invoice.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());
-					}
-					else {
-						OverUnderAmt = invoice.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
-					}
-					if (!hdr.addLine(line, OverUnderAmt, invoice))
-					{
-						m_processMsg = "Could not create Allocation Line";
-						return DocAction.STATUS_Invalid;
-					}
-					allocatelines++;
-				}
-			}
-			else if (REF_C_CashTrxType.BillOfExchange.equals(line.getCashType()))
-			{
-				if (line.getC_BOE_ID() > 0 )
-				{
-					MBOE boe = MBOE.get(getCtx(),line.getC_BOE_ID(),get_TrxName());
-					BigDecimal OverUnderAmt;
-					if (boe.isSOTrx()) {
-						OverUnderAmt = boe.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());				
-					}
-					else {
-						OverUnderAmt = boe.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
-					}
-
-					if (!hdr.addLine(line, OverUnderAmt, boe))
-					{
-						m_processMsg = "Could not create Allocation Line";
-						return DocAction.STATUS_Invalid;						
-					}
-					//					// Allocation Line					
-					//					MAllocationLine aLine = new MAllocationLine ( hdr, line.getAmount(), 
-					//							line.getDiscountAmt(), line.getWriteOffAmt(), OverUnderAmt);
-					//					aLine.setC_BOE_ID(line.getC_BOE_ID());
-					//					aLine.setC_CashLine_ID(line.getC_CashLine_ID());
-					//					aLine.setC_BPartner_ID(line.getC_BPartner_ID());
-					//					aLine.setC_Currency_ID(line.getC_Currency_ID());
-					//                                        aLine.setC_Project_ID(line.getC_Project_ID());
-					//					if (!aLine.save())
-					//					{
-					//						m_processMsg = "Could not create Allocation Line";
-					//						return DocAction.STATUS_Invalid;
-					//					}
-					if (line.getRenewedAmt().compareTo(Env.ZERO) != 0)					
-					{
-						BigDecimal RenewedAmt = line.getRenewedAmt().abs(); 
-						boe.setIsRenewed(true);
-						if (boe.save())
-						{
-							MBOE boerenew = new MBOE(getCtx(), 0, get_TrxName());
-							Timestamp duedate = boe.getR_DueDate();
-							Timestamp dateboe = boe.getR_DateBOE();
-							String DocumentNo = boe.getR_DocumentNo();							
-							boerenew.setC_Currency_ID(getC_Currency_ID());
-							boerenew.setC_ConversionType_ID(boe.getC_ConversionType_ID());
-							boerenew.setDateBOE(dateboe);
-							boerenew.setIsSOTrx(boe.isSOTrx());
-							boerenew.setGrandTotal(RenewedAmt.abs());
-							boerenew.setC_DocType_ID(boe.getC_DocType_ID());
-							boerenew.setC_DocTypeTarget_ID(boe.getC_DocTypeTarget_ID());
-							boerenew.setDocumentNo(DocumentNo);
-							boerenew.setDueDate(duedate);
-							boerenew.setC_BPartner_ID(boe.getC_BPartner_ID());
-							boerenew.setC_BPartner_Location_ID(boe.getC_BPartner_Location_ID());
-							boerenew.setDocStatus(DocAction.STATUS_Portfolio);	        
-							boerenew.setRef_BOE_ID(boe.getC_BOE_ID());
-							boerenew.setStatusDate(dateboe);
-							if (boerenew.save())
-							{
-								//
-								if (boerenew.discountIt())
-								{	        			        		
-									boerenew.save(get_TrxName());
-									MBOEStatement statement = MBOEStatement.get(boerenew.getC_BOE_ID(), boerenew.getDocStatus(), get_TrxName());
-									if ( statement != null )
-									{
-										statement.setStatusDate(boerenew.getStatusDate());
-										statement.save(get_TrxName());
-									}		        		
-								}
-							}
-							if (!hdr.addLine(boe, getC_Currency_ID(), RenewedAmt,Env.ZERO,Env.ZERO, OverUnderAmt))
-							{
-								m_processMsg = "Could not create Allocation Line";
-								return DocAction.STATUS_Invalid;											        	
-							}
-							//
-							//					        MAllocationLine renew = null;
-							//							if (boe.isSOTrx())
-							//								renew = new MAllocationLine (hdr, RenewedAmt.abs(), 
-							//									Env.ZERO, Env.ZERO, Env.ZERO);
-							//							else
-							//								renew = new MAllocationLine (hdr, RenewedAmt.abs().negate(), 
-							//									Env.ZERO, Env.ZERO, Env.ZERO);
-							//							renew.setDocInfo(getC_BPartner_ID(), 0, 0);
-							//							renew.setC_BOE_ID(boe.getC_BOE_ID());   // <-- letra que paga
-							//							renew.setAD_Table_ID(MBOE.Table_ID);    // <-- indica que es un pago con letra
-							//							renew.setRecord_ID(boerenew.getC_BOE_ID());  // <-- indica con que letra esta pagando.
-							//							renew.setC_Currency_ID(getC_Currency_ID());
-							//							renew.saveEx(get_TrxName());
-						}
-					}
-					allocatelines++;					
-				}				
-			}
-			else if (REF_C_CashTrxType.Charge.equals(line.getCashType()))
-			{
-				if (!hdr.addLine(line))
-				{
-					m_processMsg = "Could not create Allocation Line";
-					return DocAction.STATUS_Invalid;
-				}									
-				//				MAllocationLine aLine = new MAllocationLine ( hdr, line.getAmount(), 
-				//						line.getDiscountAmt(), line.getWriteOffAmt(), Env.ZERO);
-				//				aLine.setC_Charge_ID(line.getC_Charge_ID());
-				//				aLine.setC_CashLine_ID(line.getC_CashLine_ID());
-				//				aLine.setC_BPartner_ID(line.getC_BPartner_ID());
-				//				aLine.setC_Currency_ID(line.getC_Currency_ID());
-				//                                aLine.setC_Project_ID(line.getC_Project_ID());
-				//				if (!aLine.save())
-				//				{
-				//					m_processMsg = "Could not create Allocation Line";
-				//					return DocAction.STATUS_Invalid;
-				//				}				
-				allocatelines++;
-			}
-			else if (REF_C_CashTrxType.Difference.equals(line.getCashType()))
-			{
-				allocatelines++;
-			}
-			else if (REF_C_CashTrxType.GeneralExpense.equals(line.getCashType()))
-			{
-				allocatelines++;
-			}
-			else if (REF_C_CashTrxType.GeneralReceipts.equals(line.getCashType()))
-			{
-				allocatelines++;
-			}			
-		}
-
-		if (allocatelines == 0)
-		{
-			m_processMsg = "@NoLines@";
-			return DocAction.STATUS_Invalid;
-		}
-		for (MAllocation allochdr:allocations)
-		{
-			System.out.println(allochdr.getC_AllocationHdr_ID());
-			if (allochdr.completeIt())
-			{
-				if (allochdr.save())
-				{
-					if (!MFactAcct.alreadyPosted(X_C_AllocationHdr.Table_ID, allochdr.getC_AllocationHdr_ID(), get_TrxName()))
-					{				
-						String error = DocumentEngine.postImmediate(getCtx(),
-								getAD_Client_ID(), X_C_AllocationHdr.Table_ID, allochdr.getC_AllocationHdr_ID(), true,
-								get_TrxName());
-						if (error != null)
-							m_processMsg = error;				        					
-					}                    		
-				}
-			}
-		}
-
-		//	User Validation
-		String valid = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_COMPLETE);
-		if (valid != null)
-		{
-			m_processMsg = valid;
-			return DocAction.STATUS_Invalid;
-		}
-		//
-		setProcessed(true);
-		setDocAction(REF__DocumentAction.Close);
-		return DocAction.STATUS_Completed;
+			String error = String.format("%s en %s", Env.getKieError(AD_Rule_ID), dt.getName()); 						
+			setProcessMsg(error);
+			if (getProcessMsg() != null)
+				return DocAction.STATUS_Invalid;
+		}		
+		ksession.getAgenda().getAgendaGroup( "complete" ).setFocus();
+		setRulestatus(DocAction.STATUS_Invalid);		
+		ksession.fireAllRules();		
+		ksession.dispose();
+		return rulestatus;
+		
+//		//	Re-Check
+//		if (!m_justPrepared)
+//		{
+//			String status = prepareIt();
+//			if (!DocAction.STATUS_InProgress.equals(status))
+//				return status;
+//		}
+//
+//		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_COMPLETE);
+//		if (m_processMsg != null)
+//			return DocAction.STATUS_Invalid;
+//
+//
+//		//	Implicit Approval
+//		if (!isApproved())
+//			approveIt();
+//		//
+//		log.info(toString());
+//
+//		if ( getC_Payment_ID() >  0 )
+//		{
+//			MPayment pay = new MPayment (getCtx(), getC_Payment_ID(), get_TrxName());
+//			pay.setC_Cash_ID(this.getC_Cash_ID());
+//			pay.setC_CashBook_ID(this.getC_CashBook_ID());
+//			pay.save();
+//		}
+//
+//		MCashLine[] lines = getLines(false);
+//
+//		int allocatelines = 0; 
+//
+//		//ArrayList<MAllocationHdr>	allocations  = new ArrayList<MAllocationHdr>();
+//		ArrayList<MAllocation>	allocations  = new ArrayList<MAllocation>();
+//
+//		for (int i = 0; i < lines.length; i++)
+//		{
+//			System.out.println(i+" line(s) de "+lines.length);
+//			MCashLine line = lines[i];
+//			MAllocation hdr = null;
+//			Boolean found = false; 
+//			for (MAllocation allochdr:allocations)
+//			{
+//				if (allochdr.getC_Currency_ID() ==  line.getC_Currency_ID())
+//				{
+//					hdr = allochdr;
+//					found = true;
+//					break;					
+//				}
+//			}		
+//			if (hdr == null)
+//				hdr = new MAllocation();		
+//			if (!found)
+//			{				
+//				if (!hdr.addHeader(this, getStatementDate(), getDateAcct(), line.getC_Currency_ID(), get_TrxName()))
+//				{
+//					m_processMsg = "Could not create Allocation Hdr";
+//					return DocAction.STATUS_Invalid;
+//				}					
+//				allocations.add(hdr);
+//			}			
+//			if (REF_C_CashTrxType.Invoice.equals(line.getCashType()))
+//			{
+//				if ( line.getC_Invoice_ID() > 0 )
+//				{					
+//					MInvoice invoice = MInvoice.get(getCtx(), line.getC_Invoice_ID());
+//					if (invoice.getWithholdingAmt().signum() > 0)
+//					{
+//						MWithholdingLine wline = MWithholdingLine.get(Env.getCtx(), MCashLine.Table_ID, line.getC_CashLine_ID(), get_TrxName());
+//						if (wline != null)
+//						{
+//							if (wline.getWithholdingAmt().compareTo(line.getWithholdingAmt()) != 0 
+//									&& wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed))
+//							{
+//								m_processMsg = "no se puede alterar una percepcion ya completada Factura : "+invoice.getDocumentNo();
+//								return DocAction.STATUS_Invalid;
+//							}
+//							else if (wline.getParent() == null)
+//							{
+//								wline.delete(true);
+//							}
+//							else if (!wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed))
+//							{
+//								wline.delete(true);
+//							}
+//						}	
+//					}
+//					/* sergioaguayo (10/18/2007): do not complete if already paid */
+//					if (invoice.getOpenAmt().signum()==0) {
+//						m_processMsg = "@Error@ Invoice " + invoice.getSerial() + "-" + invoice.getDocumentNo() + "  @AlreadyPaid@";
+//						return DocAction.STATUS_Invalid;
+//					}
+//					BigDecimal OverUnderAmt;
+//					if (invoice.isSOTrx()) {
+//						OverUnderAmt = invoice.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());
+//					}
+//					else {
+//						OverUnderAmt = invoice.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
+//					}
+//					if (!hdr.addLine(line, OverUnderAmt, invoice))
+//					{
+//						m_processMsg = "Could not create Allocation Line";
+//						return DocAction.STATUS_Invalid;
+//					}
+//					allocatelines++;
+//				}
+//			}
+//			else if (REF_C_CashTrxType.BillOfExchange.equals(line.getCashType()))
+//			{
+//				if (line.getC_BOE_ID() > 0 )
+//				{
+//					MBOE boe = MBOE.get(getCtx(),line.getC_BOE_ID(),get_TrxName());
+//					BigDecimal OverUnderAmt;
+//					if (boe.isSOTrx()) {
+//						OverUnderAmt = boe.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());				
+//					}
+//					else {
+//						OverUnderAmt = boe.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
+//					}
+//
+//					if (!hdr.addLine(line, OverUnderAmt, boe))
+//					{
+//						m_processMsg = "Could not create Allocation Line";
+//						return DocAction.STATUS_Invalid;						
+//					}
+//					//					// Allocation Line					
+//					//					MAllocationLine aLine = new MAllocationLine ( hdr, line.getAmount(), 
+//					//							line.getDiscountAmt(), line.getWriteOffAmt(), OverUnderAmt);
+//					//					aLine.setC_BOE_ID(line.getC_BOE_ID());
+//					//					aLine.setC_CashLine_ID(line.getC_CashLine_ID());
+//					//					aLine.setC_BPartner_ID(line.getC_BPartner_ID());
+//					//					aLine.setC_Currency_ID(line.getC_Currency_ID());
+//					//                                        aLine.setC_Project_ID(line.getC_Project_ID());
+//					//					if (!aLine.save())
+//					//					{
+//					//						m_processMsg = "Could not create Allocation Line";
+//					//						return DocAction.STATUS_Invalid;
+//					//					}
+//					if (line.getRenewedAmt().compareTo(Env.ZERO) != 0)					
+//					{
+//						BigDecimal RenewedAmt = line.getRenewedAmt().abs(); 
+//						boe.setIsRenewed(true);
+//						if (boe.save())
+//						{
+//							MBOE boerenew = new MBOE(getCtx(), 0, get_TrxName());
+//							Timestamp duedate = boe.getR_DueDate();
+//							Timestamp dateboe = boe.getR_DateBOE();
+//							String DocumentNo = boe.getR_DocumentNo();							
+//							boerenew.setC_Currency_ID(getC_Currency_ID());
+//							boerenew.setC_ConversionType_ID(boe.getC_ConversionType_ID());
+//							boerenew.setDateBOE(dateboe);
+//							boerenew.setIsSOTrx(boe.isSOTrx());
+//							boerenew.setGrandTotal(RenewedAmt.abs());
+//							boerenew.setC_DocType_ID(boe.getC_DocType_ID());
+//							boerenew.setC_DocTypeTarget_ID(boe.getC_DocTypeTarget_ID());
+//							boerenew.setDocumentNo(DocumentNo);
+//							boerenew.setDueDate(duedate);
+//							boerenew.setC_BPartner_ID(boe.getC_BPartner_ID());
+//							boerenew.setC_BPartner_Location_ID(boe.getC_BPartner_Location_ID());
+//							boerenew.setDocStatus(DocAction.STATUS_Portfolio);	        
+//							boerenew.setRef_BOE_ID(boe.getC_BOE_ID());
+//							boerenew.setStatusDate(dateboe);
+//							if (boerenew.save())
+//							{
+//								//
+//								if (boerenew.discountIt())
+//								{	        			        		
+//									boerenew.save(get_TrxName());
+//									MBOEStatement statement = MBOEStatement.get(boerenew.getC_BOE_ID(), boerenew.getDocStatus(), get_TrxName());
+//									if ( statement != null )
+//									{
+//										statement.setStatusDate(boerenew.getStatusDate());
+//										statement.save(get_TrxName());
+//									}		        		
+//								}
+//							}
+//							if (!hdr.addLine(boe, getC_Currency_ID(), RenewedAmt,Env.ZERO,Env.ZERO, OverUnderAmt))
+//							{
+//								m_processMsg = "Could not create Allocation Line";
+//								return DocAction.STATUS_Invalid;											        	
+//							}
+//							//
+//							//					        MAllocationLine renew = null;
+//							//							if (boe.isSOTrx())
+//							//								renew = new MAllocationLine (hdr, RenewedAmt.abs(), 
+//							//									Env.ZERO, Env.ZERO, Env.ZERO);
+//							//							else
+//							//								renew = new MAllocationLine (hdr, RenewedAmt.abs().negate(), 
+//							//									Env.ZERO, Env.ZERO, Env.ZERO);
+//							//							renew.setDocInfo(getC_BPartner_ID(), 0, 0);
+//							//							renew.setC_BOE_ID(boe.getC_BOE_ID());   // <-- letra que paga
+//							//							renew.setAD_Table_ID(MBOE.Table_ID);    // <-- indica que es un pago con letra
+//							//							renew.setRecord_ID(boerenew.getC_BOE_ID());  // <-- indica con que letra esta pagando.
+//							//							renew.setC_Currency_ID(getC_Currency_ID());
+//							//							renew.saveEx(get_TrxName());
+//						}
+//					}
+//					allocatelines++;					
+//				}				
+//			}
+//			else if (REF_C_CashTrxType.Charge.equals(line.getCashType()))
+//			{
+//				if (!hdr.addLine(line))
+//				{
+//					m_processMsg = "Could not create Allocation Line";
+//					return DocAction.STATUS_Invalid;
+//				}									
+//				//				MAllocationLine aLine = new MAllocationLine ( hdr, line.getAmount(), 
+//				//						line.getDiscountAmt(), line.getWriteOffAmt(), Env.ZERO);
+//				//				aLine.setC_Charge_ID(line.getC_Charge_ID());
+//				//				aLine.setC_CashLine_ID(line.getC_CashLine_ID());
+//				//				aLine.setC_BPartner_ID(line.getC_BPartner_ID());
+//				//				aLine.setC_Currency_ID(line.getC_Currency_ID());
+//				//                                aLine.setC_Project_ID(line.getC_Project_ID());
+//				//				if (!aLine.save())
+//				//				{
+//				//					m_processMsg = "Could not create Allocation Line";
+//				//					return DocAction.STATUS_Invalid;
+//				//				}				
+//				allocatelines++;
+//			}
+//			else if (REF_C_CashTrxType.Difference.equals(line.getCashType()))
+//			{
+//				allocatelines++;
+//			}
+//			else if (REF_C_CashTrxType.GeneralExpense.equals(line.getCashType()))
+//			{
+//				allocatelines++;
+//			}
+//			else if (REF_C_CashTrxType.GeneralReceipts.equals(line.getCashType()))
+//			{
+//				allocatelines++;
+//			}			
+//		}
+//
+//		if (allocatelines == 0)
+//		{
+//			m_processMsg = "@NoLines@";
+//			return DocAction.STATUS_Invalid;
+//		}
+//		for (MAllocation allochdr:allocations)
+//		{
+//			System.out.println(allochdr.getC_AllocationHdr_ID());
+//			if (allochdr.completeIt())
+//			{
+//				if (allochdr.save())
+//				{
+//					if (!MFactAcct.alreadyPosted(X_C_AllocationHdr.Table_ID, allochdr.getC_AllocationHdr_ID(), get_TrxName()))
+//					{				
+//						String error = DocumentEngine.postImmediate(getCtx(),
+//								getAD_Client_ID(), X_C_AllocationHdr.Table_ID, allochdr.getC_AllocationHdr_ID(), true,
+//								get_TrxName());
+//						if (error != null)
+//							m_processMsg = error;				        					
+//					}                    		
+//				}
+//			}
+//		}
+//
+//		//	User Validation
+//		String valid = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_COMPLETE);
+//		if (valid != null)
+//		{
+//			m_processMsg = valid;
+//			return DocAction.STATUS_Invalid;
+//		}
+//		//
+//		setProcessed(true);
+//		setDocAction(REF__DocumentAction.Close);
+//		return DocAction.STATUS_Completed;
 	}	//	completeIt
 
 	/**
@@ -978,7 +1101,7 @@ public class MCash extends X_C_Cash implements DocAction
 
 	public boolean RestoreIt() {
 		String sql = "";
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return false;
@@ -1044,54 +1167,22 @@ public class MCash extends X_C_Cash implements DocAction
 		}					
 		return true;
 	}
-	/**************************************************************************
-	 * 	Before Delete
-	 *	@return true/false
-	 */
-	protected boolean beforeDelete ()
-	{
-		/* saguayo: 10/03/2007 Integrate the delete cash process here */
-		try {
-			String sql = "UPDATE " +
-			"C_Order " +
-			"SET " +
-			"C_CashLine_ID=null " +
-			"WHERE " +
-			"C_CashLine_ID IN (" +
-			"SELECT " +
-			"C_CashLine_ID " +
-			"FROM " +
-			"C_CashLine " +
-			"WHERE " +
-			"C_Cash_ID=?" +
-			")";
-			int no = DB.executeUpdate(sql, get_ID(), get_TrxName());
-			if (no == -1) return false;
-
-			sql = "UPDATE " +
-			"C_Invoice " +
-			"SET " +
-			"C_CashLine_ID=null " +
-			"WHERE " +
-			"C_CashLine_ID IN (" +
-			"SELECT " +
-			"C_CashLine_ID " +
-			"FROM " +
-			"C_CashLine " +
-			"WHERE " +
-			"C_Cash_ID=?" +
-			")";
-			no = DB.executeUpdate(sql, get_ID(), get_TrxName());
-			if (no == -1) return false;
-		}
-		catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
 
 	public void setProcessMsg(String msg)
 	{
 		m_processMsg = msg;
 	}
+	
+	public String getRulestatus() {
+		return rulestatus;
+	}
+
+	public void setRulestatus(String rulestatus) {		
+		if (rulestatus.compareTo(DocAction.STATUS_Completed) == 0 || 
+			rulestatus.compareTo(DocAction.STATUS_WaitingPayment) == 0 && 
+			getProcessMsg() == null)
+			setProcessed(true);
+		this.rulestatus = rulestatus;
+	}
+	
 }	//	MCash

@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_EMailType;
 /** Generated Model for C_ContactEmail
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_ContactEmail");
 @XendraTrl(Identifier="b6871540-075d-45bf-a3af-5daafd85a435")
 public static String es_PE_TABLE_C_ContactEmail_Name="Contact Email";
 
-@XendraTable(Name="Contact Email",Description="",Help="",TableName="C_ContactEmail",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="b6871540-075d-45bf-a3af-5daafd85a435",
-Synchronized="2017-08-16 11:41:40.0")
+@XendraTable(Name="Contact Email",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_ContactEmail",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="b6871540-075d-45bf-a3af-5daafd85a435",
+Synchronized="2020-03-03 21:36:46.0")
 /** TableName=C_ContactEmail */
 public static final String Table_Name="C_ContactEmail";
 
@@ -138,7 +138,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="71c5bc0e-a405-40fd-a003-645aa6cd9154",
-Synchronized="2014-05-14 08:11:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name C_Contact_ID */
 public static final String COLUMNNAME_C_Contact_ID = "C_Contact_ID";
 /** Set EMail Address.
@@ -170,18 +170,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8607ff1b-bfd9-4297-a013-db61a71a0c3a",
-Synchronized="2014-05-14 08:11:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name EMail */
 public static final String COLUMNNAME_EMail = "EMail";
-
-/** EMailType AD_Reference=aa9ed05b-ac7a-4d3d-916a-dcdb623a1082 */
-public static final int EMAILTYPE_AD_Reference_ID=1000059;
 /** Set EMailType.
 @param EMailType EMailType */
 public void setEMailType (String EMailType)
 {
-if (EMailType == null || EMailType.equals(REF_EMailType.House) || EMailType.equals(REF_EMailType.Other) || EMailType.equals(REF_EMailType.Work));
- else throw new IllegalArgumentException ("EMailType Invalid value - " + EMailType + " - Reference_ID=1000059 - H - O - W");
 if (EMailType != null && EMailType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -205,7 +200,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7bf3ea81-320c-473a-8b37-7c0558f1059b",Synchronized="2017-08-05 16:53:32.0")
+Identifier="7bf3ea81-320c-473a-8b37-7c0558f1059b",Synchronized="2019-08-30 22:21:25.0")
 /** Column name EMailType */
 public static final String COLUMNNAME_EMailType = "EMailType";
 /** Set Identifier.
@@ -237,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="92615981-3944-483e-b8ad-951d1cceadcc",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

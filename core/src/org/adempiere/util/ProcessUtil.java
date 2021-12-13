@@ -35,7 +35,7 @@ import org.compiere.model.reference.REF_RuleType;
 public final class ProcessUtil {
 
 	public static final String JASPER_STARTER_CLASS = "org.compiere.report.ReportStarter";
-	public static final String LINEPRINTER_STARTER_CLASS = "org.xendra.lineprinter.MatrixStarter";	
+	//public static final String LINEPRINTER_STARTER_CLASS = "org.xendra.lineprinter.MatrixStarter";	
 
 	/**	Logger				*/
 	private static CLogger log = CLogger.getCLogger(ProcessUtil.class);
@@ -82,10 +82,8 @@ public final class ProcessUtil {
 		String className = pi.getClassName();
 		if (className == null) {
 			MProcess proc = new MProcess(ctx, pi.getAD_Process_ID(), trx.getTrxName());
-			if (proc.getJasperReport() != null)
+			if (proc.getJasperReport() != null && proc.getJasperReport().length() > 0)
 				className = JASPER_STARTER_CLASS;
-			if (proc.getLinePrinterFormat() != null)
-				className = LINEPRINTER_STARTER_CLASS;			
 		}
 		//Get Class
 		Class<?> processClass = null;

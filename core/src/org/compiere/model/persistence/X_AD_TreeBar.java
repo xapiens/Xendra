@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("AD_TreeBar");
 @XendraTrl(Identifier="1b9595b9-4108-9220-abb6-6c91f0632e9d")
 public static String es_PE_TABLE_AD_TreeBar_Name="AD_TreeBar";
 
-@XendraTable(Name="AD_TreeBar",Description="User Selected tree nodes",Help="",
+@XendraTable(Name="AD_TreeBar",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="User Selected tree nodes",Help="",
 TableName="AD_TreeBar",AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.dictionary",Identifier="1b9595b9-4108-9220-abb6-6c91f0632e9d",
-Synchronized="2017-08-16 11:41:03.0")
+Synchronized="2020-03-03 21:36:02.0")
 /** TableName=AD_TreeBar */
 public static final String Table_Name="AD_TreeBar";
 
@@ -121,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="49966a06-e486-3658-709c-302ca9d07d19",
-Synchronized="2017-08-05 16:52:54.0")
+Synchronized="2019-08-30 22:20:45.0")
 /** Column name AD_Tree_ID */
 public static final String COLUMNNAME_AD_Tree_ID = "AD_Tree_ID";
 /** Set User/Contact.
@@ -149,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2422f6c9-fade-5b07-d848-9ffbdce13221",
-Synchronized="2017-08-05 16:52:54.0")
+Synchronized="2019-08-30 22:20:45.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -181,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ddd51a9e-e0cf-4568-87dc-0952bb208ea4",
-Synchronized="2017-08-05 16:52:54.0")
+Synchronized="2019-08-30 22:20:45.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Node_ID.
@@ -215,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5409d24e-c2e8-b26c-a573-5cac59559d5b",
-Synchronized="2017-08-05 16:52:54.0")
+Synchronized="2019-08-30 22:20:45.0")
 /** Column name Node_ID */
 public static final String COLUMNNAME_Node_ID = "Node_ID";
 }

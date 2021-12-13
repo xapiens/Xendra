@@ -1,6 +1,7 @@
 package org.xendra.xendrian;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -14,28 +15,33 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.naming.InitialContext;
 
+import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_MessageFormat;
+import org.compiere.model.persistence.X_AD_Process;
+import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.xendra.common.Lock;
 
-public class Listener implements Runnable, IRulesServices {
+public class Listener implements IListener, Runnable {
 	private static CLogger 		log = CLogger.getCLogger (Listener.class);
 	private String queuename;
 	private String listenerclass;
 	private String m_tag;
 	private int m_AD_Rule_ID;
+	private int m_AD_MessageFormat_ID;
 	private InitialContext ic;
 	private Connection m_connection;
 	private Session session;
 	private MessageConsumer consumer;
-	//private MessageListener ml;
 	protected final Lock lock = new Lock("listener");
 	
-	public Listener(Object key, Vector vector, String tag) {
+	public Listener(Object key, HashMap properties, String tag) {
 		queuename = (String) key;
-		listenerclass = (String) vector.firstElement();
-		m_AD_Rule_ID = (int) vector.lastElement();
+		listenerclass = (String) properties.get(X_AD_Process.COLUMNNAME_Classname);
+		m_AD_Rule_ID = (int) properties.get(X_AD_Rule.COLUMNNAME_AD_Rule_ID);
+		m_AD_MessageFormat_ID = (int) properties.get(X_AD_MessageFormat.COLUMNNAME_AD_MessageFormat_ID);
 		m_tag = tag;
 	}
 
@@ -86,29 +92,24 @@ public class Listener implements Runnable, IRulesServices {
 			consumer = session.createConsumer(queue);					
 			Class<?> clazz = Class.forName(listenerclass);		
 			log.log(Level.WARNING, String.format("start instance of %s", listenerclass));
-			Constructor<?> constructor = clazz.getDeclaredConstructor(new Class[]{IRulesServices.class, Integer.class, String.class});					
-			MessageListener ml = (MessageListener) constructor.newInstance(new Object[] {this, m_AD_Rule_ID, m_tag});			
+			Constructor<?> constructor = clazz.getDeclaredConstructor(new Class[]{Integer.class, Integer.class, String.class});					
+			MessageListener ml = (MessageListener) constructor.newInstance(new Object[] {m_AD_MessageFormat_ID, m_AD_Rule_ID, m_tag});			
 			consumer.setMessageListener(ml);
-//			consumer.setMessageListener(new MessageListener() 
-//			{
-//				public void onMessage(final Message msg)
-//				{
-//					try
-//					{
-//						System.out.println("X");
-//					}
-//					catch (Exception e)
-//					{
-//						e.printStackTrace();
-//					}
-//				}
-//			});
 			log.log(Level.WARNING, String.format("Sucessfully connect to %s",ml.toString()));
 		}
 		catch (Exception e)
 		{			
-			e.printStackTrace();
-			error = e.getMessage();
+			if (e.getClass().getName().equals("javax.naming.NameNotFoundException")) {
+				X_AD_MessageFormat mf = new Query(Env.getCtx(), X_AD_MessageFormat.Table_Name, "AD_MessageFormat_ID = ?", null)
+					.setParameters(m_AD_MessageFormat_ID).first();
+				//mf.setIsActive(false);
+				//mf.save();			
+				error = String.format("not bound to %s", mf.getQueueName());
+			}
+			else {
+				error = e.getMessage();
+			}
+			e.printStackTrace();			
 		}
 		return error;
 	}

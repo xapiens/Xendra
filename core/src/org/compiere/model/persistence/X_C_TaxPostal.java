@@ -60,12 +60,12 @@ public static int Table_ID=MTable.getTable_ID("C_TaxPostal");
 public static String es_PE_TAB_TaxZIP_Description="Impuesto C.P.";
 
 @XendraTrl(Identifier="261cb55a-eef8-9a80-aef4-b00e75265589")
-public static String es_PE_TAB_TaxZIP_Name="Impuesto C.P.";
-
-@XendraTrl(Identifier="261cb55a-eef8-9a80-aef4-b00e75265589")
 public static String es_PE_TAB_TaxZIP_Help="Para impuesto local, usted puede tener que definir una lista (los rangos de) código postal.";
 
-@XendraTab(Name="Tax ZIP",Description="Tax Postal/ZIP",
+@XendraTrl(Identifier="261cb55a-eef8-9a80-aef4-b00e75265589")
+public static String es_PE_TAB_TaxZIP_Name="Impuesto C.P.";
+@XendraTab(Name="Tax ZIP",
+Description="Tax Postal/ZIP",
 Help="For local tax, you may have to define a list of (ranges of) postal codes or ZIPs",
 AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -78,11 +78,12 @@ public static final String TABNAME_TaxZIP="261cb55a-eef8-9a80-aef4-b00e75265589"
 @XendraTrl(Identifier="69d36dcc-fd14-ff52-9bcc-ac3037ce1f55")
 public static String es_PE_TABLE_C_TaxPostal_Name="C.P. Impuesto";
 
-@XendraTable(Name="Tax ZIP",Description="Tax Postal/ZIP",Help="",TableName="C_TaxPostal",
-AccessLevel="2",AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="69d36dcc-fd14-ff52-9bcc-ac3037ce1f55",Synchronized="2017-08-16 11:42:32.0")
+@XendraTable(Name="Tax ZIP",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Tax Postal/ZIP",Help="",
+TableName="C_TaxPostal",AccessLevel="2",AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="69d36dcc-fd14-ff52-9bcc-ac3037ce1f55",Synchronized="2020-03-03 21:37:44.0")
 /** TableName=C_TaxPostal */
 public static final String Table_Name="C_TaxPostal";
 
@@ -132,18 +133,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
+public static String es_PE_FIELD_TaxZIP_Tax_Name="Impuesto";
+
+@XendraTrl(Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
 public static String es_PE_FIELD_TaxZIP_Tax_Description="Identificador del Impuesto";
 
 @XendraTrl(Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
 public static String es_PE_FIELD_TaxZIP_Tax_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
 
-@XendraTrl(Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
-public static String es_PE_FIELD_TaxZIP_Tax_Name="Impuesto";
-@XendraField(AD_Column_ID="C_Tax_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="261cb55a-eef8-9a80-aef4-b00e75265589",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
+@XendraField(AD_Column_ID="C_Tax_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="261cb55a-eef8-9a80-aef4-b00e75265589",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="e8dfbf64-76ce-67d8-a612-8c747c89dfe4")
 public static final String FIELDNAME_TaxZIP_Tax="e8dfbf64-76ce-67d8-a612-8c747c89dfe4";
 
 @XendraTrl(Identifier="5ef8ca4a-cdd3-0927-0ffa-d4bec9a58201")
@@ -155,7 +157,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5ef8ca4a-cdd3-0927-0ffa-d4bec9a58201",
-Synchronized="2017-08-05 16:54:29.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name C_Tax_ID */
 public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
 /** Set Tax ZIP.
@@ -175,13 +177,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="63990624-e2b2-abbf-f99a-631565032890")
+public static String es_PE_FIELD_TaxZIP_TaxZIP_Name="C.P. Impuesto";
+
+@XendraTrl(Identifier="63990624-e2b2-abbf-f99a-631565032890")
 public static String es_PE_FIELD_TaxZIP_TaxZIP_Description="C.P. Impuesto";
 
 @XendraTrl(Identifier="63990624-e2b2-abbf-f99a-631565032890")
 public static String es_PE_FIELD_TaxZIP_TaxZIP_Help="Para el impuesto local, usted puede definir una lista (los rangos de) códigos postales";
-
-@XendraTrl(Identifier="63990624-e2b2-abbf-f99a-631565032890")
-public static String es_PE_FIELD_TaxZIP_TaxZIP_Name="C.P. Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxPostal_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="261cb55a-eef8-9a80-aef4-b00e75265589",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -220,7 +222,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eec7df5c-1bf7-4b06-a787-1092cddf0bdb",
-Synchronized="2017-08-05 16:54:29.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set ZIP.
@@ -252,13 +254,13 @@ return new KeyNamePair(get_ID(), getPostal());
 }
 
 @XendraTrl(Identifier="3b51f028-3ce8-80bb-ef01-49e885b1804b")
+public static String es_PE_FIELD_TaxZIP_ZIP_Name="Código Postal";
+
+@XendraTrl(Identifier="3b51f028-3ce8-80bb-ef01-49e885b1804b")
 public static String es_PE_FIELD_TaxZIP_ZIP_Description="Código Postal";
 
 @XendraTrl(Identifier="3b51f028-3ce8-80bb-ef01-49e885b1804b")
 public static String es_PE_FIELD_TaxZIP_ZIP_Help="El campo Código Postal identifica el código postal para esta entidad";
-
-@XendraTrl(Identifier="3b51f028-3ce8-80bb-ef01-49e885b1804b")
-public static String es_PE_FIELD_TaxZIP_ZIP_Name="Código Postal";
 
 @XendraField(AD_Column_ID="Postal",IsCentrallyMaintained=true,
 AD_Tab_ID="261cb55a-eef8-9a80-aef4-b00e75265589",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -276,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6ac913b7-d11f-012b-0325-392a88282056",
-Synchronized="2017-08-05 16:54:29.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Postal */
 public static final String COLUMNNAME_Postal = "Postal";
 /** Set ZIP To.
@@ -300,13 +302,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="ade6b8eb-2c87-f47a-3610-ffda34f79f14")
+public static String es_PE_FIELD_TaxZIP_ZIPTo_Name="C.P. Para";
+
+@XendraTrl(Identifier="ade6b8eb-2c87-f47a-3610-ffda34f79f14")
 public static String es_PE_FIELD_TaxZIP_ZIPTo_Description="Codigo postal para";
 
 @XendraTrl(Identifier="ade6b8eb-2c87-f47a-3610-ffda34f79f14")
 public static String es_PE_FIELD_TaxZIP_ZIPTo_Help="Rangos para codigos";
-
-@XendraTrl(Identifier="ade6b8eb-2c87-f47a-3610-ffda34f79f14")
-public static String es_PE_FIELD_TaxZIP_ZIPTo_Name="C.P. Para";
 
 @XendraField(AD_Column_ID="Postal_To",IsCentrallyMaintained=true,
 AD_Tab_ID="261cb55a-eef8-9a80-aef4-b00e75265589",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -324,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="44a87d79-6077-c443-1650-f37d08572549",
-Synchronized="2017-08-05 16:54:29.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Postal_To */
 public static final String COLUMNNAME_Postal_To = "Postal_To";
 }

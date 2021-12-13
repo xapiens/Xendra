@@ -31,9 +31,9 @@ import org.columba.core.backgroundtask.BackgroundTaskManager;
 import org.columba.core.command.Command;
 import org.columba.core.command.CommandProcessor;
 import org.columba.core.command.TaskManager;
-import org.columba.core.logging.Logging;
 import org.columba.core.main.ColumbaServer;
 import org.columba.core.resourceloader.GlobalResourceLoader;
+import org.compiere.util.CLogMgt;
 
 /**
  * Manages all tasks which are responsible for doing clean-up work when shutting
@@ -238,7 +238,7 @@ public class ShutdownManager implements IShutdownManager {
 		try {
 			dialog = new ShutdownDialog();
 		} catch (Exception e) {
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 		return dialog;

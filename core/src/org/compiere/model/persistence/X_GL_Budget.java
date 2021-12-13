@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_GL_BudgetStatus;
 /** Generated Model for GL_Budget
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -62,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("GL_Budget");
 public static String es_PE_TAB_Budget_Description="La pestaña de presupuesto define un presupuesto de Libro Mayor";
 
 @XendraTrl(Identifier="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49")
-public static String es_PE_TAB_Budget_Name="Presupuesto";
-
-@XendraTrl(Identifier="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49")
 public static String es_PE_TAB_Budget_Help="Los presupuestos del libro mayor son usados para definir los costos anticipados de conducir el negocio. Son usados para reportar comparaciones con los Totales reales.";
 
-@XendraTab(Name="Budget",Description="The GL Budget Tab defines a General Ledger Budget",
+@XendraTrl(Identifier="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49")
+public static String es_PE_TAB_Budget_Name="Presupuesto";
+@XendraTab(Name="Budget",
+Description="The GL Budget Tab defines a General Ledger Budget",
 Help="The GL Budgets are used to define the anticipated costs of doing business.  They are used in reporting as a comparison to actual amounts.",
 AD_Window_ID="f3c1af71-5fcf-0f37-af9e-5defb4a6e9d1",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -80,11 +79,12 @@ public static final String TABNAME_Budget="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49"
 @XendraTrl(Identifier="56fc38ad-deb0-395b-613e-0434766f5939")
 public static String es_PE_TABLE_GL_Budget_Name="Presupuesto";
 
-@XendraTable(Name="Budget",Description="General Ledger Budget",Help="",TableName="GL_Budget",
-AccessLevel="3",AD_Window_ID="f3c1af71-5fcf-0f37-af9e-5defb4a6e9d1",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="56fc38ad-deb0-395b-613e-0434766f5939",Synchronized="2017-08-16 11:42:42.0")
+@XendraTable(Name="Budget",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="General Ledger Budget",Help="",
+TableName="GL_Budget",AccessLevel="3",AD_Window_ID="f3c1af71-5fcf-0f37-af9e-5defb4a6e9d1",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
+Identifier="56fc38ad-deb0-395b-613e-0434766f5939",Synchronized="2020-03-03 21:37:55.0")
 /** TableName=GL_Budget */
 public static final String Table_Name="GL_Budget";
 
@@ -123,15 +123,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_GL_Budget[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** BudgetStatus AD_Reference=fcd2e472-c052-bde9-c921-dffd438016ae */
-public static final int BUDGETSTATUS_AD_Reference_ID=178;
 /** Set Budget Status.
 @param BudgetStatus Indicates the current status of this budget */
 public void setBudgetStatus (String BudgetStatus)
 {
-if (BudgetStatus == null || BudgetStatus.equals(REF_GL_BudgetStatus.Approved) || BudgetStatus.equals(REF_GL_BudgetStatus.Draft));
- else throw new IllegalArgumentException ("BudgetStatus Invalid value - " + BudgetStatus + " - Reference_ID=178 - A - D");
 if (BudgetStatus != null && BudgetStatus.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -147,13 +142,13 @@ return (String)get_Value(COLUMNNAME_BudgetStatus);
 }
 
 @XendraTrl(Identifier="d73c825b-25e4-3015-0751-fc08bf7ae5ef")
+public static String es_PE_FIELD_Budget_BudgetStatus_Name="Estado del Presupuesto";
+
+@XendraTrl(Identifier="d73c825b-25e4-3015-0751-fc08bf7ae5ef")
 public static String es_PE_FIELD_Budget_BudgetStatus_Description="Indica el estado actual de este presupuesto.";
 
 @XendraTrl(Identifier="d73c825b-25e4-3015-0751-fc08bf7ae5ef")
 public static String es_PE_FIELD_Budget_BudgetStatus_Help="El estado del presupuesto indica el estado actual de este presupuesto (Ej. Borrador; aprobado).";
-
-@XendraTrl(Identifier="d73c825b-25e4-3015-0751-fc08bf7ae5ef")
-public static String es_PE_FIELD_Budget_BudgetStatus_Name="Estado del Presupuesto";
 
 @XendraField(AD_Column_ID="BudgetStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -171,7 +166,7 @@ FieldLength=1,DefaultValue="D",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="413942e6-8c0f-21be-553f-2dcf264b4e86",Synchronized="2017-08-05 16:54:40.0")
+Identifier="413942e6-8c0f-21be-553f-2dcf264b4e86",Synchronized="2019-08-30 22:22:32.0")
 /** Column name BudgetStatus */
 public static final String COLUMNNAME_BudgetStatus = "BudgetStatus";
 /** Set Description.
@@ -202,13 +197,13 @@ return value;
 }
 
 @XendraTrl(Identifier="a52e37a3-08eb-6d5b-672c-557dde3507be")
+public static String es_PE_FIELD_Budget_Description_Name="Observación";
+
+@XendraTrl(Identifier="a52e37a3-08eb-6d5b-672c-557dde3507be")
 public static String es_PE_FIELD_Budget_Description_Description="Observación";
 
 @XendraTrl(Identifier="a52e37a3-08eb-6d5b-672c-557dde3507be")
 public static String es_PE_FIELD_Budget_Description_Help="Observación";
-
-@XendraTrl(Identifier="a52e37a3-08eb-6d5b-672c-557dde3507be")
-public static String es_PE_FIELD_Budget_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -226,7 +221,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3adaab09-66d7-c65f-06d0-913e6cb97295",
-Synchronized="2017-08-05 16:54:40.0")
+Synchronized="2019-08-30 22:22:32.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Budget.
@@ -246,13 +241,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e1afd7bb-f39c-d546-dc22-b376fd048a51")
+public static String es_PE_FIELD_Budget_Budget_Name="Presupuesto";
+
+@XendraTrl(Identifier="e1afd7bb-f39c-d546-dc22-b376fd048a51")
 public static String es_PE_FIELD_Budget_Budget_Description="Presupuesto de la Contabilidad General";
 
 @XendraTrl(Identifier="e1afd7bb-f39c-d546-dc22-b376fd048a51")
 public static String es_PE_FIELD_Budget_Budget_Help="El Presupuesto de Contabilidad General identifica un presupuesto definido por el usuario. Puede ser usado para reportar en comparación con los meses reales.";
-
-@XendraTrl(Identifier="e1afd7bb-f39c-d546-dc22-b376fd048a51")
-public static String es_PE_FIELD_Budget_Budget_Name="Presupuesto";
 
 @XendraField(AD_Column_ID="GL_Budget_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -291,7 +286,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aeabfe5c-3963-4522-b629-aafe299c11e9",
-Synchronized="2017-08-05 16:54:40.0")
+Synchronized="2019-08-30 22:22:32.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Primary.
@@ -314,13 +309,13 @@ return false;
 }
 
 @XendraTrl(Identifier="f40dc1e0-4009-9302-04ad-add61b4e52a2")
+public static String es_PE_FIELD_Budget_Primary_Name="Primario";
+
+@XendraTrl(Identifier="f40dc1e0-4009-9302-04ad-add61b4e52a2")
 public static String es_PE_FIELD_Budget_Primary_Description="Indica si este es el presupuesto primario";
 
 @XendraTrl(Identifier="f40dc1e0-4009-9302-04ad-add61b4e52a2")
 public static String es_PE_FIELD_Budget_Primary_Help="El cuadro de verificación primaria indica si este presupuesto es el presupuesto primario";
-
-@XendraTrl(Identifier="f40dc1e0-4009-9302-04ad-add61b4e52a2")
-public static String es_PE_FIELD_Budget_Primary_Name="Primario";
 
 @XendraField(AD_Column_ID="IsPrimary",IsCentrallyMaintained=true,
 AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -338,7 +333,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4e5469d0-4eff-735d-8fe7-108e41718e02",
-Synchronized="2017-08-05 16:54:40.0")
+Synchronized="2019-08-30 22:22:32.0")
 /** Column name IsPrimary */
 public static final String COLUMNNAME_IsPrimary = "IsPrimary";
 /** Set Name.
@@ -370,18 +365,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
+public static String es_PE_FIELD_Budget_Name_Name="Nombre";
+
+@XendraTrl(Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
 public static String es_PE_FIELD_Budget_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
 public static String es_PE_FIELD_Budget_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
-public static String es_PE_FIELD_Budget_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="f2bb73ab-d8ac-0575-b9d5-362adb0a8e49",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="19e8beee-705c-18fe-ca99-8f69385e3e81")
 public static final String FIELDNAME_Budget_Name="19e8beee-705c-18fe-ca99-8f69385e3e81";
 
 @XendraTrl(Identifier="833e0e18-0122-c93e-776e-1cdf3dbc39b3")
@@ -393,7 +389,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="833e0e18-0122-c93e-776e-1cdf3dbc39b3",
-Synchronized="2017-08-05 16:54:40.0")
+Synchronized="2019-08-30 22:22:32.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

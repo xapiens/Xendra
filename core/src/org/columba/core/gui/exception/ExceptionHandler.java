@@ -37,6 +37,7 @@ import org.columba.core.resourceloader.GlobalResourceLoader;
 import org.columba.ristretto.imap.IMAPDisconnectedException;
 import org.columba.ristretto.imap.IMAPException;
 import org.columba.ristretto.io.ConnectionDroppedException;
+import org.compiere.util.CLogger;
 
 /**
  * Handles all exceptions catched by Worker.construct(). Opens error dialogs.
@@ -45,10 +46,8 @@ import org.columba.ristretto.io.ConnectionDroppedException;
  */
 public class ExceptionHandler implements IExceptionListener {
 	private static final String RESOURCE_PATH = "org.columba.core.i18n.dialog";
-
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger
-			.getLogger("org.columba.api.command");
+	
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.api.command");
 
 	/**
 	 * Handle all kinds of exceptions.

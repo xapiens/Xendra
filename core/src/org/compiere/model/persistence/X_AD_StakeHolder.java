@@ -63,10 +63,12 @@ public static int Table_ID=MTable.getTable_ID("AD_StakeHolder");
 @XendraTrl(Identifier="ac0cac61-5d91-4b49-9eab-487912108a54")
 public static String es_PE_TABLE_AD_StakeHolder_Name="Stake Holder";
 
-@XendraTable(Name="Stake Holder",Description="",Help="",TableName="AD_StakeHolder",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="ac0cac61-5d91-4b49-9eab-487912108a54",Synchronized="2017-08-16 11:41:00.0")
+@XendraTable(Name="Stake Holder",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_StakeHolder",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="ac0cac61-5d91-4b49-9eab-487912108a54",
+Synchronized="2020-03-03 21:35:56.0")
 /** TableName=AD_StakeHolder */
 public static final String Table_Name="AD_StakeHolder";
 
@@ -141,7 +143,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f85735d-458c-4a67-a55f-740d52e5ed98",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Description.
@@ -180,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c79e46f3-46dd-44bc-8ce5-ec752cfe0c47",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -212,7 +214,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="35ca4e5f-8c25-4ab6-9cfe-e3970dbce7cc",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set nominal_value.
@@ -240,7 +242,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="07a7bdd2-d11a-40a4-9425-51321734bafa",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name nominal_value */
 public static final String COLUMNNAME_nominal_value = "nominal_value";
 /** Set paid_up_shares.
@@ -268,7 +270,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="727b149a-bb88-4c57-b485-56ad73cb9634",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name paid_up_shares */
 public static final String COLUMNNAME_paid_up_shares = "paid_up_shares";
 /** Set Percent.
@@ -296,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1c468783-ba0c-4fd4-9dc6-a3cd85c89b15",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Percent */
 public static final String COLUMNNAME_Percent = "Percent";
 /** Set shares.
@@ -324,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1d2faa29-b4cc-4bbf-922c-5ced018dda4f",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name shares */
 public static final String COLUMNNAME_shares = "shares";
 /** Set Tax ID.
@@ -356,7 +358,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e90ca8f4-b6b6-427f-9f70-2991c9c9cbd5",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name TaxID */
 public static final String COLUMNNAME_TaxID = "TaxID";
 /** Set Valid from.
@@ -382,7 +384,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="55b2cc53-0747-4f08-b008-5140fb6ae5cb",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -407,7 +409,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="21bf848b-3aa2-47f1-bffc-bb403d0461c6",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:42.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

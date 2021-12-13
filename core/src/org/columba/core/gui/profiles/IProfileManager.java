@@ -1,6 +1,5 @@
 package org.columba.core.gui.profiles;
 
-import org.columba.core.xml.XmlElement;
 import org.compiere.model.persistence.X_A_Profile;
 
 /**

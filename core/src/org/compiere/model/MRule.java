@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -312,8 +313,22 @@ public class MRule extends X_AD_Rule
 
 	public static XmlElement getAll() {
 		XmlElement root = new XmlElement();
+		// first the groups
+		String wheregroups = "properties->'type' = 'group' AND  IsActive = 'Y' ";
+		HashMap mapgroups = new HashMap();
+		List<X_AD_Rule> groups = new Query(Env.getCtx(), X_AD_Rule.Table_Name, wheregroups, null)
+			.setOrderBy("id").list();
+		for (X_AD_Rule grp:groups) {
+			XmlElement xmlgroup = new XmlElement("id");
+			xmlgroup.addAttribute("uid", String.valueOf(grp.getAD_Rule_ID()));
+			xmlgroup.addAttribute("AD_Plugin_ID", String.valueOf(grp.getAD_Plugin_ID()));
+			xmlgroup.addAttribute("type", "group");
+			xmlgroup.addAttribute("name", grp.getName());
+			mapgroups.put(grp.getAD_Rule_ID(), xmlgroup);
+		}
 		//
-		String where = "properties->'type'  = 'kiebase'  AND  IsActive = 'Y' ";
+		//String where = "properties->'type'  = 'kiebase' OR properties->'type' = 'group' AND  IsActive = 'Y' ";
+		String where = "properties->'type' = 'kiebase' AND  IsActive = 'Y' ";
 		String whererule = "Parent_ID = ?";
 		String id = "";
 		List<X_AD_Rule> kiebases = new Query(Env.getCtx(), X_AD_Rule.Table_Name, where, null)
@@ -327,19 +342,41 @@ public class MRule extends X_AD_Rule
 				id = kiebase.getID();
 				idcontainer = new XmlElement("id");			
 				idcontainer.addAttribute("uid", "0");
+				idcontainer.addAttribute("AD_Plugin_ID", String.valueOf(kiebase.getAD_Plugin_ID()));
 				idcontainer.addAttribute("type", "plugin");
 				idcontainer.addAttribute("name", id);
+				for (X_AD_Rule grp:groups) {
+					if (grp.getAD_Plugin_ID() == kiebase.getAD_Plugin_ID()) {
+						XmlElement e = (XmlElement) mapgroups.get(grp.getAD_Rule_ID());
+						idcontainer.addElement(e);
+					}
+				}								
 				root.addElement(idcontainer);
 			}			
 			type = (String) kiebase.getProperties().get("type");
 			if (type == null)
 				type = "";
+			String group = (String) kiebase.getProperties().get("group");
+			if (group == null)
+				group = "";
+			XmlElement e = null;
+			if (group.length() > 0) {
+				for (X_AD_Rule grp:groups) {
+					if (grp.getAD_Rule_ID() == Integer.valueOf(group)) {
+						e = (XmlElement) mapgroups.get(grp.getAD_Rule_ID());						
+					}
+				}
+			}			
 			XmlElement defaultElement = new XmlElement("folder");		
 			defaultElement.addAttribute("uid", String.valueOf(kiebase.getAD_Rule_ID()));
 			defaultElement.addAttribute("type", type);
+			defaultElement.addAttribute("AD_Plugin_ID", String.valueOf(kiebase.getAD_Plugin_ID()));			
 			defaultElement.addAttribute("name", kiebase.getName());
-			idcontainer.addElement(defaultElement);
-			
+			if (e == null) {
+				idcontainer.addElement(defaultElement);
+			} else {
+				e.addElement(defaultElement);
+			}							
 			List<X_AD_Rule> rules = new Query(Env.getCtx(), X_AD_Rule.Table_Name,whererule,null).setParameters(kiebase.getAD_Rule_ID()).setOrderBy("AD_Rule_ID").list();
 			for (X_AD_Rule rule:rules)
 			{
@@ -349,6 +386,7 @@ public class MRule extends X_AD_Rule
 				XmlElement RuleElement = new XmlElement("folder");
 				RuleElement.addAttribute("uid", String.valueOf(rule.getAD_Rule_ID()));
 				RuleElement.addAttribute("type", ruletype);
+				RuleElement.addAttribute("AD_Plugin_ID", String.valueOf(rule.getAD_Plugin_ID()));
 				RuleElement.addAttribute("name", rule.getName());
 				defaultElement.addElement(RuleElement);			
 			}						
@@ -358,6 +396,7 @@ public class MRule extends X_AD_Rule
 
 	public void setParent(MRule parentrule) {
 		setParent_ID(parentrule.getAD_Rule_ID());
+		setAD_Plugin_ID(parentrule.getAD_Plugin_ID());
 		setID(parentrule.getID());		
 	}
 

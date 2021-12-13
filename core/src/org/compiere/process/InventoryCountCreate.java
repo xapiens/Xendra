@@ -42,7 +42,7 @@ description="Create Inventory Count List",
 help="The inventory count lines are generated.  You can add new lines or delete lines manually.",
 Identifier="ae85e325-f1ca-9259-d0ee-84b04668afe5",
 classname="org.compiere.process.InventoryCountCreate",
-updated="2015-06-20 10:10:12")
+updated="2020-03-23 10:10:12")
 public class InventoryCountCreate extends SvrProcess
 {
 	
@@ -141,7 +141,7 @@ public class InventoryCountCreate extends SvrProcess
 			                Help="",
 			                AD_Reference_ID=DisplayType.List,
 			                SeqNo=20,
-			                ReferenceValueID="",
+			                ReferenceValueID="6b27b2a3-a0c7-b81f-3549-668cd1903bcb",
 			                ValRuleID="",
 			                FieldLength=1,
 			                IsMandatory=false,
@@ -162,7 +162,7 @@ public class InventoryCountCreate extends SvrProcess
 			                Help="",
 			                AD_Reference_ID=DisplayType.List,
 			                SeqNo=60,
-			                ReferenceValueID="",
+			                ReferenceValueID="9df42b26-96c6-93fc-a04e-9ac202d3b2cd",
 			                ValRuleID="",
 			                FieldLength=0,
 			                IsMandatory=true,

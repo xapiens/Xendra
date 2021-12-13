@@ -392,7 +392,7 @@ public class MMatchInv extends X_M_MatchInv
 	{
 		if (isPosted())
 		{
-			if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.MatchInvoice, getAD_Org_ID()))
+			if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.MatchInvoice, getAD_Org_ID(), getAD_Client_ID()))
 				return false;
 			setPosted(false);
 			return MFactAcct.delete (Table_ID, get_ID(), get_TrxName()) >= 0;

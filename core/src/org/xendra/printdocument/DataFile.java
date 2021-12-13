@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.simoes.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class DataFile extends PrintFile implements Cloneable {
 	/**
 	 * 
 	 */
-	static Logger log = Logger.getLogger(DataFile.class);
+	static CLogger log = CLogger.getCLogger(DataFile.class);
 
 	public DataFile() {
 		super();
@@ -31,7 +31,7 @@ public class DataFile extends PrintFile implements Cloneable {
 			result = (DataFile)super.clone();
 			result.setContents(this.getContents());
 		} catch(CloneNotSupportedException e) {
-			log.error(METHOD_NAME + e.getMessage());
+			log.severe(METHOD_NAME + e.getMessage());
 			throw new InternalError(METHOD_NAME + e.getMessage());
 		}
 		return result;

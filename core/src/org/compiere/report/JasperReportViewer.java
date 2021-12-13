@@ -200,7 +200,7 @@ public class JasperReportViewer extends JRViewer implements HyperlinkListener {
 				reportManager = new JReportManager();
 			}
 
-			reportData = reportManager.getReportDataInstance(report, false);
+			reportData = reportManager.getReportDataInstance(report, false, null);
 			if (reportData == null) {
 				return false;
 			}

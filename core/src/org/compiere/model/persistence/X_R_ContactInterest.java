@@ -72,12 +72,12 @@ public static final String TABNAME_Subscriptions="5715e30a-1f22-4043-96cf-f79793
 public static String es_PE_TAB_InterestArea_Description="Área de Interés del Contacto del Socio de Negocio";
 
 @XendraTrl(Identifier="a6fe78ae-88d7-b40c-c602-8d88064dda02")
-public static String es_PE_TAB_InterestArea_Name="Area de Interés";
-
-@XendraTrl(Identifier="a6fe78ae-88d7-b40c-c602-8d88064dda02")
 public static String es_PE_TAB_InterestArea_Help="Área de Interés puede ser usada para las campañas de mercadeo.";
 
-@XendraTab(Name="Interest Area",Description="Business Partner Contact Interest Area",
+@XendraTrl(Identifier="a6fe78ae-88d7-b40c-c602-8d88064dda02")
+public static String es_PE_TAB_InterestArea_Name="Area de Interés";
+@XendraTab(Name="Interest Area",
+Description="Business Partner Contact Interest Area",
 Help="Interest Area can be used for Marketing Campaigns",
 AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",SeqNo=110,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -91,11 +91,12 @@ public static final String TABNAME_InterestArea="a6fe78ae-88d7-b40c-c602-8d88064
 @XendraTrl(Identifier="40c74a07-0c30-a9d8-bbc8-73556a3e064b")
 public static String es_PE_TABLE_R_ContactInterest_Name="R_ContactInterest";
 
-@XendraTable(Name="R_ContactInterest",Description="",Help="",TableName="R_ContactInterest",
-AccessLevel="3",AD_Window_ID="cbadf0d4-f118-0bd1-a224-303786a4e4a8",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="40c74a07-0c30-a9d8-bbc8-73556a3e064b",Synchronized="2017-08-16 11:43:47.0")
+@XendraTable(Name="R_ContactInterest",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="R_ContactInterest",AccessLevel="3",AD_Window_ID="cbadf0d4-f118-0bd1-a224-303786a4e4a8",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="40c74a07-0c30-a9d8-bbc8-73556a3e064b",Synchronized="2020-03-03 21:39:29.0")
 /** TableName=R_ContactInterest */
 public static final String Table_Name="R_ContactInterest";
 
@@ -157,13 +158,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="cc35fe5f-c4e0-72ce-2758-fd816b6f3822")
+public static String es_PE_FIELD_InterestArea_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="cc35fe5f-c4e0-72ce-2758-fd816b6f3822")
 public static String es_PE_FIELD_InterestArea_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="cc35fe5f-c4e0-72ce-2758-fd816b6f3822")
 public static String es_PE_FIELD_InterestArea_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="cc35fe5f-c4e0-72ce-2758-fd816b6f3822")
-public static String es_PE_FIELD_InterestArea_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a6fe78ae-88d7-b40c-c602-8d88064dda02",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -173,13 +174,13 @@ Identifier="cc35fe5f-c4e0-72ce-2758-fd816b6f3822")
 public static final String FIELDNAME_InterestArea_UserContact="cc35fe5f-c4e0-72ce-2758-fd816b6f3822";
 
 @XendraTrl(Identifier="904f8e9b-da5e-d462-0102-7c3caae1f3c2")
+public static String es_PE_FIELD_Subscriptions_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="904f8e9b-da5e-d462-0102-7c3caae1f3c2")
 public static String es_PE_FIELD_Subscriptions_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="904f8e9b-da5e-d462-0102-7c3caae1f3c2")
 public static String es_PE_FIELD_Subscriptions_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="904f8e9b-da5e-d462-0102-7c3caae1f3c2")
-public static String es_PE_FIELD_Subscriptions_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5715e30a-1f22-4043-96cf-f797934fa251",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -197,7 +198,7 @@ FieldLength=22,DefaultValue="@AD_User_ID@",IsKey=false,IsInternal=false,IsParent
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ed47c1ba-60cc-138b-513e-ec7422b3d96a",Synchronized="2017-08-05 16:55:48.0")
+Identifier="ed47c1ba-60cc-138b-513e-ec7422b3d96a",Synchronized="2019-08-30 22:23:44.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -229,7 +230,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d42430f-c623-4823-aae9-79384bb7ab29",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Opt-out Date.
@@ -246,13 +247,13 @@ return (Timestamp)get_Value(COLUMNNAME_OptOutDate);
 }
 
 @XendraTrl(Identifier="8ac3c41c-261f-7755-e168-f83f89d55f99")
+public static String es_PE_FIELD_InterestArea_Opt_OutDate_Name="Fecha de Baja";
+
+@XendraTrl(Identifier="8ac3c41c-261f-7755-e168-f83f89d55f99")
 public static String es_PE_FIELD_InterestArea_Opt_OutDate_Description="Fecha en que el contacto se dio de baja";
 
 @XendraTrl(Identifier="8ac3c41c-261f-7755-e168-f83f89d55f99")
 public static String es_PE_FIELD_InterestArea_Opt_OutDate_Help="Si el campo tiene una fecha; el cliente ha decidido cancelar su suscripción y no puede recibir correo sobre el área de interés.";
-
-@XendraTrl(Identifier="8ac3c41c-261f-7755-e168-f83f89d55f99")
-public static String es_PE_FIELD_InterestArea_Opt_OutDate_Name="Fecha de Baja";
 
 @XendraField(AD_Column_ID="OptOutDate",IsCentrallyMaintained=true,
 AD_Tab_ID="a6fe78ae-88d7-b40c-c602-8d88064dda02",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -262,13 +263,13 @@ Identifier="8ac3c41c-261f-7755-e168-f83f89d55f99")
 public static final String FIELDNAME_InterestArea_Opt_OutDate="8ac3c41c-261f-7755-e168-f83f89d55f99";
 
 @XendraTrl(Identifier="d01504cc-c7b5-13c2-0273-bc22e10eb581")
+public static String es_PE_FIELD_Subscriptions_Opt_OutDate_Name="Fecha de Baja";
+
+@XendraTrl(Identifier="d01504cc-c7b5-13c2-0273-bc22e10eb581")
 public static String es_PE_FIELD_Subscriptions_Opt_OutDate_Description="Fecha en que el contacto se dio de baja";
 
 @XendraTrl(Identifier="d01504cc-c7b5-13c2-0273-bc22e10eb581")
 public static String es_PE_FIELD_Subscriptions_Opt_OutDate_Help="Si el campo tiene una fecha; el cliente ha decidido cancelar su suscripción y no puede recibir correo sobre el área de interés.";
-
-@XendraTrl(Identifier="d01504cc-c7b5-13c2-0273-bc22e10eb581")
-public static String es_PE_FIELD_Subscriptions_Opt_OutDate_Name="Fecha de Baja";
 
 @XendraField(AD_Column_ID="OptOutDate",IsCentrallyMaintained=true,
 AD_Tab_ID="5715e30a-1f22-4043-96cf-f797934fa251",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -286,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="09d2910b-3976-c53d-1884-207538933913",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name OptOutDate */
 public static final String COLUMNNAME_OptOutDate = "OptOutDate";
 /** Set Interest Area.
@@ -306,13 +307,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="21ffc183-1b8f-a5b9-9c90-52a7a6138291")
+public static String es_PE_FIELD_InterestArea_InterestArea_Name="Area de Interés";
+
+@XendraTrl(Identifier="21ffc183-1b8f-a5b9-9c90-52a7a6138291")
 public static String es_PE_FIELD_InterestArea_InterestArea_Description="Area de interés o tópico";
 
 @XendraTrl(Identifier="21ffc183-1b8f-a5b9-9c90-52a7a6138291")
 public static String es_PE_FIELD_InterestArea_InterestArea_Help="Areas de interés reflejan interés en un tópico por un contacto. Areas de interés pueden ser usadas para campañas de mercadeo";
-
-@XendraTrl(Identifier="21ffc183-1b8f-a5b9-9c90-52a7a6138291")
-public static String es_PE_FIELD_InterestArea_InterestArea_Name="Area de Interés";
 
 @XendraField(AD_Column_ID="R_InterestArea_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a6fe78ae-88d7-b40c-c602-8d88064dda02",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -322,13 +323,13 @@ Identifier="21ffc183-1b8f-a5b9-9c90-52a7a6138291")
 public static final String FIELDNAME_InterestArea_InterestArea="21ffc183-1b8f-a5b9-9c90-52a7a6138291";
 
 @XendraTrl(Identifier="9c1dbc2b-546f-2645-6adf-b925279676a4")
+public static String es_PE_FIELD_Subscriptions_InterestArea_Name="Area de Interés";
+
+@XendraTrl(Identifier="9c1dbc2b-546f-2645-6adf-b925279676a4")
 public static String es_PE_FIELD_Subscriptions_InterestArea_Description="Area de interés o tópico";
 
 @XendraTrl(Identifier="9c1dbc2b-546f-2645-6adf-b925279676a4")
 public static String es_PE_FIELD_Subscriptions_InterestArea_Help="Areas de interés reflejan interés en un tópico por un contacto. Areas de interés pueden ser usadas para campañas de mercadeo";
-
-@XendraTrl(Identifier="9c1dbc2b-546f-2645-6adf-b925279676a4")
-public static String es_PE_FIELD_Subscriptions_InterestArea_Name="Area de Interés";
 
 @XendraField(AD_Column_ID="R_InterestArea_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5715e30a-1f22-4043-96cf-f797934fa251",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -346,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f2a642fe-221e-62b1-bad2-5d92e4fad2d9",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_InterestArea_ID */
 public static final String COLUMNNAME_R_InterestArea_ID = "R_InterestArea_ID";
 /** Set Subscribe Date.
@@ -363,13 +364,13 @@ return (Timestamp)get_Value(COLUMNNAME_SubscribeDate);
 }
 
 @XendraTrl(Identifier="c253f4f5-eb17-892d-b648-c0d772b42c2d")
+public static String es_PE_FIELD_InterestArea_SubscribeDate_Name="Fecha de Alta";
+
+@XendraTrl(Identifier="c253f4f5-eb17-892d-b648-c0d772b42c2d")
 public static String es_PE_FIELD_InterestArea_SubscribeDate_Description="Fecha en la que el contacto se suscribió";
 
 @XendraTrl(Identifier="c253f4f5-eb17-892d-b648-c0d772b42c2d")
 public static String es_PE_FIELD_InterestArea_SubscribeDate_Help="Fecha en la que el contacto se suscribió a un área de interés";
-
-@XendraTrl(Identifier="c253f4f5-eb17-892d-b648-c0d772b42c2d")
-public static String es_PE_FIELD_InterestArea_SubscribeDate_Name="Fecha de Alta";
 
 @XendraField(AD_Column_ID="SubscribeDate",IsCentrallyMaintained=true,
 AD_Tab_ID="a6fe78ae-88d7-b40c-c602-8d88064dda02",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -379,13 +380,13 @@ Identifier="c253f4f5-eb17-892d-b648-c0d772b42c2d")
 public static final String FIELDNAME_InterestArea_SubscribeDate="c253f4f5-eb17-892d-b648-c0d772b42c2d";
 
 @XendraTrl(Identifier="5d54571f-522b-d6ec-efdd-4cabe6b37a89")
+public static String es_PE_FIELD_Subscriptions_SubscribeDate_Name="Fecha de Alta";
+
+@XendraTrl(Identifier="5d54571f-522b-d6ec-efdd-4cabe6b37a89")
 public static String es_PE_FIELD_Subscriptions_SubscribeDate_Description="Fecha en la que el contacto se suscribió";
 
 @XendraTrl(Identifier="5d54571f-522b-d6ec-efdd-4cabe6b37a89")
 public static String es_PE_FIELD_Subscriptions_SubscribeDate_Help="Fecha en la que el contacto se suscribió a un área de interés";
-
-@XendraTrl(Identifier="5d54571f-522b-d6ec-efdd-4cabe6b37a89")
-public static String es_PE_FIELD_Subscriptions_SubscribeDate_Name="Fecha de Alta";
 
 @XendraField(AD_Column_ID="SubscribeDate",IsCentrallyMaintained=true,
 AD_Tab_ID="5715e30a-1f22-4043-96cf-f797934fa251",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -403,7 +404,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1e8b816-063b-ab58-d166-0a4d6726b7d4",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name SubscribeDate */
 public static final String COLUMNNAME_SubscribeDate = "SubscribeDate";
 }

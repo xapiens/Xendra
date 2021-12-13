@@ -8,7 +8,7 @@ package org.xendra.printdocument;
 import java.text.*;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.simoes.util.*;
 import org.simoes.lpd.common.*;
 import org.xendra.Constants;
@@ -25,7 +25,7 @@ import org.xendra.common.QueuedObject;
 public class QueuedPrintJobInfo {
     
     // logger
-    static Logger log = Logger.getLogger(QueuedPrintJobInfo.class);
+    static CLogger log = CLogger.getCLogger(QueuedPrintJobInfo.class);
     
     // private constants
     private final static String CLASS = QueuedPrintJobInfo.class.getName();

@@ -4,13 +4,12 @@ import java.awt.EventQueue;
 import java.io.*;
 import java.net.*;
 
-import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.Template;
 import org.compiere.apps.AEnv;
 import org.compiere.apps.ALogin;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_A_MachinePrinter;
+import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.Splash;
 
@@ -18,7 +17,7 @@ import org.compiere.util.Splash;
  * based in Line Printer Daemon (LPD).  
  */
 public class LinePrinterServer implements Runnable {
-	static Logger log = Logger.getLogger(LinePrinterServer.class);
+	static CLogger log = CLogger.getCLogger(LinePrinterServer.class);
 	
 	private final static LinePrinterServer INSTANCE = new LinePrinterServer();
 
@@ -29,7 +28,7 @@ public class LinePrinterServer implements Runnable {
 	 */
 	private LinePrinterServer() {
 		super();
-		log.debug("LPD(): STARTED");
+		log.fine("LPD(): STARTED");
 		ve = new VelocityEngine();
 		ve.setProperty(VelocityEngine.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
 		try {
@@ -61,12 +60,12 @@ public class LinePrinterServer implements Runnable {
 		try {
 			serverSocket = new ServerSocket(PrintConstants.port);			
 			while(true) {
-				log.debug(METHOD_NAME + "trying to accept() socket connection.");
+				log.fine(METHOD_NAME + "trying to accept() socket connection.");
 				//Socket connection = serverSocket.accept();
 				Socket connection = serverSocket.accept();
-				log.debug(METHOD_NAME + "Connection opened.");
+				log.fine(METHOD_NAME + "Connection opened.");
 				PrintJob job = null;
-				log.debug(METHOD_NAME + "Created a new PrintJob.");
+				log.fine(METHOD_NAME + "Created a new PrintJob.");
 
 				OutputStream os = null;
 				ObjectInputStream ois = null;
@@ -78,7 +77,7 @@ public class LinePrinterServer implements Runnable {
 					{
 						PrintWorker obj = (PrintWorker) printwork;
 						os = connection.getOutputStream();
-						log.debug(METHOD_NAME + "Got InputStream.");
+						log.fine(METHOD_NAME + "Got InputStream.");
 						lpdCommands.handleCommand(obj, os);						
 					}
 					else if (printwork instanceof PrintJob)
@@ -86,8 +85,8 @@ public class LinePrinterServer implements Runnable {
 						//lpdCommands.handleCommand(objx);
 					}
 				} catch(Exception e) {
-					log.debug(METHOD_NAME + "ERROR in try 2");
-					log.debug(METHOD_NAME + e.getMessage());
+					log.fine(METHOD_NAME + "ERROR in try 2");
+					log.fine(METHOD_NAME + e.getMessage());
 					e.printStackTrace();
 				} finally {
 					os.close();
@@ -106,7 +105,7 @@ public class LinePrinterServer implements Runnable {
 	}
 
 	public static void main(String args[]) {
-		log.debug("main(): STARTED");
+		log.fine("main(): STARTED");
 		try {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -152,8 +151,8 @@ public class LinePrinterServer implements Runnable {
 				}
 			});			
 		} catch(Exception e) {
-			log.fatal(e.getMessage(), e);
+			log.severe(e.getMessage());
 		}
-		log.debug("main(): FINSHED");
+		log.fine("main(): FINSHED");
 	}
 }

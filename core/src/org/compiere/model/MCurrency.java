@@ -129,6 +129,12 @@ public class MCurrency extends X_C_Currency
 		return retValue;
 	}
 	
+	public static MCurrency get(String ISO_Code, String trxName) {
+		MCurrency c = new Query(Env.getCtx(), MCurrency.Table_Name, "ISO_Code = ?", trxName)
+			.setParameters(ISO_Code).first();
+		return c;
+	}
+	
 	/**
 	 * 	Get Currency Iso Code.
 	 *	@param ctx Context

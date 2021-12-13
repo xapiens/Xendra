@@ -49,7 +49,7 @@ public class PeriodStatus extends SvrProcess
 			                Help="The Period Action indicates the action to be taken for this period.  For example 'Close Period' or 'Open Period'.",
 			                AD_Reference_ID=DisplayType.List,
 			                SeqNo=0,
-			                ReferenceValueID="",
+			                ReferenceValueID="6d64edf3-1b4f-9316-fe28-18a11e3727de",
 			                ValRuleID="",
 			                FieldLength=0,
 			                IsMandatory=true,

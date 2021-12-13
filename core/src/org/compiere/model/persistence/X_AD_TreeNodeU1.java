@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("AD_TreeNodeU1");
 @XendraTrl(Identifier="181bfc76-d3dd-efd0-477a-18c3d464fbb5")
 public static String es_PE_TABLE_AD_TreeNodeU1_Name="Tree Node User 1";
 
-@XendraTable(Name="Tree Node User 1",Description="User defined tree 1",Help="",
+@XendraTable(Name="Tree Node User 1",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="User defined tree 1",Help="",
 TableName="AD_TreeNodeU1",AccessLevel="7",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,
 IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.dictionary",Identifier="181bfc76-d3dd-efd0-477a-18c3d464fbb5",
-Synchronized="2017-08-16 11:41:04.0")
+Synchronized="2020-03-03 21:36:02.0")
 /** TableName=AD_TreeNodeU1 */
 public static final String Table_Name="AD_TreeNodeU1";
 
@@ -122,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f6a0f8ba-c100-4c51-68a3-be785f78dff0",
-Synchronized="2017-08-05 16:52:55.0")
+Synchronized="2019-08-30 22:20:46.0")
 /** Column name AD_Tree_ID */
 public static final String COLUMNNAME_AD_Tree_ID = "AD_Tree_ID";
 /** Set Identifier.
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f0bd2e4-31f6-429e-b68a-912159fd316a",
-Synchronized="2017-08-05 16:52:55.0")
+Synchronized="2019-08-30 22:20:46.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Node_ID.
@@ -182,7 +183,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1ddad42d-01bf-2202-2ded-f65177652eee",
-Synchronized="2017-08-05 16:52:55.0")
+Synchronized="2019-08-30 22:20:46.0")
 /** Column name Node_ID */
 public static final String COLUMNNAME_Node_ID = "Node_ID";
 /** Set Parent.
@@ -210,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="73d843f4-4b77-6bf9-8885-895e42fdab82",
-Synchronized="2017-08-05 16:52:55.0")
+Synchronized="2019-08-30 22:20:46.0")
 /** Column name Parent_ID */
 public static final String COLUMNNAME_Parent_ID = "Parent_ID";
 /** Set Sequence.
@@ -237,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e875dd20-0989-28ed-6de9-04d9ee44de8d",
-Synchronized="2017-08-05 16:52:55.0")
+Synchronized="2019-08-30 22:20:46.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

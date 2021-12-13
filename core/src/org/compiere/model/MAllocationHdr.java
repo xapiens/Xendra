@@ -289,7 +289,7 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 			log.warning ("No transaction");
 		if (isPosted())
 		{
-			if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.PaymentAllocation, Env.getAD_Org_ID(Env.getCtx())))
+			if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.PaymentAllocation, getAD_Org_ID(), getAD_Client_ID()))
 			{
 				log.warning ("Period Closed");
 				return false;
@@ -379,7 +379,7 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 			return DocAction.STATUS_Invalid;
 
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.PaymentAllocation, Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), REF_C_DocTypeDocBaseType.PaymentAllocation, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
@@ -717,7 +717,7 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 			throw new IllegalStateException("Allocation already reversed (not active)");
 
 		//	Can we delete posting
-		if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.PaymentAllocation, Env.getAD_Org_ID(getCtx())))
+		if (!MPeriod.isOpen(getCtx(), getDateTrx(), REF_C_DocTypeDocBaseType.PaymentAllocation, getAD_Org_ID(), getAD_Client_ID()))
 			throw new IllegalStateException("@PeriodClosed@");
 
 		//	Set Inactive

@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("PA_SLA_Measure");
 public static String es_PE_TAB_SLAMeasure_Description="Medida de Nivel de Servicio Acordado";
 
 @XendraTrl(Identifier="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c")
-public static String es_PE_TAB_SLAMeasure_Name="ANS Medida";
-
-@XendraTrl(Identifier="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c")
 public static String es_PE_TAB_SLAMeasure_Help="Visión/Mantenga el valor real individual / medida para la meta del acuerdo de porcentaje de disponibilidad del socio de negocio";
 
-@XendraTab(Name="SLA Measure",Description="Service Level Agreement Measure",
+@XendraTrl(Identifier="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c")
+public static String es_PE_TAB_SLAMeasure_Name="ANS Medida";
+@XendraTab(Name="SLA Measure",
+Description="Service Level Agreement Measure",
 Help="View/Maintain the individual actual value / measure for the business partner service level agreement goal",
 AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",SeqNo=30,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -82,12 +82,12 @@ public static final String TABNAME_SLAMeasure="dc6619b5-39c3-2cd7-34c5-f4a5c3d97
 public static String es_PE_TAB_SLAMeasure2_Description="Medida del Acuerdo del nivel de Servicio";
 
 @XendraTrl(Identifier="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e")
-public static String es_PE_TAB_SLAMeasure2_Name="Medida ANS";
-
-@XendraTrl(Identifier="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e")
 public static String es_PE_TAB_SLAMeasure2_Help="Visualiza/Mantenimiento individual del valor actual / medida para la meta del acuerdo de porcentaje de disponibilidad del socio de negocio";
 
-@XendraTab(Name="SLA Measure",Description="Service Level Agreement Measure",
+@XendraTrl(Identifier="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e")
+public static String es_PE_TAB_SLAMeasure2_Name="Medida ANS";
+@XendraTab(Name="SLA Measure",
+Description="Service Level Agreement Measure",
 Help="View/Maintain the individual actual value / measure for the business partner service level agreement goal",
 AD_Window_ID="c73cdd34-69c8-f9a1-85cc-cb0e427c8ec7",SeqNo=30,TabLevel=2,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -100,11 +100,13 @@ public static final String TABNAME_SLAMeasure2="3bc58be8-ab85-7fbe-6373-366cfe7b
 @XendraTrl(Identifier="83d06947-cd97-74a9-bfa1-8c525665bd7b")
 public static String es_PE_TABLE_PA_SLA_Measure_Name="Medida SLA ";
 
-@XendraTable(Name="SLA Measure",Description="Service Level Agreement Measure",Help="",
-TableName="PA_SLA_Measure",AccessLevel="3",AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="83d06947-cd97-74a9-bfa1-8c525665bd7b",Synchronized="2017-08-16 11:43:44.0")
+@XendraTable(Name="SLA Measure",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Service Level Agreement Measure",
+Help="",TableName="PA_SLA_Measure",AccessLevel="3",
+AD_Window_ID="2f9c0dec-822e-9ffd-0c1a-85834bda184f",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="83d06947-cd97-74a9-bfa1-8c525665bd7b",Synchronized="2020-03-03 21:39:21.0")
 /** TableName=PA_SLA_Measure */
 public static final String Table_Name="PA_SLA_Measure";
 
@@ -155,13 +157,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d996f2cf-072b-9678-d268-249431e1765e")
+public static String es_PE_FIELD_SLAMeasure_Table_Name="Tabla";
+
+@XendraTrl(Identifier="d996f2cf-072b-9678-d268-249431e1765e")
 public static String es_PE_FIELD_SLAMeasure_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="d996f2cf-072b-9678-d268-249431e1765e")
 public static String es_PE_FIELD_SLAMeasure_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="d996f2cf-072b-9678-d268-249431e1765e")
-public static String es_PE_FIELD_SLAMeasure_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -171,13 +173,13 @@ Identifier="d996f2cf-072b-9678-d268-249431e1765e")
 public static final String FIELDNAME_SLAMeasure_Table="d996f2cf-072b-9678-d268-249431e1765e";
 
 @XendraTrl(Identifier="947c006b-c06f-03c8-8c14-d087cf52a31a")
+public static String es_PE_FIELD_SLAMeasure_Table2_Name="Tabla";
+
+@XendraTrl(Identifier="947c006b-c06f-03c8-8c14-d087cf52a31a")
 public static String es_PE_FIELD_SLAMeasure_Table2_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="947c006b-c06f-03c8-8c14-d087cf52a31a")
 public static String es_PE_FIELD_SLAMeasure_Table2_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="947c006b-c06f-03c8-8c14-d087cf52a31a")
-public static String es_PE_FIELD_SLAMeasure_Table2_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -195,7 +197,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e381e360-aa0c-0fd1-389a-e94f8da3a5b5",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Transaction Date.
@@ -219,13 +221,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getDateTrx()));
 }
 
 @XendraTrl(Identifier="798d3086-e980-614d-a9f0-6aeada06988e")
+public static String es_PE_FIELD_SLAMeasure_TransactionDate_Name="Fecha de la Transacción";
+
+@XendraTrl(Identifier="798d3086-e980-614d-a9f0-6aeada06988e")
 public static String es_PE_FIELD_SLAMeasure_TransactionDate_Description="Fecha de la transacción";
 
 @XendraTrl(Identifier="798d3086-e980-614d-a9f0-6aeada06988e")
 public static String es_PE_FIELD_SLAMeasure_TransactionDate_Help="La fecha de transacción indica la fecha en que se ejecutó la transacción";
-
-@XendraTrl(Identifier="798d3086-e980-614d-a9f0-6aeada06988e")
-public static String es_PE_FIELD_SLAMeasure_TransactionDate_Name="Fecha de la Transacción";
 
 @XendraField(AD_Column_ID="DateTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,13 +237,13 @@ Identifier="798d3086-e980-614d-a9f0-6aeada06988e")
 public static final String FIELDNAME_SLAMeasure_TransactionDate="798d3086-e980-614d-a9f0-6aeada06988e";
 
 @XendraTrl(Identifier="5594cd93-4044-5b55-c2a9-8a5a6f83d322")
+public static String es_PE_FIELD_SLAMeasure_TransactionDate2_Name="Fecha de la Transacción";
+
+@XendraTrl(Identifier="5594cd93-4044-5b55-c2a9-8a5a6f83d322")
 public static String es_PE_FIELD_SLAMeasure_TransactionDate2_Description="Fecha de la transacción";
 
 @XendraTrl(Identifier="5594cd93-4044-5b55-c2a9-8a5a6f83d322")
 public static String es_PE_FIELD_SLAMeasure_TransactionDate2_Help="La fecha de transacción indica la fecha en que se ejecutó la transacción";
-
-@XendraTrl(Identifier="5594cd93-4044-5b55-c2a9-8a5a6f83d322")
-public static String es_PE_FIELD_SLAMeasure_TransactionDate2_Name="Fecha de la Transacción";
 
 @XendraField(AD_Column_ID="DateTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -259,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ace9e66d-3603-adad-8e96-fed9dc9bc545",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name DateTrx */
 public static final String COLUMNNAME_DateTrx = "DateTrx";
 /** Set Description.
@@ -290,13 +292,13 @@ return value;
 }
 
 @XendraTrl(Identifier="62944faa-93b7-bb4e-2b3f-efec044601c4")
+public static String es_PE_FIELD_SLAMeasure_Description_Name="Observación";
+
+@XendraTrl(Identifier="62944faa-93b7-bb4e-2b3f-efec044601c4")
 public static String es_PE_FIELD_SLAMeasure_Description_Description="Observación";
 
 @XendraTrl(Identifier="62944faa-93b7-bb4e-2b3f-efec044601c4")
 public static String es_PE_FIELD_SLAMeasure_Description_Help="Observación";
-
-@XendraTrl(Identifier="62944faa-93b7-bb4e-2b3f-efec044601c4")
-public static String es_PE_FIELD_SLAMeasure_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -306,13 +308,13 @@ Identifier="62944faa-93b7-bb4e-2b3f-efec044601c4")
 public static final String FIELDNAME_SLAMeasure_Description="62944faa-93b7-bb4e-2b3f-efec044601c4";
 
 @XendraTrl(Identifier="2707fa89-170b-ff17-2bcf-05a3e55586a7")
+public static String es_PE_FIELD_SLAMeasure_Description2_Name="Observación";
+
+@XendraTrl(Identifier="2707fa89-170b-ff17-2bcf-05a3e55586a7")
 public static String es_PE_FIELD_SLAMeasure_Description2_Description="Observación";
 
 @XendraTrl(Identifier="2707fa89-170b-ff17-2bcf-05a3e55586a7")
 public static String es_PE_FIELD_SLAMeasure_Description2_Help="Observación";
-
-@XendraTrl(Identifier="2707fa89-170b-ff17-2bcf-05a3e55586a7")
-public static String es_PE_FIELD_SLAMeasure_Description2_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -330,7 +332,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7534787-d0c2-535e-955f-0bdfea5a4cdd",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -362,7 +364,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1b62cd2b-2936-4bc9-ba7b-e78fac514018",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Measure Actual.
@@ -382,13 +384,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="9edaadbe-8259-510e-f4b0-3a35587a38fa")
+public static String es_PE_FIELD_SLAMeasure_MeasureActual_Name="Medida Actual";
+
+@XendraTrl(Identifier="9edaadbe-8259-510e-f4b0-3a35587a38fa")
 public static String es_PE_FIELD_SLAMeasure_MeasureActual_Description="Valor actual que ha sido medido";
 
 @XendraTrl(Identifier="9edaadbe-8259-510e-f4b0-3a35587a38fa")
 public static String es_PE_FIELD_SLAMeasure_MeasureActual_Help="La medida actual indica el valor medido actual. Los valores medidos se usan para determinar si una meta de desempeño ha sido alcanzada.";
-
-@XendraTrl(Identifier="9edaadbe-8259-510e-f4b0-3a35587a38fa")
-public static String es_PE_FIELD_SLAMeasure_MeasureActual_Name="Medida Actual";
 
 @XendraField(AD_Column_ID="MeasureActual",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -398,13 +400,13 @@ Identifier="9edaadbe-8259-510e-f4b0-3a35587a38fa")
 public static final String FIELDNAME_SLAMeasure_MeasureActual="9edaadbe-8259-510e-f4b0-3a35587a38fa";
 
 @XendraTrl(Identifier="830ab16f-6d7a-ad25-0bce-da158e7ea1c4")
+public static String es_PE_FIELD_SLAMeasure_MeasureActual2_Name="Medida Actual";
+
+@XendraTrl(Identifier="830ab16f-6d7a-ad25-0bce-da158e7ea1c4")
 public static String es_PE_FIELD_SLAMeasure_MeasureActual2_Description="Valor actual que ha sido medido";
 
 @XendraTrl(Identifier="830ab16f-6d7a-ad25-0bce-da158e7ea1c4")
 public static String es_PE_FIELD_SLAMeasure_MeasureActual2_Help="La medida actual indica el valor medido actual. Los valores medidos se usan para determinar si una meta de desempeño ha sido alcanzada.";
-
-@XendraTrl(Identifier="830ab16f-6d7a-ad25-0bce-da158e7ea1c4")
-public static String es_PE_FIELD_SLAMeasure_MeasureActual2_Name="Medida Actual";
 
 @XendraField(AD_Column_ID="MeasureActual",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -422,7 +424,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a2053c5b-b489-13a6-2749-52cc336f8d42",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name MeasureActual */
 public static final String COLUMNNAME_MeasureActual = "MeasureActual";
 /** Set SLA Goal.
@@ -442,13 +444,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="93da1e85-318a-89e5-747a-2a427a4fe2c2")
+public static String es_PE_FIELD_SLAMeasure_SLAGoal_Name="Meta ANS";
+
+@XendraTrl(Identifier="93da1e85-318a-89e5-747a-2a427a4fe2c2")
 public static String es_PE_FIELD_SLAMeasure_SLAGoal_Description="Meta del acuerdo del porcentaje de disponibilidad";
 
 @XendraTrl(Identifier="93da1e85-318a-89e5-747a-2a427a4fe2c2")
 public static String es_PE_FIELD_SLAMeasure_SLAGoal_Help="Meta para los criterios de ANS para el socio de negocio";
-
-@XendraTrl(Identifier="93da1e85-318a-89e5-747a-2a427a4fe2c2")
-public static String es_PE_FIELD_SLAMeasure_SLAGoal_Name="Meta ANS";
 
 @XendraField(AD_Column_ID="PA_SLA_Goal_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -458,13 +460,13 @@ Identifier="93da1e85-318a-89e5-747a-2a427a4fe2c2")
 public static final String FIELDNAME_SLAMeasure_SLAGoal="93da1e85-318a-89e5-747a-2a427a4fe2c2";
 
 @XendraTrl(Identifier="5d63df14-f02a-b185-2772-ca1402048484")
+public static String es_PE_FIELD_SLAMeasure_SLAGoal2_Name="Meta ANS";
+
+@XendraTrl(Identifier="5d63df14-f02a-b185-2772-ca1402048484")
 public static String es_PE_FIELD_SLAMeasure_SLAGoal2_Description="Meta del acuerdo del porcentaje de disponibilidad";
 
 @XendraTrl(Identifier="5d63df14-f02a-b185-2772-ca1402048484")
 public static String es_PE_FIELD_SLAMeasure_SLAGoal2_Help="Meta para los criterios de ANS para el socio de negocio";
-
-@XendraTrl(Identifier="5d63df14-f02a-b185-2772-ca1402048484")
-public static String es_PE_FIELD_SLAMeasure_SLAGoal2_Name="Meta ANS";
 
 @XendraField(AD_Column_ID="PA_SLA_Goal_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -482,7 +484,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f8c02ca5-06e5-cd29-669a-3b5a31238647",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name PA_SLA_Goal_ID */
 public static final String COLUMNNAME_PA_SLA_Goal_ID = "PA_SLA_Goal_ID";
 /** Set SLA Measure.
@@ -502,13 +504,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d20cb68e-eeee-a854-9a5a-9c511d594c45")
+public static String es_PE_FIELD_SLAMeasure_SLAMeasure_Name="Medida SLA ";
+
+@XendraTrl(Identifier="d20cb68e-eeee-a854-9a5a-9c511d594c45")
 public static String es_PE_FIELD_SLAMeasure_SLAMeasure_Description="Medida del acuerdo de porcentaje de disponibilidad.";
 
 @XendraTrl(Identifier="d20cb68e-eeee-a854-9a5a-9c511d594c45")
 public static String es_PE_FIELD_SLAMeasure_SLAMeasure_Help="Visualiza / Mantenimiento al valor / las medidas reales individuales para la meta del acuerdo del porcentaje de disponibilidad del socio de negocio.";
-
-@XendraTrl(Identifier="d20cb68e-eeee-a854-9a5a-9c511d594c45")
-public static String es_PE_FIELD_SLAMeasure_SLAMeasure_Name="Medida SLA ";
 
 @XendraField(AD_Column_ID="PA_SLA_Measure_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -518,13 +520,13 @@ Identifier="d20cb68e-eeee-a854-9a5a-9c511d594c45")
 public static final String FIELDNAME_SLAMeasure_SLAMeasure="d20cb68e-eeee-a854-9a5a-9c511d594c45";
 
 @XendraTrl(Identifier="80c48862-ad4b-8239-49d0-47b0f2b54ef8")
+public static String es_PE_FIELD_SLAMeasure_SLAMeasure2_Name="Medida SLA ";
+
+@XendraTrl(Identifier="80c48862-ad4b-8239-49d0-47b0f2b54ef8")
 public static String es_PE_FIELD_SLAMeasure_SLAMeasure2_Description="Medida del acuerdo de porcentaje de disponibilidad.";
 
 @XendraTrl(Identifier="80c48862-ad4b-8239-49d0-47b0f2b54ef8")
 public static String es_PE_FIELD_SLAMeasure_SLAMeasure2_Help="Visualiza / Mantenimiento al valor / las medidas reales individuales para la meta del acuerdo del porcentaje de disponibilidad del socio de negocio.";
-
-@XendraTrl(Identifier="80c48862-ad4b-8239-49d0-47b0f2b54ef8")
-public static String es_PE_FIELD_SLAMeasure_SLAMeasure2_Name="Medida SLA ";
 
 @XendraField(AD_Column_ID="PA_SLA_Measure_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -554,13 +556,13 @@ return false;
 }
 
 @XendraTrl(Identifier="880d1e1e-76db-faf7-7f0e-24e70850b9a0")
+public static String es_PE_FIELD_SLAMeasure_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="880d1e1e-76db-faf7-7f0e-24e70850b9a0")
 public static String es_PE_FIELD_SLAMeasure_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="880d1e1e-76db-faf7-7f0e-24e70850b9a0")
 public static String es_PE_FIELD_SLAMeasure_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="880d1e1e-76db-faf7-7f0e-24e70850b9a0")
-public static String es_PE_FIELD_SLAMeasure_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -570,13 +572,13 @@ Identifier="880d1e1e-76db-faf7-7f0e-24e70850b9a0")
 public static final String FIELDNAME_SLAMeasure_Processed="880d1e1e-76db-faf7-7f0e-24e70850b9a0";
 
 @XendraTrl(Identifier="711df414-7934-8edb-ae6d-2f8dc6e51314")
+public static String es_PE_FIELD_SLAMeasure_Processed2_Name="Procesado";
+
+@XendraTrl(Identifier="711df414-7934-8edb-ae6d-2f8dc6e51314")
 public static String es_PE_FIELD_SLAMeasure_Processed2_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="711df414-7934-8edb-ae6d-2f8dc6e51314")
 public static String es_PE_FIELD_SLAMeasure_Processed2_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="711df414-7934-8edb-ae6d-2f8dc6e51314")
-public static String es_PE_FIELD_SLAMeasure_Processed2_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -594,7 +596,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a07fdaf8-7e36-d719-8835-5816d11e596d",
-Synchronized="2017-08-05 16:55:45.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -617,13 +619,13 @@ return false;
 }
 
 @XendraTrl(Identifier="bab9429b-8630-c855-6c2e-326d6472c491")
+public static String es_PE_FIELD_SLAMeasure_ProcessNow_Name="Calcule las Medidas";
+
+@XendraTrl(Identifier="bab9429b-8630-c855-6c2e-326d6472c491")
 public static String es_PE_FIELD_SLAMeasure_ProcessNow_Description="Calcule las Medidas";
 
 @XendraTrl(Identifier="bab9429b-8630-c855-6c2e-326d6472c491")
 public static String es_PE_FIELD_SLAMeasure_ProcessNow_Help="Calcule/actualize la medida actual.";
-
-@XendraTrl(Identifier="bab9429b-8630-c855-6c2e-326d6472c491")
-public static String es_PE_FIELD_SLAMeasure_ProcessNow_Name="Calcule las Medidas";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -633,13 +635,13 @@ Identifier="bab9429b-8630-c855-6c2e-326d6472c491")
 public static final String FIELDNAME_SLAMeasure_ProcessNow="bab9429b-8630-c855-6c2e-326d6472c491";
 
 @XendraTrl(Identifier="a6dce0f2-1c46-ad68-2014-321c177e1f31")
+public static String es_PE_FIELD_SLAMeasure_ProcessNow2_Name="Calcule las Medidas";
+
+@XendraTrl(Identifier="a6dce0f2-1c46-ad68-2014-321c177e1f31")
 public static String es_PE_FIELD_SLAMeasure_ProcessNow2_Description="Calcule las Medidas";
 
 @XendraTrl(Identifier="a6dce0f2-1c46-ad68-2014-321c177e1f31")
 public static String es_PE_FIELD_SLAMeasure_ProcessNow2_Help="Calcule/actualize la medida actual.";
-
-@XendraTrl(Identifier="a6dce0f2-1c46-ad68-2014-321c177e1f31")
-public static String es_PE_FIELD_SLAMeasure_ProcessNow2_Name="Calcule las Medidas";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -657,7 +659,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="21d517c0-cd68-4bb4-75e6-c0a7858fc586",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="cc2da520-50a4-699a-5047-291a623269c5",Synchronized="2017-08-05 16:55:45.0")
+Identifier="cc2da520-50a4-699a-5047-291a623269c5",Synchronized="2019-08-30 22:23:41.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Record ID.
@@ -678,13 +680,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8ea04c73-b569-a460-f20c-739dd5093bd0")
+public static String es_PE_FIELD_SLAMeasure_RecordID_Name="ID de Registro";
+
+@XendraTrl(Identifier="8ea04c73-b569-a460-f20c-739dd5093bd0")
 public static String es_PE_FIELD_SLAMeasure_RecordID_Description="Identificador de registro interno";
 
 @XendraTrl(Identifier="8ea04c73-b569-a460-f20c-739dd5093bd0")
 public static String es_PE_FIELD_SLAMeasure_RecordID_Help="La ID de registro es el identificador único interno de un registro.";
-
-@XendraTrl(Identifier="8ea04c73-b569-a460-f20c-739dd5093bd0")
-public static String es_PE_FIELD_SLAMeasure_RecordID_Name="ID de Registro";
 
 @XendraField(AD_Column_ID="Record_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="3bc58be8-ab85-7fbe-6373-366cfe7b8a9e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -694,13 +696,13 @@ Identifier="8ea04c73-b569-a460-f20c-739dd5093bd0")
 public static final String FIELDNAME_SLAMeasure_RecordID="8ea04c73-b569-a460-f20c-739dd5093bd0";
 
 @XendraTrl(Identifier="681aec67-651c-da17-079e-c0883b28f6cd")
+public static String es_PE_FIELD_SLAMeasure_RecordID2_Name="ID de Registro";
+
+@XendraTrl(Identifier="681aec67-651c-da17-079e-c0883b28f6cd")
 public static String es_PE_FIELD_SLAMeasure_RecordID2_Description="Identificador de registro interno";
 
 @XendraTrl(Identifier="681aec67-651c-da17-079e-c0883b28f6cd")
 public static String es_PE_FIELD_SLAMeasure_RecordID2_Help="La ID de registro es el identificador único interno de un registro.";
-
-@XendraTrl(Identifier="681aec67-651c-da17-079e-c0883b28f6cd")
-public static String es_PE_FIELD_SLAMeasure_RecordID2_Name="ID de Registro";
 
 @XendraField(AD_Column_ID="Record_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dc6619b5-39c3-2cd7-34c5-f4a5c3d9738c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -718,7 +720,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="92416054-e082-5ee6-5317-d1cc77970a52",
-Synchronized="2017-08-05 16:55:45.0")
+Synchronized="2019-08-30 22:23:41.0")
 /** Column name Record_ID */
 public static final String COLUMNNAME_Record_ID = "Record_ID";
 }

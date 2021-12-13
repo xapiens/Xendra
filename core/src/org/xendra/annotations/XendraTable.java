@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 @Target(value = ElementType.FIELD)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface XendraTable {
+	String AD_Package_ID();
+	String AD_Plugin_ID();
 	String Name();
 	String Description();
 	String Help();

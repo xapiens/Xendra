@@ -26,8 +26,8 @@ import org.columba.api.desktop.IDesktop;
 import org.columba.core.base.OSInfo;
 import org.columba.core.base.TextUtil;
 import org.columba.core.gui.frame.FrameManager;
-import org.columba.core.logging.Logging;
 import org.columba.core.resourceloader.GlobalResourceLoader;
+import org.compiere.util.CLogMgt;
 import org.jdesktop.jdic.desktop.Desktop;
 import org.jdesktop.jdic.desktop.DesktopException;
 import org.jdesktop.jdic.filetypes.Action;
@@ -112,7 +112,7 @@ public class JDICDesktop implements IDesktop {
 		try {
 			child = Runtime.getRuntime().exec(command);
 		} catch (IOException e) {
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 
 			return false;

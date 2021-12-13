@@ -62,12 +62,12 @@ public static int Table_ID=MTable.getTable_ID("PA_BenchmarkData");
 public static String es_PE_TAB_Data_Description="Desempeño Punto deControl de Datos ";
 
 @XendraTrl(Identifier="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01")
-public static String es_PE_TAB_Data_Name="Datos";
-
-@XendraTrl(Identifier="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01")
 public static String es_PE_TAB_Data_Help="Series de Datos Puntuales para comparar desempeño interno (ej. Precio de Inventario, ...)";
 
-@XendraTab(Name="Data",Description="Performance Benchmark Data Point",
+@XendraTrl(Identifier="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01")
+public static String es_PE_TAB_Data_Name="Datos";
+@XendraTab(Name="Data",
+Description="Performance Benchmark Data Point",
 Help="Data Series Point to compare internal performance with (e.g. stock price, ...)",
 AD_Window_ID="e3187912-ea74-7814-0337-b1de9f9a6a25",SeqNo=20,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -81,11 +81,13 @@ public static final String TABNAME_Data="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01";
 public static String es_PE_TABLE_PA_BenchmarkData_Name="Información Punto de Comparación";
 
 
-@XendraTable(Name="Benchmark Data",Description="Performance Benchmark Data Point",Help="",
-TableName="PA_BenchmarkData",AccessLevel="6",AD_Window_ID="e3187912-ea74-7814-0337-b1de9f9a6a25",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="e5d9b2e7-1067-678e-7f1c-d075b93e13e4",Synchronized="2017-08-16 11:43:39.0")
+@XendraTable(Name="Benchmark Data",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Performance Benchmark Data Point",
+Help="",TableName="PA_BenchmarkData",AccessLevel="6",
+AD_Window_ID="e3187912-ea74-7814-0337-b1de9f9a6a25",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="e5d9b2e7-1067-678e-7f1c-d075b93e13e4",Synchronized="2020-03-03 21:39:00.0")
 /** TableName=PA_BenchmarkData */
 public static final String Table_Name="PA_BenchmarkData";
 
@@ -133,18 +135,19 @@ return (Timestamp)get_Value(COLUMNNAME_BenchmarkDate);
 }
 
 @XendraTrl(Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
+public static String es_PE_FIELD_Data_Date_Name="Fecha";
+
+@XendraTrl(Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
 public static String es_PE_FIELD_Data_Date_Description="Fecha Punto de Comparación";
 
 @XendraTrl(Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
 public static String es_PE_FIELD_Data_Date_Help="Fecha de Información Punto de Comparación";
 
-@XendraTrl(Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
-public static String es_PE_FIELD_Data_Date_Name="Fecha";
-@XendraField(AD_Column_ID="BenchmarkDate",
-IsCentrallyMaintained=true,AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=7,IsReadOnly=false,SeqNo=70,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
+@XendraField(AD_Column_ID="BenchmarkDate",IsCentrallyMaintained=true,
+AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=7,IsReadOnly=false,SeqNo=70,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="2a8ef9e6-27be-81f4-714e-305f412ff0e6")
 public static final String FIELDNAME_Data_Date="2a8ef9e6-27be-81f4-714e-305f412ff0e6";
 
 @XendraTrl(Identifier="be58458a-2a24-45f8-27e1-d6d3e2338fd3")
@@ -156,7 +159,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="be58458a-2a24-45f8-27e1-d6d3e2338fd3",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name BenchmarkDate */
 public static final String COLUMNNAME_BenchmarkDate = "BenchmarkDate";
 /** Set Value.
@@ -176,13 +179,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="754acb37-529c-2719-cbc4-6870befec65b")
+public static String es_PE_FIELD_Data_Value_Name="Valor ";
+
+@XendraTrl(Identifier="754acb37-529c-2719-cbc4-6870befec65b")
 public static String es_PE_FIELD_Data_Value_Description="Valor Punto de Referencia";
 
 @XendraTrl(Identifier="754acb37-529c-2719-cbc4-6870befec65b")
 public static String es_PE_FIELD_Data_Value_Help="Valor del Punto de Datos de Referencia.";
-
-@XendraTrl(Identifier="754acb37-529c-2719-cbc4-6870befec65b")
-public static String es_PE_FIELD_Data_Value_Name="Valor ";
 
 @XendraField(AD_Column_ID="BenchmarkValue",IsCentrallyMaintained=true,
 AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -200,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90c4ebe9-1d3b-ac8a-8a88-599ed2d3b1b8",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name BenchmarkValue */
 public static final String COLUMNNAME_BenchmarkValue = "BenchmarkValue";
 /** Set Description.
@@ -231,13 +234,13 @@ return value;
 }
 
 @XendraTrl(Identifier="06697d29-f8a1-3e2f-6a5e-3adac8f74c1b")
+public static String es_PE_FIELD_Data_Description_Name="Observación";
+
+@XendraTrl(Identifier="06697d29-f8a1-3e2f-6a5e-3adac8f74c1b")
 public static String es_PE_FIELD_Data_Description_Description="Observación";
 
 @XendraTrl(Identifier="06697d29-f8a1-3e2f-6a5e-3adac8f74c1b")
 public static String es_PE_FIELD_Data_Description_Help="Observación";
-
-@XendraTrl(Identifier="06697d29-f8a1-3e2f-6a5e-3adac8f74c1b")
-public static String es_PE_FIELD_Data_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -255,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="65955a69-c83e-c01c-35ea-877853e1ef37",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:35.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -287,7 +290,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ea0cc664-b682-4b41-aa90-22a3b9655e6c",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -319,18 +322,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
+public static String es_PE_FIELD_Data_Name_Name="Nombre";
+
+@XendraTrl(Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
 public static String es_PE_FIELD_Data_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
 public static String es_PE_FIELD_Data_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
-public static String es_PE_FIELD_Data_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=120,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="14efaef5-c81d-2084-776c-8cfa331f1062")
 public static final String FIELDNAME_Data_Name="14efaef5-c81d-2084-776c-8cfa331f1062";
 
 @XendraTrl(Identifier="d11b8941-1072-ed59-ed9d-23a0e59ada6b")
@@ -342,7 +346,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d11b8941-1072-ed59-ed9d-23a0e59ada6b",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Benchmark Data.
@@ -362,13 +366,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="77bfbb46-0e87-8091-8596-89d141f373c3")
+public static String es_PE_FIELD_Data_BenchmarkData_Name="Información Punto de Comparación";
+
+@XendraTrl(Identifier="77bfbb46-0e87-8091-8596-89d141f373c3")
 public static String es_PE_FIELD_Data_BenchmarkData_Description="Información Puntual Desempeño Punto de Comparación ";
 
 @XendraTrl(Identifier="77bfbb46-0e87-8091-8596-89d141f373c3")
 public static String es_PE_FIELD_Data_BenchmarkData_Help="Serie de Datos Puntuales para comparar desempeño interno con (ej. costo de inventario,....)";
-
-@XendraTrl(Identifier="77bfbb46-0e87-8091-8596-89d141f373c3")
-public static String es_PE_FIELD_Data_BenchmarkData_Name="Información Punto de Comparación";
 
 @XendraField(AD_Column_ID="PA_BenchmarkData_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -395,13 +399,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b0444678-1e5a-5981-48a7-af0a3173ffc1")
+public static String es_PE_FIELD_Data_Benchmark_Name="Punto de Comparación";
+
+@XendraTrl(Identifier="b0444678-1e5a-5981-48a7-af0a3173ffc1")
 public static String es_PE_FIELD_Data_Benchmark_Description="Desempeño Punto de Comparación";
 
 @XendraTrl(Identifier="b0444678-1e5a-5981-48a7-af0a3173ffc1")
 public static String es_PE_FIELD_Data_Benchmark_Help="Series de Datos para comparar el desempeño interno (ej precio del inventario, ...)";
-
-@XendraTrl(Identifier="b0444678-1e5a-5981-48a7-af0a3173ffc1")
-public static String es_PE_FIELD_Data_Benchmark_Name="Punto de Comparación";
 
 @XendraField(AD_Column_ID="PA_Benchmark_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="0b210549-cfba-6cbb-b1f6-c1b4ebd0bf01",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -419,7 +423,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d22e6210-45ab-1348-f410-3039bea07a17",
-Synchronized="2017-08-05 16:55:39.0")
+Synchronized="2019-08-30 22:23:36.0")
 /** Column name PA_Benchmark_ID */
 public static final String COLUMNNAME_PA_Benchmark_ID = "PA_Benchmark_ID";
 }

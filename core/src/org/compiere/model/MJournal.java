@@ -157,7 +157,10 @@ public class MJournal extends X_GL_Journal implements DocAction
 			return;
 		if (getC_Period_ID() != 0)
 			return;
-		int C_Period_ID = MPeriod.getC_Period_ID(getCtx(), DateAcct);
+		MPeriod p = MPeriod.get(getCtx(), DateAcct, getAD_Org_ID(), getAD_Client_ID());		
+		int C_Period_ID = 0;
+		if (p != null)
+			C_Period_ID = p.getC_Period_ID();
 		if (C_Period_ID == 0)
 			log.warning("setDateAcct - Period not found");
 		else
@@ -412,7 +415,7 @@ public class MJournal extends X_GL_Journal implements DocAction
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 
 		//	Get Period
-		MPeriod period = MPeriod.get (getCtx(), getDateAcct());
+		MPeriod period = MPeriod.get (getCtx(), getDateAcct(), getAD_Org_ID(), getAD_Client_ID());
 		if (period == null)
 		{
 			log.warning("No Period for " + getDateAcct());

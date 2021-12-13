@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Tool_Access");
 @XendraTrl(Identifier="26a3b148-ff67-407a-1570-ad114abac413")
 public static String es_PE_TABLE_AD_Tool_Access_Name="AD_Tool_Access";
 
-@XendraTable(Name="AD_Tool_Access",Description="",Help="",TableName="AD_Tool_Access",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="26a3b148-ff67-407a-1570-ad114abac413",
-Synchronized="2017-08-16 11:41:03.0")
+@XendraTable(Name="AD_Tool_Access",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Tool_Access",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="26a3b148-ff67-407a-1570-ad114abac413",
+Synchronized="2020-03-03 21:36:01.0")
 /** TableName=AD_Tool_Access */
 public static final String Table_Name="AD_Tool_Access";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5b24d7c7-fb25-4aa4-9789-f37302aab3e8",
-Synchronized="2017-08-05 16:52:54.0")
+Synchronized="2019-08-30 22:20:45.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

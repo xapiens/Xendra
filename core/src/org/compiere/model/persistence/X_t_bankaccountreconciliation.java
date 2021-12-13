@@ -58,11 +58,13 @@ public static int Table_ID=MTable.getTable_ID("t_bankaccountreconciliation");
 public static String es_PE_TABLE_t_bankaccountreconciliation_Name="t_bankaccountreconciliation";
 
 
-@XendraTable(Name="t_bankaccountreconciliation",Description="",Help="",
+@XendraTable(Name="t_bankaccountreconciliation",
+AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="t_bankaccountreconciliation",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="af9d900a-a0fe-223c-3533-fab9a8c92f1f",Synchronized="2017-08-16 11:44:19.0")
+Identifier="af9d900a-a0fe-223c-3533-fab9a8c92f1f",Synchronized="2020-03-03 21:40:20.0")
 /** TableName=t_bankaccountreconciliation */
 public static final String Table_Name="t_bankaccountreconciliation";
 
@@ -120,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2466927c-8397-6004-5051-8e181146bd0e",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Bank Statement.
@@ -149,7 +151,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4daa98b3-1e48-6023-4a12-ad8d71751d05",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name C_BankStatement_ID */
 public static final String COLUMNNAME_C_BankStatement_ID = "C_BankStatement_ID";
 /** Set Payment.
@@ -178,7 +180,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7557d070-335b-f604-d529-2e0beee22c5a",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Transaction Date.
@@ -203,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="edab637e-63dc-7df0-9f1d-5cd09ff467d6",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name DateTrx */
 public static final String COLUMNNAME_DateTrx = "DateTrx";
 /** Set Is Pending.
@@ -234,7 +236,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38ff8738-6f70-b5c0-3308-e67f670fa6d7",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name IsPending */
 public static final String COLUMNNAME_IsPending = "IsPending";
 /** Set Is Previous.
@@ -265,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ca382a1a-d315-02d3-b6e4-1ebf17f41821",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name IsPrevious */
 public static final String COLUMNNAME_IsPrevious = "IsPrevious";
 /** Set Reconciled.
@@ -296,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ae0e1f12-aa0d-2670-fbfc-2266ab0d7a5e",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name IsReconciled */
 public static final String COLUMNNAME_IsReconciled = "IsReconciled";
 /** Set Payment amount.
@@ -323,7 +325,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="deb27ea3-4bd6-9bbb-4515-f99a80f44256",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:21.0")
 /** Column name PayAmt */
 public static final String COLUMNNAME_PayAmt = "PayAmt";
 }

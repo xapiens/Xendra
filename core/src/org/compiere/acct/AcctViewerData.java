@@ -23,6 +23,7 @@ import javax.swing.*;
 
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MAcctSchemaElement;
+import org.compiere.model.MColumn;
 import org.compiere.model.MFactAcct;
 import org.compiere.model.MLookupFactory;
 import org.compiere.model.MRefList;
@@ -541,11 +542,13 @@ class AcctViewerData
 			rm.addColumn(new RColumn(ctx, "Record_ID", DisplayType.ID));
 			rm.addColumn(new RColumn(ctx, "Description", DisplayType.String));
 		//}
-		if (PostingType == null || PostingType.length() == 0)
+		if (PostingType == null || PostingType.length() == 0) {
+			// X_Fact_Acct PostingType
+			MColumn col = MColumn.getbyIdentifier("c695cca6-2527-c616-8ba3-7da65210895c", null);
 			rm.addColumn(new RColumn(ctx, "PostingType", DisplayType.List, // teo_sarca, [ 1664208 ]
-					RModel.TABLE_ALIAS+".PostingType",
-					MFactAcct.POSTINGTYPE_AD_Reference_ID,
+					RModel.TABLE_ALIAS+".PostingType", col.getAD_Reference_Value_ID(),
 					null));
+		}
 		return rm;
 	}   //  createRModel
 

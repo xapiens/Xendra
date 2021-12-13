@@ -28,6 +28,7 @@ import org.compiere.model.MInventoryLine;
 import org.compiere.model.MProduct;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_I_Inventory;
+import org.compiere.model.reference.REF_M_InventoryType;
 import org.compiere.util.*;
 
 import org.xendra.Constants;
@@ -245,7 +246,7 @@ public class ImportInventory extends SvrProcess {
 				inventory = new MInventory (getCtx(), 0, get_TrxName());
 				inventory.setClientOrg(imp.getAD_Client_ID(), imp.getAD_Org_ID());
 				inventory.setDescription("I " + imp.getM_Warehouse_ID() + " " + MovementDate);
-				inventory.setM_Warehouse_ID(imp.getM_Warehouse_ID());
+				inventory.setM_Warehouse_ID(imp.getM_Warehouse_ID());				
 				inventory.setMovementDate(MovementDate);
 				//
 				if (!inventory.save())
@@ -280,8 +281,6 @@ public class ImportInventory extends SvrProcess {
 					product.setM_AttributeSet_ID(mas.getM_AttributeSet_ID());
 					product.save();
 				}
-				//if (product.isInstanceAttribute())
-				//{				
 				MAttributeSetInstance masi = new MAttributeSetInstance(getCtx(), 0, mas.getM_AttributeSet_ID(), get_TrxName());
 				if (mas.isLot() && imp.getLot() != null)
 					masi.setLot(imp.getLot(), imp.getM_Product_ID());
@@ -295,6 +294,8 @@ public class ImportInventory extends SvrProcess {
 			MInventoryLine line = new MInventoryLine (inventory, 
 					imp.getM_Locator_ID(), imp.getM_Product_ID(), M_AttributeSetInstance_ID,
 					imp.getQtyBook(), imp.getQtyCount());
+			line.setCost(imp.getCost());
+			line.setInventoryType(REF_M_InventoryType.InitialCharge);
 			if (line.save())
 			{
 				imp.setI_IsImported(true);
@@ -305,102 +306,15 @@ public class ImportInventory extends SvrProcess {
 					noInsertLine++;
 			}			
 		}
-		//		/*********************************************************************/
-		//		MInventory inventory = null;
-		//
-		//		int noInsert = 0;
-		//		int noInsertLine = 0;
-		//
-		//		//	Go through Inventory Records
-		//		sql = new StringBuffer ("SELECT * FROM I_Inventory "
-		//				+ "WHERE I_IsImported='N'").append (clientCheck)
-		//				.append(" ORDER BY M_Warehouse_ID, TRUNC(MovementDate), I_Inventory_ID");
-		//		try
-		//		{
-		//			PreparedStatement pstmt = DB.prepareStatement (sql.toString (), get_TrxName());
-		//			ResultSet rs = pstmt.executeQuery ();
-		//			//
-		//			int x_M_Warehouse_ID = -1;
-		//			Timestamp x_MovementDate = null;
-		//			while (rs.next())
-		//			{
-		//				X_I_Inventory imp = new X_I_Inventory (getCtx (), rs, get_TrxName());
-		//				Timestamp MovementDate = TimeUtil.getDay(imp.getMovementDate());
-		//
-		//				if (inventory == null
-		//						|| imp.getM_Warehouse_ID() != x_M_Warehouse_ID
-		//						|| !MovementDate.equals(x_MovementDate))
-		//				{
-		//					inventory = new MInventory (getCtx(), 0, get_TrxName());
-		//					inventory.setClientOrg(imp.getAD_Client_ID(), imp.getAD_Org_ID());
-		//					inventory.setDescription("I " + imp.getM_Warehouse_ID() + " " + MovementDate);
-		//					inventory.setM_Warehouse_ID(imp.getM_Warehouse_ID());
-		//					inventory.setMovementDate(MovementDate);
-		//					//
-		//					if (!inventory.save())
-		//					{
-		//						log.log(Level.SEVERE, "Inventory not saved");
-		//						break;
-		//					}
-		//					x_M_Warehouse_ID = imp.getM_Warehouse_ID();
-		//					x_MovementDate = MovementDate;
-		//					noInsert++;
-		//				}
-		//
-		//				//	Line
-		//				int M_AttributeSetInstance_ID = 0;
-		//				if (imp.getLot() != null || imp.getSerNo() != null)
-		//				{
-		//					MProduct product = MProduct.get(getCtx(), imp.getM_Product_ID());
-		//					if (product.isInstanceAttribute())
-		//					{
-		//						MAttributeSet mas = product.getAttributeSet();
-		//						MAttributeSetInstance masi = new MAttributeSetInstance(getCtx(), 0, mas.getM_AttributeSet_ID(), get_TrxName());
-		//						if (mas.isLot() && imp.getLot() != null)
-		//							masi.setLot(imp.getLot(), imp.getM_Product_ID());
-		//						if (mas.isSerNo() && imp.getSerNo() != null)
-		//							masi.setSerNo(imp.getSerNo());
-		//						masi.setDescription();
-		//						masi.save();
-		//						M_AttributeSetInstance_ID = masi.getM_AttributeSetInstance_ID();
-		//					}
-		//				}
-		//				MInventoryLine line = new MInventoryLine (inventory, 
-		//						imp.getM_Locator_ID(), imp.getM_Product_ID(), M_AttributeSetInstance_ID,
-		//						imp.getQtyBook(), imp.getQtyCount());
-		//				if (line.save())
-		//				{
-		//					imp.setI_IsImported(true);
-		//					imp.setM_Inventory_ID(line.getM_Inventory_ID());
-		//					imp.setM_InventoryLine_ID(line.getM_InventoryLine_ID());
-		//					imp.setProcessed(true);
-		//					if (imp.save())
-		//						noInsertLine++;
-		//				}
-		//			}
-		//			rs.close();
-		//			pstmt.close();
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			log.log(Level.SEVERE, sql.toString(), e);
-		//		}
-
-		//	Set Error to indicator to not imported
-		//sql = new StringBuffer ("UPDATE I_Inventory "
-		//		+ "SET I_IsImported='N', Updated=CURRENT_TIMESTAMP "
-		//		+ "WHERE I_IsImported<>'Y'").append(clientCheck);
-		//no = DB.executeUpdate(sql.toString(), get_TrxName());
 		o = new UpdatePO();
 		o.setTablename(X_I_Inventory.Table_Name);
 		o.setField(X_I_Inventory.COLUMNNAME_I_IsImported, Constants.NO);
 		o.setFieldExpr(Constants.COLUMNNAME_Updated, "CURRENT_TIMESTAMP");
 		no = o.update("I_IsImported<>'Y'", get_TrxName());		
-
 		addLog (0, null, new BigDecimal (no), "@Errors@");
-		//
 		addLog (0, null, new BigDecimal (noInsert), "@M_Inventory_ID@: @Inserted@");
 		addLog (0, null, new BigDecimal (noInsertLine), "@M_InventoryLine_ID@: @Inserted@");
 		return "";
 	}	//	doIt
+
 } // ImportInventory

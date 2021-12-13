@@ -368,7 +368,7 @@ public class MInventoryLine extends X_M_InventoryLine
 		if (newRecord && success 
 			&& m_isManualEntry && getM_AttributeSetInstance_ID() == 0)
 			createMA();
-		return true;
+		return success;
 	}	//	afterSave
 	
 	/**

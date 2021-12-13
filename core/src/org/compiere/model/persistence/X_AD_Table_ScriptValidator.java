@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_EventModelValidator;
 /** Generated Model for AD_Table_ScriptValidator
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -63,11 +62,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Table_ScriptValidator");
 public static String es_PE_TABLE_AD_Table_ScriptValidator_Name="AD_Table_ScriptValidator";
 
 
-@XendraTable(Name="AD_Table_ScriptValidator",Description="",Help="",
+@XendraTable(Name="AD_Table_ScriptValidator",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="AD_Table_ScriptValidator",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="cddd5246-4206-15aa-dd53-b56932902060",Synchronized="2017-08-16 11:41:02.0")
+Identifier="cddd5246-4206-15aa-dd53-b56932902060",Synchronized="2020-03-03 21:35:59.0")
 /** TableName=AD_Table_ScriptValidator */
 public static final String Table_Name="AD_Table_ScriptValidator";
 
@@ -125,7 +125,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="029e51a8-be49-b10d-1d12-35e6764846b9",Synchronized="2017-08-05 16:52:53.0")
+Identifier="029e51a8-be49-b10d-1d12-35e6764846b9",Synchronized="2019-08-30 22:20:44.0")
 /** Column name AD_Rule_ID */
 public static final String COLUMNNAME_AD_Rule_ID = "AD_Rule_ID";
 /** Set Table.
@@ -153,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c0846b3b-29e4-268f-648c-2f80897cd69f",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set AD_Table_ScriptValidator_ID.
@@ -173,16 +173,10 @@ return ii.intValue();
 }
 /** Column name AD_Table_ScriptValidator_ID */
 public static final String COLUMNNAME_AD_Table_ScriptValidator_ID = "AD_Table_ScriptValidator_ID";
-
-/** EventModelValidator AD_Reference=xendra.getuuid() */
-public static final int EVENTMODELVALIDATOR_AD_Reference_ID=1000064;
 /** Set EventModelValidator.
 @param EventModelValidator EventModelValidator */
 public void setEventModelValidator (String EventModelValidator)
 {
-if (EventModelValidator == null) throw new IllegalArgumentException ("EventModelValidator is mandatory");
-if (EventModelValidator.equals(REF_EventModelValidator.TableBeforeNew) || EventModelValidator.equals(REF_EventModelValidator.TableBeforeChange) || EventModelValidator.equals(REF_EventModelValidator.TableBeforeDelete) || EventModelValidator.equals(REF_EventModelValidator.TableAfterNew) || EventModelValidator.equals(REF_EventModelValidator.TableAfterChange) || EventModelValidator.equals(REF_EventModelValidator.TableAfterDelete) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforePrepare) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeVoid) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeClose) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeReactivate) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeReverseCorrect) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeReverseAccrual) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforeComplete) || EventModelValidator.equals(REF_EventModelValidator.DocumentBeforePost) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterPrepare) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterVoid) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterClose) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterReactivate) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterReverseCorrect) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterReverseAccrual) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterComplete) || EventModelValidator.equals(REF_EventModelValidator.DocumentAfterPost));
- else throw new IllegalArgumentException ("EventModelValidator Invalid value - " + EventModelValidator + " - Reference_ID=1000064 - TBN - TBC - TBD - TAN - TAC - TAD - DBPR - DBVO - DBCL - DBAC - DBRC - DBRA - DBCO - DBPO - DAPR - DAVO - DACL - DAAC - DARC - DARA - DACO - DAPO");
 if (EventModelValidator.length() > 4)
 {
 log.warning("Length > 4 - truncated");
@@ -206,7 +200,7 @@ AD_Val_Rule_ID="",FieldLength=4,DefaultValue="",IsKey=false,IsInternal=false,IsP
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e221c171-bff2-5bab-530b-1e38b330f959",Synchronized="2017-08-05 16:52:53.0")
+Identifier="e221c171-bff2-5bab-530b-1e38b330f959",Synchronized="2019-08-30 22:20:44.0")
 /** Column name EventModelValidator */
 public static final String COLUMNNAME_EventModelValidator = "EventModelValidator";
 /** Set Identifier.
@@ -238,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd69b974-65b9-4527-aff6-2b7ed941ea31",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sequence.
@@ -265,7 +259,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="433544f4-e8d5-4e33-09f7-9f4a063d3e8e",
-Synchronized="2017-08-05 16:52:53.0")
+Synchronized="2019-08-30 22:20:44.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

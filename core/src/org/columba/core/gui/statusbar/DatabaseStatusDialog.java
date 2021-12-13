@@ -24,8 +24,14 @@ import javax.swing.border.EmptyBorder;
 import org.columba.core.gui.base.ButtonWithMnemonic;
 import org.columba.core.gui.base.SingleSideEtchedBorder;
 import org.columba.core.resourceloader.GlobalResourceLoader;
+import org.compiere.model.MClient;
+import org.compiere.model.MOrg;
+import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.util.DB;
+import org.compiere.util.Env;
 import org.compiere.util.Ini;
+import org.compiere.util.Msg;
+import org.xendra.Constants;
 
 public class DatabaseStatusDialog extends JDialog implements ActionListener {
 	private static DatabaseStatusDialog instance;
@@ -38,6 +44,12 @@ public class DatabaseStatusDialog extends JDialog implements ActionListener {
 	private JLabel lblDriver;
 	private JLabel lbldrivername;
 	Integer poolclient = Integer.valueOf(Ini.getProperty(Ini.P_POOLCLIENT));
+	private JLabel lblAddress;
+	private JLabel address;
+	private JLabel lblClient;
+	private JLabel lblClientname;
+	private JLabel lblOrg;
+	private JLabel lblOrgname;
 	
 	public static DatabaseStatusDialog createInstance() {
 		if (instance == null) {
@@ -61,13 +73,8 @@ public class DatabaseStatusDialog extends JDialog implements ActionListener {
 	}
 
 	public DatabaseStatusDialog() {
-		
 		super((JFrame) null, "Database Info", false);				
-		//pm = printManager;
-		//m_size = pm.getSize();
 		initComponents();
-		//pack();
-						
 	}
 
 	private void initComponents() {
@@ -91,6 +98,14 @@ public class DatabaseStatusDialog extends JDialog implements ActionListener {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		lbldatabase= new JLabel("Database");
@@ -106,12 +121,30 @@ public class DatabaseStatusDialog extends JDialog implements ActionListener {
 		panel.add(lbldrivername, "8, 6");
 		
 		lblConnections = new JLabel("Conexiones");
-		panel.add(lblConnections, "4, 8");
+		panel.add(lblConnections, "4, 10");
 		
 		spnconnections = new JSpinner();
 		spnconnections.setEnabled(false);
-		panel.add(spnconnections, "8, 8");
+		panel.add(spnconnections, "8, 10");
 		getContentPane().add(panel, BorderLayout.CENTER);
+		
+		lblAddress = new JLabel(Msg.translate(Env.getCtx(), X_A_Machine.COLUMNNAME_A_Machine_ID));
+		panel.add(lblAddress, "4, 12");
+		
+		address = new JLabel(Env.getMachine().getName());
+		panel.add(address, "8, 12");
+		
+		lblClient = new JLabel(Msg.translate(Env.getCtx(), Constants.COLUMNNAME_AD_Client_ID));
+		panel.add(lblClient, "4, 14");
+		
+		lblClientname = new JLabel(MClient.get(Env.getCtx(), Env.getAD_Client_ID(Env.getCtx())).getName());
+		panel.add(lblClientname, "8, 14");
+		
+		lblOrg = new JLabel(Msg.translate(Env.getCtx(), Constants.COLUMNNAME_AD_Org_ID));
+		panel.add(lblOrg, "4, 16");
+		
+		lblOrgname = new JLabel(MOrg.get(Env.getCtx(), Env.getAD_Org_ID(Env.getCtx())).getName());
+		panel.add(lblOrgname, "8, 16");
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setBorder(new SingleSideEtchedBorder(SwingConstants.TOP));
 		getContentPane().add(bottomPanel, BorderLayout.SOUTH);

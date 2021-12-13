@@ -23,7 +23,12 @@ import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
 
+import org.xendra.apps.WorkflowDialog;
+import org.xendra.core.command.XendraCommand;
+import org.xendra.core.command.XendraCommandReference;
 import org.xendra.plaf.XendraPLAF;
+import org.columba.core.command.Command;
+import org.columba.core.command.CommandProcessor;
 import org.compiere.apps.*;
 import org.compiere.apps.form.*;
 import org.compiere.model.MQuery;
@@ -48,7 +53,7 @@ public class WFPanel extends CPanel
 	 */
 	public WFPanel()
 	{
-		this (null);
+		this ((AMenu) null);
 	}	//	WFPanel
 
 	/**
@@ -70,6 +75,19 @@ public class WFPanel extends CPanel
 		}
 	}	//	WFPanel
 
+	public WFPanel (WorkflowDialog dialog) {
+		m_readWrite = true;
+		log.info("RW=" + m_readWrite);
+		try
+		{
+			jbInit();
+		}
+		catch(Exception e)
+		{
+			log.log(Level.SEVERE, "WFPanel", e);
+		}		
+	}
+	
 	/**	Menu Link					*/
 	private AMenu		m_menu = null;
 	/**	Window No			*/
@@ -368,9 +386,12 @@ public class WFPanel extends CPanel
 		infoTextPane.setText (msg.toString());
 		infoTextPane.setCaretPosition(0);
 
+		Command command = new XendraCommand(new XendraCommandReference(model.getAD_WF_Node_ID(), false, model.getName(true)));
+		CommandProcessor.getInstance().addOp(command);
+
 		//	Load Window
-		if (m_menu != null)
-			(new AMenuStartItem(model.getAD_WF_Node_ID(), false, model.getName(true), m_menu)).start();		//	async load
+		//if (m_menu != null)
+		//	(new AMenuStartItem(model.getAD_WF_Node_ID(), false, model.getName(true), m_menu)).start();		//	async load
 		//
 		m_activeNode = node;
 		//
@@ -460,7 +481,7 @@ public class WFPanel extends CPanel
 	{
 		org.compiere.Xendra.startupEnvironment(true);
 		JFrame jf = new JFrame ("WF");
-		WFPanel pp = new WFPanel(null);
+		WFPanel pp = new WFPanel((AMenu) null);
 		pp.load(101, true);
 		jf.getContentPane().add (pp);
 		jf.pack();

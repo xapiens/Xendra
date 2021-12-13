@@ -9,7 +9,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.columba.core.gui.htmlviewer.api.IHTMLViewerPlugin;
-import org.columba.core.logging.Logging;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 import org.jdesktop.jdic.browser.WebBrowser;
 
 /**
@@ -32,9 +33,7 @@ import org.jdesktop.jdic.browser.WebBrowser;
  */
 public class JDICHTMLViewerPlugin extends JPanel implements IHTMLViewerPlugin {
 
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger
-			.getLogger("org.columba.core.gui.htmlviewer");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.gui.htmlviewer");
 
 	private WebBrowser browser;
 
@@ -58,13 +57,13 @@ public class JDICHTMLViewerPlugin extends JPanel implements IHTMLViewerPlugin {
 		} catch (Error e) {
 			LOG.severe("Error while initializing JDIC native browser: "
 					+ e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		} catch (Exception e) {
 			LOG
 					.severe("Exception error while initializing JDIC native browser: "
 							+ e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 		}
 

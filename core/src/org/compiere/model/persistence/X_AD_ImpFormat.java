@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_ImpFormatFormatType;
 /** Generated Model for AD_ImpFormat
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -74,11 +73,12 @@ public static final String TABNAME_ImportFormat="6e97713e-1eac-60ef-977c-86eb12a
 @XendraTrl(Identifier="9b57ffab-049d-0de4-5010-2d8cb168c2ac")
 public static String es_PE_TABLE_AD_ImpFormat_Name="Formato de Importación";
 
-@XendraTable(Name="Import Format",Description="",Help="",TableName="AD_ImpFormat",AccessLevel="6",
-AD_Window_ID="68101bd1-27c7-50e5-b950-c55d071f1f43",AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.dictionary",Identifier="9b57ffab-049d-0de4-5010-2d8cb168c2ac",
-Synchronized="2017-08-16 11:40:19.0")
+@XendraTable(Name="Import Format",AD_Package_ID="645f34c0-ea3a-ac63-618d-8ca49873c33b",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ImpFormat",AccessLevel="6",AD_Window_ID="68101bd1-27c7-50e5-b950-c55d071f1f43",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.import",
+Identifier="9b57ffab-049d-0de4-5010-2d8cb168c2ac",Synchronized="2020-03-03 21:35:04.0")
 /** TableName=AD_ImpFormat */
 public static final String Table_Name="AD_ImpFormat";
 
@@ -114,7 +114,7 @@ return poi;
 */
 public String toString()
 {
-StringBuffer sb = new StringBuffer (get_ID()).append(" ").append(getName());
+StringBuffer sb = new StringBuffer ("X_AD_ImpFormat[").append(get_ID()).append("]");
 return sb.toString();
 }
 /** Set Import Format.
@@ -161,13 +161,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="78942053-fc4e-b435-048d-727ad82d4f0e")
+public static String es_PE_FIELD_ImportFormat_Table_Name="Tabla";
+
+@XendraTrl(Identifier="78942053-fc4e-b435-048d-727ad82d4f0e")
 public static String es_PE_FIELD_ImportFormat_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="78942053-fc4e-b435-048d-727ad82d4f0e")
 public static String es_PE_FIELD_ImportFormat_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="78942053-fc4e-b435-048d-727ad82d4f0e")
-public static String es_PE_FIELD_ImportFormat_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6e97713e-1eac-60ef-977c-86eb12ab314b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -185,7 +185,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="aa947a16-1631-a8e4-5329-6b4c57fd1e6e",Synchronized="2017-08-05 16:52:33.0")
+Identifier="aa947a16-1631-a8e4-5329-6b4c57fd1e6e",Synchronized="2019-08-30 22:20:23.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Description.
@@ -216,13 +216,13 @@ return value;
 }
 
 @XendraTrl(Identifier="cef969b5-18c2-d1c8-8831-e4ed9635aca5")
+public static String es_PE_FIELD_ImportFormat_Description_Name="Observación";
+
+@XendraTrl(Identifier="cef969b5-18c2-d1c8-8831-e4ed9635aca5")
 public static String es_PE_FIELD_ImportFormat_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="cef969b5-18c2-d1c8-8831-e4ed9635aca5")
 public static String es_PE_FIELD_ImportFormat_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="cef969b5-18c2-d1c8-8831-e4ed9635aca5")
-public static String es_PE_FIELD_ImportFormat_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="6e97713e-1eac-60ef-977c-86eb12ab314b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -240,19 +240,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2c729b42-d215-267d-d54b-25f39dcb08e0",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** FormatType AD_Reference=230ed9ba-8dc2-8494-a554-d81e665fc924 */
-public static final int FORMATTYPE_AD_Reference_ID=209;
 /** Set Format.
 @param FormatType Format of the data */
 public void setFormatType (String FormatType)
 {
-if (FormatType == null) throw new IllegalArgumentException ("FormatType is mandatory");
-if (FormatType.equals(REF_AD_ImpFormatFormatType.CommaSeparated) || FormatType.equals(REF_AD_ImpFormatFormatType.TabSeparated) || FormatType.equals(REF_AD_ImpFormatFormatType.XML) || FormatType.equals(REF_AD_ImpFormatFormatType.FixedPosition));
- else throw new IllegalArgumentException ("FormatType Invalid value - " + FormatType + " - Reference_ID=209 - C - T - X - F");
 if (FormatType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -268,13 +262,13 @@ return (String)get_Value(COLUMNNAME_FormatType);
 }
 
 @XendraTrl(Identifier="eddee132-bf34-5566-a244-45cf69230170")
+public static String es_PE_FIELD_ImportFormat_Format_Name="Formato";
+
+@XendraTrl(Identifier="eddee132-bf34-5566-a244-45cf69230170")
 public static String es_PE_FIELD_ImportFormat_Format_Description="Formato del dato";
 
 @XendraTrl(Identifier="eddee132-bf34-5566-a244-45cf69230170")
 public static String es_PE_FIELD_ImportFormat_Format_Help="El formato es un cuadro de lista para seleccionar el tipo de formato (texto; pestaña delimitada; XML; etc) del archivo a ser importada";
-
-@XendraTrl(Identifier="eddee132-bf34-5566-a244-45cf69230170")
-public static String es_PE_FIELD_ImportFormat_Format_Name="Formato";
 
 @XendraField(AD_Column_ID="FormatType",IsCentrallyMaintained=true,
 AD_Tab_ID="6e97713e-1eac-60ef-977c-86eb12ab314b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -292,7 +286,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="12cac56b-6ed2-de56-16e4-28ac54f4854d",Synchronized="2017-08-05 16:52:33.0")
+Identifier="12cac56b-6ed2-de56-16e4-28ac54f4854d",Synchronized="2019-08-30 22:20:23.0")
 /** Column name FormatType */
 public static final String COLUMNNAME_FormatType = "FormatType";
 /** Set Identifier.
@@ -324,7 +318,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f5b0ceef-d968-427c-bb5b-a64609bc6419",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -356,18 +350,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="09011691-9140-5c92-2847-996739da97f3")
+public static String es_PE_FIELD_ImportFormat_Name_Name="Nombre";
+
+@XendraTrl(Identifier="09011691-9140-5c92-2847-996739da97f3")
 public static String es_PE_FIELD_ImportFormat_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="09011691-9140-5c92-2847-996739da97f3")
 public static String es_PE_FIELD_ImportFormat_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="09011691-9140-5c92-2847-996739da97f3")
-public static String es_PE_FIELD_ImportFormat_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="6e97713e-1eac-60ef-977c-86eb12ab314b",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="09011691-9140-5c92-2847-996739da97f3")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="6e97713e-1eac-60ef-977c-86eb12ab314b",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="09011691-9140-5c92-2847-996739da97f3")
 public static final String FIELDNAME_ImportFormat_Name="09011691-9140-5c92-2847-996739da97f3";
 
 @XendraTrl(Identifier="a46fc28f-8cb1-b8ed-c12b-36c00ce68e2c")
@@ -379,7 +374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a46fc28f-8cb1-b8ed-c12b-36c00ce68e2c",
-Synchronized="2017-08-05 16:52:33.0")
+Synchronized="2019-08-30 22:20:23.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -420,7 +415,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="4a600e92-020b-2ea1-4477-9c9d4fcebaf4",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d7a15421-83fb-6b60-e89a-efa4b099548b",Synchronized="2017-08-05 16:52:33.0")
+Identifier="d7a15421-83fb-6b60-e89a-efa4b099548b",Synchronized="2019-08-30 22:20:23.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

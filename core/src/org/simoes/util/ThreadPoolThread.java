@@ -1,6 +1,6 @@
 package org.simoes.util;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 
 /**
  * The ThreadPool will process all requests thrown into the queue.
@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class ThreadPoolThread extends Thread  {
     // all files need a static Category object for error logging
-	static Logger log = Logger.getLogger(ThreadPoolRequest.class);
+	static CLogger log = CLogger.getCLogger(ThreadPoolRequest.class);
     private final static String className = "ThreadPoolThread ";
 
     private int poolObjectsSize;
@@ -46,14 +46,14 @@ public class ThreadPoolThread extends Thread  {
 	                            poolRef.objects.wait(); 
                             }
                         } catch(InterruptedException e) {
-                            log.warn(METHOD_NAME + e.getMessage(), e);
+                            log.warning(METHOD_NAME + e.getMessage());
                         }
 					}
 				}
 			}
 			catch (ClassCastException e) {
-			    log.error(METHOD_NAME + "ThreadPool contined an object other than ThreadPoolRequest.");
-                log.error(METHOD_NAME + e.getMessage(), e);
+			    log.severe(METHOD_NAME + "ThreadPool contined an object other than ThreadPoolRequest.");
+                log.severe(METHOD_NAME + e.getMessage());
 				obj = null;
 			}
 

@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentStatus;
 /** Generated Model for C_InvoiceStatus
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -61,10 +60,10 @@ public static int Table_ID=MTable.getTable_ID("C_InvoiceStatus");
 public static String es_PE_TAB_Status_Description="Estados del Documento";
 
 @XendraTrl(Identifier="03769890-0cb6-401f-334c-12d35afca799")
-public static String es_PE_TAB_Status_Name="Estado";
+public static String es_PE_TAB_Status_Help="Estados del Documento";
 
 @XendraTrl(Identifier="03769890-0cb6-401f-334c-12d35afca799")
-public static String es_PE_TAB_Status_Help="Estados del Documento";
+public static String es_PE_TAB_Status_Name="Estado";
 @XendraTab(Name="Status",
 Description="Invoice Status",Help="Invoice Status",
 AD_Window_ID="dc1a37c5-086c-c19e-c2ba-344555bfcf65",SeqNo=60,TabLevel=1,IsSingleRow=false,
@@ -78,11 +77,12 @@ public static final String TABNAME_Status="03769890-0cb6-401f-334c-12d35afca799"
 @XendraTrl(Identifier="918f8b37-2d6d-cc66-7d26-a2aba37dd3f8")
 public static String es_PE_TABLE_C_InvoiceStatus_Name="Invoice Status";
 
-@XendraTable(Name="Invoice Status",Description="Invoice Status",Help="",
+@XendraTable(Name="Invoice Status",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Invoice Status",Help="",
 TableName="C_InvoiceStatus",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="918f8b37-2d6d-cc66-7d26-a2aba37dd3f8",
-Synchronized="2017-08-16 11:41:56.0")
+Synchronized="2020-03-03 21:37:05.0")
 /** TableName=C_InvoiceStatus */
 public static final String Table_Name="C_InvoiceStatus";
 
@@ -132,13 +132,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6e9c9c7d-c0aa-27a4-c80f-9686d99d415e")
+public static String es_PE_FIELD_Status_Invoice_Name="Factura";
+
+@XendraTrl(Identifier="6e9c9c7d-c0aa-27a4-c80f-9686d99d415e")
 public static String es_PE_FIELD_Status_Invoice_Description="Identificador de la factura";
 
 @XendraTrl(Identifier="6e9c9c7d-c0aa-27a4-c80f-9686d99d415e")
 public static String es_PE_FIELD_Status_Invoice_Help="La ID de Factura identifica únicamente un documento de Factura.";
-
-@XendraTrl(Identifier="6e9c9c7d-c0aa-27a4-c80f-9686d99d415e")
-public static String es_PE_FIELD_Status_Invoice_Name="Factura";
 
 @XendraField(AD_Column_ID="C_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="03769890-0cb6-401f-334c-12d35afca799",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -156,7 +156,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b95c6a16-c94c-6b2c-48dd-343af165f4b0",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Invoice Status.
@@ -186,16 +186,10 @@ Identifier="9607f06a-2fc4-3773-eb50-4355477c6c1f")
 public static final String FIELDNAME_Status_InvoiceStatus="9607f06a-2fc4-3773-eb50-4355477c6c1f";
 /** Column name C_InvoiceStatus_ID */
 public static final String COLUMNNAME_C_InvoiceStatus_ID = "C_InvoiceStatus_ID";
-
-/** DocStatus AD_Reference=7627125d-fefe-e6bc-bb7d-4a6c772172dc */
-public static final int DOCSTATUS_AD_Reference_ID=131;
 /** Set Document Status.
 @param DocStatus The current status of the document */
 public void setDocStatus (String DocStatus)
 {
-if (DocStatus == null) throw new IllegalArgumentException ("DocStatus is mandatory");
-if (DocStatus.equals(REF__DocumentStatus.InProgress) || DocStatus.equals(REF__DocumentStatus.WaitingConfirmation) || DocStatus.equals(REF__DocumentStatus.Drafted) || DocStatus.equals(REF__DocumentStatus.Completed) || DocStatus.equals(REF__DocumentStatus.Approved) || DocStatus.equals(REF__DocumentStatus.WaitingPayment) || DocStatus.equals(REF__DocumentStatus.Placed) || DocStatus.equals(REF__DocumentStatus.Returned) || DocStatus.equals(REF__DocumentStatus.Discount) || DocStatus.equals(REF__DocumentStatus.Protested) || DocStatus.equals(REF__DocumentStatus.NotApproved) || DocStatus.equals(REF__DocumentStatus.Voided) || DocStatus.equals(REF__DocumentStatus.Invalid) || DocStatus.equals(REF__DocumentStatus.Reversed) || DocStatus.equals(REF__DocumentStatus.Closed) || DocStatus.equals(REF__DocumentStatus.Unknown) || DocStatus.equals(REF__DocumentStatus.Portfolio) || DocStatus.equals(REF__DocumentStatus.Warranty) || DocStatus.equals(REF__DocumentStatus.ToCollect) || DocStatus.equals(REF__DocumentStatus.Collect) || DocStatus.equals(REF__DocumentStatus.Receivables) || DocStatus.equals(REF__DocumentStatus.Apply));
- else throw new IllegalArgumentException ("DocStatus Invalid value - " + DocStatus + " - Reference_ID=131 - IP - WC - DR - CO - AP - WP - PL - RT - DS - PD - NA - VO - IN - RE - CL - ?? - PT - WR - TC - CT - RV - AY");
 if (DocStatus.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -211,13 +205,13 @@ return (String)get_Value(COLUMNNAME_DocStatus);
 }
 
 @XendraTrl(Identifier="ac381fc5-22a3-302c-607d-7a44cb712c26")
+public static String es_PE_FIELD_Status_DocumentStatus_Name="Estado del Documento";
+
+@XendraTrl(Identifier="ac381fc5-22a3-302c-607d-7a44cb712c26")
 public static String es_PE_FIELD_Status_DocumentStatus_Description="El estado actual del documento";
 
 @XendraTrl(Identifier="ac381fc5-22a3-302c-607d-7a44cb712c26")
 public static String es_PE_FIELD_Status_DocumentStatus_Help="El estado del documento indica el estado del documento en este momento. Si usted quiere cambiar el estado de Documento; use el campo acción de documento";
-
-@XendraTrl(Identifier="ac381fc5-22a3-302c-607d-7a44cb712c26")
-public static String es_PE_FIELD_Status_DocumentStatus_Name="Estado del Documento";
 
 @XendraField(AD_Column_ID="DocStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="03769890-0cb6-401f-334c-12d35afca799",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +229,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="22ad0809-6e12-d928-bf03-7f3b4c16f8ab",Synchronized="2017-08-05 16:53:49.0")
+Identifier="22ad0809-6e12-d928-bf03-7f3b4c16f8ab",Synchronized="2019-08-30 22:21:44.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Identifier.
@@ -267,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="25622789-e64e-464c-a057-bbc3b18077f8",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set StatusDate.
@@ -284,13 +278,13 @@ return (Timestamp)get_Value(COLUMNNAME_StatusDate);
 }
 
 @XendraTrl(Identifier="832e9f64-cad9-bc03-91ed-6cb5ae08bc69")
+public static String es_PE_FIELD_Status_StatusDate_Name="Fecha";
+
+@XendraTrl(Identifier="832e9f64-cad9-bc03-91ed-6cb5ae08bc69")
 public static String es_PE_FIELD_Status_StatusDate_Description="Fecha en que se cambio a este estado";
 
 @XendraTrl(Identifier="832e9f64-cad9-bc03-91ed-6cb5ae08bc69")
 public static String es_PE_FIELD_Status_StatusDate_Help="Fecha en que se cambio a este estado";
-
-@XendraTrl(Identifier="832e9f64-cad9-bc03-91ed-6cb5ae08bc69")
-public static String es_PE_FIELD_Status_StatusDate_Name="Fecha";
 
 @XendraField(AD_Column_ID="StatusDate",IsCentrallyMaintained=true,
 AD_Tab_ID="03769890-0cb6-401f-334c-12d35afca799",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -308,7 +302,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c81264f7-26ac-ecd9-83de-4f68b0ec75ea",
-Synchronized="2017-08-05 16:53:49.0")
+Synchronized="2019-08-30 22:21:44.0")
 /** Column name StatusDate */
 public static final String COLUMNNAME_StatusDate = "StatusDate";
 }

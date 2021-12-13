@@ -16,9 +16,27 @@
  *****************************************************************************/
 package org.compiere.util;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Label;
+import java.awt.MediaTracker;
+import java.awt.Rectangle;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.net.*;
 import java.util.Locale;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.compiere.Xendra;
 
@@ -34,7 +52,7 @@ import org.compiere.Xendra;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: Splash.java 5147 2013-12-08 03:15:24Z xapiens $
  */
-public class Splash extends Frame
+public class Splash extends JFrame
 {
 	/**
 	 *  Get Splash Screen
@@ -93,10 +111,10 @@ public class Splash extends Frame
 	private CImage  cImage = new CImage();
 	private AImage 	aImage = new AImage();
 	//
-	private Label   productLabel = new Label();
-	private Panel   contentPanel = new Panel();
+	private JLabel   productLabel = new JLabel();
+	private JPanel   contentPanel = new JPanel();
 	private GridBagLayout contentLayout = new GridBagLayout();
-	private Label   message = new Label();
+	private JLabel   message = new JLabel();
 
 	/**
 	 *	Static Init
@@ -107,11 +125,11 @@ public class Splash extends Frame
 		this.setBackground(Color.white);
 		this.setName("splash");
 		this.setUndecorated(true);
-		//
-		productLabel.setAlignment(Label.CENTER);
+		//		
+		//productLabel.setAlignment(Label.CENTER);
 		message.setFont(new java.awt.Font("Serif", 3, 20));     //  italic bold 20 pt
 		message.setForeground(SystemColor.LIGHT_GRAY);
-		message.setAlignment(Label.CENTER);
+		//message.setAlignment(Label.CENTER);
 		contentPanel.setLayout(contentLayout);
 		contentPanel.setName("splashContent");
 		contentPanel.setBackground(Color.white);

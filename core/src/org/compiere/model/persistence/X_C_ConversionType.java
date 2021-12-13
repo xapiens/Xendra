@@ -62,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("C_ConversionType");
 public static String es_PE_TAB_ConversionType_Description="Mantenga el tipo del indice de conversión de moneda";
 
 @XendraTrl(Identifier="f2962a3e-0356-10ae-b482-e9b557a8530b")
-public static String es_PE_TAB_ConversionType_Name="Conversión Moneda";
+public static String es_PE_TAB_ConversionType_Help="El tipo del índice de conversión de moneda permite definir diversos tipos de tarifas, tarifas. Ej. de punto, corporativas y/o de Venta/Compra.";
 
 @XendraTrl(Identifier="f2962a3e-0356-10ae-b482-e9b557a8530b")
-public static String es_PE_TAB_ConversionType_Help="El tipo del índice de conversión de moneda permite definir diversos tipos de tarifas, tarifas. Ej. de punto, corporativas y/o de Venta/Compra.";
+public static String es_PE_TAB_ConversionType_Name="Conversión Moneda";
 
 @XendraTab(Name="Conversion Type",Description="Maintain Currency Conversion Rate Type",
 Help="The Currency Conversion Rate Type lets you define different type of rates, e.g. Spot, Corporate and/or Sell/Buy rates.",
@@ -80,11 +80,13 @@ public static final String TABNAME_ConversionType="f2962a3e-0356-10ae-b482-e9b55
 @XendraTrl(Identifier="64e2bf0e-4680-8ff2-b00b-10dc0fd7aadd")
 public static String es_PE_TABLE_C_ConversionType_Name="Tipo de Moneda";
 
-@XendraTable(Name="Currency Type",Description="Currency Conversion Rate Type",Help="",
-TableName="C_ConversionType",AccessLevel="6",AD_Window_ID="3168c7df-79e5-8659-1824-f07e4aa500eb",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=100,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="64e2bf0e-4680-8ff2-b00b-10dc0fd7aadd",Synchronized="2017-08-16 11:41:41.0")
+@XendraTable(Name="Currency Type",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Currency Conversion Rate Type",
+Help="",TableName="C_ConversionType",AccessLevel="6",
+AD_Window_ID="3168c7df-79e5-8659-1824-f07e4aa500eb",AD_Val_Rule_ID="",IsKey=1,LoadSeq=100,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="64e2bf0e-4680-8ff2-b00b-10dc0fd7aadd",
+Synchronized="2020-03-03 21:36:47.0")
 /** TableName=C_ConversionType */
 public static final String Table_Name="C_ConversionType";
 
@@ -134,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="236f9cde-39ca-1b3e-023d-43d9ea97eede")
+public static String es_PE_FIELD_ConversionType_CurrencyType_Name="Tipo de Moneda";
+
+@XendraTrl(Identifier="236f9cde-39ca-1b3e-023d-43d9ea97eede")
 public static String es_PE_FIELD_ConversionType_CurrencyType_Description="Tipo de índice de conversión de moneda ";
 
 @XendraTrl(Identifier="236f9cde-39ca-1b3e-023d-43d9ea97eede")
 public static String es_PE_FIELD_ConversionType_CurrencyType_Help="El tipo del índice de conversión de monedas le deja definir diversos tipos de tarifas, tarifas ej. del punto, corporativas y/o de Ventas/Compras.";
-
-@XendraTrl(Identifier="236f9cde-39ca-1b3e-023d-43d9ea97eede")
-public static String es_PE_FIELD_ConversionType_CurrencyType_Name="Tipo de Moneda";
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -178,13 +180,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ea084591-5d8f-4836-740d-9185976f2174")
+public static String es_PE_FIELD_ConversionType_Description_Name="Observación";
+
+@XendraTrl(Identifier="ea084591-5d8f-4836-740d-9185976f2174")
 public static String es_PE_FIELD_ConversionType_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="ea084591-5d8f-4836-740d-9185976f2174")
 public static String es_PE_FIELD_ConversionType_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="ea084591-5d8f-4836-740d-9185976f2174")
-public static String es_PE_FIELD_ConversionType_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -202,7 +204,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b4fc71ab-93f5-878c-9413-f2b53a80c3ab",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -234,7 +236,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d9580d0-ee34-46fd-802d-a8767c1f1d23",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -257,13 +259,13 @@ return false;
 }
 
 @XendraTrl(Identifier="f0f6cd8a-acad-5c56-c00c-37c04b2628af")
+public static String es_PE_FIELD_ConversionType_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="f0f6cd8a-acad-5c56-c00c-37c04b2628af")
 public static String es_PE_FIELD_ConversionType_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="f0f6cd8a-acad-5c56-c00c-37c04b2628af")
 public static String es_PE_FIELD_ConversionType_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="f0f6cd8a-acad-5c56-c00c-37c04b2628af")
-public static String es_PE_FIELD_ConversionType_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -281,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90aad7b6-be1b-6093-3859-79b15125ce3d",
-Synchronized="2017-08-05 16:53:32.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set IsLoad.
@@ -312,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="41984637-2797-da11-ef46-5d89a69f5041",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name IsLoad */
 public static final String COLUMNNAME_IsLoad = "IsLoad";
 /** Set Mandatory.
@@ -335,13 +337,13 @@ return false;
 }
 
 @XendraTrl(Identifier="85aee42a-37f5-bfe3-8c09-49abf6c42ea2")
+public static String es_PE_FIELD_ConversionType_Mandatory_Name="Entrada Obligatoria";
+
+@XendraTrl(Identifier="85aee42a-37f5-bfe3-8c09-49abf6c42ea2")
 public static String es_PE_FIELD_ConversionType_Mandatory_Description="Entrada de datos es requerida en esta columna";
 
 @XendraTrl(Identifier="85aee42a-37f5-bfe3-8c09-49abf6c42ea2")
 public static String es_PE_FIELD_ConversionType_Mandatory_Help="El cuadro de verificación obligatorio indica si el campo es requerido para que un registro sea salvado a la base de datos.";
-
-@XendraTrl(Identifier="85aee42a-37f5-bfe3-8c09-49abf6c42ea2")
-public static String es_PE_FIELD_ConversionType_Mandatory_Name="Entrada Obligatoria";
 
 @XendraField(AD_Column_ID="IsMandatory",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -359,7 +361,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9ed3e8d-a6d4-8699-df4b-66154ed55681",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name IsMandatory */
 public static final String COLUMNNAME_IsMandatory = "IsMandatory";
 /** Set Name.
@@ -391,13 +393,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="8e5d5d68-3095-02a1-7daa-8b3d98cbe299")
+public static String es_PE_FIELD_ConversionType_Name_Name="Nombre";
+
+@XendraTrl(Identifier="8e5d5d68-3095-02a1-7daa-8b3d98cbe299")
 public static String es_PE_FIELD_ConversionType_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="8e5d5d68-3095-02a1-7daa-8b3d98cbe299")
 public static String es_PE_FIELD_ConversionType_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="8e5d5d68-3095-02a1-7daa-8b3d98cbe299")
-public static String es_PE_FIELD_ConversionType_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -415,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="93de9080-0963-d55b-6724-0cf8e01aaf1b",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Search Key.
@@ -440,13 +442,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="cc300c88-0bc6-1bd0-ebea-c44aeb32fec8")
+public static String es_PE_FIELD_ConversionType_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="cc300c88-0bc6-1bd0-ebea-c44aeb32fec8")
 public static String es_PE_FIELD_ConversionType_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="cc300c88-0bc6-1bd0-ebea-c44aeb32fec8")
 public static String es_PE_FIELD_ConversionType_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="cc300c88-0bc6-1bd0-ebea-c44aeb32fec8")
-public static String es_PE_FIELD_ConversionType_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="f2962a3e-0356-10ae-b482-e9b557a8530b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -464,7 +466,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ffbd88ce-b699-a044-dffa-50f1a3926f9e",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:26.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

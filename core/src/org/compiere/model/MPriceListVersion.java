@@ -205,8 +205,10 @@ public class MPriceListVersion extends X_M_PriceList_Version
 	}	//	beforeSave
 	
 	public String toString()
-	{		
-		String date = new SimpleDateFormat("dd/MMM/yyyy").format(getValidFrom());
+	{
+		String date = "";
+		if (getValidFrom() != null)
+			date = new SimpleDateFormat("dd/MMM/yyyy").format(getValidFrom());
 		String discount = "";
 		X_M_DiscountSchema ds = new Query(Env.getCtx(), X_M_DiscountSchema.Table_Name, "M_DiscountSchema_ID = ?", null)
 			.setParameters(this.getM_DiscountSchema_ID()).first();

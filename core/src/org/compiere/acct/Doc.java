@@ -54,8 +54,10 @@ import org.compiere.model.reference.REF_C_AcctSchemaElementType;
 import org.compiere.process.*;
 import org.compiere.report.*;
 import org.compiere.util.*;
+import org.xendra.Constants;
 //
 import org.xendra.exceptions.ConversionRateException;
+import org.xendra.util.UpdatePO;
 
 /**
  *  Posting Document Root.
@@ -506,6 +508,8 @@ public abstract class Doc
 	private int					m_C_Currency_ID = -1;
 	/** Fact ID						*/
 	private String				m_Fact_ID = "";
+	/** GL_Book_ID 					*/
+	private int 				m_GL_Book_ID = -1;
 
 	/**	Contained Doc Lines			*/
 	protected DocLine[]			p_lines;
@@ -1673,27 +1677,24 @@ public abstract class Doc
 	private final boolean save (String trxName)
 	{
 		log.fine(toString() + "->" + p_Status);
-		StringBuffer sql = new StringBuffer("UPDATE ");
-		sql.append(get_TableName()).append(" SET Posted='").append(p_Status)
-			.append("',Processing='N' ");
-//		if (getFact_ID().length() != 0)
-//			sql.append(", Fact_ID=? ");
-		sql.append("WHERE ")
-			.append(get_TableName()).append("_ID=").append(p_po.get_ID());
-		try {
-			CPreparedStatement cstmt = DB.prepareStatement(sql.toString(), ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE, trxName);
-			//if (getFact_ID().length() != 0) {
-				//cstmt.setString(1, getFact_ID());
-			//	cstmt.setInt(1, p_po.get_ID());
-			//}
-			//else
-			//cstmt.setInt(1, p_po.get_ID());
-			int no = cstmt.executeUpdate();
-			return no == 1;
-		}
-		catch (SQLException e) {
-			return false;
-		}
+		UpdatePO o = new UpdatePO();
+		o.setTablename(get_TableName());		
+		o.setField("Posted", p_Status);
+		o.setField("Processing", Constants.NO);
+		int no = o.update(String.format("%s_ID=%s", get_TableName(),p_po.get_ID()), trxName);		
+//		StringBuffer sql = new StringBuffer("UPDATE ");
+//		sql.append(get_TableName()).append(" SET Posted='").append(p_Status)
+//			.append("',Processing='N' ");
+//		sql.append("WHERE ")
+//			.append(get_TableName()).append("_ID=").append(p_po.get_ID());
+//		try {
+//			CPreparedStatement cstmt = DB.prepareStatement(sql.toString(), ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE, trxName);
+//			int no = cstmt.executeUpdate();
+		return no == 1;
+//		}
+//		catch (SQLException e) {
+//			return false;
+//		}
 	}   //  save
 
 	/**
@@ -1820,11 +1821,30 @@ public abstract class Doc
 	 * Set Fact_ID
 	 * @param Fact_ID id
 	 */
-	public void setFact_ID (String Fact_ID)
-	{
+	public void setFact_ID (String Fact_ID) {
 		m_Fact_ID = Fact_ID;
 	}
-
+	
+	public int getGL_Book_ID() {
+		if (m_GL_Book_ID == -1) {
+			int index = p_po.get_ColumnIndex("GL_Book_ID");
+			if (index != -1) {
+				Integer ii = (Integer) p_po.get_Value(index);
+				if (ii != null) {
+					m_GL_Book_ID = ii;
+				} 
+			}
+		}
+		return m_GL_Book_ID;
+	}	
+	/** 
+	 * Set GL Book
+	 * @param GL_Book_ID 
+	 * */
+	public void setGL_Book_ID(int GL_Book_ID) {
+		m_GL_Book_ID = GL_Book_ID;
+	}
+	
 	/**
 	 * 	Set C_Currency_ID
 	 *	@param C_Currency_ID id

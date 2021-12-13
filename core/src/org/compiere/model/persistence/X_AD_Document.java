@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentAction;
 /** Generated Model for AD_Document
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Document");
 @XendraTrl(Identifier="eb19205c-7fc2-4ebd-8d63-83ba6f885d5b")
 public static String es_PE_TABLE_AD_Document_Name="Document Engine";
 
-@XendraTable(Name="Document Engine",Description="",Help="",TableName="AD_Document",AccessLevel="4",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="eb19205c-7fc2-4ebd-8d63-83ba6f885d5b",Synchronized="2017-08-16 11:40:09.0")
+@XendraTable(Name="Document Engine",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="AD_Document",
+AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="eb19205c-7fc2-4ebd-8d63-83ba6f885d5b",
+Synchronized="2020-03-03 21:34:59.0")
 /** TableName=AD_Document */
 public static final String Table_Name="AD_Document";
 
@@ -137,18 +138,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e0b0b7b5-0b5b-4aa2-9a4e-24b83c8d004c",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
-
-/** DocStatus AD_Reference=e397c9b0-c643-d1cd-8380-20bee13b2a6e */
-public static final int DOCSTATUS_AD_Reference_ID=135;
 /** Set Document Status.
 @param DocStatus The current status of the document */
 public void setDocStatus (String DocStatus)
 {
-if (DocStatus == null || DocStatus.equals(REF__DocumentAction.Complete) || DocStatus.equals(REF__DocumentAction.Approve) || DocStatus.equals(REF__DocumentAction.Reject) || DocStatus.equals(REF__DocumentAction.Post) || DocStatus.equals(REF__DocumentAction.WaitComplete) || DocStatus.equals(REF__DocumentAction.Prepare) || DocStatus.equals(REF__DocumentAction.Close) || DocStatus.equals(REF__DocumentAction.Placed) || DocStatus.equals(REF__DocumentAction.Discount) || DocStatus.equals(REF__DocumentAction.Portofolio) || DocStatus.equals(REF__DocumentAction.Warranty) || DocStatus.equals(REF__DocumentAction.Reverse_Correct) || DocStatus.equals(REF__DocumentAction.Reverse_Accrual) || DocStatus.equals(REF__DocumentAction.Invalidate) || DocStatus.equals(REF__DocumentAction.Re_Activate) || DocStatus.equals(REF__DocumentAction.None) || DocStatus.equals(REF__DocumentAction.Unlock) || DocStatus.equals(REF__DocumentAction.Returned) || DocStatus.equals(REF__DocumentAction.Apply) || DocStatus.equals(REF__DocumentAction.Collect) || DocStatus.equals(REF__DocumentAction.ToCollect) || DocStatus.equals(REF__DocumentAction.Restore) || DocStatus.equals(REF__DocumentAction.Protested) || DocStatus.equals(REF__DocumentAction.Receivables) || DocStatus.equals(REF__DocumentAction.Void) || DocStatus.equals(REF__DocumentAction.Draft) || DocStatus.equals(REF__DocumentAction.InProgress) || DocStatus.equals(REF__DocumentAction.WaitingPayment));
- else throw new IllegalArgumentException ("DocStatus Invalid value - " + DocStatus + " - Reference_ID=135 - CO - AP - RJ - PO - WC - PR - CL - PL - DS - PT - WR - RC - RA - IN - RE - -- - XL - RT - AY - CT - TC - RR - PD - RV - VO - DR - IP - WP");
 if (DocStatus != null && DocStatus.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -172,7 +168,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="004fd29b-18f1-4c85-861b-9f25945b672c",Synchronized="2017-08-05 16:52:29.0")
+Identifier="004fd29b-18f1-4c85-861b-9f25945b672c",Synchronized="2019-08-30 22:20:18.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Identifier.
@@ -204,18 +200,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a3a1cea0-ee94-4fd0-aebc-fd194e44e958",
-Synchronized="2017-08-05 16:52:29.0")
+Synchronized="2019-08-30 22:20:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** NextStatus AD_Reference=e397c9b0-c643-d1cd-8380-20bee13b2a6e */
-public static final int NEXTSTATUS_AD_Reference_ID=135;
 /** Set NextStatus.
 @param NextStatus NextStatus */
 public void setNextStatus (String NextStatus)
 {
-if (NextStatus == null || NextStatus.equals(REF__DocumentAction.Complete) || NextStatus.equals(REF__DocumentAction.Approve) || NextStatus.equals(REF__DocumentAction.Reject) || NextStatus.equals(REF__DocumentAction.Post) || NextStatus.equals(REF__DocumentAction.WaitComplete) || NextStatus.equals(REF__DocumentAction.Prepare) || NextStatus.equals(REF__DocumentAction.Close) || NextStatus.equals(REF__DocumentAction.Placed) || NextStatus.equals(REF__DocumentAction.Discount) || NextStatus.equals(REF__DocumentAction.Portofolio) || NextStatus.equals(REF__DocumentAction.Warranty) || NextStatus.equals(REF__DocumentAction.Reverse_Correct) || NextStatus.equals(REF__DocumentAction.Reverse_Accrual) || NextStatus.equals(REF__DocumentAction.Invalidate) || NextStatus.equals(REF__DocumentAction.Re_Activate) || NextStatus.equals(REF__DocumentAction.None) || NextStatus.equals(REF__DocumentAction.Unlock) || NextStatus.equals(REF__DocumentAction.Returned) || NextStatus.equals(REF__DocumentAction.Apply) || NextStatus.equals(REF__DocumentAction.Collect) || NextStatus.equals(REF__DocumentAction.ToCollect) || NextStatus.equals(REF__DocumentAction.Restore) || NextStatus.equals(REF__DocumentAction.Protested) || NextStatus.equals(REF__DocumentAction.Receivables) || NextStatus.equals(REF__DocumentAction.Void) || NextStatus.equals(REF__DocumentAction.Draft) || NextStatus.equals(REF__DocumentAction.InProgress) || NextStatus.equals(REF__DocumentAction.WaitingPayment));
- else throw new IllegalArgumentException ("NextStatus Invalid value - " + NextStatus + " - Reference_ID=135 - CO - AP - RJ - PO - WC - PR - CL - PL - DS - PT - WR - RC - RA - IN - RE - -- - XL - RT - AY - CT - TC - RR - PD - RV - VO - DR - IP - WP");
 if (NextStatus != null && NextStatus.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -239,7 +230,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d490e4a0-0ec0-4e95-94dc-29c2fe871cbb",Synchronized="2017-08-05 16:52:29.0")
+Identifier="d490e4a0-0ec0-4e95-94dc-29c2fe871cbb",Synchronized="2019-08-30 22:20:18.0")
 /** Column name NextStatus */
 public static final String COLUMNNAME_NextStatus = "NextStatus";
 }

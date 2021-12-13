@@ -1,17 +1,11 @@
 package org.xendra.printdocument;
 
 import java.io.OutputStream;
-import java.sql.ResultSet;
 import java.util.Enumeration;
 
-import org.compiere.model.persistence.X_A_PrinterDriver;
 import org.compiere.model.persistence.X_C_PrinterDocumentPool;
-import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
-import org.xendra.Constants;
-
-import com.Verisign.payment.e;
 
 public class CommandReceiveJob extends CommandHandler {
 
@@ -98,7 +92,7 @@ public class CommandReceiveJob extends CommandHandler {
 			}
 		}
 		pdp.setEnvironment(test.toString());					
-		pdp.setC_PrinterDocumentFormat_ID(is.getPrinterDocumentFormat_ID());
+		//pdp.setC_PrinterDocumentFormat_ID(is.getPrinterDocumentFormat_ID());
 		pdp.save();							
 	}
 
@@ -122,7 +116,7 @@ public class CommandReceiveJob extends CommandHandler {
 			controlFile.setNumberCopy(is.getNumberCopy());
 			controlFile.setType(is.getType());
 			controlFile.setControlFileCommands(is.getContent());
-			controlFile.setC_PrinterDocumentFormat_ID(is.getPrinterDocumentFormat_ID());
+			//controlFile.setC_PrinterDocumentFormat_ID(is.getPrinterDocumentFormat_ID());			
 			controlFile.setA_MachinePrinter_ID(A_MachinePrinter_ID);
 			controlFile.setNumberLines(is.getNumberLines());
 			//controlFile.setDevicename(devicename);

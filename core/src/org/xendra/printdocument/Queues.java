@@ -2,8 +2,8 @@ package org.xendra.printdocument;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
 import org.compiere.model.persistence.X_A_MachinePrinter;
+import org.compiere.util.CLogger;
 import org.compiere.util.Util;
 import org.xendra.common.Lock;
 
@@ -13,7 +13,7 @@ import org.xendra.common.Lock;
  *
  */
 public class Queues {
-	static Logger log = Logger.getLogger(Queues.class);
+	static CLogger log = CLogger.getCLogger(Queues.class);
 
 	private final static Queues INSTANCE = new Queues();
 	private final Hashtable queues = new Hashtable(); 
@@ -27,7 +27,7 @@ public class Queues {
 	 */
 	private Queues() {
 		super();
-		log.debug("Queues(): STARTED");
+		log.fine("Queues(): STARTED");
 	}
 
 	/**
@@ -112,29 +112,29 @@ public class Queues {
 	public void addPrintJob(String queueName, PrintJob printJob) throws Exception {
 		final String METHOD_NAME = "addPrintJob(): ";
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else if(null == printJob) {
-			log.error(METHOD_NAME + "PrintJob passed in was null.");
+			log.severe(METHOD_NAME + "PrintJob passed in was null.");
 			throw new Exception(METHOD_NAME + "PrintJob passed in was null.");
 		} else if(null == printJob.getDataFile()) {
-			log.error(METHOD_NAME + "DataFile in PrintJob passed in was null.");  
+			log.severe(METHOD_NAME + "DataFile in PrintJob passed in was null.");  
 			throw new Exception(METHOD_NAME + "DataFile in PrintJob passed in was null.");
 		} else if(null == printJob.getDataFile().getContents()) {
-			log.error(METHOD_NAME + "contents of DataFile in PrintJob passed in was null.");  
+			log.severe(METHOD_NAME + "contents of DataFile in PrintJob passed in was null.");  
 			throw new Exception(METHOD_NAME + "contents of DataFile in PrintJob passed in was null.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
-			log.debug(METHOD_NAME + "got queue: " + queueName);  
+			log.fine(METHOD_NAME + "got queue: " + queueName);  
 			Lock lock = queue.getLock();
-			log.debug(METHOD_NAME + "got lock for queue: " + queueName);  
+			log.fine(METHOD_NAME + "got lock for queue: " + queueName);  
 			synchronized(lock) {
 				queue.add(printJob);
 				lock.notifyAll();
-				log.debug(METHOD_NAME + "sent notify all to Lock object for queue: " + queueName);  
+				log.fine(METHOD_NAME + "sent notify all to Lock object for queue: " + queueName);  
 			}
 		}
 	}
@@ -151,23 +151,23 @@ public class Queues {
 		PrintJob printjob = null;
 		long jobId = 0;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else if(Util.isEmpty(user)) {
-			log.error(METHOD_NAME + "user passed in was empty.");
+			log.severe(METHOD_NAME + "user passed in was empty.");
 			throw new Exception(METHOD_NAME + "user passed in was empty.");
 		} else if(Util.isEmpty(jobNumber)) {
-			log.error(METHOD_NAME + "PrintJob passed in was empty.");
+			log.severe(METHOD_NAME + "PrintJob passed in was empty.");
 			throw new Exception(METHOD_NAME + "PrintJob passed in was empty.");
 		} else {
 			try {
 				jobId = Long.parseLong(jobNumber);
 			} catch(NumberFormatException e) {
-				log.warn(METHOD_NAME + "The jobNumber(" + jobNumber + ") passed in was not a number: ");
-				log.error(METHOD_NAME + e.getMessage());
+				log.warning(METHOD_NAME + "The jobNumber(" + jobNumber + ") passed in was not a number: ");
+				log.severe(METHOD_NAME + e.getMessage());
 				throw new Exception(METHOD_NAME + e.getMessage());
 			}
 
@@ -199,7 +199,7 @@ public class Queues {
 					}
 				//}
 			} catch(Exception e) {
-				log.error(METHOD_NAME + e.getMessage());
+				log.severe(METHOD_NAME + e.getMessage());
 				throw new Exception(e);
 			}
 		}
@@ -217,10 +217,10 @@ public class Queues {
 		final String METHOD_NAME = "removePrintJob(): ";
 		long jobId = 0;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 
@@ -249,7 +249,7 @@ public class Queues {
 					}
 				//}
 			} catch(Exception e) {
-				log.error(METHOD_NAME + e.getMessage());
+				log.severe(METHOD_NAME + e.getMessage());
 				throw new Exception(e);
 			}
 		}
@@ -263,10 +263,10 @@ public class Queues {
 	public void removeAllPrintJobs(String queueName) throws Exception {
 		final String METHOD_NAME = "removeAllPrintJobs(): ";
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
@@ -287,10 +287,10 @@ public class Queues {
 		final String METHOD_NAME = "listAllPrintJobs(): ";
 		List result = null;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
@@ -306,10 +306,10 @@ public class Queues {
 		final String METHOD_NAME = "getQueueSize(): ";
 		int result = -1;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
@@ -325,10 +325,10 @@ public class Queues {
 		final String METHOD_NAME = "getQueueLock(): ";
 		Lock result = null;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
@@ -341,10 +341,10 @@ public class Queues {
 		final String METHOD_NAME = "getNextPrintJob(): ";
 		QueuedPrintJob result = null;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {
 			PrintQueue queue = (PrintQueue) queues.get(queueName);
@@ -355,7 +355,7 @@ public class Queues {
 					result = queue.getNextPrintJob();
 				}
 			} catch(Exception e) {
-				log.error(METHOD_NAME + e.getMessage());
+				log.severe(METHOD_NAME + e.getMessage());
 				throw new Exception(e);
 			}
 		}
@@ -366,10 +366,10 @@ public class Queues {
 		final String METHOD_NAME = "getNextPrintJob(): ";
 		QueuedPrintJob result = null;
 		if(Util.isEmpty(queueName)) {
-			log.error(METHOD_NAME + "queueName passed in was empty.");
+			log.severe(METHOD_NAME + "queueName passed in was empty.");
 			throw new Exception(METHOD_NAME + "queueName passed in was empty.");
 		} else if(!queues.containsKey(queueName)) {
-			log.error(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
+			log.severe(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 			throw new Exception(METHOD_NAME + "the queue called(" + queueName + ") does not exist.");
 		} else {			
 			PrintQueue queue = (PrintQueue) queues.get(queueName);

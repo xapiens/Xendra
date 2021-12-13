@@ -339,24 +339,16 @@ public final class ImpFormat
 			log.config("" + line);
 
 		ArrayList<Field> list = new ArrayList<Field>();
-		//ArrayList<String> list2 = new ArrayList<String>();
 		//	for all columns
 		for (int i = 0; i < m_rows.size(); i++)
 		{
 			ImpFormatRow row = (ImpFormatRow)m_rows.get(i);
-			//StringBuffer entry = new StringBuffer ();
 			Field entry = new Field();
 			//	Label-Start
 			if (withLabel)
 			{
-				//entry.append(row.getColumnName());				
 				entry.setName(row.getColumnName());
 				entry.settype(row.getDataType());
-				//entry.append("=");
-				//if (row.isString())
-				//	entry.append("'");
-				//else if (row.isDate())
-				//	entry.append("TO_DATE('");
 			}
 
 			//	Get Data
@@ -399,19 +391,21 @@ public final class ImpFormat
 			}
 			else if (!ignoreEmpty)
 			{
-//				if (row.isString())
-//					entry.append("'");
-//				else if (row.isDate())
-//					entry.append("','YYYY-MM-DD HH24:MI:SS')");		//	JDBC Timestamp format w/o miliseconds			
-//				list.add(entry.toString());
+				entry.setValue("");
+				list.add(entry);
 			}
 			if (trace)
 				log.fine(info + "=>" + entry.toString() + " (Length=" + info.length() + ")");			
 		}	//	for all columns
 
-		//String[] retValue = new String[list.size()];
 		Field[] retValue = new Field[list.size()];
-		list.toArray(retValue);
+		int pos = 0;
+		Iterator it = list.iterator(); 
+		while (it.hasNext()) {
+			Field f = (Field) it.next();
+			retValue[pos] = f;
+			pos ++;
+		}
 		return retValue;
 	}	//	parseLine
 
@@ -614,6 +608,7 @@ public final class ImpFormat
 		{
 			ID = DB.getNextID(ctx, m_tableName, null);		//	get ID
 			UpdatePO o = new UpdatePO();
+			o.setClient(Env.getAD_Client_ID(Env.getCtx()));
 			o.setTablename(m_tableName);
 			o.setField(m_tablePK, ID);
 			int no = o.insert(trxName);

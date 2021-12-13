@@ -65,10 +65,10 @@ public static int Table_ID=MTable.getTable_ID("I_InOutLineConfirm");
 public static String es_PE_TAB_ConfirmationLines_Description="Importa Ìtem de confirmación de entrega/recibo";
 
 @XendraTrl(Identifier="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9")
-public static String es_PE_TAB_ConfirmationLines_Name="Líneas de Confirmación";
+public static String es_PE_TAB_ConfirmationLines_Help="Datos de confirmación de la importación de las confirmaciones de entregas existentes/recibos.";
 
 @XendraTrl(Identifier="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9")
-public static String es_PE_TAB_ConfirmationLines_Help="Datos de confirmación de la importación de las confirmaciones de entregas existentes/recibos.";
+public static String es_PE_TAB_ConfirmationLines_Name="Líneas de Confirmación";
 
 @XendraTab(Name="Confirmation Lines",Description="Import Receipt/Shipment Confirmation Lines",
 Help="Import Confirmation data of existing Receipt/Shipment Confirmations",
@@ -85,11 +85,13 @@ public static String es_PE_TABLE_I_InOutLineConfirm_Name="Entrega/Recibo Línea 
 
 
 @XendraTable(Name="Ship/Receipt Confirmation Import Line",
+AD_Package_ID="645f34c0-ea3a-ac63-618d-8ca49873c33b",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Material Shipment or Receipt Confirmation Import Line",Help="",
 TableName="I_InOutLineConfirm",AccessLevel="2",AD_Window_ID="edf3096e-5fc4-ff96-89b2-45793c434f0b",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.import",
-Identifier="fe017845-fafd-797e-3dc9-e43ceec0113c",Synchronized="2017-08-16 11:42:59.0")
+Identifier="fe017845-fafd-797e-3dc9-e43ceec0113c",Synchronized="2020-03-03 21:38:08.0")
 /** TableName=I_InOutLineConfirm */
 public static final String Table_Name="I_InOutLineConfirm";
 
@@ -144,10 +146,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="fd9d5ec1-a1c2-dfb4-e22b-b5d73a6b2874")
-public static String es_PE_FIELD_ConfirmationLines_ConfirmationNo_Description="Número de confirmación";
+public static String es_PE_FIELD_ConfirmationLines_ConfirmationNo_Name="No. de Confirmación";
 
 @XendraTrl(Identifier="fd9d5ec1-a1c2-dfb4-e22b-b5d73a6b2874")
-public static String es_PE_FIELD_ConfirmationLines_ConfirmationNo_Name="No. de Confirmación";
+public static String es_PE_FIELD_ConfirmationLines_ConfirmationNo_Description="Número de confirmación";
 
 @XendraField(AD_Column_ID="ConfirmationNo",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -165,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a8419c8d-6a77-7488-1119-9b12d0ef26d5",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name ConfirmationNo */
 public static final String COLUMNNAME_ConfirmationNo = "ConfirmationNo";
 /** Set Confirmed Quantity.
@@ -185,13 +187,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="92772f5f-c6dc-1a69-d44e-ad2cc1f3736f")
+public static String es_PE_FIELD_ConfirmationLines_ConfirmedQuantity_Name="Cantidad Confirmada";
+
+@XendraTrl(Identifier="92772f5f-c6dc-1a69-d44e-ad2cc1f3736f")
 public static String es_PE_FIELD_ConfirmationLines_ConfirmedQuantity_Description="Confirmación de la cantidad recibida";
 
 @XendraTrl(Identifier="92772f5f-c6dc-1a69-d44e-ad2cc1f3736f")
 public static String es_PE_FIELD_ConfirmationLines_ConfirmedQuantity_Help="Confirmación de la cantidad recibida";
-
-@XendraTrl(Identifier="92772f5f-c6dc-1a69-d44e-ad2cc1f3736f")
-public static String es_PE_FIELD_ConfirmationLines_ConfirmedQuantity_Name="Cantidad Confirmada";
 
 @XendraField(AD_Column_ID="ConfirmedQty",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -209,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a85d2c47-802c-2336-8d9b-065190292084",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name ConfirmedQty */
 public static final String COLUMNNAME_ConfirmedQty = "ConfirmedQty";
 /** Set Description.
@@ -240,13 +242,13 @@ return value;
 }
 
 @XendraTrl(Identifier="7c1e6e2d-1382-d603-31c5-e245de37c1b9")
+public static String es_PE_FIELD_ConfirmationLines_Description_Name="Observación";
+
+@XendraTrl(Identifier="7c1e6e2d-1382-d603-31c5-e245de37c1b9")
 public static String es_PE_FIELD_ConfirmationLines_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="7c1e6e2d-1382-d603-31c5-e245de37c1b9")
 public static String es_PE_FIELD_ConfirmationLines_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="7c1e6e2d-1382-d603-31c5-e245de37c1b9")
-public static String es_PE_FIELD_ConfirmationLines_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -264,7 +266,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2ab4336d-5ff1-6b7a-b294-111ffb1a623c",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Difference.
@@ -284,10 +286,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="1f757cbe-0817-5356-48b5-6e4e66d9d6e7")
-public static String es_PE_FIELD_ConfirmationLines_Difference_Description="Cantidad de diferencia";
+public static String es_PE_FIELD_ConfirmationLines_Difference_Name="Diferencia Cant.";
 
 @XendraTrl(Identifier="1f757cbe-0817-5356-48b5-6e4e66d9d6e7")
-public static String es_PE_FIELD_ConfirmationLines_Difference_Name="Diferencia Cant.";
+public static String es_PE_FIELD_ConfirmationLines_Difference_Description="Cantidad de diferencia";
 
 @XendraField(AD_Column_ID="DifferenceQty",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -305,7 +307,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="afea35ae-229c-25bc-42e3-e1c6a9ccd73d",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name DifferenceQty */
 public static final String COLUMNNAME_DifferenceQty = "DifferenceQty";
 /** Set Identifier.
@@ -337,7 +339,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4907e86c-0758-4c53-baf3-a87b8e4b4f1a",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Import Error Message.
@@ -361,13 +363,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="eda7f588-a343-1015-35f3-69bf480fbcf7")
+public static String es_PE_FIELD_ConfirmationLines_ImportErrorMessage_Name="Mensajes de Error al Importar";
+
+@XendraTrl(Identifier="eda7f588-a343-1015-35f3-69bf480fbcf7")
 public static String es_PE_FIELD_ConfirmationLines_ImportErrorMessage_Description="Mensajes generados desde procesos de importación";
 
 @XendraTrl(Identifier="eda7f588-a343-1015-35f3-69bf480fbcf7")
 public static String es_PE_FIELD_ConfirmationLines_ImportErrorMessage_Help="El mensaje de error de Importación despliega cualquier mensaje de error generado durante el proceso de importación.";
-
-@XendraTrl(Identifier="eda7f588-a343-1015-35f3-69bf480fbcf7")
-public static String es_PE_FIELD_ConfirmationLines_ImportErrorMessage_Name="Mensajes de Error al Importar";
 
 @XendraField(AD_Column_ID="I_ErrorMsg",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -385,7 +387,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="913bfebd-9d5f-7533-18ec-56ca0d72885b",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name I_ErrorMsg */
 public static final String COLUMNNAME_I_ErrorMsg = "I_ErrorMsg";
 /** Set Ship/Receipt Confirmation Import Line.
@@ -411,13 +413,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getI_InOutLineConfirm_ID()));
 }
 
 @XendraTrl(Identifier="b306cafb-154d-d8e6-6b1a-de2cbd203523")
+public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationImportLine_Name="Entrega/Recibo Línea de Confirmación de la importación ";
+
+@XendraTrl(Identifier="b306cafb-154d-d8e6-6b1a-de2cbd203523")
 public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationImportLine_Description="Línea de confirmación de importación, entrega ó recibo de material.";
 
 @XendraTrl(Identifier="b306cafb-154d-d8e6-6b1a-de2cbd203523")
 public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationImportLine_Help="Detalles de importación de confirmación.";
-
-@XendraTrl(Identifier="b306cafb-154d-d8e6-6b1a-de2cbd203523")
-public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationImportLine_Name="Entrega/Recibo Línea de Confirmación de la importación ";
 
 @XendraField(AD_Column_ID="I_InOutLineConfirm_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -447,13 +449,13 @@ return false;
 }
 
 @XendraTrl(Identifier="480f58f6-fe89-fac0-b2c2-6fe51576b1eb")
+public static String es_PE_FIELD_ConfirmationLines_Imported_Name="Importar";
+
+@XendraTrl(Identifier="480f58f6-fe89-fac0-b2c2-6fe51576b1eb")
 public static String es_PE_FIELD_ConfirmationLines_Imported_Description="Esta importación ha sido procesada";
 
 @XendraTrl(Identifier="480f58f6-fe89-fac0-b2c2-6fe51576b1eb")
 public static String es_PE_FIELD_ConfirmationLines_Imported_Help="El cuadro de verificación Importado indica si esta importación ha sido procesada";
-
-@XendraTrl(Identifier="480f58f6-fe89-fac0-b2c2-6fe51576b1eb")
-public static String es_PE_FIELD_ConfirmationLines_Imported_Name="Importar";
 
 @XendraField(AD_Column_ID="I_IsImported",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -471,7 +473,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b86c8a2d-5177-a602-da0c-aa5a625e84e7",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name I_IsImported */
 public static final String COLUMNNAME_I_IsImported = "I_IsImported";
 /** Set Ship/Receipt Confirmation Line.
@@ -491,13 +493,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6bb9bc98-5be6-cd71-c57b-ca54d63f784b")
+public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationLine_Name="Item Confirmación entrega/Recibo";
+
+@XendraTrl(Identifier="6bb9bc98-5be6-cd71-c57b-ca54d63f784b")
 public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationLine_Description="Envio de material ó Item de confirmación del recibo.";
 
 @XendraTrl(Identifier="6bb9bc98-5be6-cd71-c57b-ca54d63f784b")
 public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationLine_Help="Detalles de la confirmación.";
-
-@XendraTrl(Identifier="6bb9bc98-5be6-cd71-c57b-ca54d63f784b")
-public static String es_PE_FIELD_ConfirmationLines_ShipReceiptConfirmationLine_Name="Item Confirmación entrega/Recibo";
 
 @XendraField(AD_Column_ID="M_InOutLineConfirm_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -515,7 +517,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c3281c6f-0899-078f-4f07-4695b21c9eaf",Synchronized="2017-08-05 16:54:53.0")
+Identifier="c3281c6f-0899-078f-4f07-4695b21c9eaf",Synchronized="2019-08-30 22:22:49.0")
 /** Column name M_InOutLineConfirm_ID */
 public static final String COLUMNNAME_M_InOutLineConfirm_ID = "M_InOutLineConfirm_ID";
 /** Set Processed.
@@ -538,13 +540,13 @@ return false;
 }
 
 @XendraTrl(Identifier="059efcb4-45e2-c449-69a2-3f50e09876a3")
+public static String es_PE_FIELD_ConfirmationLines_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="059efcb4-45e2-c449-69a2-3f50e09876a3")
 public static String es_PE_FIELD_ConfirmationLines_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="059efcb4-45e2-c449-69a2-3f50e09876a3")
 public static String es_PE_FIELD_ConfirmationLines_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="059efcb4-45e2-c449-69a2-3f50e09876a3")
-public static String es_PE_FIELD_ConfirmationLines_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -562,7 +564,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7e8f76f-a0df-5f75-b6d1-4e6adf631d0c",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -585,13 +587,13 @@ return false;
 }
 
 @XendraTrl(Identifier="636751e3-2ee8-60b5-24e3-881ef560e83d")
+public static String es_PE_FIELD_ConfirmationLines_ProcessNow_Name="Importa Confirmaciones";
+
+@XendraTrl(Identifier="636751e3-2ee8-60b5-24e3-881ef560e83d")
 public static String es_PE_FIELD_ConfirmationLines_ProcessNow_Description="Importa Confirmaciones";
 
 @XendraTrl(Identifier="636751e3-2ee8-60b5-24e3-881ef560e83d")
 public static String es_PE_FIELD_ConfirmationLines_ProcessNow_Help="Los parámetros son valores por default para los valores nulos del expediente de la importación, ellos no sobreescriben ningunos datos.";
-
-@XendraTrl(Identifier="636751e3-2ee8-60b5-24e3-881ef560e83d")
-public static String es_PE_FIELD_ConfirmationLines_ProcessNow_Name="Importa Confirmaciones";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -609,7 +611,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="83bf7ef6-d7b7-c3e1-f5d0-31ad06277d2f",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4d524fa3-babc-fd05-0ef2-dfe1d505cd18",Synchronized="2017-08-05 16:54:53.0")
+Identifier="4d524fa3-babc-fd05-0ef2-dfe1d505cd18",Synchronized="2019-08-30 22:22:49.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Scrapped Quantity.
@@ -629,10 +631,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="03dbe92d-276b-092d-6a79-7cdce10425ca")
-public static String es_PE_FIELD_ConfirmationLines_ScrappedQuantity_Description="La cantidad de desperdicio debido a las ediciones del A.C.";
+public static String es_PE_FIELD_ConfirmationLines_ScrappedQuantity_Name="Cantidad de Desperdicio";
 
 @XendraTrl(Identifier="03dbe92d-276b-092d-6a79-7cdce10425ca")
-public static String es_PE_FIELD_ConfirmationLines_ScrappedQuantity_Name="Cantidad de Desperdicio";
+public static String es_PE_FIELD_ConfirmationLines_ScrappedQuantity_Description="La cantidad de desperdicio debido a las ediciones del A.C.";
 
 @XendraField(AD_Column_ID="ScrappedQty",IsCentrallyMaintained=true,
 AD_Tab_ID="dacdf85a-28d1-8870-4c7c-eb4b0532b6b9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -650,7 +652,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a85f9bc5-c84a-932e-6cd7-e8484ee89a7d",
-Synchronized="2017-08-05 16:54:53.0")
+Synchronized="2019-08-30 22:22:49.0")
 /** Column name ScrappedQty */
 public static final String COLUMNNAME_ScrappedQty = "ScrappedQty";
 }

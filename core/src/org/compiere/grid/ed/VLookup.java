@@ -580,6 +580,8 @@ public class VLookup extends JComponent
 	private String				m_lastDisplay = "";
 	/** Column Name								*/
 	private String				m_columnName;
+	/** Filter */
+	private String				m_filter = ""; 
 	/** Lookup									*/
 	private Lookup				m_lookup;
 	/** Conbo Box Active						*/
@@ -1176,6 +1178,13 @@ public class VLookup extends JComponent
 			return "";
 		if (m_lookup.getZoomQuery() != null)
 			whereClause = m_lookup.getZoomQuery().getWhereClause();
+		if (m_filter != null && m_filter.length() > 0) {
+			if (whereClause.length() > 0) {
+				whereClause += " AND " + m_filter;
+			} else {
+				whereClause = m_filter;
+			}					
+		}
 		String validation = m_lookup.getValidation();
 		if (validation == null)
 			validation = "";
@@ -1909,4 +1918,9 @@ public class VLookup extends JComponent
 	{
 		super.setVisible(visible);
 	}
+
+	public void setFilter(String filter) {
+		m_filter = filter;		
+	}
+
 }	//	VLookup

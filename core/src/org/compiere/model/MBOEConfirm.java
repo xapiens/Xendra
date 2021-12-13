@@ -318,8 +318,7 @@ public class MBOEConfirm extends X_C_BOEConfirm implements DocAction
 	public boolean processIt(String processAction) throws Exception {
 		boolean processit;
 		m_processMsg = null;
-		m_status = getDocStatus();
-		System.out.println("X");
+		m_status = getDocStatus();		
 		if (isValidAction(getDocAction()))	//	User Selection second
 			m_action = getDocAction();
 		else 

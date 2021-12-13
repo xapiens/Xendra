@@ -40,12 +40,11 @@ import org.columba.api.plugin.PluginLoadingFailedException;
 import org.columba.core.config.Config;
 import org.columba.core.config.Custom;
 import org.columba.core.config.View;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.config.ViewList;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.shutdown.ShutdownManager;
-import org.columba.core.xml.XmlElement;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 
 /**
  * FrameManager manages all frames. It keeps a list of every controller. Its
@@ -59,7 +58,7 @@ import org.columba.core.xml.XmlElement;
  */
 public class FrameManager implements IFrameManager {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.gui.frame");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.gui.frame");
 
 	/** list of frame controllers */
 	protected List activeFrameCtrls = new LinkedList();
@@ -150,14 +149,13 @@ public class FrameManager implements IFrameManager {
 		// viewList gets modified by the close method
 		List newViewList = new LinkedList();
 
-		//ViewItem v;
 		View v;
 
 		// we cannot use an iterator here because the close method
 		// manipulates the list
 		while (activeFrameCtrls.size() > 0) {
 			DefaultContainer c = (DefaultContainer) activeFrameCtrls.get(0);
-			v = c.getViewItem();
+			v = c.getView();
 
 			// store every open frame in our temporary list
 			//newViewList.add(v.getRoot());
@@ -196,17 +194,6 @@ public class FrameManager implements IFrameManager {
 				continue;
 			}
 		}
-//		for (int i = 0; i < viewList.count(); i++) {
-//			// get element from view list
-//			XmlElement view = viewList.getElement(i);
-//			try {
-//				createFrameMediator(new ViewItem(view));
-//			} catch (PluginLoadingFailedException plfe) {
-//				// should not occur
-//				continue;
-//			}
-//
-//		}
 	}
 
 	/**
@@ -253,31 +240,25 @@ public class FrameManager implements IFrameManager {
 	 * @return
 	 * @throws PluginLoadingFailedException
 	 */
-	//private IFrameMediator instanciateFrameMediator(ViewItem viewItem)
-	private IFrameMediator instanciateFrameMediator(View viewItem) throws PluginLoadingFailedException {
-		//String id = viewItem.get("id");
+	private IFrameMediator instanciateFrameMediator(View view) throws PluginLoadingFailedException {
 		IFrameMediator frame = null;
-		//if (frameMediatorCache.containsKey(id)) {
-		if (frameMediatorCache.containsKey(viewItem.getId())) {
-			//LOG.fine("use cached instance " + id);
-			LOG.fine("use cached instance " + viewItem.getId());
+		if (frameMediatorCache.containsKey(view.getId())) {
+			LOG.fine("use cached instance " + view.getId());
 			// found cached instance
 			// -> re-use this instance and remove it from cache
-			//frame = (IFrameMediator) frameMediatorCache.remove(id);
-			frame = (IFrameMediator) frameMediatorCache.remove(viewItem.getId());
+			frame = (IFrameMediator) frameMediatorCache.remove(view.getId());
 		} else {
 			//LOG.fine("create new instance " + id);
-			LOG.fine("create new instance " + viewItem.getId());
-			Object[] args = { viewItem };
+			LOG.fine("create new instance " + view.getId());
+			Object[] args = { view };
 			// create new instance
 			// -> get frame controller using the plugin handler found above
 			try {
-				//IExtension extension = handler.getExtension(id);
-				IExtension extension = handler.getExtension(viewItem.getId());
+				IExtension extension = handler.getExtension(view.getId());
 				frame = (IFrameMediator) extension.instanciateExtension(args);
 			} catch (PluginException e) {
 				LOG.severe(e.getMessage());
-				if (Logging.DEBUG)
+				if (CLogMgt.DEBUG)
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 			}
@@ -285,10 +266,9 @@ public class FrameManager implements IFrameManager {
 		return frame;
 	}
 
-	//protected IFrameMediator createFrameMediator(ViewItem viewItem)
-	protected IFrameMediator createFrameMediator(View viewItem)
-			throws PluginLoadingFailedException {
-		IFrameMediator frame = instanciateFrameMediator(viewItem);
+	protected IFrameMediator createFrameMediator(View view)
+			throws PluginLoadingFailedException {		
+		IFrameMediator frame = instanciateFrameMediator(view);
 		IContainer c = new DefaultContainer((DefaultFrameController) frame);
 		activeFrameCtrls.add(c);
 		return frame;
@@ -299,15 +279,11 @@ public class FrameManager implements IFrameManager {
 	 * 
 	 * @see org.columba.core.gui.frame.IFrameManager#openView(java.lang.String)
 	 */
-	public IFrameMediator openView(String id) throws PluginLoadingFailedException {
-		// look for default view settings (if not found, null is returned)
-		//ViewItem view = loadDefaultView(id);
+	public IFrameMediator openView(String id) throws PluginLoadingFailedException {		
 		View view = loadDefaultView(id);
-		//if (view == null)
-		//	view = ViewItem.createDefault(id);
-		// Create a frame controller for this view
-		// view = null => defaults specified by frame controller is used
+		System.out.println(String.format("view -> %s",view));
 		IFrameMediator controller = createFrameMediator(view);
+		System.out.println("after FrameManager openview");
 		return controller;
 	}
 
@@ -332,7 +308,7 @@ public class FrameManager implements IFrameManager {
 		// Create a frame controller for this view
 		// save old framemediator in cache (use containers's old id)
 		//frameMediatorCache.put(((DefaultContainer) c).getViewItem().get("id"), c.getFrameMediator());
-		frameMediatorCache.put(((DefaultContainer) c).getViewItem().getId(), c.getFrameMediator());
+		frameMediatorCache.put(((DefaultContainer) c).getView().getId(), c.getFrameMediator());
 		IFrameMediator frame = instanciateFrameMediator(view);
 		c.switchFrameMediator(frame);
 		return frame;
@@ -345,28 +321,8 @@ public class FrameManager implements IFrameManager {
 	 *            id specifying view type
 	 * @return View settings
 	 */
-	//protected ViewItem loadDefaultView(String id) {
 	protected View loadDefaultView(String id) {
-		// If defaultViews doesn't exist, create it (backward compatibility)
-		//		if (defaultViews == null) {			
-		//			XmlElement gui = Config.getInstance().get("views").getElement("/views");
-		//			defaultViews = new XmlElement("defaultviews");
-		//			gui.addElement(defaultViews);
-		//		}
-		// search through defaultViews to get settings for given id
-		//		ViewItem view = null;
 		View ret = Config.getInstance().getViews().getViewlist().getView(id);
-		//		for (int i = 0; i < defaultViews.count(); i++) {
-		//			XmlElement child = defaultViews.getElement(i);
-		//			String childId = child.getAttribute("id");
-		//
-		//			if ((childId != null) && childId.equals(id)) {
-		//				view = new ViewItem(child);
-		//
-		//				break;
-		//			}
-		//		}
-		//return view;
 		return ret;
 	}
 
@@ -413,7 +369,7 @@ public class FrameManager implements IFrameManager {
 		// Check if the frame controller has been registered, else do nothing
 		if (activeFrameCtrls.contains(c)) {
 			//ViewItem v = ((DefaultContainer) c).getViewItem();
-			View v = ((DefaultContainer) c).getViewItem();
+			View v = ((DefaultContainer) c).getView();
 
 			// save in cache
 			//frameMediatorCache.put(v.get("id"), c.getFrameMediator());
@@ -440,14 +396,9 @@ public class FrameManager implements IFrameManager {
 		}
 	}
 
-	//public ViewItem createCustomViewItem(String id) {
 	public View createCustomViewItem(String id) {
 		View ret = null;
 		Custom custom = Config.getInstance().getViews().getViewlist().getCustom();
-		//XmlElement parent = Config.getInstance().get("views").getElement("views");
-		//XmlElement custom = parent.getElement("custom");
-		//if (custom == null)
-		//	custom = parent.addSubElement("custom");
 		for (View view:custom.getViews()) {
 			if (view.getId().equals(id))
 			{
@@ -455,17 +406,8 @@ public class FrameManager implements IFrameManager {
 				break;
 			}
 		}
-//		for (int i = 0; i < custom.count(); i++) {
-//			XmlElement child = custom.getElement(i);
-//			String name = child.getAttribute("id");
-//			if (name.equals(id))
-//				return new ViewItem(child);
-//		}
 		if (ret != null)
 			custom.addView(ret);
-		//ViewItem viewItem = ViewItem.createDefault(id);
-		//custom.addElement(viewItem.getRoot());
-		//return viewItem;
 		return ret;
 	}
 }

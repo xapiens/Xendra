@@ -29,9 +29,10 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
 
+import org.compiere.util.CLogger;
+
 public class WindowMaximizer {
-	private static final Logger LOG = Logger
-			.getLogger("org.columba.core.gui.frame");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.gui.frame");
 
 	public static void maximize(Frame frame) {
 		//Can we use the Java way to maximize the window

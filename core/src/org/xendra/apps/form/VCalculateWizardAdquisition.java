@@ -100,7 +100,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.xendra.Constants;
-import org.xendra.replication.Utilities;
 import org.xendra.swing.LED;
 
 /**
@@ -1587,39 +1586,6 @@ public class VCalculateWizardAdquisition extends CFrame implements 	FormPanel,
 									pr.setPriceLimit(PriceLimit);								
 									if (pr.save())
 									{
-										String rmsg = pr.getReplicateMessage();
-										if (rmsg != null && rmsg.length() > 0)
-										{
-											String identifier = (String) pr.get_Value(X_AD_Table.COLUMNNAME_Identifier);				
-											String query = "identifier = ?";
-											X_A_Xendrian_Replication repl = new Query(Env.getCtx(), X_A_Xendrian_Replication.Table_Name, query, null)
-												.setParameters(identifier)
-												.first();
-											if (repl == null)
-											{
-												repl = new X_A_Xendrian_Replication(Env.getCtx(), 0, null);
-												repl.setIdentifier(identifier);
-											}
-											repl.setMessage(rmsg);
-											repl.setProcessed(false);
-											repl.save();
-											String error = Utilities.TestQueue(Constants.QREPLICATIONMERGEQUEUE);
-											if (error.length() == 0)
-											{
-												query = "Processed = 'N'";
-												List<X_A_Xendrian_Replication> repllist = new Query(Env.getCtx(), X_A_Xendrian_Replication.Table_Name, query, null).list();
-												for (X_A_Xendrian_Replication replication:repllist)
-												{
-													Utilities.SendMessage(replication.getMessage(), Constants.QREPLICATIONMERGEQUEUE);
-													replication.setProcessed(true);
-													replication.save();
-												}
-											}									
-										}
-										else
-										{
-											System.out.println("X");
-										}
 										if (freightAmt.compareTo(BigDecimal.ZERO) != 0)
 										{
 											// ahora actualizamos la factura , la orden y la guia.

@@ -863,8 +863,7 @@ public class Doc_Allocation extends Doc
 			{
 				Integer project = (Integer) df.get(0);
 				BigDecimal diff = (BigDecimal) df.get(1);						
-				fl = new FactLine (getCtx(), get_Table_ID(), 
-						get_ID(), 0, getFact_ID(), getTrxName());
+				fl = new FactLine (getCtx(), get_Table_ID(), get_ID(), 0, getGL_Book_ID(), getFact_ID(), getTrxName());
 
 				if (diff.signum() < 0) 
 					fl = m_fact.createLine( null, loss, as.getC_Currency_ID(), diff.abs(), Env.ZERO);
@@ -910,7 +909,7 @@ public class Doc_Allocation extends Doc
 		Timestamp datePay = getDatePay();
 		if (datePay == null)
 		{
-			System.out.println("X");
+			System.out.println("X15");
 			return null;
 		}
 
@@ -2703,7 +2702,7 @@ public class Doc_Allocation extends Doc
 
 	public void createFact_ID() {
 		MAllocationHdr alloc = (MAllocationHdr)getPO();
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID (
 					MGLBookPeriod.getID(alloc.getAD_Org_ID(),
 							alloc.getAD_Client_ID(), 
@@ -2712,6 +2711,15 @@ public class Doc_Allocation extends Doc
 							"", 
 							alloc.getDateAcct())
 					);	
+			setGL_Book_ID (
+				MGLBookPeriod.getGLBookID(alloc.getAD_Org_ID(),
+						alloc.getAD_Client_ID(), 
+						alloc.Table_ID, 
+						0, 
+						"", 
+						alloc.getDateAcct())				
+					);
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), alloc.getDateAcct(), alloc.getAD_Org_ID() , alloc.getAD_Client_ID());
@@ -2742,7 +2750,15 @@ public class Doc_Allocation extends Doc
 								0, 
 								"", 
 								alloc.getDateAcct())
-						);	
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(alloc.getAD_Org_ID(),
+								alloc.getAD_Client_ID(), 
+								alloc.Table_ID, 
+								0, 
+								"", 
+								alloc.getDateAcct())						
+						);
 				return;
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo a���o , diferente mes, regenerar.
@@ -2754,13 +2770,18 @@ public class Doc_Allocation extends Doc
 								0, 
 								"", 
 								alloc.getDateAcct())
-						);									
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(alloc.getAD_Org_ID(),
+								alloc.getAD_Client_ID(), 
+								alloc.Table_ID, 
+								0, 
+								"", 
+								alloc.getDateAcct())
+						);													
 			}
 		}
-
-		//
 	}
-
 }   //  Doc_Allocation
 
 /**

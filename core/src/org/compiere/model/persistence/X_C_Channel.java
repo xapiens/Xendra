@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_Channel");
 public static String es_PE_TAB_Channel_Description="Canal de Distribución";
 
 @XendraTrl(Identifier="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7")
-public static String es_PE_TAB_Channel_Name="Canal";
-
-@XendraTrl(Identifier="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7")
 public static String es_PE_TAB_Channel_Help="La pestaña de Canal de Mercadeo define los métodos ó procesos a través de los cuales los clientes son captados.";
 
-@XendraTab(Name="Channel",Description="Distribution Channel",
+@XendraTrl(Identifier="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7")
+public static String es_PE_TAB_Channel_Name="Canal";
+@XendraTab(Name="Channel",
+Description="Distribution Channel",
 Help="The Marketing Channel Tab defines the different methods or processes through which customers are obtained.",
 AD_Window_ID="c21068e9-ad16-773a-791b-5cb31b479a1a",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -77,11 +77,12 @@ public static final String TABNAME_Channel="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7
 @XendraTrl(Identifier="b6853496-07c4-077f-047a-f579419b1784")
 public static String es_PE_TABLE_C_Channel_Name="Canal";
 
-@XendraTable(Name="Channel",Description="Sales Channel",Help="",TableName="C_Channel",
-AccessLevel="3",AD_Window_ID="c21068e9-ad16-773a-791b-5cb31b479a1a",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="b6853496-07c4-077f-047a-f579419b1784",Synchronized="2017-08-16 11:41:37.0")
+@XendraTable(Name="Channel",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Sales Channel",Help="",
+TableName="C_Channel",AccessLevel="3",AD_Window_ID="c21068e9-ad16-773a-791b-5cb31b479a1a",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="b6853496-07c4-077f-047a-f579419b1784",Synchronized="2020-03-03 21:36:43.0")
 /** TableName=C_Channel */
 public static final String Table_Name="C_Channel";
 
@@ -138,13 +139,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6b26fdeb-1826-0d34-4f9e-81acd7699698")
+public static String es_PE_FIELD_Channel_PrintColor_Name="Impresión a Color";
+
+@XendraTrl(Identifier="6b26fdeb-1826-0d34-4f9e-81acd7699698")
 public static String es_PE_FIELD_Channel_PrintColor_Description="Color usado para imprimir";
 
 @XendraTrl(Identifier="6b26fdeb-1826-0d34-4f9e-81acd7699698")
 public static String es_PE_FIELD_Channel_PrintColor_Help="Color usado para imprimir";
-
-@XendraTrl(Identifier="6b26fdeb-1826-0d34-4f9e-81acd7699698")
-public static String es_PE_FIELD_Channel_PrintColor_Name="Impresión a Color";
 
 @XendraField(AD_Column_ID="AD_PrintColor_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -162,7 +163,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4f02bd84-976f-683f-c804-cd69c8d62d62",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name AD_PrintColor_ID */
 public static final String COLUMNNAME_AD_PrintColor_ID = "AD_PrintColor_ID";
 /** Set Channel.
@@ -182,13 +183,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="90271890-8f67-f3fe-7a8c-169159d36fc1")
+public static String es_PE_FIELD_Channel_Channel_Name="Canal";
+
+@XendraTrl(Identifier="90271890-8f67-f3fe-7a8c-169159d36fc1")
 public static String es_PE_FIELD_Channel_Channel_Description="Canal de Ventas";
 
 @XendraTrl(Identifier="90271890-8f67-f3fe-7a8c-169159d36fc1")
 public static String es_PE_FIELD_Channel_Channel_Help="El Canal de Ventas identifica un canal (o método) de generación de ventas";
-
-@XendraTrl(Identifier="90271890-8f67-f3fe-7a8c-169159d36fc1")
-public static String es_PE_FIELD_Channel_Channel_Name="Canal";
 
 @XendraField(AD_Column_ID="C_Channel_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -226,13 +227,13 @@ return value;
 }
 
 @XendraTrl(Identifier="5ea170f5-2e07-a0d6-d79b-fef3c3117686")
+public static String es_PE_FIELD_Channel_Description_Name="Observación";
+
+@XendraTrl(Identifier="5ea170f5-2e07-a0d6-d79b-fef3c3117686")
 public static String es_PE_FIELD_Channel_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="5ea170f5-2e07-a0d6-d79b-fef3c3117686")
 public static String es_PE_FIELD_Channel_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="5ea170f5-2e07-a0d6-d79b-fef3c3117686")
-public static String es_PE_FIELD_Channel_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -250,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b849a1a9-eaf2-d5d6-4c98-2431d471ea48",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -282,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f88e29bc-7dcf-427b-97e8-14ff6e03215d",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -314,18 +315,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
+public static String es_PE_FIELD_Channel_Name_Name="Nombre";
+
+@XendraTrl(Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
 public static String es_PE_FIELD_Channel_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
 public static String es_PE_FIELD_Channel_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
-public static String es_PE_FIELD_Channel_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="8a5ef2d1-7e82-9808-e31a-cc75eb3f92a7",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="62f76197-abe9-d77d-e66c-06c2c047ec51")
 public static final String FIELDNAME_Channel_Name="62f76197-abe9-d77d-e66c-06c2c047ec51";
 
 @XendraTrl(Identifier="cea492ec-ef5c-633f-6701-75120796aa5f")
@@ -337,7 +339,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cea492ec-ef5c-633f-6701-75120796aa5f",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

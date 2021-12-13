@@ -59,12 +59,12 @@ public static int Table_ID=MTable.getTable_ID("S_TimeType");
 public static String es_PE_TAB_TimeType_Description="El tipo de tiempo registrado";
 
 @XendraTrl(Identifier="211a0889-ca23-5843-757b-2503aeb657d5")
-public static String es_PE_TAB_TimeType_Name="Tipo Hora";
-
-@XendraTrl(Identifier="211a0889-ca23-5843-757b-2503aeb657d5")
 public static String es_PE_TAB_TimeType_Help="Distinga los tipos del tiempo para reportar propósitos (en paralelo a las actividades).";
 
-@XendraTab(Name="Time Type",Description="Type of Time recorded",
+@XendraTrl(Identifier="211a0889-ca23-5843-757b-2503aeb657d5")
+public static String es_PE_TAB_TimeType_Name="Tipo Hora";
+@XendraTab(Name="Time Type",
+Description="Type of Time recorded",
 Help="Differentiate time types for reporting purposes (In parallel to Activities)",
 AD_Window_ID="cf895669-ab03-6447-d4b1-efbc9b89e8a0",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -77,11 +77,12 @@ public static final String TABNAME_TimeType="211a0889-ca23-5843-757b-2503aeb657d
 @XendraTrl(Identifier="b74d70cb-d055-3407-dddf-e19c877de1da")
 public static String es_PE_TABLE_S_TimeType_Name="Tipo de Tiempo";
 
-@XendraTable(Name="Time Type",Description="Type of time recorded",Help="",TableName="S_TimeType",
-AccessLevel="3",AD_Window_ID="cf895669-ab03-6447-d4b1-efbc9b89e8a0",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.services",
-Identifier="b74d70cb-d055-3407-dddf-e19c877de1da",Synchronized="2017-08-16 11:44:16.0")
+@XendraTable(Name="Time Type",AD_Package_ID="4bb6f0e4-f72d-dcbb-9183-88af0357143f",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Type of time recorded",Help="",
+TableName="S_TimeType",AccessLevel="3",AD_Window_ID="cf895669-ab03-6447-d4b1-efbc9b89e8a0",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.services",
+Identifier="b74d70cb-d055-3407-dddf-e19c877de1da",Synchronized="2020-03-03 21:40:14.0")
 /** TableName=S_TimeType */
 public static final String Table_Name="S_TimeType";
 
@@ -142,13 +143,13 @@ return value;
 }
 
 @XendraTrl(Identifier="24ee59f2-4fc1-96de-498a-8706cb9e4e51")
+public static String es_PE_FIELD_TimeType_Description_Name="Observación";
+
+@XendraTrl(Identifier="24ee59f2-4fc1-96de-498a-8706cb9e4e51")
 public static String es_PE_FIELD_TimeType_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="24ee59f2-4fc1-96de-498a-8706cb9e4e51")
 public static String es_PE_FIELD_TimeType_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="24ee59f2-4fc1-96de-498a-8706cb9e4e51")
-public static String es_PE_FIELD_TimeType_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="211a0889-ca23-5843-757b-2503aeb657d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b934e06b-36c8-0c51-b061-07a80087f6c8",
-Synchronized="2017-08-05 16:56:21.0")
+Synchronized="2019-08-30 22:24:18.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -192,13 +193,13 @@ return value;
 }
 
 @XendraTrl(Identifier="10ce4c27-eb47-5dd9-5fd9-20f48d4564a7")
+public static String es_PE_FIELD_TimeType_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="10ce4c27-eb47-5dd9-5fd9-20f48d4564a7")
 public static String es_PE_FIELD_TimeType_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="10ce4c27-eb47-5dd9-5fd9-20f48d4564a7")
 public static String es_PE_FIELD_TimeType_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="10ce4c27-eb47-5dd9-5fd9-20f48d4564a7")
-public static String es_PE_FIELD_TimeType_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="211a0889-ca23-5843-757b-2503aeb657d5",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -216,7 +217,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d76d0f41-d318-9d21-710c-4c3157518955",
-Synchronized="2017-08-05 16:56:21.0")
+Synchronized="2019-08-30 22:24:18.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -248,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="32cc5a9b-8f75-4fe9-b784-7100007fd230",
-Synchronized="2017-08-05 16:56:21.0")
+Synchronized="2019-08-30 22:24:18.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -280,18 +281,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
+public static String es_PE_FIELD_TimeType_Name_Name="Nombre";
+
+@XendraTrl(Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
 public static String es_PE_FIELD_TimeType_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
 public static String es_PE_FIELD_TimeType_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
-public static String es_PE_FIELD_TimeType_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="211a0889-ca23-5843-757b-2503aeb657d5",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="211a0889-ca23-5843-757b-2503aeb657d5",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="c6652648-bf60-5b5f-4a88-dab5c3003e0a")
 public static final String FIELDNAME_TimeType_Name="c6652648-bf60-5b5f-4a88-dab5c3003e0a";
 
 @XendraTrl(Identifier="5035193f-b4be-4e2f-4864-f31fd6b02ca8")
@@ -303,7 +305,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5035193f-b4be-4e2f-4864-f31fd6b02ca8",
-Synchronized="2017-08-05 16:56:21.0")
+Synchronized="2019-08-30 22:24:18.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Time Type.
@@ -323,13 +325,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0d4168b2-368f-6598-8660-fc7ee1108304")
+public static String es_PE_FIELD_TimeType_TimeType_Name="Tipo de Tiempo";
+
+@XendraTrl(Identifier="0d4168b2-368f-6598-8660-fc7ee1108304")
 public static String es_PE_FIELD_TimeType_TimeType_Description="Registro del tipo de tiempo";
 
 @XendraTrl(Identifier="0d4168b2-368f-6598-8660-fc7ee1108304")
 public static String es_PE_FIELD_TimeType_TimeType_Help="Diferencia de tipos de tiempo para reportar propositos (en paralelo a las actividades)";
-
-@XendraTrl(Identifier="0d4168b2-368f-6598-8660-fc7ee1108304")
-public static String es_PE_FIELD_TimeType_TimeType_Name="Tipo de Tiempo";
 
 @XendraField(AD_Column_ID="S_TimeType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="211a0889-ca23-5843-757b-2503aeb657d5",AD_FieldGroup_ID="",IsDisplayed=false,

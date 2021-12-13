@@ -62,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("AD_ReportView_Col");
 public static String es_PE_TAB_ReportViewColumn_Description="Columna de Vista del Informe";
 
 @XendraTrl(Identifier="a3c31013-07ae-51ef-0c34-1642e1a33e8c")
-public static String es_PE_TAB_ReportViewColumn_Name="Columna de Vista del Informe";
+public static String es_PE_TAB_ReportViewColumn_Help="La pestaña Columna de Vista de Informe define las columnas que no serán consideradas durante la generación del Select del SQL.";
 
 @XendraTrl(Identifier="a3c31013-07ae-51ef-0c34-1642e1a33e8c")
-public static String es_PE_TAB_ReportViewColumn_Help="La pestaña Columna de Vista de Informe define las columnas que no serán consideradas durante la generación del Select del SQL.";
+public static String es_PE_TAB_ReportViewColumn_Name="Columna de Vista del Informe";
 
 @XendraTab(Name="Report View Column",Description="Report View Column",
 Help="The Report View Column Tab defines any columns which will be overridden in the generation of the select SQL",
@@ -80,11 +80,12 @@ public static final String TABNAME_ReportViewColumn="a3c31013-07ae-51ef-0c34-164
 @XendraTrl(Identifier="125031f1-48fe-46cb-08a7-5831edb38e21")
 public static String es_PE_TABLE_AD_ReportView_Col_Name="Columna Vista de Informe";
 
-@XendraTable(Name="Report view Column",Description="",Help="",TableName="AD_ReportView_Col",
-AccessLevel="4",AD_Window_ID="dd35bdde-cc7b-8f79-1962-33f8253fe1b6",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.request",
-Identifier="125031f1-48fe-46cb-08a7-5831edb38e21",Synchronized="2017-08-16 11:40:56.0")
+@XendraTable(Name="Report view Column",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_ReportView_Col",AccessLevel="4",AD_Window_ID="dd35bdde-cc7b-8f79-1962-33f8253fe1b6",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="125031f1-48fe-46cb-08a7-5831edb38e21",Synchronized="2020-03-03 21:35:51.0")
 /** TableName=AD_ReportView_Col */
 public static final String Table_Name="AD_ReportView_Col";
 
@@ -135,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="70194715-3c47-d809-2a81-4ba6e0b4b347")
+public static String es_PE_FIELD_ReportViewColumn_Column_Name="Columna";
+
+@XendraTrl(Identifier="70194715-3c47-d809-2a81-4ba6e0b4b347")
 public static String es_PE_FIELD_ReportViewColumn_Column_Description="Columna en la tabla";
 
 @XendraTrl(Identifier="70194715-3c47-d809-2a81-4ba6e0b4b347")
 public static String es_PE_FIELD_ReportViewColumn_Column_Help="Enlace a la columna base de datos de la tabla";
-
-@XendraTrl(Identifier="70194715-3c47-d809-2a81-4ba6e0b4b347")
-public static String es_PE_FIELD_ReportViewColumn_Column_Name="Columna";
 
 @XendraField(AD_Column_ID="AD_Column_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a3c31013-07ae-51ef-0c34-1642e1a33e8c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -159,7 +160,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="09a998a7-d927-766a-0043-29e707ca188c",Synchronized="2017-08-05 16:52:48.0")
+Identifier="09a998a7-d927-766a-0043-29e707ca188c",Synchronized="2019-08-30 22:20:38.0")
 /** Column name AD_Column_ID */
 public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
 /** Set Report view Column.
@@ -212,13 +213,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_ReportView_ID()));
 }
 
 @XendraTrl(Identifier="018950fd-c9fe-e1fe-42d8-a0ef69880438")
+public static String es_PE_FIELD_ReportViewColumn_ReportView_Name="Vista del Informe";
+
+@XendraTrl(Identifier="018950fd-c9fe-e1fe-42d8-a0ef69880438")
 public static String es_PE_FIELD_ReportViewColumn_ReportView_Description="Vista usada para generar este Informe";
 
 @XendraTrl(Identifier="018950fd-c9fe-e1fe-42d8-a0ef69880438")
 public static String es_PE_FIELD_ReportViewColumn_ReportView_Help="La Vista del Informe indica la vista usada para generar este Informe";
-
-@XendraTrl(Identifier="018950fd-c9fe-e1fe-42d8-a0ef69880438")
-public static String es_PE_FIELD_ReportViewColumn_ReportView_Name="Vista del Informe";
 
 @XendraField(AD_Column_ID="AD_ReportView_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a3c31013-07ae-51ef-0c34-1642e1a33e8c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -236,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="01796752-4020-0a4c-2f9a-010106c167ab",
-Synchronized="2017-08-05 16:52:48.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name AD_ReportView_ID */
 public static final String COLUMNNAME_AD_ReportView_ID = "AD_ReportView_ID";
 /** Set Function Column.
@@ -261,13 +262,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="25f0f7eb-3c84-a474-e814-1b9ee0503d0e")
+public static String es_PE_FIELD_ReportViewColumn_FunctionColumn_Name="Función x Columna";
+
+@XendraTrl(Identifier="25f0f7eb-3c84-a474-e814-1b9ee0503d0e")
 public static String es_PE_FIELD_ReportViewColumn_FunctionColumn_Description="Sobre escribe columna con función.";
 
 @XendraTrl(Identifier="25f0f7eb-3c84-a474-e814-1b9ee0503d0e")
 public static String es_PE_FIELD_ReportViewColumn_FunctionColumn_Help="La columna función indica que la columna será modificada con una función.";
-
-@XendraTrl(Identifier="25f0f7eb-3c84-a474-e814-1b9ee0503d0e")
-public static String es_PE_FIELD_ReportViewColumn_FunctionColumn_Name="Función x Columna";
 
 @XendraField(AD_Column_ID="FunctionColumn",IsCentrallyMaintained=true,
 AD_Tab_ID="a3c31013-07ae-51ef-0c34-1642e1a33e8c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -285,7 +286,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4db13375-197f-936b-e42d-34532ba93bda",
-Synchronized="2017-08-05 16:52:48.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name FunctionColumn */
 public static final String COLUMNNAME_FunctionColumn = "FunctionColumn";
 /** Set Identifier.
@@ -317,7 +318,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="30fd29f0-7522-4ced-bf8b-0e63aa8ab278",
-Synchronized="2017-08-05 16:52:48.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set SQL Group Function.
@@ -340,13 +341,13 @@ return false;
 }
 
 @XendraTrl(Identifier="e99f9984-c436-ba9c-ba9f-6e103522020f")
+public static String es_PE_FIELD_ReportViewColumn_SQLGroupFunction_Name="Función de Grupo SQL";
+
+@XendraTrl(Identifier="e99f9984-c436-ba9c-ba9f-6e103522020f")
 public static String es_PE_FIELD_ReportViewColumn_SQLGroupFunction_Description="Esta función generará una cláusula por grupo.";
 
 @XendraTrl(Identifier="e99f9984-c436-ba9c-ba9f-6e103522020f")
 public static String es_PE_FIELD_ReportViewColumn_SQLGroupFunction_Help="El cuadro de verificación función grupo SQL indica que esta función generará una cláusula de grupo. ";
-
-@XendraTrl(Identifier="e99f9984-c436-ba9c-ba9f-6e103522020f")
-public static String es_PE_FIELD_ReportViewColumn_SQLGroupFunction_Name="Función de Grupo SQL";
 
 @XendraField(AD_Column_ID="IsGroupFunction",IsCentrallyMaintained=true,
 AD_Tab_ID="a3c31013-07ae-51ef-0c34-1642e1a33e8c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -364,7 +365,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ca53e136-23e9-7130-c27d-5b00233e22b4",
-Synchronized="2017-08-05 16:52:48.0")
+Synchronized="2019-08-30 22:20:38.0")
 /** Column name IsGroupFunction */
 public static final String COLUMNNAME_IsGroupFunction = "IsGroupFunction";
 }

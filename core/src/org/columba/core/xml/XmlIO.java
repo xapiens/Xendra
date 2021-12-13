@@ -35,8 +35,9 @@ import javax.swing.JOptionPane;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.columba.core.logging.Logging;
 import org.compiere.model.MConfig;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -44,7 +45,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlIO extends DefaultHandler {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.xml");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.xml");
 
 	private static final String ROOT_XML_ELEMENT_NAME = "__COLUMBA_XML_TREE_TOP__";
 
@@ -186,7 +187,7 @@ public class XmlIO extends DefaultHandler {
 			LOG.severe("XML config error while attempting to read XML file \n'"
 					+ inputURL + "'");
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 				ex.printStackTrace();
 
 			return (false);
@@ -195,7 +196,7 @@ public class XmlIO extends DefaultHandler {
 			LOG.severe("XML parse error while attempting to read XML file \n'"
 					+ inputURL + "'");			
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 			ex.printStackTrace();
 
 			return (false);
@@ -203,7 +204,7 @@ public class XmlIO extends DefaultHandler {
 			LOG.severe("I/O error while attempting to read XML file \n'"
 					+ inputURL + "'");					
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 			ex.printStackTrace();
 
 			return (false);
@@ -248,7 +249,7 @@ public class XmlIO extends DefaultHandler {
 			LOG.severe("XML config error while attempting to read XML file \n'"
 					+ m_Config.getIdentifier() + "'");
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 				ex.printStackTrace();
 
 			return (false);
@@ -258,7 +259,7 @@ public class XmlIO extends DefaultHandler {
 			//		+ inputURL + "'");
 					+ m_Config.getIdentifier() + "'");
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 			ex.printStackTrace();
 
 			return (false);
@@ -267,7 +268,7 @@ public class XmlIO extends DefaultHandler {
 					//+ inputURL + "'");
 					+ m_Config.getIdentifier() + "'");
 			LOG.severe(ex.toString());
-			if ( Logging.DEBUG)
+			if ( CLogMgt.DEBUG)
 			ex.printStackTrace();
 
 			return (false);

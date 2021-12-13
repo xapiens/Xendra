@@ -41,7 +41,7 @@ import org.compiere.util.Env;
 import org.compiere.util.Trx;
 import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.conf.EventProcessingOption;
-import org.xendra.xendrian.Listener;
+
 
 /**
  *  Process Model

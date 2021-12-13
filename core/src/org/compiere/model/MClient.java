@@ -314,7 +314,7 @@ public class MClient extends X_AD_Client
 	 * 	@param language language
 	 * 	@return true if created
 	 */
-	public boolean setupClientInfo (String language)
+	public boolean setupClientInfo (String language, String TaxID)
 	{
 		//	Create Trees
 		String sql = null;
@@ -415,7 +415,7 @@ public class MClient extends X_AD_Client
 			return false;
 
 		//	Create ClientInfo
-		MClientInfo clientInfo = new MClientInfo (this,
+		MClientInfo clientInfo = new MClientInfo (this, TaxID, 
 			AD_Tree_Org_ID, AD_Tree_BPartner_ID, AD_Tree_Project_ID, 
 			AD_Tree_SalesRegion_ID, AD_Tree_Product_ID,
 			AD_Tree_Campaign_ID, AD_Tree_Activity_ID, get_TrxName());

@@ -70,12 +70,12 @@ public static int Table_ID=MTable.getTable_ID("M_PriceList");
 public static String es_PE_TAB_PriceList_Description="Definir Listas de Precio";
 
 @XendraTrl(Identifier="265536aa-f442-516a-1ab0-dbf05f43f762")
-public static String es_PE_TAB_PriceList_Name="Lista de Precios";
-
-@XendraTrl(Identifier="265536aa-f442-516a-1ab0-dbf05f43f762")
 public static String es_PE_TAB_PriceList_Help="Listas de precios determinan la moneda del documento así como el tratamiento de impuestos.";
 
-@XendraTab(Name="Price List",Description="Define Price Lists",
+@XendraTrl(Identifier="265536aa-f442-516a-1ab0-dbf05f43f762")
+public static String es_PE_TAB_PriceList_Name="Lista de Precios";
+@XendraTab(Name="Price List",
+Description="Define Price Lists",
 Help="Price lists determine currency of the document as well as tax treatment.",
 AD_Window_ID="e3c55106-2db1-b535-c578-d544cd183313",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -88,13 +88,21 @@ public static final String TABNAME_PriceList="265536aa-f442-516a-1ab0-dbf05f43f7
 @XendraTrl(Identifier="fa060b8a-ddc4-0a28-e00b-d306cf3f34ab")
 public static String es_PE_TABLE_M_PriceList_Name="Lista de Precios";
 
-@XendraTable(Name="Price List",Description="Unique identifier of a Price List",Help="",
-TableName="M_PriceList",AccessLevel="3",AD_Window_ID="e3c55106-2db1-b535-c578-d544cd183313",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=60,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="fa060b8a-ddc4-0a28-e00b-d306cf3f34ab",Synchronized="2017-08-16 11:43:23.0")
+@XendraTable(Name="Price List",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Unique identifier of a Price List",Help="",TableName="M_PriceList",AccessLevel="3",
+AD_Window_ID="e3c55106-2db1-b535-c578-d544cd183313",AD_Val_Rule_ID="",IsKey=1,LoadSeq=60,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="fa060b8a-ddc4-0a28-e00b-d306cf3f34ab",
+Synchronized="2020-11-02 17:51:31.0")
 /** TableName=M_PriceList */
 public static final String Table_Name="M_PriceList";
+
+
+@XendraIndex(Name="m_pricelist_identifier",Identifier="f18b1caf-bffd-48c7-89ea-55681d6680a8",
+Column_Names="identifier",IsUnique="false",TableIdentifier="f18b1caf-bffd-48c7-89ea-55681d6680a8",
+Synchronized="2020-11-02 17:51:31.0")
+public static final String INDEXNAME_m_pricelist_identifier = "f18b1caf-bffd-48c7-89ea-55681d6680a8";
 
 
 @XendraIndex(Name="m_pricelist_name",Identifier="87d2fdd8-e3cd-3732-ecba-995daf5c2759",
@@ -131,9 +139,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_M_PriceList[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** BasePriceList_ID AD_Reference=a20c07c8-1fb7-74c6-ec9d-66afd2d29682 */
-public static final int BASEPRICELIST_ID_AD_Reference_ID=166;
 /** Set Base Pricelist.
 @param BasePriceList_ID Pricelist to be used, if product not found on this pricelist */
 public void setBasePriceList_ID (int BasePriceList_ID)
@@ -152,13 +157,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c11f1fb3-6fea-407a-29e1-b6bbcf3690f6")
+public static String es_PE_FIELD_PriceList_BasePricelist_Name="Lista de Precio Base";
+
+@XendraTrl(Identifier="c11f1fb3-6fea-407a-29e1-b6bbcf3690f6")
 public static String es_PE_FIELD_PriceList_BasePricelist_Description="Lista de precios a ser usada; si el producto no se encontró en esta lista de precios";
 
 @XendraTrl(Identifier="c11f1fb3-6fea-407a-29e1-b6bbcf3690f6")
 public static String es_PE_FIELD_PriceList_BasePricelist_Help="La lista de precio base identifica la lista de precio predeterminado a ser usado si un producto no se encuentra en la lista de precios seleccionada.";
-
-@XendraTrl(Identifier="c11f1fb3-6fea-407a-29e1-b6bbcf3690f6")
-public static String es_PE_FIELD_PriceList_BasePricelist_Name="Lista de Precio Base";
 
 @XendraField(AD_Column_ID="BasePriceList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -177,7 +182,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ce2a79fe-2098-48d7-6450-409bc638d533",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name BasePriceList_ID */
 public static final String COLUMNNAME_BasePriceList_ID = "BasePriceList_ID";
 /** Set Currency.
@@ -197,13 +202,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9962c439-0f22-c044-4e4c-9b3da07338ac")
+public static String es_PE_FIELD_PriceList_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="9962c439-0f22-c044-4e4c-9b3da07338ac")
 public static String es_PE_FIELD_PriceList_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="9962c439-0f22-c044-4e4c-9b3da07338ac")
 public static String es_PE_FIELD_PriceList_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="9962c439-0f22-c044-4e4c-9b3da07338ac")
-public static String es_PE_FIELD_PriceList_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -221,7 +226,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2077717f-6019-12e9-3a6c-cf446fbd34c1",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Description.
@@ -252,13 +257,13 @@ return value;
 }
 
 @XendraTrl(Identifier="52bb5ce7-7af9-b1c3-e532-ad2ee87ff00b")
+public static String es_PE_FIELD_PriceList_Description_Name="Observación";
+
+@XendraTrl(Identifier="52bb5ce7-7af9-b1c3-e532-ad2ee87ff00b")
 public static String es_PE_FIELD_PriceList_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="52bb5ce7-7af9-b1c3-e532-ad2ee87ff00b")
 public static String es_PE_FIELD_PriceList_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="52bb5ce7-7af9-b1c3-e532-ad2ee87ff00b")
-public static String es_PE_FIELD_PriceList_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -276,7 +281,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fa3c551e-7f83-a3dd-13bf-f09f73ca6293",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Enforce price limit.
@@ -299,13 +304,13 @@ return false;
 }
 
 @XendraTrl(Identifier="2c37a57e-2cad-940f-01e7-f68c70c71e17")
+public static String es_PE_FIELD_PriceList_EnforcePriceLimit_Name="Precio Límite Forzado";
+
+@XendraTrl(Identifier="2c37a57e-2cad-940f-01e7-f68c70c71e17")
 public static String es_PE_FIELD_PriceList_EnforcePriceLimit_Description="No se permiten precios por debajo del precio límite.";
 
 @XendraTrl(Identifier="2c37a57e-2cad-940f-01e7-f68c70c71e17")
 public static String es_PE_FIELD_PriceList_EnforcePriceLimit_Help="El cuadro de verificación forzar límite de precio indica que los precios no pueden estar por debajo del límite de precio.";
-
-@XendraTrl(Identifier="2c37a57e-2cad-940f-01e7-f68c70c71e17")
-public static String es_PE_FIELD_PriceList_EnforcePriceLimit_Name="Precio Límite Forzado";
 
 @XendraField(AD_Column_ID="EnforcePriceLimit",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -323,7 +328,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f9e37a31-5199-b1ae-5ed4-0b8125ef1165",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name EnforcePriceLimit */
 public static final String COLUMNNAME_EnforcePriceLimit = "EnforcePriceLimit";
 /** Set Identifier.
@@ -355,7 +360,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b41f406b-8955-4281-af4f-82df8605ad21",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsAllowCampaign.
@@ -396,7 +401,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="50709e6c-b345-59ad-7f91-d6a7fa60ca8e",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name IsAllowCampaign */
 public static final String COLUMNNAME_IsAllowCampaign = "IsAllowCampaign";
 /** Set Default.
@@ -419,13 +424,13 @@ return false;
 }
 
 @XendraTrl(Identifier="c96ddccf-18b6-5efa-198d-58228c7a7d0d")
+public static String es_PE_FIELD_PriceList_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="c96ddccf-18b6-5efa-198d-58228c7a7d0d")
 public static String es_PE_FIELD_PriceList_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="c96ddccf-18b6-5efa-198d-58228c7a7d0d")
 public static String es_PE_FIELD_PriceList_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="c96ddccf-18b6-5efa-198d-58228c7a7d0d")
-public static String es_PE_FIELD_PriceList_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -443,7 +448,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="20b18541-52ed-e445-4064-75c5e5991339",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Read Only.
@@ -474,7 +479,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8ca8f9f9-e525-339f-22db-027a5e3191a7",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name IsReadOnly */
 public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
 /** Set Sales Price list.
@@ -497,13 +502,13 @@ return false;
 }
 
 @XendraTrl(Identifier="933a39d8-52b4-fea7-d4a3-58d1b59601d0")
+public static String es_PE_FIELD_PriceList_SalesPriceList_Name="Lista de Precios de Venta";
+
+@XendraTrl(Identifier="933a39d8-52b4-fea7-d4a3-58d1b59601d0")
 public static String es_PE_FIELD_PriceList_SalesPriceList_Description="Esta es una lista de precios de venta.";
 
 @XendraTrl(Identifier="933a39d8-52b4-fea7-d4a3-58d1b59601d0")
 public static String es_PE_FIELD_PriceList_SalesPriceList_Help="El cuadro de verificación lista de precios de venta indica si esta lista de precios es usada para transacciones de ventas.";
-
-@XendraTrl(Identifier="933a39d8-52b4-fea7-d4a3-58d1b59601d0")
-public static String es_PE_FIELD_PriceList_SalesPriceList_Name="Lista de Precios de Venta";
 
 @XendraField(AD_Column_ID="IsSOPriceList",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -521,7 +526,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5a85efd5-88c1-8daa-fa11-f3b2830f55b4",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name IsSOPriceList */
 public static final String COLUMNNAME_IsSOPriceList = "IsSOPriceList";
 /** Set Price includes Tax.
@@ -544,13 +549,13 @@ return false;
 }
 
 @XendraTrl(Identifier="c1c59d8e-b187-9877-b489-6144c1aa7b84")
+public static String es_PE_FIELD_PriceList_PriceIncludesTax_Name="Impuesto Incluido en el Precio";
+
+@XendraTrl(Identifier="c1c59d8e-b187-9877-b489-6144c1aa7b84")
 public static String es_PE_FIELD_PriceList_PriceIncludesTax_Description="Impuesto incluido en el precio";
 
 @XendraTrl(Identifier="c1c59d8e-b187-9877-b489-6144c1aa7b84")
 public static String es_PE_FIELD_PriceList_PriceIncludesTax_Help="El cuadro de verificación Impuesto Incluido indica que el precio incluye impuestos. Esto es también conocido como el precio bruto";
-
-@XendraTrl(Identifier="c1c59d8e-b187-9877-b489-6144c1aa7b84")
-public static String es_PE_FIELD_PriceList_PriceIncludesTax_Name="Impuesto Incluido en el Precio";
 
 @XendraField(AD_Column_ID="IsTaxIncluded",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -568,7 +573,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6acb492d-2f49-3d2b-382f-2283758388bb",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name IsTaxIncluded */
 public static final String COLUMNNAME_IsTaxIncluded = "IsTaxIncluded";
 /** Set M_PriceList_ID.
@@ -588,13 +593,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d3ff50ec-c9f6-ea67-4447-66955b9bc136")
+public static String es_PE_FIELD_PriceList_M_PriceList_ID_Name="Lista de Precios";
+
+@XendraTrl(Identifier="d3ff50ec-c9f6-ea67-4447-66955b9bc136")
 public static String es_PE_FIELD_PriceList_M_PriceList_ID_Description="Identificador único de mi lista de precios";
 
 @XendraTrl(Identifier="d3ff50ec-c9f6-ea67-4447-66955b9bc136")
 public static String es_PE_FIELD_PriceList_M_PriceList_ID_Help="Listas de precios son usadas para determinar el precio; margen y costo de artículos comprados ó vendidos.";
-
-@XendraTrl(Identifier="d3ff50ec-c9f6-ea67-4447-66955b9bc136")
-public static String es_PE_FIELD_PriceList_M_PriceList_ID_Name="Lista de Precios";
 
 @XendraField(AD_Column_ID="M_PriceList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -633,18 +638,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
+public static String es_PE_FIELD_PriceList_Name_Name="Nombre";
+
+@XendraTrl(Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
 public static String es_PE_FIELD_PriceList_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
 public static String es_PE_FIELD_PriceList_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
-public static String es_PE_FIELD_PriceList_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="7bd926e2-07d6-970b-2891-ca85b2ce634a")
 public static final String FIELDNAME_PriceList_Name="7bd926e2-07d6-970b-2891-ca85b2ce634a";
 
 @XendraTrl(Identifier="0eb06043-75ae-5839-e371-5d3b28563641")
@@ -656,7 +662,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0eb06043-75ae-5839-e371-5d3b28563641",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Price Precision.
@@ -676,13 +682,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="bef5af6c-783c-2a18-1a81-667c76b50a74")
+public static String es_PE_FIELD_PriceList_PricePrecision_Name="Precio preciso";
+
+@XendraTrl(Identifier="bef5af6c-783c-2a18-1a81-667c76b50a74")
 public static String es_PE_FIELD_PriceList_PricePrecision_Description="Precisión (número de decimales) para el precio.";
 
 @XendraTrl(Identifier="bef5af6c-783c-2a18-1a81-667c76b50a74")
 public static String es_PE_FIELD_PriceList_PricePrecision_Help="Los precios de la lista de precios se redondean a la precisión incorporada. Esto permite tener precios debajo de la precisión actual, ej. $ 0.005. Incorpore el número de decimales ó -1 para ningún redondeo.";
-
-@XendraTrl(Identifier="bef5af6c-783c-2a18-1a81-667c76b50a74")
-public static String es_PE_FIELD_PriceList_PricePrecision_Name="Precio preciso";
 
 @XendraField(AD_Column_ID="PricePrecision",IsCentrallyMaintained=true,
 AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -700,7 +706,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="596368b3-7ac9-b20c-3d9d-5e2902c6b178",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name PricePrecision */
 public static final String COLUMNNAME_PricePrecision = "PricePrecision";
 /** Set Rate.
@@ -719,18 +725,19 @@ return bd;
 }
 
 @XendraTrl(Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
+public static String es_PE_FIELD_PriceList_Rate_Name="Tasa";
+
+@XendraTrl(Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
 public static String es_PE_FIELD_PriceList_Rate_Description="Tasa, impuesto ó conversión.";
 
 @XendraTrl(Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
 public static String es_PE_FIELD_PriceList_Rate_Help="La tasa indica el porcentaje a ser multiplicado por la fuente para obtener el impuesto ó el total de la conversión.";
 
-@XendraTrl(Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
-public static String es_PE_FIELD_PriceList_Rate_Name="Tasa";
-@XendraField(AD_Column_ID="Rate",
-IsCentrallyMaintained=true,AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=120,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
+@XendraField(AD_Column_ID="Rate",IsCentrallyMaintained=true,
+AD_Tab_ID="265536aa-f442-516a-1ab0-dbf05f43f762",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=22,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b0a36cdd-eb1d-abca-7632-f1fe62bf175c")
 public static final String FIELDNAME_PriceList_Rate="b0a36cdd-eb1d-abca-7632-f1fe62bf175c";
 
 @XendraTrl(Identifier="506183a7-c3d6-51b5-cced-b6ac7d21bf0c")
@@ -742,7 +749,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="506183a7-c3d6-51b5-cced-b6ac7d21bf0c",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name Rate */
 public static final String COLUMNNAME_Rate = "Rate";
 /** Set RateLimit.
@@ -779,7 +786,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c80e0ae3-4a32-bb2f-5354-1fc3bac49696",
-Synchronized="2017-08-05 16:55:19.0")
+Synchronized="2020-03-03 21:38:46.0")
 /** Column name RateLimit */
 public static final String COLUMNNAME_RateLimit = "RateLimit";
 }

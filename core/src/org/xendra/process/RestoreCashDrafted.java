@@ -35,7 +35,7 @@ public class RestoreCashDrafted extends SvrProcess {
 	@Override
 	protected String doIt() throws Exception {
 		MCash cash = new MCash(getCtx(), m_C_Cash_ID, get_TrxName());
-		if (!MPeriod.isOpen(getCtx(), cash.getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, Env.getAD_Org_ID(Env.getCtx())))
+		if (!MPeriod.isOpen(getCtx(), cash.getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal, cash.getAD_Org_ID(), cash.getAD_Client_ID()))
 		{
 			return "@Error@: @PeriodClosed@";
 		}				

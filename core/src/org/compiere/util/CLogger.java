@@ -73,6 +73,29 @@ public class CLogger extends Logger implements Serializable
     	return getCLogger (clazz.getName());
     }	//	getLogger
 
+    public void config(String msg) {
+    	if (isLoggable(Level.CONFIG))
+    		super.config(msg);
+        //log(Level.CONFIG, msg);
+    }
+
+    public void info(String msg) {
+    	if (isLoggable(Level.INFO))
+    		super.info(msg);    		
+    }
+    public void fine(String msg) {
+    	if (isLoggable(Level.FINE))
+    		super.fine(msg);
+    }
+    public void finer(String msg) {
+    	if (isLoggable(Level.FINER))
+    		super.finer(msg);
+    }    
+    public void finest(String msg) {
+    	if (isLoggable(Level.FINEST))
+    		super.finest(msg);
+        //log(Level.FINEST, msg);
+    }    
     /**
      * 	Get default Adempiere Logger.
      * 	Need to be used in serialized objects
@@ -281,7 +304,7 @@ public class CLogger extends Logger implements Serializable
 	public void log(Level x, String xx)
 	{
 		super.log(x, xx);
-		if (!xx.startsWith("Active="))
+		if (xx!= null && !xx.startsWith("Active="))
 			System.out.println(xx);
 	}
 	/**

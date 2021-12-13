@@ -1329,6 +1329,10 @@ public class Doc_Invoice extends Doc {
 					.getAD_Client_ID(), invoice.Table_ID, invoice
 					.getC_DocType_ID(), invoice.isSOTrx() ? "Y" : "N", invoice
 							.getDateAcct()));
+			setGL_Book_ID(MGLBookPeriod.getGLBookID(invoice.getAD_Org_ID(), invoice
+					.getAD_Client_ID(), invoice.Table_ID, invoice
+					.getC_DocType_ID(), invoice.isSOTrx() ? "Y" : "N", invoice
+							.getDateAcct()));			
 		}
 		else
 		{
@@ -1380,6 +1384,12 @@ public class Doc_Invoice extends Doc {
 							invoice.getC_DocType_ID(), 
 							invoice.isSOTrx() ? "Y" : "N", 
 							invoice.getDateAcct()));
+					setGL_Book_ID(MGLBookPeriod.getGLBookID(invoice.getAD_Org_ID(), 
+							invoice.getAD_Client_ID(), 
+							invoice.Table_ID, 
+							invoice.getC_DocType_ID(), 
+							invoice.isSOTrx() ? "Y" : "N", 
+							invoice.getDateAcct()));					
 				}
 			}
 			else // change the oldformat to new format
@@ -1390,6 +1400,12 @@ public class Doc_Invoice extends Doc {
 						invoice.getC_DocType_ID(), 
 						invoice.isSOTrx() ? "Y" : "N", 
 						invoice.getDateAcct()));
+				setGL_Book_ID(MGLBookPeriod.getGLBookID(invoice.getAD_Org_ID(), 
+						invoice.getAD_Client_ID(), 
+						invoice.Table_ID, 
+						invoice.getC_DocType_ID(), 
+						invoice.isSOTrx() ? "Y" : "N", 
+						invoice.getDateAcct()));				
 			}
 		}		
 	}

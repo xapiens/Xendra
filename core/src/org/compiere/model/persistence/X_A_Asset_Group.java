@@ -69,12 +69,12 @@ public static int Table_ID=MTable.getTable_ID("A_Asset_Group");
 public static String es_PE_TAB_AssetGroup_Description="Grupo de Activo";
 
 @XendraTrl(Identifier="544fd379-fc68-f017-e5c1-f8eaa1859795")
-public static String es_PE_TAB_AssetGroup_Name="Grupo de Activo";
-
-@XendraTrl(Identifier="544fd379-fc68-f017-e5c1-f8eaa1859795")
 public static String es_PE_TAB_AssetGroup_Help="El grupo de activos determina cuentas por default. Si un grupo del activo se selecciona en la categoría del producto, se crean los activos al entregar el activo";
 
-@XendraTab(Name="Asset Group",Description="Group of Assets",
+@XendraTrl(Identifier="544fd379-fc68-f017-e5c1-f8eaa1859795")
+public static String es_PE_TAB_AssetGroup_Name="Grupo de Activo";
+@XendraTab(Name="Asset Group",
+Description="Group of Assets",
 Help="The group of assets determines default accounts.  If a asset group is selected in the product category, assets are created when delivering the asset.",
 AD_Window_ID="10c3526d-badb-72f4-014e-1b797f940db0",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -87,11 +87,12 @@ public static final String TABNAME_AssetGroup="544fd379-fc68-f017-e5c1-f8eaa1859
 @XendraTrl(Identifier="38bf807e-0516-77ee-5622-eee7146f1b72")
 public static String es_PE_TABLE_A_Asset_Group_Name="Grupo de Activos";
 
-@XendraTable(Name="Asset Group",Description="Group of Assets",Help="",TableName="A_Asset_Group",
-AccessLevel="3",AD_Window_ID="10c3526d-badb-72f4-014e-1b797f940db0",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=70,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.asset",
-Identifier="38bf807e-0516-77ee-5622-eee7146f1b72",Synchronized="2017-08-16 11:39:56.0")
+@XendraTable(Name="Asset Group",AD_Package_ID="f42d3f39-06e2-bcd9-2954-27694ae45e5d",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Group of Assets",Help="",
+TableName="A_Asset_Group",AccessLevel="3",AD_Window_ID="10c3526d-badb-72f4-014e-1b797f940db0",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=70,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.asset",
+Identifier="38bf807e-0516-77ee-5622-eee7146f1b72",Synchronized="2020-03-03 21:34:50.0")
 /** TableName=A_Asset_Group */
 public static final String Table_Name="A_Asset_Group";
 
@@ -141,13 +142,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7cc7031f-70ed-6b6e-cca4-0006594c4895")
+public static String es_PE_FIELD_AssetGroup_AssetGroup_Name="Grupo de Activos";
+
+@XendraTrl(Identifier="7cc7031f-70ed-6b6e-cca4-0006594c4895")
 public static String es_PE_FIELD_AssetGroup_AssetGroup_Description="Grupo de Activos";
 
 @XendraTrl(Identifier="7cc7031f-70ed-6b6e-cca4-0006594c4895")
 public static String es_PE_FIELD_AssetGroup_AssetGroup_Help="El grupo de activos determina cuentas por defaul. Si un grupo del activo se selecciona en la categoría de producto, se crean los activos al entregar el activo.";
-
-@XendraTrl(Identifier="7cc7031f-70ed-6b6e-cca4-0006594c4895")
-public static String es_PE_FIELD_AssetGroup_AssetGroup_Name="Grupo de Activos";
 
 @XendraField(AD_Column_ID="A_Asset_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -185,13 +186,13 @@ return value;
 }
 
 @XendraTrl(Identifier="c352170a-f61c-3507-e4a1-85d2c886fbb2")
+public static String es_PE_FIELD_AssetGroup_Description_Name="Observación";
+
+@XendraTrl(Identifier="c352170a-f61c-3507-e4a1-85d2c886fbb2")
 public static String es_PE_FIELD_AssetGroup_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="c352170a-f61c-3507-e4a1-85d2c886fbb2")
 public static String es_PE_FIELD_AssetGroup_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="c352170a-f61c-3507-e4a1-85d2c886fbb2")
-public static String es_PE_FIELD_AssetGroup_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -209,7 +210,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7df4c3e-3299-0336-104c-abd96e6aca39",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -235,13 +236,13 @@ return value;
 }
 
 @XendraTrl(Identifier="9b04f460-cf24-09ce-6afa-32d4c271bd33")
+public static String es_PE_FIELD_AssetGroup_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="9b04f460-cf24-09ce-6afa-32d4c271bd33")
 public static String es_PE_FIELD_AssetGroup_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="9b04f460-cf24-09ce-6afa-32d4c271bd33")
 public static String es_PE_FIELD_AssetGroup_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="9b04f460-cf24-09ce-6afa-32d4c271bd33")
-public static String es_PE_FIELD_AssetGroup_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -259,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="92fbfdd4-c08f-5eea-b4aa-3ecd26ae13a5",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -291,7 +292,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="22998494-c229-4022-974e-32b43e3d81e6",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Create As Active.
@@ -314,10 +315,10 @@ return false;
 }
 
 @XendraTrl(Identifier="991a75a6-8ebf-7f74-ce32-ef68f7d98e04")
-public static String es_PE_FIELD_AssetGroup_CreateAsActive_Help="Usted puede considerar automáticamente para no hacer el activo activo, si usted necesita conseguir una cierta información adicional";
+public static String es_PE_FIELD_AssetGroup_CreateAsActive_Name="Crea como un Activo";
 
 @XendraTrl(Identifier="991a75a6-8ebf-7f74-ce32-ef68f7d98e04")
-public static String es_PE_FIELD_AssetGroup_CreateAsActive_Name="Crea como un Activo";
+public static String es_PE_FIELD_AssetGroup_CreateAsActive_Help="Usted puede considerar automáticamente para no hacer el activo activo, si usted necesita conseguir una cierta información adicional";
 
 @XendraField(AD_Column_ID="IsCreateAsActive",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -335,7 +336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cd383e7f-72c4-2fc4-95fa-070e9599685a",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name IsCreateAsActive */
 public static final String COLUMNNAME_IsCreateAsActive = "IsCreateAsActive";
 /** Set Depreciate.
@@ -358,13 +359,13 @@ return false;
 }
 
 @XendraTrl(Identifier="19a5d7fc-ad29-0dff-2d86-8ae230c5aff5")
+public static String es_PE_FIELD_AssetGroup_Depreciate_Name="Depreciar";
+
+@XendraTrl(Identifier="19a5d7fc-ad29-0dff-2d86-8ae230c5aff5")
 public static String es_PE_FIELD_AssetGroup_Depreciate_Description="El activo ha sido depreciado";
 
 @XendraTrl(Identifier="19a5d7fc-ad29-0dff-2d86-8ae230c5aff5")
 public static String es_PE_FIELD_AssetGroup_Depreciate_Help="El activo se utiliza internamente y será depreciado";
-
-@XendraTrl(Identifier="19a5d7fc-ad29-0dff-2d86-8ae230c5aff5")
-public static String es_PE_FIELD_AssetGroup_Depreciate_Name="Depreciar";
 
 @XendraField(AD_Column_ID="IsDepreciated",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -382,7 +383,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3569aaa9-2f81-6f70-25ba-0b5f120a1b1c",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name IsDepreciated */
 public static final String COLUMNNAME_IsDepreciated = "IsDepreciated";
 /** Set One Asset Per UOM.
@@ -405,13 +406,13 @@ return false;
 }
 
 @XendraTrl(Identifier="1552389a-d0e9-3aa9-20d0-2baf973e30da")
+public static String es_PE_FIELD_AssetGroup_OneAssetPerUOM_Name="Un Activo por UM";
+
+@XendraTrl(Identifier="1552389a-d0e9-3aa9-20d0-2baf973e30da")
 public static String es_PE_FIELD_AssetGroup_OneAssetPerUOM_Description="Crea un activo por UM";
 
 @XendraTrl(Identifier="1552389a-d0e9-3aa9-20d0-2baf973e30da")
 public static String es_PE_FIELD_AssetGroup_OneAssetPerUOM_Help="Si esta seleccionado, un activo por UM es creado, si no es un activo con la cantidad recibido/entregado.Si usted tiene multiples lineas, un activo es creado por línea.";
-
-@XendraTrl(Identifier="1552389a-d0e9-3aa9-20d0-2baf973e30da")
-public static String es_PE_FIELD_AssetGroup_OneAssetPerUOM_Name="Un Activo por UM";
 
 @XendraField(AD_Column_ID="IsOneAssetPerUOM",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -429,7 +430,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0b7b9466-46da-a69c-edf0-18d7ce80b06f",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name IsOneAssetPerUOM */
 public static final String COLUMNNAME_IsOneAssetPerUOM = "IsOneAssetPerUOM";
 /** Set Owned.
@@ -452,13 +453,13 @@ return false;
 }
 
 @XendraTrl(Identifier="74dbed74-5772-68c1-c864-054e177a5f2f")
+public static String es_PE_FIELD_AssetGroup_Owned_Name="Propio";
+
+@XendraTrl(Identifier="74dbed74-5772-68c1-c864-054e177a5f2f")
 public static String es_PE_FIELD_AssetGroup_Owned_Description="El activo es poseido por la organización";
 
 @XendraTrl(Identifier="74dbed74-5772-68c1-c864-054e177a5f2f")
 public static String es_PE_FIELD_AssetGroup_Owned_Help="El activo puede no estar en la posesión, pero el activo es poseído legalmente por la organización.";
-
-@XendraTrl(Identifier="74dbed74-5772-68c1-c864-054e177a5f2f")
-public static String es_PE_FIELD_AssetGroup_Owned_Name="Propio";
 
 @XendraField(AD_Column_ID="IsOwned",IsCentrallyMaintained=true,
 AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -476,7 +477,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b28ae4ad-fb62-ba72-d968-d725c37eb2a9",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name IsOwned */
 public static final String COLUMNNAME_IsOwned = "IsOwned";
 /** Set Track Issues.
@@ -507,7 +508,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6fcd6817-a236-711e-1f62-c9827f7628f4",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name IsTrackIssues */
 public static final String COLUMNNAME_IsTrackIssues = "IsTrackIssues";
 /** Set Name.
@@ -539,18 +540,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
+public static String es_PE_FIELD_AssetGroup_Name_Name="Nombre";
+
+@XendraTrl(Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
 public static String es_PE_FIELD_AssetGroup_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
 public static String es_PE_FIELD_AssetGroup_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
-public static String es_PE_FIELD_AssetGroup_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="544fd379-fc68-f017-e5c1-f8eaa1859795",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=30,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a")
 public static final String FIELDNAME_AssetGroup_Name="21b8f37d-0ade-ceb6-96ed-7f94b28dc19a";
 
 @XendraTrl(Identifier="40324933-f88d-dbec-be4b-f098059e4e25")
@@ -562,7 +564,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="40324933-f88d-dbec-be4b-f098059e4e25",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

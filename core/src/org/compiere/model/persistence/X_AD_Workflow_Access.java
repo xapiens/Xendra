@@ -61,14 +61,14 @@ public static int Table_ID=MTable.getTable_ID("AD_Workflow_Access");
 public static String es_PE_TAB_WorkflowAccess_Description="Acceso a Flujo de Trabajo";
 
 @XendraTrl(Identifier="49a9f9ab-f960-39e5-7043-335117b0c0f3")
-public static String es_PE_TAB_WorkflowAccess_Name="Acceso a Flujo de Trabajo";
+public static String es_PE_TAB_WorkflowAccess_Help="La pestaña Acceso de Flujo de Trabajo define los flujos de trabajo y el tipo de acceso que este rol tiene.";
 
 @XendraTrl(Identifier="49a9f9ab-f960-39e5-7043-335117b0c0f3")
-public static String es_PE_TAB_WorkflowAccess_Help="La pestaña Acceso de Flujo de Trabajo define los flujos de trabajo y el tipo de acceso que este rol tiene.";
+public static String es_PE_TAB_WorkflowAccess_Name="Acceso a Flujo de Trabajo";
 
 @XendraTab(Name="Workflow Access",Description="Workflow Access",
 Help="The Workflow Access Tab defines the Workflows and type of access that this Role is granted.",
-AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=70,TabLevel=1,IsSingleRow=false,
+AD_Window_ID="6341ac38-b536-eb1d-f7aa-89d20601b434",SeqNo=80,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
 AD_Column_ID="58b01af1-44d1-5d01-cb59-299915914e93",HasTree=false,WhereClause="",OrderByClause="",
 CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",
@@ -81,12 +81,12 @@ public static final String TABNAME_WorkflowAccess="49a9f9ab-f960-39e5-7043-33511
 public static String es_PE_TAB_Access_Description="Acceso a Flujo de Trabajo";
 
 @XendraTrl(Identifier="f5a5d647-cfe6-5735-a8a3-0821d22c226b")
-public static String es_PE_TAB_Access_Name="Acceso";
-
-@XendraTrl(Identifier="f5a5d647-cfe6-5735-a8a3-0821d22c226b")
 public static String es_PE_TAB_Access_Help="La pestaña Accesos de Flujo de Trabajo define los roles que tienen acceso a este flujo de trabajo.";
 
-@XendraTab(Name="Access",Description="Workflow Access",
+@XendraTrl(Identifier="f5a5d647-cfe6-5735-a8a3-0821d22c226b")
+public static String es_PE_TAB_Access_Name="Acceso";
+@XendraTab(Name="Access",
+Description="Workflow Access",
 Help="The Workflow Access Tab defines the Roles who have access to this Workflow. ",
 AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",SeqNo=30,TabLevel=1,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -100,11 +100,12 @@ public static final String TABNAME_Access="f5a5d647-cfe6-5735-a8a3-0821d22c226b"
 @XendraTrl(Identifier="f3825d8f-871e-ceba-e437-0afa91a744c1")
 public static String es_PE_TABLE_AD_Workflow_Access_Name="AD_Workflow_Access";
 
-@XendraTable(Name="AD_Workflow_Access",Description="",Help="",TableName="AD_Workflow_Access",
-AccessLevel="6",AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="f3825d8f-871e-ceba-e437-0afa91a744c1",Synchronized="2017-08-16 11:41:13.0")
+@XendraTable(Name="AD_Workflow_Access",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Workflow_Access",AccessLevel="6",AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
+Identifier="f3825d8f-871e-ceba-e437-0afa91a744c1",Synchronized="2020-03-03 21:36:13.0")
 /** TableName=AD_Workflow_Access */
 public static final String Table_Name="AD_Workflow_Access";
 
@@ -154,13 +155,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="93ca48fb-07e7-110f-6ada-3bb9c9f637ea")
+public static String es_PE_FIELD_WorkflowAccess_Role_Name="Rol";
+
+@XendraTrl(Identifier="93ca48fb-07e7-110f-6ada-3bb9c9f637ea")
 public static String es_PE_FIELD_WorkflowAccess_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="93ca48fb-07e7-110f-6ada-3bb9c9f637ea")
 public static String es_PE_FIELD_WorkflowAccess_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="93ca48fb-07e7-110f-6ada-3bb9c9f637ea")
-public static String es_PE_FIELD_WorkflowAccess_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="49a9f9ab-f960-39e5-7043-335117b0c0f3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -170,18 +171,19 @@ Identifier="93ca48fb-07e7-110f-6ada-3bb9c9f637ea")
 public static final String FIELDNAME_WorkflowAccess_Role="93ca48fb-07e7-110f-6ada-3bb9c9f637ea";
 
 @XendraTrl(Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
+public static String es_PE_FIELD_Access_Role_Name="Rol";
+
+@XendraTrl(Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
 public static String es_PE_FIELD_Access_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
 public static String es_PE_FIELD_Access_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
 
-@XendraTrl(Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
-public static String es_PE_FIELD_Access_Role_Name="Rol";
-@XendraField(AD_Column_ID="AD_Role_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="f5a5d647-cfe6-5735-a8a3-0821d22c226b",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
+@XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="f5a5d647-cfe6-5735-a8a3-0821d22c226b",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="eb026438-902b-f32a-9de3-4285ec3deb62")
 public static final String FIELDNAME_Access_Role="eb026438-902b-f32a-9de3-4285ec3deb62";
 
 @XendraTrl(Identifier="58b01af1-44d1-5d01-cb59-299915914e93")
@@ -193,7 +195,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="58b01af1-44d1-5d01-cb59-299915914e93",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Workflow.
@@ -213,13 +215,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f713ea59-3396-cbc0-b446-a6db45ceec7e")
+public static String es_PE_FIELD_WorkflowAccess_Workflow_Name="Flujo de Trabajo";
+
+@XendraTrl(Identifier="f713ea59-3396-cbc0-b446-a6db45ceec7e")
 public static String es_PE_FIELD_WorkflowAccess_Workflow_Description="Flujo de trabajo ó combinación de tareas";
 
 @XendraTrl(Identifier="f713ea59-3396-cbc0-b446-a6db45ceec7e")
 public static String es_PE_FIELD_WorkflowAccess_Workflow_Help="El campo flujo de trabajo identifica un flujo de trabajo único en el sistema.";
-
-@XendraTrl(Identifier="f713ea59-3396-cbc0-b446-a6db45ceec7e")
-public static String es_PE_FIELD_WorkflowAccess_Workflow_Name="Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_Workflow_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="49a9f9ab-f960-39e5-7043-335117b0c0f3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -229,13 +231,13 @@ Identifier="f713ea59-3396-cbc0-b446-a6db45ceec7e")
 public static final String FIELDNAME_WorkflowAccess_Workflow="f713ea59-3396-cbc0-b446-a6db45ceec7e";
 
 @XendraTrl(Identifier="c7bf80d8-7e8a-81f3-caaf-752774ae0c02")
+public static String es_PE_FIELD_Access_Workflow_Name="Flujo de Trabajo";
+
+@XendraTrl(Identifier="c7bf80d8-7e8a-81f3-caaf-752774ae0c02")
 public static String es_PE_FIELD_Access_Workflow_Description="Flujo de trabajo ó combinación de tareas";
 
 @XendraTrl(Identifier="c7bf80d8-7e8a-81f3-caaf-752774ae0c02")
 public static String es_PE_FIELD_Access_Workflow_Help="El campo flujo de trabajo identifica un flujo de trabajo único en el sistema.";
-
-@XendraTrl(Identifier="c7bf80d8-7e8a-81f3-caaf-752774ae0c02")
-public static String es_PE_FIELD_Access_Workflow_Name="Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_Workflow_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="f5a5d647-cfe6-5735-a8a3-0821d22c226b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -253,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="781fb563-72f2-bd11-5b95-eb3084da291e",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_Workflow_ID */
 public static final String COLUMNNAME_AD_Workflow_ID = "AD_Workflow_ID";
 /** Set Identifier.
@@ -285,7 +287,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c70a270-1141-4bb7-844f-bae7f195c70d",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Read Write.
@@ -308,13 +310,13 @@ return false;
 }
 
 @XendraTrl(Identifier="ea5e8709-acf3-1b87-85a1-b3c522ba43e6")
+public static String es_PE_FIELD_WorkflowAccess_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="ea5e8709-acf3-1b87-85a1-b3c522ba43e6")
 public static String es_PE_FIELD_WorkflowAccess_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="ea5e8709-acf3-1b87-85a1-b3c522ba43e6")
 public static String es_PE_FIELD_WorkflowAccess_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="ea5e8709-acf3-1b87-85a1-b3c522ba43e6")
-public static String es_PE_FIELD_WorkflowAccess_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="49a9f9ab-f960-39e5-7043-335117b0c0f3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -324,13 +326,13 @@ Identifier="ea5e8709-acf3-1b87-85a1-b3c522ba43e6")
 public static final String FIELDNAME_WorkflowAccess_ReadWrite="ea5e8709-acf3-1b87-85a1-b3c522ba43e6";
 
 @XendraTrl(Identifier="c69c9f2e-4f46-42c4-0139-1a8ad487f9c9")
+public static String es_PE_FIELD_Access_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="c69c9f2e-4f46-42c4-0139-1a8ad487f9c9")
 public static String es_PE_FIELD_Access_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="c69c9f2e-4f46-42c4-0139-1a8ad487f9c9")
 public static String es_PE_FIELD_Access_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="c69c9f2e-4f46-42c4-0139-1a8ad487f9c9")
-public static String es_PE_FIELD_Access_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="f5a5d647-cfe6-5735-a8a3-0821d22c226b",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -348,7 +350,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="afda4958-146c-9a71-0e46-9eca50b5ae4e",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name IsReadWrite */
 public static final String COLUMNNAME_IsReadWrite = "IsReadWrite";
 }

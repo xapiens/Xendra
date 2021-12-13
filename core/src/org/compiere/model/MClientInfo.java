@@ -118,13 +118,14 @@ public class MClientInfo extends X_AD_ClientInfo
 	 *	@param AD_Tree_Activity_ID activity tree
 	 *	@param trxName transaction
 	 */
-	public MClientInfo (MClient client, int AD_Tree_Org_ID, int AD_Tree_BPartner_ID,
+	public MClientInfo (MClient client, String TaxID,  int AD_Tree_Org_ID, int AD_Tree_BPartner_ID,
 		int AD_Tree_Project_ID, int AD_Tree_SalesRegion_ID, int AD_Tree_Product_ID,
 		int AD_Tree_Campaign_ID, int AD_Tree_Activity_ID, String trxName)
 	{
 		super (client.getCtx(), 0, trxName);
 		setAD_Client_ID(client.getAD_Client_ID());	//	to make sure
 		setAD_Org_ID(0);
+		setTaxID(TaxID);
 		setIsDiscountLineAmt (false);
 		//
 		setAD_Tree_Menu_ID(10);		//	HARDCODED

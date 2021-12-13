@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_EMailType;
 /** Generated Model for C_ContactAddress
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_ContactAddress");
 @XendraTrl(Identifier="314dec39-a2a4-4081-accb-37f83ed062ca")
 public static String es_PE_TABLE_C_ContactAddress_Name="Contact Address";
 
-@XendraTable(Name="Contact Address",Description="",Help="",TableName="C_ContactAddress",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="314dec39-a2a4-4081-accb-37f83ed062ca",
-Synchronized="2017-08-16 11:41:40.0")
+@XendraTable(Name="Contact Address",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_ContactAddress",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="314dec39-a2a4-4081-accb-37f83ed062ca",
+Synchronized="2020-03-03 21:36:46.0")
 /** TableName=C_ContactAddress */
 public static final String Table_Name="C_ContactAddress";
 
@@ -95,15 +95,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_C_ContactAddress[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AddressType AD_Reference=aa9ed05b-ac7a-4d3d-916a-dcdb623a1082 */
-public static final int ADDRESSTYPE_AD_Reference_ID=1000059;
 /** Set AddressType.
 @param AddressType AddressType */
 public void setAddressType (String AddressType)
 {
-if (AddressType == null || AddressType.equals(REF_EMailType.House) || AddressType.equals(REF_EMailType.Other) || AddressType.equals(REF_EMailType.Work));
- else throw new IllegalArgumentException ("AddressType Invalid value - " + AddressType + " - Reference_ID=1000059 - H - O - W");
 if (AddressType != null && AddressType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -127,7 +122,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="04efff63-37bc-47c1-af88-2411d01af0b4",Synchronized="2017-08-05 16:53:31.0")
+Identifier="04efff63-37bc-47c1-af88-2411d01af0b4",Synchronized="2019-08-30 22:21:25.0")
 /** Column name AddressType */
 public static final String COLUMNNAME_AddressType = "AddressType";
 /** Set Contact Address.
@@ -173,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9eb777d7-88b3-4447-abde-d7ed11d287df",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name C_Contact_ID */
 public static final String COLUMNNAME_C_Contact_ID = "C_Contact_ID";
 /** Set Address.
@@ -202,7 +197,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="53a0026d-20e9-4c0f-8b79-41b6555005bc",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name C_Location_ID */
 public static final String COLUMNNAME_C_Location_ID = "C_Location_ID";
 /** Set Identifier.
@@ -234,7 +229,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aced81a6-2d47-4a91-976a-d76ba8f6dbe3",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Label.
@@ -266,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="31656bb0-670d-45c9-b66a-3d90b49e656f",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name Label */
 public static final String COLUMNNAME_Label = "Label";
 /** Set POBox.
@@ -298,7 +293,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ccfe782b-ae25-446d-b4f7-e03ecedb2544",
-Synchronized="2017-08-05 16:53:31.0")
+Synchronized="2019-08-30 22:21:25.0")
 /** Column name POBox */
 public static final String COLUMNNAME_POBox = "POBox";
 }

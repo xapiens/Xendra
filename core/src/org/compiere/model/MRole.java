@@ -372,7 +372,6 @@ public final class MRole extends X_AD_Role
 	{
 		if (isManual())
 			return "-";
-		
 		String roleClientOrgUser = getAD_Role_ID() + ","
 			+ getAD_Client_ID() + "," + getAD_Org_ID() + ",'Y', CURRENT_TIMESTAMP," 
 			+ getUpdatedBy() + ", CURRENT_TIMESTAMP," + getUpdatedBy() 
@@ -435,8 +434,7 @@ public final class MRole extends X_AD_Role
 		else //	if (USERLEVEL_Organization.equals(getUserLevel()))
 		{
 			roleAccessLevel = "('3','1','7')";
-			roleAccessLevelWin = roleAccessLevel
-				+ " AND w.Name NOT LIKE '%(all)%'";
+			roleAccessLevelWin = roleAccessLevel + " AND w.Name NOT LIKE '%(all)%'";
 		}
 		if (roleAccessLevelWin == null)
 			roleAccessLevelWin = roleAccessLevel;

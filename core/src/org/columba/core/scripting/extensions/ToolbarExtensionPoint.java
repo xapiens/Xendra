@@ -23,14 +23,14 @@ import org.columba.api.gui.frame.IContainer;
 import org.columba.core.gui.action.AbstractColumbaAction;
 import org.columba.core.gui.frame.FrameManager;
 import org.columba.core.gui.toolbar.ExtendableToolBar;
+import org.compiere.util.CLogger;
 
 /**
  * @author Celso Pinto (cpinto@yimports.com)
  */
 public class ToolbarExtensionPoint extends AbstractExtensionPoint {
 	
-	private static final Logger LOG = Logger.getLogger(MenuExtensionPoint.class
-			.getName());
+	private static final CLogger LOG = CLogger.getCLogger(MenuExtensionPoint.class.getName());
 
 	public static final String EXTENSION_POINT_ID = "main_toolbar";
 

@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Extension");
 @XendraTrl(Identifier="50228442-ef4c-4525-98bc-36e2f52f968a")
 public static String es_PE_TABLE_AD_Extension_Name="Plugin Extension";
 
-@XendraTable(Name="Plugin Extension",Description="",Help="",TableName="AD_Extension",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="50228442-ef4c-4525-98bc-36e2f52f968a",
-Synchronized="2017-08-16 11:40:11.0")
+@XendraTable(Name="Plugin Extension",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Extension",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="50228442-ef4c-4525-98bc-36e2f52f968a",
+Synchronized="2020-03-03 21:35:00.0")
 /** TableName=AD_Extension */
 public static final String Table_Name="AD_Extension";
 
@@ -137,9 +138,38 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d67085b6-5322-4975-b7fe-6057f9d54d64",Synchronized="2015-11-20 16:30:17.0")
+Identifier="d67085b6-5322-4975-b7fe-6057f9d54d64",Synchronized="2019-08-30 22:20:19.0")
 /** Column name AD_ExtensionList_ID */
 public static final String COLUMNNAME_AD_ExtensionList_ID = "AD_ExtensionList_ID";
+/** Set Plugin.
+@param AD_Plugin_ID Plugin */
+public void setAD_Plugin_ID (int AD_Plugin_ID)
+{
+if (AD_Plugin_ID <= 0) set_Value (COLUMNNAME_AD_Plugin_ID, null);
+ else 
+set_Value (COLUMNNAME_AD_Plugin_ID, Integer.valueOf(AD_Plugin_ID));
+}
+/** Get Plugin.
+@return Plugin */
+public int getAD_Plugin_ID() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_AD_Plugin_ID);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="689db59c-d48d-45fb-96bb-89b656618e1f")
+public static String es_PE_COLUMN_AD_Plugin_ID_Name="Plugin";
+
+@XendraColumn(AD_Element_ID="895f0c3e-fa52-48b7-8fce-f9b2dc637774",ColumnName="AD_Plugin_ID",
+AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="689db59c-d48d-45fb-96bb-89b656618e1f",
+Synchronized="2019-08-30 22:20:19.0")
+/** Column name AD_Plugin_ID */
+public static final String COLUMNNAME_AD_Plugin_ID = "AD_Plugin_ID";
 /** Set Classname.
 @param Classname Java Classname */
 public void setClassname (String Classname)
@@ -169,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a70dc112-cf3c-4e36-b92a-6102d9a43273",
-Synchronized="2017-08-05 16:52:30.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name Classname */
 public static final String COLUMNNAME_Classname = "Classname";
 /** Set ID.
@@ -201,7 +231,35 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aad79081-e96f-4e53-9698-1d67f97b8d70",
-Synchronized="2015-11-20 16:30:17.0")
+Synchronized="2019-08-30 22:20:19.0")
 /** Column name ID */
 public static final String COLUMNNAME_ID = "ID";
+/** Set Properties.
+@param Properties Properties */
+public void setProperties (HashMap Properties)
+{
+set_Value (COLUMNNAME_Properties, Properties);
+}
+/** Get Properties.
+@return Properties */
+public HashMap getProperties() 
+{
+HashMap propsrc = (HashMap)get_Value(COLUMNNAME_Properties);
+if (propsrc == null) return new HashMap();
+ HashMap propdst = (HashMap) propsrc.clone();
+return propdst;
+}
+
+@XendraTrl(Identifier="0e0b896f-b656-485a-9315-8d12e897cfd2")
+public static String es_PE_COLUMN_Properties_Name="Properties";
+
+@XendraColumn(AD_Element_ID="acc3987b-292c-475a-86b5-5104970a96f3",ColumnName="Properties",
+AD_Reference_ID=46,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="0e0b896f-b656-485a-9315-8d12e897cfd2",
+Synchronized="2019-08-30 22:20:19.0")
+/** Column name Properties */
+public static final String COLUMNNAME_Properties = "Properties";
 }

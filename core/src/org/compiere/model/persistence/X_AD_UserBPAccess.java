@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_UserBPAccessType;
-import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
 /** Generated Model for AD_UserBPAccess
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -62,11 +60,10 @@ public static int Table_ID=MTable.getTable_ID("AD_UserBPAccess");
 public static String es_PE_TAB_BPAccess_Description="Acceso a Usuario/Contacto para información Socio del Negocio y Recursos";
 
 @XendraTrl(Identifier="6a9701f2-3fea-792b-c218-c52a12b16cbf")
-public static String es_PE_TAB_BPAccess_Name="Acceso SN";
-
-@XendraTrl(Identifier="6a9701f2-3fea-792b-c218-c52a12b16cbf")
 public static String es_PE_TAB_BPAccess_Help="Si en Nivel de Usuario, \"SN Acceso Total\" No es seleccionado, aqui debe proprcionar acceso explícitamente.";
 
+@XendraTrl(Identifier="6a9701f2-3fea-792b-c218-c52a12b16cbf")
+public static String es_PE_TAB_BPAccess_Name="Acceso SN";
 @XendraTab(Name="BP Access",
 Description="Access of the User/Contact to Business Partner information and resources",
 Help="If on User level, 'Full BP Access' is NOT selected, you need to give access explicitly here. ",
@@ -81,12 +78,13 @@ public static final String TABNAME_BPAccess="6a9701f2-3fea-792b-c218-c52a12b16cb
 @XendraTrl(Identifier="747978f4-c48f-bcba-377c-670964246441")
 public static String es_PE_TABLE_AD_UserBPAccess_Name="Usuario SN Acceso";
 
-@XendraTable(Name="User BP Access",
+@XendraTable(Name="User BP Access",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="User/concat access to Business Partner information and resources",Help="",
 TableName="AD_UserBPAccess",AccessLevel="2",AD_Window_ID="273719a2-ec2e-9b44-d30b-014c7ec70d0e",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="747978f4-c48f-bcba-377c-670964246441",Synchronized="2017-08-16 11:41:06.0")
+Identifier="747978f4-c48f-bcba-377c-670964246441",Synchronized="2020-03-03 21:36:04.0")
 /** TableName=AD_UserBPAccess */
 public static final String Table_Name="AD_UserBPAccess";
 
@@ -136,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cd58b0b7-775d-efe1-ca06-4db4c9ce4f1e")
+public static String es_PE_FIELD_BPAccess_UserBPAccess_Name="Usuario SN Acceso";
+
+@XendraTrl(Identifier="cd58b0b7-775d-efe1-ca06-4db4c9ce4f1e")
 public static String es_PE_FIELD_BPAccess_UserBPAccess_Description="Usuario/contacto acceso información Socio del Negocio y recursos";
 
 @XendraTrl(Identifier="cd58b0b7-775d-efe1-ca06-4db4c9ce4f1e")
 public static String es_PE_FIELD_BPAccess_UserBPAccess_Help="Si en Nivel de Usuario, \"Acceso Total SN\" NO es seleccionado, usted debe dar acceso explicítamente aquí. ";
-
-@XendraTrl(Identifier="cd58b0b7-775d-efe1-ca06-4db4c9ce4f1e")
-public static String es_PE_FIELD_BPAccess_UserBPAccess_Name="Usuario SN Acceso";
 
 @XendraField(AD_Column_ID="AD_UserBPAccess_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6a9701f2-3fea-792b-c218-c52a12b16cbf",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -169,13 +167,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="dca8fee2-5df1-a707-75f9-2ee25b9ced3b")
+public static String es_PE_FIELD_BPAccess_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="dca8fee2-5df1-a707-75f9-2ee25b9ced3b")
 public static String es_PE_FIELD_BPAccess_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="dca8fee2-5df1-a707-75f9-2ee25b9ced3b")
 public static String es_PE_FIELD_BPAccess_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="dca8fee2-5df1-a707-75f9-2ee25b9ced3b")
-public static String es_PE_FIELD_BPAccess_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6a9701f2-3fea-792b-c218-c52a12b16cbf",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -193,19 +191,13 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="45a25bab-339e-6b73-9e13-e48ee6a3e8a3",
-Synchronized="2017-08-05 16:52:56.0")
+Synchronized="2019-08-30 22:20:47.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
-
-/** BPAccessType AD_Reference=b91997d1-0b55-305c-e3a9-787eb5f609e8 */
-public static final int BPACCESSTYPE_AD_Reference_ID=358;
 /** Set Access Type.
 @param BPAccessType Type of Access of the user/contact to Business Partner information and resources */
 public void setBPAccessType (String BPAccessType)
 {
-if (BPAccessType == null) throw new IllegalArgumentException ("BPAccessType is mandatory");
-if (BPAccessType.equals(REF_AD_UserBPAccessType.BusinessDocuments) || BPAccessType.equals(REF_AD_UserBPAccessType.Requests) || BPAccessType.equals(REF_AD_UserBPAccessType.AssetsDownload));
- else throw new IllegalArgumentException ("BPAccessType Invalid value - " + BPAccessType + " - Reference_ID=358 - B - R - A");
 if (BPAccessType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -221,13 +213,13 @@ return (String)get_Value(COLUMNNAME_BPAccessType);
 }
 
 @XendraTrl(Identifier="9c0894db-cfca-adba-0fc8-b70cc679ad08")
+public static String es_PE_FIELD_BPAccess_AccessType_Name="Tipo Acceso";
+
+@XendraTrl(Identifier="9c0894db-cfca-adba-0fc8-b70cc679ad08")
 public static String es_PE_FIELD_BPAccess_AccessType_Description="Tipo de  Acceso del usuario/contacto para Información del Socio del Negocio y  recursos";
 
 @XendraTrl(Identifier="9c0894db-cfca-adba-0fc8-b70cc679ad08")
 public static String es_PE_FIELD_BPAccess_AccessType_Help="Si es Referente a Nivel de Usuario, \"Acceso Total SN\" No es seleccionado, de acceso explícitamente";
-
-@XendraTrl(Identifier="9c0894db-cfca-adba-0fc8-b70cc679ad08")
-public static String es_PE_FIELD_BPAccess_AccessType_Name="Tipo Acceso";
 
 @XendraField(AD_Column_ID="BPAccessType",IsCentrallyMaintained=true,
 AD_Tab_ID="6a9701f2-3fea-792b-c218-c52a12b16cbf",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -245,18 +237,13 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f65ea09f-bfe2-0ab5-8357-4bb185b93be7",Synchronized="2017-08-05 16:52:56.0")
+Identifier="f65ea09f-bfe2-0ab5-8357-4bb185b93be7",Synchronized="2019-08-30 22:20:47.0")
 /** Column name BPAccessType */
 public static final String COLUMNNAME_BPAccessType = "BPAccessType";
-
-/** DocBaseType AD_Reference=c1999318-834d-4c66-5345-371ffe3c1f06 */
-public static final int DOCBASETYPE_AD_Reference_ID=183;
 /** Set Document BaseType.
 @param DocBaseType Logical type of document */
 public void setDocBaseType (String DocBaseType)
 {
-if (DocBaseType == null || DocBaseType.equals(REF_C_DocTypeDocBaseType.PurchaseOrder) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PurchaseRequisition) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MatchInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialProduction) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ProjectIssue) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APCreditMemo) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARCreditMemo) || DocBaseType.equals(REF_C_DocTypeDocBaseType.GLJournal) || DocBaseType.equals(REF_C_DocTypeDocBaseType.GLDocument) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MatchPO) || DocBaseType.equals(REF_C_DocTypeDocBaseType.CashJournal) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BillOfExchange) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PersonalFeeShip) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReturnOfVendor) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReturnOfCustomer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APPayment) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARReceipt) || DocBaseType.equals(REF_C_DocTypeDocBaseType.SalesOrder) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARProFormaInvoice) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialDelivery) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialReceipt) || DocBaseType.equals(REF_C_DocTypeDocBaseType.PaymentAllocation) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialPhysicalInventory) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Retention) || DocBaseType.equals(REF_C_DocTypeDocBaseType.ARInvoiceFreeTransfer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.DeclarationCustomsValue) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APCreditMemoDiscount) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialMovement) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BankAccountTransfer) || DocBaseType.equals(REF_C_DocTypeDocBaseType.BankStatement) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Withholding) || DocBaseType.equals(REF_C_DocTypeDocBaseType.MaterialProductionReversed) || DocBaseType.equals(REF_C_DocTypeDocBaseType.Payroll) || DocBaseType.equals(REF_C_DocTypeDocBaseType.APDebit));
- else throw new IllegalArgumentException ("DocBaseType Invalid value - " + DocBaseType + " - Reference_ID=183 - POO - POR - MXI - MMP - PJI - APC - ARC - GLJ - GLD - API - MXP - CMC - BOE - FPS - MRV - MRC - APP - ARI - ARR - SOO - ARF - MMS - MMR - CMA - MMI - RET - ART - DCV - APD - MMM - BAT - CMB - WIT - MPR - HRP - APB");
 if (DocBaseType != null && DocBaseType.length() > 10)
 {
 log.warning("Length > 10 - truncated");
@@ -272,13 +259,13 @@ return (String)get_Value(COLUMNNAME_DocBaseType);
 }
 
 @XendraTrl(Identifier="c952289e-eb70-7303-0ee3-dab72a3e12ee")
+public static String es_PE_FIELD_BPAccess_DocumentBaseType_Name="Tipo de Documento Base";
+
+@XendraTrl(Identifier="c952289e-eb70-7303-0ee3-dab72a3e12ee")
 public static String es_PE_FIELD_BPAccess_DocumentBaseType_Description="Identifica el punto de inicio para un documento";
 
 @XendraTrl(Identifier="c952289e-eb70-7303-0ee3-dab72a3e12ee")
 public static String es_PE_FIELD_BPAccess_DocumentBaseType_Help="El tipo base de documento identifica la base ó punto de inicio de un documento. Múltiples tipos de documento pueden compartir un tipo base de documento simple.";
-
-@XendraTrl(Identifier="c952289e-eb70-7303-0ee3-dab72a3e12ee")
-public static String es_PE_FIELD_BPAccess_DocumentBaseType_Name="Tipo de Documento Base";
 
 @XendraField(AD_Column_ID="DocBaseType",IsCentrallyMaintained=true,
 AD_Tab_ID="6a9701f2-3fea-792b-c218-c52a12b16cbf",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -296,7 +283,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="20745db2-9fe4-eee8-eeb1-c6f80b3bc82b",Synchronized="2017-08-05 16:52:56.0")
+Identifier="20745db2-9fe4-eee8-eeb1-c6f80b3bc82b",Synchronized="2019-08-30 22:20:47.0")
 /** Column name DocBaseType */
 public static final String COLUMNNAME_DocBaseType = "DocBaseType";
 /** Set Identifier.
@@ -328,7 +315,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="938f91c9-10ab-474f-be44-4676acf10550",
-Synchronized="2017-08-05 16:52:57.0")
+Synchronized="2019-08-30 22:20:47.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Request Type.
@@ -349,13 +336,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e9a4e95a-c2af-043c-fdb8-57f80f2bdb06")
+public static String es_PE_FIELD_BPAccess_RequestType_Name="Tipo de Solicitud";
+
+@XendraTrl(Identifier="e9a4e95a-c2af-043c-fdb8-57f80f2bdb06")
 public static String es_PE_FIELD_BPAccess_RequestType_Description="Tipo de Solicitud (pregunta; queja).";
 
 @XendraTrl(Identifier="e9a4e95a-c2af-043c-fdb8-57f80f2bdb06")
 public static String es_PE_FIELD_BPAccess_RequestType_Help="Tipos de solicitud son usados para procesar y categorizar solicitudes. Ejemplos: consultas de cuentas; garantías; etc.";
-
-@XendraTrl(Identifier="e9a4e95a-c2af-043c-fdb8-57f80f2bdb06")
-public static String es_PE_FIELD_BPAccess_RequestType_Name="Tipo de Solicitud";
 
 @XendraField(AD_Column_ID="R_RequestType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6a9701f2-3fea-792b-c218-c52a12b16cbf",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -373,7 +360,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="613a6b8e-8d7b-98fd-19df-ab83cb9be76f",
-Synchronized="2017-08-05 16:52:57.0")
+Synchronized="2019-08-30 22:20:47.0")
 /** Column name R_RequestType_ID */
 public static final String COLUMNNAME_R_RequestType_ID = "R_RequestType_ID";
 }

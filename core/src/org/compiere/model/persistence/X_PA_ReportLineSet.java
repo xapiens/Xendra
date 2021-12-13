@@ -74,11 +74,12 @@ public static final String TABNAME_ReportLineSet="503ad351-1851-585b-d61a-e107fb
 @XendraTrl(Identifier="1a879baf-e9c3-01d1-d002-71e080bec276")
 public static String es_PE_TABLE_PA_ReportLineSet_Name="Establecer Línea de Informe";
 
-@XendraTable(Name="Report Line Set",Description="",Help="",TableName="PA_ReportLineSet",
-AccessLevel="3",AD_Window_ID="8c6d3119-8975-60f6-4810-c1c02115372c",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
-Identifier="1a879baf-e9c3-01d1-d002-71e080bec276",Synchronized="2017-08-16 11:43:42.0")
+@XendraTable(Name="Report Line Set",AD_Package_ID="34bf6e21-8c70-8fb9-604c-a300eb925459",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="PA_ReportLineSet",AccessLevel="3",AD_Window_ID="8c6d3119-8975-60f6-4810-c1c02115372c",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.performanceanalysis",
+Identifier="1a879baf-e9c3-01d1-d002-71e080bec276",Synchronized="2020-03-03 21:39:15.0")
 /** TableName=PA_ReportLineSet */
 public static final String Table_Name="PA_ReportLineSet";
 
@@ -139,13 +140,13 @@ return value;
 }
 
 @XendraTrl(Identifier="95bf0b41-9dcc-2e55-d864-c964fdcdbfa4")
+public static String es_PE_FIELD_ReportLineSet_Description_Name="Observación";
+
+@XendraTrl(Identifier="95bf0b41-9dcc-2e55-d864-c964fdcdbfa4")
 public static String es_PE_FIELD_ReportLineSet_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="95bf0b41-9dcc-2e55-d864-c964fdcdbfa4")
 public static String es_PE_FIELD_ReportLineSet_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="95bf0b41-9dcc-2e55-d864-c964fdcdbfa4")
-public static String es_PE_FIELD_ReportLineSet_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="503ad351-1851-585b-d61a-e107fbe16527",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -163,7 +164,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c53c7521-788a-a478-de85-c8e4f6eed78d",
-Synchronized="2017-08-05 16:55:43.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -195,7 +196,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2604e525-2258-41e0-b515-9682c0c4ec0e",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -227,18 +228,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
+public static String es_PE_FIELD_ReportLineSet_Name_Name="Nombre";
+
+@XendraTrl(Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
 public static String es_PE_FIELD_ReportLineSet_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
 public static String es_PE_FIELD_ReportLineSet_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
-public static String es_PE_FIELD_ReportLineSet_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="503ad351-1851-585b-d61a-e107fbe16527",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="503ad351-1851-585b-d61a-e107fbe16527",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="f014c1b9-3da7-2d4d-dc76-5fe1226be416")
 public static final String FIELDNAME_ReportLineSet_Name="f014c1b9-3da7-2d4d-dc76-5fe1226be416";
 
 @XendraTrl(Identifier="667b3017-3f2d-04b3-c144-d9d997615583")
@@ -250,7 +252,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="667b3017-3f2d-04b3-c144-d9d997615583",
-Synchronized="2017-08-05 16:55:44.0")
+Synchronized="2019-08-30 22:23:39.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Report Line Set.
@@ -300,13 +302,13 @@ return false;
 }
 
 @XendraTrl(Identifier="88974baf-8fd0-62e8-8ec3-2ba8cb98eb7b")
+public static String es_PE_FIELD_ReportLineSet_ProcessNow_Name="Copiar Líneas";
+
+@XendraTrl(Identifier="88974baf-8fd0-62e8-8ec3-2ba8cb98eb7b")
 public static String es_PE_FIELD_ReportLineSet_ProcessNow_Description="Copiar líneas de reporte desde otro conjunto de líneas";
 
 @XendraTrl(Identifier="88974baf-8fd0-62e8-8ec3-2ba8cb98eb7b")
 public static String es_PE_FIELD_ReportLineSet_ProcessNow_Help="Copiar líneas al final de éste conjunto de líneas";
-
-@XendraTrl(Identifier="88974baf-8fd0-62e8-8ec3-2ba8cb98eb7b")
-public static String es_PE_FIELD_ReportLineSet_ProcessNow_Name="Copiar Líneas";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="503ad351-1851-585b-d61a-e107fbe16527",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -324,7 +326,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="40d32397-202a-5797-584a-279216901f23",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="88a5ff17-7e43-a48e-e375-8a6dadb95902",Synchronized="2017-08-05 16:55:44.0")
+Identifier="88a5ff17-7e43-a48e-e375-8a6dadb95902",Synchronized="2019-08-30 22:23:40.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

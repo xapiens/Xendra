@@ -34,7 +34,7 @@ import org.compiere.model.MAttachment;
 import org.compiere.model.MAttachmentEntry;
 import org.compiere.model.MMailMsg;
 import org.compiere.model.MRequest;
-import org.compiere.model.MStore;
+import org.compiere.model.MWebStore;
 import org.compiere.model.MUserMail;
 import org.compiere.model.reference.REF_W_MailMsgType;
 
@@ -1014,7 +1014,7 @@ public final class WebUtil
 		String msgType, Object[] parameter)
 	{
 		WebSessionCtx wsc = WebSessionCtx.get(request);
-		MStore wStore = wsc.wstore;
+		MWebStore wStore = wsc.wstore;
 		MMailMsg mailMsg = wStore.getMailMsg(msgType);
 		//
 		StringBuffer subject = new StringBuffer(mailMsg.getSubject());

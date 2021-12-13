@@ -85,7 +85,7 @@ public final class Xendra
 	static public final String	SUB_TITLE		= "Suite ERP,CRM and SCM";
 	//static public final String	SUB_TITLE		= " ";
 	static public final String	XENDRA_R		= "Xendra\u00AE";
-	static public final String	COPYRIGHT		= "\u00A9 2006-2016 dravios \u00AE";
+	static public final String	COPYRIGHT		= "\u00A9 2006-2019 dravios \u00AE";
 
 	static private String		s_ImplementationVersion = null;
 	static private String		s_ImplementationVendor = null;
@@ -456,7 +456,7 @@ public final class Xendra
 		//	Check Version
 		if (!Login.isJavaOK(isClient) && isClient)
 			System.exit(1);
-
+		Ini.loadProperties (false);
 		CLogMgt.initialize(isClient);
 		Ini.setClient (isClient);		//	Ini requires Logging
 		//	Init Log
@@ -468,16 +468,15 @@ public final class Xendra
 		//  Load System environment
 	//	EnvLoader.load(Ini.ENV_PREFIX);
 		mainClassLoader = new MainClassLoader(Xendra.class.getClassLoader());
-		
 		//  System properties
-		Ini.loadProperties (false);
+		//Ini.loadProperties (false);
 		
 		//	Set up Log
 		CLogMgt.setLevel(Ini.getProperty(Ini.P_TRACELEVEL));
 		if (isClient && Ini.isPropertyBool(Ini.P_TRACEFILE)
 			&& CLogFile.get(false, null, isClient) == null)
-			CLogMgt.addHandler(CLogFile.get (true, Ini.findXendraHome(), isClient));
-
+			CLogMgt.addHandler(CLogFile.get (true, Ini.getXendraHome(), isClient));
+			//CLogMgt.addHandler(CLogFile.get (true, Ini.findXendraHome(), isClient));
 		//	Set UI
 		if (isClient)
 		{
@@ -486,15 +485,12 @@ public final class Xendra
 			XendraPLAF.setPLAF();
 			// set Look & Feel			
 		}
-
-		//  Set Default Database Connection from Ini
+		//  Set Default Database Conn3ection from Ini
 		DB.setDBTarget(CConnection.get(getCodeBaseHost()));
-
 		if (isClient)		//	don't test connection
 			return false;	//	need to call					
 		
 		return startupEnvironment(isClient);
-		
 	}   //  startup
 
 	/**
@@ -573,12 +569,17 @@ public final class Xendra
 	 */
 	public static void main (String[] args)
 	{
-		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-		Splash.getSplash();
-		startup(true);     //  error exit and initUI
-		
+		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");		
+		String className = "";
+		if (Env.isHeadless()) {			
+			className = "org.xendra.console.App";			
+		} else {
+			className = "org.compiere.apps.AMenu";
+			Splash.getSplash();
+			startup(true);     //  error exit and initUI
+		}			 
 		//  Start with class as argument - or if nothing provided with Client
-		String className = "org.compiere.apps.AMenu";
+		
 		for (int i = 0; i < args.length; i++)
 		{
 			if (!args[i].equals("-debug"))  //  ignore -debug

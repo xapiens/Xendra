@@ -338,6 +338,10 @@ public class Doc_Production extends Doc {
 					.getAD_Client_ID(), X_M_Production.Table_ID, prod
 					.getC_DocType_ID(), "Y", prod
 					.getDateAcct()));
+			setGL_Book_ID(MGLBookPeriod.getGLBookID(prod.getAD_Org_ID(), prod
+					.getAD_Client_ID(), X_M_Production.Table_ID, prod
+					.getC_DocType_ID(), "Y", prod
+					.getDateAcct()));			
 		}
 		else
 		{		
@@ -367,6 +371,10 @@ public class Doc_Production extends Doc {
 						.getAD_Client_ID(), X_M_Production.Table_ID, prod
 						.getC_DocType_ID(), "Y", prod
 						.getDateAcct()));
+				setGL_Book_ID(MGLBookPeriod.getGLBookID(prod.getAD_Org_ID(), prod
+						.getAD_Client_ID(), X_M_Production.Table_ID, prod
+						.getC_DocType_ID(), "Y", prod
+						.getDateAcct()));				
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
 			{
@@ -374,6 +382,10 @@ public class Doc_Production extends Doc {
 						.getAD_Client_ID(), X_M_Production.Table_ID, prod
 						.getC_DocType_ID(),  "Y", prod
 						.getDateAcct()));
+				setGL_Book_ID(MGLBookPeriod.getGLBookID(prod.getAD_Org_ID(), prod
+						.getAD_Client_ID(), X_M_Production.Table_ID, prod
+						.getC_DocType_ID(),  "Y", prod
+						.getDateAcct()));				
 			}				
 		}		
 	}

@@ -8,10 +8,12 @@ import org.compiere.model.View;
 public class VIEW_Gl_0302book 
 {
  
-@XendraTable(Name="GL_0302Book",Description="",Help="",TableName="GL_0302Book",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=true,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="d6c6fc86-1c87-4eb9-9d78-25ccdb7555e1",Synchronized="2017-08-16 12:37:21.0")
+@XendraTable(Name="GL_0302Book",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="GL_0302Book",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=true,PO_Window_ID="",
+ID="org.xendra.accounting",Identifier="d6c6fc86-1c87-4eb9-9d78-25ccdb7555e1",
+Synchronized="2020-03-03 21:37:51.0")
 /** TableName=GL_0302Book */
 public static final String Table_Name="GL_0302Book";
 
@@ -24,7 +26,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="5a3a0d55-b313-4d90-8847-2ff3635e4355",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name AccountNo */
 public static final String COLUMNNAME_AccountNo = "AccountNo";
 
@@ -37,7 +39,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f00d8ae-0517-4457-a975-53b6762682d0",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name AmtAcctCr */
 public static final String COLUMNNAME_AmtAcctCr = "AmtAcctCr";
 
@@ -50,7 +52,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8ced780e-be49-48cd-9542-c2bb394f22d4",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name AmtAcctDr */
 public static final String COLUMNNAME_AmtAcctDr = "AmtAcctDr";
 
@@ -63,7 +65,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="c27a91c7-2228-486e-871e-6a94a93c7b7e",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name banktax */
 public static final String COLUMNNAME_banktax = "banktax";
 
@@ -76,7 +78,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e60a5dca-eb47-4e75-97b3-e37768ce102a",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name currencytax */
 public static final String COLUMNNAME_currencytax = "currencytax";
 
@@ -89,7 +91,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="947ea6a0-44a0-4820-87b2-7fd0ce19c47b",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name CurSymbol */
 public static final String COLUMNNAME_CurSymbol = "CurSymbol";
 
@@ -102,7 +104,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="faedd03c-2348-4abb-9a8e-da494d4cbf10",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 
@@ -115,7 +117,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="f46cd7a8-8ac5-4554-a3d5-d5bba2e66a0e",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name namebank */
 public static final String COLUMNNAME_namebank = "namebank";
 
@@ -128,7 +130,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ebe1e6ab-6f51-4e68-8b12-62399f4f1911",
-Synchronized="2017-08-16 12:37:20.0")
+Synchronized="2020-03-03 21:37:51.0")
 /** Column name valueacct */
 public static final String COLUMNNAME_valueacct = "valueacct";
 	@XendraView(Identifier="ca35c383-c4b0-4e32-9e10-c65830a4c283",

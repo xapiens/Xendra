@@ -62,11 +62,13 @@ public static int Table_ID=MTable.getTable_ID("A_Asset_Retirement");
 @XendraTrl(Identifier="65f33097-00d9-6989-4140-cf3a35fcf2fb")
 public static String es_PE_TABLE_A_Asset_Retirement_Name="Activo Retirado";
 
-@XendraTable(Name="Asset Retirement",Description="Internally used asset is not longer used.",
-Help="",TableName="A_Asset_Retirement",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.asset",
-Identifier="65f33097-00d9-6989-4140-cf3a35fcf2fb",Synchronized="2017-08-16 11:39:56.0")
+@XendraTable(Name="Asset Retirement",AD_Package_ID="f42d3f39-06e2-bcd9-2954-27694ae45e5d",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Internally used asset is not longer used.",Help="",TableName="A_Asset_Retirement",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.asset",Identifier="65f33097-00d9-6989-4140-cf3a35fcf2fb",
+Synchronized="2020-03-03 21:34:50.0")
 /** TableName=A_Asset_Retirement */
 public static final String Table_Name="A_Asset_Retirement";
 
@@ -124,7 +126,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e1842a10-d7ce-05fc-d876-54e74a502d3b",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name A_Asset_ID */
 public static final String COLUMNNAME_A_Asset_ID = "A_Asset_ID";
 /** Set Asset Retirement.
@@ -175,7 +177,7 @@ FieldLength=22,DefaultValue="0",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9915db4a-2a1a-1172-e196-13f2ca49f84e",Synchronized="2017-08-05 16:52:19.0")
+Identifier="9915db4a-2a1a-1172-e196-13f2ca49f84e",Synchronized="2020-03-03 21:34:17.0")
 /** Column name AssetMarketValueAmt */
 public static final String COLUMNNAME_AssetMarketValueAmt = "AssetMarketValueAmt";
 /** Set Asset value.
@@ -203,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ca644094-9f58-7125-3de5-0c102be967b5",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name AssetValueAmt */
 public static final String COLUMNNAME_AssetValueAmt = "AssetValueAmt";
 /** Set Invoice Line.
@@ -232,7 +234,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="07b1d0f8-222e-8877-53d2-f034b0c22071",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name C_InvoiceLine_ID */
 public static final String COLUMNNAME_C_InvoiceLine_ID = "C_InvoiceLine_ID";
 /** Set Identifier.
@@ -264,7 +266,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="93c6518b-668c-4d33-aa59-ad1b6a15e484",
-Synchronized="2017-08-05 16:52:19.0")
+Synchronized="2020-03-03 21:34:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

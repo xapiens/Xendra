@@ -23,9 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__FrequencyType;
-import org.compiere.model.reference.REF_AD_SchedulerType;
-import org.compiere.model.reference.REF_Weekdays;
 /** Generated Model for AD_Scheduler
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -88,11 +85,12 @@ public static final String TABNAME_ScheduleProcess="78fe33fa-e8bd-19d7-d650-8575
 @XendraTrl(Identifier="9eb64579-cc57-0f07-a7db-705f2e90a2fa")
 public static String es_PE_TABLE_AD_Scheduler_Name="Programación";
 
-@XendraTable(Name="Scheduler",Description="Schedule Processes",Help="",TableName="AD_Scheduler",
-AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="9eb64579-cc57-0f07-a7db-705f2e90a2fa",Synchronized="2017-10-17 18:44:39.0")
+@XendraTable(Name="Scheduler",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Schedule Processes",Help="",
+TableName="AD_Scheduler",AccessLevel="6",AD_Window_ID="2d2f8ce7-abbe-ad81-0373-06f27fbe1596",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="9eb64579-cc57-0f07-a7db-705f2e90a2fa",Synchronized="2020-03-03 21:35:54.0")
 /** TableName=AD_Scheduler */
 public static final String Table_Name="AD_Scheduler";
 
@@ -166,7 +164,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a94cbeb-ee26-cafc-b04f-43d099548a17",
-Synchronized="2017-10-04 22:28:45.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name AD_Process_ID */
 public static final String COLUMNNAME_AD_Process_ID = "AD_Process_ID";
 /** Set Scheduler.
@@ -240,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="305aa66c-1ced-44d3-18ee-929c7fa0faed",
-Synchronized="2017-10-04 22:28:45.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set Date next run.
@@ -281,7 +279,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f9a16139-609a-206e-daee-f4757c8bdd00",
-Synchronized="2017-10-04 22:28:45.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name DateNextRun */
 public static final String COLUMNNAME_DateNextRun = "DateNextRun";
 /** Set Description.
@@ -336,7 +334,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90ed7633-ad77-1bd7-d73c-91d94ef5a7e2",
-Synchronized="2017-10-04 22:28:45.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Frequency.
@@ -379,7 +377,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2de756c8-3fc5-bb79-ce3d-5644af2c4546",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Frequency */
 public static final String COLUMNNAME_Frequency = "Frequency";
 /** Set FrequencyStartAt.
@@ -416,19 +414,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2680bfba-6e38-419c-a620-0e3018e3cc63",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name FrequencyStartAt */
 public static final String COLUMNNAME_FrequencyStartAt = "FrequencyStartAt";
-
-/** FrequencyType AD_Reference=a8e24598-16fb-a392-7587-12a112938032 */
-public static final int FREQUENCYTYPE_AD_Reference_ID=221;
 /** Set Frequency Type.
 @param FrequencyType Frequency of event */
 public void setFrequencyType (String FrequencyType)
 {
-if (FrequencyType == null) throw new IllegalArgumentException ("FrequencyType is mandatory");
-if (FrequencyType.equals(REF__FrequencyType.Minute) || FrequencyType.equals(REF__FrequencyType.Hour) || FrequencyType.equals(REF__FrequencyType.Day) || FrequencyType.equals(REF__FrequencyType.Once) || FrequencyType.equals(REF__FrequencyType.Notification));
- else throw new IllegalArgumentException ("FrequencyType Invalid value - " + FrequencyType + " - Reference_ID=221 - M - H - D - O - N");
 if (FrequencyType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -468,7 +460,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="eab331af-e52f-9774-f3a4-ded1b2a3d376",Synchronized="2017-10-04 22:28:46.0")
+Identifier="eab331af-e52f-9774-f3a4-ded1b2a3d376",Synchronized="2019-08-30 22:20:40.0")
 /** Column name FrequencyType */
 public static final String COLUMNNAME_FrequencyType = "FrequencyType";
 /** Set Identifier.
@@ -510,7 +502,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="79443d0a-6bfe-4ad4-a02c-c27e914320da",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Days to keep Log.
@@ -553,7 +545,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="68ae87c0-d819-7c90-351a-2fedd560e2b4",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name KeepLogDays */
 public static final String COLUMNNAME_KeepLogDays = "KeepLogDays";
 /** Set Lockout.
@@ -594,7 +586,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67085d37-9085-4669-8ec4-762a85a6a00a",
-Synchronized="2017-10-17 18:39:09.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Lockout */
 public static final String COLUMNNAME_Lockout = "Lockout";
 /** Set Day of the Month.
@@ -634,7 +626,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="1",ValueMax="31",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="28c61ca4-4a34-4dc5-4bc3-41befdd05ce7",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name MonthDay */
 public static final String COLUMNNAME_MonthDay = "MonthDay";
 /** Set Name.
@@ -690,7 +682,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8309c298-f640-2522-cbfe-b4c88f77eb6a",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -731,19 +723,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="111860ea-0866-f301-23de-bb516fd7bd7e",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
-
-/** ScheduleType AD_Reference=4c0c19ed-6f41-afdc-47cd-d1649d8b484f */
-public static final int SCHEDULETYPE_AD_Reference_ID=318;
 /** Set Schedule Type.
 @param ScheduleType Type of schedule */
 public void setScheduleType (String ScheduleType)
 {
-if (ScheduleType == null) throw new IllegalArgumentException ("ScheduleType is mandatory");
-if (ScheduleType.equals(REF_AD_SchedulerType.Frequency) || ScheduleType.equals(REF_AD_SchedulerType.WeekDay) || ScheduleType.equals(REF_AD_SchedulerType.MonthDay));
- else throw new IllegalArgumentException ("ScheduleType Invalid value - " + ScheduleType + " - Reference_ID=318 - F - W - M");
 if (ScheduleType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -783,12 +769,9 @@ FieldLength=1,DefaultValue="F",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="554312cb-8c00-db13-9616-2c22e8f58f65",Synchronized="2017-10-04 22:28:46.0")
+Identifier="554312cb-8c00-db13-9616-2c22e8f58f65",Synchronized="2019-08-30 22:20:40.0")
 /** Column name ScheduleType */
 public static final String COLUMNNAME_ScheduleType = "ScheduleType";
-
-/** Supervisor_ID AD_Reference=65ec50be-ff59-adbc-c1f5-a20495af24e5 */
-public static final int SUPERVISOR_ID_AD_Reference_ID=316;
 /** Set Supervisor.
 @param Supervisor_ID Supervisor for this user/organization - used for escalation and approval */
 public void setSupervisor_ID (int Supervisor_ID)
@@ -830,7 +813,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f479eff3-2ad5-8d72-e528-0d3b5e38c40b",Synchronized="2017-10-04 22:28:46.0")
+Identifier="f479eff3-2ad5-8d72-e528-0d3b5e38c40b",Synchronized="2019-08-30 22:20:40.0")
 /** Column name Supervisor_ID */
 public static final String COLUMNNAME_Supervisor_ID = "Supervisor_ID";
 /** Set Synchronized.
@@ -865,7 +848,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dda8af67-656f-4445-84a5-0182b2725778",
-Synchronized="2017-10-17 18:39:09.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Synchronized */
 public static final String COLUMNNAME_Synchronized = "Synchronized";
 /** Set Tag.
@@ -906,18 +889,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="16ec67db-c41e-4030-9a3c-27fba02587f2",
-Synchronized="2017-10-04 22:28:46.0")
+Synchronized="2019-08-30 22:20:40.0")
 /** Column name Tag */
 public static final String COLUMNNAME_Tag = "Tag";
-
-/** WeekDay AD_Reference=83e938bc-4a87-77a1-cbb0-83c31065e487 */
-public static final int WEEKDAY_AD_Reference_ID=167;
 /** Set Day of the Week.
 @param WeekDay Day of the Week */
 public void setWeekDay (String WeekDay)
 {
-if (WeekDay == null || WeekDay.equals(REF_Weekdays.Sunday) || WeekDay.equals(REF_Weekdays.Monday) || WeekDay.equals(REF_Weekdays.Tuesday) || WeekDay.equals(REF_Weekdays.Wednesday) || WeekDay.equals(REF_Weekdays.Thursday) || WeekDay.equals(REF_Weekdays.Friday) || WeekDay.equals(REF_Weekdays.Saturday));
- else throw new IllegalArgumentException ("WeekDay Invalid value - " + WeekDay + " - Reference_ID=167 - 7 - 1 - 2 - 3 - 4 - 5 - 6");
 if (WeekDay != null && WeekDay.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -954,7 +932,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="369d81a0-585f-f27e-aa64-6135ccad3eee",Synchronized="2017-10-04 22:28:46.0")
+Identifier="369d81a0-585f-f27e-aa64-6135ccad3eee",Synchronized="2019-08-30 22:20:40.0")
 /** Column name WeekDay */
 public static final String COLUMNNAME_WeekDay = "WeekDay";
 }

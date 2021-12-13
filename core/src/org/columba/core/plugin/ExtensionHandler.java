@@ -26,6 +26,7 @@ import org.columba.api.plugin.ExtensionMetadata;
 import org.columba.api.plugin.IExtension;
 import org.columba.api.plugin.IExtensionHandler;
 import org.columba.api.plugin.PluginMetadata;
+import org.compiere.util.CLogger;
 
 /**
  * Extension handler is a registry for extensions and resembles a hook to extend
@@ -36,7 +37,7 @@ import org.columba.api.plugin.PluginMetadata;
  */
 public class ExtensionHandler implements IExtensionHandler {
 
-	private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger("org.columba.core.plugin");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.plugin");
 
 	private String id;
 	private String parent;
@@ -178,8 +179,7 @@ public class ExtensionHandler implements IExtensionHandler {
 	 * @see org.columba.api.plugin.IExtensionHandler#loadExtensionsFromStream(InputStream)
 	 */
 	public void loadExtensionsFromStream(InputStream is) {
-		Enumeration e = new ExtensionXMLParser().loadExtensionsFromStream(is,
-				null, true);
+		Enumeration e = new ExtensionXMLParser().loadExtensionsFromStream(is, null, true);
 		while (e.hasMoreElements()) {
 			IExtension extension = (IExtension) e.nextElement();
 			addExtension(extension.getMetadata().getId(), extension);

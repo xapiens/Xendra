@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__FrequencyType;
 /** Generated Model for C_SubscriptionType
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -62,10 +61,10 @@ public static int Table_ID=MTable.getTable_ID("C_SubscriptionType");
 public static String es_PE_TAB_SubscriptionType_Description="Tipo de Suscripción";
 
 @XendraTrl(Identifier="80826a44-99df-9b1a-7ea4-8bf985550935")
-public static String es_PE_TAB_SubscriptionType_Name="Tipo de Suscripción";
+public static String es_PE_TAB_SubscriptionType_Help="Tipo de la suscripción y frecuencia de la renovación.";
 
 @XendraTrl(Identifier="80826a44-99df-9b1a-7ea4-8bf985550935")
-public static String es_PE_TAB_SubscriptionType_Help="Tipo de la suscripción y frecuencia de la renovación.";
+public static String es_PE_TAB_SubscriptionType_Name="Tipo de Suscripción";
 
 @XendraTab(Name="Subscription Type",Description="Type of subscription",
 Help="Subscription type and renewal frequency",AD_Window_ID="e94c5a67-b794-a034-0401-5d53fd62b4de",
@@ -79,11 +78,12 @@ public static final String TABNAME_SubscriptionType="80826a44-99df-9b1a-7ea4-8bf
 @XendraTrl(Identifier="3372fa5a-fe04-ed67-4610-0a0261a48511")
 public static String es_PE_TABLE_C_SubscriptionType_Name="Tipo de suscripción ";
 
-@XendraTable(Name="Subscription Type",Description="Type of subscription",Help="",
+@XendraTable(Name="Subscription Type",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Type of subscription",Help="",
 TableName="C_SubscriptionType",AccessLevel="2",AD_Window_ID="e94c5a67-b794-a034-0401-5d53fd62b4de",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=85,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="3372fa5a-fe04-ed67-4610-0a0261a48511",Synchronized="2017-08-16 11:42:30.0")
+Identifier="3372fa5a-fe04-ed67-4610-0a0261a48511",Synchronized="2020-03-03 21:37:42.0")
 /** TableName=C_SubscriptionType */
 public static final String Table_Name="C_SubscriptionType";
 
@@ -133,13 +133,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f0d9a296-e493-de5a-be22-56621e7af5fc")
+public static String es_PE_FIELD_SubscriptionType_SubscriptionType_Name="Tipo de suscripción ";
+
+@XendraTrl(Identifier="f0d9a296-e493-de5a-be22-56621e7af5fc")
 public static String es_PE_FIELD_SubscriptionType_SubscriptionType_Description="Tipo de suscripción ";
 
 @XendraTrl(Identifier="f0d9a296-e493-de5a-be22-56621e7af5fc")
 public static String es_PE_FIELD_SubscriptionType_SubscriptionType_Help="Tipo de suscripción y frecuencia de la renovación.";
-
-@XendraTrl(Identifier="f0d9a296-e493-de5a-be22-56621e7af5fc")
-public static String es_PE_FIELD_SubscriptionType_SubscriptionType_Name="Tipo de suscripción ";
 
 @XendraField(AD_Column_ID="C_SubscriptionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="80826a44-99df-9b1a-7ea4-8bf985550935",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -177,13 +177,13 @@ return value;
 }
 
 @XendraTrl(Identifier="2f612345-18e9-42ad-69d9-a2db27fc057b")
+public static String es_PE_FIELD_SubscriptionType_Description_Name="Observación";
+
+@XendraTrl(Identifier="2f612345-18e9-42ad-69d9-a2db27fc057b")
 public static String es_PE_FIELD_SubscriptionType_Description_Description="Observación";
 
 @XendraTrl(Identifier="2f612345-18e9-42ad-69d9-a2db27fc057b")
 public static String es_PE_FIELD_SubscriptionType_Description_Help="Observación";
-
-@XendraTrl(Identifier="2f612345-18e9-42ad-69d9-a2db27fc057b")
-public static String es_PE_FIELD_SubscriptionType_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="80826a44-99df-9b1a-7ea4-8bf985550935",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -201,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2da67d8f-5a91-ba6a-6ae1-a90785179c26",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Frequency.
@@ -220,13 +220,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3a9e5582-5675-7b55-7187-44231cc1d295")
+public static String es_PE_FIELD_SubscriptionType_Frequency_Name="Frecuencia";
+
+@XendraTrl(Identifier="3a9e5582-5675-7b55-7187-44231cc1d295")
 public static String es_PE_FIELD_SubscriptionType_Frequency_Description="Frecuencia de proceso del requerimiento";
 
 @XendraTrl(Identifier="3a9e5582-5675-7b55-7187-44231cc1d295")
 public static String es_PE_FIELD_SubscriptionType_Frequency_Help="La Frecuencia se usa junto con el tipo de frecuencia para determinar cuando un requerimiento será procesado.";
-
-@XendraTrl(Identifier="3a9e5582-5675-7b55-7187-44231cc1d295")
-public static String es_PE_FIELD_SubscriptionType_Frequency_Name="Frecuencia";
 
 @XendraField(AD_Column_ID="Frequency",IsCentrallyMaintained=true,
 AD_Tab_ID="80826a44-99df-9b1a-7ea4-8bf985550935",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -244,19 +244,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="70305410-d1f2-feef-2007-cbb51be680e1",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Frequency */
 public static final String COLUMNNAME_Frequency = "Frequency";
-
-/** FrequencyType AD_Reference=a8e24598-16fb-a392-7587-12a112938032 */
-public static final int FREQUENCYTYPE_AD_Reference_ID=221;
 /** Set Frequency Type.
 @param FrequencyType Frequency of event */
 public void setFrequencyType (String FrequencyType)
 {
-if (FrequencyType == null) throw new IllegalArgumentException ("FrequencyType is mandatory");
-if (FrequencyType.equals(REF__FrequencyType.Minute) || FrequencyType.equals(REF__FrequencyType.Hour) || FrequencyType.equals(REF__FrequencyType.Day) || FrequencyType.equals(REF__FrequencyType.Once) || FrequencyType.equals(REF__FrequencyType.Notification));
- else throw new IllegalArgumentException ("FrequencyType Invalid value - " + FrequencyType + " - Reference_ID=221 - M - H - D - O - N");
 if (FrequencyType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -272,13 +266,13 @@ return (String)get_Value(COLUMNNAME_FrequencyType);
 }
 
 @XendraTrl(Identifier="541c6fbc-8384-f011-0286-9b233f5ea9f6")
+public static String es_PE_FIELD_SubscriptionType_FrequencyType_Name="Tipo de Frecuencia";
+
+@XendraTrl(Identifier="541c6fbc-8384-f011-0286-9b233f5ea9f6")
 public static String es_PE_FIELD_SubscriptionType_FrequencyType_Description="Frecuencia de cálculo";
 
 @XendraTrl(Identifier="541c6fbc-8384-f011-0286-9b233f5ea9f6")
 public static String es_PE_FIELD_SubscriptionType_FrequencyType_Help="El Tipo de frecuencia se usa para calcular las fechas de inicio y fin del cálculo";
-
-@XendraTrl(Identifier="541c6fbc-8384-f011-0286-9b233f5ea9f6")
-public static String es_PE_FIELD_SubscriptionType_FrequencyType_Name="Tipo de Frecuencia";
 
 @XendraField(AD_Column_ID="FrequencyType",IsCentrallyMaintained=true,
 AD_Tab_ID="80826a44-99df-9b1a-7ea4-8bf985550935",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -296,7 +290,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5d32f117-924f-3cfc-d7c6-d623cf309973",Synchronized="2017-08-05 16:54:27.0")
+Identifier="5d32f117-924f-3cfc-d7c6-d623cf309973",Synchronized="2019-08-30 22:22:19.0")
 /** Column name FrequencyType */
 public static final String COLUMNNAME_FrequencyType = "FrequencyType";
 /** Set Identifier.
@@ -328,7 +322,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="375d7816-beb9-4018-b1bb-c18573b22a7f",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -360,13 +354,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d9053f92-e8f4-a545-51a5-cb5f3d13f87a")
+public static String es_PE_FIELD_SubscriptionType_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d9053f92-e8f4-a545-51a5-cb5f3d13f87a")
 public static String es_PE_FIELD_SubscriptionType_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d9053f92-e8f4-a545-51a5-cb5f3d13f87a")
 public static String es_PE_FIELD_SubscriptionType_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="d9053f92-e8f4-a545-51a5-cb5f3d13f87a")
-public static String es_PE_FIELD_SubscriptionType_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="80826a44-99df-9b1a-7ea4-8bf985550935",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -384,7 +378,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1c605619-0a4c-29c7-b9dd-ed010383a5ed",
-Synchronized="2017-08-05 16:54:27.0")
+Synchronized="2019-08-30 22:22:19.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

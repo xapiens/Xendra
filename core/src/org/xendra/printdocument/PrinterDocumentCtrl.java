@@ -13,16 +13,22 @@ public class PrinterDocumentCtrl {
 	private String m_whereExtended;
 	private int m_windowNo;
 	private Properties ctx;
-	private MPrinterDocumentFormat m_printformat;
+	//private MPrinterDocumentFormat m_printformat;
 	private MQuery m_query;
 	private PrintWorker pw;
-	private String m_processMsg;	
+	private String m_processMsg;
+	private PrintDocument m_printdocument;	
 	private static CLogger log = CLogger.getCLogger(AReport.class);
 	
 	public PrinterDocumentCtrl(Properties ctx, MPrinterDocumentFormat pf, MQuery query) {
 		this.ctx = ctx;
-		m_printformat = pf;
+		//m_printformat = pf;
 		m_query = query;
+	}
+
+	public PrinterDocumentCtrl(Properties ctx, PrintDocument pd) {
+		this.ctx = ctx;
+		m_printdocument = pd;
 	}
 
 	public void setWhereExtended(String whereExtended) {
@@ -43,11 +49,16 @@ public class PrinterDocumentCtrl {
 	}
 	
 	public PrintWorker getPrintWorker() {
-		pw = m_printformat.getPrintWorker(m_query);
+		pw = m_printdocument.getPrintWorker(m_query);
 		if (pw == null)
 		{
-			m_processMsg = m_printformat.getProcessMsg();
+			m_processMsg = pw.getProcessMsg();
 		}
+		//pw = m_printformat.getPrintWorker(m_query);
+		//if (pw == null)
+		//{
+		//	m_processMsg = m_printformat.getProcessMsg();
+		//}
 		return pw;
 	}
 

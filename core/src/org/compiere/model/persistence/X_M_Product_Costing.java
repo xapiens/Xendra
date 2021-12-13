@@ -73,10 +73,10 @@ public static int Table_ID=MTable.getTable_ID("M_Product_Costing");
 public static String es_PE_TAB_Cost_Description="Cost";
 
 @XendraTrl(Identifier="2779e740-c788-442b-bd6d-4cd5535e3d99")
-public static String es_PE_TAB_Cost_Name="Cost";
+public static String es_PE_TAB_Cost_Help="Cost History";
 
 @XendraTrl(Identifier="2779e740-c788-442b-bd6d-4cd5535e3d99")
-public static String es_PE_TAB_Cost_Help="Cost History";
+public static String es_PE_TAB_Cost_Name="Cost";
 @XendraTab(Name="Cost",Description="Cost",
 Help="Cost History",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",SeqNo=45,TabLevel=1,
 IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
@@ -91,14 +91,13 @@ public static final String TABNAME_Cost="2779e740-c788-442b-bd6d-4cd5535e3d99";
 public static String es_PE_TAB_CostingOld_Description="Definir Costeos";
 
 @XendraTrl(Identifier="6c5a0b96-45e2-624e-5845-883b310b570c")
-public static String es_PE_TAB_CostingOld_Name="Costeo";
-
-@XendraTrl(Identifier="6c5a0b96-45e2-624e-5845-883b310b570c")
 public static String es_PE_TAB_CostingOld_Help="La pestaña Costeo define el tipo de costeo usado en el sistema.";
 
-@XendraTab(Name="Costing (old)",Description="Old Product Costing Info",Help="",
-AD_Window_ID="8983f195-c186-47e9-7541-aa6e2d0eebfc",SeqNo=120,TabLevel=1,IsSingleRow=true,
-IsInfoTab=true,IsTranslationTab=false,IsReadOnly=true,
+@XendraTrl(Identifier="6c5a0b96-45e2-624e-5845-883b310b570c")
+public static String es_PE_TAB_CostingOld_Name="Costeo";
+@XendraTab(Name="Costing (old)",
+Description="Old Product Costing Info",Help="",AD_Window_ID="8983f195-c186-47e9-7541-aa6e2d0eebfc",
+SeqNo=120,TabLevel=1,IsSingleRow=true,IsInfoTab=true,IsTranslationTab=false,IsReadOnly=true,
 AD_Column_ID="eca82e20-fc03-8d9c-730f-8e5f2434cfcb",HasTree=false,WhereClause="",OrderByClause="",
 CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",
 IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=false,
@@ -109,11 +108,12 @@ public static final String TABNAME_CostingOld="6c5a0b96-45e2-624e-5845-883b310b5
 @XendraTrl(Identifier="d72e6674-f498-5a9c-20a6-8f32d8e78546")
 public static String es_PE_TABLE_M_Product_Costing_Name="M_Product_Costing";
 
-@XendraTable(Name="Product Costing",Description="",Help="",TableName="M_Product_Costing",
-AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="d72e6674-f498-5a9c-20a6-8f32d8e78546",Synchronized="2017-08-16 11:43:28.0")
+@XendraTable(Name="Product Costing",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_Product_Costing",AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",
+AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="d72e6674-f498-5a9c-20a6-8f32d8e78546",Synchronized="2020-03-03 21:38:51.0")
 /** TableName=M_Product_Costing */
 public static final String Table_Name="M_Product_Costing";
 
@@ -163,13 +163,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="dc005d15-b5a0-82cb-0d68-4c34f8c63b10")
+public static String es_PE_FIELD_CostingOld_AverageCost_Name="Costo Promedio";
+
+@XendraTrl(Identifier="dc005d15-b5a0-82cb-0d68-4c34f8c63b10")
 public static String es_PE_FIELD_CostingOld_AverageCost_Description="Costo promedio ponderado";
 
 @XendraTrl(Identifier="dc005d15-b5a0-82cb-0d68-4c34f8c63b10")
 public static String es_PE_FIELD_CostingOld_AverageCost_Help="Costos promedio ponderado (actual)";
-
-@XendraTrl(Identifier="dc005d15-b5a0-82cb-0d68-4c34f8c63b10")
-public static String es_PE_FIELD_CostingOld_AverageCost_Name="Costo Promedio";
 
 @XendraField(AD_Column_ID="CostAverage",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Actual Costs",IsDisplayed=true,
@@ -179,13 +179,13 @@ Identifier="dc005d15-b5a0-82cb-0d68-4c34f8c63b10")
 public static final String FIELDNAME_CostingOld_AverageCost="dc005d15-b5a0-82cb-0d68-4c34f8c63b10";
 
 @XendraTrl(Identifier="d4ce9129-4928-41e6-83c0-e722afee9b24")
+public static String es_PE_FIELD_Cost_AverageCost_Name="Costo Promedio";
+
+@XendraTrl(Identifier="d4ce9129-4928-41e6-83c0-e722afee9b24")
 public static String es_PE_FIELD_Cost_AverageCost_Description="Costo promedio ponderado";
 
 @XendraTrl(Identifier="d4ce9129-4928-41e6-83c0-e722afee9b24")
 public static String es_PE_FIELD_Cost_AverageCost_Help="Costos promedio ponderado (actual)";
-
-@XendraTrl(Identifier="d4ce9129-4928-41e6-83c0-e722afee9b24")
-public static String es_PE_FIELD_Cost_AverageCost_Name="Costo Promedio";
 
 @XendraField(AD_Column_ID="CostAverage",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -203,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="686da55f-ba50-3587-2a18-af7c0d77f386",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostAverage */
 public static final String COLUMNNAME_CostAverage = "CostAverage";
 /** Set Average Cost Amount Sum.
@@ -223,13 +223,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="135372cd-73ae-c385-80bc-f9a214df53f5")
+public static String es_PE_FIELD_CostingOld_AverageCostAmountSum_Name="Costo Promedio Acumulado";
+
+@XendraTrl(Identifier="135372cd-73ae-c385-80bc-f9a214df53f5")
 public static String es_PE_FIELD_CostingOld_AverageCostAmountSum_Description="Total acumulado actual para el cálculo del costo promedio (interno)";
 
 @XendraTrl(Identifier="135372cd-73ae-c385-80bc-f9a214df53f5")
 public static String es_PE_FIELD_CostingOld_AverageCostAmountSum_Help="Costos actuales acumulados para calcular los costos promedio";
-
-@XendraTrl(Identifier="135372cd-73ae-c385-80bc-f9a214df53f5")
-public static String es_PE_FIELD_CostingOld_AverageCostAmountSum_Name="Costo Promedio Acumulado";
 
 @XendraField(AD_Column_ID="CostAverageCumAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Actual Costs",IsDisplayed=true,
@@ -239,13 +239,13 @@ Identifier="135372cd-73ae-c385-80bc-f9a214df53f5")
 public static final String FIELDNAME_CostingOld_AverageCostAmountSum="135372cd-73ae-c385-80bc-f9a214df53f5";
 
 @XendraTrl(Identifier="b5bf7760-c384-4849-bea2-7ce16fca0379")
+public static String es_PE_FIELD_Cost_AverageCostAmountSum_Name="Costo Promedio Acumulado";
+
+@XendraTrl(Identifier="b5bf7760-c384-4849-bea2-7ce16fca0379")
 public static String es_PE_FIELD_Cost_AverageCostAmountSum_Description="Total acumulado actual para el cálculo del costo promedio (interno)";
 
 @XendraTrl(Identifier="b5bf7760-c384-4849-bea2-7ce16fca0379")
 public static String es_PE_FIELD_Cost_AverageCostAmountSum_Help="Costos actuales acumulados para calcular los costos promedio";
-
-@XendraTrl(Identifier="b5bf7760-c384-4849-bea2-7ce16fca0379")
-public static String es_PE_FIELD_Cost_AverageCostAmountSum_Name="Costo Promedio Acumulado";
 
 @XendraField(AD_Column_ID="CostAverageCumAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -263,7 +263,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b91b50ea-fb09-42e4-360d-3e89fc03cd6d",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostAverageCumAmt */
 public static final String COLUMNNAME_CostAverageCumAmt = "CostAverageCumAmt";
 /** Set Average Cost Quantity Sum.
@@ -283,13 +283,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="ff8c3f29-96f4-cde1-02b6-33891003b33a")
+public static String es_PE_FIELD_CostingOld_AverageCostQuantitySum_Name="Cantidad  Promedio Acumulada";
+
+@XendraTrl(Identifier="ff8c3f29-96f4-cde1-02b6-33891003b33a")
 public static String es_PE_FIELD_CostingOld_AverageCostQuantitySum_Description="Cantidad acumulada para cálculo de costo promedio (interno)";
 
 @XendraTrl(Identifier="ff8c3f29-96f4-cde1-02b6-33891003b33a")
 public static String es_PE_FIELD_CostingOld_AverageCostQuantitySum_Help="Cantidad Acumulada Actual para calcular los costos promedio";
-
-@XendraTrl(Identifier="ff8c3f29-96f4-cde1-02b6-33891003b33a")
-public static String es_PE_FIELD_CostingOld_AverageCostQuantitySum_Name="Cantidad  Promedio Acumulada";
 
 @XendraField(AD_Column_ID="CostAverageCumQty",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Actual Costs",IsDisplayed=true,
@@ -299,13 +299,13 @@ Identifier="ff8c3f29-96f4-cde1-02b6-33891003b33a")
 public static final String FIELDNAME_CostingOld_AverageCostQuantitySum="ff8c3f29-96f4-cde1-02b6-33891003b33a";
 
 @XendraTrl(Identifier="d7ba3b28-c9af-4939-bb6a-8f728b4519a4")
+public static String es_PE_FIELD_Cost_AverageCostQuantitySum_Name="Cantidad  Promedio Acumulada";
+
+@XendraTrl(Identifier="d7ba3b28-c9af-4939-bb6a-8f728b4519a4")
 public static String es_PE_FIELD_Cost_AverageCostQuantitySum_Description="Cantidad acumulada para cálculo de costo promedio (interno)";
 
 @XendraTrl(Identifier="d7ba3b28-c9af-4939-bb6a-8f728b4519a4")
 public static String es_PE_FIELD_Cost_AverageCostQuantitySum_Help="Cantidad Acumulada Actual para calcular los costos promedio";
-
-@XendraTrl(Identifier="d7ba3b28-c9af-4939-bb6a-8f728b4519a4")
-public static String es_PE_FIELD_Cost_AverageCostQuantitySum_Name="Cantidad  Promedio Acumulada";
 
 @XendraField(AD_Column_ID="CostAverageCumQty",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -323,7 +323,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f7f5b8e7-115c-c066-1576-8801b0a83ac3",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostAverageCumQty */
 public static final String COLUMNNAME_CostAverageCumQty = "CostAverageCumQty";
 /** Set Standard Cost.
@@ -343,13 +343,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="03f0e84c-e853-8eb8-4f47-b6220b152c8e")
+public static String es_PE_FIELD_CostingOld_StandardCost_Name="Costo Estándar";
+
+@XendraTrl(Identifier="03f0e84c-e853-8eb8-4f47-b6220b152c8e")
 public static String es_PE_FIELD_CostingOld_StandardCost_Description="Costo Estándar";
 
 @XendraTrl(Identifier="03f0e84c-e853-8eb8-4f47-b6220b152c8e")
 public static String es_PE_FIELD_CostingOld_StandardCost_Help="Costos Estándar (Plan)";
-
-@XendraTrl(Identifier="03f0e84c-e853-8eb8-4f47-b6220b152c8e")
-public static String es_PE_FIELD_CostingOld_StandardCost_Name="Costo Estándar";
 
 @XendraField(AD_Column_ID="CostStandard",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Standard Cost",IsDisplayed=true,
@@ -359,13 +359,13 @@ Identifier="03f0e84c-e853-8eb8-4f47-b6220b152c8e")
 public static final String FIELDNAME_CostingOld_StandardCost="03f0e84c-e853-8eb8-4f47-b6220b152c8e";
 
 @XendraTrl(Identifier="1663b49b-33fd-4bf3-a175-f734b435fd3f")
+public static String es_PE_FIELD_Cost_StandardCost_Name="Costo Estándar";
+
+@XendraTrl(Identifier="1663b49b-33fd-4bf3-a175-f734b435fd3f")
 public static String es_PE_FIELD_Cost_StandardCost_Description="Costo Estándar";
 
 @XendraTrl(Identifier="1663b49b-33fd-4bf3-a175-f734b435fd3f")
 public static String es_PE_FIELD_Cost_StandardCost_Help="Costos Estándar (Plan)";
-
-@XendraTrl(Identifier="1663b49b-33fd-4bf3-a175-f734b435fd3f")
-public static String es_PE_FIELD_Cost_StandardCost_Name="Costo Estándar";
 
 @XendraField(AD_Column_ID="CostStandard",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -383,7 +383,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="23e11c2a-a61c-9981-3111-74a473ede8d2",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostStandard */
 public static final String COLUMNNAME_CostStandard = "CostStandard";
 /** Set Std Cost Amount Sum.
@@ -403,13 +403,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="f996639d-0c25-cd04-8ca6-d783694de383")
+public static String es_PE_FIELD_CostingOld_StdCostAmountSum_Name="Costo Estándar de Factura Acumulado";
+
+@XendraTrl(Identifier="f996639d-0c25-cd04-8ca6-d783694de383")
 public static String es_PE_FIELD_CostingOld_StdCostAmountSum_Description="Total acumulado de la factura para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="f996639d-0c25-cd04-8ca6-d783694de383")
 public static String es_PE_FIELD_CostingOld_StdCostAmountSum_Help="Total acumulado actual para calcular la diferencia en costo estándar basada en el precio de la factura (actual)";
-
-@XendraTrl(Identifier="f996639d-0c25-cd04-8ca6-d783694de383")
-public static String es_PE_FIELD_CostingOld_StdCostAmountSum_Name="Costo Estándar de Factura Acumulado";
 
 @XendraField(AD_Column_ID="CostStandardCumAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Standard Cost",IsDisplayed=true,
@@ -419,13 +419,13 @@ Identifier="f996639d-0c25-cd04-8ca6-d783694de383")
 public static final String FIELDNAME_CostingOld_StdCostAmountSum="f996639d-0c25-cd04-8ca6-d783694de383";
 
 @XendraTrl(Identifier="5ad0dd61-62df-4d1f-9259-4f674002303c")
+public static String es_PE_FIELD_Cost_StdCostAmountSum_Name="Costo Estándar de Factura Acumulado";
+
+@XendraTrl(Identifier="5ad0dd61-62df-4d1f-9259-4f674002303c")
 public static String es_PE_FIELD_Cost_StdCostAmountSum_Description="Total acumulado de la factura para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="5ad0dd61-62df-4d1f-9259-4f674002303c")
 public static String es_PE_FIELD_Cost_StdCostAmountSum_Help="Total acumulado actual para calcular la diferencia en costo estándar basada en el precio de la factura (actual)";
-
-@XendraTrl(Identifier="5ad0dd61-62df-4d1f-9259-4f674002303c")
-public static String es_PE_FIELD_Cost_StdCostAmountSum_Name="Costo Estándar de Factura Acumulado";
 
 @XendraField(AD_Column_ID="CostStandardCumAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -443,7 +443,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cb2a4c5-d174-fcac-95c2-19037c517bc6",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostStandardCumAmt */
 public static final String COLUMNNAME_CostStandardCumAmt = "CostStandardCumAmt";
 /** Set Std Cost Quantity Sum.
@@ -463,13 +463,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="56012e01-7c08-03e2-492e-551bdcaff4a5")
+public static String es_PE_FIELD_CostingOld_StdCostQuantitySum_Name="Cantidad de la Factura Acumulada";
+
+@XendraTrl(Identifier="56012e01-7c08-03e2-492e-551bdcaff4a5")
 public static String es_PE_FIELD_CostingOld_StdCostQuantitySum_Description="Cantidad acumulada de la factura para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="56012e01-7c08-03e2-492e-551bdcaff4a5")
 public static String es_PE_FIELD_CostingOld_StdCostQuantitySum_Help="Cantidad Acumulada Actual para calcular la diferencia en costo estándar basada en el precio de la factura (actual)";
-
-@XendraTrl(Identifier="56012e01-7c08-03e2-492e-551bdcaff4a5")
-public static String es_PE_FIELD_CostingOld_StdCostQuantitySum_Name="Cantidad de la Factura Acumulada";
 
 @XendraField(AD_Column_ID="CostStandardCumQty",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Standard Cost",IsDisplayed=true,
@@ -479,13 +479,13 @@ Identifier="56012e01-7c08-03e2-492e-551bdcaff4a5")
 public static final String FIELDNAME_CostingOld_StdCostQuantitySum="56012e01-7c08-03e2-492e-551bdcaff4a5";
 
 @XendraTrl(Identifier="69947fbb-5455-463f-afb4-ec705a42b737")
+public static String es_PE_FIELD_Cost_StdCostQuantitySum_Name="Cantidad de la Factura Acumulada";
+
+@XendraTrl(Identifier="69947fbb-5455-463f-afb4-ec705a42b737")
 public static String es_PE_FIELD_Cost_StdCostQuantitySum_Description="Cantidad acumulada de la factura para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="69947fbb-5455-463f-afb4-ec705a42b737")
 public static String es_PE_FIELD_Cost_StdCostQuantitySum_Help="Cantidad Acumulada Actual para calcular la diferencia en costo estándar basada en el precio de la factura (actual)";
-
-@XendraTrl(Identifier="69947fbb-5455-463f-afb4-ec705a42b737")
-public static String es_PE_FIELD_Cost_StdCostQuantitySum_Name="Cantidad de la Factura Acumulada";
 
 @XendraField(AD_Column_ID="CostStandardCumQty",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -503,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80ba2659-b30e-214f-c163-25493d79e434",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostStandardCumQty */
 public static final String COLUMNNAME_CostStandardCumQty = "CostStandardCumQty";
 /** Set Std PO Cost Amount Sum.
@@ -523,13 +523,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="bbfaeefe-792b-34d6-29f3-38899220b101")
+public static String es_PE_FIELD_CostingOld_StdPOCostAmountSum_Name="Costo Acumulado de OC";
+
+@XendraTrl(Identifier="bbfaeefe-792b-34d6-29f3-38899220b101")
 public static String es_PE_FIELD_CostingOld_StdPOCostAmountSum_Description="Total acumulado de la orden de compra para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="bbfaeefe-792b-34d6-29f3-38899220b101")
 public static String es_PE_FIELD_CostingOld_StdPOCostAmountSum_Help="Total acumulado actual para calcular la diferencia en costo estándar basada en el precio de la orden de compra (planeado)";
-
-@XendraTrl(Identifier="bbfaeefe-792b-34d6-29f3-38899220b101")
-public static String es_PE_FIELD_CostingOld_StdPOCostAmountSum_Name="Costo Acumulado de OC";
 
 @XendraField(AD_Column_ID="CostStandardPOAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Standard Cost",IsDisplayed=true,
@@ -539,13 +539,13 @@ Identifier="bbfaeefe-792b-34d6-29f3-38899220b101")
 public static final String FIELDNAME_CostingOld_StdPOCostAmountSum="bbfaeefe-792b-34d6-29f3-38899220b101";
 
 @XendraTrl(Identifier="d7f72eb1-dd66-4335-9733-ef255f45b5bd")
+public static String es_PE_FIELD_Cost_StdPOCostAmountSum_Name="Costo Acumulado de OC";
+
+@XendraTrl(Identifier="d7f72eb1-dd66-4335-9733-ef255f45b5bd")
 public static String es_PE_FIELD_Cost_StdPOCostAmountSum_Description="Total acumulado de la orden de compra para el cálculo del costo estándar interno";
 
 @XendraTrl(Identifier="d7f72eb1-dd66-4335-9733-ef255f45b5bd")
 public static String es_PE_FIELD_Cost_StdPOCostAmountSum_Help="Total acumulado actual para calcular la diferencia en costo estándar basada en el precio de la orden de compra (planeado)";
-
-@XendraTrl(Identifier="d7f72eb1-dd66-4335-9733-ef255f45b5bd")
-public static String es_PE_FIELD_Cost_StdPOCostAmountSum_Name="Costo Acumulado de OC";
 
 @XendraField(AD_Column_ID="CostStandardPOAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -563,7 +563,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="87277883-2d9c-c046-b027-d877d61478ff",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostStandardPOAmt */
 public static final String COLUMNNAME_CostStandardPOAmt = "CostStandardPOAmt";
 /** Set Std PO Cost Quantity Sum.
@@ -583,13 +583,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="a730ce32-9e40-cf95-3fd6-4bb3f6123563")
+public static String es_PE_FIELD_CostingOld_StdPOCostQuantitySum_Name="Cantidad Acumulada de la OC";
+
+@XendraTrl(Identifier="a730ce32-9e40-cf95-3fd6-4bb3f6123563")
 public static String es_PE_FIELD_CostingOld_StdPOCostQuantitySum_Description="Cantidad acumulado de la orden de compra para el cálculo del costo estándar interno)";
 
 @XendraTrl(Identifier="a730ce32-9e40-cf95-3fd6-4bb3f6123563")
 public static String es_PE_FIELD_CostingOld_StdPOCostQuantitySum_Help="Cantidad Acumulada Actual para calcular la diferencia en costo estándar basada en el precio de la orden de compra (planeada)";
-
-@XendraTrl(Identifier="a730ce32-9e40-cf95-3fd6-4bb3f6123563")
-public static String es_PE_FIELD_CostingOld_StdPOCostQuantitySum_Name="Cantidad Acumulada de la OC";
 
 @XendraField(AD_Column_ID="CostStandardPOQty",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Standard Cost",IsDisplayed=true,
@@ -599,13 +599,13 @@ Identifier="a730ce32-9e40-cf95-3fd6-4bb3f6123563")
 public static final String FIELDNAME_CostingOld_StdPOCostQuantitySum="a730ce32-9e40-cf95-3fd6-4bb3f6123563";
 
 @XendraTrl(Identifier="98a01e97-b406-44c3-ac5e-33ef99d3a56c")
+public static String es_PE_FIELD_Cost_StdPOCostQuantitySum_Name="Cantidad Acumulada de la OC";
+
+@XendraTrl(Identifier="98a01e97-b406-44c3-ac5e-33ef99d3a56c")
 public static String es_PE_FIELD_Cost_StdPOCostQuantitySum_Description="Cantidad acumulado de la orden de compra para el cálculo del costo estándar interno)";
 
 @XendraTrl(Identifier="98a01e97-b406-44c3-ac5e-33ef99d3a56c")
 public static String es_PE_FIELD_Cost_StdPOCostQuantitySum_Help="Cantidad Acumulada Actual para calcular la diferencia en costo estándar basada en el precio de la orden de compra (planeada)";
-
-@XendraTrl(Identifier="98a01e97-b406-44c3-ac5e-33ef99d3a56c")
-public static String es_PE_FIELD_Cost_StdPOCostQuantitySum_Name="Cantidad Acumulada de la OC";
 
 @XendraField(AD_Column_ID="CostStandardPOQty",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -623,7 +623,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="34a9e587-18f0-a1d6-ef8f-e07958eee396",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CostStandardPOQty */
 public static final String COLUMNNAME_CostStandardPOQty = "CostStandardPOQty";
 /** Set Period.
@@ -644,13 +644,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3d9a4b74-80fe-40d2-8823-6db893ac320f")
+public static String es_PE_FIELD_Cost_Period_Name="Período";
+
+@XendraTrl(Identifier="3d9a4b74-80fe-40d2-8823-6db893ac320f")
 public static String es_PE_FIELD_Cost_Period_Description="Período de Calendario";
 
 @XendraTrl(Identifier="3d9a4b74-80fe-40d2-8823-6db893ac320f")
 public static String es_PE_FIELD_Cost_Period_Help="El Período indica un rango de fechas exclusivo para un calendario";
-
-@XendraTrl(Identifier="3d9a4b74-80fe-40d2-8823-6db893ac320f")
-public static String es_PE_FIELD_Cost_Period_Name="Período";
 
 @XendraField(AD_Column_ID="C_Period_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -668,7 +668,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f15a054-8ecf-4583-ac14-ed03ce3a51f2",
-Synchronized="2015-08-11 20:34:29.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
 /** Set Current Cost Price.
@@ -688,10 +688,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="ebb51a1a-d458-b803-bdee-f018c6260c50")
-public static String es_PE_FIELD_CostingOld_CurrentCostPrice_Description="Costo usado actualmente";
+public static String es_PE_FIELD_CostingOld_CurrentCostPrice_Name="Costo Actual";
 
 @XendraTrl(Identifier="ebb51a1a-d458-b803-bdee-f018c6260c50")
-public static String es_PE_FIELD_CostingOld_CurrentCostPrice_Name="Costo Actual";
+public static String es_PE_FIELD_CostingOld_CurrentCostPrice_Description="Costo usado actualmente";
 
 @XendraField(AD_Column_ID="CurrentCostPrice",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="General",IsDisplayed=true,
@@ -701,10 +701,10 @@ Identifier="ebb51a1a-d458-b803-bdee-f018c6260c50")
 public static final String FIELDNAME_CostingOld_CurrentCostPrice="ebb51a1a-d458-b803-bdee-f018c6260c50";
 
 @XendraTrl(Identifier="9fc82891-87a0-466e-b1e0-f56117208c89")
-public static String es_PE_FIELD_Cost_CurrentCostPrice_Description="Costo usado actualmente";
+public static String es_PE_FIELD_Cost_CurrentCostPrice_Name="Costo Actual";
 
 @XendraTrl(Identifier="9fc82891-87a0-466e-b1e0-f56117208c89")
-public static String es_PE_FIELD_Cost_CurrentCostPrice_Name="Costo Actual";
+public static String es_PE_FIELD_Cost_CurrentCostPrice_Description="Costo usado actualmente";
 
 @XendraField(AD_Column_ID="CurrentCostPrice",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -722,7 +722,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d4a6c198-5656-6c3b-5a6e-9056ffa2586e",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name CurrentCostPrice */
 public static final String COLUMNNAME_CurrentCostPrice = "CurrentCostPrice";
 /** Set Error Msg.
@@ -759,7 +759,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="15f7a901-be48-475f-8f23-150b5ad2be07",
-Synchronized="2015-08-11 20:34:29.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Future Cost Price.
@@ -807,7 +807,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="76df9b88-1292-9fdc-0158-6d6222815e72",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name FutureCostPrice */
 public static final String COLUMNNAME_FutureCostPrice = "FutureCostPrice";
 /** Set Identifier.
@@ -849,7 +849,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="edab8d62-e215-4113-8063-6196f76ba1a5",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set LastCosted.
@@ -884,7 +884,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4935236e-e9e8-4090-a1a6-7a3215e9f9e0",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name LastCosted */
 public static final String COLUMNNAME_LastCosted = "LastCosted";
 /** Set Cost Calc.
@@ -923,7 +923,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c19dc7cd-dd0b-4fdc-8d93-6df022bbdbfb",
-Synchronized="2015-08-11 20:34:29.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name M_CostCalc_ID */
 public static final String COLUMNNAME_M_CostCalc_ID = "M_CostCalc_ID";
 /** Set Cost Element.
@@ -944,10 +944,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="53624841-acc4-4b70-984b-5d5bf3268169")
-public static String es_PE_FIELD_Cost_CostElement_Description="Elemento de costo de producto";
+public static String es_PE_FIELD_Cost_CostElement_Name="Elemento de Costo";
 
 @XendraTrl(Identifier="53624841-acc4-4b70-984b-5d5bf3268169")
-public static String es_PE_FIELD_Cost_CostElement_Name="Elemento de Costo";
+public static String es_PE_FIELD_Cost_CostElement_Description="Elemento de costo de producto";
 
 @XendraField(AD_Column_ID="M_CostElement_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -965,7 +965,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90c6c097-e5c8-4e34-a5c0-6af14d583053",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name M_CostElement_ID */
 public static final String COLUMNNAME_M_CostElement_ID = "M_CostElement_ID";
 /** Set Product Costing.
@@ -1013,13 +1013,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e")
+public static String es_PE_FIELD_CostingOld_Product_Name="Producto";
+
+@XendraTrl(Identifier="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e")
 public static String es_PE_FIELD_CostingOld_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e")
 public static String es_PE_FIELD_CostingOld_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e")
-public static String es_PE_FIELD_CostingOld_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1029,13 +1029,13 @@ Identifier="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e")
 public static final String FIELDNAME_CostingOld_Product="70ae1d94-d3b4-dceb-8eeb-8fd4d31ae50e";
 
 @XendraTrl(Identifier="a517e98a-525d-40ec-89e1-dcacf3b9db9e")
+public static String es_PE_FIELD_Cost_Product_Name="Producto";
+
+@XendraTrl(Identifier="a517e98a-525d-40ec-89e1-dcacf3b9db9e")
 public static String es_PE_FIELD_Cost_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="a517e98a-525d-40ec-89e1-dcacf3b9db9e")
 public static String es_PE_FIELD_Cost_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="a517e98a-525d-40ec-89e1-dcacf3b9db9e")
-public static String es_PE_FIELD_Cost_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1053,7 +1053,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="eca82e20-fc03-8d9c-730f-8e5f2434cfcb",Synchronized="2017-08-05 16:55:25.0")
+Identifier="eca82e20-fc03-8d9c-730f-8e5f2434cfcb",Synchronized="2019-08-30 22:23:26.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Last Invoice Price.
@@ -1073,13 +1073,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="1160979e-eaf2-a2aa-c8da-aff1119505bd")
+public static String es_PE_FIELD_CostingOld_LastInvoicePrice_Name="Último Precio de la Factura";
+
+@XendraTrl(Identifier="1160979e-eaf2-a2aa-c8da-aff1119505bd")
 public static String es_PE_FIELD_CostingOld_LastInvoicePrice_Description="Precio de la última factura para el producto";
 
 @XendraTrl(Identifier="1160979e-eaf2-a2aa-c8da-aff1119505bd")
 public static String es_PE_FIELD_CostingOld_LastInvoicePrice_Help="El Precio de última factura indica el último precio pagado (unitario en la factura) para este producto";
-
-@XendraTrl(Identifier="1160979e-eaf2-a2aa-c8da-aff1119505bd")
-public static String es_PE_FIELD_CostingOld_LastInvoicePrice_Name="Último Precio de la Factura";
 
 @XendraField(AD_Column_ID="PriceLastInv",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -1089,13 +1089,13 @@ Identifier="1160979e-eaf2-a2aa-c8da-aff1119505bd")
 public static final String FIELDNAME_CostingOld_LastInvoicePrice="1160979e-eaf2-a2aa-c8da-aff1119505bd";
 
 @XendraTrl(Identifier="6a0885a6-b9b4-44d2-9a42-0e9559ce0e36")
+public static String es_PE_FIELD_Cost_LastInvoicePrice_Name="Último Precio de la Factura";
+
+@XendraTrl(Identifier="6a0885a6-b9b4-44d2-9a42-0e9559ce0e36")
 public static String es_PE_FIELD_Cost_LastInvoicePrice_Description="Precio de la última factura para el producto";
 
 @XendraTrl(Identifier="6a0885a6-b9b4-44d2-9a42-0e9559ce0e36")
 public static String es_PE_FIELD_Cost_LastInvoicePrice_Help="El Precio de última factura indica el último precio pagado (unitario en la factura) para este producto";
-
-@XendraTrl(Identifier="6a0885a6-b9b4-44d2-9a42-0e9559ce0e36")
-public static String es_PE_FIELD_Cost_LastInvoicePrice_Name="Último Precio de la Factura";
 
 @XendraField(AD_Column_ID="PriceLastInv",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1113,7 +1113,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="361bcbd2-96f5-534e-1be8-cc117a70f562",
-Synchronized="2017-08-05 16:55:25.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name PriceLastInv */
 public static final String COLUMNNAME_PriceLastInv = "PriceLastInv";
 /** Set Last PO Price.
@@ -1133,13 +1133,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="c8c76c9b-1629-d462-7a6e-e1a07cc449f9")
+public static String es_PE_FIELD_CostingOld_LastPOPrice_Name="Último Precio de OC";
+
+@XendraTrl(Identifier="c8c76c9b-1629-d462-7a6e-e1a07cc449f9")
 public static String es_PE_FIELD_CostingOld_LastPOPrice_Description="Precio de la última orden de compra del producto";
 
 @XendraTrl(Identifier="c8c76c9b-1629-d462-7a6e-e1a07cc449f9")
 public static String es_PE_FIELD_CostingOld_LastPOPrice_Help="El Precio de última orden de compra indica el último precio pagado (unitario de la orden de compra) para este producto";
-
-@XendraTrl(Identifier="c8c76c9b-1629-d462-7a6e-e1a07cc449f9")
-public static String es_PE_FIELD_CostingOld_LastPOPrice_Name="Último Precio de OC";
 
 @XendraField(AD_Column_ID="PriceLastPO",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -1149,13 +1149,13 @@ Identifier="c8c76c9b-1629-d462-7a6e-e1a07cc449f9")
 public static final String FIELDNAME_CostingOld_LastPOPrice="c8c76c9b-1629-d462-7a6e-e1a07cc449f9";
 
 @XendraTrl(Identifier="7fbe78f1-1fa0-4d78-ac73-5e3731ad95cb")
+public static String es_PE_FIELD_Cost_LastPOPrice_Name="Último Precio de OC";
+
+@XendraTrl(Identifier="7fbe78f1-1fa0-4d78-ac73-5e3731ad95cb")
 public static String es_PE_FIELD_Cost_LastPOPrice_Description="Precio de la última orden de compra del producto";
 
 @XendraTrl(Identifier="7fbe78f1-1fa0-4d78-ac73-5e3731ad95cb")
 public static String es_PE_FIELD_Cost_LastPOPrice_Help="El Precio de última orden de compra indica el último precio pagado (unitario de la orden de compra) para este producto";
-
-@XendraTrl(Identifier="7fbe78f1-1fa0-4d78-ac73-5e3731ad95cb")
-public static String es_PE_FIELD_Cost_LastPOPrice_Name="Último Precio de OC";
 
 @XendraField(AD_Column_ID="PriceLastPO",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1173,7 +1173,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6514c791-af74-e1e7-1687-1c4e432ef8bd",
-Synchronized="2017-08-05 16:55:26.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name PriceLastPO */
 public static final String COLUMNNAME_PriceLastPO = "PriceLastPO";
 /** Set Sequence.
@@ -1192,18 +1192,19 @@ return bd;
 }
 
 @XendraTrl(Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
+public static String es_PE_FIELD_Cost_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
 public static String es_PE_FIELD_Cost_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
 public static String es_PE_FIELD_Cost_Sequence_Help="La Secuencia indica el orden de los registros";
 
-@XendraTrl(Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
-public static String es_PE_FIELD_Cost_Sequence_Name="Secuencia";
-@XendraField(AD_Column_ID="SeqNo",
-IsCentrallyMaintained=true,AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=90,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2016-10-19 12:18:37.0",Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
+@XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
+AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=90,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-19 12:18:37.0",
+Identifier="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6")
 public static final String FIELDNAME_Cost_Sequence="1b4f8a4e-412f-41fd-9b27-dfb3369ac5e6";
 
 @XendraTrl(Identifier="a48a63fe-f1ea-4436-ad65-7fa059270be6")
@@ -1215,7 +1216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a48a63fe-f1ea-4436-ad65-7fa059270be6",
-Synchronized="2017-08-05 16:55:26.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set Total Invoice Amount.
@@ -1235,13 +1236,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="40fcefa6-3912-60b4-d910-d0ac378dd9ca")
+public static String es_PE_FIELD_CostingOld_TotalInvoiceAmount_Name="Total Total de la Factura";
+
+@XendraTrl(Identifier="40fcefa6-3912-60b4-d910-d0ac378dd9ca")
 public static String es_PE_FIELD_CostingOld_TotalInvoiceAmount_Description="Total Total de la Factura";
 
 @XendraTrl(Identifier="40fcefa6-3912-60b4-d910-d0ac378dd9ca")
 public static String es_PE_FIELD_CostingOld_TotalInvoiceAmount_Help="El Total acumulado total facturado en el tiempo de vida. Se usa para calcular el precio estándar total";
-
-@XendraTrl(Identifier="40fcefa6-3912-60b4-d910-d0ac378dd9ca")
-public static String es_PE_FIELD_CostingOld_TotalInvoiceAmount_Name="Total Total de la Factura";
 
 @XendraField(AD_Column_ID="TotalInvAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -1251,13 +1252,13 @@ Identifier="40fcefa6-3912-60b4-d910-d0ac378dd9ca")
 public static final String FIELDNAME_CostingOld_TotalInvoiceAmount="40fcefa6-3912-60b4-d910-d0ac378dd9ca";
 
 @XendraTrl(Identifier="d092f5d5-1cea-4d7a-bb4a-a763d1159224")
+public static String es_PE_FIELD_Cost_TotalInvoiceAmount_Name="Total Total de la Factura";
+
+@XendraTrl(Identifier="d092f5d5-1cea-4d7a-bb4a-a763d1159224")
 public static String es_PE_FIELD_Cost_TotalInvoiceAmount_Description="Total Total de la Factura";
 
 @XendraTrl(Identifier="d092f5d5-1cea-4d7a-bb4a-a763d1159224")
 public static String es_PE_FIELD_Cost_TotalInvoiceAmount_Help="El Total acumulado total facturado en el tiempo de vida. Se usa para calcular el precio estándar total";
-
-@XendraTrl(Identifier="d092f5d5-1cea-4d7a-bb4a-a763d1159224")
-public static String es_PE_FIELD_Cost_TotalInvoiceAmount_Name="Total Total de la Factura";
 
 @XendraField(AD_Column_ID="TotalInvAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1275,7 +1276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d943050-6586-adb3-ddf3-c0dd4256d70b",
-Synchronized="2017-08-05 16:55:26.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name TotalInvAmt */
 public static final String COLUMNNAME_TotalInvAmt = "TotalInvAmt";
 /** Set Total Invoice Quantity.
@@ -1295,13 +1296,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="8ca73902-ebf6-d5ab-839a-58fc37e9026f")
+public static String es_PE_FIELD_CostingOld_TotalInvoiceQuantity_Name="Cantidad Total de la Factura";
+
+@XendraTrl(Identifier="8ca73902-ebf6-d5ab-839a-58fc37e9026f")
 public static String es_PE_FIELD_CostingOld_TotalInvoiceQuantity_Description="Cantidad Total de la Factura";
 
 @XendraTrl(Identifier="8ca73902-ebf6-d5ab-839a-58fc37e9026f")
 public static String es_PE_FIELD_CostingOld_TotalInvoiceQuantity_Help="La cantidad total facturada en el tiempo de vida. Se usa para calcular el precio estándar total";
-
-@XendraTrl(Identifier="8ca73902-ebf6-d5ab-839a-58fc37e9026f")
-public static String es_PE_FIELD_CostingOld_TotalInvoiceQuantity_Name="Cantidad Total de la Factura";
 
 @XendraField(AD_Column_ID="TotalInvQty",IsCentrallyMaintained=true,
 AD_Tab_ID="6c5a0b96-45e2-624e-5845-883b310b570c",AD_FieldGroup_ID="Reference",IsDisplayed=true,
@@ -1311,13 +1312,13 @@ Identifier="8ca73902-ebf6-d5ab-839a-58fc37e9026f")
 public static final String FIELDNAME_CostingOld_TotalInvoiceQuantity="8ca73902-ebf6-d5ab-839a-58fc37e9026f";
 
 @XendraTrl(Identifier="1d195a81-7102-4e65-a26f-535c61c423dd")
+public static String es_PE_FIELD_Cost_TotalInvoiceQuantity_Name="Cantidad Total de la Factura";
+
+@XendraTrl(Identifier="1d195a81-7102-4e65-a26f-535c61c423dd")
 public static String es_PE_FIELD_Cost_TotalInvoiceQuantity_Description="Cantidad Total de la Factura";
 
 @XendraTrl(Identifier="1d195a81-7102-4e65-a26f-535c61c423dd")
 public static String es_PE_FIELD_Cost_TotalInvoiceQuantity_Help="La cantidad total facturada en el tiempo de vida. Se usa para calcular el precio estándar total";
-
-@XendraTrl(Identifier="1d195a81-7102-4e65-a26f-535c61c423dd")
-public static String es_PE_FIELD_Cost_TotalInvoiceQuantity_Name="Cantidad Total de la Factura";
 
 @XendraField(AD_Column_ID="TotalInvQty",IsCentrallyMaintained=true,
 AD_Tab_ID="2779e740-c788-442b-bd6d-4cd5535e3d99",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1335,7 +1336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fcd90c33-2c22-adfa-3ae4-31ea53344af0",
-Synchronized="2017-08-05 16:55:26.0")
+Synchronized="2019-08-30 22:23:26.0")
 /** Column name TotalInvQty */
 public static final String COLUMNNAME_TotalInvQty = "TotalInvQty";
 }

@@ -29,8 +29,8 @@ import org.columba.api.plugin.IExtensionHandlerKeys;
 import org.columba.api.plugin.PluginException;
 import org.columba.api.plugin.PluginHandlerNotFoundException;
 import org.columba.core.gui.action.AbstractColumbaAction;
-import org.columba.core.logging.Logging;
 import org.columba.core.plugin.PluginManager;
+import org.compiere.util.CLogMgt;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -129,7 +129,7 @@ public class ToolBarXMLDecoder {
 						.instanciateExtension(new Object[] { frameMediator });
 		} catch (PluginException e) {
 			LOG.severe(e.getMessage());
-			if (Logging.DEBUG)
+			if (CLogMgt.DEBUG)
 				e.printStackTrace();
 
 		}

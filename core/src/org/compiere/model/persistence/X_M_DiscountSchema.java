@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_DiscountCumulativeLevel;
-import org.compiere.model.reference.REF_M_DiscountType;
 /** Generated Model for M_DiscountSchema
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -68,10 +66,10 @@ public static int Table_ID=MTable.getTable_ID("M_DiscountSchema");
 public static String es_PE_TAB_DiscountSchema_Description="Esquema de descuentos";
 
 @XendraTrl(Identifier="a0a3132f-3864-1100-2b26-bf06f0bc817d")
-public static String es_PE_TAB_DiscountSchema_Name="Esquema de Descuentos";
+public static String es_PE_TAB_DiscountSchema_Help="El esquema de descuento calcula los porcentajes de descuento.";
 
 @XendraTrl(Identifier="a0a3132f-3864-1100-2b26-bf06f0bc817d")
-public static String es_PE_TAB_DiscountSchema_Help="El esquema de descuento calcula los porcentajes de descuento.";
+public static String es_PE_TAB_DiscountSchema_Name="Esquema de Descuentos";
 
 @XendraTab(Name="Discount Schema",Description="Trade Discount Schema",
 Help="Trade discount schema calculates the trade discount percentage",
@@ -87,10 +85,10 @@ public static final String TABNAME_DiscountSchema="a0a3132f-3864-1100-2b26-bf06f
 public static String es_PE_TAB_PriceListSchema_Description="Esquema de Lista de Precios";
 
 @XendraTrl(Identifier="56d1c142-b10c-c631-c3c3-7fa57f2669b3")
-public static String es_PE_TAB_PriceListSchema_Name="Esquema de Lista de Precios";
+public static String es_PE_TAB_PriceListSchema_Help="El esquema de lista de precios define las reglas de cálculo para la lista de precios";
 
 @XendraTrl(Identifier="56d1c142-b10c-c631-c3c3-7fa57f2669b3")
-public static String es_PE_TAB_PriceListSchema_Help="El esquema de lista de precios define las reglas de cálculo para la lista de precios";
+public static String es_PE_TAB_PriceListSchema_Name="Esquema de Lista de Precios";
 
 @XendraTab(Name="Price List Schema",Description="Price List Schema",
 Help="Price List schema defines calculation rules for price lists",
@@ -105,12 +103,13 @@ public static final String TABNAME_PriceListSchema="56d1c142-b10c-c631-c3c3-7fa5
 @XendraTrl(Identifier="6805921e-90b8-5233-f961-88c0a0bec29e")
 public static String es_PE_TABLE_M_DiscountSchema_Name="Esq List Precios/Desc";
 
-@XendraTable(Name="Discount Schema",
+@XendraTable(Name="Discount Schema",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
 Description="Schema to calculate the trade discount percentage",Help="",
 TableName="M_DiscountSchema",AccessLevel="3",AD_Window_ID="f760f302-5874-a7c5-f148-3bb74844ea1d",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=60,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="6805921e-90b8-5233-f961-88c0a0bec29e",Synchronized="2017-08-16 11:43:09.0")
+Identifier="6805921e-90b8-5233-f961-88c0a0bec29e",Synchronized="2020-03-03 21:38:20.0")
 /** TableName=M_DiscountSchema */
 public static final String Table_Name="M_DiscountSchema";
 
@@ -143,15 +142,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_M_DiscountSchema[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** CumulativeLevel AD_Reference=a4bb6a27-1410-0575-cb12-a9c47c47c9b4 */
-public static final int CUMULATIVELEVEL_AD_Reference_ID=246;
 /** Set Accumulation Level.
 @param CumulativeLevel Level for accumulative calculations */
 public void setCumulativeLevel (String CumulativeLevel)
 {
-if (CumulativeLevel == null || CumulativeLevel.equals(REF_M_DiscountCumulativeLevel.Line));
- else throw new IllegalArgumentException ("CumulativeLevel Invalid value - " + CumulativeLevel + " - Reference_ID=246 - L");
 if (CumulativeLevel != null && CumulativeLevel.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -167,10 +161,10 @@ return (String)get_Value(COLUMNNAME_CumulativeLevel);
 }
 
 @XendraTrl(Identifier="4b128c59-014b-e8e7-b86e-e56a5183f1a7")
-public static String es_PE_FIELD_DiscountSchema_AccumulationLevel_Description="Nivel para cálculos acumulados";
+public static String es_PE_FIELD_DiscountSchema_AccumulationLevel_Name="Nivel para Acumular";
 
 @XendraTrl(Identifier="4b128c59-014b-e8e7-b86e-e56a5183f1a7")
-public static String es_PE_FIELD_DiscountSchema_AccumulationLevel_Name="Nivel para Acumular";
+public static String es_PE_FIELD_DiscountSchema_AccumulationLevel_Description="Nivel para cálculos acumulados";
 
 @XendraField(AD_Column_ID="CumulativeLevel",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -180,10 +174,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="4b128c59-014b-e8e7-b86e-e56a518
 public static final String FIELDNAME_DiscountSchema_AccumulationLevel="4b128c59-014b-e8e7-b86e-e56a5183f1a7";
 
 @XendraTrl(Identifier="d6b23121-e0ae-10b0-24de-129e2749d4db")
-public static String es_PE_FIELD_PriceListSchema_AccumulationLevel_Description="Nivel para cálculos acumulados";
+public static String es_PE_FIELD_PriceListSchema_AccumulationLevel_Name="Nivel para Acumular";
 
 @XendraTrl(Identifier="d6b23121-e0ae-10b0-24de-129e2749d4db")
-public static String es_PE_FIELD_PriceListSchema_AccumulationLevel_Name="Nivel para Acumular";
+public static String es_PE_FIELD_PriceListSchema_AccumulationLevel_Description="Nivel para cálculos acumulados";
 
 @XendraField(AD_Column_ID="CumulativeLevel",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -201,7 +195,7 @@ FieldLength=1,DefaultValue="L",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5eb50612-6bfa-a55e-e6e7-201061bbb7d8",Synchronized="2017-08-05 16:55:04.0")
+Identifier="5eb50612-6bfa-a55e-e6e7-201061bbb7d8",Synchronized="2019-08-30 22:23:02.0")
 /** Column name CumulativeLevel */
 public static final String COLUMNNAME_CumulativeLevel = "CumulativeLevel";
 /** Set Description.
@@ -232,13 +226,13 @@ return value;
 }
 
 @XendraTrl(Identifier="c556cb8a-b437-52e2-1002-5b87292f76c3")
+public static String es_PE_FIELD_DiscountSchema_Description_Name="Observación";
+
+@XendraTrl(Identifier="c556cb8a-b437-52e2-1002-5b87292f76c3")
 public static String es_PE_FIELD_DiscountSchema_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="c556cb8a-b437-52e2-1002-5b87292f76c3")
 public static String es_PE_FIELD_DiscountSchema_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="c556cb8a-b437-52e2-1002-5b87292f76c3")
-public static String es_PE_FIELD_DiscountSchema_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -248,13 +242,13 @@ Identifier="c556cb8a-b437-52e2-1002-5b87292f76c3")
 public static final String FIELDNAME_DiscountSchema_Description="c556cb8a-b437-52e2-1002-5b87292f76c3";
 
 @XendraTrl(Identifier="791a7a24-fa5e-5323-1ce8-b0225081018f")
+public static String es_PE_FIELD_PriceListSchema_Description_Name="Observación";
+
+@XendraTrl(Identifier="791a7a24-fa5e-5323-1ce8-b0225081018f")
 public static String es_PE_FIELD_PriceListSchema_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="791a7a24-fa5e-5323-1ce8-b0225081018f")
 public static String es_PE_FIELD_PriceListSchema_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="791a7a24-fa5e-5323-1ce8-b0225081018f")
-public static String es_PE_FIELD_PriceListSchema_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -272,19 +266,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cce0468f-c5cd-ecd6-e860-e278d25a1d6c",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** DiscountType AD_Reference=97cc096c-622b-8db5-457c-304917053941 */
-public static final int DISCOUNTTYPE_AD_Reference_ID=247;
 /** Set Discount Type.
 @param DiscountType Type of trade discount calculation */
 public void setDiscountType (String DiscountType)
 {
-if (DiscountType == null) throw new IllegalArgumentException ("DiscountType is mandatory");
-if (DiscountType.equals(REF_M_DiscountType.FlatPercent) || DiscountType.equals(REF_M_DiscountType.Formula) || DiscountType.equals(REF_M_DiscountType.Breaks) || DiscountType.equals(REF_M_DiscountType.Pricelist));
- else throw new IllegalArgumentException ("DiscountType Invalid value - " + DiscountType + " - Reference_ID=247 - F - S - B - P");
 if (DiscountType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -300,13 +288,13 @@ return (String)get_Value(COLUMNNAME_DiscountType);
 }
 
 @XendraTrl(Identifier="e4363ecc-6116-0e98-e9dd-6b7469b47a25")
+public static String es_PE_FIELD_DiscountSchema_DiscountType_Name="Tipo de Descuento";
+
+@XendraTrl(Identifier="e4363ecc-6116-0e98-e9dd-6b7469b47a25")
 public static String es_PE_FIELD_DiscountSchema_DiscountType_Description="Tipo de cálculo del descuento comercial";
 
 @XendraTrl(Identifier="e4363ecc-6116-0e98-e9dd-6b7469b47a25")
 public static String es_PE_FIELD_DiscountSchema_DiscountType_Help="Tipo de procedimiento a ser usado para calcular el porcentaje de descuento comercial";
-
-@XendraTrl(Identifier="e4363ecc-6116-0e98-e9dd-6b7469b47a25")
-public static String es_PE_FIELD_DiscountSchema_DiscountType_Name="Tipo de Descuento";
 
 @XendraField(AD_Column_ID="DiscountType",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -316,13 +304,13 @@ Identifier="e4363ecc-6116-0e98-e9dd-6b7469b47a25")
 public static final String FIELDNAME_DiscountSchema_DiscountType="e4363ecc-6116-0e98-e9dd-6b7469b47a25";
 
 @XendraTrl(Identifier="d5a01151-ca99-8bd0-e987-5c8941a65e57")
+public static String es_PE_FIELD_PriceListSchema_DiscountType_Name="Tipo de Descuento";
+
+@XendraTrl(Identifier="d5a01151-ca99-8bd0-e987-5c8941a65e57")
 public static String es_PE_FIELD_PriceListSchema_DiscountType_Description="Tipo de cálculo del descuento comercial";
 
 @XendraTrl(Identifier="d5a01151-ca99-8bd0-e987-5c8941a65e57")
 public static String es_PE_FIELD_PriceListSchema_DiscountType_Help="Tipo de procedimiento a ser usado para calcular el porcentaje de descuento comercial";
-
-@XendraTrl(Identifier="d5a01151-ca99-8bd0-e987-5c8941a65e57")
-public static String es_PE_FIELD_PriceListSchema_DiscountType_Name="Tipo de Descuento";
 
 @XendraField(AD_Column_ID="DiscountType",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -341,7 +329,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9fccbda6-b96e-3534-d894-a8e763915534",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name DiscountType */
 public static final String COLUMNNAME_DiscountType = "DiscountType";
 /** Set Flat Discount %.
@@ -360,10 +348,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="f2866540-b49c-ed4f-b4ef-4542c0965639")
-public static String es_PE_FIELD_DiscountSchema_FlatDiscount_Description="Porcentaje de descuento simple";
+public static String es_PE_FIELD_DiscountSchema_FlatDiscount_Name="% Descuento";
 
 @XendraTrl(Identifier="f2866540-b49c-ed4f-b4ef-4542c0965639")
-public static String es_PE_FIELD_DiscountSchema_FlatDiscount_Name="% Descuento";
+public static String es_PE_FIELD_DiscountSchema_FlatDiscount_Description="Porcentaje de descuento simple";
 
 @XendraField(AD_Column_ID="FlatDiscount",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -373,10 +361,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="f2866540-b49c-ed4f-b4ef-4542c09
 public static final String FIELDNAME_DiscountSchema_FlatDiscount="f2866540-b49c-ed4f-b4ef-4542c0965639";
 
 @XendraTrl(Identifier="f8d4a72a-8d45-2e50-51e2-cce342cf6107")
-public static String es_PE_FIELD_PriceListSchema_FlatDiscount_Description="Porcentaje de descuento simple";
+public static String es_PE_FIELD_PriceListSchema_FlatDiscount_Name="% Descuento";
 
 @XendraTrl(Identifier="f8d4a72a-8d45-2e50-51e2-cce342cf6107")
-public static String es_PE_FIELD_PriceListSchema_FlatDiscount_Name="% Descuento";
+public static String es_PE_FIELD_PriceListSchema_FlatDiscount_Description="Porcentaje de descuento simple";
 
 @XendraField(AD_Column_ID="FlatDiscount",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -394,7 +382,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="-100",ValueMax="100",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5dab321e-e3ed-ed62-4e17-de37128bd9ff",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name FlatDiscount */
 public static final String COLUMNNAME_FlatDiscount = "FlatDiscount";
 /** Set Identifier.
@@ -426,7 +414,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="93b0a9c2-71c1-42ca-a371-b5d200f9d063",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set B.Partner Flat Discount.
@@ -449,13 +437,13 @@ return false;
 }
 
 @XendraTrl(Identifier="7dbbd049-3bb2-f95c-1082-49fed6751b13")
+public static String es_PE_FIELD_DiscountSchema_BPartnerFlatDiscount_Name="Descuento para Socio del Negocio";
+
+@XendraTrl(Identifier="7dbbd049-3bb2-f95c-1082-49fed6751b13")
 public static String es_PE_FIELD_DiscountSchema_BPartnerFlatDiscount_Description="Usa el % de descuento simple definido en nivel de socio del negocio";
 
 @XendraTrl(Identifier="7dbbd049-3bb2-f95c-1082-49fed6751b13")
 public static String es_PE_FIELD_DiscountSchema_BPartnerFlatDiscount_Help="Para el cálculo del descuento, utilice el descuento definido en nivel del socio de negocio";
-
-@XendraTrl(Identifier="7dbbd049-3bb2-f95c-1082-49fed6751b13")
-public static String es_PE_FIELD_DiscountSchema_BPartnerFlatDiscount_Name="Descuento para Socio del Negocio";
 
 @XendraField(AD_Column_ID="IsBPartnerFlatDiscount",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -465,13 +453,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="7dbbd049-3bb2-f95c-1082-49fed67
 public static final String FIELDNAME_DiscountSchema_BPartnerFlatDiscount="7dbbd049-3bb2-f95c-1082-49fed6751b13";
 
 @XendraTrl(Identifier="28759226-0275-9a1b-a00a-3937d7b0ce75")
+public static String es_PE_FIELD_PriceListSchema_BPartnerFlatDiscount_Name="Descuento para Socio del Negocio";
+
+@XendraTrl(Identifier="28759226-0275-9a1b-a00a-3937d7b0ce75")
 public static String es_PE_FIELD_PriceListSchema_BPartnerFlatDiscount_Description="Usa el % de descuento simple definido en nivel de socio del negocio";
 
 @XendraTrl(Identifier="28759226-0275-9a1b-a00a-3937d7b0ce75")
 public static String es_PE_FIELD_PriceListSchema_BPartnerFlatDiscount_Help="Para el cálculo del descuento, utilice el descuento definido en nivel del socio de negocio";
-
-@XendraTrl(Identifier="28759226-0275-9a1b-a00a-3937d7b0ce75")
-public static String es_PE_FIELD_PriceListSchema_BPartnerFlatDiscount_Name="Descuento para Socio del Negocio";
 
 @XendraField(AD_Column_ID="IsBPartnerFlatDiscount",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -489,7 +477,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="01202010-fad0-3c17-a3d5-0260f57ed0d0",Synchronized="2017-08-05 16:55:04.0")
+Identifier="01202010-fad0-3c17-a3d5-0260f57ed0d0",Synchronized="2019-08-30 22:23:02.0")
 /** Column name IsBPartnerFlatDiscount */
 public static final String COLUMNNAME_IsBPartnerFlatDiscount = "IsBPartnerFlatDiscount";
 /** Set Quantity based.
@@ -512,13 +500,13 @@ return false;
 }
 
 @XendraTrl(Identifier="627d16a0-8f93-f7ef-cfd3-6604a69eb3d5")
+public static String es_PE_FIELD_DiscountSchema_QuantityBased_Name="Cantidad Base";
+
+@XendraTrl(Identifier="627d16a0-8f93-f7ef-cfd3-6604a69eb3d5")
 public static String es_PE_FIELD_DiscountSchema_QuantityBased_Description="Nivel de corte del descuento comercial en cantidad (No en valor)";
 
 @XendraTrl(Identifier="627d16a0-8f93-f7ef-cfd3-6604a69eb3d5")
 public static String es_PE_FIELD_DiscountSchema_QuantityBased_Help="El cálculo del nivel de descuento comercial se basa en la cantidad de la orden y no en valor de la orden";
-
-@XendraTrl(Identifier="627d16a0-8f93-f7ef-cfd3-6604a69eb3d5")
-public static String es_PE_FIELD_DiscountSchema_QuantityBased_Name="Cantidad Base";
 
 @XendraField(AD_Column_ID="IsQuantityBased",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -528,13 +516,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="627d16a0-8f93-f7ef-cfd3-6604a69
 public static final String FIELDNAME_DiscountSchema_QuantityBased="627d16a0-8f93-f7ef-cfd3-6604a69eb3d5";
 
 @XendraTrl(Identifier="223c9acf-0538-ddbf-2ab7-be0d2c56c255")
+public static String es_PE_FIELD_PriceListSchema_QuantityBased_Name="Cantidad Base";
+
+@XendraTrl(Identifier="223c9acf-0538-ddbf-2ab7-be0d2c56c255")
 public static String es_PE_FIELD_PriceListSchema_QuantityBased_Description="Nivel de corte del descuento comercial en cantidad (No en valor)";
 
 @XendraTrl(Identifier="223c9acf-0538-ddbf-2ab7-be0d2c56c255")
 public static String es_PE_FIELD_PriceListSchema_QuantityBased_Help="El cálculo del nivel de descuento comercial se basa en la cantidad de la orden y no en valor de la orden";
-
-@XendraTrl(Identifier="223c9acf-0538-ddbf-2ab7-be0d2c56c255")
-public static String es_PE_FIELD_PriceListSchema_QuantityBased_Name="Cantidad Base";
 
 @XendraField(AD_Column_ID="IsQuantityBased",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -552,7 +540,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5a5cfe32-a7ac-29d4-8dd1-48cdea120cd7",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name IsQuantityBased */
 public static final String COLUMNNAME_IsQuantityBased = "IsQuantityBased";
 /** Set Discount Schema.
@@ -572,13 +560,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4aeea14d-c57b-d6a4-8527-71ee2a13ec89")
+public static String es_PE_FIELD_DiscountSchema_DiscountSchema_Name="Esq List Precios/Desc";
+
+@XendraTrl(Identifier="4aeea14d-c57b-d6a4-8527-71ee2a13ec89")
 public static String es_PE_FIELD_DiscountSchema_DiscountSchema_Description="Esquema para calcular el porcentaje de descuento comercial";
 
 @XendraTrl(Identifier="4aeea14d-c57b-d6a4-8527-71ee2a13ec89")
 public static String es_PE_FIELD_DiscountSchema_DiscountSchema_Help="Después del cálculo de precio (estándar); el porcentaje de descuento comercial es calculado y aplicado resultando en el precio final";
-
-@XendraTrl(Identifier="4aeea14d-c57b-d6a4-8527-71ee2a13ec89")
-public static String es_PE_FIELD_DiscountSchema_DiscountSchema_Name="Esq List Precios/Desc";
 
 @XendraField(AD_Column_ID="M_DiscountSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -588,13 +576,13 @@ Identifier="4aeea14d-c57b-d6a4-8527-71ee2a13ec89")
 public static final String FIELDNAME_DiscountSchema_DiscountSchema="4aeea14d-c57b-d6a4-8527-71ee2a13ec89";
 
 @XendraTrl(Identifier="131dce56-4f43-9ced-a02e-93d18d4affab")
+public static String es_PE_FIELD_PriceListSchema_PriceListSchema_Name="Esq List Precios/Desc";
+
+@XendraTrl(Identifier="131dce56-4f43-9ced-a02e-93d18d4affab")
 public static String es_PE_FIELD_PriceListSchema_PriceListSchema_Description="Esquema para calcular el porcentaje de descuento comercial";
 
 @XendraTrl(Identifier="131dce56-4f43-9ced-a02e-93d18d4affab")
 public static String es_PE_FIELD_PriceListSchema_PriceListSchema_Help="Después del cálculo de precio (estándar); el porcentaje de descuento comercial es calculado y aplicado resultando en el precio final";
-
-@XendraTrl(Identifier="131dce56-4f43-9ced-a02e-93d18d4affab")
-public static String es_PE_FIELD_PriceListSchema_PriceListSchema_Name="Esq List Precios/Desc";
 
 @XendraField(AD_Column_ID="M_DiscountSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -633,13 +621,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="53fb6926-4517-1117-0333-a642796aeafc")
+public static String es_PE_FIELD_DiscountSchema_Name_Name="Nombre";
+
+@XendraTrl(Identifier="53fb6926-4517-1117-0333-a642796aeafc")
 public static String es_PE_FIELD_DiscountSchema_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="53fb6926-4517-1117-0333-a642796aeafc")
 public static String es_PE_FIELD_DiscountSchema_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="53fb6926-4517-1117-0333-a642796aeafc")
-public static String es_PE_FIELD_DiscountSchema_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -649,13 +637,13 @@ Identifier="53fb6926-4517-1117-0333-a642796aeafc")
 public static final String FIELDNAME_DiscountSchema_Name="53fb6926-4517-1117-0333-a642796aeafc";
 
 @XendraTrl(Identifier="3e67a014-00a7-c8c7-ca7c-28870629f241")
+public static String es_PE_FIELD_PriceListSchema_Name_Name="Nombre";
+
+@XendraTrl(Identifier="3e67a014-00a7-c8c7-ca7c-28870629f241")
 public static String es_PE_FIELD_PriceListSchema_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="3e67a014-00a7-c8c7-ca7c-28870629f241")
 public static String es_PE_FIELD_PriceListSchema_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="3e67a014-00a7-c8c7-ca7c-28870629f241")
-public static String es_PE_FIELD_PriceListSchema_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -673,7 +661,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6306f97b-40c0-2c4f-7b0a-2d88737485f9",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -696,10 +684,10 @@ return false;
 }
 
 @XendraTrl(Identifier="990bd5ab-1013-4693-2975-92e3f1bfc863")
-public static String es_PE_FIELD_DiscountSchema_ProcessNow_Description="Renumerar entradas de descuentos";
+public static String es_PE_FIELD_DiscountSchema_ProcessNow_Name="Renumerar";
 
 @XendraTrl(Identifier="990bd5ab-1013-4693-2975-92e3f1bfc863")
-public static String es_PE_FIELD_DiscountSchema_ProcessNow_Name="Renumerar";
+public static String es_PE_FIELD_DiscountSchema_ProcessNow_Description="Renumerar entradas de descuentos";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -709,10 +697,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="990bd5ab-1013-4693-2975-92e3f1b
 public static final String FIELDNAME_DiscountSchema_ProcessNow="990bd5ab-1013-4693-2975-92e3f1bfc863";
 
 @XendraTrl(Identifier="4f4c58df-3eea-3817-5c67-e6f69f5804a6")
-public static String es_PE_FIELD_PriceListSchema_ProcessNow_Description="Renumerar entradas de descuentos";
+public static String es_PE_FIELD_PriceListSchema_ProcessNow_Name="Renumerar";
 
 @XendraTrl(Identifier="4f4c58df-3eea-3817-5c67-e6f69f5804a6")
-public static String es_PE_FIELD_PriceListSchema_ProcessNow_Name="Renumerar";
+public static String es_PE_FIELD_PriceListSchema_ProcessNow_Description="Renumerar entradas de descuentos";
 
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -730,7 +718,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="fd235ac1-048f-2b71-0caf-20b46701e013",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="95735ced-16ac-52de-1897-5ba63242240c",Synchronized="2017-08-05 16:55:04.0")
+Identifier="95735ced-16ac-52de-1897-5ba63242240c",Synchronized="2019-08-30 22:23:02.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Script.
@@ -749,13 +737,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="5612a492-7324-a9a5-19d6-a786f78b5882")
+public static String es_PE_FIELD_DiscountSchema_Script_Name="Escritura";
+
+@XendraTrl(Identifier="5612a492-7324-a9a5-19d6-a786f78b5882")
 public static String es_PE_FIELD_DiscountSchema_Script_Description="Escritura de lenguaje Java para calcular resultados";
 
 @XendraTrl(Identifier="5612a492-7324-a9a5-19d6-a786f78b5882")
 public static String es_PE_FIELD_DiscountSchema_Script_Help="Usar constructores del lenguaje Java para definir el resultado del calculo";
-
-@XendraTrl(Identifier="5612a492-7324-a9a5-19d6-a786f78b5882")
-public static String es_PE_FIELD_DiscountSchema_Script_Name="Escritura";
 
 @XendraField(AD_Column_ID="Script",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -765,13 +753,13 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="5612a492-7324-a9a5-19d6-a786f78
 public static final String FIELDNAME_DiscountSchema_Script="5612a492-7324-a9a5-19d6-a786f78b5882";
 
 @XendraTrl(Identifier="3c1d7e17-54ce-714f-48c2-6ae9de809bee")
+public static String es_PE_FIELD_PriceListSchema_Script_Name="Escritura";
+
+@XendraTrl(Identifier="3c1d7e17-54ce-714f-48c2-6ae9de809bee")
 public static String es_PE_FIELD_PriceListSchema_Script_Description="Escritura de lenguaje Java para calcular resultados";
 
 @XendraTrl(Identifier="3c1d7e17-54ce-714f-48c2-6ae9de809bee")
 public static String es_PE_FIELD_PriceListSchema_Script_Help="Usar constructores del lenguaje Java para definir el resultado del calculo";
-
-@XendraTrl(Identifier="3c1d7e17-54ce-714f-48c2-6ae9de809bee")
-public static String es_PE_FIELD_PriceListSchema_Script_Name="Escritura";
 
 @XendraField(AD_Column_ID="Script",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -789,7 +777,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b4d68fb3-45e1-4f39-f292-33df11cecbb4",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name Script */
 public static final String COLUMNNAME_Script = "Script";
 /** Set Valid from.
@@ -807,13 +795,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 }
 
 @XendraTrl(Identifier="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c")
+public static String es_PE_FIELD_DiscountSchema_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c")
 public static String es_PE_FIELD_DiscountSchema_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c")
 public static String es_PE_FIELD_DiscountSchema_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c")
-public static String es_PE_FIELD_DiscountSchema_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="a0a3132f-3864-1100-2b26-bf06f0bc817d",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -823,13 +811,13 @@ Identifier="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c")
 public static final String FIELDNAME_DiscountSchema_ValidFrom="fc6db9b9-3c33-19f1-5914-3baa56dd5a8c";
 
 @XendraTrl(Identifier="f5bbecda-a9e4-1e84-612b-f9788e92c86e")
+public static String es_PE_FIELD_PriceListSchema_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="f5bbecda-a9e4-1e84-612b-f9788e92c86e")
 public static String es_PE_FIELD_PriceListSchema_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="f5bbecda-a9e4-1e84-612b-f9788e92c86e")
 public static String es_PE_FIELD_PriceListSchema_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="f5bbecda-a9e4-1e84-612b-f9788e92c86e")
-public static String es_PE_FIELD_PriceListSchema_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="56d1c142-b10c-c631-c3c3-7fa57f2669b3",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -847,7 +835,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="86948ff5-26de-b393-5322-7c77ce27a29a",
-Synchronized="2017-08-05 16:55:04.0")
+Synchronized="2019-08-30 22:23:02.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 }

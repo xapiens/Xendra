@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_Message");
 @XendraTrl(Identifier="c6b27b43-8e74-450d-b9b8-3f41fd05c657")
 public static String es_PE_TABLE_E_Message_Name="Messages ";
 
-@XendraTable(Name="Messages ",Description="",Help="",TableName="E_Message",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.communication",
-Identifier="c6b27b43-8e74-450d-b9b8-3f41fd05c657",Synchronized="2017-08-16 11:42:36.0")
+@XendraTable(Name="Messages ",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="E_Message",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.communication",Identifier="c6b27b43-8e74-450d-b9b8-3f41fd05c657",
+Synchronized="2020-03-03 21:37:49.0")
 /** TableName=E_Message */
 public static final String Table_Name="E_Message";
 
@@ -119,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f589e405-10da-4551-9c19-550ed17c5b8e",
-Synchronized="2014-03-03 10:17:01.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set E_Folder_ID.
@@ -148,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c308db41-d73f-42fe-9955-bc4ff5ad9216",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name E_Folder_ID */
 public static final String COLUMNNAME_E_Folder_ID = "E_Folder_ID";
 /** Set E_Header_ID.
@@ -177,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f8b9b6c8-ced0-48c0-bbe8-0a9ded7fd1b6",
-Synchronized="2014-03-01 19:04:56.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name E_Header_ID */
 public static final String COLUMNNAME_E_Header_ID = "E_Header_ID";
 /** Set Messages .
@@ -226,7 +228,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c29a09e6-ca60-4aff-85c1-3944b0bca528",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name ID */
 public static final String COLUMNNAME_ID = "ID";
 /** Set Identifier.
@@ -258,7 +260,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7921a9e7-cbb3-4013-8fac-205895ce197b",
-Synchronized="2014-03-01 17:31:42.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Message.
@@ -285,7 +287,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="4d48f707-847c-4f45-83dc-28926c0c9c13",
-Synchronized="2014-03-01 17:31:42.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 }

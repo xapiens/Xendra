@@ -71,7 +71,7 @@ public class CConnectionEditor extends JComponent
 	/** Host Button Element */
 	private JLabel      m_server = new JLabel();
 	/** The Value           */
-	private CConnection m_value = null;
+	//private CConnection m_value = null;
 	/** ReadWrite           */
 	private boolean     m_rw = true;
 	/** Mandatory           */
@@ -158,8 +158,10 @@ public class CConnectionEditor extends JComponent
 	 */
 	public void setValue (Object value)
 	{
-		if (value != null && value instanceof CConnection)
-			m_value = (CConnection)value;
+		if (value != null && value instanceof CConnection)  {			
+			CConnection.get().setConection((CConnection) value);
+		}
+			//m_value = (CConnection)value;
 		setDisplay();
 	}   //  setValue
 
@@ -169,7 +171,8 @@ public class CConnectionEditor extends JComponent
 	 */
 	public Object getValue()
 	{
-		return m_value;
+		//return m_value;
+		return CConnection.get();
 	}   //  getValue
 
 	/**
@@ -178,9 +181,11 @@ public class CConnectionEditor extends JComponent
 	 */
 	public String getDisplay()
 	{
-		if (m_value == null)
+		//if (m_value == null)
+		if (CConnection.get() == null)
 			return "";
-		return m_value.getName();
+		//return m_value.getName();
+		return CConnection.get().getName();
 	}   //  getDisplay
 
 	/**
@@ -189,16 +194,20 @@ public class CConnectionEditor extends JComponent
 	public void setDisplay()
 	{
 		m_text.setText(getDisplay());
-		if (m_value == null)
+		//if (m_value == null)
+		if (CConnection.get() == null)
 			return;
 		//  Text
-		if (m_value.isAppsServerOK(false) || m_value.isDatabaseOK())
+		//if (m_value.isAppsServerOK(false) || m_value.isDatabaseOK())
+		//if (m_value.isDatabaseOK())
+		if (CConnection.get().isDatabaseOK())
 		{
 			m_text.setForeground(XendraPLAF.getTextColor_OK());
 			setBackground(false);
-			if (!m_value.isAppsServerOK(false))
-				m_server.setBackground(XendraPLAF.getFieldBackground_Error());
-			if (!m_value.isDatabaseOK())
+			//if (!m_value.isAppsServerOK(false))
+			//	m_server.setBackground(XendraPLAF.getFieldBackground_Error());
+			//if (!m_value.isDatabaseOK())
+			if (!CConnection.get().isDatabaseOK())
 				m_db.setBackground(XendraPLAF.getFieldBackground_Error());
 		}
 		else
@@ -273,7 +282,8 @@ public class CConnectionEditor extends JComponent
 			m_active = true;
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			//
-			CConnectionDialog cd = new CConnectionDialog(m_value);
+			//CConnectionDialog cd = new CConnectionDialog(m_value);
+			CConnectionDialog cd = new CConnectionDialog(CConnection.get());
 			setValue(cd.getConnection());
 			fireActionPerformed();
 			//

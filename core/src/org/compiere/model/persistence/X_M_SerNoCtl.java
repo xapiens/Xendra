@@ -65,10 +65,10 @@ public static int Table_ID=MTable.getTable_ID("M_SerNoCtl");
 public static String es_PE_TAB_SerialNoControl_Description="Control No. de Serie del Producto";
 
 @XendraTrl(Identifier="de14507c-ba8d-e889-51bf-72d6672fefc4")
-public static String es_PE_TAB_SerialNoControl_Name="Control No. de Serie";
+public static String es_PE_TAB_SerialNoControl_Help="Definición para crear los números de serie para los productos";
 
 @XendraTrl(Identifier="de14507c-ba8d-e889-51bf-72d6672fefc4")
-public static String es_PE_TAB_SerialNoControl_Help="Definición para crear los números de serie para los productos";
+public static String es_PE_TAB_SerialNoControl_Name="Control No. de Serie";
 
 @XendraTab(Name="Serial No Control",Description="Product Serial Number Control",
 Help="Definition to create Serial numbers for Products",
@@ -83,11 +83,12 @@ public static final String TABNAME_SerialNoControl="de14507c-ba8d-e889-51bf-72d6
 @XendraTrl(Identifier="52d9ef99-9bcb-c641-e01f-84e140247cdf")
 public static String es_PE_TABLE_M_SerNoCtl_Name="Control de numero de Serie";
 
-@XendraTable(Name="Serial No Control",Description="Product Serial Number Control",Help="",
-TableName="M_SerNoCtl",AccessLevel="3",AD_Window_ID="15591a4b-721e-18c5-b207-d85d143f88e3",
+@XendraTable(Name="Serial No Control",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product Serial Number Control",
+Help="",TableName="M_SerNoCtl",AccessLevel="3",AD_Window_ID="15591a4b-721e-18c5-b207-d85d143f88e3",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=80,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="52d9ef99-9bcb-c641-e01f-84e140247cdf",Synchronized="2017-08-16 11:43:35.0")
+Identifier="52d9ef99-9bcb-c641-e01f-84e140247cdf",Synchronized="2020-03-03 21:38:56.0")
 /** TableName=M_SerNoCtl */
 public static final String Table_Name="M_SerNoCtl";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b012d99e-bf7b-40c5-341e-2a1e281e5c57")
+public static String es_PE_FIELD_SerialNoControl_CurrentNext_Name="Siguiente Secuencia";
+
+@XendraTrl(Identifier="b012d99e-bf7b-40c5-341e-2a1e281e5c57")
 public static String es_PE_FIELD_SerialNoControl_CurrentNext_Description="El número siguiente a ser usado";
 
 @XendraTrl(Identifier="b012d99e-bf7b-40c5-341e-2a1e281e5c57")
 public static String es_PE_FIELD_SerialNoControl_CurrentNext_Help="El siguiente corriente indica el número siguiente a usar para este documento";
-
-@XendraTrl(Identifier="b012d99e-bf7b-40c5-341e-2a1e281e5c57")
-public static String es_PE_FIELD_SerialNoControl_CurrentNext_Name="Siguiente Secuencia";
 
 @XendraField(AD_Column_ID="CurrentNext",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6608cc11-bb1a-e03d-7854-7fd171840bcd",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name CurrentNext */
 public static final String COLUMNNAME_CurrentNext = "CurrentNext";
 /** Set Description.
@@ -191,13 +192,13 @@ return value;
 }
 
 @XendraTrl(Identifier="41e9258f-e7d7-fc56-4cd3-ab29f8f1b8cb")
+public static String es_PE_FIELD_SerialNoControl_Description_Name="Observación";
+
+@XendraTrl(Identifier="41e9258f-e7d7-fc56-4cd3-ab29f8f1b8cb")
 public static String es_PE_FIELD_SerialNoControl_Description_Description="Observación";
 
 @XendraTrl(Identifier="41e9258f-e7d7-fc56-4cd3-ab29f8f1b8cb")
 public static String es_PE_FIELD_SerialNoControl_Description_Help="Observación";
-
-@XendraTrl(Identifier="41e9258f-e7d7-fc56-4cd3-ab29f8f1b8cb")
-public static String es_PE_FIELD_SerialNoControl_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -215,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9d9a728d-8450-ba51-b266-a66f4006a7fe",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -247,7 +248,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a40a87e9-f97c-476d-bd3c-ba34adbbc13b",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Increment.
@@ -266,13 +267,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ab501177-f994-a169-f899-549301daf7f9")
+public static String es_PE_FIELD_SerialNoControl_Increment_Name="Incremento";
+
+@XendraTrl(Identifier="ab501177-f994-a169-f899-549301daf7f9")
 public static String es_PE_FIELD_SerialNoControl_Increment_Description="El número a incrementar a el último número de documento";
 
 @XendraTrl(Identifier="ab501177-f994-a169-f899-549301daf7f9")
 public static String es_PE_FIELD_SerialNoControl_Increment_Help="El incremento indica el numero a adicionar al último número de documento para obtener el número de secuencia siguiente";
-
-@XendraTrl(Identifier="ab501177-f994-a169-f899-549301daf7f9")
-public static String es_PE_FIELD_SerialNoControl_Increment_Name="Incremento";
 
 @XendraField(AD_Column_ID="IncrementNo",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -290,7 +291,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6da63f66-e6f0-83d6-17e8-065f139b9d77",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name IncrementNo */
 public static final String COLUMNNAME_IncrementNo = "IncrementNo";
 /** Set Serial No Control.
@@ -310,13 +311,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f5329dda-f756-6ed8-fff0-e877a6b3f449")
+public static String es_PE_FIELD_SerialNoControl_SerialNoControl_Name="Control de numero de Serie";
+
+@XendraTrl(Identifier="f5329dda-f756-6ed8-fff0-e877a6b3f449")
 public static String es_PE_FIELD_SerialNoControl_SerialNoControl_Description="Control de número de serie del producto";
 
 @XendraTrl(Identifier="f5329dda-f756-6ed8-fff0-e877a6b3f449")
 public static String es_PE_FIELD_SerialNoControl_SerialNoControl_Help="Definición para crear numero de serie de productos.";
-
-@XendraTrl(Identifier="f5329dda-f756-6ed8-fff0-e877a6b3f449")
-public static String es_PE_FIELD_SerialNoControl_SerialNoControl_Name="Control de numero de Serie";
 
 @XendraField(AD_Column_ID="M_SerNoCtl_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -355,13 +356,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="4cb5e68e-9aee-bbc8-23e3-208c8b082e5b")
+public static String es_PE_FIELD_SerialNoControl_Name_Name="Nombre";
+
+@XendraTrl(Identifier="4cb5e68e-9aee-bbc8-23e3-208c8b082e5b")
 public static String es_PE_FIELD_SerialNoControl_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="4cb5e68e-9aee-bbc8-23e3-208c8b082e5b")
 public static String es_PE_FIELD_SerialNoControl_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="4cb5e68e-9aee-bbc8-23e3-208c8b082e5b")
-public static String es_PE_FIELD_SerialNoControl_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -379,7 +380,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cc14d6a0-4e71-61db-77d7-bf153e962099",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Prefix.
@@ -403,13 +404,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="0494e698-03bb-5981-7512-49c1f7f9c7db")
+public static String es_PE_FIELD_SerialNoControl_Prefix_Name="Prefijo";
+
+@XendraTrl(Identifier="0494e698-03bb-5981-7512-49c1f7f9c7db")
 public static String es_PE_FIELD_SerialNoControl_Prefix_Description="Caracteres de prefijo en la identificación del documento";
 
 @XendraTrl(Identifier="0494e698-03bb-5981-7512-49c1f7f9c7db")
 public static String es_PE_FIELD_SerialNoControl_Prefix_Help="El Prefijo indica los caracteres a imprimir enfrente del número de documento";
-
-@XendraTrl(Identifier="0494e698-03bb-5981-7512-49c1f7f9c7db")
-public static String es_PE_FIELD_SerialNoControl_Prefix_Name="Prefijo";
 
 @XendraField(AD_Column_ID="Prefix",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -427,7 +428,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="37177ccd-f7f0-8325-43a0-404d0ef0d613",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name Prefix */
 public static final String COLUMNNAME_Prefix = "Prefix";
 /** Set Start No.
@@ -446,13 +447,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ce740bd4-4876-908b-d8af-926e26963b60")
+public static String es_PE_FIELD_SerialNoControl_StartNo_Name="No. de Inicio";
+
+@XendraTrl(Identifier="ce740bd4-4876-908b-d8af-926e26963b60")
 public static String es_PE_FIELD_SerialNoControl_StartNo_Description="Número de inicio / posición";
 
 @XendraTrl(Identifier="ce740bd4-4876-908b-d8af-926e26963b60")
 public static String es_PE_FIELD_SerialNoControl_StartNo_Help="El Número de Inicio indica el número inicial del documento ó posición";
-
-@XendraTrl(Identifier="ce740bd4-4876-908b-d8af-926e26963b60")
-public static String es_PE_FIELD_SerialNoControl_StartNo_Name="No. de Inicio";
 
 @XendraField(AD_Column_ID="StartNo",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -470,7 +471,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ec4bf110-4391-542d-f0a5-951a785f6ded",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name StartNo */
 public static final String COLUMNNAME_StartNo = "StartNo";
 /** Set Suffix.
@@ -494,13 +495,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="ee5236bc-7400-27a3-2294-e9eab72e54a8")
+public static String es_PE_FIELD_SerialNoControl_Suffix_Name="Sufijo";
+
+@XendraTrl(Identifier="ee5236bc-7400-27a3-2294-e9eab72e54a8")
 public static String es_PE_FIELD_SerialNoControl_Suffix_Description="Sufijo del Número";
 
 @XendraTrl(Identifier="ee5236bc-7400-27a3-2294-e9eab72e54a8")
 public static String es_PE_FIELD_SerialNoControl_Suffix_Help="El Sufijo indica los caracteres a ser adicionados al número de documento.";
-
-@XendraTrl(Identifier="ee5236bc-7400-27a3-2294-e9eab72e54a8")
-public static String es_PE_FIELD_SerialNoControl_Suffix_Name="Sufijo";
 
 @XendraField(AD_Column_ID="Suffix",IsCentrallyMaintained=true,
 AD_Tab_ID="de14507c-ba8d-e889-51bf-72d6672fefc4",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -518,7 +519,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="11c97305-8d48-acc8-8b7d-a6dec7db3993",
-Synchronized="2017-08-05 16:55:33.0")
+Synchronized="2019-08-30 22:23:31.0")
 /** Column name Suffix */
 public static final String COLUMNNAME_Suffix = "Suffix";
 }

@@ -13,11 +13,12 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.MetalTheme;
 
 import org.compiere.plaf.CompiereColor;
+import org.compiere.util.CLogger;
 
 public final class ThemeUtils {
 
 	/**	Logger					*/
-	private static Logger 	log = Logger.getLogger(ThemeUtils.class.getName());
+	private static CLogger 	log = CLogger.getCLogger(ThemeUtils.class.getName());
 	
 	/**
 	 *  Parses Color into String representation.

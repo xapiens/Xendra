@@ -22,14 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.*;
 
-import org.compiere.model.persistence.X_C_Period;
 import org.compiere.model.persistence.X_M_CostElement;
-import org.compiere.model.persistence.X_M_Product;
 import org.compiere.model.reference.REF_M_CostElementType;
 import org.compiere.model.reference.REF_C_AcctSchemaCostingMethod;
 import org.compiere.util.*;
-import org.xendra.cost.CostAverageCalc;
-import org.xendra.material.StockWorker;
 
 /**
  * 	Cost Element Model
@@ -91,7 +87,7 @@ public class MCostElement extends X_M_CostElement
 		//	Create New
 		retValue = new MCostElement (po.getCtx(), 0, po.get_TrxName());
 		retValue.setClientOrg(po.getAD_Client_ID(), 0);
-		String name = MRefList.getListName(po.getCtx(), REF_C_AcctSchemaCostingMethod.Identifier, CostingMethod);
+		String name = MRefList.getListName(po.getCtx(), REF_C_AcctSchemaCostingMethod.Identifier, CostingMethod); // ERROR: column reference "name" is ambiguous
 		if (name == null || name.length() == 0)
 			name = CostingMethod;
 		retValue.setName(name);
@@ -684,7 +680,7 @@ public class MCostElement extends X_M_CostElement
 		BigDecimal cost = BigDecimal.ZERO;
 		CallableStatement stmt = null;
 		try {
-			stmt = DB.prepareCall("{ ?= call getAverageCost(?,?,?,?,?) }", ResultSet.CONCUR_READ_ONLY, null);
+			stmt = DB.prepareCall("{ ?= call getAverageCost(?,?,?,?,?) }", ResultSet.CONCUR_READ_ONLY, trxName);
 			stmt.setInt(2, client_id);
 			stmt.setInt(3, getM_CostElement_ID());
 			stmt.setInt(4, product_id);
@@ -695,7 +691,7 @@ public class MCostElement extends X_M_CostElement
 			cost = stmt.getBigDecimal(1); 
 			if (cost.compareTo(BigDecimal.ZERO) == 0)
 			{
-				stmt = DB.prepareCall("{ ?= call getcostmsg(?,?,?,?,?) }", ResultSet.CONCUR_READ_ONLY, null);
+				stmt = DB.prepareCall("{ ?= call getcostmsg(?,?,?,?,?) }", ResultSet.CONCUR_READ_ONLY, trxName);
 				stmt.registerOutParameter(1, java.sql.Types.CHAR);
 				stmt.setInt(2, client_id);
 				stmt.setInt(3, getM_CostElement_ID());

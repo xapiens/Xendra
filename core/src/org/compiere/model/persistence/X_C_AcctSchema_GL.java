@@ -70,10 +70,10 @@ public static int Table_ID=MTable.getTable_ID("C_AcctSchema_GL");
 public static String es_PE_TAB_GeneralLedger_Description="Cuentas de la Contabilidad General (CG)";
 
 @XendraTrl(Identifier="baf4efeb-69b0-7c1e-3d95-64e0612c860f")
-public static String es_PE_TAB_GeneralLedger_Name="Contabilidad General (CG)";
+public static String es_PE_TAB_GeneralLedger_Help="La pestaña Contabilidad General (CG)) define el manejo de error y de balance a usar así como las cuentas necesarias para registrar las transacciones en el libro mayor.";
 
 @XendraTrl(Identifier="baf4efeb-69b0-7c1e-3d95-64e0612c860f")
-public static String es_PE_TAB_GeneralLedger_Help="La pestaña Contabilidad General (CG)) define el manejo de error y de balance a usar así como las cuentas necesarias para registrar las transacciones en el libro mayor.";
+public static String es_PE_TAB_GeneralLedger_Name="Contabilidad General (CG)";
 
 @XendraTab(Name="General Ledger",Description="Accounts for GL",
 Help="The General Ledger Tab defines error and balance handling to use as well as  the necessary accounts for posting to General Ledger.  ",
@@ -90,11 +90,12 @@ public static final String TABNAME_GeneralLedger="baf4efeb-69b0-7c1e-3d95-64e061
 @XendraTrl(Identifier="99989066-d7e0-f1af-cc2d-24ce1c5f8605")
 public static String es_PE_TABLE_C_AcctSchema_GL_Name="C_AcctSchema_GL";
 
-@XendraTable(Name="C_AcctSchema_GL",Description="",Help="",TableName="C_AcctSchema_GL",
-AccessLevel="2",AD_Window_ID="1d20d4ab-6f93-65b5-6cbb-44da46ec6819",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="99989066-d7e0-f1af-cc2d-24ce1c5f8605",Synchronized="2017-08-16 11:41:21.0")
+@XendraTable(Name="C_AcctSchema_GL",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_AcctSchema_GL",AccessLevel="2",AD_Window_ID="1d20d4ab-6f93-65b5-6cbb-44da46ec6819",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
+Identifier="99989066-d7e0-f1af-cc2d-24ce1c5f8605",Synchronized="2020-03-03 21:36:22.0")
 /** TableName=C_AcctSchema_GL */
 public static final String Table_Name="C_AcctSchema_GL";
 
@@ -150,13 +151,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getC_AcctSchema_ID()));
 }
 
 @XendraTrl(Identifier="a0f3592c-b6f5-c1eb-bd57-738a5836ded2")
+public static String es_PE_FIELD_GeneralLedger_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="a0f3592c-b6f5-c1eb-bd57-738a5836ded2")
 public static String es_PE_FIELD_GeneralLedger_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="a0f3592c-b6f5-c1eb-bd57-738a5836ded2")
 public static String es_PE_FIELD_GeneralLedger_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="a0f3592c-b6f5-c1eb-bd57-738a5836ded2")
-public static String es_PE_FIELD_GeneralLedger_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -174,7 +175,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9a0f7fa1-d5b9-74f4-4cc8-ce5e0dcf032e",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Commitment Offset.
@@ -193,13 +194,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="650d4aed-a387-98b4-a8e5-875fa0d03013")
+public static String es_PE_FIELD_GeneralLedger_CommitmentOffset_Name="Commitment Offset";
+
+@XendraTrl(Identifier="650d4aed-a387-98b4-a8e5-875fa0d03013")
 public static String es_PE_FIELD_GeneralLedger_CommitmentOffset_Description="Budgetary Commitment Offset Account";
 
 @XendraTrl(Identifier="650d4aed-a387-98b4-a8e5-875fa0d03013")
 public static String es_PE_FIELD_GeneralLedger_CommitmentOffset_Help="The Commitment Offset Account is used for posting Commitments and Reservations.  It is usually an off-balance sheet and gain-and-loss account.";
-
-@XendraTrl(Identifier="650d4aed-a387-98b4-a8e5-875fa0d03013")
-public static String es_PE_FIELD_GeneralLedger_CommitmentOffset_Name="Commitment Offset";
 
 @XendraField(AD_Column_ID="CommitmentOffset_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -217,7 +218,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="02777462-80e8-1493-1c16-0ecb7e7b2984",Synchronized="2017-08-05 16:53:11.0")
+Identifier="02777462-80e8-1493-1c16-0ecb7e7b2984",Synchronized="2019-08-30 22:21:01.0")
 /** Column name CommitmentOffset_Acct */
 public static final String COLUMNNAME_CommitmentOffset_Acct = "CommitmentOffset_Acct";
 /** Set Currency Balancing Income Acct.
@@ -236,13 +237,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="bda8cc1a-5179-b93b-f966-c512e9ca7220")
+public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingIncomeAcct_Name="Cuenta de Balanceo de Moneda (Ganancia)";
+
+@XendraTrl(Identifier="bda8cc1a-5179-b93b-f966-c512e9ca7220")
 public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingIncomeAcct_Description="Cuenta usada cuando la moneda está fuera de balance y se redondea hacia el haber";
 
 @XendraTrl(Identifier="bda8cc1a-5179-b93b-f966-c512e9ca7220")
 public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingIncomeAcct_Help="La cuenta de balanceo de moneda indica la cuenta a ser usada cuando una moneda esté fuera de balance (generalmente debido al redondeo). Esta se usa cuando se redondea hacia el haber.";
-
-@XendraTrl(Identifier="bda8cc1a-5179-b93b-f966-c512e9ca7220")
-public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingIncomeAcct_Name="Cuenta de Balanceo de Moneda (Ganancia)";
 
 @XendraField(AD_Column_ID="CurrencyBalancingIncome_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -260,7 +261,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="11560456-40d9-1eb2-3d2f-c1ed95023c33",Synchronized="2017-08-05 16:53:11.0")
+Identifier="11560456-40d9-1eb2-3d2f-c1ed95023c33",Synchronized="2019-08-30 22:21:01.0")
 /** Column name CurrencyBalancingIncome_Acct */
 public static final String COLUMNNAME_CurrencyBalancingIncome_Acct = "CurrencyBalancingIncome_Acct";
 /** Set Currency Balancing Loss Acct.
@@ -279,13 +280,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="69ab7691-9677-d718-2d0c-d79866ef2a8a")
+public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingLossAcct_Name="Cuenta de Balanceo de Moneda (Perdida)";
+
+@XendraTrl(Identifier="69ab7691-9677-d718-2d0c-d79866ef2a8a")
 public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingLossAcct_Description="Cuenta usada cuando la moneda está fuera de balance y se redondea hacia el debe";
 
 @XendraTrl(Identifier="69ab7691-9677-d718-2d0c-d79866ef2a8a")
 public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingLossAcct_Help="La cuenta de balanceo de moneda indica la cuenta a ser usada cuando una moneda esté fuera de balance (generalmente debido al redondeo). Esta se usa cuando se redondea hacia el debe.";
-
-@XendraTrl(Identifier="69ab7691-9677-d718-2d0c-d79866ef2a8a")
-public static String es_PE_FIELD_GeneralLedger_CurrencyBalancingLossAcct_Name="Cuenta de Balanceo de Moneda (Perdida)";
 
 @XendraField(AD_Column_ID="CurrencyBalancingLoss_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -303,7 +304,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7f62aef2-cfb2-a2e1-a2ec-261ca48d05ae",Synchronized="2017-08-05 16:53:11.0")
+Identifier="7f62aef2-cfb2-a2e1-a2ec-261ca48d05ae",Synchronized="2019-08-30 22:21:01.0")
 /** Column name CurrencyBalancingLoss_Acct */
 public static final String COLUMNNAME_CurrencyBalancingLoss_Acct = "CurrencyBalancingLoss_Acct";
 /** Set Identifier.
@@ -335,7 +336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7ae90121-8d25-4550-94c4-cfd8df0bab0f",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Income Summary Acct.
@@ -372,7 +373,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="59a751f6-5173-49a0-7472-7d8d9a24c94f",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name IncomeSummary_Acct */
 public static final String COLUMNNAME_IncomeSummary_Acct = "IncomeSummary_Acct";
 /** Set Intercompany Due From Acct.
@@ -391,13 +392,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e70e9b95-94ed-f04d-b34c-e1325b11767e")
+public static String es_PE_FIELD_GeneralLedger_IntercompanyDueFromAcct_Name="Cuenta Inter-Compañía Debido Desde";
+
+@XendraTrl(Identifier="e70e9b95-94ed-f04d-b34c-e1325b11767e")
 public static String es_PE_FIELD_GeneralLedger_IntercompanyDueFromAcct_Description="Cta. Intercompañía que debe a esta compañía / Cuenta por Cobrar";
 
 @XendraTrl(Identifier="e70e9b95-94ed-f04d-b34c-e1325b11767e")
 public static String es_PE_FIELD_GeneralLedger_IntercompanyDueFromAcct_Help="La cuenta Inter-compañía debido desde indica la cuenta que representa dinero que se debe a esta organización desde otras organizaciones";
-
-@XendraTrl(Identifier="e70e9b95-94ed-f04d-b34c-e1325b11767e")
-public static String es_PE_FIELD_GeneralLedger_IntercompanyDueFromAcct_Name="Cuenta Inter-Compañía Debido Desde";
 
 @XendraField(AD_Column_ID="IntercompanyDueFrom_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -415,7 +416,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0ed6b546-fcf1-bbba-b79c-254ff9cfb9ff",Synchronized="2017-08-05 16:53:11.0")
+Identifier="0ed6b546-fcf1-bbba-b79c-254ff9cfb9ff",Synchronized="2019-08-30 22:21:01.0")
 /** Column name IntercompanyDueFrom_Acct */
 public static final String COLUMNNAME_IntercompanyDueFrom_Acct = "IntercompanyDueFrom_Acct";
 /** Set Intercompany Due To Acct.
@@ -434,13 +435,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="120caa3e-a8da-013c-ce7d-2a6e6eae211f")
+public static String es_PE_FIELD_GeneralLedger_IntercompanyDueToAcct_Name="Cuenta Inter-Compañía Debido A";
+
+@XendraTrl(Identifier="120caa3e-a8da-013c-ce7d-2a6e6eae211f")
 public static String es_PE_FIELD_GeneralLedger_IntercompanyDueToAcct_Description="Cta. Inter-compañía que esta compañía debe / Cuenta por Pagar";
 
 @XendraTrl(Identifier="120caa3e-a8da-013c-ce7d-2a6e6eae211f")
 public static String es_PE_FIELD_GeneralLedger_IntercompanyDueToAcct_Help="La cuenta Ínter-compañía debido A indica la cuenta que representa dinero que debe esta organización a otras organizaciones";
-
-@XendraTrl(Identifier="120caa3e-a8da-013c-ce7d-2a6e6eae211f")
-public static String es_PE_FIELD_GeneralLedger_IntercompanyDueToAcct_Name="Cuenta Inter-Compañía Debido A";
 
 @XendraField(AD_Column_ID="IntercompanyDueTo_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -458,7 +459,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ebab5800-4342-cdfe-722c-89324bffac88",Synchronized="2017-08-05 16:53:11.0")
+Identifier="ebab5800-4342-cdfe-722c-89324bffac88",Synchronized="2019-08-30 22:21:01.0")
 /** Column name IntercompanyDueTo_Acct */
 public static final String COLUMNNAME_IntercompanyDueTo_Acct = "IntercompanyDueTo_Acct";
 /** Set PPV Offset.
@@ -477,13 +478,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="0600f06b-cc05-9885-5b2c-5bedd9eb83e5")
+public static String es_PE_FIELD_GeneralLedger_PPVOffset_Name="Cuenta de Balanceo de Variación Precio de Compra";
+
+@XendraTrl(Identifier="0600f06b-cc05-9885-5b2c-5bedd9eb83e5")
 public static String es_PE_FIELD_GeneralLedger_PPVOffset_Description="Cuenta de Balanceo de Variación el Precio de Compra";
 
 @XendraTrl(Identifier="0600f06b-cc05-9885-5b2c-5bedd9eb83e5")
 public static String es_PE_FIELD_GeneralLedger_PPVOffset_Help="Cuenta de Balanceo para variaciones del precio de compras con costeo estándar. La contra cuenta es Variación de Precio de Compras del Producto.";
-
-@XendraTrl(Identifier="0600f06b-cc05-9885-5b2c-5bedd9eb83e5")
-public static String es_PE_FIELD_GeneralLedger_PPVOffset_Name="Cuenta de Balanceo de Variación Precio de Compra";
 
 @XendraField(AD_Column_ID="PPVOffset_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="baf4efeb-69b0-7c1e-3d95-64e0612c860f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -501,7 +502,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fa93b1c4-1fff-541a-0174-c6e856ff4634",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name PPVOffset_Acct */
 public static final String COLUMNNAME_PPVOffset_Acct = "PPVOffset_Acct";
 /** Set Retained Earning Acct.
@@ -538,7 +539,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9703f159-5412-e9e7-498a-44ba04949782",Synchronized="2017-08-05 16:53:11.0")
+Identifier="9703f159-5412-e9e7-498a-44ba04949782",Synchronized="2019-08-30 22:21:01.0")
 /** Column name RetainedEarning_Acct */
 public static final String COLUMNNAME_RetainedEarning_Acct = "RetainedEarning_Acct";
 /** Set Suspense Balancing Acct.
@@ -575,7 +576,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5f007e54-fbfd-efea-0cdc-dcab3229635c",Synchronized="2017-08-05 16:53:11.0")
+Identifier="5f007e54-fbfd-efea-0cdc-dcab3229635c",Synchronized="2019-08-30 22:21:01.0")
 /** Column name SuspenseBalancing_Acct */
 public static final String COLUMNNAME_SuspenseBalancing_Acct = "SuspenseBalancing_Acct";
 /** Set Suspense Error Acct.
@@ -612,7 +613,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56644864-4279-e044-558d-3a8f00ef38f4",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name SuspenseError_Acct */
 public static final String COLUMNNAME_SuspenseError_Acct = "SuspenseError_Acct";
 /** Set Use Currency Balancing.
@@ -653,7 +654,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f445dbfa-574f-f84b-721a-808dea3f5d1c",Synchronized="2017-08-05 16:53:11.0")
+Identifier="f445dbfa-574f-f84b-721a-808dea3f5d1c",Synchronized="2019-08-30 22:21:01.0")
 /** Column name UseCurrencyBalancing */
 public static final String COLUMNNAME_UseCurrencyBalancing = "UseCurrencyBalancing";
 /** Set Use Suspense Balancing.
@@ -694,7 +695,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="be518ed2-3479-17f7-8231-25c89dd4d62d",Synchronized="2017-08-05 16:53:11.0")
+Identifier="be518ed2-3479-17f7-8231-25c89dd4d62d",Synchronized="2019-08-30 22:21:01.0")
 /** Column name UseSuspenseBalancing */
 public static final String COLUMNNAME_UseSuspenseBalancing = "UseSuspenseBalancing";
 /** Set Use Suspense Error.
@@ -735,7 +736,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3c9fd1ba-c443-f8f2-3eb0-82e2f0e2dd49",
-Synchronized="2017-08-05 16:53:11.0")
+Synchronized="2019-08-30 22:21:01.0")
 /** Column name UseSuspenseError */
 public static final String COLUMNNAME_UseSuspenseError = "UseSuspenseError";
 }

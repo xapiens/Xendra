@@ -5,7 +5,7 @@ package org.simoes.util;
 import java.io.*;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.compiere.util.Util;
 
 /**
@@ -15,7 +15,7 @@ import org.compiere.util.Util;
  * @author Chris Simoes
  */
 public class StringUtil {
-	static Logger log = Logger.getLogger(StringUtil.class);
+	static CLogger log = CLogger.getCLogger(StringUtil.class);
 	
 	/**
 	 * Creates a Vector of byte[] from the command passed in.
@@ -93,7 +93,7 @@ public class StringUtil {
 		int currentPos = 0;
         
 		if(-1 == startOfReplace) {
-			log.debug(METHOD_NAME + "Replace string(" + replace + ") not found in the line passed in.");
+			log.fine(METHOD_NAME + "Replace string(" + replace + ") not found in the line passed in.");
 			return line;
 		}
 		while(-1 != startOfReplace) {
@@ -211,8 +211,8 @@ public class StringUtil {
 		} else if(str.equalsIgnoreCase("N")) {
 			result = "N";
 		} else {
-			log.error(METHOD_NAME + "String was not null, nor was it a Y or an N.");
-			log.error(METHOD_NAME + "String passed in:" + str);
+			log.severe(METHOD_NAME + "String was not null, nor was it a Y or an N.");
+			log.severe(METHOD_NAME + "String passed in:" + str);
 		}
 		return result;
 	}

@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("A_Xendrian_Message");
 @XendraTrl(Identifier="c81aa431-2adb-4ca8-bbeb-3d331f9103cc")
 public static String es_PE_TABLE_A_Xendrian_Message_Name="Xendrian Message";
 
-@XendraTable(Name="Xendrian Message",Description="",Help="",TableName="A_Xendrian_Message",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="c81aa431-2adb-4ca8-bbeb-3d331f9103cc",
-Synchronized="2017-08-16 11:41:15.0")
+@XendraTable(Name="Xendrian Message",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_Xendrian_Message",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="c81aa431-2adb-4ca8-bbeb-3d331f9103cc",
+Synchronized="2020-03-03 21:36:16.0")
 /** TableName=A_Xendrian_Message */
 public static final String Table_Name="A_Xendrian_Message";
 
@@ -106,6 +107,35 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_A_Xendrian_Message[").append(get_ID()).append("]");
 return sb.toString();
 }
+/** Set Message Format.
+@param AD_MessageFormat_ID Message Format */
+public void setAD_MessageFormat_ID (int AD_MessageFormat_ID)
+{
+if (AD_MessageFormat_ID <= 0) set_Value (COLUMNNAME_AD_MessageFormat_ID, null);
+ else 
+set_Value (COLUMNNAME_AD_MessageFormat_ID, Integer.valueOf(AD_MessageFormat_ID));
+}
+/** Get Message Format.
+@return Message Format */
+public int getAD_MessageFormat_ID() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_AD_MessageFormat_ID);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="24489762-3323-4575-b8cf-ebc96a134120")
+public static String es_PE_COLUMN_AD_MessageFormat_ID_Name="Message Format";
+
+@XendraColumn(AD_Element_ID="4bfbf9f8-a9e2-4831-bd11-0a42552d9e0c",
+ColumnName="AD_MessageFormat_ID",AD_Reference_ID=19,AD_Reference_Value_ID="",AD_Val_Rule_ID="",
+FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="24489762-3323-4575-b8cf-ebc96a134120",Synchronized="2019-08-30 22:20:56.0")
+/** Column name AD_MessageFormat_ID */
+public static final String COLUMNNAME_AD_MessageFormat_ID = "AD_MessageFormat_ID";
 /** Set Process.
 @param AD_Process_ID Process or Report */
 public void setAD_Process_ID (int AD_Process_ID)
@@ -132,7 +162,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="748d1f24-6684-4e8d-bb17-0e5339c7a606",
-Synchronized="2015-08-11 20:41:56.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name AD_Process_ID */
 public static final String COLUMNNAME_AD_Process_ID = "AD_Process_ID";
 /** Set Xendrian Message.
@@ -181,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2e3ca92a-75f5-40be-a25a-0fe3a70fa705",
-Synchronized="2015-08-11 20:41:56.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Identifier.
@@ -213,7 +243,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="34134921-4f95-45ea-ac1c-f8047807af00",
-Synchronized="2015-08-11 20:41:56.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Message.
@@ -240,7 +270,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0847082b-cb5f-4629-9f67-9f81c5171acc",
-Synchronized="2015-08-11 20:41:56.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 /** Set Processed.
@@ -271,7 +301,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4ba0c417-15ff-459d-9e24-d3b9e9b24e0a",
-Synchronized="2015-08-11 20:41:56.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -302,7 +332,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2517dbb7-50a8-4029-bf14-803b12ada174",
-Synchronized="2015-08-11 20:41:57.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

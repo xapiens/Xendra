@@ -1,7 +1,7 @@
 package org.xendra.printdocument;
 
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.xendra.common.Lock;
 import org.xendra.common.Queue;
 import org.xendra.common.QueuedObject;
@@ -14,7 +14,7 @@ import org.xendra.common.QueuedObject;
  */
 public class PrintQueue {    
     // logger
-    static Logger log = Logger.getLogger(PrintQueue.class);
+    static CLogger log = CLogger.getCLogger(PrintQueue.class);
     
     // private constants
     private final static String CLASS = PrintQueue.class.getName();

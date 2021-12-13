@@ -62,10 +62,10 @@ public static int Table_ID=MTable.getTable_ID("C_ServiceLevel");
 public static String es_PE_TAB_ServiceLevel_Description="Ver nivel de servicio";
 
 @XendraTrl(Identifier="5805fe9f-d96f-828f-6fa5-92d9720b7cb8")
-public static String es_PE_TAB_ServiceLevel_Name="Nivel de Servicios";
+public static String es_PE_TAB_ServiceLevel_Help="El nivel de servicio es creado automáticamente cuando se crea una factura con productos definidos con reconocimiento de ingresos basado en servicios.";
 
 @XendraTrl(Identifier="5805fe9f-d96f-828f-6fa5-92d9720b7cb8")
-public static String es_PE_TAB_ServiceLevel_Help="El nivel de servicio es creado automáticamente cuando se crea una factura con productos definidos con reconocimiento de ingresos basado en servicios.";
+public static String es_PE_TAB_ServiceLevel_Name="Nivel de Servicios";
 
 @XendraTab(Name="Service Level",Description="View Service Level",
 Help="The service level is automatically created when creating an invoice with products using revenue recognition based on service levels.",
@@ -80,11 +80,13 @@ public static final String TABNAME_ServiceLevel="5805fe9f-d96f-828f-6fa5-92d9720
 @XendraTrl(Identifier="847f1ab7-45cd-ba51-e70e-92aa46255e87")
 public static String es_PE_TABLE_C_ServiceLevel_Name="Nivel de Servicio";
 
-@XendraTable(Name="Service Level",Description="Product Revenue Recognition Service Level ",Help="",
-TableName="C_ServiceLevel",AccessLevel="1",AD_Window_ID="ada6f57e-aa4d-9c4f-7f16-8f7ec312ac8b",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="847f1ab7-45cd-ba51-e70e-92aa46255e87",Synchronized="2017-08-16 11:42:28.0")
+@XendraTable(Name="Service Level",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Product Revenue Recognition Service Level ",Help="",TableName="C_ServiceLevel",
+AccessLevel="1",AD_Window_ID="ada6f57e-aa4d-9c4f-7f16-8f7ec312ac8b",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="847f1ab7-45cd-ba51-e70e-92aa46255e87",Synchronized="2020-03-03 21:37:40.0")
 /** TableName=C_ServiceLevel */
 public static final String Table_Name="C_ServiceLevel";
 
@@ -134,13 +136,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="547fded7-7481-080b-1997-6d647c19ec08")
+public static String es_PE_FIELD_ServiceLevel_RevenueRecognitionPlan_Name="Plan de Reconocimiento de ingresos";
+
+@XendraTrl(Identifier="547fded7-7481-080b-1997-6d647c19ec08")
 public static String es_PE_FIELD_ServiceLevel_RevenueRecognitionPlan_Description="Plan para reconocer ó registrar ingresos";
 
 @XendraTrl(Identifier="547fded7-7481-080b-1997-6d647c19ec08")
 public static String es_PE_FIELD_ServiceLevel_RevenueRecognitionPlan_Help="El plan de reconocimiento de Ingresos identifica un plan de reconocimiento de Ingresos único.";
-
-@XendraTrl(Identifier="547fded7-7481-080b-1997-6d647c19ec08")
-public static String es_PE_FIELD_ServiceLevel_RevenueRecognitionPlan_Name="Plan de Reconocimiento de ingresos";
 
 @XendraField(AD_Column_ID="C_RevenueRecognition_Plan_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -158,7 +160,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="57cb806f-35bd-2999-c7ce-ccd3c0cc9f95",Synchronized="2017-08-05 16:54:26.0")
+Identifier="57cb806f-35bd-2999-c7ce-ccd3c0cc9f95",Synchronized="2019-08-30 22:22:17.0")
 /** Column name C_RevenueRecognition_Plan_ID */
 public static final String COLUMNNAME_C_RevenueRecognition_Plan_ID = "C_RevenueRecognition_Plan_ID";
 /** Set Service Level.
@@ -178,13 +180,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="4cd7bf53-c516-db50-cb54-1333e3277984")
+public static String es_PE_FIELD_ServiceLevel_ServiceLevel_Name="Nivel de Servicio";
+
+@XendraTrl(Identifier="4cd7bf53-c516-db50-cb54-1333e3277984")
 public static String es_PE_FIELD_ServiceLevel_ServiceLevel_Description="Reconocimiento de ingresos basados en el nivel de servicio.";
 
 @XendraTrl(Identifier="4cd7bf53-c516-db50-cb54-1333e3277984")
 public static String es_PE_FIELD_ServiceLevel_ServiceLevel_Help="El nivel de servicio define un nivel de servicio único.";
-
-@XendraTrl(Identifier="4cd7bf53-c516-db50-cb54-1333e3277984")
-public static String es_PE_FIELD_ServiceLevel_ServiceLevel_Name="Nivel de Servicio";
 
 @XendraField(AD_Column_ID="C_ServiceLevel_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -228,13 +230,13 @@ return new KeyNamePair(get_ID(), getDescription());
 }
 
 @XendraTrl(Identifier="9fcd2c5a-743e-cd89-b813-25fd5f34a2bf")
+public static String es_PE_FIELD_ServiceLevel_Description_Name="Observación";
+
+@XendraTrl(Identifier="9fcd2c5a-743e-cd89-b813-25fd5f34a2bf")
 public static String es_PE_FIELD_ServiceLevel_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="9fcd2c5a-743e-cd89-b813-25fd5f34a2bf")
 public static String es_PE_FIELD_ServiceLevel_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="9fcd2c5a-743e-cd89-b813-25fd5f34a2bf")
-public static String es_PE_FIELD_ServiceLevel_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -252,7 +254,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="800bfb7c-145f-0d89-ab18-610e8a6333c7",
-Synchronized="2017-08-05 16:54:26.0")
+Synchronized="2019-08-30 22:22:17.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -284,7 +286,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="75bc7abb-60c6-472a-b90d-0a6e2ddda6e1",
-Synchronized="2017-08-05 16:54:26.0")
+Synchronized="2019-08-30 22:22:17.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -304,13 +306,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="83803e5b-6594-eda4-68f5-4e9e9179892a")
+public static String es_PE_FIELD_ServiceLevel_Product_Name="Producto";
+
+@XendraTrl(Identifier="83803e5b-6594-eda4-68f5-4e9e9179892a")
 public static String es_PE_FIELD_ServiceLevel_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="83803e5b-6594-eda4-68f5-4e9e9179892a")
 public static String es_PE_FIELD_ServiceLevel_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="83803e5b-6594-eda4-68f5-4e9e9179892a")
-public static String es_PE_FIELD_ServiceLevel_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -328,7 +330,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="979fcf68-376d-e783-2992-9b88fc77e9e9",Synchronized="2017-08-05 16:54:26.0")
+Identifier="979fcf68-376d-e783-2992-9b88fc77e9e9",Synchronized="2019-08-30 22:22:17.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Processed.
@@ -351,13 +353,13 @@ return false;
 }
 
 @XendraTrl(Identifier="ce7a838f-a97c-8244-853d-489a06f93d00")
+public static String es_PE_FIELD_ServiceLevel_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="ce7a838f-a97c-8244-853d-489a06f93d00")
 public static String es_PE_FIELD_ServiceLevel_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="ce7a838f-a97c-8244-853d-489a06f93d00")
 public static String es_PE_FIELD_ServiceLevel_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="ce7a838f-a97c-8244-853d-489a06f93d00")
-public static String es_PE_FIELD_ServiceLevel_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -375,7 +377,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f18bedd4-4561-fc28-e5ff-fed5b6c94ad8",
-Synchronized="2017-08-05 16:54:26.0")
+Synchronized="2019-08-30 22:22:17.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -416,7 +418,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27ef6e49-af96-3983-e4c5-681906361b49",
-Synchronized="2017-08-05 16:54:26.0")
+Synchronized="2019-08-30 22:22:17.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Quantity Invoiced.
@@ -436,13 +438,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="4d89341e-85be-6c6e-c345-492cf00d7507")
+public static String es_PE_FIELD_ServiceLevel_QuantityInvoiced_Name="Cantidad Facturada";
+
+@XendraTrl(Identifier="4d89341e-85be-6c6e-c345-492cf00d7507")
 public static String es_PE_FIELD_ServiceLevel_QuantityInvoiced_Description="Cantidad de producto ó servicio facturado";
 
 @XendraTrl(Identifier="4d89341e-85be-6c6e-c345-492cf00d7507")
 public static String es_PE_FIELD_ServiceLevel_QuantityInvoiced_Help="La cantidad facturada indica la cantidad total de un producto ó servicio facturado";
-
-@XendraTrl(Identifier="4d89341e-85be-6c6e-c345-492cf00d7507")
-public static String es_PE_FIELD_ServiceLevel_QuantityInvoiced_Name="Cantidad Facturada";
 
 @XendraField(AD_Column_ID="ServiceLevelInvoiced",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -460,7 +462,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="25d5492b-0f82-3e5b-c165-5d5b897025d6",Synchronized="2017-08-05 16:54:26.0")
+Identifier="25d5492b-0f82-3e5b-c165-5d5b897025d6",Synchronized="2019-08-30 22:22:17.0")
 /** Column name ServiceLevelInvoiced */
 public static final String COLUMNNAME_ServiceLevelInvoiced = "ServiceLevelInvoiced";
 /** Set Quantity Provided.
@@ -480,13 +482,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="e99d96c2-b22a-737c-4c40-9b583c4e4adc")
+public static String es_PE_FIELD_ServiceLevel_QuantityProvided_Name="Cantidad Entregada";
+
+@XendraTrl(Identifier="e99d96c2-b22a-737c-4c40-9b583c4e4adc")
 public static String es_PE_FIELD_ServiceLevel_QuantityProvided_Description="Cantidad de producto ó servicio proporcionado";
 
 @XendraTrl(Identifier="e99d96c2-b22a-737c-4c40-9b583c4e4adc")
 public static String es_PE_FIELD_ServiceLevel_QuantityProvided_Help="La cantidad proveída indica la cantidad total de un producto ó servicio que ha sido recibido por el cliente";
-
-@XendraTrl(Identifier="e99d96c2-b22a-737c-4c40-9b583c4e4adc")
-public static String es_PE_FIELD_ServiceLevel_QuantityProvided_Name="Cantidad Entregada";
 
 @XendraField(AD_Column_ID="ServiceLevelProvided",IsCentrallyMaintained=true,
 AD_Tab_ID="5805fe9f-d96f-828f-6fa5-92d9720b7cb8",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -504,7 +506,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="935a1999-168d-2a74-f19e-c80b40fd8657",Synchronized="2017-08-05 16:54:26.0")
+Identifier="935a1999-168d-2a74-f19e-c80b40fd8657",Synchronized="2019-08-30 22:22:17.0")
 /** Column name ServiceLevelProvided */
 public static final String COLUMNNAME_ServiceLevelProvided = "ServiceLevelProvided";
 }

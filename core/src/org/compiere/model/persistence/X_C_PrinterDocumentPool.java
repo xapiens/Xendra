@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("C_PrinterDocumentPool");
 @XendraTrl(Identifier="bfba69f9-652a-4397-957f-df0ac2a70cd6")
 public static String es_PE_TABLE_C_PrinterDocumentPool_Name="C_PrinterDocumentPool";
 
-@XendraTable(Name="C_PrinterDocumentPool",Description="",Help="",TableName="C_PrinterDocumentPool",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="bfba69f9-652a-4397-957f-df0ac2a70cd6",
-Synchronized="2017-08-16 11:42:17.0")
+@XendraTable(Name="C_PrinterDocumentPool",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_PrinterDocumentPool",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="bfba69f9-652a-4397-957f-df0ac2a70cd6",Synchronized="2020-03-03 21:37:30.0")
 /** TableName=C_PrinterDocumentPool */
 public static final String Table_Name="C_PrinterDocumentPool";
 
@@ -122,7 +123,7 @@ AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="66b4b875-11e8-4754-9f61-43c55faba359",Synchronized="2017-08-05 16:54:13.0")
+Identifier="66b4b875-11e8-4754-9f61-43c55faba359",Synchronized="2019-08-30 22:22:06.0")
 /** Column name C_PrinterDocumentFormat_ID */
 public static final String COLUMNNAME_C_PrinterDocumentFormat_ID = "C_PrinterDocumentFormat_ID";
 /** Set C_PrinterDocumentPool_ID.
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="37ab837b-cee0-4d12-a4c1-6183f8b5af40",
-Synchronized="2017-08-05 16:54:13.0")
+Synchronized="2019-08-30 22:22:06.0")
 /** Column name Environment */
 public static final String COLUMNNAME_Environment = "Environment";
 /** Set Identifier.
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c88e1c16-95b7-4a07-9112-7f3ff4717fe3",
-Synchronized="2017-08-05 16:54:13.0")
+Synchronized="2019-08-30 22:22:06.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set QueueName.
@@ -232,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a81b7de2-704a-4283-b4e1-0a3bb686294a",
-Synchronized="2017-08-05 16:54:13.0")
+Synchronized="2019-08-30 22:22:06.0")
 /** Column name QueueName */
 public static final String COLUMNNAME_QueueName = "QueueName";
 }

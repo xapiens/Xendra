@@ -74,11 +74,13 @@ public static final String TABNAME_AlertRecipient="aeb65600-ba69-a246-4207-f05b9
 @XendraTrl(Identifier="9cf80932-3645-b7ad-b5e6-0de2072068b7")
 public static String es_PE_TABLE_AD_AlertRecipient_Name="Recipiente de Alertas";
 
-@XendraTable(Name="Alert Recipient",Description="Recipient of the Alert Notification",Help="",
-TableName="AD_AlertRecipient",AccessLevel="6",AD_Window_ID="dc53fc66-0028-1335-3ffe-929e517d2505",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="9cf80932-3645-b7ad-b5e6-0de2072068b7",Synchronized="2017-08-16 11:39:57.0")
+@XendraTable(Name="Alert Recipient",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Recipient of the Alert Notification",Help="",TableName="AD_AlertRecipient",
+AccessLevel="6",AD_Window_ID="dc53fc66-0028-1335-3ffe-929e517d2505",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="9cf80932-3645-b7ad-b5e6-0de2072068b7",Synchronized="2020-03-03 21:34:51.0")
 /** TableName=AD_AlertRecipient */
 public static final String Table_Name="AD_AlertRecipient";
 
@@ -128,13 +130,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="77106793-b007-3339-6873-fc09d0e1740d")
+public static String es_PE_FIELD_AlertRecipient_Alert_Name="Alerta";
+
+@XendraTrl(Identifier="77106793-b007-3339-6873-fc09d0e1740d")
 public static String es_PE_FIELD_AlertRecipient_Alert_Description="Auditor de alertas.";
 
 @XendraTrl(Identifier="77106793-b007-3339-6873-fc09d0e1740d")
 public static String es_PE_FIELD_AlertRecipient_Alert_Help="Adempiere permite definir condiciones de alerta en el sistema para estar informado.";
-
-@XendraTrl(Identifier="77106793-b007-3339-6873-fc09d0e1740d")
-public static String es_PE_FIELD_AlertRecipient_Alert_Name="Alerta";
 
 @XendraField(AD_Column_ID="AD_Alert_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="aeb65600-ba69-a246-4207-f05b9a94d154",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -152,7 +154,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d67a062-f4da-6497-ad9e-1a75fee25c29",
-Synchronized="2017-08-05 16:52:21.0")
+Synchronized="2020-03-03 21:34:20.0")
 /** Column name AD_Alert_ID */
 public static final String COLUMNNAME_AD_Alert_ID = "AD_Alert_ID";
 /** Set Alert Recipient.
@@ -172,13 +174,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="df1cc2b8-8e67-3411-39b4-904abad85f42")
+public static String es_PE_FIELD_AlertRecipient_AlertRecipient_Name="Recipiente de Alertas";
+
+@XendraTrl(Identifier="df1cc2b8-8e67-3411-39b4-904abad85f42")
 public static String es_PE_FIELD_AlertRecipient_AlertRecipient_Description="Recipiente de la notificación de alertas.";
 
 @XendraTrl(Identifier="df1cc2b8-8e67-3411-39b4-904abad85f42")
 public static String es_PE_FIELD_AlertRecipient_AlertRecipient_Help="Usted puede enviar las notificaciones para usuarios ó roles.";
-
-@XendraTrl(Identifier="df1cc2b8-8e67-3411-39b4-904abad85f42")
-public static String es_PE_FIELD_AlertRecipient_AlertRecipient_Name="Recipiente de Alertas";
 
 @XendraField(AD_Column_ID="AD_AlertRecipient_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="aeb65600-ba69-a246-4207-f05b9a94d154",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -206,13 +208,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="37b44f60-1032-faab-9607-d5dbf100d40f")
+public static String es_PE_FIELD_AlertRecipient_Role_Name="Rol";
+
+@XendraTrl(Identifier="37b44f60-1032-faab-9607-d5dbf100d40f")
 public static String es_PE_FIELD_AlertRecipient_Role_Description="Rol de responsabilidad";
 
 @XendraTrl(Identifier="37b44f60-1032-faab-9607-d5dbf100d40f")
 public static String es_PE_FIELD_AlertRecipient_Role_Help="El Rol determina la seguridad y acceso del usuario que posee este Rol";
-
-@XendraTrl(Identifier="37b44f60-1032-faab-9607-d5dbf100d40f")
-public static String es_PE_FIELD_AlertRecipient_Role_Name="Rol";
 
 @XendraField(AD_Column_ID="AD_Role_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="aeb65600-ba69-a246-4207-f05b9a94d154",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -230,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a19dfbdd-aa9a-26e5-3ac5-5df3e9a08735",
-Synchronized="2017-08-05 16:52:21.0")
+Synchronized="2020-03-03 21:34:20.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set User/Contact.
@@ -257,13 +259,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="47c56e94-de3f-b9fc-a034-ba0828bdbb23")
+public static String es_PE_FIELD_AlertRecipient_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="47c56e94-de3f-b9fc-a034-ba0828bdbb23")
 public static String es_PE_FIELD_AlertRecipient_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="47c56e94-de3f-b9fc-a034-ba0828bdbb23")
 public static String es_PE_FIELD_AlertRecipient_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="47c56e94-de3f-b9fc-a034-ba0828bdbb23")
-public static String es_PE_FIELD_AlertRecipient_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="aeb65600-ba69-a246-4207-f05b9a94d154",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -281,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="50620fcd-8a36-8bc3-cf1d-042d597db686",
-Synchronized="2017-08-05 16:52:21.0")
+Synchronized="2020-03-03 21:34:20.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -313,7 +315,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56e46d29-2e76-4ab5-8849-2b1245158726",
-Synchronized="2017-08-05 16:52:21.0")
+Synchronized="2020-03-03 21:34:20.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

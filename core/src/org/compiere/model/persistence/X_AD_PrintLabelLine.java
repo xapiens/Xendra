@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_PrintLabelLineType;
 /** Generated Model for AD_PrintLabelLine
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -67,28 +66,29 @@ public static int Table_ID=MTable.getTable_ID("AD_PrintLabelLine");
 public static String es_PE_TAB_Line_Description="Ìtem de la etiqueta de la impresión";
 
 @XendraTrl(Identifier="b4f3ee34-6563-d632-44a5-24a32e22838f")
-public static String es_PE_TAB_Line_Name="Línea";
-
-@XendraTrl(Identifier="b4f3ee34-6563-d632-44a5-24a32e22838f")
 public static String es_PE_TAB_Line_Help="Mantener formato de la línea en la etiqueta";
 
-@XendraTab(Name="Line",Description="Print Label Line",
-Help="Maintain Format of the line on a Label",AD_Window_ID="f9dedcb3-64b8-9e14-5fb5-6cd892b7e3aa",
-SeqNo=20,TabLevel=1,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,
-AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
-AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",
-ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
+@XendraTrl(Identifier="b4f3ee34-6563-d632-44a5-24a32e22838f")
+public static String es_PE_TAB_Line_Name="Línea";
+@XendraTab(Name="Line",
+Description="Print Label Line",Help="Maintain Format of the line on a Label",
+AD_Window_ID="f9dedcb3-64b8-9e14-5fb5-6cd892b7e3aa",SeqNo=20,TabLevel=1,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
+WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
+AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",
+IsInsertRecord=true,IsAdvancedTab=false,Parent_Column_ID="",
 Identifier="b4f3ee34-6563-d632-44a5-24a32e22838f",Synchronized="2012-03-17 18:47:08.603")
 public static final String TABNAME_Line="b4f3ee34-6563-d632-44a5-24a32e22838f";
 
 @XendraTrl(Identifier="08d218e3-00ed-9c0d-0288-2f1ea31bde65")
 public static String es_PE_TABLE_AD_PrintLabelLine_Name="Impresión Etiqueta Linea";
 
-@XendraTable(Name="Print Label Line",Description="Print Label Line Format",Help="",
+@XendraTable(Name="Print Label Line",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Print Label Line Format",Help="",
 TableName="AD_PrintLabelLine",AccessLevel="6",AD_Window_ID="f9dedcb3-64b8-9e14-5fb5-6cd892b7e3aa",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=140,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="08d218e3-00ed-9c0d-0288-2f1ea31bde65",Synchronized="2017-08-16 11:40:49.0")
+Identifier="08d218e3-00ed-9c0d-0288-2f1ea31bde65",Synchronized="2020-03-03 21:35:42.0")
 /** TableName=AD_PrintLabelLine */
 public static final String Table_Name="AD_PrintLabelLine";
 
@@ -139,13 +139,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="07ec1dd0-47ef-5816-6409-94ad1b1e7717")
+public static String es_PE_FIELD_Line_Column_Name="Columna";
+
+@XendraTrl(Identifier="07ec1dd0-47ef-5816-6409-94ad1b1e7717")
 public static String es_PE_FIELD_Line_Column_Description="Columna en la tabla";
 
 @XendraTrl(Identifier="07ec1dd0-47ef-5816-6409-94ad1b1e7717")
 public static String es_PE_FIELD_Line_Column_Help="Enlace a la columna base de datos de la tabla";
-
-@XendraTrl(Identifier="07ec1dd0-47ef-5816-6409-94ad1b1e7717")
-public static String es_PE_FIELD_Line_Column_Name="Columna";
 
 @XendraField(AD_Column_ID="AD_Column_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -163,7 +163,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d74832f7-abc3-b907-dd63-272aaf8bc681",Synchronized="2017-08-05 16:52:43.0")
+Identifier="d74832f7-abc3-b907-dd63-272aaf8bc681",Synchronized="2019-08-30 22:20:34.0")
 /** Column name AD_Column_ID */
 public static final String COLUMNNAME_AD_Column_ID = "AD_Column_ID";
 /** Set Label printer Function.
@@ -183,10 +183,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d5400fac-b529-6e59-7fcd-c79519c61fb3")
-public static String es_PE_FIELD_Line_LabelPrinterFunction_Description="Función de la impresión de etiqueta";
+public static String es_PE_FIELD_Line_LabelPrinterFunction_Name="Función de la Impresión de Etiqueta";
 
 @XendraTrl(Identifier="d5400fac-b529-6e59-7fcd-c79519c61fb3")
-public static String es_PE_FIELD_Line_LabelPrinterFunction_Name="Función de la Impresión de Etiqueta";
+public static String es_PE_FIELD_Line_LabelPrinterFunction_Description="Función de la impresión de etiqueta";
 
 @XendraField(AD_Column_ID="AD_LabelPrinterFunction_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -205,7 +205,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9af2a727-8eaf-b0ce-999d-6f73febc00a5",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name AD_LabelPrinterFunction_ID */
 public static final String COLUMNNAME_AD_LabelPrinterFunction_ID = "AD_LabelPrinterFunction_ID";
 /** Set Print Label.
@@ -225,13 +225,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f020a439-8c54-490b-e52b-c85c78411185")
+public static String es_PE_FIELD_Line_PrintLabel_Name="Etiqueta Impresión";
+
+@XendraTrl(Identifier="f020a439-8c54-490b-e52b-c85c78411185")
 public static String es_PE_FIELD_Line_PrintLabel_Description="Formato de la etiqueta a imprimir";
 
 @XendraTrl(Identifier="f020a439-8c54-490b-e52b-c85c78411185")
 public static String es_PE_FIELD_Line_PrintLabel_Help="Formato para imprimir etiqueta";
-
-@XendraTrl(Identifier="f020a439-8c54-490b-e52b-c85c78411185")
-public static String es_PE_FIELD_Line_PrintLabel_Name="Etiqueta Impresión";
 
 @XendraField(AD_Column_ID="AD_PrintLabel_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -249,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b4d66df3-83db-dc4f-306d-c0619d70dd92",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name AD_PrintLabel_ID */
 public static final String COLUMNNAME_AD_PrintLabel_ID = "AD_PrintLabel_ID";
 /** Set Print Label Line.
@@ -269,13 +269,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b1b8fa1b-5180-0f59-53b9-9196e1a14da0")
+public static String es_PE_FIELD_Line_PrintLabelLine_Name="Impresión Etiqueta Linea";
+
+@XendraTrl(Identifier="b1b8fa1b-5180-0f59-53b9-9196e1a14da0")
 public static String es_PE_FIELD_Line_PrintLabelLine_Description="Impresión de etiqueta con formato de linea.";
 
 @XendraTrl(Identifier="b1b8fa1b-5180-0f59-53b9-9196e1a14da0")
 public static String es_PE_FIELD_Line_PrintLabelLine_Help="Formato de linea en la etiqueta.";
-
-@XendraTrl(Identifier="b1b8fa1b-5180-0f59-53b9-9196e1a14da0")
-public static String es_PE_FIELD_Line_PrintLabelLine_Name="Impresión Etiqueta Linea";
 
 @XendraField(AD_Column_ID="AD_PrintLabelLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -314,19 +314,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80b6a768-9934-403b-ab9e-7bce217e967c",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
-
-/** LabelFormatType AD_Reference=15f6fee1-f96a-305c-8322-4fa07ae1266a */
-public static final int LABELFORMATTYPE_AD_Reference_ID=280;
 /** Set Label Format Type.
 @param LabelFormatType Label Format Type */
 public void setLabelFormatType (String LabelFormatType)
 {
-if (LabelFormatType == null) throw new IllegalArgumentException ("LabelFormatType is mandatory");
-if (LabelFormatType.equals(REF_AD_PrintLabelLineType.Field) || LabelFormatType.equals(REF_AD_PrintLabelLineType.Text));
- else throw new IllegalArgumentException ("LabelFormatType Invalid value - " + LabelFormatType + " - Reference_ID=280 - F - T");
 if (LabelFormatType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -342,10 +336,10 @@ return (String)get_Value(COLUMNNAME_LabelFormatType);
 }
 
 @XendraTrl(Identifier="c3a278f2-4ca0-74c0-1cd6-f20262628a81")
-public static String es_PE_FIELD_Line_LabelFormatType_Description="Tipo del Formato de la Etiqueta";
+public static String es_PE_FIELD_Line_LabelFormatType_Name="Tipo del Formato de la Etiqueta";
 
 @XendraTrl(Identifier="c3a278f2-4ca0-74c0-1cd6-f20262628a81")
-public static String es_PE_FIELD_Line_LabelFormatType_Name="Tipo del Formato de la Etiqueta";
+public static String es_PE_FIELD_Line_LabelFormatType_Description="Tipo del Formato de la Etiqueta";
 
 @XendraField(AD_Column_ID="LabelFormatType",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -363,7 +357,7 @@ FieldLength=1,DefaultValue="F",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c7bc15d2-aba6-ce7b-49b2-6a3e016293be",Synchronized="2017-08-05 16:52:43.0")
+Identifier="c7bc15d2-aba6-ce7b-49b2-6a3e016293be",Synchronized="2019-08-30 22:20:34.0")
 /** Column name LabelFormatType */
 public static final String COLUMNNAME_LabelFormatType = "LabelFormatType";
 /** Set Name.
@@ -388,18 +382,19 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
+public static String es_PE_FIELD_Line_Name_Name="Nombre";
+
+@XendraTrl(Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
 public static String es_PE_FIELD_Line_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
 public static String es_PE_FIELD_Line_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
-public static String es_PE_FIELD_Line_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="1dfa9875-e82c-683c-51e9-d2f145f8a019")
 public static final String FIELDNAME_Line_Name="1dfa9875-e82c-683c-51e9-d2f145f8a019";
 
 @XendraTrl(Identifier="7b43eaee-d3bb-d9dd-3584-c70de14c50b2")
@@ -411,7 +406,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b43eaee-d3bb-d9dd-3584-c70de14c50b2",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Print Text.
@@ -435,13 +430,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="46ae9773-cf49-624a-0540-972f7cf71c1d")
+public static String es_PE_FIELD_Line_PrintText_Name="Nombre a ser Impreso";
+
+@XendraTrl(Identifier="46ae9773-cf49-624a-0540-972f7cf71c1d")
 public static String es_PE_FIELD_Line_PrintText_Description="Indica el nombre a ser impreso en un documento ó correspondencia";
 
 @XendraTrl(Identifier="46ae9773-cf49-624a-0540-972f7cf71c1d")
 public static String es_PE_FIELD_Line_PrintText_Help="El nombre a ser Impreso indica el nombre que será impreso en un documento ó correspondencia";
-
-@XendraTrl(Identifier="46ae9773-cf49-624a-0540-972f7cf71c1d")
-public static String es_PE_FIELD_Line_PrintText_Name="Nombre a ser Impreso";
 
 @XendraField(AD_Column_ID="PrintName",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -459,7 +454,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8cb49f7b-9bd6-8f48-31aa-bc1e8c0ac35a",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name PrintName */
 public static final String COLUMNNAME_PrintName = "PrintName";
 /** Set Sequence.
@@ -484,18 +479,19 @@ return new KeyNamePair(get_ID(), String.valueOf(getSeqNo()));
 }
 
 @XendraTrl(Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
+public static String es_PE_FIELD_Line_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
 public static String es_PE_FIELD_Line_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraTrl(Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
 public static String es_PE_FIELD_Line_Sequence_Help="La Secuencia indica el orden de los registros";
 
-@XendraTrl(Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
-public static String es_PE_FIELD_Line_Sequence_Name="Secuencia";
-@XendraField(AD_Column_ID="SeqNo",
-IsCentrallyMaintained=true,AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
+@XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
+AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=50,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="cf193668-3b1b-f9ae-ca74-b1bd610adc46")
 public static final String FIELDNAME_Line_Sequence="cf193668-3b1b-f9ae-ca74-b1bd610adc46";
 
 @XendraTrl(Identifier="0d222328-1c97-f63a-7153-cdd39b8e3484")
@@ -507,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0d222328-1c97-f63a-7153-cdd39b8e3484",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set X Position.
@@ -526,13 +522,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="05505cb9-f156-df9c-96df-436ad1684aaf")
+public static String es_PE_FIELD_Line_XPosition_Name="Posición X";
+
+@XendraTrl(Identifier="05505cb9-f156-df9c-96df-436ad1684aaf")
 public static String es_PE_FIELD_Line_XPosition_Description="Posición absoluta X (horizontal) en 1/72 de pulgada";
 
 @XendraTrl(Identifier="05505cb9-f156-df9c-96df-436ad1684aaf")
 public static String es_PE_FIELD_Line_XPosition_Help="Posición absoluta X (horizontal) en 1/72 de pulgada";
-
-@XendraTrl(Identifier="05505cb9-f156-df9c-96df-436ad1684aaf")
-public static String es_PE_FIELD_Line_XPosition_Name="Posición X";
 
 @XendraField(AD_Column_ID="XPosition",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -550,7 +546,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5b506a2e-a507-ab8d-d4cf-e5861629333b",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name XPosition */
 public static final String COLUMNNAME_XPosition = "XPosition";
 /** Set Y Position.
@@ -569,13 +565,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="115e6dcd-a53e-6549-4d11-c8fe1cb8fcd8")
+public static String es_PE_FIELD_Line_YPosition_Name="Posición Y";
+
+@XendraTrl(Identifier="115e6dcd-a53e-6549-4d11-c8fe1cb8fcd8")
 public static String es_PE_FIELD_Line_YPosition_Description="Posición absoluta Y (vertical) en 1/72 de pulgada";
 
 @XendraTrl(Identifier="115e6dcd-a53e-6549-4d11-c8fe1cb8fcd8")
 public static String es_PE_FIELD_Line_YPosition_Help="Posición absoluta Y (vertical) en 1/72 de pulgada";
-
-@XendraTrl(Identifier="115e6dcd-a53e-6549-4d11-c8fe1cb8fcd8")
-public static String es_PE_FIELD_Line_YPosition_Name="Posición Y";
 
 @XendraField(AD_Column_ID="YPosition",IsCentrallyMaintained=true,
 AD_Tab_ID="b4f3ee34-6563-d632-44a5-24a32e22838f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -593,7 +589,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="59b64ea7-ea20-e122-1cfe-ea46c9235198",
-Synchronized="2017-08-05 16:52:43.0")
+Synchronized="2019-08-30 22:20:34.0")
 /** Column name YPosition */
 public static final String COLUMNNAME_YPosition = "YPosition";
 }

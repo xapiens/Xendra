@@ -27,7 +27,7 @@ import org.compiere.model.reference.REF_AD_SchedulerType;
 import org.compiere.model.reference.REF_Weekdays;
 import org.compiere.model.reference.REF__FrequencyType;
 import org.compiere.util.*;
-import org.xendra.xendrian.Listener;
+import org.xendra.db.Querys;
 
 
 /**
@@ -48,20 +48,21 @@ public class MScheduler extends X_AD_Scheduler	implements XendraProcessor
 		ArrayList<MScheduler> list = new ArrayList<MScheduler>();
 		Machine machine = Env.getMachine();
 		if (machine != null)
-		{		
-			StringBuilder sql = new StringBuilder("SELECT s.* FROM AD_Scheduler s ")
-			.append(" LEFT OUTER JOIN AD_Process p ON s.AD_Process_ID = p.AD_Process_ID ")
-			.append(" JOIN AD_Process_Machine pm ON p.AD_Process_ID = pm.AD_Process_ID AND pm.A_Machine_ID = ? ")
-			.append(" WHERE pm.IsActive='Y' AND s.IsActive = 'Y' ")
-			.append("UNION ALL")
-			.append(" SELECT s.* FROM AD_Scheduler s  LEFT OUTER JOIN AD_Process p ON s.AD_Process_ID = p.AD_Process_ID")  
-			.append(" JOIN ad_schedulermachine sm on s.ad_scheduler_id = sm.ad_scheduler_id")
-			.append(" AND sm.a_machine_id = ?")
-			.append(" WHERE sm.isactive= 'Y' AND s.IsActive = 'Y'"); 
+		{					 
+			//StringBuilder sql = new StringBuilder("SELECT s.* FROM AD_Scheduler s ")
+			//.append(" LEFT OUTER JOIN AD_Process p ON s.AD_Process_ID = p.AD_Process_ID ")
+			//.append(" JOIN AD_Process_Machine pm ON p.AD_Process_ID = pm.AD_Process_ID AND pm.A_Machine_ID = ? ")
+			//.append(" WHERE pm.IsActive='Y' AND s.IsActive = 'Y' ")
+			//.append("UNION ALL")
+			//.append(" SELECT s.* FROM AD_Scheduler s  LEFT OUTER JOIN AD_Process p ON s.AD_Process_ID = p.AD_Process_ID")  
+			//.append(" JOIN ad_schedulermachine sm on s.ad_scheduler_id = sm.ad_scheduler_id")
+			//.append(" AND sm.a_machine_id = ?")
+			//.append(" WHERE sm.isactive= 'Y' AND s.IsActive = 'Y'"); 
 			PreparedStatement pstmt = null;
 			try
 			{
-				pstmt = DB.prepareStatement (sql.toString(), null);
+				//pstmt = DB.prepareStatement (sql.toString(), null);
+				pstmt = DB.prepareStatement(Querys.SCHEDULERPROCESSBYMACHINE, null);
 				pstmt.setInt(1, machine.getA_Machine_ID());
 				pstmt.setInt(2, machine.getA_Machine_ID());
 				ResultSet rs = pstmt.executeQuery ();
@@ -76,7 +77,7 @@ public class MScheduler extends X_AD_Scheduler	implements XendraProcessor
 			}
 			catch (Exception e)
 			{
-				s_log.log(Level.SEVERE, sql.toString(), e);
+				s_log.log(Level.SEVERE, Querys.SCHEDULERPROCESSBYMACHINE, e);
 			}
 			try
 			{
@@ -143,21 +144,15 @@ public class MScheduler extends X_AD_Scheduler	implements XendraProcessor
 				s_log.log(Level.WARNING, String.format("Adding Acceptor %s", startrule.getName()));
 			}			
 		}
-		if (listeners != null && listeners.size() > 0)
-		{
-			for (Object key : Env.getlistener().keySet()) {
-				String queuename = (String) key;
-				Vector vector = (Vector) Env.getlistener().get(key);
-				Listener listener = new Listener(key, vector, "");		
-				Thread lpdThread = new Thread(listener);
-				//lpdThread.setName("Listener ");
-				lpdThread.start();				
-			}
-		}
-//		if (Env.getSessionEntrypoints().size() > 0)
+//		if (listeners != null && listeners.size() > 0)
 //		{
-//			String error = Env.RulesBootstrap();						
-//			s_log.log(Level.WARNING, error);
+//			for (Object key : Env.getlistener().keySet()) {
+//				String queuename = (String) key;
+//				Vector vector = (Vector) Env.getlistener().get(key);
+//				Listener listener = new Listener(key, vector, "");		
+//				Thread lpdThread = new Thread(listener);
+//				lpdThread.start();				
+//			}
 //		}
 	}
 	/**	Static Logger	*/

@@ -55,6 +55,7 @@ import org.compiere.swing.CLabel;
 import org.compiere.swing.CPanel;
 import org.compiere.swing.CTabbedPane;
 import org.compiere.swing.CTextField;
+import org.compiere.util.CLogger;
 import org.compiere.util.ValueNamePair;
 
 import sun.awt.AppContext;
@@ -67,7 +68,7 @@ import sun.awt.AppContext;
 @SuppressWarnings("serial")
 public class PLAFEditorPanel extends CPanel {
 	/**	Logger			*/
-	private static Logger log = Logger.getLogger(PLAFEditor.class.getName());
+	private static CLogger log = CLogger.getCLogger(PLAFEditor.class.getName());
 	
 	static ResourceBundle   s_res = ResourceBundle.getBundle("org.compiere.plaf.PlafRes");
 	static Object[]         s_columns = new Object[] {"-0-", "-1-"};

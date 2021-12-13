@@ -28,6 +28,7 @@ import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.RGBImageFilter;
 import java.sql.PreparedStatement;
@@ -1072,6 +1073,68 @@ public final class AEnv
 		result.setFocusPainted(false);
 		//if (result != null)
 		//action.setButton(result);		
+		return result;		
+	}
+	
+	public static JButton createActionButton(AppsAction action, 
+			String text,
+			BufferedImage image, 
+			String tooltip) {
+		final ImageIcon icon = new ImageIcon(image);
+		
+		return test2(action, icon, text, tooltip);
+	}
+	public static JButton test2(AppsAction action, final ImageIcon icon, String text, String tooltip) {
+		final JButton result = new JButton();
+		final double colorFactor = 0.9;
+
+		final RGBImageFilter filter = new RGBImageFilter() {
+			public int filterRGB(int x, int y, int rgb) {
+				final int alpha = (rgb >> 24) & 0xff;
+				final int red   = (rgb >> 16) & 0xff;
+				final int green = (rgb >>  8) & 0xff;
+				final int blue  = (rgb      ) & 0xff;
+				return ((int) (alpha * colorFactor) << 24)
+				| ((int) (red   * colorFactor) << 16)
+				| ((int) (green * colorFactor) << 8)
+				| ((int) (blue  * colorFactor));
+			}
+		};
+
+		final ImageIcon darkerIcon = new ImageIcon(
+				Toolkit.getDefaultToolkit().createImage(
+						new FilteredImageSource(icon.getImage().getSource(), filter)));
+		result.setAction(action);
+		result.setText(text);
+		result.setIcon(darkerIcon);
+		result.setBorderPainted(false);
+		result.setHorizontalTextPosition(SwingConstants.CENTER);
+		result.setVerticalTextPosition(SwingConstants.BOTTOM);
+		result.setMnemonic(0);
+		if (tooltip != null)
+			result.setToolTipText(tooltip);
+
+		final Dimension dim = result.getPreferredSize();
+		result.setMaximumSize(new Dimension(32, dim.height));
+
+		result.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent me) {
+				result.setBorderPainted(true);
+				result.setIcon(icon);
+			}
+			public void mouseExited(MouseEvent me) {
+				result.setBorderPainted(false);
+				result.setIcon(darkerIcon);
+			}
+		}
+		);
+
+		result.setBorderPainted(false);
+		result.setFocusPainted(false);
+
+		if (result != null)
+			action.setButton(result);
+		
 		return result;		
 	}
 	

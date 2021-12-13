@@ -8,7 +8,7 @@ public class Loaddocumentinout0
  
 @XendraFunction(Name="loaddocumentinout",Output="void",Owner="xendra",Language="plpgsql",
 Identifier="339bb447-1903-eb56-63b8-08705f274a10",Arguments="id numeric, p_period_id numeric",
-Extension="",Synchronized="2017-10-11 11:11:28.0")
+Extension="",Synchronized="2019-04-15 11:27:28.0")
 	public static final String Identifier = "339bb447-1903-eb56-63b8-08705f274a10";
 
 	public static final String getCode() 
@@ -26,7 +26,7 @@ Extension="",Synchronized="2017-10-11 11:11:28.0")
 	sb.appendln("		io.c_bpartner_id,io.documentno,io.c_doctype_id,io.m_warehouse_id,iol.identifier, ");
 	sb.appendln("		io.MovementType, iol.movementqty, iol.m_inoutline_id, iol.c_orderline_id,");
 	sb.appendln("		iol.m_attributesetinstance_id, io.ad_org_id, io.docstatus,iol.m_product_id,");
-	sb.appendln("		iol.m_locator_id, io.movementdate, dt.transactiontype		");
+	sb.appendln("		iol.m_locator_id, io.movementdate, dt.transactiontype, iol.line");
 	sb.appendln("		from m_inoutline iol join m_inout io on io.m_inout_id = iol.m_inout_id ");
 	sb.appendln("		join c_doctype dt on io.c_doctype_id = dt.c_doctype_id");
 	sb.appendln("		LEFT JOIN  m_transaction t on t.m_inoutline_id = iol.m_inoutline_id");
@@ -81,7 +81,9 @@ Extension="",Synchronized="2017-10-11 11:11:28.0")
 	sb.appendln("		carding.m_product_id := ar.m_product_id;");
 	sb.appendln("		carding.movementdate := ar.movementdate;");
 	sb.appendln("		carding.transactiontype := ar.transactiontype;");
+	sb.appendln("		carding.seqno := ar.line;");
 	sb.appendln("		carding.identifier = ar.identifier;");
+	sb.appendln("		carding.processed = 'N';");
 	sb.appendln("		insert into m_transaction select (x).* from (select carding as x) ss;");
 	sb.appendln("	end loop;");
 	sb.appendln("	update m_inout set iscosted = 'Y' where m_inout_id = id;");
@@ -91,7 +93,7 @@ Extension="",Synchronized="2017-10-11 11:11:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2017-10-11 11:11:28.0");
+ 	sb.appendln("@Synchronized=2019-04-15 11:27:28.0");
 	sb.appendln("@Identifier=339bb447-1903-eb56-63b8-08705f274a10");
 	return sb.toString();
 }

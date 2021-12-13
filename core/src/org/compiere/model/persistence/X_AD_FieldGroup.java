@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_FieldGroup;
 /** Generated Model for AD_FieldGroup
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -76,11 +75,13 @@ public static final String TABNAME_FieldGroup="22887d1b-493d-4e64-d9b4-5dbb2e7c0
 @XendraTrl(Identifier="e48ac167-00b3-e2d7-bb32-282e0f6ed7b7")
 public static String es_PE_TABLE_AD_FieldGroup_Name="Grupo del Campo";
 
-@XendraTable(Name="Field Group",Description="Logical grouping of fields",Help="",
-TableName="AD_FieldGroup",AccessLevel="4",AD_Window_ID="ec8e87ca-2973-deb6-7690-893c4300757b",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="e48ac167-00b3-e2d7-bb32-282e0f6ed7b7",Synchronized="2017-08-16 11:40:14.0")
+@XendraTable(Name="Field Group",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Logical grouping of fields",
+Help="",TableName="AD_FieldGroup",AccessLevel="4",
+AD_Window_ID="ec8e87ca-2973-deb6-7690-893c4300757b",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="e48ac167-00b3-e2d7-bb32-282e0f6ed7b7",
+Synchronized="2020-03-03 21:35:01.0")
 /** TableName=AD_FieldGroup */
 public static final String Table_Name="AD_FieldGroup";
 
@@ -130,13 +131,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6b4bb84b-f982-705a-e6f6-b102cc46a5a5")
+public static String es_PE_FIELD_FieldGroup_FieldGroup_Name="Grupo del Campo";
+
+@XendraTrl(Identifier="6b4bb84b-f982-705a-e6f6-b102cc46a5a5")
 public static String es_PE_FIELD_FieldGroup_FieldGroup_Description="Agrupación Lógica del campo";
 
 @XendraTrl(Identifier="6b4bb84b-f982-705a-e6f6-b102cc46a5a5")
 public static String es_PE_FIELD_FieldGroup_FieldGroup_Help="El grupo del campo indica el grupo lógico al que este campo pertenece (Historia; Totales; Cantidades)";
-
-@XendraTrl(Identifier="6b4bb84b-f982-705a-e6f6-b102cc46a5a5")
-public static String es_PE_FIELD_FieldGroup_FieldGroup_Name="Grupo del Campo";
 
 @XendraField(AD_Column_ID="AD_FieldGroup_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="22887d1b-493d-4e64-d9b4-5dbb2e7c01b7",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -146,9 +147,6 @@ Identifier="6b4bb84b-f982-705a-e6f6-b102cc46a5a5")
 public static final String FIELDNAME_FieldGroup_FieldGroup="6b4bb84b-f982-705a-e6f6-b102cc46a5a5";
 /** Column name AD_FieldGroup_ID */
 public static final String COLUMNNAME_AD_FieldGroup_ID = "AD_FieldGroup_ID";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -168,13 +166,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="d724d747-4678-ba55-d4ef-5298c6bec576")
+public static String es_PE_FIELD_FieldGroup_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="d724d747-4678-ba55-d4ef-5298c6bec576")
 public static String es_PE_FIELD_FieldGroup_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="d724d747-4678-ba55-d4ef-5298c6bec576")
 public static String es_PE_FIELD_FieldGroup_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="d724d747-4678-ba55-d4ef-5298c6bec576")
-public static String es_PE_FIELD_FieldGroup_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="22887d1b-493d-4e64-d9b4-5dbb2e7c01b7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -192,18 +190,13 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="668aad9b-e4e6-c932-4937-5c03eaca74ff",Synchronized="2017-08-05 16:52:31.0")
+Identifier="668aad9b-e4e6-c932-4937-5c03eaca74ff",Synchronized="2019-08-30 22:20:20.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
-
-/** FieldGroupType AD_Reference=2facbaf0-81ba-f4b5-7557-afda96edfe71 */
-public static final int FIELDGROUPTYPE_AD_Reference_ID=53000;
 /** Set Field Group Type.
 @param FieldGroupType Field Group Type */
 public void setFieldGroupType (String FieldGroupType)
 {
-if (FieldGroupType == null || FieldGroupType.equals(REF_AD_FieldGroup.Collapse) || FieldGroupType.equals(REF_AD_FieldGroup.Tab) || FieldGroupType.equals(REF_AD_FieldGroup.Label));
- else throw new IllegalArgumentException ("FieldGroupType Invalid value - " + FieldGroupType + " - Reference_ID=53000 - C - T - L");
 if (FieldGroupType != null && FieldGroupType.length() > 10)
 {
 log.warning("Length > 10 - truncated");
@@ -237,7 +230,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="091fd948-9b9e-79bb-4ff4-99aa9ae308d3",Synchronized="2017-08-05 16:52:31.0")
+Identifier="091fd948-9b9e-79bb-4ff4-99aa9ae308d3",Synchronized="2019-08-30 22:20:20.0")
 /** Column name FieldGroupType */
 public static final String COLUMNNAME_FieldGroupType = "FieldGroupType";
 /** Set Identifier.
@@ -269,7 +262,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10d8e540-5d87-4107-b97f-2e6541ab5d30",
-Synchronized="2017-08-05 16:52:31.0")
+Synchronized="2019-08-30 22:20:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsCollapsedByDefault.
@@ -300,7 +293,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3d90a508-4bed-01c8-e353-7c090d12c64d",Synchronized="2017-08-05 16:52:31.0")
+Identifier="3d90a508-4bed-01c8-e353-7c090d12c64d",Synchronized="2019-08-30 22:20:21.0")
 /** Column name IsCollapsedByDefault */
 public static final String COLUMNNAME_IsCollapsedByDefault = "IsCollapsedByDefault";
 /** Set Name.
@@ -332,18 +325,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
+public static String es_PE_FIELD_FieldGroup_Name_Name="Nombre";
+
+@XendraTrl(Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
 public static String es_PE_FIELD_FieldGroup_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
 public static String es_PE_FIELD_FieldGroup_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
-public static String es_PE_FIELD_FieldGroup_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="22887d1b-493d-4e64-d9b4-5dbb2e7c01b7",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="22887d1b-493d-4e64-d9b4-5dbb2e7c01b7",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="d3fd528c-b99c-5954-305f-2bad31d7cae0")
 public static final String FIELDNAME_FieldGroup_Name="d3fd528c-b99c-5954-305f-2bad31d7cae0";
 
 @XendraTrl(Identifier="f91692a9-26d4-9e3a-167d-95f1c53c412b")
@@ -355,7 +349,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f91692a9-26d4-9e3a-167d-95f1c53c412b",
-Synchronized="2017-08-05 16:52:31.0")
+Synchronized="2019-08-30 22:20:21.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

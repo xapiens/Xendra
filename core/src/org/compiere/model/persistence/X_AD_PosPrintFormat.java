@@ -61,11 +61,13 @@ public static int Table_ID=MTable.getTable_ID("AD_PosPrintFormat");
 @XendraTrl(Identifier="8926e46d-5a0a-b63f-cce9-8726113171ff")
 public static String es_PE_TABLE_AD_PosPrintFormat_Name="Formato de Impresion POS";
 
-@XendraTable(Name="POS Print Format",Description="Print format for printing POS tickets",Help="",
-TableName="AD_PosPrintFormat",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.dictionary",Identifier="8926e46d-5a0a-b63f-cce9-8726113171ff",
-Synchronized="2017-08-16 11:40:38.0")
+@XendraTable(Name="POS Print Format",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Print format for printing POS tickets",Help="",TableName="AD_PosPrintFormat",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.dictionary",Identifier="8926e46d-5a0a-b63f-cce9-8726113171ff",
+Synchronized="2020-03-03 21:35:18.0")
 /** TableName=AD_PosPrintFormat */
 public static final String Table_Name="AD_PosPrintFormat";
 
@@ -151,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2ce66005-2500-8ed8-268f-1bcb782d2836",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:30.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -183,7 +185,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19a957b2-7bc4-456a-88fc-d106bf2ccdb7",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsCashOpen.
@@ -214,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c1825863-60c9-728d-85e4-2045f067ec71",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsCashOpen */
 public static final String COLUMNNAME_IsCashOpen = "IsCashOpen";
 /** Set IsCompressed.
@@ -245,7 +247,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="68599e5b-af24-efe4-e31b-edb5692f2616",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsCompressed */
 public static final String COLUMNNAME_IsCompressed = "IsCompressed";
 /** Set IsPaperCut.
@@ -276,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54fdbd8a-d162-5886-cc3f-8a20854a2ee0",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsPaperCut */
 public static final String COLUMNNAME_IsPaperCut = "IsPaperCut";
 /** Set IsPrePrinted.
@@ -307,7 +309,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="91934969-0985-42a3-dda1-b2da8210339e",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name IsPrePrinted */
 public static final String COLUMNNAME_IsPrePrinted = "IsPrePrinted";
 /** Set Line Width.
@@ -334,7 +336,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="69f4f11b-6769-19df-079e-b998af0583e5",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name LineWidth */
 public static final String COLUMNNAME_LineWidth = "LineWidth";
 /** Set Name.
@@ -374,7 +376,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5f15c16c-ca7c-fbbd-0b1c-643e40396451",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Size Y.
@@ -401,7 +403,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f569883e-0fc7-445e-ba3a-b41e7db55ddd",
-Synchronized="2017-08-05 16:52:40.0")
+Synchronized="2019-08-30 22:20:31.0")
 /** Column name SizeY */
 public static final String COLUMNNAME_SizeY = "SizeY";
 }

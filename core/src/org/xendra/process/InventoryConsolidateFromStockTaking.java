@@ -134,7 +134,7 @@ public class InventoryConsolidateFromStockTaking extends SvrProcess
 			.setParameters(M_Warehouse_ID).list();
 			//
 			// Update the AttributeSetInstance
-			//
+			//			
 			String where = "processed = 'N' AND M_Warehouse_ID = ?";
 			List<X_M_StockTaking> liststocktaking = new Query(Env.getCtx(), X_M_StockTaking.Table_Name, where, get_TrxName())
 			.setParameters(M_Warehouse_ID)
@@ -300,7 +300,7 @@ public class InventoryConsolidateFromStockTaking extends SvrProcess
 			if (errors.size() > 0)
 				throw new Exception();		
 			// continuamos
-			
+			List<X_M_InventoryLine> ilines = new ArrayList<X_M_InventoryLine>();
 			for (X_M_StockTaking st:liststocktaking)
 			{
 				st.setM_Inventory_ID(M_Inventory_ID);
@@ -336,9 +336,11 @@ public class InventoryConsolidateFromStockTaking extends SvrProcess
 						iline.setM_Product_ID(stl.getM_Product_ID());						
 						if (stl.getM_AttributeSetInstance_ID() > 0)
 							iline.setM_AttributeSetInstance_ID(stl.getM_AttributeSetInstance_ID());
-						
 						//						
-					}
+					} 
+
+					if (!ilines.contains(iline))
+						ilines.add(iline);
 					
 					BigDecimal QtyCount = stl.getQtyCount(); 
 					if (QtyCount == null)
@@ -362,7 +364,13 @@ public class InventoryConsolidateFromStockTaking extends SvrProcess
 						throw new Exception();
 					}
 				}
-			}			
+			}
+			int line = 0;
+			for (X_M_InventoryLine iline:ilines) {				
+				line = line + 10;
+				iline.setLine(line);
+				iline.save();
+			}						
 		}
 		catch (Exception e)
 		{

@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_WeekDay");
 @XendraTrl(Identifier="a6201b8d-85e0-4e40-b9d0-a1039d09e1a7")
 public static String es_PE_TABLE_E_WeekDay_Name="WeekDay";
 
-@XendraTable(Name="WeekDay",Description="WeekDay",Help="WeekDay",TableName="E_WeekDay",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="a6201b8d-85e0-4e40-b9d0-a1039d09e1a7",
-Synchronized="2017-09-15 12:49:32.0")
+@XendraTable(Name="WeekDay",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="WeekDay",Help="WeekDay",
+TableName="E_WeekDay",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="a6201b8d-85e0-4e40-b9d0-a1039d09e1a7",
+Synchronized="2020-03-03 21:37:49.0")
 /** TableName=E_WeekDay */
 public static final String Table_Name="E_WeekDay";
 
@@ -123,7 +124,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f9e496e-eac8-4cc1-9283-fb075cc7601b",
-Synchronized="2017-09-15 12:43:11.0")
+Synchronized="2019-08-30 22:22:27.0")
 /** Column name Day */
 public static final String COLUMNNAME_Day = "Day";
 /** Set E_WeekDay_ID.
@@ -169,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f7e6653f-c4b0-417c-845e-a837e70c2c17",
-Synchronized="2017-09-15 12:43:11.0")
+Synchronized="2019-08-30 22:22:27.0")
 /** Column name E_WeekDays_ID */
 public static final String COLUMNNAME_E_WeekDays_ID = "E_WeekDays_ID";
 /** Set OffsetDay.
@@ -196,7 +197,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e52c9141-12bf-4b71-9fcd-79f15b399e92",
-Synchronized="2017-09-15 12:43:11.0")
+Synchronized="2019-08-30 22:22:27.0")
 /** Column name OffsetDay */
 public static final String COLUMNNAME_OffsetDay = "OffsetDay";
 }

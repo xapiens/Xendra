@@ -76,11 +76,12 @@ public static final String TABNAME_Coupon="440bbd97-b948-5fdb-ce78-d86fb9c28a5a"
 @XendraTrl(Identifier="5b2e4bbe-fc7b-1831-bab8-48ed6c13f0b4")
 public static String es_PE_TABLE_C_Coupon_Name="C_Cupon";
 
-@XendraTable(Name="C_Coupon",Description="",Help="",TableName="C_Coupon",AccessLevel="3",
-AD_Window_ID="038deb75-6182-699a-7f6e-48283e04bed9",AD_Val_Rule_ID="",IsKey=1,LoadSeq=100,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="5b2e4bbe-fc7b-1831-bab8-48ed6c13f0b4",
-Synchronized="2017-08-16 11:41:42.0")
+@XendraTable(Name="C_Coupon",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_Coupon",
+AccessLevel="3",AD_Window_ID="038deb75-6182-699a-7f6e-48283e04bed9",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=100,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="5b2e4bbe-fc7b-1831-bab8-48ed6c13f0b4",Synchronized="2020-03-03 21:36:48.0")
 /** TableName=C_Coupon */
 public static final String Table_Name="C_Coupon";
 
@@ -130,13 +131,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="97d924ee-07d6-673e-af38-4e8a75d0e4c1")
+public static String es_PE_FIELD_Coupon_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="97d924ee-07d6-673e-af38-4e8a75d0e4c1")
 public static String es_PE_FIELD_Coupon_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="97d924ee-07d6-673e-af38-4e8a75d0e4c1")
 public static String es_PE_FIELD_Coupon_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="97d924ee-07d6-673e-af38-4e8a75d0e4c1")
-public static String es_PE_FIELD_Coupon_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bb74e5f4-4a69-2435-d8f1-6692e3629e43",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:27.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Charge.
@@ -183,7 +184,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="83ce5b0d-116d-c7f8-e921-3edb57651781",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:27.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set C_Coupon_ID.
@@ -230,13 +231,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5fed448b-8b8f-5f5b-5718-603b25afca60")
+public static String es_PE_FIELD_Coupon_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="5fed448b-8b8f-5f5b-5718-603b25afca60")
 public static String es_PE_FIELD_Coupon_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="5fed448b-8b8f-5f5b-5718-603b25afca60")
 public static String es_PE_FIELD_Coupon_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="5fed448b-8b8f-5f5b-5718-603b25afca60")
-public static String es_PE_FIELD_Coupon_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -254,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b97e248b-373d-9d50-bc03-a93c153d05d6",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:27.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Invoice.
@@ -274,13 +275,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="84b7f048-e3e4-e7d5-e312-13c8dfc76d40")
+public static String es_PE_FIELD_Coupon_Invoice_Name="Factura";
+
+@XendraTrl(Identifier="84b7f048-e3e4-e7d5-e312-13c8dfc76d40")
 public static String es_PE_FIELD_Coupon_Invoice_Description="Identificador de la factura";
 
 @XendraTrl(Identifier="84b7f048-e3e4-e7d5-e312-13c8dfc76d40")
 public static String es_PE_FIELD_Coupon_Invoice_Help="La ID de Factura identifica únicamente un documento de Factura.";
-
-@XendraTrl(Identifier="84b7f048-e3e4-e7d5-e312-13c8dfc76d40")
-public static String es_PE_FIELD_Coupon_Invoice_Name="Factura";
 
 @XendraField(AD_Column_ID="C_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -298,7 +299,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13997b2f-6b2b-8560-dff2-be6c4f83bfd9",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:27.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Order.
@@ -327,7 +328,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7fed1716-e520-48f5-6f2e-aaf69a16a597",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Tax.
@@ -356,7 +357,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ae958b4f-0659-4422-05ba-b8349261c809",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name C_Tax_ID */
 public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
 /** Set Document No.
@@ -389,7 +390,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="46c88193-c0cd-461b-a154-44ac3057658c",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set End Date.
@@ -406,13 +407,13 @@ return (Timestamp)get_Value(COLUMNNAME_EndDate);
 }
 
 @XendraTrl(Identifier="6dae8a61-78bb-6b98-3ebd-596173caa289")
+public static String es_PE_FIELD_Coupon_EndDate_Name="Fecha Límite";
+
+@XendraTrl(Identifier="6dae8a61-78bb-6b98-3ebd-596173caa289")
 public static String es_PE_FIELD_Coupon_EndDate_Description="Última fecha efectiva (inclusive)";
 
 @XendraTrl(Identifier="6dae8a61-78bb-6b98-3ebd-596173caa289")
 public static String es_PE_FIELD_Coupon_EndDate_Help="La fecha final indica la última fecha en este rango.";
-
-@XendraTrl(Identifier="6dae8a61-78bb-6b98-3ebd-596173caa289")
-public static String es_PE_FIELD_Coupon_EndDate_Name="Fecha Límite";
 
 @XendraField(AD_Column_ID="EndDate",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -430,7 +431,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="32e42eff-242e-37c2-499c-1ff3a451e461",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name EndDate */
 public static final String COLUMNNAME_EndDate = "EndDate";
 /** Set Grand Total.
@@ -450,13 +451,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="30e09225-ff4a-9ad8-2fd9-78d178a451b3")
+public static String es_PE_FIELD_Coupon_GrandTotal_Name="Gran Total";
+
+@XendraTrl(Identifier="30e09225-ff4a-9ad8-2fd9-78d178a451b3")
 public static String es_PE_FIELD_Coupon_GrandTotal_Description="Total del documento";
 
 @XendraTrl(Identifier="30e09225-ff4a-9ad8-2fd9-78d178a451b3")
 public static String es_PE_FIELD_Coupon_GrandTotal_Help="El gran total identifica el total incluyendo impuestos y totales de fletes en la moneda del documento.";
-
-@XendraTrl(Identifier="30e09225-ff4a-9ad8-2fd9-78d178a451b3")
-public static String es_PE_FIELD_Coupon_GrandTotal_Name="Gran Total";
 
 @XendraField(AD_Column_ID="GrandTotal",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -474,7 +475,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a6b0121-9fbb-4a5a-a16f-95a3d88c8fd5",
-Synchronized="2017-08-05 16:53:33.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name GrandTotal */
 public static final String COLUMNNAME_GrandTotal = "GrandTotal";
 /** Set Identifier.
@@ -506,7 +507,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d99a5a54-41ed-4421-b982-0a3be4eb1395",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Processed.
@@ -537,12 +538,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b725ea3-57c3-1699-faba-30a4a1dfb924",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
-
-/** Ref_Invoice_ID AD_Reference=7fd6a4ea-911e-151b-68bf-3a86cc5f06e3 */
-public static final int REF_INVOICE_ID_AD_Reference_ID=336;
 /** Set Ref_Invoice_ID.
 @param Ref_Invoice_ID Ref_Invoice_ID */
 public void setRef_Invoice_ID (int Ref_Invoice_ID)
@@ -569,7 +567,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a5460bd7-5b55-44a9-8e17-e968ed405934",Synchronized="2017-08-05 16:53:34.0")
+Identifier="a5460bd7-5b55-44a9-8e17-e968ed405934",Synchronized="2019-08-30 22:21:28.0")
 /** Column name Ref_Invoice_ID */
 public static final String COLUMNNAME_Ref_Invoice_ID = "Ref_Invoice_ID";
 /** Set SKU.
@@ -593,13 +591,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="ace43166-0f6e-b914-f503-170980c87278")
+public static String es_PE_FIELD_Coupon_SKU_Name="UM Almacenamiento";
+
+@XendraTrl(Identifier="ace43166-0f6e-b914-f503-170980c87278")
 public static String es_PE_FIELD_Coupon_SKU_Description="Unidad de Mantenimiento en Inventario";
 
 @XendraTrl(Identifier="ace43166-0f6e-b914-f503-170980c87278")
 public static String es_PE_FIELD_Coupon_SKU_Help="El SKU indica la unidad de almacenamiento de inventario definida por el usuario. Puede ser usada por  una simbología adicional de código de barras ó por su propio esquema .";
-
-@XendraTrl(Identifier="ace43166-0f6e-b914-f503-170980c87278")
-public static String es_PE_FIELD_Coupon_SKU_Name="UM Almacenamiento";
 
 @XendraField(AD_Column_ID="SKU",IsCentrallyMaintained=true,
 AD_Tab_ID="440bbd97-b948-5fdb-ce78-d86fb9c28a5a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -617,7 +615,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ba23ee7e-19e2-25c0-d49f-c7594cad4ce7",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name SKU */
 public static final String COLUMNNAME_SKU = "SKU";
 }

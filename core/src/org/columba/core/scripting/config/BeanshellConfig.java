@@ -24,6 +24,7 @@ import org.columba.core.config.DefaultXmlConfig;
 import org.columba.core.config.jaxbobject;
 import org.columba.core.io.DiskIO;
 import org.compiere.model.MConfig;
+import org.xendra.Constants;
 
 /**
  Service configuration class. To access the service options use the getOptions
@@ -32,8 +33,7 @@ import org.compiere.model.MConfig;
  @author Celso Pinto (cpinto@yimports.com)
 */
 public class BeanshellConfig
-{
-    private static final String CORE_MODULE = "core";
+{    
 	private static final String COLUMBA_SCRIPT_DIRECTORY = "scripts", OPTIONS_FILE = "scripting.xml";
     protected Config config;
     protected File path;
@@ -52,15 +52,10 @@ public class BeanshellConfig
 
         // scripting.xml configuration file should reside in <config-folder>
         //optionsFile = new File(config.getConfigDirectory(), OPTIONS_FILE);
-        options = MConfig.getbyIdentifier(CORE_MODULE,"scripting");
+        options = MConfig.getbyIdentifier(Constants.CORE,"scripting");
         
         registerPlugin(options, new ScriptingXmlConfig(options));
 
-    }
-
-    private String getModuleName()
-    {
-        return CORE_MODULE;
     }
 
     public File getPath()
@@ -76,12 +71,12 @@ public class BeanshellConfig
 
     private void registerPlugin(MConfig id, DefaultXmlConfig plugin)
     {
-        config.registerPlugin(getModuleName(), id, plugin);
+        config.registerPlugin(Constants.CORE, id, plugin);
     }
 
     private jaxbobject getPlugin(String id)
     {
-        return config.getPlugin(getModuleName(), id);
+        return config.getPlugin(Constants.CORE, id);
     }
 
     public static BeanshellConfig getInstance()

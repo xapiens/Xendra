@@ -21,11 +21,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
-import org.columba.core.io.DiskIO;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
 
@@ -82,7 +79,6 @@ public class ImageLoader {
 	}
 
 	public static ImageIcon getSmallIcon(String name) {
-		//return getIcon(ImageLoader.ICON_PATH, name, true);
 		return getIcon(Ini.getXendraResource(), name, true);
 	}
 
@@ -111,8 +107,6 @@ public class ImageLoader {
 
 	public static ImageIcon getMiscIcon(String name) {
 		URL url;
-		//String path = ImageLoader.ICON_PATH;
-		//url = DiskIO.getResourceURL(path + "/MISC/" + name);
 		try {
 			BufferedImage img = ImageIO.read(new File(Ini.getXendraResource("MISC")	+ name));
 			if (img == null) {
@@ -124,7 +118,7 @@ public class ImageLoader {
 		}
 		catch (Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 		return null;
 //		url = DiskIO.getResourceURL(Ini.getXendraResource("MISC") + name);

@@ -30,13 +30,14 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 import org.compiere.model.MConfig;
+import org.compiere.util.CLogger;
 
 /**
  * Utility methods for handling files and directories.
  */
 public final class DiskIO {
 
-	private static final Logger LOG = Logger.getLogger("org.columba.core.io");
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.io");
 
 	private static String resourceFolder = "";
 

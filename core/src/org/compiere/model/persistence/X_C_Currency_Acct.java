@@ -63,12 +63,12 @@ public static int Table_ID=MTable.getTable_ID("C_Currency_Acct");
 public static String es_PE_TAB_Accounting_Description="Moneda de la Contabilidad";
 
 @XendraTrl(Identifier="475573f8-1e15-5af4-fc8f-85408cb856dc")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="475573f8-1e15-5af4-fc8f-85408cb856dc")
 public static String es_PE_TAB_Accounting_Help="La tabla de la contabilidad define los parámetros de la contabilidad usados para las transacciones incluyendo una moneda. ¡Por favor se utiliza el node que si no definió, las cuentas de defecto del esquema de la contabilidad!";
 
-@XendraTab(Name="Accounting",Description="Currency Accounting",
+@XendraTrl(Identifier="475573f8-1e15-5af4-fc8f-85408cb856dc")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Currency Accounting",
 Help="The Accounting Tab defines the accounting parameters used for transactions including a currency. Please nore that if not defined, the default accounts of the Accounting Schema are used!",
 AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",SeqNo=30,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,
@@ -82,11 +82,12 @@ public static final String TABNAME_Accounting="475573f8-1e15-5af4-fc8f-85408cb85
 @XendraTrl(Identifier="bd6c23a6-5335-12a4-94f4-2921bab14581")
 public static String es_PE_TABLE_C_Currency_Acct_Name="C_Currency_Acct";
 
-@XendraTable(Name="C_Currency_Acct",Description="",Help="",TableName="C_Currency_Acct",
-AccessLevel="3",AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="bd6c23a6-5335-12a4-94f4-2921bab14581",Synchronized="2017-08-16 11:41:42.0")
+@XendraTable(Name="C_Currency_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Currency_Acct",AccessLevel="3",AD_Window_ID="69518fbe-add4-e240-8d5a-c664ddd2ccd1",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="bd6c23a6-5335-12a4-94f4-2921bab14581",Synchronized="2020-03-03 21:36:49.0")
 /** TableName=C_Currency_Acct */
 public static final String Table_Name="C_Currency_Acct";
 
@@ -136,13 +137,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b3662358-5a8c-689e-7ef0-d7621ace23ae")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="b3662358-5a8c-689e-7ef0-d7621ace23ae")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="b3662358-5a8c-689e-7ef0-d7621ace23ae")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="b3662358-5a8c-689e-7ef0-d7621ace23ae")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -160,7 +161,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0fe68d0e-ccd4-89e5-5831-eb87e5110d10",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Currency.
@@ -180,13 +181,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="450a315c-107b-0f33-4fa2-3ad760e7fe6a")
+public static String es_PE_FIELD_Accounting_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="450a315c-107b-0f33-4fa2-3ad760e7fe6a")
 public static String es_PE_FIELD_Accounting_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="450a315c-107b-0f33-4fa2-3ad760e7fe6a")
 public static String es_PE_FIELD_Accounting_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="450a315c-107b-0f33-4fa2-3ad760e7fe6a")
-public static String es_PE_FIELD_Accounting_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -204,7 +205,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bb8474d8-2105-54c9-13dd-cb4806852dd2",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Identifier.
@@ -236,7 +237,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="877f1ccd-6b11-4796-9069-b5a525129611",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Realized Gain Acct.
@@ -255,13 +256,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="227f83db-4e96-de41-5e59-ec47baa0b373")
+public static String es_PE_FIELD_Accounting_RealizedGainAcct_Name="Cta. Ganancia Realizada";
+
+@XendraTrl(Identifier="227f83db-4e96-de41-5e59-ec47baa0b373")
 public static String es_PE_FIELD_Accounting_RealizedGainAcct_Description="Cuenta de ganancia realizada";
 
 @XendraTrl(Identifier="227f83db-4e96-de41-5e59-ec47baa0b373")
 public static String es_PE_FIELD_Accounting_RealizedGainAcct_Help="La cuenta de ganancia realizada indica la cuenta a ser usada cuando se registran ganancias realizadas por reevaluación de moneda";
-
-@XendraTrl(Identifier="227f83db-4e96-de41-5e59-ec47baa0b373")
-public static String es_PE_FIELD_Accounting_RealizedGainAcct_Name="Cta. Ganancia Realizada";
 
 @XendraField(AD_Column_ID="RealizedGain_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -279,7 +280,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7545cc22-b390-2ec9-9a4e-715b4242c83d",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name RealizedGain_Acct */
 public static final String COLUMNNAME_RealizedGain_Acct = "RealizedGain_Acct";
 /** Set Realized Loss Acct.
@@ -298,13 +299,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6cf2e21d-4a37-6fcf-38c3-b54e95caba39")
+public static String es_PE_FIELD_Accounting_RealizedLossAcct_Name="Cta. Pérdida Realizada";
+
+@XendraTrl(Identifier="6cf2e21d-4a37-6fcf-38c3-b54e95caba39")
 public static String es_PE_FIELD_Accounting_RealizedLossAcct_Description="Cuenta de pérdida realizada";
 
 @XendraTrl(Identifier="6cf2e21d-4a37-6fcf-38c3-b54e95caba39")
 public static String es_PE_FIELD_Accounting_RealizedLossAcct_Help="La cuenta de pérdida realizada indica la cuenta a ser usada cuando se registran pérdidas realizadas por reevaluación de moneda";
-
-@XendraTrl(Identifier="6cf2e21d-4a37-6fcf-38c3-b54e95caba39")
-public static String es_PE_FIELD_Accounting_RealizedLossAcct_Name="Cta. Pérdida Realizada";
 
 @XendraField(AD_Column_ID="RealizedLoss_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -322,7 +323,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a7b38ed-0ee8-e38b-d984-2f619f4041a5",
-Synchronized="2017-08-05 16:53:34.0")
+Synchronized="2019-08-30 22:21:28.0")
 /** Column name RealizedLoss_Acct */
 public static final String COLUMNNAME_RealizedLoss_Acct = "RealizedLoss_Acct";
 /** Set Unrealized Gain Acct.
@@ -341,13 +342,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e21d2936-b2c2-31d3-d7e8-733aa3965a33")
+public static String es_PE_FIELD_Accounting_UnrealizedGainAcct_Name="Cta. Ganancia No Realizada";
+
+@XendraTrl(Identifier="e21d2936-b2c2-31d3-d7e8-733aa3965a33")
 public static String es_PE_FIELD_Accounting_UnrealizedGainAcct_Description="Cuenta de ganancia no realizada para reevaluación monedas";
 
 @XendraTrl(Identifier="e21d2936-b2c2-31d3-d7e8-733aa3965a33")
 public static String es_PE_FIELD_Accounting_UnrealizedGainAcct_Help="La cuenta de ganancia no realizada indica la cuenta a ser usada cuando se registran las ganancias logradas; por la reevaluación de la moneda; que aún no han sido realizadas";
-
-@XendraTrl(Identifier="e21d2936-b2c2-31d3-d7e8-733aa3965a33")
-public static String es_PE_FIELD_Accounting_UnrealizedGainAcct_Name="Cta. Ganancia No Realizada";
 
 @XendraField(AD_Column_ID="UnrealizedGain_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -365,7 +366,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="30c10b8e-b001-2618-24ac-ea515bd4dba7",Synchronized="2017-08-05 16:53:34.0")
+Identifier="30c10b8e-b001-2618-24ac-ea515bd4dba7",Synchronized="2019-08-30 22:21:28.0")
 /** Column name UnrealizedGain_Acct */
 public static final String COLUMNNAME_UnrealizedGain_Acct = "UnrealizedGain_Acct";
 /** Set Unrealized Loss Acct.
@@ -384,13 +385,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c1a461d3-86ab-dbe7-a36b-b0e409f34646")
+public static String es_PE_FIELD_Accounting_UnrealizedLossAcct_Name="Cta. Pérdida No Realizada";
+
+@XendraTrl(Identifier="c1a461d3-86ab-dbe7-a36b-b0e409f34646")
 public static String es_PE_FIELD_Accounting_UnrealizedLossAcct_Description="Cuenta de pérdida no realizada para reevaluación monedas";
 
 @XendraTrl(Identifier="c1a461d3-86ab-dbe7-a36b-b0e409f34646")
 public static String es_PE_FIELD_Accounting_UnrealizedLossAcct_Help="La cuenta de pérdida no realizada indica la cuenta a ser usada cuando se registran las pérdidas incurridas; por reevaluación de la moneda; que aún no han sido realizadas";
-
-@XendraTrl(Identifier="c1a461d3-86ab-dbe7-a36b-b0e409f34646")
-public static String es_PE_FIELD_Accounting_UnrealizedLossAcct_Name="Cta. Pérdida No Realizada";
 
 @XendraField(AD_Column_ID="UnrealizedLoss_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="475573f8-1e15-5af4-fc8f-85408cb856dc",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -408,7 +409,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7d126cc4-2264-af97-6d6f-61b20821a988",Synchronized="2017-08-05 16:53:34.0")
+Identifier="7d126cc4-2264-af97-6d6f-61b20821a988",Synchronized="2019-08-30 22:21:28.0")
 /** Column name UnrealizedLoss_Acct */
 public static final String COLUMNNAME_UnrealizedLoss_Acct = "UnrealizedLoss_Acct";
 }

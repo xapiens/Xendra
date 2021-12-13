@@ -1,6 +1,6 @@
 package org.xendra.printdocument;
 
-import org.apache.log4j.Logger;
+import org.compiere.util.CLogger;
 import org.simoes.lpd.util.PrintUtil;
 
 /**
@@ -10,7 +10,7 @@ import org.simoes.lpd.util.PrintUtil;
  * @author Chris Simoes
  */
 public class PDFPrintHandler implements HandlerInterface {
-	static Logger log = Logger.getLogger(PDFPrintHandler.class);
+	static CLogger log = CLogger.getCLogger(PDFPrintHandler.class);
 
 	public PDFPrintHandler() {
 		super();
@@ -21,7 +21,8 @@ public class PDFPrintHandler implements HandlerInterface {
 	 * @param printJob the PrintJob we are processing
 	 * @return the result of our work, true for success or false for non-success
 	 */
-	public boolean process(PrintJob printJob, String Format) {
+	//public boolean process(PrintJob printJob, String Format) {
+	public boolean process(PrintJob printJob) {
 		final String METHOD_NAME = "process(): ";
 		boolean result = false;
 		if(null != printJob 
@@ -33,10 +34,10 @@ public class PDFPrintHandler implements HandlerInterface {
 				//printUtil.printPDF(printJob.getDataFile().getContents(), null);
 				result = true;
 			} catch(Exception e) {
-				log.error(METHOD_NAME + e.getMessage());
+				log.severe(METHOD_NAME + e.getMessage());
 			}
 		} else {
-			log.error(METHOD_NAME + "The printJob or printJob.getControlFile() or printJob.getDataFile() were empty");
+			log.severe(METHOD_NAME + "The printJob or printJob.getControlFile() or printJob.getDataFile() were empty");
 		}
 		return result;
 	}

@@ -23,8 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_RelationTypeRole;
-import org.compiere.model.reference.REF_AD_RelationTypeType;
 /** Generated Model for AD_RelationType
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -64,11 +62,12 @@ public static int Table_ID=MTable.getTable_ID("AD_RelationType");
 @XendraTrl(Identifier="dba548fa-7623-19e5-df42-8cf3e995ef62")
 public static String es_PE_TABLE_AD_RelationType_Name="RelationType";
 
-@XendraTable(Name="RelationType",Description="",Help="",TableName="AD_RelationType",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=120,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.request",Identifier="dba548fa-7623-19e5-df42-8cf3e995ef62",
-Synchronized="2017-08-16 11:40:56.0")
+@XendraTable(Name="RelationType",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_RelationType",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=120,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="dba548fa-7623-19e5-df42-8cf3e995ef62",
+Synchronized="2020-03-03 21:35:51.0")
 /** TableName=AD_RelationType */
 public static final String Table_Name="AD_RelationType";
 
@@ -101,9 +100,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_AD_RelationType[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_Reference_Source_ID AD_Reference=12253474-e61c-58a4-3fd3-2c2ccf236272 */
-public static final int AD_REFERENCE_SOURCE_ID_AD_Reference_ID=4;
 /** Set AD_Reference_Source_ID.
 @param AD_Reference_Source_ID AD_Reference_Source_ID */
 public void setAD_Reference_Source_ID (int AD_Reference_Source_ID)
@@ -131,12 +127,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="fa023355-8359-7001-6c4c-14d62e3b1e0a",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name AD_Reference_Source_ID */
 public static final String COLUMNNAME_AD_Reference_Source_ID = "AD_Reference_Source_ID";
-
-/** AD_Reference_Target_ID AD_Reference=12253474-e61c-58a4-3fd3-2c2ccf236272 */
-public static final int AD_REFERENCE_TARGET_ID_AD_Reference_ID=4;
 /** Set AD_Reference_Target_ID.
 @param AD_Reference_Target_ID AD_Reference_Target_ID */
 public void setAD_Reference_Target_ID (int AD_Reference_Target_ID)
@@ -164,7 +157,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="f32b0ea5-49cb-1ad6-3f84-c14c765fd7c2",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name AD_Reference_Target_ID */
 public static final String COLUMNNAME_AD_Reference_Target_ID = "AD_Reference_Target_ID";
 /** Set RelationType.
@@ -210,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a1fea54-0847-515b-9ec7-ffe7602679f1",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Description.
@@ -249,7 +242,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6996f547-e336-ddd2-d7a7-f1bc369a5797",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -281,7 +274,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4ed17a63-80f1-4143-95a5-a8bbd62e638d",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsDirected.
@@ -312,7 +305,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a82d210f-1662-0d19-de03-4b6e72bd1d1b",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name IsDirected */
 public static final String COLUMNNAME_IsDirected = "IsDirected";
 /** Set Name.
@@ -352,18 +345,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="503d8597-f64b-0e3a-77a4-40a578d492ab",
-Synchronized="2017-08-05 16:52:47.0")
+Synchronized="2019-08-30 22:20:37.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
-
-/** Role_Source AD_Reference=9be2af4f-0f91-a3dd-c472-4f14d05e5d5b */
-public static final int ROLE_SOURCE_AD_Reference_ID=1000025;
 /** Set Role_Source.
 @param Role_Source Role_Source */
 public void setRole_Source (String Role_Source)
 {
-if (Role_Source == null || Role_Source.equals(REF_AD_RelationTypeRole.Invoice) || Role_Source.equals(REF_AD_RelationTypeRole.Order));
- else throw new IllegalArgumentException ("Role_Source Invalid value - " + Role_Source + " - Reference_ID=1000025 - Invoice - Order");
 if (Role_Source != null && Role_Source.length() > 50)
 {
 log.warning("Length > 50 - truncated");
@@ -387,18 +375,13 @@ FieldLength=50,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ea27aa65-2a46-7699-d431-7f1879360a61",Synchronized="2017-08-05 16:52:47.0")
+Identifier="ea27aa65-2a46-7699-d431-7f1879360a61",Synchronized="2019-08-30 22:20:37.0")
 /** Column name Role_Source */
 public static final String COLUMNNAME_Role_Source = "Role_Source";
-
-/** Role_Target AD_Reference=9be2af4f-0f91-a3dd-c472-4f14d05e5d5b */
-public static final int ROLE_TARGET_AD_Reference_ID=1000025;
 /** Set Role_Target.
 @param Role_Target Role_Target */
 public void setRole_Target (String Role_Target)
 {
-if (Role_Target == null || Role_Target.equals(REF_AD_RelationTypeRole.Invoice) || Role_Target.equals(REF_AD_RelationTypeRole.Order));
- else throw new IllegalArgumentException ("Role_Target Invalid value - " + Role_Target + " - Reference_ID=1000025 - Invoice - Order");
 if (Role_Target != null && Role_Target.length() > 50)
 {
 log.warning("Length > 50 - truncated");
@@ -422,19 +405,13 @@ FieldLength=50,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="66578707-6d0c-8d8f-c389-a5bfea2edf68",Synchronized="2017-08-05 16:52:47.0")
+Identifier="66578707-6d0c-8d8f-c389-a5bfea2edf68",Synchronized="2019-08-30 22:20:38.0")
 /** Column name Role_Target */
 public static final String COLUMNNAME_Role_Target = "Role_Target";
-
-/** Type AD_Reference=c3039723-e720-0622-e649-ac2d944c0df9 */
-public static final int TYPE_AD_Reference_ID=1000028;
 /** Set Type.
 @param Type Type of Validation (SQL, Java Script, Java Language) */
 public void setType (String Type)
 {
-if (Type == null) throw new IllegalArgumentException ("Type is mandatory");
-if (Type.equals(REF_AD_RelationTypeType.Explicit) || Type.equals(REF_AD_RelationTypeType.Implicit));
- else throw new IllegalArgumentException ("Type Invalid value - " + Type + " - Reference_ID=1000028 - E - I");
 if (Type.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -458,7 +435,7 @@ FieldLength=1,DefaultValue="I",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8c1a14be-2d4c-41ea-fb62-b1c53683612d",Synchronized="2017-08-05 16:52:47.0")
+Identifier="8c1a14be-2d4c-41ea-fb62-b1c53683612d",Synchronized="2019-08-30 22:20:38.0")
 /** Column name Type */
 public static final String COLUMNNAME_Type = "Type";
 }

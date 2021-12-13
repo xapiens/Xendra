@@ -20,7 +20,7 @@ import java.util.logging.*;
 
 
 /**
- *	Adempiere Log Filter
+ *	Xendra Log Filter
  *	
  *  @author Jorg Janke
  *  @version $Id: CLogFilter.java 508 2007-11-24 23:06:53Z el_man $

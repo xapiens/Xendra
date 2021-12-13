@@ -162,25 +162,30 @@ public final class ADialogDialog extends CDialog implements ActionListener
 		this.getContentPane().add(confirmPanel, BorderLayout.SOUTH);
 		this.getContentPane().add(westPanel, BorderLayout.WEST);
 		westPanel.add(iconLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
+				,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
 		this.getContentPane().add(infoPanel, BorderLayout.CENTER);
 		infoPanel.add(info, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0
-			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
+				,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
 		//
 		menuBar.add(mFile);
 		mFile.add(mPrintScreen);
 		mFile.add(mScreenShot);
 		mFile.addSeparator();
 		mFile.add(mEMail);
-		if (MRole.getDefault().isShowPreference())
-			mFile.add(mPreference);
-		mFile.addSeparator();
+		if (DB.isConnected()) {
+			MRole role = MRole.getDefault();
+			if (role != null) {
+				if (MRole.getDefault().isShowPreference())
+					mFile.add(mPreference);			
+			}
+		}
+		mFile.addSeparator();		
 		mFile.add(mEnd);
 		//
 		confirmPanel.addActionListener(this);
 	}	//	jbinit
 
-	
+
 	/**
 	 *	Convert to HTML and Calculate Size
 	 *  @param message message
@@ -218,8 +223,8 @@ public final class ADialogDialog extends CDialog implements ActionListener
 		size.height = (Math.max(paras, message.length()/60)+1) * 30;
 		size.height = Math.min(size.height, 600);
 		info.setPreferredSize(size);
-	//	Log.print("Para=" + paras + " - " + info.getPreferredSize());
-		
+		//	Log.print("Para=" + paras + " - " + info.getPreferredSize());
+
 		info.setRequestFocusEnabled(false);
 		info.setReadWrite(false);
 		info.setOpaque(false);
@@ -228,7 +233,7 @@ public final class ADialogDialog extends CDialog implements ActionListener
 		info.setCaretPosition(0);
 	}	//	calculateSize
 
-	
+
 	/**************************************************************************
 	 *	Set Info
 	 *  @param messageType
@@ -239,34 +244,34 @@ public final class ADialogDialog extends CDialog implements ActionListener
 		//
 		switch (messageType)
 		{
-			case JOptionPane.ERROR_MESSAGE:
-				iconLabel.setIcon(i_error);
-				break;
-			case JOptionPane.INFORMATION_MESSAGE:
-				iconLabel.setIcon(i_inform);
-				break;
-			case JOptionPane.QUESTION_MESSAGE:
-				confirmPanel.getCancelButton().setVisible(true);
-				iconLabel.setIcon(i_question);
-				break;
-			case JOptionPane.WARNING_MESSAGE:
-				iconLabel.setIcon(i_warn);
-				break;
+		case JOptionPane.ERROR_MESSAGE:
+			iconLabel.setIcon(i_error);
+			break;
+		case JOptionPane.INFORMATION_MESSAGE:
+			iconLabel.setIcon(i_inform);
+			break;
+		case JOptionPane.QUESTION_MESSAGE:
+			confirmPanel.getCancelButton().setVisible(true);
+			iconLabel.setIcon(i_question);
+			break;
+		case JOptionPane.WARNING_MESSAGE:
+			iconLabel.setIcon(i_warn);
+			break;
 
-			case JOptionPane.PLAIN_MESSAGE:
-			default:
-				break;
+		case JOptionPane.PLAIN_MESSAGE:
+		default:
+			break;
 		}	//	switch
 	}	//	setInfo
 
-	
+
 	/**************************************************************************
 	 *	ActionListener
 	 *  @param e
 	 */
 	public void actionPerformed (ActionEvent e)
 	{
-	//	log.finest( "ADialogDialog.actionPerformed - " + e);
+		//	log.finest( "ADialogDialog.actionPerformed - " + e);
 		if (e.getActionCommand().equals(ConfirmPanel.A_OK))
 		{
 			m_returnCode = A_OK;

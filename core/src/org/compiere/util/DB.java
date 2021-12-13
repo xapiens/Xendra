@@ -16,9 +16,6 @@
  *****************************************************************************/
 package org.compiere.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -43,7 +40,6 @@ import javax.swing.UIManager;
 import org.postgresql.util.PSQLException;
 import org.xendra.Constants;
 import org.xendra.exceptions.DBException;
-import org.xendra.xendrian.SyncModel;
 import org.compiere.Xendra;
 import org.compiere.db.XendraDatabase;
 import org.compiere.db.CConnection;
@@ -53,14 +49,11 @@ import org.compiere.model.AccessSqlParser;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MColumn;
 import org.compiere.model.MLanguage;
-import org.compiere.model.MRole;
 import org.compiere.model.MSequence;
 import org.compiere.model.MSystem;
 import org.compiere.model.PO;
 import org.compiere.model.POResultSet;
-import org.compiere.model.Query;
 import org.compiere.model.persistence.X_A_Machine;
-import org.compiere.process.SequenceCheck;
 
 /**
  *  General Database Interface
@@ -871,18 +864,6 @@ public final class DB
 		else
 			throw new DBException("Unknown parameter type "+index+" - "+param);
 			}
-
-	/**
-	 *	Execute Update.
-	 *  saves "DBExecuteError" in Log
-	 *  @param sql sql
-	 *  @return number of rows updated or -1 if error
-	 *  @deprecated
-	 */
-	public static int executeUpdate (String sql)
-	{
-		return executeUpdate(sql, null, false, null);
-	}	//	executeUpdate
 
 	/**
 	 *	Execute Update.
@@ -2093,7 +2074,7 @@ public final class DB
 		try {
 			if (rs!=null) rs.close();
 		} catch (SQLException e) {
-			;
+			e.printStackTrace();
 		}
 	}
 
@@ -2105,7 +2086,7 @@ public final class DB
 		try {
 			if (st!=null) st.close();
 		} catch (SQLException e) {
-			;
+			e.printStackTrace();
 		}
 	}
 
@@ -2338,6 +2319,10 @@ public final class DB
 
 	public static String getRestoreApp() {
 		return "/opt/PostgreSQL/9.2/bin/pg_restore";		
+	}
+
+	public static void setLastError(String message) {
+		LastError = message;		
 	}
 
 }	//	DB

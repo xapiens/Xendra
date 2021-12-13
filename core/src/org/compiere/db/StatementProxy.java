@@ -162,7 +162,9 @@ public class StatementProxy implements InvocationHandler {
 					m_conn.close();
 				}
 				catch (Exception e)
-				{}
+				{
+					e.printStackTrace();
+				}
 			}
 			m_conn = null;
 			close = true;

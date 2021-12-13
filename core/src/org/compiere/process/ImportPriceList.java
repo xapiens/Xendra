@@ -262,8 +262,8 @@ public class ImportPriceList extends SvrProcess
 						o.update(String.format("%s=%s", MPriceList.COLUMNNAME_M_PriceList_ID, pl.getM_PriceList_ID()), get_TrxName());
 					}
 				}
-				MPriceListVersion plv = new Query(Env.getCtx(), MPriceListVersion.Table_Name, "validfrom = ?", get_TrxName())
-					.setParameters(iprice.getValidFrom()).first();
+				MPriceListVersion plv = new Query(Env.getCtx(), MPriceListVersion.Table_Name, "validfrom = ? AND M_PriceList_ID = ?", get_TrxName())
+					.setParameters(iprice.getValidFrom(), pl.getM_PriceList_ID()).first();
 				if (plv == null) {
 					X_M_DiscountSchema ds = new Query(Env.getCtx(), X_M_DiscountSchema.Table_Name, "IsActive = 'Y'", get_TrxName()).first();
 					plv = new MPriceListVersion(pl);

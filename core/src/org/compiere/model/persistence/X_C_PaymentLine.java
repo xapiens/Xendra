@@ -75,11 +75,12 @@ public static final String TABNAME_PaymentLine="14b973d8-4739-0f04-7f95-f52e97bb
 @XendraTrl(Identifier="6b566dcf-8272-e1a1-6d85-d197bda9d6ea")
 public static String es_PE_TABLE_C_PaymentLine_Name="Payment Line";
 
-@XendraTable(Name="Payment Line",Description="Payment Line identifier",Help="",
+@XendraTable(Name="Payment Line",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Payment Line identifier",Help="",
 TableName="C_PaymentLine",AccessLevel="1",AD_Window_ID="a5526dd3-69bf-661f-67ed-fa8a6962a00e",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=105,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="6b566dcf-8272-e1a1-6d85-d197bda9d6ea",Synchronized="2017-08-16 11:42:09.0")
+Identifier="6b566dcf-8272-e1a1-6d85-d197bda9d6ea",Synchronized="2020-03-03 21:37:21.0")
 /** TableName=C_PaymentLine */
 public static final String Table_Name="C_PaymentLine";
 
@@ -130,13 +131,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="025a859b-06de-1099-ab53-c7cb66b32755")
+public static String es_PE_FIELD_PaymentLine_AllocationLine_Name="Línea de Asignación";
+
+@XendraTrl(Identifier="025a859b-06de-1099-ab53-c7cb66b32755")
 public static String es_PE_FIELD_PaymentLine_AllocationLine_Description="Línea de Asignación";
 
 @XendraTrl(Identifier="025a859b-06de-1099-ab53-c7cb66b32755")
 public static String es_PE_FIELD_PaymentLine_AllocationLine_Help="Asignación de Efectivo/Pagos a facturas";
-
-@XendraTrl(Identifier="025a859b-06de-1099-ab53-c7cb66b32755")
-public static String es_PE_FIELD_PaymentLine_AllocationLine_Name="Línea de Asignación";
 
 @XendraField(AD_Column_ID="C_AllocationLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -154,7 +155,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d762f628-a711-4efd-513a-eda43a08c7c1",Synchronized="2017-08-05 16:54:02.0")
+Identifier="d762f628-a711-4efd-513a-eda43a08c7c1",Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_AllocationLine_ID */
 public static final String COLUMNNAME_C_AllocationLine_ID = "C_AllocationLine_ID";
 /** Set C_BOEConfirm_ID.
@@ -193,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="55637edc-a79d-0856-37c0-38a2140906e2",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_BOEConfirm_ID */
 public static final String COLUMNNAME_C_BOEConfirm_ID = "C_BOEConfirm_ID";
 /** Set Bill Of Exchange.
@@ -214,13 +215,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="59812300-de3f-9979-8546-c0aa1aff41d2")
+public static String es_PE_FIELD_PaymentLine_BillOfExchange_Name="Letra de Cambio";
+
+@XendraTrl(Identifier="59812300-de3f-9979-8546-c0aa1aff41d2")
 public static String es_PE_FIELD_PaymentLine_BillOfExchange_Description="Identificador de la Letra de Cambio ";
 
 @XendraTrl(Identifier="59812300-de3f-9979-8546-c0aa1aff41d2")
 public static String es_PE_FIELD_PaymentLine_BillOfExchange_Help="El docuemnto Letra de Cambio";
-
-@XendraTrl(Identifier="59812300-de3f-9979-8546-c0aa1aff41d2")
-public static String es_PE_FIELD_PaymentLine_BillOfExchange_Name="Letra de Cambio";
 
 @XendraField(AD_Column_ID="C_BOE_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -238,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutPayment.boe",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5c215226-dac2-2687-b6db-1c499f670ec8",Synchronized="2017-08-05 16:54:02.0")
+Identifier="5c215226-dac2-2687-b6db-1c499f670ec8",Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_BOE_ID */
 public static final String COLUMNNAME_C_BOE_ID = "C_BOE_ID";
 /** Set Business Partner .
@@ -259,13 +260,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b8b8894f-2f54-bade-6890-0658b52bc076")
+public static String es_PE_FIELD_PaymentLine_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="b8b8894f-2f54-bade-6890-0658b52bc076")
 public static String es_PE_FIELD_PaymentLine_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="b8b8894f-2f54-bade-6890-0658b52bc076")
 public static String es_PE_FIELD_PaymentLine_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="b8b8894f-2f54-bade-6890-0658b52bc076")
-public static String es_PE_FIELD_PaymentLine_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -283,7 +284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutPayment.bPartner",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6ec7a13b-6ae7-331b-9d58-144e0fc78eed",Synchronized="2017-08-05 16:54:02.0")
+Identifier="6ec7a13b-6ae7-331b-9d58-144e0fc78eed",Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Charge.
@@ -304,13 +305,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3e81dbe6-bf71-57bd-a5ec-1f626b0b7867")
+public static String es_PE_FIELD_PaymentLine_Charge_Name="Cargo";
+
+@XendraTrl(Identifier="3e81dbe6-bf71-57bd-a5ec-1f626b0b7867")
 public static String es_PE_FIELD_PaymentLine_Charge_Description="Cargos adicionales del documento";
 
 @XendraTrl(Identifier="3e81dbe6-bf71-57bd-a5ec-1f626b0b7867")
 public static String es_PE_FIELD_PaymentLine_Charge_Help="El cargo indica un tipo de cargo (manejo; despacho; reposición)";
-
-@XendraTrl(Identifier="3e81dbe6-bf71-57bd-a5ec-1f626b0b7867")
-public static String es_PE_FIELD_PaymentLine_Charge_Name="Cargo";
 
 @XendraField(AD_Column_ID="C_Charge_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -328,7 +329,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@C_Invoice_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.charge",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="19406e3e-20fd-7139-4b55-c2ee18086baa",Synchronized="2017-08-05 16:54:02.0")
+Identifier="19406e3e-20fd-7139-4b55-c2ee18086baa",Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set Currency Type.
@@ -349,13 +350,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="a0188db3-4bc1-00dc-d56c-806d1188e0dc")
+public static String es_PE_FIELD_PaymentLine_CurrencyType_Name="Tipo de Moneda";
+
+@XendraTrl(Identifier="a0188db3-4bc1-00dc-d56c-806d1188e0dc")
 public static String es_PE_FIELD_PaymentLine_CurrencyType_Description="Tipo de índice de conversión de moneda ";
 
 @XendraTrl(Identifier="a0188db3-4bc1-00dc-d56c-806d1188e0dc")
 public static String es_PE_FIELD_PaymentLine_CurrencyType_Help="El tipo del índice de conversión de monedas le deja definir diversos tipos de tarifas, tarifas ej. del punto, corporativas y/o de Ventas/Compras.";
-
-@XendraTrl(Identifier="a0188db3-4bc1-00dc-d56c-806d1188e0dc")
-public static String es_PE_FIELD_PaymentLine_CurrencyType_Name="Tipo de Moneda";
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -374,7 +375,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 Callout="org.compiere.model.CalloutPayment.amounts",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eb2ea541-5b3e-b399-351f-6f6809fd7c95",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -395,13 +396,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8feed857-8a1a-0e2e-d50b-6089c58f0416")
+public static String es_PE_FIELD_PaymentLine_Currency_Name="Moneda";
+
+@XendraTrl(Identifier="8feed857-8a1a-0e2e-d50b-6089c58f0416")
 public static String es_PE_FIELD_PaymentLine_Currency_Description="Moneda para este registro";
 
 @XendraTrl(Identifier="8feed857-8a1a-0e2e-d50b-6089c58f0416")
 public static String es_PE_FIELD_PaymentLine_Currency_Help="Indica la moneda a ser usada cuando se procese ó Informe este registro";
-
-@XendraTrl(Identifier="8feed857-8a1a-0e2e-d50b-6089c58f0416")
-public static String es_PE_FIELD_PaymentLine_Currency_Name="Moneda";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -419,7 +420,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="10cbb003-156a-6bf0-bee5-a33cc8c26d94",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Charge amount.
@@ -438,13 +439,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="49ebd04d-5aef-1159-2b2e-929dbdcd1e3c")
+public static String es_PE_FIELD_PaymentLine_ChargeAmount_Name="Total de Cargo";
+
+@XendraTrl(Identifier="49ebd04d-5aef-1159-2b2e-929dbdcd1e3c")
 public static String es_PE_FIELD_PaymentLine_ChargeAmount_Description="Total del Cargo";
 
 @XendraTrl(Identifier="49ebd04d-5aef-1159-2b2e-929dbdcd1e3c")
 public static String es_PE_FIELD_PaymentLine_ChargeAmount_Help="El Total Cargo indica el total para un cargo adicional";
-
-@XendraTrl(Identifier="49ebd04d-5aef-1159-2b2e-929dbdcd1e3c")
-public static String es_PE_FIELD_PaymentLine_ChargeAmount_Name="Total de Cargo";
 
 @XendraField(AD_Column_ID="ChargeAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -462,7 +463,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d9d0547e-7ced-b777-f979-a0d2dbbb76cd",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name ChargeAmt */
 public static final String COLUMNNAME_ChargeAmt = "ChargeAmt";
 /** Set Invoice.
@@ -483,13 +484,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d602f138-3d23-2a50-170d-40b243d9bc68")
+public static String es_PE_FIELD_PaymentLine_Invoice_Name="Factura";
+
+@XendraTrl(Identifier="d602f138-3d23-2a50-170d-40b243d9bc68")
 public static String es_PE_FIELD_PaymentLine_Invoice_Description="Identificador de la factura";
 
 @XendraTrl(Identifier="d602f138-3d23-2a50-170d-40b243d9bc68")
 public static String es_PE_FIELD_PaymentLine_Invoice_Help="La ID de Factura identifica únicamente un documento de Factura.";
-
-@XendraTrl(Identifier="d602f138-3d23-2a50-170d-40b243d9bc68")
-public static String es_PE_FIELD_PaymentLine_Invoice_Name="Factura";
 
 @XendraField(AD_Column_ID="C_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -507,7 +508,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@C_Invoice_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.invoice",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f6b103cb-0e4b-8b72-8b96-a6c5b6337325",Synchronized="2017-08-05 16:54:02.0")
+Identifier="f6b103cb-0e4b-8b72-8b96-a6c5b6337325",Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Payment.
@@ -527,13 +528,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="33df9e7b-a611-0bcd-d176-cd7634d47c8b")
+public static String es_PE_FIELD_PaymentLine_Payment_Name="Pago";
+
+@XendraTrl(Identifier="33df9e7b-a611-0bcd-d176-cd7634d47c8b")
 public static String es_PE_FIELD_PaymentLine_Payment_Description="Identificador del pago";
 
 @XendraTrl(Identifier="33df9e7b-a611-0bcd-d176-cd7634d47c8b")
 public static String es_PE_FIELD_PaymentLine_Payment_Help="El pago es un identificador único de este pago.";
-
-@XendraTrl(Identifier="33df9e7b-a611-0bcd-d176-cd7634d47c8b")
-public static String es_PE_FIELD_PaymentLine_Payment_Name="Pago";
 
 @XendraField(AD_Column_ID="C_Payment_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -551,7 +552,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c444d93f-833e-0e11-83f5-8ebe9a69cdd7",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Payment Line.
@@ -609,13 +610,13 @@ return value;
 }
 
 @XendraTrl(Identifier="6943998d-495c-c393-3c64-a5c2a8fa572c")
+public static String es_PE_FIELD_PaymentLine_Description_Name="Descripción";
+
+@XendraTrl(Identifier="6943998d-495c-c393-3c64-a5c2a8fa572c")
 public static String es_PE_FIELD_PaymentLine_Description_Description="Descripción corta opcional del registro";
 
 @XendraTrl(Identifier="6943998d-495c-c393-3c64-a5c2a8fa572c")
 public static String es_PE_FIELD_PaymentLine_Description_Help="Una descripción esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="6943998d-495c-c393-3c64-a5c2a8fa572c")
-public static String es_PE_FIELD_PaymentLine_Description_Name="Descripción";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -633,7 +634,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="098a0c1a-4d22-677c-9100-612d760bd890",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Discount Amount.
@@ -652,13 +653,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="e736c456-e695-88b1-efbe-1f386cfa06d0")
+public static String es_PE_FIELD_PaymentLine_DiscountAmount_Name="Total del Descuento";
+
+@XendraTrl(Identifier="e736c456-e695-88b1-efbe-1f386cfa06d0")
 public static String es_PE_FIELD_PaymentLine_DiscountAmount_Description="Total de descuento calculado";
 
 @XendraTrl(Identifier="e736c456-e695-88b1-efbe-1f386cfa06d0")
 public static String es_PE_FIELD_PaymentLine_DiscountAmount_Help="El Total descuento indica el total de descuento para un documento ó línea";
-
-@XendraTrl(Identifier="e736c456-e695-88b1-efbe-1f386cfa06d0")
-public static String es_PE_FIELD_PaymentLine_DiscountAmount_Name="Total del Descuento";
 
 @XendraField(AD_Column_ID="DiscountAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -677,7 +678,7 @@ ReadOnlyLogic="@C_Charge_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.amounts",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="331c9799-9d0e-0417-fe2b-356d59d32aee",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name DiscountAmt */
 public static final String COLUMNNAME_DiscountAmt = "DiscountAmt";
 /** Set Journal Line.
@@ -698,13 +699,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="93f249d4-859e-a921-8272-f1254ab05b20")
+public static String es_PE_FIELD_PaymentLine_JournalLine_Name="Línea de Póliza";
+
+@XendraTrl(Identifier="93f249d4-859e-a921-8272-f1254ab05b20")
 public static String es_PE_FIELD_PaymentLine_JournalLine_Description="Línea de la póliza";
 
 @XendraTrl(Identifier="93f249d4-859e-a921-8272-f1254ab05b20")
 public static String es_PE_FIELD_PaymentLine_JournalLine_Help="La línea de póliza de la contabilidad general identifica una transacción simple en una póliza.";
-
-@XendraTrl(Identifier="93f249d4-859e-a921-8272-f1254ab05b20")
-public static String es_PE_FIELD_PaymentLine_JournalLine_Name="Línea de Póliza";
 
 @XendraField(AD_Column_ID="GL_JournalLine_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -722,7 +723,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutPayment.journal",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bccc04bd-cb14-52b9-efd1-e44385d35f52",Synchronized="2017-08-05 16:54:02.0")
+Identifier="bccc04bd-cb14-52b9-efd1-e44385d35f52",Synchronized="2019-08-30 22:21:58.0")
 /** Column name GL_JournalLine_ID */
 public static final String COLUMNNAME_GL_JournalLine_ID = "GL_JournalLine_ID";
 /** Set Identifier.
@@ -754,7 +755,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9588bdad-1d8e-45f9-b984-6e4762d28d00",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Over/Under Payment.
@@ -777,13 +778,13 @@ return false;
 }
 
 @XendraTrl(Identifier="33c3cde5-7a8b-b7be-07af-a64f887e27bf")
+public static String es_PE_FIELD_PaymentLine_OverUnderPayment_Name="Sobre/sub pago";
+
+@XendraTrl(Identifier="33c3cde5-7a8b-b7be-07af-a64f887e27bf")
 public static String es_PE_FIELD_PaymentLine_OverUnderPayment_Description="Sobre pago (no contabilizado) ó sub pago (pago parcial)";
 
 @XendraTrl(Identifier="33c3cde5-7a8b-b7be-07af-a64f887e27bf")
 public static String es_PE_FIELD_PaymentLine_OverUnderPayment_Help="Sobre pagos (negativos) son totales no contabilizados y permiten recibir dinero por totales superiores a una factura particular. Sub pagos (positivo) es un pago parcial de una factura. No se saca de libros la cantidad no pagada.";
-
-@XendraTrl(Identifier="33c3cde5-7a8b-b7be-07af-a64f887e27bf")
-public static String es_PE_FIELD_PaymentLine_OverUnderPayment_Name="Sobre/sub pago";
 
 @XendraField(AD_Column_ID="IsOverUnderPayment",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -802,7 +803,7 @@ ReadOnlyLogic="@C_Charge_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.amounts",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="20e9cdca-5d43-c34b-d357-955345fdfa66",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name IsOverUnderPayment */
 public static final String COLUMNNAME_IsOverUnderPayment = "IsOverUnderPayment";
 /** Set Line No.
@@ -821,13 +822,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d08db1c8-5163-7f33-a482-7eea5fb04903")
+public static String es_PE_FIELD_PaymentLine_LineNo_Name="No. Línea";
+
+@XendraTrl(Identifier="d08db1c8-5163-7f33-a482-7eea5fb04903")
 public static String es_PE_FIELD_PaymentLine_LineNo_Description="No. Línea único para este documento";
 
 @XendraTrl(Identifier="d08db1c8-5163-7f33-a482-7eea5fb04903")
 public static String es_PE_FIELD_PaymentLine_LineNo_Help="Indica el No. Línea para un documento. También controlará el orden de despliegue de las líneas dentro de un documento";
-
-@XendraTrl(Identifier="d08db1c8-5163-7f33-a482-7eea5fb04903")
-public static String es_PE_FIELD_PaymentLine_LineNo_Name="No. Línea";
 
 @XendraField(AD_Column_ID="Line",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -846,7 +847,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9cd2a58-120c-e405-c792-7b16cd3bad72",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 /** Set Over/Under Payment.
@@ -865,13 +866,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="f54cc024-405d-d274-b2ee-0431386d21d0")
+public static String es_PE_FIELD_PaymentLine_OverUnderPayment2_Name="Totales con sobre/sub pago";
+
+@XendraTrl(Identifier="f54cc024-405d-d274-b2ee-0431386d21d0")
 public static String es_PE_FIELD_PaymentLine_OverUnderPayment2_Description="Total de sobre pago (no contabilizado) ó sub pago (pago parcial)";
 
 @XendraTrl(Identifier="f54cc024-405d-d274-b2ee-0431386d21d0")
 public static String es_PE_FIELD_PaymentLine_OverUnderPayment2_Help="Sobre pagos (negativos) son totales no contabilizados y permiten recibir dinero por totales superiores a una factura particular. Sub pagos (positivo) es un pago parcial de una factura. No se saca de libros la cantidad no pagada.";
-
-@XendraTrl(Identifier="f54cc024-405d-d274-b2ee-0431386d21d0")
-public static String es_PE_FIELD_PaymentLine_OverUnderPayment2_Name="Totales con sobre/sub pago";
 
 @XendraField(AD_Column_ID="OverUnderAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -890,7 +891,7 @@ ReadOnlyLogic="@C_Charge_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.amounts",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5a48f30e-d1ed-c683-b246-b1f6790f18d2",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name OverUnderAmt */
 public static final String COLUMNNAME_OverUnderAmt = "OverUnderAmt";
 /** Set Payment amount.
@@ -910,13 +911,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="159888c9-c295-27cf-b377-2cd50c02c398")
+public static String es_PE_FIELD_PaymentLine_PaymentAmount_Name="Total del Pago";
+
+@XendraTrl(Identifier="159888c9-c295-27cf-b377-2cd50c02c398")
 public static String es_PE_FIELD_PaymentLine_PaymentAmount_Description="Total siendo pagado";
 
 @XendraTrl(Identifier="159888c9-c295-27cf-b377-2cd50c02c398")
 public static String es_PE_FIELD_PaymentLine_PaymentAmount_Help="Indica el total a pagar. El total del pago puede ser para una factura simple, múltiple ó un pago parcial de una factura.";
-
-@XendraTrl(Identifier="159888c9-c295-27cf-b377-2cd50c02c398")
-public static String es_PE_FIELD_PaymentLine_PaymentAmount_Name="Total del Pago";
 
 @XendraField(AD_Column_ID="PayAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -934,7 +935,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutPayment.amounts",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b0c6febc-0985-5190-3674-a2511d462a87",Synchronized="2017-08-05 16:54:02.0")
+Identifier="b0c6febc-0985-5190-3674-a2511d462a87",Synchronized="2019-08-30 22:21:58.0")
 /** Column name PayAmt */
 public static final String COLUMNNAME_PayAmt = "PayAmt";
 /** Set Processed.
@@ -957,13 +958,13 @@ return false;
 }
 
 @XendraTrl(Identifier="b64363ae-40bd-fe9c-cfdc-4e6add5896e0")
+public static String es_PE_FIELD_PaymentLine_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="b64363ae-40bd-fe9c-cfdc-4e6add5896e0")
 public static String es_PE_FIELD_PaymentLine_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="b64363ae-40bd-fe9c-cfdc-4e6add5896e0")
 public static String es_PE_FIELD_PaymentLine_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="b64363ae-40bd-fe9c-cfdc-4e6add5896e0")
-public static String es_PE_FIELD_PaymentLine_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -981,7 +982,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6cbdd540-b27a-de11-a382-9f61bd501734",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -1022,7 +1023,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c4500c39-1578-32a9-0504-f60d345a2c51",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Remaining Amt.
@@ -1041,10 +1042,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="55d38ee0-e608-ec03-fd63-a3a23ff14b22")
-public static String es_PE_FIELD_PaymentLine_RemainingAmt_Description="Importe Remanente";
+public static String es_PE_FIELD_PaymentLine_RemainingAmt_Name="Importe Remanente";
 
 @XendraTrl(Identifier="55d38ee0-e608-ec03-fd63-a3a23ff14b22")
-public static String es_PE_FIELD_PaymentLine_RemainingAmt_Name="Importe Remanente";
+public static String es_PE_FIELD_PaymentLine_RemainingAmt_Description="Importe Remanente";
 
 @XendraField(AD_Column_ID="RemainingAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1063,7 +1064,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT MAX(p.PayAmt)+COALESCE(SUM(currencyconvert(pl.PayAmt,pl.c_currency_id,p.c_currency_id,p.datetrx,pl.c_conversiontype_id,pl.ad_client_id,0)),0) FROM C_Payment p  LEFT OUTER JOIN C_PaymentLine pl ON (p.C_Payment_ID=pl.C_Payment_ID)  WHERE p.C_Payment_ID=C_PaymentLine.C_Payment_ID)",
 IsAllowLogging=false,Identifier="0776ba0e-c360-d8a2-1999-a5942c8880f2",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name RemainingAmt */
 public static final String COLUMNNAME_RemainingAmt = "RemainingAmt";
 /** Set RemainingAmt2.
@@ -1101,7 +1102,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT i.GrandTotal + pl.WriteOffAmt + pl.PayAmt FROM c_invoice i JOIN c_paymentline pl ON pl.c_invoice_id = i.c_invoice_id WHERE pl.C_PaymentLine_ID=C_PaymentLine.C_PaymentLine_ID)",
 IsAllowLogging=false,Identifier="4ccb7a60-bc98-8e91-e5c9-1541eea70e68",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name RemainingAmt2 */
 public static final String COLUMNNAME_RemainingAmt2 = "RemainingAmt2";
 /** Set Tax Amount.
@@ -1120,13 +1121,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="57f4fd06-00f9-e6df-e009-d7c8431a1d4c")
+public static String es_PE_FIELD_PaymentLine_TaxAmount_Name="Total del Impuesto";
+
+@XendraTrl(Identifier="57f4fd06-00f9-e6df-e009-d7c8431a1d4c")
 public static String es_PE_FIELD_PaymentLine_TaxAmount_Description="Total del impuesto para un documento";
 
 @XendraTrl(Identifier="57f4fd06-00f9-e6df-e009-d7c8431a1d4c")
 public static String es_PE_FIELD_PaymentLine_TaxAmount_Help="El Total de Impuesto despliega el total de impuesto para un documento";
-
-@XendraTrl(Identifier="57f4fd06-00f9-e6df-e009-d7c8431a1d4c")
-public static String es_PE_FIELD_PaymentLine_TaxAmount_Name="Total del Impuesto";
 
 @XendraField(AD_Column_ID="TaxAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -1144,7 +1145,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="655b6171-1d69-b108-28f2-fe88bbf60eed",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name TaxAmt */
 public static final String COLUMNNAME_TaxAmt = "TaxAmt";
 /** Set WithholdingAmt.
@@ -1171,7 +1172,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f068d3e2-b6bf-4c50-aba6-447a02a21bf5",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name WithholdingAmt */
 public static final String COLUMNNAME_WithholdingAmt = "WithholdingAmt";
 /** Set Write-off Amount.
@@ -1190,13 +1191,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="7f980bd0-c004-e695-ab40-457138c81a5a")
+public static String es_PE_FIELD_PaymentLine_Write_OffAmount_Name="Total del Ajuste";
+
+@XendraTrl(Identifier="7f980bd0-c004-e695-ab40-457138c81a5a")
 public static String es_PE_FIELD_PaymentLine_Write_OffAmount_Description="Total por ajustar";
 
 @XendraTrl(Identifier="7f980bd0-c004-e695-ab40-457138c81a5a")
 public static String es_PE_FIELD_PaymentLine_Write_OffAmount_Help="El Total de ajuste indica el total a ser ajustado como incobrable";
-
-@XendraTrl(Identifier="7f980bd0-c004-e695-ab40-457138c81a5a")
-public static String es_PE_FIELD_PaymentLine_Write_OffAmount_Name="Total del Ajuste";
 
 @XendraField(AD_Column_ID="WriteOffAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="14b973d8-4739-0f04-7f95-f52e97bb0285",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1214,7 +1215,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@C_Charge_ID@!0",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutPayment.amounts",VFormat="",ValueMin="",ValueMax="",Version="0",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="680151fc-befb-00a6-006e-85d71bdaf06b",Synchronized="2017-08-05 16:54:02.0")
+Identifier="680151fc-befb-00a6-006e-85d71bdaf06b",Synchronized="2019-08-30 22:21:58.0")
 /** Column name WriteOffAmt */
 public static final String COLUMNNAME_WriteOffAmt = "WriteOffAmt";
 }

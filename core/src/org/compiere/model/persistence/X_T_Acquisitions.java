@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("T_Acquisitions");
 @XendraTrl(Identifier="e5e6e1ee-3a0c-70f0-17e7-caa63fb63bb2")
 public static String es_PE_TABLE_T_Acquisitions_Name="Registro de Compras";
 
-@XendraTable(Name="Acquisitions Report",Description="",Help="",TableName="T_Acquisitions",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="e5e6e1ee-3a0c-70f0-17e7-caa63fb63bb2",
-Synchronized="2017-08-16 11:44:17.0")
+@XendraTable(Name="Acquisitions Report",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="T_Acquisitions",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="e5e6e1ee-3a0c-70f0-17e7-caa63fb63bb2",
+Synchronized="2020-03-03 21:40:17.0")
 /** TableName=T_Acquisitions */
 public static final String Table_Name="T_Acquisitions";
 

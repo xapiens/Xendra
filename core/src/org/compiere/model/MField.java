@@ -125,7 +125,7 @@ public class MField extends X_AD_Field
 			M_Element element = M_Element.getOfColumn(getCtx(), getAD_Column_ID());
 			if (element == null)
 			{
-				System.out.println("X");
+				System.out.println("X17");
 			}
 			setName (element.getName ());
 			setDescription (element.getDescription ());

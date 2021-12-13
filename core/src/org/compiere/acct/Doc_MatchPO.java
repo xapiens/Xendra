@@ -23,7 +23,6 @@ import java.util.logging.*;
 
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MConversionRate;
-import org.compiere.model.MCostDetail;
 import org.compiere.model.MMatchPO;
 import org.compiere.model.MOrder;
 import org.compiere.model.MOrderLine;
@@ -188,11 +187,11 @@ public class Doc_MatchPO extends Doc
 		tQty = tQty.add(getQty());		
 
 		// Set Total Amount and Total Quantity from Matched PO 
-		MCostDetail.createOrder(as, m_oLine.getAD_Org_ID(), 
-				getM_Product_ID(), m_M_AttributeSetInstance_ID,
-				m_C_OrderLine_ID, 0,		//	no cost element
-				tAmt, tQty,			//	Delivered
-				m_oLine.getDescription(), getTrxName());
+		//MCostDetail.createOrder(as, m_oLine.getAD_Org_ID(), 
+		//		getM_Product_ID(), m_M_AttributeSetInstance_ID,
+		//	m_C_OrderLine_ID, 0,		//	no cost element
+		//		tAmt, tQty,			//	Delivered
+		//		m_oLine.getDescription(), getTrxName());
 		// end MZ
 
 		//	Calculate PPV for standard costing

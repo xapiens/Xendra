@@ -57,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_FolderSpecial");
 @XendraTrl(Identifier="98d35d9d-af90-46f4-bd16-98ea8352e1d4")
 public static String es_PE_TABLE_E_FolderSpecial_Name="E_FolderSpecial";
 
-@XendraTable(Name="E_FolderSpecial",Description="",Help="",TableName="E_FolderSpecial",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.communication",Identifier="98d35d9d-af90-46f4-bd16-98ea8352e1d4",
-Synchronized="2017-08-16 11:42:36.0")
+@XendraTable(Name="E_FolderSpecial",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="E_FolderSpecial",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.communication",Identifier="98d35d9d-af90-46f4-bd16-98ea8352e1d4",
+Synchronized="2020-03-03 21:37:48.0")
 /** TableName=E_FolderSpecial */
 public static final String Table_Name="E_FolderSpecial";
 
@@ -120,12 +121,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d8f9413a-2bf9-425c-a480-1533ecd211d4",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
-
-/** E_FolderDrafts_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERDRAFTS_ID_AD_Reference_ID=1000055;
 /** Set E_FolderDrafts_ID.
 @param E_FolderDrafts_ID E_FolderDrafts_ID */
 public void setE_FolderDrafts_ID (int E_FolderDrafts_ID)
@@ -152,12 +150,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6e221617-a1e8-47f0-89c5-4d8c31c1d737",Synchronized="2017-08-05 16:54:33.0")
+Identifier="6e221617-a1e8-47f0-89c5-4d8c31c1d737",Synchronized="2019-08-30 22:22:25.0")
 /** Column name E_FolderDrafts_ID */
 public static final String COLUMNNAME_E_FolderDrafts_ID = "E_FolderDrafts_ID";
-
-/** E_FolderInbox_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERINBOX_ID_AD_Reference_ID=1000055;
 /** Set E_FolderInbox_ID.
 @param E_FolderInbox_ID E_FolderInbox_ID */
 public void setE_FolderInbox_ID (int E_FolderInbox_ID)
@@ -184,12 +179,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="545bf44a-79a9-480c-9ba8-1a084c31a70f",Synchronized="2017-08-05 16:54:33.0")
+Identifier="545bf44a-79a9-480c-9ba8-1a084c31a70f",Synchronized="2019-08-30 22:22:25.0")
 /** Column name E_FolderInbox_ID */
 public static final String COLUMNNAME_E_FolderInbox_ID = "E_FolderInbox_ID";
-
-/** E_FolderSent_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERSENT_ID_AD_Reference_ID=1000055;
 /** Set E_FolderSent_ID.
 @param E_FolderSent_ID E_FolderSent_ID */
 public void setE_FolderSent_ID (int E_FolderSent_ID)
@@ -216,12 +208,9 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6d1688d9-8c54-475a-a6d1-c8ebf4ce5a93",Synchronized="2017-08-05 16:54:33.0")
+Identifier="6d1688d9-8c54-475a-a6d1-c8ebf4ce5a93",Synchronized="2019-08-30 22:22:25.0")
 /** Column name E_FolderSent_ID */
 public static final String COLUMNNAME_E_FolderSent_ID = "E_FolderSent_ID";
-
-/** E_FolderSpecial_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERSPECIAL_ID_AD_Reference_ID=1000055;
 /** Set E_FolderSpecial_ID.
 @param E_FolderSpecial_ID E_FolderSpecial_ID */
 public void setE_FolderSpecial_ID (int E_FolderSpecial_ID)
@@ -239,9 +228,6 @@ return ii.intValue();
 }
 /** Column name E_FolderSpecial_ID */
 public static final String COLUMNNAME_E_FolderSpecial_ID = "E_FolderSpecial_ID";
-
-/** E_FolderTemplates_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERTEMPLATES_ID_AD_Reference_ID=1000055;
 /** Set E_FolderTemplates_ID.
 @param E_FolderTemplates_ID E_FolderTemplates_ID */
 public void setE_FolderTemplates_ID (int E_FolderTemplates_ID)
@@ -269,12 +255,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="10e1f3cb-6e55-4472-ab8a-bc98e0ada28b",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name E_FolderTemplates_ID */
 public static final String COLUMNNAME_E_FolderTemplates_ID = "E_FolderTemplates_ID";
-
-/** E_FolderTrash_ID AD_Reference=78d11f10-7a65-4786-abf0-65f9631dd1f1 */
-public static final int E_FOLDERTRASH_ID_AD_Reference_ID=1000055;
 /** Set E_FolderTrash_ID.
 @param E_FolderTrash_ID E_FolderTrash_ID */
 public void setE_FolderTrash_ID (int E_FolderTrash_ID)
@@ -301,7 +284,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8b9cbe37-53f2-4f3f-831b-c05dbc027236",Synchronized="2017-08-05 16:54:33.0")
+Identifier="8b9cbe37-53f2-4f3f-831b-c05dbc027236",Synchronized="2019-08-30 22:22:25.0")
 /** Column name E_FolderTrash_ID */
 public static final String COLUMNNAME_E_FolderTrash_ID = "E_FolderTrash_ID";
 /** Set Identifier.
@@ -333,7 +316,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b72dc7ac-0142-4c91-b2f6-54d5c5aedb9b",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

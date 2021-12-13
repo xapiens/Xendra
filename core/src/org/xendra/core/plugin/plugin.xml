@@ -1,13 +1,19 @@
 <?xml  version="1.0" encoding="UTF-8"?>
-<plugin name="Xendra extensions" description="Contains references to all Xendra core"
-	id="org.xendra.core" version="1.0" category="framework" enabled="true">
+<plugin name="Xendra extensions" 
+	description="Contains references to all Xendra core"
+	id="org.xendra.core" 
+	version="1.0" 
+	category="framework" 
+	synchronized="@timestamp@"
+	enabled="true">
   <extensionlist id="org.columba.core.frame">
     	<extension id="XendraFrame" class="org.xendra.core.ui.frame.XendraFrameMediator" >
       		<properties managed="true" /> 
     	</extension>
   </extensionlist>  	
   <extensionlist id="org.columba.core.search">
-    <extension id="InvoiceSearchProvider" class="org.xendra.core.search.InvoiceSearchProvider"/>
+	  <extension id="InvoiceSearchProvider" class="org.xendra.core.search.InvoiceSearchProvider"/>
+	  <extension id="PluginSearchProvider" class="org.xendra.core.search.PluginSearchProvider"/>
   </extensionlist>  
   <extensionlist id="org.columba.core.component">
         <extension id="XendraComponent" class="org.xendra.main.Main" />

@@ -22,13 +22,11 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
-import org.compiere.acct.Doc;
-import org.compiere.apps.ADialog;
+import org.compiere.model.persistence.X_C_BPartner_Location;
+import org.compiere.model.persistence.X_C_DocType;
 import org.compiere.model.persistence.X_C_Invoice;
 import org.compiere.model.persistence.X_C_Order;
-import org.compiere.model.persistence.X_C_OrderLine;
 import org.compiere.model.persistence.X_M_InOut;
-import org.compiere.model.reference.REF_C_BPartnerSOCreditStatus;
 import org.compiere.model.reference.REF_C_DocTypeSubType;
 import org.compiere.model.reference.REF_C_OrderDeliveryRule;
 import org.compiere.model.reference.REF_C_OrderFreightCostRule;
@@ -37,7 +35,6 @@ import org.compiere.model.reference.REF_C_OrderDeliveryViaRule;
 import org.compiere.model.reference.REF__DocumentAction;
 import org.compiere.model.reference.REF_C_DocTypeDocBaseType;
 import org.compiere.model.reference.REF__DocumentStatus;
-import org.compiere.model.reference.REF_M_TransactionMovementType;
 import org.compiere.model.reference.REF__PaymentRule;
 import org.compiere.model.reference.REF__PriorityRule;
 import org.compiere.print.*;
@@ -45,13 +42,8 @@ import org.compiere.process.*;
 import org.compiere.util.*;
 import org.drools.core.io.impl.ClassPathResource;
 import org.kie.api.KieBase;
-import org.kie.api.KieServices;
-import org.kie.api.event.rule.DebugAgendaEventListener;
-import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.io.ResourceType;
-import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.KnowledgeBase;
 import org.kie.internal.KnowledgeBaseFactory;
 import org.kie.internal.builder.KnowledgeBuilder;
@@ -59,8 +51,9 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.runtime.StatefulKnowledgeSession;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xendra.Constants;
+import org.xendra.rules.CustomAgendaEventListener;
+import org.xendra.rules.CustomWorkingMemoryEventListener;
 
 
 /**
@@ -246,7 +239,7 @@ public class MOrder extends X_C_Order implements DocAction
 		if (C_Order_ID == 0)
 		{
 			setDocStatus(REF__DocumentStatus.Drafted);
-			setDocAction (REF__DocumentAction.Prepare);
+			setDocAction (REF__DocumentAction.Complete);
 			//
 			setDeliveryRule (REF_C_OrderDeliveryRule.Availability);
 			setFreightCostRule (REF_C_OrderFreightCostRule.FreightIncluded);
@@ -351,13 +344,12 @@ public class MOrder extends X_C_Order implements DocAction
 	private String		m_processMsg = null;
 	/**	Just Prepared Flag			*/
 	private boolean		m_justPrepared = false;
-	private Timestamp dateInvoiced;
 	private Timestamp dateInOut;
 	private Integer InOut_C_DocType_ID;
 	private Integer Invoice_C_DocType_ID;
 	//private String InvoiceSerial;
 	//private String InvoiceDocNumber;
-	private String InOutDocNumber;
+	private String InOutDocNumber = "";
 	private BigDecimal taxAmt = BigDecimal.ZERO;
 	private BigDecimal taxBaseAmt = BigDecimal.ZERO;
 	private String rulestatus;	
@@ -407,6 +399,7 @@ public class MOrder extends X_C_Order implements DocAction
 	{
 		super.setC_BPartner_ID (C_BPartner_ID);
 		super.setBill_BPartner_ID (C_BPartner_ID);
+		super.setPay_BPartner_ID(C_BPartner_ID);
 	}	//	setC_BPartner_ID
 	
 	/**
@@ -416,7 +409,11 @@ public class MOrder extends X_C_Order implements DocAction
 	public void setC_BPartner_Location_ID (int C_BPartner_Location_ID)
 	{
 		super.setC_BPartner_Location_ID (C_BPartner_Location_ID);
-		super.setBill_Location_ID(C_BPartner_Location_ID);
+		X_C_BPartner_Location pl = new Query(Env.getCtx(), X_C_BPartner_Location.Table_Name, "C_BPartner_Location_ID = ?", get_TrxName())
+			.setParameters(C_BPartner_Location_ID).first();
+		if (pl != null) {
+			super.setBill_Location_ID(pl.getC_BPartner_Location_ID());
+		}
 	}	//	setC_BPartner_Location_ID
 
 	/**
@@ -481,18 +478,17 @@ public class MOrder extends X_C_Order implements DocAction
 	 */
 	public void setC_DocTypeTarget_ID (String DocSubType_x)
 	{
-		String sql = "SELECT C_DocType_ID FROM C_DocType "
-			+ "WHERE AD_Client_ID=? AND AD_Org_ID IN (0," + getAD_Org_ID()
-			+ ") AND DocSubType=? "
-			+ "ORDER BY AD_Org_ID DESC, IsDefault DESC";
-		int C_DocType_ID = DB.getSQLValue(null, sql, getAD_Client_ID(), DocSubType_x);
-		if (C_DocType_ID <= 0)
+		String where = "AD_Client_ID=? AND AD_Org_ID IN (0, ?) AND DocSubType = ?";
+		X_C_DocType doctype = new Query(Env.getCtx(), X_C_DocType.Table_Name, where, null)
+			.setParameters(getAD_Client_ID(), getAD_Org_ID(), DocSubType_x).setOrderBy("AD_Org_ID DESC, IsDefault DESC").first();
+		if (doctype == null) {
 			log.severe ("Not found for AD_Client_ID=" + getAD_Client_ID () + ", SubType=" + DocSubType_x);
+		}
 		else
 		{
 			log.fine("(SO) - " + DocSubType_x);
-			setC_DocTypeTarget_ID (C_DocType_ID);
-			setIsSOTrx(true);
+			setC_DocTypeTarget_ID(doctype.getC_DocType_ID());
+			setIsSOTrx(doctype.isSOTrx());
 		}
 	}	//	setC_DocTypeTarget_ID
 
@@ -1425,7 +1421,7 @@ public class MOrder extends X_C_Order implements DocAction
 	 * 	@return new status (In Progress or Invalid) 
 	 */
 	public String prepareIt()
-	{							
+	{						
 		log.info(toString());
 		setProcessMsg(ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE));
 		if (getProcessMsg() != null)
@@ -1437,8 +1433,10 @@ public class MOrder extends X_C_Order implements DocAction
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			//ksession.addEventListener(new DebugAgendaEventListener());
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -1689,7 +1687,7 @@ public class MOrder extends X_C_Order implements DocAction
 	 */
 	public boolean reserveStock ()
 	{		//MDocType dt, MOrderLine[] lines)
-		MPeriod period = MPeriod.get(Env.getCtx(), this.getDateOrdered(), getAD_Org_ID());
+		MPeriod period = MPeriod.get(Env.getCtx(), this.getDateOrdered(), getAD_Org_ID(), getAD_Client_ID());
 		if (period == null) {
 			setProcessMsg("@PeriodClosed@");
 			return false;
@@ -2031,8 +2029,9 @@ public class MOrder extends X_C_Order implements DocAction
 		if (kb != null)
 		{
 			ksession = kb.newKieSession();
-			ksession.addEventListener(new DebugAgendaEventListener());
-			ksession.addEventListener(new DebugRuleRuntimeEventListener());					
+			//ksession.addEventListener(new DebugRuleRuntimeEventListener());
+			ksession.addEventListener(new CustomAgendaEventListener());
+			ksession.addEventListener(new CustomWorkingMemoryEventListener());			
 			ksession.setGlobal("ctx", Env.getCtx());								
 			ksession.insert(this);			
 		}		
@@ -2690,7 +2689,7 @@ public class MOrder extends X_C_Order implements DocAction
 	public boolean RestoreIt() {
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 		
-		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateAcct(), dt.getDocBaseType(), getAD_Org_ID(), getAD_Client_ID()))
 		{
 			setProcessMsg("@PeriodClosed@");
 			return false;
@@ -2758,7 +2757,7 @@ public class MOrder extends X_C_Order implements DocAction
 	private boolean dereserveStock(MDocType dt, MOrderLine lines[]) {
 		if (dt == null)
 			dt = MDocType.get(getCtx(), getC_DocType_ID());
-		Integer C_Period_ID = MPeriod.get(Env.getCtx(), this.getDateOrdered()).getC_Period_ID();
+		Integer C_Period_ID = MPeriod.get(Env.getCtx(), getDateOrdered(), getAD_Org_ID(), getAD_Client_ID()).getC_Period_ID();
 		//	Binding
 		boolean binding = !dt.isProposal();
 		//	Not binding - i.e. Target=0
@@ -2829,15 +2828,6 @@ public class MOrder extends X_C_Order implements DocAction
 		}	//	reverse inventory
 		
 		return true;
-	}
-	
-	public void setDateInvoiced(Timestamp dateInvoiced)
-	{
-		this.dateInvoiced = dateInvoiced;
-	}
-	public Timestamp getDateInvoiced()
-	{
-		return dateInvoiced;
 	}
 	public void setDateInOut(Timestamp dateInOut)
 	{

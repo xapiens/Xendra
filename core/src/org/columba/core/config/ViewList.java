@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ViewList {
-	//@XmlElementWrapper(name="View")
 	@XmlElement(name="view")
 	List<View> views = new ArrayList<View>();
 	@XmlElement
@@ -31,6 +30,7 @@ public class ViewList {
 	}
 	public View getView(String id) {
 		View ret = null;
+		System.out.println("entrando al getView em ViewList");
 		for (View view:views ) {			
 			if (view.getId().equals(id)) {
 				ret = view;

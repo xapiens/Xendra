@@ -76,11 +76,12 @@ public static final String TABNAME_UpdateNotification="7c053895-4b86-4b32-6187-c
 @XendraTrl(Identifier="d2028c42-6003-42ef-77ed-e679baf4f3d3")
 public static String es_PE_TABLE_R_CategoryUpdates_Name="R_CategoryUpdates";
 
-@XendraTable(Name="R_CategoryUpdates",Description="",Help="",TableName="R_CategoryUpdates",
-AccessLevel="7",AD_Window_ID="e9016b80-21a4-1781-85f4-03148c8c1976",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="d2028c42-6003-42ef-77ed-e679baf4f3d3",Synchronized="2017-08-16 11:43:47.0")
+@XendraTable(Name="R_CategoryUpdates",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="R_CategoryUpdates",AccessLevel="7",AD_Window_ID="e9016b80-21a4-1781-85f4-03148c8c1976",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="d2028c42-6003-42ef-77ed-e679baf4f3d3",Synchronized="2020-03-03 21:39:29.0")
 /** TableName=R_CategoryUpdates */
 public static final String Table_Name="R_CategoryUpdates";
 
@@ -130,13 +131,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="588fe776-4722-46de-f768-73c9e4a6f512")
+public static String es_PE_FIELD_UpdateNotification_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="588fe776-4722-46de-f768-73c9e4a6f512")
 public static String es_PE_FIELD_UpdateNotification_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="588fe776-4722-46de-f768-73c9e4a6f512")
 public static String es_PE_FIELD_UpdateNotification_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="588fe776-4722-46de-f768-73c9e4a6f512")
-public static String es_PE_FIELD_UpdateNotification_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7c053895-4b86-4b32-6187-c21498b57bed",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4143011c-d99e-50f9-af42-3b01e2102406",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Identifier.
@@ -186,7 +187,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6330c459-eea9-4d7b-bc78-6124e90ea5d3",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Self-Service.
@@ -209,13 +210,13 @@ return false;
 }
 
 @XendraTrl(Identifier="a2794f21-903b-6183-9ba7-ec1bb038d2e2")
+public static String es_PE_FIELD_UpdateNotification_Self_Service_Name="Auto-Servicio";
+
+@XendraTrl(Identifier="a2794f21-903b-6183-9ba7-ec1bb038d2e2")
 public static String es_PE_FIELD_UpdateNotification_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraTrl(Identifier="a2794f21-903b-6183-9ba7-ec1bb038d2e2")
 public static String es_PE_FIELD_UpdateNotification_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
-
-@XendraTrl(Identifier="a2794f21-903b-6183-9ba7-ec1bb038d2e2")
-public static String es_PE_FIELD_UpdateNotification_Self_Service_Name="Auto-Servicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="7c053895-4b86-4b32-6187-c21498b57bed",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -233,7 +234,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="251e012e-b324-b633-57ae-b0955ec7a4b5",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Category.
@@ -253,13 +254,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="74c5efd1-25f5-139b-b879-930cd2addcb8")
+public static String es_PE_FIELD_UpdateNotification_Category_Name="Categoría";
+
+@XendraTrl(Identifier="74c5efd1-25f5-139b-b879-930cd2addcb8")
 public static String es_PE_FIELD_UpdateNotification_Category_Description="Categoría de Solicitud";
 
 @XendraTrl(Identifier="74c5efd1-25f5-139b-b879-930cd2addcb8")
 public static String es_PE_FIELD_UpdateNotification_Category_Help="Categoria ó asunto de la solicitud";
-
-@XendraTrl(Identifier="74c5efd1-25f5-139b-b879-930cd2addcb8")
-public static String es_PE_FIELD_UpdateNotification_Category_Name="Categoría";
 
 @XendraField(AD_Column_ID="R_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="7c053895-4b86-4b32-6187-c21498b57bed",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -277,7 +278,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2e117ed9-de5c-3cff-a145-fdb0ce8c7fc1",
-Synchronized="2017-08-05 16:55:48.0")
+Synchronized="2019-08-30 22:23:44.0")
 /** Column name R_Category_ID */
 public static final String COLUMNNAME_R_Category_ID = "R_Category_ID";
 }

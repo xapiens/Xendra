@@ -33,10 +33,6 @@ import org.compiere.model.MScheduler;
 import org.compiere.model.MSystem;
 import org.compiere.model.XendraProcessor;
 import org.compiere.model.XendraProcessorLog;
-import org.compiere.model.persistence.X_A_MachineServer;
-import org.compiere.model.persistence.X_R_RequestProcessor;
-import org.compiere.model.reference.REF_C_CommissionFrequency;
-import org.compiere.model.reference.REF_ServerType;
 import org.compiere.model.reference.REF__FrequencyType;
 import org.compiere.util.*;
 import org.compiere.wf.*;
@@ -95,7 +91,7 @@ public abstract class XendraServer extends Thread implements PgNotificationListe
 		if (p_system == null)
 			p_system = MSystem.get(m_ctx);
 		p_client = MClient.get(m_ctx);
-		Env.setContext(m_ctx, "#AD_Client_ID", p_client.getAD_Client_ID());
+		//Env.setContext(m_ctx, "#AD_Client_ID", p_client.getAD_Client_ID());
 		m_initialNap = initialNap;
 	//	log.info(model.getName() + " - " + getThreadGroup());
 	}	//	ServerBase
@@ -268,7 +264,6 @@ public abstract class XendraServer extends Thread implements PgNotificationListe
 				cal0.set(Calendar.MINUTE, 0);
 				cal0.set(Calendar.SECOND, 0);
 				cal0.set(Calendar.MILLISECOND, 0);
-				java.util.Date xx = cal0.getTime();
 				long next = cal0.getTimeInMillis();
 				if (next < now)
 				{
@@ -299,11 +294,6 @@ public abstract class XendraServer extends Thread implements PgNotificationListe
 			if (!sleep())
 				break;							
 		}
-//		forever = true;
-//		while (forever)
-//		{
-//			sleep();
-//		}
 		m_start = 0;
 	}	//	run
 

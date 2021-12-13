@@ -15,7 +15,8 @@
 //All Rights Reserved.
 package org.columba.core.facade;
 
-import org.columba.core.logging.Logging;
+import org.compiere.util.CLogMgt;
+
 
 /**
  * A facade for logging in columba.
@@ -31,6 +32,6 @@ public final class LoggingFacade {
 	}
 
 	public static void enableDebuggingMode(boolean enabled) {
-		Logging.setDebugging(enabled);
+		CLogMgt.setDebugging(enabled);
 	}
 }

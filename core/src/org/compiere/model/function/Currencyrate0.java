@@ -9,7 +9,7 @@ public class Currencyrate0
 @XendraFunction(Name="currencyrate",Output="numeric",Owner="xendra",Language="plpgsql",
 Identifier="5c3d0ae1-8b25-e641-c7e0-ef59338e2567",
 Arguments="p_curfrom_id numeric, p_curto_id numeric, p_convdate timestamp with time zone, p_conversiontype_id numeric, p_client_id numeric, p_org_id numeric",
-Extension="",Synchronized="2013-09-29 01:27:28.0")
+Extension="",Synchronized="2020-02-12 22:27:28.0")
 	public static final String Identifier = "5c3d0ae1-8b25-e641-c7e0-ef59338e2567";
 
 	public static final String getCode() 
@@ -49,8 +49,8 @@ Extension="",Synchronized="2013-09-29 01:27:28.0")
 	sb.appendln("WHERE C_Currency_ID=v_CurrencyFrom AND C_Currency_ID_To=v_CurrencyTo");
 	sb.appendln(" AND C_ConversionType_ID=v_ConversionType_ID");
 	sb.appendln(" AND v_ConvDate BETWEEN ValidFrom AND ValidTo");
-	sb.appendln(" AND AD_Client_ID IN (0,p_Client_ID) AND AD_Org_ID IN (0,p_Org_ID)");
-	sb.appendln("ORDER BY AD_Client_ID DESC, AD_Org_ID DESC, ValidFrom DESC");
+	sb.appendln(" AND AD_Client_ID IN (0,p_Client_ID) ");
+	sb.appendln("ORDER BY AD_Client_ID DESC, ValidFrom DESC");
 	sb.appendln("LOOP");
 	sb.appendln("v_Rate := c.MultiplyRate;");
 	sb.appendln("EXIT; -- only first");
@@ -71,7 +71,7 @@ Extension="",Synchronized="2013-09-29 01:27:28.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2013-09-29 01:27:28.0");
+ 	sb.appendln("@Synchronized=2020-02-12 22:27:28.0");
 	sb.appendln("@Identifier=5c3d0ae1-8b25-e641-c7e0-ef59338e2567");
 	return sb.toString();
 }

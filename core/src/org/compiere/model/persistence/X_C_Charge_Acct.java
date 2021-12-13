@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_Charge_Acct");
 public static String es_PE_TAB_Accounting_Description="Contabilidad de Cargos";
 
 @XendraTrl(Identifier="5f56b3f5-9bf5-e34e-2bbc-164017b6de89")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="5f56b3f5-9bf5-e34e-2bbc-164017b6de89")
 public static String es_PE_TAB_Accounting_Help="La pestaña Contabilidad define los parámetros usados para transacciones incluyendo cargos.";
 
-@XendraTab(Name="Accounting",Description="Charge Accounting",
+@XendraTrl(Identifier="5f56b3f5-9bf5-e34e-2bbc-164017b6de89")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Charge Accounting",
 Help="The Accounting Tab defines the accounting parameters used for transactions including a charge or charges.",
 AD_Window_ID="ef466ff3-68cd-74cc-581f-b4cfbb084e84",SeqNo=20,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_Accounting="5f56b3f5-9bf5-e34e-2bbc-164017b6d
 @XendraTrl(Identifier="06547239-75ce-c41c-ae5e-3be5d1f5ac9b")
 public static String es_PE_TABLE_C_Charge_Acct_Name="C_Charge_Acct";
 
-@XendraTable(Name="C_Charge_Acct",Description="",Help="",TableName="C_Charge_Acct",AccessLevel="3",
-AD_Window_ID="ef466ff3-68cd-74cc-581f-b4cfbb084e84",AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,
-IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="06547239-75ce-c41c-ae5e-3be5d1f5ac9b",
-Synchronized="2017-08-16 11:41:37.0")
+@XendraTable(Name="C_Charge_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_Charge_Acct",AccessLevel="3",AD_Window_ID="ef466ff3-68cd-74cc-581f-b4cfbb084e84",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="06547239-75ce-c41c-ae5e-3be5d1f5ac9b",Synchronized="2020-03-03 21:36:43.0")
 /** TableName=C_Charge_Acct */
 public static final String Table_Name="C_Charge_Acct";
 
@@ -133,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="45e1231d-05a9-3d21-3d4a-6b338b849431")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="45e1231d-05a9-3d21-3d4a-6b338b849431")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="45e1231d-05a9-3d21-3d4a-6b338b849431")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="45e1231d-05a9-3d21-3d4a-6b338b849431")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5f56b3f5-9bf5-e34e-2bbc-164017b6de89",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -157,7 +158,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c63dee47-10ab-c7af-9e4a-77859acde399",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Charge.
@@ -177,13 +178,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="95f1166d-81a9-0a57-01aa-b21c291d714f")
+public static String es_PE_FIELD_Accounting_Charge_Name="Cargo";
+
+@XendraTrl(Identifier="95f1166d-81a9-0a57-01aa-b21c291d714f")
 public static String es_PE_FIELD_Accounting_Charge_Description="Cargos adicionales del documento";
 
 @XendraTrl(Identifier="95f1166d-81a9-0a57-01aa-b21c291d714f")
 public static String es_PE_FIELD_Accounting_Charge_Help="El cargo indica un tipo de cargo (manejo; despacho; reposición)";
-
-@XendraTrl(Identifier="95f1166d-81a9-0a57-01aa-b21c291d714f")
-public static String es_PE_FIELD_Accounting_Charge_Name="Cargo";
 
 @XendraField(AD_Column_ID="C_Charge_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="5f56b3f5-9bf5-e34e-2bbc-164017b6de89",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -201,7 +202,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3fe418e6-3f8d-51ab-dff1-f37f29c841e7",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set Charge Expense.
@@ -220,13 +221,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2f9c7ae7-8ff1-4ad1-a4df-61838554eb5a")
+public static String es_PE_FIELD_Accounting_ChargeExpense_Name="Cuenta Cargo";
+
+@XendraTrl(Identifier="2f9c7ae7-8ff1-4ad1-a4df-61838554eb5a")
 public static String es_PE_FIELD_Accounting_ChargeExpense_Description="Cuenta de otros gastos";
 
 @XendraTrl(Identifier="2f9c7ae7-8ff1-4ad1-a4df-61838554eb5a")
 public static String es_PE_FIELD_Accounting_ChargeExpense_Help="La cuenta de otros gastos identifica la cuenta a usar cuando se registran cargos pagados a proveedores.";
-
-@XendraTrl(Identifier="2f9c7ae7-8ff1-4ad1-a4df-61838554eb5a")
-public static String es_PE_FIELD_Accounting_ChargeExpense_Name="Cuenta Cargo";
 
 @XendraField(AD_Column_ID="Ch_Expense_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="5f56b3f5-9bf5-e34e-2bbc-164017b6de89",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -244,7 +245,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="703851cf-a082-3750-709d-a0f121a890b1",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Ch_Expense_Acct */
 public static final String COLUMNNAME_Ch_Expense_Acct = "Ch_Expense_Acct";
 /** Set Charge Revenue.
@@ -263,13 +264,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f490aad1-71c1-9227-7e9f-8becfca49106")
+public static String es_PE_FIELD_Accounting_ChargeRevenue_Name="Cuenta Abono";
+
+@XendraTrl(Identifier="f490aad1-71c1-9227-7e9f-8becfca49106")
 public static String es_PE_FIELD_Accounting_ChargeRevenue_Description="Cuenta de otros ingresos";
 
 @XendraTrl(Identifier="f490aad1-71c1-9227-7e9f-8becfca49106")
 public static String es_PE_FIELD_Accounting_ChargeRevenue_Help="La cuenta de otros ingresos identifica la cuenta a usar cuando se registran cargos pagados por los clientes";
-
-@XendraTrl(Identifier="f490aad1-71c1-9227-7e9f-8becfca49106")
-public static String es_PE_FIELD_Accounting_ChargeRevenue_Name="Cuenta Abono";
 
 @XendraField(AD_Column_ID="Ch_Revenue_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="5f56b3f5-9bf5-e34e-2bbc-164017b6de89",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -287,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="94cc3464-33ad-9279-0a60-210521d32e25",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Ch_Revenue_Acct */
 public static final String COLUMNNAME_Ch_Revenue_Acct = "Ch_Revenue_Acct";
 /** Set Identifier.
@@ -319,7 +320,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9154a0ef-2782-4a99-8738-0fde9a2f8984",
-Synchronized="2017-08-05 16:53:29.0")
+Synchronized="2019-08-30 22:21:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

@@ -188,7 +188,7 @@ public class Doc_Perception extends Doc
 	public void createFact_ID() {
 		X_C_Perception perception = (X_C_Perception) getPO();
 		/* Fact ID */
-		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0)
+		if (getFact_ID().length() == 0 || getFact_ID().compareTo("NSD") == 0) {
 			setFact_ID (
 					MGLBookPeriod.getID(perception.getAD_Org_ID(),
 										perception.getAD_Client_ID(),
@@ -197,6 +197,15 @@ public class Doc_Perception extends Doc
 										isSOTrx()==true ? "Y":"N", 
 										perception.getDateAcct())
 					);		
+			setGL_Book_ID (
+					MGLBookPeriod.getGLBookID(perception.getAD_Org_ID(),
+										perception.getAD_Client_ID(),
+										perception.Table_ID, 
+										0, 
+										isSOTrx()==true ? "Y":"N", 
+										perception.getDateAcct())
+					);					
+		}
 		else
 		{
 			MPeriod period = MPeriod.get (Env.getCtx(), perception.getDateAcct(), perception.getAD_Org_ID() , perception.getAD_Client_ID());
@@ -222,7 +231,15 @@ public class Doc_Perception extends Doc
 											0, 
 											isSOTrx()==true ? "Y":"N", 
 											perception.getDateAcct())
-						);		
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(perception.getAD_Org_ID(),
+											perception.getAD_Client_ID(),
+											perception.Table_ID, 
+											0, 
+											isSOTrx()==true ? "Y":"N", 
+											perception.getDateAcct())
+						);						
 				return;
 			}
 			else if (month != cal.get(Calendar.MONTH) + 1) // mismo año , diferente mes, regenerar.
@@ -234,7 +251,15 @@ public class Doc_Perception extends Doc
 											0, 
 											isSOTrx()==true ? "Y":"N", 
 											perception.getDateAcct())
-						);		
+						);
+				setGL_Book_ID (
+						MGLBookPeriod.getGLBookID(perception.getAD_Org_ID(),
+											perception.getAD_Client_ID(),
+											perception.Table_ID, 
+											0, 
+											isSOTrx()==true ? "Y":"N", 
+											perception.getDateAcct())
+						);						
 			}
 		}
 		

@@ -512,5 +512,4 @@ public abstract class Lookup extends AbstractListModel
 	{
 		return "";
 	}
-	
 }	//	Lookup

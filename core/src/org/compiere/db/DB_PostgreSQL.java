@@ -40,9 +40,10 @@ import org.compiere.util.DB;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
-import org.xendra.model.sql;
+import org.xendra.db.Querys;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.log.MLevel;
 
 /**
  *  PostgreSQL Database Port
@@ -568,9 +569,9 @@ public class DB_PostgreSQL implements XendraDatabase
 		
         try
         {
-        	
             System.setProperty("com.mchange.v2.log.MLog", "com.mchange.v2.log.FallbackMLog");
-            //System.setProperty("com.mchange.v2.log.FallbackMLog.DEFAULT_CUTOFF_LEVEL", "ALL");
+            System.setProperty("com.mchange.v2.log.FallbackMLog.DEFAULT_CUTOFF_LEVEL", "OFF");
+            //com.mchange.v2.log.MLog.getLogger().setLevel(MLevel.WARNING);
             ComboPooledDataSource cpds = new ComboPooledDataSource();
             //cpds.connectionCustomizerClassName(null);
             //
@@ -788,22 +789,13 @@ public class DB_PostgreSQL implements XendraDatabase
             	cpds.close();
             	cpds = null;
             }
-            //if (IsBackup)
-            //	m_backupds = cpds;
-            //else
             m_ds = cpds;
         }
         catch (Exception ex)
         {
-        	//if (IsBackup)
-        	//	m_backupds = null;
-        	//else
         	m_ds = null;
             log.log(Level.SEVERE, "Could not initialise C3P0 Datasource", ex);
         }
-		//if (IsBackup)
-		//	return m_backupds;
-		//else
 		return m_ds;
 	}
 
@@ -1014,7 +1006,7 @@ public class DB_PostgreSQL implements XendraDatabase
 								+ " MAXVALUE " + maxvalue 
 								+ " START " + start , trxName);
 			if (no != -1)
-				DB.executeUpdate(String.format(sql.OWNERTOXENDRA,name.toUpperCase()), trxName);
+				DB.executeUpdate(String.format(Querys.OWNERTOXENDRA,name.toUpperCase()), trxName);
 		}
 		//
 		// Already existing sequence => ALTER

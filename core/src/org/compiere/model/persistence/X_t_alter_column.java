@@ -56,11 +56,12 @@ public static int Table_ID=MTable.getTable_ID("t_alter_column");
 @XendraTrl(Identifier="442ac176-06a1-c5a9-bad1-c858f9691ad8")
 public static String es_PE_TABLE_t_alter_column_Name="t_alter_column";
 
-@XendraTable(Name="t_alter_column",Description="",Help="",TableName="t_alter_column",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="442ac176-06a1-c5a9-bad1-c858f9691ad8",
-Synchronized="2017-08-16 11:44:18.0")
+@XendraTable(Name="t_alter_column",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="t_alter_column",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="442ac176-06a1-c5a9-bad1-c858f9691ad8",
+Synchronized="2020-03-03 21:40:20.0")
 /** TableName=t_alter_column */
 public static final String Table_Name="t_alter_column";
 
@@ -117,7 +118,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="63739637-9fb8-f4ff-3269-39a6427719ad",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:20.0")
 /** Column name ColumnName */
 public static final String COLUMNNAME_ColumnName = "ColumnName";
 /** Set Data Type.
@@ -144,7 +145,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="005faf34-4bf4-847f-a018-3f2d06c80e8c",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:20.0")
 /** Column name DataType */
 public static final String COLUMNNAME_DataType = "DataType";
 /** Set defaultclause.
@@ -176,7 +177,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="258cdb9c-9028-1b11-f4a7-b9f5bacfe8ea",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:20.0")
 /** Column name defaultclause */
 public static final String COLUMNNAME_defaultclause = "defaultclause";
 /** Set nullclause.
@@ -208,7 +209,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="313e8dce-a6eb-38db-3b39-61fa20f0d1b5",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:20.0")
 /** Column name nullclause */
 public static final String COLUMNNAME_nullclause = "nullclause";
 /** Set DB Table Name.
@@ -235,7 +236,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="79f334da-5b1a-a134-243c-4919c40f4879",
-Synchronized="2017-08-05 16:56:23.0")
+Synchronized="2019-08-30 22:24:20.0")
 /** Column name TableName */
 public static final String COLUMNNAME_TableName = "TableName";
 }

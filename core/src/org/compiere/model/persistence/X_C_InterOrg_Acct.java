@@ -61,12 +61,12 @@ public static int Table_ID=MTable.getTable_ID("C_InterOrg_Acct");
 public static String es_PE_TAB_Accounting_Description="Contabilidad de la Organización";
 
 @XendraTrl(Identifier="677f00fe-69c1-a933-da4a-e5a9362714c7")
-public static String es_PE_TAB_Accounting_Name="Contabilidad";
-
-@XendraTrl(Identifier="677f00fe-69c1-a933-da4a-e5a9362714c7")
 public static String es_PE_TAB_Accounting_Help="La pestaña Contabilidad de Organización define los parámetros contables predeterminados que son usados por esta organización.";
 
-@XendraTab(Name="Accounting",Description="Organization Accounting",
+@XendraTrl(Identifier="677f00fe-69c1-a933-da4a-e5a9362714c7")
+public static String es_PE_TAB_Accounting_Name="Contabilidad";
+@XendraTab(Name="Accounting",
+Description="Organization Accounting",
 Help="The Organization Accounting Tab defines the default accounting parameters to be used by this Organization.",
 AD_Window_ID="b18505b0-64f9-9322-2e8a-0daf80e326cb",SeqNo=30,TabLevel=1,IsSingleRow=true,
 IsInfoTab=true,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -79,11 +79,12 @@ public static final String TABNAME_Accounting="677f00fe-69c1-a933-da4a-e5a936271
 @XendraTrl(Identifier="de79d41f-161c-fc90-e03e-6cc2645faf33")
 public static String es_PE_TABLE_C_InterOrg_Acct_Name="C_InterOrg_Acct";
 
-@XendraTable(Name="C_InterOrg_Acct",Description="",Help="",TableName="C_InterOrg_Acct",
-AccessLevel="3",AD_Window_ID="b18505b0-64f9-9322-2e8a-0daf80e326cb",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="de79d41f-161c-fc90-e03e-6cc2645faf33",Synchronized="2017-08-16 11:41:48.0")
+@XendraTable(Name="C_InterOrg_Acct",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_InterOrg_Acct",AccessLevel="3",AD_Window_ID="b18505b0-64f9-9322-2e8a-0daf80e326cb",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="de79d41f-161c-fc90-e03e-6cc2645faf33",Synchronized="2020-03-03 21:36:55.0")
 /** TableName=C_InterOrg_Acct */
 public static final String Table_Name="C_InterOrg_Acct";
 
@@ -116,9 +117,6 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_C_InterOrg_Acct[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AD_OrgTo_ID AD_Reference=54e78591-f7f4-c613-ea27-e64b3dac5198 */
-public static final int AD_ORGTO_ID_AD_Reference_ID=130;
 /** Set Inter-Organization.
 @param AD_OrgTo_ID Organization valid for intercompany documents */
 public void setAD_OrgTo_ID (int AD_OrgTo_ID)
@@ -136,13 +134,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="890a1fb0-a976-0226-b85d-b55e272e6f22")
+public static String es_PE_FIELD_Accounting_Inter_Organization_Name="Inter-Organización";
+
+@XendraTrl(Identifier="890a1fb0-a976-0226-b85d-b55e272e6f22")
 public static String es_PE_FIELD_Accounting_Inter_Organization_Description="Organización válida para documentos intercompañía";
 
 @XendraTrl(Identifier="890a1fb0-a976-0226-b85d-b55e272e6f22")
 public static String es_PE_FIELD_Accounting_Inter_Organization_Help="El campo Inter organización identifica una organización que puede ser usada por esta organización para documentos intercompañía.";
-
-@XendraTrl(Identifier="890a1fb0-a976-0226-b85d-b55e272e6f22")
-public static String es_PE_FIELD_Accounting_Inter_Organization_Name="Inter-Organización";
 
 @XendraField(AD_Column_ID="AD_OrgTo_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="677f00fe-69c1-a933-da4a-e5a9362714c7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -161,7 +159,7 @@ IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a2c107a2-06bc-dcf0-417b-8ab17fb85474",
-Synchronized="2017-08-05 16:53:41.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name AD_OrgTo_ID */
 public static final String COLUMNNAME_AD_OrgTo_ID = "AD_OrgTo_ID";
 /** Set Accounting Schema.
@@ -181,13 +179,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1ff5524b-f3dd-81cc-512b-6a0a92838958")
+public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
+
+@XendraTrl(Identifier="1ff5524b-f3dd-81cc-512b-6a0a92838958")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Description="Reglas para contabilizar";
 
 @XendraTrl(Identifier="1ff5524b-f3dd-81cc-512b-6a0a92838958")
 public static String es_PE_FIELD_Accounting_AccountingSchema_Help="Un esquema contable define las reglas contables usadas tales como método de costeo; moneda y calendario";
-
-@XendraTrl(Identifier="1ff5524b-f3dd-81cc-512b-6a0a92838958")
-public static String es_PE_FIELD_Accounting_AccountingSchema_Name="Esquema Contable";
 
 @XendraField(AD_Column_ID="C_AcctSchema_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="677f00fe-69c1-a933-da4a-e5a9362714c7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -205,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f3bc378a-9acf-4eff-b008-0c8369922b63",
-Synchronized="2017-08-05 16:53:41.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Identifier.
@@ -237,7 +235,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5bf96a61-0c25-4f8b-83b2-cd50bd632c0c",
-Synchronized="2017-08-05 16:53:41.0")
+Synchronized="2019-08-30 22:21:35.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Intercompany Due From Acct.
@@ -256,13 +254,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c313f71b-601c-0030-ec5c-18c2529af352")
+public static String es_PE_FIELD_Accounting_IntercompanyDueFromAcct_Name="Cuenta Inter-Compañía Debido Desde";
+
+@XendraTrl(Identifier="c313f71b-601c-0030-ec5c-18c2529af352")
 public static String es_PE_FIELD_Accounting_IntercompanyDueFromAcct_Description="Cta. Intercompañía que debe a esta compañía / Cuenta por Cobrar";
 
 @XendraTrl(Identifier="c313f71b-601c-0030-ec5c-18c2529af352")
 public static String es_PE_FIELD_Accounting_IntercompanyDueFromAcct_Help="La cuenta Inter-compañía debido desde indica la cuenta que representa dinero que se debe a esta organización desde otras organizaciones";
-
-@XendraTrl(Identifier="c313f71b-601c-0030-ec5c-18c2529af352")
-public static String es_PE_FIELD_Accounting_IntercompanyDueFromAcct_Name="Cuenta Inter-Compañía Debido Desde";
 
 @XendraField(AD_Column_ID="IntercompanyDueFrom_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="677f00fe-69c1-a933-da4a-e5a9362714c7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -280,7 +278,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="554d5e30-393a-da2d-bcfe-397d4fe8ef71",Synchronized="2017-08-05 16:53:41.0")
+Identifier="554d5e30-393a-da2d-bcfe-397d4fe8ef71",Synchronized="2019-08-30 22:21:35.0")
 /** Column name IntercompanyDueFrom_Acct */
 public static final String COLUMNNAME_IntercompanyDueFrom_Acct = "IntercompanyDueFrom_Acct";
 /** Set Intercompany Due To Acct.
@@ -299,13 +297,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6a777da5-c30f-144c-7ad0-79883f3454e7")
+public static String es_PE_FIELD_Accounting_IntercompanyDueToAcct_Name="Cuenta Inter-Compañía Debido A";
+
+@XendraTrl(Identifier="6a777da5-c30f-144c-7ad0-79883f3454e7")
 public static String es_PE_FIELD_Accounting_IntercompanyDueToAcct_Description="Cta. Inter-compañía que esta compañía debe / Cuenta por Pagar";
 
 @XendraTrl(Identifier="6a777da5-c30f-144c-7ad0-79883f3454e7")
 public static String es_PE_FIELD_Accounting_IntercompanyDueToAcct_Help="La cuenta Ínter-compañía debido A indica la cuenta que representa dinero que debe esta organización a otras organizaciones";
-
-@XendraTrl(Identifier="6a777da5-c30f-144c-7ad0-79883f3454e7")
-public static String es_PE_FIELD_Accounting_IntercompanyDueToAcct_Name="Cuenta Inter-Compañía Debido A";
 
 @XendraField(AD_Column_ID="IntercompanyDueTo_Acct",IsCentrallyMaintained=true,
 AD_Tab_ID="677f00fe-69c1-a933-da4a-e5a9362714c7",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -323,7 +321,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="613aef10-3171-c6b3-3556-70689b86ac8e",Synchronized="2017-08-05 16:53:41.0")
+Identifier="613aef10-3171-c6b3-3556-70689b86ac8e",Synchronized="2019-08-30 22:21:35.0")
 /** Column name IntercompanyDueTo_Acct */
 public static final String COLUMNNAME_IntercompanyDueTo_Acct = "IntercompanyDueTo_Acct";
 }

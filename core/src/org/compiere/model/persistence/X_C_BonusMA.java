@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("C_BonusMA");
 @XendraTrl(Identifier="31c8fba1-086f-8dd1-d4d2-5af6de1cbcbe")
 public static String es_PE_TABLE_C_BonusMA_Name="C_BonusMA";
 
-@XendraTable(Name="C_BonusMA",Description="",Help="",TableName="C_BonusMA",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="31c8fba1-086f-8dd1-d4d2-5af6de1cbcbe",Synchronized="2017-08-16 11:41:28.0")
+@XendraTable(Name="C_BonusMA",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_BonusMA",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.commercial",Identifier="31c8fba1-086f-8dd1-d4d2-5af6de1cbcbe",
+Synchronized="2020-03-03 21:36:32.0")
 /** TableName=C_BonusMA */
 public static final String Table_Name="C_BonusMA";
 
@@ -148,7 +150,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27f30295-a235-9195-0b94-5f509b806ab6",
-Synchronized="2017-08-05 16:53:20.0")
+Synchronized="2019-08-30 22:21:09.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Invoice.
@@ -177,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="921eb56e-d9f9-14b8-2cce-0bb12bac99cb",
-Synchronized="2017-08-05 16:53:20.0")
+Synchronized="2019-08-30 22:21:09.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Identifier.
@@ -209,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="30b84c11-5ac7-464c-84d4-08c5909e2934",
-Synchronized="2017-08-05 16:53:20.0")
+Synchronized="2019-08-30 22:21:09.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -238,7 +240,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19dd0770-80ad-672d-10ec-adf5c07a0a55",
-Synchronized="2017-08-05 16:53:20.0")
+Synchronized="2019-08-30 22:21:09.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Points.
@@ -265,7 +267,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="775e55e3-21ca-f755-80a7-70d625680895",
-Synchronized="2017-08-05 16:53:20.0")
+Synchronized="2019-08-30 22:21:09.0")
 /** Column name Points */
 public static final String COLUMNNAME_Points = "Points";
 }

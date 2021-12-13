@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF__DocumentAction;
 /** Generated Model for C_DocTypeCounter
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -66,10 +65,10 @@ public static int Table_ID=MTable.getTable_ID("C_DocTypeCounter");
 public static String es_PE_TAB_CounterDocument_Description="Mantenimiento a los tipos de Contra Documentos";
 
 @XendraTrl(Identifier="d9660071-60ea-01d5-e076-c8b8cec3e62f")
-public static String es_PE_TAB_CounterDocument_Name="Contador de Documentos";
+public static String es_PE_TAB_CounterDocument_Help="Al usar los documentos explícitos para la transacción inter-organización (después de ligar a un socio de negocio a una organización), usted puede determinarse qué tipo de documento se basa el documento contrario en el tipo de documento de la transacción original. Ejemplo: una \"orden estándar\" crea un \"PO estándar\".Si usted define una relación aquí, usted sobreescribe el documento del contador de defecto de mecanografía adentro de la definición de tipo de documento. Esto permite que usted defina traz específico.Usted puede definir el contra de documentos para todas las organizaciones (de la transacción original) ó para una organización específica.";
 
 @XendraTrl(Identifier="d9660071-60ea-01d5-e076-c8b8cec3e62f")
-public static String es_PE_TAB_CounterDocument_Help="Al usar los documentos explícitos para la transacción inter-organización (después de ligar a un socio de negocio a una organización), usted puede determinarse qué tipo de documento se basa el documento contrario en el tipo de documento de la transacción original. Ejemplo: una \"orden estándar\" crea un \"PO estándar\".Si usted define una relación aquí, usted sobreescribe el documento del contador de defecto de mecanografía adentro de la definición de tipo de documento. Esto permite que usted defina traz específico.Usted puede definir el contra de documentos para todas las organizaciones (de la transacción original) ó para una organización específica.";
+public static String es_PE_TAB_CounterDocument_Name="Contador de Documentos";
 
 @XendraTab(Name="Counter Document",Description="Maintain Counter Document Types",
 Help="When using explicit documents for inter-org transaction (after linking a Business Partner to an Organization), you can determine what document type the counter document is based on the document type of the original transaction.  Example: a 'Standard Order' creates a 'Standard PO'.  If you define a relationship here, you overwrite the default counter document type in the Document Type definition. This allows you to define a specific mapping. You can define conter documents for all organizations (of the original transaction) or for a specific organization.",
@@ -84,11 +83,13 @@ public static final String TABNAME_CounterDocument="d9660071-60ea-01d5-e076-c8b8
 @XendraTrl(Identifier="6a283d9e-7042-bab5-c074-033b4d7cd7e3")
 public static String es_PE_TABLE_C_DocTypeCounter_Name="Tipo de Contra Documento";
 
-@XendraTable(Name="Counter Document",Description="Counter Document Relationship",Help="",
-TableName="C_DocTypeCounter",AccessLevel="2",AD_Window_ID="ed217f22-5c28-bb5e-dcc4-5e27f3875de5",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="6a283d9e-7042-bab5-c074-033b4d7cd7e3",Synchronized="2017-08-16 11:41:44.0")
+@XendraTable(Name="Counter Document",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Counter Document Relationship",
+Help="",TableName="C_DocTypeCounter",AccessLevel="2",
+AD_Window_ID="ed217f22-5c28-bb5e-dcc4-5e27f3875de5",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="6a283d9e-7042-bab5-c074-033b4d7cd7e3",
+Synchronized="2020-03-03 21:36:50.0")
 /** TableName=C_DocTypeCounter */
 public static final String Table_Name="C_DocTypeCounter";
 
@@ -138,13 +139,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fec31d90-56a7-8c08-ae07-776f77732529")
+public static String es_PE_FIELD_CounterDocument_CounterDocument_Name="Tipo de Contra Documento";
+
+@XendraTrl(Identifier="fec31d90-56a7-8c08-ae07-776f77732529")
 public static String es_PE_FIELD_CounterDocument_CounterDocument_Description="Tipo de Contra Documento";
 
 @XendraTrl(Identifier="fec31d90-56a7-8c08-ae07-776f77732529")
 public static String es_PE_FIELD_CounterDocument_CounterDocument_Help="Cuando usan los documentos explícitos para la inter-org transacción (después de ligar a un socio de negocio a una organización), usted puede determinar qué tipo de documento se basa en el documento contrario en el tipo del documento de la transacción original, ejemplo: una \"Orden Estandard\" crear un \"PO Standard\".Si usted define una relación aquí, usted sobreescribe el tipo de documento del contador del defecto en la definición del tipo de documento. Esto permite que usted defina en específico.";
-
-@XendraTrl(Identifier="fec31d90-56a7-8c08-ae07-776f77732529")
-public static String es_PE_FIELD_CounterDocument_CounterDocument_Name="Tipo de Contra Documento";
 
 @XendraField(AD_Column_ID="C_DocTypeCounter_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -171,13 +172,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e09a7f35-8434-456e-ba8d-da694c0ac736")
+public static String es_PE_FIELD_CounterDocument_DocumentType_Name="Tipo de Documento";
+
+@XendraTrl(Identifier="e09a7f35-8434-456e-ba8d-da694c0ac736")
 public static String es_PE_FIELD_CounterDocument_DocumentType_Description="Tipo de documento ó reglas";
 
 @XendraTrl(Identifier="e09a7f35-8434-456e-ba8d-da694c0ac736")
 public static String es_PE_FIELD_CounterDocument_DocumentType_Help="El tipo de documento determina la secuencia del documento y las reglas de proceso";
-
-@XendraTrl(Identifier="e09a7f35-8434-456e-ba8d-da694c0ac736")
-public static String es_PE_FIELD_CounterDocument_DocumentType_Name="Tipo de Documento";
 
 @XendraField(AD_Column_ID="C_DocType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -195,12 +196,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47b6ca98-01cf-c8f8-5c8d-c1d9bd80bd36",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
-
-/** Counter_C_DocType_ID AD_Reference=f06eaf85-a231-e1cf-ebf8-59d002c13ab4 */
-public static final int COUNTER_C_DOCTYPE_ID_AD_Reference_ID=170;
 /** Set Counter Document Type.
 @param Counter_C_DocType_ID Generated Counter Document Type (To) */
 public void setCounter_C_DocType_ID (int Counter_C_DocType_ID)
@@ -218,13 +216,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b126c17b-f183-c8f3-c8d4-94881fb35bdf")
+public static String es_PE_FIELD_CounterDocument_CounterDocumentType_Name="Tipo Contador de Documento";
+
+@XendraTrl(Identifier="b126c17b-f183-c8f3-c8d4-94881fb35bdf")
 public static String es_PE_FIELD_CounterDocument_CounterDocumentType_Description="Tipo Generado de Contador de Documento.";
 
 @XendraTrl(Identifier="b126c17b-f183-c8f3-c8d4-94881fb35bdf")
 public static String es_PE_FIELD_CounterDocument_CounterDocumentType_Help="El tipo de documento del documento contrario generado.";
-
-@XendraTrl(Identifier="b126c17b-f183-c8f3-c8d4-94881fb35bdf")
-public static String es_PE_FIELD_CounterDocument_CounterDocumentType_Name="Tipo Contador de Documento";
 
 @XendraField(AD_Column_ID="Counter_C_DocType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -243,7 +241,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="2c2c6837-dc74-251a-a9e3-6e4f8abf2384",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name Counter_C_DocType_ID */
 public static final String COLUMNNAME_Counter_C_DocType_ID = "Counter_C_DocType_ID";
 /** Set Description.
@@ -274,13 +272,13 @@ return value;
 }
 
 @XendraTrl(Identifier="5164b504-2a61-9d5f-53f6-42f5cd2b0133")
+public static String es_PE_FIELD_CounterDocument_Description_Name="Observación";
+
+@XendraTrl(Identifier="5164b504-2a61-9d5f-53f6-42f5cd2b0133")
 public static String es_PE_FIELD_CounterDocument_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="5164b504-2a61-9d5f-53f6-42f5cd2b0133")
 public static String es_PE_FIELD_CounterDocument_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="5164b504-2a61-9d5f-53f6-42f5cd2b0133")
-public static String es_PE_FIELD_CounterDocument_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -298,18 +296,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a8557b97-39ce-133b-6222-ec2da6f93adf",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
-
-/** DocAction AD_Reference=e397c9b0-c643-d1cd-8380-20bee13b2a6e */
-public static final int DOCACTION_AD_Reference_ID=135;
 /** Set Document Action.
 @param DocAction The targeted status of the document */
 public void setDocAction (String DocAction)
 {
-if (DocAction == null || DocAction.equals(REF__DocumentAction.Complete) || DocAction.equals(REF__DocumentAction.Approve) || DocAction.equals(REF__DocumentAction.Reject) || DocAction.equals(REF__DocumentAction.Post) || DocAction.equals(REF__DocumentAction.WaitComplete) || DocAction.equals(REF__DocumentAction.Prepare) || DocAction.equals(REF__DocumentAction.Close) || DocAction.equals(REF__DocumentAction.Placed) || DocAction.equals(REF__DocumentAction.Discount) || DocAction.equals(REF__DocumentAction.Portofolio) || DocAction.equals(REF__DocumentAction.Warranty) || DocAction.equals(REF__DocumentAction.Reverse_Correct) || DocAction.equals(REF__DocumentAction.Reverse_Accrual) || DocAction.equals(REF__DocumentAction.Invalidate) || DocAction.equals(REF__DocumentAction.Re_Activate) || DocAction.equals(REF__DocumentAction.None) || DocAction.equals(REF__DocumentAction.Unlock) || DocAction.equals(REF__DocumentAction.Returned) || DocAction.equals(REF__DocumentAction.Apply) || DocAction.equals(REF__DocumentAction.Collect) || DocAction.equals(REF__DocumentAction.ToCollect) || DocAction.equals(REF__DocumentAction.Restore) || DocAction.equals(REF__DocumentAction.Protested) || DocAction.equals(REF__DocumentAction.Receivables) || DocAction.equals(REF__DocumentAction.Void) || DocAction.equals(REF__DocumentAction.Draft) || DocAction.equals(REF__DocumentAction.InProgress) || DocAction.equals(REF__DocumentAction.WaitingPayment));
- else throw new IllegalArgumentException ("DocAction Invalid value - " + DocAction + " - Reference_ID=135 - CO - AP - RJ - PO - WC - PR - CL - PL - DS - PT - WR - RC - RA - IN - RE - -- - XL - RT - AY - CT - TC - RR - PD - RV - VO - DR - IP - WP");
 if (DocAction != null && DocAction.length() > 2)
 {
 log.warning("Length > 2 - truncated");
@@ -325,13 +318,13 @@ return (String)get_Value(COLUMNNAME_DocAction);
 }
 
 @XendraTrl(Identifier="d1ee9411-71ef-6a92-1be9-b7330a866f4a")
+public static String es_PE_FIELD_CounterDocument_DocumentAction_Name="Acción en el Documento";
+
+@XendraTrl(Identifier="d1ee9411-71ef-6a92-1be9-b7330a866f4a")
 public static String es_PE_FIELD_CounterDocument_DocumentAction_Description="El estado destino del documento";
 
 @XendraTrl(Identifier="d1ee9411-71ef-6a92-1be9-b7330a866f4a")
 public static String es_PE_FIELD_CounterDocument_DocumentAction_Help="Usted encuentra el estado actual en el campo Estado del Documento";
-
-@XendraTrl(Identifier="d1ee9411-71ef-6a92-1be9-b7330a866f4a")
-public static String es_PE_FIELD_CounterDocument_DocumentAction_Name="Acción en el Documento";
 
 @XendraField(AD_Column_ID="DocAction",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -349,7 +342,7 @@ FieldLength=2,DefaultValue="--",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="648d1a76-e778-388e-ab40-40cbfb92df37",Synchronized="2017-08-05 16:53:36.0")
+Identifier="648d1a76-e778-388e-ab40-40cbfb92df37",Synchronized="2019-08-30 22:21:30.0")
 /** Column name DocAction */
 public static final String COLUMNNAME_DocAction = "DocAction";
 /** Set Identifier.
@@ -381,7 +374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="859f9e04-9942-4b29-b8ca-44587d4b5e10",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Create Counter Document.
@@ -404,13 +397,13 @@ return false;
 }
 
 @XendraTrl(Identifier="66edc0b1-c65e-4e9c-21bf-2c0a23e5ba59")
+public static String es_PE_FIELD_CounterDocument_CreateCounterDocument_Name="Crea Contador de Documento";
+
+@XendraTrl(Identifier="66edc0b1-c65e-4e9c-21bf-2c0a23e5ba59")
 public static String es_PE_FIELD_CounterDocument_CreateCounterDocument_Description="Crea Contador de documento";
 
 @XendraTrl(Identifier="66edc0b1-c65e-4e9c-21bf-2c0a23e5ba59")
 public static String es_PE_FIELD_CounterDocument_CreateCounterDocument_Help="Si es seleccionado, crea un contador de documento especifico. Si no esta seleccionado, no crea contador de documento para el tipo de documento.";
-
-@XendraTrl(Identifier="66edc0b1-c65e-4e9c-21bf-2c0a23e5ba59")
-public static String es_PE_FIELD_CounterDocument_CreateCounterDocument_Name="Crea Contador de Documento";
 
 @XendraField(AD_Column_ID="IsCreateCounter",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -428,7 +421,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0478d095-35fb-3e82-f65e-9fe5f5933c59",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name IsCreateCounter */
 public static final String COLUMNNAME_IsCreateCounter = "IsCreateCounter";
 /** Set Valid.
@@ -451,13 +444,13 @@ return false;
 }
 
 @XendraTrl(Identifier="603fc348-d26e-644d-f1ba-05356336e7ce")
+public static String es_PE_FIELD_CounterDocument_Valid_Name="Valido";
+
+@XendraTrl(Identifier="603fc348-d26e-644d-f1ba-05356336e7ce")
 public static String es_PE_FIELD_CounterDocument_Valid_Description="El elemento es valido";
 
 @XendraTrl(Identifier="603fc348-d26e-644d-f1ba-05356336e7ce")
 public static String es_PE_FIELD_CounterDocument_Valid_Help="El elemento pasado es el cheque de la validación";
-
-@XendraTrl(Identifier="603fc348-d26e-644d-f1ba-05356336e7ce")
-public static String es_PE_FIELD_CounterDocument_Valid_Name="Valido";
 
 @XendraField(AD_Column_ID="IsValid",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -475,7 +468,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13dc9ded-c41e-cb82-3718-a2fd82cd8a0e",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name IsValid */
 public static final String COLUMNNAME_IsValid = "IsValid";
 /** Set Name.
@@ -507,13 +500,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="5b7da9b8-e953-c964-2248-ec30e48cdbc4")
+public static String es_PE_FIELD_CounterDocument_Name_Name="Nombre";
+
+@XendraTrl(Identifier="5b7da9b8-e953-c964-2248-ec30e48cdbc4")
 public static String es_PE_FIELD_CounterDocument_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="5b7da9b8-e953-c964-2248-ec30e48cdbc4")
 public static String es_PE_FIELD_CounterDocument_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="5b7da9b8-e953-c964-2248-ec30e48cdbc4")
-public static String es_PE_FIELD_CounterDocument_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="d9660071-60ea-01d5-e076-c8b8cec3e62f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -531,7 +524,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="69a827c7-8aa1-118e-6164-735f64bc21f5",
-Synchronized="2017-08-05 16:53:36.0")
+Synchronized="2019-08-30 22:21:30.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Process Now.
@@ -572,7 +565,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="5f5a1e19-d48c-005e-d863-207b8b125308",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8a4375a5-3be4-fb75-242e-5c54466a3864",Synchronized="2017-08-05 16:53:36.0")
+Identifier="8a4375a5-3be4-fb75-242e-5c54466a3864",Synchronized="2019-08-30 22:21:30.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 }

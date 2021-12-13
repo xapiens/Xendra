@@ -30,6 +30,8 @@ import org.compiere.model.GridField;
 import org.compiere.model.Lookup;
 
 import java.util.logging.*;
+
+import org.compiere.swing.ExtendedTheme;
 import org.compiere.util.*;
 
 /**
@@ -98,7 +100,8 @@ public final class VCellRenderer extends DefaultTableCellRenderer
 	private DecimalFormat		m_numberFormat = null;
 	private JCheckBox           m_check = null;
 	// http://cloford.com/resources/colours/500col.htm
-	private Color m_color = new Color(202,255,112);
+	private Color m_color = new Color(202,255,112); // color verde 
+
 	/**	Logger			*/
 	private static CLogger log = CLogger.getCLogger(VCellRenderer.class);
 	
@@ -174,8 +177,9 @@ public final class VCellRenderer extends DefaultTableCellRenderer
 			//
 			//if (cCode == 0 && table instanceof org.xendra.tableview.TableView)
 			//	fg = XendraPLAF.getTextColor_Issue();		//	Red
-			if (cCode < 0)
-				bg = XendraPLAF.getTextColor_Issue();		//	Red
+			if (cCode < 0)	{
+				fg = XendraPLAF.getTextColor_Issue();
+			}
 			
 			
 			//  Set Color

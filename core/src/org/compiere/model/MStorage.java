@@ -22,19 +22,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
+import org.compiere.Xendra;
 import org.compiere.model.persistence.X_M_InOut;
+import org.compiere.model.persistence.X_M_InOutLine;
 import org.compiere.model.persistence.X_M_Storage;
-import org.compiere.model.persistence.X_M_Transaction;
 import org.compiere.util.CLogMgt;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
-import org.xendra.material.StockWorker;
 
 /**
  * 	Inventory Storage Model
@@ -254,7 +253,7 @@ public class MStorage extends X_M_Storage
 		//	Specific Attribute Set Instance
 		String sql = "SELECT s.M_Storage_ID, s.M_Product_ID,s.M_Locator_ID,s.M_AttributeSetInstance_ID,"
 			+ "s.AD_Client_ID,s.AD_Org_ID,s.IsActive,s.Created,s.CreatedBy,s.Updated,s.UpdatedBy,"
-			+ "s.QtyOnHand,s.QtyReserved,s.QtyOrdered,s.DateLastInventory, DateLastRun "
+			+ "s.QtyOnHand,s.QtyReserved,s.QtyOrdered,s.DateLastInventory, DateLastRun, s.Identifier "
 			+ " FROM M_Storage s"
 			+ " INNER JOIN M_Locator l ON (l.M_Locator_ID=s.M_Locator_ID) ";
 		if (M_Locator_ID > 0)
@@ -279,7 +278,7 @@ public class MStorage extends X_M_Storage
 		{
 			sql = "SELECT s.M_Storage_ID, s.M_Product_ID,s.M_Locator_ID,s.M_AttributeSetInstance_ID,"
 				+ "s.AD_Client_ID,s.AD_Org_ID,s.IsActive,s.Created,s.CreatedBy,s.Updated,s.UpdatedBy,"
-				+ "s.QtyOnHand,s.QtyReserved,s.QtyOrdered,s.DateLastInventory, DateLastRun "
+				+ "s.QtyOnHand,s.QtyReserved,s.QtyOrdered,s.DateLastInventory, DateLastRun, s.Identifier "
 				+ "FROM M_Storage s"
 				+ " INNER JOIN M_Locator l ON (l.M_Locator_ID=s.M_Locator_ID)"
 				+ " LEFT OUTER JOIN M_AttributeSetInstance asi ON (s.M_AttributeSetInstance_ID=asi.M_AttributeSetInstance_ID) ";
@@ -439,8 +438,6 @@ public class MStorage extends X_M_Storage
 		BigDecimal diffQtyOrdered, 
 		Boolean IsRealtimePOS,		
 		final Integer C_Period_ID,
-		//final Integer AD_Table_ID,
-		//final Integer Record_ID,
 		String ProcedureName,
 		String trxName)
 	{
@@ -489,14 +486,14 @@ public class MStorage extends X_M_Storage
 			boolean changed = false;
 			if (diffQtyOnHand != null && diffQtyOnHand.signum() != 0)
 			{
-				if (storage.getQtyOnHand().compareTo(Env.ZERO) > 0)
-				{
-					BigDecimal newQtyOnHand = storage.getQtyOnHand().add (diffQtyOnHand);
-					if ( newQtyOnHand.compareTo(Env.ZERO) < 0 && !IsRealtimePOS && M_AttributeSetInstance_ID != 0)
-					{						
-						throw new Exception (getProductName( M_Product_ID , trxName ) + ",ASI=" + M_AttributeSetInstance_ID + " QtyOnHand = " + newQtyOnHand );
-					}
-				}
+//				if (storage.getQtyOnHand().compareTo(Env.ZERO) > 0)
+//				{
+//					BigDecimal newQtyOnHand = storage.getQtyOnHand().add (diffQtyOnHand);
+//					if ( newQtyOnHand.compareTo(Env.ZERO) < 0 && !IsRealtimePOS && M_AttributeSetInstance_ID != 0)
+//					{						
+//						throw new Exception (getProductName( M_Product_ID , trxName ) + ",ASI=" + M_AttributeSetInstance_ID + " QtyOnHand = " + newQtyOnHand );
+//					}
+//				}
 				
 				storage.setQtyOnHand (storage.getQtyOnHand().add (diffQtyOnHand));							
 				diffText.append("OnHand=").append(diffQtyOnHand);
@@ -557,9 +554,9 @@ public class MStorage extends X_M_Storage
 				}
 				if (!storage.save (trxName))
 					throw new Exception ("MStorage can't be saved");
-				BigDecimal value = DB.getSQLValueBD(null," SELECT qtydiffbyuom(?,?,0)",M_Product_ID,M_Warehouse_ID);
-				value = value.add(diffQtyOnHand);
-				diffText.append(")").append(M_Product_ID).append(" ->").append(value);
+				//BigDecimal value = DB.getSQLValueBD(null," SELECT qtydiffbyuom(?,?,0)",M_Product_ID,M_Warehouse_ID);
+				//value = value.add(diffQtyOnHand);
+				//diffText.append(")").append(M_Product_ID).append(" ->").append(value);
 //				diffText.append(" table_id="+AD_Table_ID+" record_id="+Record_ID);				
 //				StockWorker sw = new StockWorker();
 //				sw.setCommand(StockWorker.Product);
@@ -698,6 +695,9 @@ public class MStorage extends X_M_Storage
 	public static BigDecimal getQtyAvailable (int M_Warehouse_ID, int M_Locator_ID, 
 		int M_Product_ID, int M_AttributeSetInstance_ID, String trxName)
 	{
+		if (M_Product_ID == 2008096) {
+			System.out.println("X");
+		}
 		ArrayList<Object> params = new ArrayList<Object>();
 		StringBuffer sql = new StringBuffer("SELECT SUM(COALESCE(s.QtyOnHand,0)-COALESCE(s.QtyReserved,0))")
 								.append(" FROM M_Storage s")
@@ -721,6 +721,8 @@ public class MStorage extends X_M_Storage
 		}
 		//
 		BigDecimal retValue = DB.getSQLValueBD(trxName, sql.toString(), params);
+		if (retValue == null)
+			retValue = BigDecimal.ZERO;
 		if (CLogMgt.isLevelFine())
 			s_log.fine("M_Warehouse_ID=" + M_Warehouse_ID + ", M_Locator_ID=" + M_Locator_ID 
 				+ ",M_Product_ID=" + M_Product_ID + " = " + retValue);
@@ -829,4 +831,28 @@ public class MStorage extends X_M_Storage
 			where += " AND M_Product_ID = " +  M_Product_ID;
 		DB.executeUpdate("DELETE FROM M_Storage " + where, trxName);
 	}
+
+	public static BigDecimal bomqtyavailable(int M_Product_ID, int M_AttributeSetInstance_ID, int M_Warehouse_ID, int M_Locator_ID) {
+		BigDecimal CurrentQty = BigDecimal.ZERO;
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT bomqtyonhandasi(?,?,?,?)");
+		PreparedStatement pstmt = DB.prepareStatement(sb.toString(), null);
+		try {		
+			pstmt.setInt(1, M_Product_ID);
+			pstmt.setInt(2, M_AttributeSetInstance_ID);
+			pstmt.setInt(3, M_Warehouse_ID);
+			pstmt.setInt(4, M_Locator_ID);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				CurrentQty = rs.getBigDecimal(1);				
+			}
+			rs.close();
+			pstmt.close();
+			pstmt = null;			
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		}		
+		return CurrentQty;
+	}	
 }	//	MStorage

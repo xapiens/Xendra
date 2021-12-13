@@ -23,10 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_AD_TableAccessLevels;
-import org.compiere.model.reference.REF_WF_DurationUnit;
-import org.compiere.model.reference.REF__PublishStatus;
-import org.compiere.model.reference.REF_AD_WorkflowType;
 /** Generated Model for AD_Workflow
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -81,13 +77,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Workflow");
 public static String es_PE_TAB_Workflow_Description="Definir Flujo de Trabajo";
 
 @XendraTrl(Identifier="b4adc288-925d-fc5f-3b32-0b2d62c53dbe")
-public static String es_PE_TAB_Workflow_Name="Flujo de Trabajo";
-
-@XendraTrl(Identifier="b4adc288-925d-fc5f-3b32-0b2d62c53dbe")
 public static String es_PE_TAB_Workflow_Help="La pestaña de flujo de trabajo define flujos de trabajo en el sistema.";
 
-@XendraTab(Name="Workflow",Description="Define Workflow",
-Help="The Workflow Tab defines Workflows in the system.",
+@XendraTrl(Identifier="b4adc288-925d-fc5f-3b32-0b2d62c53dbe")
+public static String es_PE_TAB_Workflow_Name="Flujo de Trabajo";
+@XendraTab(Name="Workflow",
+Description="Define Workflow",Help="The Workflow Tab defines Workflows in the system.",
 AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",SeqNo=10,TabLevel=0,IsSingleRow=true,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
 WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
@@ -99,11 +94,13 @@ public static final String TABNAME_Workflow="b4adc288-925d-fc5f-3b32-0b2d62c53db
 @XendraTrl(Identifier="1d921a40-e89d-e148-7d4f-97dc36c05e44")
 public static String es_PE_TABLE_AD_Workflow_Name="Flujo de Trabajo";
 
-@XendraTable(Name="Workflow",Description="Workflow or combination of tasks",Help="",
-TableName="AD_Workflow",AccessLevel="6",AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.workflow",
-Identifier="1d921a40-e89d-e148-7d4f-97dc36c05e44",Synchronized="2017-08-16 11:41:13.0")
+@XendraTable(Name="Workflow",AD_Package_ID="9df191d4-b8da-879a-276b-6e16b286e868",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Workflow or combination of tasks",
+Help="",TableName="AD_Workflow",AccessLevel="6",
+AD_Window_ID="62b2e7ae-ae80-0120-50fa-d101e75827e6",AD_Val_Rule_ID="",IsKey=1,LoadSeq=125,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.workflow",Identifier="1d921a40-e89d-e148-7d4f-97dc36c05e44",
+Synchronized="2020-03-03 21:36:13.0")
 /** TableName=AD_Workflow */
 public static final String Table_Name="AD_Workflow";
 
@@ -142,16 +139,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_AD_Workflow[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AccessLevel AD_Reference=5684046b-00f0-a17c-843e-efad2b0e42f3 */
-public static final int ACCESSLEVEL_AD_Reference_ID=5;
 /** Set Data Access Level.
 @param AccessLevel Access Level required */
 public void setAccessLevel (String AccessLevel)
 {
-if (AccessLevel == null) throw new IllegalArgumentException ("AccessLevel is mandatory");
-if (AccessLevel.equals(REF_AD_TableAccessLevels.SystemPlusClient) || AccessLevel.equals(REF_AD_TableAccessLevels.ClientOnly) || AccessLevel.equals(REF_AD_TableAccessLevels.Organization) || AccessLevel.equals(REF_AD_TableAccessLevels.ClientPlusOrganization) || AccessLevel.equals(REF_AD_TableAccessLevels.SystemOnly) || AccessLevel.equals(REF_AD_TableAccessLevels.All));
- else throw new IllegalArgumentException ("AccessLevel Invalid value - " + AccessLevel + " - Reference_ID=5 - 6 - 2 - 1 - 3 - 4 - 7");
 if (AccessLevel.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -167,13 +158,13 @@ return (String)get_Value(COLUMNNAME_AccessLevel);
 }
 
 @XendraTrl(Identifier="7a46aa96-9f5a-4b96-c562-e56bc69c7225")
+public static String es_PE_FIELD_Workflow_DataAccessLevel_Name="Nivel de Acceso a Datos";
+
+@XendraTrl(Identifier="7a46aa96-9f5a-4b96-c562-e56bc69c7225")
 public static String es_PE_FIELD_Workflow_DataAccessLevel_Description="Nivel de Acceso requerido";
 
 @XendraTrl(Identifier="7a46aa96-9f5a-4b96-c562-e56bc69c7225")
 public static String es_PE_FIELD_Workflow_DataAccessLevel_Help="Indica el nivel de acceso requerido para este registro ó proceso";
-
-@XendraTrl(Identifier="7a46aa96-9f5a-4b96-c562-e56bc69c7225")
-public static String es_PE_FIELD_Workflow_DataAccessLevel_Name="Nivel de Acceso a Datos";
 
 @XendraField(AD_Column_ID="AccessLevel",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -191,7 +182,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e427f933-5c78-75cd-6d91-3a54df848431",Synchronized="2017-08-05 16:53:03.0")
+Identifier="e427f933-5c78-75cd-6d91-3a54df848431",Synchronized="2019-08-30 22:20:54.0")
 /** Column name AccessLevel */
 public static final String COLUMNNAME_AccessLevel = "AccessLevel";
 /** Set Table.
@@ -212,13 +203,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="8db33803-07f0-2a9d-ad71-36bbdec5872b")
+public static String es_PE_FIELD_Workflow_Table_Name="Tabla";
+
+@XendraTrl(Identifier="8db33803-07f0-2a9d-ad71-36bbdec5872b")
 public static String es_PE_FIELD_Workflow_Table_Description="Tabla para los campos";
 
 @XendraTrl(Identifier="8db33803-07f0-2a9d-ad71-36bbdec5872b")
 public static String es_PE_FIELD_Workflow_Table_Help="La Tabla indica una tabla en la que reside un campo ó campos.";
-
-@XendraTrl(Identifier="8db33803-07f0-2a9d-ad71-36bbdec5872b")
-public static String es_PE_FIELD_Workflow_Table_Name="Tabla";
 
 @XendraField(AD_Column_ID="AD_Table_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -236,7 +227,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9c62e6a5-7e60-2c3f-be09-c97c8e931b9b",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_Table_ID */
 public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
 /** Set Node.
@@ -257,13 +248,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f69da43b-8ae8-a630-09f1-1c4fef718912")
+public static String es_PE_FIELD_Workflow_StartNode_Name="Iniciar Nodo";
+
+@XendraTrl(Identifier="f69da43b-8ae8-a630-09f1-1c4fef718912")
 public static String es_PE_FIELD_Workflow_StartNode_Description="Workflow Node, step or process";
 
 @XendraTrl(Identifier="f69da43b-8ae8-a630-09f1-1c4fef718912")
 public static String es_PE_FIELD_Workflow_StartNode_Help="The Workflow Node indicates a unique step or process in a Workflow.";
-
-@XendraTrl(Identifier="f69da43b-8ae8-a630-09f1-1c4fef718912")
-public static String es_PE_FIELD_Workflow_StartNode_Name="Iniciar Nodo";
 
 @XendraField(AD_Column_ID="AD_WF_Node_ID",IsCentrallyMaintained=false,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="General",IsDisplayed=true,
@@ -281,7 +272,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6ad9e9d2-7d07-bfa1-e6d4-302bc8abc754",Synchronized="2017-08-05 16:53:03.0")
+Identifier="6ad9e9d2-7d07-bfa1-e6d4-302bc8abc754",Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_WF_Node_ID */
 public static final String COLUMNNAME_AD_WF_Node_ID = "AD_WF_Node_ID";
 /** Set Workflow Responsible.
@@ -302,13 +293,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9f9c583d-7456-6e07-bbda-a36181377b19")
+public static String es_PE_FIELD_Workflow_WorkflowResponsible_Name="Responsable del Flujo de Trabajo";
+
+@XendraTrl(Identifier="9f9c583d-7456-6e07-bbda-a36181377b19")
 public static String es_PE_FIELD_Workflow_WorkflowResponsible_Description="Responsable para la ejecución del flujo de trabajo.";
 
 @XendraTrl(Identifier="9f9c583d-7456-6e07-bbda-a36181377b19")
 public static String es_PE_FIELD_Workflow_WorkflowResponsible_Help="La última responsabilidad para el flujo de trabajo es con un usuario actual. El flujo de trabajo responsable permite definir maneras de encontrar a ese usuario final.";
-
-@XendraTrl(Identifier="9f9c583d-7456-6e07-bbda-a36181377b19")
-public static String es_PE_FIELD_Workflow_WorkflowResponsible_Name="Responsable del Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_WF_Responsible_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -326,7 +317,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0b49ca71-c1da-7245-4c3d-b46e309b4e61",Synchronized="2017-08-05 16:53:03.0")
+Identifier="0b49ca71-c1da-7245-4c3d-b46e309b4e61",Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_WF_Responsible_ID */
 public static final String COLUMNNAME_AD_WF_Responsible_ID = "AD_WF_Responsible_ID";
 /** Set Workflow.
@@ -346,13 +337,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="e531ce06-264f-397e-1621-719363ddb402")
+public static String es_PE_FIELD_Workflow_Workflow_Name="Flujo de Trabajo";
+
+@XendraTrl(Identifier="e531ce06-264f-397e-1621-719363ddb402")
 public static String es_PE_FIELD_Workflow_Workflow_Description="Flujo de trabajo ó combinación de tareas";
 
 @XendraTrl(Identifier="e531ce06-264f-397e-1621-719363ddb402")
 public static String es_PE_FIELD_Workflow_Workflow_Help="El campo flujo de trabajo identifica un flujo de trabajo único en el sistema.";
-
-@XendraTrl(Identifier="e531ce06-264f-397e-1621-719363ddb402")
-public static String es_PE_FIELD_Workflow_Workflow_Name="Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="AD_Workflow_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -380,13 +371,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3b84d24e-44c4-6641-5f03-338ea9490922")
+public static String es_PE_FIELD_Workflow_WorkflowProcessor_Name="Procesador FT";
+
+@XendraTrl(Identifier="3b84d24e-44c4-6641-5f03-338ea9490922")
 public static String es_PE_FIELD_Workflow_WorkflowProcessor_Description="Servidor del procesador del flujo de trabajo";
 
 @XendraTrl(Identifier="3b84d24e-44c4-6641-5f03-338ea9490922")
 public static String es_PE_FIELD_Workflow_WorkflowProcessor_Help="Servidor del procesador del flujo de trabajo";
-
-@XendraTrl(Identifier="3b84d24e-44c4-6641-5f03-338ea9490922")
-public static String es_PE_FIELD_Workflow_WorkflowProcessor_Name="Procesador FT";
 
 @XendraField(AD_Column_ID="AD_WorkflowProcessor_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -404,7 +395,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c7ab9ff7-a9a9-8a2c-9f64-757db1a8f51f",Synchronized="2017-08-05 16:53:03.0")
+Identifier="c7ab9ff7-a9a9-8a2c-9f64-757db1a8f51f",Synchronized="2019-08-30 22:20:54.0")
 /** Column name AD_WorkflowProcessor_ID */
 public static final String COLUMNNAME_AD_WorkflowProcessor_ID = "AD_WorkflowProcessor_ID";
 /** Set Author.
@@ -429,15 +420,16 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="4543f478-827d-092e-bda4-1bc0cb12999a")
-public static String es_PE_FIELD_Workflow_Author_Description="Autor/creador de la entidad";
+public static String es_PE_FIELD_Workflow_Author_Name="Autor";
 
 @XendraTrl(Identifier="4543f478-827d-092e-bda4-1bc0cb12999a")
-public static String es_PE_FIELD_Workflow_Author_Name="Autor";
-@XendraField(AD_Column_ID="Author",
-IsCentrallyMaintained=true,AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=200,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="4543f478-827d-092e-bda4-1bc0cb12999a")
+public static String es_PE_FIELD_Workflow_Author_Description="Autor/creador de la entidad";
+
+@XendraField(AD_Column_ID="Author",IsCentrallyMaintained=true,
+AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=200,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="4543f478-827d-092e-bda4-1bc0cb12999a")
 public static final String FIELDNAME_Workflow_Author="4543f478-827d-092e-bda4-1bc0cb12999a";
 
 @XendraTrl(Identifier="7f05327b-6585-456a-b95b-8865d35faed2")
@@ -449,7 +441,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7f05327b-6585-456a-b95b-8865d35faed2",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Author */
 public static final String COLUMNNAME_Author = "Author";
 /** Set Cost.
@@ -468,15 +460,16 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="bddca86a-ecb6-35cc-3ca4-e0a085d22438")
-public static String es_PE_FIELD_Workflow_Cost_Description="Información Costo";
+public static String es_PE_FIELD_Workflow_Cost_Name="Costo";
 
 @XendraTrl(Identifier="bddca86a-ecb6-35cc-3ca4-e0a085d22438")
-public static String es_PE_FIELD_Workflow_Cost_Name="Costo";
-@XendraField(AD_Column_ID="Cost",
-IsCentrallyMaintained=true,AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",
-AD_FieldGroup_ID="Simulation",IsDisplayed=true,DisplayLogic="",DisplayLength=11,IsReadOnly=false,
-SeqNo=260,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="bddca86a-ecb6-35cc-3ca4-e0a085d22438")
+public static String es_PE_FIELD_Workflow_Cost_Description="Información Costo";
+
+@XendraField(AD_Column_ID="Cost",IsCentrallyMaintained=true,
+AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="Simulation",IsDisplayed=true,
+DisplayLogic="",DisplayLength=11,IsReadOnly=false,SeqNo=260,SortNo=0,IsSameLine=true,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="bddca86a-ecb6-35cc-3ca4-e0a085d22438")
 public static final String FIELDNAME_Workflow_Cost="bddca86a-ecb6-35cc-3ca4-e0a085d22438";
 
 @XendraTrl(Identifier="80428f7a-e6ce-0545-0c42-cdd0fee7c3e8")
@@ -488,7 +481,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80428f7a-e6ce-0545-0c42-cdd0fee7c3e8",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Cost */
 public static final String COLUMNNAME_Cost = "Cost";
 /** Set Description.
@@ -519,13 +512,13 @@ return value;
 }
 
 @XendraTrl(Identifier="18adb7d3-0922-241c-4769-4ab66143168a")
+public static String es_PE_FIELD_Workflow_Description_Name="Observación";
+
+@XendraTrl(Identifier="18adb7d3-0922-241c-4769-4ab66143168a")
 public static String es_PE_FIELD_Workflow_Description_Description="Observación";
 
 @XendraTrl(Identifier="18adb7d3-0922-241c-4769-4ab66143168a")
 public static String es_PE_FIELD_Workflow_Description_Help="Observación";
-
-@XendraTrl(Identifier="18adb7d3-0922-241c-4769-4ab66143168a")
-public static String es_PE_FIELD_Workflow_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -543,7 +536,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="345b2675-a35b-e211-0499-669059268c41",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Document Value Logic.
@@ -567,10 +560,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="91d454ff-cae4-4db7-aec3-02a14f847222")
-public static String es_PE_FIELD_Workflow_DocumentValueLogic_Description="Lógica para determinar el Inicio del FT - Si es verdadero, un proceso de FT es iniciado para el documento";
+public static String es_PE_FIELD_Workflow_DocumentValueLogic_Name="Lógica del Valor del Documento";
 
 @XendraTrl(Identifier="91d454ff-cae4-4db7-aec3-02a14f847222")
-public static String es_PE_FIELD_Workflow_DocumentValueLogic_Name="Lógica del Valor del Documento";
+public static String es_PE_FIELD_Workflow_DocumentValueLogic_Description="Lógica para determinar el Inicio del FT - Si es verdadero, un proceso de FT es iniciado para el documento";
 
 @XendraField(AD_Column_ID="DocValueLogic",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -588,7 +581,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd4a5cad-9a58-1479-58bb-0422dbb06602",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name DocValueLogic */
 public static final String COLUMNNAME_DocValueLogic = "DocValueLogic";
 /** Set Duration.
@@ -607,13 +600,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2ac1bdf2-c7b8-c0ba-9a87-b1e1912d67a5")
+public static String es_PE_FIELD_Workflow_Duration_Name="Duración";
+
+@XendraTrl(Identifier="2ac1bdf2-c7b8-c0ba-9a87-b1e1912d67a5")
 public static String es_PE_FIELD_Workflow_Duration_Description="Duración en unidad de la duración";
 
 @XendraTrl(Identifier="2ac1bdf2-c7b8-c0ba-9a87-b1e1912d67a5")
 public static String es_PE_FIELD_Workflow_Duration_Help="Esperando la hora prevista para la ejecución";
-
-@XendraTrl(Identifier="2ac1bdf2-c7b8-c0ba-9a87-b1e1912d67a5")
-public static String es_PE_FIELD_Workflow_Duration_Name="Duración";
 
 @XendraField(AD_Column_ID="Duration",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="Simulation",IsDisplayed=true,
@@ -631,7 +624,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6687db48-7e50-a0c1-0249-c1edef503807",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Duration */
 public static final String COLUMNNAME_Duration = "Duration";
 /** Set DurationLimit.
@@ -650,13 +643,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="89314762-05a0-c097-9cbe-339fca0aacca")
+public static String es_PE_FIELD_Workflow_DurationLimit_Name="DurationLimit";
+
+@XendraTrl(Identifier="89314762-05a0-c097-9cbe-339fca0aacca")
 public static String es_PE_FIELD_Workflow_DurationLimit_Description="Normal Duration in Duration Unit";
 
 @XendraTrl(Identifier="89314762-05a0-c097-9cbe-339fca0aacca")
 public static String es_PE_FIELD_Workflow_DurationLimit_Help="Expected (normal) Length of time for the execution";
-
-@XendraTrl(Identifier="89314762-05a0-c097-9cbe-339fca0aacca")
-public static String es_PE_FIELD_Workflow_DurationLimit_Name="DurationLimit";
 
 @XendraField(AD_Column_ID="DurationLimit",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="General",IsDisplayed=true,
@@ -674,18 +667,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="be328ac5-92f4-19bd-0f08-9bdedcc19582",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name DurationLimit */
 public static final String COLUMNNAME_DurationLimit = "DurationLimit";
-
-/** DurationUnit AD_Reference=ff9fc47e-117f-0c97-65db-b02e392a7e15 */
-public static final int DURATIONUNIT_AD_Reference_ID=299;
 /** Set Duration Unit.
 @param DurationUnit Unit of Duration */
 public void setDurationUnit (String DurationUnit)
 {
-if (DurationUnit == null || DurationUnit.equals(REF_WF_DurationUnit.Year) || DurationUnit.equals(REF_WF_DurationUnit.Month) || DurationUnit.equals(REF_WF_DurationUnit.Day) || DurationUnit.equals(REF_WF_DurationUnit.Hour) || DurationUnit.equals(REF_WF_DurationUnit.Minute) || DurationUnit.equals(REF_WF_DurationUnit.Second));
- else throw new IllegalArgumentException ("DurationUnit Invalid value - " + DurationUnit + " - Reference_ID=299 - Y - M - D - h - m - s");
 if (DurationUnit != null && DurationUnit.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -701,13 +689,13 @@ return (String)get_Value(COLUMNNAME_DurationUnit);
 }
 
 @XendraTrl(Identifier="138f9b31-a7ce-1f71-dca1-52a84b9528e2")
+public static String es_PE_FIELD_Workflow_DurationUnit_Name="Unidad de la Duración";
+
+@XendraTrl(Identifier="138f9b31-a7ce-1f71-dca1-52a84b9528e2")
 public static String es_PE_FIELD_Workflow_DurationUnit_Description="Unidad de la Duración";
 
 @XendraTrl(Identifier="138f9b31-a7ce-1f71-dca1-52a84b9528e2")
 public static String es_PE_FIELD_Workflow_DurationUnit_Help="Unidad para definir la duración de tiempo para la ejecución.";
-
-@XendraTrl(Identifier="138f9b31-a7ce-1f71-dca1-52a84b9528e2")
-public static String es_PE_FIELD_Workflow_DurationUnit_Name="Unidad de la Duración";
 
 @XendraField(AD_Column_ID="DurationUnit",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="General",IsDisplayed=true,
@@ -725,12 +713,9 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1801d42e-16a2-1ca9-f50b-7f1944900390",Synchronized="2017-08-05 16:53:03.0")
+Identifier="1801d42e-16a2-1ca9-f50b-7f1944900390",Synchronized="2019-08-30 22:20:54.0")
 /** Column name DurationUnit */
 public static final String COLUMNNAME_DurationUnit = "DurationUnit";
-
-/** EntityType AD_Reference=fae4ad31-8ff1-5d5c-8d47-2426c541cd74 */
-public static final int ENTITYTYPE_AD_Reference_ID=389;
 /** Set Entity Type.
 @param EntityType Dictionary Entity Type: Determines ownership and synchronization */
 public void setEntityType (String EntityType)
@@ -750,13 +735,13 @@ return (String)get_Value(COLUMNNAME_EntityType);
 }
 
 @XendraTrl(Identifier="6c1fd824-2789-c5e2-bb4a-ee1878aa2a30")
+public static String es_PE_FIELD_Workflow_EntityType_Name="Tipo de Entidad";
+
+@XendraTrl(Identifier="6c1fd824-2789-c5e2-bb4a-ee1878aa2a30")
 public static String es_PE_FIELD_Workflow_EntityType_Description="Tipo de Entidad Diccionario; determina propiedad y sincronización";
 
 @XendraTrl(Identifier="6c1fd824-2789-c5e2-bb4a-ee1878aa2a30")
 public static String es_PE_FIELD_Workflow_EntityType_Help="Los tipos de entidad \"Diccionario\"; \"Adempiere\"; y \"Aplicación\" podrían ser automáticamente sincronizados y las personalizaciones eliminadas ó sobreescritas";
-
-@XendraTrl(Identifier="6c1fd824-2789-c5e2-bb4a-ee1878aa2a30")
-public static String es_PE_FIELD_Workflow_EntityType_Name="Tipo de Entidad";
 
 @XendraField(AD_Column_ID="EntityType",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -774,7 +759,7 @@ FieldLength=4,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="@EntityType@=D",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="263d898e-fdb6-ae65-fb15-8204577402ab",Synchronized="2017-08-05 16:53:03.0")
+Identifier="263d898e-fdb6-ae65-fb15-8204577402ab",Synchronized="2019-08-30 22:20:54.0")
 /** Column name EntityType */
 public static final String COLUMNNAME_EntityType = "EntityType";
 /** Set Comment/Help.
@@ -800,13 +785,13 @@ return value;
 }
 
 @XendraTrl(Identifier="fcc01d20-59fe-652e-233d-055ce3cce524")
+public static String es_PE_FIELD_Workflow_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="fcc01d20-59fe-652e-233d-055ce3cce524")
 public static String es_PE_FIELD_Workflow_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="fcc01d20-59fe-652e-233d-055ce3cce524")
 public static String es_PE_FIELD_Workflow_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="fcc01d20-59fe-652e-233d-055ce3cce524")
-public static String es_PE_FIELD_Workflow_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -824,7 +809,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="50245f16-b60f-1c79-2aac-56f26ecd1048",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -856,7 +841,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c4fd34ee-be96-4168-af7f-7aad0c0f678b",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -879,13 +864,13 @@ return false;
 }
 
 @XendraTrl(Identifier="a8423994-f43a-cd89-0f3e-0dd270b3eedb")
+public static String es_PE_FIELD_Workflow_Default_Name="Predeterminado";
+
+@XendraTrl(Identifier="a8423994-f43a-cd89-0f3e-0dd270b3eedb")
 public static String es_PE_FIELD_Workflow_Default_Description="Valor Predeterminado";
 
 @XendraTrl(Identifier="a8423994-f43a-cd89-0f3e-0dd270b3eedb")
 public static String es_PE_FIELD_Workflow_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
-
-@XendraTrl(Identifier="a8423994-f43a-cd89-0f3e-0dd270b3eedb")
-public static String es_PE_FIELD_Workflow_Default_Name="Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -903,7 +888,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="caac9f16-39a7-b34a-3f4a-85748b448e78",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Valid.
@@ -926,18 +911,19 @@ return false;
 }
 
 @XendraTrl(Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
+public static String es_PE_FIELD_Workflow_Valid_Name="Valido";
+
+@XendraTrl(Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
 public static String es_PE_FIELD_Workflow_Valid_Description="El elemento es valido";
 
 @XendraTrl(Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
 public static String es_PE_FIELD_Workflow_Valid_Help="El elemento pasado es el cheque de la validación";
 
-@XendraTrl(Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
-public static String es_PE_FIELD_Workflow_Valid_Name="Valido";
-@XendraField(AD_Column_ID="IsValid",
-IsCentrallyMaintained=true,AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=300,SortNo=0,
-IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
+@XendraField(AD_Column_ID="IsValid",IsCentrallyMaintained=true,
+AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=300,SortNo=0,IsSameLine=true,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="40e74ba5-ddc5-90a7-c537-bbda00f5cf36")
 public static final String FIELDNAME_Workflow_Valid="40e74ba5-ddc5-90a7-c537-bbda00f5cf36";
 
 @XendraTrl(Identifier="6d6baebf-892b-e074-9ca9-575d8d7ad27f")
@@ -949,7 +935,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d6baebf-892b-e074-9ca9-575d8d7ad27f",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name IsValid */
 public static final String COLUMNNAME_IsValid = "IsValid";
 /** Set Name.
@@ -981,18 +967,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
+public static String es_PE_FIELD_Workflow_Name_Name="Nombre";
+
+@XendraTrl(Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
 public static String es_PE_FIELD_Workflow_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
 public static String es_PE_FIELD_Workflow_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
-public static String es_PE_FIELD_Workflow_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="b4760f6a-fb41-46a5-ec88-2a2968c17e1b")
 public static final String FIELDNAME_Workflow_Name="b4760f6a-fb41-46a5-ec88-2a2968c17e1b";
 
 @XendraTrl(Identifier="2786eb47-032a-a006-1380-8bff49dccb27")
@@ -1004,7 +991,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2786eb47-032a-a006-1380-8bff49dccb27",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Priority.
@@ -1023,13 +1010,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="792f8fe8-934b-9b61-6426-b3e4b0234ae1")
+public static String es_PE_FIELD_Workflow_Priority_Name="Prioridad";
+
+@XendraTrl(Identifier="792f8fe8-934b-9b61-6426-b3e4b0234ae1")
 public static String es_PE_FIELD_Workflow_Priority_Description="Indica si este requerimiento es de una alta; media ó baja prioridad";
 
 @XendraTrl(Identifier="792f8fe8-934b-9b61-6426-b3e4b0234ae1")
 public static String es_PE_FIELD_Workflow_Priority_Help="La Prioridad indica la importancia de este requerimiento";
-
-@XendraTrl(Identifier="792f8fe8-934b-9b61-6426-b3e4b0234ae1")
-public static String es_PE_FIELD_Workflow_Priority_Name="Prioridad";
 
 @XendraField(AD_Column_ID="Priority",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1047,19 +1034,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fbf25234-d85f-a62f-0edf-fe425884c95d",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Priority */
 public static final String COLUMNNAME_Priority = "Priority";
-
-/** PublishStatus AD_Reference=500006fa-6215-9c7e-9fb1-23609093d16b */
-public static final int PUBLISHSTATUS_AD_Reference_ID=310;
 /** Set Publication Status.
 @param PublishStatus Status of Publication */
 public void setPublishStatus (String PublishStatus)
 {
-if (PublishStatus == null) throw new IllegalArgumentException ("PublishStatus is mandatory");
-if (PublishStatus.equals(REF__PublishStatus.Released) || PublishStatus.equals(REF__PublishStatus.Test) || PublishStatus.equals(REF__PublishStatus.UnderRevision) || PublishStatus.equals(REF__PublishStatus.Void));
- else throw new IllegalArgumentException ("PublishStatus Invalid value - " + PublishStatus + " - Reference_ID=310 - R - T - U - V");
 if (PublishStatus.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -1075,13 +1056,13 @@ return (String)get_Value(COLUMNNAME_PublishStatus);
 }
 
 @XendraTrl(Identifier="a7ce12e4-89f0-3ba9-1a70-13482ca040ab")
+public static String es_PE_FIELD_Workflow_PublicationStatus_Name="Estado de la Publicación";
+
+@XendraTrl(Identifier="a7ce12e4-89f0-3ba9-1a70-13482ca040ab")
 public static String es_PE_FIELD_Workflow_PublicationStatus_Description="Estado de la Publicación";
 
 @XendraTrl(Identifier="a7ce12e4-89f0-3ba9-1a70-13482ca040ab")
 public static String es_PE_FIELD_Workflow_PublicationStatus_Help="Usado para documentación interna";
-
-@XendraTrl(Identifier="a7ce12e4-89f0-3ba9-1a70-13482ca040ab")
-public static String es_PE_FIELD_Workflow_PublicationStatus_Name="Estado de la Publicación";
 
 @XendraField(AD_Column_ID="PublishStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1099,7 +1080,7 @@ FieldLength=1,DefaultValue="U",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="503f3938-96db-a121-845a-8e9db0bdda67",Synchronized="2017-08-05 16:53:03.0")
+Identifier="503f3938-96db-a121-845a-8e9db0bdda67",Synchronized="2019-08-30 22:20:54.0")
 /** Column name PublishStatus */
 public static final String COLUMNNAME_PublishStatus = "PublishStatus";
 /** Set Validate Workflow.
@@ -1121,13 +1102,13 @@ return (String)get_Value(COLUMNNAME_ValidateWorkflow);
 }
 
 @XendraTrl(Identifier="06aec98b-090a-87a3-d26e-9a2166937c7e")
+public static String es_PE_FIELD_Workflow_ValidateWorkflow_Name="Valida Flujo de Trabajo";
+
+@XendraTrl(Identifier="06aec98b-090a-87a3-d26e-9a2166937c7e")
 public static String es_PE_FIELD_Workflow_ValidateWorkflow_Description="Valida cuando el Flujo de Trabajo es correcto";
 
 @XendraTrl(Identifier="06aec98b-090a-87a3-d26e-9a2166937c7e")
 public static String es_PE_FIELD_Workflow_ValidateWorkflow_Help="(Comprobación limitada)";
-
-@XendraTrl(Identifier="06aec98b-090a-87a3-d26e-9a2166937c7e")
-public static String es_PE_FIELD_Workflow_ValidateWorkflow_Name="Valida Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="ValidateWorkflow",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1145,7 +1126,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="6f79b03f-7d59-748d-396a-471311719a27",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="122873dd-5a35-c241-1252-f2b3365039e6",Synchronized="2017-08-05 16:53:03.0")
+Identifier="122873dd-5a35-c241-1252-f2b3365039e6",Synchronized="2019-08-30 22:20:54.0")
 /** Column name ValidateWorkflow */
 public static final String COLUMNNAME_ValidateWorkflow = "ValidateWorkflow";
 /** Set Valid from.
@@ -1162,13 +1143,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 }
 
 @XendraTrl(Identifier="dbc65a0b-3a96-c4ef-c4d8-505633a1b500")
+public static String es_PE_FIELD_Workflow_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="dbc65a0b-3a96-c4ef-c4d8-505633a1b500")
 public static String es_PE_FIELD_Workflow_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="dbc65a0b-3a96-c4ef-c4d8-505633a1b500")
 public static String es_PE_FIELD_Workflow_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="dbc65a0b-3a96-c4ef-c4d8-505633a1b500")
-public static String es_PE_FIELD_Workflow_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1186,7 +1167,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="09dc7220-139c-79d0-1eee-91b687f3e52e",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -1203,13 +1184,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidTo);
 }
 
 @XendraTrl(Identifier="b6ba6f71-1d93-1396-a361-fb07add1c4a1")
+public static String es_PE_FIELD_Workflow_ValidTo_Name="Válido Hasta";
+
+@XendraTrl(Identifier="b6ba6f71-1d93-1396-a361-fb07add1c4a1")
 public static String es_PE_FIELD_Workflow_ValidTo_Description="Válido hasta; incluyendo esta fecha (ultimo día)";
 
 @XendraTrl(Identifier="b6ba6f71-1d93-1396-a361-fb07add1c4a1")
 public static String es_PE_FIELD_Workflow_ValidTo_Help="La fecha válida hasta indica el último día de un rango de fechas";
-
-@XendraTrl(Identifier="b6ba6f71-1d93-1396-a361-fb07add1c4a1")
-public static String es_PE_FIELD_Workflow_ValidTo_Name="Válido Hasta";
 
 @XendraField(AD_Column_ID="ValidTo",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1227,7 +1208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f87efe00-3f81-ff03-9338-50f400427462",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 /** Set Search Key.
@@ -1252,13 +1233,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="f1b598a0-e136-34d3-5ebd-4c25466162ea")
+public static String es_PE_FIELD_Workflow_SearchKey_Name="Clave de Búsqueda";
+
+@XendraTrl(Identifier="f1b598a0-e136-34d3-5ebd-4c25466162ea")
 public static String es_PE_FIELD_Workflow_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="f1b598a0-e136-34d3-5ebd-4c25466162ea")
 public static String es_PE_FIELD_Workflow_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
-
-@XendraTrl(Identifier="f1b598a0-e136-34d3-5ebd-4c25466162ea")
-public static String es_PE_FIELD_Workflow_SearchKey_Name="Clave de Búsqueda";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1276,7 +1257,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e3c87b6d-9e4d-dc0e-3592-e4f1e5c14843",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Version.
@@ -1295,13 +1276,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5dacc27d-6760-0c65-8382-4977af3bbeac")
+public static String es_PE_FIELD_Workflow_Version_Name="Versión";
+
+@XendraTrl(Identifier="5dacc27d-6760-0c65-8382-4977af3bbeac")
 public static String es_PE_FIELD_Workflow_Version_Description="Versión de la definición de tabla";
 
 @XendraTrl(Identifier="5dacc27d-6760-0c65-8382-4977af3bbeac")
 public static String es_PE_FIELD_Workflow_Version_Help="La versión indica la versión de esta definición de tabla";
-
-@XendraTrl(Identifier="5dacc27d-6760-0c65-8382-4977af3bbeac")
-public static String es_PE_FIELD_Workflow_Version_Name="Versión";
 
 @XendraField(AD_Column_ID="Version",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1319,7 +1300,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f8c41ffa-f64d-8b26-f5ad-d05367ae202c",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name Version */
 public static final String COLUMNNAME_Version = "Version";
 /** Set Waiting Time.
@@ -1338,13 +1319,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9b3dc996-6720-abaf-9aad-390d65bb00b7")
+public static String es_PE_FIELD_Workflow_WaitingTime_Name="Tiempo de Espera";
+
+@XendraTrl(Identifier="9b3dc996-6720-abaf-9aad-390d65bb00b7")
 public static String es_PE_FIELD_Workflow_WaitingTime_Description="Tiempo de espera para la simulación del flujo de trabajo.";
 
 @XendraTrl(Identifier="9b3dc996-6720-abaf-9aad-390d65bb00b7")
 public static String es_PE_FIELD_Workflow_WaitingTime_Help="Cantidad de hora necesaria de preparar el funcionamiento de la tarea en unidades de la duración.";
-
-@XendraTrl(Identifier="9b3dc996-6720-abaf-9aad-390d65bb00b7")
-public static String es_PE_FIELD_Workflow_WaitingTime_Name="Tiempo de Espera";
 
 @XendraField(AD_Column_ID="WaitingTime",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="Simulation",IsDisplayed=true,
@@ -1362,19 +1343,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8f8bed28-3eb0-97e2-8d33-c230fb01d118",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name WaitingTime */
 public static final String COLUMNNAME_WaitingTime = "WaitingTime";
-
-/** WorkflowType AD_Reference=9cff63cf-4649-ca92-f60d-786935680030 */
-public static final int WORKFLOWTYPE_AD_Reference_ID=328;
 /** Set Workflow Type.
 @param WorkflowType Type of Worflow */
 public void setWorkflowType (String WorkflowType)
 {
-if (WorkflowType == null) throw new IllegalArgumentException ("WorkflowType is mandatory");
-if (WorkflowType.equals(REF_AD_WorkflowType.General) || WorkflowType.equals(REF_AD_WorkflowType.DocumentProcess) || WorkflowType.equals(REF_AD_WorkflowType.DocumentValue));
- else throw new IllegalArgumentException ("WorkflowType Invalid value - " + WorkflowType + " - Reference_ID=328 - G - P - V");
 if (WorkflowType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -1390,13 +1365,13 @@ return (String)get_Value(COLUMNNAME_WorkflowType);
 }
 
 @XendraTrl(Identifier="cb9ede97-6e87-a1fe-c91f-d7f5ca1f0cc6")
+public static String es_PE_FIELD_Workflow_WorkflowType_Name="Tipo de Flujo de Trabajo";
+
+@XendraTrl(Identifier="cb9ede97-6e87-a1fe-c91f-d7f5ca1f0cc6")
 public static String es_PE_FIELD_Workflow_WorkflowType_Description="Tipo de Flujo de Trabajo";
 
 @XendraTrl(Identifier="cb9ede97-6e87-a1fe-c91f-d7f5ca1f0cc6")
 public static String es_PE_FIELD_Workflow_WorkflowType_Help="El tipo de flujo de trabajo determina comó se comienza el flujo de trabajo.";
-
-@XendraTrl(Identifier="cb9ede97-6e87-a1fe-c91f-d7f5ca1f0cc6")
-public static String es_PE_FIELD_Workflow_WorkflowType_Name="Tipo de Flujo de Trabajo";
 
 @XendraField(AD_Column_ID="WorkflowType",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1414,7 +1389,7 @@ FieldLength=1,DefaultValue="G",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0358d074-f8ec-d724-dccc-609ec621e93d",Synchronized="2017-08-05 16:53:03.0")
+Identifier="0358d074-f8ec-d724-dccc-609ec621e93d",Synchronized="2019-08-30 22:20:54.0")
 /** Column name WorkflowType */
 public static final String COLUMNNAME_WorkflowType = "WorkflowType";
 /** Set Working Time.
@@ -1433,13 +1408,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="cda38bb1-d89a-ea57-06bb-bbcef147953c")
+public static String es_PE_FIELD_Workflow_WorkingTime_Name="Tiempo Acumulado";
+
+@XendraTrl(Identifier="cda38bb1-d89a-ea57-06bb-bbcef147953c")
 public static String es_PE_FIELD_Workflow_WorkingTime_Description="Simulación de la ejecución del tiempo acumulado en el flujo de trabajo.";
 
 @XendraTrl(Identifier="cda38bb1-d89a-ea57-06bb-bbcef147953c")
 public static String es_PE_FIELD_Workflow_WorkingTime_Help="Cantidad de tiempo de duración que necesita una unidad despues de ser ejecutada.";
-
-@XendraTrl(Identifier="cda38bb1-d89a-ea57-06bb-bbcef147953c")
-public static String es_PE_FIELD_Workflow_WorkingTime_Name="Tiempo Acumulado";
 
 @XendraField(AD_Column_ID="WorkingTime",IsCentrallyMaintained=true,
 AD_Tab_ID="b4adc288-925d-fc5f-3b32-0b2d62c53dbe",AD_FieldGroup_ID="Simulation",IsDisplayed=true,
@@ -1457,7 +1432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a721f9dc-6dae-2fa4-2c04-335d74a9ea0e",
-Synchronized="2017-08-05 16:53:03.0")
+Synchronized="2019-08-30 22:20:54.0")
 /** Column name WorkingTime */
 public static final String COLUMNNAME_WorkingTime = "WorkingTime";
 }

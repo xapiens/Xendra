@@ -32,6 +32,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import javax.swing.text.html.HTML;
 
+import org.compiere.util.CLogger;
 import org.frapuccino.htmleditor.common.ExtendedHTMLDocument;
 import org.frapuccino.htmleditor.common.ExtendedHTMLEditorKit;
 
@@ -42,9 +43,7 @@ import org.frapuccino.htmleditor.common.ExtendedHTMLEditorKit;
  */
 public class HtmlEditorView extends JTextPane {
 
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger
-			.getLogger("org.frapuccino.htmleditor");
+	private static final CLogger LOG = CLogger.getCLogger("org.frapuccino.htmleditor");
 
 	// Members used for html handling:
 

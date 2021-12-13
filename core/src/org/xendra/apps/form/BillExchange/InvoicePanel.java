@@ -34,7 +34,7 @@ import org.compiere.grid.ed.VLookup;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MCurrency;
 import org.compiere.model.MDocType;
-import org.compiere.model.persistence.X_C_DocType;
+import org.compiere.model.persistence.X_C_DocumentTax;
 import org.compiere.model.persistence.X_C_Invoice;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -173,11 +173,12 @@ public class InvoicePanel extends JSplitPane implements ListSelectionListener, A
 				"CASE WHEN i.IsSOTrx='Y' THEN '(Venta) ' || dt.name ELSE '(Compra) ' || dt.name END    AS C_DocTypeName," +
 				" true AS isinvoice," +
 				"pt.netdays, " +
-		"cdt.codsunat" );
+		"dtax.taxid" );
 		sql.append( " FROM C_Invoice_v i ");		//  corrected for CM/Split
 		sql.append( " INNER JOIN C_Currency c ON (i.C_Currency_ID=c.C_Currency_ID) ");
 		sql.append( " LEFT OUTER JOIN C_DocType_trl dt ON i.c_doctype_id = dt.c_doctype_id ");
 		sql.append( " LEFT OUTER JOIN C_Doctype cdt ON i.c_doctype_id = cdt.c_doctype_id  ");
+		sql.append( " LEFT OUTER JOIN C_DocumentTax dtax ON cdt.c_DocumentTax_ID = dtax.c_documenttax_ID ");
 		sql.append(" JOIN C_PaymentTerm pt on i.c_paymentterm_id = pt.c_paymentterm_id ");
 		sql.append( " WHERE i.IsPaid='N' AND i.Processed='Y' ");
 		sql.append(" AND i.IsSOTrx=");
@@ -224,7 +225,7 @@ public class InvoicePanel extends JSplitPane implements ListSelectionListener, A
 					Timestamp DateInvoice = rs.getTimestamp(X_C_Invoice.COLUMNNAME_DateInvoiced);
 					String Serial = rs.getString(X_C_Invoice.COLUMNNAME_Serial);
 					String DocumentNo = rs.getString(X_C_Invoice.COLUMNNAME_DocumentNo);
-					String codsunat = rs.getString(X_C_DocType.COLUMNNAME_CodSunat);
+					String codsunat = rs.getString(X_C_DocumentTax.COLUMNNAME_TaxID);
 					Integer C_Invoice_ID = rs.getInt(X_C_Invoice.COLUMNNAME_C_Invoice_ID);
 					Integer C_Withholding_ID = rs.getInt(X_C_Invoice.COLUMNNAME_C_Withholding_ID);
 					BigDecimal Total = rs.getBigDecimal(X_C_Invoice.COLUMNNAME_GrandTotal);

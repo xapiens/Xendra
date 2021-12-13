@@ -146,8 +146,8 @@ import javax.swing.SwingConstants;
  *  @see FR [2887701] https://sourceforge.net/tracker/?func=detail&atid=879335&aid=2887701&group_id=176962
  *  @sponsor www.metas.de
  */
-public final class APanel extends CPanel
-	implements DataStatusListener, ChangeListener, ActionListener, ASyncProcess
+public final class APanel extends GridPanel
+	implements DataStatusListener, ChangeListener, ActionListener, ASyncProcess, IFrontPanel
 {
 	/**
 	 *

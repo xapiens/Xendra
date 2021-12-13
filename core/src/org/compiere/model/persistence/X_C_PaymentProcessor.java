@@ -88,10 +88,10 @@ public static int Table_ID=MTable.getTable_ID("C_PaymentProcessor");
 public static String es_PE_TAB_PaymentProcessor_Description="Procesador para pagos en línea";
 
 @XendraTrl(Identifier="52482ace-9c2b-3b37-4c46-42d350e94ca9")
-public static String es_PE_TAB_PaymentProcessor_Name="Procesador de Pago";
+public static String es_PE_TAB_PaymentProcessor_Help="La pestaña Pago Electrónico es usada para definir los parámetros para el procesamiento de pagos electrónicos.";
 
 @XendraTrl(Identifier="52482ace-9c2b-3b37-4c46-42d350e94ca9")
-public static String es_PE_TAB_PaymentProcessor_Help="La pestaña Pago Electrónico es usada para definir los parámetros para el procesamiento de pagos electrónicos.";
+public static String es_PE_TAB_PaymentProcessor_Name="Procesador de Pago";
 
 @XendraTab(Name="Payment Processor",Description="Processor for online payments",
 Help="The Electronic Payments Tab is used to define the parameters for the processing of electronic payments. If no currency is defined, all currencies are accepted. If a minumum amount is defined (or not zero), the payment processor is only used if the payment amount is equal or higher than the minumum amount. <br> The class needs to implement org.compiere.model.PaymentProcessor",
@@ -106,12 +106,13 @@ public static final String TABNAME_PaymentProcessor="52482ace-9c2b-3b37-4c46-42d
 @XendraTrl(Identifier="48bfe7bc-630c-25fc-1894-dd460e793bd5")
 public static String es_PE_TABLE_C_PaymentProcessor_Name="Procesador de Pago";
 
-@XendraTable(Name="Payment Processor",Description="Payment processor for electronic payments",
-Help="",TableName="C_PaymentProcessor",AccessLevel="3",
-AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",AD_Val_Rule_ID="",IsKey=1,LoadSeq=95,
-IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
-PO_Window_ID="",ID="org.xendra.commercial",Identifier="48bfe7bc-630c-25fc-1894-dd460e793bd5",
-Synchronized="2017-08-16 11:42:10.0")
+@XendraTable(Name="Payment Processor",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Payment processor for electronic payments",Help="",TableName="C_PaymentProcessor",
+AccessLevel="3",AD_Window_ID="da35b881-e51f-c76d-0c58-a14a86f4a839",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=95,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="48bfe7bc-630c-25fc-1894-dd460e793bd5",Synchronized="2020-03-03 21:37:22.0")
 /** TableName=C_PaymentProcessor */
 public static final String Table_Name="C_PaymentProcessor";
 
@@ -164,13 +165,13 @@ return false;
 }
 
 @XendraTrl(Identifier="400499be-f5b2-783e-d657-abac32c5fce9")
+public static String es_PE_FIELD_PaymentProcessor_AcceptAMEX_Name="Acepta AMEX";
+
+@XendraTrl(Identifier="400499be-f5b2-783e-d657-abac32c5fce9")
 public static String es_PE_FIELD_PaymentProcessor_AcceptAMEX_Description="Acepta Tarjeta American Express";
 
 @XendraTrl(Identifier="400499be-f5b2-783e-d657-abac32c5fce9")
 public static String es_PE_FIELD_PaymentProcessor_AcceptAMEX_Help="Indica si las Tarjetas American Express son aceptadas como pagos a esta cuenta Bancaria";
-
-@XendraTrl(Identifier="400499be-f5b2-783e-d657-abac32c5fce9")
-public static String es_PE_FIELD_PaymentProcessor_AcceptAMEX_Name="Acepta AMEX";
 
 @XendraField(AD_Column_ID="AcceptAMEX",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -188,7 +189,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c1fac00d-e4ac-7b20-de9c-d707706627d5",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptAMEX */
 public static final String COLUMNNAME_AcceptAMEX = "AcceptAMEX";
 /** Set Accept ATM.
@@ -211,13 +212,13 @@ return false;
 }
 
 @XendraTrl(Identifier="870da152-e277-8bd3-3db5-3e233e5d34f9")
+public static String es_PE_FIELD_PaymentProcessor_AcceptATM_Name="Acepta ATM";
+
+@XendraTrl(Identifier="870da152-e277-8bd3-3db5-3e233e5d34f9")
 public static String es_PE_FIELD_PaymentProcessor_AcceptATM_Description="Acepta Tarjeta Bank ATM";
 
 @XendraTrl(Identifier="870da152-e277-8bd3-3db5-3e233e5d34f9")
 public static String es_PE_FIELD_PaymentProcessor_AcceptATM_Help="Indica si las Tarjetas Bank ATM son aceptadas como pagos a esta cuenta Bancaria";
-
-@XendraTrl(Identifier="870da152-e277-8bd3-3db5-3e233e5d34f9")
-public static String es_PE_FIELD_PaymentProcessor_AcceptATM_Name="Acepta ATM";
 
 @XendraField(AD_Column_ID="AcceptATM",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -235,7 +236,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ea09da49-b725-c7a3-b077-36a7ec104e8c",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptATM */
 public static final String COLUMNNAME_AcceptATM = "AcceptATM";
 /** Set Accept Electronic Check.
@@ -258,13 +259,13 @@ return false;
 }
 
 @XendraTrl(Identifier="acf2836a-37e0-10aa-bf80-b5c9af13be86")
+public static String es_PE_FIELD_PaymentProcessor_AcceptElectronicCheck_Name="Acepta Cheque Electrónico";
+
+@XendraTrl(Identifier="acf2836a-37e0-10aa-bf80-b5c9af13be86")
 public static String es_PE_FIELD_PaymentProcessor_AcceptElectronicCheck_Description="Acepta Tarjeta Cheques Electrónicos";
 
 @XendraTrl(Identifier="acf2836a-37e0-10aa-bf80-b5c9af13be86")
 public static String es_PE_FIELD_PaymentProcessor_AcceptElectronicCheck_Help="Indica si cheques electronicos son aceptados como pagos a esta Cuenta Bancaria.";
-
-@XendraTrl(Identifier="acf2836a-37e0-10aa-bf80-b5c9af13be86")
-public static String es_PE_FIELD_PaymentProcessor_AcceptElectronicCheck_Name="Acepta Cheque Electrónico";
 
 @XendraField(AD_Column_ID="AcceptCheck",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -282,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6cd8f3e8-71f3-f646-2ed8-2991c2ee53ca",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptCheck */
 public static final String COLUMNNAME_AcceptCheck = "AcceptCheck";
 /** Set Accept Corporate.
@@ -305,13 +306,13 @@ return false;
 }
 
 @XendraTrl(Identifier="37d97f7f-1b7b-26c8-e5b9-6af7b3ed6cd3")
+public static String es_PE_FIELD_PaymentProcessor_AcceptCorporate_Name="Acepta Tarjeta de Pago Corporativa";
+
+@XendraTrl(Identifier="37d97f7f-1b7b-26c8-e5b9-6af7b3ed6cd3")
 public static String es_PE_FIELD_PaymentProcessor_AcceptCorporate_Description="Acepta Tarjetas de Pago Corporativas";
 
 @XendraTrl(Identifier="37d97f7f-1b7b-26c8-e5b9-6af7b3ed6cd3")
 public static String es_PE_FIELD_PaymentProcessor_AcceptCorporate_Help="Indica si Tarjetas de Pago Corporativas son aceptadas como pagos a esta cuenta bancaria";
-
-@XendraTrl(Identifier="37d97f7f-1b7b-26c8-e5b9-6af7b3ed6cd3")
-public static String es_PE_FIELD_PaymentProcessor_AcceptCorporate_Name="Acepta Tarjeta de Pago Corporativa";
 
 @XendraField(AD_Column_ID="AcceptCorporate",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -329,7 +330,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e3855b32-64cc-8a6e-171f-d6f3714c83e3",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptCorporate */
 public static final String COLUMNNAME_AcceptCorporate = "AcceptCorporate";
 /** Set Accept Diners.
@@ -352,13 +353,13 @@ return false;
 }
 
 @XendraTrl(Identifier="f61d7b5d-29f4-ffe7-6fad-cb19f6968284")
+public static String es_PE_FIELD_PaymentProcessor_AcceptDiners_Name="Acepta Diner`s Club";
+
+@XendraTrl(Identifier="f61d7b5d-29f4-ffe7-6fad-cb19f6968284")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDiners_Description="Acepta Tarjeta Diner";
 
 @XendraTrl(Identifier="f61d7b5d-29f4-ffe7-6fad-cb19f6968284")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDiners_Help="Indica si las Tarjetas Diner son aceptadas como pagos a esta cuenta Bancaria";
-
-@XendraTrl(Identifier="f61d7b5d-29f4-ffe7-6fad-cb19f6968284")
-public static String es_PE_FIELD_PaymentProcessor_AcceptDiners_Name="Acepta Diner`s Club";
 
 @XendraField(AD_Column_ID="AcceptDiners",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -376,7 +377,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="560e0d92-eeb8-18b2-2943-0a21018c9878",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptDiners */
 public static final String COLUMNNAME_AcceptDiners = "AcceptDiners";
 /** Set Accept Direct Debit.
@@ -399,13 +400,13 @@ return false;
 }
 
 @XendraTrl(Identifier="8d006b74-fd14-40d4-59c0-67488f9ba0d7")
+public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDebit_Name="Acepta El Debito Directo";
+
+@XendraTrl(Identifier="8d006b74-fd14-40d4-59c0-67488f9ba0d7")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDebit_Description="Aceptar Debito Directo (proveedor iniciado)";
 
 @XendraTrl(Identifier="8d006b74-fd14-40d4-59c0-67488f9ba0d7")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDebit_Help="Acepta transacciones de Debito Directo. Los debitos directos son iniciados para el proveedor cuando tiene permisos para deducir montos desde su cuenta de pago.";
-
-@XendraTrl(Identifier="8d006b74-fd14-40d4-59c0-67488f9ba0d7")
-public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDebit_Name="Acepta El Debito Directo";
 
 @XendraField(AD_Column_ID="AcceptDirectDebit",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -423,7 +424,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a69173a-9baf-2a29-759d-e5f58deaa263",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptDirectDebit */
 public static final String COLUMNNAME_AcceptDirectDebit = "AcceptDirectDebit";
 /** Set Accept Direct Deposit.
@@ -446,13 +447,13 @@ return false;
 }
 
 @XendraTrl(Identifier="ffbc8280-c35b-8449-1b5d-9eff2275a216")
+public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDeposit_Name="Acepta TRAN";
+
+@XendraTrl(Identifier="ffbc8280-c35b-8449-1b5d-9eff2275a216")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDeposit_Description="Acepta Automatic Clearing House";
 
 @XendraTrl(Identifier="ffbc8280-c35b-8449-1b5d-9eff2275a216")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDeposit_Help="Indica si los Pagos ACH son aceptados como pagos a esta Cuenta Bancaria";
-
-@XendraTrl(Identifier="ffbc8280-c35b-8449-1b5d-9eff2275a216")
-public static String es_PE_FIELD_PaymentProcessor_AcceptDirectDeposit_Name="Acepta TRAN";
 
 @XendraField(AD_Column_ID="AcceptDirectDeposit",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -470,7 +471,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a38ce747-c742-434e-e143-475059bbbbb8",Synchronized="2017-08-05 16:54:02.0")
+Identifier="a38ce747-c742-434e-e143-475059bbbbb8",Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptDirectDeposit */
 public static final String COLUMNNAME_AcceptDirectDeposit = "AcceptDirectDeposit";
 /** Set Accept Discover.
@@ -493,13 +494,13 @@ return false;
 }
 
 @XendraTrl(Identifier="df275ca0-19f6-cb4e-a95b-0b7b7550369a")
+public static String es_PE_FIELD_PaymentProcessor_AcceptDiscover_Name="Aceptar Discover Card";
+
+@XendraTrl(Identifier="df275ca0-19f6-cb4e-a95b-0b7b7550369a")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDiscover_Description="Aceptar Discover Card";
 
 @XendraTrl(Identifier="df275ca0-19f6-cb4e-a95b-0b7b7550369a")
 public static String es_PE_FIELD_PaymentProcessor_AcceptDiscover_Help="Indica si las tarjetas Discover son aceptadas como pago a esta Cuenta Bancaria";
-
-@XendraTrl(Identifier="df275ca0-19f6-cb4e-a95b-0b7b7550369a")
-public static String es_PE_FIELD_PaymentProcessor_AcceptDiscover_Name="Aceptar Discover Card";
 
 @XendraField(AD_Column_ID="AcceptDiscover",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -517,7 +518,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="55c79cd8-c55f-fafd-242c-a258565f2ee5",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptDiscover */
 public static final String COLUMNNAME_AcceptDiscover = "AcceptDiscover";
 /** Set Accept MasterCard.
@@ -540,13 +541,13 @@ return false;
 }
 
 @XendraTrl(Identifier="e5d2fb0d-b90f-b562-2671-40a6a5d47ca3")
+public static String es_PE_FIELD_PaymentProcessor_AcceptMasterCard_Name="Acepta MasterCard";
+
+@XendraTrl(Identifier="e5d2fb0d-b90f-b562-2671-40a6a5d47ca3")
 public static String es_PE_FIELD_PaymentProcessor_AcceptMasterCard_Description="Acepta Tarjeta Master Card";
 
 @XendraTrl(Identifier="e5d2fb0d-b90f-b562-2671-40a6a5d47ca3")
 public static String es_PE_FIELD_PaymentProcessor_AcceptMasterCard_Help="Indica si Master Cards son aceptadas como pagos a esta cuenta Bancaria";
-
-@XendraTrl(Identifier="e5d2fb0d-b90f-b562-2671-40a6a5d47ca3")
-public static String es_PE_FIELD_PaymentProcessor_AcceptMasterCard_Name="Acepta MasterCard";
 
 @XendraField(AD_Column_ID="AcceptMC",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -564,7 +565,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="96acc0da-b2ff-09d3-cc77-535cf0f2764c",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptMC */
 public static final String COLUMNNAME_AcceptMC = "AcceptMC";
 /** Set Accept Visa.
@@ -587,13 +588,13 @@ return false;
 }
 
 @XendraTrl(Identifier="072879e0-db0c-433e-96cc-f0678e051665")
+public static String es_PE_FIELD_PaymentProcessor_AcceptVisa_Name="Acepta Visa";
+
+@XendraTrl(Identifier="072879e0-db0c-433e-96cc-f0678e051665")
 public static String es_PE_FIELD_PaymentProcessor_AcceptVisa_Description="Acepta Tarjetas Visa";
 
 @XendraTrl(Identifier="072879e0-db0c-433e-96cc-f0678e051665")
 public static String es_PE_FIELD_PaymentProcessor_AcceptVisa_Help="Indica si tarjetas Visa son aceptadas como pago para esta cuenta bancaria";
-
-@XendraTrl(Identifier="072879e0-db0c-433e-96cc-f0678e051665")
-public static String es_PE_FIELD_PaymentProcessor_AcceptVisa_Name="Acepta Visa";
 
 @XendraField(AD_Column_ID="AcceptVisa",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -611,12 +612,9 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c030e571-c304-6d3b-0ffa-5af250729682",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name AcceptVisa */
 public static final String COLUMNNAME_AcceptVisa = "AcceptVisa";
-
-/** AD_Sequence_ID AD_Reference=4aa462a2-7603-59ba-08c7-4982c43f3ad7 */
-public static final int AD_SEQUENCE_ID_AD_Reference_ID=128;
 /** Set Sequence.
 @param AD_Sequence_ID Document Sequence */
 public void setAD_Sequence_ID (int AD_Sequence_ID)
@@ -635,13 +633,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="9270ac54-20fc-53c4-438e-904024f2dd69")
+public static String es_PE_FIELD_PaymentProcessor_Sequence_Name="Secuencia";
+
+@XendraTrl(Identifier="9270ac54-20fc-53c4-438e-904024f2dd69")
 public static String es_PE_FIELD_PaymentProcessor_Sequence_Description="Secuencia del documento";
 
 @XendraTrl(Identifier="9270ac54-20fc-53c4-438e-904024f2dd69")
 public static String es_PE_FIELD_PaymentProcessor_Sequence_Help="La secuencia indica el número de secuencia a ser usado para los documentos";
-
-@XendraTrl(Identifier="9270ac54-20fc-53c4-438e-904024f2dd69")
-public static String es_PE_FIELD_PaymentProcessor_Sequence_Name="Secuencia";
 
 @XendraField(AD_Column_ID="AD_Sequence_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -659,7 +657,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="253437b2-2906-eac4-08da-dfb650a74681",Synchronized="2017-08-05 16:54:02.0")
+Identifier="253437b2-2906-eac4-08da-dfb650a74681",Synchronized="2019-08-30 22:21:58.0")
 /** Column name AD_Sequence_ID */
 public static final String COLUMNNAME_AD_Sequence_ID = "AD_Sequence_ID";
 /** Set Bank Account.
@@ -679,13 +677,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="d943f39b-fe24-42be-4343-2f183bfb9f14")
+public static String es_PE_FIELD_PaymentProcessor_BankAccount_Name="Cuenta Bancaria";
+
+@XendraTrl(Identifier="d943f39b-fe24-42be-4343-2f183bfb9f14")
 public static String es_PE_FIELD_PaymentProcessor_BankAccount_Description="Cuenta bancaria";
 
 @XendraTrl(Identifier="d943f39b-fe24-42be-4343-2f183bfb9f14")
 public static String es_PE_FIELD_PaymentProcessor_BankAccount_Help="La cuenta bancaria identifica una cuenta en este banco";
-
-@XendraTrl(Identifier="d943f39b-fe24-42be-4343-2f183bfb9f14")
-public static String es_PE_FIELD_PaymentProcessor_BankAccount_Name="Cuenta Bancaria";
 
 @XendraField(AD_Column_ID="C_BankAccount_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -703,7 +701,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1bbf4c4-7414-0b0d-0b97-eca9bbbcc875",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_BankAccount_ID */
 public static final String COLUMNNAME_C_BankAccount_ID = "C_BankAccount_ID";
 /** Set Currency.
@@ -724,13 +722,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3ceb98ec-5c92-4e3d-091e-69e0020175f6")
+public static String es_PE_FIELD_PaymentProcessor_OnlyCurrency_Name="Moneda Única";
+
+@XendraTrl(Identifier="3ceb98ec-5c92-4e3d-091e-69e0020175f6")
 public static String es_PE_FIELD_PaymentProcessor_OnlyCurrency_Description="Restringe aceptar solamente esta moneda.";
 
 @XendraTrl(Identifier="3ceb98ec-5c92-4e3d-091e-69e0020175f6")
 public static String es_PE_FIELD_PaymentProcessor_OnlyCurrency_Help="El campo moneda Única  indica que esta cuenta bancaria acepta solamente la moneda identificada aquí.";
-
-@XendraTrl(Identifier="3ceb98ec-5c92-4e3d-091e-69e0020175f6")
-public static String es_PE_FIELD_PaymentProcessor_OnlyCurrency_Name="Moneda Única";
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=false,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -748,7 +746,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8a6a3ce7-12e2-cf61-2ba7-8fb0c2357e18",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Commission %.
@@ -768,13 +766,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="4e12054f-945e-9d1f-29cf-2bcb3fe07d49")
+public static String es_PE_FIELD_PaymentProcessor_Commission_Name="Comisión";
+
+@XendraTrl(Identifier="4e12054f-945e-9d1f-29cf-2bcb3fe07d49")
 public static String es_PE_FIELD_PaymentProcessor_Commission_Description="Comisión establecida como un porcentaje";
 
 @XendraTrl(Identifier="4e12054f-945e-9d1f-29cf-2bcb3fe07d49")
 public static String es_PE_FIELD_PaymentProcessor_Commission_Help="La Comisión indica (como porcentaje) la comisión a ser pagada";
-
-@XendraTrl(Identifier="4e12054f-945e-9d1f-29cf-2bcb3fe07d49")
-public static String es_PE_FIELD_PaymentProcessor_Commission_Name="Comisión";
 
 @XendraField(AD_Column_ID="Commission",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -792,7 +790,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e576d1aa-5304-57e0-5117-518b01ae039d",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Commission */
 public static final String COLUMNNAME_Commission = "Commission";
 /** Set Cost per transaction.
@@ -812,13 +810,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="90cf436d-71a0-fc1f-b1ad-a36f5186fddd")
+public static String es_PE_FIELD_PaymentProcessor_CostPerTransaction_Name="Costo por Transacción";
+
+@XendraTrl(Identifier="90cf436d-71a0-fc1f-b1ad-a36f5186fddd")
 public static String es_PE_FIELD_PaymentProcessor_CostPerTransaction_Description="Costo fijado por transacción";
 
 @XendraTrl(Identifier="90cf436d-71a0-fc1f-b1ad-a36f5186fddd")
 public static String es_PE_FIELD_PaymentProcessor_CostPerTransaction_Help="El costo por transacción indica el costo fijo a ser cargado por transacción";
-
-@XendraTrl(Identifier="90cf436d-71a0-fc1f-b1ad-a36f5186fddd")
-public static String es_PE_FIELD_PaymentProcessor_CostPerTransaction_Name="Costo por Transacción";
 
 @XendraField(AD_Column_ID="CostPerTrx",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -836,7 +834,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dc5e89e3-0222-3f03-d1ce-1ee6b8ff35cd",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name CostPerTrx */
 public static final String COLUMNNAME_CostPerTrx = "CostPerTrx";
 /** Set Payment Processor.
@@ -856,13 +854,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="32cbb077-d831-a414-e634-8a449405cc1f")
+public static String es_PE_FIELD_PaymentProcessor_PaymentProcessor_Name="Procesador de Pago";
+
+@XendraTrl(Identifier="32cbb077-d831-a414-e634-8a449405cc1f")
 public static String es_PE_FIELD_PaymentProcessor_PaymentProcessor_Description="Procesador de pagos para pagos electrónicos.";
 
 @XendraTrl(Identifier="32cbb077-d831-a414-e634-8a449405cc1f")
 public static String es_PE_FIELD_PaymentProcessor_PaymentProcessor_Help="El procesador de pagos indica el procesador a ser usado para pagos electrónicos.";
-
-@XendraTrl(Identifier="32cbb077-d831-a414-e634-8a449405cc1f")
-public static String es_PE_FIELD_PaymentProcessor_PaymentProcessor_Name="Procesador de Pago";
 
 @XendraField(AD_Column_ID="C_PaymentProcessor_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -900,13 +898,13 @@ return value;
 }
 
 @XendraTrl(Identifier="0a785e8d-e054-0315-95b6-89226ba20d69")
+public static String es_PE_FIELD_PaymentProcessor_Description_Name="Observación";
+
+@XendraTrl(Identifier="0a785e8d-e054-0315-95b6-89226ba20d69")
 public static String es_PE_FIELD_PaymentProcessor_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="0a785e8d-e054-0315-95b6-89226ba20d69")
 public static String es_PE_FIELD_PaymentProcessor_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="0a785e8d-e054-0315-95b6-89226ba20d69")
-public static String es_PE_FIELD_PaymentProcessor_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -924,7 +922,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7e538874-7069-e928-13da-97b217f3eec1",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Host Address.
@@ -949,13 +947,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="f9c63eab-f631-3000-5e61-6be466c32a19")
+public static String es_PE_FIELD_PaymentProcessor_HostAddress_Name="Dirección Anfitrión";
+
+@XendraTrl(Identifier="f9c63eab-f631-3000-5e61-6be466c32a19")
 public static String es_PE_FIELD_PaymentProcessor_HostAddress_Description="Dirección de host del procesador de pagos";
 
 @XendraTrl(Identifier="f9c63eab-f631-3000-5e61-6be466c32a19")
 public static String es_PE_FIELD_PaymentProcessor_HostAddress_Help="La dirección del host identifica el URL para su procesador de pagos";
-
-@XendraTrl(Identifier="f9c63eab-f631-3000-5e61-6be466c32a19")
-public static String es_PE_FIELD_PaymentProcessor_HostAddress_Name="Dirección Anfitrión";
 
 @XendraField(AD_Column_ID="HostAddress",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -973,7 +971,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="79f2f39d-c31f-c175-74ca-a54cc14a032d",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name HostAddress */
 public static final String COLUMNNAME_HostAddress = "HostAddress";
 /** Set Host port.
@@ -992,13 +990,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="7f748ae2-ba2a-a2f2-8d59-d0b0c3a8aaff")
+public static String es_PE_FIELD_PaymentProcessor_HostPort_Name="Puerto Anfitrión";
+
+@XendraTrl(Identifier="7f748ae2-ba2a-a2f2-8d59-d0b0c3a8aaff")
 public static String es_PE_FIELD_PaymentProcessor_HostPort_Description="Puerto de host del procesador de pagos";
 
 @XendraTrl(Identifier="7f748ae2-ba2a-a2f2-8d59-d0b0c3a8aaff")
 public static String es_PE_FIELD_PaymentProcessor_HostPort_Help="El Puerto Host identifica la ID del puerto para su procesador de pagos";
-
-@XendraTrl(Identifier="7f748ae2-ba2a-a2f2-8d59-d0b0c3a8aaff")
-public static String es_PE_FIELD_PaymentProcessor_HostPort_Name="Puerto Anfitrión";
 
 @XendraField(AD_Column_ID="HostPort",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1016,7 +1014,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2a86afc2-570b-b1f2-8274-d66233d21618",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name HostPort */
 public static final String COLUMNNAME_HostPort = "HostPort";
 /** Set Identifier.
@@ -1048,7 +1046,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13497c87-4312-4a39-984b-1f22893e438b",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Minimum Amt.
@@ -1067,10 +1065,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="0865d42d-5be0-df0a-2512-26db7e598316")
-public static String es_PE_FIELD_PaymentProcessor_MinimumAmt_Description="Cantidad Minima en el documento de moneda";
+public static String es_PE_FIELD_PaymentProcessor_MinimumAmt_Name="Cantidad Minima";
 
 @XendraTrl(Identifier="0865d42d-5be0-df0a-2512-26db7e598316")
-public static String es_PE_FIELD_PaymentProcessor_MinimumAmt_Name="Cantidad Minima";
+public static String es_PE_FIELD_PaymentProcessor_MinimumAmt_Description="Cantidad Minima en el documento de moneda";
 
 @XendraField(AD_Column_ID="MinimumAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1088,7 +1086,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b39d23e7-4ac4-042f-a1fc-e4e3fffe7139",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name MinimumAmt */
 public static final String COLUMNNAME_MinimumAmt = "MinimumAmt";
 /** Set Name.
@@ -1120,13 +1118,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="49aa6d6c-5bcc-9660-f809-e6358aac0061")
+public static String es_PE_FIELD_PaymentProcessor_Name_Name="Nombre";
+
+@XendraTrl(Identifier="49aa6d6c-5bcc-9660-f809-e6358aac0061")
 public static String es_PE_FIELD_PaymentProcessor_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="49aa6d6c-5bcc-9660-f809-e6358aac0061")
 public static String es_PE_FIELD_PaymentProcessor_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="49aa6d6c-5bcc-9660-f809-e6358aac0061")
-public static String es_PE_FIELD_PaymentProcessor_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1144,7 +1142,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47f3f1f2-86af-937c-8323-aa15c2e27c2a",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Partner ID.
@@ -1168,10 +1166,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="eae2709a-8517-0819-7b64-a4a0a886ea69")
-public static String es_PE_FIELD_PaymentProcessor_PartnerID_Description="Identificación del socio para el procesamiento de pago";
+public static String es_PE_FIELD_PaymentProcessor_PartnerID_Name="ID del Socio";
 
 @XendraTrl(Identifier="eae2709a-8517-0819-7b64-a4a0a886ea69")
-public static String es_PE_FIELD_PaymentProcessor_PartnerID_Name="ID del Socio";
+public static String es_PE_FIELD_PaymentProcessor_PartnerID_Description="Identificación del socio para el procesamiento de pago";
 
 @XendraField(AD_Column_ID="PartnerID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1189,7 +1187,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f162bc5-acde-63f8-bc17-6a954aa31119",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name PartnerID */
 public static final String COLUMNNAME_PartnerID = "PartnerID";
 /** Set Password.
@@ -1214,13 +1212,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="cdf47a3a-6d84-c088-8537-eed6e8aac341")
+public static String es_PE_FIELD_PaymentProcessor_Password_Name="Contraseña";
+
+@XendraTrl(Identifier="cdf47a3a-6d84-c088-8537-eed6e8aac341")
 public static String es_PE_FIELD_PaymentProcessor_Password_Description="Contraseña de cualquier longitud (Sensible a mayúsculas y minúsculas)";
 
 @XendraTrl(Identifier="cdf47a3a-6d84-c088-8537-eed6e8aac341")
 public static String es_PE_FIELD_PaymentProcessor_Password_Help="La contraseña indica la contraseña para esta ID de usuario. Las contraseñas se requieren para identificar usuarios autorizados";
-
-@XendraTrl(Identifier="cdf47a3a-6d84-c088-8537-eed6e8aac341")
-public static String es_PE_FIELD_PaymentProcessor_Password_Name="Contraseña";
 
 @XendraField(AD_Column_ID="Password",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1238,7 +1236,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2343bd72-09ac-cb4b-e24b-53d04d37fb3b",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name Password */
 public static final String COLUMNNAME_Password = "Password";
 /** Set Payment Processor Class.
@@ -1262,13 +1260,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="2cccf40e-d6b3-ac9a-1521-b8d4f2c351d7")
+public static String es_PE_FIELD_PaymentProcessor_PaymentProcessorClass_Name="Clase Procesador de Pago";
+
+@XendraTrl(Identifier="2cccf40e-d6b3-ac9a-1521-b8d4f2c351d7")
 public static String es_PE_FIELD_PaymentProcessor_PaymentProcessorClass_Description="Clase Java del procesador de Pagos";
 
 @XendraTrl(Identifier="2cccf40e-d6b3-ac9a-1521-b8d4f2c351d7")
 public static String es_PE_FIELD_PaymentProcessor_PaymentProcessorClass_Help="La clase del procesador de pagos identifica la clase Java usada para procesar pagos";
-
-@XendraTrl(Identifier="2cccf40e-d6b3-ac9a-1521-b8d4f2c351d7")
-public static String es_PE_FIELD_PaymentProcessor_PaymentProcessorClass_Name="Clase Procesador de Pago";
 
 @XendraField(AD_Column_ID="PayProcessorClass",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1286,7 +1284,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9cd3d39d-13cc-220a-3f09-97e16e3f18e1",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name PayProcessorClass */
 public static final String COLUMNNAME_PayProcessorClass = "PayProcessorClass";
 /** Set Proxy address.
@@ -1310,13 +1308,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="448ccf9a-ad11-2d4c-739a-8c905ca5b535")
+public static String es_PE_FIELD_PaymentProcessor_ProxyAddress_Name="Dirección Proxy";
+
+@XendraTrl(Identifier="448ccf9a-ad11-2d4c-739a-8c905ca5b535")
 public static String es_PE_FIELD_PaymentProcessor_ProxyAddress_Description="Dirección de su servidor de proxy";
 
 @XendraTrl(Identifier="448ccf9a-ad11-2d4c-739a-8c905ca5b535")
 public static String es_PE_FIELD_PaymentProcessor_ProxyAddress_Help="La dirección del proxy debe ser definida si usted debe y pasa a través de un cortafuego para tener acceso a su procesador de pago";
-
-@XendraTrl(Identifier="448ccf9a-ad11-2d4c-739a-8c905ca5b535")
-public static String es_PE_FIELD_PaymentProcessor_ProxyAddress_Name="Dirección Proxy";
 
 @XendraField(AD_Column_ID="ProxyAddress",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1334,7 +1332,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="595a9fc1-b6bd-be5a-c9ad-19f3f98edb6b",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name ProxyAddress */
 public static final String COLUMNNAME_ProxyAddress = "ProxyAddress";
 /** Set Proxy logon.
@@ -1358,13 +1356,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="6c1adfff-3ee2-0872-e1e9-46367f26fc68")
+public static String es_PE_FIELD_PaymentProcessor_ProxyLogon_Name="ID Usuario Proxy";
+
+@XendraTrl(Identifier="6c1adfff-3ee2-0872-e1e9-46367f26fc68")
 public static String es_PE_FIELD_PaymentProcessor_ProxyLogon_Description="ID Usuario en el servidor Proxy";
 
 @XendraTrl(Identifier="6c1adfff-3ee2-0872-e1e9-46367f26fc68")
 public static String es_PE_FIELD_PaymentProcessor_ProxyLogon_Help="La Firma Proxy identifica en la ID de la Firma para su servidor proxy";
-
-@XendraTrl(Identifier="6c1adfff-3ee2-0872-e1e9-46367f26fc68")
-public static String es_PE_FIELD_PaymentProcessor_ProxyLogon_Name="ID Usuario Proxy";
 
 @XendraField(AD_Column_ID="ProxyLogon",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1382,7 +1380,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ce5d0f9b-4c24-a1a1-3657-4b4f24ab1cf9",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name ProxyLogon */
 public static final String COLUMNNAME_ProxyLogon = "ProxyLogon";
 /** Set Proxy password.
@@ -1406,13 +1404,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="07782e34-f147-2093-db0d-01781b0bd617")
+public static String es_PE_FIELD_PaymentProcessor_ProxyPassword_Name="Contraseña Proxy";
+
+@XendraTrl(Identifier="07782e34-f147-2093-db0d-01781b0bd617")
 public static String es_PE_FIELD_PaymentProcessor_ProxyPassword_Description="Contraseña en el servidor proxy";
 
 @XendraTrl(Identifier="07782e34-f147-2093-db0d-01781b0bd617")
 public static String es_PE_FIELD_PaymentProcessor_ProxyPassword_Help="La contraseña proxy identifica la contraseña para su servidor proxy";
-
-@XendraTrl(Identifier="07782e34-f147-2093-db0d-01781b0bd617")
-public static String es_PE_FIELD_PaymentProcessor_ProxyPassword_Name="Contraseña Proxy";
 
 @XendraField(AD_Column_ID="ProxyPassword",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1430,7 +1428,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ccc4a178-5ee8-18bc-c380-fa3bea2e3d5b",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name ProxyPassword */
 public static final String COLUMNNAME_ProxyPassword = "ProxyPassword";
 /** Set Proxy port.
@@ -1449,13 +1447,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c44c4c59-e641-d195-8029-739a7a1e4382")
+public static String es_PE_FIELD_PaymentProcessor_ProxyPort_Name="Puerto Proxy";
+
+@XendraTrl(Identifier="c44c4c59-e641-d195-8029-739a7a1e4382")
 public static String es_PE_FIELD_PaymentProcessor_ProxyPort_Description="Puerto de tu servidor proxy";
 
 @XendraTrl(Identifier="c44c4c59-e641-d195-8029-739a7a1e4382")
 public static String es_PE_FIELD_PaymentProcessor_ProxyPort_Help="El Puerto Proxy identifica el  puerto de su servidor proxy";
-
-@XendraTrl(Identifier="c44c4c59-e641-d195-8029-739a7a1e4382")
-public static String es_PE_FIELD_PaymentProcessor_ProxyPort_Name="Puerto Proxy";
 
 @XendraField(AD_Column_ID="ProxyPort",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1473,7 +1471,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="709707d5-4710-2c28-31a2-56e373fe5cef",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name ProxyPort */
 public static final String COLUMNNAME_ProxyPort = "ProxyPort";
 /** Set Require CreditCard Verification Code.
@@ -1496,13 +1494,13 @@ return false;
 }
 
 @XendraTrl(Identifier="d0e19ce7-96b4-2581-8fec-85ffa3a145ea")
+public static String es_PE_FIELD_PaymentProcessor_RequireCreditCardVerificationCode_Name="Verificar Tarjeta de crédito";
+
+@XendraTrl(Identifier="d0e19ce7-96b4-2581-8fec-85ffa3a145ea")
 public static String es_PE_FIELD_PaymentProcessor_RequireCreditCardVerificationCode_Description="Requiere código de verificación de crédito verificación tarjeta de crédito dígito 3/4";
 
 @XendraTrl(Identifier="d0e19ce7-96b4-2581-8fec-85ffa3a145ea")
 public static String es_PE_FIELD_PaymentProcessor_RequireCreditCardVerificationCode_Help="El cuadro de verificación require verficación la tarjeta de crédito, indica si esta cuenta de banco requiere un número de verificación para transacciones de tarjeta de crédito.";
-
-@XendraTrl(Identifier="d0e19ce7-96b4-2581-8fec-85ffa3a145ea")
-public static String es_PE_FIELD_PaymentProcessor_RequireCreditCardVerificationCode_Name="Verificar Tarjeta de crédito";
 
 @XendraField(AD_Column_ID="RequireVV",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1520,7 +1518,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b598075a-503e-9b0e-848b-f7e4a98eef28",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name RequireVV */
 public static final String COLUMNNAME_RequireVV = "RequireVV";
 /** Set User ID.
@@ -1545,13 +1543,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="0d5ddd4d-4eff-3bd6-1cec-3a5a5a3803f1")
+public static String es_PE_FIELD_PaymentProcessor_UserID_Name="ID de Usuario";
+
+@XendraTrl(Identifier="0d5ddd4d-4eff-3bd6-1cec-3a5a5a3803f1")
 public static String es_PE_FIELD_PaymentProcessor_UserID_Description="ID de Usuario";
 
 @XendraTrl(Identifier="0d5ddd4d-4eff-3bd6-1cec-3a5a5a3803f1")
 public static String es_PE_FIELD_PaymentProcessor_UserID_Help="La ID de Usuario identifica a un usuario y le permite el acceso a los registros ó procesos.";
-
-@XendraTrl(Identifier="0d5ddd4d-4eff-3bd6-1cec-3a5a5a3803f1")
-public static String es_PE_FIELD_PaymentProcessor_UserID_Name="ID de Usuario";
 
 @XendraField(AD_Column_ID="UserID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1569,7 +1567,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="821544e2-cc15-6d45-dee3-f8b7cc20b155",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name UserID */
 public static final String COLUMNNAME_UserID = "UserID";
 /** Set Vendor ID.
@@ -1593,10 +1591,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="adb8887d-9a29-6abc-60e6-99734059e3e3")
-public static String es_PE_FIELD_PaymentProcessor_VendorID_Description="Identificación del proveedor para el procesamiento de pago";
+public static String es_PE_FIELD_PaymentProcessor_VendorID_Name="ID del Proveedor";
 
 @XendraTrl(Identifier="adb8887d-9a29-6abc-60e6-99734059e3e3")
-public static String es_PE_FIELD_PaymentProcessor_VendorID_Name="ID del Proveedor";
+public static String es_PE_FIELD_PaymentProcessor_VendorID_Description="Identificación del proveedor para el procesamiento de pago";
 
 @XendraField(AD_Column_ID="VendorID",IsCentrallyMaintained=true,
 AD_Tab_ID="52482ace-9c2b-3b37-4c46-42d350e94ca9",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1614,7 +1612,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cfdf9f8f-7dd3-031f-1fb0-e1200b042418",
-Synchronized="2017-08-05 16:54:02.0")
+Synchronized="2019-08-30 22:21:58.0")
 /** Column name VendorID */
 public static final String COLUMNNAME_VendorID = "VendorID";
 }

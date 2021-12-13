@@ -19,7 +19,6 @@ import org.columba.api.gui.frame.IDock;
 import org.columba.api.gui.frame.IDockable;
 import org.columba.core.config.DefaultConfigDirectory;
 import org.columba.core.config.View;
-//import org.columba.core.config.ViewItem;
 import org.columba.core.gui.docking.XMLPersister;
 import org.compiere.model.MConfig;
 import org.flexdock.docking.Dockable;
@@ -42,14 +41,11 @@ public abstract class DockFrameController extends DefaultFrameController
 	private MConfig dock;
 
 	/**
-	 * @param viewItem
+	 * @param view
 	 */
-	//public DockFrameController(ViewItem viewItem) {
-	public DockFrameController(View viewItem) {
-		super(viewItem);
-
+	public DockFrameController(View view) {
+		super(view);
 		initComponents();
-
 	}
 
 	/**
@@ -67,12 +63,9 @@ public abstract class DockFrameController extends DefaultFrameController
 	 *
 	 */
 	private void initComponents() {
-
 		dockingPort = new DefaultDockingPort();
 		dockingPort.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
 		searchPanelDockable = registerDockable(IDock.DOCKING_VIEW_SEARCH, "Search", getSearchPanel().getView(), null);
-
 	}
 
 	/* (non-Javadoc)
@@ -85,22 +78,14 @@ public abstract class DockFrameController extends DefaultFrameController
 	/* (non-Javadoc)
 	 * @see org.columba.api.gui.frame.IFrameMediator#loadPositions()
 	 */
-	public void loadPositions() {
+	public void loadPositions(String id) {
 		super.loadPositions();
-
 		boolean restoreSuccess = false;
-		// load docking settings from last user session
-		File configDirectory = DefaultConfigDirectory.getInstance().getCurrentPath();
-		//File dockDirectory = new File(configDirectory, "flexdock");
-		dock = MConfig.getbyIdentifier(getId(), "docking");
-		//if (!dockDirectory.exists())
-		//	dockDirectory.mkdir();
-		//String filename = getId() + ".xml";	
+		dock = MConfig.getbyIdentifier(id, "docking");
 		// docking xapiens
 		// docking no funciona bien
 		// mientras ello ocurra no hacemos nada
 		try {
-			//File file = new File(dockDirectory, filename);
 			if (dock != null && dock.getContent().length() > 0) {				
 				InputStream is = new ByteArrayInputStream(dock.getContent().getBytes());
 				//new XMLPersister().load(new FileInputStream(file), dockingPort);

@@ -20,35 +20,44 @@ package org.columba.api.plugin;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Vector;
 
 public class PluginMetadata {
-
 	private String id;
 	private String name;
 	private String description;
 	private String version;
+	private String tags;
 	private String category;
 	private String filename;
-	private String filesize;
+	//private String filesize;
+	private String url;
 	private boolean enabled;
+	private boolean installed;
 	private Timestamp sync;
+	private HashMap properties;
+	private Timestamp actual;
+	private Timestamp update;
 
 	private Vector extensions = new Vector();
 
 	
-	private File directory;
+	//private File directory;
 
-	public PluginMetadata(String id, String name, boolean enabled) {
+//	public PluginMetadata(String id, String name, boolean enabled) {
+//		this.id = id;
+//		this.name = name;
+//		this.enabled = enabled;
+//	}
+
+	public PluginMetadata(String id, String name, String description,
+			String version, String category, String syncro, boolean enabled, boolean installed) {
+		//this(id, name, enabled);
 		this.id = id;
 		this.name = name;
 		this.enabled = enabled;
-	}
-
-	public PluginMetadata(String id, String name, String description,
-			String version, String category, String syncro, boolean enabled) {
-		this(id, name, enabled);
-
+		this.installed = installed;
 		this.description = description;
 		this.version = version;
 		this.category = category;
@@ -66,9 +75,7 @@ public class PluginMetadata {
 
 	public Enumeration enumExtensions() {
 		return extensions.elements();
-	}
-
-	
+	}	
 	
 	public Timestamp getSynchronized() {
 		return sync;
@@ -92,19 +99,6 @@ public class PluginMetadata {
 		return description;
 	}
 
-	/**
-	 * @return Returns the directory.
-	 */
-	public File getDirectory() {
-		return directory;
-	}
-
-	/**
-	 * @return Returns the enabled.
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
 
 	/**
 	 * @return Returns the extensions.
@@ -130,6 +124,15 @@ public class PluginMetadata {
 	public void setVersion(String version) {
 		this.version = version;
 	}
+	
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tag) {
+		this.tags = tag;
+	}
+
 	/**
 	 * @return Returns the version.
 	 */
@@ -146,27 +149,79 @@ public class PluginMetadata {
 	}
 
 	/**
-	 * @param directory
-	 *            The directory to set.
+	 * @return Returns the enabled.
 	 */
-	public void setDirectory(File directory) {
-		this.directory = directory;
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	
+//	/**
+//	 * @param directory
+//	 *            The directory to set.
+//	 */
+//	public void setDirectory(File directory) {
+//		this.directory = directory;
+//	}
+//	
+//	/**
+//	 * @return Returns the directory.
+//	 */
+//	public File getDirectory() {
+//		return directory;
+//	}
+
+	public boolean isInstalled() {
+		return installed;
+	}
+
+	public void setInstalled(boolean installed) {
+		this.installed = installed;
 	}
 
 	public String getFilename() {
 		return filename;
 	}
 
+	public HashMap getProperties() {
+		return properties;
+	}
+
+	public void setProperties(HashMap properties) {
+		this.properties = properties;
+	}
+
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
-	public String getFilesize() {
-		return filesize;
+//	public String getFilesize() {
+//		return filesize;
+//	}
+//
+//	public void setFilesize(String filesize) {
+//		this.filesize = filesize;
+//	}
+	public void setSource(String url) {
+		this.url = url;
+	}
+	public String getSource() {
+		return url;
 	}
 
-	public void setFilesize(String filesize) {
-		this.filesize = filesize;
+	public Timestamp getActual() {
+		return actual;
 	}
 
+	public void setActual(Timestamp actual) {
+		this.actual = actual;
+	}
+
+	public Timestamp getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(Timestamp update) {
+		this.update = update;
+	}	
 }

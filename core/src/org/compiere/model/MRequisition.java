@@ -253,7 +253,7 @@ public class MRequisition extends X_M_Requisition implements DocAction
 			return DocAction.STATUS_Invalid;
 		
 		//	Std Period open?
-		if (!MPeriod.isOpen(getCtx(), getDateDoc(), REF_C_DocTypeDocBaseType.PurchaseRequisition, getAD_Org_ID()))
+		if (!MPeriod.isOpen(getCtx(), getDateDoc(), REF_C_DocTypeDocBaseType.PurchaseRequisition, getAD_Org_ID(), getAD_Client_ID()))
 		{
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;

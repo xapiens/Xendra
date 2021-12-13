@@ -59,10 +59,10 @@ public static int Table_ID=MTable.getTable_ID("R_IssueRecommendation");
 public static String es_PE_TAB_IssueRecommendation_Description="Mantener Recomendación de Surtimiento";
 
 @XendraTrl(Identifier="aa1f1a38-81a5-46ed-ed79-3d41beecaa53")
-public static String es_PE_TAB_IssueRecommendation_Name="Recomendación Surtimiento";
+public static String es_PE_TAB_IssueRecommendation_Help="Recomendaciones sobre como fijar un surtimiento.";
 
 @XendraTrl(Identifier="aa1f1a38-81a5-46ed-ed79-3d41beecaa53")
-public static String es_PE_TAB_IssueRecommendation_Help="Recomendaciones sobre como fijar un surtimiento.";
+public static String es_PE_TAB_IssueRecommendation_Name="Recomendación Surtimiento";
 
 @XendraTab(Name="Issue Recommendation",Description="Maintain Issue Recommendation",
 Help="Recommendations how to fix an Issue",AD_Window_ID="710417ee-5cdc-d4d7-5d8a-ee10a1d94d5a",
@@ -77,11 +77,13 @@ public static final String TABNAME_IssueRecommendation="aa1f1a38-81a5-46ed-ed79-
 public static String es_PE_TABLE_R_IssueRecommendation_Name="Edición de Recomendación";
 
 
-@XendraTable(Name="Issue Recommendation",Description="",Help="",TableName="R_IssueRecommendation",
-AccessLevel="6",AD_Window_ID="710417ee-5cdc-d4d7-5d8a-ee10a1d94d5a",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="46aa2e58-ad63-15f3-268e-6c4d24c178c9",Synchronized="2017-08-16 11:43:48.0")
+@XendraTable(Name="Issue Recommendation",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="R_IssueRecommendation",AccessLevel="6",
+AD_Window_ID="710417ee-5cdc-d4d7-5d8a-ee10a1d94d5a",AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.standard",Identifier="46aa2e58-ad63-15f3-268e-6c4d24c178c9",
+Synchronized="2020-03-03 21:39:31.0")
 /** TableName=R_IssueRecommendation */
 public static final String Table_Name="R_IssueRecommendation";
 
@@ -142,13 +144,13 @@ return value;
 }
 
 @XendraTrl(Identifier="df6b4f1a-bdac-9828-5cfc-7c15e04fe586")
+public static String es_PE_FIELD_IssueRecommendation_Description_Name="Observación";
+
+@XendraTrl(Identifier="df6b4f1a-bdac-9828-5cfc-7c15e04fe586")
 public static String es_PE_FIELD_IssueRecommendation_Description_Description="Observación";
 
 @XendraTrl(Identifier="df6b4f1a-bdac-9828-5cfc-7c15e04fe586")
 public static String es_PE_FIELD_IssueRecommendation_Description_Help="Observación";
-
-@XendraTrl(Identifier="df6b4f1a-bdac-9828-5cfc-7c15e04fe586")
-public static String es_PE_FIELD_IssueRecommendation_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="aa1f1a38-81a5-46ed-ed79-3d41beecaa53",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="04fa6fab-8054-947e-4ea7-b908124fa7af",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Comment/Help.
@@ -192,13 +194,13 @@ return value;
 }
 
 @XendraTrl(Identifier="ea6443a2-c87f-dd54-90f8-50f30be795b9")
+public static String es_PE_FIELD_IssueRecommendation_CommentHelp_Name="Ayuda";
+
+@XendraTrl(Identifier="ea6443a2-c87f-dd54-90f8-50f30be795b9")
 public static String es_PE_FIELD_IssueRecommendation_CommentHelp_Description="Ayuda; Comentario o Sugerencia";
 
 @XendraTrl(Identifier="ea6443a2-c87f-dd54-90f8-50f30be795b9")
 public static String es_PE_FIELD_IssueRecommendation_CommentHelp_Help="El campo ayuda contiene una sugerencia; comentario o ayuda acerca del uso de esta partida";
-
-@XendraTrl(Identifier="ea6443a2-c87f-dd54-90f8-50f30be795b9")
-public static String es_PE_FIELD_IssueRecommendation_CommentHelp_Name="Ayuda";
 
 @XendraField(AD_Column_ID="Help",IsCentrallyMaintained=true,
 AD_Tab_ID="aa1f1a38-81a5-46ed-ed79-3d41beecaa53",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -216,7 +218,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="91ecc02d-7078-33a0-f105-eecb5706c38d",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -248,7 +250,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b70a404-75c0-4760-84c7-8c3e6558c96a",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -280,13 +282,13 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="1c3a073a-9834-d6d9-2381-ab814b89f59c")
+public static String es_PE_FIELD_IssueRecommendation_Name_Name="Nombre";
+
+@XendraTrl(Identifier="1c3a073a-9834-d6d9-2381-ab814b89f59c")
 public static String es_PE_FIELD_IssueRecommendation_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="1c3a073a-9834-d6d9-2381-ab814b89f59c")
 public static String es_PE_FIELD_IssueRecommendation_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
-
-@XendraTrl(Identifier="1c3a073a-9834-d6d9-2381-ab814b89f59c")
-public static String es_PE_FIELD_IssueRecommendation_Name_Name="Nombre";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="aa1f1a38-81a5-46ed-ed79-3d41beecaa53",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -304,7 +306,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ba27682f-8c34-1162-d732-a3e7d24e5ec2",
-Synchronized="2017-08-05 16:55:50.0")
+Synchronized="2019-08-30 22:23:45.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Issue Recommendation.
@@ -324,13 +326,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="5f0bc6f9-a1f4-46bf-bd88-7a3e6dbe3e5e")
+public static String es_PE_FIELD_IssueRecommendation_IssueRecommendation_Name="Edición de Recomendación";
+
+@XendraTrl(Identifier="5f0bc6f9-a1f4-46bf-bd88-7a3e6dbe3e5e")
 public static String es_PE_FIELD_IssueRecommendation_IssueRecommendation_Description="Recomendaciones cómo fijar una edición";
 
 @XendraTrl(Identifier="5f0bc6f9-a1f4-46bf-bd88-7a3e6dbe3e5e")
 public static String es_PE_FIELD_IssueRecommendation_IssueRecommendation_Help="Recomendaciones cómo fijar una edición.";
-
-@XendraTrl(Identifier="5f0bc6f9-a1f4-46bf-bd88-7a3e6dbe3e5e")
-public static String es_PE_FIELD_IssueRecommendation_IssueRecommendation_Name="Edición de Recomendación";
 
 @XendraField(AD_Column_ID="R_IssueRecommendation_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="aa1f1a38-81a5-46ed-ed79-3d41beecaa53",AD_FieldGroup_ID="",IsDisplayed=false,

@@ -3,12 +3,12 @@ package org.columba.core.util;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
-
-import org.columba.core.logging.Logging;
+import org.compiere.util.CLogMgt;
+import org.compiere.util.CLogger;
 
 public class StackProfiler {
 
-	private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger("org.columba.core.util"); //$NON-NLS-1$
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.util"); //$NON-NLS-1$
 
 	/**
 	 * keeps a list of profile point ids
@@ -34,7 +34,7 @@ public class StackProfiler {
 	 */
 	public void push(String id) {
 		// abort if not in debugging mode
-		if (Logging.DEBUG == false)
+		if (CLogMgt.DEBUG == false)
 			return;
 
 		// current time
@@ -59,7 +59,7 @@ public class StackProfiler {
 	public void pop(String id) {
 		System.out.println("id="+id);
 		// abort if not in debugging mode
-		if (Logging.DEBUG == false)
+		if (CLogMgt.DEBUG == false)
 			return;
 
 		if (id == null)

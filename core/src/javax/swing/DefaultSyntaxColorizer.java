@@ -39,7 +39,7 @@ public class DefaultSyntaxColorizer extends SyntaxColorizer {
         StyleConstants.setItalic(comment, true);
 
         quote = new SimpleAttributeSet();
-        StyleConstants.setForeground(quote, Color.orange);
+        StyleConstants.setForeground(quote, Color.blue);
 
         operator = new SimpleAttributeSet();
         StyleConstants.setForeground(operator, Color.blue);

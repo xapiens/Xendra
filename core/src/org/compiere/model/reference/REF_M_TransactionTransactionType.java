@@ -24,6 +24,12 @@ public class REF_M_TransactionTransactionType implements Reference
 		Identifier="06d01270-301d-49dc-a72c-141e32ea4ff9")
 	/** Only Cost = C */
 	public static final String OnlyCost = "C";
+	@XendraRefItem(Name="Adjustment",
+		Value="A",
+		Description="",
+		Identifier="fcf4131c-37a4-4363-9e1a-bbc17ebfa3c9")
+	/** Adjustment = A */
+	public static final String Adjustment = "A";
 	@XendraRef(Name="M_Transaction Transaction Type",
 		AD_Reference_ID="0",
 		ValidationType="L",
@@ -32,7 +38,7 @@ public class REF_M_TransactionTransactionType implements Reference
 		VFormat="",
 		EntityType="D",
 		IsOrderByValue=false,
-		Synchronized="2015-10-02 14:26:19.033",
+		Synchronized="2018-06-24 08:42:55.535",
 		Extension="",
 		Identifier="fe35729f-77d7-4356-a8e1-30e72e5d389a")
 	public static final String Identifier = "fe35729f-77d7-4356-a8e1-30e72e5d389a";

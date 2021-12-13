@@ -93,7 +93,7 @@ public class MenuTest {
 
 		public void actionPerformed(ActionEvent e) {
 			// do nothing
-			System.out.println("X");
+			System.out.println("X12");
 		}
 	}
 }

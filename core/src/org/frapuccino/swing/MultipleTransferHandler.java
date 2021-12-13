@@ -30,6 +30,8 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.TransferHandler;
 
+import org.compiere.util.CLogger;
+
 
 /**
  * A transfer handler that is composed from many transfer handlers.
@@ -64,7 +66,7 @@ import javax.swing.TransferHandler;
  */
 public class MultipleTransferHandler extends TransferHandler {
 
-    private static final Logger LOG = Logger.getLogger("org.frappucino.swing");
+    private static final CLogger LOG = CLogger.getCLogger("org.frappucino.swing");
 
     private List transferHandlers = new ArrayList();
 

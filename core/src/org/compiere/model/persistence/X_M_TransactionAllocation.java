@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_M_TransactionAllocationType;
 /** Generated Model for M_TransactionAllocation
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -67,11 +66,12 @@ public static int Table_ID=MTable.getTable_ID("M_TransactionAllocation");
 public static String es_PE_TABLE_M_TransactionAllocation_Name="M_TransactionAllocation";
 
 
-@XendraTable(Name="M_TransactionAllocation",Description="",Help="",
+@XendraTable(Name="M_TransactionAllocation",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="M_TransactionAllocation",AccessLevel="1",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
 LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="72249ad1-3085-fd06-3c48-d33733b06853",Synchronized="2017-08-16 11:43:38.0")
+Identifier="72249ad1-3085-fd06-3c48-d33733b06853",Synchronized="2020-03-03 21:38:59.0")
 /** TableName=M_TransactionAllocation */
 public static final String Table_Name="M_TransactionAllocation";
 
@@ -110,16 +110,10 @@ public String toString()
 StringBuffer sb = new StringBuffer ("X_M_TransactionAllocation[").append(get_ID()).append("]");
 return sb.toString();
 }
-
-/** AllocationStrategyType AD_Reference=9148d9e2-9168-fae3-adbc-678718e7ce5f */
-public static final int ALLOCATIONSTRATEGYTYPE_AD_Reference_ID=294;
 /** Set Allocation Strategy.
 @param AllocationStrategyType Allocation Strategy */
 public void setAllocationStrategyType (String AllocationStrategyType)
 {
-if (AllocationStrategyType == null) throw new IllegalArgumentException ("AllocationStrategyType is mandatory");
-if (AllocationStrategyType.equals(REF_M_TransactionAllocationType.LiFo) || AllocationStrategyType.equals(REF_M_TransactionAllocationType.FiFo));
- else throw new IllegalArgumentException ("AllocationStrategyType Invalid value - " + AllocationStrategyType + " - Reference_ID=294 - L - F");
 if (AllocationStrategyType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -144,7 +138,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="fb4e1fab-8a32-861a-9e78-3884b30d1873",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name AllocationStrategyType */
 public static final String COLUMNNAME_AllocationStrategyType = "AllocationStrategyType";
 /** Set Identifier.
@@ -176,7 +170,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b3c78f28-4f07-4c69-98c2-ee81ccbed356",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Allocated.
@@ -207,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1380204-8f4f-00ac-d1f4-00d22c84b137",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name IsAllocated */
 public static final String COLUMNNAME_IsAllocated = "IsAllocated";
 /** Set Manual.
@@ -238,7 +232,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8f08ee83-b9df-b1e5-17ac-6bfdda2e3ddc",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name IsManual */
 public static final String COLUMNNAME_IsManual = "IsManual";
 /** Set Attribute Set Instance.
@@ -266,7 +260,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a03165aa-2034-22e5-a759-0e82b13c1bbe",Synchronized="2017-08-05 16:55:37.0")
+Identifier="a03165aa-2034-22e5-a759-0e82b13c1bbe",Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Shipment/Receipt Line.
@@ -295,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d0e4473a-998c-30db-e745-ab9d318b5fa7",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_InOutLine_ID */
 public static final String COLUMNNAME_M_InOutLine_ID = "M_InOutLine_ID";
 /** Set Phys.Inventory Line.
@@ -324,7 +318,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="75d84214-4dc8-df5a-cade-ca579c56a2c5",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_InventoryLine_ID */
 public static final String COLUMNNAME_M_InventoryLine_ID = "M_InventoryLine_ID";
 /** Set Product.
@@ -352,7 +346,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6379b446-4da8-068c-597d-f79952c62aa5",Synchronized="2017-08-05 16:55:37.0")
+Identifier="6379b446-4da8-068c-597d-f79952c62aa5",Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Production Line.
@@ -381,7 +375,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="39d0028a-a014-394d-3254-7be7ba699d34",Synchronized="2017-08-05 16:55:37.0")
+Identifier="39d0028a-a014-394d-3254-7be7ba699d34",Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_ProductionLine_ID */
 public static final String COLUMNNAME_M_ProductionLine_ID = "M_ProductionLine_ID";
 /** Set Inventory Transaction.
@@ -409,12 +403,9 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1810d8cb-ac53-2ccd-10a6-57c923c0e006",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name M_Transaction_ID */
 public static final String COLUMNNAME_M_Transaction_ID = "M_Transaction_ID";
-
-/** Out_M_InOutLine_ID AD_Reference=09bcaf38-49c7-0311-4a15-1296d9699294 */
-public static final int OUT_M_INOUTLINE_ID_AD_Reference_ID=295;
 /** Set Out Shipment Line.
 @param Out_M_InOutLine_ID Outgoing Shipment/Receipt */
 public void setOut_M_InOutLine_ID (int Out_M_InOutLine_ID)
@@ -441,12 +432,9 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3f7e2c78-4e05-ff9d-5426-4b6e10d362fa",Synchronized="2017-08-05 16:55:37.0")
+Identifier="3f7e2c78-4e05-ff9d-5426-4b6e10d362fa",Synchronized="2019-08-30 22:23:34.0")
 /** Column name Out_M_InOutLine_ID */
 public static final String COLUMNNAME_Out_M_InOutLine_ID = "Out_M_InOutLine_ID";
-
-/** Out_M_InventoryLine_ID AD_Reference=2b2adb14-50b2-7181-3248-cc0e81a55c1a */
-public static final int OUT_M_INVENTORYLINE_ID_AD_Reference_ID=296;
 /** Set Out Inventory Line.
 @param Out_M_InventoryLine_ID Outgoing Inventory Line */
 public void setOut_M_InventoryLine_ID (int Out_M_InventoryLine_ID)
@@ -474,12 +462,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="c7d9bed5-a5f8-a64d-03e1-4ff343489733",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Out_M_InventoryLine_ID */
 public static final String COLUMNNAME_Out_M_InventoryLine_ID = "Out_M_InventoryLine_ID";
-
-/** Out_M_ProductionLine_ID AD_Reference=f699853b-860b-22cb-9641-da3d4d63523a */
-public static final int OUT_M_PRODUCTIONLINE_ID_AD_Reference_ID=297;
 /** Set Out Production Line.
 @param Out_M_ProductionLine_ID Outgoing Production Line */
 public void setOut_M_ProductionLine_ID (int Out_M_ProductionLine_ID)
@@ -507,12 +492,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="ef8ba54e-783c-90d4-f537-5835f8b6841e",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Out_M_ProductionLine_ID */
 public static final String COLUMNNAME_Out_M_ProductionLine_ID = "Out_M_ProductionLine_ID";
-
-/** Out_M_Transaction_ID AD_Reference=859ed0e6-0ba2-1fb0-8b19-4bb3433e134c */
-public static final int OUT_M_TRANSACTION_ID_AD_Reference_ID=298;
 /** Set Out Transaction.
 @param Out_M_Transaction_ID Outgoing Transaction */
 public void setOut_M_Transaction_ID (int Out_M_Transaction_ID)
@@ -540,7 +522,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="29e91689-68ef-38d7-c4f7-aa97bbb74e61",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Out_M_Transaction_ID */
 public static final String COLUMNNAME_Out_M_Transaction_ID = "Out_M_Transaction_ID";
 /** Set Quantity.
@@ -568,7 +550,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54b2ae60-aa40-c267-e2ef-3f51e0254b61",
-Synchronized="2017-08-05 16:55:37.0")
+Synchronized="2019-08-30 22:23:34.0")
 /** Column name Qty */
 public static final String COLUMNNAME_Qty = "Qty";
 }

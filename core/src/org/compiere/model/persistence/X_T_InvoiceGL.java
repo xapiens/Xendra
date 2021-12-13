@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_APAR;
 /** Generated Model for T_InvoiceGL
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -80,11 +79,13 @@ public static int Table_ID=MTable.getTable_ID("T_InvoiceGL");
 @XendraTrl(Identifier="8b7b8f85-2758-752f-897e-5ce5979f2388")
 public static String es_PE_TABLE_T_InvoiceGL_Name="T_Invoicegl";
 
-@XendraTable(Name="T_InvoiceGL",Description="Gain/Loss - actual data shown id T_InvoiceGL_v",
-Help="",TableName="T_InvoiceGL",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="8b7b8f85-2758-752f-897e-5ce5979f2388",Synchronized="2017-08-16 11:44:23.0")
+@XendraTable(Name="T_InvoiceGL",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Gain/Loss - actual data shown id T_InvoiceGL_v",Help="",TableName="T_InvoiceGL",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,
+IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.standard",Identifier="8b7b8f85-2758-752f-897e-5ce5979f2388",
+Synchronized="2020-03-03 21:40:25.0")
 /** TableName=T_InvoiceGL */
 public static final String Table_Name="T_InvoiceGL";
 
@@ -142,7 +143,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="60bc7680-882d-2329-fbf2-71f97ccaf73f",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Accounted Balance.
@@ -170,7 +171,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d1581f4-5511-f7e5-4ebb-6dedfd006f0e",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtAcctBalance */
 public static final String COLUMNNAME_AmtAcctBalance = "AmtAcctBalance";
 /** Set Revaluated Amount Cr.
@@ -198,7 +199,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="241098d2-d4f8-140b-bfa6-bd807aa18467",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtRevalCr */
 public static final String COLUMNNAME_AmtRevalCr = "AmtRevalCr";
 /** Set Revaluated Difference Cr.
@@ -226,7 +227,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2252a933-db3f-724f-e525-b1edabe6f838",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtRevalCrDiff */
 public static final String COLUMNNAME_AmtRevalCrDiff = "AmtRevalCrDiff";
 /** Set Revaluated Amount Dr.
@@ -254,7 +255,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6cde9e5c-5b2c-d86b-6713-6b7757a1c18e",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtRevalDr */
 public static final String COLUMNNAME_AmtRevalDr = "AmtRevalDr";
 /** Set Revaluated Difference Dr.
@@ -282,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ff6dc4ba-b250-43e0-b7f3-9a3b0bb4ae0f",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtRevalDrDiff */
 public static final String COLUMNNAME_AmtRevalDrDiff = "AmtRevalDrDiff";
 /** Set Source Balance.
@@ -310,18 +311,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7fa1e876-3d4a-632e-d641-cab839d1082a",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name AmtSourceBalance */
 public static final String COLUMNNAME_AmtSourceBalance = "AmtSourceBalance";
-
-/** APAR AD_Reference=f7f54ef7-c97e-a561-fa1c-241fadd391d4 */
-public static final int APAR_AD_Reference_ID=332;
 /** Set AP - AR.
 @param APAR Include Receivables and/or Payables transactions */
 public void setAPAR (String APAR)
 {
-if (APAR == null || APAR.equals(REF_APAR.ReceivablesPayables) || APAR.equals(REF_APAR.ReceivablesOnly) || APAR.equals(REF_APAR.PayablesOnly));
- else throw new IllegalArgumentException ("APAR Invalid value - " + APAR + " - Reference_ID=332 - A - R - P");
 if (APAR != null && APAR.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -345,12 +341,9 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="fa32019a-23d4-e671-2dbb-de70b0ae1b99",Synchronized="2017-08-05 16:56:27.0")
+Identifier="fa32019a-23d4-e671-2dbb-de70b0ae1b99",Synchronized="2019-08-30 22:24:24.0")
 /** Column name APAR */
 public static final String COLUMNNAME_APAR = "APAR";
-
-/** C_ConversionTypeReval_ID AD_Reference=41dda287-7ecf-a6d1-d177-b35716a62768 */
-public static final int C_CONVERSIONTYPEREVAL_ID_AD_Reference_ID=352;
 /** Set Revaluation Conversion Type.
 @param C_ConversionTypeReval_ID Revaluation Currency Conversion Type */
 public void setC_ConversionTypeReval_ID (int C_ConversionTypeReval_ID)
@@ -377,12 +370,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="1869ec1f-d000-c0e5-798f-88b219ddb8da",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name C_ConversionTypeReval_ID */
 public static final String COLUMNNAME_C_ConversionTypeReval_ID = "C_ConversionTypeReval_ID";
-
-/** C_DocTypeReval_ID AD_Reference=f06eaf85-a231-e1cf-ebf8-59d002c13ab4 */
-public static final int C_DOCTYPEREVAL_ID_AD_Reference_ID=170;
 /** Set Revaluation Document Type.
 @param C_DocTypeReval_ID Document Type for Revaluation Journal */
 public void setC_DocTypeReval_ID (int C_DocTypeReval_ID)
@@ -409,7 +399,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5621b8d7-0f61-bbee-5c4f-9b0680f1c891",Synchronized="2017-08-05 16:56:27.0")
+Identifier="5621b8d7-0f61-bbee-5c4f-9b0680f1c891",Synchronized="2019-08-30 22:24:24.0")
 /** Column name C_DocTypeReval_ID */
 public static final String COLUMNNAME_C_DocTypeReval_ID = "C_DocTypeReval_ID";
 /** Set Invoice.
@@ -437,7 +427,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="57d9711c-6b45-7927-53ba-727a4b1353e7",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name C_Invoice_ID */
 public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
 /** Set Revaluation Date.
@@ -463,7 +453,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0304313d-82bf-38fc-0279-ddc4227361b9",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name DateReval */
 public static final String COLUMNNAME_DateReval = "DateReval";
 /** Set Accounting Fact.
@@ -508,7 +498,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ea58402-c46f-c536-a9ae-507239a36d83",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name GrandTotal */
 public static final String COLUMNNAME_GrandTotal = "GrandTotal";
 /** Set Include All Currencies.
@@ -539,7 +529,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3df83162-199c-7619-a97c-e39c26f903c8",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name IsAllCurrencies */
 public static final String COLUMNNAME_IsAllCurrencies = "IsAllCurrencies";
 /** Set Open Amount.
@@ -567,7 +557,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="df0e4047-4e16-13b5-af84-14b1262d3133",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name OpenAmt */
 public static final String COLUMNNAME_OpenAmt = "OpenAmt";
 /** Set Percent.
@@ -594,7 +584,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c2df5d1-2149-bb9b-81eb-01cde5a7a9ea",
-Synchronized="2017-08-05 16:56:27.0")
+Synchronized="2019-08-30 22:24:24.0")
 /** Column name Percent */
 public static final String COLUMNNAME_Percent = "Percent";
 }

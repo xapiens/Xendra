@@ -21,7 +21,7 @@ public class PropertiesAdapter  extends XmlAdapter<PropertiesMap, Properties> {
 			} else if (value instanceof String) {
 				e.setValue((String)value);
 			} else {
-				System.out.println("X");
+				System.out.println("org.columba.core.config.PropertiesAdapter.marshal");
 			}
 			
 			//e.value = value;

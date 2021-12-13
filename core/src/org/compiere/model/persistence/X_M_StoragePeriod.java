@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("M_StoragePeriod");
 @XendraTrl(Identifier="f48f59cc-b6e4-4469-934a-4d8959a9b678")
 public static String es_PE_TABLE_M_StoragePeriod_Name="Storage Period";
 
-@XendraTable(Name="Storage Period",Description="",Help="",TableName="M_StoragePeriod",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.material",Identifier="f48f59cc-b6e4-4469-934a-4d8959a9b678",
-Synchronized="2017-08-16 11:43:36.0")
+@XendraTable(Name="Storage Period",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_StoragePeriod",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.material",Identifier="f48f59cc-b6e4-4469-934a-4d8959a9b678",
+Synchronized="2020-03-03 21:38:58.0")
 /** TableName=M_StoragePeriod */
 public static final String Table_Name="M_StoragePeriod";
 
@@ -121,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d60cd4a4-1a76-4dac-948c-69c232c966d1",
-Synchronized="2017-08-05 16:55:35.0")
+Synchronized="2019-08-30 22:23:33.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
 /** Set Date last run.
@@ -146,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d34364c3-76e3-4675-97b5-372ca834d943",
-Synchronized="2017-08-05 16:55:35.0")
+Synchronized="2019-08-30 22:23:33.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set LastCosted.
@@ -171,7 +172,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b8a3480f-017a-4458-a358-6e5242699190",
-Synchronized="2017-08-05 16:55:35.0")
+Synchronized="2019-08-30 22:23:33.0")
 /** Column name LastCosted */
 public static final String COLUMNNAME_LastCosted = "LastCosted";
 /** Set Product.
@@ -200,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6fc154f4-f749-4849-ae18-895456c01acf",
-Synchronized="2017-08-05 16:55:35.0")
+Synchronized="2019-08-30 22:23:33.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Storage Period.
@@ -248,7 +249,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d25309d6-0cb1-4285-863c-fe7dd5b1c535",
-Synchronized="2017-08-05 16:55:35.0")
+Synchronized="2019-08-30 22:23:33.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 }

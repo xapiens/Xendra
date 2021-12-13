@@ -392,6 +392,9 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 				int sortNo = field.getSortNo();
 				if (sortNo == 0)
 					;
+				if (field.getAD_Rule_ID() > 0) {
+					Env.startRule(field.getAD_Rule_ID());
+				}
 				else if (Math.abs(sortNo) == 1)
 				{
 					m_OrderBys[0] = columnName;
@@ -2759,7 +2762,8 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	public String processCallout (GridField field)
 	{
 		String callout = field.getCallout();
-		if (callout.length() == 0)
+		String Agenda = field.getAgenda();
+		if (callout.length() == 0 && Agenda.length() == 0) 		
 			return "";
 		//
 		if (isProcessed() && !field.isAlwaysUpdateable())		//	only active records
@@ -2767,16 +2771,17 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		
 		//this.getValue(row, columnName)
 		//this.getAD_Rule_ID();
-
 		Object value = field.getValue();
 		Object oldValue = field.getOldValue();
+		Boolean equals = true;
+		if (value != null)
+			equals = value.equals(oldValue);
 		result = "";
 		log.fine(field.getColumnName() + "=" + value
 				+ " (" + callout + ") - old=" + oldValue);
 
 		
-		String Agenda = field.getAgenda();
-		if (Agenda != null)
+		if (Agenda.length() > 0 && !equals)
 		{
 			//ADialog.ask(0, null, Agenda);
 			System.out.println(String.format("Agenda %s ColumnName %s", Agenda, field.getColumnName()));
@@ -2787,7 +2792,11 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 			}			
 			if (AD_Rule_ID > 0 && Agenda.length() > 0)
 			{
-				KieBase kb = Env.startRule(AD_Rule_ID, true);
+				KieBase kb = null;
+				if (CLogMgt.DEBUG)
+					kb = Env.startRule(AD_Rule_ID, true);
+				else
+					kb = Env.startRule(AD_Rule_ID);
 				if (kb != null)
 				{
 					ksession = kb.newKieSession();

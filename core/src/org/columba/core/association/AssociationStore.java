@@ -16,14 +16,14 @@ import org.columba.core.association.api.IAssociationStore;
 import org.columba.core.config.DefaultConfigDirectory;
 import org.compiere.model.persistence.X_A_Association;
 import org.compiere.model.Query;
+import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 
 public class AssociationStore implements IAssociationStore, Runnable {
 
 	final static String ENTITY_MANAGER = "associations";
-
-	/** JDK 1.4+ logging framework logger, used for logging. */
-	private static final Logger LOG = Logger.getLogger("org.columba.core.association.AssociationStore");
+	
+	private static final CLogger LOG = CLogger.getCLogger("org.columba.core.association.AssociationStore");
 
 //	EntityManagerFactory factory;
 //

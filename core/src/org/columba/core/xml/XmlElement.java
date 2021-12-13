@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Vector;
 
+import org.compiere.util.CLogger;
+
 /////////////////////////////////////////////////////////////////////////////
 //                                 CODE                                    //
 /////////////////////////////////////////////////////////////////////////////
@@ -60,7 +62,7 @@ import java.util.Vector;
  * Model/View/Controller based applications at www.javaworld.com: -
  * http://www.javaworld.com/javaworld/jw-10-1996/jw-10-howto.html
  * 
- * @see org.columba.mail.gui.config.general.MailOptionsDialog#initObservables()
+ * @see org.xendra.console.gui.config.general.MailOptionsDialog#initObservables()
  * @see org.columba.mail.gui.message.viewer.MarkAsReadTimer
  * 
  * @author Tony Parent, fdietz
@@ -68,7 +70,7 @@ import java.util.Vector;
 public class XmlElement extends Observable implements Cloneable {
 	
 	private static final java.util.logging.Logger LOG = 
-        java.util.logging.Logger.getLogger("org.columba.core.xml"); //$NON-NLS-1$
+        CLogger.getCLogger("org.columba.core.xml"); //$NON-NLS-1$
 	
 	String name;
 

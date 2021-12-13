@@ -57,10 +57,12 @@ public static int Table_ID=MTable.getTable_ID("E_MailUser");
 @XendraTrl(Identifier="b6bcc5c3-64ae-4736-924c-79beb9871234")
 public static String es_PE_TABLE_E_MailUser_Name="E_MailUser";
 
-@XendraTable(Name="E_MailUser",Description="",Help="",TableName="E_MailUser",AccessLevel="3",
-AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=false,
-IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.communication",
-Identifier="b6bcc5c3-64ae-4736-924c-79beb9871234",Synchronized="2017-08-16 11:42:36.0")
+@XendraTable(Name="E_MailUser",AD_Package_ID="5a4baeee-43d7-eba9-9b5a-4ab05cfda2bd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="E_MailUser",
+AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
+IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
+ID="org.xendra.communication",Identifier="b6bcc5c3-64ae-4736-924c-79beb9871234",
+Synchronized="2020-03-03 21:37:48.0")
 /** TableName=E_MailUser */
 public static final String Table_Name="E_MailUser";
 
@@ -119,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f069d6c-95dc-4246-aaa8-88e00330d3a1",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Authentication_Methods.
@@ -151,7 +153,7 @@ FieldLength=20,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c5b19d7a-1ec1-4bf9-8b26-a2ae65769059",Synchronized="2017-08-05 16:54:33.0")
+Identifier="c5b19d7a-1ec1-4bf9-8b26-a2ae65769059",Synchronized="2019-08-30 22:22:25.0")
 /** Column name Authentication_Methods */
 public static final String COLUMNNAME_Authentication_Methods = "Authentication_Methods";
 /** Set Download_Limit.
@@ -178,7 +180,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b17dc9f4-cc1e-499e-acd5-b3066355e49e",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name Download_Limit */
 public static final String COLUMNNAME_Download_Limit = "Download_Limit";
 /** Set EMail User ID.
@@ -210,7 +212,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56922a36-c4a0-44ef-a91d-6209ec75f714",
-Synchronized="2017-08-05 16:54:33.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name EMailUser */
 public static final String COLUMNNAME_EMailUser = "EMailUser";
 /** Set E_MailUser_ID.
@@ -259,7 +261,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6173dca3-a3bf-4f1f-9c05-249d89131949",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name HostAddress */
 public static final String COLUMNNAME_HostAddress = "HostAddress";
 /** Set Host port.
@@ -286,7 +288,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fae707ca-2704-4a83-aa90-1a266af05182",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name HostPort */
 public static final String COLUMNNAME_HostPort = "HostPort";
 /** Set Identifier.
@@ -318,7 +320,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2677cf0e-23bb-41ca-9ea9-8664f782f4f0",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set IsApplyFilter.
@@ -349,7 +351,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2ec49a29-ea87-4214-b9e6-22ea4e8e5e0e",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name IsApplyFilter */
 public static final String COLUMNNAME_IsApplyFilter = "IsApplyFilter";
 /** Set IsAutomatically_Download_New_Messages.
@@ -380,7 +382,7 @@ AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsP
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2bce8081-97ab-432c-8c07-416cf24d809e",Synchronized="2017-08-05 16:54:34.0")
+Identifier="2bce8081-97ab-432c-8c07-416cf24d809e",Synchronized="2019-08-30 22:22:25.0")
 /** Column name IsAutomatically_Download_New_Messages */
 public static final String COLUMNNAME_IsAutomatically_Download_New_Messages = "IsAutomatically_Download_New_Messages";
 /** Set Default.
@@ -411,7 +413,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="743def0e-46ad-4df8-bfef-fee80182b61d",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:25.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set IsEnabledDownloadLimit.
@@ -442,7 +444,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="fd126e4a-7e7b-4c19-958c-470f6d46aeb5",Synchronized="2017-08-05 16:54:34.0")
+Identifier="fd126e4a-7e7b-4c19-958c-470f6d46aeb5",Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsEnabledDownloadLimit */
 public static final String COLUMNNAME_IsEnabledDownloadLimit = "IsEnabledDownloadLimit";
 /** Set IsEnableSSL.
@@ -473,7 +475,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf0a8952-83f8-4eef-a5f6-13ce94f7098b",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsEnableSSL */
 public static final String COLUMNNAME_IsEnableSSL = "IsEnableSSL";
 /** Set IsExcludeFromCheckAll.
@@ -504,7 +506,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="484e0fe3-1027-4b70-b10f-9ebb91c610f9",Synchronized="2017-08-05 16:54:34.0")
+Identifier="484e0fe3-1027-4b70-b10f-9ebb91c610f9",Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsExcludeFromCheckAll */
 public static final String COLUMNNAME_IsExcludeFromCheckAll = "IsExcludeFromCheckAll";
 /** Set IsIncoming.
@@ -535,7 +537,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4bafb90c-fe54-4151-8092-6fbc931a37ce",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsIncoming */
 public static final String COLUMNNAME_IsIncoming = "IsIncoming";
 /** Set IsLeave_Messages_On_Server.
@@ -566,7 +568,7 @@ AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsP
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f0a2c7b4-7c2f-4d26-8210-2cbd061fb9c9",Synchronized="2017-08-05 16:54:34.0")
+Identifier="f0a2c7b4-7c2f-4d26-8210-2cbd061fb9c9",Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsLeave_Messages_On_Server */
 public static final String COLUMNNAME_IsLeave_Messages_On_Server = "IsLeave_Messages_On_Server";
 /** Set IsMailCheck.
@@ -597,7 +599,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="57899eae-27f8-49af-9e18-faa61d32f0f2",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsMailCheck */
 public static final String COLUMNNAME_IsMailCheck = "IsMailCheck";
 /** Set IsRemove_Old_From_Server.
@@ -628,7 +630,7 @@ AD_Val_Rule_ID="",FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsP
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="58a70dd9-6ccf-4eca-a4c6-1ea4685a7c47",Synchronized="2017-08-05 16:54:34.0")
+Identifier="58a70dd9-6ccf-4eca-a4c6-1ea4685a7c47",Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsRemove_Old_From_Server */
 public static final String COLUMNNAME_IsRemove_Old_From_Server = "IsRemove_Old_From_Server";
 /** Set IsSavePassword.
@@ -659,7 +661,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6802f5fa-9114-4d57-bd65-493988af3568",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsSavePassword */
 public static final String COLUMNNAME_IsSavePassword = "IsSavePassword";
 /** Set IsSound.
@@ -690,7 +692,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bcdbd049-2088-4f3c-9725-41556aefe847",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name IsSound */
 public static final String COLUMNNAME_IsSound = "IsSound";
 /** Set LoginMethod.
@@ -717,7 +719,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="85b8018b-74fc-4e05-851c-b4d6e092f994",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name LoginMethod */
 public static final String COLUMNNAME_LoginMethod = "LoginMethod";
 /** Set MailCheck_Interval.
@@ -744,7 +746,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7b914bf9-de20-472c-98c3-a629917a8b52",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name MailCheck_Interval */
 public static final String COLUMNNAME_MailCheck_Interval = "MailCheck_Interval";
 /** Set Name.
@@ -776,7 +778,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dd40ed6d-f58a-4970-982b-5a2486fdd654",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Older_Than.
@@ -803,7 +805,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b4ca868d-3069-44ef-ba7d-b5cd43156c79",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Older_Than */
 public static final String COLUMNNAME_Older_Than = "Older_Than";
 /** Set Password.
@@ -835,7 +837,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="03434509-5c63-485f-9a59-88ead85ae3d6",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Password */
 public static final String COLUMNNAME_Password = "Password";
 /** Set Protocol.
@@ -867,7 +869,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38b4c869-7c35-4c30-ab14-ba0c49aaaabd",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name Protocol */
 public static final String COLUMNNAME_Protocol = "Protocol";
 /** Set SSLType.
@@ -894,7 +896,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="75970908-0fd1-4be3-be71-a46e8f3279e5",
-Synchronized="2017-08-05 16:54:34.0")
+Synchronized="2019-08-30 22:22:26.0")
 /** Column name SSLType */
 public static final String COLUMNNAME_SSLType = "SSLType";
 }

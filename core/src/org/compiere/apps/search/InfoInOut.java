@@ -48,7 +48,7 @@ public class InfoInOut extends Info
 	 *  @param multiSelection multiple selections
 	 *  @param whereClause where clause
 	 */
-	protected InfoInOut(Frame frame, boolean modal, int WindowNo, String value,
+	public InfoInOut(Frame frame, boolean modal, int WindowNo, String value,
 		boolean multiSelection, String whereClause)
 	{
 		super (frame, modal, WindowNo, "i", "M_InOut_ID", multiSelection, whereClause);

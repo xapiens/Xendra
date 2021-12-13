@@ -82,11 +82,13 @@ public static final String TABNAME_EmployeeRemuneration="bb2d7cca-549a-325b-ffed
 @XendraTrl(Identifier="01bed140-9724-6a6b-607a-8b51cf79bbdf")
 public static String es_PE_TABLE_C_UserRemuneration_Name="Remuneración a Empleado";
 
-@XendraTable(Name="Employee Remuneration",Description="Employee Wage or Salary Overwrite",Help="",
-TableName="C_UserRemuneration",AccessLevel="2",AD_Window_ID="5430bec6-fb8a-fb45-67e1-794d63718e0c",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="01bed140-9724-6a6b-607a-8b51cf79bbdf",Synchronized="2017-08-16 11:42:33.0")
+@XendraTable(Name="Employee Remuneration",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",
+Description="Employee Wage or Salary Overwrite",Help="",TableName="C_UserRemuneration",
+AccessLevel="2",AD_Window_ID="5430bec6-fb8a-fb45-67e1-794d63718e0c",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
+Identifier="01bed140-9724-6a6b-607a-8b51cf79bbdf",Synchronized="2020-03-03 21:37:45.0")
 /** TableName=C_UserRemuneration */
 public static final String Table_Name="C_UserRemuneration";
 
@@ -142,13 +144,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_User_ID()));
 }
 
 @XendraTrl(Identifier="f27f6563-e3ff-0c4c-3d42-a3f1c73b93ac")
+public static String es_PE_FIELD_EmployeeRemuneration_UserContact_Name="Usuario";
+
+@XendraTrl(Identifier="f27f6563-e3ff-0c4c-3d42-a3f1c73b93ac")
 public static String es_PE_FIELD_EmployeeRemuneration_UserContact_Description="ID de Usuario dentro del sistema";
 
 @XendraTrl(Identifier="f27f6563-e3ff-0c4c-3d42-a3f1c73b93ac")
 public static String es_PE_FIELD_EmployeeRemuneration_UserContact_Help="La ID de usuario identifica un usuario único en el sistema";
-
-@XendraTrl(Identifier="f27f6563-e3ff-0c4c-3d42-a3f1c73b93ac")
-public static String es_PE_FIELD_EmployeeRemuneration_UserContact_Name="Usuario";
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +168,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="764d72e2-873c-7c9c-47f9-36a4c6e1b71a",Synchronized="2017-08-05 16:54:30.0")
+Identifier="764d72e2-873c-7c9c-47f9-36a4c6e1b71a",Synchronized="2019-08-30 22:22:21.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set Remuneration.
@@ -186,10 +188,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="b79b8a71-8af8-6435-6a35-9c276748e943")
-public static String es_PE_FIELD_EmployeeRemuneration_Remuneration_Description="Salario ó sueldo.";
+public static String es_PE_FIELD_EmployeeRemuneration_Remuneration_Name="Remuneración";
 
 @XendraTrl(Identifier="b79b8a71-8af8-6435-6a35-9c276748e943")
-public static String es_PE_FIELD_EmployeeRemuneration_Remuneration_Name="Remuneración";
+public static String es_PE_FIELD_EmployeeRemuneration_Remuneration_Description="Salario ó sueldo.";
 
 @XendraField(AD_Column_ID="C_Remuneration_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -207,7 +209,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="29f64b64-ae22-7664-b4d7-3ddeb2c65d0d",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name C_Remuneration_ID */
 public static final String COLUMNNAME_C_Remuneration_ID = "C_Remuneration_ID";
 /** Set Employee Remuneration.
@@ -227,13 +229,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="ac8c59a4-1bdd-6bf2-315d-76fc9c7e8dea")
+public static String es_PE_FIELD_EmployeeRemuneration_EmployeeRemuneration_Name="Remuneración a Empleado";
+
+@XendraTrl(Identifier="ac8c59a4-1bdd-6bf2-315d-76fc9c7e8dea")
 public static String es_PE_FIELD_EmployeeRemuneration_EmployeeRemuneration_Description="Sobreescribe el salario ó sueldo del empleado.";
 
 @XendraTrl(Identifier="ac8c59a4-1bdd-6bf2-315d-76fc9c7e8dea")
 public static String es_PE_FIELD_EmployeeRemuneration_EmployeeRemuneration_Help="Sobreescribe la renumeración estandard.";
-
-@XendraTrl(Identifier="ac8c59a4-1bdd-6bf2-315d-76fc9c7e8dea")
-public static String es_PE_FIELD_EmployeeRemuneration_EmployeeRemuneration_Name="Remuneración a Empleado";
 
 @XendraField(AD_Column_ID="C_UserRemuneration_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -271,13 +273,13 @@ return value;
 }
 
 @XendraTrl(Identifier="05d5ce83-e6d7-ced0-8c98-7a878566feba")
+public static String es_PE_FIELD_EmployeeRemuneration_Description_Name="Observación";
+
+@XendraTrl(Identifier="05d5ce83-e6d7-ced0-8c98-7a878566feba")
 public static String es_PE_FIELD_EmployeeRemuneration_Description_Description="Observación corta opcional del registro";
 
 @XendraTrl(Identifier="05d5ce83-e6d7-ced0-8c98-7a878566feba")
 public static String es_PE_FIELD_EmployeeRemuneration_Description_Help="Una Observación esta limitada a 255 caracteres";
-
-@XendraTrl(Identifier="05d5ce83-e6d7-ced0-8c98-7a878566feba")
-public static String es_PE_FIELD_EmployeeRemuneration_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -295,7 +297,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7bcb92c7-2552-d41e-853f-d4fff10700b1",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Gross Amount.
@@ -315,13 +317,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="18b33f2a-8336-d8e6-744e-a52bf260b0b5")
+public static String es_PE_FIELD_EmployeeRemuneration_GrossAmount_Name="Importe Total";
+
+@XendraTrl(Identifier="18b33f2a-8336-d8e6-744e-a52bf260b0b5")
 public static String es_PE_FIELD_EmployeeRemuneration_GrossAmount_Description="Cantidad total de la renumeración.";
 
 @XendraTrl(Identifier="18b33f2a-8336-d8e6-744e-a52bf260b0b5")
 public static String es_PE_FIELD_EmployeeRemuneration_GrossAmount_Help="Cantidad total del sueldo ó del salario (sin gastos indirectos del tiempo suplementario, de las ventajas y del patrón)";
-
-@XendraTrl(Identifier="18b33f2a-8336-d8e6-744e-a52bf260b0b5")
-public static String es_PE_FIELD_EmployeeRemuneration_GrossAmount_Name="Importe Total";
 
 @XendraField(AD_Column_ID="GrossRAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -339,7 +341,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a6f0ef56-91f9-dda7-8d91-57bc0cc7c488",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name GrossRAmt */
 public static final String COLUMNNAME_GrossRAmt = "GrossRAmt";
 /** Set Gross Cost.
@@ -359,13 +361,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="a2bd948d-baba-71dd-083a-802afe9564ca")
+public static String es_PE_FIELD_EmployeeRemuneration_GrossCost_Name="Importe de Costo";
+
+@XendraTrl(Identifier="a2bd948d-baba-71dd-083a-802afe9564ca")
 public static String es_PE_FIELD_EmployeeRemuneration_GrossCost_Description="Importe de Costo";
 
 @XendraTrl(Identifier="a2bd948d-baba-71dd-083a-802afe9564ca")
 public static String es_PE_FIELD_EmployeeRemuneration_GrossCost_Help="Costos elevados del sueldo ó salario (sin tiempo suplementario, con gastos indirectos de las ventajas y el patrón)";
-
-@XendraTrl(Identifier="a2bd948d-baba-71dd-083a-802afe9564ca")
-public static String es_PE_FIELD_EmployeeRemuneration_GrossCost_Name="Importe de Costo";
 
 @XendraField(AD_Column_ID="GrossRCost",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -383,7 +385,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9acdae0b-6d72-5a91-c55c-fe9158f08f3b",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name GrossRCost */
 public static final String COLUMNNAME_GrossRCost = "GrossRCost";
 /** Set Identifier.
@@ -415,7 +417,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cb3c9007-f103-4e0e-9e64-4f384ad1c5b4",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Overtime Amount.
@@ -435,13 +437,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="e188ca4e-a3f0-ecdd-282e-9927f912d8ea")
+public static String es_PE_FIELD_EmployeeRemuneration_OvertimeAmount_Name="Importe de Sobre tiempo";
+
+@XendraTrl(Identifier="e188ca4e-a3f0-ecdd-282e-9927f912d8ea")
 public static String es_PE_FIELD_EmployeeRemuneration_OvertimeAmount_Description="Tarifa del suplemento cada hora";
 
 @XendraTrl(Identifier="e188ca4e-a3f0-ecdd-282e-9927f912d8ea")
 public static String es_PE_FIELD_EmployeeRemuneration_OvertimeAmount_Help="Cantidad de cada hora sin gastos indirectos de las ventajas y del patrón.";
-
-@XendraTrl(Identifier="e188ca4e-a3f0-ecdd-282e-9927f912d8ea")
-public static String es_PE_FIELD_EmployeeRemuneration_OvertimeAmount_Name="Importe de Sobre tiempo";
 
 @XendraField(AD_Column_ID="OvertimeAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -459,7 +461,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eefe6e88-666b-c468-8024-749dc1cebb7b",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name OvertimeAmt */
 public static final String COLUMNNAME_OvertimeAmt = "OvertimeAmt";
 /** Set Overtime Cost.
@@ -479,13 +481,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="7c6e6a11-144c-1a83-768d-b653e3a90987")
+public static String es_PE_FIELD_EmployeeRemuneration_OvertimeCost_Name="Costo de Sobretiempo";
+
+@XendraTrl(Identifier="7c6e6a11-144c-1a83-768d-b653e3a90987")
 public static String es_PE_FIELD_EmployeeRemuneration_OvertimeCost_Description="Costo de cada hora del tiempo suplementario";
 
 @XendraTrl(Identifier="7c6e6a11-144c-1a83-768d-b653e3a90987")
 public static String es_PE_FIELD_EmployeeRemuneration_OvertimeCost_Help="Cantidad de cada hora con gastos indirectos de las ventajas y del patrón";
-
-@XendraTrl(Identifier="7c6e6a11-144c-1a83-768d-b653e3a90987")
-public static String es_PE_FIELD_EmployeeRemuneration_OvertimeCost_Name="Costo de Sobretiempo";
 
 @XendraField(AD_Column_ID="OvertimeCost",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -503,7 +505,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="22305ff0-5150-89f8-e06e-5e4f62dc5893",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name OvertimeCost */
 public static final String COLUMNNAME_OvertimeCost = "OvertimeCost";
 /** Set Valid from.
@@ -521,13 +523,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 }
 
 @XendraTrl(Identifier="08b5528b-9d1d-2f7c-1a6c-db79b2094521")
+public static String es_PE_FIELD_EmployeeRemuneration_ValidFrom_Name="Válido Desde";
+
+@XendraTrl(Identifier="08b5528b-9d1d-2f7c-1a6c-db79b2094521")
 public static String es_PE_FIELD_EmployeeRemuneration_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraTrl(Identifier="08b5528b-9d1d-2f7c-1a6c-db79b2094521")
 public static String es_PE_FIELD_EmployeeRemuneration_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
-
-@XendraTrl(Identifier="08b5528b-9d1d-2f7c-1a6c-db79b2094521")
-public static String es_PE_FIELD_EmployeeRemuneration_ValidFrom_Name="Válido Desde";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -545,7 +547,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6cce2e6f-2ca7-2c07-ef2f-31e1002d78e6",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -562,13 +564,13 @@ return (Timestamp)get_Value(COLUMNNAME_ValidTo);
 }
 
 @XendraTrl(Identifier="7334d696-208d-9fd8-37db-cb3be179b79c")
+public static String es_PE_FIELD_EmployeeRemuneration_ValidTo_Name="Válido Hasta";
+
+@XendraTrl(Identifier="7334d696-208d-9fd8-37db-cb3be179b79c")
 public static String es_PE_FIELD_EmployeeRemuneration_ValidTo_Description="Válido hasta; incluyendo esta fecha (ultimo día)";
 
 @XendraTrl(Identifier="7334d696-208d-9fd8-37db-cb3be179b79c")
 public static String es_PE_FIELD_EmployeeRemuneration_ValidTo_Help="La fecha válida hasta indica el último día de un rango de fechas";
-
-@XendraTrl(Identifier="7334d696-208d-9fd8-37db-cb3be179b79c")
-public static String es_PE_FIELD_EmployeeRemuneration_ValidTo_Name="Válido Hasta";
 
 @XendraField(AD_Column_ID="ValidTo",IsCentrallyMaintained=true,
 AD_Tab_ID="bb2d7cca-549a-325b-ffed-a7d59bb018f6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -586,7 +588,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8513783f-1902-a72a-1e36-f94147ae3070",
-Synchronized="2017-08-05 16:54:30.0")
+Synchronized="2019-08-30 22:22:22.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

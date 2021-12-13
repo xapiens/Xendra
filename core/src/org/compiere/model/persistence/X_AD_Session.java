@@ -60,28 +60,29 @@ public static int Table_ID=MTable.getTable_ID("AD_Session");
 public static String es_PE_TAB_SessionAudit_Description="Lista de sesiones de usuario";
 
 @XendraTrl(Identifier="ea05a430-3987-f6b1-5746-b3fe12b1e1df")
-public static String es_PE_TAB_SessionAudit_Name="Sesión";
-
-@XendraTrl(Identifier="ea05a430-3987-f6b1-5746-b3fe12b1e1df")
 public static String es_PE_TAB_SessionAudit_Help="Historia de la línea ó sesiones de la Web";
 
-@XendraTab(Name="Session Audit",Description="List of User Sessions",
-Help="History of Online or Web Sessions",AD_Window_ID="2d54fdd9-1f23-a280-9f41-33238a31aa47",
-SeqNo=10,TabLevel=0,IsSingleRow=false,IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,
-AD_Column_ID="",HasTree=false,WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",
-AD_ColumnSortOrder_ID="",AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",
-ReadOnlyLogic="",DisplayLogic="",IsInsertRecord=false,IsAdvancedTab=false,Parent_Column_ID="",
+@XendraTrl(Identifier="ea05a430-3987-f6b1-5746-b3fe12b1e1df")
+public static String es_PE_TAB_SessionAudit_Name="Sesión";
+@XendraTab(Name="Session Audit",
+Description="List of User Sessions",Help="History of Online or Web Sessions",
+AD_Window_ID="2d54fdd9-1f23-a280-9f41-33238a31aa47",SeqNo=10,TabLevel=0,IsSingleRow=false,
+IsInfoTab=false,IsTranslationTab=false,IsReadOnly=true,AD_Column_ID="",HasTree=false,
+WhereClause="",OrderByClause="",CommitWarning="",AD_Process_ID="",AD_ColumnSortOrder_ID="",
+AD_ColumnSortYesNo_ID="",IsSortTab=false,Included_Tab_ID="",ReadOnlyLogic="",DisplayLogic="",
+IsInsertRecord=false,IsAdvancedTab=false,Parent_Column_ID="",
 Identifier="ea05a430-3987-f6b1-5746-b3fe12b1e1df",Synchronized="2012-03-17 18:47:08.603")
 public static final String TABNAME_SessionAudit="ea05a430-3987-f6b1-5746-b3fe12b1e1df";
 
 @XendraTrl(Identifier="8f07356a-3b02-0e7e-b51c-bc57dbf0bcab")
 public static String es_PE_TABLE_AD_Session_Name="Sesión";
 
-@XendraTable(Name="Session",Description="User Session Online or Web",Help="",
-TableName="AD_Session",AccessLevel="6",AD_Window_ID="2d54fdd9-1f23-a280-9f41-33238a31aa47",
+@XendraTable(Name="Session",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="User Session Online or Web",
+Help="",TableName="AD_Session",AccessLevel="6",AD_Window_ID="2d54fdd9-1f23-a280-9f41-33238a31aa47",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="8f07356a-3b02-0e7e-b51c-bc57dbf0bcab",Synchronized="2017-08-16 11:40:59.0")
+Identifier="8f07356a-3b02-0e7e-b51c-bc57dbf0bcab",Synchronized="2020-03-03 21:35:56.0")
 /** TableName=AD_Session */
 public static final String Table_Name="AD_Session";
 
@@ -140,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cee80ecb-04e9-8074-2014-8d724e889376",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name AD_Role_ID */
 public static final String COLUMNNAME_AD_Role_ID = "AD_Role_ID";
 /** Set Session.
@@ -166,13 +167,13 @@ return new KeyNamePair(get_ID(), String.valueOf(getAD_Session_ID()));
 }
 
 @XendraTrl(Identifier="bf0be0f6-000c-c58f-a849-5cef769897bf")
+public static String es_PE_FIELD_SessionAudit_Session_Name="Sesión";
+
+@XendraTrl(Identifier="bf0be0f6-000c-c58f-a849-5cef769897bf")
 public static String es_PE_FIELD_SessionAudit_Session_Description="Usar sesión el línea ó Web";
 
 @XendraTrl(Identifier="bf0be0f6-000c-c58f-a849-5cef769897bf")
 public static String es_PE_FIELD_SessionAudit_Session_Help="Información de sesión en línea ó Web.";
-
-@XendraTrl(Identifier="bf0be0f6-000c-c58f-a849-5cef769897bf")
-public static String es_PE_FIELD_SessionAudit_Session_Name="Sesión";
 
 @XendraField(AD_Column_ID="AD_Session_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="ea05a430-3987-f6b1-5746-b3fe12b1e1df",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -218,7 +219,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7e5fe8bb-61a6-f7ce-2528-f9f707463fc0",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -250,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="619242e6-74fe-4098-b886-3d80fc49228b",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set LoginDate.
@@ -275,7 +276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a81a0f6b-26ea-89f3-b762-9a95bad57587",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name LoginDate */
 public static final String COLUMNNAME_LoginDate = "LoginDate";
 /** Set Processed.
@@ -298,13 +299,13 @@ return false;
 }
 
 @XendraTrl(Identifier="3e508e2b-539d-77d4-9711-9af26e35b21b")
+public static String es_PE_FIELD_SessionAudit_Processed_Name="Procesado";
+
+@XendraTrl(Identifier="3e508e2b-539d-77d4-9711-9af26e35b21b")
 public static String es_PE_FIELD_SessionAudit_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="3e508e2b-539d-77d4-9711-9af26e35b21b")
 public static String es_PE_FIELD_SessionAudit_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
-
-@XendraTrl(Identifier="3e508e2b-539d-77d4-9711-9af26e35b21b")
-public static String es_PE_FIELD_SessionAudit_Processed_Name="Procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="ea05a430-3987-f6b1-5746-b3fe12b1e1df",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -322,7 +323,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="caaffe43-d1b8-e65d-3ce5-9407c25333ff",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Remote Addr.
@@ -346,13 +347,13 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="2c866867-30c0-a28d-389b-75bce4153ea5")
+public static String es_PE_FIELD_SessionAudit_RemoteAddr_Name="Dirección Remota";
+
+@XendraTrl(Identifier="2c866867-30c0-a28d-389b-75bce4153ea5")
 public static String es_PE_FIELD_SessionAudit_RemoteAddr_Description="Dirección remota";
 
 @XendraTrl(Identifier="2c866867-30c0-a28d-389b-75bce4153ea5")
 public static String es_PE_FIELD_SessionAudit_RemoteAddr_Help="La dirección remota indica una dirección alternativa ó externa";
-
-@XendraTrl(Identifier="2c866867-30c0-a28d-389b-75bce4153ea5")
-public static String es_PE_FIELD_SessionAudit_RemoteAddr_Name="Dirección Remota";
 
 @XendraField(AD_Column_ID="Remote_Addr",IsCentrallyMaintained=true,
 AD_Tab_ID="ea05a430-3987-f6b1-5746-b3fe12b1e1df",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -370,7 +371,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4326aa8e-6fbe-ffa1-db75-4d36bc84842c",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Remote_Addr */
 public static final String COLUMNNAME_Remote_Addr = "Remote_Addr";
 /** Set Remote Host.
@@ -412,7 +413,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a0b7fd9a-f23d-675d-1397-55abe768a2d0",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Remote_Host */
 public static final String COLUMNNAME_Remote_Host = "Remote_Host";
 /** Set Web Session.
@@ -436,10 +437,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="5e5a28ef-2949-b244-6cdd-c9bdbf482007")
-public static String es_PE_FIELD_SessionAudit_WebSession_Description="ID sesión Web.";
+public static String es_PE_FIELD_SessionAudit_WebSession_Name="Sesión Web";
 
 @XendraTrl(Identifier="5e5a28ef-2949-b244-6cdd-c9bdbf482007")
-public static String es_PE_FIELD_SessionAudit_WebSession_Name="Sesión Web";
+public static String es_PE_FIELD_SessionAudit_WebSession_Description="ID sesión Web.";
 
 @XendraField(AD_Column_ID="WebSession",IsCentrallyMaintained=true,
 AD_Tab_ID="ea05a430-3987-f6b1-5746-b3fe12b1e1df",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -457,7 +458,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="492e3a2d-52f5-8372-a30f-066d6f1dddf5",
-Synchronized="2017-08-05 16:52:51.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name WebSession */
 public static final String COLUMNNAME_WebSession = "WebSession";
 }

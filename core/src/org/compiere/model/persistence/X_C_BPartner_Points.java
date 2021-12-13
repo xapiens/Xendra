@@ -60,11 +60,12 @@ public static int Table_ID=MTable.getTable_ID("C_BPartner_Points");
 @XendraTrl(Identifier="17bad2e8-851f-3c97-5ec2-3eb567e298bd")
 public static String es_PE_TABLE_C_BPartner_Points_Name="C_BPartner_Point";
 
-@XendraTable(Name="C_BPartner_Points",Description="C_BPartner_Points",Help="",
+@XendraTable(Name="C_BPartner_Points",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="C_BPartner_Points",Help="",
 TableName="C_BPartner_Points",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=70,
 IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
 PO_Window_ID="",ID="org.xendra.commercial",Identifier="17bad2e8-851f-3c97-5ec2-3eb567e298bd",
-Synchronized="2017-08-16 11:41:31.0")
+Synchronized="2020-03-03 21:36:35.0")
 /** TableName=C_BPartner_Points */
 public static final String Table_Name="C_BPartner_Points";
 
@@ -122,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="257bf3b9-57e1-7dce-d542-d2f5bdb79dd9",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:13.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set C_BPartner_Points.
@@ -167,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="865f2d57-b91b-f1cf-1025-c9a3aa774a8d",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:13.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Identifier.
@@ -199,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="04cce6ca-0f48-4581-a94f-610cc0a2c37c",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:13.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Points.
@@ -227,7 +228,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="70f1a47f-4f27-fbcf-6770-44df651a5964",
-Synchronized="2017-08-05 16:53:24.0")
+Synchronized="2019-08-30 22:21:13.0")
 /** Column name Points */
 public static final String COLUMNNAME_Points = "Points";
 }

@@ -1,26 +1,12 @@
 package org.columba.core.config;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.*;
-
-import org.columba.api.gui.frame.IContainer;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Toolbars {
-	//@XmlElementWrapper(name="ToolbarArea")
-	//@XmlElement
-	//List<ToolbarArea> areas = new ArrayList<ToolbarArea>();
 	@XmlAttribute
 	Boolean main;
-//	public List<ToolbarArea> getAreas() {
-//		return areas;
-//	}
-//	public void setAreas(List<ToolbarArea> areas) {
-//		this.areas = areas;
-//	}	
 	public void set(String id, boolean value) {
 		try {
 			Field[] fields = this.getClass().getDeclaredFields();

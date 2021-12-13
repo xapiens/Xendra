@@ -62,11 +62,12 @@ public static int Table_ID=MTable.getTable_ID("C_BOE_Conversion_Rate");
 @XendraTrl(Identifier="5c3aa62d-4f26-766e-b461-6d737a0e38a5")
 public static String es_PE_TABLE_C_BOE_Conversion_Rate_Name="C_Boe_Conversion_Rate";
 
-@XendraTable(Name="C_BOE_Conversion_Rate",Description="C_BOE_Conversion_Rate",Help="",
+@XendraTable(Name="C_BOE_Conversion_Rate",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="C_BOE_Conversion_Rate",Help="",
 TableName="C_BOE_Conversion_Rate",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=120,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="5c3aa62d-4f26-766e-b461-6d737a0e38a5",Synchronized="2017-08-16 11:41:26.0")
+Identifier="5c3aa62d-4f26-766e-b461-6d737a0e38a5",Synchronized="2020-03-03 21:36:30.0")
 /** TableName=C_BOE_Conversion_Rate */
 public static final String Table_Name="C_BOE_Conversion_Rate";
 
@@ -148,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3926671c-d8a6-1349-546f-9c3ca2641154",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name C_BOEGroup_ID */
 public static final String COLUMNNAME_C_BOEGroup_ID = "C_BOEGroup_ID";
 /** Set Currency.
@@ -176,7 +177,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1496417c-9646-81ed-8e2c-e8d45140c4cb",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Currency To.
@@ -203,7 +204,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="475e0da9-daa6-6b83-572d-115f5f878331",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name C_Currency_ID_To */
 public static final String COLUMNNAME_C_Currency_ID_To = "C_Currency_ID_To";
 /** Set C_GroupDoc_ID.
@@ -232,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="638564a4-85a7-59c2-84bb-692e652062ba",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name C_GroupDoc_ID */
 public static final String COLUMNNAME_C_GroupDoc_ID = "C_GroupDoc_ID";
 /** Set Identifier.
@@ -264,7 +265,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5dfa46a7-c2d6-44a1-b1dc-be018b7257fa",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Rate.
@@ -292,7 +293,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="633bff5c-7057-508f-3092-8b3519fdaa33",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name Rate */
 public static final String COLUMNNAME_Rate = "Rate";
 /** Set Valid from.
@@ -318,7 +319,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="43caaad8-cf4e-187b-fa35-563aacbfa34d",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
 /** Set Valid to.
@@ -343,7 +344,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="03e409db-4cba-a779-7a2a-8745322eb8af",
-Synchronized="2017-08-05 16:53:18.0")
+Synchronized="2019-08-30 22:21:07.0")
 /** Column name ValidTo */
 public static final String COLUMNNAME_ValidTo = "ValidTo";
 }

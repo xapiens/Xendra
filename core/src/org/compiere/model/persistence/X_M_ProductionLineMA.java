@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("M_ProductionLineMA");
 @XendraTrl(Identifier="d57e67e2-4a9a-1249-4ba6-3cc1d577675e")
 public static String es_PE_TABLE_M_ProductionLineMA_Name="Production Line MA";
 
-@XendraTable(Name="Production Line MA",Description="",Help="",TableName="M_ProductionLineMA",
-AccessLevel="1",AD_Window_ID="735b6408-f744-4421-e308-a3bb880dfd24",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="d57e67e2-4a9a-1249-4ba6-3cc1d577675e",Synchronized="2017-08-16 11:43:29.0")
+@XendraTable(Name="Production Line MA",AD_Package_ID="2809ac2d-7d43-20f8-05f0-a478f2e50204",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="M_ProductionLineMA",AccessLevel="1",AD_Window_ID="735b6408-f744-4421-e308-a3bb880dfd24",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
+Identifier="d57e67e2-4a9a-1249-4ba6-3cc1d577675e",Synchronized="2020-03-03 21:38:52.0")
 /** TableName=M_ProductionLineMA */
 public static final String Table_Name="M_ProductionLineMA";
 
@@ -125,7 +126,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="62c40733-c10a-40c7-8e13-a8124429d76e",
-Synchronized="2017-08-05 16:55:27.0")
+Synchronized="2019-08-30 22:23:28.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Attribute Set Instance.
@@ -153,7 +154,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="16522ab8-8d03-6c5d-9518-b92ace502b70",Synchronized="2017-08-05 16:55:27.0")
+Identifier="16522ab8-8d03-6c5d-9518-b92ace502b70",Synchronized="2019-08-30 22:23:28.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Movement Quantity.
@@ -181,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f76a1c8d-37aa-780c-102c-7139d5b21437",
-Synchronized="2017-08-05 16:55:27.0")
+Synchronized="2019-08-30 22:23:28.0")
 /** Column name MovementQty */
 public static final String COLUMNNAME_MovementQty = "MovementQty";
 /** Set Production Line.
@@ -215,7 +216,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ea34f9b9-f615-7dac-6656-9b85af8031f2",Synchronized="2017-08-05 16:55:27.0")
+Identifier="ea34f9b9-f615-7dac-6656-9b85af8031f2",Synchronized="2019-08-30 22:23:28.0")
 /** Column name M_ProductionLine_ID */
 public static final String COLUMNNAME_M_ProductionLine_ID = "M_ProductionLine_ID";
 }

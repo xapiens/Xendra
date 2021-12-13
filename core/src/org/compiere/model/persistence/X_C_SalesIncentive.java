@@ -71,11 +71,12 @@ public static final String TABNAME_Incentive="8dd58ef1-0f28-872e-7c18-3031c6edea
 @XendraTrl(Identifier="82aca990-6d4a-c3ac-3d26-bc0e504291e4")
 public static String es_PE_TABLE_C_SalesIncentive_Name="C_SalesIncentive";
 
-@XendraTable(Name="C_SalesIncentive",Description="",Help="",TableName="C_SalesIncentive",
-AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.commercial",Identifier="82aca990-6d4a-c3ac-3d26-bc0e504291e4",
-Synchronized="2017-08-16 11:42:27.0")
+@XendraTable(Name="C_SalesIncentive",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="C_SalesIncentive",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="82aca990-6d4a-c3ac-3d26-bc0e504291e4",
+Synchronized="2020-03-03 21:37:40.0")
 /** TableName=C_SalesIncentive */
 public static final String Table_Name="C_SalesIncentive";
 
@@ -124,13 +125,13 @@ return bd;
 }
 
 @XendraTrl(Identifier="0d53dc8a-24bd-7b5c-70f1-806511242b67")
+public static String es_PE_FIELD_Incentive_Amount_Name="Monto del Incentivo";
+
+@XendraTrl(Identifier="0d53dc8a-24bd-7b5c-70f1-806511242b67")
 public static String es_PE_FIELD_Incentive_Amount_Description="Total en una moneda definida";
 
 @XendraTrl(Identifier="0d53dc8a-24bd-7b5c-70f1-806511242b67")
 public static String es_PE_FIELD_Incentive_Amount_Help="Indica el total para esta línea del documento";
-
-@XendraTrl(Identifier="0d53dc8a-24bd-7b5c-70f1-806511242b67")
-public static String es_PE_FIELD_Incentive_Amount_Name="Monto del Incentivo";
 
 @XendraField(AD_Column_ID="Amount",IsCentrallyMaintained=true,
 AD_Tab_ID="8dd58ef1-0f28-872e-7c18-3031c6edea3e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -148,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64935896-a931-7e3c-4f0c-cc6a3a324c85",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set C_SalesIncentive.
@@ -196,18 +197,19 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
+public static String es_PE_FIELD_Incentive_UOM_Name="UM";
+
+@XendraTrl(Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
 public static String es_PE_FIELD_Incentive_UOM_Description="Unidad de Medida";
 
 @XendraTrl(Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
 public static String es_PE_FIELD_Incentive_UOM_Help="La UM define una unidad de medida única no monetaria";
 
-@XendraTrl(Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
-public static String es_PE_FIELD_Incentive_UOM_Name="UM";
-@XendraField(AD_Column_ID="C_UOM_ID",
-IsCentrallyMaintained=true,AD_Tab_ID="8dd58ef1-0f28-872e-7c18-3031c6edea3e",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=60,SortNo=0,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
+@XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
+AD_Tab_ID="8dd58ef1-0f28-872e-7c18-3031c6edea3e",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="13cfb4e6-83aa-7091-876f-7b002c43ed7e")
 public static final String FIELDNAME_Incentive_UOM="13cfb4e6-83aa-7091-876f-7b002c43ed7e";
 
 @XendraTrl(Identifier="0594843b-5915-b8f8-76da-8247da489d96")
@@ -219,7 +221,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0594843b-5915-b8f8-76da-8247da489d96",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set Identifier.
@@ -251,7 +253,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a1a89ea7-6309-434c-99f6-71e510eab310",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Product.
@@ -272,13 +274,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="2e2e350d-9fbe-88be-270b-5372767a9bb3")
+public static String es_PE_FIELD_Incentive_Product_Name="Producto";
+
+@XendraTrl(Identifier="2e2e350d-9fbe-88be-270b-5372767a9bb3")
 public static String es_PE_FIELD_Incentive_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="2e2e350d-9fbe-88be-270b-5372767a9bb3")
 public static String es_PE_FIELD_Incentive_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
-
-@XendraTrl(Identifier="2e2e350d-9fbe-88be-270b-5372767a9bb3")
-public static String es_PE_FIELD_Incentive_Product_Name="Producto";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="8dd58ef1-0f28-872e-7c18-3031c6edea3e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -296,7 +298,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=false,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="36d6d277-3f93-05d2-fb74-e80e57a12c33",
-Synchronized="2017-08-05 16:54:25.0")
+Synchronized="2019-08-30 22:22:16.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 }

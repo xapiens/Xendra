@@ -23,7 +23,6 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-import org.compiere.model.reference.REF_ReplicationType;
 /** Generated Model for A_Xendrian_Replication
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
@@ -58,11 +57,12 @@ public static int Table_ID=MTable.getTable_ID("A_Xendrian_Replication");
 @XendraTrl(Identifier="312026bc-ffeb-4778-a283-f4b4f7176b74")
 public static String es_PE_TABLE_A_Xendrian_Replication_Name="Xendrian Replication";
 
-@XendraTable(Name="Xendrian Replication",Description="",Help="",TableName="A_Xendrian_Replication",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.standard",Identifier="312026bc-ffeb-4778-a283-f4b4f7176b74",
-Synchronized="2017-08-16 11:41:15.0")
+@XendraTable(Name="Xendrian Replication",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="A_Xendrian_Replication",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,
+LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
+IsView=false,PO_Window_ID="",ID="org.xendra.standard",
+Identifier="312026bc-ffeb-4778-a283-f4b4f7176b74",Synchronized="2020-03-03 21:36:16.0")
 /** TableName=A_Xendrian_Replication */
 public static final String Table_Name="A_Xendrian_Replication";
 
@@ -141,7 +141,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="eebe28e4-a6b8-46f6-a8f4-5dd09394b889",
-Synchronized="2017-08-05 16:53:06.0")
+Synchronized="2019-08-30 22:20:56.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Identifier.
@@ -173,7 +173,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b3713a5a-95b1-4d9d-8af8-145624f17048",
-Synchronized="2015-08-11 20:43:00.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Message.
@@ -200,7 +200,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="99312412-64df-41b9-8302-6257693e5ca5",
-Synchronized="2015-08-11 20:43:00.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name Message */
 public static final String COLUMNNAME_Message = "Message";
 /** Set Processed.
@@ -231,18 +231,13 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1b843bd3-f16b-4012-964a-e0922e57d778",
-Synchronized="2015-08-11 20:43:00.0")
+Synchronized="2019-08-30 22:20:57.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
-
-/** ReplicationType AD_Reference=b21a4af6-31d2-3c66-8ee7-fca98e903ccb */
-public static final int REPLICATIONTYPE_AD_Reference_ID=1000047;
 /** Set Replication Type.
 @param ReplicationType Type of Data Replication */
 public void setReplicationType (String ReplicationType)
 {
-if (ReplicationType == null || ReplicationType.equals(REF_ReplicationType.Merge) || ReplicationType.equals(REF_ReplicationType.Reference) || ReplicationType.equals(REF_ReplicationType.Local) || ReplicationType.equals(REF_ReplicationType.None));
- else throw new IllegalArgumentException ("ReplicationType Invalid value - " + ReplicationType + " - Reference_ID=1000047 - M - R - L - N");
 if (ReplicationType != null && ReplicationType.length() > 1)
 {
 log.warning("Length > 1 - truncated");
@@ -266,7 +261,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="19ca07fb-018a-452a-9672-8fc70bfd058b",Synchronized="2017-08-05 16:53:06.0")
+Identifier="19ca07fb-018a-452a-9672-8fc70bfd058b",Synchronized="2019-08-30 22:20:57.0")
 /** Column name ReplicationType */
 public static final String COLUMNNAME_ReplicationType = "ReplicationType";
 }

@@ -72,11 +72,12 @@ public static final String TABNAME_ProcessByMachine="d0c6b57f-ef1d-45ed-9aa0-e08
 @XendraTrl(Identifier="67b818ce-ca6c-44bd-b568-4a201486bfe3")
 public static String es_PE_TABLE_AD_Process_Machine_Name="Process Machine";
 
-@XendraTable(Name="Process Machine",Description="",Help="",TableName="AD_Process_Machine",
-AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
-IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
-ID="org.xendra.dictionary",Identifier="67b818ce-ca6c-44bd-b568-4a201486bfe3",
-Synchronized="2017-08-16 11:40:54.0")
+@XendraTable(Name="Process Machine",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Process_Machine",AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.dictionary",Identifier="67b818ce-ca6c-44bd-b568-4a201486bfe3",
+Synchronized="2020-03-03 21:35:48.0")
 /** TableName=AD_Process_Machine */
 public static final String Table_Name="AD_Process_Machine";
 
@@ -126,13 +127,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="29022031-4f19-47b2-bc3b-ef95441bbbf5")
+public static String es_PE_FIELD_ProcessByMachine_Process_Name="Proceso";
+
+@XendraTrl(Identifier="29022031-4f19-47b2-bc3b-ef95441bbbf5")
 public static String es_PE_FIELD_ProcessByMachine_Process_Description="Proceso ó Informe";
 
 @XendraTrl(Identifier="29022031-4f19-47b2-bc3b-ef95441bbbf5")
 public static String es_PE_FIELD_ProcessByMachine_Process_Help="El campo proceso identifica un proceso ó Informe único en el sistema.";
-
-@XendraTrl(Identifier="29022031-4f19-47b2-bc3b-ef95441bbbf5")
-public static String es_PE_FIELD_ProcessByMachine_Process_Name="Proceso";
 
 @XendraField(AD_Column_ID="AD_Process_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d0c6b57f-ef1d-45ed-9aa0-e08f11156587",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -150,7 +151,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="00904242-e414-48f5-a97a-ea843512e178",
-Synchronized="2017-08-05 16:52:45.0")
+Synchronized="2019-08-30 22:20:35.0")
 /** Column name AD_Process_ID */
 public static final String COLUMNNAME_AD_Process_ID = "AD_Process_ID";
 /** Set Process Machine.
@@ -215,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d2765d8f-726a-4126-96cd-b43bfe73dc58",
-Synchronized="2015-08-21 20:39:03.0")
+Synchronized="2019-08-30 22:20:36.0")
 /** Column name A_Machine_ID */
 public static final String COLUMNNAME_A_Machine_ID = "A_Machine_ID";
 /** Set Identifier.
@@ -257,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b4cc0c9f-3e36-42c5-a3c0-cd823d93866e",
-Synchronized="2015-08-21 20:39:03.0")
+Synchronized="2019-08-30 22:20:36.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Read Write.
@@ -280,13 +281,13 @@ return false;
 }
 
 @XendraTrl(Identifier="a8a76432-2d35-413d-9b73-596746833d77")
+public static String es_PE_FIELD_ProcessByMachine_ReadWrite_Name="Lectura Escritura";
+
+@XendraTrl(Identifier="a8a76432-2d35-413d-9b73-596746833d77")
 public static String es_PE_FIELD_ProcessByMachine_ReadWrite_Description="El campo es de lectura / escritura";
 
 @XendraTrl(Identifier="a8a76432-2d35-413d-9b73-596746833d77")
 public static String es_PE_FIELD_ProcessByMachine_ReadWrite_Help="El lectura escritura indica que este campo puede ser leído y actualizado.";
-
-@XendraTrl(Identifier="a8a76432-2d35-413d-9b73-596746833d77")
-public static String es_PE_FIELD_ProcessByMachine_ReadWrite_Name="Lectura Escritura";
 
 @XendraField(AD_Column_ID="IsReadWrite",IsCentrallyMaintained=true,
 AD_Tab_ID="d0c6b57f-ef1d-45ed-9aa0-e08f11156587",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -304,7 +305,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="befca5d1-ff74-4df7-90cf-26a75980af7b",
-Synchronized="2015-08-21 20:39:03.0")
+Synchronized="2019-08-30 22:20:36.0")
 /** Column name IsReadWrite */
 public static final String COLUMNNAME_IsReadWrite = "IsReadWrite";
 }

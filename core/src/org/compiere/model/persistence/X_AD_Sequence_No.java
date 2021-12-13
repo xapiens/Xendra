@@ -59,11 +59,12 @@ public static int Table_ID=MTable.getTable_ID("AD_Sequence_No");
 @XendraTrl(Identifier="0f0e04e6-75ad-d020-4f17-dd6384c1d3a2")
 public static String es_PE_TABLE_AD_Sequence_No_Name="AD_Sequence_No";
 
-@XendraTable(Name="AD_Sequence_No",Description="",Help="",TableName="AD_Sequence_No",
-AccessLevel="6",AD_Window_ID="c20f0a4a-33e9-82a3-2cc2-3b602cd050d2",AD_Val_Rule_ID="",IsKey=0,
-LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
-IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
-Identifier="0f0e04e6-75ad-d020-4f17-dd6384c1d3a2",Synchronized="2017-08-16 11:40:59.0")
+@XendraTable(Name="AD_Sequence_No",AD_Package_ID="140d4d0c-8da8-bcb6-9c20-bc776701f80c",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
+TableName="AD_Sequence_No",AccessLevel="6",AD_Window_ID="c20f0a4a-33e9-82a3-2cc2-3b602cd050d2",
+AD_Val_Rule_ID="",IsKey=0,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
+IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.dictionary",
+Identifier="0f0e04e6-75ad-d020-4f17-dd6384c1d3a2",Synchronized="2020-03-03 21:35:55.0")
 /** TableName=AD_Sequence_No */
 public static final String Table_Name="AD_Sequence_No";
 
@@ -121,7 +122,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3e5fb348-58d6-a828-c1eb-931d3154f8a7",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name AD_Sequence_ID */
 public static final String COLUMNNAME_AD_Sequence_ID = "AD_Sequence_ID";
 /** Set Year.
@@ -154,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a74c5958-8ac8-ec0f-b89b-f57327136d94",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name CalendarYear */
 public static final String COLUMNNAME_CalendarYear = "CalendarYear";
 /** Set Current Next.
@@ -181,7 +182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="19871b5c-80bf-0335-928d-b185cb620340",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name CurrentNext */
 public static final String COLUMNNAME_CurrentNext = "CurrentNext";
 /** Set Identifier.
@@ -213,7 +214,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f5031da0-f489-4ac4-9873-71df9c4654d2",
-Synchronized="2017-08-05 16:52:50.0")
+Synchronized="2019-08-30 22:20:41.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 }

@@ -70,12 +70,12 @@ public static int Table_ID=MTable.getTable_ID("C_BP_Relation");
 public static String es_PE_TAB_Relation_Description="Relación de socio de negocio";
 
 @XendraTrl(Identifier="c964b76d-3a1e-b95a-71ec-56ee1b2b462e")
-public static String es_PE_TAB_Relation_Name="Relación";
-
-@XendraTrl(Identifier="c964b76d-3a1e-b95a-71ec-56ee1b2b462e")
 public static String es_PE_TAB_Relation_Help="La relación de socio de negocio permite mantener reglas de relación de terceros: quién recibe las facturas para los envíos ó paga facturas. Si la localización del socio de negocio no se define, la regla se aplica a toda la localización de ese socio de negocio.";
 
-@XendraTab(Name="Relation",Description="Business Partner Relation",
+@XendraTrl(Identifier="c964b76d-3a1e-b95a-71ec-56ee1b2b462e")
+public static String es_PE_TAB_Relation_Name="Relación";
+@XendraTab(Name="Relation",
+Description="Business Partner Relation",
 Help="Business Partner Relation allow to maintain Third Party Relationship rules: who receives invoices for shipments or pays for invoices.  If the Location of the Business partner is not defined, the rule applies to all location of that Business Partner",
 AD_Window_ID="3f325fd1-999f-5f33-3925-a4a7490b5de7",SeqNo=10,TabLevel=0,IsSingleRow=false,
 IsInfoTab=false,IsTranslationTab=false,IsReadOnly=false,AD_Column_ID="",HasTree=false,
@@ -88,11 +88,13 @@ public static final String TABNAME_Relation="c964b76d-3a1e-b95a-71ec-56ee1b2b462
 @XendraTrl(Identifier="c57974e9-aefd-d26b-ba8d-3763b8da9e9f")
 public static String es_PE_TABLE_C_BP_Relation_Name="Relación con Socios";
 
-@XendraTable(Name="Partner Relation",Description="Business Partner Relation",Help="",
-TableName="C_BP_Relation",AccessLevel="2",AD_Window_ID="3f325fd1-999f-5f33-3925-a4a7490b5de7",
-AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
-IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="c57974e9-aefd-d26b-ba8d-3763b8da9e9f",Synchronized="2017-08-16 11:41:34.0")
+@XendraTable(Name="Partner Relation",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Business Partner Relation",
+Help="",TableName="C_BP_Relation",AccessLevel="2",
+AD_Window_ID="3f325fd1-999f-5f33-3925-a4a7490b5de7",AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,
+IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,IsView=false,
+PO_Window_ID="",ID="org.xendra.commercial",Identifier="c57974e9-aefd-d26b-ba8d-3763b8da9e9f",
+Synchronized="2020-03-03 21:36:39.0")
 /** TableName=C_BP_Relation */
 public static final String Table_Name="C_BP_Relation";
 
@@ -142,13 +144,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="3fe34aef-a18a-834b-8f49-5d04a6b4f431")
+public static String es_PE_FIELD_Relation_BusinessPartner_Name="Socio de Negocio";
+
+@XendraTrl(Identifier="3fe34aef-a18a-834b-8f49-5d04a6b4f431")
 public static String es_PE_FIELD_Relation_BusinessPartner_Description="Identifica un Socio de Negocio";
 
 @XendraTrl(Identifier="3fe34aef-a18a-834b-8f49-5d04a6b4f431")
 public static String es_PE_FIELD_Relation_BusinessPartner_Help="Un socio de negocio es cualquiera con quien usted realiza transacciones. Este puede incluir Proveedores; Clientes; Empleados ó Vendedores.";
-
-@XendraTrl(Identifier="3fe34aef-a18a-834b-8f49-5d04a6b4f431")
-public static String es_PE_FIELD_Relation_BusinessPartner_Name="Socio de Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -166,7 +168,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="295138a5-6543-ea6f-e539-de028c47e749",Synchronized="2017-08-05 16:53:25.0")
+Identifier="295138a5-6543-ea6f-e539-de028c47e749",Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Partner Location.
@@ -187,13 +189,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="179cd683-340d-5b5e-5614-90064156f8fa")
+public static String es_PE_FIELD_Relation_PartnerLocation_Name="Dirección del Socio del Negocio";
+
+@XendraTrl(Identifier="179cd683-340d-5b5e-5614-90064156f8fa")
 public static String es_PE_FIELD_Relation_PartnerLocation_Description="Identifica la dirección para este socio de negocio";
 
 @XendraTrl(Identifier="179cd683-340d-5b5e-5614-90064156f8fa")
 public static String es_PE_FIELD_Relation_PartnerLocation_Help="La dirección de un socio indica la ubicación de un socio de negocio";
-
-@XendraTrl(Identifier="179cd683-340d-5b5e-5614-90064156f8fa")
-public static String es_PE_FIELD_Relation_PartnerLocation_Name="Dirección del Socio del Negocio";
 
 @XendraField(AD_Column_ID="C_BPartner_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -212,12 +214,9 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c5d5d0b5-39ce-b336-2f4b-96a543e1decf",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_BPartner_Location_ID */
 public static final String COLUMNNAME_C_BPartner_Location_ID = "C_BPartner_Location_ID";
-
-/** C_BPartnerRelation_ID AD_Reference=ed87c3fe-720d-c26d-0166-b5178b65db41 */
-public static final int C_BPARTNERRELATION_ID_AD_Reference_ID=138;
 /** Set Related Partner.
 @param C_BPartnerRelation_ID Related Business Partner */
 public void setC_BPartnerRelation_ID (int C_BPartnerRelation_ID)
@@ -235,13 +234,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="62a7c4f0-c835-4b50-5a29-66262fb1f9e6")
+public static String es_PE_FIELD_Relation_RelatedPartner_Name="Socio Relacionado";
+
+@XendraTrl(Identifier="62a7c4f0-c835-4b50-5a29-66262fb1f9e6")
 public static String es_PE_FIELD_Relation_RelatedPartner_Description="Socio de negocio relacionado.";
 
 @XendraTrl(Identifier="62a7c4f0-c835-4b50-5a29-66262fb1f9e6")
 public static String es_PE_FIELD_Relation_RelatedPartner_Help="La relación de un socio de negocio actua a nombre del socio de negocio - Ejemplo: el socio relacionado paga las facturas del socio de negocio - ó pagamos al socio relacionado las facturas recibidas del negocio.";
-
-@XendraTrl(Identifier="62a7c4f0-c835-4b50-5a29-66262fb1f9e6")
-public static String es_PE_FIELD_Relation_RelatedPartner_Name="Socio Relacionado";
 
 @XendraField(AD_Column_ID="C_BPartnerRelation_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="Proxy",IsDisplayed=true,
@@ -260,12 +259,9 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="c6b38ec6-91b0-5f27-c08c-f42feaa22630",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_BPartnerRelation_ID */
 public static final String COLUMNNAME_C_BPartnerRelation_ID = "C_BPartnerRelation_ID";
-
-/** C_BPartnerRelation_Location_ID AD_Reference=8d01ccac-6606-99a5-ebc2-5a6e01980b37 */
-public static final int C_BPARTNERRELATION_LOCATION_ID_AD_Reference_ID=159;
 /** Set Related Partner Location.
 @param C_BPartnerRelation_Location_ID Location of the related Business Partner */
 public void setC_BPartnerRelation_Location_ID (int C_BPartnerRelation_Location_ID)
@@ -283,10 +279,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="c475e2ea-3ebb-4e14-0d9f-c500cfcd5dbc")
-public static String es_PE_FIELD_Relation_RelatedPartnerLocation_Description="Localización de el socio de negocio relacionado.";
+public static String es_PE_FIELD_Relation_RelatedPartnerLocation_Name="Localización de Socio Relacionado";
 
 @XendraTrl(Identifier="c475e2ea-3ebb-4e14-0d9f-c500cfcd5dbc")
-public static String es_PE_FIELD_Relation_RelatedPartnerLocation_Name="Localización de Socio Relacionado";
+public static String es_PE_FIELD_Relation_RelatedPartnerLocation_Description="Localización de el socio de negocio relacionado.";
 
 @XendraField(AD_Column_ID="C_BPartnerRelation_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -306,7 +302,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d66564f7-14fa-a18c-ba16-b39e57ee7a89",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name C_BPartnerRelation_Location_ID */
 public static final String COLUMNNAME_C_BPartnerRelation_Location_ID = "C_BPartnerRelation_Location_ID";
 /** Set Partner Relation.
@@ -326,13 +322,13 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="f9c06a6d-8b8d-e2b3-ea49-510e2d7e6c92")
+public static String es_PE_FIELD_Relation_PartnerRelation_Name="Relación con Socios";
+
+@XendraTrl(Identifier="f9c06a6d-8b8d-e2b3-ea49-510e2d7e6c92")
 public static String es_PE_FIELD_Relation_PartnerRelation_Description="Relación con Socios de negocio";
 
 @XendraTrl(Identifier="f9c06a6d-8b8d-e2b3-ea49-510e2d7e6c92")
 public static String es_PE_FIELD_Relation_PartnerRelation_Help="Relación con socios de negocio permite mantener reglas de la relación de los terceros: quién recibe las facturas para los envíos ó paga facturas.";
-
-@XendraTrl(Identifier="f9c06a6d-8b8d-e2b3-ea49-510e2d7e6c92")
-public static String es_PE_FIELD_Relation_PartnerRelation_Name="Relación con Socios";
 
 @XendraField(AD_Column_ID="C_BP_Relation_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -370,13 +366,13 @@ return value;
 }
 
 @XendraTrl(Identifier="319df37c-e88d-73b8-5e12-42fd220f74ed")
+public static String es_PE_FIELD_Relation_Description_Name="Observación";
+
+@XendraTrl(Identifier="319df37c-e88d-73b8-5e12-42fd220f74ed")
 public static String es_PE_FIELD_Relation_Description_Description="Observación";
 
 @XendraTrl(Identifier="319df37c-e88d-73b8-5e12-42fd220f74ed")
 public static String es_PE_FIELD_Relation_Description_Help="Observación";
-
-@XendraTrl(Identifier="319df37c-e88d-73b8-5e12-42fd220f74ed")
-public static String es_PE_FIELD_Relation_Description_Name="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -394,7 +390,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="04482ddb-1331-2b9d-1750-471e80afc0d6",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -426,7 +422,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="13ab7fd1-c3cc-4ac1-a869-51988c5a34a9",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Invoice Address.
@@ -449,13 +445,13 @@ return false;
 }
 
 @XendraTrl(Identifier="5ded8b71-0ec1-69a4-47e9-66ee56f4707b")
+public static String es_PE_FIELD_Relation_InvoiceAddress_Name="Dirección Facturar-A";
+
+@XendraTrl(Identifier="5ded8b71-0ec1-69a4-47e9-66ee56f4707b")
 public static String es_PE_FIELD_Relation_InvoiceAddress_Description="Indica que esta dirección es la dirección de facturar A";
 
 @XendraTrl(Identifier="5ded8b71-0ec1-69a4-47e9-66ee56f4707b")
 public static String es_PE_FIELD_Relation_InvoiceAddress_Help="El cuadro de verificación facturar A indica si esta ubicación es la dirección de facturar A para este socio de negocio";
-
-@XendraTrl(Identifier="5ded8b71-0ec1-69a4-47e9-66ee56f4707b")
-public static String es_PE_FIELD_Relation_InvoiceAddress_Name="Dirección Facturar-A";
 
 @XendraField(AD_Column_ID="IsBillTo",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -473,7 +469,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="395b5ca4-5083-33ed-a5c1-cb1994cbdccb",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsBillTo */
 public static final String COLUMNNAME_IsBillTo = "IsBillTo";
 /** Set Pay-From Address.
@@ -496,13 +492,13 @@ return false;
 }
 
 @XendraTrl(Identifier="04c9b683-a22c-7780-5dd4-3c7481fed552")
+public static String es_PE_FIELD_Relation_Pay_FromAddress_Name="Dirección Pagar-Desde";
+
+@XendraTrl(Identifier="04c9b683-a22c-7780-5dd4-3c7481fed552")
 public static String es_PE_FIELD_Relation_Pay_FromAddress_Description="El socio de negocio paga desde esta dirección y a donde se envían las cartas de morosidad";
 
 @XendraTrl(Identifier="04c9b683-a22c-7780-5dd4-3c7481fed552")
 public static String es_PE_FIELD_Relation_Pay_FromAddress_Help="El cuadro de verificación pagado desde la dirección; indica si esta localización es la dirección donde paga el socio de negocio y a donde las cartas de morosidad serán enviadas.";
-
-@XendraTrl(Identifier="04c9b683-a22c-7780-5dd4-3c7481fed552")
-public static String es_PE_FIELD_Relation_Pay_FromAddress_Name="Dirección Pagar-Desde";
 
 @XendraField(AD_Column_ID="IsPayFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -520,7 +516,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d365b3d-51cd-ce12-2faa-4cc6f84268ff",
-Synchronized="2017-08-05 16:53:25.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsPayFrom */
 public static final String COLUMNNAME_IsPayFrom = "IsPayFrom";
 /** Set Remit-To Address.
@@ -543,13 +539,13 @@ return false;
 }
 
 @XendraTrl(Identifier="65a8fe2f-6372-785a-1de3-6b344ec4a3ed")
+public static String es_PE_FIELD_Relation_Remit_ToAddress_Name="Dirección Remitir-A";
+
+@XendraTrl(Identifier="65a8fe2f-6372-785a-1de3-6b344ec4a3ed")
 public static String es_PE_FIELD_Relation_Remit_ToAddress_Description="Dirección a la que enviamos el pago";
 
 @XendraTrl(Identifier="65a8fe2f-6372-785a-1de3-6b344ec4a3ed")
 public static String es_PE_FIELD_Relation_Remit_ToAddress_Help="El cuadro de verificación remitir a la dirección indica si esta localización es la dirección a la cual se deben enviar los pagos a este socio de negocio";
-
-@XendraTrl(Identifier="65a8fe2f-6372-785a-1de3-6b344ec4a3ed")
-public static String es_PE_FIELD_Relation_Remit_ToAddress_Name="Dirección Remitir-A";
 
 @XendraField(AD_Column_ID="IsRemitTo",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -567,7 +563,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d51316c-fb99-108b-644d-14406771019f",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsRemitTo */
 public static final String COLUMNNAME_IsRemitTo = "IsRemitTo";
 /** Set Ship Address.
@@ -590,13 +586,13 @@ return false;
 }
 
 @XendraTrl(Identifier="50b2d669-9723-eb99-b81e-e9f91f33d221")
+public static String es_PE_FIELD_Relation_ShipAddress_Name="Dirección Entregar-A";
+
+@XendraTrl(Identifier="50b2d669-9723-eb99-b81e-e9f91f33d221")
 public static String es_PE_FIELD_Relation_ShipAddress_Description="Dirección del socio de negocio a donde embarcar los bienes";
 
 @XendraTrl(Identifier="50b2d669-9723-eb99-b81e-e9f91f33d221")
 public static String es_PE_FIELD_Relation_ShipAddress_Help="El cuadro de verificación embarcar a la dirección indica si esta localización es la dirección a usar cuando las órdenes se embarquen a este socio de negocio";
-
-@XendraTrl(Identifier="50b2d669-9723-eb99-b81e-e9f91f33d221")
-public static String es_PE_FIELD_Relation_ShipAddress_Name="Dirección Entregar-A";
 
 @XendraField(AD_Column_ID="IsShipTo",IsCentrallyMaintained=true,
 AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -614,7 +610,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ad57da36-129a-422b-688e-05b06a986685",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name IsShipTo */
 public static final String COLUMNNAME_IsShipTo = "IsShipTo";
 /** Set Name.
@@ -646,18 +642,19 @@ return new KeyNamePair(get_ID(), getName());
 }
 
 @XendraTrl(Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
+public static String es_PE_FIELD_Relation_Name_Name="Nombre";
+
+@XendraTrl(Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
 public static String es_PE_FIELD_Relation_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraTrl(Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
 public static String es_PE_FIELD_Relation_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
-@XendraTrl(Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
-public static String es_PE_FIELD_Relation_Name_Name="Nombre";
-@XendraField(AD_Column_ID="Name",
-IsCentrallyMaintained=true,AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",
-IsDisplayed=true,DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,
-IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
-Synchronized="2012-03-17 18:47:14.0",Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
+@XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
+AD_Tab_ID="c964b76d-3a1e-b95a-71ec-56ee1b2b462e",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=40,SortNo=1,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
+Identifier="f5922ce6-9802-e8ac-189a-54f11fc1bc23")
 public static final String FIELDNAME_Relation_Name="f5922ce6-9802-e8ac-189a-54f11fc1bc23";
 
 @XendraTrl(Identifier="e8043aef-3faa-8678-5ec4-d74a2985b8ae")
@@ -669,7 +666,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e8043aef-3faa-8678-5ec4-d74a2985b8ae",
-Synchronized="2017-08-05 16:53:26.0")
+Synchronized="2019-08-30 22:21:16.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

@@ -170,7 +170,7 @@ public final class Preference extends CDialog
 	private String mLocal_Host = "";
 	
 	private static ImageIcon iOpen = new ImageIcon(org.compiere.Xendra.class.getResource("images/mOpen.gif"));
-	VNumber nwebport = new VNumber();	
+	//VNumber nwebport = new VNumber();	
 	JPanel panel_1 = new JPanel();
 	private JPanel panel_1_1;
 	JPanel panel_1a = new JPanel();	
@@ -639,10 +639,10 @@ public final class Preference extends CDialog
 		panel_3.add(bootlabel, gbc_bootlabel);
 		bootlabel.setText("Port:");
 		
-		GridBagConstraints gbc_nwebport = new GridBagConstraints();
-		gbc_nwebport.gridx = 3;
-		gbc_nwebport.gridy = 0;
-		panel_3.add(nwebport, gbc_nwebport);
+		//GridBagConstraints gbc_nwebport = new GridBagConstraints();
+		//gbc_nwebport.gridx = 3;
+		//gbc_nwebport.gridy = 0;
+		//panel_3.add(nwebport, gbc_nwebport);
 		
 //		lblReportsdir = new JLabel("ReportsDir");
 //		GridBagConstraints gbc_lblReportsdir = new GridBagConstraints();
@@ -1012,7 +1012,7 @@ public final class Preference extends CDialog
 			//chkIsholon.setReadWrite(true);
 			//chkStartWebServer.setReadWrite(true);
 			//txtholonname.setReadWrite(true);
-			nwebport.setReadWrite(true);
+			//nwebport.setReadWrite(true);
 			npoolclient.setReadWrite(true);			
 		}
 		else
@@ -1020,7 +1020,7 @@ public final class Preference extends CDialog
 			//chkIsholon.setReadWrite(false);
 			//chkStartWebServer.setReadWrite(false);
 			//txtholonname.setReadWrite(false);			
-			nwebport.setReadWrite(false);
+			//nwebport.setReadWrite(false);
 			npoolclient.setReadWrite(false);
 		}				
 		//  Validate Connection on Startup
@@ -1036,9 +1036,9 @@ public final class Preference extends CDialog
 		npoolclient.setDisplayType(DisplayType.Integer);
 		npoolclient.setValue(poolclient);
 		
-		Integer holonwebport = Integer.valueOf(Ini.getProperty(Ini.P_HOLONWEBPORT));
-		nwebport.setDisplayType(DisplayType.Integer);
-		nwebport.setValue(holonwebport);
+		//Integer holonwebport = Integer.valueOf(Ini.getProperty(Ini.P_HOLONWEBPORT));
+		//nwebport.setDisplayType(DisplayType.Integer);
+		//nwebport.setValue(holonwebport);
 				
 		//	TraceLevel
 		traceLevel.setSelectedItem(CLogMgt.getLevel());
@@ -1099,13 +1099,13 @@ public final class Preference extends CDialog
 		Ini.setProperty(Ini.P_SHOW_ADVANCED, (showAdvanced.isSelected()));
 		Env.setContext(Env.getCtx(), "#ShowAdvanced", (showAdvanced.isSelected()));
 		//Ini.setProperty(Ini.P_MACHINESERIAL, (String) fMachineSerial.getValue());
-		Ini.setProperty(Ini.P_HOLONWEBPORT, String.valueOf(nwebport.getValue()));
+		//Ini.setProperty(Ini.P_HOLONWEBPORT, String.valueOf(nwebport.getValue()));
 		Integer ipoolclient = new Integer(Ini.getProperty(Ini.P_POOLCLIENT));
 		Integer poolclient = (Integer) npoolclient.getValue();
 		if (!ipoolclient.equals(poolclient))
 		{
 			Ini.setProperty(Ini.P_POOLCLIENT, String.valueOf(npoolclient.getValue()));
-			Ini.setProperty(Ini.P_CONNECTION, "");
+			//Ini.setProperty(Ini.P_CONNECTION, "");
 		}
 		//Ini.setProperty(Ini.P_HOLON_REPORT_DIR, fHolonReportDir.getText());
 		//Ini.setProperty(Ini.P_HOLON_CONFIG_DIR, fHolonConfigDir.getText());

@@ -49,9 +49,7 @@ public class SeveralCustomersStep extends AbstractStep {
 		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "newclient", "othersname_text")));
 		component.add(Box.createVerticalStrut(40));
 		LabelWithMnemonic psLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "newclient", "othersname"));
-		//clientname  = new CTextField(20);    	
 		psLabel.setLabelFor(clientname);
-		clientname.setInputVerifier(new ClientNameVerifier());
 		WizardTextField middlePanel = new WizardTextField();		
 		Method method = null;
 		try {			
@@ -84,7 +82,6 @@ public class SeveralCustomersStep extends AbstractStep {
 		//
 		LabelWithMnemonic taxlabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "newclient", "otherstaxid"));
 		taxlabel.setLabelFor(taxid);
-		taxid.setInputVerifier(new TaxInputVerifier());
 		WizardTextField taxPanel = new WizardTextField();		
 		Method taxmethod = null;
 		try {			
@@ -122,38 +119,4 @@ public class SeveralCustomersStep extends AbstractStep {
 			}
 		}
 	}
-	class ClientNameVerifier extends InputVerifier {
-	    @Override
-	    public boolean verify(JComponent input) {
-	        String text = ((CTextField) input).getText();
-	        try {
-	    		String SQL = String.format("UPDATE AD_CLient SET CreatedBy=0 WHERE Name='%s'", text);
-	    		if (DB.executeUpdate(SQL, null) != 0) {
-	    			setCanGoNext(false);	
-	    			ADialog.error(0, null, "NotUnique", text);
-	    			return false;
-	    		}
-	    		else
-	    		{
-	    			setCanGoNext(true);			
-	    			return true;	    			
-	    		}
-	        } catch (NumberFormatException e) {
-	            return false;
-	        }
-	    }
-	}	
-	class TaxInputVerifier extends InputVerifier {
-	    @Override
-	    public boolean verify(JComponent input) {
-	        String text = ((CTextField) input).getText();
-	        try {
-	        	Boolean result = Sunat.isValidRUC(text);
-	    		setCanGoNext(result);
-	    		return result;
-	        } catch (NumberFormatException e) {
-	            return false;
-	        }
-	    }
-	}	
 }
