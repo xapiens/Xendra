@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="background" tilewidth="16" tileheight="16">
+  <image source="sprites/background.png" trans="ff00ff" width="838" height="227"/>
+ </tileset>
+ <layer name="elementos" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3WXU7CQBhG4flG2YYIK1Bs/dmPKK4DlC0o4DoE3QAqBdmGAisA5HjXmzaTdGaS4pzkuXkz6UWHkCpVvh5FqSf00McAz+J+N23C2QRTzPCFubjfjdNKCTQOcIiK9rAbFnE2xjkucIkr7X437YR3fYoGzhAhFve7adecbeIGt2jhTtzvIT+N8Y4PfGKCxMNu2hobbPH7N/DbEHG/70ttdHCPB3QLblnPzNvzesEQI7zireCW9cy8vczZuiObd5rO1h39pztN981/0Q8WWGIlfjbTjvjWqeIYNdS1ny0UCoVCIVvtAB+7zlDAEgAA
+  </data>
+ </layer>
+ <imagelayer name="Image Layer 1" width="40" height="30"/>
+</map>

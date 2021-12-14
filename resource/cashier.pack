@@ -1,0 +1,41 @@
+
+cashier.png
+size: 390,124
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cashier
+  rotate: false
+  xy: 103, 20
+  size: 104, 104
+  orig: 104, 104
+  offset: 0, 0
+  index: -1
+client1b
+  rotate: false
+  xy: 337, 15
+  size: 53, 109
+  orig: 53, 109
+  offset: 0, 0
+  index: -1
+cliente1a
+  rotate: false
+  xy: 278, 15
+  size: 57, 109
+  orig: 57, 109
+  offset: 0, 0
+  index: -1
+cliente2
+  rotate: false
+  xy: 2, 2
+  size: 99, 122
+  orig: 99, 122
+  offset: 0, 0
+  index: -1
+cliente3
+  rotate: false
+  xy: 209, 7
+  size: 67, 117
+  orig: 67, 117
+  offset: 0, 0
+  index: -1
