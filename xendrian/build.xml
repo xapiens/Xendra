@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================= -->
+<!-- Base                                          -->
+<!-- ============================================= -->
+<!-- $Header: /cvsroot/xendra/erp/base/build.xml,v 1.1 2007/06/14 23:27:12 xapiens Exp $ -->
+
+<project name="xendrian" default="catalog" basedir=".">
+
+  <description>
+    This buildfile is used to build the xendrian subproject within 
+    the Xendra project.
+  </description>
+
+  <!-- set global properties for this build -->
+  <import file="../utils_dev/properties.xml"/>
+  <property name="src" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="build.deploy.dir" value="${build.dir}/deploy"/>
+  <property name="dist.dir" value="../lib"/>
+  <property name="plugin_id" value="org.xendra.xendrian"/>
+  <property name="web.dir" value="web"/>
+  <property name="jar.path" value="../lib"/>
+  <property name="jar.name" value="xendrian"/>
+
+  <!-- set path to include the necessary jar files for javac -->
+  <path id="project.class.path">
+    <pathelement path="${classpath}"/>
+    <pathelement path="${jar.path}/core.jar"/>
+    <pathelement path="${jar.path}/Xendralib.jar"/>
+  </path>
+
+
+  <target name="init" depends="clean" description="initialization target">
+    <echo message="=========== Build Xendrian"/>
+    <!-- create the time stamp -->
+    <tstamp>
+	<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />    
+    </tstamp>	      
+    <!-- create the build directory structure used by compile -->
+    <mkdir dir="${build.dir}"/>
+    <!-- check for the distribution directory -->
+    <available file="${dist.dir}" type="dir" property="dist.dir.exists"/>
+  </target>
+
+  <target name="makedir" depends="init" unless="dist.dir.exists">
+    <!-- create the distribution directory if not available -->
+    <mkdir dir="${dist.dir}"/>
+  </target>
+
+  
+  <target name="compile" depends="makedir">
+    <!-- compile the java code from ${src} into ${build.dir} -->
+    <javac destdir="${build.dir}" deprecation="off" debug="on" encoding="${env.ENCODING}">
+      <classpath refid="project.class.path"/>
+      <src path="${src}"/>
+    </javac>
+    <!-- copy all image & sound files from src to the build directory -->
+    <copy todir="${build.dir}">
+      <fileset dir="${src}">
+        <include name="**/images/*"/>
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.wav"/>
+        <include name="**/*.htm"/>
+        <include name="**/*.html"/>
+        <include name="**/*.properties"/>
+        <exclude name="**/package.html"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <!-- =========================================== -->
+  <!-- Distribution                                -->
+  <!-- =========================================== -->
+  <target name="dist" depends="compile">
+    <!-- put everything from ${build.dir} into the ${jar.name}.jar file -->
+    <jar jarfile="${plugin_id}/${jar.name}.jar" basedir="${build.dir}">
+	<manifest>
+	<attribute name="Specification-Title" value="Xendra"/>
+	<attribute name="Specification-Version" value="${env.XENDRA_VERSION}"/>
+	<attribute name="Specification-Vendor" value="Xendra"/>
+	<attribute name="Implementation-Title" value="Xendra ${Env.XENDRA_VERSION}"/>
+	<attribute name="Implementation-Version" value="${Env.XENDRA_VERSION} ${DSTAMP}-${TSTAMP}"/>
+	<attribute name="Implementation-Vendor" value="${Env.XENDRA_VENDOR}"/>
+	<attribute name="Implementation-URL" value="http://www.xendra.org"/>
+	</manifest>
+    </jar>
+    <copy file="src/org/xendra/xendrian/plugin/plugin.xml" todir="."/>
+    <replace file="./plugin.xml"> 
+	<replacefilter token="@timestamp@" value="${timestamp}"/>
+    </replace>	    
+    <copy todir="${dist.dir}">
+	<file file="${plugin_id}/${jar.name}.jar"/>
+    </copy>
+    <war warfile="${build.deploy.dir}/root.war" needxmlfile="false">
+    	<fileset dir="${web.dir}" />
+    </war>
+    <zip destfile="${dist.dir}/${jar.name}.zip">
+  	<zipfileset dir="${plugin_id}" prefix="${plugin_id}">
+		<include name="${jar.name}.jar"/>
+	</zipfileset>
+	<!--<zipfileset dir="src/org/xendra/${jar.name}/plugin" includes="plugin.xml" prefix="${plugin_id}"/>-->
+	<zipfileset dir="." includes="plugin.xml" prefix="${plugin_id}"/>
+	<zipfileset dir="../lib" includes="undertow.jar" prefix="${plugin_id}"/>
+	<zipfileset dir="../lib" includes="CSTools.jar" prefix="${plugin_id}"/>
+	<!--<zipfileset dir="../MessageServer" includes="*/**" prefix="${plugin_id}/MessageServer">
+		<exclude name="data/**"/>
+	</zipfileset>
+	<zipfileset dir="../service" includes="*/**" prefix="${plugin_id}/service"/>-->
+	<zipfileset dir="${build.deploy.dir}" includes="root.war" prefix="${plugin_id}/web"/>
+    </zip>	
+  </target>
+  <target name="catalog" depends="dist">
+     <java fork="true" classname="org.xendra.developer.GenerateCatalog">
+       <arg value="."/>
+       <arg value="./plugin.xml"/>
+       <classpath refid="project.class.path"/>
+       <classpath>
+	   <pathelement location="${plugin_id}/${jar.name}.jar"/>
+       </classpath>
+     </java>
+     <delete file="./plugin.xml"/>
+  </target>
+  <target name="clean">
+    <!-- Delete the ${build.dir} directory trees -->
+    <delete dir="${build.dir}"/>
+    <delete file="${dist.dir}/${jar.name}.jar" failonerror="false"/>
+  </target>
+
+</project>

@@ -1,0 +1,79 @@
+<configuration xmlns="urn:hornetq"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="urn:hornetq /schema/hornetq-configuration.xsd">
+
+   <bindings-directory>${data.dir:../data}/bindings</bindings-directory>
+
+   <journal-directory>${data.dir:../data}/journal</journal-directory>
+
+   <large-messages-directory>${data.dir:../data}/large-messages</large-messages-directory>
+
+   <journal-min-files>10</journal-min-files>
+
+   <paging-directory>${data.dir:../data}/paging</paging-directory>
+   <jmx-management-enabled>true</jmx-management-enabled>
+   <message-counter-enabled>true</message-counter-enabled>
+   <message-counter-sample-period>2000</message-counter-sample-period>
+   <message-counter-max-day-history>2</message-counter-max-day-history>
+   <!-- Connectors -->
+   <connectors>
+      <connector name="netty-connector">
+         <factory-class>org.hornetq.core.remoting.impl.netty.NettyConnectorFactory</factory-class>
+	 <param key="host" value="{myip}"/>
+         <param key="port" value="5445"/>
+      </connector>   
+      <connector name="remote-connector">
+	 <factory-class>org.hornetq.core.remoting.impl.netty.NettyConnectorFactory</factory-class>
+	 <param key="host" value="192.168.2.3"/>
+	 <param key="port" value="5446"/>
+      </connector>
+   </connectors>
+  
+   <!-- Acceptors -->     
+   <acceptors>
+      <acceptor name="netty-acceptor">
+         <factory-class>org.hornetq.core.remoting.impl.netty.NettyAcceptorFactory</factory-class>
+	 <param key="host" value="{myip}"/>
+         <param key="port" value="5445"/>
+      </acceptor>
+   </acceptors>
+  
+   <queues>
+	<queue name="jms.queue.pos">
+	   <address>jms.queue.pos</address>
+        </queue>
+	<queue name="jms.queue.masterpos">
+	   <address>jms.queue.pos</address>
+	</queue>
+   </queues> 
+   <bridges>
+	<bridge name="posbridge">
+		<queue-name>jms.queue.masterpos</queue-name>
+		<forwarding-address>jms.queue.pos</forwarding-address>		
+		<reconnect-attempts>-1</reconnect-attempts>
+		<use-duplicate-detection>false</use-duplicate-detection>
+		<confirmation-window-size>1048576</confirmation-window-size>
+		<static-connectors>
+			<connector-ref>remote-connector</connector-ref>
+		</static-connectors>
+	</bridge>
+   </bridges>
+   <security-settings>
+      <!--security for example queue-->
+      <security-setting match="jms.queue.#">
+         <permission type="createDurableQueue" roles="guest"/>
+         <permission type="deleteDurableQueue" roles="guest"/>
+         <permission type="createNonDurableQueue" roles="guest"/>
+         <permission type="deleteNonDurableQueue" roles="guest"/>
+         <permission type="consume" roles="guest"/>
+         <permission type="send" roles="guest"/>
+      </security-setting>
+      <!-- security setting for JMS temporary queue -->
+      <security-setting match="jms.tempqueue.#">
+	 <permission type="createNonDurableQueue" roles="guest"/>
+	 <permission type="deleteNonDurableQueue" roles="guest"/>
+	 <permission type="consume" roles="guest" />
+	 <permission type="send" roles="guest" />
+      </security-setting>
+   </security-settings>
+</configuration>

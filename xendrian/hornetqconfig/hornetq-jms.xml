@@ -1,0 +1,35 @@
+<configuration xmlns="urn:hornetq"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="urn:hornetq /schema/hornetq-jms.xsd">
+   <!--the connection factory used by the example-->
+   <connection-factory name="ConnectionFactory">
+      <connectors>
+         <connector-ref connector-name="netty-connector"/>
+      </connectors>
+      <entries>
+         <entry name="ConnectionFactory"/>
+      </entries>
+      <!--<client-failure-check-period>-1</client-failure-check-period>
+      <reconnect-attempts>-1</reconnect-attempts>-->
+      <connection-ttl>-1</connection-ttl>
+      <confirmation-window-size>1048576</confirmation-window-size>
+      <consumer-max-rate>10</consumer-max-rate>
+   </connection-factory>
+
+   <!--the queue used by the example-->
+   <queue name="mincing-machine">
+	<entry name="/queue/mincing-machine"/>
+   </queue>
+   <queue name="demand">
+	<entry name="/queue/demand"/>
+   </queue>
+   <queue name="pos">
+	<entry name="/queue/pos"/>
+   </queue>
+   <queue name="pop">
+	<entry name="/queue/pop"/>
+   </queue>
+   <queue name="void">
+	<entry name="/queue/void"/>
+   </queue>
+</configuration>

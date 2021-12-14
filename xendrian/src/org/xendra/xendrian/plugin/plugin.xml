@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin name="Xendrian" 
+        description="Contains references to Xendrian extension" 
+        id="org.xendra.xendrian" 
+        version="1.0" 
+        category="core"
+        synchronized="@timestamp@" 
+	enabled="true">       
+</plugin>
