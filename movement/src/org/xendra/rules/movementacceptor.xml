@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="movementkb" category="movement acceptor" agenda="movement" default="True" package="org.xendra.rules.messages" queuename="/queue/movement" entrypoint="movement" sessionname="movementks" EqualsBehavior="EQUALITY" queuelistenerclass="org.xendra.rules.messages.movListener" type="kiebase" EventProcessingMode="STREAM" Identifier="ec33fd7b-032a-9f15-0fc2-caa1b2e8f389" synchronized="2018-10-01 22:10:41">
+  <rule name="src/main/resources/org/xendra/rules/movementacceptor.drl" type="rule" file="movementacceptor.drl" Identifier="a31e8694-473d-9d3e-7e7a-7bba3f774d8a" synchronized="2018-10-01 18:48:41"><![CDATA[//created on: 01/10/2018
+package org.xendra.rules.messages
+
+import org.xendra.rules.model.MovementPolicyRequest
+import org.xendra.messages.MessageProcessor
+
+dialect "mvel"
+
+// tells the engine that a Sales Policy instance will assume the
+// role (semantics) of events 
+declare MovementPolicyRequest
+    @role( event )
+end 
+
+rule "document"
+	agenda-group "movement"
+when
+	$spr : MovementPolicyRequest(processed == false) from entry-point "movement"
+	eval($spr.processMovement())
+then
+	retract ($spr)
+end]]></rule>
+  <process value="Movement Acceptor" accesslevel="6" frequencytype="M" frequency="2" keeplogdays="7" name="Movement Acceptor" type="A" class="org.xendrian.process.AcceptMovement" AD_Rule_ID="ec33fd7b-032a-9f15-0fc2-caa1b2e8f389" Identifier="8fe3dec7-c8ce-1859-7414-ea1309eb22b6" />
+  <process value="Movement Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Movement Listener" type="L" class="" AD_Rule_ID="ec33fd7b-032a-9f15-0fc2-caa1b2e8f389" AD_MessageFormat_ID="0a065955-421d-4ac2-9424-553dbef77551" Identifier="1e4c0126-3e29-bb06-71fc-ee835fe0688a" />
+</kiebase>
+
+

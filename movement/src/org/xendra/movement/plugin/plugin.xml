@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="movement"
+	description="movement"
+	id="org.xendra.movement"
+	version="1.0"
+	category="Material Management"
+	synchronized="@timestamp@"
+	tags = "material"
+	enabled="true">
+</plugin>
