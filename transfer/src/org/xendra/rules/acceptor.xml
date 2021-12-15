@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="transferkb" category="transference acceptor" agenda="transfer" default="True" package="org.xendra.transfer.messages" queuename="/queue/transfer" EntryPoint="transfer" SessionName="rulesKS" EqualsBehavior="EQUALITY" queuelistenerclass="org.xendra.rules.messages.transfermessageListener" EventProcessingMode="STREAM" identifier="909ab377-3bd4-c9a7-4eab-e668353de660" synchronized="2017-10-18 17:54:41">
+  <rule name="src/main/resources/org/xendra/transfer/acceptor.drl" file="acceptor.drl" identifier="b9046f3e-6ef1-9d56-1d74-c1935aa0fcaf" synchronized="2017-10-18 15:44:41"><![CDATA[//created on: 18/10/2017
+package org.xendra.rules.messages
+
+import org.xendra.transfer.process.TransferPolicyRequest
+ 
+dialect "mvel"
+ 
+// tells the engine that a Transfer Policy instance will assume the
+// role (semantics) of events 
+declare TransferPolicyRequest
+    @role( event )
+end 
+
+rule "generate sub docs"
+    agenda-group "transfer"
+    //lock-on-active
+when
+    $spr : TransferPolicyRequest() from entry-point "transfer"
+then
+    modify ($spr) {simple()} 
+    retract ($spr)
+end]]></rule>
+  <process value="Transfer Acceptor" accesslevel="6" Tag="TRF" frequencytype="N" frequency="2" keeplogdays="7" name="Transfer Acceptor" type="A" class="org.xendra.transfer.process.AcceptTransfer" identifier="4603b7ab-58ac-fef4-9431-2d6bca9b9da4" synchronized="2017-10-17 20:22:41" />
+  <process value="Transfer Listener" accesslevel="4" Tag="TRF" frequencytype="O" frequency="1" keeplogdays="7" name="Transfer Listener" type="L" class="" identifier="62152103-c644-9db5-2685-72a7028091cf" synchronized="2017-10-17 20:22:41" />
+</kiebase>
+
+

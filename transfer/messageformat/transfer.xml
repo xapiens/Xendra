@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+@code{doc.setIdentifier("TRANSFERMESSAGE")}@{doc.get("Header", header, "allfields")}
+@code{seq=1;}@foreach{line : lines}@{doc.get("Line",seq,"allfields", line)}@code{seq++;}
+@end{}

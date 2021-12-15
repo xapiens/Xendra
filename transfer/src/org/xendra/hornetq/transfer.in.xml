@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<format name="transfer" identifier = "b5e1bf86-7c0d-d9bf-db9b-ec6e72af4741" synchronized="2016-09-06 11:20:41">
+<message file="transfer.mvel"/>
+</format>

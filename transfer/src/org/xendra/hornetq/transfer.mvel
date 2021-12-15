@@ -1,0 +1,3 @@
+@code{doc.setIdentifier("TRANSFERMESSAGE")}@code{doc.setField("Header", "LineCount", lines.length)}@code{doc.setField("Header", "AD_Client_ID", doc.getAD_Client_ID())}@code{doc.setField("Header", "AD_Org_ID", doc.getAD_Org_ID())}@{doc.getOpen("Header", header, "allfields")}
+@foreach{line : lines}@{doc.get("item","allfields", line)}@{doc.getClose("Header")}
+@end{}

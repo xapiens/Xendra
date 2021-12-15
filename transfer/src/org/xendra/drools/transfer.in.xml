@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase name="transferkb" category="transference" agenda="init" default="false" 
+	package="org.xendra.transfer.rules" SessionName="transferks" 
+	EqualsBehavior="EQUALITY" EventProcessingMode="CLOUD"	identifier="5db60020-4370-3046-5c2b-77f670f18f59"  synchronized="2017-05-23 07:05:41">	
+<rule name="src/main/resources/org/xendra/transfer/transfer.drl" file="transfer.drl" identifier = "1572d880-727a-6c65-d72e-446d7cdff0b9"  synchronized="2017-05-23 07:05:41"/>
+</kiebase>

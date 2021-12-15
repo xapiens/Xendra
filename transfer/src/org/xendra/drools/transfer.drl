@@ -1,0 +1,327 @@
+// created on: 23/05/2017
+// modified on : 23/05/2017
+// by xapiens
+// pkg start with init
+package org.xendra.transfer.rules
+
+import org.compiere.model.MMovement
+import org.compiere.model.MAttributeSet
+import org.compiere.model.MUOM
+import org.compiere.model.MDocType
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MProductBOM
+import org.compiere.model.MProduct
+import org.compiere.model.MStorage
+import org.compiere.model.Query
+import org.compiere.model.persistence.X_C_PrinterDocumentFormat
+import org.xendra.objectview.ObjectView
+import org.xendra.objectview.ObjectViewModel
+import org.xendra.transfer.Row
+import org.xendra.transfer.CTransferWarehouse
+import org.compiere.util.Env
+import org.compiere.util.Util
+import java.util.Properties
+import java.math.BigDecimal
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.util.DB;
+global Properties ctx
+dialect "mvel"
+
+rule "doctype"
+	agenda-group "noprinter"
+	when
+		$panel : CTransferWarehouse( $error : error == "" )		
+		$mov : MMovement( $doctype : C_DocType_ID > 0)
+		eval(noprinter(ctx, $doctype))
+	then
+		modify ($panel) { setError("no printer") }	
+		retract ($panel)		
+		retract($mov)
+end
+
+rule "deliveryviarule"
+	agenda-group "movement"
+	when
+		$panel : CTransferWarehouse( $error : error == "" )		
+		$mov : MMovement( $deliveryviarule : DeliveryViaRule == null )
+	then		
+		imprime($mov)
+		modify ($panel) { setError("no deliveryviarule") }	
+		retract ($panel)
+		retract($mov)
+end
+
+rule "deliveryrule"
+	agenda-group "movement"
+	when
+		$panel : CTransferWarehouse( $error : error == "" )		
+		$mov : MMovement( $deliveryrule : DeliveryRule == null )
+	then		
+		modify ($panel) { setError("no deliveryrule") }	
+		retract ($panel)
+		retract($mov)
+end
+
+rule "priorityrule"
+	agenda-group "movement"
+	when
+		$panel : CTransferWarehouse(  $error : error == ""  )			
+		$mov : MMovement( $priorityrule : PriorityRule == null )
+	then
+		modify ($panel) { setError("no priorityrule") }	
+		retract ($panel)
+		retract($mov)
+end
+
+rule "asdsf"
+	agenda-group "movement"
+	when
+		$mov : MMovement()
+	then
+		imprime($mov)
+end
+
+rule "view"
+	agenda-group "view"
+	when
+		//$panel : CTransferWarehouse(  $error : error == ""  )			
+		$panel : CTransferWarehouse()			
+		$view : ObjectView()
+		eval(nolines($view))
+	then
+		modify ($panel) { setError("no lines") }	
+		retract ($view)
+		retract ($panel)
+end
+
+rule "stock"
+	agenda-group "view"
+	when
+		//$panel : CTransferWarehouse(  $error : error == ""  )			
+		$panel : CTransferWarehouse()			
+		$view : ObjectView()
+		$mov : MMovement()
+		eval(nostock($mov, $view))
+	then
+		modify ($panel) { setError("no stock") }	
+		retract ($view)
+		retract ($panel)
+end
+
+rule "M_Product_ID"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "M_Product_ID" )	 	
+	 then
+	   $row.getRowData().setM_Product_ID( $row.getFieldIntValue());
+	   product($row);	   	   
+	   createAttribute($row);
+	   kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();	   
+end
+
+rule "QtyEntered"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "QtyEntered" )
+	 	eval(canQtyEntered($row))
+	 then
+	  setQtyEntered($row);
+	  totalrow($row);
+	  System.out.println("QtyEntered->"+$row.getFieldValue());
+  	 kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "C_UOM_ID"
+	agenda-group "row"
+	when 
+		$row : Row ( getFieldName() == "C_UOM_ID" )
+		eval(setC_UOM_ID($row))
+	then
+	$row.getRowData().setC_UOM_ID( $row.getFieldIntValue() ); 
+	totalrow($row);
+	kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "total" ).setFocus();
+end
+
+rule "M_AttributeSetInstance_ID"
+	 agenda-group "row"
+	 when
+	 	$row : Row( getFieldName() == "M_AttributeSetInstance_ID" )	 	
+	 then
+	   $row.getRowData().setM_AttributeSetInstance_ID( $row.getFieldIntValue() );
+end
+
+
+function boolean noprinter(Properties ctx, Integer C_DocType_ID)
+{
+	System.out.println("function noprinter");
+	System.out.println(C_DocType_ID);
+	boolean noprinter = false;
+	MDocType dt = MDocType.get(ctx, C_DocType_ID);
+	if (dt != null)
+	{
+		X_C_PrinterDocumentFormat pd = new Query(Env.getCtx(), 
+				X_C_PrinterDocumentFormat.Table_Name, "C_PrinterDocumentFormat_ID = ?", null)
+				.setParameters(dt.getC_PrinterDocumentFormat_ID()).first();
+		if (pd == null)
+			noprinter = true;
+	}
+	return noprinter;
+}
+
+function void imprime(MMovement mov)
+{
+	System.out.println(String.format("Identifier %s", mov.getIdentifier()));
+	System.out.println(String.format("priority rule %s", mov.getPriorityRule()));	
+	System.out.println(String.format("delivery via rule %s", mov.getDeliveryViaRule()));
+	System.out.println(String.format("delivery rule %s", mov.getDeliveryRule()));
+	System.out.println(String.format("DocType %s", mov.getC_DocType_ID()));
+}
+
+function boolean nolines(ObjectView view) {
+	boolean nolines = true;
+	ObjectViewModel adapter = view.getDataModel();
+	for (int j=0; j <  view.getRowCount() ; j++)
+	{
+		Row row = (Row) adapter.getRowObject(j);
+		if (row.getM_Product_ID() > 0)
+		{				
+			nolines = false;
+			break;
+		}
+	}
+	if (nolines)
+		System.out.println("nolines is true");
+	return nolines;
+}
+
+function boolean nostock(MMovement m, ObjectView view) {
+	if (m.getDeliveryRule().equals(REF_C_OrderDeliveryRule.Force)) {
+			return false;
+	}
+	System.out.println(String.format("nostock -> deliveryRule %s", m.getDeliveryRule()));
+	boolean nostock = false;
+	ObjectViewModel adapter = view.getDataModel();
+	for (int j=0; j <  view.getRowCount() ; j++)
+	{
+		Row row = (Row) adapter.getRowObject(j);
+		if (row.getM_Product_ID() == 0) 
+			continue;
+		System.out.println(String.format("available %s movement %s",row.getQtyAvailable(), row.getMovementQty()));
+		if (row.getQtyAvailable().compareTo(row.getMovementQty()) <= 0)	{				
+			nostock = true;
+			break;
+		}
+	}
+	return nostock;
+}
+
+function boolean canQtyEntered(Row row) {
+	System.out.println("canqtyentered");
+	int C_UOM_To_ID = row.getRowData().getC_UOM_ID(); 			
+	MUOM uom = MUOM.get(Env.getCtx(), row.getRowData().getC_UOM_ID());
+	if (row.getFieldValue().remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) > 0 && !uom.isSplit())
+	{
+		row.setM_processMsg("Producto no acepta fraccion");
+		return false;
+	}
+	return true;
+}
+
+function void createAttribute(Row row) {
+	System.out.println("createAttribute");
+	System.out.println(row.getRowData().getM_AttributeSetInstance_ID());
+	if (row.getRowData().getM_AttributeSetInstance_ID() == 0) {
+		System.out.println("buscando el lote mas antiguo");
+		Integer new_AttributeSetInstance_ID = DB.getSQLValue(null, "SELECT * FROM getancientattributesetinstance(?, ?, ?, ?)", 
+			row.getRowData().getM_Warehouse_ID(), 
+			row.getRowData().getM_Product_ID(), 
+			row.getRowData().getMovementQty(), 
+			Env.getAD_Org_ID(Env.getCtx()));
+			if (new_AttributeSetInstance_ID > 0 )
+			{
+				row.getRowData().setM_AttributeSetInstance_ID(new_AttributeSetInstance_ID);				
+			}			
+	}
+}
+
+function boolean product(Row row) {
+	System.out.println("function product");
+	BigDecimal Qty = row.getRowData().getMovementQty();
+	row.getRowData().setC_UOM_ID(row.getProduct().getC_UOM_ID());
+	row.getRowData().setmProductBrand(row.getProduct().getBrand());
+	row.getRowData().setmProductBrandValue(row.getProduct().getBrandValue());
+	row.getRowData().setM_AttributeSet_ID(row.getProduct().getM_AttributeSet_ID());
+	if (row.getRowData().getM_AttributeSet_ID() != 0) {
+		MAttributeSet mas = MAttributeSet.get(Env.getCtx(),	row.getRowData().getM_AttributeSet_ID());
+		if (mas != null	&& mas.isMandatory())  {
+			row.getRowData().setIsAttributeMandatory(true);
+		}
+	}
+   return true;
+}
+
+function boolean setC_UOM_ID(Row row) {
+	int C_UOM_To_ID = row.getFieldIntValue();	
+	BigDecimal QtyEntered1 = row.getRowData().getQtyEntered()
+		.setScale(MUOM.getPrecision(Env.getCtx(), C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (row.getRowData().getMovementQty().compareTo(QtyEntered1) != 0)
+	{
+		row.getRowData().setQtyEntered(QtyEntered1);
+	}
+	row.getRowData().setMovementQty(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getRowData().getQtyEntered()));
+
+	if (row.getRowData().getMovementQty() == null)
+		row.getRowData().setMovementQty(row.getRowData().getQtyEntered());
+		boolean conversion = row.getRowData().getQtyEntered().compareTo(row.getRowData().getMovementQty()) != 0;
+		if (!row.getRowData().getIsStocked())
+			 return true;		
+	return checkAvailable(row);			
+}
+
+function void totalrow(Row row) {
+		//int StdPrecision = MPriceList.getStandardPrecision(Env.getCtx(), row.getRowData().getM_PriceList_ID()); // jala la precision de la moneda
+		//row.getRowData().setGross(row.getRowData().getPriceList().multiply(row.getRowData().getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP));
+		//row.getRowData().setTotal(row.getRowData().getPriceActual().multiply(row.getRowData().getQtyOrdered()).setScale(StdPrecision, BigDecimal.ROUND_HALF_UP));
+}
+
+function boolean checkAvailable(Row row) {
+		if (row.getRowData().getM_DeliveryRule().equals(REF_C_OrderDeliveryRule.Force))
+			return true;
+		BigDecimal available = MStorage.getQtyAvailable(row.getRowData().getM_Warehouse_ID(),
+								0,
+								row.getRowData().getM_Product_ID().intValue(),
+								row.getRowData().getM_AttributeSetInstance_ID(), null);
+		if (available == null)
+			available = BigDecimal.ZERO;
+		if (available.signum() == 0)
+		{
+		  row.setM_processMsg("NoQtyAvailable");		 
+		  return false;
+		}
+		else if (available.compareTo(row.getRowData().getMovementQty()) < 0)
+		{
+			row.setM_processMsg("InsufficientQtyAvailable");
+			return false;
+		}
+		return true;
+}
+
+function void setQtyEntered(Row row)
+{
+	int C_UOM_To_ID = row.getRowData().getC_UOM_ID(); 			
+	MUOM uom = MUOM.get(Env.getCtx(), row.getRowData().getC_UOM_ID());
+	row.getRowData().setQtyEntered(row.getFieldValue());
+	BigDecimal QtyEntered1 = row.getRowData().getQtyEntered().setScale(uom.getStdPrecision(), BigDecimal.ROUND_HALF_UP);
+	if (row.getRowData().getQtyEntered().compareTo(QtyEntered1) != 0)
+	{
+		row.getRowData().setQtyEntered(QtyEntered1);
+	}
+	row.getRowData().setMovementQty(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(), C_UOM_To_ID, row.getRowData().getQtyEntered()));
+	if (row.getRowData().getMovementQty() == null)
+		row.getRowData().setMovementQty(row.getRowData().getQtyEntered());
+	//boolean conversion = row.getRowData().getQtyEntered().compareTo(row.getRowData().getMovementQty()) != 0;
+	//row.getRowData().setUOMConversion(conversion ? "Y" : "N");	
+	//row.getRowData().setMovementQty(MUOMConversion.convertProductFrom (Env.getCtx(), row.getRowData().getM_Product_ID(),row.getRowData().getC_UOM_ID(), row.getRowData().getQtyEntered()));
+	if (row.getRowData().getMovementQty() == null)
+		row.getRowData().setMovementQty(row.getRowData().getQtyEntered());
+}

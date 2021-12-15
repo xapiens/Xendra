@@ -1,0 +1,22 @@
+//created on: 18/10/2017
+package org.xendra.rules.messages
+
+import org.xendra.transfer.process.TransferPolicyRequest
+ 
+dialect "mvel"
+ 
+// tells the engine that a Transfer Policy instance will assume the
+// role (semantics) of events 
+declare TransferPolicyRequest
+    @role( event )
+end 
+
+rule "generate sub docs"
+    agenda-group "transfer"
+    //lock-on-active
+when
+    $spr : TransferPolicyRequest() from entry-point "transfer"
+then
+    modify ($spr) {simple()} 
+    retract ($spr)
+end
