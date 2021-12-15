@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listen name="replicationkb" 
+	package="org.xendra.replication.messages"
+	queuename="/queue/reference"
+	queuelistenerclass="org.xendra.replication.messages.replmessageListener"
+    identifier="6d5aef7b-b053-5e11-8fc3-5a0e01b33e46"  synchronized="2017-05-12 16:33:41">	
+<process value="Replication Acceptor" accesslevel="6" frequencytype="M" frequency="1" keeplogdays="7" name="Replication Acceptor" type="A" class="org.xendra.replication.process.Replication" identifier="03cb243b-d2ba-aba1-6ef3-7dfb6ec735aa"/>
+<process value="Replication Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Replication Listener" type="L" class="" identifier="e83e1098-7503-1470-badb-7c3655eea68b"/>
+</listen>

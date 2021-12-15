@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="replication" 
+        description="replication" 
+        id="org.xendra.replication" 
+        version="1.0" 
+        category="framework" 
+	synchronized="@timestamp@"
+	tags="replication"
+	enabled="true">
+</plugin>
