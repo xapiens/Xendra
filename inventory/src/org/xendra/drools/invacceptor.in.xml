@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="inventory" category="" default="false" package="org.xendra.rules.messages" name="inventorykb" 
+sessionname="inventoryks" queuename="/queue/inventory" docbasetype="" docsubtype="" 
+ruletype="" entrypoint="inventory" EqualsBehavior="EQUALITY" 
+queuelistenerclass="org.xendra.rules.messages.invListener" EventProcessingMode="STREAM" Identifier="f65bd13a-831b-4ef0-ab6f-18a7c13eae55" synchronized="2018-10-09 23:43:51.104" type="kiebase" >
+<rule name="src/main/resources/org.xendra.inventory/invacceptor.drl" type="rule" sessionname="inventoryks" file="invacceptor.drl" Identifier="b212ee01-d2f6-4c64-8e20-909b53c8657d" synchronized="2018-10-09 23:43:51.126"/>
+<process value="Inventory Acceptor" accesslevel="6" frequencytype="M" frequency="2" keeplogdays="7" name="Inventory Acceptor" type="A" class="org.xendrian.process.AcceptInventory" AD_Rule_ID="f65bd13a-831b-4ef0-ab6f-18a7c13eae55" Identifier="c04be62b-691e-4f7e-ebb8-973e92ab3c32"/>
+<process value="Inventory Listener" accesslevel="4" frequencytype="O" frequency="1" keeplogdays="7" name="Inventory Listener" type="L" class="" AD_Rule_ID="f65bd13a-831b-4ef0-ab6f-18a7c13eae55" AD_MessageFormat_ID="ed091f30-6ab0-4f80-b259-45c9d53cd198" Identifier="8fd0eb7e-67f0-7581-ef77-78699e70c300"/>
+</kiebase>

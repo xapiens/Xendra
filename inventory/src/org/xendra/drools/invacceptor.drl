@@ -1,0 +1,22 @@
+//created on: 01/10/2018
+package org.xendra.rules.messages
+
+import org.xendra.rules.model.InventoryPolicyRequest
+import org.xendra.messages.MessageProcessor
+
+dialect "mvel"
+
+// tells the engine that a Inventory Policy instance will assume the
+// role (semantics) of events 
+declare InventoryPolicyRequest
+    @role( event )
+end 
+
+rule "document"
+	agenda-group "inventory"
+when
+	$spr : InventoryPolicyRequest(processed == false) from entry-point "inventory"
+	eval($spr.processInventory())
+then
+	retract ($spr)
+end
