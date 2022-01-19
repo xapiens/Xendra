@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  icons /usr/share/icons/gnome/ -->
+<toolbar visible="true">
+    <button action="LoadAction"/>
+    <button action="SaveAction"/>
+    <button action="AddCertificateAction"/>
+    <button action="ExportAsciiAction"/>
+    <button action="ExportCertificateAction"/>
+</toolbar>
