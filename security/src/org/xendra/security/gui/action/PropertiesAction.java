@@ -15,11 +15,12 @@ import org.xendra.security.util.ResourceLoader;
 public class PropertiesAction extends SecurityColumbaAction {
 	public PropertiesAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "Properties"));
-		putValue(Constants.ID, "Properties");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","Properties"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","Properties"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		//putValue(Constants.ID, "Properties");		
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe","Properties"));
+		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","Properties"));
+		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","Properties"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","properties.png"));
+		//putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	public void actionPerformed(ActionEvent arg0) {

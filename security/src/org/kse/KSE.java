@@ -37,15 +37,15 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 
 import org.bouncycastle.asn1.x500.X500Name;
-//import org.columba.core.component.ComponentManager;
-//import org.columba.core.gui.frame.FrameManager;
-//import org.columba.core.plugin.PluginManager;
-//import org.compiere.apps.AEnv;
-//import org.compiere.apps.ALogin;
-//import org.compiere.model.Query;
-//import org.compiere.model.persistence.X_A_Machine;
-//import org.compiere.util.Env;
-//import org.compiere.util.Splash;
+import org.columba.core.component.ComponentManager;
+import org.columba.core.gui.frame.FrameManager;
+import org.columba.core.plugin.PluginManager;
+import org.compiere.apps.AEnv;
+import org.compiere.apps.ALogin;
+import org.compiere.model.Query;
+import org.compiere.model.persistence.X_A_Machine;
+import org.compiere.util.Env;
+import org.compiere.util.Splash;
 import org.kse.crypto.x509.KseX500NameStyle;
 import org.kse.gui.CreateApplicationGui;
 import org.kse.gui.CurrentDirectory;
@@ -86,57 +86,57 @@ public class KSE {
 	 *            the command line arguments
 	 */
 	public static void main(String args[]) {
-//		try {
-//			try {
-//				org.compiere.Xendra.startup(true);
-//				Splash splash = Splash.getSplash();
-//				ALogin login = new ALogin(splash);
-//				if (!login.initLogin())		//	no automatic login
-//				{
-//					//	Center the window
-//					try
-//					{
-//						AEnv.showCenterScreen(login);	//	HTML load errors
-//					}
-//					catch (Exception ex)
-//					{
-//						//log.severe(ex.toString());
-//						ex.printStackTrace();
-//					}
-//					if (!login.isConnected() || !login.isOKpressed())
-//						AEnv.exit(1);
-//				}
-//				
-//				splash.dispose();
-//				splash = null;					
-//				
-//				int AD_Role_ID = Env.getAD_Role_ID(Env.getCtx());
-//				
-//				List<X_A_Machine> machines = new Query(Env.getCtx(), X_A_Machine.Table_Name, "IsActive = 'Y' ", null).list();
-//				for (X_A_Machine machine:machines)
-//				{
-//					
-//				}
-//				PluginManager.getInstance().addExtensionHandlers("org/columba/core/plugin/extensionhandler.xml");
-//				//PluginManager.getInstance().addExtensionHandlers("org/xendra/security/plugin/extensionhandler.xml");
-//
-//				String path = "org/columba/core/plugin/plugin.xml";
-//				PluginManager.getInstance().addPlugin(path);
-//
-//				path = "org/xendra/security/plugin/plugin.xml";
-//				PluginManager.getInstance().addPlugin(path);
-//				//Main.mainClassLoader = new MainClassLoader(Main.class.getClassLoader());
-//				ComponentManager.getInstance().init();
-//				FrameManager.getInstance().openView("SecurityEditor");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}			
-//		} catch (Throwable t) {
-//			DError dError = new DError(new JFrame(), t);
-//			dError.setLocationRelativeTo(null);
-//			dError.setVisible(true);
-//			System.exit(1);
-//		}
+		try {
+			try {
+				org.compiere.Xendra.startup(true);
+				Splash splash = Splash.getSplash();
+				ALogin login = new ALogin(splash);
+				if (!login.initLogin())		//	no automatic login
+				{
+					//	Center the window
+					try
+					{
+						AEnv.showCenterScreen(login);	//	HTML load errors
+					}
+					catch (Exception ex)
+					{
+						//log.severe(ex.toString());
+						ex.printStackTrace();
+					}
+					if (!login.isConnected() || !login.isOKpressed())
+						AEnv.exit(1);
+				}
+				
+				splash.dispose();
+				splash = null;					
+				
+				int AD_Role_ID = Env.getAD_Role_ID(Env.getCtx());
+				
+				List<X_A_Machine> machines = new Query(Env.getCtx(), X_A_Machine.Table_Name, "IsActive = 'Y' ", null).list();
+				for (X_A_Machine machine:machines)
+				{
+					
+				}
+				PluginManager.getInstance().addExtensionHandlers("org/columba/core/plugin/extensionhandler.xml");
+				//PluginManager.getInstance().addExtensionHandlers("org/xendra/security/plugin/extensionhandler.xml");
+
+				String path = "org/columba/core/plugin/plugin.xml";
+				PluginManager.getInstance().addPlugin(path);
+
+				path = "org/xendra/security/plugin/plugin.xml";
+				PluginManager.getInstance().addPlugin(path);
+				//Main.mainClassLoader = new MainClassLoader(Main.class.getClassLoader());
+				ComponentManager.getInstance().init();
+				FrameManager.getInstance().openView("SecurityEditor");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+		} catch (Throwable t) {
+			DError dError = new DError(new JFrame(), t);
+			dError.setLocationRelativeTo(null);
+			dError.setVisible(true);
+			System.exit(1);
+		}
 	}
 
 //	// To take affect these must be set before the splash screen is instantiated

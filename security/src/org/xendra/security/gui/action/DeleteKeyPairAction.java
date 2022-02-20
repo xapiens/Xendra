@@ -20,11 +20,7 @@ import org.xendra.security.util.ResourceLoader;
 public class DeleteKeyPairAction extends SecurityColumbaAction implements HistoryAction {
 	public DeleteKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "DeleteKeyPair"));
-		putValue(Constants.ID, "DeleteKeyPair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","DeleteKeyPair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","DeleteKeyPair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "delete.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

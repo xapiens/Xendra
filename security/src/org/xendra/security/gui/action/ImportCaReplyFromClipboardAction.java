@@ -34,11 +34,8 @@ public class ImportCaReplyFromClipboardAction extends AuthorityCertificatesActio
 	
 	public ImportCaReplyFromClipboardAction(IFrameMediator frameMediator) {
 		super(frameMediator);
-		putValue(Constants.ID, "ImportCaReplyFromClipboard");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ImportCaReplyFromClipboard"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ImportCaReplyFromClipboard"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe", "ImportCaReplyFromClipboard"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "importcareplyclipboard.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

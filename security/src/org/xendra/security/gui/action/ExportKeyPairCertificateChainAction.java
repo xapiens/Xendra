@@ -28,11 +28,11 @@ import java.io.IOException;
 public class ExportKeyPairCertificateChainAction extends SecurityColumbaAction {
 	public ExportKeyPairCertificateChainAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "ExportKeyPairCertificateChain"));
-		putValue(Constants.ID, "ExportKeyPairCertificateChain");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ExportKeyPairCertificateChain"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ExportKeyPairCertificateChain"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		//putValue(Constants.ID, "ExportKeyPairCertificateChain");
+		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ExportKeyPairCertificateChain"));
+		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ExportKeyPairCertificateChain"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "exportkeypaircertchain.png"));
+		//putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	@Override

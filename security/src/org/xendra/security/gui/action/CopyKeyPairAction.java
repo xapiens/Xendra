@@ -9,11 +9,7 @@ import org.xendra.security.util.ResourceLoader;
 public class CopyKeyPairAction extends CopyAction   {
 	public CopyKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator);
-		putValue(Constants.ID, "copykeypair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","copykeypair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","copykeypair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));				
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "copy.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 }

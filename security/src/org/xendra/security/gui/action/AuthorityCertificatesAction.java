@@ -29,11 +29,6 @@ public class AuthorityCertificatesAction extends SecurityColumbaAction {
 	
 	public AuthorityCertificatesAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "authoritycertificates"));
-		putValue(Constants.ID, "authoritycertificates");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","authoritycertificates"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","authoritycertificates"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

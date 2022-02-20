@@ -33,11 +33,8 @@ import org.xendra.security.util.ResourceLoader;
 public class ImportKeyPairAction extends SecurityColumbaAction implements HistoryAction {
 	public ImportKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "ImportKeyPair"));
-		putValue(Constants.ID, "ImportKeyPair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ImportKeyPair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ImportKeyPair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe","ImportKeyPair"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","importkeypair.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 
@@ -218,7 +215,8 @@ public class ImportKeyPairAction extends SecurityColumbaAction implements Histor
 			JOptionPane.showMessageDialog(getFrameMediator().getContainer().getFrame(), res.getString("ImportKeyPairAction.KeyPairImportSuccessful.message"),
 					res.getString("ImportKeyPairAction.ImportKeyPair.Title"), JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception ex) {
-			DError.displayError(getFrameMediator().getContainer().getFrame(), ex);
+			ex.printStackTrace();
+			//DError.displayError(getFrameMediator().getContainer().getFrame(), ex);
 		}
 	}
 	private void importKeyPairPvk() {

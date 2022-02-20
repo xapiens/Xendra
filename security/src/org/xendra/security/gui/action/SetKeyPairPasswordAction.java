@@ -32,11 +32,7 @@ public class SetKeyPairPasswordAction extends SecurityColumbaAction  implements 
 
 	public SetKeyPairPasswordAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "SetKeyPairPassword"));
-		putValue(Constants.ID, "SetKeyPairPassword");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","SetKeyPairPassword"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","SetKeyPairPassword"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "setpass.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	

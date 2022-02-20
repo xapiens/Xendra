@@ -20,11 +20,12 @@ import org.xendra.security.util.ResourceLoader;
 public class SetPasswordAction extends SecurityColumbaAction implements HistoryAction {
 	public SetPasswordAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "setpassword"));
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","setpassword"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","setpassword"));
-		putValue(Constants.ID, "setpassword");
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.DOCUMENT_SAVE));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.DOCUMENT_SAVE));		
+		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","setpassword"));
+		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","setpassword"));
+		//putValue(Constants.ID, "setpassword");
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe","setpassword"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","setpass.png"));
+		//putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.DOCUMENT_SAVE));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

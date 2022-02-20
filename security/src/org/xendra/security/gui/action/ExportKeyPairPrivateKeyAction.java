@@ -38,11 +38,7 @@ import org.apache.commons.io.IOUtils;
 public class ExportKeyPairPrivateKeyAction extends SecurityColumbaAction {
 	public ExportKeyPairPrivateKeyAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "ExportKeyPairPrivateKey"));
-		putValue(Constants.ID, "ExportKeyPairCertificateChain");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ExportKeyPairPrivateKey"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ExportKeyPairPrivateKey"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "keypairexportpvk.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

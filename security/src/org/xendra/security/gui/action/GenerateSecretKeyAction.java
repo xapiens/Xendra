@@ -28,11 +28,11 @@ import org.xendra.security.util.ResourceLoader;
 public class GenerateSecretKeyAction extends SecurityColumbaAction implements HistoryAction {
 	public GenerateSecretKeyAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "GenerateSecretKey"));
-		putValue(Constants.ID, "GenerateSecretKey");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","GenerateSecretKey"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","GenerateSecretKey"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		//putValue(Constants.ID, "GenerateSecretKey");
+		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","GenerateSecretKey"));
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe","GenerateSecretKey"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","genseckey.png"));
+		//putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

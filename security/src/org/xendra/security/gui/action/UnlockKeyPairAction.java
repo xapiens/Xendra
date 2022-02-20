@@ -20,11 +20,7 @@ public class UnlockKeyPairAction extends SecurityColumbaAction  {
 
 	public UnlockKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "unlockkeypair"));
-		putValue(Constants.ID, "unlockkeypair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","unlockkeypair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","unlockkeypair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "unlock.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	public void actionPerformed(ActionEvent e) {

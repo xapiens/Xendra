@@ -37,10 +37,7 @@ public class ChangeTypeAction  extends SecurityColumbaAction implements HistoryA
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "ChangeType"));
 		this.newType = newType;
 		putValue(Constants.ID, "ChangeType");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","ChangeType"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","ChangeType"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(NAME, newType.friendly());
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

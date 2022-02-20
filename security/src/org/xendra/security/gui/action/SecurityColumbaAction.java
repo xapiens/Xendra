@@ -36,6 +36,7 @@ public class SecurityColumbaAction extends AbstractColumbaAction {
 	public SecurityColumbaAction(IFrameMediator frameMediator, String name) {
 		super(frameMediator, name);
 		this.frameMediator = frameMediator;
+		applicationSettings = ApplicationSettings.getInstance();
 	}	
 	//	public SecurityColumbaAction(IFrameMediator frameMediator) {
 	//		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "authoritycertificates"));

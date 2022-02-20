@@ -1,6 +1,7 @@
 package org.xendra.security.gui.action;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.security.KeyStore;
 import java.security.cert.X509Certificate;
@@ -32,11 +33,9 @@ public class ImportTrustedCertificateAction  extends AuthorityCertificatesAction
 
 	public ImportTrustedCertificateAction(IFrameMediator frameMediator) {
 		super(frameMediator);
-		putValue(Constants.ID, "authoritycertificates");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","authoritycertificates"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","authoritycertificates"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(Constants.ID, "ImportTrustedCertificateAction");
+		putValue(NAME, ResourceLoader.getString("menu", "mainframe","ImportTrustedCertificate"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","importcert.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 
@@ -74,7 +73,8 @@ public class ImportTrustedCertificateAction  extends AuthorityCertificatesAction
 	 * Do action.
 	 */
 	//@Override
-	protected void doAction() {
+	public void actionPerformed(ActionEvent arg0) {
+	//protected void doAction() {
 		try {
 			KeyStoreHistory history = ((SecurityEditorFrameController) frameMediator).getActiveKeyStoreHistory();
 

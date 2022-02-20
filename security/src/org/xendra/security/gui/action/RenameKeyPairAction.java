@@ -25,11 +25,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class RenameKeyPairAction extends SecurityColumbaAction  implements HistoryAction {
 	public RenameKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "RenameKeyPair"));
-		putValue(Constants.ID, "RenameKeyPair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","RenameKeyPair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","RenameKeyPair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "rename.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -41,6 +42,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -60,6 +62,7 @@ import org.columba.api.gui.frame.IDockable;
 import org.columba.core.config.View;
 import org.columba.core.gui.action.AbstractColumbaAction;
 import org.columba.core.gui.frame.DockFrameController;
+import org.columba.core.resourceloader.ImageLoader;
 import org.compiere.model.MConfig;
 import org.kse.ApplicationSettings;
 import org.kse.KSE;
@@ -87,6 +90,7 @@ import org.kse.utilities.history.KeyStoreHistory;
 import org.kse.utilities.history.KeyStoreState;
 import org.kse.utilities.os.OperatingSystem;
 import org.xendra.security.gui.action.AppendToCertificateChainAction;
+import org.xendra.security.gui.action.ChangeTypeAction;
 import org.xendra.security.gui.action.CopyAction;
 import org.xendra.security.gui.action.CopyKeyPairAction;
 import org.xendra.security.gui.action.CopyTrustedCertificateAction;
@@ -104,19 +108,24 @@ import org.xendra.security.gui.action.ExportTrustedCertificateAction;
 import org.xendra.security.gui.action.ExportTrustedCertificatePublicKeyAction;
 import org.xendra.security.gui.action.GenerateCsrAction;
 import org.xendra.security.gui.action.GenerateKeyPairAction;
+import org.xendra.security.gui.action.GenerateSecretKeyAction;
 import org.xendra.security.gui.action.ImportCaReplyFromClipboardAction;
 import org.xendra.security.gui.action.ImportCaReplyFromFileAction;
+import org.xendra.security.gui.action.ImportKeyPairAction;
+import org.xendra.security.gui.action.ImportTrustedCertificateAction;
 import org.xendra.security.gui.action.KeyDetailsAction;
 import org.xendra.security.gui.action.KeyPairCertificateChainDetailsAction;
 import org.xendra.security.gui.action.KeyPairPrivateKeyDetailsAction;
 import org.xendra.security.gui.action.KeyPairPublicKeyDetailsAction;
 import org.xendra.security.gui.action.PasteAction;
+import org.xendra.security.gui.action.PropertiesAction;
 import org.xendra.security.gui.action.RemoveFromCertificateChainAction;
 import org.xendra.security.gui.action.RenameKeyAction;
 import org.xendra.security.gui.action.RenameKeyPairAction;
 import org.xendra.security.gui.action.RenameTrustedCertificateAction;
 import org.xendra.security.gui.action.SetKeyPairPasswordAction;
 import org.xendra.security.gui.action.SetKeyPasswordAction;
+import org.xendra.security.gui.action.SetPasswordAction;
 import org.xendra.security.gui.action.SignCsrAction;
 import org.xendra.security.gui.action.SignJarAction;
 import org.xendra.security.gui.action.SignMidletAction;
@@ -143,7 +152,22 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	private JPopupMenu jpmTrustedCertificate;
 	private JMenu jmKeyPairDetails;
 	private JPopupMenu jpmKey;
+	// KeyStore and items of right click 
 	private JPopupMenu jpmKeyStore;
+	private JMenuItem jmiKeyStoreGenerateKeyPair;
+	private JMenuItem jmiKeyStoreGenerateSecretKey;
+	private JMenuItem jmiKeyStoreImportTrustedCertificate;
+	private JMenuItem jmiKeyStoreImportKeyPair;
+	private JMenu jmKeyStoreChangeType;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeJks;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeJceks;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypePkcs12;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeBksV1;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeBks;
+	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeUber;
+	private JMenuItem jmiKeyStoreSetPassword;
+	private JMenuItem jmiKeyStoreProperties;
+	
 	private JMenuItem jmiKeyPairCertificateChainDetails;
 	private JMenuItem jmiKeyPairPrivateKeyDetails;
 	private JMenuItem jmiKeyPairPublicKeyDetails;
@@ -187,7 +211,19 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	private JMenuItem jmiKeyRename;
 
 	private UnlockKeyAction unlockKeyAction = new UnlockKeyAction(this);
-	private GenerateKeyPairAction generateKeyPairAction = new GenerateKeyPairAction(this);	
+	private GenerateKeyPairAction generateKeyPairAction = new GenerateKeyPairAction(this);
+	private GenerateSecretKeyAction generateSecretKeyAction = new GenerateSecretKeyAction(this);
+	private ImportTrustedCertificateAction importTrustedCertificateAction = new ImportTrustedCertificateAction(this);
+	private ImportKeyPairAction importKeyPairAction = new ImportKeyPairAction(this);
+	private SetPasswordAction setPasswordAction = new SetPasswordAction(this);
+	private ChangeTypeAction changeTypeJksAction = new ChangeTypeAction(this, KeyStoreType.JKS);
+	private ChangeTypeAction changeTypeJceksAction = new ChangeTypeAction(this, KeyStoreType.JCEKS);
+	private ChangeTypeAction changeTypePkcs12Action = new ChangeTypeAction(this, KeyStoreType.PKCS12);
+	private ChangeTypeAction changeTypeBksV1Action = new ChangeTypeAction(this, KeyStoreType.BKS_V1);
+	private ChangeTypeAction changeTypeBksAction = new ChangeTypeAction(this, KeyStoreType.BKS);
+	private ChangeTypeAction changeTypeUberAction = new ChangeTypeAction(this, KeyStoreType.UBER);
+	private PropertiesAction propertiesAction = new PropertiesAction(this); 
+		
 	private final CutAction cutAction = new CutAction(this);
 	private KeyPairCertificateChainDetailsAction keyPairCertificateChainDetailsAction = new KeyPairCertificateChainDetailsAction(this);
 	private KeyPairPrivateKeyDetailsAction keyPairPrivateKeyDetailsAction = new KeyPairPrivateKeyDetailsAction(this);
@@ -230,12 +266,59 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	public SecurityEditorFrameController(View viewItem) {
 		super(viewItem);
 		//initKeyStoreTabPopupMenu();
-		//initKeyStorePopupMenu();
+		initKeyStorePopupMenu();
 		initKeyStoreEntryPopupMenus();
 		//mainPanel = new SecurityPanel();
 		jkstpKeyStores = new JKeyStoreTabbedPane(this);
 		Security.addProvider(new BouncyCastleProvider());
 		registerDockables();
+	}
+	private void initKeyStorePopupMenu() {
+		jpmKeyStore = new JPopupMenu();
+		
+		jmiKeyStoreGenerateKeyPair = new JMenuItem(generateKeyPairAction);
+		jpmKeyStore.add(jmiKeyStoreGenerateKeyPair);
+		
+		jmiKeyStoreGenerateSecretKey = new JMenuItem(generateSecretKeyAction);
+		jpmKeyStore.add(jmiKeyStoreGenerateSecretKey);
+		
+		jmiKeyStoreImportTrustedCertificate = new JMenuItem(importTrustedCertificateAction);
+		jpmKeyStore.add(jmiKeyStoreImportTrustedCertificate);
+		
+		jmiKeyStoreImportKeyPair = new JMenuItem(importKeyPairAction);
+		jpmKeyStore.add(jmiKeyStoreImportKeyPair);
+		
+		jpmKeyStore.addSeparator();
+		// src/org/kse/gui/KseFrame.java 1762
+		jmiKeyStoreSetPassword = new JMenuItem(setPasswordAction);
+		jpmKeyStore.add(jmiKeyStoreSetPassword);
+		
+		jmKeyStoreChangeType = new JMenu(res.getString("KseFrame.jmChangeType.text"));
+		jmKeyStoreChangeType.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
+					getClass().getResource(res.getString("KseFrame.jmChangeType.image")))));				
+		jpmKeyStore.add(jmKeyStoreChangeType);
+		
+		jrbmiKeyStoreChangeTypeJks = new JRadioButtonMenuItem(changeTypeJksAction);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeJks);
+		jrbmiKeyStoreChangeTypeJceks = new JRadioButtonMenuItem(changeTypeJceksAction);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeJceks);
+		jrbmiKeyStoreChangeTypePkcs12 = new JRadioButtonMenuItem(changeTypePkcs12Action);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypePkcs12);
+		jrbmiKeyStoreChangeTypeBksV1 = new JRadioButtonMenuItem(changeTypeBksV1Action);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeBksV1);
+		jrbmiKeyStoreChangeTypeBks = new JRadioButtonMenuItem(changeTypeBksAction);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeBks);
+        jrbmiKeyStoreChangeTypeUber = new JRadioButtonMenuItem(changeTypeUberAction);
+        jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeUber);
+        ButtonGroup changeTypeGroup = new ButtonGroup();
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypeJks);
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypeJceks);
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypePkcs12);
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypeBks);
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypeBksV1);
+        changeTypeGroup.add(jrbmiKeyStoreChangeTypeUber);
+        jmiKeyStoreProperties = new JMenuItem(propertiesAction);
+        jpmKeyStore.add(jmiKeyStoreProperties);		
 	}
 	private void registerDockables() {	
 		//main = registerDockable("modeleditor_foldertree", ResourceLoader.getString("global", "dockable_foldertree"), mainPanel, null);
@@ -247,7 +330,7 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	}	
 	public void extendToolBar(IContainer container) {
 		try {
-			MConfig config = MConfig.getbyIdentifier("xendra","security","main_toolbar");
+			MConfig config = MConfig.getbyIdentifier("org.xendra.security","main_toolbar");
 			InputStream is2 = new ByteArrayInputStream(config.getContent().getBytes());
 			container.extendToolbar(this, is2);
 		}
@@ -499,6 +582,9 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		//		updateApplicationTitle();
 
 		//		frame.repaint();
+		//this.getContainer().getFrame().repaint();		
+		jkstpKeyStores.revalidate();
+		jkstpKeyStores.repaint();
 	}
 
 
@@ -808,8 +894,10 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		jpmKeyPair = new JPopupMenu();
 
 		jmKeyPairDetails = new JMenu(res.getString("KseFrame.jmKeyPairDetails.text"));
-		jmKeyPairDetails.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
-				getClass().getResource(res.getString("KseFrame.jmKeyPairDetails.image")))));
+		//ImageIcon icon = ImageLoader.getResource("org.xendra.security","importkeypair.png");
+		jmKeyPairDetails.setIcon(ImageLoader.getResource("org.xendra.security","keypairdetails.png"));
+		//jmKeyPairDetails.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
+		//		getClass().getResource(res.getString("KseFrame.jmKeyPairDetails.image")))));
 
 		jmiKeyPairCertificateChainDetails = new JMenuItem(keyPairCertificateChainDetailsAction);
 		jmiKeyPairCertificateChainDetails.setToolTipText(null);
@@ -835,8 +923,9 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		//new StatusBarChangeHandler(jmiKeyPairCopy, (String) copyKeyPairAction.getValue(Action.LONG_DESCRIPTION), this);
 
 		jmKeyPairExport = new JMenu(res.getString("KseFrame.jmKeyPairExport.text"));
-		jmKeyPairExport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
-				getClass().getResource(res.getString("KseFrame.jmKeyPairExport.image")))));
+		jmKeyPairExport.setIcon(ImageLoader.getResource("org.xendra.security","keypairexport.png"));
+		//jmKeyPairExport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
+		//		getClass().getResource(res.getString("KseFrame.jmKeyPairExport.image")))));
 
 		jmiKeyPairExport = new JMenuItem(exportKeyPairAction);
 		jmiKeyPairExport.setToolTipText(null);
@@ -1228,4 +1317,7 @@ public class SecurityEditorFrameController extends DockFrameController implement
                     applicationSettings.setTabLayout(tabLayoutPolicy);
             }
     }
+	public void loadPositions() {		
+		super.loadPositions("org.xendra.security");		
+	}			
 }

@@ -1,6 +1,7 @@
 package org.xendra.security.gui.action;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -8,11 +9,14 @@ import java.security.Provider;
 import java.security.cert.X509Certificate;
 import java.text.MessageFormat;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
+import org.compiere.util.Env;
 import org.kse.crypto.Password;
 import org.kse.crypto.keypair.KeyPairType;
 import org.kse.crypto.keystore.KeyStoreType;
@@ -34,12 +38,10 @@ public class GenerateKeyPairAction extends SecurityColumbaAction implements Hist
 
 	public GenerateKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "generatekeypair"));
-		putValue(Constants.ID, "generatekeypair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","generatekeypair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","generatekeypair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIcon(IconKeys.FOLDER_OPEN));
-		putValue(LARGE_ICON, ImageLoader.getIcon(IconKeys.FOLDER_OPEN));		
-		((SecurityEditorFrameController) frameMediator).register(this);
+		//putValue(Constants.ID, "generatekeypair");
+		putValue(NAME, ResourceLoader.getString("menu","mainframe","GenerateKeyPairAction"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","genkeypair.png"));
+		((SecurityEditorFrameController) frameMediator).register(this);		
 	}
 
 	@Override

@@ -28,11 +28,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class ExportKeyPairAction  extends SecurityColumbaAction {
 	public ExportKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "exportkeypair"));
-		putValue(Constants.ID, "exportkeypair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","exportkeypair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","exportkeypair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "exportkeypair.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	@Override
