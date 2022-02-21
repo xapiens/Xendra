@@ -30,11 +30,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class SignJarAction extends SecurityColumbaAction {
 	public SignJarAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "signJar"));
-		putValue(Constants.ID, "signJar");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","signJar"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","signJar"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "signjar.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

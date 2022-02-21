@@ -26,11 +26,7 @@ import org.xendra.security.util.ResourceLoader;
 public class AppendToCertificateChainAction extends SecurityColumbaAction implements HistoryAction {
 	public AppendToCertificateChainAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "AppendToCertificateChain"));
-		putValue(Constants.ID, "AppendToCertificateChain");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","AppendToCertificateChain"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","AppendToCertificateChain"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "appendcert.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	public void actionPerformed(ActionEvent e) {

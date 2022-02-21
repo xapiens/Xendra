@@ -10,12 +10,7 @@ public class CutKeyPairAction extends CutAction {
 	
 	public CutKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator);
-		//putValue(Constants.ID, "cutkeypair");
-		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","cutkeypair"));
-		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","cutkeypair"));
-		//putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
 		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "cut.png"));
-		//putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);		
 	}
 

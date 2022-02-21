@@ -19,12 +19,8 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class KeyPairPublicKeyDetailsAction extends SecurityColumbaAction {
 
 	public KeyPairPublicKeyDetailsAction(IFrameMediator frameMediator) {
-		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "keypairPublickeydetails"));
-		//putValue(Constants.ID, "keypairPublickeydetails");
-		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","keypairPublickeydetails"));
-		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","keypairPublickeydetails"));
+		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "KeyPairPublicKeyDetails"));
 		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "keypairpubkeydetails.png"));
-		//putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "keypairpubkeydetails.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);		
 	}
 

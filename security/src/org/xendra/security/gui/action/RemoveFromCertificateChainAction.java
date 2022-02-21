@@ -22,11 +22,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class RemoveFromCertificateChainAction  extends SecurityColumbaAction implements HistoryAction {
 	public RemoveFromCertificateChainAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "removefromcertificatechain"));
-		putValue(Constants.ID, "removefromcertificatechain");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","removefromcertificatechain"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","removefromcertificatechain"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "removecert.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

@@ -985,20 +985,20 @@ public class SecurityEditorFrameController extends DockFrameController implement
 				getClass().getResource(res.getString("KseFrame.jmKeyPairSign.image")))));
 
 		jmiKeyPairSignCsr = new JMenuItem(signCsrAction);
-		jmiKeyPairSignCsr.setToolTipText(null);
+		//jmiKeyPairSignCsr.setToolTipText(null);
 		//new StatusBarChangeHandler(jmiKeyPairSignCsr, (String) signCsrAction.getValue(Action.LONG_DESCRIPTION), this);
 
 		jmiKeyPairSignJar = new JMenuItem(signJarAction);
-		jmiKeyPairSignJar.setToolTipText(null);
+		//jmiKeyPairSignJar.setToolTipText(null);
 		//new StatusBarChangeHandler(jmiKeyPairSignJar, (String) signJarAction.getValue(Action.LONG_DESCRIPTION), this);
 
 		jmiKeyPairSignMidlet = new JMenuItem(signMidletAction);
-		jmiKeyPairSignMidlet.setToolTipText(null);
+		//jmiKeyPairSignMidlet.setToolTipText(null);
 		//new StatusBarChangeHandler(jmiKeyPairSignMidlet, (String) signMidletAction.getValue(Action.LONG_DESCRIPTION),
 		//		this);
 
 		jmiKeyPairSignNewKeyPair = new JMenuItem(signNewKeyPairAction);
-		jmiKeyPairSignNewKeyPair.setToolTipText(null);
+		//jmiKeyPairSignNewKeyPair.setToolTipText(null);
 		//new StatusBarChangeHandler(jmiKeyPairSignNewKeyPair,
 		//		(String) signNewKeyPairAction.getValue(Action.LONG_DESCRIPTION), this);
 

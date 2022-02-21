@@ -18,12 +18,8 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class KeyPairCertificateChainDetailsAction extends SecurityColumbaAction  {
 
 	public KeyPairCertificateChainDetailsAction(IFrameMediator frameMediator) {
-		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "KeyPairCertificateChainDetailsAction"));
-		putValue(Constants.ID, "KeyPairCertificateChainDetailsAction");
-		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","addCertificate"));
-		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","addCertificate"));		
+		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "KeyPairCertificateChainDetails"));
 		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security","certdetails.png"));
-		//putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);		
 	}
 

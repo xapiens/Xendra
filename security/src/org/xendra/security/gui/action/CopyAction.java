@@ -27,11 +27,7 @@ import org.xendra.security.util.ResourceLoader;
 public class CopyAction extends SecurityColumbaAction  {
 	public CopyAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "copy"));
-		putValue(Constants.ID, "copy");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","copy"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","copy"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "copy.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

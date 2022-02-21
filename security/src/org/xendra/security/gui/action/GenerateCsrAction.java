@@ -39,12 +39,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class GenerateCsrAction extends SecurityColumbaAction {
 	public GenerateCsrAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "GenerateCsr"));
-		//putValue(Constants.ID, "GenerateCsr");
-		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","GenerateCsr"));
-		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","GenerateCsr"));
-		//putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
 		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "gencsr.png"));
-		//putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 	

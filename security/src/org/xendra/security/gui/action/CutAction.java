@@ -33,12 +33,8 @@ import org.xendra.security.util.ResourceLoader;
 
 public class CutAction extends SecurityColumbaAction  implements HistoryAction {
 	public CutAction(IFrameMediator frameMediator) {
-		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "cutaction"));
-		//putValue(Constants.ID, "addcertificate");
-		//putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","addCertificate"));
-		//putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","addCertificate"));
+		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "Cut"));
 		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "cut.png"));
-		//putValue(LARGE_ICON, ImageLoader.getResource("org.xendra.security", "addcertificate.png"));		
 		((SecurityEditorFrameController) frameMediator).register(this);		
 	}
 	

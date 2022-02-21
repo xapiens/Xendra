@@ -26,12 +26,8 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class SignMidletAction extends SecurityColumbaAction {
 
 	public SignMidletAction(IFrameMediator frameMediator) {
-		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "signMIdlet"));
-		putValue(Constants.ID, "signMIdlet");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","signMIdlet"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","signMIdlet"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "signMidlet"));
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "signmidlet.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 

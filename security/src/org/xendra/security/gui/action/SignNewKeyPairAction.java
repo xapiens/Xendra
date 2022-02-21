@@ -21,11 +21,7 @@ import org.xendra.security.gui.frame.SecurityEditorFrameController;
 public class SignNewKeyPairAction extends SecurityColumbaAction {
 	public SignNewKeyPairAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "SignNewKeyPair"));
-		putValue(Constants.ID, "SignNewKeyPair");
-		putValue(SHORT_DESCRIPTION, ResourceLoader.getString("menu","mainframe","SignNewKeyPair"));
-		putValue(TOOLBAR_NAME, ResourceLoader.getString("menu", "mainframe","SignNewKeyPair"));
-		putValue(SMALL_ICON, ImageLoader.getSmallIconFromResource("org.xendra.security", "addcertificate.png"));
-		putValue(LARGE_ICON, ImageLoader.getLargeIconFromResource("org.xendra.security", "addcertificate.png"));		
+		putValue(SMALL_ICON, ImageLoader.getResource("org.xendra.security", "signnewkeypair.png"));
 		((SecurityEditorFrameController) frameMediator).register(this);
 	}
 
