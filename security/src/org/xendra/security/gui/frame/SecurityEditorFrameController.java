@@ -137,7 +137,7 @@ import org.xendra.security.gui.action.UnlockKeyPairAction;
 import org.xendra.security.util.ResourceLoader;
 
 public class SecurityEditorFrameController extends DockFrameController implements ActionListener, SecurityEditorFrameMediator {
-    private ApplicationSettings applicationSettings = ApplicationSettings.getInstance();
+	private ApplicationSettings applicationSettings = ApplicationSettings.getInstance();
 	private JMenuRecentFiles jmrfRecentFiles;
 	private static ResourceBundle res = ResourceBundle.getBundle("org/kse/gui/resources");
 	//private static ResourceBundle props = ResourceBundle.getBundle("org/kse/version");
@@ -167,7 +167,7 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	private JRadioButtonMenuItem jrbmiKeyStoreChangeTypeUber;
 	private JMenuItem jmiKeyStoreSetPassword;
 	private JMenuItem jmiKeyStoreProperties;
-	
+
 	private JMenuItem jmiKeyPairCertificateChainDetails;
 	private JMenuItem jmiKeyPairPrivateKeyDetails;
 	private JMenuItem jmiKeyPairPublicKeyDetails;
@@ -223,7 +223,7 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	private ChangeTypeAction changeTypeBksAction = new ChangeTypeAction(this, KeyStoreType.BKS);
 	private ChangeTypeAction changeTypeUberAction = new ChangeTypeAction(this, KeyStoreType.UBER);
 	private PropertiesAction propertiesAction = new PropertiesAction(this); 
-		
+
 	private final CutAction cutAction = new CutAction(this);
 	private KeyPairCertificateChainDetailsAction keyPairCertificateChainDetailsAction = new KeyPairCertificateChainDetailsAction(this);
 	private KeyPairPrivateKeyDetailsAction keyPairPrivateKeyDetailsAction = new KeyPairPrivateKeyDetailsAction(this);
@@ -275,29 +275,29 @@ public class SecurityEditorFrameController extends DockFrameController implement
 	}
 	private void initKeyStorePopupMenu() {
 		jpmKeyStore = new JPopupMenu();
-		
+
 		jmiKeyStoreGenerateKeyPair = new JMenuItem(generateKeyPairAction);
 		jpmKeyStore.add(jmiKeyStoreGenerateKeyPair);
-		
+
 		jmiKeyStoreGenerateSecretKey = new JMenuItem(generateSecretKeyAction);
 		jpmKeyStore.add(jmiKeyStoreGenerateSecretKey);
-		
+
 		jmiKeyStoreImportTrustedCertificate = new JMenuItem(importTrustedCertificateAction);
 		jpmKeyStore.add(jmiKeyStoreImportTrustedCertificate);
-		
+
 		jmiKeyStoreImportKeyPair = new JMenuItem(importKeyPairAction);
 		jpmKeyStore.add(jmiKeyStoreImportKeyPair);
-		
+
 		jpmKeyStore.addSeparator();
 		// src/org/kse/gui/KseFrame.java 1762
 		jmiKeyStoreSetPassword = new JMenuItem(setPasswordAction);
 		jpmKeyStore.add(jmiKeyStoreSetPassword);
-		
+
 		jmKeyStoreChangeType = new JMenu(res.getString("KseFrame.jmChangeType.text"));
 		jmKeyStoreChangeType.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(
-					getClass().getResource(res.getString("KseFrame.jmChangeType.image")))));				
+				getClass().getResource(res.getString("KseFrame.jmChangeType.image")))));				
 		jpmKeyStore.add(jmKeyStoreChangeType);
-		
+
 		jrbmiKeyStoreChangeTypeJks = new JRadioButtonMenuItem(changeTypeJksAction);
 		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeJks);
 		jrbmiKeyStoreChangeTypeJceks = new JRadioButtonMenuItem(changeTypeJceksAction);
@@ -308,17 +308,17 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeBksV1);
 		jrbmiKeyStoreChangeTypeBks = new JRadioButtonMenuItem(changeTypeBksAction);
 		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeBks);
-        jrbmiKeyStoreChangeTypeUber = new JRadioButtonMenuItem(changeTypeUberAction);
-        jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeUber);
-        ButtonGroup changeTypeGroup = new ButtonGroup();
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypeJks);
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypeJceks);
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypePkcs12);
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypeBks);
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypeBksV1);
-        changeTypeGroup.add(jrbmiKeyStoreChangeTypeUber);
-        jmiKeyStoreProperties = new JMenuItem(propertiesAction);
-        jpmKeyStore.add(jmiKeyStoreProperties);		
+		jrbmiKeyStoreChangeTypeUber = new JRadioButtonMenuItem(changeTypeUberAction);
+		jmKeyStoreChangeType.add(jrbmiKeyStoreChangeTypeUber);
+		ButtonGroup changeTypeGroup = new ButtonGroup();
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypeJks);
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypeJceks);
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypePkcs12);
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypeBks);
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypeBksV1);
+		changeTypeGroup.add(jrbmiKeyStoreChangeTypeUber);
+		jmiKeyStoreProperties = new JMenuItem(propertiesAction);
+		jpmKeyStore.add(jmiKeyStoreProperties);		
 	}
 	private void registerDockables() {	
 		//main = registerDockable("modeleditor_foldertree", ResourceLoader.getString("global", "dockable_foldertree"), mainPanel, null);
@@ -339,17 +339,17 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		}
 	}
 
-//	@Override
-//	public SecurityPanel getSecurityPanel() {
-//		return mainPanel;
-//	}
-//
-//	@Override
+	//	@Override
+	//	public SecurityPanel getSecurityPanel() {
+	//		return mainPanel;
+	//	}
+	//
+	//	@Override
 	public void actionPerformed(ActionEvent e) {		
-//		mainPanel.actionPerformed(e);
+		//		mainPanel.actionPerformed(e);
 	}
 	public void register(AbstractColumbaAction action) {
-//		mainPanel.register(action);		
+		//		mainPanel.register(action);		
 	}
 	public void addKeyStore(KeyStore keyStore, String keyStoreName, Password password, Provider explicitProvider) {
 		KeyStoreHistory history = new KeyStoreHistory(keyStore, keyStoreName, password, explicitProvider);
@@ -486,68 +486,68 @@ public class SecurityEditorFrameController extends DockFrameController implement
 		//
 		//		// Can use tools on
 		generateKeyPairAction.setEnabled(true);
-		//		generateSecretKeyAction.setEnabled(type.supportsKeyEntries());
-		//		importTrustedCertificateAction.setEnabled(true);
-		//		importKeyPairAction.setEnabled(true);
-		//		propertiesAction.setEnabled(true);
-		//		if (type.isFileBased()) {
-		//			setPasswordAction.setEnabled(true);
-		//		}
-		//
-		//		// Show default status bar display
+		generateSecretKeyAction.setEnabled(type.supportsKeyEntries());
+		importTrustedCertificateAction.setEnabled(true);
+		importKeyPairAction.setEnabled(true);
+		propertiesAction.setEnabled(true);
+		if (type.isFileBased()) {
+			setPasswordAction.setEnabled(true);
+		}
+
+		// Show default status bar display
 		setDefaultStatusBarText();
 		//
-		//		// Passwords, and therefore unlocking, are not relevant for PKCS #12 or KeyStores that are not file-based
-		//		if (!type.hasEntryPasswords() || !type.isFileBased()) {
-		//			unlockKeyPairAction.setEnabled(false);
-		//			setKeyPairPasswordAction.setEnabled(false);
-		//			unlockKeyAction.setEnabled(false);
-		//			setKeyPasswordAction.setEnabled(false);
-		//		} else {
-		//			unlockKeyPairAction.setEnabled(true);
-		//			setKeyPairPasswordAction.setEnabled(true);
-		//			unlockKeyAction.setEnabled(true);
-		//			setKeyPasswordAction.setEnabled(true);
-		//		}
-		//
-		//		// Special restrictions for MSCAPI and PKCS#11 type
-		//		if (type == KeyStoreType.MS_CAPI_PERSONAL || type == KeyStoreType.PKCS11) {
-		//
-		//			keyPairPrivateKeyDetailsAction.setEnabled(false);
-		//			keyDetailsAction.setEnabled(false);
-		//
-		//			renameKeyAction.setEnabled(false);
-		//			renameKeyPairAction.setEnabled(false);
-		//			renameTrustedCertificateAction.setEnabled(false);
-		//
-		//			exportKeyPairAction.setEnabled(false);
-		//			exportKeyPairPrivateKeyAction.setEnabled(false);
-		//
-		//			jmKeyPairEditCertChain.setEnabled(false);
-		//			appendToCertificateChainAction.setEnabled(false);
-		//			removeFromCertificateChainAction.setEnabled(false);
-		//
-		//			// "UnsupportedOperationException" ...
-		//			jmKeyPairImportCaReply.setEnabled(false);
-		//		} else {
-		//			keyPairPrivateKeyDetailsAction.setEnabled(true);
-		//			keyDetailsAction.setEnabled(true);
-		//
-		//			renameKeyAction.setEnabled(true);
-		//			renameKeyPairAction.setEnabled(true);
-		//			renameTrustedCertificateAction.setEnabled(true);
-		//
-		//			exportKeyPairAction.setEnabled(true);
-		//			exportKeyPairPrivateKeyAction.setEnabled(true);
-		//
-		//			jmKeyPairEditCertChain.setEnabled(true);
-		//			appendToCertificateChainAction.setEnabled(true);
-		//			removeFromCertificateChainAction.setEnabled(true);
-		//
-		//			jmKeyPairImportCaReply.setEnabled(true);
-		//		}
-		//
-		//		// KeyStore type menu items
+		// Passwords, and therefore unlocking, are not relevant for PKCS #12 or KeyStores that are not file-based
+		if (!type.hasEntryPasswords() || !type.isFileBased()) {
+			unlockKeyPairAction.setEnabled(false);
+			setKeyPairPasswordAction.setEnabled(false);
+			unlockKeyAction.setEnabled(false);
+			setKeyPasswordAction.setEnabled(false);
+		} else {
+			unlockKeyPairAction.setEnabled(true);
+			setKeyPairPasswordAction.setEnabled(true);
+			unlockKeyAction.setEnabled(true);
+			setKeyPasswordAction.setEnabled(true);
+		}
+
+		// Special restrictions for MSCAPI and PKCS#11 type
+		if (type == KeyStoreType.MS_CAPI_PERSONAL || type == KeyStoreType.PKCS11) {
+
+			keyPairPrivateKeyDetailsAction.setEnabled(false);
+			keyDetailsAction.setEnabled(false);
+
+			renameKeyAction.setEnabled(false);
+			renameKeyPairAction.setEnabled(false);
+			renameTrustedCertificateAction.setEnabled(false);
+
+			exportKeyPairAction.setEnabled(false);
+			exportKeyPairPrivateKeyAction.setEnabled(false);
+
+			jmKeyPairEditCertChain.setEnabled(false);
+			appendToCertificateChainAction.setEnabled(false);
+			removeFromCertificateChainAction.setEnabled(false);
+
+			// "UnsupportedOperationException" ...
+			jmKeyPairImportCaReply.setEnabled(false);
+		} else {
+			keyPairPrivateKeyDetailsAction.setEnabled(true);
+			keyDetailsAction.setEnabled(true);
+
+			renameKeyAction.setEnabled(true);
+			renameKeyPairAction.setEnabled(true);
+			renameTrustedCertificateAction.setEnabled(true);
+
+			exportKeyPairAction.setEnabled(true);
+			exportKeyPairPrivateKeyAction.setEnabled(true);
+
+			jmKeyPairEditCertChain.setEnabled(true);
+			appendToCertificateChainAction.setEnabled(true);
+			removeFromCertificateChainAction.setEnabled(true);
+
+			jmKeyPairImportCaReply.setEnabled(true);
+		}
+
+		// KeyStore type menu items
 		//		if (type.isFileBased()) {
 		//			jmChangeType.setEnabled(true);
 		//
@@ -1236,87 +1236,87 @@ public class SecurityEditorFrameController extends DockFrameController implement
 
 		return sizeAndPosition;
 	}
-    /**
-     * Removed the supplied KeyStore from the set of loaded KeyStores.
-     *
-     * @param keyStore
-     *            KeyStore
-     */
-    public void removeKeyStore(KeyStore keyStore) {
-            int index = findKeyStoreIndex(keyStore);
+	/**
+	 * Removed the supplied KeyStore from the set of loaded KeyStores.
+	 *
+	 * @param keyStore
+	 *            KeyStore
+	 */
+	public void removeKeyStore(KeyStore keyStore) {
+		int index = findKeyStoreIndex(keyStore);
 
-            if (index >= 0) {
-                    keyStoreTables.remove(index);
-                    histories.remove(index).nullPasswords();
-                    jkstpKeyStores.remove(index);
-            }
-    }
-	
-    /**
-     * Get recently opened files.
-     *
-     * @return Recently opened files
-     */
-    public File[] getRecentFiles() {
-            return jmrfRecentFiles.getRecentFiles();
-    }
-    
-    /**
-     * If the status bar is currently displayed hide it and vice versa.
-     */
-    public void showHideStatusBar() {
-            Container contentPane = getContainer().getFrame().getContentPane();
-            boolean statusBarShown = false;
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
-                    if (contentPane.getComponent(i).equals(jlStatusBar)) {
-                            statusBarShown = true;
-                            break;
-                    }
-            }
+		if (index >= 0) {
+			keyStoreTables.remove(index);
+			histories.remove(index).nullPasswords();
+			jkstpKeyStores.remove(index);
+		}
+	}
 
-            if (statusBarShown) {
-            		getContainer().getFrame().getContentPane().remove(jlStatusBar);
-                    applicationSettings.setShowStatusBar(false);
-            } else {
-            		getContainer().getFrame().getContentPane().add(jlStatusBar, BorderLayout.SOUTH);
-                    applicationSettings.setShowStatusBar(true);
-            }
-    }
-    
-    /**
-     * If the tool bar is currently displayed hide it and vice versa.
-     */
-    public void showHideToolBar() {
-            Container contentPane = getContainer().getFrame().getContentPane();
-            boolean toolBarShown = false;
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
-                    if (contentPane.getComponent(i).equals(jtbToolBar)) {
-                            toolBarShown = true;
-                            break;
-                    }
-            }
+	/**
+	 * Get recently opened files.
+	 *
+	 * @return Recently opened files
+	 */
+	public File[] getRecentFiles() {
+		return jmrfRecentFiles.getRecentFiles();
+	}
 
-            if (toolBarShown) {
-            	getContainer().getFrame().getContentPane().remove(jtbToolBar);
-            	applicationSettings.setShowToolBar(false);
-            } else {
-            	getContainer().getFrame().getContentPane().add(jtbToolBar, BorderLayout.NORTH);
-            	applicationSettings.setShowToolBar(true);
-            }
-    }
-    /**
-     * Set tab layout policy - must be one of JTabbedPane.WRAP_TAB_LAYOUT or
-     * JTabbedPane.SCROLL_TAB_LAYOUT to take effect.
-     *
-     * @param tabLayoutPolicy
-     *            Tab layout policy
-     */
-    public void setKeyStoreTabLayoutPolicy(int tabLayoutPolicy) {
-            if (tabLayoutPolicy == JTabbedPane.WRAP_TAB_LAYOUT || tabLayoutPolicy == JTabbedPane.SCROLL_TAB_LAYOUT) {
-                    jkstpKeyStores.setTabLayoutPolicy(tabLayoutPolicy);
-                    applicationSettings.setTabLayout(tabLayoutPolicy);
-            }
-    }
+	/**
+	 * If the status bar is currently displayed hide it and vice versa.
+	 */
+	public void showHideStatusBar() {
+		Container contentPane = getContainer().getFrame().getContentPane();
+		boolean statusBarShown = false;
+		for (int i = 0; i < contentPane.getComponentCount(); i++) {
+			if (contentPane.getComponent(i).equals(jlStatusBar)) {
+				statusBarShown = true;
+				break;
+			}
+		}
+
+		if (statusBarShown) {
+			getContainer().getFrame().getContentPane().remove(jlStatusBar);
+			applicationSettings.setShowStatusBar(false);
+		} else {
+			getContainer().getFrame().getContentPane().add(jlStatusBar, BorderLayout.SOUTH);
+			applicationSettings.setShowStatusBar(true);
+		}
+	}
+
+	/**
+	 * If the tool bar is currently displayed hide it and vice versa.
+	 */
+	public void showHideToolBar() {
+		Container contentPane = getContainer().getFrame().getContentPane();
+		boolean toolBarShown = false;
+		for (int i = 0; i < contentPane.getComponentCount(); i++) {
+			if (contentPane.getComponent(i).equals(jtbToolBar)) {
+				toolBarShown = true;
+				break;
+			}
+		}
+
+		if (toolBarShown) {
+			getContainer().getFrame().getContentPane().remove(jtbToolBar);
+			applicationSettings.setShowToolBar(false);
+		} else {
+			getContainer().getFrame().getContentPane().add(jtbToolBar, BorderLayout.NORTH);
+			applicationSettings.setShowToolBar(true);
+		}
+	}
+	/**
+	 * Set tab layout policy - must be one of JTabbedPane.WRAP_TAB_LAYOUT or
+	 * JTabbedPane.SCROLL_TAB_LAYOUT to take effect.
+	 *
+	 * @param tabLayoutPolicy
+	 *            Tab layout policy
+	 */
+	public void setKeyStoreTabLayoutPolicy(int tabLayoutPolicy) {
+		if (tabLayoutPolicy == JTabbedPane.WRAP_TAB_LAYOUT || tabLayoutPolicy == JTabbedPane.SCROLL_TAB_LAYOUT) {
+			jkstpKeyStores.setTabLayoutPolicy(tabLayoutPolicy);
+			applicationSettings.setTabLayout(tabLayoutPolicy);
+		}
+	}
 	public void loadPositions() {		
 		super.loadPositions("org.xendra.security");		
 	}			

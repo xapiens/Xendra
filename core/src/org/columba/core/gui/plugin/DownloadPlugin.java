@@ -153,11 +153,8 @@ public class DownloadPlugin extends JDialog {
 			Response response = client.newCall(request).execute();
 			is = response.body().byteStream();							 
 			BufferedInputStream input = new BufferedInputStream(is);					
-			//String filedst = String.format("%s%s", installedfolder,plugin.getFilename());
-			//updateTitle(String.format("%s/%s %s %s",current,toUpdate.size(),Msg.translate(Env.getCtx(), "Loading"),plugin.getFilename()));
 			String filedst = String.format("%s%s", System.getProperty("java.io.tmpdir") + System.getProperty("file.separator"),filename);
 			System.out.println(filedst);				
-			///reset();											
 			output = new FileOutputStream(new File(filedst));
 			int read = 0;
 			boolean ralenti = true;
@@ -174,7 +171,6 @@ public class DownloadPlugin extends JDialog {
 				currentsize += read;
 				percent = (int) (( currentsize / totalsize ) * 100);
 				if (progress.getProgress() != percent)
-					//progress.setProgress(percent);
 					update(percent);
 				if (ralenti)
 					Thread.sleep(10);
@@ -184,12 +180,6 @@ public class DownloadPlugin extends JDialog {
 			if (output != null) 
 				output.close();
 			File tmpfile = new File(filedst);		
-			//String installedfolder = (String) Env.getMachine().getProperties().get(Constants.INSTALLED);
-			//String fileinst = String.format("%s%s", installedfolder,filename);
-			//File insfile = new File(fileinst);
-			//if (insfile.exists())
-			//	insfile.delete();
-			//Files.move(tmpfile, new File(fileinst));			
 			return tmpfile;
 		}
 		catch (Exception e)
