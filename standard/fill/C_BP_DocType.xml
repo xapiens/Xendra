@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="C_BP_DocType">
+    <table name="C_BP_DocType" accesslevel="0" level="1" Identifier="ec7a38cb-4f42-1b95-3307-390faf469957">
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="ec7a38cb-4f42-1b95-3307-390faf469957" Name="DNI" TaxID="1" Value="01" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="66cb96fa-3cbe-6f7c-fdbc-506b3f2533e1" Name="Carnet Extranjeria" TaxID="4" Value="04" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="bea909e4-f69e-15c9-f289-db2a8dd28474" Name="RUC" TaxID="6" Value="06" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="bbd35ab2-17ff-5048-b8fa-e800ff486bfc" Name="Pasaporte" TaxID="7" Value="07" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="a3693c35-1b79-b08e-af28-17840e688b99" Name="Otros" TaxID="0" Value="00" IsActive="true" />
+    </table>
+  </record>
+</stream>
+

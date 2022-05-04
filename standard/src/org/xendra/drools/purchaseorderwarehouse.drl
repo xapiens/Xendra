@@ -1,0 +1,343 @@
+//created on: 08-mar-2018
+//modified on : 09-abr-2018
+//created by : xapiens
+//purchaseorder.drl
+// no se ha hecho nada, solo copiado
+package org.compiere.model
+import org.xendra.standard.rules.PurchasePolicy
+import org.compiere.model.MOrder
+import org.compiere.model.MInvoice
+import org.compiere.model.MInOut
+import org.compiere.model.MPeriod
+import org.compiere.model.MOrderLine
+import org.compiere.model.MProduct
+import org.compiere.model.MDocType
+import org.compiere.model.MBPartner
+import org.compiere.model.MConversionRate
+import org.compiere.process.DocAction
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.model.reference.REF__DocumentStatus
+import org.compiere.model.reference.REF_C_BPartnerSOCreditStatus
+import org.compiere.model.reference.REF_C_DocTypeSubType
+import org.compiere.model.reference.REF__DocumentAction
+import org.compiere.util.Env
+import org.compiere.util.Util
+import java.math.BigDecimal
+import java.util.Properties
+//declare any global variables here
+global Properties ctx
+dialect "mvel"
+// order prepare
+rule "Period"
+	agenda-group "prepare"	
+    when
+    	eval(namerule("period"));
+        $order : MOrder()	
+        eval(!isperiodopen($order))        
+    then
+		System.out.println("period");
+        $order.setProcessMsg("@PeriodClosed@");
+        $order.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"    
+    dialect "mvel"
+    when
+    	  eval(namerule("lines"));
+        $order : MOrder($length : getLength() )
+        eval($length == 0)        
+    then
+        $order.setProcessMsg("@NoLines@");
+        $order.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "POcalculateTax"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("POcalculateTax"));
+		$order : MOrder()
+		eval(!$order.isSOTrx())
+		eval(!checktax($order))		
+	then
+		$order.setProcessMsg("Error calculating tax");
+		$order.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "excludeAutoDelivery"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("excludeAutodelivery"));	 
+		$order : MOrder()
+		eval($order.getDeliveryRule() == REF_C_OrderDeliveryRule.CompleteOrder)
+		eval(isexcludeautodelivery($order))		
+	then
+		$order.setRulestatus(DocAction.STATUS_Invalid);	
+end
+
+rule "changeDocType"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("changeDocType"));
+		$order : MOrder()
+		eval(!isdoctypevalid($order))
+	then	
+		$order.setRulestatus(DocAction.STATUS_Invalid);
+		$order.setProcessMsg("@CannotChangeDocType@");
+end
+
+rule "changeDocType2"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+		eval(namerule("changeDocType2"));
+		$order : MOrder()
+		eval(isdoctypevalid($order))
+	then	
+		$order.setC_DocType_ID($order.getC_DocTypeTarget_ID());
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "prepareattributes" ).setFocus();
+end	
+
+rule "attributes"
+	agenda-group "prepareattributes"
+	dialect "mvel"
+	when
+	  eval(namerule("attributes"));
+		$order : MOrder()
+		eval(!$order.isMandatoryAttributes())		
+	then	
+		$order.explodeBOM() 		
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "stock" ).setFocus();
+end	
+
+rule "bom"
+	agenda-group "stock"
+	dialect "mvel"
+	when
+	  eval(namerule("bom"));
+		$order : MOrder()
+		eval(reserveStock($order))
+	then
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "tax" ).setFocus();
+end		
+
+rule "tax"
+	agenda-group "tax"
+	dialect "mvel"
+	when
+	  eval(namerule("tax"));
+		$order : MOrder()
+		eval(calculateTaxTotal($order))
+	then
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "credit" ).setFocus();
+end
+
+rule "credit"
+	agenda-group "credit"
+	dialect "mvel"
+	when
+		eval(namerule("credit"));
+		$order : MOrder()		
+		eval(checkcredit($order))
+	then
+		$order.setRulestatus(DocAction.STATUS_InProgress);
+end
+
+
+//  order complete
+
+rule "prepare"
+	agenda-group "complete"
+	dialect "mvel"
+	when 
+	  eval(namerule("prepare"));
+		$order : MOrder()
+		eval($order.getDocAction() == REF__DocumentAction.Prepare)
+	then
+	  $order.setRulestatus(DocAction.STATUS_InProgress);
+end
+
+rule "prepare2"
+	agenda-group "complete"
+	dialect "mvel"
+	when 
+	  eval(namerule("prepare2"));
+		$order : MOrder()
+		eval($order.getDocAction() != REF__DocumentAction.Prepare)
+	then
+	  kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "shipment" ).setFocus();
+end
+
+rule shipment
+	agenda-group "shipment"
+	dialect "mvel"
+	when 
+		eval(namerule("shipment"));
+		$order : MOrder();
+		eval(createshipment($order))
+	then
+		$order.setDocAction(REF__DocumentAction.Close);
+		$order.setRulestatus(DocAction.STATUS_Completed);	
+end
+
+function boolean createshipment(MOrder order) {
+	return PurchasePolicy.getInstance().createShipment(order);
+}
+
+function boolean createinvoice(MOrder order) {
+	return PurchasePolicy.getInstance().createInvoice(order);
+}
+
+
+function boolean namerule(String name) {
+	System.out.println("namerule ->" + name);
+	return true;
+}
+
+function boolean isperiodopen(MOrder order) {
+	MDocType dt = MDocType.get(Env.getCtx(), order.getC_DocTypeTarget_ID());
+	return MPeriod.isOpen(order.getCtx(), order.getDateAcct(), dt.getDocBaseType(), order.getAD_Org_ID(), order.getAD_Client_ID());
+}
+
+function boolean checktax(MOrder order) {
+	MDocType dt = MDocType.get(Env.getCtx(), order.getC_DocTypeTarget_ID());
+	if (REF_C_DocTypeSubType.Request.equals(dt.getDocSubType()))
+	{
+		if (!order.calculateTaxTotal())
+		{			
+			return false;
+		}		
+	}	
+	return true;
+}
+
+function boolean isexcludeautodelivery(MOrder order) {
+	MOrderLine[] lines = order.getLines(true, "M_Product_ID");
+	for (int i = 0; i < lines.length; i++) 
+	{
+		MOrderLine line = lines[i];
+		MProduct product = line.getProduct();
+		if (product != null && product.isExcludeAutoDelivery())
+		{
+			order.setProcessMsg("@M_Product_ID@ "+product.getValue()+" @IsExcludeAutoDelivery@");
+			return true;			
+		}
+	}
+	return false;
+}
+
+function boolean isdoctypevalid(MOrder order) {
+	  boolean ret = false;
+	  System.out.println("doctypeid = "+ order.getC_DocType_ID());
+	  System.out.println("doctypetargetid = "+ order.getC_DocTypeTarget_ID());
+		if (order.getC_DocType_ID() != order.getC_DocTypeTarget_ID())		
+		{
+		  MDocType dt = MDocType.get(order.getCtx(), order.getC_DocTypeTarget_ID());
+		  if ( order.getC_DocType_ID() != 0) 
+		  {		  	
+				MDocType dtOld = MDocType.get(order.getCtx(), order.getC_DocType_ID());
+				if (REF_C_DocTypeSubType.StandardOrder.equals(dtOld.getDocSubType())		//	From SO
+					&& !REF_C_DocTypeSubType.StandardOrder.equals(dt.getDocSubType()))	//	To !SO
+				{
+			 	  MOrderLine[] lines = order.getLines(true, "M_Product_ID");
+					for (int i = 0; i < lines.length; i++)
+					{
+						if (lines[i].getM_Warehouse_ID() != order.getM_Warehouse_ID())
+						{				
+							order.setProcessMsg("@CannotChangeDocType@");				
+							System.out.println("isdoctypevalid false");
+							ret = false;
+					    break;
+						}
+					}
+				}					
+			}
+			
+			if (REF__DocumentStatus.Drafted.equals(order.getDocStatus()) || 
+				 REF__DocumentStatus.InProgress.equals(order.getDocStatus()) || 
+				 REF__DocumentStatus.Invalid.equals(order.getDocStatus()) || 
+				 order.getC_DocType_ID() == 0 )		 
+			{
+				 System.out.println("isdoctypevalid true");
+				 ret = true;
+			}
+			else
+			{
+				if (dt.isOffer())
+				{
+				  System.out.println("isdoctypevalid true");
+					ret = true;
+				}
+				else
+				{
+					System.out.println("isdoctypevalid false");
+					ret = false;
+				}
+			}						
+			System.out.println("isdoctypevalid true");
+			ret = true;
+		}
+		else
+		{
+			System.out.println("isdoctypevalid true");
+			ret = true;
+		}
+		return ret;
+}
+
+function boolean reserveStock(MOrder order) {
+	if (!order.reserveStock())
+	{
+		order.setProcessMsg("Cannot reserve Stock");
+		order.setRulestatus(DocAction.STATUS_Invalid);
+		return false;
+	}
+	return true;
+}
+function boolean calculateTaxTotal(MOrder order) {
+	if (!order.calculateTaxTotal())
+	{
+		order.setProcessMsg("Error calculating tax");
+		order.setRulestatus(DocAction.STATUS_Invalid);
+		return false;
+	}
+	return true;
+}
+
+function boolean checkcredit(MOrder order) {
+	if (order.isSOTrx())
+	{
+		MBPartner bp = new MBPartner (order.getCtx(), order.getC_BPartner_ID(), order.get_TrxName());
+		if (REF_C_BPartnerSOCreditStatus.CreditStop.equals(bp.getSOCreditStatus()))
+		{
+			order.setProcessMsg("@BPartnerCreditStop@ - @TotalOpenBalance@=" 
+				+ bp.getTotalOpenBalance()
+				+ ", @SO_CreditLimit@=" + bp.getSO_CreditLimit());
+			order.setRulestatus(DocAction.STATUS_Invalid);
+			return false;
+		}
+		if (REF_C_BPartnerSOCreditStatus.CreditHold.equals(bp.getSOCreditStatus()))
+		{
+			order.setProcessMsg("@BPartnerCreditHold@ - @TotalOpenBalance@=" 
+				+ bp.getTotalOpenBalance() 
+				+ ", @SO_CreditLimit@=" + bp.getSO_CreditLimit());
+			order.setRulestatus(DocAction.STATUS_Invalid);
+			return false;
+		}
+		BigDecimal grandTotal = MConversionRate.convertBase(order.getCtx(), order.getC_DocType_ID(),  
+			order.getGrandTotal(), order.getC_Currency_ID(), order.getDateOrdered(), 
+			order.getC_ConversionType_ID(), order.getAD_Client_ID(), order.getAD_Org_ID());
+		if (REF_C_BPartnerSOCreditStatus.CreditHold.equals(bp.getSOCreditStatus(grandTotal)))
+		{
+			order.setProcessMsg("@BPartnerOverOCreditHold@ - @TotalOpenBalance@=" 
+				+ bp.getTotalOpenBalance() + ", @GrandTotal@=" + grandTotal
+				+ ", @SO_CreditLimit@=" + bp.getSO_CreditLimit());
+			order.setRulestatus(DocAction.STATUS_Invalid);
+			return false;
+		}		
+	}
+	return true;
+}

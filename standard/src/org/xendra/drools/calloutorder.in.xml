@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="calloutorderkb" 
+sessionname="calloutorderks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="f9ecdcef-7253-0ca9-c720-5bd5551220e5" synchronized="2016-08-25 18:48:41.0" type="kiebase" >
+<field TableName="C_Order" ColumnName="C_BPartner_ID" Agenda="bpartner"/>
+<field TableName="C_Order" ColumnName="Bill_BPartner_ID" Agenda="bpartnerbill"/>
+<field TableName="C_Order" ColumnName="DateOrdered" Agenda="dateacct"/>
+<field TableName="C_OrderLine" ColumnName="C_Charge_ID" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="C_BPartner_Location_ID" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="C_UOM_ID" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="Discount" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="M_AttributeSetInstance_ID" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="M_Product_ID" Agenda="product"/>
+<field TableName="C_OrderLine" ColumnName="PriceList" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="QtyEntered" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="PriceActual" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="QtyOrdered" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="PriceEntered" Agenda="line"/>
+<field TableName="C_OrderLine" ColumnName="S_ResourceAssignment_ID" Agenda="line"/>
+<field TableName="C_Order" ColumnName="C_DocTypeTarget_ID" Agenda="doctype"/>
+<field TableName="C_Order" ColumnName="M_PriceList_ID" Agenda="pricelist"/>
+<rule name="src/main/resources/org/compiere/model/calloutorder.drl" type="rule" sessionname="calloutorderks" file="calloutorder.drl" Identifier="f7cda1d7-c08c-a33f-ffb6-0d966e0314f3" synchronized="2016-04-06 18:52:41.0"/>
+</kiebase>

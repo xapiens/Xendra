@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="calloutinvoicekb" sessionname="calloutinvoiceks" queuename="" docbasetype="" docsubtype="" ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="9297b23c-f23f-7b26-b51d-09c91fd9dc2d" synchronized="2017-04-05 08:59:41.0" type="kiebase">
+  <field TableName="C_InvoiceLine" ColumnName="C_UOM_ID" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="C_Charge_ID" Agenda="charge" />
+  <field TableName="C_InvoiceLine" ColumnName="PriceEntered" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="QtyInvoiced" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="PriceActual" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="QtyEntered" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="TaxAmt" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="S_ResourceAssignment_ID" Agenda="line" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="C_BPartner_Location_ID" Agenda="tax" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="C_Charge_ID" Agenda="charge" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="C_DocType_ID" Agenda="doctype" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="C_Tax_ID" Agenda="batchline" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="DateInvoiced" Agenda="dateacct" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="C_BPartner_ID" Agenda="bpartner" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="IsTaxIncluded" Agenda="batchline" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="QtyEntered" Agenda="batchline" />
+  <field TableName="C_Invoice" ColumnName="Ref_Invoice_ID" Agenda="reference" />
+  <field TableName="C_Invoice" ColumnName="C_DocTypeTarget_ID" Agenda="doctype" />
+  <field TableName="C_Invoice" ColumnName="C_BPartner_ID" Agenda="bpartner" />
+  <field TableName="C_Invoice" ColumnName="C_PaymentTerm_ID" Agenda="paymentterm" />
+  <field TableName="C_InvoiceLine" ColumnName="C_Tax_ID" Agenda="line" />
+  <field TableName="C_InvoiceLine" ColumnName="M_Product_ID" Agenda="product" />
+  <field TableName="C_InvoiceBatchLine" ColumnName="PriceEntered" Agenda="batchline" />
+  <field TableName="C_Invoice" ColumnName="DateInvoiced" Agenda="dateacct" />
+  <field TableName="C_Invoice" ColumnName="M_PriceList_ID" Agenda="pricelist" />
+  <rule name="src/main/resources/org/compiere/model/calloutinvoice.drl" type="rule" sessionname="calloutinvoiceks" file="calloutinvoice.drl" Identifier="a22761ec-f4f8-4879-0ddf-bda4dae1db1e" synchronized="2017-04-05 08:59:41.0"><![CDATA[//created on: 05-abr-2017
+//modified on : 09-abr-2018
+// author : xapiens
+package org.xendra.rules
+// HEADER
+import org.compiere.model.GridTab
+import org.compiere.model.GridField
+
+import org.compiere.model.MPayment
+import org.compiere.model.MPaymentTerm
+import org.compiere.model.MBOE
+import org.compiere.model.MUOM
+import org.compiere.model.MInvoice
+import org.compiere.model.MTax
+import org.compiere.model.MPriceList
+import org.compiere.model.MProduct
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MRole
+import org.compiere.model.MProductPricing
+import org.compiere.model.persistence.X_C_CashLine
+import org.compiere.model.persistence.X_C_Invoice
+import org.compiere.model.reference.REF_C_CashTrxType
+
+import java.util.Properties
+import java.math.BigDecimal
+import org.compiere.util.Env
+import java.sql.ResultSet	
+import java.sql.SQLException
+import java.sql.PreparedStatement
+import java.sql.Timestamp
+import org.compiere.util.DB
+import org.compiere.util.DisplayType;
+
+global Object value
+global String result
+global Object OldValue
+global Properties ctx
+global Integer WindowNo
+
+rule partner
+	agenda-group "bpartner"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_BPartner_ID")						
+	then	
+		updatepartner(ctx, WindowNo, $tab, $field, value);
+end
+
+rule paymentterm
+	agenda-group "paymentterm"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_PaymentTerm_ID")						
+	then	
+		updatepaymentterm(ctx, WindowNo, $tab, $field, value);
+end
+
+
+rule doctype
+	agenda-group "doctype"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="C_DocTypeTarget_ID")				
+	then
+		updatedoctype(ctx, WindowNo, $tab, $field, value);
+end
+
+
+
+rule dateinvoiced
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "DateInvoiced")
+	then
+		$tab.setValue("DateAcct", value);		
+end
+
+rule pricelist
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "M_PriceList_ID")
+	then
+		updatepricelist(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule reference
+	agenda-group "reference"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "Ref_Invoice_ID")						
+	then	
+		updatereference(ctx, WindowNo, $tab, $field, value);
+end
+// LINES
+
+rule product
+	agenda-group "product"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "M_Product_ID")						
+	then
+		updateproduct(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+
+rule qtyinvoiced
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "QtyInvoiced")
+	then
+		updateqtyinvoiced(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+
+rule priceactual
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "PriceActual")
+	then
+		updatepriceactual(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule charge
+	agenda-group "charge"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_Charge_ID")						
+	then
+		updatecharge(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule uom
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_UOM_ID")						
+	then
+		updateuom(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule tax
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_Tax_ID")						
+	then
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule resource
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "S_ResourceAssignment_ID")						
+	then
+		updateproduct(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule taxamt
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "TaxAmt")						
+	then
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule qtyentered
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "QtyEntered")						
+	then
+		updateqtyentered(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule priceentered
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "PriceEntered")
+	then
+		updatepriceentered(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+function void updatepricelist(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer M_PriceList_ID = (Integer)value;
+	String sql = "SELECT pl.IsTaxIncluded,pl.EnforcePriceLimit,pl.C_Currency_ID,c.StdPrecision,"
+		+ "plv.M_PriceList_Version_ID,plv.ValidFrom "
+		+ "FROM M_PriceList pl,C_Currency c,M_PriceList_Version plv "
+		+ "WHERE pl.C_Currency_ID=c.C_Currency_ID"
+		+ " AND pl.M_PriceList_ID=plv.M_PriceList_ID"
+		+ " AND pl.M_PriceList_ID=? "						//	1
+		+ "ORDER BY plv.ValidFrom DESC";
+	//	Use newest price list - may not be future
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, M_PriceList_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			//	Tax Included
+			mTab.setValue("IsTaxIncluded", new Boolean("Y".equals(rs.getString(1))));
+			//	Price Limit Enforce
+			Env.setContext(ctx, WindowNo, "EnforcePriceLimit", rs.getString(2));
+			//	Currency
+			Integer ii = new Integer(rs.getInt(3));
+			mTab.setValue("C_Currency_ID", ii);
+			//	PriceList Version
+			Env.setContext(ctx, WindowNo, "M_PriceList_Version_ID", rs.getInt(5));
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+		mTab.setResult(e.getMessage());
+	}
+}
+
+function void updateqtyinvoiced(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal QtyInvoiced = (BigDecimal)value;
+	int precision = MProduct.get(ctx, M_Product_ID,null).getUOMPrecision(); 
+	BigDecimal QtyInvoiced1 = QtyInvoiced.setScale(precision, BigDecimal.ROUND_HALF_UP);
+	if (QtyInvoiced.compareTo(QtyInvoiced1) != 0)
+	{
+		//log.fine("Corrected QtyInvoiced Scale "	+ QtyInvoiced + "->" + QtyInvoiced1);  
+		QtyInvoiced = QtyInvoiced1;
+		mTab.setValue("QtyInvoiced", QtyInvoiced);
+	}
+	BigDecimal QtyEntered = MUOMConversion.convertProductTo (ctx, M_Product_ID, 
+		C_UOM_To_ID, QtyInvoiced);
+	if (QtyEntered == null)
+		QtyEntered = QtyInvoiced;
+	boolean conversion = QtyInvoiced.compareTo(QtyEntered) != 0;
+	//log.fine("qty - UOM=" + C_UOM_To_ID 
+	//	+ ", QtyInvoiced=" + QtyInvoiced
+	//	+ " -> " + conversion 
+	//	+ " QtyEntered=" + QtyEntered);
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyEntered", QtyEntered);
+}
+
+function void updatepriceentered(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal PriceEntered = (BigDecimal)value;
+	BigDecimal PriceActual = MUOMConversion.convertProductTo (ctx, M_Product_ID, C_UOM_To_ID, PriceEntered);
+	if (PriceActual == null)
+		PriceActual = PriceEntered;
+	//
+	//log.fine("amt - PriceEntered=" + PriceEntered 
+	//	+ " -> PriceActual=" + PriceActual);
+	mTab.setValue("PriceActual", PriceActual);
+}
+
+function void updatepriceactual(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal PriceActual = (BigDecimal)value;
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, PriceActual);
+	if (PriceEntered == null)
+		PriceEntered = PriceActual;
+	//
+	//log.fine("amt - PriceActual=" + PriceActual 
+	//	+ " -> PriceEntered=" + PriceEntered);
+	mTab.setValue("PriceEntered", PriceEntered);
+}
+
+function void updateqtyentered(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, "C_BPartner_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	BigDecimal QtyEntered = (BigDecimal)value;
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		//log.fine("Corrected QtyEntered Scale UOM=" + C_UOM_To_ID + "; QtyEntered=" + QtyEntered + "->" + QtyEntered1);  
+		QtyEntered = QtyEntered1;
+		mTab.setValue("QtyEntered", QtyEntered);
+	}
+	BigDecimal QtyInvoiced = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyInvoiced == null)
+		QtyInvoiced = QtyEntered;
+	boolean conversion = QtyEntered.compareTo(QtyInvoiced) != 0;
+	//log.fine("qty - UOM=" + C_UOM_To_ID 
+	//	+ ", QtyEntered=" + QtyEntered
+	//	+ " -> " + conversion 
+	//	+ " QtyInvoiced=" + QtyInvoiced);
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyInvoiced", QtyInvoiced);
+	//
+	// amt
+	//
+	MProductPricing pp = new MProductPricing (M_Product_ID, C_BPartner_ID, QtyInvoiced, IsSOTrx);
+	pp.setM_PriceList_ID(M_PriceList_ID);
+	// globalqss - fix reported bug [ 1643489 ] PriceListVersion misfunctionality
+	int M_PriceList_Version_ID;
+	// try to get the price list version from info product tab
+	M_PriceList_Version_ID = Env.getContextAsInt(Env.getCtx(), Env.WINDOW_INFO, Env.TAB_INFO, "M_PriceList_Version_ID");
+	// if not found try to get from the context of window
+	if (M_PriceList_Version_ID == 0)
+		M_PriceList_Version_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_Version_ID");
+	// end globalqss 
+	pp.setM_PriceList_Version_ID(M_PriceList_Version_ID);
+	Timestamp date = (Timestamp)mTab.getValue("DateInvoiced");
+	pp.setPriceDate(date);
+	//
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+		C_UOM_To_ID, pp.getPriceStd());
+	if (PriceEntered == null)
+		PriceEntered = pp.getPriceStd();
+	//
+	//log.fine("amt - QtyChanged -> PriceActual=" + pp.getPriceStd() 
+	//	+ ", PriceEntered=" + PriceEntered + ", Discount=" + pp.getDiscount());
+	mTab.setValue("PriceActual", pp.getPriceStd());
+//	mTab.setValue("Discount", pp.getDiscount());
+	mTab.setValue("PriceEntered", PriceEntered);
+	Env.setContext(ctx, WindowNo, "DiscountSchema", pp.isDiscountSchema() ? "Y" : "N");
+}
+
+
+function void updateuom(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = ((Integer)value).intValue();
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal QtyEntered = (BigDecimal)mTab.getValue("QtyEntered");
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		QtyEntered = QtyEntered1;
+		mTab.setValue("QtyEntered", QtyEntered);
+	}
+	BigDecimal QtyInvoiced = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyInvoiced == null)
+		QtyInvoiced = QtyEntered;
+	boolean conversion = QtyEntered.compareTo(QtyInvoiced) != 0;
+	BigDecimal PriceActual = (BigDecimal)mTab.getValue("PriceActual");
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+		C_UOM_To_ID, PriceActual);
+	if (PriceEntered == null)
+		PriceEntered = PriceActual; 
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyInvoiced", QtyInvoiced);
+	mTab.setValue("PriceEntered", PriceEntered);
+}
+
+function void updatecharge(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_Charge_ID = (Integer)value;	
+	//	No Product defined
+	if (mTab.getValue("M_Product_ID") != null)
+	{
+		mTab.setValue("C_Charge_ID", null);
+		mTab.setResult("ChargeExclusively");
+	}
+	mTab.setValue("M_AttributeSetInstance_ID", null);
+	mTab.setValue("S_ResourceAssignment_ID", null);
+	mTab.setValue("C_UOM_ID", new Integer(100));	//	EA
+	Env.setContext(ctx, WindowNo, "DiscountSchema", "N");
+	String sql = "SELECT ChargeAmt FROM C_Charge WHERE C_Charge_ID=?";
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, C_Charge_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			mTab.setValue ("PriceEntered", rs.getBigDecimal (1));
+			mTab.setValue ("PriceActual", rs.getBigDecimal (1));
+			mTab.setValue ("PriceLimit", Env.ZERO);
+			mTab.setValue ("PriceList", Env.ZERO);
+			mTab.setValue ("Discount", Env.ZERO);
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+		mTab.setResult(e.getLocalizedMessage());
+	}
+}
+
+function void updateproduct(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer M_Product_ID = (Integer)value;
+	mTab.setValue("C_Charge_ID", null);
+	
+	//	Set Attribute
+	if (Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_Product_ID") == M_Product_ID.intValue()
+		&& Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID") != 0)
+		mTab.setValue("M_AttributeSetInstance_ID", new Integer(Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID")));
+	else
+		mTab.setValue("M_AttributeSetInstance_ID", null);
+		/*****	Price Calculation see also qty	****/
+	boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+	int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, WindowNo, "C_BPartner_ID");
+	BigDecimal Qty = (BigDecimal)mTab.getValue("QtyInvoiced");
+	MProductPricing pp = new MProductPricing (M_Product_ID.intValue(), C_BPartner_ID, Qty, IsSOTrx);
+	//
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	pp.setM_PriceList_ID(M_PriceList_ID);
+	// globalqss - fix reported bug [ 1643489 ] PriceListVersion misfunctionality
+	int M_PriceList_Version_ID;
+	// try to get the price list version from info product tab
+	M_PriceList_Version_ID = Env.getContextAsInt(Env.getCtx(), Env.WINDOW_INFO, Env.TAB_INFO, "M_PriceList_Version_ID");
+	// if not found try to get from the context of window
+	if (M_PriceList_Version_ID == 0)
+		M_PriceList_Version_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_Version_ID");
+	// end globalqss 
+	pp.setM_PriceList_Version_ID(M_PriceList_Version_ID);
+	Timestamp date = Env.getContextAsDate(ctx, WindowNo, "DateInvoiced");
+	pp.setPriceDate(date);
+	//		
+	mTab.setValue("PriceList", pp.getPriceList());
+	mTab.setValue("PriceLimit", pp.getPriceLimit());
+	mTab.setValue("PriceActual", pp.getPriceStd());
+	mTab.setValue("PriceEntered", pp.getPriceStd());
+	mTab.setValue("C_Currency_ID", new Integer(pp.getC_Currency_ID()));
+//	mTab.setValue("Discount", pp.getDiscount());
+	mTab.setValue("C_UOM_ID", new Integer(pp.getC_UOM_ID()));
+	Env.setContext(ctx, WindowNo, "EnforcePriceLimit", pp.isEnforcePriceLimit() ? "Y" : "N");
+	Env.setContext(ctx, WindowNo, "DiscountSchema", pp.isDiscountSchema() ? "Y" : "N");
+	//
+}
+
+function void updateline(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	int StdPrecision = MPriceList.getStandardPrecision(ctx, M_PriceList_ID);
+	BigDecimal QtyEntered = (BigDecimal)mTab.getValue("QtyEntered");
+	BigDecimal QtyInvoiced = (BigDecimal)mTab.getValue("QtyInvoiced");
+	BigDecimal PriceActual = (BigDecimal)mTab.getValue("PriceActual");
+	BigDecimal Discount = (BigDecimal)mTab.getValue("Discount");
+	BigDecimal PriceLimit = (BigDecimal)mTab.getValue("PriceLimit");
+	BigDecimal PriceList = (BigDecimal)mTab.getValue("PriceList");
+	//	Check PriceLimit
+	String epl = Env.getContext(ctx, WindowNo, "EnforcePriceLimit");
+	boolean enforce = Env.isSOTrx(ctx, WindowNo) && epl != null && epl.equals("Y");
+	if (enforce && MRole.getDefault().isOverwritePriceLimit())
+		enforce = false;
+	//	Check Price Limit?
+	if (enforce && PriceLimit.doubleValue() != 0.0 && PriceActual.compareTo(PriceLimit) < 0)
+	{
+		PriceActual = PriceLimit;
+		BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, PriceLimit);
+		if (PriceEntered == null)
+			PriceEntered = PriceLimit;
+		//log.fine("amt =(under) PriceEntered=" + PriceEntered + ", Actual" + PriceLimit);
+		mTab.setValue ("PriceActual", PriceLimit);
+		mTab.setValue ("PriceEntered", PriceEntered);
+		mTab.fireDataStatusEEvent ("UnderLimitPrice", "", false);
+		//	Repeat Discount calc
+		if (PriceList.intValue() != 0)
+		{
+			Discount = new BigDecimal ((PriceList.doubleValue () - PriceActual.doubleValue ()) / PriceList.doubleValue () * 100.0);
+			if (Discount.scale () > 2)
+				Discount = Discount.setScale (2, BigDecimal.ROUND_HALF_UP);
+		//	mTab.setValue ("Discount", Discount);
+		}
+	}
+		//	Line Net Amt
+	BigDecimal LineNetAmt = QtyInvoiced.multiply(PriceActual);
+	if (LineNetAmt.scale() > StdPrecision)
+		LineNetAmt = LineNetAmt.setScale(StdPrecision, BigDecimal.ROUND_HALF_UP);
+	mTab.setValue("LineNetAmt", LineNetAmt);
+
+	//	Calculate Tax Amount for PO
+	boolean IsSOTrx = "Y".equals(Env.getContext(Env.getCtx(), WindowNo, "IsSOTrx"));
+	if (!IsSOTrx)
+	{
+		BigDecimal TaxAmt = Env.ZERO; // teo_sarca: [ 1656829 ] Problem when there is not tax selected in vendor invoice
+		Integer taxID = (Integer)mTab.getValue("C_Tax_ID");
+		//MTax tax = null;
+		if (taxID != null)
+		{
+			MTax tax = new MTax (ctx, taxID.intValue() , null);
+			if (mField.getColumnName().equals("TaxAmt"))
+			{
+				TaxAmt = (BigDecimal)mTab.getValue("TaxAmt");
+			}
+			else
+			{				
+				if (taxID != null)
+				{					
+					//						
+					//int C_Tax_ID = taxID.intValue();
+					//MTax tax = new MTax (ctx, C_Tax_ID, null);
+					//tax = MTax.get(ctx, C_Tax_ID);
+					TaxAmt = tax.calculateTax(LineNetAmt, isTaxIncluded(WindowNo), StdPrecision);
+					mTab.setValue("TaxAmt", TaxAmt);
+				}
+			}
+			if (tax != null)
+			{
+				MPriceList mpl = MPriceList.get(ctx, M_PriceList_ID, null);
+				if ( mpl.isTaxIncluded() && tax.isSubstract())
+				{
+					mTab.fireDataStatusEEvent(tax.getName()+" no es compatible con "+mpl.getName()+" por tener incluido el impuesto en el precio",
+							"este impuesto requiere una lista de precios que no incluya impuesto",
+							true);
+					}
+			}	
+			//	Add it up			
+			if (tax.isSubstract())
+				mTab.setValue("LineTotalAmt", LineNetAmt.subtract(TaxAmt));
+			else
+				mTab.setValue("LineTotalAmt", LineNetAmt.add(TaxAmt));
+		}
+	}
+}
+
+function boolean isTaxIncluded (int WindowNo)
+{
+	String ss = Env.getContext(Env.getCtx(), WindowNo, "IsTaxIncluded");
+	//	Not Set Yet
+	if (ss.length() == 0)
+	{
+		int M_PriceList_ID = Env.getContextAsInt(Env.getCtx(), WindowNo, "M_PriceList_ID");
+		if (M_PriceList_ID == 0)
+			return false;
+		ss = DB.getSQLValueString(null, "SELECT IsTaxIncluded FROM M_PriceList WHERE M_PriceList_ID=?", M_PriceList_ID);
+		if (ss == null)
+			ss = "N";
+		Env.setContext(Env.getCtx(), WindowNo, "IsTaxIncluded", ss);
+	}
+	return "Y".equals(ss);
+}	//	isTaxIncluded
+
+
+function void updatepaymentterm(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_PaymentTerm_ID = (Integer)value;
+	int C_Invoice_ID = Env.getContextAsInt(ctx, WindowNo, "C_Invoice_ID");
+	if (C_PaymentTerm_ID == null || C_PaymentTerm_ID.intValue() == 0 || C_Invoice_ID == 0)	//	not saved yet
+		return;
+	//
+	MPaymentTerm pt = new MPaymentTerm (ctx, C_PaymentTerm_ID.intValue(), null);
+	if (pt.get_ID() == 0)
+	{
+		mTab.setResult("PaymentTerm not found");
+		return;
+	}
+	boolean valid = pt.apply (C_Invoice_ID);
+	mTab.setValue("IsPayScheduleValid", valid ? "Y" : "N");
+}
+
+function void updatedoctype(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_DocType_ID = (Integer)value;
+				
+	if (C_DocType_ID == null || C_DocType_ID.intValue() == 0)
+		return;
+
+	String sql = " SELECT d.HasCharges,'N',d.IsDocNoControlled, "
+	+ " s.CurrentNext, d.DocBaseType, s.Serial, d.C_ConversionType_ID " 
+	+ " FROM C_DocType d LEFT OUTER JOIN AD_Sequence s " 
+	+ " ON (d.DocNoSequence_ID=s.AD_Sequence_ID) " 
+	+ " WHERE C_DocType_ID=? ";
+	
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, C_DocType_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			mTab.setValue("C_DocType_ID", C_DocType_ID);
+			//	Charges - Set Context
+			Env.setContext(ctx, WindowNo, "HasCharges", rs.getString(1));
+			//	DocumentNo
+			if (rs.getString("IsDocNoControlled").equals("Y")) {
+				mTab.setValue("DocumentNo", "<" + rs.getString("CurrentNext") + ">");
+				mTab.setValue("Serial", rs.getString("Serial"));
+			}
+			//  DocBaseType - Set Context
+			String s = rs.getString("DocBaseType");
+			Env.setContext(ctx, WindowNo, "DocBaseType", s);
+			//  AP Check & AR Credit Memo
+			if (s.startsWith("AP"))
+				mTab.setValue("PaymentRule", "S");    //  Check
+			else if (s.endsWith("C"))
+				mTab.setValue("PaymentRule", "P");    //  OnCredit
+			if (rs.getInt("C_ConversionType_ID") > 0)
+				mTab.setValue("C_ConversionType_ID", rs.getInt("C_ConversionType_ID"));
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+		mTab.setResult(e.getLocalizedMessage());
+	}	
+}
+
+function void updatereference(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_Invoice_ID=((Integer)value).intValue();
+	MInvoice invoice = MInvoice.get(ctx, C_Invoice_ID);
+	mTab.setValue("C_Bpartner_ID", invoice.getC_BPartner_ID());
+	//mTab.setValue("DateInvoiced", invoice.getDateInvoiced());
+	mTab.setValue("C_ConversionType_ID", invoice.getC_ConversionType_ID());
+	mTab.setValue("SalesRep_ID", invoice.getSalesRep_ID());
+	mTab.setValue("M_PriceList_ID", invoice.getM_PriceList_ID());
+}
+
+function void updatepartner(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+		Integer C_BPartner_ID = (Integer)value;
+		if (C_BPartner_ID == null || C_BPartner_ID.intValue() == 0)
+			return;
+
+		String sql = "SELECT p.AD_Language,p.C_PaymentTerm_ID,"
+			+ " COALESCE(p.M_PriceList_ID,g.M_PriceList_ID) AS M_PriceList_ID, p.PaymentRule,p.POReference,"
+			+ " p.SO_Description,p.IsDiscountPrinted,"
+			+ " p.SO_CreditLimit, (p.SO_CreditLimit+p.SO_CreditOverLimit)-p.SO_CreditUsed AS CreditAvailable,"
+			+ " l.C_BPartner_Location_ID,c.AD_User_ID,"
+			+ " COALESCE(p.PO_PriceList_ID,g.PO_PriceList_ID) AS PO_PriceList_ID, p.PaymentRulePO,p.PO_PaymentTerm_ID " 
+			+ "FROM C_BPartner p"
+			+ " INNER JOIN C_BP_Group g ON (p.C_BP_Group_ID=g.C_BP_Group_ID)"			
+			+ " LEFT OUTER JOIN C_BPartner_Location l ON (p.C_BPartner_ID=l.C_BPartner_ID AND l.IsBillTo='Y' AND l.IsActive='Y')"
+			+ " LEFT OUTER JOIN AD_User c ON (p.C_BPartner_ID=c.C_BPartner_ID) "
+			+ "WHERE p.C_BPartner_ID=? AND p.IsActive='Y'";		//	#1
+
+		boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+		try
+		{
+			PreparedStatement pstmt = DB.prepareStatement(sql, null);
+			pstmt.setInt(1, C_BPartner_ID.intValue());
+			ResultSet rs = pstmt.executeQuery();
+			//
+			if (rs.next())
+			{
+				//	PriceList & IsTaxIncluded & Currency
+				Integer ii = new Integer(rs.getInt(IsSOTrx ? "M_PriceList_ID" : "PO_PriceList_ID"));
+				if (!rs.wasNull())
+					mTab.setValue("M_PriceList_ID", ii);
+				else
+				{	//	get default PriceList
+					int i = Env.getContextAsInt(ctx, "#M_PriceList_ID");
+					if (i != 0)
+						mTab.setValue("M_PriceList_ID", new Integer(i));
+				}
+
+				//	PaymentRule
+				String s = rs.getString(IsSOTrx ? "PaymentRule" : "PaymentRulePO");
+				if (s != null && s.length() != 0)
+				{
+					if (Env.getContext(ctx, WindowNo, "DocBaseType").endsWith("C"))	//	Credits are Payment Term
+						s = "P";
+					else if (IsSOTrx && (s.equals("S") || s.equals("U")))	//	No Check/Transfer for SO_Trx
+						s = "P";											//  Payment Term
+					mTab.setValue("PaymentRule", s);
+				}
+				//  Payment Term
+				ii = new Integer(rs.getInt(IsSOTrx ? "C_PaymentTerm_ID" : "PO_PaymentTerm_ID"));
+				if (!rs.wasNull())
+					mTab.setValue("C_PaymentTerm_ID", ii);
+
+				//	Location
+				int locID = rs.getInt("C_BPartner_Location_ID");
+				//	overwritten by InfoBP selection - works only if InfoWindow
+				//	was used otherwise creates error (uses last value, may belong to differnt BP)
+				if (C_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+				{
+					String loc = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_Location_ID");
+					if (loc.length() > 0)
+						locID = Integer.parseInt(loc);
+				}
+				if (locID == 0)
+					mTab.setValue("C_BPartner_Location_ID", null);
+				else
+					mTab.setValue("C_BPartner_Location_ID", new Integer(locID));
+
+				//	Contact - overwritten by InfoBP selection
+				int contID = rs.getInt("AD_User_ID");
+				if (C_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+				{
+					String cont = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "AD_User_ID");
+					if (cont.length() > 0)
+						contID = Integer.parseInt(cont);
+				}
+				if (contID == 0)
+					mTab.setValue("AD_User_ID", null);
+				else
+					mTab.setValue("AD_User_ID", new Integer(contID));
+
+				//	CreditAvailable
+				if (IsSOTrx)
+				{
+					double CreditLimit = rs.getDouble("SO_CreditLimit");
+					if (CreditLimit != 0)
+					{
+						double CreditAvailable = rs.getDouble("CreditAvailable");
+						if (!rs.wasNull() && CreditAvailable < 0)
+							mTab.fireDataStatusEEvent("CreditLimitOver",
+								DisplayType.getNumberFormat(DisplayType.Amount).format(CreditAvailable),
+								false);
+					}
+				}
+				
+				//	PO Reference
+				s = rs.getString("POReference");
+				if (s != null && s.length() != 0)
+					mTab.setValue("POReference", s);
+				else
+					mTab.setValue("POReference", null);
+				//	SO Description
+				s = rs.getString("SO_Description");
+				if (s != null && s.trim().length() != 0)
+					mTab.setValue("Description", s);
+				//	IsDiscountPrinted
+				s = rs.getString("IsDiscountPrinted");
+				if (s != null && s.length() != 0)
+					mTab.setValue("IsDiscountPrinted", s);
+				else
+					mTab.setValue("IsDiscountPrinted", "N");
+			}
+			rs.close();
+			pstmt.close();
+		}
+		catch (SQLException e)
+		{
+			mTab.setResult(e.getLocalizedMessage());
+		}	
+}]]></rule>
+</kiebase>
+
+

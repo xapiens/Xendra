@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="calloutmovementkb" 
+sessionname="calloutmovementks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="4af476fc-e9e0-49a5-bdf6-02ed8f8a69f0" synchronized="2018-09-26 18:56:29.171" type="kiebase" >
+<field TableName="M_Movement" ColumnName="C_DocType_ID" Agenda="doctype"/>
+<field TableName="M_MovementLine" ColumnName="QtyEntered" Agenda="qtyentered"/>
+<field TableName="M_MovementLine" ColumnName="M_LocatorTo_ID" Agenda="locator"/>
+<field TableName="M_MovementLine" ColumnName="M_Product_ID" Agenda="product"/>
+<field TableName="M_MovementLine" ColumnName="C_UOM_ID" Agenda="qty"/>
+<field TableName="M_Movement" ColumnName="MovementDate" Agenda="dateacct"/>
+<rule name="src/main/resources/org.xendra.standard/calloutmovement.drl" type="rule" sessionname="calloutmovementkb" file="calloutmovement.drl" Identifier="d467985e-eb7c-4b4e-87d1-519ee49884cc" synchronized="2018-09-26 18:56:29.215"/>
+</kiebase>

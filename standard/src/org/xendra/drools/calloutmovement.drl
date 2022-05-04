@@ -1,0 +1,156 @@
+
+package org.xendra.rules
+
+import org.compiere.model.GridTab
+import org.compiere.model.GridField
+import org.compiere.model.MUOM
+import org.compiere.model.MProduct
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MStorage
+import org.compiere.util.DB
+import java.util.Properties
+import java.lang.Integer
+import java.math.BigDecimal
+import org.compiere.util.Env
+
+global Object value
+global String result
+global Object OldValue
+global Properties ctx
+global Integer WindowNo
+
+rule orderpricelist
+	agenda-group "doctype"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_DocType_ID")						
+	then	
+		doctype(ctx, WindowNo, $tab, $field, value);
+end
+
+rule product
+	agenda-group "product"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="M_Product_ID")				
+	then
+		product(ctx, WindowNo, $tab, $field, value);
+		updateqty(ctx, WindowNo, $tab, $field, value);
+end
+
+rule uom
+	agenda-group "qty"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="C_UOM_ID")				
+	then
+		updateqty(ctx, WindowNo, $tab, $field, value);
+		checkstock(ctx, WindowNo, $tab, $field, value);
+end
+
+rule qtyentered
+	agenda-group "qtyentered"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="QtyEntered")
+	then
+		updateqty(ctx, WindowNo, $tab, $field, value);
+		checkstock(ctx, WindowNo, $tab, $field, value);
+end
+
+rule locator
+	agenda-group "locator"
+	when
+		$tab : GridTab()
+		$field : GridField ( $value : Value != null, getColumnName() == "M_LocatorTo_ID")
+	then
+		checkstock(ctx, WindowNo, $tab, $field, value);
+end
+
+rule dateacct
+	agenda-group "dateacct"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "MovementDate")
+	then
+		System.out.println(value);
+		$tab.setValue("DateAcct", value);
+end
+
+
+function void doctype(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_DocType_ID = (Integer)value;
+	String InTransit = "N";
+	String sql = "SELECT d.IsInTransit FROM C_DocType d WHERE C_DocType_ID = ?";
+	InTransit = DB.getSQLValueString(null, sql, C_DocType_ID);
+	mTab.setValue("IsInTransit", InTransit);
+	mTab.setValue("PriorityRule","5");
+}
+
+function void product(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer M_Product_ID = (Integer)value;
+	//	Set Attribute
+	if (Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_Product_ID") == M_Product_ID.intValue()
+		&& Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID") != 0)
+		mTab.setValue("M_AttributeSetInstance_ID", new Integer(Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID")));
+	else
+		mTab.setValue("M_AttributeSetInstance_ID", null);
+	
+	MProduct product = MProduct.get (ctx, M_Product_ID.intValue(), null);
+	if (product.isStocked() && product.getC_UOM_Order_ID() != 0 )
+		mTab.setValue("C_UOM_ID", product.getC_UOM_Order_ID());
+	else
+	{			
+		mTab.setValue("C_UOM_ID", product.getC_UOM_ID());
+	}			
+	if (product.getC_UOM_ID() != product.getC_UOM_Order_ID())
+	{
+		mTab.setValue("QtyEntered", mTab.getValue("QtyEntered"));
+	}
+	else
+		mTab.setValue("MovementQty", mTab.getValue("QtyEntered"));		
+}
+
+function void updateqty(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal QtyOrdered = Env.ZERO;		
+	BigDecimal QtyEntered = (BigDecimal) mTab.getValue("QtyEntered");
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		QtyEntered = QtyEntered1;
+		mTab.setValue("QtyEntered", QtyEntered);
+	}
+	QtyOrdered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyOrdered == null)
+		QtyOrdered = QtyEntered;
+	boolean conversion = QtyEntered.compareTo(QtyOrdered) != 0;
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("MovementQty", QtyOrdered);
+	MUOM uom = MUOM.get(Env.getCtx(), C_UOM_To_ID);
+	if (QtyOrdered.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) > 0 && !uom.isSplit()) {
+		mTab.setValue("MovementQty", BigDecimal.ZERO);
+		mTab.fireDataStatusEEvent("NoDecimal", "0", true);
+		return;
+	}
+}
+
+
+function void checkstock(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	BigDecimal QtyOrdered = (BigDecimal)mTab.getValue("MovementQty");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	MProduct product = MProduct.get(ctx, M_Product_ID, null);
+	if (product.isStocked()) {
+		int M_Warehouse_ID = Env.getContextAsInt(ctx, WindowNo, "M_Warehouse_ID");
+		int M_AttributeSetInstance_ID = Env.getContextAsInt(ctx, WindowNo, "M_AttributeSetInstance_ID");
+		BigDecimal available = MStorage.getQtyAvailable
+			(M_Warehouse_ID, 0, M_Product_ID, M_AttributeSetInstance_ID, null);
+		if (available == null)
+			available = BigDecimal.ZERO;
+		if (available.signum() == 0)
+			mTab.fireDataStatusEEvent("NoQtyAvailable", "0", false);
+		else if (available.compareTo(QtyOrdered) < 0 )
+			mTab.fireDataStatusEEvent("InsufficientQtyAvailable", available.toString(), false);
+	}
+}

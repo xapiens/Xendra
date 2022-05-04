@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="C_DocumentTax">
+    <table name="C_DocumentTax" accesslevel="0" level="1" Identifier="ec7f068b-1a6b-c93e-60b1-b74086557b16">
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="ec7f068b-1a6b-c93e-60b1-b74086557b16" Name="Certificado de pago de regalías emitidas por PERUPETRO S.A" TaxID="24" Value="24" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="292b5485-4b3d-33d0-a0a8-a024499ffe6e" Name="Documento de Atribución" TaxID="25" Value="25" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="3cbc230d-1f76-2dbc-3bed-5640a4728f5b" Name="Boleto de transporte aereo" TaxID="05" Value="05" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="1626941b-fdcb-060e-5367-b99652fa801e" Name="Documentos emitidos por los servicios aeroportuarios" TaxID="28" Value="28" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e0ccdac9-6245-c117-6f9b-5092dc62c7c4" Name="Recibo por arrendamiento" TaxID="10" Value="10" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="a458fe94-d3c3-83d8-bb35-85c9d7750604" Name="Recibo por el Pago de la Tarifa por Uso de Agua Superficial" TaxID="26" Value="26" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="0ffcb049-aea1-8825-2184-0967be419fdc" Name="Póliza o DUI Fraccionada" TaxID="51" Value="51" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="dacc0b79-f6e9-ae53-20c9-132a493f31b9" Name="Boleto de transporte terrestre" TaxID="15" Value="15" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="49db45f1-ba9e-13be-e393-0d88f38a1f15" Name="Carta de porte aereo" TaxID="06" Value="06" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e2a672fc-5939-b11b-e18c-eee6be72ee54" Name="Form.Declaración-pago o Boleta de pago de trib.Internos" TaxID="46" Value="46" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="bc2cba48-b7db-d590-2706-0cf568f739a9" Name="Poliza emitida por la bolsa de valores" TaxID="11" Value="11" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="7fd4c156-3d99-a02c-e5d9-cf46675c2381" Name="Documentos emitidos por las empresas recaudadoras" TaxID="32" Value="32" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="d858057a-6808-3ab0-97df-6ac460d2e084" Name="Boleto o entrada por atracciones y espectáculos públicos" TaxID="19" Value="19" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="a5127d99-4714-fd8c-ad86-cb4ef9ab8c6b" Name="Nota de Crédito Especial" TaxID="87" Value="87" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="3672f4de-3cbd-3dd7-afca-0ab0631d05f8" Name="Ticket" TaxID="12" Value="12" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="012bd440-3b92-d706-e117-63daf8a66c4a" Name="Declaración Única de Aduanas - Importación definitiva" TaxID="50" Value="50" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="f4aac772-0cb9-5f5b-7b38-b6c48a194d74" Name="Recibo de Distribución de Gas Natural" TaxID="36" Value="36" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e15c4e91-8259-1d8f-3b5f-b13eef613dd5" Name="Boletos de viaje emitidos por las empresas de transporte nacional de pasajeros" TaxID="16" Value="16" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="4ac7ab5a-c3d5-b9dd-f447-80503c29d1a3" Name="Comprobante por Operaciones No Habituales" TaxID="22" Value="22" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="ab3f75be-671e-fcd0-fa7f-67aa4d4b39d8" Name="Doc.emitido por las AFP" TaxID="18" Value="18" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="3ae0832d-7024-6954-a9fd-de6279e5da84" Name="Nota de Débito Especial" TaxID="88" Value="88" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="c1b2f40b-022c-15f3-fd87-07422ec248b1" Name="Nota de Crédito - No Domiciliado" TaxID="97" Value="97" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="de08e6b2-167a-689c-8f8f-749894204e7e" Name="Liquidacion de compras" TaxID="04" Value="04" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="2f9ad176-531d-64d5-a3ac-1a932dc38afe" Name="Facura" TaxID="01" Value="01" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="700ff05b-b20d-dd2d-00cd-f675a8f3eea7" Name="Otros" TaxID="00" Value="00" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="d2e13633-309b-f0c2-1db1-07ccdd779540" Name="Comprobante de Percepción" TaxID="40" Value="40" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="b93e43f6-7af4-aaf2-f628-da2740fbac34" Name="Documentos emitidos por centros educativos y culturales" TaxID="45" Value="45" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="1a9c298c-9d9c-6e2c-a92d-fc1930c88e11" Name="Nota de Débito" TaxID="08" Value="08" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="1ddc351c-e037-9282-b075-5cd20787fbfe" Name="Seguro Complementario de Trabajo de Riesgo" TaxID="27" Value="27" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="acdad89b-cbe8-45fe-393b-5f52b699f18d" Name="Docs de empresas que desempeñan el rol adquirente en pagos mediante tarj.crédito y débito, emit.por ellos misos" TaxID="42" Value="42" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="d7bc0ee9-fc59-8682-39e6-e2342aa308dd" Name="Docs de empresas que desempeñan el rol adquirente en pagos mediante tarj.crédito y débito, emit por bcos" TaxID="30" Value="30" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="78a32a72-5a50-a8b1-31ed-b79cea0b68f8" Name="Billetes de lotería, rifas y apuestas. " TaxID="44" Value="44" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="f9af57c8-e6e3-5eee-de50-7c7807a254b0" Name="Liquidación de Cobranza" TaxID="54" Value="54" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="53fec2d4-cb20-3a9d-02fe-3f1acf1c30cf" Name="Documento del Partícipe" TaxID="35" Value="35" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e5d2975a-6d54-6c14-4ff4-8514b272b33d" Name="Despacho Simplificado - Importación Simplificada" TaxID="52" Value="52" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="b39c7848-dfdd-1dab-ae88-d79504a3ab77" Name="Nota de Ajuste de Operaciones - Ley N° 29972" TaxID="89" Value="89" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="d8cd1618-3a6d-66b8-7b7c-052e31908a16" Name="Constancia de Depósito - IVAP (Ley 28211)" TaxID="49" Value="49" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="d17aedef-0833-4def-174e-4c265a60ccbf" Name="Declaración de Mensajería o Courier" TaxID="53" Value="53" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="848876fb-bb44-1859-9509-3bb227d7c11a" Name="Boleta de Venta" TaxID="03" Value="03" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="044de789-a41c-82a7-9351-315c804ab1d4" Name="Boletos emitidos por las Compañías de Aviación Comercial" TaxID="43" Value="43" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="0c294b74-959d-2f37-f605-b5f2a3ad3288" Name="Nota de Crédito" TaxID="07" Value="07" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="4f4d1b35-6200-1c51-514c-6b204b99f004" Name="Manifiesto de Pasajeros" TaxID="33" Value="33" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="90a11a69-e80f-017f-cc13-d070b46c36ec" Name="Documento del Operador" TaxID="34" Value="34" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="ba065b4b-911f-64b5-424a-0fdabdec4f02" Name="Documento emitido por la Iglesia Católica" TaxID="17" Value="17" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="7aef89e1-353d-e51c-e785-e47697122361" Name="Nota de Débito - No Domiciliado" TaxID="98" Value="98" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="39b18478-ab3e-add8-1976-1078f61651e0" Name="Conocimiento de embarque" TaxID="21" Value="21" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="4a968494-70f8-3025-7022-4f2fa47f5b5e" Name="Documentos que emitan los concesionarios del servicio de revisiones técnicas vehiculares" TaxID="37" Value="37" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="ce8ef05d-25db-305b-9189-4c25c1b83dc0" Name="Comprobante de Operaciones - Ley N° 29972" TaxID="48" Value="48" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="965f5c01-1e2c-1700-a236-6924271de1b2" Name="Comprobante de pago SEAE" TaxID="56" Value="56" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="b17ca113-80e4-b64a-d0ab-0c77d589785d" Name="Docs.emitidos por las empresas del sistema financiero y de seguros" TaxID="13" Value="13" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e5588ed1-4b39-3fab-00f1-750b8a21250a" Name="Comprobante de No Domiciliado" TaxID="91" Value="91" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="1a1cc815-01ed-b949-bc27-c6c2187dbe1c" Name="Pólizas de Adjudicación emitidas con ocasión del remate" TaxID="23" Value="23" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="7a9d28e0-81f1-45f0-760f-dc1b754fd4f7" Name="Comprobante de Retención" TaxID="20" Value="20" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="b5737e9a-bb06-eebe-4d93-4410e6340262" Name="CDocumentos emitidos por la COFOPRI" TaxID="29" Value="29" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="91adafa0-da5a-a2d6-a622-601d00899caf" Name="Recibo Honorarios" TaxID="02" Value="02" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="6e48a41d-1daa-7861-dc48-e8fd621cf140" Name="Recibo Servicios" TaxID="14" Value="14" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="8d4af732-47d5-156c-d691-d8d72e722186" Name="Exceso de crédito fiscal por retiro de bienes" TaxID="96" Value="96" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="722430f4-5733-01fe-4eab-ac1d7e4b16d3" Name="BVME para transporte ferroviario de pasajeros" TaxID="55" Value="55" IsActive="true" />
+    </table>
+  </record>
+</stream>
+

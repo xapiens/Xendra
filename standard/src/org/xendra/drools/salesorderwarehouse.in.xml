@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesorderwarehousekb" 
+sessionname="salesorderwarehouseks" queuename="" docbasetype="SOO" docsubtype="WP" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="b463cdd2-972c-4b54-a3cc-cf1d1cd955de" synchronized="2018-04-04 16:49:27.0" type="kiebase" >
+<doctype docbasetype="SOO" docsubtype="WP"/>
+<rule name="src/main/resources/org.xendra.standard/salesorderwarehouse.drl" type="rule" sessionname="salesorderwarehouseks" file="salesorderwarehouse.drl" Identifier="8282b5c8-ff8f-40fc-ab00-964f1ad42315" synchronized="2018-04-04 16:49:27.0"/>
+</kiebase>

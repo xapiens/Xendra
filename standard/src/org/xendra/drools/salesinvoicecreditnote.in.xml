@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesinvoicecreditnotekb" 
+sessionname="salesinvoicecreditnoteks" queuename="" docbasetype="ARC" docsubtype="" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="cec3a17f-7070-484e-939a-d7275ad1a0f3" synchronized="2018-04-04 16:49:28.0" type="kiebase" >
+<doctype docbasetype="ARC" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/salesinvoicecreditnote.drl" type="rule" sessionname="salesinvoicecreditnoteks" file="salesinvoicecreditnote.drl" Identifier="a08d283b-d761-46e2-ac61-c6facbab925a" synchronized="2018-04-04 16:49:28.0"/>
+</kiebase>

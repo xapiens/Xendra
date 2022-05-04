@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="purchaseinoutkb" 
+sessionname="purchaseinoutks" queuename="" docbasetype="MMR" docsubtype="" 
+ruletype="R" group="4b84bd44-8b2b-42ce-934e-51faa9b12e72" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="2061c4ea-c3e0-42b9-95ee-8e1a203f25bf" synchronized="2018-04-05 16:05:43.0" type="kiebase" >
+<doctype docbasetype="MMR" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/purchaseinout.drl" type="rule" sessionname="purchaseinoutks" file="purchaseinout.drl" Identifier="d9a7fdcb-c337-4e93-9114-f8a874893137" synchronized="2018-04-05 16:05:43.0"/>
+</kiebase>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="movementkb" 
+sessionname="Movementks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="9565443b-40c1-4886-8321-d4eca78c780e" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="97261640-b440-47b8-a1dd-dd2ba2b5f73c" synchronized="2018-09-24 17:28:43" type="kiebase" >
+<doctype docbasetype="MMM" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/Movement.drl" type="rule" sessionname="Movementks" file="Movement.drl" Identifier="ef26637b-23fe-4fa2-bc5d-37633f356cf4" synchronized="2018-09-24 17:28:43.109"/>
+<channel name="message" AD_MessageFormat_ID="0a065955-421d-4ac2-9424-553dbef77551" sessionname="Movementks" Identifier="932b30c8-2ea7-4809-9053-e48ab4b880da" synchronized="2018-10-05 00:29:03"/>
+</kiebase>

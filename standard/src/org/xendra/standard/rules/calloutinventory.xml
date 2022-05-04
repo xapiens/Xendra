@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="calloutinventorykb" sessionname="calloutinventoryks" queuename="" docbasetype="" docsubtype="" ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="3fe517f6-b62d-f24f-9caa-17a0f594184c" synchronized="2018-10-09 23:45:51.086" type="kiebase">
+  <field TableName="M_InventoryLine" ColumnName="M_Locator_ID" Agenda="product" />
+  <field TableName="M_InventoryLine" ColumnName="M_Product_ID" Agenda="product" />
+  <field TableName="M_InventoryLine" ColumnName="M_AttributeSetInstance_ID" Agenda="product" />
+  <rule name="src/main/resources/org.xendra.standard/calloutinventory.drl" type="rule" sessionname="calloutinventoryks" file="calloutinventory.drl" Identifier="d9cf10c1-b207-7996-eb0d-d8f917ce91a7" synchronized="2018-10-09 23:45:51.097"><![CDATA[package org.xendra.rules
+
+import org.compiere.model.GridTab
+import org.compiere.model.GridField
+import org.compiere.model.MUOM
+import org.compiere.model.MProduct
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MStorage
+import org.compiere.util.DB
+import java.util.Properties
+import java.lang.Integer
+import java.math.BigDecimal
+import org.compiere.util.Env
+
+global Object value
+global String result
+global Object OldValue
+global Properties ctx
+global Integer WindowNo
+
+rule product
+	agenda-group "product"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="M_Product_ID")				
+	then
+		product(ctx, WindowNo, $tab, $field, value);		
+end
+
+function void product(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer InventoryLine = (Integer) mTab.getValue("M_InventoryLine_ID");
+	if (InventoryLine != null && InventoryLine.intValue() != 0)
+		return;
+	// New Line - get Book Value
+	int M_Product_ID = 0;
+	Integer Product = (Integer) mTab.getValue("M_Product_ID");
+	if (Product != null)
+		M_Product_ID = Product.intValue();
+	if (M_Product_ID == 0)
+		return;
+	int M_Locator_ID = 0;
+	Integer Locator = (Integer) mTab.getValue("M_Locator_ID");
+	if (Locator != null)
+		M_Locator_ID = Locator.intValue();
+	if (M_Locator_ID == 0)
+		return;
+	// set Attribute
+	int M_AttributeSetInstance_ID = 0;
+	Integer ASI = (Integer) mTab.getValue("M_AttributeSetInstance_ID");
+	if (ASI != null)
+		M_AttributeSetInstance_ID = ASI.intValue();
+	if (Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_Product_ID") == M_Product_ID) {
+		M_AttributeSetInstance_ID = Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID");
+		if (M_AttributeSetInstance_ID != 0)
+			mTab.setValue("M_AttributeSetInstance_ID", new Integer(M_AttributeSetInstance_ID));
+		else
+			mTab.setValue("M_AttributeSetInstance_ID", null);
+	}
+	// Set QtyBook from first storage location
+	BigDecimal bd = null;
+	if (M_AttributeSetInstance_ID > 0) 
+		bd = DB.getSQLValueBD(null, "SELECT QtyOnHand FROM M_Storage WHERE M_Product_ID=? AND M_Locator_ID = ? AND M_AttributeSetInstance_ID=?", M_Product_ID, M_Locator_ID, M_AttributeSetInstance_ID);
+	else
+		bd = DB.getSQLValueBD(null, "SELECT SUM(QtyOnHand) FROM M_Storage WHERE M_Product_ID = ? AND M_Locator_ID=?", M_Product_ID, M_Locator_ID);	
+	if (bd != null) {
+		mTab.setValue("QtyBook", bd);
+	}
+}]]></rule>
+</kiebase>
+
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesinoutreturnkb" 
+sessionname="salesinoutreturnks" queuename="" docbasetype="MRC" docsubtype="RM" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="b889ea1d-f858-4395-a936-1ffdf3169330" synchronized="2018-04-04 16:49:28.0" type="kiebase" >
+<doctype docbasetype="MRC" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/salesinoutreturn.drl" type="rule" sessionname="salesinoutreturnks" file="salesinoutreturn.drl" Identifier="4157fb75-6ba7-4a5b-988b-7e80a9a1a579" synchronized="2018-04-04 16:49:28.0"/>
+</kiebase>

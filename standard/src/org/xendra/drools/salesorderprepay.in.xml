@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesorderprepaykb" 
+sessionname="salesorderprepayks" queuename="" docbasetype="SOO" docsubtype="PR" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="2be55d21-1599-4c84-abbd-b1d2e1aa77b6" synchronized="2018-04-04 16:49:28.0" type="kiebase" >
+<doctype docbasetype="SOO" docsubtype="PR"/>
+<rule name="src/main/resources/org.xendra.standard/salesorderprepay.drl" type="rule" sessionname="salesorderprepayks" file="salesorderprepay.drl" Identifier="cfd0922f-388c-4611-987f-23c76f0ed0d2" synchronized="2018-04-04 16:49:28.0"/>
+</kiebase>

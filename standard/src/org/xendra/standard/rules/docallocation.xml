@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.xendra.acct" name="docallocationkb" sessionname="docallocationkb" queuename="" docbasetype="" docsubtype="" ruletype="" group="87811363-b910-489d-958f-c13673f4dcdd" entrypoint="" EqualsBehavior="EQUALITY" queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="ef6fed1c-1f5c-46cf-b8ea-d7c8c361584c" synchronized="2018-08-29 12:23:19.073" type="kiebase">
+  <rule name="src/main/resources/org.xendra.acct/docallocation.drl" type="rule" sessionname="docallocationkb" file="cashjournal.drl" Identifier="bc3de629-db90-42c5-8782-fb3569baabf0" synchronized="2018-08-29 12:23:19.099"><![CDATA[//created on: 14-08-2018
+//modified on : 22-08-2018
+//created by :
+package org.compiere.model
+
+import org.compiere.util.Env
+import org.compiere.model.persistence.X_C_AllocationHdr
+import org.compiere.model.reference.REF_C_DocTypeDocBaseType
+import org.compiere.model.reference.REF__DocumentAction
+import org.compiere.model.reference.REF_C_CashTrxType
+import org.compiere.process.DocAction
+import org.compiere.process.DocumentEngine
+import java.util.Properties
+import java.util.ArrayList
+import java.math.BigDecimal
+import java.sql.Timestamp
+
+global Properties ctx
+dialect "mvel"
+
+rule "Period"
+	agenda-group "prepare"	
+    when
+    	  eval(namerule("period"));
+        $cash : MCash()
+        eval(!isperiodopen($cash))
+    then
+	   	System.out.println("period");
+        $cash.setProcessMsg("@PeriodClosed@");
+        $cash.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"
+    dialect "mvel"
+    when
+    	eval(namerule("lines"));
+        $cash : MCash($length : getLength() )
+        eval($length == 0)
+    then
+        $cash.setProcessMsg("@NoLines@");
+        $cash.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "prepareok"
+	agenda-group "prepare"
+	when
+		eval(namerule("prepareok"));
+		$cash : MCash($length : getLength())
+		eval($length > 0)
+		eval(isperiodopen($cash))
+		eval(checkamounts($cash));
+	then
+		$cash.setRulestatus(DocAction.STATUS_InProgress);
+end
+
+rule "prepare"
+	agenda-group "complete"
+	dialect "mvel"
+	when 
+	  eval(namerule("prepare"));
+		$cash : MCash()
+		eval($cash.getDocAction() == REF__DocumentAction.Prepare)
+	then
+	  $cash.setRulestatus(DocAction.STATUS_InProgress);
+end
+
+rule "approved"
+	agenda-group "complete"
+	when
+		$cash : MCash ()
+	then
+		isapproved($cash);
+end
+
+rule "payment"
+	agenda-group "complete"
+	when
+		$cash : MCash(DocStatus == 'IP')
+		eval($cash.getC_Payment_ID() > 0)
+	then
+		paycash($cash);
+end
+//  cash complete
+
+rule "allocations"
+	agenda-group "complete"
+	dialect "mvel"
+	when
+		$cash : MCash(DocStatus == 'IP')
+		eval(!$cash.isProcessed())
+		eval(allocations($cash))
+	then
+		$cash.setRulestatus(DocAction.STATUS_Completed);
+end
+
+function boolean allocations(MCash cash)  {
+	System.out.println("entrando a la funcion allocations");
+	MCashLine[] lines =  cash.getLines(false);
+	int allocatelines = 0;
+	ArrayList<MAllocation> allocations = new ArrayList<MAllocation>();
+	try {
+	for (MCashLine line:lines) {
+		MAllocation hdr = null;
+		Boolean found = false;
+		for (MAllocation allochdr:allocations) {
+			if (allochdr.getC_Currency_ID() == line.getC_Currency_ID()) {
+				hdr = allochdr;
+				found = true;
+				break;
+			}
+		}
+		if (hdr == null)
+			hdr = new MAllocation();
+		if (!found) {
+			if (!hdr.addHeader(cash, cash.getStatementDate(), cash.getDateAcct(), line.getC_Currency_ID(), cash.get_TrxName())) {
+				throw new Exception("Could not create Allocation Hdr");
+			}
+			allocations.add(hdr);
+		}
+		if (REF_C_CashTrxType.Invoice.equals(line.getCashType())) {
+			if (line.getC_Invoice_ID() > 0) {
+				MInvoice invoice = MInvoice.get(Env.getCtx(), line.getC_Invoice_ID());
+				if (invoice.getWithholdingAmt().signum() > 0) {
+					MWithholdingLine wline = MWithholdingLine.get(Env.getCtx(), MCashLine.Table_ID, line.getC_CashLine_ID(), cash.get_TrxName());
+					if (wline != null) {
+						if (wline.getWithholdingAmt().compareTo(line.getWithholdingAmt()) != 0 && wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed)) {						
+							throw new Exception("no se puede alterar una percepcion ya completada Factura :"+invoice.getDocumentNo());
+						} else if (wline.getParent() == null) {
+							wline.delete(true);
+						} else if (!wline.getParent().getDocStatus().equals(DocAction.STATUS_Completed)) {
+							wline.delete(true);
+						}
+					}
+				}				
+				if (invoice.getOpenAmt().signum() == 0) {
+					throw new Exception("@Error@ Invoice " + invoice.getSerial() + "-" + invoice.getDocumentNo() + " @AlreadyPaid@ ");
+				}
+				BigDecimal OverUnderAmt;
+				if (invoice.isSOTrx()) {
+					OverUnderAmt = invoice.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());
+				} else {
+					OverUnderAmt = invoice.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
+				}
+				if (!hdr.addLine(line, OverUnderAmt, invoice)) {
+					throw new Exception("Could not create Allocation Line");
+				}
+				allocatelines++;				
+			}
+		}
+		else if (REF_C_CashTrxType.BillOfExchange.equals(line.getCashType())) {
+			if (line.getC_BOE_ID() > 0) {
+				MBOE boe = MBOE.get(Env.getCtx(), line.getC_BOE_ID(), cash.get_TrxName());
+				BigDecimal OverUnderAmt;
+				if (boe.isSOTrx()) {
+					OverUnderAmt = boe.getOpenAmt().subtract(line.getAmount()).subtract(line.getDiscountAmt());
+				} else {
+					OverUnderAmt = boe.getOpenAmt().negate().add(line.getAmount().negate()).add(line.getDiscountAmt());
+				}
+				if (!hdr.addLine(line, OverUnderAmt, boe)) {
+					throw new Exception("Could not create Allocation Line");
+				}
+				if (line.getRenewedAmt().compareTo(BigDecimal.ZERO) != 0) {
+					BigDecimal RenewedAmt = line.getRenewedAmt().abs();
+					boe.setIsRenewed(true);
+					if (boe.save()) {
+						MBOE boerenew = new MBOE(Env.getCtx(), 0, cash.get_TrxName());
+						Timestamp duedate = boe.getR_DueDate();
+						Timestamp dateboe = boe.getR_DateBOE();
+						String DocumentNo = boe.getR_DocumentNo();
+						boerenew.setC_Currency_ID(cash.getC_Currency_ID());
+						boerenew.setC_ConversionType_ID(boe.getC_ConversionType_ID());
+						boerenew.setDateBOE(dateboe);
+						boerenew.setIsSOTrx(boe.isSOTrx());
+						boerenew.setGrandTotal(RenewedAmt.abs());
+						boerenew.setC_DocType_ID(boe.getC_DocType_ID());
+						boerenew.setC_DocTypeTarget_ID(boe.getC_DocTypeTarget_ID());
+						boerenew.setDocumentNo(DocumentNo);
+						boerenew.setDueDate(duedate);
+						boerenew.setC_BPartner_ID(boe.getC_BPartner_ID());
+						boerenew.setC_BPartner_Location_ID(boe.getC_BPartner_Location_ID());
+						boerenew.setDocStatus(DocAction.STATUS_Portfolio);
+						boerenew.setRef_BOE_ID(boe.getC_BOE_ID());
+						boerenew.setStatusDate(dateboe);
+						if (boerenew.save()) {
+							if (boerenew.discountIt()) {
+								boerenew.save(cash.get_TrxName());
+								MBOEStatement statement = MBOEStatement.get(boerenew.getC_BOE_ID(), boerenew.getDocStatus(), cash.get_TrxName());
+								if (statement != null) {
+									statement.setStatusDate( boerenew.getStatusDate());
+									statement.save(cash.get_TrxName());
+								} 
+							}
+						}
+						if (!hdr.addLine(boe, cash.getC_Currency_ID(), RenewedAmt, BigDecimal.ZERO, BigDecimal.ZERO, OverUnderAmt)) {
+							throw new Exception("Could not create Allocation Line");
+						}
+					}
+				}
+				allocatelines++;
+			}
+		}
+		else if (REF_C_CashTrxType.Charge.equals(line.getCashType())) {
+			if (!hdr.addLine(line)) {
+				throw new Exception("Could not create Allocation Line");
+			}
+			allocatelines++;
+		}
+		else if (REF_C_CashTrxType.GeneralExpense.equals(line.getCashType())) {
+			allocatelines++;
+		}
+		else if (REF_C_CashTrxType.GeneralReceipts.equals(line.getCashType())) {
+			allocatelines++;
+		}
+	}
+	if (allocatelines == 0) {
+		throw new Exception("@NoLines@");
+		//cash.setProcessMsg("@NoLines@");
+		//cash.save();
+		//return false;
+	}
+	for (MAllocation allochdr:allocations) {
+		if (allochdr.completeIt()) {
+			if (allochdr.save()) {
+				if (!MFactAcct.alreadyPosted(X_C_AllocationHdr.Table_ID, allochdr.getC_AllocationHdr_ID(), cash.get_TrxName())) {
+					String error = DocumentEngine.postImmediate(Env.getCtx(), cash.getAD_Client_ID(), X_C_AllocationHdr.Table_ID,
+									allochdr.getC_AllocationHdr_ID(), true, cash.get_TrxName());
+					if (error != null) {
+						throw new Exception(error);
+					}
+				}
+			}
+		}
+	}
+	} catch (Exception e) {
+		System.out.println(String.format("exception retorna false por : %s", e.getMessage()));
+		cash.setProcessMsg(e.getMessage()); 
+		cash.setRulestatus(DocAction.STATUS_Invalid);
+		cash.save();
+		return false;		
+	}
+	cash.setProcessed(true);
+	cash.setDocAction(REF__DocumentAction.Close);
+	cash.save();
+	return true;
+}
+
+function void paycash(MCash cash) {
+	MPayment pay = new MPayment(Env.getCtx(), cash.getC_Payment_ID(), cash.get_TrxName());
+	pay.setC_Cash_ID(cash.getC_Cash_ID());
+	pay.setC_CashBook_ID(cash.getC_CashBook_ID());
+	pay.save();
+}
+
+function boolean isapproved(MCash cash) {
+	if (!cash.isApproved())
+		cash.approveIt();
+	return cash.isApproved();
+}
+
+function boolean namerule(String name) {
+	System.out.println("namerule ->" + name);
+	return true;
+}
+
+function boolean isperiodopen(MCash cash) {
+	return MPeriod.isOpen(cash.getCtx(), cash.getDateAcct(), REF_C_DocTypeDocBaseType.CashJournal , cash.getAD_Org_ID(), cash.getAD_Client_ID());
+}
+
+function boolean checkamounts(MCash cash) {
+	MCashLine[] lines =  cash.getLines(false);
+	BigDecimal difference = BigDecimal.ZERO;
+	int C_Currency_ID = cash.getC_Currency_ID();	
+	for (MCashLine line:lines) {
+		if (!line.isActive())
+			continue;
+		if (C_Currency_ID == line.getC_Currency_ID())
+			difference = difference.add( line.getAmount().add(line.getWithholdingAmt()));
+		else
+		{
+			BigDecimal amt = MConversionRate.convert(Env.getCtx(), line.getAmount().add(line.getWithholdingAmt()),
+							line.getC_Currency_ID(), C_Currency_ID, cash.getStatementDate(), line.getC_ConversionType_ID(),
+							cash.getAD_Client_ID(), cash.getAD_Org_ID());
+			if (amt == null) {
+		       cash.setProcessMsg("No Conversion Rate found - @C_CashLine_ID@=" + line.getLine());			
+		       cash.setRulestatus(DocAction.STATUS_Invalid);	
+				return false;
+			}
+			difference = difference.add(amt);
+		}
+	}
+	cash.setStatementDifference(difference);
+	return true;
+}]]></rule>
+</kiebase>
+
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="inventorykb" 
+sessionname="inventoryks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="d092cd21-5de2-431c-9642-41e2ea273d87" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="c7397e41-e798-1b13-fdb4-9de0db7a9d63" synchronized="2018-10-10 00:07:06.995" type="kiebase" >
+<doctype docbasetype="MMI" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/Inventory.drl" type="rule" sessionname="inventoryks" file="Inventory.drl" Identifier="9ac7f4f7-22f0-0314-1b3b-e29a95fe1175" synchronized="2018-10-10 00:07:07.015"/>
+<channel name="message" AD_MessageFormat_ID="ed091f30-6ab0-4f80-b259-45c9d53cd198" sessionname="inventoryks" Identifier="3c5f94a0-061d-c76c-a209-f7d22203c2b7" synchronized="2018-10-10 00:07:07.016"/>
+</kiebase>

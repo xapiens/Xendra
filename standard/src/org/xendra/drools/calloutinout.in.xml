@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="calloutinoutkb" 
+sessionname="calloutinoutks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="f7dbdeb4-1b12-2d64-4d1d-2a1be2535471" synchronized="2017-04-07 21:04:41.0" type="kiebase" >
+<field TableName="M_InOut" ColumnName="C_BPartner_ID" Agenda="partner"/>
+<field TableName="M_InOut" ColumnName="C_DocType_ID" Agenda="doctype"/>
+<field TableName="M_InOut" ColumnName="M_Warehouse_ID" Agenda="warehouse"/>
+<field TableName="M_InOutLine" ColumnName="C_UOM_ID" Agenda="qty"/>
+<field TableName="M_InOutLine" ColumnName="C_OrderLine_ID" Agenda="orderline"/>
+<field TableName="M_InOutLine" ColumnName="QtyEntered" Agenda="qty"/>
+<field TableName="M_InOutLine" ColumnName="M_AttributeSetInstance_ID" Agenda="asi"/>
+<field TableName="M_InOutLine" ColumnName="M_Product_ID" Agenda="product"/>
+<field TableName="M_InOut" ColumnName="MovementDate" Agenda="dateacct"/>
+<field TableName="M_InOut" ColumnName="C_Order_ID" Agenda="order"/>
+<field TableName="M_InOutLine" ColumnName="MovementQty" Agenda="qty"/>
+<rule name="src/main/resources/org/compiere/model/calloutinout.drl" type="rule" sessionname="calloutinoutks" file="calloutinout.drl" Identifier="ce6a4234-5771-70f4-6ed7-d5bd2c564f71" synchronized="2017-04-07 18:10:41.0"/>
+</kiebase>

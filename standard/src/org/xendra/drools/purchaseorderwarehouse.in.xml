@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="purchaseorderwarehousekb" 
+sessionname="purchaseorderwarehouseks" queuename="" docbasetype="POO" docsubtype="PW" 
+ruletype="R" group="4b84bd44-8b2b-42ce-934e-51faa9b12e72" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="3b477bf4-d4ff-46e8-a207-7e1ecdbbe00d" synchronized="2018-04-05 16:05:43.0" type="kiebase" >
+<doctype docbasetype="POO" docsubtype="PW"/>
+<rule name="src/main/resources/org.xendra.standard/purchaseorderwarehouse.drl" type="rule" sessionname="purchaseorderwarehouseks" file="purchaseorderwarehouse.drl" Identifier="a31d0068-753a-4307-8c02-7276e596270d" synchronized="2018-04-05 16:05:43.0"/>
+</kiebase>

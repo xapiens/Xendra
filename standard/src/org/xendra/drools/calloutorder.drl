@@ -1,0 +1,1136 @@
+//created on: 10-nov-2017
+//modified on : 09-abr-2018
+//created by :
+package org.xendra.rules
+
+import org.compiere.model.GridTab
+import org.compiere.model.GridField
+import org.compiere.model.MUOM
+import org.compiere.model.MRole
+import org.compiere.model.MUOMConversion
+import org.compiere.model.MProduct
+import org.compiere.model.MStorage
+import org.compiere.model.MOrderLine
+import org.compiere.model.MProductPricing
+import org.compiere.model.MPriceList
+import org.compiere.model.Tax
+import org.compiere.util.Msg
+import org.compiere.util.CLogger
+import org.compiere.util.DB
+import java.util.Properties
+import java.lang.Boolean
+import java.sql.ResultSet	
+import java.sql.SQLException
+import org.compiere.util.Env
+import java.math.BigDecimal
+import java.sql.PreparedStatement
+import java.sql.Timestamp
+import org.compiere.model.reference.REF_C_OrderInvoiceRule
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.model.reference.REF_C_DocTypeSubType
+import org.compiere.model.reference.REF__PaymentRule
+import org.compiere.util.Ini
+import org.compiere.util.Env
+import org.compiere.util.DisplayType
+import org.xendra.standard.rules.Policy
+global Object value
+global String result
+global Object OldValue
+global Properties ctx
+global Integer WindowNo
+
+// HEADER
+
+rule orderpricelist
+	agenda-group "pricelist"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "M_PriceList_ID")						
+	then	
+		pricelist(ctx, WindowNo, $tab, $field, value);
+end
+
+rule bpartnerbill
+	agenda-group "bpartnerbill"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "Bill_BPartner_ID")
+	then
+		partnerbill(ctx, WindowNo, $tab, $field, value);
+end
+rule dateacct
+	agenda-group "dateacct"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "DateOrdered")
+	then
+		$tab.setValue("DateAcct", value);
+end
+
+rule bpartner
+	agenda-group "bpartner"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "C_BPartner_ID")
+	then
+		bpartner(ctx, WindowNo, $tab, $field, value);
+end				
+
+rule doctype
+	agenda-group "doctype"
+	dialect "mvel"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="C_DocTypeTarget_ID")				
+	then
+		createupdatedoc(ctx, WindowNo, $tab, $field, value);
+end
+
+// LINE
+
+rule product
+	agenda-group "product"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() =="M_Product_ID")				
+	then
+		product(ctx, WindowNo, $tab, $field, value);
+		updatetax(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule attribute
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "M_AttributeSetInstance_ID")
+	then
+		attribute(ctx, WindowNo, $tab, $field, value);
+end
+
+rule priceactual
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField( $value : Value != null, getColumnName() == "PriceActual")
+	then
+		updatepriceactual(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule pricelist
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "PriceList")
+	then
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule partnerlocation
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "C_BPartner_Location_ID")
+	then
+		updatetax(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule uom
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "C_UOM_ID")
+	then
+		updateuom(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule priceentered
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "PriceEntered")
+	then
+		System.out.println("priceentered");
+		updatepriceentered(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule qtyentered
+	agenda-group "line"	
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "QtyEntered")
+	then
+		updateqtyentered(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule qtyordered
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "QtyOrdered")
+	then
+		updateqtyordered(ctx, WindowNo, $tab, $field, value);
+		updateline(ctx, WindowNo, $tab, $field, value);
+end
+
+rule charge
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "C_Charge_ID")
+	then
+		updatecharge(ctx, WindowNo, $tab, $field, value);
+		updatetax(ctx, WindowNo, $tab, $field, value);
+end
+
+rule discount
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "Discount")
+	then
+		updatediscount(ctx, WindowNo, $tab, $field, value);
+end
+
+rule resource
+	agenda-group "line"
+	when
+		$tab : GridTab()
+		$field : GridField($value : Value != null, getColumnName() == "S_ResourceAssignment_ID")
+	then
+		product(ctx, WindowNo, $tab, $field, value);
+		updatetax(ctx, WindowNo, $tab, $field, value);
+end		
+
+function void updatediscount(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	int StdPrecision = MPriceList.getStandardPrecision(ctx, M_PriceList_ID);
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	BigDecimal PriceList = (BigDecimal)mTab.getValue("PriceList");
+	BigDecimal PriceActual = (BigDecimal)mTab.getValue("PriceActual");
+	BigDecimal PriceEntered = (BigDecimal)mTab.getValue("PriceEntered");
+	BigDecimal Discount = (BigDecimal) value;
+	if ( PriceList.doubleValue() != 0 )
+		PriceActual = new BigDecimal ((100.0 - Discount.doubleValue()) / 100.0 * PriceList.doubleValue());
+	if (PriceActual.scale() > StdPrecision)
+		PriceActual = PriceActual.setScale(StdPrecision, BigDecimal.ROUND_HALF_UP);
+	PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+		C_UOM_To_ID, PriceActual);
+	if (PriceEntered == null)
+		PriceEntered = PriceActual;
+	mTab.setValue("PriceActual", PriceActual);
+	mTab.setValue("PriceEntered", PriceEntered);
+}
+
+function void updatecharge(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_Charge_ID = (Integer)value;
+	if (mTab.getValue("M_Product_ID") != null)
+	{
+		mTab.setValue("C_Charge_ID", null);
+		//return "ChargeExclusively";
+		return;
+	}
+	mTab.setValue("M_AttributeSetInstance_ID", null);
+	mTab.setValue("S_ResourceAssignment_ID", null);
+	mTab.setValue("C_UOM_ID", new Integer(100));	//	EA
+	
+	Env.setContext(ctx, WindowNo, "DiscountSchema", "N");
+	String sql = "SELECT ChargeAmt FROM C_Charge WHERE C_Charge_ID=?";
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, C_Charge_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			mTab.setValue ("PriceEntered", rs.getBigDecimal (1));
+			mTab.setValue ("PriceActual", rs.getBigDecimal (1));
+			mTab.setValue ("PriceLimit", Env.ZERO);
+			mTab.setValue ("PriceList", Env.ZERO);
+			mTab.setValue ("Discount", Env.ZERO);
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+
+	}
+	//
+}
+
+function void updateqtyordered(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	// qty
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	BigDecimal QtyOrdered = (BigDecimal)value;
+	int precision = MProduct.get(ctx, M_Product_ID,null).getUOMPrecision(); 
+	BigDecimal QtyOrdered1 = QtyOrdered.setScale(precision, BigDecimal.ROUND_HALF_UP);
+	if (QtyOrdered.compareTo(QtyOrdered1) != 0)
+	{
+		QtyOrdered = QtyOrdered1;
+		mTab.setValue("QtyOrdered", QtyOrdered);
+	}
+	BigDecimal QtyEntered = MUOMConversion.convertProductTo (ctx, M_Product_ID, C_UOM_To_ID, QtyOrdered);
+	if (QtyEntered == null)
+		QtyEntered = QtyOrdered;
+	boolean conversion = QtyOrdered.compareTo(QtyEntered) != 0;
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyEntered", QtyEntered);
+	// amt
+	if (!"N".equals(Env.getContext(ctx, WindowNo, "DiscountSchema")))		
+	{
+		int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, "C_BPartner_ID");
+		boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+		MProductPricing pp = new MProductPricing (M_Product_ID, C_BPartner_ID, QtyOrdered, IsSOTrx);
+		pp.setM_PriceList_ID(M_PriceList_ID);
+		// globalqss - fix reported bug [ 1643489 ] PriceListVersion misfunctionality
+		int M_PriceList_Version_ID;
+		// try to get the price list version from info product tab
+		M_PriceList_Version_ID = Env.getContextAsInt(Env.getCtx(), Env.WINDOW_INFO, Env.TAB_INFO, "M_PriceList_Version_ID");
+		// if not found try to get from the context of window
+		if (M_PriceList_Version_ID == 0)
+			M_PriceList_Version_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_Version_ID");
+		// end globalqss 
+		pp.setM_PriceList_Version_ID(M_PriceList_Version_ID);
+		Timestamp date = (Timestamp)mTab.getValue("DateOrdered");
+		pp.setPriceDate(date);
+		//
+		BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+			C_UOM_To_ID, pp.getPriceStd());
+		if (PriceEntered == null)
+			PriceEntered = pp.getPriceStd();
+		//
+		//log.fine("QtyChanged -> PriceActual=" + pp.getPriceStd() 
+		//	+ ", PriceEntered=" + PriceEntered + ", Discount=" + pp.getDiscount());
+		mTab.setValue("PriceActual", pp.getPriceStd());
+		mTab.setValue("Discount", pp.getDiscount());
+		mTab.setValue("PriceEntered", PriceEntered);
+		Env.setContext(ctx, WindowNo, "DiscountSchema", pp.isDiscountSchema() ? "Y" : "N");
+	}	
+}
+
+function void updateqtyentered(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	// qty
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	BigDecimal QtyEntered = (BigDecimal)value;
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		QtyEntered = QtyEntered1;
+		mTab.setValue("QtyEntered", QtyEntered);
+	}
+	BigDecimal QtyOrdered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyOrdered == null)
+		QtyOrdered = QtyEntered;
+	boolean conversion = QtyEntered.compareTo(QtyOrdered) != 0;
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyOrdered", QtyOrdered);	
+	// amt
+	if (!"N".equals(Env.getContext(ctx, WindowNo, "DiscountSchema")))		
+	{
+		int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, "C_BPartner_ID");
+		boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+		MProductPricing pp = new MProductPricing (M_Product_ID, C_BPartner_ID, QtyOrdered, IsSOTrx);
+		pp.setM_PriceList_ID(M_PriceList_ID);
+		// globalqss - fix reported bug [ 1643489 ] PriceListVersion misfunctionality
+		int M_PriceList_Version_ID;
+		// try to get the price list version from info product tab
+		M_PriceList_Version_ID = Env.getContextAsInt(Env.getCtx(), Env.WINDOW_INFO, Env.TAB_INFO, "M_PriceList_Version_ID");
+		// if not found try to get from the context of window
+		if (M_PriceList_Version_ID == 0)
+			M_PriceList_Version_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_Version_ID");
+		// end globalqss 
+		pp.setM_PriceList_Version_ID(M_PriceList_Version_ID);
+		Timestamp date = (Timestamp)mTab.getValue("DateOrdered");
+		pp.setPriceDate(date);
+		//
+		BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+			C_UOM_To_ID, pp.getPriceStd());
+		if (PriceEntered == null)
+			PriceEntered = pp.getPriceStd();
+		//
+		//log.fine("QtyChanged -> PriceActual=" + pp.getPriceStd() 
+		//	+ ", PriceEntered=" + PriceEntered + ", Discount=" + pp.getDiscount());
+		mTab.setValue("PriceActual", pp.getPriceStd());
+		mTab.setValue("Discount", pp.getDiscount());
+		mTab.setValue("PriceEntered", PriceEntered);
+		Env.setContext(ctx, WindowNo, "DiscountSchema", pp.isDiscountSchema() ? "Y" : "N");
+	}
+}
+
+function void updateuom(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int C_UOM_To_ID = ((Integer)value).intValue();
+	BigDecimal QtyEntered = (BigDecimal)mTab.getValue("QtyEntered");
+	BigDecimal QtyEntered1 = QtyEntered.setScale(MUOM.getPrecision(ctx, C_UOM_To_ID), BigDecimal.ROUND_HALF_UP);
+	if (QtyEntered.compareTo(QtyEntered1) != 0)
+	{
+		QtyEntered = QtyEntered1;
+		mTab.setValue("QtyEntered", QtyEntered);
+	}
+	BigDecimal QtyOrdered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, QtyEntered);
+	if (QtyOrdered == null)
+		QtyOrdered = QtyEntered;
+	boolean conversion = QtyEntered.compareTo(QtyOrdered) != 0;
+	BigDecimal PriceActual = (BigDecimal)mTab.getValue("PriceActual");
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, PriceActual);
+	if (PriceEntered == null)
+		PriceEntered = PriceActual; 
+	Env.setContext(ctx, WindowNo, "UOMConversion", conversion ? "Y" : "N");
+	mTab.setValue("QtyOrdered", QtyOrdered);
+	mTab.setValue("PriceEntered", PriceEntered);
+}
+
+function void updateline(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	// aca lo que se actualiza al final
+	// amt
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+	int StdPrecision = MPriceList.getStandardPrecision(ctx, M_PriceList_ID);
+	BigDecimal PriceLimit = (BigDecimal)mTab.getValue("PriceLimit");
+	BigDecimal PriceActual = (BigDecimal)mTab.getValue("PriceActual");
+	BigDecimal PriceEntered = (BigDecimal)mTab.getValue("PriceEntered");
+	BigDecimal PriceList = (BigDecimal)mTab.getValue("PriceList");
+	BigDecimal Discount = (BigDecimal)mTab.getValue("Discount");
+	BigDecimal QtyOrdered = (BigDecimal)mTab.getValue("QtyOrdered");
+	//
+	String epl = Env.getContext(ctx, WindowNo, "EnforcePriceLimit");
+	boolean enforce = Env.isSOTrx(ctx, WindowNo) && epl != null && epl.equals("Y");
+	if (enforce && MRole.getDefault().isOverwritePriceLimit())
+		enforce = false;
+	//	Check Price Limit?
+	if (enforce && PriceLimit.doubleValue() != 0.0
+	  && PriceActual.compareTo(PriceLimit) < 0)
+	{
+		PriceActual = PriceLimit;
+		PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, 
+			C_UOM_To_ID, PriceLimit);
+		if (PriceEntered == null)
+			PriceEntered = PriceLimit;
+		//log.fine("(under) PriceEntered=" + PriceEntered + ", Actual" + PriceLimit);
+		mTab.setValue ("PriceActual", PriceLimit);
+		mTab.setValue ("PriceEntered", PriceEntered);
+		mTab.fireDataStatusEEvent ("UnderLimitPrice", "", false);
+		//	Repeat Discount calc
+		if (PriceList.intValue() != 0)
+		{
+			Discount = new BigDecimal ((PriceList.doubleValue () - PriceActual.doubleValue ()) / PriceList.doubleValue () * 100.0);
+			if (Discount.scale () > 2)
+				Discount = Discount.setScale (2, BigDecimal.ROUND_HALF_UP);
+			mTab.setValue ("Discount", Discount);
+		}
+	}
+		//	Line Net Amt
+	BigDecimal LineNetAmt = QtyOrdered.multiply(PriceActual);
+	if (LineNetAmt.scale() > StdPrecision)
+		LineNetAmt = LineNetAmt.setScale(StdPrecision, BigDecimal.ROUND_HALF_UP);
+	mTab.setValue("LineNetAmt", LineNetAmt);
+	// qty
+	//	Storage
+	if (M_Product_ID != 0 && Env.isSOTrx(ctx, WindowNo)	&& QtyOrdered.signum() > 0)		//	no negative (returns)
+	{
+		MProduct product = MProduct.get (ctx, M_Product_ID,null);
+		if (product.isStocked())
+		{
+			int M_Warehouse_ID = Env.getContextAsInt(ctx, WindowNo, "M_Warehouse_ID");
+			int M_AttributeSetInstance_ID = Env.getContextAsInt(ctx, WindowNo, "M_AttributeSetInstance_ID");
+			BigDecimal available = MStorage.getQtyAvailable
+				(M_Warehouse_ID, 0, M_Product_ID, M_AttributeSetInstance_ID, null);
+			if (available == null)
+				available = Env.ZERO;
+			if (available.signum() == 0)
+				mTab.fireDataStatusEEvent ("NoQtyAvailable", "0", false);
+			else if (available.compareTo(QtyOrdered) < 0)
+				mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", available.toString(), false);
+			else
+			{
+				Integer C_OrderLine_ID = (Integer)mTab.getValue("C_OrderLine_ID");
+				if (C_OrderLine_ID == null)
+					C_OrderLine_ID = new Integer(0);
+				BigDecimal notReserved = BigDecimal.ZERO; 
+				//Policy.getNotReserved(ctx, 
+				//	M_Warehouse_ID, M_Product_ID, M_AttributeSetInstance_ID,
+				//	C_OrderLine_ID.intValue());
+				if (notReserved == null)
+					notReserved = Env.ZERO;
+				BigDecimal total = available.subtract(notReserved);
+				if (total.compareTo(QtyOrdered) < 0)
+				{
+					String info = Msg.parseTranslation(ctx, "@QtyAvailable@=" + available 
+						+ "  -  @QtyNotReserved@=" + notReserved + "  =  " + total);
+					mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", info, false);
+				}
+			}
+		}
+	}
+}
+
+function void updatepriceentered(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	BigDecimal PriceEntered = (BigDecimal)value;
+	BigDecimal PriceActual = MUOMConversion.convertProductTo (ctx, M_Product_ID, C_UOM_To_ID, PriceEntered);
+	if (PriceActual == null)
+		PriceActual = PriceEntered;
+	mTab.setValue("PriceActual", PriceActual);
+}
+
+function void updatepriceactual(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	int C_UOM_To_ID = Env.getContextAsInt(ctx, WindowNo, "C_UOM_ID");
+	BigDecimal PriceActual = (BigDecimal)value;
+	BigDecimal PriceEntered = MUOMConversion.convertProductFrom (ctx, M_Product_ID, C_UOM_To_ID, PriceActual);
+	if (PriceEntered == null)
+		PriceEntered = PriceActual;
+	mTab.setValue("PriceEntered", PriceEntered);
+}
+
+function void attribute(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	int M_Product_ID = Env.getContextAsInt(ctx, WindowNo, "M_Product_ID");
+	BigDecimal QtyOrdered = (BigDecimal)mTab.getValue("QtyOrdered");
+	if (M_Product_ID != 0 
+		&& Env.isSOTrx(ctx, WindowNo)
+		&& QtyOrdered.signum() > 0)		//	no negative (returns)
+	{
+		MProduct product = MProduct.get (ctx, M_Product_ID,null);
+		if (product.isStocked())
+		{
+			int M_Warehouse_ID = Env.getContextAsInt(ctx, WindowNo, "M_Warehouse_ID");
+			int M_AttributeSetInstance_ID = Env.getContextAsInt(ctx, WindowNo, "M_AttributeSetInstance_ID");
+			BigDecimal available = MStorage.getQtyAvailable
+			(M_Warehouse_ID, 0, M_Product_ID, M_AttributeSetInstance_ID, null);
+			if (available == null)
+				available = Env.ZERO;
+			if (available.signum() == 0)
+				mTab.fireDataStatusEEvent ("NoQtyAvailable", "0", false);
+			else if (available.compareTo(QtyOrdered) < 0)
+				mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", available.toString(), false);
+			else
+			{
+				Integer C_OrderLine_ID = (Integer)mTab.getValue("C_OrderLine_ID");
+				if (C_OrderLine_ID == null)
+					C_OrderLine_ID = new Integer(0);
+				BigDecimal notReserved = BigDecimal.ZERO; 
+				//Policy.getNotReserved(ctx, 
+				//	M_Warehouse_ID, M_Product_ID, M_AttributeSetInstance_ID,
+				//	C_OrderLine_ID.intValue());
+				if (notReserved == null)
+					notReserved = Env.ZERO;
+				BigDecimal total = available.subtract(notReserved);
+				if (total.compareTo(QtyOrdered) < 0)
+				{
+					String info = Msg.parseTranslation(ctx, "@QtyAvailable@=" + available 
+						+ "  -  @QtyNotReserved@=" + notReserved + "  =  " + total);
+					mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", 
+						info, false);
+				}
+			}
+		}
+	}
+}
+
+function void product(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+		Integer M_Product_ID = (Integer)value;
+		//
+		mTab.setValue("C_Charge_ID", null);
+		//	Set Attribute
+		if (Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_Product_ID") == M_Product_ID.intValue()
+			&& Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID") != 0)
+			mTab.setValue("M_AttributeSetInstance_ID", new Integer(Env.getContextAsInt(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "M_AttributeSetInstance_ID")));
+		else
+			mTab.setValue("M_AttributeSetInstance_ID", null);
+			
+		/*****	Price Calculation see also qty	****/
+		int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, "C_BPartner_ID");
+		BigDecimal Qty = (BigDecimal)mTab.getValue("QtyOrdered");
+		boolean IsSOTrx = Env.getContext(ctx, WindowNo, "IsSOTrx").equals("Y");
+		MProductPricing pp = new MProductPricing (M_Product_ID.intValue(), C_BPartner_ID, Qty, IsSOTrx);
+		//
+		int M_PriceList_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_ID");
+		pp.setM_PriceList_ID(M_PriceList_ID);
+		/** PLV is only accurate if PL selected in header */
+		// globalqss - fix reported bug [ 1643489 ] PriceListVersion misfunctionality
+		int M_PriceList_Version_ID;
+		// try to get the price list version from info product tab
+		M_PriceList_Version_ID = Env.getContextAsInt(Env.getCtx(), Env.WINDOW_INFO, Env.TAB_INFO, "M_PriceList_Version_ID");
+		// if not found try to get from the context of window
+		if (M_PriceList_Version_ID == 0)
+			M_PriceList_Version_ID = Env.getContextAsInt(ctx, WindowNo, "M_PriceList_Version_ID");
+		// end globalqss 
+		pp.setM_PriceList_Version_ID(M_PriceList_Version_ID); 
+		Timestamp orderDate = (Timestamp)mTab.getValue("DateOrdered");
+		pp.setPriceDate(orderDate);
+		//		
+		mTab.setValue("PriceList", pp.getPriceList());
+		mTab.setValue("PriceLimit", pp.getPriceLimit());
+		mTab.setValue("PriceActual", pp.getPriceStd());
+		mTab.setValue("PriceEntered", pp.getPriceStd());
+		mTab.setValue("C_Currency_ID", new Integer(pp.getC_Currency_ID()));
+		mTab.setValue("Discount", pp.getDiscount());
+		if (Env.isSOTrx(ctx, WindowNo))
+			mTab.setValue("C_UOM_ID", new Integer(pp.getC_UOM_ID()));
+		else
+		{			
+			mTab.setValue("C_UOM_ID", new Integer(pp.getC_UOM_Order_ID()));
+		}		
+		if (pp.getC_UOM_ID() != pp.getC_UOM_Order_ID())
+		{
+			mTab.setValue("QtyEntered", mTab.getValue("QtyEntered"));
+		}
+		else
+			mTab.setValue("QtyOrdered", mTab.getValue("QtyEntered"));
+		Env.setContext(ctx, WindowNo, "EnforcePriceLimit", pp.isEnforcePriceLimit() ? "Y" : "N");
+		Env.setContext(ctx, WindowNo, "DiscountSchema", pp.isDiscountSchema() ? "Y" : "N");
+		
+		//	Check/Update Warehouse Setting
+		//	int M_Warehouse_ID = Env.getContextAsInt(ctx, Env.WINDOW_INFO, "M_Warehouse_ID");
+		//	Integer wh = (Integer)mTab.getValue("M_Warehouse_ID");
+		//	if (wh.intValue() != M_Warehouse_ID)
+		//	{
+		//		mTab.setValue("M_Warehouse_ID", new Integer(M_Warehouse_ID));
+		//		ADialog.warn(,WindowNo, "WarehouseChanged");
+		//	}
+
+		
+		if (Env.isSOTrx(ctx, WindowNo))
+		{
+			MProduct product = MProduct.get (ctx, M_Product_ID.intValue(), null);
+			if (product.isStocked())
+			{
+				BigDecimal QtyOrdered = (BigDecimal)mTab.getValue("QtyOrdered");
+				int M_Warehouse_ID = Env.getContextAsInt(ctx, WindowNo, "M_Warehouse_ID");
+				int M_AttributeSetInstance_ID = Env.getContextAsInt(ctx, WindowNo, "M_AttributeSetInstance_ID");
+				BigDecimal available = MStorage.getQtyAvailable
+					(M_Warehouse_ID, M_Product_ID.intValue(), M_AttributeSetInstance_ID, null);
+				if (available == null)
+					available = Env.ZERO;
+				if (available.signum() == 0)
+					mTab.fireDataStatusEEvent ("NoQtyAvailable", "0", false);
+				else if (available.compareTo(QtyOrdered) < 0)
+					mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", available.toString(), false);
+				else
+				{
+					Integer C_OrderLine_ID = (Integer)mTab.getValue("C_OrderLine_ID");
+					if (C_OrderLine_ID == null)
+						C_OrderLine_ID = new Integer(0);
+					BigDecimal notReserved = BigDecimal.ZERO; 
+//						Policy.getNotReserved(ctx, 
+//						M_Warehouse_ID, M_Product_ID, M_AttributeSetInstance_ID,
+//						C_OrderLine_ID.intValue());
+					if (notReserved == null)
+						notReserved = Env.ZERO;
+					BigDecimal total = available.subtract(notReserved);
+					if (total.compareTo(QtyOrdered) < 0)
+					{
+						String info = Msg.parseTranslation(ctx, "@QtyAvailable@=" + available 
+							+ " - @QtyNotReserved@=" + notReserved + " = " + total);
+						mTab.fireDataStatusEEvent ("InsufficientQtyAvailable", 
+							info, false);
+					}
+				}
+			}
+		}
+		//
+		updatetax(ctx, WindowNo, mTab, mField, value);
+}
+
+function void updatetax(Properties ctx,Integer WindowNo, GridTab mTab,GridField mField,Object value) {
+	Policy.getInstance().calculatetax(ctx, WindowNo, mTab, mField, value);
+	return;
+}
+
+
+function void pricelist(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer M_PriceList_ID = (Integer)value;
+	String sql = "SELECT pl.IsTaxIncluded,pl.EnforcePriceLimit,pl.C_Currency_ID,c.StdPrecision,"
+		+ "plv.M_PriceList_Version_ID,plv.ValidFrom "
+		+ "FROM M_PriceList pl,C_Currency c,M_PriceList_Version plv "
+		+ "WHERE pl.C_Currency_ID=c.C_Currency_ID"
+		+ " AND pl.M_PriceList_ID=plv.M_PriceList_ID"
+		+ " AND pl.M_PriceList_ID=? "						//	1
+		+ "ORDER BY plv.ValidFrom DESC";
+	//	Use newest price list - may not be future
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, M_PriceList_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			//	Tax Included
+			mTab.setValue("IsTaxIncluded", new Boolean("Y".equals(rs.getString(1))));
+			//	Price Limit Enforce
+			Env.setContext(ctx, WindowNo, "EnforcePriceLimit", rs.getString(2));
+			//	Currency
+			Integer ii = new Integer(rs.getInt(3));
+			mTab.setValue("C_Currency_ID", ii);
+			//	PriceList Version
+			Env.setContext(ctx, WindowNo, "M_PriceList_Version_ID", rs.getInt(5));
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+	}
+}
+
+function void bpartner(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_BPartner_ID = (Integer)value;
+	String sql = "SELECT p.AD_Language,p.C_PaymentTerm_ID,"
+		+ " COALESCE(p.M_PriceList_ID,g.M_PriceList_ID) AS M_PriceList_ID, p.PaymentRule,p.POReference,"
+		+ " p.SO_Description,p.IsDiscountPrinted,"
+		+ " p.InvoiceRule,p.DeliveryRule,p.FreightCostRule,DeliveryViaRule,"
+		+ " p.SO_CreditLimit, (p.SO_CreditLimit+p.SO_CreditOverLimit)-p.SO_CreditUsed AS CreditAvailable,"
+		+ " lship.C_BPartner_Location_ID,c.AD_User_ID,"
+		+ " COALESCE(p.PO_PriceList_ID,g.PO_PriceList_ID) AS PO_PriceList_ID, p.PaymentRulePO,p.PO_PaymentTerm_ID," 
+		+ " lbill.C_BPartner_Location_ID AS Bill_Location_ID, p.SOCreditStatus, "
+		+ " p.SalesRep_ID "
+		+ "FROM C_BPartner p"
+		+ " INNER JOIN C_BP_Group g ON (p.C_BP_Group_ID=g.C_BP_Group_ID)"			
+		+ " LEFT OUTER JOIN C_BPartner_Location lbill ON (p.C_BPartner_ID=lbill.C_BPartner_ID AND lbill.IsBillTo='Y' AND lbill.IsActive='Y')"
+		+ " LEFT OUTER JOIN C_BPartner_Location lship ON (p.C_BPartner_ID=lship.C_BPartner_ID AND lship.IsShipTo='Y' AND lship.IsActive='Y')"
+		+ " LEFT OUTER JOIN AD_User c ON (p.C_BPartner_ID=c.C_BPartner_ID) "
+		+ "WHERE p.C_BPartner_ID=? AND p.IsActive='Y'";		//	#1
+
+		boolean IsSOTrx = "Y".equals(Env.getContext(ctx, WindowNo, "IsSOTrx"));
+
+		try
+		{
+			PreparedStatement pstmt = DB.prepareStatement(sql, null);
+			pstmt.setInt(1, C_BPartner_ID.intValue());
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				// Sales Rep - If BP has a default SalesRep then default it
+				Integer salesRep = rs.getInt("SalesRep_ID");
+				if (IsSOTrx && salesRep != 0 )
+				{
+					mTab.setValue("SalesRep_ID", salesRep);
+				}
+				
+				//	PriceList (indirect: IsTaxIncluded & Currency)
+				Integer ii = new Integer(rs.getInt(IsSOTrx ? "M_PriceList_ID" : "PO_PriceList_ID"));
+				if (!rs.wasNull())
+					mTab.setValue("M_PriceList_ID", ii);
+				else
+				{	//	get default PriceList
+					int i = Env.getContextAsInt(ctx, "#M_PriceList_ID");
+					if (i != 0)
+						mTab.setValue("M_PriceList_ID", new Integer(i));
+				}
+
+				//	Bill-To
+				mTab.setValue("Bill_BPartner_ID", C_BPartner_ID);
+				int bill_Location_ID = rs.getInt("Bill_Location_ID");
+				if (bill_Location_ID == 0)
+					mTab.setValue("Bill_Location_ID", null);
+				else
+					mTab.setValue("Bill_Location_ID", new Integer(bill_Location_ID));
+				// Ship-To Location
+				int shipTo_ID = rs.getInt("C_BPartner_Location_ID");
+				//	overwritten by InfoBP selection - works only if InfoWindow
+				//	was used otherwise creates error (uses last value, may belong to differnt BP)
+				if (C_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+				{
+					String loc = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_Location_ID");
+					if (loc.length() > 0)
+						shipTo_ID = Integer.parseInt(loc);
+				}
+				if (shipTo_ID == 0)
+					mTab.setValue("C_BPartner_Location_ID", null);
+				else
+					mTab.setValue("C_BPartner_Location_ID", new Integer(shipTo_ID));
+
+				//	Contact - overwritten by InfoBP selection
+				int contID = rs.getInt("AD_User_ID");
+				if (C_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+				{
+					String cont = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "AD_User_ID");
+					if (cont.length() > 0)
+						contID = Integer.parseInt(cont);
+				}
+				if (contID == 0)
+					mTab.setValue("AD_User_ID", null);
+				else
+				{
+					mTab.setValue("AD_User_ID", new Integer(contID));
+					mTab.setValue("Bill_User_ID", new Integer(contID));
+				}
+
+				//	CreditAvailable 
+				if (IsSOTrx)
+				{
+					double CreditLimit = rs.getDouble("SO_CreditLimit");
+					String SOCreditStatus = rs.getString("SOCreditStatus");
+					if (CreditLimit != 0)
+					{
+						double CreditAvailable = rs.getDouble("CreditAvailable");
+						if (!rs.wasNull() && CreditAvailable < 0)
+							mTab.fireDataStatusEEvent("CreditLimitOver",
+								DisplayType.getNumberFormat(DisplayType.Amount).format(CreditAvailable),
+								false);
+					}
+				}
+
+				//	PO Reference
+				String s = rs.getString("POReference");
+				if (s != null && s.length() != 0)
+					mTab.setValue("POReference", s);
+				// should not be reset to null if we entered already value! VHARCQ, accepted YS makes sense that way
+				// TODO: should get checked and removed if no longer needed!
+				/*else
+					mTab.setValue("POReference", null);*/ 
+				
+				//	SO Description
+				s = rs.getString("SO_Description");
+				if (s != null && s.trim().length() != 0)
+					mTab.setValue("Description", s);
+				//	IsDiscountPrinted
+				s = rs.getString("IsDiscountPrinted");
+				if (s != null && s.length() != 0)
+					mTab.setValue("IsDiscountPrinted", s);
+				else
+					mTab.setValue("IsDiscountPrinted", "N");
+
+				//	Defaults, if not Walkin Receipt or Walkin Invoice
+				String OrderType = Env.getContext(ctx, WindowNo, "OrderType");
+				mTab.setValue("InvoiceRule", REF_C_OrderInvoiceRule.AfterDelivery);
+				mTab.setValue("DeliveryRule", REF_C_OrderDeliveryRule.Availability);
+				mTab.setValue("PaymentRule", REF__PaymentRule.OnCredit);
+				if (OrderType.equals(REF_C_DocTypeSubType.PrepayOrder))
+				{
+					mTab.setValue("InvoiceRule", REF_C_OrderInvoiceRule.Immediate);
+					mTab.setValue("DeliveryRule", REF_C_OrderDeliveryRule.AfterReceipt);
+				}
+				else if (OrderType.equals(REF_C_DocTypeSubType.POSOrder))	//  for POS
+					mTab.setValue("PaymentRule", REF__PaymentRule.Cash);
+				else
+				{
+					//	PaymentRule
+					s = rs.getString(IsSOTrx ? "PaymentRule" : "PaymentRulePO");
+					if (s != null && s.length() != 0)
+					{
+						if (s.equals("B"))				//	No Cache in Non POS
+							s = "P";
+						if (IsSOTrx && (s.equals("S") || s.equals("U")))	//	No Check/Transfer for SO_Trx
+							s = "P";										//  Payment Term
+						mTab.setValue("PaymentRule", s);
+					}
+					//	Payment Term
+					ii = new Integer(rs.getInt(IsSOTrx ? "C_PaymentTerm_ID" : "PO_PaymentTerm_ID"));
+					if (!rs.wasNull())
+						mTab.setValue("C_PaymentTerm_ID", ii);
+					//	InvoiceRule
+					s = rs.getString("InvoiceRule");
+					if (s != null && s.length() != 0)
+						mTab.setValue("InvoiceRule", s);
+					//	DeliveryRule
+					s = rs.getString("DeliveryRule");
+					if (s != null && s.length() != 0)
+						mTab.setValue("DeliveryRule", s);
+					//	FreightCostRule
+					s = rs.getString("FreightCostRule");
+					if (s != null && s.length() != 0)
+						mTab.setValue("FreightCostRule", s);
+					//	DeliveryViaRule
+					s = rs.getString("DeliveryViaRule");
+					if (s != null && s.length() != 0)
+						mTab.setValue("DeliveryViaRule", s);
+				}
+			}
+			rs.close();
+			pstmt.close();
+		}
+		catch (SQLException e)
+		{						
+
+		}
+}
+
+function void partnerbill(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer bill_BPartner_ID = (Integer)value;
+	String sql = "SELECT p.AD_Language,p.C_PaymentTerm_ID,"
+		+ "p.M_PriceList_ID,p.PaymentRule,p.POReference,"
+		+ "p.SO_Description,p.IsDiscountPrinted,"
+		+ "p.InvoiceRule,p.DeliveryRule,p.FreightCostRule,DeliveryViaRule,"
+		+ "p.SO_CreditLimit, (p.SO_CreditLimit+p.SO_CreditOverLimit)-p.SO_CreditUsed AS CreditAvailable,"
+		+ "c.AD_User_ID,"
+		+ "p.PO_PriceList_ID, p.PaymentRulePO, p.PO_PaymentTerm_ID,"
+		+ "lbill.C_BPartner_Location_ID AS Bill_Location_ID "
+		+ "FROM C_BPartner p"
+		+ " LEFT OUTER JOIN C_BPartner_Location lbill ON (p.C_BPartner_ID=lbill.C_BPartner_ID AND lbill.IsBillTo='Y' AND lbill.IsActive='Y')"
+		+ " LEFT OUTER JOIN AD_User c ON (p.C_BPartner_ID=c.C_BPartner_ID) "
+		+ "WHERE p.C_BPartner_ID=? AND p.IsActive='Y'";		//	#1
+	boolean IsSOTrx = "Y".equals(Env.getContext(ctx, WindowNo, "IsSOTrx"));
+	try
+	{
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, bill_BPartner_ID.intValue());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			//	PriceList (indirect: IsTaxIncluded & Currency)
+			Integer ii = new Integer(rs.getInt(IsSOTrx ? "M_PriceList_ID" : "PO_PriceList_ID"));
+			if (!rs.wasNull())
+				mTab.setValue("M_PriceList_ID", ii);
+			else
+			{	//	get default PriceList
+				int i = Env.getContextAsInt(ctx, "#M_PriceList_ID");
+				if (i != 0)
+					mTab.setValue("M_PriceList_ID", new Integer(i));
+			}
+			int bill_Location_ID = rs.getInt("Bill_Location_ID");
+			//	overwritten by InfoBP selection - works only if InfoWindow
+			//	was used otherwise creates error (uses last value, may belong to differnt BP)
+			if (bill_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+			{
+				String loc = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_Location_ID");
+				if (loc.length() > 0)
+					bill_Location_ID = Integer.parseInt(loc);
+			}
+			if (bill_Location_ID == 0)
+				mTab.setValue("Bill_Location_ID", null);
+			else
+				mTab.setValue("Bill_Location_ID", new Integer(bill_Location_ID));
+			//	Contact - overwritten by InfoBP selection
+			int contID = rs.getInt("AD_User_ID");
+			if (bill_BPartner_ID.toString().equals(Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "C_BPartner_ID")))
+			{
+				String cont = Env.getContext(ctx, Env.WINDOW_INFO, Env.TAB_INFO, "AD_User_ID");
+				if (cont.length() > 0)
+					contID = Integer.parseInt(cont);
+			}
+			if (contID == 0)
+				mTab.setValue("Bill_User_ID", null);
+			else
+				mTab.setValue("Bill_User_ID", new Integer(contID));
+				//	CreditAvailable 
+			if (IsSOTrx)
+			{
+				double CreditLimit = rs.getDouble("SO_CreditLimit");
+				if (CreditLimit != 0)
+				{
+					double CreditAvailable = rs.getDouble("CreditAvailable");
+					if (!rs.wasNull() && CreditAvailable < 0)
+						mTab.fireDataStatusEEvent("CreditLimitOver",
+							DisplayType.getNumberFormat(DisplayType.Amount).format(CreditAvailable),
+							false);
+				}
+			}
+				//	PO Reference
+			String s = rs.getString("POReference");
+			if (s != null && s.length() != 0)
+				mTab.setValue("POReference", s);
+			else
+				mTab.setValue("POReference", null);
+			//	SO Description
+			s = rs.getString("SO_Description");
+			if (s != null && s.trim().length() != 0)
+				mTab.setValue("Description", s);
+			//	IsDiscountPrinted
+			s = rs.getString("IsDiscountPrinted");
+			if (s != null && s.length() != 0)
+				mTab.setValue("IsDiscountPrinted", s);
+			else
+				mTab.setValue("IsDiscountPrinted", "N");
+				//	Defaults, if not Walkin Receipt or Walkin Invoice
+			String OrderType = Env.getContext(ctx, WindowNo, "OrderType");
+			mTab.setValue("InvoiceRule", REF_C_OrderInvoiceRule.AfterDelivery);
+			mTab.setValue("PaymentRule", REF__PaymentRule.OnCredit);
+			if (OrderType.equals(REF_C_DocTypeSubType.PrepayOrder))
+				mTab.setValue("InvoiceRule", REF_C_OrderInvoiceRule.Immediate);
+			else if (OrderType.equals(REF_C_DocTypeSubType.POSOrder))	//  for POS
+				mTab.setValue("PaymentRule", REF__PaymentRule.Cash);
+			else
+			{
+				//	PaymentRule
+				s = rs.getString(IsSOTrx ? "PaymentRule" : "PaymentRulePO");
+				if (s != null && s.length() != 0)
+				{
+					if (s.equals("B"))				//	No Cache in Non POS
+						s = "P";
+					if (IsSOTrx && (s.equals("S") || s.equals("U")))	//	No Check/Transfer for SO_Trx
+						s = "P";										//  Payment Term
+					mTab.setValue("PaymentRule", s);
+				}
+				//	Payment Term
+				ii = new Integer(rs.getInt(IsSOTrx ? "C_PaymentTerm_ID" : "PO_PaymentTerm_ID"));
+				if (!rs.wasNull())
+					mTab.setValue("C_PaymentTerm_ID", ii);
+				//	InvoiceRule
+				s = rs.getString("InvoiceRule");
+				if (s != null && s.length() != 0)
+					mTab.setValue("InvoiceRule", s);
+			}
+		}
+		rs.close();
+		pstmt.close();
+	}
+	catch (SQLException e)
+	{
+
+	}
+}
+
+function void createupdatedoc(Properties ctx, Integer WindowNo, GridTab mTab, GridField mField, Object value) {
+	Integer C_DocType_ID = (Integer)value;		//	Actually C_DocTypeTarget_ID
+	//	Re-Create new DocNo, if there is a doc number already
+	//	and the existing source used a different Sequence number
+	String oldDocNo = (String)mTab.getValue("DocumentNo");
+	boolean newDocNo = (oldDocNo == null);
+	if (!newDocNo && oldDocNo.startsWith("<") && oldDocNo.endsWith(">"))
+		newDocNo = true;
+	Integer oldC_DocType_ID = (Integer)mTab.getValue("C_DocType_ID");
+
+	String sql = "SELECT d.DocSubType,d.HasCharges,'N',"			//	1..3
+			+ " d.IsDocNoControlled,s.CurrentNext,s.CurrentNextSys,"     //  4..6
+			+ " s.AD_Sequence_ID,d.IsSOTrx, d.C_ConversionType_ID "                             //	7..9
+			+ " FROM C_DocType d LEFT OUTER JOIN AD_Sequence s ON d.DocNoSequence_ID = s.AD_Sequence_ID"
+			+ " WHERE C_DocType_ID=?";	//	#1
+	try
+	{
+		int AD_Sequence_ID = 0;
+		//	Get old AD_SeqNo for comparison
+		if (!newDocNo && oldC_DocType_ID.intValue() != 0)
+		{
+			PreparedStatement pstmt = DB.prepareStatement(sql, null);
+			pstmt.setInt(1, oldC_DocType_ID.intValue());
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				AD_Sequence_ID = rs.getInt(6);
+			rs.close();
+			pstmt.close();
+		}
+		System.out.println(String.format("doctype %s",C_DocType_ID));
+		PreparedStatement pstmt = DB.prepareStatement(sql, null);
+		pstmt.setInt(1, C_DocType_ID);
+		ResultSet rs = pstmt.executeQuery();
+		String DocSubType = "";
+		boolean IsSOTrx = true;
+		if (rs.next())		//	we found document type
+		{
+			mTab.setValue("C_DocType_ID", C_DocType_ID);
+			//	Set Context:	Document Sub Type for Sales Orders
+			DocSubType = rs.getString(1);
+			if (DocSubType == null)
+				DocSubType = "--";
+			Env.setContext(ctx, WindowNo, "OrderType", DocSubType);
+			//	No Drop Ship other than Standard
+			if (!DocSubType.equals(REF_C_DocTypeSubType.StandardOrder))
+				mTab.setValue ("IsDropShip", "N");
+			
+			//	Delivery Rule
+			if (DocSubType.equals(REF_C_DocTypeSubType.POSOrder))
+				mTab.setValue ("DeliveryRule", REF_C_OrderDeliveryRule.Force);
+			else if (DocSubType.equals(REF_C_DocTypeSubType.PrepayOrder))
+				mTab.setValue ("DeliveryRule", REF_C_OrderDeliveryRule.AfterReceipt);
+			else
+				mTab.setValue ("DeliveryRule", REF_C_OrderDeliveryRule.Availability);
+			
+			//	Invoice Rule
+			if (DocSubType.equals(REF_C_DocTypeSubType.POSOrder)
+				|| DocSubType.equals(REF_C_DocTypeSubType.PrepayOrder)
+				|| DocSubType.equals(REF_C_DocTypeSubType.OnCreditOrder) )
+				mTab.setValue ("InvoiceRule", REF_C_OrderInvoiceRule.Immediate);
+			else
+				mTab.setValue ("InvoiceRule", REF_C_OrderInvoiceRule.AfterDelivery);
+			
+			//	Payment Rule - POS Order
+			if (DocSubType.equals(REF_C_DocTypeSubType.POSOrder))
+				mTab.setValue("PaymentRule", REF__PaymentRule.Cash);
+			else
+				mTab.setValue("PaymentRule", REF__PaymentRule.OnCredit);
+				//	IsSOTrx
+			if ("N".equals(rs.getString(8)))
+				IsSOTrx = false;
+
+			//	Set Context:
+			Env.setContext(ctx, WindowNo, "HasCharges", rs.getString(2));
+			//	DocumentNo
+			if (rs.getString(4).equals("Y"))			//	IsDocNoControlled
+			{
+				if (!newDocNo && AD_Sequence_ID != rs.getInt(7))
+					newDocNo = true;
+				if (newDocNo)
+					if (Ini.isPropertyBool(Ini.P_XENDRASYS) && Env.getAD_Client_ID(Env.getCtx()) < 1000000)
+						mTab.setValue("DocumentNo", "<" + rs.getString(6) + ">");
+					else
+						mTab.setValue("DocumentNo", "<" + rs.getString(5) + ">");
+			}
+			if (rs.getInt(9) > 0)
+				mTab.setValue("C_ConversionType_ID", rs.getInt(9));
+		}
+		rs.close();
+		pstmt.close();
+		//  When BPartner is changed, the Rules are not set if
+		//  it is a POS or Credit Order (i.e. defaults from Standard BPartner)
+		//  This re-reads the Rules and applies them.
+		if (DocSubType.equals(REF_C_DocTypeSubType.POSOrder) 
+			|| DocSubType.equals(REF_C_DocTypeSubType.PrepayOrder))    //  not for POS/PrePay
+			;
+		else
+		{
+			sql = "SELECT PaymentRule,C_PaymentTerm_ID,"            //  1..2
+				+ "InvoiceRule,DeliveryRule,"                       //  3..4
+				+ "FreightCostRule,DeliveryViaRule, "               //  5..6
+				+ "PaymentRulePO,PO_PaymentTerm_ID "
+				+ "FROM C_BPartner "
+				+ "WHERE C_BPartner_ID=?";		//	#1
+			pstmt = DB.prepareStatement(sql, null);
+			int C_BPartner_ID = Env.getContextAsInt(ctx, WindowNo, "C_BPartner_ID");
+			pstmt.setInt(1, C_BPartner_ID);
+			//
+			rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				//	PaymentRule
+				String s = rs.getString(IsSOTrx ? "PaymentRule" : "PaymentRulePO");
+				if (s != null && s.length() != 0)
+				{
+					if (IsSOTrx && (s.equals("B") || s.equals("S") || s.equals("U")))	//	No Cash/Check/Transfer for SO_Trx
+						s = "P";										//  Payment Term
+					if (!IsSOTrx && (s.equals("B")))					//	No Cash for PO_Trx
+						s = "P";										//  Payment Term
+					mTab.setValue("PaymentRule", s);
+				}
+				//	Payment Term
+				Integer ii =new Integer(rs.getInt(IsSOTrx ? "C_PaymentTerm_ID" : "PO_PaymentTerm_ID"));
+				if (!rs.wasNull())
+					mTab.setValue("C_PaymentTerm_ID", ii);
+				//	InvoiceRule
+				s = rs.getString(3);
+				if (s != null && s.length() != 0)
+					mTab.setValue("InvoiceRule", s);
+				//	DeliveryRule
+				s = rs.getString(4);
+				if (s != null && s.length() != 0)
+					mTab.setValue("DeliveryRule", s);
+				//	FreightCostRule
+				s = rs.getString(5);
+				if (s != null && s.length() != 0)
+					mTab.setValue("FreightCostRule", s);
+				//	DeliveryViaRule
+				s = rs.getString(6);
+				if (s != null && s.length() != 0)
+					mTab.setValue("DeliveryViaRule", s);
+			}
+			rs.close();
+			pstmt.close();
+		}   //  re-read customer rules
+	}
+	catch (SQLException e)
+	{
+	}
+}

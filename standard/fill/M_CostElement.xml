@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="2" name="C_Currency">
+    <table name="C_Currency" accesslevel="0" level="2" Identifier="f6ac3adf-de8b-9bcf-a539-e923ec048ee4">
+      <row AD_Client_ID="0" AD_Org_ID="0" CodSunat="01" CostingPrecision="4" CurSymbol="S/." Description="Soles" EMURate="0" Identifier="f6ac3adf-de8b-9bcf-a539-e923ec048ee4" IsEMUMember="false" IsEuro="false" IsMandatory="false" ISO_Code="PEN" StdPrecision="2" IsActive="true" />
+    </table>
+    <table name="M_CostElement" accesslevel="0" level="1" Identifier="1b35ed8b-a764-37ce-fe0c-a77c14832bfe">
+      <row AD_Client_ID="0" AD_Org_ID="0" C_Currency_ID="f6ac3adf-de8b-9bcf-a539-e923ec048ee4" CostElementType="M" CostingMethod="A" Identifier="1b35ed8b-a764-37ce-fe0c-a77c14832bfe" IsCalculated="true" Name="Promedio" IsActive="true">
+        <Properties>
+          <hashmap>
+            <map key="function" value="
+{
+ ? = call costaveragemonth(?,?,?,?)}
+" />
+          </hashmap>
+        </Properties>
+      </row>
+    </table>
+  </record>
+</stream>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="cashkb" 
+sessionname="cashkb" queuename="" docbasetype="CMC" docsubtype="" 
+ruletype="" group="87811363-b910-489d-958f-c13673f4dcdd" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="ef6fed1c-1f5c-46cf-b8ea-d7c8c361584c" synchronized="2018-08-29 12:23:19.073" type="kiebase" >
+<doctype docbasetype="CMC" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/cashjournal.drl" type="rule" sessionname="cashkb" file="cashjournal.drl" Identifier="bc3de629-db90-42c5-8782-fb3569baabf0" synchronized="2018-08-29 12:23:19.099"/>
+<model name="MCash" AD_Table_ID="0ad94ea3-6b1f-830d-408f-4ca92b26cb35" Classname="org.compiere.model.MCash" Identifier="6f0f1805-e617-4932-bd6c-ca7817eed389" synchronized="2018-08-29 11:53:42.0" />
+</kiebase>

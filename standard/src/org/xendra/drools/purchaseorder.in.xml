@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="purchaseorderkb" 
+sessionname="purchaseorderks" queuename="" docbasetype="POO" docsubtype="PO" 
+ruletype="R" group="4b84bd44-8b2b-42ce-934e-51faa9b12e72" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="d05955b0-b64b-b394-5c12-7cb8e3765116" synchronized="2018-12-11 22:24:41.0" type="kiebase" >
+<doctype docbasetype="POO" docsubtype="PO"/>
+<rule name="src/main/resources/org/compiere/model/purchaseorder.drl" type="rule" sessionname="purchaseorderks" file="purchaseorder.drl" Identifier="1eadf334-bcc3-2887-a3e1-deefcc827e83" synchronized="2016-09-29 22:24:42.0"/>
+</kiebase>

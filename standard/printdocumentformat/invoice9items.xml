@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="INVOICE9Items" category="INV" version="1.0" Identifier="f6ae8b39-8995-2359-ebaa-ef787731808d" synchronized="2016-09-05 17:30:41">
+<properties Header="C_Invoice" 
+			Lines="C_InvoiceLine" 
+			M_Product_Brand_ID="@SQL=SELECT Value FROM M_PRODUCT_BRAND WHERE M_PRODUCT_BRAND_ID in (SELECT M_PRODUCT_BRAND_ID FROM M_PRODUCT WHERE M_PRODUCT_ID = @M_PRODUCT_ID@)" 
+			Value="@SQL=SELECT CASE WHEN EXISTS (SELECT 1 FROM AD_CLIENTINFO WHERE C_BPARTNERCASHTRX_ID = i.c_bpartner_ID) THEN i.description ELSE p.name END from c_invoice i join c_bpartner p on i.c_bpartner_id = p.c_bpartner_id AND c_invoice_id = @C_Invoice_ID@"  
+			UOM="@SQL=SELECT UOMSymbol FROM C_UOM WHERE C_UOM_ID in (select c_uom_id from c_invoiceline where c_invoiceline_id = @C_invoiceline_ID@)" 
+			AmountInText="@FUNCTION=getAmtInWords(@GrandTotal@)" 
+			Created="C_Invoice"
+			DocumentNo="C_Invoice"
+			GrandTotal="C_Invoice"
+			SalesRep_ID="C_Invoice"
+			DateInvoiced="C_Invoice"
+			C_PaymentTerm_ID="C_Invoice"
+			Description="C_Invoice"
+			LineNetAmt="C_InvoiceLine"
+			QtyEntered="C_InvoiceLine"
+			M_Product_ID="C_InvoiceLine" 
+			PriceEntered="C_InvoiceLine"
+			M_Product="C_InvoiceLine"
+		
+			C_InvoiceLine_ID="C_InvoiceLine" 
+			C_BPartner_Location_ID="C_Invoice" 
+			C_BPartner_ID="C_Invoice" />
+<format>
+<![CDATA[#macro(amt $bigdecimal)${formatter.amt($bigdecimal,9)}#end
+#macro(pad1 $string)${formatter.pad($string,70)}#end
+#macro(pad5 $string)${formatter.pad($string,39)}#end
+#macro(pad4 $string)${formatter.pad($string,51)}#end
+#macro(pad2 $string)${formatter.pad($string,5)}#end
+#macro(pad3 $string)${formatter.pad($string,6)}#end
+#macro(qty $bigdecimal)${formatter.qty($bigdecimal,8)}#end
+
+
+$font_condensed
+Fecha: $Created                                          $DocumentNo
+Cliente : $Description 
+Direccion : 
+
+#set($counter = 0)
+#set($numberlines = 8)
+#foreach ($item in $C_InvoiceLine_ID)
+#qty($QtyEntered.get($counter)) #pad3($UOM.get($counter)) #pad5($M_Product_ID.get($counter)) #pad2($M_Product_Brand_ID.get($counter)) #amt($PriceEntered.get($counter)) #amt($LineNetAmt.get($counter))
+
+#set($counter = $counter + 1)
+#end
+#if( $counter < $numberlines )
+  #set($range = [$counter..$numberlines])
+	#foreach ($i in $range)
+	
+#end	
+#end
+
+  #pad4($AmountInText)             S/.   $GrandTotal
+
+   $SalesRep_ID  For.Pago: $C_PaymentTerm_ID   
+$font_normal   
+
+]]>
+</format> 
+</printdocumentformat>

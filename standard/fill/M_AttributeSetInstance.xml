@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="2" name="M_AttributeSetInstance">
+    <table name="M_AttributeSetInstance" accesslevel="0" level="1" Identifier="93d46d48-2597-4c47-ee76-9464b21719bb">
+      <row AD_Client_ID="0" AD_Org_ID="0" M_AttributeSetInstance_ID="0" Description="---" Identifier="93d46d48-2597-4c47-ee76-9464b21719bb" M_AttributeSet_ID="0423c793-bda8-79a0-52c2-4bc6768df97b" IsActive="true" />
+    </table>
+    <table name="M_AttributeSet" accesslevel="0" level="2" Identifier="0423c793-bda8-79a0-52c2-4bc6768df97b">
+      <row M_AttributeSet_ID="0" AD_Client_ID="0" AD_Org_ID="0" Description="** System Entity **" GuaranteeDays="0" Identifier="0423c793-bda8-79a0-52c2-4bc6768df97b" IsGuaranteeDate="false" IsGuaranteeDateMandatory="false" IsInstanceAttribute="false" IsLot="false" IsLotMandatory="false" IsSerNo="false" IsSerNoMandatory="false" MandatoryType="N" Name="** Do not Change/Use **" IsActive="false" />
+    </table>
+  </record>
+</stream>
+

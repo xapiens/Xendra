@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message uid="1000018" AD_Plugin_ID="1000000" type="message" name="Movement" QueueName="/queue/movement" lockout="Y" synchronized="2018-10-01 23:37:29.276" Identifier="0a065955-421d-4ac2-9424-553dbef77551">
+  <section name="Header" parent="" sequence="0">
+    <field area="Header" mandatory="false" name="DateReceived" sequence="0" key="false" columnid="1ea81560-46ee-8ba6-586c-7cbeb37971c8" tableid="" />
+    <field area="Header" mandatory="true" name="IsInTransit" sequence="0" key="false" columnid="741579ed-bfe8-7c2f-5dd3-5a64800d1c59" />
+    <field area="Header" mandatory="true" name="DeliveryRule" sequence="0" key="false" columnid="45394a0f-d886-44a6-d1d9-58114475c916" />
+    <field area="Header" mandatory="true" name="M_Movement_ID" sequence="0" key="true" columnid="b5939b68-c431-eeec-86fd-3fbab53900c7" />
+    <field area="Header" mandatory="false" name="C_Project_ID" sequence="0" key="false" columnid="66af995e-2abb-2405-139a-fcf3f2d7c8c0" />
+    <field area="Header" mandatory="false" name="TrackingNo" sequence="0" key="false" columnid="9ac7ca5d-a960-0e9b-c11c-b4ff35dd91ad" tableid="" />
+    <field area="Header" mandatory="true" name="DocumentNo" sequence="0" key="false" columnid="a106d7f9-cbab-d005-4a0c-27447508afd8" />
+    <field area="Header" mandatory="true" name="C_DocType_ID" sequence="0" key="false" columnid="39018032-397f-b6c5-7112-e3d6997e7a18" />
+    <field area="Header" mandatory="true" name="DeliveryViaRule" sequence="0" key="false" columnid="b6bad444-843e-4814-2979-db0fea86215b" />
+    <field area="Header" mandatory="true" name="MovementDate" sequence="0" key="false" columnid="7bc35640-4003-8e3c-9470-aa97ee710127" />
+    <field area="Header" mandatory="false" name="C_Campaign_ID" sequence="0" key="false" columnid="2f96ad17-c87a-1fe0-cc58-1805e1fe4a46" />
+    <field area="Header" mandatory="true" name="DateAcct" sequence="0" key="false" columnid="f6235351-dfb8-4a0b-989f-1dca2b63c1ca" />
+    <field area="Header" mandatory="false" name="PriorityRule" sequence="0" key="false" columnid="e0c86c8c-9266-44d9-962e-de603b8f2b4c" />
+    <field area="Header" mandatory="false" name="ApprovalAmt" sequence="0" key="false" columnid="38efde79-86ac-e66e-e2e7-20ad083ebf3d" />
+    <field area="Header" mandatory="false" name="ShipDate" sequence="0" key="false" columnid="af422b66-405f-c2f2-655d-51b1965a96d6" tableid="" />
+    <field area="Header" mandatory="false" name="Vehicle" sequence="0" key="false" columnid="e4bce6f9-006d-b703-0245-d95e22c31b32" tableid="" />
+    <field area="Header" mandatory="false" name="C_Activity_ID" sequence="0" key="false" columnid="c1133d53-aeb0-ad36-6672-26ad7558d801" />
+    <field area="Header" mandatory="false" name="Description" sequence="0" key="false" columnid="d8793d42-8dd7-2b6d-2152-dcc59a6db108" tableid="" />
+  </section>
+  <section name="item" parent="" sequence="0">
+    <field area="item" mandatory="true" name="M_AttributeSetInstanceTo_ID" sequence="0" key="false" columnid="74d628cb-676b-591c-847a-d9f38e8e95d3" />
+    <field area="item" mandatory="true" name="M_Locator_ID" sequence="0" key="false" columnid="c4891a64-82e8-57d4-6c5f-85eba3c508cf" />
+    <field area="item" mandatory="true" name="M_MovementLine_ID" sequence="0" key="true" columnid="95c88e9b-07a2-fc00-67f9-155190f4602b" />
+    <field area="item" mandatory="true" name="M_Product_ID" sequence="0" key="false" columnid="9f071a9e-1fc1-1442-aea1-a73297fd0144" />
+    <field area="item" mandatory="true" name="QtyEntered" sequence="0" key="false" columnid="62b05df9-7ee0-3737-7136-a2ae8c68a3bf" />
+    <field area="item" mandatory="true" name="MovementQty" sequence="0" key="false" columnid="ce1a92d4-80bf-fa09-18e7-f9b02389bd4d" />
+    <field area="item" mandatory="true" name="ScrappedQty" sequence="0" key="false" columnid="8e3052fd-1319-0ddc-9a27-0f5cd10d1f38" />
+    <field area="item" mandatory="true" name="ConfirmedQty" sequence="0" key="false" columnid="d551c073-adac-f1ad-c12f-6a70ded6527d" />
+    <field area="item" mandatory="true" name="TargetQty" sequence="0" key="false" columnid="5affb1fe-8981-27c4-ef0b-8ec14f822658" />
+    <field area="item" mandatory="true" name="M_LocatorTo_ID" sequence="0" key="false" columnid="5f968144-b7ce-559e-d009-8321659666b1" />
+    <field area="item" mandatory="true" name="C_UOM_ID" sequence="0" key="false" columnid="27a0e866-482a-eef0-65e9-661bfe4eb6b0" />
+    <field area="item" mandatory="true" name="M_AttributeSetInstance_ID" sequence="0" key="false" columnid="bbfb112f-2073-54e6-e1a1-978313761fd0" />
+  </section>
+  <section name="client" parent="" sequence="0">
+    <field area="client" mandatory="true" name="AD_Client_ID" sequence="0" key="true" columnid="e9cb549a-68a5-8ce7-872f-3e91392332e0" tableid="" />
+  </section>
+  <section name="org" parent="" sequence="0">
+    <field area="org" mandatory="true" name="AD_Org_ID" sequence="0" key="true" columnid="91a880b5-492c-9607-ac78-5b8440d8becd" tableid="" />
+  </section>  
+</message>
+

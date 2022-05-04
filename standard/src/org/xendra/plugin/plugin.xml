@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="standard"
+	description="standard"
+	id="org.xendra.standard"
+	version="1.1"
+	category="framework"
+	synchronized="@timestamp@"
+	enabled="true">
+</plugin>
+

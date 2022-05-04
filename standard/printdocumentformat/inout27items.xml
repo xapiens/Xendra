@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printdocumentformat name="INOUT27Items" category="OUT" version="1.0" identifier="42dee41f-3572-b1d6-4e0d-017ee9e799fe" synchronized="2016-09-06 15:00:41">
+<properties M_Product_Brand_ID="@SQL=SELECT Value FROM M_PRODUCT_BRAND WHERE M_PRODUCT_BRAND_ID in (SELECT M_PRODUCT_BRAND_ID FROM M_PRODUCT WHERE M_PRODUCT_ID = @M_PRODUCT_ID@)" 
+			Lot="@SQL=SELECT LOT from m_attributesetinstance where m_attributesetinstance_id in (SELECT M_ATTRIBUTESETINSTANCE_ID FROM m_inoutline where m_inoutline_id = @M_InOutLine_ID@)" 
+			DocumentInv="@SQL=select i.serial||chr(45)|| i.documentno from c_invoice i join c_doctype c on i.c_doctype_id = c.c_doctype_id where c_invoice_id = (SELECT c_invoice_id from m_inout where m_inout_id=@M_InOut_ID@)" 
+			DocumentType="@SQL=SELECT c.name from c_invoice i join c_doctype c on i.c_doctype_id = c.c_doctype_id where c_invoice_id = (SELECT c_invoice_id from m_inout where m_inout_id=@M_InOut_ID@)" 
+			GuaranteeDate="@SQL=SELECT guaranteedate from m_attributesetinstance where m_attributesetinstance_id in (SELECT M_ATTRIBUTESETINSTANCE_ID FROM m_inoutline where m_inoutline_id = @M_InOutLine_ID@)" 
+			UOM="@SQL=SELECT UOMSymbol FROM C_UOM WHERE C_UOM_ID in (select c_uom_id from m_inoutline where m_inoutline_id = @m_inoutline_ID@)" 
+			Shipper="@SQL=select name from m_shipper where m_shipper_id = (select m_shipper_id from m_inout where m_inout_id = @m_inout_ID@)" 
+			TaxIDShipper="@SQL=select taxid from c_bpartner where c_bpartner_id=(select c_bpartner_id from m_shipper sh where m_shipper_id = (select m_shipper_id from m_inout where m_inout_id = @m_inout_ID@))"  
+			LotDate="@SQL=select fakelot(il.m_product_id) from c_invoiceline il where C_InvoiceLine_ID=@C_InvoiceLine_ID@"
+			Lines="M_InOutLine"
+			Header="M_InOut"
+			DocumentNo="M_InOut"
+			Description="M_InOut"
+			MovementDate="M_InOut"
+			ShipDate="M_InOut"
+			TrackingNo="M_InOut"
+			NoPackages="M_InOut"
+			QtyEntered="M_InOutLine" 
+			C_BPartner_ID="M_InOut"
+			C_BPartner_Location_ID="M_InOut"
+			M_Product_ID="M_InOutLine"
+			M_InOutLine_ID="M_InOutLine"
+			M_Warehouse="M_InOut" 
+			C_Location_ID="M_Warehouse"
+			M_Product="M_InOutLine"
+			Value="M_Product"
+			C_BPartner="M_InOut"			 
+			TaxID="C_BPartner" 
+			Name2="C_BPartner" />
+<format>
+<![CDATA[#macro(amt $bigdecimal)${formatter.amt($bigdecimal,18)}#end
+#macro(amt2 $bigdecimal)${formatter.amt($bigdecimal,20)}#end
+#macro(pad1 $string)${formatter.pad($string,30)}#end
+#macro(pad5 $string)${formatter.pad($string,60)}#end
+#macro(pad4 $string)${formatter.pad($string,15)}#end
+#macro(pad3 $string)${formatter.pad($string,7)}#end
+#macro(pad $string)${formatter.pad($string,10)}#end
+#macro(qty $bigdecimal)${formatter.qty($bigdecimal,10)}#end
+$font_condensed
+                                                                                                          $DocumentNo
+
+
+       $Name2
+
+
+        $MovementDate                      $ShipDate
+        
+
+
+       $C_Location_ID                                                 $C_BPartner_Location_ID
+                                                                  
+
+
+                   $C_BPartner_ID
+                   $TaxID
+
+                   $TrackingNo
+
+
+#set($counter = 0)
+#set($numberlines = 26)
+#foreach ($item in $M_InOutLine_ID)
+#qty($QtyEntered.get($counter)) #pad3($UOM.get($counter)) #pad4($Value.get($counter)) #pad5($M_Product_ID.get($counter)) .#pad1($LotDate.get($counter)).  #pad($M_Product_Brand_ID.get($counter))   
+
+#set($counter = $counter + 1)
+#end
+#if( $counter < $numberlines )
+  #set($range = [$counter..$numberlines])
+	#foreach ($i in $range)
+	
+#end	
+#end
+
+                                        		$NoPackages  $Description
+
+
+
+
+
+
+              $Shipper
+
+          $TaxIDShipper  
+
+
+           $DocumentType                                                                1
+           $DocumentInv
+
+
+
+
+
+
+
+
+]]>
+</format> 
+</printdocumentformat>

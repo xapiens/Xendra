@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="HR_WorkShift">
+    <table name="HR_WorkShift" accesslevel="0" level="1" Identifier="9cffffe3-5f23-7fd8-2ae7-fe9a6fa0f0d7">
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="9cffffe3-5f23-7fd8-2ae7-fe9a6fa0f0d7" Name="Tarde" Value="T02" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="068e6861-0f18-e4d3-7762-11197c4670dd" Name="Mañana" Value="T01" IsActive="true" />
+    </table>
+  </record>
+</stream>
+

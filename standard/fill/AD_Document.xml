@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="AD_Document">
+    <table name="AD_Document" accesslevel="0" level="1" Identifier="e0a29727-c4cd-818a-ee3e-59940830c704 ">
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="30c5e8de-d802-4fd3-8057-40150c715f5c" DocStatus="CO" Identifier="e0a29727-c4cd-818a-ee3e-59940830c704 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="30c5e8de-d802-4fd3-8057-40150c715f5c" DocStatus="CO" Identifier="fd999b02-f6e8-a841-8e81-d43dcdca4e9e " NextStatus="TC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="DR" Identifier="ef500302-3c92-aa26-cec4-5eece424be75 " NextStatus="PR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="IP" Identifier="885fc3d0-9fc9-3c3a-9cdb-2518c2f1da8d " NextStatus="PR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="IN" Identifier="7c222a2d-75c7-950f-e85a-6d92978ede2b " NextStatus="PR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="IN" Identifier="54e734ee-c571-a032-9ee6-b012bc64f7b7 " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="IP" Identifier="20c4531a-9def-b038-2502-242f7c6971f6 " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="DR" Identifier="c8ce6e29-9478-0014-3e6b-47a33caca5b2 " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="CO" Identifier="57d79bf9-a235-ea30-5102-134c418c3f4b " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="CO" Identifier="ab672c2d-59e5-fcb9-08d2-6e98c7b849de " NextStatus="RE" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="WP" Identifier="8a4079d2-36b2-0354-a584-a59df49d1288 " NextStatus="RE" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="404bcd8b-f40d-6c46-08aa-9636e05195b5" DocStatus="WP" Identifier="fa6de20e-79c5-1a42-d4e4-aeee11b527de " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" DocStatus="CO" Identifier="be74036e-9705-6df5-e290-231a40a19362 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" DocStatus="CO" Identifier="aacc826f-9e59-fccd-5bff-8daddd0f1391 " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" DocStatus="CO" Identifier="18bb2b43-7acf-24ff-9f88-539727ec755c " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" DocStatus="CO" Identifier="5906597b-521a-0684-3338-6cec71a1c992 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b56eee3-2271-8a46-80c2-c8ad74a02b26" DocStatus="CO" Identifier="d77f38c2-b8bd-45a2-0116-996042647481 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b56eee3-2271-8a46-80c2-c8ad74a02b26" DocStatus="CO" Identifier="212e49fb-b1a4-6392-aee6-69303e6351ca " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="da0e7e4b-652c-7e6e-91b6-4ff277f89b9a" DocStatus="CO" Identifier="7f597649-4d0f-9b79-3d57-8a80faafea46 " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="da0e7e4b-652c-7e6e-91b6-4ff277f89b9a" DocStatus="CO" Identifier="a2b2fc79-90df-ae87-8cb2-a6c98f4b7a54 " NextStatus="RA" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="da0e7e4b-652c-7e6e-91b6-4ff277f89b9a" DocStatus="CO" Identifier="09e0f297-487e-ba2e-e80c-632cc2b0d19a " NextStatus="RE" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="cd8fb645-af6d-0007-902c-83119a322c11" DocStatus="CO" Identifier="0f3d62de-9ca3-87c4-286c-700aa1bae2ed " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="cd8fb645-af6d-0007-902c-83119a322c11" DocStatus="CO" Identifier="1a102294-503e-b99d-7232-1366de56acb4 " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0ad94ea3-6b1f-830d-408f-4ca92b26cb35" DocStatus="CO" Identifier="d355df95-ad92-8554-1d1a-9f481fcad435 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="34624857-e37e-e31d-b092-7199df9f8d29" DocStatus="CO" Identifier="8e57355c-c807-7c3b-bab5-b1f4b31be507 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="34624857-e37e-e31d-b092-7199df9f8d29" DocStatus="CO" Identifier="ce323b33-2bef-94e2-2acc-31b2ef7a16ad " NextStatus="RC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="30c5e8de-d802-4fd3-8057-40150c715f5c" DocStatus="TC" Identifier="c4f207b4-2563-bcff-a61d-3f43b39859a0 " NextStatus="CT" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="30c5e8de-d802-4fd3-8057-40150c715f5c" DocStatus="CT" Identifier="7fe32640-ca63-2dbb-4500-015df77f3f56 " NextStatus="AY" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="30c5e8de-d802-4fd3-8057-40150c715f5c" DocStatus="AY" Identifier="c2bd37e2-2309-a2c0-5bdc-1577394c5c9a " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="501f1568-8b7c-6a73-fb58-7ba3a65072a5" DocStatus="CO" Identifier="36735fd8-54f2-6dec-53fc-00f591a1d439 " NextStatus="VO" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="PT" Identifier="5d12c555-07c9-478c-4417-2363ab712152 " NextStatus="WR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="PT" Identifier="3886579b-cc21-d2fb-323d-7d3dbd5262d7 " NextStatus="DS" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="PT" Identifier="994b0fbb-85a8-1690-2191-7bf9b24c51ba " NextStatus="RV" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="PT" Identifier="191175ac-b56d-1c9b-6d6c-fb66ed956ca9 " NextStatus="PD" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="WR" Identifier="0f1f5135-b936-9e19-8157-e748378a60a3 " NextStatus="DS" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="WR" Identifier="2c83dc47-d41a-1362-1304-54a2464038eb " NextStatus="RV" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="WR" Identifier="1095398a-c4f5-3345-6498-ff17a40585b1 " NextStatus="PD" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="WR" Identifier="6c4bd908-c5ed-8cce-e3ee-2bc08c57a42d " NextStatus="RR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="DS" Identifier="b7258703-5273-3056-3fee-1f37025ffdc7 " NextStatus="WR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="DS" Identifier="53b99119-3e87-45f1-56b5-445a1a3a6fdf " NextStatus="RV" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="DS" Identifier="7bd0ef20-0ad1-7756-262a-d4c623770bd3 " NextStatus="PD" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="DS" Identifier="d3a23327-fefa-7370-636e-0080d2bbc1f1 " NextStatus="RR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="RV" Identifier="d4146789-7a01-6085-ce2a-4ce8d900dc3b " NextStatus="WR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="RV" Identifier="eb52b4c5-8f69-c58c-dff5-cc2e8b6dd779 " NextStatus="DS" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="RV" Identifier="f2eaa678-aea7-5a2d-ae92-7b81f37e3c84 " NextStatus="PD" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="RV" Identifier="61583617-c338-803d-fc67-08e176384422 " NextStatus="RR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="IP" Identifier="59fe7ff7-7e47-8124-7b47-b153b9d66bf1 " NextStatus="PR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="IP" Identifier="58dfa2bc-b8b2-89c4-ae54-0e88643feb15 " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="IN" Identifier="b9910d71-bfd8-2e7a-7017-64fc191e2538 " NextStatus="PR" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="4e4addcb-330a-72a0-01ef-ad4002f26e77" DocStatus="IN" Identifier="352c6e41-c680-7437-b695-8ab2fac2a00d " NextStatus="CL" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="38fceae3-fdb8-74d5-becf-6b9def430144" DocStatus="DR" Identifier="18229177-2733-94b2-fac7-ee75cbd2c664 " NextStatus="TC" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="38fceae3-fdb8-74d5-becf-6b9def430144" DocStatus="TC" Identifier="8138f734-e49f-602d-bf9e-e86e6b55bbc6 " NextStatus="CT" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="38fceae3-fdb8-74d5-becf-6b9def430144" DocStatus="CT" Identifier="88ff3b8c-7b81-5ee2-97a5-54c767bbd864 " NextStatus="AY" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="38fceae3-fdb8-74d5-becf-6b9def430144" DocStatus="AY" Identifier="3f680f74-eb2a-276b-99ce-2e4fe00f5beb " NextStatus="CL" IsActive="true" />
+    </table>
+  </record>
+</stream>
+

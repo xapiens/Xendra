@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="purchaseinvoicekb" 
+sessionname="purchaseinvoiceks" queuename="" docbasetype="API" docsubtype="" 
+ruletype="R" group="4b84bd44-8b2b-42ce-934e-51faa9b12e72" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="e37e45b7-a0b4-419d-8a9f-93ba334c1f8d" synchronized="2018-04-05 16:05:43.0" type="kiebase" >
+<doctype docbasetype="API" docsubtype=""/>
+<rule name="src/main/resources/org.xendra.standard/purchaseinvoice.drl" type="rule" sessionname="purchaseinvoiceks" file="purchaseinvoice.drl" Identifier="260d75d5-6db1-463d-a014-6ed4c84ef329" synchronized="2018-04-05 16:05:43.0"/>
+</kiebase>

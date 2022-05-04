@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesorderquotationkb" 
+sessionname="salesorderquotationks" queuename="" docbasetype="SOO" docsubtype="OB" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="df47d28a-d55f-44f4-bbd6-0c5baf76c840" synchronized="2018-04-04 16:49:28.0" type="kiebase" >
+<doctype docbasetype="SOO" docsubtype="OB"/>
+<rule name="src/main/resources/org.xendra.standard/salesorderquotation.drl" type="rule" sessionname="salesorderquotationks" file="salesorderquotation.drl" Identifier="585ac41b-a82e-4e0b-a19a-83d951c99483" synchronized="2018-04-04 16:49:28.0"/>
+</kiebase>

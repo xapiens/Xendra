@@ -1,0 +1,124 @@
+//created on: 28-mar-2017
+//modified on : 28-mar-2017
+//created by : xapiens
+package org.compiere.model
+//list any import classes here.
+import org.compiere.model.MBOE
+import org.compiere.model.MCashLine;
+import java.math.BigDecimal
+import java.util.Properties
+import org.compiere.acct.DocLine_Allocation
+import org.compiere.acct.Doc_Allocation
+import org.compiere.acct.FactLine
+//declare any global variables here
+global Properties ctx
+dialect "mvel"
+
+rule "boecash"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$boe : MBOE()
+		$cashline : 	MCashLine()
+	then
+		System.out.println("cashboe");
+		$docallocation.createFactCashLine($boe.getC_DocType_ID(), false);
+		$docallocation.createFactBOE();
+		retract( $boe )
+		retract( $cashline )
+end
+
+rule "boepaymentline"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$boe : MBOE()
+		$paymentline : MPaymentLine()
+	then
+		System.out.println("paymentlineboe");
+		$docallocation.createFactPaymentLine($boe.getC_DocType_ID(), true);
+		$docallocation.createFactBOE();
+		retract( $boe )
+		retract( $paymentline )
+end
+
+rule "boepayment"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$boe : MBOE()
+		$payment : MPayment()
+	then
+		System.out.println("paymentboe");
+		$docallocation.createFactPayment($boe.getC_DocType_ID(), true);
+		$docallocation.createFactBOE();
+		retract( $boe )
+		retract( $payment )
+end
+
+rule "invoicepayment"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$invoice : MInvoice()
+		$payment : MPayment()
+	then
+		System.out.println("invoicepayment");
+		$docallocation.createFactPayment($invoice.getC_DocType_ID(), true);
+		$docallocation.createFactInvoice(true);		
+		retract( $invoice )
+		retract( $payment )
+end
+
+rule "invoicepaymentline"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$invoice : MInvoice()
+		$paymentline : MPaymentLine()
+	then
+		System.out.println("invoicepaymentline");
+		$docallocation.createFactPaymentLine($invoice.getC_DocType_ID(), true);
+		$docallocation.createFactInvoice(true);		
+		retract( $invoice )
+		retract( $paymentline )
+end
+
+rule "invoiceboe"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$invoice : MInvoice()
+		eval($docallocation.getPayTableName() == "C_BOE")
+	then
+		System.out.println("invoiceboe");
+		$docallocation.createFactBOEPay(0,"", false);
+		$docallocation.createFactInvoice(true);		
+end
+
+rule "invoicecashline"
+	agenda-group "line"
+	when
+		$docallocation : Doc_Allocation()
+		$invoice : MInvoice()
+		$cashline :MCashLine()
+	then
+		System.out.println("invoicecashline");
+		$docallocation.createFactCashLine($invoice.getC_DocType_ID(), true);
+		$docallocation.createFactInvoice(true);		
+		retract( $invoice )
+		retract( $cashline )
+end
+
+rule "charge"
+	agenda-group "line"
+	when
+		$payment : MPayment()
+		$docallocation : Doc_Allocation()
+		$charge : MCharge()		
+	then
+		$docallocation.createFactCharge();
+		$docallocation.createFactPaymentLine($payment.getC_DocType_ID(), false);
+		System.out.println("charge");
+		retract( $charge )
+end

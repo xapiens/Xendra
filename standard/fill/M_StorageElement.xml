@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="M_StorageElement">
+    <table name="M_StorageElement" accesslevel="0" level="1" Identifier="0f1e6810-a4bc-46ba-afff-1221f0afb42c">
+      <row AD_Client_ID="0" AD_Org_ID="0" Description="standard storage" Identifier="0f1e6810-a4bc-46ba-afff-1221f0afb42c" Name="standard" IsActive="true">
+        <Properties>
+          <hashmap>
+            <map key="function" value="
+{
+call calcstoragemonthly(?,?,?,?,?)}
+" />
+          </hashmap>
+        </Properties>
+      </row>
+    </table>
+  </record>
+</stream>
+

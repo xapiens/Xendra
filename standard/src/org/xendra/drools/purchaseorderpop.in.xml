@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="purchaseorderpopkb" 
+sessionname="purchaseorderpopks" queuename="" docbasetype="POO" docsubtype="PP" 
+ruletype="R" group="4b84bd44-8b2b-42ce-934e-51faa9b12e72" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="4ea4d416-e98a-4f95-b972-6b516d0b8872" synchronized="2018-04-05 16:05:43.0" type="kiebase" >
+<doctype docbasetype="POO" docsubtype="PP"/>
+<rule name="src/main/resources/org.xendra.standard/purchaseorderpop.drl" type="rule" sessionname="purchaseorderpopks" file="purchaseorderpop.drl" Identifier="3aabe282-b97f-4c99-9e80-8c45d6619e64" synchronized="2018-04-05 16:05:43.0"/>
+</kiebase>

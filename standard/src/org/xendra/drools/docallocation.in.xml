@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.xendra.acct" name="docallocationkb" 
+sessionname="docallocationkb" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="87811363-b910-489d-958f-c13673f4dcdd" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="ef6fed1c-1f5c-46cf-b8ea-d7c8c361584c" synchronized="2018-08-29 12:23:19.073" type="kiebase" >
+<rule name="src/main/resources/org.xendra.acct/docallocation.drl" type="rule" sessionname="docallocationkb" file="cashjournal.drl" Identifier="bc3de629-db90-42c5-8782-fb3569baabf0" synchronized="2018-08-29 12:23:19.099"/>
+</kiebase>

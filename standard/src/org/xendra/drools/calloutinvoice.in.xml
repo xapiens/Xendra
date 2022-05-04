@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="calloutinvoicekb" 
+sessionname="calloutinvoiceks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="9297b23c-f23f-7b26-b51d-09c91fd9dc2d" synchronized="2017-04-05 08:59:41.0" type="kiebase" >
+<field TableName="C_InvoiceLine" ColumnName="C_UOM_ID" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="C_Charge_ID" Agenda="charge"/>
+<field TableName="C_InvoiceLine" ColumnName="PriceEntered" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="QtyInvoiced" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="PriceActual" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="QtyEntered" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="TaxAmt" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="S_ResourceAssignment_ID" Agenda="line"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="C_BPartner_Location_ID" Agenda="tax"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="C_Charge_ID" Agenda="charge"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="C_DocType_ID" Agenda="doctype"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="C_Tax_ID" Agenda="batchline"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="DateInvoiced" Agenda="dateacct"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="C_BPartner_ID" Agenda="bpartner"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="IsTaxIncluded" Agenda="batchline"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="QtyEntered" Agenda="batchline"/>
+<field TableName="C_Invoice" ColumnName="Ref_Invoice_ID" Agenda="reference"/>
+<field TableName="C_Invoice" ColumnName="C_DocTypeTarget_ID" Agenda="doctype"/>
+<field TableName="C_Invoice" ColumnName="C_BPartner_ID" Agenda="bpartner"/>
+<field TableName="C_Invoice" ColumnName="C_PaymentTerm_ID" Agenda="paymentterm"/>
+<field TableName="C_InvoiceLine" ColumnName="C_Tax_ID" Agenda="line"/>
+<field TableName="C_InvoiceLine" ColumnName="M_Product_ID" Agenda="product"/>
+<field TableName="C_InvoiceBatchLine" ColumnName="PriceEntered" Agenda="batchline"/>
+<field TableName="C_Invoice" ColumnName="DateInvoiced" Agenda="dateacct"/>
+<field TableName="C_Invoice" ColumnName="M_PriceList_ID" Agenda="pricelist"/>
+<rule name="src/main/resources/org/compiere/model/calloutinvoice.drl" type="rule" sessionname="calloutinvoiceks" file="calloutinvoice.drl" Identifier="a22761ec-f4f8-4879-0ddf-bda4dae1db1e" synchronized="2017-04-05 08:59:41.0"/>
+</kiebase>

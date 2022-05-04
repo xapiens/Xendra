@@ -1,0 +1,184 @@
+//created on: 01-ene-2018
+//modified on : 09-abr-2018
+//created by :
+package org.compiere.model
+import org.compiere.model.MOrder
+import org.compiere.model.MInvoice
+import org.compiere.model.MInOut
+import org.compiere.model.MPeriod
+import org.compiere.model.MOrderLine
+import org.compiere.model.MProduct
+import org.compiere.model.MDocType
+import org.compiere.model.MBPartner
+import org.compiere.model.MConversionRate
+import org.compiere.process.DocAction
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.model.reference.REF__DocumentStatus
+import org.compiere.model.reference.REF_C_BPartnerSOCreditStatus
+import org.compiere.model.reference.REF_C_DocTypeSubType
+import org.compiere.model.reference.REF__DocumentAction
+import org.compiere.util.Env
+import org.compiere.util.Util
+import java.math.BigDecimal
+import java.util.Properties
+global Properties ctx
+dialect "mvel"
+// invoice prepare
+rule "Period"
+	agenda-group "prepare"	
+    when
+    	eval(namerule("period"));
+        $invoice : MInvoice()	
+        eval(!isperiodopen($invoice))        
+    then
+        $invoice.setProcessMsg("@PeriodClosed@");
+        $invoice.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"    
+    dialect "mvel"
+    when
+
+        $invoice : MInvoice($length : getLength() )
+    	 eval(namerule("lines"))
+ 	 eval(namerule(String.format("%s",$length)))
+ eval(namerule("lines"))
+        eval($length == 0)        
+    then
+        $invoice.setProcessMsg("@NoLines@");
+        $invoice.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "ref_invoicevalid"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("ref_invoicevalid"));
+		$invoice : MInvoice($ref_invoice_id : getRef_Invoice_ID())
+		eval($ref_invoice_id == 0)
+	then	
+		$invoice.setRulestatus(DocAction.STATUS_Invalid);
+		$invoice.setProcessMsg("No ref_invoice");
+end
+
+rule "NotDocTypeValid"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("DocTypeValid"));
+		$invoice : MInvoice()
+		eval(!isdoctypevalid($invoice))
+	then	
+		$invoice.setRulestatus(DocAction.STATUS_Invalid);
+		$invoice.setProcessMsg("No Document Type");
+end
+
+rule "Valid"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+	  eval(namerule("Valid"));
+		$invoice : MInvoice($ref_invoice_id : getRef_Invoice_ID(), $length : getLength())
+		eval(isdoctypevalid($invoice))
+        eval(isperiodopen($invoice))  
+		eval($ref_invoice_id > 0)
+        eval($length > 0)        
+	then	
+		$invoice.explodeBOM();
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "tax" ).setFocus();
+end
+
+rule "tax"
+	agenda-group "tax"
+	dialect "mvel"
+	when
+	  eval(namerule("tax"));
+		$invoice : MInvoice()
+		eval(calculateTaxTotal($invoice))
+	then
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "credit" ).setFocus();
+end
+
+rule "Credit"
+	agenda-group "credit"	
+    when
+    	eval(namerule("credit"));    	
+        $invoice : MInvoice()                       
+        eval(checkcredit($invoice))
+    then
+	    $invoice.setRulestatus(DocAction.STATUS_InProgress);
+end	
+
+// invoice complete
+
+rule update
+    agenda-group "complete"    
+    dialect "mvel"
+    when
+    	eval(namerule("update"));
+        $invoice : MInvoice()
+        eval($invoice.UpdateInOut())               
+        eval($invoice.UpdateOrder())
+        eval($invoice.UpdateBPStats())
+        eval($invoice.UpdateUser())
+        eval($invoice.UpdateProject())
+    then
+   	$invoice.setRulestatus(DocAction.STATUS_Completed); 
+end
+
+function boolean namerule(String name) {
+	System.out.println("namerule ->" + name);
+	return true;
+}
+
+function boolean isperiodopen(MInvoice invoice) {
+	MDocType dt = MDocType.get(Env.getCtx(), invoice.getC_DocTypeTarget_ID());
+	return MPeriod.isOpen(invoice.getCtx(), invoice.getDateAcct(), dt.getDocBaseType(), invoice.getAD_Org_ID(), invoice.getAD_Client_ID());
+}
+
+function boolean isdoctypevalid(MInvoice invoice) {
+	boolean ret = true;
+	if (invoice.getC_DocType_ID() != invoice.getC_DocTypeTarget_ID())			
+		invoice.setC_DocType_ID(invoice.getC_DocTypeTarget_ID());
+	if (invoice.getC_DocType_ID() == 0)
+	{							
+		ret = false;
+	}
+	return ret;
+}
+
+function boolean checkcredit(MInvoice invoice) {
+	boolean ret = true;
+	if (invoice.isSOTrx() && !invoice.isReversal())
+	{
+		MBPartner bp = new MBPartner (invoice.getCtx(), invoice.getC_BPartner_ID(), invoice.get_TrxName());
+		if (REF_C_BPartnerSOCreditStatus.CreditStop.equals(bp.getSOCreditStatus()))
+		{
+			invoice.setProcessMsg("@BPartnerCreditStop@ - @TotalOpenBalance@=" 
+				+ bp.getTotalOpenBalance()
+				+ ", @SO_CreditLimit@=" + bp.getSO_CreditLimit());
+			invoice.setRulestatus(DocAction.STATUS_Invalid);
+			ret = false;
+		}
+		if (REF_C_BPartnerSOCreditStatus.CreditHold.equals(bp.getSOCreditStatus()))
+		{
+			invoice.setProcessMsg("@BPartnerCreditHold@ - @TotalOpenBalance@=" 
+				+ bp.getTotalOpenBalance() 
+				+ ", @SO_CreditLimit@=" + bp.getSO_CreditLimit());
+			invoice.setRulestatus(DocAction.STATUS_Invalid);
+			ret = false;
+		}
+	}
+	return ret;
+}
+
+function boolean calculateTaxTotal(MInvoice invoice) {
+	boolean ret = true;
+	if (!invoice.calculateTaxTotal())
+	{
+		invoice.setRulestatus(DocAction.STATUS_Invalid);
+		ret = false;		
+	}
+	return ret;
+}

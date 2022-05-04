@@ -1,0 +1,266 @@
+//created on: 08-mar-2018
+//modified on : 09-abr-2018
+//creted by: xapiens
+//movement.drl
+package org.compiere.model
+
+import org.xendra.Constants
+import org.compiere.process.DocAction
+import java.util.Properties
+import java.math.BigDecimal
+import java.text.DecimalFormat
+import org.compiere.util.Env
+import org.compiere.util.DisplayType
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.model.reference.REF__MMPolicy
+import org.compiere.model.MMovement
+import org.compiere.model.MMovementConfirm
+import org.compiere.model.MStorage
+
+global Properties ctx
+dialect "mvel"
+
+// movement prepare
+rule "Period"
+    agenda-group "prepare"   
+    when
+        eval(namerule("period"));
+        $movement : MMovement()   
+        eval(!isperiodopen($movement))       
+    then
+        $movement.setProcessMsg("@PeriodClosed@");
+        $movement.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"   
+    dialect "mvel"
+    when
+        eval(namerule("lines"));
+        $movement : MMovement($length : getLength() )
+        eval($length == 0)       
+    then
+        $movement.setProcessMsg("@NoLines@");
+        $movement.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "materialonhand"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+		eval(namerule("materialonhand"));
+		$movement : MMovement( $deliveryrule : getDeliveryRule() )
+		eval ($deliveryrule == REF_C_OrderDeliveryRule.Availability)
+		eval(!checkmaterialonhand($movement))
+	then
+        $movement.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "intransit"
+	agenda-group "prepare"
+	dialect "mvel"
+	when
+		$movement : MMovement()
+		eval(isintransit($movement));
+	then
+		createconfirmation($movement);
+end 
+
+rule "confirmation"
+	agenda-group "complete"
+	dialect "mvel"
+	when
+		$movement : MMovement()
+		eval(!confirmpendings($movement));
+	then
+        $movement.setRulestatus(DocAction.STATUS_InProgress);		
+end		
+
+rule "approve"
+	agenda-group "complete"
+	when
+		$movement : MMovement(!isApproved())
+	then
+		$movement.approveIt();
+end
+
+rule "update"
+	agenda-group "complete"
+	when 
+		$movement : MMovement();
+		eval(!updatestorage($movement))
+	then
+		$movement.setRulestatus(DocAction.STATUS_Invalid);			
+end
+
+rule "sendmessage"
+	agenda-group "post"
+	when
+		$movement : MMovement();
+	then
+		channels["message"].send($movement);
+end
+
+
+function boolean updatestorage(MMovement movement) {
+	try {
+	MMovementLine[] lines = movement.getLines(false);
+	for (MMovementLine line:lines)  {
+		checkMaterialPolicy(line);
+		if (line.getM_AttributeSetInstance_ID() == 0) {
+			MMovementLineMA mas[] = MMovementLineMA.get(movement.getCtx(),
+				line.getM_MovementLine_ID(), movement.get_TrxName());
+			for (MMovementLineMA ma:mas) {
+				MStorage storageFrom = MStorage.get(Env.getCtx(), line.getM_Locator_ID(),
+					line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+				if (storageFrom == null) 
+					storageFrom = MStorage.getCreate(Env.getCtx(), line.getM_Locator_ID(),
+						line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+				//
+				MStorage storageTo = MStorage.get(Env.getCtx(), line.getM_LocatorTo_ID(),
+						line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+				if (storageTo == null) 
+					storageTo = MStorage.getCreate(Env.getCtx(), line.getM_LocatorTo_ID(),
+						line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+				
+				storageFrom.setQtyOnHand(storageFrom.getQtyOnHand().subtract(ma.getMovementQty()));
+				if (!storageFrom.save(movement.get_TrxName())) {
+					throw new Exception("Storage From no updated (MA)");
+				}
+				storageTo.setQtyOnHand(storageTo.getQtyOnHand().add(ma.getMovementQty()));
+				if (!storageTo.save(movement.get_TrxName())) {
+					throw new Exception("Storage To not updated (MA)");
+				}
+			}
+		} else {
+			MStorage storageFrom = MStorage.get(Env.getCtx(), line.getM_Locator_ID(), 
+				line.getM_Product_ID(), line.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+			if (storageFrom == null) 
+				storageFrom = MStorage.getCreate(Env.getCtx(), line.getM_Locator_ID(),
+					line.getM_Product_ID(),  line.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+			//
+			MStorage storageTo = MStorage.get(Env.getCtx(), line.getM_LocatorTo_ID(),
+				line.getM_Product_ID(), line.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+			if (storageTo == null)
+				storageTo = MStorage.getCreate(Env.getCtx(), line.getM_LocatorTo_ID(),
+					line.getM_Product_ID(), line.getM_AttributeSetInstanceTo_ID(), movement.get_TrxName());
+			//
+			storageFrom.setQtyOnHand(storageFrom.getQtyOnHand().subtract(line.getMovementQty()));
+			if (!storageFrom.save(movement.get_TrxName())) {
+				throw new Exception("Storage From not updated");
+			}
+			storageTo.setQtyOnHand(storageTo.getQtyOnHand().add(line.getMovementQty()));
+			if (!storageTo.save(movement.get_TrxName())) {
+				throw new Exception("Storage To not updated");
+			}
+		}
+	}
+	} catch (Exception e) {
+		movement.setRulestatus(DocAction.STATUS_Invalid);			
+		movement.setProcessMsg(e.getMessage());
+		return false;
+	}
+	return true;
+}
+
+function void checkMaterialPolicy(MMovementLine line) {
+	if (line.getM_AttributeSetInstance_ID() == 0) {
+		MProduct product = MProduct.get(Env.getCtx(), line.getM_Product_ID(), line.get_TrxName());
+		String MMPolicy = product.getMMPolicy();
+		MStorage[] storages = MStorage.getWarehouse(Env.getCtx(), 0, line.getM_Product_ID(), 0,
+			null, REF__MMPolicy.FiFo.equals(MMPolicy), true, line.getM_Locator_ID(), line.get_TrxName());
+
+		BigDecimal qtyToDeliver = line.getMovementQty();
+
+		for (MStorage storage : storages) {
+			if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0) {
+				MMovementLineMA ma = new MMovementLineMA(line, 
+					storage.getM_AttributeSetInstance_ID(),
+					qtyToDeliver);
+				ma.saveEx();
+				qtyToDeliver = Env.ZERO;
+			}
+			else 
+			{
+				MMovementLineMA ma = new MMovementLineMA( line,
+					storage.getM_AttributeSetInstance_ID(),
+					storage.getQtyOnHand());
+				ma.saveEx();
+				qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());				
+			}
+			if (qtyToDeliver.signum() == 0)
+				break;
+		}
+		if (qtyToDeliver.signum() != 0) {
+			// delivery using new asi
+			MAttributeSetInstance asi = MAttributeSetInstance.create(Env.getCtx(), product, line.get_TrxName());
+			int M_AttributeSetInstance_ID = asi.getM_AttributeSetInstance_ID();
+			MMovementLineMA ma = new MMovementLineMA( line, M_AttributeSetInstance_ID, qtyToDeliver);
+			ma.saveEx();
+		}
+	}
+}
+
+function boolean confirmpendings(MMovement movement) {
+	MMovementConfirm[] confirmations = movement.getConfirmations(true, null);
+	for (MMovementConfirm confirm:confirmations) {
+		if (!confirm.isProcessed()) {
+			confirm.setProcessMsg("Open: @M_MovementConfirm_ID@ - " + confirm.getDocumentNo());
+			return false;
+		}
+	}	
+	return true;
+}
+
+function void createconfirmation(MMovement movement)  {
+	MMovementConfirm[] confirmations = movement.getConfirmations(false, null);
+	if (confirmations.length > 0)
+		return;
+	MMovementConfirm.create(movement, false);	
+}
+
+function boolean isintransit(MMovement movement) {
+	boolean intransit = false;
+	MDocType dt = new Query(Env.getCtx(), MDocType.Table_Name, "C_DocType_ID = ?", null)
+		.setParameters(movement.getC_DocType_ID()).first();
+	if (dt != null) {
+		intransit = dt.isInTransit();
+	}
+	return intransit;
+}
+
+function boolean checkmaterialonhand(MMovement movement) {
+	boolean goahead = true;
+	String m_processMsg = "";
+	MMovementLine[] lines = movement.getLines(false);
+	for (int i = 0; i < lines.length; i++)
+	{
+		MMovementLine line = lines[i];
+				BigDecimal available = MStorage.getQtyAvailable(0, line.getM_Locator_ID(), line.getM_Product_ID(), line.getM_AttributeSetInstance_ID(), movement.get_TrxName());
+		if ( available.compareTo(Env.ZERO) == 0 )
+			available = MStorage.getQtyAvailable(0, line.getM_Locator_ID(), line.getM_Product_ID(), 0, movement.get_TrxName());
+		BigDecimal qtyToDeliver = line.getMovementQty();
+		if ( available.compareTo(qtyToDeliver) < 0 )
+		{
+			MProduct product = MProduct.get(Env.getCtx(), line.getM_Product_ID(), movement.get_TrxName());
+			DecimalFormat format = DisplayType.getNumberFormat(DisplayType.Quantity, Env.getLanguage(Env.getCtx()));															
+			if (goahead)
+			{
+				goahead = false;
+			}
+			m_processMsg += product.getValue()+" "+product.getName()+" Disponible: "+format.format(available)+" Solicitado: "+format.format(qtyToDeliver)+"\n";
+			movement.setProcessMsg(m_processMsg);
+		}
+	}	
+	return goahead;
+}
+
+function boolean namerule(String name) {
+    System.out.println("namerule ->" + name);
+    return true;
+}
+
+function boolean isperiodopen(MMovement movement) {
+    MDocType dt = MDocType.get(Env.getCtx(), movement.getC_DocType_ID());
+    return MPeriod.isOpen(movement.getCtx(), movement.getDateAcct(), dt.getDocBaseType(), movement.getAD_Org_ID(),movement.getAD_Client_ID());
+}

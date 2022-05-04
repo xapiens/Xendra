@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="inventorykb" sessionname="inventoryks" queuename="" docbasetype="" docsubtype="" ruletype="" group="d092cd21-5de2-431c-9642-41e2ea273d87" entrypoint="" EqualsBehavior="EQUALITY" queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="c7397e41-e798-1b13-fdb4-9de0db7a9d63" synchronized="2018-10-10 00:07:06.995" type="kiebase">
+  <doctype docbasetype="MMI" docsubtype="" />
+  <rule name="src/main/resources/org.xendra.standard/Inventory.drl" type="rule" sessionname="inventoryks" file="Inventory.drl" Identifier="9ac7f4f7-22f0-0314-1b3b-e29a95fe1175" synchronized="2018-10-10 00:07:07.015"><![CDATA[//created on: 08-oct-2018
+//modified on : 01-ene-2019
+//creted by: xapiens
+//inventory.drl
+package org.compiere.model
+
+import org.xendra.Constants
+import org.compiere.process.DocAction
+import java.util.Properties
+import java.util.ArrayList
+import java.util.List
+import java.math.BigDecimal
+import java.text.DecimalFormat
+import org.compiere.util.Env
+import org.compiere.util.DisplayType
+
+import org.compiere.model.MStorage
+
+import org.compiere.model.persistence.X_M_StockTaking;
+import org.compiere.model.persistence.X_M_StockTakingLine;
+
+import org.compiere.model.reference.REF_M_TransactionMovementType
+import org.compiere.model.reference.REF__MMPolicy
+global Properties ctx
+dialect "mvel"
+
+// inventory prepare
+rule "Period"
+    agenda-group "prepare"   
+    when
+        eval(namerule("period"))
+        $inventory : MInventory()   
+        eval(!isperiodopen($inventory))       
+    then
+        $inventory.setProcessMsg("@PeriodClosed@");
+        $inventory.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"   
+    dialect "mvel"
+    when
+        eval(namerule("lines"));
+        $inventory : MInventory($length : getLength() )
+        eval($length == 0)       
+    then
+        $inventory.setProcessMsg("@NoLines@");
+        $inventory.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "storage"
+	agenda-group "complete"
+	when
+		$inventory : MInventory()
+		eval(!updatestorage($inventory))
+	then
+        $inventory.setProcessMsg("@NoLines@");
+        $inventory.setRulestatus(DocAction.STATUS_Invalid);	
+end
+
+rule "stocktaking"
+	agenda-group "complete"
+	dialect "mvel"
+	when
+		$inventory : MInventory()  
+		eval(!updateStockTaking($inventory))
+	then
+		$inventory.setRulestatus(DocAction.STATUS_Invalid);	
+end
+
+//rule "sendmessage"
+//	agenda-group "post"
+//	when
+//		$inventory : MInventory();
+//	then
+//		channels["message"].send($inventory);
+//end
+
+
+
+function boolean updatestorage(MInventory inv) {
+	int C_Period_ID = 0;
+	MPeriod p  = MPeriod.get(Env.getCtx(), inv.getMovementDate(), inv.getAD_Org_ID(), inv.getAD_Client_ID());
+	if (p != null)
+		C_Period_ID = p.getC_Period_ID();
+	try {
+	  MInventoryLine[] lines = inv.getLines(false);
+	  for (MInventoryLine line:lines) {
+		if (!line.isActive())
+			continue;
+		MProduct product = line.getProduct();
+		BigDecimal qtyDiff = line.getQtyInternalUse().negate();
+		// If Quantity to Inventory Internal Use = Zero then is Physical Inventory Else is Inventory Internal Use
+		if (qtyDiff.signum() == 0)
+			qtyDiff = line.getQtyCount().subtract(line.getQtyBook());
+		
+		// ignore the Material Policy when is Reverse Correction
+		if (!inv.isReversal())
+			checkMaterialPolicy(inv, line, qtyDiff);		
+		if (product != null && product.isStocked()) {
+			if (line.getM_AttributeSetInstance_ID() == 0 || qtyDiff.compareTo(BigDecimal.ZERO) == 0) {
+				MInventoryLineMA[] mas = MInventoryLineMA.get(Env.getCtx(), line.getM_InventoryLine_ID(), inv.get_TrxName());
+				for (MInventoryLineMA ma:mas) {
+					BigDecimal QtyMA = ma.getMovementQty();
+					BigDecimal QtyNew = QtyMA.add(qtyDiff);
+					String error = MStorage.add(inv.getCtx(), inv.getM_Warehouse_ID(),
+						line.getM_Locator_ID(),
+						line.getM_Product_ID(),
+						ma.getM_AttributeSetInstance_ID(), 0,
+						QtyMA.negate(), BigDecimal.ZERO, BigDecimal.ZERO, false, 
+						C_Period_ID, 
+						"MInventory.completeit()", inv.get_TrxName());
+					if (line.getQtyInternalUse().compareTo(BigDecimal.ZERO) == 0) {
+						MStorage storage =MStorage.get(inv.getCtx(), line.getM_Locator_ID(),
+							line.getM_Product_ID(), ma.getM_AttributeSetInstance_ID(), inv.get_TrxName());
+						storage.setDateLastInventory(inv.getMovementDate());
+						if (!storage.save(inv.get_TrxName())) {
+							throw new Exception("Storage not updated");
+						}
+					}
+					String m_MovementType =null;
+					if (QtyMA.negate().compareTo(BigDecimal.ZERO) > 0 ) 
+						m_MovementType = REF_M_TransactionMovementType.InventoryIn;
+					else
+						m_MovementType = REF_M_TransactionMovementType.InventoryOut;
+					qtyDiff = QtyNew;
+				}
+				if (qtyDiff.compareTo(BigDecimal.ZERO) != 0) {
+					String error = MStorage.add(inv.getCtx(), inv.getM_Warehouse_ID(),
+								line.getM_Locator_ID(),
+								line.getM_Product_ID(),
+								line.getM_AttributeSetInstance_ID(), 0,
+								qtyDiff, BigDecimal.ZERO, BigDecimal.ZERO, false,
+								C_Period_ID,
+								"MInventory.completeIt()",
+								inv.get_TrxName());					
+				}												
+			}
+			else {
+				String error = MStorage.add(inv.getCtx(), inv.getM_Warehouse_ID(),
+								line.getM_Locator_ID(),
+								line.getM_Product_ID(),
+								line.getM_AttributeSetInstance_ID(), 0,
+								qtyDiff, BigDecimal.ZERO, BigDecimal.ZERO, false,
+								C_Period_ID,
+								"MInventory.completeIt()",
+								inv.get_TrxName());
+				if (line.getQtyInternalUse().compareTo(BigDecimal.ZERO) == 0) {
+					MStorage storage = MStorage.get(inv.getCtx(), line.getM_Locator_ID(),
+						line.getM_Product_ID(), line.getM_AttributeSetInstance_ID(), inv.get_TrxName());
+					storage.setDateLastInventory(inv.getMovementDate());
+					if (!storage.save(inv.get_TrxName())) {
+						throw new Exception("Storage not updated(2)");
+					}
+				}
+				String m_MovementType =null;
+				if (qtyDiff.compareTo(BigDecimal.ZERO) > 0 ) 
+					m_MovementType = REF_M_TransactionMovementType.InventoryIn;
+				else
+					m_MovementType = REF_M_TransactionMovementType.InventoryOut;
+			}
+		}
+	 }
+ 	} catch (Exception e)  {
+		inv.setRulestatus(DocAction.STATUS_Invalid);			
+		inv.setProcessMsg(e.getMessage());
+		return false;		
+	}
+	return true;
+}
+
+function boolean updateStockTaking(MInventory inv) {
+	List<Integer> StockTaking = new ArrayList<Integer>();
+	MInventoryLine[] lines = inv.getLines(false);
+	for (MInventoryLine line:lines) {
+		if (!line.isActive())
+			continue;
+		X_M_StockTakingLine stl = new Query(Env.getCtx(), X_M_StockTakingLine.Table_Name, "M_InventoryLine_ID = ?", inv.get_TrxName())
+			.setParameters(line.getM_InventoryLine_ID()).first();
+		if (stl != null) {
+			if (!StockTaking.contains(stl.getM_StockTaking_ID()))
+				StockTaking.add(stl.getM_StockTaking_ID());
+		}
+	}
+	if (StockTaking.size() > 0) {
+		for (Integer stocktaking:StockTaking) {
+			X_M_StockTaking st = new X_M_StockTaking(Env.getCtx(), stocktaking, inv.get_TrxName());
+			st.setProcessed(true);
+			st.save();
+		}
+	}
+	return true;
+}
+
+function boolean namerule(String name) {
+    System.out.println("namerule ->" + name);
+    return true;
+}
+
+function boolean isperiodopen(MInventory inv) {
+    MDocType dt = MDocType.get(Env.getCtx(), inv.getC_DocType_ID());
+    return MPeriod.isOpen(inv.getCtx(), inv.getMovementDate(), dt.getDocBaseType(), inv.getAD_Org_ID(), inv.getAD_Client_ID());
+}
+
+/**
+ * 	Check Material Policy.
+ */
+function void checkMaterialPolicy(MInventory inv, MInventoryLine line, BigDecimal qtyDiff)
+{
+	int no = MInventoryLineMA.deleteInventoryLineMA(line.getM_InventoryLine_ID(), inv.get_TrxName());
+	if (no > 0)
+		//log.config("Delete old #" + no);
+		System.out.println(String.format("Delete old #",no));
+
+	//	Check Line
+	boolean needSave = false;
+	//	Attribute Set Instance
+	if (line.getM_AttributeSetInstance_ID() == 0)
+	{
+		MProduct product = MProduct.get(inv.getCtx(), line.getM_Product_ID(), inv.get_TrxName());
+		if (qtyDiff.signum() > 0)	//	Incoming Trx
+		{
+			MAttributeSetInstance asi = null;
+			//auto balance negative on hand
+			MStorage[] storages = MStorage.getWarehouse(inv.getCtx(), inv.getM_Warehouse_ID(), line.getM_Product_ID(), 0,
+					null, REF__MMPolicy.FiFo.equals(product.getMMPolicy()), false, line.getM_Locator_ID(), inv.get_TrxName());
+			for (MStorage storage : storages)
+			{
+				if (storage.getQtyOnHand().signum() < 0)
+				{
+					asi = new MAttributeSetInstance(inv.getCtx(), storage.getM_AttributeSetInstance_ID(), inv.get_TrxName());				
+					break;
+				}
+			}
+			if (asi == null)
+			{
+				asi = MAttributeSetInstance.create(inv.getCtx(), product, inv.get_TrxName());
+			}
+			line.setM_AttributeSetInstance_ID(asi.getM_AttributeSetInstance_ID());
+			needSave = true;
+		}
+		else	//	Outgoing Trx
+		{
+			String MMPolicy = product.getMMPolicy();
+			MStorage[] storages = MStorage.getWarehouse(inv.getCtx(), inv.getM_Warehouse_ID(), line.getM_Product_ID(), 0,
+					null, REF__MMPolicy.FiFo.equals(MMPolicy), true, line.getM_Locator_ID(), inv.get_TrxName());
+
+			BigDecimal qtyToDeliver = qtyDiff.negate();
+
+			for (MStorage storage: storages)
+			{					
+				if (storage.getQtyOnHand().compareTo(qtyToDeliver) >= 0)
+				{
+					MInventoryLineMA ma = new MInventoryLineMA (line, 
+							storage.getM_AttributeSetInstance_ID(),
+							qtyToDeliver);
+					ma.saveEx();		
+					qtyToDeliver = Env.ZERO;
+				}
+				else
+				{	
+					MInventoryLineMA ma = new MInventoryLineMA (line, 
+							storage.getM_AttributeSetInstance_ID(),
+							storage.getQtyOnHand());
+					ma.saveEx();	
+					qtyToDeliver = qtyToDeliver.subtract(storage.getQtyOnHand());
+				}
+				if (qtyToDeliver.signum() == 0)
+					break;
+			}
+
+			//	No AttributeSetInstance found for remainder
+			if (qtyToDeliver.signum() != 0)
+			{
+				//deliver using new asi
+				MAttributeSetInstance asi = MAttributeSetInstance.create(inv.getCtx(), product, inv.get_TrxName());
+				int M_AttributeSetInstance_ID = asi.getM_AttributeSetInstance_ID();
+				MInventoryLineMA ma = new MInventoryLineMA (line, M_AttributeSetInstance_ID , qtyToDeliver);
+
+				ma.saveEx();
+			}
+		}	//	outgoing Trx
+
+		if (needSave)
+		{
+			line.saveEx();
+		}
+	}	//	for all lines
+
+}	//	checkMaterialPolicy]]></rule>
+  <channel name="message" AD_MessageFormat_ID="ed091f30-6ab0-4f80-b259-45c9d53cd198" sessionname="inventoryks" Identifier="3c5f94a0-061d-c76c-a209-f7d22203c2b7" synchronized="2018-10-10 00:07:07.016" />
+</kiebase>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="" category="" default="false" package="org.compiere.model" name="calloutinventorykb" 
+sessionname="calloutinventoryks" queuename="" docbasetype="" docsubtype="" 
+ruletype="" group="fdf17d92-6110-4a01-b12d-42fa56be48bf" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="3fe517f6-b62d-f24f-9caa-17a0f594184c" synchronized="2018-10-09 23:45:51.086" type="kiebase" >
+<field TableName="M_InventoryLine" ColumnName="M_Locator_ID" Agenda="product"/>
+<field TableName="M_InventoryLine" ColumnName="M_Product_ID" Agenda="product"/>
+<field TableName="M_InventoryLine" ColumnName="M_AttributeSetInstance_ID" Agenda="product"/>
+<rule name="src/main/resources/org.xendra.standard/calloutinventory.drl" type="rule" sessionname="calloutinventoryks" file="calloutinventory.drl" Identifier="d9cf10c1-b207-7996-eb0d-d8f917ce91a7" synchronized="2018-10-09 23:45:51.097"/>
+</kiebase>

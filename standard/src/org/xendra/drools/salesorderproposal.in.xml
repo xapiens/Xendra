@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesorderproposalkb" 
+sessionname="salesorderproposalks" queuename="" docbasetype="SOO" docsubtype="ON" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="068fd2d8-6da4-4038-80e6-bbab20f63664" synchronized="2018-04-04 16:49:27.0" type="kiebase" >
+<doctype docbasetype="SOO" docsubtype="ON"/>
+<rule name="src/main/resources/org.xendra.standard/salesorderproposal.drl" type="rule" sessionname="salesorderproposalks" file="salesorderproposal.drl" Identifier="380faa65-df95-4baa-bc2a-8d94c6c1a5dc" synchronized="2018-04-04 16:49:27.0"/>
+</kiebase>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesorderposkb" 
+sessionname="salesorderposks" queuename="" docbasetype="SOO" docsubtype="WR" 
+ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" 
+queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="300e8de2-8927-4d64-a25a-75d40445cea4" synchronized="2018-04-04 16:49:28.0" type="kiebase" >
+<doctype docbasetype="SOO" docsubtype="WR"/>
+<rule name="src/main/resources/org.xendra.standard/salesorderpos.drl" type="rule" sessionname="salesorderposks" file="salesorderpos.drl" Identifier="29980a31-d2ea-40d0-9f04-aa3368aff95a" synchronized="2018-04-04 16:49:28.0"/>
+</kiebase>

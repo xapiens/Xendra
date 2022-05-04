@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message uid="1000018" AD_Plugin_ID="1000000" type="message" name="Inventory" QueueName="/queue/inventory" lockout="Y" synchronized="2018-10-10 17:11:22.027" Identifier="ed091f30-6ab0-4f80-b259-45c9d53cd198">
+  <section name="client" parent="" sequence="0">
+    <field area="client" mandatory="true" name="AD_Client_ID" sequence="0" key="true" columnid="e9cb549a-68a5-8ce7-872f-3e91392332e0" tableid="" />
+  </section>
+  <section name="org" parent="" sequence="0">
+    <field area="org" mandatory="true" name="AD_Org_ID" sequence="0" key="true" columnid="91a880b5-492c-9607-ac78-5b8440d8becd" tableid="" />
+  </section>
+  <section name="Header" parent="" sequence="0">
+    <field area="Header" mandatory="false" name="Description" sequence="0" key="false" columnid="325fbf89-767d-748e-6b82-65e8f09b6db7" tableid="" />
+    <field area="Header" mandatory="true" name="DocumentNo" sequence="0" key="false" columnid="d9c2b7d6-76fd-ff2a-6ccc-5f0668215dbd" />
+    <field area="Header" mandatory="false" name="C_Project_ID" sequence="0" key="false" columnid="2e5cee26-00a7-7807-462e-6c46b7ee6469" tableid="" />
+    <field area="Header" mandatory="true" name="M_Inventory_ID" sequence="0" key="true" columnid="67b075bc-197e-49e3-536f-f8b32f8c8ada" />
+    <field area="Header" mandatory="true" name="MovementDate" sequence="0" key="false" columnid="88b4d120-3699-900e-170f-8bf39355615c" />
+    <field area="Header" mandatory="false" name="ApprovalAmt" sequence="0" key="false" columnid="07b0c467-77e0-c1f4-bb02-85313c43129a" tableid="" />
+    <field area="Header" mandatory="false" name="C_GroupDoc_ID" sequence="0" key="false" columnid="32a897d9-3821-bee3-1d40-361eb37ee426" tableid="" />
+    <field area="Header" mandatory="false" name="M_PerpetualInv_ID" sequence="0" key="false" columnid="36e4eff4-9143-d55d-66fb-83b514ac9429" tableid="" />
+    <field area="Header" mandatory="false" name="AD_OrgTrx_ID" sequence="0" key="false" columnid="c652376e-e27d-2cf1-30e9-c137a03a70af" tableid="" />
+    <field area="Header" mandatory="true" name="C_DocType_ID" sequence="0" key="false" columnid="a585f69f-d82e-8c36-9728-7fd51a5797d5" />
+    <field area="Header" mandatory="false" name="C_Activity_ID" sequence="0" key="false" columnid="6877e646-21a6-20f8-3bf4-c00727576b3b" tableid="" />
+    <field area="Header" mandatory="true" name="M_Warehouse_ID" sequence="0" key="false" columnid="e2b3d6be-3aab-d5d7-8f14-4c32a7af4706" />
+    <field area="Header" mandatory="false" name="C_Campaign_ID" sequence="0" key="false" columnid="80f4beab-0ad6-3485-0d17-1720ead767e4" tableid="" />
+  </section>
+  <section name="item" parent="" sequence="0">
+    <field area="item" mandatory="true" name="QtyCount" sequence="0" key="false" columnid="b2276058-a25c-ac60-a88f-57692bda17b0" />
+    <field area="item" mandatory="false" name="Cost" sequence="0" key="false" columnid="2d34752c-12af-4c1d-94fc-51e57f4fc716" tableid="" />
+    <field area="item" mandatory="true" name="DifferenceQty" sequence="0" key="false" columnid="1107a9de-4f05-47b1-bf07-c2f671bfeb32" />
+    <field area="item" mandatory="true" name="InventoryType" sequence="0" key="false" columnid="6a0e2e3c-70e7-ae9d-7e03-ea53a7123cf0" />
+    <field area="item" mandatory="true" name="QtyBook" sequence="0" key="false" columnid="fec84ce6-08ce-2b76-781c-e5fbdcdbe3ff" />
+    <field area="item" mandatory="true" name="M_Locator_ID" sequence="0" key="false" columnid="f832c49c-6d91-64ec-3001-5e48cf5743dc" />
+    <field area="item" mandatory="true" name="M_Product_ID" sequence="0" key="false" columnid="a88d8d2c-139c-ab46-87e6-fc3c462daa3c" />
+    <field area="item" mandatory="false" name="Description" sequence="0" key="false" columnid="452b947d-9cc6-6a93-e812-a8fe9d9264d1" tableid="" />
+    <field area="item" mandatory="false" name="M_AttributeSetInstance_ID" sequence="0" key="false" columnid="4609a3d2-e0f6-147f-049e-5a501a29802d" tableid="" />
+    <field area="item" mandatory="true" name="QtyInternalUse" sequence="0" key="false" columnid="a44b43b4-87cf-92cd-1cbd-6086deb9ba1e" />
+    <field area="item" mandatory="true" name="Processed" sequence="0" key="false" columnid="05c062e2-eef9-cd10-b26d-0a08be51a481" />
+    <field area="item" mandatory="true" name="M_InventoryLine_ID" sequence="0" key="true" columnid="a8b428b7-b6a5-fae1-a75f-c9d04ff35688" />
+    <field area="item" mandatory="false" name="Line" sequence="0" key="false" columnid="e7b8c642-19f0-3005-0b6f-2dd6a457ca19" tableid="" />
+    <field area="item" mandatory="false" name="C_Charge_ID" sequence="0" key="false" columnid="f162e920-ebd4-c8d4-53ca-93e4a4fc8983" tableid="" />
+  </section>
+</message>

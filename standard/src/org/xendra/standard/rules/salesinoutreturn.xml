@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiebase agenda="prepare" category="" default="false" package="org.compiere.model" name="salesinoutreturnkb" sessionname="salesinoutreturnks" queuename="" docbasetype="MRC" docsubtype="RM" ruletype="R" group="81d6772e-3044-4277-a08d-5ac774a40997" entrypoint="" EqualsBehavior="EQUALITY" queuelistenerclass="" EventProcessingMode="CLOUD" Identifier="b889ea1d-f858-4395-a936-1ffdf3169330" synchronized="2018-04-04 16:49:28.0" type="kiebase">
+  <doctype docbasetype="MRC" docsubtype="" />
+  <rule name="src/main/resources/org.xendra.standard/salesinoutreturn.drl" type="rule" sessionname="salesinoutreturnks" file="salesinoutreturn.drl" Identifier="4157fb75-6ba7-4a5b-988b-7e80a9a1a579" synchronized="2018-04-04 16:49:28.0"><![CDATA[//created on: 04-ene-2018
+//modified on : 09-abr-2018
+//modified on : 07-feb-2019
+package org.compiere.model
+import org.xendra.Constants
+import org.xendra.standard.rules.Policy
+import org.compiere.model.MOrder
+import org.compiere.model.MInvoice
+import org.compiere.model.MInOut
+import org.compiere.model.MPeriod
+import org.compiere.model.MOrderLine
+import org.compiere.model.MProduct
+import org.compiere.model.MDocType
+import org.compiere.model.MBPartner
+import org.compiere.model.MConversionRate
+import org.compiere.model.persistence.X_AD_Table
+import org.compiere.process.DocAction
+import org.compiere.model.reference.REF_C_OrderDeliveryRule
+import org.compiere.model.reference.REF__DocumentStatus
+import org.compiere.model.reference.REF_C_BPartnerSOCreditStatus
+import org.compiere.model.reference.REF_C_DocTypeSubType
+import org.compiere.model.reference.REF_C_DocTypeSubType
+import org.compiere.model.reference.REF__DocumentAction
+import org.compiere.util.Env
+import org.compiere.util.Util
+import java.math.BigDecimal
+import java.util.Properties
+global Properties ctx
+dialect "mvel"
+// inout prepare
+rule "Period"
+    agenda-group "prepare"   
+    when
+        eval(namerule("period"));
+        $inout : MInOut()   
+        eval(!isperiodopen($inout))       
+    then
+        $inout.setProcessMsg("@PeriodClosed@");
+        $inout.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "lines"
+    agenda-group "prepare"   
+    dialect "mvel"
+    when
+         eval(namerule("lines"));
+        $inout : MInOut($length : getLength() )
+        eval($length == 0)       
+    then
+        $inout.setProcessMsg("@NoLines@");
+        $inout.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "valid"
+    agenda-group "prepare"   
+    when
+        eval(namerule("valid"));       
+        $inout : MInOut($length : getLength() )
+        eval($length > 0)       
+        eval(isperiodopen($inout))
+        eval($inout.isSOTrx())
+        eval(checkcredit($inout))
+    then
+        kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "prepareattributes" ).setFocus();       
+end
+
+rule "attributes"
+    agenda-group "prepareattributes"
+    dialect "mvel"
+    when
+      eval(namerule("attributes"));
+      $inout : MInOut()
+      eval(checkattributes($inout))   
+      eval($inout.setVolume())   
+    then                
+        kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "checkMaterialPolicy" ).setFocus();
+end   
+
+rule "stock"
+    agenda-group "checkMaterialPolicy"
+    dialect "mvel"
+    when
+      eval(namerule("stock"));
+      $inout : MInOut()
+      eval(!$inout.isReversal())
+      eval($inout.checkMaterialPolicy())   
+    then
+        $inout.setRulestatus(DocAction.STATUS_InProgress);                
+        kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "stock" ).setFocus();       
+end   
+
+rule "PickQAConfirm"
+    agenda-group "stock"
+    dialect "mvel"
+    when
+        eval(namerule("PickQAConfirm"));
+        $inout : MInOut();
+        eval(!$inout.isReversal())
+        eval($inout.IsPickQAConfirm())
+    then
+        $inout.createPickQAConfirm();
+end       
+
+rule "ShipConfirm"
+    agenda-group "stock"
+    dialect "mvel"
+    when
+        eval(namerule("ShipConfirm"));
+        $inout : MInOut();
+        eval(!$inout.isReversal())
+        eval($inout.IsShipConfirm())
+    then
+        $inout.createShipConfirm();
+end       
+
+//  minout complete
+
+rule "prepare"
+    agenda-group "complete"
+    dialect "mvel"
+    when
+      eval(namerule("prepare"));
+        $inout : MInOut()
+        eval($inout.getC_Order_ID() == 0)
+    then
+      $inout.setProcessMsg("No Order");
+      $inout.setRulestatus(DocAction.STATUS_Invalid);
+end
+
+rule "prepare2"
+    agenda-group "complete"
+    dialect "mvel"
+    when
+      eval(namerule("prepare"));
+        $inout : MInOut()
+        eval($inout.getC_Order_ID() > 0)
+    then
+      kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "confirmation" ).setFocus();
+end
+
+rule "confirmation"
+    agenda-group "confirmation"
+    dialect "mvel"
+    when
+      eval(namerule("confirmation"));
+        $inout : MInOut()
+        eval(!$inout.confirmsPending())
+    then
+      kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "approve" ).setFocus();
+end
+
+rule "approve"
+    agenda-group "approve"
+    dialect "mvel"
+    when
+      eval(namerule("approve"));
+        $inout : MInOut()
+        eval($inout.approveIt())
+    then
+      kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "pick" ).setFocus();
+end
+
+
+rule "complete"
+    agenda-group "pick"
+    dialect "mvel"
+    when
+      eval(namerule("complete"));
+        $inout : MInOut()
+        eval($inout.pick())
+    then
+      $inout.setRulestatus(DocAction.STATUS_Completed);      
+end
+
+function boolean checkcredit(MInOut inout)
+{
+    return Policy.getInstance().checkcredit(inout);
+}
+
+function boolean checkattributes(MInOut inout)
+{
+    return Policy.getInstance().checkattributes(inout);
+}
+
+function boolean namerule(String name) {
+    System.out.println("namerule ->" + name);
+    return true;
+}
+
+function boolean isperiodopen(MInOut inout) {
+    MDocType dt = MDocType.get(Env.getCtx(), inout.getC_DocType_ID());
+    return MPeriod.isOpen(inout.getCtx(), inout.getDateAcct(), dt.getDocBaseType(), inout.getAD_Org_ID(), inout.getAD_Client_ID());
+}]]></rule>
+</kiebase>
+
+

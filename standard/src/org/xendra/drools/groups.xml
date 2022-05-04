@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+<group name="Callout" Identifier="fdf17d92-6110-4a01-b12d-42fa56be48bf" synchronized="2018-04-04 16:49:27.0" />
+<group name="Sales" Identifier="81d6772e-3044-4277-a08d-5ac774a40997" synchronized="2018-04-04 16:49:27.0" />
+<group name="Purchase" Identifier="4b84bd44-8b2b-42ce-934e-51faa9b12e72" synchronized="2018-04-04 16:49:27.0" />
+<group name="Cash" Identifier="87811363-b910-489d-958f-c13673f4dcdd" synchronized="2018-08-22 21:47:27.0" />
+<group name="Movement" Identifier="9565443b-40c1-4886-8321-d4eca78c780e" synchronized="2018-09-24 17:28:34.96" />
+<group name="Inventory" Identifier="d092cd21-5de2-431c-9642-41e2ea273d87" synchronized="2018-10-10 00:06:34.0" />
+</groups>
