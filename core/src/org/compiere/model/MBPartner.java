@@ -182,37 +182,6 @@ public class MBPartner extends X_C_BPartner
 		MBPartner partner = new Query(Env.getCtx(), X_C_BPartner.Table_Name, " C_BPartner_ID = ? ", null)
 		.setParameters(C_BPartner_ID).setClient_ID().first();
 		return partner;
-		//		MBPartner retValue = null;
-		//		int AD_Client_ID = Env.getAD_Client_ID(ctx);
-		//		String sql = "SELECT * FROM C_BPartner WHERE C_BPartner_ID=? AND AD_Client_ID=?";
-		//		PreparedStatement pstmt = null;
-		//		try
-		//		{
-		//			pstmt = DB.prepareStatement (sql, null);
-		//			pstmt.setInt(1, C_BPartner_ID);
-		//			pstmt.setInt(2, AD_Client_ID);
-		//			ResultSet rs = pstmt.executeQuery ();
-		//			if (rs.next ())
-		//				retValue = new MBPartner(ctx, rs, null);
-		//			rs.close ();
-		//			pstmt.close ();
-		//			pstmt = null;
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			s_log.log(Level.SEVERE, sql, e);
-		//		}
-		//		try
-		//		{
-		//			if (pstmt != null)
-		//				pstmt.close ();
-		//			pstmt = null;
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			pstmt = null;
-		//		}
-		//		return retValue;
 	}	//	get
 
 	/**
@@ -973,6 +942,7 @@ public class MBPartner extends X_C_BPartner
 				|| REF_C_BPartnerSOCreditStatus.CreditHold.equals(status);
 	}	//	isCreditStopHold
 
+	
 	/**
 	 * 	Set Total Open Balance
 	 *	@param TotalOpenBalance
