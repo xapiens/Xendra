@@ -99,21 +99,21 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Tax identifier"
 TableName="C_Tax",AccessLevel="2",AD_Window_ID="738fa9ed-8c68-6bf1-79fe-8963640b6a8b",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=110,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.commercial",
-Identifier="bd384907-c32c-22eb-52ed-6812f64dc1ee",Synchronized="2020-11-02 17:49:26.0")
+Identifier="bd384907-c32c-22eb-52ed-6812f64dc1ee",Synchronized="2022-05-06 16:12:00.0")
 /** TableName=C_Tax */
 public static final String Table_Name="C_Tax";
-
-
-@XendraIndex(Name="c_tax_name",Identifier="af3b5d7e-6aba-303a-4a47-dbcd3d556c62",
-Column_Names="ad_client_id, name",IsUnique="true",
-TableIdentifier="af3b5d7e-6aba-303a-4a47-dbcd3d556c62",Synchronized="2014-06-01 19:03:58.0")
-public static final String INDEXNAME_c_tax_name = "af3b5d7e-6aba-303a-4a47-dbcd3d556c62";
 
 
 @XendraIndex(Name="c_tax_identifier",Identifier="41d74326-38dd-480e-af0d-69ede9bf53a5",
 Column_Names="identifier",IsUnique="false",TableIdentifier="41d74326-38dd-480e-af0d-69ede9bf53a5",
 Synchronized="2020-11-02 17:49:26.0")
 public static final String INDEXNAME_c_tax_identifier = "41d74326-38dd-480e-af0d-69ede9bf53a5";
+
+
+@XendraIndex(Name="c_tax_name",Identifier="af3b5d7e-6aba-303a-4a47-dbcd3d556c62",
+Column_Names="ad_client_id, name",IsUnique="true",
+TableIdentifier="af3b5d7e-6aba-303a-4a47-dbcd3d556c62",Synchronized="2014-06-01 19:03:58.0")
+public static final String INDEXNAME_c_tax_name = "af3b5d7e-6aba-303a-4a47-dbcd3d556c62";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"C_Tax");
 
@@ -165,10 +165,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_Country_ID_Name="País";
 
 @XendraTrl(Identifier="9b71e0b2-79cd-22da-8ff0-0d37c917dc3b")
-public static String es_PE_FIELD_Tax_Country_ID_Description="País";
+public static String es_PE_FIELD_Tax_Country_ID_Help="El país define un país. Cada país debe ser definido antes de que pueda ser usado en un documento.";
 
 @XendraTrl(Identifier="9b71e0b2-79cd-22da-8ff0-0d37c917dc3b")
-public static String es_PE_FIELD_Tax_Country_ID_Help="El país define un país. Cada país debe ser definido antes de que pueda ser usado en un documento.";
+public static String es_PE_FIELD_Tax_Country_ID_Description="País";
 
 @XendraField(AD_Column_ID="C_Country_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -186,7 +186,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ba544d29-307c-7e89-c441-b623b4c2a4a9",Synchronized="2020-03-03 21:37:42.0")
+Identifier="ba544d29-307c-7e89-c441-b623b4c2a4a9",Synchronized="2022-05-06 12:50:47.0")
 /** Column name C_Country_ID */
 public static final String COLUMNNAME_C_Country_ID = "C_Country_ID";
 /** Set Region.
@@ -210,10 +210,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_Region_Name="Región";
 
 @XendraTrl(Identifier="0ee01927-84da-0a08-04dc-3e04446fbd52")
-public static String es_PE_FIELD_Tax_Region_Description="Identifica una región geográfica";
+public static String es_PE_FIELD_Tax_Region_Help="La región indica una región única para este país";
 
 @XendraTrl(Identifier="0ee01927-84da-0a08-04dc-3e04446fbd52")
-public static String es_PE_FIELD_Tax_Region_Help="La región indica una región única para este país";
+public static String es_PE_FIELD_Tax_Region_Description="Identifica una región geográfica";
 
 @XendraField(AD_Column_ID="C_Region_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -232,7 +232,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c43f2085-f852-72d4-9edb-6fbcff2e8837",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name C_Region_ID */
 public static final String COLUMNNAME_C_Region_ID = "C_Region_ID";
 /** Set Tax Category.
@@ -255,10 +255,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_TaxCategory_Name="Categoría del Impuesto";
 
 @XendraTrl(Identifier="f07b1729-e447-caca-0791-c87794ae4d40")
-public static String es_PE_FIELD_Tax_TaxCategory_Description="Categoría del Impuesto";
+public static String es_PE_FIELD_Tax_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
 
 @XendraTrl(Identifier="f07b1729-e447-caca-0791-c87794ae4d40")
-public static String es_PE_FIELD_Tax_TaxCategory_Help="La categoría de impuesto proporciona un método de agrupación de impuestos similares. (Ej. Impuesto de ventas ó Impuesto al Valor Agregado)";
+public static String es_PE_FIELD_Tax_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -276,7 +276,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="269d84a5-c484-79e8-9b50-e7c33f7333b5",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name C_TaxCategory_ID */
 public static final String COLUMNNAME_C_TaxCategory_ID = "C_TaxCategory_ID";
 /** Set Tax.
@@ -299,10 +299,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_Tax_Name="Impuesto";
 
 @XendraTrl(Identifier="7fa71700-5b87-a93a-656d-ae0590a224f3")
-public static String es_PE_FIELD_Tax_Tax_Description="Identificador del Impuesto";
+public static String es_PE_FIELD_Tax_Tax_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
 
 @XendraTrl(Identifier="7fa71700-5b87-a93a-656d-ae0590a224f3")
-public static String es_PE_FIELD_Tax_Tax_Help="El Impuesto indica el tipo de impuesto para esta línea del documento";
+public static String es_PE_FIELD_Tax_Tax_Description="Identificador del Impuesto";
 
 @XendraField(AD_Column_ID="C_Tax_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -343,10 +343,10 @@ return value;
 public static String es_PE_FIELD_Tax_Description_Name="Observación";
 
 @XendraTrl(Identifier="ea7cb2fa-3d38-e85c-497d-e451a0b136f9")
-public static String es_PE_FIELD_Tax_Description_Description="Observación corta opcional del registro";
+public static String es_PE_FIELD_Tax_Description_Help="Una Observación esta limitada a 255 caracteres";
 
 @XendraTrl(Identifier="ea7cb2fa-3d38-e85c-497d-e451a0b136f9")
-public static String es_PE_FIELD_Tax_Description_Help="Una Observación esta limitada a 255 caracteres";
+public static String es_PE_FIELD_Tax_Description_Description="Observación corta opcional del registro";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -364,9 +364,69 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0b1675b9-4567-5938-e80a-f0659496e722",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
+/** Set ECE_5153.
+@param ECE_5153 ECE_5153 */
+public void setECE_5153 (String ECE_5153)
+{
+if (ECE_5153 != null && ECE_5153.length() > 3)
+{
+log.warning("Length > 3 - truncated");
+ECE_5153 = ECE_5153.substring(0,2);
+}
+set_Value (COLUMNNAME_ECE_5153, ECE_5153);
+}
+/** Get ECE_5153.
+@return ECE_5153 */
+public String getECE_5153() 
+{
+return (String)get_Value(COLUMNNAME_ECE_5153);
+}
+
+@XendraTrl(Identifier="06bfc5b7-228e-4f01-a5f2-fc5f2377f25d")
+public static String es_PE_COLUMN_ECE_5153_Name="ece_5153";
+
+@XendraColumn(AD_Element_ID="6121c493-c446-412e-88cc-57c5f391b0e8",ColumnName="ECE_5153",
+AD_Reference_ID=17,AD_Reference_Value_ID="4cdd85df-9b38-4ad7-82cd-f40112b627a0",AD_Val_Rule_ID="",
+FieldLength=3,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="06bfc5b7-228e-4f01-a5f2-fc5f2377f25d",Synchronized="2022-05-06 12:50:48.0")
+/** Column name ECE_5153 */
+public static final String COLUMNNAME_ECE_5153 = "ECE_5153";
+/** Set ECE_5305.
+@param ECE_5305 ECE_5305 */
+public void setECE_5305 (String ECE_5305)
+{
+if (ECE_5305 != null && ECE_5305.length() > 1)
+{
+log.warning("Length > 1 - truncated");
+ECE_5305 = ECE_5305.substring(0,0);
+}
+set_Value (COLUMNNAME_ECE_5305, ECE_5305);
+}
+/** Get ECE_5305.
+@return ECE_5305 */
+public String getECE_5305() 
+{
+return (String)get_Value(COLUMNNAME_ECE_5305);
+}
+
+@XendraTrl(Identifier="dd25e2a5-41d1-4b1f-ba93-5d87129d67de")
+public static String es_PE_COLUMN_ECE_5305_Name="ece_5305";
+
+@XendraColumn(AD_Element_ID="89437455-31b3-4645-a98b-f0787aea373f",ColumnName="ECE_5305",
+AD_Reference_ID=17,AD_Reference_Value_ID="1340ebe7-dd50-46df-b593-6020bac6591c",AD_Val_Rule_ID="",
+FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="dd25e2a5-41d1-4b1f-ba93-5d87129d67de",Synchronized="2022-05-06 12:50:48.0")
+/** Column name ECE_5305 */
+public static final String COLUMNNAME_ECE_5305 = "ECE_5305";
 /** Set Identifier.
 @param Identifier Identifier */
 public void setIdentifier (String Identifier)
@@ -396,7 +456,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="faf9e71d-2e00-4beb-8693-cf6f3d3313f5",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -422,10 +482,10 @@ return false;
 public static String es_PE_FIELD_Tax_Default_Name="Predeterminado";
 
 @XendraTrl(Identifier="ab27618b-d395-b1c5-a818-b67e2c32f28a")
-public static String es_PE_FIELD_Tax_Default_Description="Valor Predeterminado";
+public static String es_PE_FIELD_Tax_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
 
 @XendraTrl(Identifier="ab27618b-d395-b1c5-a818-b67e2c32f28a")
-public static String es_PE_FIELD_Tax_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
+public static String es_PE_FIELD_Tax_Default_Description="Valor Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -443,7 +503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d72eb96-aa69-3b73-17f9-c7294a12dee4",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Document Level.
@@ -469,10 +529,10 @@ return false;
 public static String es_PE_FIELD_Tax_DocumentLevel_Name="Nivel del Documento";
 
 @XendraTrl(Identifier="5e53fcff-8222-ab75-c65a-500e5976afc8")
-public static String es_PE_FIELD_Tax_DocumentLevel_Description="El Impuesto es calculado a nivel de documento (No línea por línea)";
+public static String es_PE_FIELD_Tax_DocumentLevel_Help="Si el impuesto se calcula a nivel documento; todas las líneas con esa tasa de impuesto son sumadas antes de calcular el total de impuesto para el documento.";
 
 @XendraTrl(Identifier="5e53fcff-8222-ab75-c65a-500e5976afc8")
-public static String es_PE_FIELD_Tax_DocumentLevel_Help="Si el impuesto se calcula a nivel documento; todas las líneas con esa tasa de impuesto son sumadas antes de calcular el total de impuesto para el documento.";
+public static String es_PE_FIELD_Tax_DocumentLevel_Description="El Impuesto es calculado a nivel de documento (No línea por línea)";
 
 @XendraField(AD_Column_ID="IsDocumentLevel",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -490,7 +550,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8aa7ef93-d726-a06a-199e-3ea47151ba63",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsDocumentLevel */
 public static final String COLUMNNAME_IsDocumentLevel = "IsDocumentLevel";
 /** Set Sales Tax.
@@ -516,10 +576,10 @@ return false;
 public static String es_PE_FIELD_Tax_SalesTax_Name="Impuesto de Venta";
 
 @XendraTrl(Identifier="7c7cc2ab-74a6-2c7b-80c2-7a1812cd32f3")
-public static String es_PE_FIELD_Tax_SalesTax_Description="Esto es un Impuesto de Venta (ej. no es impuesto al valor agregado)";
+public static String es_PE_FIELD_Tax_SalesTax_Help="Si seleccionó un impuesto CXP este es manejado como un gasto, de otra manera es manejado como un crédito al IVA ";
 
 @XendraTrl(Identifier="7c7cc2ab-74a6-2c7b-80c2-7a1812cd32f3")
-public static String es_PE_FIELD_Tax_SalesTax_Help="Si seleccionó un impuesto CXP este es manejado como un gasto, de otra manera es manejado como un crédito al IVA ";
+public static String es_PE_FIELD_Tax_SalesTax_Description="Esto es un Impuesto de Venta (ej. no es impuesto al valor agregado)";
 
 @XendraField(AD_Column_ID="IsSalesTax",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -537,7 +597,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="74468cfb-05f1-039c-98ba-072c5a0d8dda",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsSalesTax */
 public static final String COLUMNNAME_IsSalesTax = "IsSalesTax";
 /** Set IsSubstract.
@@ -578,7 +638,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dd6e6b94-64a5-682e-8b06-f4d77941b472",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsSubstract */
 public static final String COLUMNNAME_IsSubstract = "IsSubstract";
 /** Set Summary Level.
@@ -604,10 +664,10 @@ return false;
 public static String es_PE_FIELD_Tax_SummaryLevel_Name="Entidad Acumulada";
 
 @XendraTrl(Identifier="8af8ed1a-fe1b-e396-297e-74dce79ef829")
-public static String es_PE_FIELD_Tax_SummaryLevel_Description="Esta es una entidad sumaria";
+public static String es_PE_FIELD_Tax_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
 
 @XendraTrl(Identifier="8af8ed1a-fe1b-e396-297e-74dce79ef829")
-public static String es_PE_FIELD_Tax_SummaryLevel_Help="Una entidad sumaria representa una rama en un árbol mas bien que un nodo final. Las entidades sumarias son usadas para reportar y no tienen valores propios";
+public static String es_PE_FIELD_Tax_SummaryLevel_Description="Esta es una entidad sumaria";
 
 @XendraField(AD_Column_ID="IsSummary",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -625,7 +685,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47ff0408-7011-94ae-2179-d8de1d6683d7",
-Synchronized="2020-03-03 21:37:42.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsSummary */
 public static final String COLUMNNAME_IsSummary = "IsSummary";
 /** Set Tax exempt.
@@ -651,10 +711,10 @@ return false;
 public static String es_PE_FIELD_Tax_TaxExempt_Name="Exento de Impuesto";
 
 @XendraTrl(Identifier="cc75b06d-70c3-f4bf-f406-cb75bbda539e")
-public static String es_PE_FIELD_Tax_TaxExempt_Description="Este socio de negocio esta exento del impuesto de ventas.";
+public static String es_PE_FIELD_Tax_TaxExempt_Help="El cuadro de verificación exento de impuesto identifica un socio de negocio quien no esta sujeto al impuesto de ventas.";
 
 @XendraTrl(Identifier="cc75b06d-70c3-f4bf-f406-cb75bbda539e")
-public static String es_PE_FIELD_Tax_TaxExempt_Help="El cuadro de verificación exento de impuesto identifica un socio de negocio quien no esta sujeto al impuesto de ventas.";
+public static String es_PE_FIELD_Tax_TaxExempt_Description="Este socio de negocio esta exento del impuesto de ventas.";
 
 @XendraField(AD_Column_ID="IsTaxExempt",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -672,7 +732,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8b3275e4-c378-5a3a-0fc3-2798e088424f",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name IsTaxExempt */
 public static final String COLUMNNAME_IsTaxExempt = "IsTaxExempt";
 /** Set Name.
@@ -707,10 +767,10 @@ return new KeyNamePair(get_ID(), getName());
 public static String es_PE_FIELD_Tax_Name_Name="Nombre";
 
 @XendraTrl(Identifier="f2df536f-cbc2-738b-8894-86cf844a2c1b")
-public static String es_PE_FIELD_Tax_Name_Description="Identificador alfanumérico de la entidad.";
+public static String es_PE_FIELD_Tax_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
 @XendraTrl(Identifier="f2df536f-cbc2-738b-8894-86cf844a2c1b")
-public static String es_PE_FIELD_Tax_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
+public static String es_PE_FIELD_Tax_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -728,7 +788,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6d47308f-b270-155d-eb79-8b0f65c3658a",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Parent Tax.
@@ -752,10 +812,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_ParentTax_Name="Impuesto Padre";
 
 @XendraTrl(Identifier="7e4a24ea-5b4a-ac78-4c48-a5bc7d4ae761")
-public static String es_PE_FIELD_Tax_ParentTax_Description="Impuesto Padre indica un impuesto que esta formado por múltiples impuestos";
+public static String es_PE_FIELD_Tax_ParentTax_Help="El Impuesto padre indica un impuesto que es una referencia para múltiples impuestos. Esto le permite cambiar múltiples impuestos en un documento introduciendo el Impuesto padre.";
 
 @XendraTrl(Identifier="7e4a24ea-5b4a-ac78-4c48-a5bc7d4ae761")
-public static String es_PE_FIELD_Tax_ParentTax_Help="El Impuesto padre indica un impuesto que es una referencia para múltiples impuestos. Esto le permite cambiar múltiples impuestos en un documento introduciendo el Impuesto padre.";
+public static String es_PE_FIELD_Tax_ParentTax_Description="Impuesto Padre indica un impuesto que esta formado por múltiples impuestos";
 
 @XendraField(AD_Column_ID="Parent_Tax_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -773,7 +833,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a37fa2e2-619a-27b7-c583-35954c1faf6d",Synchronized="2020-03-03 21:37:43.0")
+Identifier="a37fa2e2-619a-27b7-c583-35954c1faf6d",Synchronized="2022-05-06 12:50:48.0")
 /** Column name Parent_Tax_ID */
 public static final String COLUMNNAME_Parent_Tax_ID = "Parent_Tax_ID";
 /** Set Rate.
@@ -796,10 +856,10 @@ return bd;
 public static String es_PE_FIELD_Tax_Rate_Name="Tasa";
 
 @XendraTrl(Identifier="43d66ec7-c43e-b5be-0238-768ab3045d9b")
-public static String es_PE_FIELD_Tax_Rate_Description="Tasa, impuesto ó conversión.";
+public static String es_PE_FIELD_Tax_Rate_Help="La tasa indica el porcentaje a ser multiplicado por la fuente para obtener el impuesto ó el total de la conversión.";
 
 @XendraTrl(Identifier="43d66ec7-c43e-b5be-0238-768ab3045d9b")
-public static String es_PE_FIELD_Tax_Rate_Help="La tasa indica el porcentaje a ser multiplicado por la fuente para obtener el impuesto ó el total de la conversión.";
+public static String es_PE_FIELD_Tax_Rate_Description="Tasa, impuesto ó conversión.";
 
 @XendraField(AD_Column_ID="Rate",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -817,7 +877,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="0",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a4e95e0d-f3bd-a3d0-09c0-148653191ecf",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name Rate */
 public static final String COLUMNNAME_Rate = "Rate";
 /** Set Requires Tax Certificate.
@@ -843,10 +903,10 @@ return false;
 public static String es_PE_FIELD_Tax_RequiresTaxCertificate_Name="Requiere Certificado de Impuestos";
 
 @XendraTrl(Identifier="6e92acd5-e059-a130-2f8d-1b1244486077")
-public static String es_PE_FIELD_Tax_RequiresTaxCertificate_Description="Esta tasa de impuesto requiere que el socio de negocio este ecxento de impuestos.";
+public static String es_PE_FIELD_Tax_RequiresTaxCertificate_Help="El requiere certificado de Impuesto indica que un certificado de impuesto es requerido por un socio de negocio para estar ecxento de impuestos.";
 
 @XendraTrl(Identifier="6e92acd5-e059-a130-2f8d-1b1244486077")
-public static String es_PE_FIELD_Tax_RequiresTaxCertificate_Help="El requiere certificado de Impuesto indica que un certificado de impuesto es requerido por un socio de negocio para estar ecxento de impuestos.";
+public static String es_PE_FIELD_Tax_RequiresTaxCertificate_Description="Esta tasa de impuesto requiere que el socio de negocio este ecxento de impuestos.";
 
 @XendraField(AD_Column_ID="RequiresTaxCertificate",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -864,7 +924,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5732d847-8b61-7904-fb54-831c96d7d153",Synchronized="2020-03-03 21:37:43.0")
+Identifier="5732d847-8b61-7904-fb54-831c96d7d153",Synchronized="2022-05-06 12:50:48.0")
 /** Column name RequiresTaxCertificate */
 public static final String COLUMNNAME_RequiresTaxCertificate = "RequiresTaxCertificate";
 /** Set SO/PO Type.
@@ -889,10 +949,10 @@ return (String)get_Value(COLUMNNAME_SOPOType);
 public static String es_PE_FIELD_Tax_SOPOType_Name="Tipo OV / OC ";
 
 @XendraTrl(Identifier="0753abcb-161d-aeff-5018-3a7b2fd89aba")
-public static String es_PE_FIELD_Tax_SOPOType_Description="El impuesto de ventas aplica a las situaciones de ventas, Impuesto de compras para situaciones de compra.";
+public static String es_PE_FIELD_Tax_SOPOType_Help="Impuesto de ventas: cargado al vender - ejemplos: Impuesto de ventas, salida de IVA (Pagadero)Impuesto de compras: el impuesto cargado al comprar - ejemplos: impuesto de uso, entrada de IVA,  (admisible)";
 
 @XendraTrl(Identifier="0753abcb-161d-aeff-5018-3a7b2fd89aba")
-public static String es_PE_FIELD_Tax_SOPOType_Help="Impuesto de ventas: cargado al vender - ejemplos: Impuesto de ventas, salida de IVA (Pagadero)Impuesto de compras: el impuesto cargado al comprar - ejemplos: impuesto de uso, entrada de IVA,  (admisible)";
+public static String es_PE_FIELD_Tax_SOPOType_Description="El impuesto de ventas aplica a las situaciones de ventas, Impuesto de compras para situaciones de compra.";
 
 @XendraField(AD_Column_ID="SOPOType",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -910,7 +970,7 @@ FieldLength=1,DefaultValue="B",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="79d4c9e0-50f1-ff9d-6d0f-9706c3811e60",Synchronized="2020-03-03 21:37:43.0")
+Identifier="79d4c9e0-50f1-ff9d-6d0f-9706c3811e60",Synchronized="2022-05-06 12:50:48.0")
 /** Column name SOPOType */
 public static final String COLUMNNAME_SOPOType = "SOPOType";
 /** Set Tax Alias.
@@ -950,7 +1010,7 @@ FieldLength=3,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f7aee15e-3337-a41b-8203-fe244bdfee08",Synchronized="2020-03-03 21:37:43.0")
+Identifier="f7aee15e-3337-a41b-8203-fe244bdfee08",Synchronized="2022-05-06 12:50:48.0")
 /** Column name TaxAlias */
 public static final String COLUMNNAME_TaxAlias = "TaxAlias";
 /** Set Tax Indicator.
@@ -977,10 +1037,10 @@ return value;
 public static String es_PE_FIELD_Tax_TaxIndicator_Name="Identificador de Impuesto";
 
 @XendraTrl(Identifier="9bb3ce26-9514-279a-4db8-a3fd6f38785c")
-public static String es_PE_FIELD_Tax_TaxIndicator_Description="Forma corta para que el impuesto sea impreso en los documentos";
+public static String es_PE_FIELD_Tax_TaxIndicator_Help="El Indicador de Impuesto identifica el nombre corto que se imprimirá en un documento haciendo referencia a este impuesto.";
 
 @XendraTrl(Identifier="9bb3ce26-9514-279a-4db8-a3fd6f38785c")
-public static String es_PE_FIELD_Tax_TaxIndicator_Help="El Indicador de Impuesto identifica el nombre corto que se imprimirá en un documento haciendo referencia a este impuesto.";
+public static String es_PE_FIELD_Tax_TaxIndicator_Description="Forma corta para que el impuesto sea impreso en los documentos";
 
 @XendraField(AD_Column_ID="TaxIndicator",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -998,7 +1058,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c028e376-e7aa-7eb1-2c5d-ac7e5ab95ceb",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:48.0")
 /** Column name TaxIndicator */
 public static final String COLUMNNAME_TaxIndicator = "TaxIndicator";
 /** Set To.
@@ -1022,10 +1082,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_To_Name="A";
 
 @XendraTrl(Identifier="90fa67f2-ad58-adc4-c45b-023cd747735a")
-public static String es_PE_FIELD_Tax_To_Description="País que recibe";
+public static String es_PE_FIELD_Tax_To_Help="El A País indica el país que recibe en un documento.";
 
 @XendraTrl(Identifier="90fa67f2-ad58-adc4-c45b-023cd747735a")
-public static String es_PE_FIELD_Tax_To_Help="El A País indica el país que recibe en un documento.";
+public static String es_PE_FIELD_Tax_To_Description="País que recibe";
 
 @XendraField(AD_Column_ID="To_Country_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1043,7 +1103,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6e407897-52af-7883-a59d-499fe9dee3db",Synchronized="2020-03-03 21:37:43.0")
+Identifier="6e407897-52af-7883-a59d-499fe9dee3db",Synchronized="2022-05-06 12:50:48.0")
 /** Column name To_Country_ID */
 public static final String COLUMNNAME_To_Country_ID = "To_Country_ID";
 /** Set To.
@@ -1067,10 +1127,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Tax_To2_Name="A";
 
 @XendraTrl(Identifier="59cb387d-3043-3674-075e-1222a68889a0")
-public static String es_PE_FIELD_Tax_To2_Description="Región que recibe";
+public static String es_PE_FIELD_Tax_To2_Help="El A Región indica la región que recibe en un documento";
 
 @XendraTrl(Identifier="59cb387d-3043-3674-075e-1222a68889a0")
-public static String es_PE_FIELD_Tax_To2_Help="El A Región indica la región que recibe en un documento";
+public static String es_PE_FIELD_Tax_To2_Description="Región que recibe";
 
 @XendraField(AD_Column_ID="To_Region_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1089,7 +1149,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9ebd45d2-3b08-574a-c55f-cdabdf65f6f9",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:49.0")
 /** Column name To_Region_ID */
 public static final String COLUMNNAME_To_Region_ID = "To_Region_ID";
 /** Set Valid from.
@@ -1110,10 +1170,10 @@ return (Timestamp)get_Value(COLUMNNAME_ValidFrom);
 public static String es_PE_FIELD_Tax_ValidFrom_Name="Válido Desde";
 
 @XendraTrl(Identifier="e2f5630b-c253-e7be-1b82-9e5ac4f53fcf")
-public static String es_PE_FIELD_Tax_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
+public static String es_PE_FIELD_Tax_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
 
 @XendraTrl(Identifier="e2f5630b-c253-e7be-1b82-9e5ac4f53fcf")
-public static String es_PE_FIELD_Tax_ValidFrom_Help="La fecha válida desde indica el primer día de un rango de fechas";
+public static String es_PE_FIELD_Tax_ValidFrom_Description="Válido desde; incluyendo esta fecha (primer día)";
 
 @XendraField(AD_Column_ID="ValidFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="83ca4a33-fb7e-f6d7-6aa9-d23b3744f82a",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -1131,7 +1191,39 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd8d3670-cda0-b514-25fd-8c252c09c111",
-Synchronized="2020-03-03 21:37:43.0")
+Synchronized="2022-05-06 12:50:49.0")
 /** Column name ValidFrom */
 public static final String COLUMNNAME_ValidFrom = "ValidFrom";
+/** Set Search Key.
+@param Value Search key for the record in the format required - must be unique */
+public void setValue (String Value)
+{
+if (Value != null && Value.length() > 40)
+{
+log.warning("Length > 40 - truncated");
+Value = Value.substring(0,39);
+}
+set_Value (COLUMNNAME_Value, Value);
+}
+/** Get Search Key.
+@return Search key for the record in the format required - must be unique */
+public String getValue() 
+{
+String value = (String)get_Value(COLUMNNAME_Value);
+if (value == null)
+  return "";
+return value;
+}
+@XendraTrl(Identifier="0d009932-5fd4-428a-9a47-89e8c3060a8b")
+public static String es_PE_COLUMN_Value_Name="Search Key";
+
+@XendraColumn(AD_Element_ID="e75e100c-9b41-a643-2cb3-46eeced683d8",ColumnName="Value",
+AD_Reference_ID=10,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=40,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="0d009932-5fd4-428a-9a47-89e8c3060a8b",
+Synchronized="2022-05-06 16:10:30.0")
+/** Column name Value */
+public static final String COLUMNNAME_Value = "Value";
 }
