@@ -1,0 +1,264 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendiblesxlinea" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" uuid="fc9a232e-148e-4693-9ed9-1aa842f3fcb6"><property name="Description" value="vendiblesxlinea.jrxml" /><property name="FileName" value="vendiblesxlinea.jrxml" /><property name="Synchronized" value="2017-06-08 06:29:48.775" /><property name="Identifier" value="09a1e7f1-ea68-423f-9305-c2fe3e414946" />
+	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<parameter name="M_PriceList_Version_ID" class="java.math.BigDecimal">
+		<parameterDescription />
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Warehouse_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Product_Brand_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+p.value,
+plv.name as pricelistvername,
+p.name,
+pp.pricelist,
+pb.name || ' ' ||pb.m_product_brand_id AS lab,
+coalesce (QtyByUOM(pp.m_product_id,$P{M_Warehouse_ID},0),0 ) AS qtyavailable2,
+coalesce (priceByUOM(pp.m_product_id,plv.m_pricelist_version_id,0),pp.pricelist ) AS PriceList2,
+coalesce (qtydiffbyuom(pp.m_product_id,$P{M_Warehouse_ID},0),0 ) AS qtyavailable,
+(select w.name from m_warehouse w where w.m_warehouse_id = $P{M_Warehouse_ID}) as namew
+
+from
+
+m_productprice pp
+INNER JOIN  m_product p ON pp.m_product_id = p.m_product_id
+INNER JOIN  m_product_brand pb ON p.m_product_brand_id= pb.m_product_brand_id
+INNER JOIN  m_pricelist_version plv ON pp.m_pricelist_version_id = plv.m_pricelist_version_id
+
+where
+pp.m_pricelist_version_id = $P{M_PriceList_Version_ID} and (
+coalesce (QtyByUOM(pp.m_product_id,$P{M_Warehouse_ID},0),0 ) > 0 OR coalesce (qtydiffbyuom(pp.m_product_id,$P{M_Warehouse_ID},0),0 ) > 0 )
+and pb.m_product_brand_id=$P{M_Product_Brand_ID}
+and pp.ad_client_id = $P{AD_Client_ID}
+
+order by lab, p.name]]>
+	</queryString>
+	<field name="value" class="java.lang.String" />
+	<field name="pricelistvername" class="java.lang.String" />
+	<field name="name" class="java.lang.String" />
+	<field name="pricelist" class="java.math.BigDecimal" />
+	<field name="lab" class="java.lang.String" />
+	<field name="qtyavailable2" class="java.math.BigDecimal" />
+	<field name="pricelist2" class="java.math.BigDecimal" />
+	<field name="qtyavailable" class="java.math.BigDecimal" />
+	<field name="namew" class="java.lang.String" />
+	<group name="laboratorio">
+		<groupExpression><![CDATA[$F{lab}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement x="12" y="4" width="443" height="14" uuid="07361cda-5822-47c5-a070-5a22c014c9e4" />
+					<textElement>
+						<font fontName="SansSerif" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{lab}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.intValue() > 1]]></printWhenExpression>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" x="535" y="72" width="44" height="14" uuid="dafe4105-0ecb-43a4-824f-d50d22e300bf" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" x="11" y="72" width="444" height="14" uuid="cbe311c9-7a33-4bac-b17e-57f2a5c82496" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" x="460" y="72" width="43" height="14" uuid="c2dc1cd3-9bad-4f51-9630-358ecfed09b2" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" x="505" y="60" width="75" height="14" uuid="a468445f-0e92-42a1-9a8f-110fd9b27c11" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[STOCK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" x="505" y="72" width="27" height="14" uuid="de995e85-289c-4805-a94c-4c99f3db0c34" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[CAJA]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="5" y="56" width="582" height="1" uuid="db771acb-f937-4778-b780-068290d0e987" />
+			</line>
+			<line>
+				<reportElement key="line" x="9" y="89" width="578" height="1" uuid="2c804e73-f11b-460d-90d9-262f06a1ee4a" />
+			</line>
+			<staticText>
+				<reportElement key="staticText-2" x="84" y="20" width="93" height="14" uuid="b862d192-840d-46b8-978b-1801ae81fcea" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="9" />
+				</textElement>
+				<text><![CDATA[LISTA DE PRECIOS]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="468" y="4" width="80" height="12" uuid="f5d4ecc0-d7b9-4f8b-bd2d-448d70491087" />
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="8" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="481" y="20" width="65" height="12" uuid="f005747f-ca27-4c84-aa45-52a40ba1a753" />
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="546" y="20" width="22" height="12" uuid="f0c1ef25-07ac-4072-a94a-7b6093b50d7c" />
+				<textElement>
+					<font fontName="SansSerif" size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="520" y="4" width="50" height="12" uuid="b4fe84ab-18f3-43ea-8320-83b394f98eed" />
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="8" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="4" width="192" height="14" uuid="4181230b-b77b-4d53-9d86-6a2aca65d47e" />
+				<textElement>
+					<font fontName="SansSerif" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namew}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-2" x="8" y="4" width="56" height="14" uuid="e2918196-480e-40d9-bc3c-3190119b58f0" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="9" />
+				</textElement>
+				<text><![CDATA[ALMACEN :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="37" width="260" height="14" uuid="ca268726-fcda-4d5d-946b-75476498252b" />
+				<textElement>
+					<font fontName="SansSerif" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pricelistvername}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch" />
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern="###0">
+				<reportElement x="545" y="1" width="33" height="12" uuid="b3abcfa2-d3d8-4436-ac98-cd57ae30674c" />
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyavailable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="1" width="443" height="12" uuid="f70a882c-7b01-4e94-ba77-8ca08d760feb" />
+				<textElement>
+					<font fontName="SansSerif" size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="501" y="1" width="33" height="12" uuid="d38d39b5-5240-4b9a-a88b-49de3f3df24f" />
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyavailable2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="458" y="1" width="37" height="12" uuid="8f6a4278-534e-4f66-8a80-9377a42ada3c" />
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pricelist2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch" />
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch" />
+	</summary>
+</jasperReport>
+

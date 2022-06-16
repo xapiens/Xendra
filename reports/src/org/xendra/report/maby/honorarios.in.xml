@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Honorarios" Name="Honorarios" BaseRole="" Description="" Help="Muestra el detalle de los Recibos por Honorario registrados según el rango de fechas del parametro" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="honorarios.jrxml" Identifier="3a8b144f-37de-7740-1548-9d6e7db80d35" Synchronized="2017-06-06 22:40:02.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="356186ff-5d10-2eeb-4a68-f9aa5c5c6119" Synchronized="2017-06-06 22:40:02.0" />
+  <parameter Name="DateFrom" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="60e2433d-3db4-a744-3c2a-2774adeb57ec" Synchronized="2017-06-06 22:40:02.0" />
+</process>
+
+

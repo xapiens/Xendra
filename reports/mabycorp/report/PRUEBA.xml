@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport name="PRUEBA" columnCount="1" printOrder="Vertical" orientation="Portrait" pageWidth="595" pageHeight="842" columnWidth="535" columnSpacing="0" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" whenNoDataType="NoPages" isTitleNewPage="false" isSummaryNewPage="false" language="java" isFloatColumnFooter="false" whenResourceMissingType="Null" isIgnorePagination="false">
+  <property name="Description" value="PRUEBA.jrxml" />
+  <property name="FileName" value="PRUEBA.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:35.007" />
+  <property name="Identifier" value="9ba15d38-ceaf-4d37-b97a-831ef2a7df20" />
+  <property name="ireport.scriptlethandling" value="2" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="java.util.*" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <queryString language="sql"><![CDATA[SELECT t.m_transaction_id, t.ad_client_id, t.ad_org_id, t.movementtype, t.movementdate, t.movementqty, t.m_attributesetinstance_id, asi.m_attributeset_id, asi.serno, asi.lot, asi.m_lot_id, asi.guaranteedate, t.m_product_id, p.value, p.name, p.description, p.upc, p.sku, p.c_uom_id, p.m_product_category_id, p.classification, p.weight, p.volume, p.versionno, t.m_locator_id, l.m_warehouse_id, l.x, l.y, l.z, t.m_inventoryline_id, il.m_inventory_id, t.m_movementline_id, ml.m_movement_id, t.m_inoutline_id, iol.m_inout_id, t.m_productionline_id, prdl.m_productionplan_id, prdp.m_production_id, t.c_projectissue_id, pjl.c_project_id, COALESCE(il.line, ml.line, iol.line, prdl.line, pjl.line) AS line
+   FROM m_transaction t
+   JOIN m_locator l ON t.m_locator_id = l.m_locator_id
+   JOIN m_product p ON t.m_product_id = p.m_product_id
+   LEFT JOIN m_attributesetinstance asi ON t.m_attributesetinstance_id = asi.m_attributesetinstance_id
+   LEFT JOIN m_inventoryline il ON t.m_inventoryline_id = il.m_inventoryline_id
+   LEFT JOIN m_movementline ml ON t.m_movementline_id = ml.m_movementline_id
+   LEFT JOIN m_inoutline iol ON t.m_inoutline_id = iol.m_inoutline_id
+   LEFT JOIN m_productionline prdl ON t.m_productionline_id = prdl.m_productionline_id
+   LEFT JOIN m_productionplan prdp ON prdl.m_productionplan_id = prdp.m_productionplan_id
+   LEFT JOIN c_projectissue pjl ON t.c_projectissue_id = pjl.c_projectissue_id;]]></queryString>
+  <field name="m_transaction_id" class="java.math.BigDecimal" />
+  <field name="ad_client_id" class="java.math.BigDecimal" />
+  <field name="ad_org_id" class="java.math.BigDecimal" />
+  <field name="movementtype" class="java.lang.String" />
+  <field name="movementdate" class="java.sql.Timestamp" />
+  <field name="movementqty" class="java.math.BigDecimal" />
+  <field name="m_attributesetinstance_id" class="java.math.BigDecimal" />
+  <field name="m_attributeset_id" class="java.math.BigDecimal" />
+  <field name="serno" class="java.lang.String" />
+  <field name="lot" class="java.lang.String" />
+  <field name="m_lot_id" class="java.math.BigDecimal" />
+  <field name="guaranteedate" class="java.sql.Timestamp" />
+  <field name="m_product_id" class="java.math.BigDecimal" />
+  <field name="value" class="java.lang.String" />
+  <field name="name" class="java.lang.String" />
+  <field name="description" class="java.lang.String" />
+  <field name="upc" class="java.lang.String" />
+  <field name="sku" class="java.lang.String" />
+  <field name="c_uom_id" class="java.math.BigDecimal" />
+  <field name="m_product_category_id" class="java.math.BigDecimal" />
+  <field name="classification" class="java.lang.String" />
+  <field name="weight" class="java.math.BigDecimal" />
+  <field name="volume" class="java.math.BigDecimal" />
+  <field name="versionno" class="java.lang.String" />
+  <field name="m_locator_id" class="java.math.BigDecimal" />
+  <field name="m_warehouse_id" class="java.math.BigDecimal" />
+  <field name="x" class="java.lang.String" />
+  <field name="y" class="java.lang.String" />
+  <field name="z" class="java.lang.String" />
+  <field name="m_inventoryline_id" class="java.math.BigDecimal" />
+  <field name="m_inventory_id" class="java.math.BigDecimal" />
+  <field name="m_movementline_id" class="java.math.BigDecimal" />
+  <field name="m_movement_id" class="java.math.BigDecimal" />
+  <field name="m_inoutline_id" class="java.math.BigDecimal" />
+  <field name="m_inout_id" class="java.math.BigDecimal" />
+  <field name="m_productionline_id" class="java.math.BigDecimal" />
+  <field name="m_productionplan_id" class="java.math.BigDecimal" />
+  <field name="m_production_id" class="java.math.BigDecimal" />
+  <field name="c_projectissue_id" class="java.math.BigDecimal" />
+  <field name="c_project_id" class="java.math.BigDecimal" />
+  <field name="line" class="java.math.BigDecimal" />
+  <background>
+    <band height="0" isSplitAllowed="true" />
+  </background>
+  <title>
+    <band height="50" isSplitAllowed="true" />
+  </title>
+  <pageHeader>
+    <band height="50" isSplitAllowed="true" />
+  </pageHeader>
+  <columnHeader>
+    <band height="30" isSplitAllowed="true" />
+  </columnHeader>
+  <detail>
+    <band height="100" isSplitAllowed="true" />
+  </detail>
+  <columnFooter>
+    <band height="30" isSplitAllowed="true" />
+  </columnFooter>
+  <pageFooter>
+    <band height="50" isSplitAllowed="true" />
+  </pageFooter>
+  <lastPageFooter>
+    <band height="50" isSplitAllowed="true" />
+  </lastPageFooter>
+  <summary>
+    <band height="50" isSplitAllowed="true" />
+  </summary>
+</jasperReport>
+
+

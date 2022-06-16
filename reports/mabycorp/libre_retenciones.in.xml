@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Formato Libro Retenciones" Name="Formato Libro Retenciones" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="libre_retenciones.jrxml" Identifier="30b1f30b-1a17-82a4-198c-eaa781e39fa0" Synchronized="2017-06-06 22:40:01.0">
+  <parameter Name="dateretention" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateretention" FieldLength="10" IsMandatory="false" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="48d9c552-492e-5e61-eea5-d4338f8d4b3c" Synchronized="2017-06-06 22:40:01.0" />
+</process>
+
+

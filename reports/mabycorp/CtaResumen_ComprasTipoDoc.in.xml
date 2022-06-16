@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="CtaResumen_ComprasTipoDoc" Name="CtaResumen_ComprasTipoDoc" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="Contabilidad" AccessLevel="3" EntityType="D" FileName="CtaResumen_ComprasTipoDoc.jrxml" Identifier="fb6391d4-6a92-4d8b-b570-cbbaebcda544" Synchronized="2016-05-13 05:16:29.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="d83a7502-d313-4cba-98b7-298bdd2d0dae" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="fbbbce40-6dae-46be-9de1-2f0708d0d954" Synchronized="2016-05-13 05:24:50.0" />
+</process>
+
+

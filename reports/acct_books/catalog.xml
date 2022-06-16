@@ -1,0 +1,3 @@
+<plugin id="org.xendra.report.acct_books"  name="account books reports extension" 
+ description="account books reports extension"  category="Libros-SUNAT" 
+ synchronized="2020-01-17 17:50:46.0"  tag="SUNAT" >

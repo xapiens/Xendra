@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="R_EstadoDeCuentasResumen" Name="R_EstadoDeCuentasResumen" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="ProductosClasificacion.jrxml" Identifier="0eb101e1-6bfc-62aa-f98b-035b226998f2" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="C_BPartner_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="ff9ee67c-f518-ac12-0503-c4352a66480c" Synchronized="2017-06-06 22:39:54.0" />
+</process>
+
+

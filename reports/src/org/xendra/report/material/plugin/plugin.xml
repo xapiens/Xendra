@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="material report extension" description="material extension" id="org.xendra.report.material" version="1.0" category="material" synchronized="@timestamp@" tags="Material" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Material" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Report="warehousecosted" SeqNo="10" />
+    <menuitem Report="warehousecosted2" SeqNo="20" />
+    <menuitem Report="warehousecosted3" SeqNo="30" />
+    <menuitem Report="ingresos_a_almacenes" SeqNo="40" />
+  </menuitem>
+</plugin>
+
+

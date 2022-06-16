@@ -1,0 +1,677 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato12_1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+  <property name="Description" value="Formato12_1.jrxml" />
+  <property name="FileName" value="Formato12_1.jrxml" />
+  <property name="Synchronized" value="2017-06-07 18:23:12.401" />
+  <property name="Identifier" value="d852a46d-d3b1-46c9-9ef3-5dd8fe6a6f5f" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="93" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="java.util.*" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_Period_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000446)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Warehouse_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[-- SALDO INICIAL
+SELECT
+--titulo
+(SELECT p.name FROM c_period p
+    WHERE p.c_period_id = $P{C_Period_ID}) as periodo,
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN ci.taxid ELSE oi.taxid END FROM ad_orginfo oi
+JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id
+WHERE ci.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as ruc,
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN c.description ELSE o.description END FROM ad_org o
+JOIN ad_client c on c.ad_client_id = o.ad_client_id
+WHERE c.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as cliente,
+acc.name as esquema,
+
+--cabecera
+(SELECT CASE when $P{M_Warehouse_ID}=0 THEN ' 'ELSE
+	(select name from M_Warehouse where M_Warehouse_ID = $P{M_Warehouse_ID}) END) as almacen,
+pr.value as codprod,
+(SELECT reftrl.description FROM ad_ref_list_trl reftrl
+JOIN ad_ref_list refl on reftrl.ad_ref_list_id = refl.ad_ref_list_id
+JOIN ad_reference ree on refl.ad_reference_id = ree.ad_reference_id
+WHERE ree.name = 'M_Product_ProductType_Tax'
+AND pr.producttypetax= refl.value ) as tipo,
+pr.name as descripcion,
+uom.codsunat as oumcod,
+uom.name as uomname,
+
+--detalle
+max(p.enddate) as fecha,
+null as docsunat,
+null as docname,
+'Saldo Inicial' as numero,
+null as tipoop,
+CASE WHEN SUM(m.qtysource)>0  THEN SUM(m.qtysource) ELSE 0 END as ingreso,
+CASE WHEN SUM(m.qtysource)<0  THEN SUM(m.qtysource)*-1 ELSE 0 END as egreso,
+
+SUM(m.qtyinput) as ingreso2,
+SUM(m.qtyoutput) as egreso2
+
+FROM
+fact_acct f
+JOIN c_period p on f.c_period_id = p.c_period_id
+JOIN c_elementvalue ev on ev.c_elementvalue_id = f.account_id
+JOIN ad_org o on f.ad_org_id = o.ad_org_id
+JOIN c_acctschema acc on f.c_acctschema_id = acc.c_acctschema_id
+JOIN rv_carding m on (m.record_id = f.record_id
+		and m.ad_table_id = f.ad_table_id
+                     and m.m_product_id = f.m_product_id
+                     and m.m_locator_id = f.m_locator_id)
+JOIN m_product pr on m.m_product_id = pr.m_product_id
+JOIN m_warehouse w on m.m_warehouse_id = w.m_warehouse_id
+JOIN c_uom uom on uom.c_uom_id = pr.c_uom_id
+
+WHERE f.ad_client_id = $P{AD_Client_ID}
+AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       THEN true
+       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+AND p.c_year_id = (SELECT p.c_year_id FROM c_period p WHERE p.c_period_id = $P{C_Period_ID})
+AND p.periodno < (SELECT p.periodno FROM c_period p WHERE p.c_period_id = $P{C_Period_ID})
+AND (CASE WHEN COALESCE($P{M_Product_ID}, 0)  = 0
+       THEN true
+       ELSE m.m_product_id = $P{M_Product_ID} END)
+AND (CASE WHEN COALESCE($P{M_Warehouse_ID}, 0)  = 0
+       THEN true
+       ELSE w.m_warehouse_id = $P{M_Warehouse_ID} END)
+AND ev.value like '2%'
+
+GROUP BY acc.name,pr.value,pr.producttypetax,pr.name,uom.codsunat,uom.name
+
+UNION
+-- MOVIMIENTOS
+SELECT
+--titulo
+p.name as periodo,
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN ci.taxid ELSE oi.taxid END FROM ad_orginfo oi
+JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id
+WHERE ci.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as ruc,
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN c.description ELSE o.description END FROM ad_org o
+JOIN ad_client c on c.ad_client_id = o.ad_client_id
+WHERE c.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as cliente,
+acc.name as esquema,
+
+--cabecera
+(SELECT CASE when $P{M_Warehouse_ID}=0 THEN ' 'ELSE
+	(select name from M_Warehouse where M_Warehouse_ID = $P{M_Warehouse_ID}) END) as almacen,
+pr.value as codprod,
+(SELECT reftrl.description FROM ad_ref_list_trl reftrl
+JOIN ad_ref_list refl on reftrl.ad_ref_list_id = refl.ad_ref_list_id
+JOIN ad_reference ree on refl.ad_reference_id = ree.ad_reference_id
+WHERE ree.name = 'M_Product_ProductType_Tax'
+AND pr.producttypetax= refl.value ) as tipo,
+pr.name as descripcion,
+uom.codsunat as oumcod,
+uom.name as uomname,
+
+--detalle
+m.movementdate as fecha,
+dt.codsunat as docsunat,
+dt.printname as docname,
+(SELECT CASE WHEN m.ad_table_id = 319 THEN mio.documentno
+	WHEN m.ad_table_id = 323 THEN mtv.documentno
+	WHEN m.ad_table_id = 321 THEN minv.documentno
+	WHEN m.ad_table_id = 325 THEN mpro.documentno END) as numero,
+(SELECT reftrl.description FROM ad_ref_list_trl reftrl
+JOIN ad_ref_list refl on reftrl.ad_ref_list_id = refl.ad_ref_list_id
+JOIN ad_reference ree on refl.ad_reference_id = ree.ad_reference_id
+WHERE ree.name = 'M_Transaction Movement Type'
+AND m.movementtype = refl.value ) as tipoop,
+CASE WHEN m.qtysource>0  THEN m.qtysource ELSE 0 END as ingreso,
+CASE WHEN m.qtysource<0  THEN m.qtysource*-1 ELSE 0 END as egreso,
+
+CASE WHEN m.qtysource>0  THEN m.qtysource ELSE 0 END as ingreso2,
+CASE WHEN m.qtysource<0  THEN m.qtysource*-1 ELSE 0 END as egreso2
+
+
+FROM
+fact_acct f
+JOIN c_period p on f.c_period_id = p.c_period_id
+JOIN ad_org o on f.ad_org_id = o.ad_org_id
+JOIN c_acctschema acc on f.c_acctschema_id = acc.c_acctschema_id
+JOIN rv_carding m on (m.record_id = f.record_id
+		and m.ad_table_id = f.ad_table_id
+                     and m.m_product_id = f.m_product_id
+                     and m.m_locator_id = f.m_locator_id)
+JOIN m_product pr on m.m_product_id = pr.m_product_id
+JOIN m_warehouse w on m.m_warehouse_id = w.m_warehouse_id
+JOIN c_doctype dt on m.c_doctype_id = dt.c_doctype_id
+JOIN c_uom uom on uom.c_uom_id = pr.c_uom_id
+LEFT JOIN m_inout mio on m.record_id = mio.m_inout_id
+LEFT JOIN m_movement mtv on m.record_id = mtv.m_movement_id
+LEFT JOIN m_inventory minv on m.record_id = minv.m_inventory_id
+LEFT JOIN m_production mpro on m.record_id = mpro.m_production_id
+
+WHERE f.ad_client_id = $P{AD_Client_ID}
+AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       THEN true
+       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+AND f.c_period_id = $P{C_Period_ID}
+AND (CASE WHEN COALESCE($P{M_Product_ID}, 0)  = 0
+       THEN true
+       ELSE m.m_product_id = $P{M_Product_ID} END)
+AND (CASE WHEN COALESCE($P{M_Warehouse_ID}, 0)  = 0
+       THEN true
+       ELSE w.m_warehouse_id = $P{M_Warehouse_ID} END)
+
+ORDER BY 6, 11]]></queryString>
+  <field name="periodo" class="java.lang.String" />
+  <field name="ruc" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="esquema" class="java.lang.String" />
+  <field name="almacen" class="java.lang.String" />
+  <field name="codprod" class="java.lang.String" />
+  <field name="tipo" class="java.lang.String" />
+  <field name="descripcion" class="java.lang.String" />
+  <field name="oumcod" class="java.lang.String" />
+  <field name="uomname" class="java.lang.String" />
+  <field name="fecha" class="java.sql.Timestamp" />
+  <field name="docsunat" class="java.lang.String" />
+  <field name="docname" class="java.lang.String" />
+  <field name="numero" class="java.lang.String" />
+  <field name="tipoop" class="java.lang.String" />
+  <field name="ingreso" class="java.math.BigDecimal" />
+  <field name="egreso" class="java.math.BigDecimal" />
+  <field name="ingreso2" class="java.math.BigDecimal" />
+  <field name="egreso2" class="java.math.BigDecimal" />
+  <variable name="SumaIngreso" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto" calculation="Sum">
+    <variableExpression><![CDATA[$F{ingreso}]]></variableExpression>
+  </variable>
+  <variable name="SumaEgreso" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto" calculation="Sum">
+    <variableExpression><![CDATA[$F{egreso}]]></variableExpression>
+  </variable>
+  <variable name="SumaSaldo" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto">
+    <variableExpression><![CDATA[$V{SumaIngreso}.subtract($V{SumaEgreso})]]></variableExpression>
+  </variable>
+  <variable name="SumaIngreso2" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto" calculation="Sum">
+    <variableExpression><![CDATA[$F{ingreso2}]]></variableExpression>
+  </variable>
+  <variable name="SumaEgreso2" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto" calculation="Sum">
+    <variableExpression><![CDATA[$F{egreso2}]]></variableExpression>
+  </variable>
+  <variable name="SumaSaldo2" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto">
+    <variableExpression><![CDATA[$V{SumaIngreso2}.subtract($V{SumaEgreso2})]]></variableExpression>
+  </variable>
+  <group name="Producto">
+    <groupExpression><![CDATA[$F{codprod}]]></groupExpression>
+    <groupHeader>
+      <band height="30">
+        <staticText>
+          <reportElement key="staticText-4" x="14" y="3" width="82" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[CODIGO DE EXISRENCIA]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-7" x="296" y="3" width="5" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="300" y="3" width="119" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="102" y="3" width="108" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{codprod}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-7" x="96" y="3" width="5" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-4" x="241" y="3" width="56" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[DESCRIPCIÓN]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="299" y="14" width="120" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-4" x="14" y="14" width="82" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[COD. UNIDAD DE MEDIDA]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-7" x="96" y="14" width="5" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="102" y="14" width="28" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{oumcod}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-7" x="129" y="14" width="5" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[-]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="135" y="14" width="75" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{uomname}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-4" x="241" y="14" width="55" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[TIPO]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-7" x="296" y="14" width="5" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="39">
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="301" y="3" width="60" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaIngreso}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="381" y="3" width="60" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaEgreso}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="464" y="3" width="57" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaSaldo}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-4" x="185" y="3" width="56" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[Total Mes:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-4" x="185" y="16" width="72" height="12" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <text><![CDATA[Total Acumulado:]]></text>
+        </staticText>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="381" y="16" width="60" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaEgreso2}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="301" y="16" width="60" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaIngreso2}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+          <reportElement x="464" y="16" width="57" height="12" />
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaSaldo}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="67" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-1" x="10" y="6" width="525" height="40" />
+        <textElement textAlignment="Center">
+          <font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FORMATO 12.1 : "Registro del Inventario Permanente en Unidades Físicas - Detalle del Inventario Permanente en Unidades Físicas"]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="137" y="42" width="258" height="20" />
+        <textElement textAlignment="Center">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="104" splitType="Stretch">
+      <rectangle>
+        <reportElement key="rectangle-1" x="3" y="60" width="528" height="39" />
+      </rectangle>
+      <line>
+        <reportElement key="line-1" x="3" y="83" width="231" height="1" />
+      </line>
+      <line>
+        <reportElement key="line-2" x="369" y="59" width="1" height="40" />
+      </line>
+      <line>
+        <reportElement key="line-3" x="234" y="60" width="1" height="39" />
+      </line>
+      <line>
+        <reportElement key="line-4" x="49" y="83" width="1" height="16" />
+      </line>
+      <line>
+        <reportElement key="line-7" x="452" y="60" width="1" height="39" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-8" x="5" y="60" width="220" height="23" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Documento de Traslado, Comprobandte de Pago, Documento Interno o Similar]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-10" x="451" y="69" width="82" height="24" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Saldo Final]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-16" x="9" y="85" width="33" height="14" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-3" x="14" y="17" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[RUC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-4" x="14" y="30" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[RAZÓN SOCIAL]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="91" y="4" width="5" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-6" x="91" y="17" width="5" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-7" x="91" y="30" width="5" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="95" y="4" width="202" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="95" y="17" width="202" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="95" y="30" width="202" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-2" x="14" y="4" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[PERIODO]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="95" y="43" width="202" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-4" x="14" y="43" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[ESTABLECIMIENTO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-7" x="91" y="43" width="5" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-10" x="370" y="69" width="82" height="24" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Salidas]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-10" x="288" y="69" width="82" height="24" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Entradas]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line-2" x="288" y="60" width="1" height="39" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-10" x="234" y="69" width="54" height="24" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo de Operación]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-16" x="60" y="85" width="33" height="14" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line-4" x="111" y="83" width="1" height="16" />
+      </line>
+      <line>
+        <reportElement key="line-4" x="166" y="83" width="1" height="16" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-16" x="123" y="85" width="33" height="14" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Serie]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-16" x="177" y="85" width="33" height="14" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Número]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="20" splitType="Stretch">
+      <textField isBlankWhenNull="true">
+        <reportElement x="68" y="3" width="8" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{docsunat}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-7" x="75" y="3" width="5" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <text><![CDATA[-]]></text>
+      </staticText>
+      <textField isBlankWhenNull="true">
+        <reportElement x="79" y="3" width="77" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{docname}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="167" y="3" width="53" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="238" y="3" width="45" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipoop}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+        <reportElement x="301" y="3" width="60" height="12" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+        <reportElement x="381" y="3" width="60" height="12" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{egreso}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="464" y="3" width="60" height="12" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{SumaSaldo}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+        <reportElement x="9" y="3" width="40" height="12" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha} == java.sql.Timestamp.valueOf("1900-01-01 00:00:00")?null:$F{fecha}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="25" splitType="Stretch">
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="285" y="4" width="22" height="16" />
+        <textElement>
+          <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-2" x="220" y="4" width="65" height="16" />
+        <textElement textAlignment="Right">
+          <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <lastPageFooter>
+    <band splitType="Stretch" />
+  </lastPageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

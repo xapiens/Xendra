@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="KardexMensualCosto" Name="KardexMensualCosto" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="KardexMensualCosto.jrxml" Identifier="671bfcc3-2635-e587-31f1-6680dbc5c660" Synchronized="2017-06-06 22:40:01.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3338cfb4-b66d-0cd8-cbcd-9496f00272a5" Synchronized="2017-06-06 22:40:01.0" />
+  <parameter Name="C_Period_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Period_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="a4d803ea-0c44-d754-d084-4fcdbe056c12" Synchronized="2017-06-06 22:40:01.0" />
+</process>
+
+

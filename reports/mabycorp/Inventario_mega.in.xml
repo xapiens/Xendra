@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Inventario_mega" Name="Inventario_mega" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Inventario_mega.jrxml" Identifier="0c5d8f19-007c-4aa7-8dc9-133113b1d3a1" Synchronized="2017-06-06 23:00:40.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="e24d3996-f6d9-48ba-a4a1-872910361c86" Synchronized="2017-06-06 23:00:40.0" />
+  <parameter Name="MovementDate_2" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="MovementDate_2" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="8da168e7-bb2a-448b-b124-c51ae2852cac" Synchronized="2017-06-06 23:00:40.0" />
+</process>
+
+

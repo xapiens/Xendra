@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Documentos No Contabilizados" Name="Documentos No Contabilizados" BaseRole="" Description="Lista los documentos u operaciones sin aplicar" Help="Lista los documentos u operaciones sin aplicar" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="DocSinAplicar.jrxml" Identifier="c2f10c8e-ac1f-b746-af24-39075daa005c" Synchronized="2016-10-11 15:12:18.0" />
+
+

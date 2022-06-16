@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="9ded8d5c-b7b4-4ee1-a836-fcb278013ea2" Value="Formato 3.19" Name="Formato 3.19" BaseRole="" Description="" Help=" " Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Formato3_19.jrxml" Identifier="ed348451-f0b9-cc83-9719-a314f77ae3e0" Synchronized="2012-09-20 18:28:18.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato3_19" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="a4ea7d67-1a2d-4243-b967-f771ed6d6438">
+    <property name="Description" value="Formato3_19.jrxml" />
+    <property name="FileName" value="Formato3_19.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:36.689" />
+    <property name="Identifier" value="6c50f88f-93a3-4451-8284-23722d2fa021" />
+    <property name="ireport.scriptlethandling" value="0" />
+    <property name="ireport.encoding" value="UTF-8" />
+    <property name="ireport.zoom" value="1.0" />
+    <property name="ireport.x" value="0" />
+    <property name="ireport.y" value="0" />
+    <import value="net.sf.jasperreports.engine.*" />
+    <import value="net.sf.jasperreports.engine.data.*" />
+    <import value="java.util.*" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000089)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="C_Period_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000615)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="DateAcct" class="java.util.Date">
+      <defaultValueExpression><![CDATA[new SimpleDateFormat("dd/mm/yyyy").parse("31/12/2012")]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PostingType" class="java.lang.String">
+      <defaultValueExpression><![CDATA['A']]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[WITH prevperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period
+		WHERE periodno < (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} )
+		AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID} )),
+currperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ),
+period as (SELECT c_period_id, (SELECT name FROM c_period where c_period_id = $P{C_Period_ID}) as name,enddate,periodno FROM c_period WHERE periodno <= (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID}) AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID})),
+tax as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN max(ci.taxid) ELSE max(oi.taxid) END as id FROM ad_orginfo oi
+		JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id WHERE ci.ad_client_id = $P{AD_Client_ID}),
+client as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN (SELECT description FROM AD_Client where AD_Client_ID = $P{AD_Client_ID})
+				     ELSE (SELECT description FROM AD_org where AD_Org_ID = $P{AD_Org_ID}) END),
+schema as (SELECT acc.name FROM c_acctschema acc WHERE acc.c_acctschema_id = $P{C_AcctSchema_ID})
+SELECT  (select name from currperiod) as periodo,
+	tax.id as ruc,
+	client.description as cliente,
+	client.description as organizacion,
+	schema.name as esquema,
+	--
+	iPAS020 as i_capital,
+	iPAS021 as i_adicio,
+	iPAS022 as i_invers,
+	iPAS023 as i_revalu,
+	iPAS024 as i_reserva,
+	iPAS025 as i_otrasreser,
+	iPAS026+iEGPF001+iEGPF002+iEGPF004+iEGPF006+iEGPF007+iEGPF009+iEGPF010+iEGPF011+iEGPF012+iEGPF013+iEGPF015+iEGPF016+iEGPF018+iEGPF019+iEGPF021 as i_resacum,
+	iPAS020+iPAS021+iPAS022+iPAS023+iPAS024+iPAS025+iPAS026+iEGPF001+iEGPF002+iEGPF004+iEGPF006+iEGPF007+iEGPF009+iEGPF010+iEGPF011+iEGPF012+iEGPF013+iEGPF015+iEGPF016+iEGPF018+iEGPF019+iEGPF021 as i_total,
+	mPAS020 as m_capital,
+	mPAS021 as m_adicio,
+	mPAS022 as m_invers,
+	mPAS023 as m_revalu,
+	mPAS024 as m_reserva,
+	mPAS025 as m_otrasreser,
+	mPAS024+mPAS025 as otros_total,
+	mPAS026 as m_resacum,
+	mEGPF001+mEGPF002+mEGPF004+mEGPF006+mEGPF007+mEGPF009+mEGPF010+mEGPF011+mEGPF012+mEGPF013+mEGPF015+mEGPF016+mEGPF018+mEGPF019+mEGPF021 as m_resejerc,
+	fPAS020 as f_capital,
+	fPAS021 as f_adicio,
+	fPAS022 as f_invers,
+	fPAS023 as f_revalu,
+	fPAS024 as f_reserva,
+	fPAS025 as f_otrasreser,
+	fPAS026+fEGPF001+fEGPF002+fEGPF004+fEGPF006+fEGPF007+fEGPF009+fEGPF010+fEGPF011+fEGPF012+fEGPF013+fEGPF015+fEGPF016+fEGPF018+fEGPF019+fEGPF021 as f_resacum,
+	fPAS020+fPAS021+fPAS022+fPAS023+fPAS024+fPAS025+fPAS026+fEGPF001+fEGPF002+fEGPF004+fEGPF006+fEGPF007+fEGPF009+fEGPF010+fEGPF011+fEGPF012+fEGPF013+fEGPF015+fEGPF016+fEGPF018+fEGPF019+fEGPF021 as f_total
+	FROM (
+SELECT 	sum(iPAS020cr-iPAS020dr) as iPAS020,
+	sum(iPAS021cr-iPAS021dr) as iPAS021,
+	sum(iPAS022cr-iPAS022dr) as iPAS022,
+	sum(iPAS023cr-iPAS023dr) as iPAS023,
+	sum(iPAS024cr-iPAS024dr) as iPAS024,
+	sum(iPAS025cr-iPAS025dr) as iPAS025,
+	sum(iPAS026cr-iPAS026dr) as iPAS026,
+	sum(iPAS027cr-iPAS027dr) as iPAS027,
+	sum(iEGPF001cr-iEGPF001dr) as iEGPF001,
+	sum(iEGPF002cr-iEGPF002dr) as iEGPF002,
+	sum(iEGPF004cr-iEGPF004dr) as iEGPF004,
+	sum(iEGPF006cr-iEGPF006dr) as iEGPF006,
+	sum(iEGPF007cr-iEGPF007dr) as iEGPF007,
+	sum(iEGPF009cr-iEGPF009dr) as iEGPF009,
+	sum(iEGPF010cr-iEGPF010dr) as iEGPF010,
+	sum(iEGPF011cr-iEGPF011dr) as iEGPF011,
+	sum(iEGPF012cr-iEGPF012dr) as iEGPF012,
+	sum(iEGPF013cr-iEGPF013dr) as iEGPF013,
+	sum(iEGPF015cr-iEGPF015dr) as iEGPF015,
+	sum(iEGPF016cr-iEGPF016dr) as iEGPF016,
+	sum(iEGPF018cr-iEGPF018dr) as iEGPF018,
+	sum(iEGPF019cr-iEGPF019dr) as iEGPF019,
+	sum(iEGPF021cr-iEGPF021dr) as iEGPF021,
+	sum(mPAS020cr-mPAS020dr) as mPAS020,
+	sum(mPAS021cr-mPAS021dr) as mPAS021,
+	sum(mPAS022cr-mPAS022dr) as mPAS022,
+	sum(mPAS023cr-mPAS023dr) as mPAS023,
+	sum(mPAS024cr-mPAS024dr) as mPAS024,
+	sum(mPAS025cr-mPAS025dr) as mPAS025,
+	sum(mPAS026cr-mPAS026dr) as mPAS026,
+	sum(mPAS027cr-mPAS027dr) as mPAS027,
+	sum(mEGPF001cr-mEGPF001dr) as mEGPF001,
+	sum(mEGPF002cr-mEGPF002dr) as mEGPF002,
+	sum(mEGPF004cr-mEGPF004dr) as mEGPF004,
+	sum(mEGPF006cr-mEGPF006dr) as mEGPF006,
+	sum(mEGPF007cr-mEGPF007dr) as mEGPF007,
+	sum(mEGPF009cr-mEGPF009dr) as mEGPF009,
+	sum(mEGPF010cr-mEGPF010dr) as mEGPF010,
+	sum(mEGPF011cr-mEGPF011dr) as mEGPF011,
+	sum(mEGPF012cr-mEGPF012dr) as mEGPF012,
+	sum(mEGPF013cr-mEGPF013dr) as mEGPF013,
+	sum(mEGPF015cr-mEGPF015dr) as mEGPF015,
+	sum(mEGPF016cr-mEGPF016dr) as mEGPF016,
+	sum(mEGPF018cr-mEGPF018dr) as mEGPF018,
+	sum(mEGPF019cr-mEGPF019dr) as mEGPF019,
+	sum(mEGPF021cr-mEGPF021dr) as mEGPF021,
+	sum(fPAS020cr-fPAS020dr) as fPAS020,
+	sum(fPAS021cr-fPAS021dr) as fPAS021,
+	sum(fPAS022cr-fPAS022dr) as fPAS022,
+	sum(fPAS023cr-fPAS023dr) as fPAS023,
+	sum(fPAS024cr-fPAS024dr) as fPAS024,
+	sum(fPAS025cr-fPAS025dr) as fPAS025,
+	sum(fPAS026cr-fPAS026dr) as fPAS026,
+	sum(fPAS027cr-fPAS027dr) as fPAS027,
+	sum(fEGPF001cr-fEGPF001dr) as fEGPF001,
+	sum(fEGPF002cr-fEGPF002dr) as fEGPF002,
+	sum(fEGPF004cr-fEGPF004dr) as fEGPF004,
+	sum(fEGPF006cr-fEGPF006dr) as fEGPF006,
+	sum(fEGPF007cr-fEGPF007dr) as fEGPF007,
+	sum(fEGPF009cr-fEGPF009dr) as fEGPF009,
+	sum(fEGPF010cr-fEGPF010dr) as fEGPF010,
+	sum(fEGPF011cr-fEGPF011dr) as fEGPF011,
+	sum(fEGPF012cr-fEGPF012dr) as fEGPF012,
+	sum(fEGPF013cr-fEGPF013dr) as fEGPF013,
+	sum(fEGPF015cr-fEGPF015dr) as fEGPF015,
+	sum(fEGPF016cr-fEGPF016dr) as fEGPF016,
+	sum(fEGPF018cr-fEGPF018dr) as fEGPF018,
+	sum(fEGPF019cr-fEGPF019dr) as fEGPF019,
+	sum(fEGPF021cr-fEGPF021dr) as fEGPF021
+--
+        from (
+SELECT
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS020dr,
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS020cr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS021dr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS021cr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS022dr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS022cr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS023dr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS023cr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS024dr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS024cr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS025dr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS025cr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS026dr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS026cr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctdr) ELSE 0 END) as iPAS027dr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctcr) ELSE 0 END) as iPAS027cr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF001dr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF001cr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF002dr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF002cr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF004dr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF004cr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF006dr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF006cr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF007dr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF007cr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF009dr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF009cr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF010dr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF010cr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF011dr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF011cr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF012dr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF012cr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF013dr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF013cr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF015dr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF015cr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF016dr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF016cr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF018dr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF018cr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF019dr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF019cr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctdr) ELSE 0 END) as iEGPF021dr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctcr) ELSE 0 END) as iEGPF021cr,
+	0 as mPAS020dr,
+	0 as mPAS020cr,
+	0 as mPAS021dr,
+	0 as mPAS021cr,
+	0 as mPAS022dr,
+	0 as mPAS022cr,
+	0 as mPAS023dr,
+	0 as mPAS023cr,
+	0 as mPAS024dr,
+	0 as mPAS024cr,
+	0 as mPAS025dr,
+	0 as mPAS025cr,
+	0 as mPAS026dr,
+	0 as mPAS026cr,
+	0 as mPAS027dr,
+	0 as mPAS027cr,
+	0 as mEGPF001dr,
+	0 as mEGPF001cr,
+	0 as mEGPF002dr,
+	0 as mEGPF002cr,
+	0 as mEGPF004dr,
+	0 as mEGPF004cr,
+	0 as mEGPF006dr,
+	0 as mEGPF006cr,
+	0 as mEGPF007dr,
+	0 as mEGPF007cr,
+	0 as mEGPF009dr,
+	0 as mEGPF009cr,
+	0 as mEGPF010dr,
+	0 as mEGPF010cr,
+	0 as mEGPF011dr,
+	0 as mEGPF011cr,
+	0 as mEGPF012dr,
+	0 as mEGPF012cr,
+	0 as mEGPF013dr,
+	0 as mEGPF013cr,
+	0 as mEGPF015dr,
+	0 as mEGPF015cr,
+	0 as mEGPF016dr,
+	0 as mEGPF016cr,
+	0 as mEGPF018dr,
+	0 as mEGPF018cr,
+	0 as mEGPF019dr,
+	0 as mEGPF019cr,
+	0 as mEGPF021dr,
+	0 as mEGPF021cr,
+	0 as fPAS020dr,
+	0 as fPAS020cr,
+	0 as fPAS021dr,
+	0 as fPAS021cr,
+	0 as fPAS022dr,
+	0 as fPAS022cr,
+	0 as fPAS023dr,
+	0 as fPAS023cr,
+	0 as fPAS024dr,
+	0 as fPAS024cr,
+	0 as fPAS025dr,
+	0 as fPAS025cr,
+	0 as fPAS026dr,
+	0 as fPAS026cr,
+	0 as fPAS027dr,
+	0 as fPAS027cr,
+	0 as fEGPF001dr,
+	0 as fEGPF001cr,
+	0 as fEGPF002dr,
+	0 as fEGPF002cr,
+	0 as fEGPF004dr,
+	0 as fEGPF004cr,
+	0 as fEGPF006dr,
+	0 as fEGPF006cr,
+	0 as fEGPF007dr,
+	0 as fEGPF007cr,
+	0 as fEGPF009dr,
+	0 as fEGPF009cr,
+	0 as fEGPF010dr,
+	0 as fEGPF010cr,
+	0 as fEGPF011dr,
+	0 as fEGPF011cr,
+	0 as fEGPF012dr,
+	0 as fEGPF012cr,
+	0 as fEGPF013dr,
+	0 as fEGPF013cr,
+	0 as fEGPF015dr,
+	0 as fEGPF015cr,
+	0 as fEGPF016dr,
+	0 as fEGPF016cr,
+	0 as fEGPF018dr,
+	0 as fEGPF018cr,
+	0 as fEGPF019dr,
+	0 as fEGPF019cr,
+	0 as fEGPF021dr,
+	0 as fEGPF021cr
+ FROM
+fact_acct f
+	JOIN prevperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id= ev.c_elementvalue_id
+	JOIN c_subject sub on ev.c_subject_id = sub.c_subject_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{AD_Client_ID}
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND (CASE WHEN COALESCE('2012/12/31'::timestamp, p.enddate) = p.enddate THEN true
+		ELSE
+	     f.dateacct <= '2012/12/31'::timestamp END)
+	group by sub.value
+UNION
+SELECT
+	0 as iPAS020dr,
+	0 as iPAS020cr,
+	0 as iPAS021dr,
+	0 as iPAS021cr,
+	0 as iPAS022dr,
+	0 as iPAS022cr,
+	0 as iPAS023dr,
+	0 as iPAS023cr,
+	0 as iPAS024dr,
+	0 as iPAS024cr,
+	0 as iPAS025dr,
+	0 as iPAS025cr,
+	0 as iPAS026dr,
+	0 as iPAS026cr,
+	0 as iPAS027dr,
+	0 as iPAS027cr,
+	0 as iEGPF001dr,
+	0 as iEGPF001cr,
+	0 as iEGPF002dr,
+	0 as iEGPF002cr,
+	0 as iEGPF004dr,
+	0 as iEGPF004cr,
+	0 as iEGPF006dr,
+	0 as iEGPF006cr,
+	0 as iEGPF007dr,
+	0 as iEGPF007cr,
+	0 as iEGPF009dr,
+	0 as iEGPF009cr,
+	0 as iEGPF010dr,
+	0 as iEGPF010cr,
+	0 as iEGPF011dr,
+	0 as iEGPF011cr,
+	0 as iEGPF012dr,
+	0 as iEGPF012cr,
+	0 as iEGPF013dr,
+	0 as iEGPF013cr,
+	0 as iEGPF015dr,
+	0 as iEGPF015cr,
+	0 as iEGPF016dr,
+	0 as iEGPF016cr,
+	0 as iEGPF018dr,
+	0 as iEGPF018cr,
+	0 as iEGPF019dr,
+	0 as iEGPF019cr,
+	0 as iEGPF021dr,
+	0 as iEGPF021cr,
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS020dr,
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS020cr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS021dr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS021cr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS022dr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS022cr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS023dr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS023cr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS024dr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS024cr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS025dr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS025cr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS026dr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS026cr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctdr) ELSE 0 END) as mPAS027dr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctcr) ELSE 0 END) as mPAS027cr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF001dr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF001cr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF002dr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF002cr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF004dr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF004cr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF006dr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF006cr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF007dr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF007cr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF009dr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF009cr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF010dr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF010cr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF011dr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF011cr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF012dr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF012cr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF013dr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF013cr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF015dr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF015cr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF016dr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF016cr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF018dr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF018cr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF019dr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF019cr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctdr) ELSE 0 END) as mEGPF021dr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctcr) ELSE 0 END) as mEGPF021cr,
+	0 as fPAS020dr,
+	0 as fPAS020cr,
+	0 as fPAS021dr,
+	0 as fPAS021cr,
+	0 as fPAS022dr,
+	0 as fPAS022cr,
+	0 as fPAS023dr,
+	0 as fPAS023cr,
+	0 as fPAS024dr,
+	0 as fPAS024cr,
+	0 as fPAS025dr,
+	0 as fPAS025cr,
+	0 as fPAS026dr,
+	0 as fPAS026cr,
+	0 as fPAS027dr,
+	0 as fPAS027cr,
+	0 as fEGPF001dr,
+	0 as fEGPF001cr,
+	0 as fEGPF002dr,
+	0 as fEGPF002cr,
+	0 as fEGPF004dr,
+	0 as fEGPF004cr,
+	0 as fEGPF006dr,
+	0 as fEGPF006cr,
+	0 as fEGPF007dr,
+	0 as fEGPF007cr,
+	0 as fEGPF009dr,
+	0 as fEGPF009cr,
+	0 as fEGPF010dr,
+	0 as fEGPF010cr,
+	0 as fEGPF011dr,
+	0 as fEGPF011cr,
+	0 as fEGPF012dr,
+	0 as fEGPF012cr,
+	0 as fEGPF013dr,
+	0 as fEGPF013cr,
+	0 as fEGPF015dr,
+	0 as fEGPF015cr,
+	0 as fEGPF016dr,
+	0 as fEGPF016cr,
+	0 as fEGPF018dr,
+	0 as fEGPF018cr,
+	0 as fEGPF019dr,
+	0 as fEGPF019cr,
+	0 as fEGPF021dr,
+	0 as fEGPF021cr
+ FROM
+fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id= ev.c_elementvalue_id
+	JOIN c_subject sub on ev.c_subject_id = sub.c_subject_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{AD_Client_ID}
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND (CASE WHEN COALESCE($P{DateAcct}, p.enddate) = p.enddate THEN true
+		ELSE
+	     f.dateacct <= $P{DateAcct} END)
+	group by sub.value
+UNION
+SELECT
+	0 as iPAS020dr,
+	0 as iPAS020cr,
+	0 as iPAS021dr,
+	0 as iPAS021cr,
+	0 as iPAS022dr,
+	0 as iPAS022cr,
+	0 as iPAS023dr,
+	0 as iPAS023cr,
+	0 as iPAS024dr,
+	0 as iPAS024cr,
+	0 as iPAS025dr,
+	0 as iPAS025cr,
+	0 as iPAS026dr,
+	0 as iPAS026cr,
+	0 as iPAS027dr,
+	0 as iPAS027cr,
+	0 as iEGPF001dr,
+	0 as iEGPF001cr,
+	0 as iEGPF002dr,
+	0 as iEGPF002cr,
+	0 as iEGPF004dr,
+	0 as iEGPF004cr,
+	0 as iEGPF006dr,
+	0 as iEGPF006cr,
+	0 as iEGPF007dr,
+	0 as iEGPF007cr,
+	0 as iEGPF009dr,
+	0 as iEGPF009cr,
+	0 as iEGPF010dr,
+	0 as iEGPF010cr,
+	0 as iEGPF011dr,
+	0 as iEGPF011cr,
+	0 as iEGPF012dr,
+	0 as iEGPF012cr,
+	0 as iEGPF013dr,
+	0 as iEGPF013cr,
+	0 as iEGPF015dr,
+	0 as iEGPF015cr,
+	0 as iEGPF016dr,
+	0 as iEGPF016cr,
+	0 as iEGPF018dr,
+	0 as iEGPF018cr,
+	0 as iEGPF019dr,
+	0 as iEGPF019cr,
+	0 as iEGPF021dr,
+	0 as iEGPF021cr,
+	0 as mPAS020dr,
+	0 as mPAS020cr,
+	0 as mPAS021dr,
+	0 as mPAS021cr,
+	0 as mPAS022dr,
+	0 as mPAS022cr,
+	0 as mPAS023dr,
+	0 as mPAS023cr,
+	0 as mPAS024dr,
+	0 as mPAS024cr,
+	0 as mPAS025dr,
+	0 as mPAS025cr,
+	0 as mPAS026dr,
+	0 as mPAS026cr,
+	0 as mPAS027dr,
+	0 as mPAS027cr,
+	0 as mEGPF001dr,
+	0 as mEGPF001cr,
+	0 as mEGPF002dr,
+	0 as mEGPF002cr,
+	0 as mEGPF004dr,
+	0 as mEGPF004cr,
+	0 as mEGPF006dr,
+	0 as mEGPF006cr,
+	0 as mEGPF007dr,
+	0 as mEGPF007cr,
+	0 as mEGPF009dr,
+	0 as mEGPF009cr,
+	0 as mEGPF010dr,
+	0 as mEGPF010cr,
+	0 as mEGPF011dr,
+	0 as mEGPF011cr,
+	0 as mEGPF012dr,
+	0 as mEGPF012cr,
+	0 as mEGPF013dr,
+	0 as mEGPF013cr,
+	0 as mEGPF015dr,
+	0 as mEGPF015cr,
+	0 as mEGPF016dr,
+	0 as mEGPF016cr,
+	0 as mEGPF018dr,
+	0 as mEGPF018cr,
+	0 as mEGPF019dr,
+	0 as mEGPF019cr,
+	0 as mEGPF021dr,
+	0 as mEGPF021cr,
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS020dr,
+(CASE WHEN sub.value = 'PAS020' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS020cr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS021dr,
+(CASE WHEN sub.value = 'PAS021' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS021cr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS022dr,
+(CASE WHEN sub.value = 'PAS022' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS022cr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS023dr,
+(CASE WHEN sub.value = 'PAS023' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS023cr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS024dr,
+(CASE WHEN sub.value = 'PAS024' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS024cr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS025dr,
+(CASE WHEN sub.value = 'PAS025' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS025cr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS026dr,
+(CASE WHEN sub.value = 'PAS026' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS026cr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctdr) ELSE 0 END) as fPAS027dr,
+(CASE WHEN sub.value = 'PAS027' THEN sum(f.amtacctcr) ELSE 0 END) as fPAS027cr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF001dr,
+(CASE WHEN sub.value = 'EGPF001' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF001cr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF002dr,
+(CASE WHEN sub.value = 'EGPF002' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF002cr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF004dr,
+(CASE WHEN sub.value = 'EGPF004' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF004cr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF006dr,
+(CASE WHEN sub.value = 'EGPF006' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF006cr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF007dr,
+(CASE WHEN sub.value = 'EGPF007' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF007cr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF009dr,
+(CASE WHEN sub.value = 'EGPF009' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF009cr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF010dr,
+(CASE WHEN sub.value = 'EGPF010' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF010cr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF011dr,
+(CASE WHEN sub.value = 'EGPF011' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF011cr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF012dr,
+(CASE WHEN sub.value = 'EGPF012' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF012cr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF013dr,
+(CASE WHEN sub.value = 'EGPF013' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF013cr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF015dr,
+(CASE WHEN sub.value = 'EGPF015' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF015cr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF016dr,
+(CASE WHEN sub.value = 'EGPF016' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF016cr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF018dr,
+(CASE WHEN sub.value = 'EGPF018' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF018cr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF019dr,
+(CASE WHEN sub.value = 'EGPF019' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF019cr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctdr) ELSE 0 END) as fEGPF021dr,
+(CASE WHEN sub.value = 'EGPF021' THEN sum(f.amtacctcr) ELSE 0 END) as fEGPF021cr
+ FROM
+fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id= ev.c_elementvalue_id
+	JOIN c_subject sub on ev.c_subject_id = sub.c_subject_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{AD_Client_ID}
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND (CASE WHEN COALESCE($P{DateAcct}, p.enddate) = p.enddate THEN true
+		ELSE
+	     f.dateacct <= $P{DateAcct} END)
+	group by sub.value
+) as factline
+) as fact,tax,client,schema]]></queryString>
+    <field name="periodo" class="java.lang.String" />
+    <field name="ruc" class="java.lang.String" />
+    <field name="cliente" class="java.lang.String" />
+    <field name="organizacion" class="java.lang.String" />
+    <field name="esquema" class="java.lang.String" />
+    <field name="i_capital" class="java.math.BigDecimal" />
+    <field name="i_adicio" class="java.math.BigDecimal" />
+    <field name="i_invers" class="java.math.BigDecimal" />
+    <field name="i_revalu" class="java.math.BigDecimal" />
+    <field name="i_reserva" class="java.math.BigDecimal" />
+    <field name="i_otrasreser" class="java.math.BigDecimal" />
+    <field name="i_resacum" class="java.math.BigDecimal" />
+    <field name="i_total" class="java.math.BigDecimal" />
+    <field name="m_capital" class="java.math.BigDecimal" />
+    <field name="m_adicio" class="java.math.BigDecimal" />
+    <field name="m_invers" class="java.math.BigDecimal" />
+    <field name="m_revalu" class="java.math.BigDecimal" />
+    <field name="m_reserva" class="java.math.BigDecimal" />
+    <field name="m_otrasreser" class="java.math.BigDecimal" />
+    <field name="otros_total" class="java.math.BigDecimal" />
+    <field name="m_resacum" class="java.math.BigDecimal" />
+    <field name="m_resejerc" class="java.math.BigDecimal" />
+    <field name="f_capital" class="java.math.BigDecimal" />
+    <field name="f_adicio" class="java.math.BigDecimal" />
+    <field name="f_invers" class="java.math.BigDecimal" />
+    <field name="f_revalu" class="java.math.BigDecimal" />
+    <field name="f_reserva" class="java.math.BigDecimal" />
+    <field name="f_otrasreser" class="java.math.BigDecimal" />
+    <field name="f_resacum" class="java.math.BigDecimal" />
+    <field name="f_total" class="java.math.BigDecimal" />
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band height="64" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-1" x="43" y="9" width="693" height="30" uuid="182f554c-c87b-41a7-964b-f58078835207" />
+          <textElement textAlignment="Center">
+            <font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[FORMATO 3.19 : "Libro de Inventarios y Balances - Estado de Cambios en el Patrimonio Neto"]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-1" x="258" y="39" width="258" height="20" uuid="005e9d03-4c57-45dc-9faf-7f5a4850e233" />
+          <textElement textAlignment="Center">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+        </textField>
+      </band>
+    </title>
+    <pageHeader>
+      <band height="65" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-2" x="10" y="6" width="77" height="12" uuid="287774f1-45b2-42fe-aeca-c4a8e4e48e59" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[PERIODO]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-3" x="10" y="19" width="77" height="12" uuid="492e5ac3-4de2-42ac-adc4-e0560add5965" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[RUC]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-4" x="10" y="31" width="77" height="14" uuid="faf5460e-7a1b-4da0-8a29-a4f261c567a2" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[RAZÓN SOCIAL]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-5" x="89" y="6" width="5" height="20" uuid="62eee9c3-6591-44ef-b1c0-7250fed81f33" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-6" x="89" y="19" width="5" height="12" uuid="de551b15-79a2-4380-9f2f-858733af9957" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-7" x="89" y="31" width="5" height="13" uuid="92849c33-8b3b-433c-ba42-a52b7a9c6604" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-2" x="99" y="5" width="277" height="15" uuid="48218594-d36f-4bae-90a4-c4cd9711c209" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement key="textField-3" x="99" y="17" width="277" height="15" uuid="883ab17e-2a47-4655-968b-76e7948e91c4" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-4" x="99" y="30" width="277" height="15" uuid="d66394be-3d3c-444c-b8b8-63d48b7ec0a5" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-7" x="89" y="44" width="5" height="13" uuid="68686d38-a720-4511-8219-8e9e155e2762" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[:]]></text>
+        </staticText>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+          <reportElement key="textField-4" x="99" y="43" width="277" height="15" uuid="094d719f-cd45-4f8a-a941-8997f16befbb" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$P{DateAcct}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-4" x="10" y="44" width="77" height="14" uuid="0be5a311-c2e4-4046-a7d4-f575fe858a95" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <text><![CDATA[FECHA]]></text>
+        </staticText>
+      </band>
+    </pageHeader>
+    <columnHeader>
+      <band height="305" splitType="Stretch">
+        <rectangle>
+          <reportElement key="rectangle-1" x="11" y="4" width="761" height="32" uuid="56b48d37-b4c9-4f89-b538-c40bc8e9c387" />
+        </rectangle>
+        <line>
+          <reportElement key="line-17" x="700" y="4" width="1" height="32" uuid="c285c267-a478-486e-a7f5-c80edac2c2c0" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-32" x="701" y="5" width="70" height="30" uuid="924812b9-ace7-4e84-8092-e6c4e7f0606c" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Total]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-33" x="630" y="5" width="70" height="30" uuid="ea921a97-d71d-47dc-93e7-cd76ff245846" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Resultados Acumulados]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-34" x="560" y="5" width="70" height="30" uuid="3ac32aef-dd03-4285-b302-5ef5ea1cde0f" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Otras Reservas]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-19" x="630" y="4" width="1" height="32" uuid="b7ea93d8-6baf-43f5-b13e-de9e8d7f58e2" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-35" x="490" y="5" width="70" height="30" uuid="1f158d14-b452-4d4e-a997-d236ee28d8c2" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Reserva Legal]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-36" x="420" y="5" width="70" height="30" uuid="e775dcb4-7f88-4b3c-9cc6-0a7d52889d96" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Excedente de Reevaluación]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-20" x="490" y="4" width="1" height="32" uuid="cc6d045a-8d3a-44cc-913f-ba7aa7f489f3" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-37" x="350" y="5" width="70" height="30" uuid="aae94ed5-79ec-494c-933b-dddc3cf71f38" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Acciones de Inversión]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-21" x="420" y="4" width="1" height="32" uuid="df9bbc8b-b59b-4ad9-94ee-194cb9d5d0f4" />
+        </line>
+        <line>
+          <reportElement key="line-22" x="560" y="4" width="1" height="32" uuid="33bfcf0d-8d4f-4306-a0ce-790d15a518df" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-38" x="280" y="5" width="70" height="30" uuid="b1c7e22c-0f33-4558-9bb6-dcb1850f3f69" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Capital Adicional]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-23" x="350" y="4" width="1" height="32" uuid="f0d8fdec-4979-48de-9abd-e536cb0e1efe" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-39" x="210" y="5" width="70" height="30" uuid="a5ab5dcb-0ba2-43f2-8f6d-490c47996eb7" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Capital]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-40" x="10" y="5" width="199" height="30" uuid="f2ba4522-32d1-41f7-95dc-f82a45526d44" />
+          <textElement textAlignment="Center" verticalAlignment="Middle" />
+          <text><![CDATA[Cuentas Patrimoniales]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-24" x="210" y="4" width="1" height="32" uuid="92f1fd86-f4d9-453b-94ec-477c7fdd9c72" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-41" x="10" y="36" width="199" height="20" uuid="3300ca20-4349-4b3e-bf3f-e46f5a3bb06d" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Saldos Iniciales]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-18" x="280" y="4" width="1" height="32" uuid="5d2d5ce4-58c9-4954-a419-551d937a0818" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-42" x="10" y="56" width="199" height="20" uuid="fd36bb31-b120-443c-b06a-ca78e48b173b" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Efecto acum. cambio en polit. conta.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-43" x="10" y="76" width="199" height="20" uuid="1c662113-4793-4227-b936-806d333e6063" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Distrib. de utilidades en el periodo]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-44" x="10" y="96" width="199" height="20" uuid="9da15c4e-225d-4568-8a3f-12629d4d1c90" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Dividendos y participaciones]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-45" x="10" y="115" width="199" height="20" uuid="976f14bb-6cc9-4dbc-98a4-a35c9e32a552" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Nuevos aportes de accionistas]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-46" x="10" y="135" width="199" height="20" uuid="85f413c2-1c89-44ed-b710-62d72a969fcc" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Movimientos de prima]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-47" x="10" y="155" width="199" height="20" uuid="b4597c70-5443-40e0-907d-02edf53ed7af" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Incremento por fusiones o escisiones]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-48" x="10" y="175" width="199" height="20" uuid="eb35606a-a4c7-4751-aae3-b32f97fbc850" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Revaluación de Activos]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-49" x="10" y="195" width="199" height="20" uuid="e1e60b7b-06eb-4b6c-a46d-b99a418d0260" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Capitalización de partidas patrimon.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-50" x="10" y="215" width="199" height="20" uuid="9d77c755-5856-40f3-9a79-0bbe88128f2e" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Redención de acciones de inversión]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-51" x="10" y="234" width="199" height="20" uuid="ca85e48e-0e0b-4218-bc4b-2161e2eeb8e5" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Utilidad (Pérdida) del ejercicio]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-52" x="10" y="253" width="199" height="20" uuid="60fdd3cf-2404-40b7-9092-8639071960d8" />
+          <textElement textAlignment="Left" verticalAlignment="Middle" />
+          <text><![CDATA[Otros incrementos o disminuciones]]></text>
+        </staticText>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="216" y="38" width="56" height="15" uuid="ee407020-c0fb-4e47-8f89-666fa16b9eee" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_capital}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="286" y="38" width="53" height="15" uuid="9c75542e-2629-4cfb-b77c-9a1b5e7615ad" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_adicio}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="356" y="38" width="55" height="15" uuid="bc0b3b4a-3aa9-4650-95c4-10c30af6ffb8" />
+          <textElement>
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_invers}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="426" y="38" width="54" height="14" uuid="f6c28719-ca00-44f7-8670-19c72d2ba9da" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_revalu}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="499" y="38" width="46" height="14" uuid="65ac8b2d-36cb-4e5d-b90c-72486d0ea334" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_reserva}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="569" y="38" width="48" height="15" uuid="6fc56f32-cb76-4555-9f93-9571ba09cb07" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_otrasreser}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="636" y="37" width="54" height="15" uuid="20ffb5e0-f648-41a2-b8ab-426850dd7f49" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_resacum}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="285" y="116" width="54" height="12" uuid="effbfe02-d613-49af-842d-bdd74ec3d793" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_adicio}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="215" y="96" width="57" height="12" uuid="4f170237-4167-4589-923b-1fea274420a9" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_capital}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="355" y="155" width="55" height="12" uuid="c7f912f6-e412-4326-a61e-df348b6ec27a" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_invers}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="425" y="175" width="55" height="12" uuid="c2fedc68-69b6-4128-83b7-df4e12cf5230" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_revalu}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="498" y="254" width="46" height="12" uuid="6078fc3b-615b-49ba-80de-f7194902f44c" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_reserva}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="568" y="254" width="49" height="12" uuid="825f1e43-a834-446a-ba72-898fe555e49c" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_otrasreser}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="636" y="195" width="54" height="12" uuid="b8e54e1b-798c-4e2f-82f9-fb697e1d8fc0" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_resacum}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="216" y="273" width="56" height="18" uuid="ae25c1ec-c2a0-4d50-92b4-5778e69129f5" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_capital}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement key="line-25" x="10" y="273" width="762" height="1" uuid="4b279958-2b9c-4e5b-a61f-efa582362215" />
+        </line>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="286" y="274" width="53" height="18" uuid="920cd50b-712d-42fb-91bb-3e33e266b29f" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_adicio}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="356" y="274" width="54" height="18" uuid="5357df85-0a2b-4d4e-9faf-86fb9c28cbc7" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_invers}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="426" y="274" width="54" height="18" uuid="f88b3f8b-7bd4-481e-8b18-9f946aecb961" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_revalu}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="499" y="274" width="46" height="18" uuid="e9fd4175-10cf-42e1-bcbc-05476b3c0717" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_reserva}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="569" y="274" width="48" height="16" uuid="2a1ed802-ec01-4908-b07e-0aa40c70c758" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_otrasreser}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="636" y="274" width="54" height="18" uuid="a2d12978-78f3-4e67-86f7-bbe79657fa26" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_resacum}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="96" width="57" height="12" uuid="cb7733ee-aeca-4b5b-9eed-e1628e698f0f" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_capital}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="116" width="54" height="12" uuid="74134c9e-a237-4203-ab7b-41982290e319" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_adicio}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="155" width="54" height="12" uuid="a8f27757-7395-4f81-bbfc-5a1852ac16f8" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_invers}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="175" width="54" height="12" uuid="78b3df95-d754-4cae-a307-345409ea5e64" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_revalu}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="195" width="54" height="12" uuid="1546e91a-080f-4390-8ccb-fec4e63b741f" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_resacum}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="254" width="54" height="12" uuid="1993e668-ef6e-4486-929c-f2c6706117fa" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{otros_total}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="38" width="54" height="15" uuid="cdfe290b-e32c-44b6-999a-bf4c5b290dee" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{i_total}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="636" y="234" width="54" height="12" uuid="bbfbc2db-3133-47d3-abe3-0eae1d9dcaf6" />
+          <textElement textAlignment="Right">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_resejerc}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="234" width="54" height="12" uuid="e3ff02a3-f752-4d4b-9319-241bcada806d" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_resejerc}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="709" y="274" width="54" height="18" uuid="6e7a8451-8bb2-4c23-9aa1-35a144dfffc1" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{f_total}]]></textFieldExpression>
+        </textField>
+      </band>
+    </columnHeader>
+    <detail>
+      <band splitType="Stretch" />
+    </detail>
+    <columnFooter>
+      <band splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band splitType="Stretch" />
+    </pageFooter>
+    <summary>
+      <band splitType="Stretch" />
+    </summary>
+  </jasperReport>
+  <parameter Name="C_AcctSchema_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="C_AcctSchema_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="be80484a-6d55-28cb-0edc-a96c4d2c13ab" Synchronized="2017-06-06 23:00:39.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="4a5be0a8-0852-46dd-985c-5a946d377fc2" Synchronized="2017-06-06 23:00:39.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Org_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2ba70c24-8c52-a66d-0940-cb6658455bf2" Synchronized="2017-06-06 23:00:39.0" />
+  <parameter Name="C_Period_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="C_Period_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="50" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="42df9a14-d7c3-cc3e-d1fb-db3ddd142656" Synchronized="2017-06-06 23:00:39.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="60" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="135eeefc-40fa-66c6-b2f3-adb64cb0dc1f" Synchronized="2017-06-06 23:00:39.0" />
+  <parameter Name="PostingType" Description="" Help="" AD_Reference_ID="8846760d-b892-c47e-5f24-cbfc1d7dcb31" AD_Reference_Value_ID="1ad48d23-2ec9-09d0-cb68-38688c5e6ce0" ColumnName="PostingType" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="40" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="37cb86a6-4a92-60c1-6ed7-5b4f941ac945" Synchronized="2017-06-06 23:00:39.0" />
+</process>
+
+

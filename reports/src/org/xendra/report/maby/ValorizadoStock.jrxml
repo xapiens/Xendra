@@ -1,0 +1,1030 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ValorizadoStock" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="780" leftMargin="42" rightMargin="20" topMargin="28" bottomMargin="20" uuid="a6dc4337-bf58-473d-959f-029c9f3f7246"><property name="Description" value="ValorizadoStock.jrxml" /><property name="FileName" value="ValorizadoStock.jrxml" /><property name="Synchronized" value="2017-06-06 22:10:34.162" /><property name="Identifier" value="99158dea-e13b-41f5-9b2c-b1dde5b84844" />
+	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<import value="java.util.*" />
+	<parameter name="P_ProductsWithStock" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Product_Group_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Product_Type_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Product_Brand_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Product_Generic_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select prod.m_product_id,
+     m_product_group."name" AS m_product_group_name,
+     m_product_type."name" AS m_product_type_name,
+     m_product_brand."name" AS m_product_brand_name,
+     m_product_generic."name" AS m_product_generic_name,
+prod.value,
+prod.name,
+coalesce(m_cost.currentcostprice,0) as currentcostprice,
+(coalesce(qh.a,0) * coalesce(m_cost.currentcostprice,0)) as atevalorizado,
+(coalesce(qh.b,0) * coalesce(m_cost.currentcostprice,0)) as dalsacvalorizado,
+(coalesce(qh.c,0) * coalesce(m_cost.currentcostprice,0)) as warrantvalorizado,
+coalesce(qh.a,0) as ate,
+coalesce(qh.b,0) as dalsac,
+coalesce(qh.c,0) as warrant,
+coalesce(qh.a,0)+coalesce(qh.b,0)+coalesce(qh.c,0) as totstock,
+(coalesce(qh.a,0) +coalesce(qh.b,0)+coalesce(qh.c,0)) * coalesce(m_cost.currentcostprice,0) as totvalorizado
+from m_product prod
+LEFT OUTER JOIN qtyonhand qh ON prod.m_product_id = qh.m_product_id
+     LEFT OUTER JOIN "m_product_group" m_product_group ON prod."m_product_group_id" = m_product_group."m_product_group_id"
+     LEFT OUTER JOIN "m_product_brand" m_product_brand ON prod."m_product_brand_id" = m_product_brand."m_product_brand_id"
+     LEFT OUTER JOIN "m_product_type" m_product_type ON prod."m_product_type_id" = m_product_type."m_product_type_id"
+     LEFT OUTER JOIN "m_product_generic" m_product_generic ON prod."m_product_generic_id" = m_product_generic."m_product_generic_id"
+     LEFT OUTER JOIN "m_cost" m_cost ON prod.m_product_id = m_cost.m_product_id and m_cost.m_costtype_id = 1000029 and m_cost.m_costelement_id = 1000050
+where prod.ad_client_id = 1000026 and prod.isactive = 'Y' and prod.issummary ='N'
+
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Group_ID}, 0)  = 0
+        THEN true
+        ELSE prod.m_product_group_id = $P{M_Product_Group_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Type_ID}, 0)  = 0
+        THEN true
+        ELSE prod.m_product_type_id = $P{M_Product_Type_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Brand_ID}, 0)  = 0
+        THEN true
+        ELSE prod.m_product_brand_id = $P{M_Product_Brand_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Generic_ID}, 0)  = 0
+        THEN true
+        ELSE prod.m_product_generic_id = $P{M_Product_Generic_ID}
+    END)
+order by
+m_product_group."name",
+m_product_type."name",
+m_product_brand."name",
+m_product_generic."name",
+prod.name]]>
+	</queryString>
+	<field name="m_product_id" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="m_product_group_name" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="m_product_type_name" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="m_product_brand_name" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="m_product_generic_name" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="value" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="currentcostprice" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="atevalorizado" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="dalsacvalorizado" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="warrantvalorizado" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="ate" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="dalsac" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="warrant" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="totstock" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="totvalorizado" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<variable name="Filtro" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{P_ProductsWithStock}.equals("N")  ? "Todos" : "Con Stock")]]></variableExpression>
+	</variable>
+	<variable name="Filtro2" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{M_Product_Group_ID}.longValue() == 0L ? "*" : $F{m_product_group_name})+","+
+                                      ($P{M_Product_Type_ID}.longValue() == 0L ? "*" : $F{m_product_type_name})+","+
+                                       ($P{M_Product_Brand_ID}.longValue() == 0L ? "*" : $F{m_product_brand_name})]]></variableExpression>
+	</variable>
+	<variable name="Filtro3" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[($P{M_Product_Generic_ID}.longValue() == 0L ? "*" : $F{m_product_generic_name})]]></variableExpression>
+	</variable>
+	<variable name="ate_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{ate}]]></variableExpression>
+	</variable>
+	<variable name="dalsac_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsac}]]></variableExpression>
+	</variable>
+	<variable name="warrant_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrant}]]></variableExpression>
+	</variable>
+	<variable name="totstock_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+	</variable>
+	<variable name="ate_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{ate}]]></variableExpression>
+	</variable>
+	<variable name="dalsac_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsac}]]></variableExpression>
+	</variable>
+	<variable name="totstock_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+	</variable>
+	<variable name="warrant_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrant}]]></variableExpression>
+	</variable>
+	<variable name="ate_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{ate}]]></variableExpression>
+	</variable>
+	<variable name="dalsac_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsac}]]></variableExpression>
+	</variable>
+	<variable name="warrant_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrant}]]></variableExpression>
+	</variable>
+	<variable name="totstock_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+	</variable>
+	<variable name="ate_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{ate}]]></variableExpression>
+	</variable>
+	<variable name="dalsac_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsac}]]></variableExpression>
+	</variable>
+	<variable name="warrant_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrant}]]></variableExpression>
+	</variable>
+	<variable name="totstock_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+	</variable>
+	<variable name="ate_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{ate}]]></variableExpression>
+	</variable>
+	<variable name="dalsac_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsac}]]></variableExpression>
+	</variable>
+	<variable name="warrant_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrant}]]></variableExpression>
+	</variable>
+	<variable name="totstock_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+	</variable>
+	<variable name="atevalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{atevalorizado}]]></variableExpression>
+	</variable>
+	<variable name="dalsacvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsacvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="warrantvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrantvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="totvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="atevalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{atevalorizado}]]></variableExpression>
+	</variable>
+	<variable name="atevalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{atevalorizado}]]></variableExpression>
+	</variable>
+	<variable name="atevalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{atevalorizado}]]></variableExpression>
+	</variable>
+	<variable name="dalsacvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsacvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="dalsacvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsacvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="dalsacvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{dalsacvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="warrantvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrantvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="warrantvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrantvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="warrantvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{warrantvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="totvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+		<variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="totvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+	</variable>
+	<variable name="totvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+		<variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+	</variable>
+	<group name="g_group">
+		<groupExpression><![CDATA[$F{m_product_group_name}]]></groupExpression>
+		<groupHeader>
+			<band height="41" splitType="Stretch">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="14" width="780" height="27" backcolor="#E8E3E3" uuid="81515869-d177-49a9-8264-45fef5719dc9" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+				</frame>
+				<textField bookmarkLevel="1">
+					<reportElement x="7" y="21" width="296" height="20" uuid="37c9fef5-892a-4b16-8b17-256e3c71daae" />
+					<textElement>
+						<font size="9" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+					<anchorNameExpression><![CDATA[$F{m_product_group_name}]]></anchorNameExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null)]]></printWhenExpression>
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="780" height="13" backcolor="#E8E3E3" uuid="0d113b86-27e6-401b-8af0-0fac345cb460" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="366" y="0" width="52" height="10" uuid="0329c2ef-8929-4089-ac3d-4019a12b1c5f" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{atevalorizado_4}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="489" y="0" width="52" height="10" uuid="94823e80-5acd-4a84-9681-c2b7e169305c" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{dalsacvalorizado_4}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="603" y="0" width="52" height="10" uuid="2db711e9-b4b2-4edd-b55a-385c314a760f" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{warrantvalorizado_4}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="727" y="0" width="48" height="10" uuid="b961a233-8763-4cc9-ba00-46547770f093" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{totvalorizado_3}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField pattern="#,##0">
+					<reportElement x="314" y="0" width="52" height="10" uuid="dd6613ad-9c92-4007-9569-3632d4798d36">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ate_5}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="437" y="0" width="50" height="10" uuid="2a77a2b0-df7f-4e04-a874-023afe4447e9">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{dalsac_5}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="549" y="0" width="52" height="10" uuid="18ad9238-29bb-4ee8-b55e-d2caf8c8256b">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{warrant_5}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="671" y="0" width="52" height="10" uuid="ff00b248-5311-4110-b890-f984d815e760">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totstock_5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="73" y="3" width="187" height="10" uuid="114a3a4f-fb1c-4aca-8161-825d56a21cc9" />
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true" isItalic="true" />
+					</textElement>
+					<textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="g_type">
+		<groupExpression><![CDATA[$F{m_product_type_name}]]></groupExpression>
+		<groupHeader>
+			<band height="17" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null)]]></printWhenExpression>
+				<textField>
+					<reportElement x="7" y="2" width="184" height="14" uuid="fac2916f-03d1-4c64-878f-f79cef48b72c" />
+					<textElement>
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+				</textField>
+				<textField bookmarkLevel="2">
+					<reportElement x="194" y="3" width="187" height="14" uuid="8d4e340c-5ef1-459d-a89f-218b312f6152" />
+					<textElement>
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_type_name}]]></textFieldExpression>
+					<anchorNameExpression><![CDATA[$F{m_product_type_name}]]></anchorNameExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="780" height="17" uuid="9d39bbc7-9ed1-4b41-b09e-eceed5006361" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="17" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null)]]></printWhenExpression>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="780" height="17" uuid="196f905d-6de9-4fa1-b454-27052c1c8f5c" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="366" y="3" width="52" height="10" uuid="d0766d40-2554-4279-9c6f-9d910b44813c" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{atevalorizado_3}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="489" y="3" width="52" height="10" uuid="94ed3af6-ccb7-43a4-87ad-bd037bd57323" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{dalsacvalorizado_3}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="603" y="3" width="52" height="10" uuid="ff633e9b-2b34-4a09-bb60-65f6fae11735" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{warrantvalorizado_3}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="727" y="3" width="48" height="10" uuid="eb94eb87-4e80-49b0-a54f-33853a87cd71" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{totvalorizado_4}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField pattern="#,##0">
+					<reportElement x="314" y="3" width="52" height="10" uuid="a123bbe2-79d7-4fe0-81b8-5639c01bdeae">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ate_4}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="437" y="3" width="50" height="10" uuid="6fc79cb9-1dc4-460a-81bd-1a439b7036fc">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{dalsac_4}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="549" y="3" width="52" height="10" uuid="2c2448dc-11f9-4cbd-9507-b3f658d19961">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{warrant_4}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="671" y="3" width="52" height="10" uuid="958b8781-b8b5-442e-b7e2-9897f3a00978">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totstock_4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="13" y="3" width="253" height="13" uuid="d5e7c45b-b00a-4ef5-abb3-36e7283232f1" />
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" isItalic="true" />
+					</textElement>
+					<textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()+" - "+$F{m_product_type_name}.trim()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="g_brand">
+		<groupExpression><![CDATA[$F{m_product_brand_name}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null)]]></printWhenExpression>
+				<textField bookmarkLevel="3">
+					<reportElement x="390" y="1" width="187" height="14" uuid="e21d09ed-7c46-49ed-b4b1-4814fcc1182b" />
+					<textElement>
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_brand_name}]]></textFieldExpression>
+					<anchorNameExpression><![CDATA[$F{m_product_brand_name}]]></anchorNameExpression>
+				</textField>
+				<textField>
+					<reportElement x="194" y="1" width="187" height="14" uuid="4d7a0740-e678-46d0-8b68-22914b43aa29" />
+					<textElement>
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_type_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="7" y="1" width="187" height="14" uuid="8a59a4d2-9cd7-406b-ae98-6922f3e1d15d" />
+					<textElement>
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="780" height="15" uuid="f2bfeb5d-a14f-479e-baaa-c543fae02d9f" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null)]]></printWhenExpression>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="0" width="780" height="18" uuid="9912edee-9046-4570-8147-614c454812df" />
+					<box>
+						<pen lineWidth="0.5" />
+						<topPen lineWidth="0.5" />
+						<leftPen lineWidth="0.5" />
+						<bottomPen lineWidth="0.5" />
+						<rightPen lineWidth="0.5" />
+					</box>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="366" y="4" width="52" height="10" uuid="aedd9e8b-ed08-448c-b17f-50b923270c64" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{atevalorizado_2}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="489" y="4" width="52" height="10" uuid="75f9492e-405e-4214-bc07-d92c7c8be00e" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{dalsacvalorizado_2}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="603" y="4" width="52" height="10" uuid="ba5c67b1-50b5-4ab7-9e47-805031e98629" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{warrantvalorizado_2}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00;-#,##0.00">
+						<reportElement x="727" y="4" width="48" height="10" uuid="e68ae1e5-7cc1-444a-a3c4-04b66f32361c" />
+						<textElement textAlignment="Right">
+							<font size="7" isBold="true" />
+						</textElement>
+						<textFieldExpression><![CDATA[$V{totvalorizado_2}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField pattern="#,##0">
+					<reportElement x="314" y="4" width="52" height="10" uuid="be492ce4-b586-4512-ad06-ecb2954ee4fa">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ate_3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="437" y="4" width="50" height="10" uuid="34c4fb3b-a1ac-4e5c-96c0-6b65019bf993">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{dalsac_3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="549" y="4" width="52" height="10" uuid="481cfba2-f7c4-45f8-81ad-aa235c565f36">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{warrant_3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="671" y="4" width="52" height="10" uuid="d35ab837-dd7e-4a75-b863-529cb23c2980">
+						<printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totstock_3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="14" y="4" width="253" height="14" uuid="b277827a-6947-43d3-8e21-eb75cc9c6ec1" />
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" isItalic="true" />
+					</textElement>
+					<textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()+" - "+$F{m_product_type_name}.trim()+" - "+$F{m_product_brand_name}.trim()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="8" splitType="Stretch" />
+	</title>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="13" y="48" width="69" height="18" uuid="405644bd-0eb7-4869-9755-6f0500f9f684" />
+				<textElement>
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="311" y="45" width="115" height="13" uuid="572b3526-421d-42c6-8f36-f1610f4f72d5" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Ate]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="0" y="32" width="780" height="1" uuid="7792a686-2bd5-4e29-b05c-18378e34ec52" />
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="87" y="48" width="172" height="18" uuid="2baefd61-d5f1-41b1-8f32-bbd86b559440" />
+				<textElement>
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="428" y="45" width="118" height="13" uuid="aba88891-a643-49cc-9a70-67da38b8355e" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Dalsac]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="549" y="45" width="115" height="13" uuid="1b8fd6d4-511d-4b5c-b5c6-a3236170c6b8" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Warrant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="671" y="45" width="52" height="13" uuid="1649c192-0263-4bbb-8a81-14e78771daba" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Stock]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="310" y="32" width="1" height="36" uuid="64f0207e-c736-4c2a-b93a-3503c333694f" />
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="311" y="33" width="353" height="16" uuid="081aa79c-d75d-46b9-80b0-c7b0009277b7" />
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" />
+				</textElement>
+				<text><![CDATA[ALMACEN]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="664" y="32" width="1" height="36" uuid="a4f73e49-cb00-4975-bc6c-038e4847d1fd" />
+			</line>
+			<line>
+				<reportElement key="line" x="0" y="68" width="780" height="1" uuid="1891fbb8-6718-4124-9710-3159780518f9" />
+			</line>
+			<line>
+				<reportElement key="line" x="326" y="12" width="115" height="1" uuid="02b74787-48c9-4e57-9a23-6caabc6b6ff2" />
+			</line>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="656" y="0" width="80" height="18" uuid="52f4dd91-7480-490b-bd7f-b3098902992d" />
+				<textElement verticalAlignment="Top">
+					<font size="8" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="736" y="19" width="22" height="12" uuid="75d73828-9d7a-4230-8356-eb90d0765566" />
+				<textElement>
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="708" y="0" width="50" height="12" uuid="13c7e013-12b9-494d-9bc9-d7892e0332e2" />
+				<textElement verticalAlignment="Top">
+					<font size="8" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-20" x="559" y="0" width="100" height="20" uuid="e88d7647-b767-48d2-803a-f58ac28b712d" />
+				<textElement>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Fecha de Impresión:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="671" y="19" width="65" height="12" uuid="db4bb406-22a4-4eb6-8c0d-38e321081941" />
+				<textElement textAlignment="Right">
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line" x="779" y="34" width="1" height="35" uuid="8933349f-e684-440b-8b9b-8b76baf43bac" />
+			</line>
+			<staticText>
+				<reportElement key="staticText-21" x="7" y="4" width="47" height="10" uuid="b2d319f6-72f2-44b1-9f5e-5a3ee22eebc7" />
+				<textElement>
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Filtro : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="54" y="4" width="100" height="10" uuid="7b9968ee-e545-4c17-9177-9f559f635ea9" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Filtro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="14" width="100" height="10" uuid="5e2a672a-69a0-4627-9693-59b2eb95fff0" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Filtro2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="24" width="100" height="10" uuid="8c8e1c43-487a-43dc-b462-dccf69d059a3" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Filtro3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-21" x="7" y="20" width="47" height="10" uuid="faebe157-03d5-4b97-af8e-9dc564018013" />
+				<textElement>
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Generico : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="314" y="55" width="52" height="13" uuid="cdad485d-2022-4202-9be3-a84f4edd863e" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="366" y="55" width="52" height="13" uuid="5770a35b-daba-4c13-8fa1-03624cf5fa97" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="489" y="55" width="52" height="13" uuid="550a8fff-9af1-43ce-a7cb-0918af85ccb7" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="437" y="55" width="52" height="13" uuid="32998246-7b5f-4381-b1e9-7449f1028129" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="601" y="55" width="52" height="13" uuid="55a3a08a-d6db-4c94-998b-7d981f31c4a3" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="549" y="55" width="52" height="13" uuid="0f09ff5b-b928-40fa-a8ad-613269ae5b29" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<line>
+				<reportElement x="310" y="44" width="354" height="1" uuid="80696c72-09b0-4c2f-a894-beda9205915a" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement key="line" x="427" y="44" width="1" height="25" uuid="41a96c77-3f7c-41d0-97fb-be03e8a99dbb" />
+			</line>
+			<line>
+				<reportElement key="line" x="546" y="44" width="1" height="25" uuid="56a7445e-57bd-479c-9586-c1e3cbb812dd" />
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="727" y="45" width="48" height="13" uuid="1616b155-f548-41da-af08-beffc6a07219" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Valorizado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="326" y="1" width="115" height="19" uuid="a786dd79-cebe-46e6-9d8c-a27ea6d73df7" />
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" />
+				</textElement>
+				<text><![CDATA[Stock Valorizado]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="261" y="33" width="1" height="36" uuid="8ed738d3-295b-4e10-b2b7-cc0d9fa67da9" />
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="264" y="48" width="46" height="18" uuid="c9132924-c3f5-4496-9d5d-88e5e63d5111" />
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" />
+				</textElement>
+				<text><![CDATA[Costo Unitario]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch" />
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($P{P_ProductsWithStock}.equals("N") || ($P{P_ProductsWithStock}.equals("Y") &&
+$F{totstock}.doubleValue() != 0.00))]]></printWhenExpression>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="13" y="1" width="69" height="10" uuid="196952d1-fcf5-491d-aa3e-c86af7b04501" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="780" height="14" uuid="09108e46-d64c-4621-8862-9dd783b826f0" />
+				<box>
+					<pen lineWidth="0.5" />
+					<topPen lineWidth="0.5" />
+					<leftPen lineWidth="0.5" />
+					<bottomPen lineWidth="0.5" />
+					<rightPen lineWidth="0.5" />
+				</box>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="366" y="1" width="52" height="10" uuid="77d3c18e-5827-4291-b644-b527924db3ff" />
+					<textElement textAlignment="Right">
+						<font size="7" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{atevalorizado}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="264" y="1" width="39" height="10" uuid="abea5302-1c32-4275-85c7-640390f308bd" />
+					<textElement textAlignment="Right">
+						<font size="7" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{currentcostprice}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="489" y="0" width="52" height="10" uuid="06b42b41-58f4-4a57-b5b7-466d87bfcc36" />
+					<textElement textAlignment="Right">
+						<font size="7" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dalsacvalorizado}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="603" y="0" width="52" height="10" uuid="9d093657-76e5-409b-9aa0-7fc2cd5e3df9" />
+					<textElement textAlignment="Right">
+						<font size="7" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{warrantvalorizado}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="727" y="0" width="48" height="10" uuid="ac0c68e6-d91b-43b4-aa2e-c7d3263f1960" />
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totvalorizado}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line" x="546" y="0" width="1" height="14" uuid="8ffc64d7-d998-471f-89ce-835656c532ea" />
+				</line>
+			</frame>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="314" y="1" width="52" height="10" uuid="843beefe-0980-4df3-a234-4807bf4eb9f9" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="437" y="0" width="50" height="10" uuid="06efe95d-6c74-422e-be32-c14a14455bf7" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dalsac}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="549" y="0" width="52" height="10" uuid="24606711-753f-4f4f-8555-0327ac32eaed" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warrant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="671" y="0" width="54" height="10" uuid="419f9746-c157-43b6-b6b5-0a4285e143a3" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totstock}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line" x="310" y="0" width="1" height="14" uuid="69503233-b78c-4b8f-9517-770a7014ee3e" />
+			</line>
+			<line>
+				<reportElement key="line" x="664" y="0" width="1" height="14" uuid="e2ba53d8-b8c9-4ff5-9b4f-cb5b5acba4d5" />
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="87" y="1" width="172" height="10" uuid="3cf9ac5f-157a-44a2-9a25-3dde7b7dbbf9" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line" x="426" y="0" width="1" height="14" uuid="d58be3f2-8b4b-4c30-9727-f764a32406c3" />
+			</line>
+			<line>
+				<reportElement key="line" x="260" y="0" width="1" height="14" uuid="a12cebac-b10d-4fa6-a90e-f94cc42188d9" />
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch" />
+	</pageFooter>
+	<summary>
+		<band height="19" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="314" y="5" width="52" height="10" uuid="b58b8324-9fe4-4ab3-ad9c-cd848853a64f">
+					<printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ate_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="437" y="5" width="50" height="10" uuid="e05dc416-1d6d-469c-912d-71239ff628cb">
+					<printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dalsac_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="671" y="5" width="52" height="10" uuid="9641e5fd-2c11-44f2-9df4-89395b769ec6">
+					<printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totstock_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="549" y="5" width="52" height="10" uuid="413e78fd-12ab-4019-a15e-92204615325f">
+					<printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{warrant_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="5" width="187" height="13" uuid="5e0ca562-5d47-4130-ab72-4a43eb7e7eaf" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" isItalic="true" />
+				</textElement>
+				<textFieldExpression><![CDATA["Total "+($P{M_Product_Generic_ID}.longValue() != 0L ? $F{m_product_generic_name}.trim() : "")]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="366" y="5" width="52" height="10" uuid="bc76b2d5-6504-4b22-810b-3566283d730c" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{atevalorizado_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="489" y="5" width="52" height="10" uuid="4b661dc0-623b-473d-b6b2-51c5ba0fd44d" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dalsacvalorizado_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="603" y="5" width="52" height="10" uuid="e358edf4-6ed2-4db0-aa43-a5b3fc6acedc" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{warrantvalorizado_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="727" y="5" width="48" height="10" uuid="f602b47f-7841-4341-8884-3540bae4d019" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totvalorizado_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="188" y="13" width="405" height="25" uuid="d71bb3c5-7374-408b-b121-1050fcd03422" />
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" />
+				</textElement>
+				<text><![CDATA[No existen Datos Para La Combinacion Solicitada]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
+

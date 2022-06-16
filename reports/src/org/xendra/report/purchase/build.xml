@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==================== -->
+<!-- Jasper Report        -->
+<!-- ==================== -->
+<!-- $Header: /svn/Xendra/client/build.xml,v 1.2 2011/11/11 21:57:27 xapiens Exp $ -->
+<project name="report" default="clientDistribute" basedir=".">
+  <description>
+    This buildfile is used to build the report plugin subproject within the Xendra project.
+  </description>
+  <!-- set global properties for this build -->
+  <property name="name" value="Report of Account"/>
+  <property name="description" value="Report of Account"/>
+  <property name="category" value="account report"/>
+  <property name="src" value="src"/>
+  <property name="report.in.dir" value="../src/org/xendra/report/acct"/>
+  <property name="report.out.dir" value="."/>
+  <property name="plugin_id" value="org.xendra.report.acct"/>
+  <property name="plugin_name" value="reportacct"/>
+  <property name="jar.path" value="../../lib"/>
+  <property name="tools.path" value="../../tools/lib"/>
+  <!--<property environment="env"/>-->
+  <import file="../../utils_dev/properties.xml"/>
+
+  <!-- set path to include the necessary jar files for javac -->
+  <path id="project.class.path">
+	  <pathelement path="${classpath}"/>
+	  <pathelement path="${jar.path}/core.jar"/>
+	  <pathelement path="${jar.path}/common.jar"/>
+	  <pathelement path="${jar.path}/holon.jar"/>
+	  <pathelement path="${jar.path}/postgresql.jar"/>
+	  <pathelement path="${jar.path}/Base.jar"/>
+	  <pathelement path="${tools.path}/jdom-1.0.jar"/>
+	  <pathelement path="${tools.path}/commons-collections-3.1.jar"/>
+	  <pathelement path="${tools.path}/commons-io-2.0.jar"/>
+  </path>
+  <target name="clientInit" description="initialization target">
+    <echo message="=========== Build report"/>
+    <!-- create the time stamp -->
+    <tstamp> 
+	<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />	 
+    </tstamp>	
+  </target>
+	
+  <!-- =========================================== -->
+  <!-- Compile                                     -->
+  <!-- =========================================== -->
+  <target name="clientCompile">
+    <!-- compile the java code from ${src} into ${build.dir} -->
+    <java fork="true" classname="org.compiere.util.GenerateReport" >
+	    <arg value="${report.in.dir}"/>
+	    <arg value="${report.out.dir}"/>
+	    <arg value="../src/org/xendra/report/purchase/plugin/plugin.in.xml"/>
+	    <classpath refid="project.class.path" />
+    </java>
+  </target>
+
+
+  <!-- =========================================== -->
+  <!-- Distribution                                -->
+  <!-- =========================================== -->
+  <target name="clientDistribute" depends="clientCompile" unless="jar.uptodate">
+    <copy file="../src/org/xendra/report/purchase/plugin/plugin.xml" todir="."/>	  
+    <replace file="./plugin.xml">
+	    <replacefilter token="@timestamp@" value="${timestamp}"/>
+	    <replacefilter token="@name@" value="${name}"/>
+	    <replacefilter token="@id@" value="${plugin_id}"/>
+	    <replacefilter token="@description@" value="${description}"/>
+	    <replacefilter token="@category@" value="${category}"/>
+    </replace>
+    <zip destfile="${report.out.dir}/${plugin_name}.zip">	
+	<zipfileset dir="." includes="plugin.xml" prefix="${plugin_id}"/>    
+	<zipfileset dir="${report.out.dir}" includes="plugin.xml" prefix="${plugin_id}"/>
+	<zipfileset dir="${report.out.dir}/report" includes="*.xml" prefix="${plugin_id}/report"/>
+    </zip>
+    <delete dir="${report.out.dir}/report"/>
+  </target>
+  <target name="catalog" depends="clientDistribute" unless="jar.uptodate">
+	<java fork="true" classname="org.xendra.developer.GenerateCatalog">
+		<arg value="."/>
+		<arg value="./plugin.xml"/>
+		<classpath refid="project.class.path"/>
+	</java>
+	<delete file="./plugin.xml"/>
+  </target>	  
+  <target name="clean">
+    <delete file="${report.out.dir}/${plugin_name}.zip" failonerror="false"/>
+  </target>
+</project>

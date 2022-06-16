@@ -1,0 +1,233 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventasgeneral" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="160" isFloatColumnFooter="true" uuid="4454bc16-325f-4a1e-8577-71b614b16bef"><property name="Description" value="ventasgeneral.jrxml" /><property name="FileName" value="ventasgeneral.jrxml" /><property name="Synchronized" value="2019-03-18 22:33:55.253" /><property name="Identifier" value="edd5cb4a-8844-4985-9172-e739553ac2ca" />
+	<property name="ireport.zoom" value="1.5" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<parameter name="DateFrom1" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateFrom2" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+
+o.name as tda,
+sum(i.grandtotal) as totalVentas
+
+from c_invoice i
+left join ad_org o on i.ad_org_id = o.ad_org_id
+
+where
+i.ad_client_id = $P{AD_Client_ID}
+and i.dateinvoiced between $P{DateFrom1} and $P{DateFrom2}
+and i.docstatus in ('CO', 'CL')
+and i.issotrx = 'Y' and i.isactive = 'Y'
+
+group by tda
+
+order by totalVentas desc]]>
+	</queryString>
+	<field name="tda" class="java.lang.String" />
+	<field name="totalventas" class="java.math.BigDecimal" />
+	<variable name="totalventas" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalventas}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{totalventas}.multiply( new BigDecimal(100)).divide($V{totalventas},3)]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalventas} : new BigDecimal(0.00)]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="52" width="516" height="23" backcolor="#E2DEDE" uuid="5da5c8b7-778e-4e93-be7b-617f3af96d40" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="37" y="55" width="283" height="13" uuid="aa2ceb20-029c-4cf3-a50a-e899004dd453" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="55" width="99" height="13" uuid="ece1aab0-4e64-4adb-83d1-b9ca8493f383" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Ventas Soles]]></text>
+			</staticText>
+			<line>
+				<reportElement x="414" y="52" width="1" height="21" uuid="ed2e1ea2-c4fc-4679-8424-297356dafcb5" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="450" y="19" width="52" height="12" uuid="ad9ff240-921a-40e5-b41e-09775d3a301f" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="463" y="35" width="65" height="12" uuid="8a07edec-37a3-4fa7-9e11-a77fba2f10da" />
+				<textElement textAlignment="Right">
+					<font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-20" x="367" y="19" width="86" height="20" uuid="cec9973d-26d3-408e-8d1e-0fb5683d45ee" />
+				<textElement textAlignment="Justified">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Fecha de Impresión:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="528" y="35" width="22" height="12" uuid="c6156eb1-ffe8-4c99-8b4f-5cd1f9a6cd2b" />
+				<textElement>
+					<font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="502" y="19" width="50" height="12" uuid="2a06200e-f2f3-4129-8eca-fc8d1da939e4" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="209" y="28" width="57" height="12" uuid="344fc48d-1642-40ff-b74b-c70fa4d6ee42" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateFrom1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="290" y="27" width="67" height="12" uuid="c2880f25-6f19-4a76-bc1a-519ae4ed0b5b" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateFrom2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="188" y="28" width="22" height="12" uuid="80f5084e-fb0b-496f-937d-1e3186756faa" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[DEL : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="28" width="22" height="12" uuid="445f4e24-e481-48a3-a2e8-3674f56418a4" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[AL : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="6" width="179" height="21" uuid="b1855a1d-fb03-4f54-b969-02ac6fa87d99" />
+				<textElement textAlignment="Center" markup="none">
+					<font size="10" isBold="true" />
+				</textElement>
+				<text><![CDATA[VENTAS TOTALES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($V{COLUMN_COUNT}.intValue() <= 10)]]></printWhenExpression>
+			<textField pattern="#,##0.00">
+				<reportElement x="418" y="0" width="100" height="13" uuid="9ed0cfa6-f6c5-4b86-8a77-1e3e620f4fec" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalventas} : new BigDecimal(0.00)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="12" y="0" width="1" height="17" uuid="b25eb58d-26f1-4ae1-95cb-595392079198" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="414" y="0" width="1" height="17" uuid="20e689ec-cd63-404c-9af8-58d91e96c1f8" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="528" y="0" width="1" height="17" uuid="d662e8ef-2c57-4caa-8762-b4299d971b2b" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="12" y="16" width="516" height="1" uuid="b7f3ca2a-7a63-4db4-baae-61741b2f4ed3" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="36" y="1" width="283" height="13" uuid="9a296eea-b125-4412-81cd-6dcd176ca064" />
+				<textFieldExpression><![CDATA[$F{tda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="39" splitType="Immediate">
+			<textField evaluationTime="Column" pattern="#,##0.00">
+				<reportElement x="419" y="6" width="100" height="13" uuid="ab44d687-6f49-490e-8711-fd829c029040" />
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="135" y="6" width="283" height="13" uuid="35e8bb59-01fe-46f8-878e-8c4f6996f277" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Ventas sin IGV : ]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="318">
+			<elementGroup>
+				<pie3DChart>
+					<chart isShowLegend="true" renderType="draw" theme="default">
+						<reportElement x="0" y="0" width="555" height="315" uuid="0eca7a1a-2fe8-46b2-b543-877bcf800d99" />
+						<chartTitle position="Top">
+							<font size="12" isBold="true" />
+							<titleExpression><![CDATA["VENTAS"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle />
+						<chartLegend position="Bottom">
+							<font size="8" />
+						</chartLegend>
+					</chart>
+					<pieDataset maxCount="11">
+						<keyExpression><![CDATA[$F{tda}]]></keyExpression>
+						<valueExpression><![CDATA[$F{totalventas}]]></valueExpression>
+						<sectionHyperlink hyperlinkType="ReportExecution" />
+					</pieDataset>
+					<pie3DPlot depthFactor="0.1" isCircular="true" labelFormat="{0} ({2})" legendLabelFormat="{0} [{1}] -  ({2})">
+						<plot orientation="Horizontal" backgroundAlpha="0.0" foregroundAlpha="0.9" />
+						<itemLabel color="#000000" backgroundColor="#FFFFCC">
+							<font size="14" pdfEncoding="Cp1252" />
+						</itemLabel>
+					</pie3DPlot>
+				</pie3DChart>
+			</elementGroup>
+		</band>
+	</pageFooter>
+</jasperReport>
+

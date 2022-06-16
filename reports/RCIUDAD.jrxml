@@ -1,0 +1,317 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RESUMEN_VENTAS_POR_CIUDAD" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="48" bottomMargin="20" uuid="e9fcde40-aca0-42d4-92c6-1fb5681aac14">
+  <property name="Description" value="RCIUDAD.jrxml" />
+  <property name="FileName" value="RCIUDAD.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:32.868" />
+  <property name="Identifier" value="ea9eefd6-e06b-4a63-b54f-512a9fc2351c" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="java.util.*" />
+  <parameter name="VENTAS" class="java.lang.String" />
+  <parameter name="FECHA1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="FECHA2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2009-12-31 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="EMPRESA" class="java.lang.String" />
+  <parameter name="ORGANIZACION" class="java.lang.String" />
+  <queryString><![CDATA[SELECT
+     c_invoice.dateinvoiced AS "Mes",
+     ad_org."name" AS ad_org_name,
+     ad_client."name" AS ad_client_name,
+     c_city."name" AS "Ciudad",
+     sum(c_invoice."grandtotal") as "Ventas Totales",
+     c_invoice.issotrx 
+FROM
+     "xendra"."c_invoiceline" c_invoiceline 
+
+     join "xendra".c_invoice on c_invoiceline.c_invoice_id = c_invoice.c_invoice_id 
+     INNER JOIN "xendra"."ad_client" ad_client ON c_invoice."ad_client_id" = ad_client."ad_client_id"
+     INNER JOIN "xendra"."ad_org" ad_org ON c_invoice."ad_org_id" = ad_org."ad_org_id"
+     join "xendra"."c_bpartner" c_bpartner on c_invoice."c_bpartner_id" = c_bpartner.c_bpartner_id
+	join "xendra"."c_bpartner_location" c_bpartner_location on c_invoice.c_bpartner_location_id = c_bpartner_location.c_bpartner_location_id
+	join "xendra".c_location on c_bpartner_location.c_location_id = c_location.c_location_id
+	join "xendra".c_city on c_location.c_city_id = c_city.c_city_id
+        
+
+where  c_invoice.issotrx = $P{VENTAS}  and  date(c_invoice.dateinvoiced) >= date($P{FECHA1}) AND date(c_invoice.dateinvoiced) <= date($P{FECHA2})
+
+GROUP BY 1,2,3,4,6
+
+order by c_city."name" asc]]></queryString>
+  <field name="Mes" class="java.sql.Timestamp" />
+  <field name="ad_org_name" class="java.lang.String" />
+  <field name="ad_client_name" class="java.lang.String" />
+  <field name="Ciudad" class="java.lang.String" />
+  <field name="Ventas Totales" class="java.math.BigDecimal" />
+  <field name="issotrx" class="java.lang.String" />
+  <background>
+    <band height="1" splitType="Stretch" />
+  </background>
+  <title>
+    <band height="95" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-1" x="213" y="52" width="355" height="23" forecolor="#000099" uuid="17553dd3-4493-4860-98e9-a4086539ef6b" />
+        <textElement textAlignment="Center">
+          <font size="18" isBold="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[RESUMEN DE VENTAS POR CIUDAD]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-2" x="321" y="74" width="78" height="19" forecolor="#3366FF" uuid="cea20657-d1de-4294-9d61-a2395086542a" />
+        <textElement>
+          <font size="9" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <text><![CDATA[del 01/01/09 al  01/01/09]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-1" x="397" y="74" width="57" height="18" forecolor="#3366FF" uuid="6e4d3eb9-b798-47ab-9f1d-18ff93c0fc59" />
+        <textElement textAlignment="Left">
+          <font size="9" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <image>
+        <reportElement key="image-2" stretchType="RelativeToTallestObject" x="320" y="9" width="177" height="34" uuid="6f3fada5-02e4-4d0a-b820-cbce29cf4d58" />
+        <imageExpression><![CDATA["/home/oxalc/Desktop/mx.jpg"]]></imageExpression>
+      </image>
+      <line>
+        <reportElement key="line-2" x="15" y="87" width="750" height="1" uuid="680cd904-40b7-42c1-9b20-32c21e9e6670" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-8" x="19" y="16" width="78" height="32" forecolor="#006633" uuid="779718f9-c220-421f-9ff4-c6c1ebdb93e3" />
+        <textElement textAlignment="Center">
+          <font size="10" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[ERP XENDRA DRAVIOS SAC.]]></text>
+      </staticText>
+      <image>
+        <reportElement key="image-3" stretchType="RelativeToTallestObject" x="674" y="15" width="93" height="33" uuid="eeca532e-0e82-47ba-97ed-a5abae51d698" />
+        <imageExpression><![CDATA["/home/oxalc/Desktop/xendra.jpg"]]></imageExpression>
+      </image>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="59" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="702" y="8" width="54" height="18" uuid="11233d5a-c964-4e12-abf7-ae552b41c617" />
+        <textElement>
+          <font isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="107" y="29" width="87" height="18" uuid="6d873099-7fc2-4d0c-912c-53b9414620f3" />
+        <textFieldExpression><![CDATA[$F{ad_org_name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="107" y="8" width="100" height="18" uuid="683c792f-fb09-4ff7-84fc-0051a8a7aed4" />
+        <textFieldExpression><![CDATA[$F{ad_client_name}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-3" x="18" y="29" width="89" height="16" forecolor="#0033CC" uuid="89010ee6-ae73-4755-b9d0-6d47ca2e18a8" />
+        <textElement>
+          <font fontName="SansSerif" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[ORGANIZACIÓN:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-4" x="18" y="8" width="51" height="16" forecolor="#0033CC" uuid="1220652c-3359-4fb5-8c58-ee6ec227a088" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[EMPRESA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="601" y="8" width="86" height="18" forecolor="#0033CC" uuid="0c7d6d27-5752-4417-9d55-d5ecc62651b9" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FECHA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-7" x="601" y="21" width="86" height="18" forecolor="#0033CC" uuid="1007ddb9-5371-4f31-bc32-1b67a33a5e85" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[HORA:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="702" y="21" width="54" height="18" uuid="4a5a2ab6-56e9-4172-abd0-f29a14bb5568" />
+        <textElement>
+          <font isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="674" y="41" width="62" height="16" uuid="006d1416-30a0-4327-b59d-2e0e7b78e946" />
+        <textElement textAlignment="Right">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField" x="741" y="41" width="20" height="16" uuid="56252cbb-5846-4c51-a4e3-0af1f849e6bb" />
+        <textElement>
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line-1" x="15" y="54" width="750" height="1" uuid="fbaf1d5e-a95e-4d9c-9ca9-f6cdf0c28b9c" />
+      </line>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band splitType="Stretch" />
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="276" splitType="Stretch">
+      <crosstab>
+        <reportElement key="crosstab-1" stretchType="RelativeToBandHeight" x="15" y="12" width="760" height="231" uuid="02855cff-243f-474c-bee3-dbdbba0e1581" />
+        <crosstabHeaderCell>
+          <cellContents mode="Transparent">
+            <staticText>
+              <reportElement key="staticText-6" x="2" y="6" width="40" height="13" uuid="4a92e1eb-7457-4510-a840-b75efd9f2a6b" />
+              <textElement>
+                <font isBold="true" pdfFontName="Helvetica-Bold" />
+              </textElement>
+              <text><![CDATA[FECHA]]></text>
+            </staticText>
+          </cellContents>
+        </crosstabHeaderCell>
+        <rowGroup name="c_city_name" width="46" totalPosition="End">
+          <bucket class="java.lang.String">
+            <bucketExpression><![CDATA[$F{Ciudad}]]></bucketExpression>
+          </bucket>
+          <crosstabRowHeader>
+            <cellContents mode="Transparent">
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="35" height="29" forecolor="#070742" backcolor="#D3EBF7" uuid="a105ca93-2ae4-48a7-9b5f-815b550eccde" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{c_city_name}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabRowHeader>
+          <crosstabTotalRowHeader>
+            <cellContents mode="Transparent">
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="40" height="29" forecolor="#070742" backcolor="#D3EBF7" uuid="51c0ef5f-e462-473a-9d18-cf901a488b94" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabTotalRowHeader>
+        </rowGroup>
+        <columnGroup name="c_invoice_created" height="37" totalPosition="End" headerPosition="Center">
+          <bucket class="java.lang.String">
+            <bucketExpression><![CDATA[(new SimpleDateFormat("MM        MMMMM")).format($F{Mes})]]></bucketExpression>
+          </bucket>
+          <crosstabColumnHeader>
+            <cellContents mode="Transparent">
+              <box>
+                <pen lineWidth="0.0" lineStyle="Double" />
+                <topPen lineWidth="0.0" lineStyle="Double" />
+                <leftPen lineWidth="0.0" lineStyle="Double" />
+                <bottomPen lineWidth="0.0" lineStyle="Double" />
+                <rightPen lineWidth="0.0" lineStyle="Double" />
+              </box>
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="17" y="0" width="40" height="34" forecolor="#070742" backcolor="#0033FF" uuid="21b328a6-6e94-49e7-bdf8-01583d0297e4" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{c_invoice_created}]]></textFieldExpression>
+              </textField>
+              <staticText>
+                <reportElement key="staticText-8" x="18" y="15" width="0" height="0" uuid="2cfb0ecc-051a-404e-b246-26f13a476517" />
+                <text><![CDATA[Static Text]]></text>
+              </staticText>
+            </cellContents>
+          </crosstabColumnHeader>
+          <crosstabTotalColumnHeader>
+            <cellContents mode="Transparent">
+              <box>
+                <pen lineWidth="0.0" lineStyle="Double" />
+                <topPen lineWidth="0.0" lineStyle="Double" />
+                <leftPen lineWidth="0.0" lineStyle="Double" />
+                <bottomPen lineWidth="0.0" lineStyle="Double" />
+                <rightPen lineWidth="0.0" lineStyle="Double" />
+              </box>
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="55" height="32" forecolor="#070742" backcolor="#D3EBF7" uuid="5c03e25b-3f4a-443d-a579-61102cb75485" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                </textElement>
+                <textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabTotalColumnHeader>
+        </columnGroup>
+        <measure name="Ventas Totales_Sum" class="java.math.BigDecimal" calculation="Sum">
+          <measureExpression><![CDATA[$F{Ventas Totales}]]></measureExpression>
+        </measure>
+        <crosstabCell width="59" height="30">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="58" height="29" uuid="517a1a5b-194e-482a-984b-c5e638f20e57" />
+              <textElement textAlignment="Right" verticalAlignment="Middle" />
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="58" height="30" columnTotalGroup="c_invoice_created">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="56" height="29" uuid="6573cf80-6a16-45d0-8eb1-723a40c09c53" />
+              <textElement textAlignment="Right" verticalAlignment="Middle">
+                <font isBold="true" pdfFontName="Helvetica-Bold" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="59" height="30" rowTotalGroup="c_city_name">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="58" height="29" uuid="d53ca13c-febb-41df-b2e0-aae669ecde73" />
+              <textElement textAlignment="Right" verticalAlignment="Middle">
+                <font isBold="true" pdfFontName="Helvetica-Bold" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="58" height="30" rowTotalGroup="c_city_name" columnTotalGroup="c_invoice_created">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="56" height="29" uuid="ab7ff5fd-7b8e-4b0c-81ea-c07862a1beed" />
+              <textElement textAlignment="Right" verticalAlignment="Middle">
+                <font isBold="true" pdfFontName="Helvetica-Bold" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <whenNoDataCell>
+          <cellContents mode="Transparent" />
+        </whenNoDataCell>
+      </crosstab>
+    </band>
+  </summary>
+</jasperReport>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PLEdiario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf3b2638-ee20-48bf-8012-959fe8403e24">
+  <property name="Description" value="PLEdiario.jrxml" />
+  <property name="FileName" value="PLEdiario.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:37.195" />
+  <property name="Identifier" value="d43ccfc7-85e2-49ed-a49a-de2306e6b1dc" />
+  <property name="ireport.zoom" value="6.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="periodo" class="java.lang.String" />
+  <parameter name="dateacct1" class="java.util.Date" />
+  <parameter name="dateacct2" class="java.util.Date" />
+  <queryString><![CDATA[select
+--CAMPO 1: Periodo
+'|',
+--CAMPO 2: Correlativo
+(CASE 	WHEN (rank() OVER (PARTITION BY f.fact_id ORDER BY ev.value DESC))::integer >= 10
+	THEN (f.fact_id)::text||'-'||(rank() OVER (PARTITION BY f.fact_id ORDER BY ev.value DESC))
+	ELSE (f.fact_id)::text||'-0'||(rank() OVER (PARTITION BY f.fact_id ORDER BY ev.value DESC))
+	END)
+as correlativo_asiento,
+'|',
+
+--CAMPO 3: PLAN CONTABLE GENERAL EMPRESARIAL
+'01' as Plan_Contable,
+'|',
+--montos
+--CAMPO 4: Código de la cuenta contable
+ev.value as cuenta,
+'|',
+
+--CAMPO 5: Fecha de la operación
+--f.dateacct as fecha,
+(case 	when (EXTRACT(DAY FROM f.dateacct) < 10 and EXTRACT(MONTH FROM f.dateacct) < 10)
+		then
+		('0'||EXTRACT(day FROM f.dateacct)::text||'/0'||EXTRACT(month FROM f.dateacct)::text||'/'||EXTRACT(year FROM f.dateacct)::text)
+
+		when (EXTRACT(DAY FROM f.dateacct) < 10 and EXTRACT(MONTH FROM f.dateacct) >= 10)
+		then
+		('0'||EXTRACT(day FROM f.dateacct)::text||'/'||EXTRACT(month FROM f.dateacct)::text||'/'||EXTRACT(year FROM f.dateacct)::text)
+
+		when (EXTRACT(DAY FROM f.dateacct) >= 10 and EXTRACT(MONTH FROM f.dateacct) < 10)
+		then
+		(EXTRACT(day FROM f.dateacct)::text||'/0'||EXTRACT(month FROM f.dateacct)::text||'/'||EXTRACT(year FROM f.dateacct)::text)
+
+		when (EXTRACT(DAY FROM f.dateacct) >= 10 and EXTRACT(MONTH FROM f.dateacct) >= 10)
+		then
+		(EXTRACT(day FROM f.dateacct)::text||'/'||EXTRACT(month FROM f.dateacct)::text||'/'||EXTRACT(year FROM f.dateacct)::text)
+end) as fecha,
+'|',
+
+--CAMPO 6: Glosa o descripción
+ct.name as description2,
+'|',
+
+--CAMPO 7: Parte deudora de saldos y movimientos
+round(sum(f.amtacctdr),2) as deudor,
+'|',
+
+--CAMPO 8: Parte acreedora de saldos y movimientos
+round(sum(f.amtacctcr),2) as acreedor,
+'|',
+
+--CAMPO 9: Indica el estado de la operación
+'1','|'
+FROM (
+select fact_acct.*,case when amtacctcr > 0 then 1 else 0 end as cr,case when amtacctdr > 0 then 0 else 1 end as dr from fact_acct
+) as f
+JOIN c_period p on f.c_period_id = p.c_period_id
+JOIN ad_client c on f.ad_client_id = c.ad_client_id
+JOIN ad_org o on f.ad_org_id = o.ad_org_id
+JOIN ad_orginfo oi on o.ad_org_id = oi.ad_org_id
+JOIN c_elementvalue ev on f.account_id= ev.c_elementvalue_id
+JOIN c_currency cy on f.c_currency_id=cy.c_currency_id
+JOIN c_acctschema acc on f.c_acctschema_id=acc.c_acctschema_id
+JOIN gl_category ct on f.gl_category_id = ct.gl_category_id
+LEFT JOIN c_bpartner bp on bp.c_bpartner_id = f.c_bpartner_id
+LEFT JOIN m_product pr on pr.m_product_id = f.m_product_id
+LEFT JOIN gl_journal jr on f.record_id = jr.gl_journal_id
+LEFT JOIN c_invoice inv on f.record_id = inv.c_invoice_id
+LEFT JOIN m_inout mio on f.record_id = mio.m_inout_id
+LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+LEFT JOIN c_cash ch on f.record_id = ch.c_cash_id
+LEFT JOIN c_allocationhdr allo on f.record_id = allo.c_allocationhdr_id
+
+WHERE f.c_acctschema_id = 1000033
+AND f.dateacct BETWEEN $P{dateacct1} AND $P{dateacct2}
+AND f.ad_client_id = 1000033
+AND (CASE WHEN COALESCE(0, 0)  = 0
+       THEN true
+       ELSE f.ad_org_id = 0 END)
+AND (CASE WHEN COALESCE(0, 0)  = 0
+       THEN true
+       ELSE f.account_id = 0 END)
+
+AND f.ad_table_id not in (319,323,325)
+GROUP BY cuenta,fecha,
+ct.name,
+f.fact_id,f.cr,f.dr
+ORDER BY correlativo_asiento --5, 7, 3]]></queryString>
+  <field name="?column?" class="java.lang.String" />
+  <field name="correlativo_asiento" class="java.lang.String" />
+  <field name="plan_contable" class="java.lang.String" />
+  <field name="cuenta" class="java.lang.String" />
+  <field name="fecha" class="java.lang.String" />
+  <field name="description2" class="java.lang.String" />
+  <field name="deudor" class="java.math.BigDecimal" />
+  <field name="acreedor" class="java.math.BigDecimal" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="15" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-20" x="46" y="0" width="1" height="14" uuid="0aae61d7-b0f1-41db-a2d2-d42551d62cf0" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="1" y="0" width="46" height="14" uuid="029e77fb-a670-4cd1-9ea2-22d4587e8221" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="142" y="0" width="1" height="14" uuid="a438b195-f807-40c5-b8ed-b04de73a87a3" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="47" y="0" width="95" height="14" uuid="023ac9e8-5fa9-48fb-9b60-e35fa4e07aa8" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{correlativo_asiento}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="143" y="0" width="15" height="14" uuid="a6c0de50-19fd-49c3-be7b-761a33b46c0a" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{plan_contable}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="160" y="0" width="36" height="14" uuid="3cf0afeb-1926-418b-aeb7-d41225c83de7" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cuenta}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="198" y="0" width="49" height="14" uuid="5a2a4df4-9239-47ef-a67e-bd1fdf6432bc" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="248" y="0" width="73" height="14" uuid="e5e6cdf5-18fc-4117-a415-bdc869f09cdd" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{description2}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="373" y="0" width="56" height="14" uuid="d945c008-5ddd-4380-bf4d-7c373cb6fb27" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{acreedor}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="322" y="0" width="50" height="14" uuid="4850a688-16e7-4045-a91a-e9bffbb4ef38" />
+        <textElement>
+          <font size="8" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{deudor}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="158" y="0" width="1" height="14" uuid="3e235a51-d4c5-45ec-8058-22f149024e8f" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="196" y="0" width="1" height="14" uuid="1116a45c-cc29-4f20-a514-cde9aa09c95d" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="246" y="0" width="1" height="14" uuid="9fed51cd-8b8d-4df1-97f1-dab0f5ed8e1a" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="320" y="0" width="1" height="14" uuid="9dd1616c-0c80-442a-8fcc-a6d171bc64a3" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="371" y="0" width="1" height="14" uuid="78f20bf9-ee2e-4c10-af49-fa0c5f2bb86a" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="428" y="0" width="1" height="14" uuid="b842e41d-93c3-47c4-ac86-90e4b66fb575" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="430" y="0" width="11" height="14" uuid="77ca318b-d4ea-4582-9a9e-750a3c358429" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[01]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="440" y="0" width="1" height="14" uuid="1f0c00c3-eaa1-4d8b-bb2a-39bff730b8bb" />
+        <textElement>
+          <font size="8" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>
+
+

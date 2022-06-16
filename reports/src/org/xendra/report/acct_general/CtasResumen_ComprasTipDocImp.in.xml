@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Cuenta de Compras Resumen x Tipo Doc e Impuesto" Name="Cuenta de Compras Resumen x Tipo Doc e Impuesto" BaseRole="ACT,ALL" Description="" Help="Muestra un resumen de las cuentas del libro 08, agrupandolas por tipo de documento afectas e inafectas" Classname="org.compiere.report.ReportStarter" CategoryName="Contabilidad" AccessLevel="3" EntityType="D" FileName="CtasResumen_ComprasTipDocImp.jrxml" Identifier="02101373-2bf5-4471-8c4a-6d8858fee956" Synchronized="2016-05-13 05:16:29.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="c3b72732-fcf3-406e-a33f-fb1bdaca6616" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="562d5520-ab36-4f9e-b574-c845446e3574" Synchronized="2016-05-13 05:24:50.0" />
+</process>
+
+

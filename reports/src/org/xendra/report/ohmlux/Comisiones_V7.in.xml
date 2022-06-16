@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Liquidacion De Comisiones" Name="Liquidacion De Comisiones" BaseRole="" Description="Lista las liquidaciones de vendedores" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Comisiones_V7.jrxml" Identifier="41e6c440-fffb-c503-85f4-e1af176a215b" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="SalesRep_ID" Description="Representante De Ventas" Help="Ingrese el vendedor " AD_Reference_ID="bd8e8e9c-9386-f903-747b-145acdb28168" AD_Reference_Value_ID="15251147-a1b6-4a83-a3a5-2d3ae7db69d9" AD_Val_Rule_ID="" ColumnName="SalesRep_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="f7dfb95d-baf9-4af6-82b3-956d90102fbd" Synchronized="2018-11-30 09:58:03.0" />
+  <parameter Name="DateFrom" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="50bf6f38-c9e8-41b5-b2ef-3e2287a053ff" Synchronized="2018-11-30 09:58:03.0" />
+</process>
+
+

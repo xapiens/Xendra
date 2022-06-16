@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="" Value="R_TransacCategProducto" Name="R_TransacCategProducto" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="transaccionesxcategoria.jrxml" Identifier="0b6a2b9d-fe60-36e9-f1a9-700643ae4671" Synchronized="2017-06-06 23:00:41.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Stock" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="3a557e47-8530-4931-ae62-f277a8dd3d61">
+    <property name="Description" value="transaccionesxcategoria.jrxml" />
+    <property name="FileName" value="transaccionesxcategoria.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:37.601" />
+    <property name="Identifier" value="387cd6d3-c5c3-4ca5-b630-148212857bd7" />
+    <property name="ireport.scriptlethandling" value="0" />
+    <property name="ireport.encoding" value="UTF-8" />
+    <import value="net.sf.jasperreports.engine.data.*" />
+    <import value="net.sf.jasperreports.engine.*" />
+    <import value="java.util.*" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="M_Locator_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="M_Product_Category_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MovementDate1" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MovementDate2" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2009-12-31 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[SELECT  t.m_transaction_id, 
+        c.ad_client_id,
+	c."name" as empresa,
+        o.ad_org_id,
+        o."name" AS organizacion,
+        p."name" AS producto,
+        p.m_product_category_id,
+	pc."name" as categoria,
+CASE WHEN t.movementtype='C-' THEN 'VENTAS' 
+     WHEN t.movementtype='V+' THEN 'COMPRAS' 
+     WHEN t.movementtype='M-' THEN 'MOV. SALIDA'
+     WHEN t.movementtype='M+' THEN 'MOV. ENTRADA' 
+     WHEN t.movementtype='I+' THEN 'INVENTARIO'
+      WHEN t.movementtype='I-' THEN 'INVENTARIO' END AS TIPOMOV,
+	t.movementdate, 
+	t.movementqty,
+        l.m_locator_id,
+	l."value" as locator, 
+	l.m_warehouse_id,
+	m_warehouse."name" as warehouse,
+	p."value"
+   
+       
+        
+   FROM xendra.m_transaction t
+
+   JOIN xendra.ad_client c ON t.ad_client_id = c.ad_client_id
+   JOIN xendra.ad_org o ON t.ad_org_id = o.ad_org_id
+   JOIN xendra.m_product p ON t.m_product_id = p.m_product_id
+   JOIN xendra.m_product_category pc ON p.m_product_category_id = pc.m_product_category_id
+   JOIN xendra.m_locator l ON t.m_locator_id = l.m_locator_id
+   JOIN xendra.m_warehouse ON l.m_warehouse_id = m_warehouse.m_warehouse_id
+
+WHERE  c.ad_client_id = $P{AD_Client_ID}  and  o.ad_org_id = $P{AD_Org_ID} 
+	and l.m_locator_id = $P{M_Locator_ID} and p.m_product_category_id = $P{M_Product_Category_ID}
+	and  date(t.movementdate) >= date($P{MovementDate1}) AND date(t.movementdate) <= date($P{MovementDate2})]]></queryString>
+    <field name="m_transaction_id" class="java.math.BigDecimal" />
+    <field name="ad_client_id" class="java.math.BigDecimal" />
+    <field name="empresa" class="java.lang.String" />
+    <field name="ad_org_id" class="java.math.BigDecimal" />
+    <field name="organizacion" class="java.lang.String" />
+    <field name="producto" class="java.lang.String" />
+    <field name="m_product_category_id" class="java.math.BigDecimal" />
+    <field name="categoria" class="java.lang.String" />
+    <field name="tipomov" class="java.lang.String" />
+    <field name="movementdate" class="java.sql.Timestamp" />
+    <field name="movementqty" class="java.math.BigDecimal" />
+    <field name="m_locator_id" class="java.math.BigDecimal" />
+    <field name="locator" class="java.lang.String" />
+    <field name="m_warehouse_id" class="java.math.BigDecimal" />
+    <field name="warehouse" class="java.lang.String" />
+    <field name="value" class="java.lang.String" />
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band height="50" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-6" x="90" y="10" width="370" height="23" forecolor="#000099" uuid="f7a7b7f6-dbc7-4e0f-92e5-fa38c2c88d33" />
+          <textElement textAlignment="Center">
+            <font size="17" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+          </textElement>
+          <text><![CDATA[TRANSACCIONES DE PRODUCTOS]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-2" x="14" y="44" width="505" height="1" forecolor="#0033FF" uuid="3cb6ec9c-34cf-49ad-a60f-52f11e20c298" />
+        </line>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-6" x="149" y="30" width="280" height="18" forecolor="#0000CC" uuid="e4db0519-64f1-4a24-a95e-ce453b6c4c64" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement>
+            <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+          </textElement>
+          <textFieldExpression><![CDATA["Desde " + $P{MovementDate1}.toString() + " hasta " + $P{MovementDate2}.toString()]]></textFieldExpression>
+        </textField>
+      </band>
+    </title>
+    <pageHeader>
+      <band height="73" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-1" x="20" y="5" width="70" height="20" forecolor="#0033CC" uuid="2ebe160d-ddfc-42f3-831b-c3e1dd6a10d3" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[EMPRESA:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-2" x="20" y="21" width="90" height="20" forecolor="#0033CC" uuid="41883224-ced4-4f92-80d7-b7c9b50c8fad" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[ORGANIZACIÓN:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="140" y="5" width="130" height="20" uuid="57d2aefa-4c17-414f-87e2-316431b409c3" />
+          <textElement>
+            <font size="9" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="140" y="19" width="130" height="20" uuid="1241c913-10e5-4754-a1a1-d2f77907c1d4" />
+          <textElement>
+            <font size="9" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{organizacion}]]></textFieldExpression>
+        </textField>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+          <reportElement key="textField-2" x="430" y="10" width="79" height="18" uuid="1182b94f-f9bf-49ec-bde6-bcbd558d0e16" />
+          <textElement textAlignment="Right">
+            <font size="9" isItalic="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-8" x="388" y="10" width="86" height="18" forecolor="#0033CC" uuid="0153e574-00e3-417b-94a3-3a487e1c8aee" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[FECHA:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-9" x="388" y="25" width="86" height="18" forecolor="#0033CC" uuid="987dc1e7-00c3-47db-be5a-2ac3f7c6c4a6" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[HORA:]]></text>
+        </staticText>
+        <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+          <reportElement key="textField-3" x="455" y="25" width="54" height="18" uuid="7341e3b3-6d92-4202-8e1d-8fb6b34da66b" />
+          <textElement>
+            <font size="9" isItalic="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-4" x="426" y="41" width="65" height="16" uuid="de2ebc4c-241c-4561-8327-e16fa647d1b7" />
+          <textElement textAlignment="Right">
+            <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+          </textElement>
+          <textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+        </textField>
+        <textField evaluationTime="Report" isBlankWhenNull="false">
+          <reportElement key="textField-5" x="491" y="41" width="22" height="16" uuid="eb9b9db5-fc58-4231-8615-79ac03687ced" />
+          <textElement>
+            <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+          </textElement>
+          <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-10" x="20" y="37" width="150" height="20" forecolor="#0033CC" uuid="3da7e1f8-c1f1-4cd8-8bb7-f62d44b9315b" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[CATEGORÍA DE PRODUCTO:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-11" x="20" y="52" width="90" height="20" forecolor="#0033CC" uuid="d298c244-e47e-4314-acac-c1316529443c" />
+          <textElement>
+            <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[ALMACÉN:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="140" y="35" width="219" height="20" uuid="6356ca87-c21a-4cce-9c7b-1fea21b85d0f" />
+          <textElement>
+            <font size="9" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="140" y="51" width="280" height="20" uuid="39c47651-1d8d-4ea4-ac9d-178138b7a666" />
+          <textElement>
+            <font size="9" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{locator}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement key="line-1" x="15" y="67" width="505" height="1" forecolor="#0033CC" uuid="167cd89d-fe83-42ed-b924-a4d9e9e6cfb0" />
+        </line>
+      </band>
+    </pageHeader>
+    <columnHeader>
+      <band splitType="Stretch" />
+    </columnHeader>
+    <detail>
+      <band splitType="Stretch" />
+    </detail>
+    <columnFooter>
+      <band splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band splitType="Stretch" />
+    </pageFooter>
+    <summary>
+      <band height="209" splitType="Stretch">
+        <crosstab>
+          <reportElement key="crosstab-2" x="20" y="7" width="500" height="190" uuid="982a97c9-3ed5-4eb0-811b-548230408fe7" />
+          <crosstabHeaderCell>
+            <cellContents mode="Transparent">
+              <staticText>
+                <reportElement key="staticText-12" x="178" y="4" width="40" height="17" uuid="1b865fe6-7aad-4e99-90a9-6d8123b6e12c" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                  <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                </textElement>
+                <text><![CDATA[CÓDIGO]]></text>
+              </staticText>
+              <staticText>
+                <reportElement key="staticText-12" x="2" y="6" width="131" height="15" uuid="fc5605a3-cbe7-4828-aa11-54c91aef2f7e" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                  <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                </textElement>
+                <text><![CDATA[PRODUCT]]></text>
+              </staticText>
+            </cellContents>
+          </crosstabHeaderCell>
+          <rowGroup name="producto" width="177" totalPosition="End">
+            <bucket class="java.lang.String">
+              <bucketExpression><![CDATA[$F{producto}]]></bucketExpression>
+            </bucket>
+            <crosstabRowHeader>
+              <cellContents mode="Transparent">
+                <textField isBlankWhenNull="false">
+                  <reportElement key="textField" x="1" y="3" width="175" height="23" uuid="a3e9ac38-da6b-4e24-8560-158cc163f1d5" />
+                  <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="false" pdfFontName="Helvetica" />
+                  </textElement>
+                  <textFieldExpression><![CDATA[$V{producto}]]></textFieldExpression>
+                </textField>
+              </cellContents>
+            </crosstabRowHeader>
+            <crosstabTotalRowHeader>
+              <cellContents mode="Transparent">
+                <textField isBlankWhenNull="false">
+                  <reportElement key="textField" x="118" y="3" width="100" height="27" uuid="ca0261d4-2bca-4fc2-89df-75d8f25580ec" />
+                  <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                  </textElement>
+                  <textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+                </textField>
+              </cellContents>
+            </crosstabTotalRowHeader>
+          </rowGroup>
+          <rowGroup name="value" width="71" totalPosition="End">
+            <bucket class="java.lang.String">
+              <bucketExpression><![CDATA[$F{value}]]></bucketExpression>
+            </bucket>
+            <crosstabRowHeader>
+              <cellContents mode="Transparent">
+                <textField isBlankWhenNull="false">
+                  <reportElement key="textField" x="1" y="2" width="69" height="23" uuid="1d6c677d-be7b-4fcb-8bdd-4826e03b7cf7" />
+                  <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="false" pdfFontName="Helvetica" />
+                  </textElement>
+                  <textFieldExpression><![CDATA[$V{value}]]></textFieldExpression>
+                </textField>
+              </cellContents>
+            </crosstabRowHeader>
+            <crosstabTotalRowHeader>
+              <cellContents mode="Transparent" />
+            </crosstabTotalRowHeader>
+          </rowGroup>
+          <columnGroup name="tipomov" height="22" totalPosition="End" headerPosition="Center">
+            <bucket class="java.lang.String">
+              <bucketExpression><![CDATA[$F{tipomov}]]></bucketExpression>
+            </bucket>
+            <crosstabColumnHeader>
+              <cellContents mode="Transparent">
+                <textField isBlankWhenNull="false">
+                  <reportElement key="textField" x="0" y="0" width="62" height="21" uuid="2e444950-615a-4408-8636-6c69a896ee0d" />
+                  <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                  </textElement>
+                  <textFieldExpression><![CDATA[$V{tipomov}]]></textFieldExpression>
+                </textField>
+              </cellContents>
+            </crosstabColumnHeader>
+            <crosstabTotalColumnHeader>
+              <cellContents mode="Transparent">
+                <textField isBlankWhenNull="false">
+                  <reportElement key="textField" x="12" y="0" width="45" height="21" uuid="852d1007-44b2-43c3-b0c8-d946d2250ad1" />
+                  <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                  </textElement>
+                  <textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+                </textField>
+              </cellContents>
+            </crosstabTotalColumnHeader>
+          </columnGroup>
+          <measure name="movementqty_Sum" class="java.math.BigDecimal" calculation="Sum">
+            <measureExpression><![CDATA[$F{movementqty}]]></measureExpression>
+          </measure>
+          <crosstabCell width="63" height="26">
+            <cellContents mode="Transparent">
+              <textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="62" height="25" uuid="98859a4d-d221-4526-99b0-34ffaf6c9557" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                  <font size="8" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{movementqty_Sum}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabCell>
+          <crosstabCell width="58" height="26" columnTotalGroup="tipomov">
+            <cellContents mode="Transparent">
+              <textField pattern="###0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="57" height="25" uuid="8e9bc977-3ab9-4fb5-b2a4-3bcf2501d35f" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                  <font size="8" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{movementqty_Sum}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabCell>
+          <crosstabCell width="63" height="2" rowTotalGroup="value">
+            <cellContents mode="Transparent" />
+          </crosstabCell>
+          <crosstabCell width="58" height="2" rowTotalGroup="value" columnTotalGroup="tipomov">
+            <cellContents mode="Transparent" />
+          </crosstabCell>
+          <crosstabCell width="63" height="33" rowTotalGroup="producto">
+            <cellContents mode="Transparent">
+              <textField pattern="###0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="2" y="0" width="59" height="30" uuid="6fcedf90-005f-4e2c-a4bb-d1a4e6c3cc7f" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                  <font size="8" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{movementqty_Sum}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabCell>
+          <crosstabCell width="58" height="33" rowTotalGroup="producto" columnTotalGroup="tipomov">
+            <cellContents mode="Transparent">
+              <textField pattern="###0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="1" y="0" width="57" height="30" uuid="88538a42-8eab-4f15-9188-b5591ec79088" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                  <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{movementqty_Sum}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabCell>
+          <whenNoDataCell>
+            <cellContents mode="Transparent" />
+          </whenNoDataCell>
+        </crosstab>
+      </band>
+    </summary>
+  </jasperReport>
+  <parameter Name="M_Product_Category_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="M_Product_Category_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="50" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="c3cba725-b62d-c79f-5298-96b4e66dbaa2" Synchronized="2017-06-06 23:00:41.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="9b166727-3659-3b7c-baf6-ef3acc5cbe77" Synchronized="2017-06-06 23:00:41.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Org_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="1a4bcdae-0d7a-01b5-2249-f038fdf4d704" Synchronized="2017-06-06 23:00:41.0" />
+  <parameter Name="MovementDate" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="MovementDate" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="60" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="b0cf38b6-2600-4127-c144-09c176f78ace" Synchronized="2017-06-06 23:00:41.0" />
+  <parameter Name="M_Locator_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="M_Locator_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="40" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="6e9d936d-5392-96f2-e11e-61bd665a0298" Synchronized="2017-06-06 23:00:41.0" />
+</process>
+
+

@@ -1,0 +1,533 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="POSReport" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="af9529c5-619f-4ccc-8fd9-0a43ac41dd30">
+  <property name="Identifier" value="42ecd6dd-292d-3ab6-cd88-c3965956e59d" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="POS Report.jrxml" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="java.util.*" />
+  <parameter name="C_POS_ID" class="java.math.BigDecimal" isForPrompting="false">
+    <parameterDescription><![CDATA[The POS Terminal]]></parameterDescription>
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateTrx1" class="java.sql.Timestamp" isForPrompting="false">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateTrx2" class="java.sql.Timestamp" isForPrompting="false">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2008-01-04 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+	CASE WHEN o.DocStatus='CO' THEN o.DocumentNo ELSE o.DocumentNo||' - **ANULADO**' END AS OrderNo,
+	CASE WHEN COALESCE(i.DocStatus,'CO')='CO' THEN COALESCE(i.Serial||'-','')||COALESCE(i.DocumentNo,'') ELSE COALESCE(i.Serial||'-','')||COALESCE(i.DocumentNo,'')||' - **ANULADO**' END AS InvoiceNo,
+	CASE WHEN COALESCE(m.DocStatus,'CO')='CO' THEN COALESCE(m.DocumentNo::text,'') ELSE COALESCE(m.DocumentNo,'')||' - **ANULADO**' END AS ShipmentNo,
+	COALESCE(cl.C_Cash_ID::text,'') AS CashJournalNo,
+	CASE WHEN COALESCE(y.DocStatus,'CO')='CO' THEN COALESCE(y.DocumentNo::text,'') ELSE COALESCE(y.DocumentNo::text,'')||' - **ANULADO**' END AS PaymentNo,
+	p.DateTrx AS DateTrx,
+	o.GrandTotal AS GrandTotal,
+	p.PaymentType AS PaymentType,
+	p.DocumentType AS DocumentType
+FROM
+	xendra.C_POSLog p
+	LEFT JOIN xendra.C_Order o ON (p.C_Order_ID=o.C_Order_ID)
+	LEFT JOIN xendra.C_Invoice i ON (p.C_Invoice_ID=i.C_Invoice_ID)
+	LEFT JOIN xendra.M_InOut m ON (p.M_InOut_ID=m.M_InOut_ID)
+	LEFT JOIN xendra.C_Payment y ON (p.C_Payment_ID=y.C_Payment_ID)
+	LEFT JOIN xendra.C_CashLine cl ON (p.C_CashLine_ID=cl.C_CashLine_ID)
+WHERE
+	p.C_POS_ID=$P{C_POS_ID}
+	AND date(p.DateTrx)>=date($P{DateTrx1})
+	AND date(p.DateTrx)<=date($P{DateTrx2})
+	AND (
+		(o.DocStatus='CO' AND COALESCE(i.DocStatus,'CO')='CO' AND COALESCE(m.DocStatus,'CO')='CO')
+		OR (o.DocStatus='VO' AND COALESCE(i.DocStatus,'VO')='VO' AND COALESCE(m.DocStatus,'VO')='VO')
+	)
+ORDER BY
+	p.PaymentType,
+	p.DocumentType,
+	p.DateTrx
+;]]></queryString>
+  <field name="orderno" class="java.lang.String" />
+  <field name="invoiceno" class="java.lang.String" />
+  <field name="shipmentno" class="java.lang.String" />
+  <field name="cashjournalno" class="java.lang.String" />
+  <field name="paymentno" class="java.lang.String" />
+  <field name="datetrx" class="java.sql.Timestamp" />
+  <field name="grandtotal" class="java.math.BigDecimal" />
+  <field name="paymenttype" class="java.lang.String" />
+  <field name="documenttype" class="java.lang.String" />
+  <variable name="PAYMENT_TYPE_STRING" class="java.lang.String" resetType="Group" resetGroup="Payment Type">
+    <variableExpression><![CDATA[($F{paymenttype}.equals( "C" ) ? "Efectivo" : ($F{paymenttype}.equals( "K" ) ? "Tarjeta de Credito" : "Credito"))]]></variableExpression>
+    <initialValueExpression><![CDATA[($F{paymenttype}.equals( "C" ) ? "Efectivo" : ($F{paymenttype}.equals( "K" ) ? "Tarjeta de Credito" : "Credito"))]]></initialValueExpression>
+  </variable>
+  <variable name="PAYTYPE_GRANDTOTAL" class="java.math.BigDecimal" resetType="Group" resetGroup="Payment Type">
+    <variableExpression><![CDATA[$V{PAYTYPE_GRANDTOTAL}.add($F{grandtotal})]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="BIG_GRANDTOTAL" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$V{BIG_GRANDTOTAL}.add($F{grandtotal})]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="DOCTYPE_STRING" class="java.lang.String" resetType="Group" resetGroup="Document Type">
+    <variableExpression><![CDATA[$F{documenttype}.equals("BM") ? "Boleta Efectivo" : ($F{documenttype}.equals("BC") ? "Boleta Credito" : ($F{documenttype}.equals("IM") ? "Factura Efectivo" : ($F{documenttype}.equals("IC") ? "Factura Credito" : "Guia de Credito")))]]></variableExpression>
+    <initialValueExpression><![CDATA[$F{documenttype}.equals("BM") ? "Boleta Efectivo" : ($F{documenttype}.equals("BC") ? "Boleta Credito" : ($F{documenttype}.equals("IM") ? "Factura Efectivo" : ($F{documenttype}.equals("IC") ? "Factura Credito" : "Guia de Credito")))]]></initialValueExpression>
+  </variable>
+  <variable name="DOCTYPE_GRANDTOTAL" class="java.math.BigDecimal" resetType="Group" resetGroup="Document Type">
+    <variableExpression><![CDATA[$V{DOCTYPE_GRANDTOTAL}.add($F{grandtotal})]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_PAYTYPE_CASH" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{paymenttype}.equals("C")?$V{GRANDTOTAL_PAYTYPE_CASH}.add($F{grandtotal}):$V{GRANDTOTAL_PAYTYPE_CASH}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_PAYTYPE_CCARD" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{paymenttype}.equals("K")?$V{GRANDTOTAL_PAYTYPE_CCARD}.add($F{grandtotal}):$V{GRANDTOTAL_PAYTYPE_CCARD}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_PAYTYPE_CREDIT" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{paymenttype}.equals("D")?$V{GRANDTOTAL_PAYTYPE_CREDIT}.add($F{grandtotal}):$V{GRANDTOTAL_PAYTYPE_CREDIT}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_DOCTYPE_BOLETA" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{documenttype}.equals("BM")||$F{documenttype}.equals("BC")?$V{GRANDTOTAL_DOCTYPE_BOLETA}.add($F{grandtotal}):$V{GRANDTOTAL_DOCTYPE_BOLETA}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_DOCTYPE_INVOICE" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{documenttype}.equals("IM")||$F{documenttype}.equals("IC")?$V{GRANDTOTAL_DOCTYPE_INVOICE}.add($F{grandtotal}):$V{GRANDTOTAL_DOCTYPE_INVOICE}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="GRANDTOTAL_DOCTYPE_CREDITGUIDE" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{documenttype}.equals("CG")?$V{GRANDTOTAL_DOCTYPE_CREDITGUIDE}.add($F{grandtotal}):$V{GRANDTOTAL_DOCTYPE_CREDITGUIDE}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <group name="Payment Type">
+    <groupExpression><![CDATA[$F{paymenttype}]]></groupExpression>
+    <groupHeader>
+      <band height="14" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-8" x="0" y="0" width="241" height="14" uuid="fa5c53ab-ce16-4973-9aab-b50b573ff914" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Tipo de Pago: " + $V{PAYMENT_TYPE_STRING}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="22" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-9" x="0" y="1" width="272" height="14" uuid="f023cc5c-b4ad-40df-ae51-e24f7e74998a" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total Tipo de Pago " + $V{PAYMENT_TYPE_STRING}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-10" x="444" y="0" width="111" height="13" uuid="6884c5bf-cd6c-4387-99f9-3ed5b4b0abb4" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement textAlignment="Right">
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{PAYTYPE_GRANDTOTAL}.toString()]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <group name="Document Type">
+    <groupExpression><![CDATA[$F{documenttype}]]></groupExpression>
+    <groupHeader>
+      <band height="14" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-12" x="10" y="0" width="262" height="14" uuid="fe0bbf28-4378-4e0b-a240-63ec21fb50e9" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Tipo de Documento: " + $V{DOCTYPE_STRING}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="14" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-13" x="10" y="0" width="241" height="13" uuid="5197df8c-8d2a-4abc-9c9e-8173a02e63f8" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total Tipo de Documento " + $V{DOCTYPE_STRING}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-14" x="444" y="0" width="111" height="14" uuid="ef4fd0f0-55f9-4859-9f6e-0a93c204e857" />
+          <box>
+            <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+            <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          </box>
+          <textElement textAlignment="Right">
+            <font isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{DOCTYPE_GRANDTOTAL}.toString()]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="36" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-1" x="0" y="0" width="158" height="18" uuid="69ce3bf5-6754-4f18-9c49-cd40f804f5ad" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <text><![CDATA[Xendra ERP - Reporte de PDV]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="594" y="0" width="145" height="18" uuid="953f46e4-ddad-4a84-b0ee-4ed7d1f5d16d" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" pattern="EEE, d MMM yyyy HH:mm:ss Z" isBlankWhenNull="false">
+        <reportElement key="textField" x="637" y="18" width="145" height="18" uuid="cdc3ed9c-1d55-4892-96a4-babf2ec833c0" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-18" x="0" y="18" width="359" height="18" uuid="598773c5-ea86-4c22-b96b-c05307d32b42" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textFieldExpression><![CDATA["Desde " + $P{DateTrx1}.toString() + " hasta " + $P{DateTrx2}.toString()]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-19" x="739" y="0" width="43" height="18" uuid="c21c4c0e-c7a0-4cd4-972d-79ec950131f3" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="14" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-2" x="0" y="0" width="111" height="14" uuid="7e173664-5d9b-4ec0-95e2-536e59e72914" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <text><![CDATA[Fecha/Hora]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-3" x="111" y="0" width="111" height="14" uuid="9d49e344-4370-4b48-b206-9d3cffdf45b4" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Orden]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-4" x="222" y="0" width="111" height="13" uuid="19c54221-a8cd-4d42-ac58-209a75f375cc" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Factura]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="333" y="0" width="111" height="14" uuid="2dc8431d-cd82-47bc-ae61-1ce228a91683" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Envio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-6" x="444" y="0" width="111" height="14" uuid="18a3c266-a8ed-4dce-8084-ea9e714e7f3f" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Total]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-7" x="555" y="0" width="111" height="14" uuid="f48c0253-080e-44eb-b0a8-35c78dbdd9a0" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Diario de Efectivo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-8" x="666" y="0" width="116" height="14" uuid="1876c13c-e6dd-4056-996a-4ed21c2c830c" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <text><![CDATA[Pago]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="10" y="0" width="101" height="14" uuid="9bccd54b-07a0-4c37-bc38-aac0525f932f" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement>
+          <font size="10" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{datetrx} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-2" x="111" y="0" width="111" height="14" uuid="85d3fb76-316e-4d95-9d54-67618ed307d4" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{orderno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-3" x="222" y="0" width="111" height="14" uuid="466065f4-91d2-4ff0-b130-1195dc3a2513" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{invoiceno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-4" x="333" y="0" width="111" height="14" uuid="2f91777a-68a2-496c-912a-5ecbff2a2466" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{shipmentno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-5" x="444" y="0" width="111" height="14" uuid="31e3dac5-c768-4262-9f9d-a847b5a047ef" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{grandtotal} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="555" y="0" width="111" height="14" uuid="44ce3749-ac1c-4ea1-abe4-e46633817914" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{cashjournalno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-7" x="666" y="0" width="116" height="14" uuid="0198f0bf-0e86-4e27-b4ea-09344ccc88a1" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{paymentno}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="17" splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band height="14" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-20" x="594" y="0" width="145" height="14" uuid="d50d3d55-c38f-4bfc-ae65-7d78d494167c" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-21" x="739" y="0" width="43" height="14" uuid="11a8c085-75e9-4876-9cf3-f77d0e7ed0ff" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+  <lastPageFooter>
+    <band height="16" splitType="Stretch" />
+  </lastPageFooter>
+  <summary>
+    <band height="119" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-11" x="444" y="0" width="111" height="12" uuid="060ff5aa-e1ac-4ab1-9f1a-560cad7a060c" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right">
+          <font isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{BIG_GRANDTOTAL}.toString()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-9" x="0" y="0" width="118" height="12" uuid="f7bfd46a-ca58-4776-adce-42d5def099f2" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement>
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Gran Total]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-10" x="0" y="23" width="158" height="16" uuid="4cc8602f-2220-4bc6-94b9-5bbe21becc41" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <text><![CDATA[Resumen por Tipo de Pago:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-11" x="391" y="23" width="180" height="16" uuid="aaa68d5c-aa3f-4e29-969f-7e940a92ed70" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <text><![CDATA[Resumen por Tipo de Documento:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-22" x="0" y="39" width="391" height="66" uuid="36201392-fcfd-4bc1-bff7-8275e4ae98af" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textFieldExpression><![CDATA[($V{GRANDTOTAL_PAYTYPE_CASH}.signum() != 0 ? "Efectivo: " + $V{GRANDTOTAL_PAYTYPE_CASH}.toString() + "\n": "") +
+($V{GRANDTOTAL_PAYTYPE_CCARD}.signum() != 0 ? "Tarjeta de Credito: " + $V{GRANDTOTAL_PAYTYPE_CCARD}.toString() + "\n": "") +
+($V{GRANDTOTAL_PAYTYPE_CREDIT}.signum() != 0 ? "Credito: " + $V{GRANDTOTAL_PAYTYPE_CREDIT}.toString() : "")]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-23" x="391" y="39" width="391" height="66" uuid="0cb82f5b-99e2-43e5-a370-82f1a547cffe" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textFieldExpression><![CDATA[($V{GRANDTOTAL_DOCTYPE_BOLETA}.signum() != 0 ? "Boleta: " + $V{GRANDTOTAL_DOCTYPE_BOLETA}.toString() + "\n" : "") +
+($V{GRANDTOTAL_DOCTYPE_INVOICE}.signum() != 0 ? "Factura: " + $V{GRANDTOTAL_DOCTYPE_INVOICE}.toString() + "\n" : "") +
+($V{GRANDTOTAL_DOCTYPE_CREDITGUIDE}.signum() != 0 ? "Guia de Credito: " + $V{GRANDTOTAL_DOCTYPE_CREDITGUIDE}.toString() + "\n" : "")]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+</jasperReport>

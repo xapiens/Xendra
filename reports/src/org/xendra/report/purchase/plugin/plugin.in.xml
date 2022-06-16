@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="purchase reports extension" description="purchase reports extension" id="org.xendra.report.purchase" version="1.0" category="Compras" synchronized="@timestamp@" tags="Compras" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

@@ -1,0 +1,123 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GuiaRemisionMaby" pageWidth="612" pageHeight="792" whenNoDataType="NoDataSection" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca8cd369-56ea-47ff-99b1-a10f30679aff">
+  <property name="Description" value="GuiaRemisionMaby_old.jrxml" />
+  <property name="FileName" value="GuiaRemisionMaby_old.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.196" />
+  <property name="Identifier" value="b7f91354-6c82-4dbb-adfc-1af251408310" />
+  <property name="ireport.zoom" value="0.75" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="RECORD_ID" class="java.lang.Integer">
+    <defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[with direccion as (
+select
+l.m_locator_id,
+lt.address1
+from m_locator l
+join m_warehouse w on l.m_warehouse_id = w.m_warehouse_id
+join c_location lt on w.c_location_id = lt.c_location_id)
+
+select
+o.documentno,
+(select name from m_product p where ol.m_product_id = p.m_product_id) as producto,
+(select value from m_product p where ol.m_product_id = p.m_product_id) as codproducto,
+ol.description,
+ol.movementqty,
+g.name,
+g.value,
+--ol.c_uom_id,
+coalesce((select uomsymbol from c_uom u where ol.c_uom_id = u.c_uom_id),'') as unidad,
+
+--ol.m_locatorto_id,
+(select address1 from direccion where direccion.m_locator_id = ol.m_locatorto_id) as almacen,
+(select address1 from direccion where direccion.m_locator_id = ol.m_locator_id) as destino,
+
+ol.line
+--*
+
+from
+m_movement o
+join m_movementline ol on(o.m_movement_id = ol.m_movement_id)
+join c_bpartner g on (o.c_bpartner_id = g.c_bpartner_id)
+where o.m_movement_id = $P{RECORD_ID} and o.isactive = 'Y']]></queryString>
+  <field name="documentno" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="codproducto" class="java.lang.String" />
+  <field name="description" class="java.lang.String" />
+  <field name="movementqty" class="java.math.BigDecimal" />
+  <field name="name" class="java.lang.String" />
+  <field name="value" class="java.lang.String" />
+  <field name="unidad" class="java.lang.String" />
+  <field name="almacen" class="java.lang.String" />
+  <field name="destino" class="java.lang.String" />
+  <field name="line" class="java.math.BigDecimal" />
+  <title>
+    <band height="302" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="108" y="135" width="100" height="13" uuid="8c661a3c-fca4-4919-b833-84a022d7391b" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="342" y="193" width="199" height="13" uuid="58d16f0b-68ba-4a8a-b2fb-84ff7b65ae81" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="342" y="157" width="199" height="25" uuid="14ad2a8d-17e8-4ce3-9fdf-c468921fdf12" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="413" y="130" width="100" height="20" uuid="d42cd4b3-f0a9-4e19-9850-3ae947ed3582" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="55" y="157" width="224" height="15" uuid="194a02c4-cfa5-4911-ae6f-fe120f33578a" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="55" y="193" width="100" height="15" uuid="e316b40e-50fb-47ef-9b03-d734be2f9de8" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <textField isStretchWithOverflow="true">
+        <reportElement x="0" y="1" width="321" height="13" uuid="74cf4158-92f3-434e-aab2-56da135d57d6" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="324" y="1" width="107" height="13" uuid="aa48e9c1-0eae-430c-8ff0-00e330cd89a3" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{codproducto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.000">
+        <reportElement x="431" y="1" width="66" height="13" uuid="d756d42a-9701-467a-84ba-86ebdd750010" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{movementqty}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="497" y="1" width="65" height="13" uuid="bb49974a-00e5-4fa4-a4b4-3b407af4b562" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <noData>
+    <band height="31" splitType="Stretch">
+      <staticText>
+        <reportElement x="139" y="3" width="286" height="27" uuid="7a8820ee-0004-4e60-a9c0-7e3bec2e287b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[LA GUIA DE REMISION NO EXISTE]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

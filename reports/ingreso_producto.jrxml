@@ -1,0 +1,273 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IngresoProducto" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="646b6ac4-f077-4841-8ae2-8f23cdcab399">
+  <property name="Description" value="ingreso_producto.jrxml" />
+  <property name="FileName" value="ingreso_producto.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:09:56.698" />
+  <property name="Identifier" value="ac2c975b-5f5a-4d3d-bdf4-30bc0ef6e6aa" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <property name="ireport.callouts" value="##Mon May 20 17:00:27 PET 2013" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="Created1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="Created2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_PriceList_Version_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[Select DISTINCT
+p.m_product_id as pr,
+p.name,
+p.value,
+u.name as user,
+date(p.created) as fecha,
+t.name as tipo,
+a.pricestd as compra,
+round(a.pricelist,2) as precio,
+p.identifier
+
+From
+m_product p
+inner join m_productprice a on p.m_product_id=a.m_product_id
+inner join m_pricelist_version  t on t.m_pricelist_version_id =a.m_pricelist_version_id
+inner join ad_user u on p.createdby=u.ad_user_id
+where
+p.ad_client_id=$P{AD_Client_ID} and
+a.m_pricelist_version_id=$P{M_PriceList_Version_ID} and
+date(p.created) between date($P{Created1}) and date($P{Created2})
+
+order by p.m_product_id]]></queryString>
+  <field name="pr" class="java.math.BigDecimal" />
+  <field name="name" class="java.lang.String" />
+  <field name="value" class="java.lang.String" />
+  <field name="user" class="java.lang.String" />
+  <field name="fecha" class="java.sql.Date" />
+  <field name="tipo" class="java.lang.String" />
+  <field name="compra" class="java.math.BigDecimal" />
+  <field name="precio" class="java.math.BigDecimal" />
+  <field name="identifier" class="java.lang.String" />
+  <title>
+    <band height="87" splitType="Stretch">
+      <rectangle radius="10">
+        <reportElement x="152" y="0" width="419" height="84" uuid="7c278d8f-a30c-4e73-ac9a-f9cd5fc79dba" />
+      </rectangle>
+      <staticText>
+        <reportElement x="206" y="34" width="100" height="12" uuid="845b9700-a09a-49e2-83ed-adbd12feb60e" />
+        <textElement verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[DEL :]]></text>
+      </staticText>
+      <rectangle radius="10">
+        <reportElement x="5" y="0" width="146" height="84" uuid="38c5d9b8-bda4-4253-b937-7cdbbb96cd47" />
+      </rectangle>
+      <staticText>
+        <reportElement x="216" y="12" width="262" height="15" uuid="73efe6d6-cabc-4dd1-9ee3-9b34f36396d4" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="12" isBold="true" isUnderline="false" />
+        </textElement>
+        <text><![CDATA[PRODUCTOS NUEVOS POR FECHA]]></text>
+      </staticText>
+      <componentElement>
+        <reportElement x="499" y="4" width="58" height="28" uuid="dee9d206-a8a2-42c9-9312-e37998fc15ab" />
+        <jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="2of7" drawText="false" checksumRequired="false">
+          <jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+        </jr:barbecue>
+      </componentElement>
+      <staticText>
+        <reportElement x="206" y="50" width="100" height="12" uuid="687c8281-2bd2-43a9-bda5-1a9a4eb96e84" />
+        <textElement verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[HASTA:]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="317" y="63" width="160" height="17" uuid="649e6711-9342-4b4d-8b9c-4e67f660bf84" />
+        <textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="206" y="64" width="100" height="12" uuid="9b7473d8-d68c-4322-830b-a3e5a02a949e" />
+        <textElement verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[TIPO DE PRECIO:]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="316" y="33" width="147" height="13" uuid="a965f619-6b0a-4c45-9d9f-a47e61391948" />
+        <textFieldExpression><![CDATA[$P{Created1}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="316" y="47" width="145" height="13" uuid="03facbb3-258d-4a06-9761-1c48e4cbeef4" />
+        <textFieldExpression><![CDATA[$P{Created2}]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <columnHeader>
+    <band height="24" splitType="Stretch">
+      <staticText>
+        <reportElement x="1" y="4" width="79" height="15" uuid="39ebeee8-ef22-4b18-9772-27d53fb88802" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[CODIGO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="117" y="4" width="198" height="15" uuid="4848e2b3-291e-4a08-b7c2-9e1078fc32c0" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[PRODUCTO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="434" y="4" width="43" height="15" uuid="523c8b20-d30c-484c-868f-2fb9ccf66f68" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[PRECIO]]></text>
+      </staticText>
+      <line>
+        <reportElement x="116" y="2" width="1" height="19" uuid="a0e31bb6-4c7f-42b5-8275-40d012b4517e" />
+        <graphicElement>
+          <pen lineWidth="1.25" lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="434" y="2" width="1" height="18" uuid="cadcff58-9782-4f2a-a140-84d672591b69" />
+        <graphicElement>
+          <pen lineWidth="1.25" lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="0" y="20" width="575" height="1" uuid="b4850e03-4451-4e71-9114-afe0cc567b80" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="514" y="2" width="1" height="18" uuid="12d45474-4b7d-4a86-a384-5017879622ec" />
+        <graphicElement>
+          <pen lineWidth="1.25" lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="524" y="4" width="47" height="15" uuid="f65802d7-4f93-4ab2-ab2e-811e0bf139d8" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[USUARIO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="478" y="3" width="33" height="15" uuid="4d393d2f-9572-477d-89e1-8b1b37cd81cc" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[CREADO]]></text>
+      </staticText>
+      <line>
+        <reportElement x="477" y="1" width="1" height="18" uuid="2231c81f-471c-465f-a7c7-46fdb15d32b9" />
+        <graphicElement>
+          <pen lineWidth="1.25" lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="-2" y="1" width="575" height="1" uuid="c4749c9f-d033-4592-b4ee-3783b8171f96" />
+        <graphicElement>
+          <pen lineWidth="2.0" lineStyle="Double" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="317" y="4" width="117" height="14" uuid="cdd7402d-3f1d-4f37-89d8-275beedf7925" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[IDENTIFICADOR]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="80" y="5" width="35" height="15" uuid="eb02c1ad-64a1-4ccd-8a37-718a5ae1a935" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[ID]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="13" splitType="Stretch">
+      <elementGroup />
+      <textField>
+        <reportElement x="116" y="0" width="200" height="11" uuid="bfa6dd7e-592c-40f7-bc4e-7f11da09ecd8" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="0" y="0" width="80" height="11" uuid="277d9304-49aa-42dc-9661-d1d4e4ab2188" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="514" y="0" width="60" height="11" uuid="fa559212-1630-4126-b5f7-75a00643fe31" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="436" y="0" width="41" height="11" uuid="bd80b7b5-59a3-40d7-938b-7b742c228e90" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yy">
+        <reportElement x="477" y="0" width="37" height="11" uuid="ca4b758a-eb9d-4b1f-a6e0-915ee2ad006b" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="317" y="0" width="119" height="11" uuid="bd9562b6-08e8-4d25-8596-af75b7cf49fd" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{identifier}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="80" y="0" width="36" height="11" uuid="a83d8173-8ea0-4e6f-80f8-c280d87b6902" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pr}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <pageFooter>
+    <band />
+  </pageFooter>
+  <noData>
+    <band height="60">
+      <staticText>
+        <reportElement x="16" y="5" width="543" height="35" uuid="4a9b86d2-1830-4cca-a5a5-3bde4566dcf0" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="15" isBold="true" />
+        </textElement>
+        <text><![CDATA[CUMPITA POR EL MOMENTO NO HAY NINGUN PRODUCTO NUEVO INGRESADO EN ESTA FECHA]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="166" y="41" width="240" height="19" uuid="efa1b298-aa61-4485-84a8-20c6a9267d96" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[¡DISCULPE LA MOLESTIA!]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

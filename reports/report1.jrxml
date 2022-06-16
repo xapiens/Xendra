@@ -1,0 +1,627 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendedoresComisiones" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="28" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f034b991-5e83-476c-9984-4f53ec3003f5">
+  <property name="Description" value="report1.jrxml" />
+  <property name="FileName" value="report1.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:35.826" />
+  <property name="Identifier" value="28129a25-e615-44b8-bc7e-7cb6061a1b94" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1992-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1992-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+  payment.documentno AS "pagonro",
+  cd_ds.multiplyrate as TC_ds,
+  cd_es.multiplyrate as TC_es,
+  'pb' as pagoTipo,
+  payment.datetrx AS "pagofecha",
+
+  (select accountno from c_bankaccount where c_bankaccount.ad_client_id = payment.ad_client_id and c_bankaccount.c_bankaccount_id = payment.c_bankaccount_id) as bankaccount,
+  (select name from c_bank where c_bank.c_bank_id =
+	(select c_bank_id from c_bankaccount where c_bankaccount.ad_client_id = c_bank.ad_client_id and c_bankaccount.c_bankaccount_id = payment.c_bankaccount_id)) as bank,
+  payment.checkno as cheque,
+
+  c_currency.iso_code,
+  payment.payamt as payamt,
+  inv.documentno AS "paiddocnro",
+  (select documentno from c_order where payment.ad_client_id = c_order.ad_client_id and inv.c_order_id = c_order.c_order_id) as "orderNro",
+  inv.salesrep_id AS "vendorId",
+  tbl_pc.iso_code as isoCodeItem,
+ -- inv.grandtotal,
+ -- (case when tbl_pc.iso_code = 'S'
+--	then inv.grandtotal
+--	when tbl_pc.iso_code = '$'
+--	then round((inv.grandtotal*100/(100.00+taxtbl.rate))*cd_ds.multiplyrate,2)
+--	when tbl_pc.iso_code = 'E'
+--	then round((inv.grandtotal*100/(100.00+taxtbl.rate))*cd_es.multiplyrate,2)
+--	end) docTotalSolesConvertedSoles,
+  (case when tbl_pc.iso_code = 'S'
+		then 1.00
+	when tbl_pc.iso_code = '$'
+		then cd_ds.multiplyrate
+	when tbl_pc.iso_code = 'E'
+		then cd_es.multiplyrate
+	end
+  ) as tcItem,
+  --invline.linenetamt AS "itemMontoBase",
+  --- % comisionable del item., usamos todo en moneda origina de factura o documento.
+   (
+	-- Dividmos el monto total sin igv vs el montot total sin igv y determinamos el %
+	round((invline.linenetamt *100.0)/(
+		--  el monto sin igv
+		inv.grandtotal*100/(100.00+taxtbl.rate)),2)
+   ) as porParaComision,
+   calc_comisionitem(payment.payamt,c_currency.iso_code,inv.grandtotal,tbl_pc.iso_code ,invline.linenetamt,
+	cd_ds.multiplyrate,cd_es.multiplyrate,taxtbl.rate,plannedqty) as comision,
+
+  (case when tbl_pc.iso_code = '$'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseDolares,
+  (case when tbl_pc.iso_code = 'S/.'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseSoles,
+  (case when tbl_pc.iso_code = 'E'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseEuros,
+ -- (case when tbl_pc.iso_code = '$'
+--	then round(invline.linenetamt*cd_ds.multiplyrate,2)
+--	when tbl_pc.iso_code = 'E'
+--	then round(invline.linenetamt*cd_es.multiplyrate,2)
+--	when tbl_pc.iso_code = 'S'
+--	then invline.linenetamt
+--	else 0
+--	end) itemBaseConvertedSoles,
+
+  c_project.plannedqty,
+  (select name from c_bpartner where payment.ad_client_id = c_bpartner.ad_client_id and payment.c_bpartner_id = c_bpartner.c_bpartner_id) as partnerName,
+  (select name from c_doctype_trl where c_doctype_trl.ad_client_id = inv.ad_client_id  AND
+  c_doctype_trl.c_doctype_id = inv.c_doctype_id) as docPagoTipo,
+  taxtbl.rate,
+  (select m_product."name" from m_product where m_product.ad_client_id = payment.ad_client_id
+  and m_product.m_product_id = invline.m_product_id) as productName
+  --c_invoiceline.qtyentered,
+  --c_invoiceline.priceentered,
+  --c_invoiceline.priceactual
+  FROM
+  c_payment payment join c_invoice inv on payment.c_invoice_id = inv.c_invoice_id and payment.datetrx between date($P{DateFrom1}) and date($P{DateFrom2})
+  LEFT OUTER JOIN c_invoiceline invline on (invline.c_invoice_id = inv.c_invoice_id)
+  LEFT OUTER JOIN c_tax taxtbl on ( invline.ad_client_id = taxtbl.ad_client_id  and taxtbl.c_tax_id = invline.c_tax_id)
+  LEFT OUTER JOIN c_currency tbl_pc on ( inv.c_currency_id = tbl_pc.c_currency_id)
+  LEFT OUTER JOIN c_currency  on ( payment.c_currency_id = c_currency.c_currency_id)
+  LEFT OUTER JOIN c_project  on ( invline.ad_client_id = c_project.ad_client_id AND invline.c_project_id = c_project.c_project_id)
+
+ -- Tipo de cambio dolares a soles
+  LEFT OUTER JOIN c_conversion_rate cd_ds on (cd_ds.c_conversion_rate_id=  (select c_conversion_rate_id from c_conversion_rate cds2 where cds2.c_currency_id = 100
+  and cds2.c_currency_id_to = 308
+  and
+  cds2.c_conversiontype_id = 1000005 and cds2.validfrom = date($P{DateFrom2}) order by  c_conversion_rate_id  desc limit 1))
+ -- Tipo de cambio euros a soles
+  LEFT OUTER JOIN c_conversion_rate cd_es on (cd_es.c_conversion_rate_id=  (select c_conversion_rate_id from c_conversion_rate cds2 where cds2.c_currency_id = 102
+  and cds2.c_currency_id_to = 308
+  and
+  cds2.c_conversiontype_id = 1000005 and cds2.validfrom = date($P{DateFrom2}) order by  c_conversion_rate_id  desc limit 1))
+
+
+WHERE
+  -- Si es factura o boleta y tiene comision
+  payment.docstatus = 'CO' and payment.isactive = 'Y' and (inv.c_doctype_id = '1001040' or inv.c_doctype_id = '1001094')
+--and inv.salesrep_id = 1000360
+--and plannedqty > 0
+and
+payment.datetrx between date($P{DateFrom1}) and ($P{DateFrom2})
+
+union
+
+
+-- Busca en todos los boeline toda letra que este procesada y activa
+-- luego basado en el boe group que pertenece (canje)
+SELECT
+   distinct bg.documentno AS "pagonro",
+  cd_ds.multiplyrate as TC_ds,
+  cd_es.multiplyrate as TC_es,
+
+  'cj' as pagoTipo,
+  bg.updated AS "pagofecha",
+  '' as bankaccount,
+  '' as bank,
+  '' as cheque,
+  --el currency de la letra es siempre la usada en el canje.
+   lcur.iso_code,
+  -- En este caso ohmlux considera que una factura esta pagada si esta canjeada
+  -- Por lo tantoel monto ttal de la fctura se asumira como el monto pagado , este monto incuye el igv
+  -- PERO QUE PASA SI SOLO QUEDA SALDO LUEGO DE APLICARSE UNA NOTA DE CREDITO?
+  -- NO DEBERIA TOMARSE EL SALDO?
+  -- COMO DISTINGUIR UN SALDO APLICADO DE UNA FACTURA-RETENCION , YA QUE LA RETENCION
+  -- SI ES COMISONABLE DE EL SALDO QUE QUEDA DE APLICARSE UNA NOTA.
+  -- YA QUE LA NOTA DEBE RESTAR.
+  -- EN ESTE MOMENTO COMISONARE POR EL TOTAL DE LA FACTURA Y RESTARE LA COMISION POR EL TOTAL
+  -- DE LA NOTA REFRENCIADA
+  inv.grandtotal as payamt,
+    inv.documentno AS "paiddocnro",
+  (select documentno from c_order where bl.ad_client_id = c_order.ad_client_id and inv.c_order_id = c_order.c_order_id) as "orderNro",
+  inv.salesrep_id AS "vendorId",
+  tbl_pc.iso_code as isoCodeItem,
+
+    (case when lcur.iso_code = 'S'
+		then 1.00
+	when lcur.iso_code = '$'
+		then cd_ds.multiplyrate
+	when lcur.iso_code = 'E'
+		then cd_es.multiplyrate
+	end
+  ) as tcItem,
+
+
+  --invline.linenetamt AS "itemMontoBase",
+  --- % comisionable del item., usamos todo en moneda origina de factura o documento.
+   (
+	-- Dividmos el monto total sin igv vs el montot total sin igv y determinamos el %
+	round((invline.linenetamt *100.0)/(
+		--  el monto sin igv
+		inv.grandtotal*100/(100.00+taxtbl.rate)),2)
+   ) as porParaComision,
+-- CUIDADO EL TOTAL DE LA FACTURA ES USADO COMO MONTO DE PAGO
+   calc_comisionitem(inv.grandtotal,lcur.iso_code,inv.grandtotal,tbl_pc.iso_code ,invline.linenetamt,
+	cd_ds.multiplyrate,cd_es.multiplyrate,taxtbl.rate,plannedqty) as comision,
+ (case when tbl_pc.iso_code = '$'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseDolares,
+  (case when tbl_pc.iso_code = 'S/.'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseSoles,
+  (case when tbl_pc.iso_code = 'E'
+	then invline.linenetamt
+	else 0
+	end) as itemBaseEuros,
+
+  c_project.plannedqty,
+  (select name from c_bpartner where bl.ad_client_id = c_bpartner.ad_client_id and inv.c_bpartner_id = c_bpartner.c_bpartner_id) as partnerName,
+  (select name from c_doctype_trl where c_doctype_trl.ad_client_id = inv.ad_client_id  AND
+  c_doctype_trl.c_doctype_id = inv.c_doctype_id) as docPagoTipo,
+  taxtbl.rate,
+  (select m_product."name" from m_product where m_product.ad_client_id = bl.ad_client_id
+  and m_product.m_product_id = invline.m_product_id) as productName
+
+ from
+c_boeline bl
+join c_boegroup bg on bl.c_boegroup_id = bg.c_boegroup_id and bg.updated between '2010-05-01' and date($P{DateFrom2})
+join c_invoice inv on bl.c_invoice_id =  inv.c_invoice_id and (inv.c_doctype_id = '1001040' or inv.c_doctype_id = '1001094')
+join c_currency lcur on ( bl.c_currency_id = lcur.c_currency_id)
+JOIN c_currency tbl_pc on ( inv.c_currency_id = tbl_pc.c_currency_id)
+JOIN c_invoiceline invline on (invline.c_invoice_id = inv.c_invoice_id)
+join c_tax taxtbl on ( invline.ad_client_id = taxtbl.ad_client_id  and taxtbl.c_tax_id = invline.c_tax_id)
+--Comision
+LEFT OUTER JOIN c_project  on ( invline.ad_client_id = c_project.ad_client_id AND invline.c_project_id = c_project.c_project_id)
+-- Tipo de cambio dolares a soles
+  LEFT OUTER JOIN c_conversion_rate cd_ds on (cd_ds.c_conversion_rate_id=  (select c_conversion_rate_id from c_conversion_rate cds2 where cds2.c_currency_id = 100
+  and cds2.c_currency_id_to = 308
+  and
+  cds2.c_conversiontype_id = 1000005 and cds2.validfrom = date($P{DateFrom2}) order by  c_conversion_rate_id  desc limit 1))
+ -- Tipo de cambio euros a soles
+  LEFT OUTER JOIN c_conversion_rate cd_es on (cd_es.c_conversion_rate_id=  (select c_conversion_rate_id from c_conversion_rate cds2 where cds2.c_currency_id = 102
+  and cds2.c_currency_id_to = 308
+  and
+  cds2.c_conversiontype_id = 1000005 and cds2.validfrom = date($P{DateFrom2}) order by  c_conversion_rate_id  desc limit 1))
+
+where
+bl.processed = 'Y' and bl.isactive='Y' and
+bg.updated between date($P{DateFrom1}) and ($P{DateFrom2})
+--and inv.salesrep_id = 1000360
+-- and plannedqty > 0
+
+order by pagofecha,pagotipo,pagoNro,paiddocnro]]></queryString>
+  <field name="pagonro" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="tc_ds" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="tc_es" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="pagotipo" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="pagofecha" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="bankaccount" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="bank" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="cheque" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="iso_code" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="payamt" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="paiddocnro" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="orderNro" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="vendorId" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="isocodeitem" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="tcitem" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="porparacomision" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="comision" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="itembasedolares" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="itembasesoles" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="itembaseeuros" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="plannedqty" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="partnername" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="docpagotipo" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="rate" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="productname" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <variable name="tipoDocPagado" class="java.lang.String">
+    <variableExpression><![CDATA[$F{docpagotipo}.equalsIgnoreCase("Factura De Ventas") ? "FV" : "NC"]]></variableExpression>
+  </variable>
+  <variable name="cuentaBanco" class="java.lang.String">
+    <variableExpression><![CDATA[$F{bank}+$F{bankaccount}]]></variableExpression>
+  </variable>
+  <variable name="comision_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+    <variableExpression><![CDATA[$F{comision}]]></variableExpression>
+  </variable>
+  <variable name="comision_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{comision}]]></variableExpression>
+  </variable>
+  <group name="g_vendor">
+    <groupExpression><![CDATA[$F{vendorId}]]></groupExpression>
+    <groupHeader>
+      <band splitType="Stretch" />
+    </groupHeader>
+  </group>
+  <group name="g_pago">
+    <groupExpression><![CDATA[$F{pagonro}]]></groupExpression>
+    <groupHeader>
+      <band splitType="Stretch" />
+    </groupHeader>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="20" splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="34" splitType="Stretch">
+      <staticText>
+        <reportElement x="325" y="7" width="100" height="20" uuid="30136beb-7cb4-4580-be93-517689439aaa" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[COMISIONES]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="61" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="37" width="33" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="f4787f6e-1f2c-4f01-b3dc-ae28bcec0ded" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="51" y="37" width="43" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="83a7ba08-e40d-4ceb-8db6-c82ee093d49e" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro Pago]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="108" y="37" width="32" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="79ba6619-bfe1-4558-99ff-c0a853117d38" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Monto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="147" y="37" width="16" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="c7305edd-9ce4-41c5-a7a1-6d4e4b75299d" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[O/V]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="167" y="37" width="15" height="24" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="638efec6-9404-4a1e-b731-3f23e4bc4518" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo Doc.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="187" y="37" width="27" height="24" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="0a3606c2-67a5-4308-a92c-ad2dab745fb5" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro.Doc]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="325" y="37" width="44" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="425d9fb4-b192-41d4-9097-5ba64be00441" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Clente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="413" y="37" width="44" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="c5f5e575-fea0-4e71-a2eb-960c3c6d15a6" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="534" y="37" width="36" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="053858d4-ede0-479e-8e6b-ffd53c09bd12" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Dolares]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="577" y="37" width="36" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="8705b77f-a1b4-4237-95cb-3bb426fe6fb1" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Euros]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="622" y="37" width="36" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="e75eaa71-5f03-4b1d-8b90-67ffc23d6301" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Soles]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="682" y="37" width="19" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="7ee3f487-9842-4a25-afe7-6f5c20a439ba" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[%]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="734" y="37" width="36" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="72980ebe-f15d-420c-b1b9-d932f6d36c2e" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Comision]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="215" y="37" width="32" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="21554c16-c240-45c5-b048-2bc552146d74" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cuenta]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="286" y="37" width="32" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="43fff726-0979-4ad6-b201-d2d4018b6bc6" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cheqe]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="11" splitType="Stretch">
+      <textField>
+        <reportElement x="51" y="0" width="43" height="10" isPrintWhenDetailOverflows="true" uuid="5dc5d48d-a8a9-4242-94ab-9319a071fd5b">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pagonro}]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Group" evaluationGroup="g_pago" pattern="dd/MM/yyyy">
+        <reportElement x="0" y="0" width="33" height="10" isPrintWhenDetailOverflows="true" printWhenGroupChanges="g_pago" uuid="c704230c-3a3e-4466-884b-a27d47d1c9a2">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pagofecha}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="95" y="0" width="13" height="10" isPrintWhenDetailOverflows="true" uuid="eefa1c2d-175d-4a33-9c61-b5069f0728db">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{iso_code}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="108" y="0" width="32" height="10" isPrintWhenDetailOverflows="true" uuid="1442fece-4f46-4f68-a0e4-744b806db483">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{payamt}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="187" y="0" width="27" height="10" isPrintWhenDetailOverflows="true" uuid="5b2e4d74-798f-45c9-a939-a4bff48075e2" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{paiddocnro}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="147" y="0" width="16" height="10" isPrintWhenDetailOverflows="true" uuid="b6ece80a-5338-4709-8357-a9903a9d6c22" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{orderNro}]]></textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true">
+        <reportElement x="325" y="0" width="78" height="10" uuid="11a26c16-7450-4259-8ef1-baa3f6609fcd">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{partnername}]]></textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true">
+        <reportElement x="413" y="0" width="100" height="10" uuid="35172588-f0d3-438a-809c-17d129dd85f2" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="520" y="0" width="11" height="10" uuid="e4b64f3d-6629-426d-91fa-13c08bb2824a" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{isocodeitem}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="534" y="0" width="36" height="10" uuid="1a97292a-4d6f-419d-ab9f-4f24b4fdfedc" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{itembasedolares}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="577" y="0" width="36" height="10" uuid="a797e7b1-45e7-473e-ab2a-1d0a40122b9d" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{itembaseeuros}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="622" y="0" width="36" height="10" uuid="5f128925-ed08-4635-a44f-5a97f3e08cec" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{itembasesoles}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="682" y="0" width="19" height="10" uuid="2fccb413-5ac9-47bf-9448-fcab4a774b66" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{plannedqty}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="167" y="0" width="15" height="10" uuid="b3714419-90ee-4ccd-b0de-def55c7808f7" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{tipoDocPagado}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="734" y="0" width="36" height="10" uuid="ec943048-99ca-49e7-97b0-60186c5c1b53" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{comision}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000">
+        <reportElement x="692" y="0" width="28" height="10" uuid="c646aa60-9d8d-4c56-b187-4ad475061ba3" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tcitem}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="215" y="0" width="68" height="10" uuid="9ac1e165-3f30-46b5-a3c0-028d2339b39b">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{cuentaBanco}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="286" y="0" width="39" height="10" uuid="c90e4f99-3deb-473a-80a8-fa6c0f41f555">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cheque}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="660" y="0" width="19" height="10" uuid="0305bc9b-6f6a-4171-b224-042973c2e493" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porparacomision}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="35" y="0" width="11" height="10" uuid="ee61beaf-cd5e-437a-af0d-fc68c256f970">
+          <printWhenExpression><![CDATA[new Boolean($V{g_pago_COUNT}.intValue() == 1)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pagotipo}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="27" />
+  </columnFooter>
+  <pageFooter>
+    <band height="17" splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="50">
+      <textField evaluationTime="Report" pattern="#,##0.00;-#,##0.00">
+        <reportElement x="734" y="10" width="36" height="10" uuid="06304c87-8963-45ed-b3aa-7220dcb0cf79" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{comision_1}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="622" y="10" width="100" height="20" uuid="3c6e49a8-79dd-4d8b-95b9-2140212be8ac" />
+        <textFieldExpression><![CDATA[$V{comision_2}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+</jasperReport>

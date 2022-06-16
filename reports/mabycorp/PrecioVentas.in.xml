@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="VentasPrecio" Name="VentasPrecio" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="PrecioVentas.jrxml" Identifier="ebd9c158-e6aa-1b33-4114-65f32cc83fb1" Synchronized="2017-06-06 22:39:58.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="cc31a638-dabb-73ea-a68f-28d45b1e834b" Synchronized="2017-06-06 22:39:58.0" />
+  <parameter Name="M_Product_ID" Description="" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_Product_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="5a0f6af2-3d59-ff6c-5597-91f908d926d5" Synchronized="2017-06-06 22:39:58.0" />
+  <parameter Name="DateInvoiced" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateInvoiced" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="bcea4580-c6f1-6774-7423-8a6f53ae8e68" Synchronized="2017-06-06 22:39:58.0" />
+</process>
+
+

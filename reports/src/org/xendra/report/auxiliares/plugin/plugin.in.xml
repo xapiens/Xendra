@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="auxiliares report extension" description="auxiliares report extension" id="org.xendra.report.auxiliares" version="1.0" category="Administracion" synchronized="@timestamp@" tags="Administracion" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

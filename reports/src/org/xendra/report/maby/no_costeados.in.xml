@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Productos No Costeados" Name="Productos No Costeados" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="no_costeados.jrxml" Identifier="49b3ccd5-4112-31f2-1067-f27ae7f43147" Synchronized="2018-11-30 09:58:23.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="796b0720-64aa-ecf0-3cf7-d37799c84096" Synchronized="2017-06-06 22:39:53.0" />
+</process>
+
+

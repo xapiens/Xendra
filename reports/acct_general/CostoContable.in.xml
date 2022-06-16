@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="CostoContable" Name="CostoContable" BaseRole="ACT,ALL" Description="" Help="Muestra un resumen de las cuentas relacionadas con el costo" Classname="org.compiere.report.ReportStarter" CategoryName="Contabilidad" AccessLevel="3" EntityType="D" FileName="CostoContable.jrxml" Identifier="111fe344-db05-488f-b8ca-3bdc018a638f" Synchronized="2016-05-13 05:16:29.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="0075f703-41ff-4611-b6a6-a68f055a8597" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="26d69432-de8f-42da-86be-df874f24566e" Synchronized="2016-05-13 05:24:50.0" />
+</process>
+
+

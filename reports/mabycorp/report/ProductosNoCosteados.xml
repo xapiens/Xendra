@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="4e5acc15-a7d4-4a8f-9c44-1845d4b54864" Value="Productos No Costeados" Name="Productos No Costeados" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="no_costeados.jrxml" Identifier="49b3ccd5-4112-31f2-1067-f27ae7f43147" Synchronized="2012-09-20 18:28:18.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="no_costeados" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2cdfe84d-8094-402c-b140-126deb6fffa2">
+    <property name="Description" value="no_costeados.jrxml" />
+    <property name="FileName" value="no_costeados.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:31.805" />
+    <property name="Identifier" value="2eb9c35a-be1f-457d-a5aa-272ad2885cc0" />
+    <property name="ireport.zoom" value="2.0" />
+    <property name="ireport.x" value="216" />
+    <property name="ireport.y" value="39" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[select
+
+p.name,
+mp.value as codigo,
+mp.name as producto,
+currentcostprice,
+costaverage,
+pricelastpo,
+costaveragecumqty
+FROM xendra.m_product_costing pc
+join c_period p on  pc.c_period_id = p.c_period_id
+join m_product mp on pc.m_product_id = mp.m_product_id
+where costaveragecumqty < 0
+and pc.ad_client_id = $P{AD_Client_ID}
+order by costaveragecumqty]]></queryString>
+    <field name="name" class="java.lang.String" />
+    <field name="codigo" class="java.lang.String" />
+    <field name="producto" class="java.lang.String" />
+    <field name="currentcostprice" class="java.math.BigDecimal" />
+    <field name="costaverage" class="java.math.BigDecimal" />
+    <field name="pricelastpo" class="java.math.BigDecimal" />
+    <field name="costaveragecumqty" class="java.math.BigDecimal" />
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band splitType="Stretch" />
+    </title>
+    <pageHeader>
+      <band height="34" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText" x="200" y="6" width="152" height="12" uuid="d9b51490-1890-4a7f-85ce-2aa42a50ff25" />
+          <textElement textAlignment="Center">
+            <font size="10" isBold="true" isUnderline="true" />
+          </textElement>
+          <text><![CDATA[Productos No Costeados]]></text>
+        </staticText>
+        <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+          <reportElement key="textField-3" x="512" y="1" width="38" height="10" uuid="4928ae71-521a-420b-854d-72e1f4d863a7" />
+          <textElement verticalAlignment="Top">
+            <font size="6" isItalic="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+        </textField>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+          <reportElement key="textField-2" x="467" y="1" width="45" height="10" uuid="9468e97f-d1c0-4394-a9fc-a2b44681ccc4" />
+          <textElement verticalAlignment="Top">
+            <font size="6" isItalic="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+        </textField>
+        <textField evaluationTime="Report" isBlankWhenNull="false">
+          <reportElement key="textField-7" x="523" y="10" width="22" height="12" uuid="f5711394-59e6-4824-becc-32bc05bfd9fa" />
+          <textElement>
+            <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+          </textElement>
+          <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-6" x="458" y="10" width="65" height="12" uuid="bd18f066-03ea-4cce-bbe5-95e57a2111cf" />
+          <textElement textAlignment="Right">
+            <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+          </textElement>
+          <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="217" y="24" width="75" height="10" uuid="b167cc24-4b88-4e84-805b-a5af294fea55" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[codigo]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="300" y="24" width="255" height="10" uuid="2b995c13-6377-4ec1-ad7e-a7a3e63a1d5b" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Nombre]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="0" y="24" width="37" height="10" uuid="0efd4caa-c2f7-47de-a85b-e7e42d534adb" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Periodo]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="37" y="24" width="45" height="10" uuid="51bf112e-eccc-4cbc-b681-a7ffb32285d4" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Precio]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="82" y="24" width="45" height="10" uuid="2caf06c2-ff36-4ff2-901b-46c5b8e17b3a" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Cost.Prom.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="127" y="24" width="45" height="10" uuid="08b0f81c-c56f-4ca0-938b-43a94561d567" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Ult.Comp.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="172" y="24" width="45" height="10" uuid="e2ac28de-2136-4e53-8453-9d29a03fb9f6" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <text><![CDATA[Cantidad]]></text>
+        </staticText>
+      </band>
+    </pageHeader>
+    <columnHeader>
+      <band splitType="Stretch" />
+    </columnHeader>
+    <detail>
+      <band height="11" splitType="Stretch">
+        <textField>
+          <reportElement x="217" y="0" width="75" height="10" uuid="169bbebb-e3b8-42b2-a230-d94ff320f835" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="300" y="0" width="255" height="10" uuid="0b511b4b-f8c4-47b5-8162-cd36b08ca6d8" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="0" y="0" width="37" height="10" uuid="a09dbcbc-2222-4ff4-bf08-294a276c1832" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+        </textField>
+        <textField pattern="###0.0000">
+          <reportElement x="37" y="0" width="45" height="10" uuid="2f631ee0-443e-4fd0-9199-77158926d852" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{currentcostprice}]]></textFieldExpression>
+        </textField>
+        <textField pattern="###0.0000">
+          <reportElement x="82" y="0" width="45" height="10" uuid="c2561d80-98c5-446e-bbf9-0bbcc41580fb" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{costaverage}]]></textFieldExpression>
+        </textField>
+        <textField pattern="###0.0000">
+          <reportElement x="127" y="0" width="45" height="10" uuid="ca5d38d1-1330-49ab-aed7-6faa8db4dc2e" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{pricelastpo}]]></textFieldExpression>
+        </textField>
+        <textField pattern="###0.0000">
+          <reportElement x="172" y="0" width="45" height="10" uuid="a4e1bee8-4fb8-41b9-9158-43722349ef81" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{costaveragecumqty}]]></textFieldExpression>
+        </textField>
+      </band>
+    </detail>
+    <columnFooter>
+      <band splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band splitType="Stretch" />
+    </pageFooter>
+    <summary>
+      <band splitType="Stretch" />
+    </summary>
+  </jasperReport>
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="796b0720-64aa-ecf0-3cf7-d37799c84096" Synchronized="2017-06-06 22:39:53.0" />
+</process>
+
+

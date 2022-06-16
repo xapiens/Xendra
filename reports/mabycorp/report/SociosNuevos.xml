@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="0ee378ae-9ddb-40e2-b10c-da53828bf69c" Value="Socios Nuevos" Name="Socios Nuevos" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="ingreso_socio.jrxml" Identifier="60eab039-d16a-4d25-8eb8-3c3fbd77ee3e" Synchronized="2017-06-06 22:40:02.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IngresoSocio" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="646b6ac4-f077-4841-8ae2-8f23cdcab399">
+    <property name="Description" value="ingreso_socio.jrxml" />
+    <property name="FileName" value="ingreso_socio.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:35.949" />
+    <property name="Identifier" value="a132b023-190e-4d74-877d-64dfc4ca491d" />
+    <property name="ireport.zoom" value="2.0" />
+    <property name="ireport.x" value="387" />
+    <property name="ireport.y" value="143" />
+    <property name="ireport.callouts" value="##Mon May 20 17:00:27 PET 2013" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Created1" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <parameter name="Created2" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[Select DISTINCT
+b.c_bpartner_id as pr,
+b.name,
+b.value,
+u.name as user,
+date(b.created) as fecha,
+b.identifier
+
+From
+c_bpartner b
+inner join ad_user u on b.createdby=u.ad_user_id
+where
+b.ad_client_id=$P{AD_Client_ID} and
+date(b.created) between date($P{Created1}) and date($P{Created2})]]></queryString>
+    <field name="pr" class="java.math.BigDecimal" />
+    <field name="name" class="java.lang.String" />
+    <field name="value" class="java.lang.String" />
+    <field name="user" class="java.lang.String" />
+    <field name="fecha" class="java.sql.Date" />
+    <field name="identifier" class="java.lang.String" />
+    <title>
+      <band height="87" splitType="Stretch">
+        <rectangle radius="10">
+          <reportElement x="152" y="0" width="419" height="84" uuid="7c278d8f-a30c-4e73-ac9a-f9cd5fc79dba" />
+        </rectangle>
+        <staticText>
+          <reportElement x="206" y="34" width="100" height="12" uuid="845b9700-a09a-49e2-83ed-adbd12feb60e" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[DEL :]]></text>
+        </staticText>
+        <rectangle radius="10">
+          <reportElement x="5" y="0" width="146" height="84" uuid="38c5d9b8-bda4-4253-b937-7cdbbb96cd47" />
+        </rectangle>
+        <staticText>
+          <reportElement x="216" y="12" width="262" height="15" uuid="73efe6d6-cabc-4dd1-9ee3-9b34f36396d4" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="12" isBold="true" isUnderline="false" />
+          </textElement>
+          <text><![CDATA[PRODUCTOS SOCIOS POR FECHA]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="206" y="50" width="100" height="12" uuid="687c8281-2bd2-43a9-bda5-1a9a4eb96e84" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[HASTA:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="316" y="33" width="147" height="13" uuid="a965f619-6b0a-4c45-9d9f-a47e61391948" />
+          <textFieldExpression><![CDATA[$P{Created1}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="316" y="47" width="145" height="13" uuid="03facbb3-258d-4a06-9761-1c48e4cbeef4" />
+          <textFieldExpression><![CDATA[$P{Created2}]]></textFieldExpression>
+        </textField>
+      </band>
+    </title>
+    <columnHeader>
+      <band height="24" splitType="Stretch">
+        <staticText>
+          <reportElement x="28" y="4" width="50" height="15" uuid="39ebeee8-ef22-4b18-9772-27d53fb88802" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[RUC]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="106" y="2" width="252" height="15" uuid="4848e2b3-291e-4a08-b7c2-9e1078fc32c0" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[SOCIO DE NEGOCIO]]></text>
+        </staticText>
+        <line>
+          <reportElement x="104" y="2" width="1" height="19" uuid="a0e31bb6-4c7f-42b5-8275-40d012b4517e" />
+          <graphicElement>
+            <pen lineWidth="1.25" lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="0" y="20" width="575" height="1" uuid="b4850e03-4451-4e71-9114-afe0cc567b80" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="-2" y="1" width="575" height="1" uuid="c4749c9f-d033-4592-b4ee-3783b8171f96" />
+          <graphicElement>
+            <pen lineWidth="2.0" lineStyle="Double" />
+          </graphicElement>
+        </line>
+        <staticText>
+          <reportElement x="369" y="4" width="201" height="14" uuid="cdd7402d-3f1d-4f37-89d8-275beedf7925" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[IDENTIFICADOR]]></text>
+        </staticText>
+      </band>
+    </columnHeader>
+    <detail>
+      <band height="13" splitType="Stretch">
+        <elementGroup />
+        <textField>
+          <reportElement x="106" y="0" width="252" height="11" uuid="bfa6dd7e-592c-40f7-bc4e-7f11da09ecd8" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="2" y="0" width="102" height="11" uuid="277d9304-49aa-42dc-9661-d1d4e4ab2188" />
+          <textElement textAlignment="Center">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="358" y="0" width="212" height="11" uuid="bd9562b6-08e8-4d25-8596-af75b7cf49fd" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{identifier}]]></textFieldExpression>
+        </textField>
+      </band>
+    </detail>
+    <pageFooter>
+      <band />
+    </pageFooter>
+    <noData>
+      <band height="60">
+        <staticText>
+          <reportElement x="16" y="5" width="543" height="35" uuid="4a9b86d2-1830-4cca-a5a5-3bde4566dcf0" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="15" isBold="true" />
+          </textElement>
+          <text><![CDATA[CUMPITA POR EL MOMENTO NO HAY NINGUN PRODUCTO NUEVO INGRESADO EN ESTA FECHA]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="166" y="41" width="240" height="19" uuid="efa1b298-aa61-4485-84a8-20c6a9267d96" />
+          <textElement textAlignment="Center">
+            <font isBold="true" />
+          </textElement>
+          <text><![CDATA[¡DISCULPE LA MOLESTIA!]]></text>
+        </staticText>
+      </band>
+    </noData>
+  </jasperReport>
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="51d79fa1-368c-45aa-b54a-c31e7fac4451" Synchronized="2017-06-06 22:40:02.0" />
+  <parameter Name="Created" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="Created" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="08a501fb-f0b0-4b5b-b558-98d89be0df63" Synchronized="2017-06-06 22:40:02.0" />
+</process>
+
+

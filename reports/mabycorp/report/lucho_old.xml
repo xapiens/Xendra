@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lucho" pageWidth="595" pageHeight="842" columnWidth="591" leftMargin="2" rightMargin="2" topMargin="11" bottomMargin="11" uuid="756c2b31-5f7f-4d3c-9921-7bb3b7fcff9e">
+  <property name="Description" value="lucho_old.jrxml" />
+  <property name="FileName" value="lucho_old.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:35.643" />
+  <property name="Identifier" value="52566dad-8cac-4eeb-8eab-3d7a06455696" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+--o.c_bpartner_id,
+--o.c_bpartner_location_id,
+--o.c_currency_id,
+--ol.m_product_id,
+s.name as socio,
+o.documentno,
+(select name from m_product p where ol.m_product_id = p.m_product_id) as producto,
+(select value from m_product p where ol.m_product_id = p.m_product_id) as codproducto,
+(select case when ol.movementtype = 'C' then 'Cambio' when ol.movementtype = 'F' then 'Faltante' else ' ' end) as tipo_mov,
+(select case when o.description is null then ' ' else o.description end) as observacion,
+ol.movementqty,
+o.movementdate as fecha_doc,
+--ol.c_uom_id,
+coalesce((select uomsymbol from c_uom u where ol.c_uom_id = u.c_uom_id),'') as unidad,
+
+--ol.m_locatorto_id,
+(select substr((select value from m_locator j where ol.m_locatorto_id = j.m_locator_id),8,25)) as almacen,
+--ol.m_locator_id,
+(select value from m_locator j where ol.m_locator_id = j.m_locator_id) as destino,
+
+ol.line
+--*
+
+from
+m_movement o
+join m_movementline ol on(o.m_movement_id = ol.m_movement_id)
+join c_bpartner s on(o.c_bpartner_id = s.c_bpartner_id)
+where
+
+o.c_bpartner_id = $P{C_BPartner_ID}
+and o.isactive = 'Y'
+and ol.isregularize = 'N'
+and o.docstatus = 'CO'
+order by o.movementdate asc]]></queryString>
+  <field name="socio" class="java.lang.String" />
+  <field name="documentno" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="codproducto" class="java.lang.String" />
+  <field name="tipo_mov" class="java.lang.String" />
+  <field name="observacion" class="java.lang.String" />
+  <field name="movementqty" class="java.math.BigDecimal" />
+  <field name="fecha_doc" class="java.sql.Timestamp" />
+  <field name="unidad" class="java.lang.String" />
+  <field name="almacen" class="java.lang.String" />
+  <field name="destino" class="java.lang.String" />
+  <field name="line" class="java.math.BigDecimal" />
+  <group name="b copia">
+    <groupExpression><![CDATA[$F{socio}]]></groupExpression>
+  </group>
+  <title>
+    <band height="56" splitType="Stretch">
+      <staticText>
+        <reportElement x="121" y="6" width="316" height="19" uuid="ca37988a-bc8b-4003-a75c-a5f0d82d2809" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="Arial" size="12" isBold="true" />
+        </textElement>
+        <text><![CDATA[DIFERENCIAS DE ENTREGA]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="14" y="29" width="117" height="20" uuid="ee1d035a-161d-4a5d-9899-18766737b79e" />
+        <textElement verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[Socio de Negocio :]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="136" y="29" width="239" height="20" uuid="be1a307e-dcff-49b9-ba47-ad0f3cc35753" />
+        <textElement verticalAlignment="Middle">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{socio}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy h.mm a">
+        <reportElement x="448" y="29" width="126" height="20" uuid="604ca0fb-2a4d-40a5-80b0-10e340706e69" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <columnHeader>
+    <band height="23" splitType="Stretch">
+      <staticText>
+        <reportElement x="2" y="3" width="60" height="18" uuid="907fa715-8d0d-4b1f-ade9-544d3bb80765" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[CODIGO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="63" y="3" width="221" height="18" uuid="6f1a944b-f5a6-4c77-a71e-0fa543a5a908" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[DESCRIPCION]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="284" y="3" width="31" height="18" uuid="0ff7e3da-2324-43ed-8483-6095dd61b932" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[CANT.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="316" y="3" width="21" height="18" uuid="ee4336f6-9b8a-4e1b-b35e-a3506e863d35" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[UM]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="337" y="3" width="58" height="18" uuid="084143da-9b14-4cea-aa74-fd0891b7a492" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[MOTIVO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="395" y="3" width="64" height="18" uuid="084143da-9b14-4cea-aa74-fd0891b7a492" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[FECHA_DOC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="460" y="3" width="63" height="18" uuid="084143da-9b14-4cea-aa74-fd0891b7a492" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[DOC_REF.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="524" y="3" width="65" height="18" uuid="084143da-9b14-4cea-aa74-fd0891b7a492" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[ALMACEN]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="15" splitType="Stretch">
+      <textField>
+        <reportElement x="2" y="3" width="60" height="11" uuid="ea019ec7-6bfc-49f1-b8b4-253620d89c06" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{codproducto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="63" y="3" width="221" height="11" uuid="f294bd24-301a-4355-b775-59f40dee6f95" />
+        <textElement verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.000">
+        <reportElement x="284" y="3" width="31" height="11" uuid="0d85dc96-4335-4177-a9cb-bb72b2c4d22b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{movementqty}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="315" y="3" width="21" height="11" uuid="396642e3-d125-4e83-b31c-967aa98e60be" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="337" y="3" width="58" height="11" uuid="37e1d200-821d-4812-96c3-18afdf4b2280" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipo_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="395" y="3" width="64" height="11" uuid="8aac4e04-ab26-4206-9e23-3866b91b0547" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha_doc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="460" y="3" width="63" height="11" uuid="38dbd30c-2a54-4ee2-b76a-dfd1216bb165" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="524" y="3" width="65" height="11" uuid="57d10fbc-7dd2-414a-8154-6fe8fd4e3335" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+</jasperReport>
+
+

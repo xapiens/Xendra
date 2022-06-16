@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato5_2_1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="4dcfa7f5-5547-4d0c-9b97-2eba87e5ab5d">
+	<property name="Description" value="Formato5_2_1.jrxml"/>
+	<property name="FileName" value="Formato5_2_1.jrxml"/>
+	<property name="Synchronized" value="2017-06-07 18:23:12.139"/>
+	<property name="Identifier" value="b1c6b187-ed77-444c-9426-6f7efcb058ce"/>
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="72"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Org_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_Period_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000573)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT foo.ruc, foo.cliente, foo.esquema, foo.periodo, foo.asiento,
+foo.observacion, foo.fecha,
+SUM(foo.cta10) as cta10, SUM(foo.cta11) as cta11,
+SUM(foo.cta12) as cta12, SUM(foo.cta13) as cta13,
+SUM(foo.cta14) as cta14, SUM(foo.cta16) as cta16,
+SUM(foo.cta17) as cta17, SUM(foo.cta18) as cta18,
+SUM(foo.cta19) as cta19, SUM(foo.cta20) as cta20,
+SUM(foo.cta21) as cta21, SUM(foo.cta22) as cta22,
+SUM(foo.cta13) as cta23, SUM(foo.cta24) as cta24,
+SUM(foo.cta25) as cta25, SUM(foo.cta26) as cta26,
+SUM(foo.cta27) as cta27, SUM(foo.cta28) as cta28,
+SUM(foo.cta29) as cta29, SUM(foo.cta30) as cta30,
+SUM(foo.cta31) as cta31, SUM(foo.cta32) as cta32,
+SUM(foo.cta33) as cta33, SUM(foo.cta34) as cta34,
+SUM(foo.cta35) as cta35, SUM(foo.cta36) as cta36,
+SUM(foo.cta37) as cta37, SUM(foo.cta38) as cta38,
+SUM(foo.cta39) as cta39,
+--pasivo
+SUM(foo.cta40) as cta40, SUM(foo.cta41) as cta41,
+SUM(foo.cta42) as cta42, SUM(foo.cta43) as cta43,
+SUM(foo.cta44) as cta44, SUM(foo.cta45) as cta45,
+SUM(foo.cta46) as cta46, SUM(foo.cta47) as cta47,
+SUM(foo.cta48) as cta48, SUM(foo.cta49) as cta49,
+--patrimonio
+SUM(foo.cta50) as cta50, SUM(foo.cta51) as cta51,
+SUM(foo.cta52) as cta52, SUM(foo.cta56) as cta56,
+SUM(foo.cta57) as cta57, SUM(foo.cta58) as cta58,
+SUM(foo.cta59) as cta59,
+--gastos
+SUM(foo.cta60) as cta60, SUM(foo.cta61) as cta61,
+SUM(foo.cta62) as cta62, SUM(foo.cta63) as cta63,
+SUM(foo.cta63) as cta64, SUM(foo.cta65) as cta65,
+SUM(foo.cta67) as cta67, SUM(foo.cta68) as cta68,
+SUM(foo.cta69) as cta69,
+--ingresos
+SUM(foo.cta70) as cta70, SUM(foo.cta71)as cta71,
+SUM(foo.cta71) as cta72, SUM(foo.cta73) as cta73,
+SUM(foo.cta74) as cta74, SUM(foo.cta75) as cta75,
+SUM(foo.cta77) as cta77, SUM(foo.cta78) as cta78,
+SUM(foo.cta79) as cta79,
+--saldosintermediario
+SUM(foo.cta80) as cta80, SUM(foo.cta81) as cta81,
+SUM(foo.cta82) as cta82, SUM(foo.cta83) as cta83,
+SUM(foo.cta84) as cta84, SUM(foo.cta85) as cta85,
+SUM(foo.cta87) as cta87, SUM(foo.cta88) as cta88,
+SUM(foo.cta89) as cta89,
+--gastos de funcion
+SUM(foo.cta93) as cta93, SUM(foo.cta94) as cta94,
+SUM(foo.cta97) as cta97
+
+FROM
+
+(SELECT
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN ci.taxid ELSE oi.taxid END FROM ad_orginfo oi
+JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id
+       AND ci.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as ruc,
+(SELECT CASE WHEN $P{AD_Org_ID}=0 THEN c.description ELSE o.description END FROM ad_org o
+JOIN ad_client c on c.ad_client_id = o.ad_client_id
+       AND c.ad_client_id = $P{AD_Client_ID} LIMIT 1)  as cliente,
+acc.name as esquema,
+p.name as periodo,
+--detalle de reporte
+ev.value as cuenta,
+f.fact_id as asiento,
+f.description as observacion,
+f.dateacct as fecha,
+--cuentas activo
+(SELECT CASE WHEN ev.value like '10%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta10,
+(SELECT CASE WHEN ev.value like '11%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta11,
+(SELECT CASE WHEN ev.value like '12%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta12,
+(SELECT CASE WHEN ev.value like '13%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta13,
+(SELECT CASE WHEN ev.value like '14%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta14,
+(SELECT CASE WHEN ev.value like '16%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta16,
+(SELECT CASE WHEN ev.value like '17%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta17,
+(SELECT CASE WHEN ev.value like '18%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta18,
+(SELECT CASE WHEN ev.value like '19%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta19,
+(SELECT CASE WHEN ev.value like '20%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta20,
+(SELECT CASE WHEN ev.value like '21%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta21,
+(SELECT CASE WHEN ev.value like '22%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta22,
+(SELECT CASE WHEN ev.value like '23%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta23,
+(SELECT CASE WHEN ev.value like '24%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta24,
+(SELECT CASE WHEN ev.value like '25%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta25,
+(SELECT CASE WHEN ev.value like '26%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta26,
+(SELECT CASE WHEN ev.value like '27%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta27,
+(SELECT CASE WHEN ev.value like '28%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta28,
+(SELECT CASE WHEN ev.value like '29%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta29,
+(SELECT CASE WHEN ev.value like '30%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta30,
+(SELECT CASE WHEN ev.value like '31%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta31,
+(SELECT CASE WHEN ev.value like '32%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta32,
+(SELECT CASE WHEN ev.value like '33%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta33,
+(SELECT CASE WHEN ev.value like '34%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta34,
+(SELECT CASE WHEN ev.value like '35%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta35,
+(SELECT CASE WHEN ev.value like '36%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta36,
+(SELECT CASE WHEN ev.value like '37%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta37,
+(SELECT CASE WHEN ev.value like '38%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta38,
+(SELECT CASE WHEN ev.value like '39%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta39,
+--pasivo
+(SELECT CASE WHEN ev.value like '40%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta40,
+(SELECT CASE WHEN ev.value like '41%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta41,
+(SELECT CASE WHEN ev.value like '42%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta42,
+(SELECT CASE WHEN ev.value like '43%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta43,
+(SELECT CASE WHEN ev.value like '44%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta44,
+(SELECT CASE WHEN ev.value like '45%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta45,
+(SELECT CASE WHEN ev.value like '46%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta46,
+(SELECT CASE WHEN ev.value like '47%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta47,
+(SELECT CASE WHEN ev.value like '48%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta48,
+(SELECT CASE WHEN ev.value like '49%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta49,
+--patrimonio
+(SELECT CASE WHEN ev.value like '50%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta50,
+(SELECT CASE WHEN ev.value like '51%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta51,
+(SELECT CASE WHEN ev.value like '52%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta52,
+(SELECT CASE WHEN ev.value like '56%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta56,
+(SELECT CASE WHEN ev.value like '57%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta57,
+(SELECT CASE WHEN ev.value like '58%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta58,
+(SELECT CASE WHEN ev.value like '59%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta59,
+--gastos
+(SELECT CASE WHEN ev.value like '60%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta60,
+(SELECT CASE WHEN ev.value like '61%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta61,
+(SELECT CASE WHEN ev.value like '62%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta62,
+(SELECT CASE WHEN ev.value like '63%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta63,
+(SELECT CASE WHEN ev.value like '64%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta64,
+(SELECT CASE WHEN ev.value like '65%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta65,
+(SELECT CASE WHEN ev.value like '67%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta67,
+(SELECT CASE WHEN ev.value like '68%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta68,
+(SELECT CASE WHEN ev.value like '69%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta69,
+--ingresos
+(SELECT CASE WHEN ev.value like '70%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta70,
+(SELECT CASE WHEN ev.value like '71%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta71,
+(SELECT CASE WHEN ev.value like '72%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta72,
+(SELECT CASE WHEN ev.value like '73%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta73,
+(SELECT CASE WHEN ev.value like '74%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta74,
+(SELECT CASE WHEN ev.value like '75%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta75,
+(SELECT CASE WHEN ev.value like '77%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta77,
+(SELECT CASE WHEN ev.value like '78%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta78,
+(SELECT CASE WHEN ev.value like '79%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta79,
+--saldosintermediario
+(SELECT CASE WHEN ev.value like '80%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta80,
+(SELECT CASE WHEN ev.value like '81%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta81,
+(SELECT CASE WHEN ev.value like '82%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta82,
+(SELECT CASE WHEN ev.value like '83%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta83,
+(SELECT CASE WHEN ev.value like '84%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta84,
+(SELECT CASE WHEN ev.value like '85%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta85,
+(SELECT CASE WHEN ev.value like '87%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta87,
+(SELECT CASE WHEN ev.value like '88%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta88,
+(SELECT CASE WHEN ev.value like '89%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta89,
+--gastos de funcion
+(SELECT CASE WHEN ev.value like '93%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta93,
+(SELECT CASE WHEN ev.value like '94%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta94,
+(SELECT CASE WHEN ev.value like '97%' THEN SUM(f.amtacctdr)-SUM(f.amtacctcr) ELSE 0 END) as cta97
+
+FROM fact_acct f
+JOIN c_period p ON f.c_period_id = p.c_period_id
+JOIN c_acctschema acc ON f.c_acctschema_id = acc.c_acctschema_id
+JOIN ad_client c ON f.ad_client_id = c.ad_client_id
+JOIN ad_org o ON f.ad_org_id = o.ad_org_id
+JOIN c_elementvalue ev ON ev.c_elementvalue_id = f.account_id
+--JOIN gl_category gl ON gl.gl_category_id = f.gl_category_id
+WHERE p.c_period_id = $P{C_Period_ID}
+AND f.ad_client_id = $P{AD_Client_ID}
+AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       THEN true
+       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+GROUP BY p.name, c.name, o.name, ev.value, f.dateacct, f.fact_id, f.description, acc.name
+ORDER BY f.dateacct, f.fact_id) as foo
+GROUP BY foo.ruc, foo.cliente, foo.esquema, foo.periodo, foo.asiento,
+foo.observacion, foo.fecha]]>
+	</queryString>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="esquema" class="java.lang.String"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="asiento" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="cta10" class="java.math.BigDecimal"/>
+	<field name="cta11" class="java.math.BigDecimal"/>
+	<field name="cta12" class="java.math.BigDecimal"/>
+	<field name="cta13" class="java.math.BigDecimal"/>
+	<field name="cta14" class="java.math.BigDecimal"/>
+	<field name="cta16" class="java.math.BigDecimal"/>
+	<field name="cta17" class="java.math.BigDecimal"/>
+	<field name="cta18" class="java.math.BigDecimal"/>
+	<field name="cta19" class="java.math.BigDecimal"/>
+	<field name="cta20" class="java.math.BigDecimal"/>
+	<field name="cta21" class="java.math.BigDecimal"/>
+	<field name="cta22" class="java.math.BigDecimal"/>
+	<field name="cta23" class="java.math.BigDecimal"/>
+	<field name="cta24" class="java.math.BigDecimal"/>
+	<field name="cta25" class="java.math.BigDecimal"/>
+	<field name="cta26" class="java.math.BigDecimal"/>
+	<field name="cta27" class="java.math.BigDecimal"/>
+	<field name="cta28" class="java.math.BigDecimal"/>
+	<field name="cta29" class="java.math.BigDecimal"/>
+	<field name="cta30" class="java.math.BigDecimal"/>
+	<field name="cta31" class="java.math.BigDecimal"/>
+	<field name="cta32" class="java.math.BigDecimal"/>
+	<field name="cta33" class="java.math.BigDecimal"/>
+	<field name="cta34" class="java.math.BigDecimal"/>
+	<field name="cta35" class="java.math.BigDecimal"/>
+	<field name="cta36" class="java.math.BigDecimal"/>
+	<field name="cta37" class="java.math.BigDecimal"/>
+	<field name="cta38" class="java.math.BigDecimal"/>
+	<field name="cta39" class="java.math.BigDecimal"/>
+	<field name="cta40" class="java.math.BigDecimal"/>
+	<field name="cta41" class="java.math.BigDecimal"/>
+	<field name="cta42" class="java.math.BigDecimal"/>
+	<field name="cta43" class="java.math.BigDecimal"/>
+	<field name="cta44" class="java.math.BigDecimal"/>
+	<field name="cta45" class="java.math.BigDecimal"/>
+	<field name="cta46" class="java.math.BigDecimal"/>
+	<field name="cta47" class="java.math.BigDecimal"/>
+	<field name="cta48" class="java.math.BigDecimal"/>
+	<field name="cta49" class="java.math.BigDecimal"/>
+	<field name="cta50" class="java.math.BigDecimal"/>
+	<field name="cta51" class="java.math.BigDecimal"/>
+	<field name="cta52" class="java.math.BigDecimal"/>
+	<field name="cta56" class="java.math.BigDecimal"/>
+	<field name="cta57" class="java.math.BigDecimal"/>
+	<field name="cta58" class="java.math.BigDecimal"/>
+	<field name="cta59" class="java.math.BigDecimal"/>
+	<field name="cta60" class="java.math.BigDecimal"/>
+	<field name="cta61" class="java.math.BigDecimal"/>
+	<field name="cta62" class="java.math.BigDecimal"/>
+	<field name="cta63" class="java.math.BigDecimal"/>
+	<field name="cta64" class="java.math.BigDecimal"/>
+	<field name="cta65" class="java.math.BigDecimal"/>
+	<field name="cta67" class="java.math.BigDecimal"/>
+	<field name="cta68" class="java.math.BigDecimal"/>
+	<field name="cta69" class="java.math.BigDecimal"/>
+	<field name="cta70" class="java.math.BigDecimal"/>
+	<field name="cta71" class="java.math.BigDecimal"/>
+	<field name="cta72" class="java.math.BigDecimal"/>
+	<field name="cta73" class="java.math.BigDecimal"/>
+	<field name="cta74" class="java.math.BigDecimal"/>
+	<field name="cta75" class="java.math.BigDecimal"/>
+	<field name="cta77" class="java.math.BigDecimal"/>
+	<field name="cta78" class="java.math.BigDecimal"/>
+	<field name="cta79" class="java.math.BigDecimal"/>
+	<field name="cta80" class="java.math.BigDecimal"/>
+	<field name="cta81" class="java.math.BigDecimal"/>
+	<field name="cta82" class="java.math.BigDecimal"/>
+	<field name="cta83" class="java.math.BigDecimal"/>
+	<field name="cta84" class="java.math.BigDecimal"/>
+	<field name="cta85" class="java.math.BigDecimal"/>
+	<field name="cta87" class="java.math.BigDecimal"/>
+	<field name="cta88" class="java.math.BigDecimal"/>
+	<field name="cta89" class="java.math.BigDecimal"/>
+	<field name="cta93" class="java.math.BigDecimal"/>
+	<field name="cta94" class="java.math.BigDecimal"/>
+	<field name="cta97" class="java.math.BigDecimal"/>
+	<variable name="cta10" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta10}]]></variableExpression>
+	</variable>
+	<variable name="cta11" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta11}]]></variableExpression>
+	</variable>
+	<variable name="cta12" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta12}]]></variableExpression>
+	</variable>
+	<variable name="cta13" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta13}]]></variableExpression>
+	</variable>
+	<variable name="cta14" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta14}]]></variableExpression>
+	</variable>
+	<variable name="cta16" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta16}]]></variableExpression>
+	</variable>
+	<variable name="cta17" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta17}]]></variableExpression>
+	</variable>
+	<variable name="cta18" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta18}]]></variableExpression>
+	</variable>
+	<variable name="cta19" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta19}]]></variableExpression>
+	</variable>
+	<variable name="cta20" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta20}]]></variableExpression>
+	</variable>
+	<variable name="cta21" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta21}]]></variableExpression>
+	</variable>
+	<variable name="cta22" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta22}]]></variableExpression>
+	</variable>
+	<variable name="cta23" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta23}]]></variableExpression>
+	</variable>
+	<variable name="cta24" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta24}]]></variableExpression>
+	</variable>
+	<variable name="cta25" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta25}]]></variableExpression>
+	</variable>
+	<variable name="cta26" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta26}]]></variableExpression>
+	</variable>
+	<variable name="cta27" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta27}]]></variableExpression>
+	</variable>
+	<variable name="cta28" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta28}]]></variableExpression>
+	</variable>
+	<variable name="cta29" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta29}]]></variableExpression>
+	</variable>
+	<variable name="cta30" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta30}]]></variableExpression>
+	</variable>
+	<variable name="cta31" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta31}]]></variableExpression>
+	</variable>
+	<variable name="cta32" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta32}]]></variableExpression>
+	</variable>
+	<variable name="cta33" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta33}]]></variableExpression>
+	</variable>
+	<variable name="cta34" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta34}]]></variableExpression>
+	</variable>
+	<variable name="cta35" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta35}]]></variableExpression>
+	</variable>
+	<variable name="cta36" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta36}]]></variableExpression>
+	</variable>
+	<variable name="cta37" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta37}]]></variableExpression>
+	</variable>
+	<variable name="cta38" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta38}]]></variableExpression>
+	</variable>
+	<variable name="cta39" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cta39}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="207" y="3" width="374" height="31" uuid="73c901f0-ab0e-462e-9c23-2b1202204798"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[FORMATO 5.2 : "Libro de Diario Formato Simplificado Parte 1[Activos]]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="269" y="35" width="243" height="17" uuid="dbc8855c-2b7c-4c35-8093-ab3e7b7eccd5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="87" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-1" x="2" y="46" width="780" height="37" uuid="65d5f17e-a71a-49ae-804f-07f27f33042e"/>
+			</rectangle>
+			<line>
+				<reportElement key="line-1" x="138" y="46" width="1" height="37" uuid="ebd8c02b-6e15-42b7-a65c-d7f39f2aac67"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-9" x="144" y="48" width="638" height="16" uuid="032fb0e2-4a3f-4c52-a069-83df7abd6df8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Activos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-11" x="3" y="47" width="48" height="33" uuid="5f4afcb9-8e5e-4854-8d41-d507bd15a3f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-2" x="139" y="63" width="643" height="1" uuid="2405e07a-78ce-4bd2-8f3b-2c1ad82b3683"/>
+			</line>
+			<line>
+				<reportElement key="line-3" x="57" y="47" width="1" height="37" uuid="e474473b-2f19-4011-ab14-60d3e5909387"/>
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="98" y="27" width="277" height="15" uuid="646fe3db-3315-4f95-96ac-59b79f750fba"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="98" y="14" width="277" height="15" uuid="787e6787-18e1-40cd-872e-c9cb3b68c5b5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-2" x="16" y="3" width="77" height="12" uuid="d7561825-639d-46bd-9e5d-cc5210cff44f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="16" y="16" width="77" height="12" uuid="33406933-b06c-45c0-9e8a-204aa765a0f4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="16" y="28" width="77" height="14" uuid="66a411c8-22f8-4d30-a10a-51e71ddf4c69"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RAZÓN SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="93" y="16" width="5" height="20" uuid="0485ce69-4947-4d5c-96fb-b0a32adc100d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-5" x="93" y="3" width="5" height="20" uuid="db771162-59fc-4536-905c-5e77bb5e7821"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="93" y="28" width="5" height="13" uuid="8d416cfc-11c8-4ee5-b07d-1696dc1091b8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="98" y="2" width="277" height="15" uuid="9ed46ec0-c78b-4f0f-97fc-d57420e5a628"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-11" x="60" y="47" width="28" height="33" uuid="ef224608-f18c-4d12-9226-846ea530dbae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-11" x="93" y="47" width="46" height="33" uuid="42bcc033-d074-440c-b72e-4c2eed686352"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Glosa]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-3" x="90" y="46" width="1" height="37" uuid="4aa491db-0774-416c-8c12-a03c6a3c1922"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-9" x="141" y="65" width="22" height="16" uuid="506d8036-6aa9-4f03-bdc5-bd0cad1eb6b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="163" y="65" width="22" height="16" uuid="0bef91bd-5ad0-4357-9180-c6e9e4293950"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="185" y="65" width="22" height="16" uuid="074297f5-0fef-4b87-81ff-005be2ba03c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="207" y="65" width="22" height="16" uuid="5e6a9f5b-299f-4778-8623-91731e5132f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="229" y="65" width="22" height="16" uuid="bcf963fe-1113-4feb-99f1-ff3a7d690801"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[14]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="251" y="65" width="22" height="16" uuid="f0ea1348-6de3-4798-afc3-40e2204d22f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[16]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="273" y="65" width="22" height="16" uuid="f14f18c7-5aa3-4d1e-99b9-a7c56423bdbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[17]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="295" y="65" width="22" height="16" uuid="e1ec35e9-da43-4fee-a081-c3257fc1b553"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[18]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="317" y="65" width="22" height="16" uuid="1fe0d27f-b3af-417d-a28c-2ced6f58f6ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="339" y="65" width="22" height="16" uuid="9169b714-a1e1-4f32-a5a1-6dddbac5f0b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="361" y="65" width="22" height="16" uuid="1b137cde-c4aa-4874-a53a-807aae39e6be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[21]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="383" y="65" width="22" height="16" uuid="c97785d1-65e8-4ecf-a0ee-d65f4b4cb2a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[22]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="405" y="65" width="22" height="16" uuid="d0c947d5-f51c-435e-b2a1-fb99d4215f4e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[23]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="427" y="65" width="22" height="16" uuid="354037ac-7b49-4c95-99a2-82fd58c8cdbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[24]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="449" y="65" width="22" height="16" uuid="c3f80732-f33b-48c3-8c09-2f7baf18e52b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[25]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="471" y="65" width="22" height="16" uuid="f7258e7a-b8b9-41bc-9442-c7884c2d0e1b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[26]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="493" y="65" width="22" height="16" uuid="8721bbf4-0b18-4356-a637-d09436a06e63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[27]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="515" y="65" width="22" height="16" uuid="6d3525ec-e354-4330-a34b-ec005e344c9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[28]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="537" y="65" width="22" height="16" uuid="a54370da-fdfe-49f5-bd9d-14ef11650d6c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[29]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="559" y="65" width="22" height="16" uuid="df29f7ff-e9d2-43c0-912f-4b4592d813cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[30]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="581" y="65" width="22" height="16" uuid="da2f14da-7ecf-4c85-8c68-d8cd8e38ea49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[31]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="603" y="65" width="22" height="16" uuid="978e43db-c4a9-4f32-8be9-2626d49af6b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[32]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="625" y="65" width="22" height="16" uuid="b6fd3f1e-fe4e-4a13-8225-10cc428a6981"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[33]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="647" y="65" width="22" height="16" uuid="86d835fd-761b-475b-b9fd-9bc222cea4cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[34]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="669" y="65" width="22" height="16" uuid="fe9ad1fe-2eab-4f91-8c0f-c2daf354bf16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[35]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="691" y="65" width="22" height="16" uuid="278511ba-f79a-4dfe-a93f-dfadfd8dd5e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="713" y="65" width="22" height="16" uuid="cacd5c3c-9530-45e7-8be5-77d4e51a16c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[37]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="735" y="65" width="22" height="16" uuid="4bdebbb0-4f2a-420e-942f-5fee6b48b5f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[38]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="757" y="65" width="22" height="16" uuid="a6d3048b-6a38-42c7-893c-437a8c47fff9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[39]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement key="textField" x="58" y="3" width="25" height="8" uuid="5f14b2b3-4fbf-4456-8d7b-3309998dfedd"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="85" y="3" width="55" height="8" uuid="44f7652e-3c56-446d-af66-608ce61fda62"/>
+				<textElement textAlignment="Left">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="6" y="3" width="48" height="8" uuid="1e44bb46-5a02-41c4-aa66-a0a100b5781a"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="229" y="1" width="22" height="11" uuid="06d5e9a1-eef7-4023-9c02-66d08e495437"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta14}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="427" y="1" width="22" height="11" uuid="4c75b9b2-0fc3-426c-8319-37df04754393"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta24}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="449" y="1" width="22" height="11" uuid="cbb8a810-55ce-41d3-b539-95ec514d5fca"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta25}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="339" y="1" width="22" height="11" uuid="cb90c048-c91b-4d5b-b360-7d813bd93b4e"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta20}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="273" y="1" width="22" height="11" uuid="5a518798-2353-4c00-8ce8-b4916b083865"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta17}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="251" y="1" width="22" height="11" uuid="4a4aac77-76e0-4ad3-94e5-cb832d0666fa"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta16}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="713" y="1" width="22" height="11" uuid="a632f2f6-407d-41bb-9862-7edd4a1e3f09"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta37}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="691" y="1" width="22" height="11" uuid="c25a1943-6a0e-4511-ad80-c6d51e39d675"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta36}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="757" y="1" width="22" height="11" uuid="51ab0dd8-36ff-45fe-b90f-00e3cbc1ee64"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta39}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="559" y="1" width="22" height="11" uuid="db6ad885-4ba0-4fa7-869d-ff3b151aff7c"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta30}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="669" y="1" width="22" height="11" uuid="506f763a-493c-49d6-8b47-43e45c68d0d0"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta35}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="537" y="1" width="22" height="11" uuid="e63d0e1f-c470-4659-9d4a-4a94b515f6b9"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta29}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="471" y="1" width="22" height="11" uuid="5c19da27-edcb-4d96-8d5e-20d401192aee"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta26}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="361" y="1" width="22" height="11" uuid="33f0d4f1-5136-4c98-befb-46a521f9c98a"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta21}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="493" y="1" width="22" height="11" uuid="49d141a5-80f4-4351-b7e0-766a30672ea4"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta27}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="405" y="1" width="22" height="11" uuid="bbfe44e7-5219-4651-b8f7-6152f7cf8aea"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta23}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="581" y="1" width="22" height="11" uuid="4a292174-9c23-4317-912c-ab651956d7c8"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta31}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="317" y="1" width="22" height="11" uuid="8ee131f7-679c-4e9c-b3e7-592da64d6afd"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta19}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="603" y="1" width="22" height="11" uuid="50262474-f139-483d-b037-2226124c1530"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta32}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="383" y="1" width="22" height="11" uuid="60f4f579-18aa-4a6e-bc7e-9f150f41b7f5"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta22}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="163" y="1" width="22" height="11" uuid="71b839d6-ff50-40b3-be84-452ebd42dd2f"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta11}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="735" y="1" width="22" height="11" uuid="5a1a2b06-53db-4569-9175-27a093f004f9"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta38}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="207" y="1" width="22" height="11" uuid="57444e17-f660-4b49-b4db-ede46f046af1"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta13}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="625" y="1" width="22" height="11" uuid="9da9fbdb-b17f-44d1-bdc0-89e2b5fca898"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta33}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="515" y="1" width="22" height="11" uuid="e9ac4cbc-6651-4df6-b248-904877690815"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta28}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="295" y="1" width="22" height="11" uuid="5178e67f-bab5-46a7-92bf-b19c401cd469"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta18}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="141" y="1" width="22" height="11" uuid="738b4476-32b9-44b1-8b18-6341c62146d2"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="185" y="1" width="22" height="11" uuid="805fcc3f-a590-44a3-a6f1-63111968e8b6"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta12}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="647" y="1" width="22" height="11" uuid="438647a2-ab84-43f7-82d5-293e25b7b8e7"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cta34}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="10" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-5" x="239" y="0" width="47" height="10" uuid="8099e7d7-e403-4735-9114-96d2d5c52947"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-6" x="286" y="0" width="19" height="10" uuid="d51516d1-f195-4e68-98cf-1197b0172e59"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="13">
+			<staticText>
+				<reportElement key="staticText-13" x="50" y="0" width="74" height="12" uuid="30bb3801-c106-478d-a468-a517c6c7b4e0"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="141" y="0" width="22" height="12" uuid="75bfd40e-bd57-4958-9636-80ac1e41f3ed"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="163" y="0" width="22" height="12" uuid="cc793047-0ada-446a-b47e-e97e8c3b5260"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta11}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="185" y="0" width="22" height="12" uuid="67b91962-e343-44e7-a9ea-7ca5d159814e"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta12}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="207" y="0" width="22" height="12" uuid="3ab6e2cd-db1c-4c3c-b7a7-5e98372a94fb"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta13}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="229" y="0" width="22" height="12" uuid="aa2624b8-3f8c-4bea-b80c-1ba3754e4827"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta14}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="251" y="0" width="22" height="12" uuid="a3132129-5ac4-448c-adad-a1ad8248ae43"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta16}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="273" y="0" width="22" height="12" uuid="17bdfd6c-8c6d-4ea3-9f26-651f37363178"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta17}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="295" y="0" width="22" height="12" uuid="fe4d288d-f0e5-4c35-9701-68011a7e8d52"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta18}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="317" y="0" width="22" height="12" uuid="123aebb2-0962-4d82-af2b-b6311a8709ff"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta19}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="339" y="0" width="22" height="12" uuid="5797098d-ca40-4fc2-89c1-2037974acc29"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta20}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="361" y="0" width="22" height="12" uuid="b6923f75-f2a3-4a1d-9c15-57eb562684ee"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta21}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="383" y="0" width="22" height="12" uuid="8c734422-5cce-464d-b65e-d6a09cb4333c"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta22}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="405" y="0" width="22" height="12" uuid="0e33db01-ed2b-4c57-aa10-ec2ae059a33b"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta23}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="427" y="0" width="22" height="12" uuid="171bbb73-7b56-44db-a795-083cbcd6200d"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta24}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="449" y="0" width="22" height="12" uuid="e9541044-dca7-4d39-a0b3-91d7b947c2ac"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta25}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="471" y="0" width="22" height="12" uuid="90dc45e0-0cfa-48c6-af47-929a5cad5a56"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta26}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="493" y="0" width="22" height="12" uuid="6a215a03-9a8f-4dc2-8d55-33fb9e6c86cc"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta27}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="515" y="0" width="22" height="12" uuid="bffc2347-f5c2-49bd-bc8a-f162b8b135ec"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta28}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="537" y="0" width="22" height="12" uuid="5e11e63e-6a4f-42d2-8e51-c5eb2d703913"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta29}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="559" y="0" width="22" height="12" uuid="6ae79e3d-33be-4cc6-afe9-162299af2679"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta30}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="581" y="0" width="22" height="12" uuid="0284de3c-b04e-49ee-824e-a9ed1e919a9b"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta31}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="603" y="0" width="22" height="12" uuid="32618f74-629f-498e-bb28-f99f1256ab12"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta32}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="625" y="0" width="22" height="12" uuid="064e3c9f-3eac-4a21-85e2-63fa2997187f"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta33}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="647" y="0" width="22" height="12" uuid="a766daec-79e6-46e8-b75e-59f8fd51ae72"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta34}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="669" y="0" width="22" height="12" uuid="c467c26f-1fce-4942-a2ca-1667cbe59e8c"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta35}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="691" y="0" width="22" height="12" uuid="43a3e3a0-a5a5-43c9-8efd-5418788d10ec"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta36}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="713" y="0" width="22" height="12" uuid="ae30139f-b07c-4e51-9286-2c7024411701"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta37}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="735" y="0" width="22" height="12" uuid="079fa5de-7071-4949-90b7-6f174415ba08"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta38}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement key="textField" x="757" y="0" width="22" height="12" uuid="09dd39e1-ab3c-4ba4-9746-649000bd6ef4"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cta39}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

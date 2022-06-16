@@ -1,0 +1,64 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sales" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50d02672-a6f3-4a2b-8815-971c3069e0ff">
+  <property name="Description" value="sales.jrxml" />
+  <property name="FileName" value="sales.jrxml" />
+  <property name="Synchronized" value="2019-03-16 10:02:45.151" />
+  <property name="Identifier" value="5265047e-f708-4248-8e29-e4f4387cf8d0" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression />
+  </parameter>
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression />
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression />
+  </parameter>
+  <queryString><![CDATA[select o.name as orgname, p.name as productname, pb.name as productbrandname, pc.name as productcategoryname,extract(year from i.dateinvoiced)::text || '-' || lpad(extract(month from i.dateinvoiced)::text,2,'0') as period,il.priceactual, il.linenetamt from c_invoice i  join c_invoiceline il on i.c_invoice_id = il.c_invoice_id  join m_product p on il.m_product_id = p.m_product_id  join m_product_brand pb on p.m_product_brand_id = pb.m_product_brand_id  join m_product_category pc on p.m_product_category_id = pc.m_product_category_id  join ad_org o on i.ad_org_id = o.ad_org_id where i.issotrx = 'Y' AND i.docstatus = 'CO' AND i.AD_Client_ID = $P{AD_Client_ID} AND date_trunc('day',dateinvoiced) >= date($P{DateFrom1})
+	AND date_trunc('day',dateinvoiced) <= date($P{DateFrom2})]]></queryString>
+  <field name="orgname" class="java.lang.String" />
+  <field name="productname" class="java.lang.String" />
+  <field name="productbrandname" class="java.lang.String" />
+  <field name="productcategoryname" class="java.lang.String" />
+  <field name="period" class="java.lang.String" />
+  <field name="priceactual" class="java.math.BigDecimal" />
+  <field name="linenetamt" class="java.math.BigDecimal" />
+  <group name="orgname">
+    <groupExpression><![CDATA[$F{orgname}]]></groupExpression>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="79" splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="35" splitType="Stretch">
+      <textField>
+        <reportElement x="97" y="9" width="100" height="20" uuid="56285a67-64f1-40ef-86f3-008c0ca204db" />
+        <textFieldExpression><![CDATA[$F{orgname}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="61" splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="26" splitType="Stretch">
+      <textField>
+        <reportElement x="19" y="0" width="100" height="20" uuid="dbb90204-1abf-4d3a-8447-ffd8df0e5f6a" />
+        <textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="45" splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band height="54" splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="42" splitType="Stretch" />
+  </summary>
+</jasperReport>

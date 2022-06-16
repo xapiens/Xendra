@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="account general reports extension" description="account general reports extension" id="org.xendra.report.acct_general" version="1.0" category="Contabilidad" synchronized="@timestamp@" tags="SUNAT,Contabilidad" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

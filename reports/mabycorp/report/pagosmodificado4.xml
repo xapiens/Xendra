@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Untitled_report_1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="94cb5810-d0d7-42c3-a5ff-f4fef27dcc39">
+  <property name="Description" value="pagosmodificado4.jrxml" />
+  <property name="FileName" value="pagosmodificado4.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:31.53" />
+  <property name="Identifier" value="13733ff0-fb1a-4811-b94a-c65f6cc9581d" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="java.util.*" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="SalesRep_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateTrx1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2009-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateTrx2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2009-12-31 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+     c_invoice.documentno as fac, 
+     c_allocationline.c_invoice_id,
+     c_invoice.serial,
+     c_bpartner.name AS c_bpartner_name,
+     ad_client.name AS ad_client_name,
+     ad_user.name as agente,
+     c_invoice.dateinvoiced,
+     c_invoice.totallines,
+     c_allocationline.amount,
+     c_invoice.grandtotal,
+     c_invoice.docstatus,
+     c_allocationline.c_payment_id,
+     c_payment.datetrx,
+     c_payment.documentno as pag,
+     c_currency.cursymbol,
+     c_cash.dateacct,
+     c_cash."name" as c_cash_name,
+     sum(c_invoice.totallines),
+     CASE WHEN c_invoice.ispaid='Y' THEN 'Pagado' 
+     WHEN c_invoice.ispaid='N' THEN 'No Pagado' END AS Pago,
+     t_sales.amt_base_taxed,
+     t_sales.grandtotal as total,
+     currencyconvert(c_allocationline.amount, c_invoice.c_currency_id, 308, c_payment.datetrx, c_invoice.c_conversiontype_id, 1000023, 1000053) as pagPAG,
+     currencyconvert(c_allocationline.amount, c_invoice.c_currency_id, 308, c_cash.dateacct, c_invoice.c_conversiontype_id, 1000023, 1000053) as pagEfec,
+     currencyconvert(c_invoice.totallines, c_invoice.c_currency_id, 308, c_invoice.dateinvoiced, c_invoice.c_conversiontype_id, 1000023, 1000053) as subFactura,
+     sum(currencyconvert(c_invoice.totallines, c_invoice.c_currency_id, 308, c_invoice.dateinvoiced, c_invoice.c_conversiontype_id, 1000023, 1000053)) as sumFactura
+FROM
+     
+     xendra.c_invoice
+     right join xendra.t_sales on  t_sales.c_invoice_id = c_invoice.c_invoice_id
+     right join xendra.c_allocationline on  c_allocationline.c_invoice_id = c_invoice.c_invoice_id
+     left join xendra.c_payment on  c_allocationline.c_payment_id = c_payment.c_payment_id
+     left join xendra.c_cashline on  c_allocationline.c_cashline_id = c_cashline.c_cashline_id
+     left join xendra.c_cash on  c_cashline.c_cash_id = c_cash.c_cash_id
+     left join xendra.c_currency on  c_invoice.c_currency_id = c_currency.c_currency_id
+     left join xendra.c_bpartner on  c_invoice.c_bpartner_id = c_bpartner.c_bpartner_id
+     LEFT join xendra.ad_client on c_invoice.ad_client_id = ad_client.ad_client_id
+     left join xendra.ad_user on  c_invoice.salesrep_id = ad_user.ad_user_id
+
+where ad_client.ad_client_id = $P{AD_Client_ID} and c_invoice.issotrx = 'Y' and ad_user.ad_user_id = $P{SalesRep_ID}
+      AND (date(c_payment.datetrx) >= date($P{DateTrx1}) OR date(c_cash.dateacct) >= date($P{DateTrx1}))
+      AND (date(c_payment.datetrx) <= date($P{DateTrx2}) OR date(c_cash.dateacct) <= date($P{DateTrx2}))
+
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22,23,24
+order by c_invoice.documentno]]></queryString>
+  <field name="fac" class="java.lang.String" />
+  <field name="c_invoice_id" class="java.math.BigDecimal" />
+  <field name="serial" class="java.lang.String" />
+  <field name="c_bpartner_name" class="java.lang.String" />
+  <field name="ad_client_name" class="java.lang.String" />
+  <field name="agente" class="java.lang.String" />
+  <field name="dateinvoiced" class="java.sql.Timestamp" />
+  <field name="totallines" class="java.math.BigDecimal" />
+  <field name="amount" class="java.math.BigDecimal" />
+  <field name="grandtotal" class="java.math.BigDecimal" />
+  <field name="docstatus" class="java.lang.String" />
+  <field name="c_payment_id" class="java.math.BigDecimal" />
+  <field name="datetrx" class="java.sql.Timestamp" />
+  <field name="pag" class="java.lang.String" />
+  <field name="cursymbol" class="java.lang.String" />
+  <field name="dateacct" class="java.sql.Timestamp" />
+  <field name="c_cash_name" class="java.lang.String" />
+  <field name="sum" class="java.math.BigDecimal" />
+  <field name="pago" class="java.lang.String" />
+  <field name="amt_base_taxed" class="java.math.BigDecimal" />
+  <field name="total" class="java.math.BigDecimal" />
+  <field name="pagpag" class="java.math.BigDecimal" />
+  <field name="pagefec" class="java.math.BigDecimal" />
+  <field name="subfactura" class="java.math.BigDecimal" />
+  <field name="sumfactura" class="java.math.BigDecimal" />
+  <variable name="V_sum" class="java.math.BigDecimal" incrementType="Group" incrementGroup="reportes" calculation="Sum">
+    <variableExpression><![CDATA[$F{subfactura}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="V_Total" class="java.math.BigDecimal" incrementType="Group" incrementGroup="reportes">
+    <variableExpression><![CDATA[$F{sum}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="totallines" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{totallines}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <variable name="grandtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="reportes2">
+    <variableExpression><![CDATA[$F{grandtotal}]]></variableExpression>
+  </variable>
+  <variable name="amount" class="java.math.BigDecimal">
+    <variableExpression><![CDATA[$F{amount}]]></variableExpression>
+  </variable>
+  <variable name="V_sum_1" class="java.math.BigDecimal" incrementType="Group" incrementGroup="reportes2" calculation="Sum">
+    <variableExpression><![CDATA[$F{pagpag}]]></variableExpression>
+    <initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+  </variable>
+  <group name="reportes">
+    <groupExpression><![CDATA[$F{fac}]]></groupExpression>
+    <groupHeader>
+      <band height="33" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-20" x="9" y="2" width="70" height="14" uuid="99437063-f3c8-4cb2-adba-ed71b5836c62" />
+          <textElement>
+            <font isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[Nº Factura:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="81" y="2" width="20" height="14" uuid="1dcca312-b2bc-405b-b615-b8a7c0c17472" />
+          <textFieldExpression><![CDATA[$F{serial}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-24" x="101" y="3" width="10" height="13" uuid="29da32ba-9cfc-410e-bf69-3fc9d24f03b1" />
+          <text><![CDATA[-]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-4" x="9" y="17" width="46" height="14" uuid="0c8c7466-f384-4653-b632-befcb7e2874f" />
+          <textElement>
+            <font isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[Cliente:]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-10" x="333" y="1" width="40" height="16" uuid="9508c05f-8194-4334-8900-732301453b5d" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[Pago]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-11" x="455" y="1" width="64" height="16" uuid="3e70e912-a45a-44e2-96f3-ffcd7f352d0f" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[Fecha Pago]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="81" y="17" width="256" height="15" uuid="ca9b7db3-2b77-413f-aa0e-380a19e704a5" />
+          <textFieldExpression><![CDATA[$F{c_bpartner_name}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="167" y="2" width="60" height="15" uuid="41fb2f4e-e02e-453b-b33b-62df9e0cfabe" />
+          <textElement textAlignment="Left" />
+          <textFieldExpression><![CDATA[$F{dateinvoiced}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-8" x="251" y="18" width="0" height="0" uuid="c6249730-9a89-4af7-a250-04e91d30945b" />
+          <text><![CDATA[Static Text]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="112" y="2" width="55" height="14" uuid="16ae6bf7-5213-481b-9e49-5a77773626d6" />
+          <textFieldExpression><![CDATA[$F{fac}]]></textFieldExpression>
+        </textField>
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField-8" x="233" y="4" width="70" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="0cf3435e-0d80-4f4a-9549-9adb3d606996" />
+          <textFieldExpression><![CDATA[$F{subfactura}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="44" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="270" y="18" width="69" height="17" uuid="9d94b6ee-1786-4806-ac49-d6465c26ab2f" />
+          <textElement textAlignment="Right" verticalAlignment="Middle" />
+          <textFieldExpression><![CDATA[$V{grandtotal}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-26" x="184" y="18" width="71" height="17" uuid="6ee6f23d-ee35-48a8-bab7-9ca480118c7d" />
+          <textElement>
+            <font isBold="false" pdfFontName="Helvetica" />
+          </textElement>
+          <text><![CDATA[Total con IGV:]]></text>
+        </staticText>
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="269" y="0" width="69" height="20" uuid="141d0b23-c94c-4aaa-9d29-53ea945cae5f" />
+          <textElement textAlignment="Right" verticalAlignment="Middle" />
+          <textFieldExpression><![CDATA[$V{totallines}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-25" x="184" y="3" width="71" height="14" uuid="c92ec237-de87-440d-acf7-94a4a3f0342f" />
+          <text><![CDATA[Total sin IGV:]]></text>
+        </staticText>
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="361" y="4" width="57" height="20" uuid="3f6b79ca-0dd7-4698-8181-0249b496e20e" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{amt_base_taxed}]]></textFieldExpression>
+        </textField>
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="361" y="21" width="57" height="18" uuid="cbf78376-cd33-4a1e-86ca-02395e4421cf" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-6" x="269" y="3" width="21" height="15" uuid="618633a6-ed4b-4ea2-9659-509f4a6806cd" />
+          <textFieldExpression><![CDATA[$F{cursymbol}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField-7" x="269" y="21" width="21" height="15" uuid="31fcf668-7a68-49c5-97be-9e119f19ee75" />
+          <textFieldExpression><![CDATA[$F{cursymbol}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-31" x="353" y="4" width="20" height="20" uuid="d2c9205b-e015-4d26-91c0-041654a37447" />
+          <text><![CDATA[S/.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-32" x="353" y="16" width="20" height="22" uuid="fc3498bc-3bdc-4cde-a660-03d872c94729" />
+          <textElement verticalAlignment="Middle" />
+          <text><![CDATA[S/.]]></text>
+        </staticText>
+        <line>
+          <reportElement key="line-4" x="10" y="41" width="515" height="1" forecolor="#0033CC" uuid="c0b5723a-1036-4264-bb2d-0e668369b534" />
+        </line>
+      </band>
+    </groupFooter>
+  </group>
+  <group name="reportes2">
+    <groupExpression><![CDATA[$F{pag}]]></groupExpression>
+    <groupHeader>
+      <band height="25" splitType="Stretch">
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" mode="Opaque" x="287" y="3" width="50" height="16" uuid="84d5015c-1979-4295-9c9f-f0cc7d9517ea" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="269" y="3" width="21" height="15" uuid="c586bad6-46f4-46c2-aac9-c5e2ace9909b" />
+          <textFieldExpression><![CDATA[$F{cursymbol}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement key="textField" x="455" y="3" width="62" height="16" uuid="f4dc5725-b81a-48ce-8af4-27377c866e29" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{dateacct}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement key="textField" mode="Transparent" x="133" y="1" width="146" height="21" uuid="510c57b9-bc7a-407c-9097-ab69afbd442f" />
+          <textFieldExpression><![CDATA[$F{c_cash_name}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-30" x="78" y="2" width="50" height="18" uuid="f23d1e21-4419-438c-a773-416f77c522cc" />
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <text><![CDATA[Nº Pago:]]></text>
+        </staticText>
+        <textField isBlankWhenNull="true">
+          <reportElement key="textField" x="133" y="1" width="94" height="18" uuid="6b63f2bd-9d65-4d03-a4cf-7139ba64a6a7" />
+          <textFieldExpression><![CDATA[$F{pag}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement key="textField" x="457" y="3" width="60" height="20" uuid="7e30f605-fe8f-4912-b7b7-8022e768ce95" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{datetrx}]]></textFieldExpression>
+        </textField>
+        <textField pattern="##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="357" y="3" width="61" height="16" uuid="bd5133cd-78f8-404d-98c7-0adfd816f16e" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{pagpag}]]></textFieldExpression>
+        </textField>
+        <textField pattern="##0.00" isBlankWhenNull="true">
+          <reportElement key="textField" x="348" y="3" width="70" height="20" uuid="9dcb0188-3134-48a2-97c8-6e42c28cfc96" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{pagefec}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-33" x="352" y="4" width="15" height="20" uuid="193d0d39-f5f1-4bbf-ae5b-1505527bde28" />
+          <text><![CDATA[S/.]]></text>
+        </staticText>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="1" splitType="Stretch" />
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-12" x="109" y="10" width="320" height="23" forecolor="#000099" uuid="25ff6bc6-f8bb-48de-9332-80a4aaba1d3b" />
+        <textElement textAlignment="Center">
+          <font size="18" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[RESUMEN DE PAGO DE FACTURAS]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-5" x="129" y="30" width="295" height="18" forecolor="#0033CC" uuid="e8d49106-69f7-42c4-a4cf-915a1ec5ca42" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement>
+          <font size="9" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Desde " + $P{DateTrx1}.toString() + " hasta " + $P{DateTrx2}.toString()]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line-3" x="11" y="46" width="515" height="1" forecolor="#0033CC" uuid="d1d45d5d-77e9-4194-995c-69b8ccc8473f" />
+      </line>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="41" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-1" x="463" y="5" width="54" height="18" uuid="b6678ddd-e12b-4ed2-918e-15a3c3ff2c43" />
+        <textElement>
+          <font size="9" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-14" x="24" y="5" width="51" height="16" forecolor="#0033CC" uuid="c9284fe2-1862-46bb-b9a9-2bde964e091f" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[EMPRESA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-15" x="394" y="5" width="86" height="18" forecolor="#0033CC" uuid="6d381e9a-0010-4884-8bee-bcec3ec45787" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FECHA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-16" x="394" y="19" width="86" height="12" forecolor="#0033CC" uuid="f36b7f13-9aec-4858-a17d-e9bb7cad5eed" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[HORA:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="463" y="19" width="54" height="12" uuid="ec35dc67-ca50-422d-a345-1b884ba3dd26" />
+        <textElement>
+          <font size="9" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="147" y="3" width="100" height="16" uuid="c7fe7760-55a3-43ff-a226-8ed313738c50" />
+        <textElement>
+          <font size="10" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ad_client_name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="147" y="19" width="66" height="14" uuid="a92b8fa5-ff00-43af-9869-84f3c40ec95f" />
+        <textFieldExpression><![CDATA[$F{agente}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-27" x="24" y="19" width="106" height="12" forecolor="#0033CC" uuid="18419751-37c3-4014-a617-fcea9fed52ea" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[AGENTE DE VENTAS:]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line-2" x="11" y="37" width="515" height="1" forecolor="#0033CC" uuid="92116e6a-56aa-4386-b63e-d8ecd113ed19" />
+      </line>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="3" splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="2" splitType="Stretch" />
+  </detail>
+  <columnFooter>
+    <band height="40" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-23" x="119" y="1" width="163" height="15" uuid="552155c1-80a9-4ea5-8e75-bdf75dc9864c" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Total de Facturas sin IGV:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-3" x="231" y="28" width="65" height="10" uuid="adf2e9e3-8671-4ff7-90df-7bddccdd9962" />
+        <textElement textAlignment="Right">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-4" x="296" y="28" width="41" height="10" uuid="56883047-6311-4a2a-a4ff-d5bfcfe27b45" />
+        <textElement>
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-34" x="284" y="2" width="15" height="20" uuid="19f63400-0b19-4b31-acac-99e7df9bcc00" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[S/.]]></text>
+      </staticText>
+      <textField pattern="##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="299" y="3" width="60" height="21" uuid="57a19768-7c34-44cc-be09-97297c853db0" />
+        <textElement textAlignment="Right">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{V_sum}]]></textFieldExpression>
+      </textField>
+      <textField pattern="##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="279" y="16" width="80" height="21" uuid="8e55666f-cffb-4a51-8447-9e0092e98619" />
+        <textElement textAlignment="Right">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{V_sum_1}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-35" x="170" y="13" width="113" height="15" uuid="8be42a03-e5ed-46b6-b7d2-68db184ba095" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Total de Pagos:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-36" x="284" y="16" width="15" height="20" uuid="3772167b-265d-4fe8-a5bf-68334c650a74" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[S/.]]></text>
+      </staticText>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>
+
+

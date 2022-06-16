@@ -1,0 +1,119 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GuiaRemisionFormato" pageWidth="595" pageHeight="878" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cdb3cf1b-e16e-4a13-b0b8-cbc82a3fa09a">
+  <property name="Description" value="GuiaRemisionFormato.jrxml" />
+  <property name="FileName" value="GuiaRemisionFormato.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:34.353" />
+  <property name="Identifier" value="c53efd56-bf14-442e-a9f3-0f908e455e66" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="RECORD_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+
+
+--o.c_bpartner_id,
+--o.c_bpartner_location_id,
+--o.c_currency_id,
+--ol.m_product_id,
+o.documentno,
+(select name from m_product p where ol.m_product_id = p.m_product_id) as producto,
+(select value from m_product p where ol.m_product_id = p.m_product_id) as codproducto,
+
+ol.description,
+ol.movementqty,
+
+--ol.c_uom_id,
+coalesce((select uomsymbol from c_uom u where ol.c_uom_id = u.c_uom_id),'') as unidad,
+
+--ol.m_locatorto_id,
+(select value from m_locator j where ol.m_locatorto_id = j.m_locator_id) as almacen,
+--ol.m_locator_id,
+(select value from m_locator j where ol.m_locator_id = j.m_locator_id) as destino,
+
+ol.line
+--*
+
+from
+m_movement o
+join m_movementline ol on(o.m_movement_id = ol.m_movement_id)
+where o.m_movement_id = $P{RECORD_ID} and o.isactive = 'Y' and o.processing = 'N']]></queryString>
+  <field name="documentno" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="codproducto" class="java.lang.String" />
+  <field name="description" class="java.lang.String" />
+  <field name="movementqty" class="java.math.BigDecimal" />
+  <field name="unidad" class="java.lang.String" />
+  <field name="almacen" class="java.lang.String" />
+  <field name="destino" class="java.lang.String" />
+  <field name="line" class="java.math.BigDecimal" />
+  <title>
+    <band height="232" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="82" y="94" width="100" height="13" uuid="aacefb7d-a26a-4af5-9ee8-f607587a2f86" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="64" y="115" width="100" height="13" uuid="39a00c47-2912-4c5d-bcb0-4534f9135ef3" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="357" y="118" width="95" height="13" uuid="54f90820-2505-47d5-8868-d71cfbd0a9cb" />
+        <textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="412" y="43" width="100" height="20" uuid="22ca092a-6f64-4e24-bab6-c8b7ada6c48c" />
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <textField isStretchWithOverflow="true">
+        <reportElement x="76" y="3" width="341" height="10" uuid="d3d1ffcb-7365-4ab5-a56d-5288ab489cca" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="3" width="72" height="10" uuid="ba77ac8d-0bab-4de8-964e-7591dfe86969" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{codproducto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0">
+        <reportElement x="421" y="2" width="47" height="11" uuid="a96d8f2a-368b-4de9-9d21-269511f88087" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{movementqty}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="472" y="2" width="23" height="11" uuid="76d9ce71-f830-41b5-8fa9-aa95d6c7a20e" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <noData>
+    <band height="31" splitType="Stretch">
+      <staticText>
+        <reportElement x="139" y="3" width="286" height="27" uuid="8f7d3c93-8693-44f0-94cc-3518969fa760" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="12" isBold="true" />
+        </textElement>
+        <text><![CDATA[LA GUIA DE REMISION NO EXISTE]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Retenciones Por Recoger" Name="Retenciones Por Recoger" BaseRole="" Description="Retenciones Por Recoger" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="RetencionesPorRecoger_V5.jrxml" Identifier="5a39553d-745c-d7ce-d447-68bae1e039d5" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="C_BPartner_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="0" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="35fab8c2-26fb-42ef-95c7-42f3d809a388" Synchronized="2018-11-30 09:58:03.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="50935a00-36f5-4282-bb18-a83895596fba" Synchronized="2018-11-30 09:58:03.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Org_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="86dfa874-b384-494e-ae58-d17b60776d69" Synchronized="2018-11-30 09:58:03.0" />
+</process>
+
+

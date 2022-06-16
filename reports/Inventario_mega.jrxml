@@ -1,0 +1,148 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario_mega" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="60a30fb1-a5e7-4e05-b264-01f3d997d9bb">
+  <property name="Description" value="Inventario_mega.jrxml" />
+  <property name="FileName" value="Inventario_mega.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:37.062" />
+  <property name="Identifier" value="f2760fbc-4639-45e8-b0a8-65db21c74660" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="MovementDate_2" class="java.util.Date">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+e.value as codigo,
+e.name as descripcion,
+a.qtycount as cantidad_contada,
+f.pricelist as precio_costo,
+b.uomsymbol as unidad_medida,
+c.value as almacen
+from m_stocktakingline a
+left outer join m_stocktaking d on a.m_stocktaking_id = d.m_stocktaking_id
+left outer join m_product e on a.m_product_id = e.m_product_id
+left outer join m_locator c on a.m_locator_id = c.m_locator_id
+left outer join c_uom b on a.c_uom_id = b.c_uom_id
+left outer join m_productprice f on a.m_product_id = f.m_product_id
+where
+d.movementdate_2 >=$P{MovementDate_2}
+and f.m_pricelist_version_id = 1000182
+order by descripcion asc, codigo asc]]></queryString>
+  <field name="codigo" class="java.lang.String" />
+  <field name="descripcion" class="java.lang.String" />
+  <field name="cantidad_contada" class="java.math.BigDecimal" />
+  <field name="precio_costo" class="java.math.BigDecimal" />
+  <field name="unidad_medida" class="java.lang.String" />
+  <field name="almacen" class="java.lang.String" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="15" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="1" width="81" height="13" uuid="9862b4ee-3c2f-48e6-990e-baab007b48d5" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Codigo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="81" y="1" width="252" height="13" uuid="c1ab3248-2cb6-4cae-9e2c-033670333875" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripcion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="388" y="1" width="54" height="13" uuid="5dab3bd5-a3ce-491c-acf2-fc1bda6a6c09" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[P.Costo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="333" y="1" width="54" height="13" uuid="c0106ef9-e06f-44f8-bbdc-044cd48a6a09" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cantidad]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="443" y="1" width="54" height="13" uuid="6874b2e0-d938-4124-86ef-7e4c9b2e418c" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[U.Med]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="498" y="1" width="54" height="13" uuid="cac51a7e-cb86-4c30-a0e7-4d313d1aca4b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Almacen]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <textField>
+        <reportElement x="0" y="1" width="81" height="12" uuid="68ca3d7e-4641-4ad0-be5b-c0969d77c213" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="81" y="1" width="252" height="12" uuid="ec8ae5da-e313-4165-8d1c-02faf27e60eb" />
+        <textElement verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="333" y="1" width="54" height="12" uuid="b4c58d5a-4c94-437a-a6f7-ac84ed11b09b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cantidad_contada}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="388" y="1" width="54" height="12" uuid="bf3ff5b5-11b7-4b4a-8f0c-65a7c4d0f57c" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{precio_costo}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="443" y="1" width="54" height="12" uuid="2ead48c7-124a-4612-9fe9-d198bc0ea706" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{unidad_medida}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="498" y="1" width="54" height="12" uuid="cf269bed-c4ff-4bfe-8dfa-cc396d57028c" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Tasas De Cambio - Bi Moneda" Name="Tasas De Cambio - Bi Moneda" BaseRole="" Description="Tasas De Cambio- Bi Moneda" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="TasasDeCambioBiMoneda.jrxml" Identifier="43063115-55fc-0f62-80b3-9759c06685de" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="rangeDate" Description="rangeDate" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="rangeDate" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="d87d044b-1500-4875-8a72-92b4f413335c" Synchronized="2018-11-30 09:58:12.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Org_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="40e2031f-8252-4ba7-b0b4-4aeb4a760918" Synchronized="2018-11-30 09:58:12.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="e95eff89-ecbf-4f95-a967-1b81970f9a2f" Synchronized="2018-11-30 09:58:12.0" />
+</process>
+
+

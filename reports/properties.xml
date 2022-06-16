@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<project name="properties" basedir="." >
+	<description>
+	
+	</description>
+	<property file="report.properties"/>
+</project>

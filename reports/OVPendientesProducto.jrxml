@@ -1,0 +1,518 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OVPendientesProducto" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="756" leftMargin="56" rightMargin="30" topMargin="20" bottomMargin="20" uuid="4793834f-de5b-4471-a057-f0edf288b02b">
+  <property name="Identifier" value="53bd209a-52d0-cc9c-a47f-a4a3d1ede002" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="OVPendientesProducto.jrxml" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="469" />
+  <property name="ireport.y" value="69" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="java.util.*" />
+  <parameter name="DateOrdered1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateOrdered2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-31 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000069)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+o.documentno,
+o.dateordered,
+o.description,
+ol.datepromised as datepromised,
+bp.value,
+bp.name as "cliente",
+(select prod.value from m_product prod WHERE prod.m_product_id = p.m_product_id) as "codprod",
+(select prod.name from m_product prod WHERE  prod.m_product_id = p.m_product_id) as "producto",
+p.c_bpartner_id,
+p.m_product_id,
+p.c_order_id,
+p.pending,
+--qh.a,qh.b,qh.c,qh.d,qh.e,qh.f,
+COALESCE(qh.a, 0)+COALESCE(qh.b, 0)+COALESCE(qh.c, 0) as totalstock,
+qtya,
+qtyb,
+qtyc,
+total,
+(select array_to_string(array_agg(name), ',') from m_warehouse where warbasetype = '001' and ad_client_id = $P{AD_Client_ID}) as name_a,
+(select array_to_string(array_agg(name), ',') from m_warehouse where warbasetype = '002' and ad_client_id = $P{AD_Client_ID}) as name_b,
+(select array_to_string(array_agg(name), ',') from m_warehouse where warbasetype = '003' and ad_client_id = $P{AD_Client_ID}) as name_c
+
+
+FROM pendings p
+LEFT OUTER JOIN qtyonhand qh ON p.m_product_id = qh.m_product_id
+LEFT OUTER JOIN c_order o ON p.c_order_id = o.c_order_id
+LEFT OUTER JOIN c_bpartner bp ON (bp.c_bpartner_id = o.c_bpartner_id)
+LEFT OUTER JOIN m_product prod ON (prod.m_product_id = p.m_product_id)
+LEFT OUTER JOIN c_orderline ol ON (ol.c_order_id = p.c_order_id and ol.m_product_id = p.m_product_id)
+
+left join (
+select final.m_product_id,
+sum(sqtyA)+sum(dqtyA) as qtya,
+sum(sqtyB)+sum(dqtyB) as qtyb,
+sum(sqtyC)+sum(dqtyC) as qtyc,
+sum(sqtyA)+sum(dqtyA)+sum(sqtyB)+sum(dqtyB)+sum(sqtyC)+sum(dqtyC) as total
+
+from (SELECT il.m_product_id,
+	(case when wh.warbasetype = '001'
+	then (CASE  WHEN "substring"(io.movementtype::text, 2) = '+'::text
+		THEN il.movementqty ELSE il.movementqty * (-1)::numeric END)
+	else 0 end) as sqtyA,
+	(case when wh.warbasetype = '002'
+	then (CASE  WHEN "substring"(io.movementtype::text, 2) = '+'::text
+		THEN il.movementqty ELSE il.movementqty * (-1)::numeric END)
+	else 0 end) as sqtyB,
+	(case when wh.warbasetype = '003'
+	then (CASE  WHEN "substring"(io.movementtype::text, 2) = '+'::text
+	THEN il.movementqty ELSE il.movementqty * (-1)::numeric END)
+	else 0 end) as sqtyC,
+	(0) as dqtyA,
+	(0) as dqtyB,
+	(0) as dqtyC,
+	io.movementtype
+	FROM xendra.m_inout io
+	JOIN xendra.m_inoutline il ON il.m_inout_id = io.m_inout_id
+	left join m_warehouse wh on io.m_warehouse_id = wh.m_warehouse_id
+	AND il.isactive = 'Y'::bpchar
+	WHERE io.isactive = 'Y'::bpchar
+	AND wh.ad_client_id = $P{AD_Client_ID}
+	AND wh.ad_org_id = $P{AD_Org_ID}
+	AND (io.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar, 'RE'::bpchar]))
+
+
+UNION all
+	SELECT ml.m_product_id,
+	(case when wo.warbasetype = '001'
+	then (-1)::numeric * ml.movementqty else 0 end) as sqtyA,
+	(case when wo.warbasetype = '002'
+	then (-1)::numeric * ml.movementqty else 0 end) as sqtyB,
+	(case when wo.warbasetype = '003'
+	then (-1)::numeric * ml.movementqty else 0 end) as sqtyC,
+	(case when wd.warbasetype = '001'
+	then ml.movementqty else 0 end) as dqtyA,
+	(case when wd.warbasetype = '002'
+	then ml.movementqty else 0 end) as dqtyB,
+	(case when wd.warbasetype = '003'
+	then ml.movementqty else 0 end) as dqtyC,
+	'M-' AS movementtype
+	FROM xendra.m_movement mio
+	JOIN xendra.m_movementline ml ON ml.m_movement_id = mio.m_movement_id
+	AND ml.isactive = 'Y'::bpchar
+	JOIN xendra.m_warehouse wo ON wo.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM xendra.m_locator loc WHERE loc.m_locator_id = ml.m_locator_id))
+	JOIN xendra.m_warehouse wd ON wd.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM xendra.m_locator loc WHERE loc.m_locator_id = ml.m_locatorto_id))
+
+	WHERE mio.isactive = 'Y'::bpchar
+	AND (mio.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar]))
+	AND mio.ad_client_id = $P{AD_Client_ID}
+	AND mio.ad_org_id = $P{AD_Org_ID}
+UNION all
+	SELECT il.m_product_id,
+	(case when wr.warbasetype = '001'
+	then il.qtycount - il.qtybook else 0 end) as sqtyA,
+	(case when wr.warbasetype = '002'
+	then il.qtycount - il.qtybook else 0 end) as sqtyB,
+	(case when wr.warbasetype = '003'
+	then il.qtycount - il.qtybook else 0 end) as sqtyC,
+	(0) as dqtyA,
+	(0) as dqtyB,
+	(0) as dqtyC,
+	CASE WHEN (il.qtycount - il.qtybook) >= 0::numeric THEN 'I+'::text
+	ELSE 'I-'::text END AS movementtype
+
+	FROM xendra.m_inventoryline il
+	JOIN xendra.m_inventory i ON il.m_inventory_id = i.m_inventory_id
+	AND i.isactive = 'Y'::bpchar AND i.docstatus <> 'DR'::bpchar
+	left join m_warehouse wr on i.m_warehouse_id = wr.m_warehouse_id
+
+	WHERE i.isactive = 'Y'::bpchar
+	AND (i.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar]))
+	AND il.ad_client_id = $P{AD_Client_ID}
+	AND il.ad_org_id = $P{AD_Org_ID}
+
+UNION all
+	SELECT  pl.m_product_id,
+	(case when w.warbasetype = '001'
+	then pl.movementqty else 0 end) as sqtyA,
+	(case when w.warbasetype = '002'
+	then pl.movementqty else 0 end) as sqtyB,
+	(case when w.warbasetype = '003'
+	then pl.movementqty else 0 end) as sqtyC,
+	(0) as dqtyA,
+	(0) as dqtyB,
+	(0) as dqtyC,
+	CASE WHEN pl.movementqty >= 0::numeric THEN 'P+'::text
+	ELSE 'P-'::text END AS movementtype
+
+	FROM xendra.m_production p
+	JOIN xendra.m_productionplan pla ON pla.m_production_id = p.m_production_id
+	JOIN xendra.m_productionline pl ON pla.m_productionplan_id = pl.m_productionplan_id 	AND pl.isactive = 'Y'::bpchar
+	JOIN xendra.m_warehouse w ON w.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM xendra.m_locator loc WHERE loc.m_locator_id = pl.m_locator_id))
+	--where pl.m_product_id = prodid
+
+	where p.isactive='Y'
+	and (p.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar]))
+	and pla.isactive='Y'
+	AND p.ad_client_id = $P{AD_Client_ID}
+	AND p.ad_org_id = $P{AD_Org_ID}
+
+	) final
+	--join m_product p on p.m_product_id = final.m_product_id
+
+	group by final.m_product_id
+
+) stocks on stocks.m_product_id = prod.m_product_id
+
+where
+(o.docstatus = 'CO')
+and o.issotrx='Y'
+and o.ad_client_id = $P{AD_Client_ID}
+AND (CASE WHEN COALESCE($P{M_Product_ID}, 0)  = 0
+    THEN true
+    ELSE p.m_product_id = $P{M_Product_ID}
+    END)
+AND date(o.dateordered) >= date($P{DateOrdered1})
+AND date(o.dateordered) <= date($P{DateOrdered2})
+
+order by p.m_product_id,o.dateordered]]></queryString>
+  <field name="documentno" class="java.lang.String" />
+  <field name="dateordered" class="java.sql.Timestamp" />
+  <field name="description" class="java.lang.String" />
+  <field name="datepromised" class="java.sql.Timestamp" />
+  <field name="value" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="codprod" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="m_product_id" class="java.math.BigDecimal" />
+  <field name="c_order_id" class="java.math.BigDecimal" />
+  <field name="pending" class="java.math.BigDecimal" />
+  <field name="totalstock" class="java.math.BigDecimal" />
+  <field name="qtya" class="java.math.BigDecimal" />
+  <field name="qtyb" class="java.math.BigDecimal" />
+  <field name="qtyc" class="java.math.BigDecimal" />
+  <field name="total" class="java.math.BigDecimal" />
+  <field name="name_a" class="java.lang.String" />
+  <field name="name_b" class="java.lang.String" />
+  <field name="name_c" class="java.lang.String" />
+  <sortField name="codprod" />
+  <variable name="V_sum_1" class="java.lang.String" calculation="Sum">
+    <variableExpression><![CDATA[$F{codprod}]]></variableExpression>
+  </variable>
+  <variable name="totalprod" class="java.math.BigDecimal" resetType="Group" resetGroup="producto" calculation="Sum">
+    <variableExpression><![CDATA[$F{pending}]]></variableExpression>
+  </variable>
+  <variable name="Filtro" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{M_Product_ID}.longValue() == 0L  ? "Todos" : $F{producto})]]></variableExpression>
+  </variable>
+  <group name="producto">
+    <groupExpression><![CDATA[$F{codprod}]]></groupExpression>
+    <groupHeader>
+      <band height="13" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="4" y="1" width="63" height="11" uuid="7f8f0783-36c0-40f0-b99c-8380e72c3aa5" />
+          <textElement>
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{codprod}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="67" y="1" width="358" height="11" uuid="f82792b7-0275-4c9f-9934-fcd5329279d0" />
+          <textElement>
+            <font size="7" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="true">
+          <reportElement key="textField" x="529" y="1" width="40" height="12" uuid="f38a49c3-0cad-44e4-8314-a1d3c4545638" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{qtya}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="true">
+          <reportElement key="textField" x="573" y="1" width="40" height="12" uuid="5b8a45bf-5a88-42e4-b89c-762f15873426" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{qtyb}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="true">
+          <reportElement key="textField" x="620" y="1" width="40" height="12" uuid="3efadfee-6eba-49f9-935a-19e361aaea94" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{qtyc}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="true">
+          <reportElement key="textField" x="669" y="0" width="40" height="11" uuid="56a3b179-fd16-4bdd-8f3c-bca57b6906aa" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="true">
+          <reportElement key="textField" x="712" y="0" width="40" height="11" uuid="699d36e1-421c-475f-989b-f027e9f9ebff" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{totalstock}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="17" splitType="Stretch">
+        <textField evaluationTime="Group" evaluationGroup="producto" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="349" y="0" width="49" height="10" uuid="788f6bf1-7f2f-47ce-ae41-484fcc943f54" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{totalprod}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement key="line-3" x="5" y="12" width="777" height="1" forecolor="#CCCCCC" uuid="1e146d18-6c31-443a-ae3c-8d373f7d5327" />
+        </line>
+        <staticText>
+          <reportElement key="staticText-5" x="291" y="0" width="58" height="10" uuid="3ab93632-17c1-4c6b-97e2-4d36d88d099b" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+          </textElement>
+          <text><![CDATA[Total :]]></text>
+        </staticText>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band height="2" splitType="Stretch" />
+  </background>
+  <title>
+    <band height="4" splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="54" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-11" x="223" y="4" width="311" height="41" forecolor="#000000" uuid="0eeb1144-d38e-4d53-bcfc-687e1bca7bc5" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[Relación de Órdenes de Venta Pendiente x Producto]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="235" y="38" width="287" height="7" forecolor="#000000" uuid="80efc369-6857-4fb1-a497-2dcfa4bbca8c" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " + $P{DateOrdered1}.toString() + " al " + $P{DateOrdered2}.toString()]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line-4" x="252" y="34" width="290" height="1" uuid="e10ab14a-0beb-4f8c-a4d4-d4f0295a54db" />
+      </line>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="650" y="15" width="80" height="18" uuid="5296e77f-4421-4ed4-b0dd-ad1c9ee4ab02" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="708" y="15" width="48" height="12" uuid="61c2cad7-cd66-406b-85c8-e6fb27d1ff40" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line-1" x="0" y="51" width="782" height="1" forecolor="#0033CC" uuid="7060e609-0118-4a8e-9c08-fc256ce01bc3" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-20" x="550" y="15" width="100" height="20" uuid="4dd2d95b-a44c-47d6-a447-a6250fd552ed" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="665" y="34" width="65" height="12" uuid="042a86c0-c82d-42e8-b646-33459aefafbd" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="730" y="34" width="22" height="12" uuid="d489a54b-62cf-4b9d-9cc2-8b8956ace333" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="67" y="31" width="176" height="16" uuid="d10e06af-93de-4ee2-bdfb-dbd75c347b90" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText" x="7" y="31" width="60" height="16" uuid="23a74b0b-391c-4fc5-97c0-7cb90fa5576f" />
+        <textElement>
+          <font size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto:]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="27" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-1" x="4" y="0" width="40" height="20" uuid="335649fe-8ae4-4a70-82ac-896f2033e900" />
+        <textElement>
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[NºDoc.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-2" x="43" y="0" width="37" height="20" uuid="fbb317ba-4d0c-40d2-9365-ba2285315013" />
+        <textElement textAlignment="Center">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="340" y="0" width="58" height="20" uuid="92d7acac-ceec-4f78-b02c-b541caf3bbbb" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Pendiente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-9" x="84" y="0" width="56" height="20" uuid="a2b18b66-35a5-40f7-a965-7bdc0a7dcf87" />
+        <textElement>
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Descripción]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line-2" x="1" y="23" width="779" height="1" forecolor="#0033CC" uuid="1139f4d3-f387-4937-b147-6675ca5ef162" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-4" x="150" y="0" width="190" height="20" uuid="2864634d-e60c-4a26-ad30-51f52ef3f78c" />
+        <textElement textAlignment="Left">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Cliente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-21" x="669" y="0" width="40" height="20" uuid="60258ad9-50e9-4494-ac66-edfbdd4ac460" />
+        <textElement textAlignment="Right" verticalAlignment="Top">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Total Kardex]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="425" y="0" width="61" height="18" uuid="88f8ce3e-1cd6-4eb5-af33-a73b31dd298c" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[F. Prometida]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="529" y="1" width="40" height="17" uuid="600dc0a4-89cc-4fc8-a34c-a9afc19fecaa" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name_a}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="573" y="1" width="40" height="17" uuid="1c1c4f59-5355-4260-ba42-c4b7e143359d" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name_b}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="620" y="1" width="40" height="17" uuid="c2e705ec-c038-4484-8898-fc1402e91cd8" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name_c}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <textField pattern="dd/MM/yy" isBlankWhenNull="false">
+        <reportElement key="textField" x="37" y="0" width="43" height="12" uuid="bb637d79-f2e7-4468-b332-3f243d5fef28" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dateordered}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement key="textField" x="85" y="0" width="65" height="12" isRemoveLineWhenBlank="true" uuid="e6a52cb9-7360-410a-bab3-a6f2accd49c7" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="3" y="0" width="28" height="12" uuid="3edde847-c461-40a3-8260-1a9b26f95959" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="150" y="0" width="58" height="12" uuid="1b2dba9c-0691-4bd4-b0e3-f7137062bd18" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="208" y="0" width="95" height="12" uuid="a8e6581d-c92f-4de2-9c5a-121b2afeb6ab" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="349" y="0" width="49" height="12" uuid="66e30492-330e-4650-b9f8-9fe35a085a4d" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pending}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="425" y="2" width="61" height="12" uuid="8d400214-6e9f-4878-a1b7-0a38902200c3" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{datepromised}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band height="3" splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

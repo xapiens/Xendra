@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="account books reports extension" description="account books reports extension" id="org.xendra.report.acct_books" version="1.0" category="Libros-SUNAT" synchronized="@timestamp@" tags="SUNAT" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="d47ae692-fc7e-4bb0-8d69-44dfad647baf" Value="RV_prodsaldo" Name="RV_prodsaldo" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="prodsaldo.jrxml" Identifier="eea1efdd-8c3c-a661-82b5-a065edc1792f" Synchronized="2012-09-20 18:28:18.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prodsaldo" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="4103c32e-e487-4866-86ab-9a1423e048ae">
+    <property name="Description" value="prodsaldo.jrxml" />
+    <property name="FileName" value="prodsaldo.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:33.026" />
+    <property name="Identifier" value="55f392c6-0902-4bae-9624-9bbfe0d6f0d2" />
+    <property name="ireport.scriptlethandling" value="0" />
+    <property name="ireport.encoding" value="UTF-8" />
+    <import value="net.sf.jasperreports.engine.*" />
+    <import value="net.sf.jasperreports.engine.data.*" />
+    <import value="java.util.*" />
+    <parameter name="ad_org_id" class="java.math.BigDecimal" />
+    <parameter name="m_locator_id" class="java.math.BigDecimal" />
+    <parameter name="movementdate1" class="java.util.Date" />
+    <parameter name="movementdate2" class="java.util.Date" />
+    <queryString><![CDATA[SELECT  t.ad_org_id,
+       t.ad_client_id,        
+       t.m_locator_id,
+       p.value,
+       p.name,
+       t.m_product_id,        
+       sum(t.movementqty) as totqty
+       FROM
+       m_transaction t RIGHT JOIN m_product p ON t.m_product_id = p.m_product_id WHERE                 
+               t.ad_org_id = $P{ad_org_id} AND 
+               t.m_locator_id = $P{m_locator_id} AND 
+               t.movementdate >= $P{movementdate1} AND 
+               t.movementdate <= $P{movementdate2} group by 1,2,3,4,5,6
+order by name]]></queryString>
+    <field name="m_product_id" class="java.math.BigDecimal" />
+    <field name="totqty" class="java.math.BigDecimal" />
+    <field name="value" class="java.lang.String" />
+    <field name="name" class="java.lang.String" />
+    <field name="ad_org_id" class="java.math.BigDecimal" />
+    <field name="m_locator_id" class="java.math.BigDecimal" />
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band height="56" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-1" x="0" y="6" width="535" height="27" uuid="360267cf-ec53-4d85-8e7e-21804493c8df" />
+          <textElement textAlignment="Center">
+            <font size="14" isBold="true" />
+          </textElement>
+          <text><![CDATA[SALDOS DE PRODUCTOS POR ALMACEN]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-3" x="162" y="38" width="23" height="18" uuid="32e347fe-6488-4665-a234-8881f2018e0f" />
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <text><![CDATA[DEL]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="191" y="38" width="78" height="18" uuid="4c0f02fa-2aba-450d-88fc-613a9d3386d3" />
+          <textFieldExpression><![CDATA[$P{movementdate1}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement key="staticText-4" x="284" y="38" width="24" height="15" uuid="50141612-f753-4c0a-9b5d-f530e5494869" />
+          <textElement>
+            <font isBold="true" />
+          </textElement>
+          <text><![CDATA[AL]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="315" y="37" width="82" height="18" uuid="6c263a65-a854-4c63-94e2-8db2064af111" />
+          <textFieldExpression><![CDATA[$P{movementdate2}]]></textFieldExpression>
+        </textField>
+      </band>
+    </title>
+    <pageHeader>
+      <band height="31" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-2" x="5" y="5" width="70" height="19" uuid="374d9fb1-9e4b-482f-b303-ddcab775e3ba" />
+          <textElement>
+            <font size="12" isBold="true" />
+          </textElement>
+          <text><![CDATA[ALMACEN :]]></text>
+        </staticText>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="86" y="5" width="100" height="18" uuid="278401c1-4046-466e-97f6-05fb7fdd34fd" />
+          <textFieldExpression><![CDATA[$P{m_locator_id}]]></textFieldExpression>
+        </textField>
+      </band>
+    </pageHeader>
+    <columnHeader>
+      <band height="30" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-5" x="10" y="9" width="76" height="17" uuid="474bc35d-e812-4a85-844d-be20b0d418f1" />
+          <textElement>
+            <font isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[CODIGO]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-6" x="106" y="8" width="255" height="18" uuid="f7fc602f-905d-45f7-b319-88d9ebee2348" />
+          <textElement>
+            <font isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[DESCRIPCION]]></text>
+        </staticText>
+        <staticText>
+          <reportElement key="staticText-7" x="398" y="9" width="93" height="17" uuid="e83f6f0f-d3d5-41be-9d91-736b70c61809" />
+          <textElement textAlignment="Center">
+            <font isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[CANTIDAD]]></text>
+        </staticText>
+      </band>
+    </columnHeader>
+    <detail>
+      <band height="28" splitType="Stretch">
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="398" y="5" width="93" height="18" uuid="ce3d2d7e-f118-449f-baf1-f8cc57fb21a3" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{totqty}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="10" y="5" width="86" height="18" uuid="adf88bc3-aa4a-4104-b5e4-45b2753c16d1" />
+          <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="106" y="5" width="272" height="18" uuid="8e103e40-6fb8-4cd7-9e15-9937bfc2fa9d" />
+          <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+        </textField>
+      </band>
+    </detail>
+    <columnFooter>
+      <band height="8" splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band height="8" splitType="Stretch" />
+    </pageFooter>
+    <lastPageFooter>
+      <band height="5" splitType="Stretch" />
+    </lastPageFooter>
+    <summary>
+      <band height="11" splitType="Stretch" />
+    </summary>
+  </jasperReport>
+  <parameter Name="Locator" Description="Warehouse Locator" Help="The Locator indicates where in a Warehouse a product is located." AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="M_Locator_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="ba8bde0f-a75a-b862-a49f-2ca6545f2663" Synchronized="2017-06-06 22:39:55.0" />
+  <parameter Name="Organization" Description="Organizational entity within client" Help="An organization is a unit of your client or legal entity - examples are store, department. You can share data between organizations." AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Org_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="9942ced5-9820-d5a8-6cba-1340d08555a3" Synchronized="2017-06-06 22:39:55.0" />
+  <parameter Name="Movement Date" Description="Date a product was moved in or out of inventory" Help="The Movement Date indicates the date that a product moved in or out of inventory.  This is the result of a shipment, receipt or inventory movement." AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="MovementDate" FieldLength="7" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="e504d7d5-c908-39b0-dcb9-e3d9968d27d4" Synchronized="2017-06-06 22:39:55.0" />
+</process>
+
+

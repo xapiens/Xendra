@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="DocumentosCtas" Name="DocumentosCtas" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="DocumentoCtas.jrxml" Identifier="6b21cbba-308a-4481-ad90-ed617a1bb6b7" Synchronized="2017-06-06 22:39:56.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3941ccb8-6e98-4d5e-abc4-852b183c19c4" Synchronized="2017-06-06 22:39:56.0" />
+  <parameter Name="C_DocType_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_DocType_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="8924875f-03aa-4720-9602-826e265fbfeb" Synchronized="2017-06-06 22:39:56.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="0f21ad24-13b1-416b-9af4-52d2021237fe" Synchronized="2017-06-06 22:39:56.0" />
+</process>
+
+

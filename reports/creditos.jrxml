@@ -1,0 +1,322 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="creditos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c05bd9e-f8c6-499f-b3f1-9a56d06d1d1a">
+  <property name="Description" value="creditos.jrxml" />
+  <property name="FileName" value="creditos.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:31.676" />
+  <property name="Identifier" value="bebf85ee-d744-4492-822d-82ca536a8516" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <parameterDescription />
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="datetrx1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="datetrx2" class="java.sql.Timestamp">
+    <parameterDescription />
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+i.serial,
+i.documentno,
+i.dateinvoiced,
+bp.name,
+pl.creditamt,
+pl.machineserial
+
+from c_poslog pl
+left join c_invoice i on pl.c_invoice_id = i.c_invoice_id
+left join c_bpartner bp on i.c_bpartner_id = bp.c_bpartner_id
+
+
+where
+pl.creditamt > 0.00 and pl.docstatus = 'CO'
+and pl.ad_client_id = $P{AD_Client_ID}
+AND date(pl.datetrx)>=date($P{datetrx1})
+AND date(pl.datetrx)<=date($P{datetrx2})
+
+order by pl.machineserial, i.documentno]]></queryString>
+  <field name="serial" class="java.lang.String" />
+  <field name="documentno" class="java.lang.String" />
+  <field name="dateinvoiced" class="java.sql.Timestamp" />
+  <field name="name" class="java.lang.String" />
+  <field name="creditamt" class="java.math.BigDecimal" />
+  <field name="machineserial" class="java.lang.String" />
+  <variable name="suma" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{creditamt}]]></variableExpression>
+  </variable>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band height="72" splitType="Stretch">
+      <rectangle>
+        <reportElement x="0" y="50" width="553" height="19" backcolor="#E2DEDE" uuid="4629e73d-9759-4476-aac4-89b33b8fa0e0" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </rectangle>
+      <staticText>
+        <reportElement x="113" y="53" width="53" height="13" uuid="4aaafd8f-045e-46dd-b669-a73e5f8edd19" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="38" y="53" width="72" height="13" uuid="e59af8c8-5489-417d-9375-f7ad1030aca7" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[N-Documento]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="175" y="53" width="217" height="13" uuid="144346e5-925f-456c-9967-3126414cb3e5" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cliente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="397" y="53" width="84" height="13" uuid="a2016695-3fd6-4f6d-95b0-804783024488" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="7" y="53" width="30" height="13" uuid="0c837fb6-58cd-433c-bead-7e6eb6ae60e9" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Serie]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="370" y="17" width="86" height="12" uuid="5303b794-b6bc-45ef-8b25-2d3d0fb5dcc4" />
+        <textElement textAlignment="Justified">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="466" y="33" width="65" height="12" uuid="f19130bb-d2e8-4201-9fee-dd1f42c4d601" />
+        <textElement textAlignment="Right">
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="213" y="26" width="60" height="13" uuid="f9d2d5a9-5ed9-4b78-8d85-39fdd65dd856" />
+        <textFieldExpression><![CDATA[$P{datetrx1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="453" y="17" width="52" height="12" uuid="76e0f9f2-1f68-4025-945b-7d6a9d305d8a" />
+        <textElement verticalAlignment="Top">
+          <font size="7" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="505" y="18" width="50" height="12" uuid="47316dff-bdd9-4cbf-a8eb-1f6738d97b7e" />
+        <textElement verticalAlignment="Top">
+          <font size="7" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="191" y="27" width="22" height="12" uuid="1edc58aa-7940-4e88-b278-fe5814260815" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[DEL :]]></text>
+      </staticText>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="531" y="34" width="22" height="12" uuid="acadd4b2-7032-443d-a3df-1d45bb31a667" />
+        <textElement>
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="273" y="27" width="22" height="12" uuid="4d000414-1257-44e4-81ca-3f5c4169ba82" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[AL :]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="295" y="26" width="75" height="13" uuid="cb11345f-bd0c-4aaa-a039-37bef1ed3f69" />
+        <textFieldExpression><![CDATA[$P{datetrx2}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="489" y="53" width="60" height="13" uuid="2d82de34-cec6-4e28-a577-e78c06b6243d" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Caja]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="175" y="4" width="197" height="13" uuid="66a51e07-4349-4835-8f59-569d42a7d86f" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[VENTAS - CREDITOS]]></text>
+      </staticText>
+      <line>
+        <reportElement x="37" y="51" width="1" height="17" uuid="ec36aec2-630d-4e22-a4fd-7eef11e0b69f" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="111" y="51" width="1" height="17" uuid="88daec51-350c-4be4-b7f5-2b38934478ae" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="171" y="51" width="1" height="17" uuid="833c1237-c7be-408b-83e9-2c1295a9d154" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="393" y="51" width="1" height="17" uuid="74eb6639-3756-402e-a1be-7aa8de36dc32" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="484" y="51" width="1" height="17" uuid="086da917-5f3a-4b2f-a727-fdf9a9adec11" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="18" splitType="Stretch">
+      <line>
+        <reportElement x="0" y="16" width="553" height="1" uuid="5119ff32-26c7-4d18-8f39-f544436e96b9" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="111" y="0" width="1" height="17" uuid="b55c8b80-8857-40da-b5f0-896e6ca4ad56" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="0" y="0" width="1" height="17" uuid="381babb9-4105-4614-bfd5-7808e4895c1c" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="171" y="0" width="1" height="17" uuid="92bb6c09-308b-4e7d-ae7f-2f78dff795c5" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="393" y="0" width="1" height="17" uuid="2ba18bae-66d6-4e97-b6c7-de0dd5456bba" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="484" y="0" width="1" height="17" uuid="ba50de13-ccf4-4de4-a365-aa5ecffaa2ab" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="552" y="0" width="1" height="17" uuid="7ca7b2af-4f9f-4f47-9a97-4bae28536c48" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="2" y="2" width="36" height="12" uuid="5678d134-4396-4919-b7bb-c10d62183a6e" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{serial}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="115" y="2" width="53" height="12" uuid="9da15929-afc1-4b94-9463-5ccca8cf26a6" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dateinvoiced}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="174" y="2" width="218" height="12" uuid="94a83edb-371b-442d-82e3-ccaff4d9f45b" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="397" y="2" width="84" height="12" uuid="9bbb5dc8-89ef-4079-985d-86e37fb811b5" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{creditamt}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="487" y="2" width="63" height="12" uuid="b35a1a30-b7a8-4c93-958f-ac4b0b584df1" />
+        <textElement textAlignment="Center">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{machineserial}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="40" y="2" width="70" height="12" uuid="66f8c476-d655-4b56-8950-046d0280ff5b" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="37" y="0" width="1" height="17" uuid="262c24da-89f5-4424-8867-0a105aab7a32" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="46" splitType="Stretch">
+      <staticText>
+        <reportElement x="111" y="4" width="283" height="13" uuid="c946f17c-43bf-4c80-a5dc-ba35849df98d" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Ventas :]]></text>
+      </staticText>
+      <textField pattern="###0.00">
+        <reportElement x="405" y="4" width="78" height="13" uuid="52d50748-76f3-4087-a878-7ec8756be1ce" />
+        <textElement textAlignment="Right">
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

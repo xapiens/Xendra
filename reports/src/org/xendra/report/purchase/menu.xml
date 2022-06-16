@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Compras" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D"  anchor="REPORTS" >
+<menuitem Report="IngresoProductos" SeqNo="10" />
+<menuitem Report="comprasxorganizacion" SeqNo="20" />
+<menuitem Report="rbt" SeqNo="30" />
+</menuitem>

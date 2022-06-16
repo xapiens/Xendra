@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="finance reports extension" description="finance reports extension" id="org.xendra.report.finance" version="1.0" category="Finanzas" synchronized="@timestamp@" tags="Finanzas" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Finanzas" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Name="Caja" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+      <menuitem Report="cajaContados" SeqNo="10" />
+      <menuitem Report="cajaCreditos" SeqNo="420" />
+      <menuitem Report="CobranzasxVendxDocxFecha" SeqNo="30" />
+      <menuitem Report="CobranzasxVendxFecha" SeqNo="40" />
+    </menuitem>
+    <menuitem Name="Bancos" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+      <menuitem Report="EstadoCuentasBancos" SeqNo="10" />
+    </menuitem>
+    <menuitem Name="Por Cobrar" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+      <menuitem Report="EstadoDeCuentaCli" SeqNo="10" />
+      <menuitem Report="EstadoDeCuentaCliTodo" SeqNo="20" />
+      <menuitem Report="LetrasPendientes" SeqNo="30" />
+      <menuitem Report="Pendientes" SeqNo="40" />
+      <menuitem Report="Pendientesxcliente" SeqNo="50" />
+      <menuitem Report="PendientesxclienteMorosidad" SeqNo="60" />
+    </menuitem>
+    <menuitem Name="Por Pagar" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+      <menuitem Report="EstadoDeCuentaProv" SeqNo="10" />
+      <menuitem Report="EstadoDeCuentaProvTodo" SeqNo="20" />
+      <menuitem Report="ObligxMesxDoc" SeqNo="30" />
+      <menuitem Report="ObligxMesxSocio" SeqNo="40" />
+      <menuitem Report="ObligxSocAFecha" SeqNo="50" />
+      <menuitem Report="documentospendientesproveedor" SeqNo="60" />
+    </menuitem>
+  </menuitem>
+</plugin>
+
+

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Orden de Compra" Name="Orden de Compra" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="OrdenCompraFormato.jrxml" Identifier="1af2a32c-7755-7a04-1f20-4c0b284bad82" Synchronized="2018-11-30 09:58:26.0">
+  <parameter Name="C_Order_ID" Description="" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Order_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="eeedccd6-f68a-f8a9-40e3-6a8b66b8a085" Synchronized="2018-11-30 09:58:26.0" />
+</process>
+
+

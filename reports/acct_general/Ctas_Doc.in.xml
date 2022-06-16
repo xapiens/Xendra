@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Ctas_Doc" Name="Ctas_Doc" BaseRole="ACT,ALL" Description="" Help="Muestra el resumen de las cuentas invoulucradas en un determinado tipo de documento" Classname="org.compiere.report.ReportStarter" CategoryName="Contabilidad" AccessLevel="3" EntityType="D" FileName="Ctas_Doc.jrxml" Identifier="34c7d6cb-e55a-495d-9ef6-8a919280b787" Synchronized="2016-05-13 05:16:29.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="657804a5-b44a-4c97-8664-175ef0bff3f3" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="C_DocType_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_DocType_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3b0136fb-c8d1-4543-8731-65b35ed12ddb" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="57d3e372-d5f3-4c11-bdbb-a4f046f40001" Synchronized="2016-05-13 05:24:50.0" />
+</process>
+
+

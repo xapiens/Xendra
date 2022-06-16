@@ -1,0 +1,190 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TomaInventario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="011d395c-a2dd-4eea-ad45-3426b35fc462"><property name="Description" value="TomaInventario.jrxml" /><property name="FileName" value="TomaInventario.jrxml" /><property name="Synchronized" value="2017-06-06 22:10:34.155" /><property name="Identifier" value="2efd0df0-b062-4ab8-9cf0-3eb6581936fd" />
+	<property name="ireport.zoom" value="2.0" />
+	<property name="ireport.x" value="291" />
+	<property name="ireport.y" value="0" />
+	<parameter name="M_Warehouse_ID" class="java.math.BigDecimal" />
+	<queryString>
+		<![CDATA[SELECT
+t.documentno,
+t.description,
+pb.value,
+p.value as codigo,
+p.name as nombre,
+tl.qtycount as contado,
+tl.lot as lote,
+tl.guaranteedate as fecha,
+u.uomsymbol,
+w.name as almacen
+
+FROM
+
+M_stocktakingline tl
+left join m_stocktaking t on tl.m_stocktaking_id = t.m_stocktaking_id
+left join m_product p on tl.m_product_id = p.m_product_id
+left join m_product_brand pb on p.m_product_brand_id = pb.m_product_brand_id
+left join c_uom u on tl.c_uom_id = u.c_uom_id
+left join m_warehouse w on t.m_warehouse_id = w.m_warehouse_id
+
+where t.m_warehouse_id = $P{M_Warehouse_ID} and t.movementdate >= '2014-01-31 06:00:00'
+
+order by nombre]]>
+	</queryString>
+	<field name="documentno" class="java.lang.String" />
+	<field name="description" class="java.lang.String" />
+	<field name="value" class="java.lang.String" />
+	<field name="codigo" class="java.lang.String" />
+	<field name="nombre" class="java.lang.String" />
+	<field name="contado" class="java.math.BigDecimal" />
+	<field name="lote" class="java.lang.String" />
+	<field name="fecha" class="java.sql.Timestamp" />
+	<field name="uomsymbol" class="java.lang.String" />
+	<field name="almacen" class="java.lang.String" />
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="213" y="0" width="134" height="15" uuid="673a89bd-ddf0-4394-9568-1564e885fdba" />
+				<textElement>
+					<font size="12" />
+				</textElement>
+				<text><![CDATA[TOMA DE INVENTARIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch">
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="533" y="0" width="22" height="12" uuid="a2c7aff7-7ac8-4d83-898b-9508bc3b6224" />
+				<textElement>
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="468" y="0" width="65" height="12" uuid="f3de4745-d842-4f41-9035-4f4f4e277e42" />
+				<textElement textAlignment="Right">
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="1" width="202" height="11" uuid="58e83c24-9483-49f0-b460-7a78b2115599" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="1" width="46" height="11" uuid="a789a26c-b37b-4c6b-a0a3-a01a0e1539bd" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Almacen : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="14" uuid="754d5160-770e-41c2-8fe3-082904b2ad3c" />
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="2" width="55" height="13" uuid="ed8da17d-f942-46c4-a718-2f4c57a72719" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="2" width="166" height="13" uuid="7206bf47-02e0-4d56-aef3-f51d87a32aa9" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Nombre del Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="1" width="41" height="13" uuid="9fe12754-a192-4e0b-ab4a-48a5cce51a9b" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="1" width="42" height="13" uuid="983e8e80-263c-40c6-8b90-e892e37c6a8d" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Inv N-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="2" width="23" height="13" uuid="10841399-0ab7-4061-a5f7-4f13b27ae2d8" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[UM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="2" width="89" height="12" uuid="7400b181-490e-4bcb-b26d-9a9e112dbd0b" />
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="31" y="0" width="54" height="11" uuid="26076729-bf43-46fd-acd4-48aed7468dec" />
+				<textElement>
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="166" height="11" uuid="eb9400ea-caa5-4201-8a2f-0674b935cdec" />
+				<textElement>
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="282" y="0" width="40" height="11" uuid="27243f6d-981c-45be-b3c8-7130347d2413" />
+				<textElement textAlignment="Right">
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="0" width="42" height="11" uuid="635cd4d7-fa95-4ad6-8f29-67f8aeaac603" />
+				<textElement>
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="22" height="11" uuid="e071f7a0-e4e6-4683-8b91-427306d11031" />
+				<textElement>
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uomsymbol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="183" height="11" uuid="9b310055-5012-420e-ade9-e82bb92e86d6" />
+				<textElement>
+					<font size="6" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch" />
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch" />
+	</summary>
+</jasperReport>
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="material report extension" description="material extension" id="org.xendra.report.material" version="1.0" category="material" synchronized="@timestamp@" tags="Material" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

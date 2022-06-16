@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="PLEmayor.jrxml" Name="PLEmayor.jrxml" BaseRole="" Description="PLEmayor.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="PLEmayor.jrxml" Identifier="c4d282c7-7e9b-4d51-b5bf-a9c2a5b7c4d0" Synchronized="2017-06-06 22:10:33.0">
+  <parameter Name="dateacct2" Description="dateacct2" Help="dateacct2" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateacct2" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="2" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="199f6ed3-cd80-41ec-8c22-1446466abcd3" Synchronized="2017-06-14 11:17:50.0" />
+  <parameter Name="dateacct1" Description="dateacct1" Help="dateacct1" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateacct1" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="1" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="7bfc129a-8a86-401a-aaaf-541e0da81601" Synchronized="2017-06-14 11:17:50.0" />
+  <parameter Name="periodo" Description="" Help="" AD_Reference_ID="dc109434-dc5c-098b-4f9f-2ceec7b0f812" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="periodo" FieldLength="60" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="41a834ef-7988-4eab-9881-aa61aa4e4501" Synchronized="2017-06-14 11:17:50.0" />
+</process>
+
+

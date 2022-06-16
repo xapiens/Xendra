@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Vencimiento de Productos" Name="Vencimiento de Productos" BaseRole="MGN,ALL" Description="" Help="Muestra los productos que vencen en el rango de las fechas" Classname="org.compiere.report.ReportStarter" CategoryName="Administracion" AccessLevel="3" EntityType="D" FileName="vencimiento.jrxml" Identifier="0eb101e1-6bfc-62aa-f98b-035b226998f2" Synchronized="2019-03-13 18:28:18.0">
+  <parameter Name="M_Locator_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_Locator_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="adbca6b7-062a-0630-0143-cb7fa6509d85" Synchronized="2019-03-13 16:01:04.0" />
+  <parameter Name="DateFrom" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2105b2f6-4724-2283-8047-4b15f0978d5b" Synchronized="2019-03-13 16:03:14.0" /> 
+</process>
+
+

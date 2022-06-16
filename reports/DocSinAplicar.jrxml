@@ -1,0 +1,396 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DocSinAplicar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ffd6d3b1-b9b9-4b19-8a35-dee3e031b312">
+  <property name="Identifier" value="c2f10c8e-ac1f-b746-af24-39075daa005c" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="DocSinAplicar.jrxml" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <queryString><![CDATA[select
+	'Guia-' || dt.name as tipodoc,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end) as origen,m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from m_inout m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+
+union all
+
+select
+	'Guia-' || dt.name as tipodoc,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end),m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+	--m.*
+from m_inout m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where  posted='Y' and fact_id is null and  C_BPartner_ID!=1012821 and m.isactive='Y'
+
+union all
+-------------------------------------------------------------------
+select
+	dt.name as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from m_inventory m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+----------------------------------------------------------------------------
+union all
+
+
+select
+	dt.name as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from m_movement m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+union all
+select
+	dt.name as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from m_movement m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='Y' and fact_id is null  and m.isactive='Y'
+----------------------------------------------------------------------
+union all
+select
+	dt.name as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.movementdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from m_production m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+----------------------------------------------------------------------
+union all
+
+select
+	dt.name as tipodoc ,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end),m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.dateinvoiced as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_invoice m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+union all
+select
+	dt.name as tipodoc ,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end),m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.dateinvoiced as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_invoice m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='Y' and fact_id is null and  C_BPartner_ID!=1012821 and description not like '%** A N U L A D O%' and m.isactive='Y'
+----------------------------------------------------------------------
+union all
+
+select
+	dt.name as tipodoc ,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end),m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	'' as description,
+	'No Contabilizado' as estadocont,
+	m.statusdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_boestatement m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+union all
+select
+	dt.name as tipodoc ,(case when issotrx='Y' then 'Cliente' else 'Proveedor' end),m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	'' as description,
+	'No Contabilizado' as estadocont,
+	m.statusdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_boestatement m
+	left join c_doctype_trl dt on dt.c_doctype_id = m.c_doctype_id
+where posted='Y' and fact_id is null and m.isactive='Y'
+
+-----------------------------------------------------------------------
+union all
+
+select
+	'Retencion' as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	'' as description,
+	'No Contabilizado' as estadocont,
+	m.statusdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_retentionstatement m
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+union all
+select
+	'Retencion' as tipodoc ,'Cliente',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	'' as description,
+	'No Contabilizado' as estadocont,
+	m.statusdate as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_retentionstatement m
+where posted='Y' and fact_id is null and m.isactive='Y' and prestatus != 'DR'
+-------------------------------------------------------------------------
+union all
+select
+	'Asignacion' as tipodoc ,'',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.datetrx as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_allocationhdr m
+where posted='N' and docstatus IN('CO','CL','DR','IN','RR') and m.isactive='Y'
+union all
+select
+	'Asignacion' as tipodoc ,'',m.documentno as nrodoc,
+	(case when docstatus not in ('CL','CO') then docstatus else 'Ok' end) as estado,
+	m.description,
+	'No Contabilizado' as estadocont,
+	m.datetrx as fechadoc,
+	m.updated as fecha_control
+--m.*
+from c_allocationhdr m
+where posted='Y' and fact_id is null and m.isactive='Y'
+----------------------------------------------------------------------
+order by tipodoc,fechadoc
+------------------------------------------------------------------------]]></queryString>
+  <field name="tipodoc" class="java.lang.String" />
+  <field name="origen" class="java.lang.String" />
+  <field name="nrodoc" class="java.lang.String" />
+  <field name="estado" class="java.lang.String" />
+  <field name="description" class="java.lang.String" />
+  <field name="estadocont" class="java.lang.String" />
+  <field name="fechadoc" class="java.sql.Timestamp" />
+  <field name="fecha_control" class="java.sql.Timestamp" />
+  <group name="tipodoc">
+    <groupExpression><![CDATA[$F{tipodoc}]]></groupExpression>
+    <groupHeader>
+      <band height="14">
+        <line>
+          <reportElement x="0" y="8" width="555" height="1" uuid="3d16aee6-d81f-4ef1-bf16-16c3a5f9d658" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+      </band>
+    </groupHeader>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <pageHeader>
+    <band height="46" splitType="Stretch">
+      <staticText>
+        <reportElement x="118" y="10" width="318" height="20" uuid="47813e7d-2529-4e4e-864e-4a7e88eb62f1" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[Documentos No contabilizados]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="448" y="12" width="80" height="18" uuid="f5de8a16-f961-4a25-8232-a85a1e006fec" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="463" y="31" width="65" height="12" uuid="ffa48f49-f39c-469b-8982-4c08972cbab2" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="528" y="31" width="22" height="12" uuid="b3f7b0ce-da2f-432e-9754-dca9598697e3" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="408" y="12" width="36" height="20" uuid="1934878c-b492-4014-b41a-5f1c10611d7a" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="500" y="12" width="50" height="12" uuid="a6bdd510-873f-47ed-8f92-092cd234210b" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="26" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="0" width="130" height="20" uuid="fed5f686-6b11-46d4-8e1f-c8a6b2041323" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo Doc]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="189" y="0" width="52" height="20" uuid="2af806fb-ab46-43ae-ac34-9121d2574775" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Origen]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="130" y="0" width="59" height="20" uuid="ae9281e8-c906-4350-ba5b-5efe451004a5" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="241" y="0" width="17" height="20" uuid="8da67c30-e5af-4888-a03c-4a1120797c25" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[E]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="258" y="0" width="132" height="20" uuid="1b9d1a31-0dc2-4d63-b49d-a03d595245c5" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripcion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="391" y="0" width="69" height="20" uuid="f64b0a15-a6b1-4639-9b53-4d9262a69917" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Contabilizado?]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="460" y="0" width="47" height="20" uuid="1bfe82e2-358b-4219-bac8-3e751c282223" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="507" y="0" width="48" height="20" uuid="4cbcb7bd-b972-4efb-8785-b8f92cf46cc8" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Control]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="22" width="555" height="1" uuid="efdeb34e-ca2e-4a8f-bbf9-fc28f6529a93" />
+        <graphicElement>
+          <pen lineStyle="Solid" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="0" y="-3" width="555" height="1" uuid="f6db33ab-0de8-4d31-bb2f-b043cd9985f0" />
+        <graphicElement>
+          <pen lineStyle="Solid" />
+        </graphicElement>
+      </line>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="15" splitType="Stretch">
+      <textField>
+        <reportElement x="0" y="0" width="130" height="14" uuid="0dc94541-dca2-4c7b-8073-ce4d9a6e3401" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipodoc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="189" y="0" width="52" height="14" uuid="3fa9f187-3ec2-4dd8-8482-1e507ab7c6b2" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{origen}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="130" y="0" width="59" height="14" uuid="0e181d07-045d-41e0-a8dc-dd851a653fbd" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nrodoc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="241" y="0" width="17" height="14" uuid="e1f090fc-33de-4d0f-8fb8-2c0af5835ac9" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="258" y="0" width="132" height="14" uuid="cca4be5f-c43c-4b2e-a665-9b94f5609786" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="391" y="0" width="69" height="14" uuid="e3a21892-3c03-42fd-9d96-11fc9a942351" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{estadocont}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="460" y="0" width="47" height="14" uuid="e6154bfb-5998-4fd2-98fa-1b28a1b6d325" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fechadoc}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="507" y="0" width="48" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="713402f6-9ea7-4c2e-95ac-bff15a39ea05" />
+        <textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha_control}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <summary>
+    <band height="9" splitType="Stretch" />
+  </summary>
+</jasperReport>

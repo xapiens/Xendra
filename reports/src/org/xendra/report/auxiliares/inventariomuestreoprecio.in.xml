@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Muestreo con el Precio de Compra" Name="Muestreo con el Precio de Compra" BaseRole="MGN,ALL" Description="" Help="Muestra la cantidad contada, en libros y la diferencia, y esta ultima se multiplica por el precio de compra actual, de tal forma que se sepa la diferencia valorizada" Classname="org.compiere.report.ReportStarter" CategoryName="Administracion" AccessLevel="3" EntityType="D" FileName="inventariomuestreoprecio.jrxml" Identifier="33a6b8f4-a0f7-42d9-a77a-04d07ee9c0aa" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="ffbe71f5-de8d-480d-9688-6fca9c43dd39" Synchronized="2019-03-13 12:00:00.0" />
+  <parameter Name="M_Inventory_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_Inventory_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="138d5695-b9cc-4bb5-836a-0fb778c9d14f" Synchronized="2019-03-13 16:01:04.0" />
+</process>
+
+

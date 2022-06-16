@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GuiasSalidaPendientes" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf46ad98-fd61-4a92-b0e6-c35d0ff70279">
+  <property name="Description" value="GuiasSalidaPendientes.jrxml" />
+  <property name="FileName" value="GuiasSalidaPendientes.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.709" />
+  <property name="Identifier" value="196f58ee-3cf4-4f9d-8478-c9be1eb38a84" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="DateRange1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2000-03-30 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateRange2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-30 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[--------------------------------------------------------------------------
+-- SOPORTA CASO DE ITEMS DE UNA GUIA ESTEN FACTURADO Y OTRAS NO
+-------------------------------------------------------------------------
+
+select
+date_trunc('day',g.movementdate) as fechaGuia,
+(select name from c_doctype_trl where g.c_doctype_id = c_doctype_trl.c_doctype_id) as docname,
+g.documentno as guianro,
+g.c_doctype_id as tipdoc_guia,
+(select documentno from c_order where g.c_order_id = c_order.c_order_id) as orderno,
+g.dateordered as fechaOrden,
+g.description as observacion,
+(select name from c_bpartner where g.c_bpartner_id = c_bpartner.c_bpartner_id) as partnerName,
+--(select name from c_bpartner_location where g.c_bpartner_location_id = c_bpartner_location.c_bpartner_location_id) as partnerAddress,
+(select name from m_shipper s where g.m_shipper_id = s.m_shipper_id) as transportista			,
+g.shipdate as fechaEntrega,
+(select name from m_warehouse m where g.m_warehouse_id = m.m_warehouse_id) as almacen,
+
+(select name from m_product p where gl.m_product_id = p.m_product_id) as producto,
+(select name from c_uom u where gl.c_uom_id = u.c_uom_id) as unidad,
+gl.isinvoiced,
+gl.qtyentered,
+g.isprinted,
+(select name from ad_user where ad_user_id = g.salesrep_id) as vendedor,
+-- Obtengo el nombre de la regla de delivery
+(select name from ad_ref_list_trl rlt where rlt.ad_ref_list_id =
+(select ad_ref_list_id from ad_ref_list rl where rl.value = g.deliveryrule and rl.ad_reference_id=151)) as reglaentrega,
+-- Obtengo el nombre de la forma de transporte a usar
+(select name from ad_ref_list_trl rlt where rlt.ad_ref_list_id =
+(select ad_ref_list_id from ad_ref_list rl where rl.value = g.deliveryviarule and rl.ad_reference_id=152)) as tipotransporte,
+-- Determino si esta en borrador
+(case when g.docstatus ='DR' then 'Y' else 'N' end) as isBorrador
+from m_inout g
+
+left outer join m_inoutline gl on (g.m_inout_id = gl.m_inout_id)
+where
+-- Solo las que al menos tienen un item pendiente
+g.m_inout_id in (select distinct g.m_inout_id from m_inout g ,m_inoutline gl
+	where
+	(
+	-- activa, de ventas y completadas o cerradas
+	g.ad_client_id = 1000026 and g.isactive='Y' and g.issotrx='Y'
+	and
+	(g.docstatus = 'CO' or g.docstatus ='CL')
+	and
+	-- Solo aquellas que tiene facturas pendientes de guiar , O ESTE EN BORRADOR Y NO TIENE ITEMS
+	(g.m_inout_id = gl.m_inout_id and gl.isactive = 'Y' and gl.isinvoiced = 'N')
+	and
+ 	(CASE WHEN COALESCE($P{C_BPartner_ID}, 0)  = 0
+    		THEN true
+    	ELSE g.C_BPartner_ID = $P{C_BPartner_ID}
+	END)
+	and
+	date(g.movementdate) between date($P{DateRange1}) AND date($P{DateRange2})
+	)
+	or
+	-- este en borrador
+	(g.docstatus ='DR' 	and
+ 	(CASE WHEN COALESCE($P{C_BPartner_ID}, 0)  = 0
+    		THEN true
+    	ELSE g.C_BPartner_ID = $P{C_BPartner_ID}
+	END)
+	and
+	date(g.movementdate) between date($P{DateRange1}) AND date($P{DateRange2})
+))
+
+order by g.c_doctype_id,fechaGuia,guiaNro]]></queryString>
+  <field name="fechaguia" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="docname" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="guianro" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="tipdoc_guia" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="orderno" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="fechaorden" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="observacion" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="partnername" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="transportista" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="fechaentrega" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="almacen" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="producto" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="unidad" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="isinvoiced" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="qtyentered" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="isprinted" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="vendedor" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="reglaentrega" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="tipotransporte" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="isborrador" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <variable name="Filtro" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{C_BPartner_ID}.longValue() == 0L ? "Todos" : $F{partnername})]]></variableExpression>
+  </variable>
+  <group name="g_tipodoc">
+    <groupExpression><![CDATA[$F{docname}]]></groupExpression>
+    <groupHeader>
+      <band height="37" splitType="Stretch">
+        <frame>
+          <reportElement mode="Opaque" x="0" y="0" width="555" height="37" backcolor="#D6CDCD" uuid="c2b2621f-1109-469f-9820-6c6c154fe0c7" />
+        </frame>
+        <textField>
+          <reportElement x="2" y="7" width="551" height="20" uuid="24f40167-4a77-4b04-b81c-12da06f3f182" />
+          <textElement textAlignment="Center">
+            <font size="14" isBold="true" isUnderline="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{docname}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+  </group>
+  <group name="g_document" minHeightToStartNewPage="70">
+    <groupExpression><![CDATA[$F{guianro}]]></groupExpression>
+    <groupHeader>
+      <band height="36" splitType="Stretch">
+        <textField pattern="dd/MM/yyyy">
+          <reportElement x="0" y="5" width="40" height="12" uuid="e8ae2926-2868-446c-86d3-3094ab2ba6f3" />
+          <textElement>
+            <font size="6" isBold="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{fechaguia}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="40" y="5" width="50" height="12" uuid="08b5b850-c9bd-4540-9003-613a5dee627b" />
+          <textElement>
+            <font size="6" isBold="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{guianro}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="131" y="5" width="146" height="12" uuid="ee41e7a8-9df5-416b-9efa-813b20f9463d" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{partnername}]]></textFieldExpression>
+        </textField>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+          <reportElement x="383" y="5" width="35" height="12" uuid="0e590d81-02e2-40a9-9159-405b0cd7af1e" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{fechaorden}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement x="329" y="5" width="45" height="12" uuid="3e9b651c-2490-4e6a-b90d-80d50902a2db" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{orderno}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement x="352" y="17" width="80" height="12" uuid="021b9b11-31e5-4835-972e-8b9edba3a22b" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{transportista}]]></textFieldExpression>
+        </textField>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+          <reportElement x="477" y="17" width="40" height="12" uuid="e424fd4a-4db9-472f-bdea-f6ae6902e5f0" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{fechaentrega}]]></textFieldExpression>
+        </textField>
+        <textField isBlankWhenNull="true">
+          <reportElement x="71" y="17" width="84" height="12" uuid="e3bcb42f-b408-4a9e-95a9-054a50d382af" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement x="0" y="32" width="555" height="1" uuid="d87a1e48-bf6b-4727-a03a-c677d47a1aea" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <staticText>
+          <reportElement x="98" y="5" width="33" height="12" uuid="3df4cacb-4d9c-4a8b-b3b5-38f3e4ee757c" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[Cliente :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="296" y="5" width="33" height="12" uuid="2cc5298e-578f-455b-8c7c-ffb8791c1a79" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[Orden :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="23" y="17" width="45" height="12" uuid="25a2fd8c-d07c-498b-96df-6f57015524c8" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[Vendedor :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="296" y="17" width="54" height="12" uuid="44566337-d9ac-4c49-acd6-f1c966fa8a75" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[Transportista :  :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="429" y="17" width="54" height="12" uuid="7c4d0cac-aad4-4790-a81f-dfcb8db7cb5a" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[F.Transporte :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="428" y="5" width="43" height="12" uuid="acf383b8-2c8e-4993-93e0-04f298cc4029" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[R.Entrega :]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="475" y="5" width="67" height="12" uuid="d63df08d-2c3f-44e0-aa78-620824b47fc9" />
+          <textElement>
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{reglaentrega}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="155" y="17" width="45" height="12" uuid="a6bbc499-0ade-4ce4-ae3e-8677e40ad309" />
+          <textElement verticalAlignment="Top" markup="none">
+            <font size="6" isBold="true" isItalic="true" />
+          </textElement>
+          <text><![CDATA[Via Entrega:]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="200" y="17" width="80" height="12" uuid="97a6a534-a356-4c9b-a15b-ee7b099a1d2c" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{tipotransporte}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="517" y="17" width="17" height="12" uuid="d7881001-499e-498f-8498-dd066ca17203" />
+          <textElement markup="none">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{isprinted}.equals("Y") ? "<I>" : ""]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="535" y="17" width="17" height="12" uuid="01381577-b63e-40ad-85fb-c78a51fb3ff9" />
+          <textElement markup="none">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{isborrador}.equals("Y") ? "<B>" : ""]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="11" splitType="Stretch">
+        <line>
+          <reportElement x="0" y="5" width="555" height="1" uuid="183cc96c-8fd8-4522-82b7-052eb1a97c3c" />
+          <graphicElement>
+            <pen lineStyle="Double" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="0" y="7" width="555" height="1" uuid="f481f4ed-bd67-4ab7-89cb-90d0be4fcbfb" />
+          <graphicElement>
+            <pen lineStyle="Double" />
+          </graphicElement>
+        </line>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <columnHeader>
+    <band height="55" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="187" y="25" width="180" height="14" forecolor="#000000" uuid="7ac20b20-b047-4545-a4b6-15b96062604b" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{DateRange1})+ " al " + DateFormat.getDateInstance().format($P{DateRange2})]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="466" y="41" width="65" height="12" uuid="e3d14151-bdb9-4ca2-bede-972197ee3387" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="453" y="25" width="80" height="18" uuid="3ecf6c21-fe11-4733-8f2c-b9274107f6a4" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="531" y="41" width="22" height="12" uuid="88955210-5e72-4522-a1cc-f846f0214a1e" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="408" y="25" width="48" height="20" uuid="5977e748-26bb-478a-8b5b-b1bb16164f72" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Impreso :]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="39" width="68" height="12" uuid="5b96e3bb-7eb3-4e04-8375-107c17fad0e5" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Filtro Cliente :]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="505" y="25" width="50" height="12" uuid="5564e068-94c6-4846-bd1b-632e4c5ad0a9" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="118" y="5" width="318" height="20" uuid="85d605b3-54eb-43ef-83be-e4cf756469b4" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[Guias De Salida No Facturadas]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="53" width="555" height="1" uuid="0b2c884d-d751-44c2-9fb5-89ae7c294d4c" />
+        <graphicElement>
+          <pen lineStyle="Solid" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="71" y="39" width="178" height="12" uuid="b7462ddf-97b4-468b-9feb-9ca870ad00d7" />
+        <textElement verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="13" splitType="Stretch">
+      <textField isBlankWhenNull="true">
+        <reportElement x="23" y="1" width="145" height="12" uuid="6781e10d-76be-420d-829c-1474a65237f7" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{almacen}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="300" y="1" width="166" height="12" uuid="e5a11f5a-38f3-4e0d-8c52-7ebb26b21180" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="222" y="1" width="43" height="12" uuid="b72967b4-9418-48c4-984c-32a385b80d59" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="true">
+        <reportElement x="168" y="0" width="50" height="13" uuid="8ff19c3c-a1a5-44fb-9ab4-9e646731b1d7" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{qtyentered}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <noData>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement x="128" y="15" width="318" height="20" uuid="92836e79-2515-4e6c-b601-485247bfcdee" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[No hay datos para los parametros especificados]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>
+
+

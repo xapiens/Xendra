@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Cuenta de Ventas Resumen" Name="Cuenta de Ventas Resumen" BaseRole="ACT,ALL" Description="" Help="Muestra un resumen de laa cuentas del libro 14, agrupandolas por tipo de documento" Classname="org.compiere.report.ReportStarter" CategoryName="Contabilidad" AccessLevel="3" EntityType="D" FileName="CtaResumen_Ventas.jrxml" Identifier="8620d5eb-403f-47a7-b2d6-5a0393f4396f" Synchronized="2016-05-13 05:16:29.0">
+  <parameter Name="DateAcct" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateAcct" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="bffa38aa-da8e-42fb-ade7-625cd945ed89" Synchronized="2016-05-13 05:24:50.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="1a555255-d60e-4133-9d5e-bd344b6a2533" Synchronized="2016-05-13 05:24:50.0" />
+</process>
+
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="R_ProductCategory" Name="R_ProductCategory" BaseRole="" Description="R_ProductCategory" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="ventasxcategoria.jrxml" Identifier="25e4ffb0-fe6b-bf89-d60d-06d1fe6a5e90" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="b8abbe0a-a4d7-41eb-bb92-5d93fef41a27" Synchronized="2018-11-30 09:58:11.0" />
+  <parameter Name="DateInvoiced" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateInvoiced" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="e9885367-c1b3-4454-aad9-cf57a8d46166" Synchronized="2018-11-30 09:58:11.0" />
+</process>
+
+

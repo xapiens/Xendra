@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Ventas" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D"  anchor="REPORTS" >
+<menuitem Report="ventasgeneral" SeqNo="10" />
+<menuitem Report="VentasTopTen" SeqNo="20" />
+<menuitem Report="ventasvendedor" SeqNo="30" />
+<menuitem Report="Mod_historial_compras_cliente" SeqNo="40" />
+</menuitem>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="7b5cbd75-0b61-4146-ba3d-4fcf947d68e4" Value="POS Report Product" Name="POS Report Product" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="POSReportProd.jrxml" Identifier="d5c36868-cccd-9e5e-11db-d24a93594e92" Synchronized="2012-09-20 18:28:18.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pos por producto" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="b0611767-dd90-4e7b-9c94-4e6ab55e2716">
+    <property name="Description" value="POSReportProd.jrxml" />
+    <property name="FileName" value="POSReportProd.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:36.43" />
+    <property name="Identifier" value="6036f818-2909-4758-abfe-a236ee3a5da1" />
+    <property name="ireport.scriptlethandling" value="0" />
+    <property name="ireport.encoding" value="UTF-8" />
+    <import value="net.sf.jasperreports.engine.*" />
+    <import value="net.sf.jasperreports.engine.data.*" />
+    <import value="java.util.*" />
+    <parameter name="c_pos_id" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(1000028)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="datepos1" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <parameter name="datepos2" class="java.sql.Timestamp">
+      <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2008-01-04 00:00:00")]]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[SELECT
+     c_pos.name as name2,
+     c_poslog."c_invoice_id",
+     c_poslog."c_poslog_id",
+     c_poslog."c_pos_id",
+     c_invoiceline."m_product_id",
+     c_invoiceline."qtyinvoiced",
+     c_invoiceline."linenetamt",
+     c_invoice."documentno",
+     c_invoice."dateinvoiced",
+     m_product."value",
+     m_product."name",
+     m_product."m_product_id"
+FROM
+	xendra.c_pos,
+	xendra.c_poslog,
+	xendra.c_invoiceline,
+	xendra.c_invoice,
+	xendra.m_product
+WHERE
+     xendra.c_poslog.c_pos_id = $P{c_pos_id}
+ AND date(c_invoice.dateinvoiced) >= date($P{datepos1})
+ AND date(c_invoice.dateinvoiced) <= date($P{datepos2})
+and	xendra.c_pos.c_pos_id = xendra.c_poslog.c_pos_id
+and	xendra.c_poslog.c_invoice_id = xendra.c_invoice.c_invoice_id
+and	xendra.c_invoice.c_invoice_id = xendra.c_invoiceline.c_invoice_id
+and	xendra.c_invoiceline.m_product_id = xendra.m_product.m_product_id
+
+order by xendra.m_product.m_product_id, xendra.c_poslog.c_invoice_id]]></queryString>
+    <field name="value" class="java.math.BigDecimal" />
+    <field name="name" class="java.lang.String" />
+    <field name="qtyinvoiced" class="java.math.BigDecimal" />
+    <field name="documentno" class="java.lang.String" />
+    <field name="dateinvoiced" class="java.sql.Timestamp" />
+    <field name="name2" class="java.lang.String" />
+    <variable name="total_producto" class="java.math.BigDecimal" resetType="Group" resetGroup="Producto" calculation="Sum">
+      <variableExpression><![CDATA[$F{qtyinvoiced}]]></variableExpression>
+    </variable>
+    <group name="Producto">
+      <groupExpression><![CDATA[$F{value}]]></groupExpression>
+      <groupHeader>
+        <band height="60" splitType="Stretch">
+          <textField pattern="###0;-###0" isBlankWhenNull="false">
+            <reportElement key="textField" x="54" y="0" width="100" height="18" uuid="ef59b7c1-b31e-4558-a708-67849b376ad6" />
+            <textElement>
+              <font size="11" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+          </textField>
+          <textField isBlankWhenNull="false">
+            <reportElement key="textField" x="54" y="24" width="334" height="18" uuid="d3ecbb02-85eb-4dca-9589-948fb26b55ad" />
+            <textElement>
+              <font size="11" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+          </textField>
+          <staticText>
+            <reportElement key="staticText-1" x="0" y="42" width="100" height="14" uuid="c865fdeb-51d2-49f7-8cc1-7b45ae8f2743" />
+            <textElement>
+              <font isBold="true" />
+            </textElement>
+            <text><![CDATA[Documento]]></text>
+          </staticText>
+          <staticText>
+            <reportElement key="staticText-2" x="119" y="42" width="100" height="14" uuid="85b726f9-7f9b-47e0-8f42-98d967de443b" />
+            <textElement>
+              <font isBold="true" />
+            </textElement>
+            <text><![CDATA[Fecha]]></text>
+          </staticText>
+          <staticText>
+            <reportElement key="staticText-3" x="240" y="42" width="100" height="14" uuid="9620c509-46aa-4a96-97b3-2a57a5746c5b" />
+            <textElement>
+              <font isBold="true" />
+            </textElement>
+            <text><![CDATA[cantidad]]></text>
+          </staticText>
+          <staticText>
+            <reportElement key="staticText-5" x="0" y="0" width="49" height="19" uuid="4069c91f-97be-45be-b439-4d61831e6437" />
+            <textElement>
+              <font size="11" isBold="true" />
+            </textElement>
+            <text><![CDATA[CODIGO]]></text>
+          </staticText>
+          <staticText>
+            <reportElement key="staticText-6" x="0" y="24" width="49" height="19" uuid="aa5b327d-d0d0-4fc3-ac51-9232c035e429" />
+            <textElement>
+              <font size="11" isBold="true" />
+            </textElement>
+            <text><![CDATA[NOMBRE]]></text>
+          </staticText>
+        </band>
+      </groupHeader>
+      <groupFooter>
+        <band height="36" splitType="Stretch">
+          <textField pattern="##0.00" isBlankWhenNull="false">
+            <reportElement key="textField" x="240" y="6" width="100" height="18" uuid="df3346ff-9652-42db-9fc7-bedf8c4a634b" />
+            <textElement textAlignment="Right" />
+            <textFieldExpression><![CDATA[$V{total_producto}]]></textFieldExpression>
+          </textField>
+          <line>
+            <reportElement key="line-1" x="0" y="24" width="535" height="1" uuid="f8c30edd-3716-460b-a6ad-90bffbc29f36" />
+          </line>
+          <staticText>
+            <reportElement key="staticText-7" x="122" y="6" width="96" height="17" uuid="5c0c0e39-2d5a-415c-bb54-f8c99d318073" />
+            <textElement>
+              <font isBold="true" isItalic="true" />
+            </textElement>
+            <text><![CDATA[TOTAL]]></text>
+          </staticText>
+          <line>
+            <reportElement key="line-2" x="240" y="5" width="100" height="1" uuid="07fad450-847e-4b2c-bd9e-299eedb8b067" />
+          </line>
+        </band>
+      </groupFooter>
+    </group>
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band height="35" splitType="Stretch">
+        <staticText>
+          <reportElement key="staticText-4" x="128" y="9" width="263" height="22" uuid="cca6d606-e87d-4622-ba2e-563676365d74" />
+          <textElement textAlignment="Center">
+            <font fontName="SansSerif" size="18" isBold="true" />
+          </textElement>
+          <text><![CDATA[punto de venta por producto]]></text>
+        </staticText>
+      </band>
+    </title>
+    <pageHeader>
+      <band height="12" splitType="Stretch" />
+    </pageHeader>
+    <columnHeader>
+      <band height="30" splitType="Stretch">
+        <textField isBlankWhenNull="false">
+          <reportElement key="textField" x="0" y="0" width="165" height="18" uuid="866effe3-9348-4bec-adc9-70ea97f68ff9" />
+          <textElement>
+            <font size="12" isBold="true" isItalic="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{name2}]]></textFieldExpression>
+        </textField>
+      </band>
+    </columnHeader>
+    <detail>
+      <band height="22" splitType="Stretch">
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="240" y="0" width="100" height="18" uuid="bfcf1de4-6aaf-4b3f-bfa5-8637405f1d1d" />
+          <textElement textAlignment="Right" />
+          <textFieldExpression><![CDATA[$F{qtyinvoiced}]]></textFieldExpression>
+        </textField>
+        <textField pattern="##0.00" isBlankWhenNull="false">
+          <reportElement key="textField" x="0" y="0" width="100" height="18" uuid="83bc7e70-8164-4ac8-83fd-a1b5be16a3fd" />
+          <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+        </textField>
+        <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+          <reportElement key="textField" x="119" y="0" width="100" height="18" uuid="377d6e5c-61bf-4ad5-8cd5-83cba35da0ba" />
+          <textFieldExpression><![CDATA[$F{dateinvoiced}]]></textFieldExpression>
+        </textField>
+      </band>
+    </detail>
+    <columnFooter>
+      <band height="10" splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band height="8" splitType="Stretch" />
+    </pageFooter>
+    <lastPageFooter>
+      <band height="11" splitType="Stretch" />
+    </lastPageFooter>
+    <summary>
+      <band height="11" splitType="Stretch" />
+    </summary>
+  </jasperReport>
+  <parameter Name="POS Terminal" Description="Point of Sales Terminal" Help="The POS Terminal defines the defaults and functions available for the POS Form" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="C_POS_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="b02e5352-9503-8a65-b1e3-18dfb980aab2" Synchronized="2017-06-06 22:40:03.0" />
+  <parameter Name="Date Invoiced" Description="Date printed on Invoice" Help="The Date Invoice indicates the date printed on the invoice." AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="datepos" FieldLength="7" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="1b6674c1-7d09-7de2-b103-a0a290601dfc" Synchronized="2017-06-06 22:40:03.0" />
+</process>
+
+

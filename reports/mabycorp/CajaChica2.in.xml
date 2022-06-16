@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="R_DiaryEffecPrint" Name="R_DiaryEffecPrint" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="CajaChica2.jrxml" Identifier="d78791d4-2ab7-4ca8-a65d-2e3360009de8" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="C_CashBook_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_CashBook_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="44c4b97d-6075-57e0-204e-bb30c0f4ff9f" Synchronized="2017-06-06 23:00:41.0" />
+  <parameter Name="StatementDate" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="StatementDate" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2f2f2dfa-4b97-22e8-9105-805eedc2e3d0" Synchronized="2017-06-06 23:00:41.0" />
+</process>
+
+

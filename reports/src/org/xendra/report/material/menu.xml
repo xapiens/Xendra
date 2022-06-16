@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Material" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+ <menuitem Report="warehousecosted" SeqNo="10" />
+ <menuitem Report="warehousecosted2" SeqNo="20" />
+ <menuitem Report="warehousecosted3" SeqNo="30" />
+ <menuitem Report="ingresos_a_almacenes" SeqNo="40" />
+</menuitem> 

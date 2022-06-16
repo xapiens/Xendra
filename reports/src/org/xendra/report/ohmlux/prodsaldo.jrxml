@@ -1,0 +1,142 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prodsaldo" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="239a149e-ae5d-45f7-83f6-94dacd88e00e"><property name="Description" value="prodsaldo.jrxml" />
+	<property name="Identifier" value="eea1efdd-8c3c-a661-82b5-a065edc1792f" />
+	<property name="Synchronized" value="2016-10-11 15:12:18.0" />
+	<property name="FileName" value="prodsaldo.jrxml" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<import value="java.util.*" />
+	<parameter name="ad_org_id" class="java.math.BigDecimal" />
+	<parameter name="m_locator_id" class="java.math.BigDecimal" />
+	<parameter name="movementdate1" class="java.util.Date" />
+	<parameter name="movementdate2" class="java.util.Date" />
+	<queryString>
+		<![CDATA[SELECT  t.ad_org_id,
+       t.ad_client_id,        
+       t.m_locator_id,
+       p.value,
+       p.name,
+       t.m_product_id,        
+       sum(t.movementqty) as totqty
+       FROM
+       m_transaction t RIGHT JOIN m_product p ON t.m_product_id = p.m_product_id WHERE                 
+               t.ad_org_id = $P{ad_org_id} AND 
+               t.m_locator_id = $P{m_locator_id} AND 
+               t.movementdate >= $P{movementdate1} AND 
+               t.movementdate <= $P{movementdate2} group by 1,2,3,4,5,6
+order by name]]>
+	</queryString>
+	<field name="m_product_id" class="java.math.BigDecimal" />
+	<field name="totqty" class="java.math.BigDecimal" />
+	<field name="value" class="java.lang.String" />
+	<field name="name" class="java.lang.String" />
+	<field name="ad_org_id" class="java.math.BigDecimal" />
+	<field name="m_locator_id" class="java.math.BigDecimal" />
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="0" y="6" width="535" height="27" uuid="80973744-e32e-4cc8-9327-d463cc209e78" />
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" />
+				</textElement>
+				<text><![CDATA[SALDOS DE PRODUCTOS POR ALMACEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="162" y="38" width="23" height="18" uuid="dc27d3dd-cbe1-41d2-81b2-66447de1cbfb" />
+				<textElement>
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[DEL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="191" y="38" width="78" height="18" uuid="bb5031c4-02f1-4e62-b481-3773fd049969" />
+				<textFieldExpression><![CDATA[$P{movementdate1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-4" x="284" y="38" width="24" height="15" uuid="965cfe3d-0ef8-45d2-880b-f07a327c2ce3" />
+				<textElement>
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[AL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="315" y="37" width="82" height="18" uuid="2a23a399-dfe9-44f0-8e4b-f04b77e4ca10" />
+				<textFieldExpression><![CDATA[$P{movementdate2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" x="5" y="5" width="70" height="19" uuid="d4fabd3f-bc0c-47e5-a008-57be2e5bae2c" />
+				<textElement>
+					<font size="12" isBold="true" />
+				</textElement>
+				<text><![CDATA[ALMACEN :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="86" y="5" width="100" height="18" uuid="e0551d61-5fa1-499e-9a49-f357a1a3cdbc" />
+				<textFieldExpression><![CDATA[$P{m_locator_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="10" y="9" width="76" height="17" uuid="430eb706-0bb2-4f3c-a57d-4d15c77af99b" />
+				<textElement>
+					<font isBold="true" isItalic="true" />
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="106" y="8" width="255" height="18" uuid="be6949fb-bcfe-492a-916f-84f32f6b9de3" />
+				<textElement>
+					<font isBold="true" isItalic="true" />
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="398" y="9" width="93" height="17" uuid="324fa6f7-51b9-402f-a41c-3c9a91de4a22" />
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="true" />
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="398" y="5" width="93" height="18" uuid="93905105-ba1a-47d2-96bc-48c5bc9a7734" />
+				<textElement textAlignment="Right" />
+				<textFieldExpression><![CDATA[$F{totqty}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="10" y="5" width="86" height="18" uuid="3e09bdbe-e5ca-4ba4-9cdb-e203b8a525a7" />
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="106" y="5" width="272" height="18" uuid="96a7f29d-052c-4a10-bf3f-aa044786f81e" />
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band height="8" splitType="Stretch" />
+	</pageFooter>
+	<lastPageFooter>
+		<band height="5" splitType="Stretch" />
+	</lastPageFooter>
+	<summary>
+		<band height="11" splitType="Stretch" />
+	</summary>
+</jasperReport>
+

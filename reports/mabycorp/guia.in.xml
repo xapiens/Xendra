@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="guia.jrxml" Name="guia.jrxml" BaseRole="" Description="guia.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="guia.jrxml" Identifier="078ff91c-409c-42c6-aca1-fb55f8a7b588" Synchronized="2017-06-06 22:10:33.0">
+  <parameter Name="N_TRANSFERENCIA" Description="N_TRANSFERENCIA" Help="N_TRANSFERENCIA" AD_Reference_ID="2bdf579b-6652-8542-6c29-59598861d88c" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="N_TRANSFERENCIA" FieldLength="22" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="732d0f95-78a7-4904-80f5-42be39e06ab9" Synchronized="2017-06-14 11:17:50.0" />
+</process>
+
+

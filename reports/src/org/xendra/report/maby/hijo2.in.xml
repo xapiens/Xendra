@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="hijo2.jrxml" Name="hijo2.jrxml" BaseRole="" Description="hijo2.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="hijo2.jrxml" Identifier="2048e632-7d21-4572-833d-5e63530ccde6" Synchronized="2017-06-06 22:10:34.0">
+  <parameter Name="C_Retention_ID" Description="" Help="" AD_Reference_ID="2bdf579b-6652-8542-6c29-59598861d88c" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Retention_ID" FieldLength="22" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="3886303f-b7e3-4d40-bf8d-4a5da359ee6b" Synchronized="2017-06-14 11:17:52.0" />
+</process>
+
+

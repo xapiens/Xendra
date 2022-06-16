@@ -1,0 +1,1154 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StockVentasPresup" pageWidth="1600" pageHeight="595" orientation="Landscape" columnWidth="1560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="c8a589ac-b783-429a-928d-f9baefdb18cc">
+  <property name="Identifier" value="66a90477-313b-27ca-b450-50118df7f0b3" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="StockVentasPresup_v4.jrxml" />
+  <property name="ireport.zoom" value="2.0" />
+  <property name="ireport.x" value="1307" />
+  <property name="ireport.y" value="0" />
+  <property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true" />
+  <property name="net.sf.jasperreports.export.xls.white.page.background" value="false" />
+  <property name="net.sf.jasperreports.export.xls.size.fix.enabled" value="true" />
+  <property name="net.sf.jasperreports.export.xls.collapse.row.span" value="true" />
+  <parameter name="DateFrom" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[new SimpleDateFormat("dd/mm/yyyy").parse("01/01/2014")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000069)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[with acctschema as (select ad_client_id, c_currency_id from c_acctschema where ad_client_id = 1000026)
+select codproducto as idProducto,p.value as codProducto,p.name as descripcionProducto,
+	m_product_group.name AS m_product_group_name,
+	m_product_type.name AS m_product_type_name,
+	m_product_brand.name AS m_product_brand_name,
+	m_product_generic.name AS m_product_generic_name,
+	m_product_model.name AS m_product_model_name,
+	sum(totalUnidades) as totalUnidades,
+	(case when max(precioMinimo) = 9999999 then 0 else max(precioMinimo) end) as precioMinimo,
+	sum(precioPromedioVenta) as precioPromedioVenta,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	sum(total_stock) as total_stock,
+	sum(porrecibir) as porrecibir,
+	sum(porentregar) as porentregar,
+	sum(porrecibir_0030) as porrecibir_0030,
+	sum(porrecibir_3060) as porrecibir_3060,
+	sum(porrecibir_60) as porrecibir_60,
+	sum(currentcostprice) as currentcostprice,
+	sum(totalvalorstock) as totalvalorstock
+from (
+----------------------------------------------------------------------------------------
+--- AREA 1 DETERMINACION A PARTIR DE LA FACTURACION DE PRECIOS;MINIMOS;MAXMOS;PROMEDIOS
+--- UNIDADES VENDIDAS
+----------------------------------------------------------------------------------------
+	select m_product_id as codproducto,
+		sum(totunidades) as totalUnidades,
+		min(
+		CASE WHEN precio = 0 then
+			9999999
+		else
+			precio
+		end) as precioMinimo,
+		--sum(precio),sum(tosumpromedio) ,
+		sum(precio)/(case when sum(tosumpromedio) = 0 then
+			      1
+			     else
+			      sum(tosumpromedio)
+			     end) as precioPromedioVenta,
+		0 as type001,
+		0 as type002,
+		0 as type003,
+		0 as type004,
+		0 as type005,
+		0 as type006,
+		0 as type007,
+		0 as type008,
+		0 as type009,
+		0 as total_stock,
+		0 as porrecibir,
+		0 as porentregar,
+		0 as porrecibir_0030,
+		0 as porrecibir_3060,
+		0 as porrecibir_60,
+		0 as currentcostprice,
+		0 as totalvalorstock
+		 from (
+			---------------------
+			-- Primero se acumula agrupado por product , mes y año
+			------------------------------
+			select
+			il.m_product_id,
+			qtyinvoiced as totunidades,
+			(case when inv.c_currency_id != s.c_currency_id
+				then priceentered*cr.multiplyrate
+				else priceentered
+			end
+			) as precio,
+			1 tosumpromedio
+			from c_invoiceline il
+			JOIN acctschema s on s.ad_client_id  = il.ad_client_id
+			join c_invoice inv on inv.c_invoice_id = il.c_invoice_id
+			join c_doctype dt on dt.c_doctype_id=inv.c_doctype_id
+			left join c_conversion_rate cr on (inv.c_conversiontype_id = cr.c_conversiontype_id
+				and cr.ad_client_id = 1000026
+				and inv.c_currency_id != s.c_currency_id    --No buscar soles a soles (casi un segundo menos)
+				and inv.c_currency_id = cr.c_currency_id
+				and cr.c_currency_id_to = s.c_currency_id
+				and date(dateinvoiced) between cr.validfrom and cr.validto)
+			where
+			inv.issotrx  ='Y'
+			AND inv.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+			and il.isactive='Y' and inv.isactive='Y'
+			and inv.ad_client_id = 1000026
+			-- No a las transferencias gratuitas, nota de credito
+			AND dt.docbasetype not in ('ART','ARC')
+			and dateinvoiced between DATE($P{DateFrom}) and DATE(now())
+			union all
+			-- Las devoluciones las hacemos toamndo en cuenta las guias
+			-- por ser mas preciso , a veces las notas no indican con precision
+			-- el numero de unidades.
+			select il.m_product_id,
+			-1*il.qtyentered totunidades,
+			0 as precio,
+			0 tosumpromedio
+			from m_inout io
+			join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y'
+			join c_orderline ol on ol.c_orderline_id = il.c_orderline_id
+			join c_order ord on ord.c_order_id = ol.c_order_id
+			join c_doctype dt on dt.c_doctype_id = ord.c_doctype_id
+			--join c_doctype_trl dtt on dtt.c_doctype_id = ord.c_doctype_id
+			join m_product p on p.m_product_id = il.m_product_id
+			where io.isactive  = 'Y'
+			AND io.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+			and io.issotrx = 'Y'
+			and io.ad_client_id = 1000026
+			AND dt.docbasetype = 'SOO' AND dt.docsubtypeso = 'RM'
+			and movementdate between DATE($P{DateFrom}) and DATE(now())
+
+		) detalle
+		group by m_product_id
+---------------------------------------------------------------------------------------
+--- AREA 2 DETERMINACION DE COSTOS PROMEDIO ; UNIDADES X ALMACEN ; POR ENTREGAR ; POR RECIBIR
+---
+---------------------------------------------------------------------------------------
+union all
+	select
+	product_id,
+	0 as totalunidades,
+	0 as preciominimo,
+	0 as preciopromedioventa,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	sum(total_stock) as total_stock,
+
+
+	sum(porrecibir) as porrecibir,
+	sum(porentregar) as porentregar,
+
+	sum(porrecibir_0030) as porrecibir_0030,
+	sum(porrecibir_3060) as porrecibir_3060,
+	sum(porrecibir_60) as porrecibir_60,
+	getaveragecost(1000026,1000069,1000050,product_id,(date(now())+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+	sum(total_stock)*getaveragecost(1000026,1000069,1000050,product_id,(date(now())+time '23:59:59')::timestamp without time zone,'Y')  as totalValorStock
+	from (
+
+	--
+	-- Primero las guias
+	--
+	select
+	product_id,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+
+	sum(type001)+sum(type002)+sum(type003)+sum(type004)+sum(type005)+sum(type006)+sum(type007)+sum(type008)+sum(type009) as total_stock,
+
+	sum(porrecibir) as porrecibir,
+	sum(porentregar) as porentregar,
+
+	sum(porrecibir_0030) as porrecibir_0030,
+	sum(porrecibir_3060) as porrecibir_3060,
+	sum(porrecibir_60) as porrecibir_60
+
+
+	from (
+
+	select
+	datepromised,
+	product_id,
+	c_orderline_id,
+	sum(qtyentered) as qtyentered,
+	max(oqtyenterd) as oqtyenterd,
+	(
+	case when min(issotrx) = 'Y' and max(oqtyenterd)-sum(qtyentered) >= 0 and min(docstatus) != 'CL'
+		then max(oqtyenterd)-sum(qtyentered)
+		else 0
+	end
+	) as porentregar,
+	(
+	case when min(issotrx) = 'N' and max(oqtyenterd)-sum(qtyentered) >= 0 and min(docstatus) != 'CL'
+		then max(oqtyenterd)-sum(qtyentered)
+		else 0
+	end
+	) as porrecibir,
+	(
+	case when min(issotrx) = 'N' and max(oqtyenterd)-sum(qtyentered) >= 0 and min(docstatus) != 'CL'
+		and date(datepromised)-date(now()) <= 30
+		then max(oqtyenterd)-sum(qtyentered)
+		else 0
+	end
+	) as porrecibir_0030,
+	(
+	case when min(issotrx) = 'N' and max(oqtyenterd)-sum(qtyentered) >= 0 and min(docstatus) != 'CL'
+		and date(datepromised)-date(now()) > 30 and date(datepromised)-date(now()) <= 60
+		then max(oqtyenterd)-sum(qtyentered)
+		else 0
+	end
+	) as porrecibir_3060,
+	(
+	case when min(issotrx) = 'N' and max(oqtyenterd)-sum(qtyentered) >= 0 and min(docstatus) != 'CL'
+		and date(datepromised)-date(now()) > 60
+		then max(oqtyenterd)-sum(qtyentered)
+		else 0
+	end
+	) as porrecibir_60,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	min(issotrx)
+	from(
+	------------------- hoja1begin
+	select
+	ol.datepromised,
+	il.m_product_id as product_id,
+	il.c_orderline_id,
+	sum(il.qtyentered) as qtyentered,
+	max(ol.qtyentered) as oqtyenterd,
+	(
+		case when w.warbasetype = '001'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+			)
+		else
+			0
+		end
+	) as type001,
+	(
+		case when w.warbasetype = '002'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+			)
+		else
+			0
+		end
+	) as type002,
+	(
+		case when w.warbasetype = '003'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+
+			)
+		else
+			0
+		end
+	) as type003,
+	(
+		case when w.warbasetype = '004'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+
+			)
+		else
+			0
+		end
+	) as type004,
+	(
+		case when w.warbasetype = '005'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+			)
+		else
+			0
+		end
+	) as type005,
+	(
+		case when w.warbasetype = '006'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+			)
+		else
+			0
+		end
+	) as type006,
+	(
+		case when w.warbasetype = '007'
+			then (
+				case when substring(io.movementtype,2) = '-'
+					then -1*sum(il.qtyentered)
+				else
+					sum(il.qtyentered)
+				end
+			)
+		else
+			0
+		end
+	) as type007,
+	(
+		case when w.warbasetype = '008' then
+			sum(il.qtyentered)
+		     when w.warbasetype = '008' AND substring(io.movementtype,2)='-' then
+			-1*sum(il.qtyentered)
+		     else
+			0
+		end
+	) as type008,
+	(
+		case when w.warbasetype = '009' then
+			sum(il.qtyentered)
+		     when w.warbasetype = '009' AND substring(io.movementtype,2)='-' then
+			-1*sum(il.qtyentered)
+		     else
+			0
+		end
+	) as type009,
+	min(ord.docstatus) as docstatus,
+	min(io.issotrx) as issotrx
+
+	from m_inout io
+	join m_warehouse w on io.m_warehouse_id = w.m_warehouse_id
+	left join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y'
+	left join c_orderline ol on ol.c_orderline_id = il.c_orderline_id
+	left join c_order ord on ord.c_order_id = ol.c_order_id
+	where io.isactive  = 'Y'
+	AND io.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+	and io.ad_client_id = 1000026
+	--and (CASE WHEN COALESCE(1000069, 0)  = 0
+	--     THEN true
+	--     ELSE io.ad_org_id = 1000069
+	--     END)
+	group by product_id,il.c_orderline_id,ol.datepromised,w.warbasetype,io.movementtype
+	-------------------- hoja1end
+	) xx
+	group by product_id,c_orderline_id,datepromised
+
+
+	) yy
+	group by product_id
+
+	--
+	-- Ahora las lineas de ordenes que no estan atendias al 100%
+	--
+	union all
+
+	select
+	m_product_id as product_id,
+	0 as type001,
+	0 as type002,
+	0 as type003,
+	0 as type004,
+	0 as type005,
+	0 as type006,
+	0 as type007,
+	0 as type008,
+	0 as type009,
+	0 as total_stock,
+	sum(porrecibir) as porrecibir,
+	sum(porentregar) as porentregar,
+
+	sum(porrecibir_0030) as porrecibir_0030,
+	sum(porrecibir_3060) as porrecibir_3060,
+	sum(porrecibir_60) as porrecibir_60
+
+
+	from (
+
+	select col.m_product_id,
+	co.documentno,
+	qtyordered,
+	col.datepromised,
+	(
+	case when issotrx = 'N'
+		then qtyordered
+		else 0
+	end
+	) as porrecibir,
+	(
+	case when issotrx = 'Y'
+		then qtyordered
+		else 0
+	end
+	) as porentregar,
+	(
+	case when issotrx = 'N'
+		and (date(col.datepromised)-date(now())) <= 30
+		then qtyordered
+		else 0
+	end
+	) as porrecibir_0030,
+	(
+	case when issotrx = 'N'
+		and (date(col.datepromised)-date(now())) > 30 and (date(col.datepromised)-date(now())) <= 60
+		then qtyordered
+		else 0
+	end
+	) as porrecibir_3060,
+	(
+	case when issotrx = 'N'
+		and (date(col.datepromised)-date(now())) > 60
+		then qtyordered
+		else 0
+	end
+	) as porrecibir_60
+
+
+	from c_orderline col
+	left join c_order co on co.c_order_id = col.c_order_id
+	left join m_inoutline iol on iol.c_orderline_id = col.c_orderline_id
+	where iol.c_orderline_id IS NULL
+	--and co.docstatus != 'CL' and co.docstatus != 'DR' and co.docstatus != 'IN'  and co.docstatus != 'VO'
+	--and co.c_bpartner_id != 1012821
+	and co.ad_client_id = 1000026
+	--and (CASE WHEN COALESCE(1000069, 0)  = 0
+        	--     THEN true
+        	--    ELSE co.ad_org_id = 1000069
+     	--    END)
+	and co.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+	and col.m_product_id is not null
+	) xx
+	group by product_id
+
+	--
+	-- Ahora las transferencias
+	----
+	union all
+
+	select
+	product_id,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	sum(type001)+sum(type002)+sum(type003)+sum(type004)+sum(type005)+sum(type006)+sum(type007)+sum(type008)+sum(type009) as total_stock,
+
+	0 as porrecibir,
+	0 as porentregar,
+
+	0 as porrecibir_0030,
+	0 as porrecibir_3060,
+	0 as porrecibir_60
+
+	from (
+	---------------- HOJA2begin
+	select
+	m_product_id as product_id,
+	(
+	 case when wo.warbasetype = '001' and wd.warbasetype != '001' then -1*ml.movementqty
+	     when wd.warbasetype = '001' and wo.warbasetype != '001' then ml.movementqty
+	     else 0
+	 end
+	) as type001,
+	(
+	 case when wo.warbasetype = '002' and wd.warbasetype != '002' then -1*ml.movementqty
+	     when wd.warbasetype = '002' and wo.warbasetype != '002' then ml.movementqty
+	     else 0
+	 end
+	) as type002,
+	(
+	 case when wo.warbasetype = '003' and wd.warbasetype != '003' then -1*ml.movementqty
+	     when wd.warbasetype = '003' and wo.warbasetype != '003' then ml.movementqty
+	     else 0
+	 end
+	) as type003,
+	(
+	 case when wo.warbasetype = '004' and wd.warbasetype != '004' then -1*ml.movementqty
+	     when wd.warbasetype = '004' and wo.warbasetype != '004' then ml.movementqty
+	     else 0
+	 end
+	) as type004,
+	(
+	 case when wo.warbasetype = '005' and wd.warbasetype != '005' then -1*ml.movementqty
+	     when wd.warbasetype = '005' and wo.warbasetype != '005' then ml.movementqty
+	     else 0
+	 end
+	) as type005,
+	(
+	 case when wo.warbasetype = '006' and wd.warbasetype != '006' then -1*ml.movementqty
+	      when wd.warbasetype = '006' and wo.warbasetype != '006' then ml.movementqty
+	      else 0
+	  end
+	) as type006,
+	(
+	  case when wo.warbasetype = '007' and wd.warbasetype != '007' then -1*ml.movementqty
+	       when wd.warbasetype = '007' and wo.warbasetype != '007' then ml.movementqty
+	       else 0
+	  end
+	) as type007,
+	(
+	  case when wo.warbasetype = '008' and wd.warbasetype != '008' then -1*ml.movementqty
+	       when wd.warbasetype = '008' and wo.warbasetype != '008' then ml.movementqty
+	       else 0
+	  end
+	) as type008,
+	(
+	  case when wo.warbasetype = '009' and wd.warbasetype != '009' then -1*ml.movementqty
+	       when wd.warbasetype = '009' and wo.warbasetype != '009' then ml.movementqty
+	       else 0
+	  end
+	) as type009
+	from m_movement mio
+	join m_movementline ml on ml.m_movement_id=mio.m_movement_id and ml.isactive  = 'Y' --and ml.m_product_id = 1017928
+	join m_warehouse wo on wo.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locator_id)
+	join m_warehouse wd on wd.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locatorto_id)
+	where mio.isactive  = 'Y' and mio.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+	--and mio.docstatus != 'DR' and mio.docstatus != 'IN' and mio.docstatus != 'VO'
+	and mio.ad_client_id = 1000026
+	and wo.warbasetype != wd.warbasetype
+	--------------------- HOJA2end
+	) xx
+	group by product_id
+
+	--
+	-- Ahora inventarios
+	union all
+
+	select
+	product_id,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	sum(type001)+sum(type002)+sum(type003)+sum(type004)+sum(type005)+sum(type006)+sum(type007)+sum(type008)+sum(type009) as total_stock,
+
+	0 as porrecibir,
+	0 as porentregar,
+	0 as porrecibir_0030,
+	0 as porrecibir_3060,
+	0 as porrecibir_60
+
+	from (
+	----------- hoja3begin
+	select
+	m_product_id as product_id,
+	qtycount-qtybook as qtyentered,
+	(
+		case when w.warbasetype = '001' then qtycount-qtybook else 0	end
+	) as type001,
+	(
+		case when w.warbasetype = '002'	then qtycount-qtybook
+		else 0
+		end
+	) as type002,
+	(
+		case when w.warbasetype = '003'	then qtycount-qtybook
+		else 0
+		end
+	) as type003,
+	(
+		case when w.warbasetype = '004'	then qtycount-qtybook
+		else 0
+		end
+	) as type004,
+	(
+		case when w.warbasetype = '005'	then qtycount-qtybook
+		else
+			0
+		end
+	) as type005,
+	(
+		case when w.warbasetype = '006'
+			then qtycount-qtybook
+		else
+			0
+		end
+	) as type006,
+	(
+		case when w.warbasetype = '007'
+			then qtycount-qtybook
+		else
+			0
+		end
+	) as type007,
+	(
+	  case when w.warbasetype = '008'
+		then qtycount-qtybook
+	  else
+		0
+	  end
+	) as type008,
+	(
+	  case when w.warbasetype = '009'
+		then qtycount-qtybook
+	  else
+		0
+	  end
+	) as type009
+	from m_inventoryline il
+	join m_inventory i on il.m_inventory_id = i.m_inventory_id
+		and i.isactive  = 'Y'
+		--and i.docstatus != 'DR' and i.docstatus != 'IN' and i.docstatus != 'VO'
+		and i.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])
+	join m_warehouse w on i.m_warehouse_id = w.m_warehouse_id
+	where il.isactive = 'Y'
+	and i.ad_client_id = 1000026
+	-------------- hoja3end
+	) xx
+	group by product_id
+
+	--------------------
+	-- Produccion
+	--------------------
+	union all
+	select
+	product_id,
+	sum(type001) as type001,
+	sum(type002) as type002,
+	sum(type003) as type003,
+	sum(type004) as type004,
+	sum(type005) as type005,
+	sum(type006) as type006,
+	sum(type007) as type007,
+	sum(type008) as type008,
+	sum(type009) as type009,
+	sum(type001)+sum(type002)+sum(type003)+sum(type004)+sum(type005)+sum(type006)+sum(type007)+sum(type008)+sum(type009) as total_stock,
+
+	0 as porrecibir,
+	0 as porentregar,
+
+	0 as porrecibir_0030,
+	0 as porrecibir_3060,
+	0 as porrecibir_60
+
+	from (
+
+	select
+	il.m_product_id as product_id,
+	movementqty as qtyentered,
+	(
+		case when w.warbasetype = '001'
+			then movementqty
+		else
+			0
+		end
+	) as type001,
+	(
+		--case when w.m_warehouse_id = 1000093
+		case when w.warbasetype = '002'
+			then movementqty
+		else
+			0
+		end
+	) as type002,
+	(
+		--case when w.m_warehouse_id = 1000094  or w.M_Warehouse_ID=1004414
+		case when w.warbasetype = '003'
+			then movementqty
+		else
+			0
+		end
+	) as type003,
+	(
+		--case when w.m_warehouse_id = 1000096 or w.m_warehouse_id = 1000097 or w.m_warehouse_id = 1000098 or w.m_warehouse_id = 1000099 or w.M_Warehouse_ID=1004411 or w.M_Warehouse_ID=1004412 or w.M_Warehouse_ID=1004413
+		case when w.warbasetype = '004'
+			then movementqty
+		else
+			0
+		end
+	) as type004,
+	(
+		case when w.warbasetype = '005'
+			then movementqty
+		else
+			0
+		end
+	) as type005,
+	(
+		case when w.warbasetype = '006'
+			then movementqty
+		else
+			0
+		end
+	) as type006,
+	(
+	  case when w.warbasetype = '007'
+		then movementqty
+	  else
+		0
+	  end
+	) as type007,
+	(
+	  case when w.warbasetype = '008'
+		then movementqty
+	  else
+		0
+	  end
+	) as type008,
+	(
+	  case when w.warbasetype = '009'
+		then movementqty
+	  else
+		0
+	  end
+	) as type009
+	--*
+	from m_productionline  il
+	join m_productionplan i on il.m_productionplan_id = i.m_productionplan_id and i.isactive  = 'Y'
+	join m_production pp on pp.m_production_id = i.m_production_id
+	JOIN m_warehouse w ON w.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM m_locator loc
+							WHERE loc.m_locator_id = il.m_locator_id))
+	where il.isactive='Y'
+		and (pp.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar]))
+		and pp.isactive='Y'
+		and pp.ad_client_id = 1000026
+	) xx
+	group by product_id
+	) total_agrupador
+	group by product_id
+) final
+join m_product p on p.m_product_id = final.codProducto
+	left join m_product_group   ON p.m_product_group_id = m_product_group.m_product_group_id
+	left join m_product_brand   ON p.m_product_brand_id = m_product_brand.m_product_brand_id
+	left join m_product_type    ON p.m_product_type_id = m_product_type.m_product_type_id
+	left join m_product_generic ON p.m_product_generic_id = m_product_generic.m_product_generic_id
+	left join m_product_model   ON p.m_product_model_id = m_product_model.m_product_model_id
+	where p.ad_client_id = 1000026
+	and p.isactive = 'Y'
+	and p.issummary ='N'
+	group by codproducto,p.value,p.name,m_product_group.name,m_product_type.name,m_product_brand.name,m_product_generic.name,m_product_model.name
+	order by m_product_group.name,m_product_type.name,m_product_brand.name,m_product_generic.name,codproducto]]></queryString>
+  <field name="idproducto" class="java.math.BigDecimal" />
+  <field name="codproducto" class="java.lang.String" />
+  <field name="descripcionproducto" class="java.lang.String" />
+  <field name="m_product_group_name" class="java.lang.String" />
+  <field name="m_product_type_name" class="java.lang.String" />
+  <field name="m_product_brand_name" class="java.lang.String" />
+  <field name="m_product_generic_name" class="java.lang.String" />
+  <field name="m_product_model_name" class="java.lang.String" />
+  <field name="totalunidades" class="java.math.BigDecimal" />
+  <field name="preciominimo" class="java.math.BigDecimal" />
+  <field name="preciopromedioventa" class="java.math.BigDecimal" />
+  <field name="type001" class="java.math.BigDecimal" />
+  <field name="type002" class="java.math.BigDecimal" />
+  <field name="type003" class="java.math.BigDecimal" />
+  <field name="type004" class="java.math.BigDecimal" />
+  <field name="type005" class="java.math.BigDecimal" />
+  <field name="type006" class="java.math.BigDecimal" />
+  <field name="type007" class="java.math.BigDecimal" />
+  <field name="type008" class="java.math.BigDecimal" />
+  <field name="type009" class="java.math.BigDecimal" />
+  <field name="total_stock" class="java.math.BigDecimal" />
+  <field name="porrecibir" class="java.math.BigDecimal" />
+  <field name="porentregar" class="java.math.BigDecimal" />
+  <field name="porrecibir_0030" class="java.math.BigDecimal" />
+  <field name="porrecibir_3060" class="java.math.BigDecimal" />
+  <field name="porrecibir_60" class="java.math.BigDecimal" />
+  <field name="currentcostprice" class="java.math.BigDecimal" />
+  <field name="totalvalorstock" class="java.math.BigDecimal" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <pageHeader>
+    <band height="56" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="0" width="1553" height="20" uuid="384b6e9b-66fe-4e5c-a9f1-f31d5faddb08" />
+        <textElement textAlignment="Center">
+          <font size="16" isBold="true" />
+        </textElement>
+        <text><![CDATA[Reporte Stock-Ventas y Presupuesto de Ventas]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="0" y="20" width="1553" height="16" uuid="cf14cc70-65ee-4263-aca2-b752bb10c0cd" />
+        <textElement textAlignment="Right" verticalAlignment="Top">
+          <font size="10" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="0" y="36" width="1553" height="20" uuid="575b7719-e854-42e0-b9ad-bc1a6b067b56" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA["Ventas Tomadas Desde El "+$P{DateFrom}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="21" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="0" width="100" height="20" uuid="c75a5f46-33ce-47a1-9fb8-6828b2ca8b3a" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cod.Producto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="100" y="0" width="243" height="20" uuid="ef0b57de-99c4-4f98-9ae4-1da03786e104" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripcion Producto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="343" y="0" width="80" height="20" uuid="0c54e467-cba1-4a63-b8ee-4f7d596719ce" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Linea]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="423" y="0" width="80" height="20" uuid="0ad98c85-bad9-4c62-bd16-edc41934bc0d" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Familia]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="503" y="0" width="39" height="20" uuid="1d15dd88-97e5-4747-8b0e-1af94e026872" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Seccion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="581" y="0" width="47" height="20" uuid="a49f13b0-4b97-4cdd-8b60-f234a307bab1" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Generico]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="628" y="0" width="57" height="20" uuid="f9416981-a95b-423c-a871-210df9b32db0" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[C.Promedio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="685" y="0" width="55" height="20" uuid="2211af81-1a25-42fe-8c29-439c41bddf4c" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Ate]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="740" y="0" width="55" height="20" uuid="a9b77510-f962-438c-9090-93afd5007870" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Dalsac]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="795" y="0" width="55" height="20" uuid="b3368200-8cc6-4423-b62b-d40ef3e049ab" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Warrants]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="850" y="0" width="55" height="20" uuid="a37d7b0a-fea8-46e1-a7e3-1a7418d60fd6" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Otros]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="905" y="0" width="77" height="20" uuid="c7f1c0c2-9b43-4ff7-ad85-952f938a71cd" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Unidades]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="982" y="0" width="77" height="20" uuid="fc847d24-7b22-4d86-818d-19230a81a76b" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1136" y="0" width="55" height="20" uuid="bc22b599-1873-4cd5-a429-334caefa0af1" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[P.Minimo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1191" y="0" width="55" height="20" uuid="db6c7e8b-9ae2-45d2-8fa9-ffb426c5c179" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[P.Promedio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1246" y="0" width="60" height="20" uuid="ed7a483e-336e-47e3-94b8-270b20933a54" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Por Entregar]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1306" y="0" width="80" height="20" uuid="8c6f08da-d332-411e-a152-075725dc17be" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Recibir >= 30]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1386" y="0" width="87" height="20" uuid="e1a31ad1-db5e-43c4-be9c-d137bf8281ad" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Recibir  [30 ,60>]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1473" y="0" width="80" height="20" uuid="85a48f2e-080f-4a13-9aab-05381d23f352" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Recibir > 60]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="1059" y="0" width="77" height="20" uuid="3b43137e-06a7-48b2-bf73-79cc8c2d74ab" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Unid.Vendidas]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="542" y="0" width="39" height="20" uuid="2fb9d53a-83ba-4efa-99aa-b4b83416eb57" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Modelo]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="17" splitType="Stretch">
+      <textField>
+        <reportElement x="0" y="1" width="100" height="16" uuid="a4aa8cc4-96b3-4b93-8e1d-092aab1b56bb" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{codproducto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="100" y="1" width="243" height="16" uuid="acf9a8b2-79b3-422b-8b60-100e37daf490" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{descripcionproducto}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="343" y="1" width="80" height="16" uuid="2ab41edd-382c-4bed-9401-be9017c70c11" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="423" y="1" width="80" height="16" uuid="436dcc06-27d5-427d-a822-c60f96b00e38" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{m_product_type_name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="503" y="1" width="39" height="16" uuid="753906c2-3cec-4a61-af21-cf586d6bf90b" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{m_product_brand_name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="581" y="1" width="47" height="16" uuid="b1db987a-25f8-424c-a250-a646127d56db" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{m_product_generic_name}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00000" isBlankWhenNull="true">
+        <reportElement x="628" y="1" width="57" height="16" uuid="55b313a0-332c-4e3f-8237-9bccb9eecfb0" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{currentcostprice}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="685" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="f5457fdd-c877-441c-877f-4f5558e79cfd" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{type001}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="740" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="93f58651-2a0a-4914-9d6d-6719a567bbc4" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{type002}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="795" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="340e4b9b-0fde-47fd-b3bc-df89034c886b" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{type003}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="850" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="39019b4a-1a09-4144-9d4e-d24d149d21be" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{type004}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="905" y="1" width="77" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="218c422c-c05c-409d-84ab-dc7aa2f83b4d" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total_stock}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="982" y="1" width="77" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="1823f8a5-af80-4500-8e4b-15f1db6c3a56" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{totalvalorstock}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1136" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="26a218c5-e6dd-4ccb-8c44-c3e80bee0ef9" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{preciominimo}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1191" y="1" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="3557aa70-8d97-4b26-8623-f1edaf4e149f" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{preciopromedioventa}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1246" y="1" width="60" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="d4fed576-e5df-4d7b-9159-d9d19d133f76" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porentregar}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1306" y="1" width="80" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="711e04a2-ee87-4ab3-b172-30d90aec984f" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porrecibir_0030}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1386" y="1" width="87" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="0afc7376-2b0d-4c3b-9af5-429c82febbdc" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porrecibir_3060}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1473" y="1" width="80" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="4578db4e-7aec-440b-a487-2f777d923ec8" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porrecibir_60}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="1059" y="1" width="77" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="ef6c5d71-3c6c-4081-b14f-f49f6706403c" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{totalunidades}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="542" y="1" width="39" height="16" uuid="5ae86f7f-0dc1-4cc1-8ccb-9eb4ba6189ea" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{m_product_model_name}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <summary>
+    <band height="42" splitType="Stretch" />
+  </summary>
+</jasperReport>

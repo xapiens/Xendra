@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Tasas De Cambio" Name="Tasas De Cambio" BaseRole="" Description="Tasas De Cambio" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="TasasDeCambio.jrxml" Identifier="86368d58-f93b-5177-5f2e-eb6414497735" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="isDolar" Description="isDolar" Help="Las tasas son en dolares?" AD_Reference_ID="bcbf94d0-aa1b-b784-dcb0-6961408b2d83" AD_Reference_Value_ID="64ecc5d9-280a-1f58-161f-356a16ae8978" AD_Val_Rule_ID="" ColumnName="isDolar" FieldLength="0" IsMandatory="false" IsRange="false" DefaultValue="Y" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="e37874da-7ddd-4bb4-b744-42a4c87f28d5" Synchronized="2018-11-30 09:58:07.0" />
+  <parameter Name="rangeDate" Description="rangeDate" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="rangeDate" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2700f23a-cfc8-4a49-a67d-c9ab8990ba1d" Synchronized="2018-11-30 09:58:07.0" />
+</process>
+
+

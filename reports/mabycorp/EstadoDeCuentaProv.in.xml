@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Estado de Cta Proveedor 1" Name="Estado de Cta Proveedor 1" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="Finanzas" AccessLevel="3" EntityType="D" FileName="EstadoDeCuentaProv.jrxml" Identifier="9fd56d42-fd14-0bbe-4982-afd7f220d449" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="C_BPartner_ID" Description="" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="5ad00982-257b-6bb1-4e47-bca04d01d511" Synchronized="2016-05-04 12:56:58.0" />
+  <parameter Name="DateFrom" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="803f0e46-bc50-4702-8735-f94bb9b15e85" Synchronized="2016-05-04 12:57:35.0" />
+</process>
+
+

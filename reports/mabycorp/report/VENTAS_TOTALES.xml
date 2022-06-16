@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VENTAS_TOTALES" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="47" bottomMargin="20" uuid="ee09c0c5-b750-4371-b0f0-efb756856471">
+  <property name="Description" value="VENTAS_TOTALES.jrxml" />
+  <property name="FileName" value="VENTAS_TOTALES.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:37.1" />
+  <property name="Identifier" value="9b5bcd57-c7ce-4cde-9a03-a6e16c132de0" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="java.util.*" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateInvoiced1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateInvoiced2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2009-12-31 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+     c_invoice.dateinvoiced as "Fecha",
+     ad_client."name" as "Empresa",
+     ad_client.ad_client_id,
+     ad_org."name" as "Organizacion",
+     ad_org.ad_org_id,
+     sum(c_invoice."grandtotal") as "Ventas Totales",
+     c_invoice.issotrx
+FROM
+     "xendra".c_invoice
+
+join "xendra".ad_user on c_invoice.ad_user_id = ad_user.ad_user_id
+join "xendra".ad_client on c_invoice.ad_client_id = ad_client.ad_client_id
+join "xendra".ad_org on c_invoice.ad_org_id = ad_org.ad_org_id
+join "xendra".c_bpartner on c_invoice.c_bpartner_id = c_bpartner.c_bpartner_id
+join "xendra".c_bpartner_location on c_invoice.c_bpartner_location_id = c_bpartner_location.c_bpartner_location_id
+join "xendra".c_location on c_bpartner_location.c_location_id = c_location.c_location_id
+
+
+where  ad_client.ad_client_id= $P{AD_Client_ID} and ad_org.ad_org_id = $P{AD_Org_ID}  AND date(c_invoice.dateinvoiced) >= date($P{DateInvoiced1}) AND date(c_invoice.dateinvoiced) <= date($P{DateInvoiced2})
+group by 1,2,3,4,5,7
+order by ad_client."name" asc]]></queryString>
+  <field name="Fecha" class="java.sql.Timestamp" />
+  <field name="Empresa" class="java.lang.String" />
+  <field name="ad_client_id" class="java.math.BigDecimal" />
+  <field name="Organizacion" class="java.lang.String" />
+  <field name="ad_org_id" class="java.math.BigDecimal" />
+  <field name="Ventas Totales" class="java.math.BigDecimal" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="63" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-1" x="194" y="15" width="430" height="23" forecolor="#000099" uuid="f7c64405-d69b-402c-924a-43227f1e8579" />
+        <textElement textAlignment="Center">
+          <font size="18" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[RESUMEN DE VENTAS DIARIAS POR TIENDAS]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line-2" x="15" y="60" width="750" height="1" forecolor="#0033CC" uuid="22aa9a31-1803-41fb-a1ef-6de761c2ec2a" />
+      </line>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-8" x="270" y="43" width="280" height="18" forecolor="#0000CC" uuid="13de27ce-962e-4d3a-854f-518004592d6d" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement>
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Desde " + $P{DateInvoiced1}.toString() + " hasta " + $P{DateInvoiced2}.toString()]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="55" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-2" x="137" y="6" width="100" height="18" uuid="44879ab1-78ee-4083-be5a-94fca897c0f2" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{Empresa}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="665" y="5" width="54" height="18" uuid="feac9e79-d9a3-40d0-a5fb-e7c98af8ed23" />
+        <textElement>
+          <font isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-3" x="31" y="23" width="89" height="16" forecolor="#0033CC" uuid="3b049dc0-3396-4f05-8011-23e5e8d5db2e" />
+        <textElement>
+          <font fontName="SansSerif" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[ORGANIZACIÓN:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-4" x="31" y="7" width="51" height="16" forecolor="#0033CC" uuid="ec7e60a6-246b-41ef-b652-8b2498ec2a17" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[EMPRESA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-5" x="600" y="5" width="86" height="18" forecolor="#0033CC" uuid="4f9164df-b2bb-47fb-871e-90e347818e22" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FECHA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-6" x="600" y="22" width="86" height="18" forecolor="#0033CC" uuid="e8b70f9b-f182-4cd5-ac87-4e2e431e3a0d" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[HORA:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-4" x="665" y="22" width="54" height="18" uuid="5ec70b84-5986-4be9-a143-760253f1b075" />
+        <textElement>
+          <font isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line-1" x="14" y="50" width="750" height="1" forecolor="#0033CC" uuid="e3d58e1f-16cc-4a0c-bbc5-3b30e706ef99" />
+      </line>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="669" y="37" width="65" height="16" uuid="ebb696a1-9246-47e2-880e-900ea7e1b123" />
+        <textElement textAlignment="Right">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="737" y="37" width="22" height="16" uuid="304923ee-e9af-4cf5-9159-ca479bb9cbaa" />
+        <textElement>
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="137" y="23" width="183" height="18" uuid="c3eff79a-ec47-424d-a259-3644ca8d5bea" />
+        <textElement>
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{Organizacion}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band splitType="Stretch" />
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="291" splitType="Stretch">
+      <crosstab>
+        <reportElement key="crosstab-1" x="8" y="12" width="763" height="214" uuid="1341ebe9-3fe7-4a00-9f43-3abf120f5537" />
+        <crosstabHeaderCell>
+          <cellContents mode="Transparent">
+            <staticText>
+              <reportElement key="staticText-8" x="14" y="4" width="30" height="15" uuid="17b825f4-8cda-4f7b-bb91-dc9b0bdf7078" />
+              <textElement textAlignment="Right">
+                <font isBold="true" pdfFontName="Helvetica-Bold" />
+                <paragraph lineSpacing="Single" />
+              </textElement>
+              <text><![CDATA[DÍA]]></text>
+            </staticText>
+          </cellContents>
+        </crosstabHeaderCell>
+        <rowGroup name="Fecha" width="58" totalPosition="End">
+          <bucket class="java.lang.String">
+            <bucketExpression><![CDATA[(new SimpleDateFormat("dd")).format($F{Fecha})]]></bucketExpression>
+          </bucket>
+          <crosstabRowHeader>
+            <cellContents mode="Transparent">
+              <textField pattern="dd" isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="57" height="30" uuid="d33e8d90-fb0a-4b9b-930f-612e7533e330" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                  <paragraph lineSpacing="Single" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{Fecha}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabRowHeader>
+          <crosstabTotalRowHeader>
+            <cellContents mode="Transparent">
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="57" height="25" uuid="888bdbf8-64e4-4ad1-9ddc-e8098b0b3034" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                  <paragraph lineSpacing="Single" />
+                </textElement>
+                <textFieldExpression><![CDATA["Total"]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabTotalRowHeader>
+        </rowGroup>
+        <columnGroup name="Fecha1" height="25" totalPosition="End" headerPosition="Center">
+          <bucket class="java.lang.String">
+            <bucketExpression><![CDATA[(new SimpleDateFormat("MM        MMMM")).format($F{Fecha})]]></bucketExpression>
+          </bucket>
+          <crosstabColumnHeader>
+            <cellContents mode="Transparent">
+              <textField pattern="MMMMM" isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="50" height="25" uuid="bf3b99ac-b193-49dd-8afb-c4630168502d" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                  <paragraph lineSpacing="Single" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{Fecha1}]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabColumnHeader>
+          <crosstabTotalColumnHeader>
+            <cellContents mode="Transparent">
+              <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="50" height="25" uuid="b82041c7-4bb5-48d6-a5a0-cf6ca336c5b4" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                  <font isBold="true" pdfFontName="Helvetica-Bold" />
+                  <paragraph lineSpacing="Single" />
+                </textElement>
+                <textFieldExpression><![CDATA["Total"]]></textFieldExpression>
+              </textField>
+            </cellContents>
+          </crosstabTotalColumnHeader>
+        </columnGroup>
+        <measure name="Ventas Totales_Sum" class="java.math.BigDecimal" calculation="Sum">
+          <measureExpression><![CDATA[$F{Ventas Totales}]]></measureExpression>
+        </measure>
+        <crosstabCell width="54" height="30">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="50" height="30" uuid="85c79363-8897-401a-9caa-5dbd05dd0048" />
+              <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="8" />
+                <paragraph lineSpacing="Single" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="53" height="30" columnTotalGroup="Fecha1">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="53" height="30" uuid="56b3c513-83aa-4696-86e6-05e95fe59def" />
+              <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                <paragraph lineSpacing="Single" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="54" height="27" rowTotalGroup="Fecha">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="0" y="0" width="50" height="25" uuid="d592cbb6-52ea-4ea4-9c1c-368873098525" />
+              <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                <paragraph lineSpacing="Single" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <crosstabCell width="53" height="27" rowTotalGroup="Fecha" columnTotalGroup="Fecha1">
+          <cellContents mode="Transparent">
+            <textField isBlankWhenNull="false">
+              <reportElement key="textField" x="1" y="0" width="52" height="26" uuid="e238cba3-d814-41c3-bf3d-5dacaa686b47" />
+              <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+                <paragraph lineSpacing="Single" />
+              </textElement>
+              <textFieldExpression><![CDATA[$V{Ventas Totales_Sum}]]></textFieldExpression>
+            </textField>
+          </cellContents>
+        </crosstabCell>
+        <whenNoDataCell>
+          <cellContents mode="Transparent" />
+        </whenNoDataCell>
+      </crosstab>
+    </band>
+  </summary>
+</jasperReport>
+
+

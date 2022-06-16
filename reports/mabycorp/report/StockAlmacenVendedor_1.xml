@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="7cb9a2ce-cc17-4a46-bb8b-a20795ccf88c" Value="StockAlmacenVendedor_1" Name="StockAlmacenVendedor_1" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="good_warehouse.jrxml" Identifier="2d861c89-bbbb-b52c-23f3-88ff7cf4b5d7" Synchronized="2017-06-06 22:40:00.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="good_warehouse" pageWidth="595" pageHeight="842" columnWidth="583" leftMargin="6" rightMargin="6" topMargin="20" bottomMargin="20" uuid="9de4ced5-ce70-45a3-aac1-f8a6166df198">
+    <property name="Description" value="good_warehouse.jrxml" />
+    <property name="FileName" value="good_warehouse.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:35.681" />
+    <property name="Identifier" value="ae14a9e0-6c55-42a3-9a54-5014c74c4759" />
+    <property name="ireport.zoom" value="1.0" />
+    <property name="ireport.x" value="0" />
+    <property name="ireport.y" value="0" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="C_Contact_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MovementDate1" class="java.util.Date">
+      <defaultValueExpression><![CDATA[new java.sql.Timestamp(new Date().getTime())]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MovementDate2" class="java.util.Date">
+      <defaultValueExpression><![CDATA[new java.sql.Timestamp(new Date().getTime())]]></defaultValueExpression>
+    </parameter>
+    <queryString><![CDATA[select
+distinct(a.value) as cod_product,
+a.name as name_product,
+b.name as contact_name,
+c.name as buss_name
+from
+c_invoice d
+join c_invoiceline f on d.c_invoice_id = f.c_invoice_id
+join m_product a on f.m_product_id = a.m_product_id
+join c_contact b on d.c_contact_id = b.c_contact_id
+join c_bpartner c on b.c_bpartner_id = c.c_bpartner_id
+
+where
+a.isactive = 'Y'
+and d.ad_client_id = $P{AD_Client_ID}
+and b.c_contact_id = $P{C_Contact_ID}
+and d.dateinvoiced >=($P{MovementDate1})
+and d.dateinvoiced <($P{MovementDate2})
+and d.issotrx = 'N'
+ORDER BY a.name asc, a.value asc]]></queryString>
+    <field name="cod_product" class="java.lang.String">
+      <fieldDescription />
+    </field>
+    <field name="name_product" class="java.lang.String">
+      <fieldDescription />
+    </field>
+    <field name="contact_name" class="java.lang.String">
+      <fieldDescription />
+    </field>
+    <field name="buss_name" class="java.lang.String">
+      <fieldDescription />
+    </field>
+    <pageHeader>
+      <band height="119" splitType="Stretch">
+        <rectangle radius="10">
+          <reportElement x="511" y="89" width="70" height="20" uuid="ec588a45-32ed-46ed-9cc7-aae9f6c3cb73" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <textField>
+          <reportElement x="103" y="44" width="227" height="15" uuid="24c66a8d-e06e-4622-a9ad-d3725feef8d3" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{buss_name}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="230" y="3" width="132" height="20" uuid="a39e87e2-8006-41fa-8767-e2dd6f417b39" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="12" isBold="true" />
+          </textElement>
+          <text><![CDATA[ORDEN DE COMPRA]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="7" y="44" width="78" height="15" uuid="b0049878-5cb2-4a69-868f-ba6ca6d77c9a" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[EMPRESA    :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="7" y="61" width="78" height="15" uuid="7485d68c-28a7-4e9a-b3f2-8dee2b70c86e" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[CONTACTO :]]></text>
+        </staticText>
+        <textField pattern="dd/MM/yyyy h.mm a">
+          <reportElement x="454" y="2" width="100" height="20" uuid="887d0b48-7b53-4d83-b677-e978021226ae" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="454" y="25" width="49" height="15" uuid="a1521d83-970d-4e5e-bdc4-70e3230a6945" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+        </textField>
+        <textField evaluationTime="Report">
+          <reportElement x="503" y="25" width="40" height="15" uuid="49300402-0b50-4c01-9d5e-59acb3e2f4e5" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="185" y="25" width="29" height="15" uuid="72bd64aa-6e43-44ef-b1f0-deb9207ad668" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[Del  :]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="316" y="25" width="29" height="15" uuid="0ec3bfb6-0670-48bd-ae96-02638921e530" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[Al  :]]></text>
+        </staticText>
+        <rectangle radius="10">
+          <reportElement x="0" y="80" width="583" height="36" uuid="79ccd48c-043e-4cd3-954b-c5697b31bb37" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <rectangle radius="10">
+          <reportElement x="6" y="89" width="100" height="20" uuid="32461d4e-2157-4d8f-b8a3-d970eae1c67b" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <staticText>
+          <reportElement x="13" y="93" width="82" height="13" uuid="acd1b064-3a58-4ea6-8253-582799b118a7" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[CODIGO]]></text>
+        </staticText>
+        <rectangle radius="10">
+          <reportElement x="106" y="89" width="239" height="20" uuid="afa53dcb-0c7a-43f1-938b-6e9137cc602d" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <staticText>
+          <reportElement x="113" y="93" width="221" height="13" uuid="00090a26-8dc4-48f8-8d7d-b18f574b1f39" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[DESCRIPCION]]></text>
+        </staticText>
+        <rectangle radius="10">
+          <reportElement x="355" y="89" width="70" height="20" uuid="a8c1ea8a-92de-41cd-a8c9-b7621da29226" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <staticText>
+          <reportElement x="359" y="93" width="63" height="13" uuid="719edf19-e6eb-4dca-9af1-5a70357fae77" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[STOCK]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="214" y="25" width="84" height="15" uuid="c0991b87-e41b-4d69-9535-4e940acc3227" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$P{MovementDate1}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="345" y="25" width="100" height="15" uuid="b6a91532-e66c-4352-8ad2-a7c443fa32c3" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$P{MovementDate2}]]></textFieldExpression>
+        </textField>
+        <rectangle radius="10">
+          <reportElement x="430" y="89" width="70" height="20" uuid="3aadac27-fa77-4219-b095-95f45d79e4ce" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <rectangle radius="10">
+          <reportElement x="505" y="89" width="70" height="20" uuid="a9cf60e2-bfa9-4893-89e4-6d89f1c29e63" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <staticText>
+          <reportElement x="434" y="93" width="63" height="13" uuid="2e4a18fc-59ca-483c-bd5c-7d728ed1b5f7" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[CANT. PEDIDO]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="103" y="61" width="227" height="15" uuid="512bf69f-f9d5-48fb-a429-0f56c543b776" />
+          <textElement verticalAlignment="Middle">
+            <font size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{contact_name}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="510" y="93" width="63" height="13" uuid="c9a98d6f-6d02-431b-90e0-4bbe76104f40" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[PRECIO PACT.]]></text>
+        </staticText>
+      </band>
+    </pageHeader>
+    <detail>
+      <band height="19" splitType="Stretch">
+        <textField>
+          <reportElement x="112" y="2" width="229" height="13" uuid="9cb21c0a-11dc-470d-ac07-73b9271395f6" />
+          <textElement verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{name_product}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="6" y="2" width="100" height="13" uuid="ff362e95-7fdc-42b9-b692-fc34fffeaa7a" />
+          <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{cod_product}]]></textFieldExpression>
+        </textField>
+        <rectangle>
+          <reportElement x="360" y="2" width="65" height="13" uuid="05c4def8-f5f8-41ac-a4a2-b3576d112fda" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <line>
+          <reportElement x="0" y="17" width="583" height="1" uuid="49ac9ea6-3aef-497c-b200-35f5f159f9c2" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="108" y="3" width="1" height="14" uuid="490223cc-4ba1-4408-a58a-73d3678f8e9a" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="357" y="3" width="1" height="14" uuid="d9dffa04-82cf-49c5-adaf-0e0592426f4b" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="428" y="3" width="1" height="14" uuid="ce69594d-5019-479b-acd6-9931309c6840" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <rectangle>
+          <reportElement x="433" y="2" width="66" height="13" uuid="c8046436-5ce0-417c-a080-1335e35eda49" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <rectangle>
+          <reportElement x="508" y="2" width="66" height="13" uuid="d083527f-1b23-4de5-a832-a675e2112009" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </rectangle>
+        <line>
+          <reportElement x="503" y="3" width="1" height="14" uuid="16cd5e49-c4f5-4047-a908-2a698715a070" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+      </band>
+    </detail>
+  </jasperReport>
+  <parameter Name="MovementDate" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" ColumnName="MovementDate" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="296b5614-6e27-8251-14bc-05dd5897c963" Synchronized="2017-06-06 22:40:00.0" />
+  <parameter Name="C_Contact_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="C_Contact_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="c03c7318-699a-821c-c384-8fa39fc5c277" Synchronized="2017-06-06 22:40:01.0" />
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="abef77a7-64ed-f2f1-dd88-ed62ae52835b" Synchronized="2017-06-06 22:40:01.0" />
+</process>
+
+

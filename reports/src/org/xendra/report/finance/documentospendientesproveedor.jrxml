@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="documentospendientesproveedor" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="3e1bc2a7-65d6-4f62-ad38-78cd2dff36f6">
+	<property name="Description" value="documentospendientesproveedor.jrxml"/>
+	<property name="FileName" value="documentospendientesproveedor.jrxml"/>
+	<property name="Synchronized" value="2017-06-08 06:01:09.781"/>
+	<property name="Identifier" value="7f7942ef-8c2f-493d-b83d-ccc005736e06"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_User_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_BP_Group_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateTrx" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.sql.Timestamp(new Date().getTime())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Org_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000088)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[--Facturas
+SELECT
+(Select name from ad_org where ad_org_id = $P{AD_Org_ID}) as Compañia,
+b.name AS bpartner,
+b.taxid AS ruc,
+i.dateinvoiced AS dateinvoiced,
+d.name AS doctype,
+i.documentno AS documentno,
+sum(case when d.docbasetype= 'APC' then i.grandtotal*-1 else i.grandtotal end) as grandtotal,
+xendra.invoiceopenatdate(i.c_invoice_id, null, $P{DateTrx}) AS saldo,
+u.name AS agentecia,
+i.dateinvoiced + p.netdays AS duedate,
+CASE WHEN (xendra.date_diff ($P{DateTrx}::date, i.dateinvoiced + p.netdays))=0 THEN 0 ELSE
+xendra.date_diff ($P{DateTrx}::date, i.dateinvoiced + p.netdays) END AS duedays,
+g.name as group
+
+FROM C_Invoice i
+JOIN C_BPartner b ON b.C_BPartner_ID = i.C_BPartner_ID
+JOIN AD_User u ON u.AD_User_ID = i.SalesRep_ID
+JOIN C_DocType d ON d.C_Doctype_ID = i.C_DocType_ID
+JOIN C_PaymentTerm p ON p.C_PaymentTerm_ID = i.C_PaymentTerm_ID
+JOIN C_BP_Group g ON g.C_BP_Group_ID = b.C_BP_Group_iD
+
+WHERE i.issotrx = 'N'
+and docstatus not in ('DR','VO')
+AND i.ad_client_id= $P{AD_Client_ID}
+AND i.ad_org_id = $P{AD_Org_ID}
+AND (CASE WHEN COALESCE($P{C_BPartner_ID}, 0)  = 0
+       THEN true
+       ELSE b.C_BPartner_ID = $P{C_BPartner_ID} END)
+AND (CASE WHEN COALESCE($P{AD_User_ID}, 0)  = 0
+       THEN true
+       ELSE u.AD_User_ID = $P{AD_User_ID} END)
+AND (CASE WHEN COALESCE($P{C_BP_Group_ID}, 0)  = 0
+       THEN true
+       ELSE g.C_BP_Group_ID = $P{C_BP_Group_ID} END)
+
+and (case when xendra.invoiceopenatdate(i.c_invoice_id, null, $P{DateTrx})<0 and d.docbasetype!= 'APC' then 1 else 0 end)=0
+and xendra.invoiceopenatdate(i.c_invoice_id, null, $P{DateTrx}) != 0
+GROUP BY b.name, b.taxid, i.dateinvoiced, i.c_invoice_id, d.name, i.documentno, i.grandtotal, u.name, p.netdays, g.name
+
+--Letras
+UNION
+SELECT
+(Select name from ad_org where ad_org_id = $P{AD_Org_ID}) as Compañia,
+b.name AS bpartner,
+b.taxid AS ruc,
+ii.dateboe AS dateinvoiced,
+d.name AS doctype,
+ii.documentno AS documentno,
+ii.grandtotal AS grandtotal,
+xendra.boeopenatdate(ii.c_boe_id, $P{DateTrx}) AS saldo,
+'' as agentecia,
+--u.name AS agentecia,
+ii.duedate AS duedate,
+CASE WHEN (xendra.date_diff ($P{DateTrx}::date, duedate::date))= 0 THEN 0 ELSE xendra.date_diff ($P{DateTrx}::date, duedate::date) END  AS duedays,
+g.name as group
+
+FROM C_BOE ii
+JOIN C_BPartner b ON b.C_BPartner_ID = ii.C_BPartner_ID
+--JOIN AD_User u ON u.AD_User_ID = ii.SalesRep_ID
+JOIN C_DocType d ON d.C_Doctype_ID = ii.C_DocType_ID
+JOIN C_BP_Group g ON g.C_BP_Group_ID = b.C_BP_Group_iD
+
+WHERE ii.issotrx = 'N'
+AND ii.ad_client_id= $P{AD_Client_ID}
+AND ii.ad_org_id = $P{AD_Org_ID}
+
+AND (CASE WHEN COALESCE($P{C_BPartner_ID}, 0)  = 0
+       THEN true
+       ELSE b.C_BPartner_ID = $P{C_BPartner_ID} END)
+
+AND (CASE WHEN COALESCE($P{C_BP_Group_ID}, 0)  = 0
+       THEN true
+       ELSE g.C_BP_Group_ID = $P{C_BP_Group_ID} END)
+
+GROUP BY b.name, b.taxid, ii.dateboe, ii.c_boe_id, d.name, ii.documentno, ii.grandtotal, ii.duedate, agentecia, g.name
+HAVING xendra.boeopenatdate(ii.c_boe_id, $P{DateTrx}) != 0
+AND ii.dateboe <= $P{DateTrx}
+
+ORDER BY 1,10,3]]>
+	</queryString>
+	<field name="compañia" class="java.lang.String"/>
+	<field name="bpartner" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="dateinvoiced" class="java.sql.Timestamp"/>
+	<field name="doctype" class="java.lang.String"/>
+	<field name="documentno" class="java.lang.String"/>
+	<field name="grandtotal" class="java.math.BigDecimal"/>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="agentecia" class="java.lang.String"/>
+	<field name="duedate" class="java.sql.Timestamp"/>
+	<field name="duedays" class="java.lang.Integer"/>
+	<field name="group" class="java.lang.String"/>
+	<variable name="SumGranTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{grandtotal}]]></variableExpression>
+	</variable>
+	<variable name="SumSaldo" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="21" width="239" height="15" uuid="65c84992-9a58-41e3-947b-e3679b09a904"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Facturas y Letras Pendientes Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="21" width="101" height="15" uuid="790433e4-f027-41d9-b3bf-e146cca91089"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Corte:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="108" y="21" width="100" height="15" uuid="833648a5-d0bc-4add-9bf8-257e67ec70a9"/>
+				<textFieldExpression><![CDATA[$P{DateTrx}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="3" width="81" height="15" uuid="49e5f857-b1d9-470f-9713-19e09fab7d30"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[XENDRA ERP -]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="4" width="343" height="15" uuid="128fa3fd-c8cc-4231-a2cb-d68dc82b6e70"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compañia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="179" height="12" uuid="657dd8dd-7ec2-40a8-9670-e9447bf400b3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Socio de Negocios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="1" width="78" height="12" uuid="92b070bf-65ca-403e-88b2-fc4143358456"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="1" width="76" height="12" uuid="f5e82420-8420-4afe-abf8-3c0a31c5df8f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="1" width="83" height="12" uuid="291c3586-84db-4eac-8363-52088159ccf8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="1" width="72" height="12" uuid="cb781cae-960b-4e8b-bf73-3b12d68975c8"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Gran Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="1" width="60" height="12" uuid="6c4c3874-7040-4a4d-938c-60239a6ae4d1"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="618" y="1" width="61" height="12" uuid="d3bae7c4-d98e-43f4-8757-cd7cbed1ac0d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Agente Cia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="679" y="1" width="77" height="12" uuid="7bca4ecf-edf2-48c1-a872-bf67a1b8582a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha Ven]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="762" y="1" width="38" height="12" uuid="09348854-375a-4dc1-808b-21b3349ed87d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Atraso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="1" width="52" height="12" uuid="4b368201-4aa5-4544-8ec8-4b49e637818d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[No. Doc]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="179" height="12" uuid="02c17c47-c3f7-484c-aff8-d5feaa178f43"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpartner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="3" width="78" height="12" uuid="f4f8e012-a972-4364-9aca-18d18523704f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="257" y="3" width="76" height="12" uuid="7626c50b-d4b2-4160-9eca-6324c176a621"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateinvoiced}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="3" width="83" height="12" uuid="7fd5680c-5596-4623-9fbe-6cd1f88ad16b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doctype}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="468" y="3" width="72" height="12" uuid="ccaf06e5-56ca-4d2f-bc05-e999f04852af"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grandtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="547" y="3" width="60" height="12" uuid="9389c9e5-ae11-49f3-9eee-582064fd1b31"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="618" y="3" width="61" height="12" uuid="4055cd74-9531-4e3c-9f6a-14d2ca9904d3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{agentecia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="679" y="3" width="77" height="12" uuid="3dd29e42-5420-4307-adbf-e2b6cefdbd53"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="762" y="3" width="38" height="12" uuid="a3e23e3b-88d8-44c4-a524-f0c1d870e142"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duedays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="3" width="52" height="12" uuid="5babaa1c-3399-456f-955b-6e2a8d5c5f4d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="416" y="2" width="53" height="13" uuid="dc86e8e5-ef31-47fe-8ba7-a32323da1471"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="468" y="2" width="72" height="13" uuid="710d6f2b-1cde-4344-b663-2a7fb852636c"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumGranTotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="547" y="2" width="60" height="13" uuid="24722f70-1c4d-4c45-bf37-03be3f4c9344"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumSaldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,188 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vencimiento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8aa41476-1fa3-4e9d-954b-009891f68674"><property name="Description" value="vencimiento.jrxml" /><property name="FileName" value="vencimiento.jrxml" /><property name="Synchronized" value="2019-03-16 12:28:27.103" /><property name="Identifier" value="eb25336c-6c3f-4bd4-884f-15f0083af0df" />
+	<property name="ireport.zoom" value="1.5" />
+	<property name="ireport.x" value="19" />
+	<property name="ireport.y" value="0" />
+	<parameter name="M_Locator_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateFrom1" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2011-01-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateFrom2" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2012-01-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+
+pb.name as linea,
+p.name as producto,
+atr.lot as lote,
+date(atr.guaranteedate) as fecvenc,
+sum(s.qtyonhand) as stock,
+lc.m_locator_id,
+lc.value as locator,
+(case when (atr.guaranteedate < now()) then 'Vencido' else 'Por Vencer' end) as flag
+from m_attributesetinstance atr
+join m_storage s on atr.m_attributesetinstance_id=s.m_attributesetinstance_id
+join m_locator lc on s.m_locator_id=lc.m_locator_id
+join m_product p on s.m_product_id=p.m_product_id
+join m_product_brand pb on p.m_product_brand_id=pb.m_product_brand_id
+
+where date(atr.guaranteedate) between date($P{DateFrom1}) and date($P{DateFrom2})
+and s.qtyonhand>0
+and lc.m_locator_id=$P{M_Locator_ID}
+group by linea, producto, lote, fecvenc, lc.m_locator_id, locator,flag
+order by fecvenc]]>
+	</queryString>
+	<field name="linea" class="java.lang.String" />
+	<field name="producto" class="java.lang.String" />
+	<field name="lote" class="java.lang.String" />
+	<field name="fecvenc" class="java.sql.Date" />
+	<field name="stock" class="java.math.BigDecimal" />
+	<field name="m_locator_id" class="java.math.BigDecimal" />
+	<field name="locator" class="java.lang.String" />
+	<field name="flag" class="java.lang.String" />
+	<group name="grupo1">
+		<groupHeader>
+			<band height="18">
+				<staticText>
+					<reportElement x="11" y="2" width="100" height="14" uuid="cd723f43-da22-45f4-89d6-eb5748a34462" />
+					<textElement textAlignment="Center">
+						<font size="9" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" />
+					</textElement>
+					<text><![CDATA[Producto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="201" y="2" width="100" height="14" uuid="981a4fb6-6178-4062-b4d9-30c90a190e1c" />
+					<textElement textAlignment="Center">
+						<font size="9" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" />
+					</textElement>
+					<text><![CDATA[Lote]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="313" y="2" width="120" height="14" uuid="870362e6-6896-485c-8bf7-5cb72db44825" />
+					<textElement textAlignment="Center">
+						<font size="9" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" />
+					</textElement>
+					<text><![CDATA[Fecha de Vencimiento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="455" y="2" width="100" height="14" uuid="6ed5d9f3-eaee-402b-b836-1f0454a6f92f" />
+					<textElement textAlignment="Center">
+						<font size="9" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" />
+					</textElement>
+					<text><![CDATA[Stock]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band />
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="454" y="45" width="65" height="12" uuid="05581ff7-ed84-40be-8db3-0ae6caebe1b2" />
+				<textElement textAlignment="Right">
+					<font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="493" y="29" width="50" height="12" uuid="0c0738b2-c823-4cd5-94dc-4d205a321aa7" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-20" x="358" y="29" width="86" height="20" uuid="bc93f9f2-eb7b-4d40-b03d-32b430fb5b49" />
+				<textElement textAlignment="Justified">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Fecha de Impresión:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="519" y="45" width="22" height="12" uuid="7f05f9b0-f435-4150-8412-b0a5380ec843" />
+				<textElement>
+					<font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="441" y="29" width="52" height="12" uuid="ae88690f-4f20-4b80-98d0-b9474a8bf764" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="25" width="177" height="16" uuid="eec48022-cb88-44b4-95a2-e5bb80294fce" />
+				<textElement>
+					<font size="10" isBold="true" isItalic="false" isUnderline="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{locator}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="25" width="61" height="16" uuid="094a5a1a-5f1a-4771-9291-31c5063dcbee" />
+				<textElement>
+					<font isBold="true" isItalic="false" />
+				</textElement>
+				<text><![CDATA[ALMACÉN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="0" width="296" height="20" uuid="79aeac38-8324-462a-8f1b-6e87caf88e71" />
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true" />
+				</textElement>
+				<text><![CDATA[PRODUCTOS POR VENCER]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="188" height="13" uuid="3a8324c1-9a52-464c-9ccd-96eaaaae9eda" />
+				<textElement verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="100" height="13" uuid="e7c2dff8-3786-4670-abc4-4d02b2afbaae" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="313" y="0" width="71" height="13" uuid="3f33e036-d39c-4800-a32e-9d485a8ea3e8" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecvenc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="459" y="0" width="69" height="13" uuid="27c2fed5-43da-460e-b0e4-aca234d576bd" />
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="0" width="49" height="13" uuid="d1205944-a4b7-4858-8da0-b0c236ccd2f6" />
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flag}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="1" splitType="Stretch" />
+	</pageFooter>
+</jasperReport>
+

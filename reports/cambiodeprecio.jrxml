@@ -1,0 +1,314 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cambiodeprecio" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="2eb16797-01f8-48a3-a79b-91faf24804c4">
+  <property name="Description" value="cambiodeprecio.jrxml" />
+  <property name="FileName" value="cambiodeprecio.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:35.793" />
+  <property name="Identifier" value="ef43a4bf-afee-4032-bd85-ac3589ec2666" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_PriceList_Version_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="Updated1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="Updated2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+p.value,
+p.name,
+pp.created,
+pp.updated,
+u.name as usuario,
+pp.pricelist,
+pc.name as familia
+
+from m_productprice pp
+left join ad_user u on pp.updatedby = u.ad_user_id
+left join m_product p on pp.m_product_id = p.m_product_id
+left join m_product_category pc on p.m_product_category_id = pc.m_product_category_id
+
+where
+pp.AD_Client_ID = $P{AD_Client_ID}
+and pp.M_Pricelist_Version_ID = $P{M_PriceList_Version_ID}
+and pp.updated between $P{Updated1} and $P{Updated2}
+
+order by familia, name]]></queryString>
+  <field name="value" class="java.lang.String" />
+  <field name="name" class="java.lang.String" />
+  <field name="created" class="java.sql.Timestamp" />
+  <field name="updated" class="java.sql.Timestamp" />
+  <field name="usuario" class="java.lang.String" />
+  <field name="pricelist" class="java.math.BigDecimal" />
+  <field name="familia" class="java.lang.String" />
+  <group name="familia">
+    <groupExpression><![CDATA[$F{familia}]]></groupExpression>
+    <groupHeader>
+      <band height="16">
+        <textField>
+          <reportElement x="7" y="3" width="303" height="12" uuid="0e5b2ad5-7584-43e9-8d8d-91819b741310" />
+          <textElement>
+            <font fontName="SansSerif" size="8" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{familia}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band height="75" splitType="Stretch">
+      <staticText>
+        <reportElement x="272" y="34" width="22" height="15" uuid="24d570f9-f833-48a6-a9dc-4778750be5d0" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[AL :]]></text>
+      </staticText>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="528" y="35" width="22" height="12" uuid="d21a5d6d-52cd-4b91-9aca-f9c3c97cde89" />
+        <textElement>
+          <font fontName="SansSerif" size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="467" y="35" width="65" height="12" uuid="995ec9d9-a7c2-482a-81dd-496f246690cb" />
+        <textElement textAlignment="Right">
+          <font fontName="SansSerif" size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="454" y="19" width="52" height="12" uuid="d4a1fc76-05d7-49c1-8a36-4e04a03e4db4" />
+        <textElement verticalAlignment="Top">
+          <font fontName="SansSerif" size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="363" y="19" width="94" height="12" uuid="b170575e-a024-4695-854b-1043bb0b8682" />
+        <textElement textAlignment="Justified">
+          <font fontName="SansSerif" size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fech.Impresión:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="137" y="34" width="36" height="15" uuid="cc27781b-5494-4f8f-be01-99c445d3479e" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[DEL :]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="506" y="19" width="50" height="12" uuid="89aad8ce-176a-4f18-ab38-2384f736c2d7" />
+        <textElement verticalAlignment="Top">
+          <font fontName="SansSerif" size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <rectangle>
+        <reportElement x="0" y="53" width="567" height="20" backcolor="#E2DEDE" uuid="5fe057bd-bf7a-47c0-90bb-63275abf322f" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </rectangle>
+      <staticText>
+        <reportElement x="3" y="56" width="70" height="15" uuid="99aaea78-a050-41b4-b1ad-d6a167df0c57" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[Codigo]]></text>
+      </staticText>
+      <line>
+        <reportElement x="508" y="53" width="1" height="20" uuid="c0a2ec3a-9037-41e5-98e8-ae61b95b08d9" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="77" y="56" width="235" height="15" uuid="8b0a6fd4-b2e2-4325-9b92-8e8a137b52ae" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripcion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="511" y="56" width="52" height="15" uuid="1521db16-7d83-475f-b687-ca574238cf8e" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[Precio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="316" y="56" width="65" height="15" uuid="06b87a2d-ad2e-4819-a379-9f04fa7ed466" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[F.Creacion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="385" y="56" width="66" height="15" uuid="6598d7c3-fb21-4e70-9668-5501b85c6fd7" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[F.Cambio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="455" y="56" width="51" height="15" uuid="2415f45d-eb52-484c-a170-f698ef8f3b92" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[Usuario]]></text>
+      </staticText>
+      <line>
+        <reportElement x="453" y="53" width="1" height="20" uuid="2916d919-2021-4c9a-8ac3-875b180a53cd" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="382" y="53" width="1" height="20" uuid="ab4f16d0-c888-4bad-9a70-15cab0f9dd6f" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="313" y="53" width="1" height="20" uuid="42e14405-7852-4393-9a59-ed887849f0e7" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="74" y="55" width="1" height="18" uuid="783938d8-bf71-4767-aa20-b12f2fafba9d" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField pattern="dd/MM/yyyy h.mm a">
+        <reportElement x="173" y="34" width="99" height="15" uuid="54de6479-456d-4f49-9177-de9d72667295" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{Updated1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy h.mm a">
+        <reportElement x="294" y="34" width="98" height="15" uuid="60203205-e0ca-48ff-89f8-add8ba9bd7cd" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{Updated2}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="127" y="2" width="284" height="15" uuid="89f03eea-46e3-4e69-ae04-550478185f4c" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+          <font fontName="SansSerif" size="10" isBold="true" />
+        </textElement>
+        <text><![CDATA[PRODUCTOS QUE CAMBIARON DE PRECIO]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="15" splitType="Stretch">
+      <line>
+        <reportElement x="0" y="13" width="567" height="1" uuid="6656e925-939a-4448-b0a9-7ddad06e0dfa" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="314" y="0" width="1" height="11" uuid="4d203487-9e5b-4edb-bb12-18ff1768d11e" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="3" y="2" width="68" height="10" uuid="a3e71887-6b1e-4423-83ad-395258443542" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="77" y="2" width="235" height="10" uuid="06d1f751-91c1-4be8-a00c-806c7fbf0852" />
+        <textElement verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="72" y="3" width="1" height="8" uuid="c1ea4a44-c87b-434e-a68f-90b2016ddd22" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="316" y="2" width="65" height="10" uuid="85377e96-53fd-4746-90c0-58f93660a60a" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{created}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy h.mm a">
+        <reportElement x="385" y="2" width="66" height="10" uuid="d76866f3-b546-489c-bdb7-c4b896f1b053" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{updated}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="382" y="0" width="1" height="10" uuid="68e0af84-8380-4380-9d8c-70e7e42d0ca7" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="455" y="2" width="51" height="10" uuid="216f2336-d63a-4aa4-b912-c727d235273d" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="511" y="2" width="52" height="10" uuid="664f0fe6-829c-4298-9ad6-3415ddb1e074" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="SansSerif" size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pricelist}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="453" y="1" width="1" height="10" uuid="492843c3-5456-4da8-8cbc-a7f969fe7237" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="508" y="1" width="1" height="11" uuid="172292eb-2b7d-40fb-bb24-8886fc2d710e" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

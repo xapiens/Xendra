@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Auxiliares" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D"  anchor="REPORTS" >
+  <menuitem Name="Gerencia" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+    <menuitem Report="HistoricoVentasCantidad" SeqNo="40" />
+    <menuitem Report="HistoricoVentasMonto" SeqNo="50" />
+    <menuitem Report="Rentabilidadprecio" SeqNo="30" />
+    <menuitem Report="RentabilidadProductoTopTen" SeqNo="20" />
+    <menuitem Report="RentabilidadTiendas" SeqNo="10" />
+  </menuitem>  
+  <menuitem Name="Administracion" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+    <menuitem Report="comprastotal" SeqNo="40" />
+    <menuitem Report="gastos" SeqNo="60" />
+    <menuitem Report="productossincompras" SeqNo="20" />
+    <menuitem Report="ProductosSinRotacionValorizado" SeqNo="10" />
+    <menuitem Report="sinprecioventa" SeqNo="30" />
+	<menuitem Report="vencimiento" SeqNo="70" />
+	<menuitem Report="ventasdetalle" SeqNo="50" />	
+	<menuitem Report="OrdenFormato" SeqNo="80" />    
+  </menuitem>
+  <menuitem Name="Stock" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+	<menuitem Report="inventariocostocompra" SeqNo="40" />
+	<menuitem Report="inventariomuestreoprecio" SeqNo="50" />
+	<menuitem Report="stockvcarding" SeqNo="10" />
+	<menuitem Report="stockvcardingtodo" SeqNo="20" />
+	<menuitem Report="stockvcardingvalorizado" SeqNo="30" />
+	<menuitem Report="trasladoscostocompra" SeqNo="60" />
+  </menuitem>
+</menuitem>

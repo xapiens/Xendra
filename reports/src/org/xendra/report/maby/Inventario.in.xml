@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="TomaInventario" Name="TomaInventario" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Inventario.jrxml" Identifier="823f7f05-37da-41f9-9cf3-8744aa01bb15" Synchronized="2017-06-06 22:39:57.0">
+  <parameter Name="M_Warehouse_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_Warehouse_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="45dc9ab5-9e82-f2a5-3207-225faeb87b4d" Synchronized="2017-06-06 22:39:57.0" />
+</process>
+
+

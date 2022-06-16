@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Estado de Cta Cliente Todo" Name="Estado de Cta Cliente Todo" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="EstadoDeCuenta.jrxml" Identifier="2fb76997-98e5-4e97-95e4-abc2dfbd4bf5" Synchronized="2017-06-06 22:40:02.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="9ec7d6a5-6cbb-45bc-a4aa-9077c4966916" Synchronized="2017-06-06 22:40:02.0" />
+  <parameter Name="DateFrom" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="30" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="b5afdbc6-134a-4de3-9eff-c8e25b09bb02" Synchronized="2017-06-06 22:40:02.0" />
+  <parameter Name="C_BPartner_ID" Description="" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="d51b02a4-8739-46a7-9f6e-c7f7005d4b4b" Synchronized="2017-06-06 22:40:02.0" />
+</process>
+
+

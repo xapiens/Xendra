@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RenovacionLetrasTransito" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5942a500-9c2d-4e5a-bb33-7541a5ae6872">
+  <property name="Description" value="RenovacionLetrasTransito.jrxml" />
+  <property name="FileName" value="RenovacionLetrasTransito.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.603" />
+  <property name="Identifier" value="a3676747-33de-40bd-abeb-363af1462885" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="java.util.*" />
+  <parameter name="DateBOE1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1992-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateBOE2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-12-31 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+  boe.c_boe_id,
+  boe.created,
+  boe.updated,
+  boe.documentno,
+  boe.duedate,
+  boe.grandtotal,
+  boe.boeno,
+  boe.dateboe,
+  boe.r_documentno as orignroletra,
+  --boe_orig.documentno as orignroletra_old,
+  boe.r_duedate as vctorenovada,
+  --boe_orig.duedate as vctorenovada_old,
+  boe.r_amount as montorenovada,
+  --boe_orig.grandtotal as montorenovada_old,
+  --boe_orig.boeno as boenorenovada,
+  boe.r_dateboe as fecharenovada,
+  --boe_orig.dateboe AS fecharenovada_old,
+  (select cursymbol from c_currency where boe.c_currency_id = c_currency.c_currency_id) as cursymbol,
+  p."value",
+  p."name",
+  ba.accountno,
+  (select name from c_bank where ba.c_bank_id = c_bank.c_bank_id) as bankname,
+  boe.created as fechaRenovacion
+
+FROM
+  c_boe boe
+join c_bpartner p on boe.c_bpartner_id = p.c_bpartner_id
+left join c_bankaccount ba on boe.c_bankaccount_id = ba.c_bankaccount_id
+
+WHERE
+  COALESCE(boe.isrenewed, 'N') = 'N'
+  and
+  boe.docstatus != 'DR'
+  and
+  boe.docaction != '--'
+  and
+  boe.grandtotal > boe.r_amount
+  and
+ coalesce(boe.r_documentno,'') != ''
+  and
+ coalesce(boe.r_dateboe || '','') != ''
+  and
+ coalesce(boe.r_duedate || '','') != ''
+  and
+ coalesce(boe.r_amount,0) != 0
+  and
+ issotrx = 'Y'
+and
+(case when  COALESCE($P{C_BPartner_ID},0) = 0
+    then TRUE
+    else
+      boe.c_bpartner_id = $P{C_BPartner_ID}
+END)
+AND date(boe.updated) >= date($P{DateBOE1})
+AND date(boe.updated) <= date($P{DateBOE2})
+order by
+ boe.updated]]></queryString>
+  <field name="c_boe_id" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="created" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="updated" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="documentno" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="duedate" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="grandtotal" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="boeno" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="dateboe" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="orignroletra" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="vctorenovada" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="montorenovada" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="fecharenovada" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="cursymbol" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="value" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="name" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="accountno" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="bankname" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="fecharenovacion" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <variable name="Filtro" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{C_BPartner_ID}.longValue() == 0L ? "Todos" : $F{name})]]></variableExpression>
+  </variable>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="6" splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band height="86" splitType="Stretch">
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="772" y="29" width="22" height="12" uuid="ca00f47b-8925-4875-890a-6c439ece7f59" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-11" stretchType="RelativeToBandHeight" x="245" y="4" width="313" height="16" forecolor="#000000" uuid="489ffc54-8d8a-4b89-9e8a-2b2337a80968" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[Renovaciones De Letras - Transito]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="770" y="10" width="28" height="12" uuid="5e79594b-84bd-4a88-9a7c-9d9589bbb66c" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="0" y="44" width="802" height="1" uuid="43fd0a16-852e-4284-8389-867a9d22c09a" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-20" x="626" y="10" width="100" height="20" uuid="4b7cf85a-7e15-48ad-bdb8-6073514a9329" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresion:]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="718" y="10" width="52" height="18" uuid="82914211-c779-4f87-880a-ff4b79f0183d" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="707" y="29" width="65" height="12" uuid="8b2c1137-ec33-4832-a0ee-d841b45f6386" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["PÃ¡g. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="0" y="83" width="802" height="1" uuid="f168bbb8-7a55-44e0-aae0-11fc35d841ad" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="0" y="47" width="67" height="15" uuid="b7feb86b-511a-4320-a5b9-5c1c4e895dda" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="67" y="47" width="57" height="15" uuid="ac1c238c-46c7-4afc-8430-e9fac20d3e9e" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[RUC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="129" y="47" width="142" height="15" uuid="6b904dc4-bdf7-42c7-b012-0a407fae31de" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cliente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="274" y="47" width="70" height="15" uuid="ae132c44-55bc-4df6-9bd1-b3f9dfe6f2d7" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha Emision]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="353" y="47" width="66" height="15" uuid="374ff0a1-2f57-4be1-8811-09051a57168e" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha Vcto.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="419" y="47" width="100" height="15" uuid="bc7f0201-a9b4-4887-bed1-f8a2ed20662a" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro Letra]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="419" y="65" width="100" height="15" uuid="afa79ab1-0aea-4758-b18c-79190e225b0d" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro Letra x Renovar]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="526" y="47" width="82" height="15" uuid="11949a18-04bf-46ad-808e-a246ee4bab52" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Monto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="526" y="65" width="82" height="15" uuid="cd487978-c14e-43b4-8ac1-b0f0b7c88eee" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Monto a Renovar]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="626" y="65" width="81" height="15" uuid="47834bce-3e40-4831-906e-b16fd71e7fe1" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Banco]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="710" y="65" width="81" height="15" uuid="07c1187c-a7c4-461f-bd40-837a38ecbfc7" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cuenta Bco]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="311" y="22" width="180" height="14" forecolor="#000000" uuid="a4a7c713-c138-4b5c-9a37-d17f50cfc52c" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="6" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " + $P{DateBOE1}.toString() + " al " + $P{DateBOE2}.toString()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText" x="0" y="23" width="50" height="13" uuid="dfccfd3f-bfd6-4b7b-9b6e-62ae0ca05fe4" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cliente :]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="50" y="23" width="99" height="13" uuid="f25e70a3-3c3f-4f10-8463-e5e8b7468674" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="33" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="419" y="7" width="100" height="12" uuid="7d1b8f8c-f698-442b-b7ba-3081bd123354" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="353" y="7" width="66" height="12" uuid="6d1699cb-16c6-4e6b-bd7f-31bdfe39de85" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="525" y="7" width="82" height="12" uuid="0c2807ec-5226-422a-a70d-96905a9e4fdc" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{grandtotal}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="274" y="7" width="70" height="12" uuid="700f97dc-ec3b-489e-8784-4d5c0b723fe4" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dateboe}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="419" y="20" width="100" height="12" uuid="a729bb3f-a060-42f9-b6b5-4a9476779e0e" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{orignroletra}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="353" y="20" width="66" height="12" uuid="58bf3049-4c4a-4981-9085-c19ea3266470" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{vctorenovada}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="525" y="20" width="82" height="12" uuid="dbe52226-5342-4443-9f99-6fc0adfa2d70" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{montorenovada}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="274" y="21" width="70" height="12" uuid="11780db8-18fb-49ff-b3be-d12f1c1e77f8" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecharenovada}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="67" y="7" width="62" height="12" uuid="dd5b1bb0-203d-4837-a622-fdaec79f6471" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="129" y="7" width="142" height="12" uuid="0aadebdc-cabd-4da6-9d7b-15c83e2acc4e" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement key="textField" x="710" y="7" width="73" height="12" uuid="9036a5fd-1376-4f19-9e58-eb38656b3ab9" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{accountno}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement key="textField" x="625" y="7" width="82" height="12" uuid="dc7065a2-380b-43b6-9687-83ad8fe9ccc5" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{bankname}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField" x="0" y="7" width="57" height="12" uuid="1a06207c-191c-43d9-abd1-134160c18701" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{updated}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <lastPageFooter>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText" x="61" y="28" width="209" height="13" uuid="d3dc75b2-3d7b-4647-93e8-1b076541e6f3" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Hecho Por.................................................]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="311" y="28" width="209" height="13" uuid="7bb6c2b3-0d86-4b45-8c60-930312cc95ce" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Revisado Por...............................................]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="542" y="28" width="209" height="13" uuid="c657e1f3-524e-48b5-86f8-d918750ac644" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Recibido Por...............................................]]></text>
+      </staticText>
+      <line>
+        <reportElement x="61" y="17" width="209" height="1" uuid="1f04726d-e6c4-4df4-9fe6-650d66eac074" />
+      </line>
+      <line>
+        <reportElement x="311" y="18" width="209" height="1" uuid="ef0719d8-c483-4df5-b800-df952f9b9dc9" />
+      </line>
+      <line>
+        <reportElement x="542" y="16" width="209" height="1" uuid="493f696b-6f61-41a7-869a-54abdcf11841" />
+      </line>
+    </band>
+  </lastPageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+  <noData>
+    <band height="50">
+      <staticText>
+        <reportElement key="staticText-11" stretchType="RelativeToBandHeight" x="255" y="14" width="313" height="16" forecolor="#000000" uuid="5325de83-186d-4eb9-98b9-b4aaf2cdaec5" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[No existen datos para el filtro solicitado]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>
+
+

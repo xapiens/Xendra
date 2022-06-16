@@ -1,0 +1,1239 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato3_18" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="b329690a-8067-4edc-969b-a02e4872d617"><property name="Description" value="Formato3_18.jrxml" /><property name="FileName" value="Formato3_18.jrxml" /><property name="Synchronized" value="2018-12-15 22:59:34.548" /><property name="Identifier" value="58f42d7c-b8fe-4e92-a4ef-c9fb31de624f" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<import value="java.util.*" />
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Org_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_Period_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000476)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateAcct" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH).parse("31/12/2012")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PostingType" class="java.lang.String">
+		<defaultValueExpression><![CDATA['A']]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[WITH
+tax as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN max(ci.taxid) ELSE max(oi.taxid) END as id FROM ad_orginfo oi JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id WHERE ci.ad_client_id = $P{AD_Client_ID}),
+client as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN (SELECT description FROM AD_Client where AD_Client_ID = $P{AD_Client_ID}) ELSE (SELECT description FROM AD_org where AD_Org_ID = $P{AD_Org_ID}) END),
+schema as (SELECT acc.c_acctschema_id, acc.name FROM c_acctschema acc WHERE acc.c_acctschema_id = $P{C_AcctSchema_ID}),
+prevperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE periodno < (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID}) AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID})),
+currperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ),
+period as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE periodno <= (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ) AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID} ))
+SELECT
+-- título de reporte
+(SELECT name FROM currperiod) as periodo,
+(SELECT description FROM client) as cliente,
+(SELECT id FROM tax)  as ruc,
+(SELECT o.name FROM ad_org o WHERE o.ad_org_id = $P{AD_Org_ID} ) as organizacion,
+(SELECT name FROM schema) as esquema,
+
+-- saldo inicial
+(         (SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN prevperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+     	  THEN true
+     	  ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND left(ev.value,2) = '10') -
+          (SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN prevperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+    	   THEN true
+    	   ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND left(ev.value,2) = '10')
+) as inicial,
+
+--cobranza de ventas
+(	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+     	  THEN true
+     	  ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+01'
+	OR flow2.value = 'OP+01'
+	OR flow3.value = 'OP+01')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+      	THEN true
+      	ELSE f.dateacct <= $P{DateAcct} END))
+      	-
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+    	   THEN true
+     	   ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+01'
+	OR flow2.value = 'OP+01'
+	OR flow3.value = 'OP+01')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+      	ELSE f.dateacct <= $P{DateAcct} END))
+) as cob_vent,
+
+--cobranza regalias
+(	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+02'
+	OR flow2.value = 'OP+02'
+	OR flow3.value = 'OP+02')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+          -
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	  THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+02'
+	OR flow2.value = 'OP+02'
+	OR flow3.value = 'OP+02')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+) as cob_regal,
+
+--cobranza intereses
+(	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+03'
+	OR flow2.value = 'OP+03'
+	OR flow3.value = 'OP+03')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+03'
+	OR flow2.value = 'OP+03'
+	OR flow3.value = 'OP+03')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	     THEN true
+	     ELSE f.dateacct <= $P{DateAcct} END))
+) as cob_int,
+
+--cobranza otros
+((SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+04'
+	OR flow2.value = 'OP+04'
+	OR flow3.value = 'OP+04')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP+04'
+	OR flow2.value = 'OP+04'
+	OR flow3.value = 'OP+04')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+) as cob_otro,
+
+--pago proveedores
+((SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-01'
+	OR flow2.value = 'OP-01'
+	OR flow3.value = 'OP-01')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true
+	ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-01'
+	OR flow2.value = 'OP-01'
+	OR flow3.value = 'OP-01')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as pago_prov,
+
+--pago remun
+((SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+       	THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-02'
+	OR flow2.value = 'OP-02'
+	OR flow3.value = 'OP-02')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true
+	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-02'
+	OR flow2.value = 'OP-02'
+	OR flow3.value = 'OP-02')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true
+       	ELSE f.dateacct <= $P{DateAcct} END))
+) as pago_remun,
+
+--pago tribu
+((SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true
+	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-03'
+	OR flow2.value = 'OP-03'
+	OR flow3.value = 'OP-03')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)=0 THEN true
+	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-03'
+	OR flow2.value = 'OP-03'
+	OR flow3.value = 'OP-03')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as pago_tribu,
+
+--pago inter
+(	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID} AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-04'
+	OR flow2.value = 'OP-04'
+	OR flow3.value = 'OP-04')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+       	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID} AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-04'
+	OR flow2.value = 'OP-04'
+	OR flow3.value = 'OP-04')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as pago_inter,
+
+--pago inter
+((SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID} AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	THEN true  ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-05'
+	OR flow2.value = 'OP-05'
+	OR flow3.value = 'OP-05')
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (flow.value = 'OP-05'
+	OR flow2.value = 'OP-05'
+	OR flow3.value = 'OP-05')
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as pago_otro,
+
+-- operacion
+((SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true
+	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND ((flow.value = 'OP+01' OR flow.value = 'OP+02' OR flow.value = 'OP+03' OR flow.value = 'OP+04' OR flow.value = 'OP-01' OR flow.value = 'OP-02'
+	OR flow.value = 'OP-03' OR flow.value = 'OP-04' OR flow.value = 'OP-05')
+	OR (flow2.value = 'OP+01' OR flow2.value = 'OP+02' OR flow2.value = 'OP+03' OR flow2.value = 'OP+04' OR flow2.value = 'OP-01' OR flow2.value = 'OP-02'
+	OR flow2.value = 'OP-03' OR flow2.value = 'OP-04' OR flow2.value = 'OP-05')
+	OR (flow3.value = 'OP+01' OR flow3.value = 'OP+02' OR flow3.value = 'OP+03' OR flow3.value = 'OP+04' OR flow3.value = 'OP-01' OR flow3.value = 'OP-02'
+	OR flow3.value = 'OP-03' OR flow3.value = 'OP-04' OR flow3.value = 'OP-05'))
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN currperiod p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_cashflow_group flow on py.c_cashflow_group_id = flow.c_cashflow_group_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashflow_group flow2 on po.c_cashflow_group_id = flow2.c_cashflow_group_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	LEFT JOIN c_cashflow_group flow3 on ch.c_cashflow_group_id = flow3.c_cashflow_group_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND ((flow.value = 'OP+01' OR flow.value = 'OP+02' OR flow.value = 'OP+03' OR flow.value = 'OP+04' OR flow.value = 'OP-01' OR flow.value = 'OP-02'
+	OR flow.value = 'OP-03' OR flow.value = 'OP-04' OR flow.value = 'OP-05')
+	OR (flow2.value = 'OP+01' OR flow2.value = 'OP+02' OR flow2.value = 'OP+03' OR flow2.value = 'OP+04' OR flow2.value = 'OP-01' OR flow2.value = 'OP-02'
+	OR flow2.value = 'OP-03' OR flow2.value = 'OP-04' OR flow2.value = 'OP-05')
+	OR (flow3.value = 'OP+01' OR flow3.value = 'OP+02' OR flow3.value = 'OP+03' OR flow3.value = 'OP+04' OR flow3.value = 'OP-01' OR flow3.value = 'OP-02'
+	OR flow3.value = 'OP-03' OR flow3.value = 'OP-04' OR flow3.value = 'OP-05'))
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as operacion,
+
+--OTRO
+(	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0) = 0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (cast (py.c_cashflow_group_id as character) is null
+	OR cast (po.c_cashflow_group_id as character) is null
+	OR cast (ch.c_cashflow_group_id as character) is null)
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN c_period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	LEFT JOIN c_payment py on f.record_id = py.c_payment_id
+	LEFT JOIN c_allocationline allo on f.record_id = allo.c_allocationhdr_id
+	LEFT JOIN c_payment po on allo.c_payment_id = po.c_payment_id
+	LEFT JOIN c_cashline ch on f.record_id = ch.c_cash_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)=0 THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (cast (py.c_cashflow_group_id as character) is null
+	OR cast (po.c_cashflow_group_id as character) is null
+	OR cast (ch.c_cashflow_group_id as character) is null)
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+) as OTRO,
+
+-- saldo final
+(	(SELECT SUM(f.amtacctdr) FROM fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0) = 0 THEN true
+       	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (CASE WHEN COALESCE($P{DateAcct}, (SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true ELSE f.dateacct <= $P{DateAcct} END))
+	-
+	(SELECT SUM(f.amtacctcr) FROM fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0 THEN true
+	ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	AND ev.value like '10%'
+	AND (CASE WHEN COALESCE($P{DateAcct},(SELECT enddate FROM currperiod))=(SELECT enddate FROM currperiod)
+	THEN true  ELSE f.dateacct <= $P{DateAcct} END))
+) as final]]>
+	</queryString>
+	<field name="periodo" class="java.lang.String" />
+	<field name="cliente" class="java.lang.String" />
+	<field name="ruc" class="java.lang.String" />
+	<field name="organizacion" class="java.lang.String" />
+	<field name="esquema" class="java.lang.String" />
+	<field name="inicial" class="java.math.BigDecimal" />
+	<field name="cob_vent" class="java.math.BigDecimal" />
+	<field name="cob_regal" class="java.math.BigDecimal" />
+	<field name="cob_int" class="java.math.BigDecimal" />
+	<field name="cob_otro" class="java.math.BigDecimal" />
+	<field name="pago_prov" class="java.math.BigDecimal" />
+	<field name="pago_remun" class="java.math.BigDecimal" />
+	<field name="pago_tribu" class="java.math.BigDecimal" />
+	<field name="pago_inter" class="java.math.BigDecimal" />
+	<field name="pago_otro" class="java.math.BigDecimal" />
+	<field name="operacion" class="java.math.BigDecimal" />
+	<field name="otro" class="java.math.BigDecimal" />
+	<field name="final" class="java.math.BigDecimal" />
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="11" y="9" width="507" height="30" uuid="fd6d771b-65a6-4452-a113-b6359eb63d55" />
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[FORMATO 3.18 : "Libro de Inventarios y Balances - Estado de Flujos de Efectivo"]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="142" y="39" width="258" height="20" uuid="0381cb92-f770-4d0f-b0b9-5dee20e03671" />
+				<textElement textAlignment="Center">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" x="10" y="6" width="77" height="12" uuid="ddb8b21c-7475-411d-8672-11caaf4a781f" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="10" y="19" width="77" height="12" uuid="b0137a54-ad6b-4cb2-aa8c-e5d2b649c10d" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="31" width="77" height="14" uuid="4c40fe02-6f77-43a7-beae-ebfaa344a062" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[RAZÓN SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-5" x="89" y="6" width="5" height="20" uuid="bd36046c-1262-4052-b21e-7bc624f7d1b9" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="89" y="19" width="5" height="12" uuid="c5a7991c-75ad-412d-b3d5-aecdd1d83838" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="89" y="31" width="5" height="13" uuid="5e30ef31-7c39-4990-9a47-dfce8eed2f52" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="99" y="5" width="277" height="15" uuid="482c0539-f092-46e3-b3b0-ce8df1bab6c1" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="99" y="17" width="277" height="15" uuid="182f019a-cd8c-4a91-b125-2d09c5774b78" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="99" y="30" width="277" height="15" uuid="e82ddfb3-1ded-46b9-a443-46c3176e2963" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-7" x="89" y="44" width="5" height="13" uuid="c5a14b03-f502-4e4c-a65c-e2a39013e4ed" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement key="textField-4" x="99" y="43" width="277" height="15" uuid="9ff90fe6-fc92-44dc-87ff-c0a45d0fda5c" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateAcct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="44" width="77" height="14" uuid="730e282f-42b5-4a91-9644-d372bf63e305" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="671" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-1" x="11" y="4" width="512" height="19" uuid="9a476839-1e1d-4561-a3b7-76be237be455" />
+			</rectangle>
+			<line>
+				<reportElement key="line-17" x="410" y="4" width="1" height="19" uuid="adbd006a-da98-4124-be11-708be4831130" />
+			</line>
+			<staticText>
+				<reportElement key="staticText-42" x="410" y="3" width="113" height="20" uuid="5ced598c-0cdf-47c9-8420-cfd33a79fc32" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<text><![CDATA[Ejercicio o Periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-43" x="13" y="4" width="397" height="20" uuid="301d62c1-856a-401e-8109-182cf84b893e" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<text><![CDATA[Actividades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-44" x="11" y="41" width="398" height="12" uuid="ae86191c-3afc-455d-aab9-be840f6ce61e" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false" isUnderline="true" pdfFontName="Helvetica" />
+				</textElement>
+				<text><![CDATA[Actividades de Operación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-45" x="11" y="52" width="398" height="12" uuid="c7336596-8bcb-4663-9701-62da923f8720" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de venta de bienes oservicios e ingresos operacionales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="11" y="63" width="398" height="12" uuid="5fccf126-3bf5-406b-b57f-a9ee3fb7e99a" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de regalías, honorarios, comisiones y otros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-47" x="11" y="74" width="398" height="12" uuid="61077004-aa67-4813-9aac-b569e0eb4dc2" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de intereses y dividendos recibidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-48" x="11" y="85" width="398" height="12" uuid="2c7327ac-59ba-487f-bfa0-64bb232cda7f" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros cobros de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-49" x="11" y="96" width="398" height="12" uuid="be62eaf5-178f-4837-85da-f82e8e79ce5a" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Menos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-50" x="11" y="107" width="398" height="12" uuid="1966c6e0-7d50-479f-aff2-c19024407b58" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pago a proveedores de bienes y servicios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-51" x="11" y="118" width="398" height="12" uuid="84b9413f-b164-426c-b6cb-30dc2fefebfd" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pago de remuneraciones y beneficios sociales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-52" x="11" y="129" width="398" height="12" uuid="f5d9ae7e-982c-4e19-a1cb-5446cb271991" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pago de tributos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-53" x="11" y="151" width="398" height="12" uuid="baf45651-9d1e-48f1-af0a-d3f85a21ebd1" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros pagos de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-54" x="11" y="167" width="398" height="12" uuid="90196d9f-0052-4178-8e98-c1e5c8c42c74" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Aumento (Disminución) de Efectivo y Equivalente de Efectivo Provenientes de Act. de Operación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-55" x="11" y="183" width="398" height="12" uuid="326301a5-7c62-4ba3-82a1-5e069c8d548f" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isUnderline="true" />
+				</textElement>
+				<text><![CDATA[Actividades de Inversión:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-56" x="11" y="194" width="398" height="12" uuid="bbeb188f-95c2-4349-847b-9c08ad1d3f9d" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de venta de valores e inversiones permanentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-57" x="11" y="205" width="398" height="12" uuid="292f6473-c585-4049-9378-23a0d6f14733" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de venta de inmuebles, maquinarioa y equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-58" x="11" y="216" width="398" height="12" uuid="3e85c54d-907d-4970-90c1-49ca5a773586" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de activos intangibles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-59" x="11" y="227" width="398" height="12" uuid="ca747079-55be-4da1-bfb8-61acab1ede16" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros cobros de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-60" x="11" y="238" width="398" height="12" uuid="49d1fbff-567f-4b81-9173-64fe4d89dcd1" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Menos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-61" x="11" y="249" width="398" height="12" uuid="a0a96b17-2a76-4b5c-b949-1434b79edfdd" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pagos por compra de valores e inversiones permanentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-62" x="11" y="260" width="398" height="12" uuid="3bf3ed92-dfd9-459f-8e5a-434dd1a429da" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pagos por compra de inmuebles, maquinaria y equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-63" x="11" y="271" width="398" height="12" uuid="05c53245-e9de-4cbe-b0bb-a8c969f4f474" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pagos por compra de intangibles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-64" x="11" y="282" width="398" height="12" uuid="2f17b65e-5a63-4a31-8785-d99178f42c88" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros pagos de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-65" x="11" y="25" width="398" height="12" uuid="2af09af2-23df-4ed2-ba2a-001f4f47c882" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false" isUnderline="false" pdfFontName="Helvetica" />
+				</textElement>
+				<text><![CDATA[Saldo Inicial]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="24" width="94" height="12" uuid="f22a43d7-d722-4fb6-bc8d-83d0ac3cb3c8" />
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inicial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="52" width="94" height="12" uuid="9aa323ec-2f25-4436-8596-70b8608d9819" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cob_vent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="63" width="94" height="12" uuid="c7d07c02-437e-47ae-90a6-6b62c6cc610a" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cob_regal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="74" width="94" height="12" uuid="e69b21f0-14b7-4022-b91c-bb9e506fc0b2" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cob_int}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="85" width="94" height="12" uuid="ec215e0b-1726-449a-b34d-a9cccd6c6abe" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cob_otro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="107" width="94" height="12" uuid="d085c7fc-14c2-4170-bd3f-982cac2ae8f6" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_prov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="118" width="94" height="12" uuid="d452440d-664f-4870-a648-c01cfaaf30a3" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_remun}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="129" width="94" height="12" uuid="3956da88-1ba3-431d-8ac0-5da9dd0c0ff3" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_tribu}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="140" width="94" height="12" uuid="c055de3f-1368-4af2-a44f-790731980bf7" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_inter}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-66" x="11" y="140" width="398" height="12" uuid="652f20ff-1636-4d16-a23e-e353a4ef3379" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pago de intereses y rendimientos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-67" x="11" y="298" width="398" height="12" uuid="ebeb3c8b-9f8d-4a83-898a-998236d2f509" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Aumento (Disminución) de Efectivo y Equivalente de Efectivo Provenientes de Act. de Inversión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-68" x="11" y="315" width="398" height="12" uuid="5c3692b4-b8fd-42cb-9d25-dab218614fb2" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isUnderline="true" />
+				</textElement>
+				<text><![CDATA[Actividades de Financiamiento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-69" x="11" y="326" width="398" height="12" uuid="d887ded7-68a4-4f0d-956d-108a58cceb03" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de emisión de acciones o nuevos aportes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-70" x="11" y="337" width="398" height="12" uuid="9bda878d-b69e-4785-b984-03fb84456837" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cobranza de recursos obtenidos por emisión de valores u otras obligaciones de largo plazo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-71" x="11" y="348" width="398" height="12" uuid="14de07ff-aeb1-4f3c-9e6a-8ba8e1753a56" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros cobros de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-73" x="11" y="359" width="398" height="12" uuid="1abf5abe-a199-4153-8ece-d0582ffea981" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Menos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-74" x="11" y="370" width="398" height="12" uuid="b6df5206-fdda-452b-b092-1ebc7c543207" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pagos de amortización o cancelación de valores u otras obligaciones de largo plazo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-75" x="11" y="381" width="398" height="12" uuid="4a893e8a-b8c7-47cd-86fb-00bcb10667d5" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pago de dividendos y otras distribuciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-77" x="11" y="392" width="398" height="12" uuid="627272c4-661b-4f45-81f2-285995c89837" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros pagos de efectivo relativos a la actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-80" x="11" y="425" width="398" height="12" uuid="3ccab67c-dde9-473f-a04e-360aab92f30a" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Aumento (Disminución) Neto de efectivo y Equivalente de Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-81" x="11" y="437" width="398" height="12" uuid="d0439bb9-c7a4-43ba-bd40-3c812c277d0e" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Saldo Efectivo y Equivalente de Efectivo al Inicio del Ejercivio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-82" x="11" y="448" width="398" height="12" uuid="fb3f5fcd-206a-407c-b50f-9b7682f11417" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Conciliación de Resultado Neto con el Efectivo y Equivalente de Efectivo proveniente de Act. Operación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-83" x="11" y="459" width="398" height="12" uuid="ce20c6b5-214f-4d29-87c5-6a7fd644052e" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Utilidad (Pérdida) neta del Ejercicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-84" x="11" y="470" width="398" height="12" uuid="0bd7b901-a986-4e3c-8669-b319bcf1fad5" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Mas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-85" x="11" y="481" width="398" height="12" uuid="6ff3a630-ff63-40aa-8860-179bd56f5638" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Ajustes a la Utilidad (Pérdida) del Ejercicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-86" x="11" y="492" width="398" height="12" uuid="46a1f239-b8fa-4fc6-a269-a067c0b9e887" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Depreciación y amortización del periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-87" x="11" y="503" width="398" height="12" uuid="139a15e4-4dee-4697-ba50-84b4980bacab" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Provisión Beneficios Sociales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-88" x="11" y="514" width="398" height="12" uuid="e15772c6-2cab-4243-87e3-53d06d2583a0" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Provisiones Diversas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-89" x="11" y="525" width="398" height="12" uuid="366602f9-f89a-45d6-bf86-42467668c1ab" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pérdida en venta de inmuebles, maquinaria y Equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-90" x="11" y="536" width="398" height="12" uuid="8d081930-dd53-45f9-82ca-383d533d3b2d" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pérdida en venta de valores e inversiones permanentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-91" x="11" y="547" width="398" height="12" uuid="3dc3c3d4-72b7-400d-b2b6-a1936634bc60" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Pérdida por activos mometarios no corrientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-92" x="11" y="558" width="398" height="12" uuid="af8325da-ca23-464c-ab61-5afe70f4eccd" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Otros]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="558" width="94" height="12" uuid="22b5cd7c-ffa1-4d81-9ea0-53b69b486b99" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="151" width="94" height="12" uuid="1c7a9917-0e9f-4923-bc6e-4ee87c2545ae" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago_otro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-93" x="11" y="569" width="398" height="12" uuid="f220bac2-9329-4bf5-b9d2-01ce819bfd64" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Menos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-94" x="11" y="580" width="398" height="12" uuid="a295df01-130d-4627-b6a6-c23f91fd547d" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Ajustes a la Utilidad (Pérdida) del Ejercicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-95" x="11" y="592" width="398" height="12" uuid="af659358-ba2c-47f9-b966-944ae11f1b96" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Utilidad en venta de inmuebles, maquinaria y equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-96" x="11" y="602" width="398" height="12" uuid="7ea5dd42-476e-4a5b-9897-0bcb592ff7f9" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Utilidad en venta de valores e inversiones permamentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-97" x="11" y="614" width="398" height="12" uuid="3fb8058b-c469-4a40-a699-561820fbfacd" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Ganancia por pasivos monetarios no corrientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-98" x="11" y="624" width="398" height="12" uuid="4c42c185-c900-42d1-8a46-6899064b6498" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Cargos y Abonos por cambios netos en el Activo y Pasivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-99" x="11" y="409" width="398" height="12" uuid="cb3668c4-7b4a-47ce-a0f4-1b8c7497a43f" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Aumento (Disminución) de Efectivo y Equivalente de Efectivo Provenientes de Act. de Financiemiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-100" x="11" y="644" width="398" height="12" uuid="3060bd19-d6bf-4a73-a29b-6a91b6aa5c97" />
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" />
+				</textElement>
+				<text><![CDATA[Aumento (Disminución) de Efectivo y Equivalente de Efectivo Provenientes de la Operación]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="167" width="94" height="12" uuid="06267306-a814-4e44-b3d1-5fd412cda50a" />
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{operacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="420" y="644" width="94" height="12" uuid="1ec1d9c9-8190-45f4-a4d6-8692cd8f9519" />
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{final}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch" />
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch" />
+	</pageFooter>
+	<lastPageFooter>
+		<band height="14" splitType="Stretch" />
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch" />
+	</summary>
+</jasperReport>
+

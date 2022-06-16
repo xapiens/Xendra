@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daot_clientes" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93477f6a-47e5-4324-96b4-812d14697392">
+  <property name="Description" value="daot_clientes_old.jrxml" />
+  <property name="FileName" value="daot_clientes_old.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:31.911" />
+  <property name="Identifier" value="c92a656f-e97e-45d4-a86f-7839132e7adb" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+bp.taxid as RUC,
+bp.name as Cliente,
+dt.name as tipo,
+date(i.dateinvoiced) as fecha,
+i.serial as serie,
+i.documentno as doc,
+sum((case when dt.docbasetype = 'ARC' then (it.taxbaseamt*-1)
+else (it.taxbaseamt) end)) as sinigv,
+sum((case when dt.docbasetype = 'ARC' then ((it.taxbaseamt+it.taxamt)*-1)
+else (it.taxbaseamt+it.taxamt) end)) as monto
+from c_invoice i
+inner join c_invoicetax it on i.c_invoice_id=it.c_invoice_id
+inner join c_bpartner bp on i.c_bpartner_id=bp.c_bpartner_id
+left outer join c_doctype dt on dt.c_doctype_id=i.c_doctype_id
+where  date(i.dateinvoiced) between date($P{DateFrom1}) and date($P{DateFrom2})
+and dt.isdaot = 'Y'
+and i.issotrx='Y' and i.isactive='Y'
+and i.docstatus !='DR'
+and i.ad_client_id = $P{AD_Client_ID}
+and bp.c_bpartner_id=$P{C_BPartner_ID}
+group by CLIENTE,RUC,tipo,serie,doc,fecha
+order by cliente,fecha,doc]]></queryString>
+  <field name="ruc" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="tipo" class="java.lang.String" />
+  <field name="fecha" class="java.sql.Date" />
+  <field name="serie" class="java.lang.String" />
+  <field name="doc" class="java.lang.String" />
+  <field name="sinigv" class="java.math.BigDecimal" />
+  <field name="monto" class="java.math.BigDecimal" />
+  <variable name="sumimporte" class="java.math.BigDecimal" incrementType="Group" incrementGroup="cliente" calculation="Sum">
+    <variableExpression><![CDATA[$F{sinigv}]]></variableExpression>
+  </variable>
+  <variable name="sumimporte_igv" class="java.math.BigDecimal" incrementType="Group" incrementGroup="cliente" calculation="Sum">
+    <variableExpression><![CDATA[$F{monto}]]></variableExpression>
+  </variable>
+  <group name="cliente">
+    <groupExpression><![CDATA[$F{doc}]]></groupExpression>
+  </group>
+  <pageHeader>
+    <band height="19">
+      <staticText>
+        <reportElement x="18" y="-1" width="70" height="20" uuid="fe3aa95c-8b13-4e11-a543-d23a55a0420c" />
+        <textElement verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[RUC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="307" y="-1" width="82" height="20" uuid="75838d3b-b855-4990-a24d-0cb9ba4a28c4" />
+        <textElement textAlignment="Center" verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[FECHA]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="88" y="-1" width="219" height="20" uuid="b55b5de9-c60d-4b0f-85e6-c0a8e670d576" />
+        <textElement verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[CLIENTE]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="389" y="-1" width="157" height="20" uuid="83c5c47f-e77a-416d-a58c-34c07fafe4fb" />
+        <textElement verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[TIPO DOC.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="546" y="-1" width="30" height="20" uuid="03287ae3-2cee-45da-a2c4-f7948c7dae49" />
+        <textElement verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[SERIE]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="576" y="-1" width="56" height="20" uuid="390098f0-0995-4cf9-afb3-1af3da393b55" />
+        <textElement textAlignment="Right" verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro. DOC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="632" y="-1" width="75" height="20" uuid="0c87a07b-3beb-4742-9276-1e035f598108" />
+        <textElement textAlignment="Right" verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Importe]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="707" y="-1" width="75" height="20" uuid="35580fb9-e050-4019-8339-8cdb11c24feb" />
+        <textElement textAlignment="Right" verticalAlignment="Bottom">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Importe Inc. IGV]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <detail>
+    <band height="12" splitType="Stretch">
+      <textField>
+        <reportElement x="18" y="0" width="70" height="12" uuid="00c6eb17-e483-4ae7-8332-bce8c22d2fcf" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="88" y="0" width="219" height="12" uuid="a2c79771-033b-4089-a42d-12af6235f9ae" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="389" y="0" width="157" height="12" uuid="9fd737e5-1be4-4bf9-a280-a77e045e02ee" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="546" y="0" width="30" height="12" uuid="177fa273-24e8-4039-997d-73d0ea89e52d" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="576" y="0" width="56" height="12" uuid="bf276e46-8cdc-48c1-994a-bf2ce22ec3ca" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{doc}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00" isBlankWhenNull="true">
+        <reportElement x="632" y="0" width="75" height="12" uuid="e57f35e3-fe09-47dd-ae99-1fea20e7c767" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{sinigv}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00" isBlankWhenNull="true">
+        <reportElement x="707" y="0" width="75" height="12" uuid="b27dfc67-cca5-45cc-a377-bb5a0d6b99f6" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+        <reportElement x="307" y="0" width="82" height="12" uuid="9dea04d3-c03c-439d-a933-90f5af0099d8" />
+        <textElement textAlignment="Center">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <summary>
+    <band height="29" splitType="Stretch">
+      <textField pattern="###0.00" isBlankWhenNull="true">
+        <reportElement x="632" y="3" width="75" height="20" uuid="2ea8360e-f6c5-4b96-99c6-3bb0a99a792a" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{sumimporte}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="707" y="3" width="75" height="20" uuid="c400556b-b8e6-46c5-b590-e62f91cf3e4a" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{sumimporte_igv}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+</jasperReport>
+
+

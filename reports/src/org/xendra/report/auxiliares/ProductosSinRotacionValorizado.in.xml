@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Productos Sin Rotacion Valorizado" Name="Productos Sin Rotacion Valorizado" BaseRole="MGN,ALL" Description="" Help="Muestra los productos que no tienen rotacion valorizados al precio de compra actual" Classname="org.compiere.report.ReportStarter" CategoryName="Administracion" AccessLevel="3" EntityType="D" FileName="ProductosSinRotacionValorizado.jrxml" Identifier="819c781b-8e2e-417f-817c-5e8554302909" Synchronized="2019-03-13 18:28:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="4e889e01-dabd-4abf-bc1f-b7e76286c1e4" Synchronized="2019-03-13 12:00:00.0" />
+  <parameter Name="AD_Org_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Org_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="dd8c85a6-e4c4-4ed8-b00f-6e36efeb27d9" Synchronized="2019-03-13 16:01:04.0" />
+</process>
+
+

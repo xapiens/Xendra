@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="stock reports extension" description="stock reports extension" id="org.xendra.report.stock" version="1.0" category="Stock" synchronized="@timestamp@" tags="Stock" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Stock" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Report="RetirodeMaterial" SeqNo="10" />
+    <menuitem Report="vendiblesxlinea" SeqNo="20" />
+  </menuitem>
+</plugin>
+
+

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RetirodeMaterial" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="88388a29-5468-4628-8a21-decaaafa923a">
+	<property name="Description" value="RetirodeMaterial.jrxml"/>
+	<property name="FileName" value="RetirodeMaterial.jrxml"/>
+	<property name="Synchronized" value="2017-06-08 06:29:48.827"/>
+	<property name="Identifier" value="a99efb42-6c1d-46bb-af9f-89f763e05d8a"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="194"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Org_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Shipper_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TrackingNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	c."name" as empresa,
+        o."name" AS organizacion,
+        cbp."name" as socio,
+       cbpl."name" AS direccion,
+	sh."name" as transportista,
+	sh.license,
+	l.city,
+	w.description,
+	il.qtyentered,
+	p."value",
+	p."name",
+	r."name" as region
+
+
+fROM xendra.m_inout i
+
+   JOIN xendra.ad_client c ON i.ad_client_id = c.ad_client_id
+   JOIN xendra.ad_org o ON i.ad_org_id = o.ad_org_id
+   JOIN xendra.c_bpartner  cbp ON i.c_bpartner_id = cbp.c_bpartner_id
+   join xendra.c_bpartner_location cbpl on  i.c_bpartner_location_id = cbpl.c_bpartner_location_id
+   JOIN xendra.m_shipper sh ON i.m_shipper_id = sh.m_shipper_id
+   join xendra.c_location l on cbpl.c_location_id = l.c_location_id
+   join xendra.c_region r on l.c_region_id=r.c_region_id
+   JOIN xendra.m_warehouse w ON i.m_warehouse_id = w.m_warehouse_id
+   right join xendra.m_inoutline il on  il.m_inout_id = i.m_inout_id
+   left join xendra.m_product p on  il.m_product_id = p.m_product_id
+
+WHERE  c.ad_client_id = $P{AD_Client_ID}  and  o.ad_org_id = $P{AD_Org_ID} and i.deliveryviarule='S' and i.issotrx='Y'
+         and sh.m_shipper_id= $P{M_Shipper_ID} and i.trackingno=$P{TrackingNo}
+ORDER BY cbp."name"]]>
+	</queryString>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="organizacion" class="java.lang.String"/>
+	<field name="socio" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="transportista" class="java.lang.String"/>
+	<field name="license" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="qtyentered" class="java.math.BigDecimal"/>
+	<field name="value" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="region" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="164" splitType="Stretch">
+			<textField pattern="dd MMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-1" x="437" y="11" width="84" height="18" uuid="1c19d1fb-f62e-4f15-8fdd-6e33d5084117"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-1" x="33" y="69" width="120" height="20" uuid="daeb4823-ada5-48d3-a13a-c5ad2b7c0997"/>
+				<text><![CDATA[Señores:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="33" y="89" width="210" height="20" uuid="f899a49e-8c4e-48e5-abff-668b5fb5e72c"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="33" y="109" width="210" height="20" uuid="84a4dc11-66f6-4e9d-ac6a-debeb41032f8"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="33" y="130" width="207" height="19" uuid="d9ad2673-ee0e-4630-9d2a-34bc6ac4789e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{region}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="172" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="139" y="13" width="149" height="20" uuid="f9e703f3-50fc-4bc3-9626-db23d94c65da"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-2" x="33" y="12" width="29" height="20" uuid="04f7d375-2e43-4347-83ec-93c806db5f1e"/>
+				<text><![CDATA[Atn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="33" y="45" width="29" height="20" uuid="8503658f-9ff1-4966-bfca-f68d3098b999"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[REF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="123" y="46" width="150" height="20" uuid="4663da20-b995-4f56-83ee-998c004e45e0"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[ENTREGA DE MATERIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-5" x="33" y="87" width="130" height="20" uuid="63133c38-4d4e-45ea-955f-c7808f0f50a1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Estimados Señores:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="34" y="117" width="205" height="20" uuid="70ab554e-8a02-40a7-a53f-e7b3ccaa1699"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Por medio de la presente autorizamos al señor]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="243" y="117" width="110" height="13" uuid="46dbd4c2-e341-4813-8c99-47441b635b96"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transportista}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-7" x="352" y="117" width="91" height="20" uuid="4446de24-efb7-42cf-852d-c3e60445ccea"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[identificado con DNI]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="446" y="117" width="81" height="18" uuid="7f5bc694-af66-438c-849f-14833c3bde38"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{license}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-8" x="34" y="137" width="205" height="20" uuid="b7964639-df23-4b29-81c9-f10e9541b0c8"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[para retirar los siguientes materiales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-12" x="124" y="12" width="19" height="20" uuid="d99ff525-c9fc-47fc-add4-ef19bf85e5ab"/>
+				<text><![CDATA[Sr.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="30" y="4" width="89" height="17" uuid="25f99c1b-99cc-4266-8c6d-abe25f659a27"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyentered}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="151" y="4" width="70" height="15" uuid="e0ac145a-5860-4db6-a5f8-ddacd3ea67bc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="237" y="4" width="245" height="15" uuid="5a187184-8361-4361-b687-8257d9190ddc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-9" x="35" y="3" width="497" height="20" uuid="aaf699fa-d943-4aed-8fc3-0738f6988657"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[SIn otro particular y agradeciendo la atención prestada a la presente, quedamos de ustedes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-10" x="313" y="23" width="130" height="20" uuid="8de5b112-1655-40f0-a656-116fed5ed3e3"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Atentemente,]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

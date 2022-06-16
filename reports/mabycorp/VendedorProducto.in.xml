@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="VendedorProducto" Name="VendedorProducto" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="VendedorProducto.jrxml" Identifier="7127f4ff-045e-0924-8483-aed158104c9f" Synchronized="2017-06-06 22:40:02.0">
+  <parameter Name="C_Contact_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Contact_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3804130a-7c37-24dc-4f13-c736fefb1301" Synchronized="2017-06-06 22:40:02.0" />
+  <parameter Name="M_Locator_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_Locator_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2a33b514-7b39-fbeb-cc19-33e89f8d44d5" Synchronized="2017-06-06 22:40:02.0" />
+</process>
+
+

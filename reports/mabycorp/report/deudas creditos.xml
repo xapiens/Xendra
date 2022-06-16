@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bde76cb0-9523-4446-a25e-ddf058caf1c5">
+  <property name="Description" value="deudas creditos.jrxml" />
+  <property name="FileName" value="deudas creditos.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.348" />
+  <property name="Identifier" value="416e6d1f-278e-45a2-9ceb-5f5a39819dc8" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="HASTA" class="java.sql.Timestamp">
+    <defaultValueExpression />
+  </parameter>
+  <queryString><![CDATA[SELECT
+     c_invoice."grandtotal"-c_cashline."amount" as abono,
+     c_invoice."c_invoice_id" AS c_invoice_c_invoice_id,
+     c_invoice."documentno" AS c_invoice_documentno,
+     c_invoice."grandtotal" AS c_invoice_grandtotal,
+     c_invoice."ispaid" AS c_invoice_ispaid,
+     c_bpartner."c_bpartner_id" AS c_bpartner_c_bpartner_id,
+     c_bpartner."points" AS c_bpartner_points,
+     c_bpartner."so_creditoverlimit" AS c_bpartner_so_creditoverlimit,
+     c_bpartner."name" AS c_bpartner_name,
+     c_invoice."created" AS c_invoice_created,
+     c_invoice."c_bpartner_id" AS c_invoice_c_bpartner_id,
+     c_bpartner."so_creditlimit" AS c_bpartner_so_creditlimit,
+     c_bpartner."so_creditused" AS c_bpartner_so_creditused,
+     c_bpartner."c_bp_group_id" AS c_bpartner_c_bp_group_id,
+     c_cashline."c_cashline_id" AS c_cashline_c_cashline_id,
+     c_cashline."amount" AS c_cashline_amount
+FROM
+     "xendra"."c_bpartner" c_bpartner INNER JOIN "xendra"."c_invoice" c_invoice ON c_bpartner."c_bpartner_id" = c_invoice."c_bpartner_id"
+     INNER JOIN "xendra"."c_cashline" c_cashline ON c_invoice."c_invoice_id" = c_cashline."c_invoice_id"
+     AND c_cashline."c_bpartner_id" = c_bpartner."c_bpartner_id"
+WHERE
+     (c_bpartner.so_creditlimit > 0
+     or c_bpartner."so_creditused" > 0)
+     and c_invoice.ispaid = 'N'
+     and c_bpartner."c_bp_group_id" <> 1000253
+ AND c_bpartner."c_bp_group_id" <> 1000255
+ AND c_invoice.c_paymentterm_id = 1000105
+     and c_invoice.created <= ($P{HASTA})
+ORDER BY
+     c_bpartner."name" ASC]]></queryString>
+  <field name="abono" class="java.math.BigDecimal" />
+  <field name="c_invoice_c_invoice_id" class="java.math.BigDecimal" />
+  <field name="c_invoice_documentno" class="java.lang.String" />
+  <field name="c_invoice_grandtotal" class="java.math.BigDecimal" />
+  <field name="c_invoice_ispaid" class="java.lang.String" />
+  <field name="c_bpartner_c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="c_bpartner_points" class="java.math.BigDecimal" />
+  <field name="c_bpartner_so_creditoverlimit" class="java.math.BigDecimal" />
+  <field name="c_bpartner_name" class="java.lang.String" />
+  <field name="c_invoice_created" class="java.sql.Timestamp" />
+  <field name="c_invoice_c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="c_bpartner_so_creditlimit" class="java.math.BigDecimal" />
+  <field name="c_bpartner_so_creditused" class="java.math.BigDecimal" />
+  <field name="c_bpartner_c_bp_group_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_c_cashline_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_amount" class="java.math.BigDecimal" />
+  <variable name="c_invoice_grandtotal_1" class="java.math.BigDecimal" resetType="Group" resetGroup="c_bpartner_name" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_invoice_grandtotal}]]></variableExpression>
+  </variable>
+  <variable name="c_invoice_grandtotal_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_invoice_grandtotal}]]></variableExpression>
+  </variable>
+  <variable name="c_cashline_amount_1" class="java.math.BigDecimal" resetType="Group" resetGroup="c_bpartner_name" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_cashline_amount}]]></variableExpression>
+  </variable>
+  <variable name="SUMA" class="java.lang.String" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_invoice_grandtotal}-$F{c_cashline_amount}]]></variableExpression>
+  </variable>
+  <variable name="abono_1" class="java.math.BigDecimal" resetType="Group" resetGroup="c_bpartner_name" calculation="Sum">
+    <variableExpression><![CDATA[$F{abono}]]></variableExpression>
+  </variable>
+  <group name="c_bpartner_name">
+    <groupExpression><![CDATA[$F{c_bpartner_name}]]></groupExpression>
+    <groupHeader>
+      <band height="32">
+        <textField>
+          <reportElement x="6" y="8" width="243" height="20" forecolor="#0000FF" uuid="a37b31c8-ce9a-4036-b6df-24421062a280" />
+          <textElement>
+            <font size="12" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{c_bpartner_name}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement x="15" y="4" width="528" height="1" uuid="32b4dcad-3199-430b-a1d3-94132c82acbf" />
+        </line>
+        <staticText>
+          <reportElement x="273" y="8" width="100" height="20" uuid="fa994415-ac01-468a-8ca1-fee14fe2f351" />
+          <text><![CDATA[NETO DOCUMENTO]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="384" y="8" width="78" height="20" uuid="da4ccc04-a9e2-4c94-90e9-015a79c271bc" />
+          <text><![CDATA[ABONOS]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="470" y="8" width="64" height="20" uuid="1ad1b5b7-b57c-4c41-ac47-3a79a1dd1dcd" />
+          <text><![CDATA[DEUDA]]></text>
+        </staticText>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="27">
+        <staticText>
+          <reportElement x="354" y="4" width="81" height="20" uuid="41ab8cea-6623-428d-8229-7a3730c4a54f" />
+          <text><![CDATA[TOTAL DEUDA]]></text>
+        </staticText>
+        <textField>
+          <reportElement x="450" y="5" width="100" height="20" uuid="56d6bb86-8067-49cc-a7c4-dfc959611f16" />
+          <textFieldExpression><![CDATA[$V{abono_1}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="79" splitType="Stretch">
+      <staticText>
+        <reportElement x="116" y="26" width="344" height="20" forecolor="#FF0000" uuid="2ea389f3-4188-4c8b-b478-f8b084d05a2a" />
+        <textElement>
+          <font size="15" isBold="true" />
+        </textElement>
+        <text><![CDATA[CREDITOS MABY PENDIENTES DE PAGO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="145" y="52" width="299" height="20" uuid="d2eefbf0-a000-4e75-acb7-e7ed85abfda2" />
+        <textElement>
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[MABY MARKET SAC----- RUC. 20484263010]]></text>
+      </staticText>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="18" splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band height="30" splitType="Stretch">
+      <staticText>
+        <reportElement x="304" y="4" width="115" height="20" forecolor="#FF0000" uuid="1fdbb76f-4311-402d-adff-241c9d6666d0" />
+        <textElement>
+          <font size="15" isBold="true" isItalic="true" />
+        </textElement>
+        <text><![CDATA[DOCUMENTO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="450" y="4" width="76" height="20" forecolor="#FF0000" uuid="178ada7d-d992-44b7-a8f9-a073596a127e" />
+        <textElement>
+          <font size="15" isBold="true" isItalic="true" />
+        </textElement>
+        <text><![CDATA[IMPORTE]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="20" y="6" width="196" height="20" forecolor="#FF0000" uuid="1f94121a-009f-4612-8cb1-4965d13937d0" />
+        <textElement>
+          <font size="15" isBold="true" isItalic="true" />
+        </textElement>
+        <text><![CDATA[CLIENTE]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="29" splitType="Stretch">
+      <textField>
+        <reportElement x="171" y="6" width="100" height="20" uuid="f2e91e34-5e78-432e-8974-f05661a3468f" />
+        <textFieldExpression><![CDATA[$F{c_invoice_documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="279" y="3" width="86" height="20" uuid="a9769b47-dfbc-4fdc-b647-efc174d6b1b8" />
+        <textFieldExpression><![CDATA[$F{c_invoice_grandtotal}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="95" y="6" width="71" height="20" uuid="eeafdbe8-22d3-40c5-a140-90b81abf7782" />
+        <text><![CDATA[FACTURA Nº :]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="6" y="6" width="85" height="20" uuid="a07acd55-3dfa-4337-93cc-45f395f15b46" />
+        <textFieldExpression><![CDATA[$F{c_invoice_created}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="371" y="5" width="80" height="20" uuid="461ce74f-463c-490e-b60b-e4465343c7b7" />
+        <textFieldExpression><![CDATA[$F{c_cashline_amount}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="460" y="5" width="90" height="20" uuid="626e7ca5-b886-48fe-8fe5-ef2230937058" />
+        <textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="41" splitType="Stretch">
+      <textField>
+        <reportElement x="370" y="4" width="100" height="20" uuid="ff63d9c0-e7bb-4360-aee8-f04a5c4296cd" />
+        <textFieldExpression><![CDATA[$F{c_cashline_amount}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band height="54" splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="42" splitType="Stretch">
+      <textField>
+        <reportElement x="419" y="12" width="100" height="20" uuid="69e70efc-d0f0-4501-b65d-1fb733153c00" />
+        <textFieldExpression><![CDATA[$V{c_invoice_grandtotal_2}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+</jasperReport>
+
+

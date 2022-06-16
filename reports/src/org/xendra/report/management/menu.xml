@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Gerencia" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D"  anchor="REPORTS" >
+<menuitem Report="CoberturaVendedorCliente" SeqNo="10"/>
+<menuitem Report="historicoPendientesVendedor" SeqNo="20"/>
+<menuitem Report="rankingClientesTodo" SeqNo="30"/>
+</menuitem>

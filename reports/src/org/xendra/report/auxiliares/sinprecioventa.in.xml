@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Productos Sin Precio de Venta" Name="Productos Sin Precio de Venta" BaseRole="MGN,ALL" Description="" Help="Muestra los productos que no tienen asignado un precio de venta" Classname="org.compiere.report.ReportStarter" CategoryName="Administracion" AccessLevel="3" EntityType="D" FileName="sinprecioventa.jrxml" Identifier="39ff57b8-ef12-4485-bf4c-6ebf757bc9e6" Synchronized="2019-03-13 18:28:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="39b5fa51-10d1-483a-9af0-0a86f6f56623" Synchronized="2019-03-13 12:00:00.0" />
+  <parameter Name="M_PriceList_Version_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="M_PriceList_Version_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="5387a136-0373-49de-8a7c-8c446e3d4492" Synchronized="2019-03-13 16:01:04.0" />
+</process>
+
+

@@ -1,0 +1,653 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato3_20" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="c1529dc4-e466-4b0f-b259-d42ec77e0d5d">
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="java.util.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000089)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_Period_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000615)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="PostingType" class="java.lang.String">
+    <defaultValueExpression><![CDATA['A']]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[WITH period as (SELECT p.c_period_id, p.name,p.c_year_id,p.periodno FROM c_period p WHERE
+enddate <= (select enddate from c_period WHERE c_period_id = $P{C_Period_ID})
+AND
+extract(year from enddate) = (select extract(year from enddate) from c_period WHERE c_period_id = $P{C_Period_ID})),
+currperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ),
+     org as (SELECT o.ad_org_id, o.name FROM ad_org o WHERE o.ad_org_id = $P{AD_Org_ID}),
+     tax as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN ci.taxid ELSE oi.taxid END
+	FROM ad_orginfo oi JOIN ad_clientinfo ci
+	on ci.ad_client_id = oi.ad_client_id WHERE ci.ad_client_id = $P{AD_Client_ID}),
+client as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN (SELECT description FROM AD_Client where AD_Client_ID = $P{AD_Client_ID}) ELSE (SELECT description FROM AD_org where AD_Org_ID = $P{AD_Org_ID}) END),
+     acct as (SELECT acc.c_acctschema_id, acc.name FROM c_acctschema acc WHERE acc.c_acctschema_id = $P{C_AcctSchema_ID}),
+     fact as (
+	SELECT
+	SUM(CASE WHEN sub.value = 'EGPF001' THEN f.amtacctcr ELSE 0 END) as salescr,
+	SUM(CASE WHEN sub.value = 'EGPF001' THEN f.amtacctdr ELSE 0 END) as salesdr,
+	SUM(CASE WHEN sub.value = 'EGPF002' THEN f.amtacctcr ELSE 0 END) as othersincomecr,
+	SUM(CASE WHEN sub.value = 'EGPF002' THEN f.amtacctdr ELSE 0 END) as othersincomedr,
+	SUM(CASE WHEN sub.value = 'EGPF004' THEN f.amtacctcr ELSE 0 END) as salescostcr,
+	SUM(CASE WHEN sub.value = 'EGPF004' THEN f.amtacctdr ELSE 0 END) as salescostdr,
+	SUM(CASE WHEN sub.value = 'EGPF006' THEN f.amtacctcr ELSE 0 END) as admexpensecr,
+	SUM(CASE WHEN sub.value = 'EGPF006' THEN f.amtacctdr ELSE 0 END) as admexpensedr,
+	SUM(CASE WHEN sub.value = 'EGPF007' THEN f.amtacctcr ELSE 0 END) as salesexpensecr,
+	SUM(CASE WHEN sub.value = 'EGPF007' THEN f.amtacctdr ELSE 0 END) as salesexpensedr,
+	SUM(CASE WHEN sub.value = 'EGPF009' THEN f.amtacctcr ELSE 0 END) as finanincomecr,
+	SUM(CASE WHEN sub.value = 'EGPF009' THEN f.amtacctdr ELSE 0 END) as finanincomedr,
+	SUM(CASE WHEN sub.value = 'EGPF010' THEN f.amtacctcr ELSE 0 END) as finanoutcomecr,
+	SUM(CASE WHEN sub.value = 'EGPF010' THEN f.amtacctdr ELSE 0 END) as finanoutcomedr,
+	SUM(CASE WHEN sub.value = 'EGPF011' THEN f.amtacctcr ELSE 0 END) as anotherincomecr,
+	SUM(CASE WHEN sub.value = 'EGPF011' THEN f.amtacctdr ELSE 0 END) as anotherincomedr,
+	SUM(CASE WHEN sub.value = 'EGPF012' THEN f.amtacctcr ELSE 0 END) as anotheroutcomecr,
+	SUM(CASE WHEN sub.value = 'EGPF012' THEN f.amtacctdr ELSE 0 END) as anotheroutcomedr,
+	SUM(CASE WHEN sub.value = 'EGPF013' THEN f.amtacctcr ELSE 0 END) as resultinflcr,
+	SUM(CASE WHEN sub.value = 'EGPF013' THEN f.amtacctdr ELSE 0 END) as resultinfldr,
+	SUM(CASE WHEN sub.value = 'EGPF015' THEN f.amtacctcr ELSE 0 END) as participcr,
+	SUM(CASE WHEN sub.value = 'EGPF015' THEN f.amtacctdr ELSE 0 END) as participdr,
+	SUM(CASE WHEN sub.value = 'EGPF016' THEN f.amtacctcr ELSE 0 END) as ImpueRentacr,
+	SUM(CASE WHEN sub.value = 'EGPF016' THEN f.amtacctdr ELSE 0 END) as ImpueRentadr,
+	SUM(CASE WHEN sub.value = 'EGPF018' THEN f.amtacctcr ELSE 0 END) as IncomeExtracr,
+	SUM(CASE WHEN sub.value = 'EGPF018' THEN f.amtacctdr ELSE 0 END) as IncomeExtradr,
+	SUM(CASE WHEN sub.value = 'EGPF019' THEN f.amtacctcr ELSE 0 END) as OutcomeExtracr,
+	SUM(CASE WHEN sub.value = 'EGPF019' THEN f.amtacctdr ELSE 0 END) as OutcomeExtradr,
+	SUM(CASE WHEN sub.value = 'EGPF021' THEN f.amtacctcr ELSE 0 END) as IntMinoritariocr,
+	SUM(CASE WHEN sub.value = 'EGPF021' THEN f.amtacctdr ELSE 0 END) as IntMinoritariodr
+	FROM fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN c_elementvalue ev on f.account_id= ev.c_elementvalue_id
+	JOIN c_subject sub on ev.egpf_c_subject_id = sub.c_subject_id
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0) = 0  THEN true ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.c_acctschema_id = $P{C_AcctSchema_ID}
+	AND f.postingtype = $P{PostingType}
+	)
+select currperiod.name as periodo,
+       tax.taxid as ruc,
+       acct.name as esquema,
+       client.description as cliente,
+       org.name as organizacion,
+       salescr-salesdr as ventas,
+       othersincomecr-othersincomedr as OtrosIngresosOpe,
+       (salescr+othersincomecr)-(salesdr+othersincomedr) as ventas_netas,
+       salescostcr-salescostdr as CostoVentas,
+       (salescr+othersincomecr+salescostcr)-(salesdr+othersincomedr+salescostdr) as utilidad_bruta,
+       admexpensecr-admexpensedr as GastAdminist,
+       salesexpensecr-salesexpensedr as GastVentas,
+       (salescr
+       +othersincomecr
+       +salescostcr
+       +admexpensecr
+       +salesexpensecr)
+       -
+       (salesdr
+       +othersincomedr
+       +salescostdr
+       +admexpensedr
+       +salesexpensedr) as util_operat,
+       finanincomecr-finanincomedr as IngFinanc,
+       finanoutcomecr-finanoutcomedr as GastFina,
+       anotherincomecr-anotherincomedr as OtrosIng,
+       anotheroutcomecr-anotheroutcomedr as OtrosGastos,
+       resultinflcr-resultinfldr as ResultInflac,
+       (salescr+othersincomecr+salescostcr+admexpensecr+salesexpensecr+finanincomecr+finanoutcomecr+anotherincomecr+anotheroutcomecr+resultinflcr)
+       -
+       (salesdr+othersincomedr+salescostdr+admexpensedr+salesexpensedr+finanincomedr+finanoutcomedr+anotherincomedr+anotheroutcomedr+resultinfldr) as util_and_ext_imp,
+	participcr-participdr as particip,
+	ImpueRentacr-ImpueRentadr as ImpueRenta,
+       (salescr
+       +othersincomecr
+       +salescostcr
+       +admexpensecr
+       +salesexpensecr
+       +finanincomecr
+       +finanoutcomecr
+       +anotherincomecr
+       +anotheroutcomecr
+       +resultinflcr
+       +participcr
+       +ImpueRentacr)
+       -
+       (salesdr
+       +othersincomedr
+       +salescostdr
+       +admexpensedr
+       +salesexpensedr
+       +finanincomedr
+       +finanoutcomedr
+       +anotherincomedr
+       +anotheroutcomedr
+       +resultinfldr
+       +participdr
+       +ImpueRentadr) as util_part_imp,
+       IncomeExtracr-IncomeExtradr as IngExtra,
+       OutcomeExtracr-OutcomeExtradr as GastExtra,
+       (salescr
+       +othersincomecr
+       +salescostcr
+       +admexpensecr
+       +salesexpensecr
+       +finanincomecr
+       +finanoutcomecr
+       +anotherincomecr
+       +anotheroutcomecr
+       +resultinflcr
+       +participcr
+       +ImpueRentacr
+       +IncomeExtracr
+       +OutcomeExtracr)
+       -
+       (salesdr
+       +othersincomedr
+       +salescostdr
+       +admexpensedr
+       +salesexpensedr
+       +finanincomedr
+       +finanoutcomedr
+       +anotherincomedr
+       +anotheroutcomedr
+       +resultinfldr
+       +participdr
+       +ImpueRentadr
+       +IncomeExtradr
+       +OutcomeExtradr) as util_int_min,
+       IntMinoritariocr-IntMinoritariodr as IntMinoritario,
+       (salescr
+       +othersincomecr
+       +salescostcr
+       +admexpensecr
+       +salesexpensecr
+       +finanincomecr
+       +finanoutcomecr
+       +anotherincomecr
+       +anotheroutcomecr
+       +resultinflcr
+       +participcr
+       +ImpueRentacr
+       +IncomeExtracr
+       +OutcomeExtracr
+       +IntMinoritariocr)
+       -
+       (salesdr
+       +othersincomedr
+       +salescostdr
+       +admexpensedr
+       +salesexpensedr
+       +finanincomedr
+       +finanoutcomedr
+       +anotherincomedr
+       +anotheroutcomedr
+       +resultinfldr
+       +participdr
+       +ImpueRentadr
+       +IncomeExtradr
+       +OutcomeExtradr
+       +IntMinoritariodr) as util_net from fact, period p, currperiod, tax, client, org, acct]]></queryString>
+  <field name="periodo" class="java.lang.String" />
+  <field name="ruc" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="organizacion" class="java.lang.String" />
+  <field name="esquema" class="java.lang.String" />
+  <field name="ventas" class="java.math.BigDecimal" />
+  <field name="otrosingresosope" class="java.math.BigDecimal" />
+  <field name="ventas_netas" class="java.math.BigDecimal" />
+  <field name="costoventas" class="java.math.BigDecimal" />
+  <field name="utilidad_bruta" class="java.math.BigDecimal" />
+  <field name="gastadminist" class="java.math.BigDecimal" />
+  <field name="gastventas" class="java.math.BigDecimal" />
+  <field name="util_operat" class="java.math.BigDecimal" />
+  <field name="ingfinanc" class="java.math.BigDecimal" />
+  <field name="gastfina" class="java.math.BigDecimal" />
+  <field name="otrosing" class="java.math.BigDecimal" />
+  <field name="otrosgastos" class="java.math.BigDecimal" />
+  <field name="resultinflac" class="java.math.BigDecimal" />
+  <field name="util_and_ext_imp" class="java.math.BigDecimal" />
+  <field name="particip" class="java.math.BigDecimal" />
+  <field name="impuerenta" class="java.math.BigDecimal" />
+  <field name="util_part_imp" class="java.math.BigDecimal" />
+  <field name="ingextra" class="java.math.BigDecimal" />
+  <field name="gastextra" class="java.math.BigDecimal" />
+  <field name="util_int_min" class="java.math.BigDecimal" />
+  <field name="intminoritario" class="java.math.BigDecimal" />
+  <field name="util_net" class="java.math.BigDecimal" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="64" splitType="Stretch">
+      <staticText>
+        <reportElement uuid="8c9ac270-bcea-4c58-a0b7-960e590197f3" key="staticText-1" x="0" y="9" width="535" height="30" />
+        <textElement textAlignment="Center">
+          <font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FORMATO 3.20 : "Libro de Inventarios y Balances - Estado de Ganancias y Pérdidas"]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement uuid="3af4825c-c66a-4951-b451-3585ce59b82e" key="textField-1" x="137" y="40" width="258" height="20" />
+        <textElement textAlignment="Center">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+      </textField>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="68" splitType="Stretch">
+      <staticText>
+        <reportElement uuid="525271af-71a8-4cca-a22f-611acce9d4a2" key="staticText-2" x="10" y="6" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[PERIODO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="6f41ad9b-cc5c-44e1-8911-e2a0bab8b98f" key="staticText-3" x="10" y="19" width="77" height="12" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[RUC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="467b237b-168f-4f1f-aed7-47b53720d4be" key="staticText-4" x="10" y="31" width="77" height="14" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[RAZÓN SOCIAL]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="6657bbe3-1fbe-402d-b8c6-129ef344c880" key="staticText-5" x="89" y="6" width="5" height="20" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="7b4ae2fb-52d7-4aca-8390-bd07692db0df" key="staticText-6" x="89" y="19" width="5" height="11" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="d82e6db4-40e5-4bae-822b-f5182f46343a" key="staticText-7" x="89" y="31" width="5" height="13" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement uuid="dd112dc9-bb87-47eb-9202-1ad4863f5d22" key="textField-2" x="99" y="5" width="277" height="15" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement uuid="9be51e41-c09b-42f6-adfd-bafcc6ccda15" key="textField-3" x="99" y="17" width="277" height="15" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement uuid="0e3a06c5-1a25-4e96-8325-31c242ad1edf" key="textField-4" x="99" y="30" width="277" height="15" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement uuid="80e9a96f-1319-492d-8d3b-6df9cfd39f64" key="staticText-7" x="89" y="44" width="5" height="13" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="ac89b0ae-27c3-4564-91c6-4bd42e2f5151" key="staticText-4" x="10" y="44" width="77" height="14" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <text><![CDATA[FECHA]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="549" splitType="Stretch">
+      <rectangle>
+        <reportElement uuid="91f8cb06-ac62-4407-867a-d185e60a1c7b" key="rectangle-1" x="11" y="4" width="509" height="32" />
+      </rectangle>
+      <staticText>
+        <reportElement uuid="37d7b4ad-9817-4096-8a27-f0ab6aa014dd" key="staticText-39" x="411" y="5" width="106" height="30" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <text><![CDATA[Ejercicio o Periodo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="f1423a17-5631-431c-a0e9-684a3beec6fd" key="staticText-40" x="10" y="5" width="401" height="30" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <text><![CDATA[Descricpción]]></text>
+      </staticText>
+      <line>
+        <reportElement uuid="7b2aa005-6410-469e-aa2d-7f1653f03a57" key="line-24" x="411" y="4" width="1" height="32" />
+      </line>
+      <staticText>
+        <reportElement uuid="ea77619f-e3e5-4efc-835e-e5deade0bada" key="staticText-41" x="10" y="36" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font size="10" />
+        </textElement>
+        <text><![CDATA[Ventas Netas Ingresos Operacionales)]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="46ae446d-3928-4a8a-9dba-0ee7c110f8c4" key="staticText-42" x="10" y="52" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Otros Ingresos Operacionales]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="c13777c7-38ed-4eb8-bbc9-cc1da5eccbab" key="staticText-43" x="137" y="77" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Ingresos Brutos]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="5f82c3a9-4532-4171-9972-98b6bba5acf2" key="staticText-44" x="10" y="103" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Costo de Ventas]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="3401902a-dbe6-40c7-bd83-6ccd1f4112fa" key="staticText-45" x="137" y="127" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Utilidad Bruta]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="dd845a02-5a37-4933-9f5d-3794ad8091b4" key="staticText-46" x="10" y="149" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isUnderline="true" />
+        </textElement>
+        <text><![CDATA[Gastos Operacinales]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="942e7d32-291c-479d-a9a4-c87c048c7832" key="staticText-47" x="10" y="166" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Gastos Administrativos]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="50161188-1057-4b03-88b2-2460a9197e77" key="staticText-48" x="10" y="182" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Gastos de Venta]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="c92e3208-1d7c-4f06-8032-85f2ac1cb0d8" key="staticText-49" x="137" y="206" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Utilidad Operativa]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="456667d1-6a0c-4b71-80ca-07455453c03f" key="staticText-50" x="10" y="232" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isUnderline="true" />
+        </textElement>
+        <text><![CDATA[Otros Ingreso (Gastos)]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="7c210f8e-27e5-47a6-af14-a5eec4fd5671" key="staticText-51" x="10" y="249" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Otros Ingresos]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="1e2d8c02-fa88-43b2-a601-6b8a7493ebe2" key="staticText-52" x="10" y="266" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Gastos Financieros]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="c1ccfa7c-9c7c-4742-afdd-0ade9e8108e8" key="staticText-53" x="10" y="283" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Otros Ingresos]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="c2d6b8b4-0c0b-4d14-ab48-3daef2df80a2" key="staticText-54" x="10" y="299" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Otros Gastos]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="108aecfc-0d5c-4a03-89f5-44daee77bee9" key="staticText-55" x="137" y="337" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Result. Ant Part., Imp Renta y Part. Extraordinarias]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="9081c7e0-6015-4400-961e-dd55916c3b73" key="staticText-56" x="10" y="360" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Participaciones]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="c9a786c1-0577-4355-9419-27f8cb3b4b36" key="staticText-57" x="10" y="376" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Impuesto a la Renta]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="142bccc3-090f-4903-8e48-e29336114a6d" key="staticText-58" x="10" y="315" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Resultados por Exposición a la Inflación]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="b272fafd-c7ff-4f01-89c3-58ca3f36aabb" key="staticText-59" x="137" y="398" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Resultados Antes de Partidas Extraordinarias]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="f4034a1b-e119-4b72-bcbb-507af8c0370b" key="staticText-60" x="10" y="423" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Ingresos Extraordinarios]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="f6d2f3d7-5007-4481-8cab-6382006645dd" key="staticText-61" x="10" y="439" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Gastos Extraordinarios]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="ff753ed9-0269-4264-8eef-f505c0b62363" key="staticText-62" x="137" y="462" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Resultados Antes de Interes Minoritario]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="43bcd234-5247-4e8e-b282-f03c54da0eb6" key="staticText-63" x="10" y="488" width="401" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" />
+        <text><![CDATA[Interés Minoritario]]></text>
+      </staticText>
+      <staticText>
+        <reportElement uuid="dc93dc1a-1c33-4065-99fa-6fdbe8406142" key="staticText-64" x="137" y="512" width="274" height="15" />
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Utilidad (Pérdida del Ejercicio)]]></text>
+      </staticText>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement uuid="4ed88d58-c23f-4ca6-be13-47d858ae2014" key="textField" x="421" y="37" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ventas}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="b0847734-38ce-4e4c-b1be-fe2d8f5dd4ed" key="textField" x="421" y="53" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{otrosingresosope}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="b9cde575-765b-4840-9a32-f685195ba26c" key="textField" x="421" y="105" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{costoventas}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="80b43461-3ec5-4429-be6d-2c743aff31b4" key="textField" x="421" y="168" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{gastadminist}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="4a1f2ee8-f686-4bed-8b37-a79cae29389e" key="textField" x="421" y="185" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{gastventas}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="f86cc70a-dcbf-4be5-96fe-dbde0069aae7" key="textField" x="421" y="252" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ingfinanc}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="5af939a9-c779-432f-b1e9-6467687022ed" key="textField" x="421" y="268" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{gastfina}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="979cdca0-ee44-4d18-b17f-ff3242b7b604" key="textField" x="421" y="283" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{otrosing}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="ca6d97c1-0f50-4c8d-85c7-75e8ca5cb3cf" key="textField" x="421" y="314" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{resultinflac}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="969359e9-be4b-42cd-82f6-6d37c4efdd75" key="textField" x="421" y="298" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{otrosgastos}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="59beaab1-d715-48d0-982a-16e01c192dcc" key="textField" x="421" y="360" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{particip}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="ae79541b-e9ac-4dd1-ad7d-206405533b33" key="textField" x="421" y="375" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{impuerenta}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="41d527d1-08af-4fc2-ac29-68e56f5c609d" key="textField" x="421" y="423" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ingextra}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="2e40d027-19bd-4eba-849c-66b1a5b6c862" key="textField" x="421" y="439" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{gastextra}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="0fa249b2-a96e-4ba7-b5a8-5493356fe69f" key="textField" x="421" y="488" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{intminoritario}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="8a072c4e-9bc8-4d61-98c0-8bebc820b23a" key="textField" x="421" y="78" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ventas_netas}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="9f9df0bd-cbc7-4140-80c0-c67614208255" key="textField" x="421" y="128" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{utilidad_bruta}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="2cf31074-0a0b-4804-9fdb-9a2e26311505" key="textField" x="421" y="207" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{util_operat}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="00b4d85d-e7cf-4af0-8403-a47e2c01d158" key="textField" x="421" y="338" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{util_and_ext_imp}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="3843acef-7cae-4335-a95c-83fc57626248" key="textField" x="422" y="399" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{util_part_imp}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="afc7e3e1-5ee6-48d9-afcb-fb95b3d88dba" key="textField" x="421" y="462" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{util_int_min}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement uuid="56446d44-f329-420f-b4bc-482fcfe424e4" key="textField" x="421" y="513" width="82" height="13" />
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{util_net}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnHeader>
+  <detail>
+    <band splitType="Stretch" />
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

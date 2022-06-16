@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="deudas creditos.jrxml" Name="deudas creditos.jrxml" BaseRole="" Description="deudas creditos.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="deudas creditos.jrxml" Identifier="416e6d1f-278e-45a2-9ceb-5f5a39819dc8" Synchronized="2017-06-06 22:10:36.0">
+  <parameter Name="HASTA" Description="HASTA" Help="HASTA" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="HASTA" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="d8922836-1bc9-421c-a5f1-837fda94c4e7" Synchronized="2018-11-30 09:58:34.0" />
+</process>
+
+

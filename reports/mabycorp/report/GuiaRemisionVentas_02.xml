@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GuiaRemisionVentas" pageWidth="595" pageHeight="878" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca8cd369-56ea-47ff-99b1-a10f30679aff">
+  <property name="Description" value="GuiaRemisionVentas_02.jrxml" />
+  <property name="FileName" value="GuiaRemisionVentas_02.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:35.998" />
+  <property name="Identifier" value="f91023c1-ddb3-4ccd-9ab5-02dbd39548da" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="1" />
+  <parameter name="RECORD_ID" class="java.lang.Integer">
+    <defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[with direccion as (
+select
+l.m_locator_id,
+lt.address1
+from m_locator l
+join m_warehouse w on l.m_warehouse_id = w.m_warehouse_id
+join c_location lt on w.c_location_id = lt.c_location_id)
+
+select
+o.documentno,
+(select name from m_product p where ol.m_product_id = p.m_product_id) as producto,
+(select value from m_product p where ol.m_product_id = p.m_product_id) as codproducto,
+ol.description,
+ol.movementqty,
+o.description as dir,
+g.name,
+g.value,
+--ol.c_uom_id,
+coalesce((select uomsymbol from c_uom u where ol.c_uom_id = u.c_uom_id),'') as unidad,
+
+--ol.m_locatorto_id,
+--(select address1 from direccion where direccion.m_locator_id = ol.m_locatorto_id) as almacen,
+(select address1 from direccion where direccion.m_locator_id = ol.m_locator_id) as destino,
+
+ol.line
+--*
+
+from
+m_inout o
+join m_inoutline ol on(o.m_inout_id = ol.m_inout_id)
+join c_bpartner g on (o.c_bpartner_id = g.c_bpartner_id)
+where o.m_inout_id = $P{RECORD_ID} and o.isactive = 'Y']]></queryString>
+  <field name="documentno" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="codproducto" class="java.lang.String" />
+  <field name="description" class="java.lang.String" />
+  <field name="movementqty" class="java.math.BigDecimal" />
+  <field name="dir" class="java.lang.String" />
+  <field name="name" class="java.lang.String" />
+  <field name="value" class="java.lang.String" />
+  <field name="unidad" class="java.lang.String" />
+  <field name="destino" class="java.lang.String" />
+  <field name="line" class="java.math.BigDecimal" />
+  <pageHeader>
+    <band height="271">
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="105" y="137" width="100" height="13" uuid="8c661a3c-fca4-4919-b833-84a022d7391b" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="412" y="97" width="100" height="20" uuid="d42cd4b3-f0a9-4e19-9850-3ae947ed3582" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="105" y="158" width="211" height="15" uuid="194a02c4-cfa5-4911-ae6f-fe120f33578a" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="105" y="177" width="100" height="15" uuid="e316b40e-50fb-47ef-9b03-d734be2f9de8" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="333" y="177" width="211" height="13" uuid="9063e6a0-9be9-4fc6-9f74-802d1ce8da2d" />
+        <textFieldExpression><![CDATA[$F{dir}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="333" y="137" width="211" height="13" uuid="3c0c34ec-086e-4577-814c-7fc64539c029" />
+        <textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <detail>
+    <band height="13" splitType="Stretch">
+      <textField isStretchWithOverflow="true">
+        <reportElement x="76" y="2" width="341" height="10" uuid="74cf4158-92f3-434e-aab2-56da135d57d6" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="2" width="72" height="10" uuid="aa48e9c1-0eae-430c-8ff0-00e330cd89a3" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{codproducto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.000">
+        <reportElement x="421" y="2" width="47" height="10" uuid="d756d42a-9701-467a-84ba-86ebdd750010" />
+        <textElement textAlignment="Center" verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{movementqty}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="472" y="2" width="23" height="10" uuid="bb49974a-00e5-4fa4-a4b4-3b407af4b562" />
+        <textElement verticalAlignment="Middle" />
+        <textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <noData>
+    <band height="31" splitType="Stretch">
+      <staticText>
+        <reportElement x="139" y="3" width="286" height="27" uuid="7a8820ee-0004-4e60-a9c0-7e3bec2e287b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[LA GUIA DE REMISION NO EXISTE]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>
+
+

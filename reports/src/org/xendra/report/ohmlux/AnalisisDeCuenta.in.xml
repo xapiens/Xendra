@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="R_AnalisisDeCuentas" Name="R_AnalisisDeCuentas" BaseRole="" Description="Analisis De Cuentas" Help="Escoja el rango y cuenta para analizar" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="AnalisisDeCuenta.jrxml" Identifier="9651701d-f915-9d96-04cf-cc29a89ba5ae" Synchronized="2016-10-11 15:08:18.0">
+  <parameter Name="DateFrom" Description="Indicar el Rango De Fechas Para Analisis" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="487c0b59-ca8a-4011-b53f-579c4f8e8bbf" Synchronized="2018-11-30 09:58:06.0" />
+  <parameter Name="ACCOUNT" Description="Cuenta o Grupo De Cuentas a Analizar" Help="      " AD_Reference_ID="dc109434-dc5c-098b-4f9f-2ceec7b0f812" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="ACCOUNT" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="8135607a-779d-4fef-9643-a6363d7a6fe2" Synchronized="2018-11-30 09:58:06.0" />
+</process>
+
+

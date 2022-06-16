@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Reporte Cargos Completo" Name="Reporte Cargos Completo" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="adelantosueldo2.jrxml" Identifier="99dcc30f-b06a-344f-e8ac-1945aca43467" Synchronized="2017-06-06 22:40:01.0">
+  <parameter Name="C_CashBook_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_CashBook_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="c105dce0-a5a0-894f-5bdd-ca17da09a444" Synchronized="2017-06-06 22:40:01.0" />
+  <parameter Name="StatementDate" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="StatementDate" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3f5b5a33-15e0-46dc-6e42-393fd6f57be4" Synchronized="2017-06-06 22:40:01.0" />
+  <parameter Name="C_Charge_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Charge_ID" FieldLength="0" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="bb394287-a877-2e4a-8762-6aa96d96d61f" Synchronized="2017-06-06 22:40:01.0" />
+</process>
+
+

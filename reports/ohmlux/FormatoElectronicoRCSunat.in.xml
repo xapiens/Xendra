@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Registro de Compras Electronico SUNAT" Name="Registro de Compras Electronico SUNAT" BaseRole="" Description="Registro de Compras Electronico SUNAT" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="FormatoElectronicoRCSunat.jrxml" Identifier="c1015918-e7f0-7c50-b3be-f88f3b53d933" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="DateFrom" Description="Rango De FEchas" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="33a34780-2ef3-4c2c-a6f1-106d3f3523b8" Synchronized="2018-11-30 09:58:07.0" />
+</process>
+
+

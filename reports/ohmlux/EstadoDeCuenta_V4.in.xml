@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Estado De Cuenta - Cliente" Name="Estado De Cuenta - Cliente" BaseRole="" Description="Estado De Cuenta - Cliente" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="EstadoDeCuenta_V4.jrxml" Identifier="60ffbf2f-5376-988a-16f1-b092f163d110" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="C_BPartner_ID" Description="Socio De Negocio" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="e61067c9-9ce8-4398-9736-153e79bd4efb" Synchronized="2018-11-30 09:58:11.0" />
+  <parameter Name="DateFrom" Description="Fecha De Corte" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="30" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="1b9d5274-156d-4b3a-8a7b-e137ec204b66" Synchronized="2018-11-30 09:58:11.0" />
+</process>
+
+

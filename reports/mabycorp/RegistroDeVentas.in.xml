@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="RegistroDeVentas.jrxml" Name="RegistroDeVentas.jrxml" BaseRole="" Description="RegistroDeVentas.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="RegistroDeVentas.jrxml" Identifier="211df895-e29e-4cba-8b81-ef604f141bd9" Synchronized="2017-06-06 22:10:36.0">
+  <parameter Name="RegDate2" Description="RegDate2" Help="RegDate2" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="RegDate2" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="1" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="08d1b157-2624-4d76-8d2a-f0eac9b6baad" Synchronized="2018-11-30 09:58:34.0" />
+  <parameter Name="RegDate1" Description="RegDate1" Help="RegDate1" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="RegDate1" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="397b7cf5-4f95-4fa8-a0fb-2a9d9d6ad430" Synchronized="2018-11-30 09:58:34.0" />
+</process>
+
+

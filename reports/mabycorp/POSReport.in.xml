@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="RV_POSReportPago2" Name="RV_POSReportPago2" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="Finanzas" AccessLevel="3" EntityType="D" FileName="POSReport.jrxml" Identifier="053c48a3-e581-0422-dc05-5ea61106cc77" Synchronized="2012-09-20 18:28:18.0">
+  <parameter Name="C_POS_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_POS_ID" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="2d170138-0d32-24d3-21fc-bb5d0142f814" Synchronized="2010-12-16 20:26:40.0" />
+  <parameter Name="dateordered" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateordered" FieldLength="10" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="62135498-f1d9-bbab-99fb-e62c0c10f96b" Synchronized="2010-12-16 20:27:46.0" />
+</process>
+
+

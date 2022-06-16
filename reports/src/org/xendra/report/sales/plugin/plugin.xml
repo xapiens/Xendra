@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="sales reports extension" description="sales reports extension" id="org.xendra.report.sales" version="1.0" category="Ventas" synchronized="@timestamp@" tags="Ventas" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Ventas" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Report="ventasgeneral" SeqNo="10" />
+    <menuitem Report="VentasTopTen" SeqNo="20" />
+    <menuitem Report="ventasvendedor" SeqNo="30" />
+    <menuitem Report="Mod_historial_compras_cliente" SeqNo="40" />
+  </menuitem>
+</plugin>
+
+

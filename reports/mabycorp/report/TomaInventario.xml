@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process AD_Menu_ID="" Value="TomaInventario" Name="TomaInventario" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Inventario.jrxml" Identifier="823f7f05-37da-41f9-9cf3-8744aa01bb15" Synchronized="2017-06-06 22:39:57.0">
+  <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="60a30fb1-a5e7-4e05-b264-01f3d997d9bb">
+    <property name="Description" value="Inventario.jrxml" />
+    <property name="FileName" value="Inventario.jrxml" />
+    <property name="Synchronized" value="2017-06-06 22:10:37.067" />
+    <property name="Identifier" value="a0068887-3bc1-4514-88ae-75669ccef8d8" />
+    <property name="ireport.zoom" value="3.0" />
+    <property name="ireport.x" value="345" />
+    <property name="ireport.y" value="45" />
+    <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+      <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+    </parameter>
+    <parameter name="MovementDate" class="java.sql.Timestamp">
+      <defaultValueExpression />
+    </parameter>
+    <queryString><![CDATA[select
+il.m_product_id,
+p.value,
+p.name,
+sum(il.qtycount) as cantidad,
+max(cost) as costo,
+((sum(il.qtycount))*(max(cost))) as total
+
+from m_inventoryline il
+left join m_inventory i on il.m_inventory_id = i.m_inventory_id
+left join m_product p on il.m_product_id = p.m_product_id
+ where
+i.ad_client_id = $P{AD_Client_ID}
+and date(i.movementdate) = $P{MovementDate}
+
+
+group by il.m_product_id, p.value, p.name]]></queryString>
+    <field name="m_product_id" class="java.math.BigDecimal" />
+    <field name="value" class="java.lang.String" />
+    <field name="name" class="java.lang.String" />
+    <field name="cantidad" class="java.math.BigDecimal" />
+    <field name="costo" class="java.math.BigDecimal" />
+    <field name="total" class="java.math.BigDecimal" />
+    <variable name="Sumacant" class="java.math.BigDecimal" calculation="Sum">
+      <variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
+    </variable>
+    <variable name="SumaTotal" class="java.math.BigDecimal" calculation="Sum">
+      <variableExpression><![CDATA[$F{total}]]></variableExpression>
+    </variable>
+    <background>
+      <band splitType="Stretch" />
+    </background>
+    <title>
+      <band height="12" splitType="Stretch">
+        <staticText>
+          <reportElement x="0" y="0" width="554" height="12" uuid="fb8f7f95-8bfc-4b25-9b5e-51ba1b3fd5b5" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[INVENTARIO FISICO VALORIZADO]]></text>
+        </staticText>
+      </band>
+    </title>
+    <pageHeader>
+      <band height="10" splitType="Stretch">
+        <staticText>
+          <reportElement x="56" y="0" width="57" height="10" uuid="4b593e79-8cf7-4e20-8958-4b6ff8b0b167" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Costo Unit.]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="113" y="0" width="58" height="10" uuid="0d67f8b3-4d88-434c-bd29-59c245715f89" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Total]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="171" y="0" width="102" height="10" uuid="da33e8e4-a027-46f9-85bc-5115d4499f18" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Codigo]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="273" y="0" width="281" height="10" uuid="60a7e41f-2125-4652-b276-156210eb21b7" />
+          <textElement textAlignment="Left">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Nombre]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="0" y="0" width="56" height="10" uuid="473416c4-9691-418c-b1d8-28ee56ca23f5" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Cantidad]]></text>
+        </staticText>
+      </band>
+    </pageHeader>
+    <columnHeader>
+      <band splitType="Stretch" />
+    </columnHeader>
+    <detail>
+      <band height="10" splitType="Stretch">
+        <textField pattern="#,##0.0000">
+          <reportElement x="0" y="0" width="56" height="10" uuid="e14ff657-6f70-47b5-a777-052beb89c540" />
+          <textElement textAlignment="Right">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.0000">
+          <reportElement x="56" y="0" width="57" height="10" uuid="915d1231-e281-4bc1-a6c1-7b081f6cc70a" />
+          <textElement textAlignment="Right">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.0000">
+          <reportElement x="113" y="0" width="58" height="10" uuid="526c54ef-4951-4c1b-99dc-c3041fe89bcd" />
+          <textElement textAlignment="Right">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="171" y="0" width="102" height="10" uuid="832f132a-ad2a-43b5-afd7-69c8cc17a9ea" />
+          <textElement textAlignment="Center">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="273" y="0" width="281" height="10" uuid="2bfd2b86-c1ec-479b-bd21-9f8b61812b85" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+        </textField>
+      </band>
+    </detail>
+    <columnFooter>
+      <band splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+      <band splitType="Stretch" />
+    </pageFooter>
+    <summary>
+      <band height="12" splitType="Stretch">
+        <textField pattern="#,##0.00">
+          <reportElement x="0" y="0" width="56" height="12" uuid="aace5dcf-42cb-4ec8-bac2-e473de3aebcf" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{Sumacant}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00">
+          <reportElement x="113" y="0" width="58" height="12" uuid="3b198947-84b2-47cf-be87-86a9831c3163" />
+          <textElement textAlignment="Right">
+            <font size="7" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{SumaTotal}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="56" y="0" width="57" height="12" uuid="806b5fad-087f-4bcd-b836-0781afefde6c" />
+          <textElement textAlignment="Right">
+            <font size="6" />
+          </textElement>
+          <text><![CDATA[Total  :]]></text>
+        </staticText>
+      </band>
+    </summary>
+  </jasperReport>
+  <parameter Name="M_Warehouse_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" ColumnName="M_Warehouse_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="45dc9ab5-9e82-f2a5-3207-225faeb87b4d" Synchronized="2017-06-06 22:39:57.0" />
+</process>
+
+

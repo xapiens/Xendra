@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="POS Report" Name="POS Report" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="POS Report.jrxml" Identifier="42ecd6dd-292d-3ab6-cd88-c3965956e59d" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="POS Terminal" Description="Point of Sales Terminal" Help="The POS Terminal defines the defaults and functions available for the POS Form" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_POS_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="22f74cee-0695-4527-9bfd-f5da71bc08e3" Synchronized="2018-11-30 09:58:12.0" />
+  <parameter Name="Date Ordered" Description="Date of Order" Help="Indicates the Date an item was ordered." AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="dateordered" FieldLength="7" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="6093ee4b-4ce6-4c31-b05b-0b905d2ee221" Synchronized="2018-11-30 09:58:12.0" />
+</process>
+
+

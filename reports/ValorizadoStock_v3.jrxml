@@ -1,0 +1,1344 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ValorizadoStock_V3" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="780" leftMargin="42" rightMargin="20" topMargin="28" bottomMargin="20" uuid="26dc1100-36fa-4008-a1ce-47d98571b9b7">
+  <property name="Description" value="ValorizadoStock_v3.jrxml" />
+  <property name="FileName" value="ValorizadoStock_v3.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.923" />
+  <property name="Identifier" value="4cde0214-2e96-405c-9ca2-c39964f2d39b" />
+  <property name="ireport.zoom" value="2.0" />
+  <property name="ireport.x" value="593" />
+  <property name="ireport.y" value="324" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="java.util.*" />
+  <parameter name="P_ProductsWithStock" class="java.lang.String">
+    <defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_Group_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_Type_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_Brand_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_Generic_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[new java.sql.Timestamp(new Date().getTime())]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+--p.m_product_group_id,
+(SELECT name FROM m_product_group WHERE p.m_product_group_id = m_product_group_id) AS m_product_group_name,
+--p.m_product_type_id,
+(SELECT name FROM m_product_type WHERE p.m_product_type_id = m_product_type_id) AS m_product_type_name,
+--p.m_product_brand_id,
+(SELECT name FROM m_product_brand WHERE p.m_product_brand_id = m_product_brand_id) AS m_product_brand_name,
+--p.m_product_generic_id,
+(SELECT name FROM m_product_generic WHERE p.m_product_generic_id = m_product_generic_id) AS m_product_generic_name,
+--p.m_product_id,
+productName,
+p.value,
+ALMGN as GN,
+ALMMG as MG,
+ALMMB as MB,
+ALMCM as CM,
+ALMTR as TR,
+currentcostprice,
+ALMGN*currentcostprice as GNvalorizado,
+ALMMG*currentcostprice as MGvalorizado,
+ALMMB*currentcostprice as MBvalorizado,
+ALMCM*currentcostprice as CMvalorizado,
+ALMTR*currentcostprice as TRvalorizado,
+round((ALMGN+ALMMG+ALMMB+ALMCM+ALMTR),2) as totstock,
+round((ALMGN+ALMMG+ALMMB+ALMCM+ALMTR)*currentcostprice,2) as totvalorizado
+FROM (
+      SELECT ad_client_id,ad_org_id,
+      m_product_id,
+      productName,
+      SUM(ALMGN) AS ALMGN,
+      SUM(ALMMG) AS ALMMG,
+      SUM(ALMMB) AS ALMMB,
+      SUM(ALMCM) AS ALMCM,
+      SUM(ALMTR) AS ALMTR,
+      getValidatedaveragecostforproduct(ad_client_id,ad_org_id,m_product_id,(date($P{DateFrom})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice
+      FROM
+      (SELECT ad_client_id,ad_org_id,mc.m_product_id, productName,
+       (
+        CASE WHEN fromWarehouse_Id = 1000114
+        THEN qtysource
+        ELSE
+        (
+         CASE WHEN toWarehouse_Id = 1000114
+         THEN qtydestiny
+         ELSE 0
+         END
+         )
+
+        END
+        ) AS ALMGN,
+       (
+        CASE WHEN fromWarehouse_Id = 1000113
+        THEN qtysource
+        ELSE
+        (
+         CASE WHEN toWarehouse_Id = 1000113
+         THEN qtydestiny
+         ELSE 0
+         END
+         )
+
+        END
+        ) AS ALMMG,
+       (
+        CASE WHEN fromWarehouse_Id = 1000112
+        THEN qtysource
+        ELSE
+        (
+         CASE WHEN toWarehouse_Id = 1000112
+         THEN qtydestiny
+         ELSE 0
+         END
+         )
+
+        END
+        ) AS ALMMB,
+       (
+        CASE WHEN fromWarehouse_Id = 1000116
+        THEN qtysource
+        ELSE
+        (
+         CASE WHEN toWarehouse_Id = 1000116
+         THEN qtydestiny
+         ELSE 0
+         END
+         )
+
+        END
+        ) AS ALMCM,
+	(
+        CASE WHEN fromWarehouse_Id = 1000115
+        THEN qtysource
+        ELSE
+        (
+         CASE WHEN toWarehouse_Id = 10001115
+         THEN qtydestiny
+         ELSE 0
+         END
+         )
+
+        END
+        ) AS ALMTR
+
+
+       FROM m_carding mc
+		where date(movementdate) <= $P{DateFrom}
+       ) AS result
+      GROUP BY ad_client_id,ad_org_id,m_product_id, productName
+      ) AS r2
+JOIN m_product p ON r2.m_product_id = p.m_product_id
+where
+--currentcostprice < 0 and
+   	p.ad_client_id = 1000033
+and
+     (CASE WHEN COALESCE($P{M_Product_Group_ID}, 0)  = 0
+        THEN true
+        ELSE m_product_group_id = $P{M_Product_Group_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Type_ID}, 0)  = 0
+        THEN true
+        ELSE m_product_type_id = $P{M_Product_Type_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Brand_ID}, 0)  = 0
+        THEN true
+        ELSE m_product_brand_id = $P{M_Product_Brand_ID}
+    END)
+    AND
+     (CASE WHEN COALESCE($P{M_Product_Generic_ID}, 0)  = 0
+        THEN true
+        ELSE m_product_generic_id = $P{M_Product_Generic_ID}
+    END)
+order by m_product_group_name,m_product_type_name,m_product_brand_name,productName]]></queryString>
+  <field name="m_product_group_name" class="java.lang.String" />
+  <field name="m_product_type_name" class="java.lang.String" />
+  <field name="m_product_brand_name" class="java.lang.String" />
+  <field name="m_product_generic_name" class="java.lang.String" />
+  <field name="productname" class="java.lang.String" />
+  <field name="value" class="java.lang.String" />
+  <field name="ALMGN" class="java.math.BigDecimal" />
+  <field name="ALMMG" class="java.math.BigDecimal" />
+  <field name="ALMMB" class="java.math.BigDecimal" />
+  <field name="ALMCM" class="java.math.BigDecimal" />
+  <field name="ALMTR" class="java.math.BigDecimal" />
+  <field name="currentcostprice" class="java.math.BigDecimal" />
+  <field name="ALMGNvalorizado" class="java.math.BigDecimal" />
+  <field name="ALMMGvalorizado" class="java.math.BigDecimal" />
+  <field name="ALMMBvalorizado" class="java.math.BigDecimal" />
+  <field name="ALMCMvalorizado" class="java.math.BigDecimal" />
+  <field name="ALMTRvalorizado" class="java.math.BigDecimal" />
+  <field name="totstock" class="java.math.BigDecimal" />
+  <field name="totvalorizado" class="java.math.BigDecimal" />
+  <variable name="Filtro" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{P_ProductsWithStock}.equals("N")  ? "Todos" : "Con Stock")]]></variableExpression>
+  </variable>
+  <variable name="Filtro2" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{M_Product_Group_ID}.longValue() == 0L ? "*" : $F{m_product_group_name})+","+
+                                      ($P{M_Product_Type_ID}.longValue() == 0L ? "*" : $F{m_product_type_name})+","+
+                                       ($P{M_Product_Brand_ID}.longValue() == 0L ? "*" : $F{m_product_brand_name})]]></variableExpression>
+  </variable>
+  <variable name="Filtro3" class="java.lang.String" resetType="None">
+    <variableExpression><![CDATA[($P{M_Product_Generic_ID}.longValue() == 0L ? "*" : $F{m_product_generic_name})]]></variableExpression>
+  </variable>
+  <variable name="ALMGN_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGN}]]></variableExpression>
+  </variable>
+  <variable name="ALMMG_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMG}]]></variableExpression>
+  </variable>
+  <variable name="ALMMB_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMB}]]></variableExpression>
+  </variable>
+  <variable name="totstock_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+  </variable>
+  <variable name="ALMGN_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGN}]]></variableExpression>
+  </variable>
+  <variable name="ALMMG_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMG}]]></variableExpression>
+  </variable>
+  <variable name="totstock_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+  </variable>
+  <variable name="ALMMB_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMB}]]></variableExpression>
+  </variable>
+  <variable name="ALMGM_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGN}]]></variableExpression>
+  </variable>
+  <variable name="ALMMG_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMG}]]></variableExpression>
+  </variable>
+  <variable name="ALMMB_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMB}]]></variableExpression>
+  </variable>
+  <variable name="totstock_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+  </variable>
+  <variable name="ALMGN_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGN}]]></variableExpression>
+  </variable>
+  <variable name="ALMMG_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMG}]]></variableExpression>
+  </variable>
+  <variable name="ALMMB_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMB}]]></variableExpression>
+  </variable>
+  <variable name="totstock_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+  </variable>
+  <variable name="ALMGN_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGN}]]></variableExpression>
+  </variable>
+  <variable name="ALMMG_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMG}]]></variableExpression>
+  </variable>
+  <variable name="ALMMB_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMB}]]></variableExpression>
+  </variable>
+  <variable name="totstock_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{totstock}]]></variableExpression>
+  </variable>
+  <variable name="ALMGNvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGNvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMGvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMGvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMBvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMBvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="totvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMGNvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGNvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMGNvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGNvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMGNvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMGNvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMGvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMGvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMGvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMGvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMGvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMGvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMBvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMBvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMBvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMBvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMMBvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMMBvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="totvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="totvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="totvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{totvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMCM_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCM}]]></variableExpression>
+  </variable>
+  <variable name="ALMCMvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCMvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMCM_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCM}]]></variableExpression>
+  </variable>
+  <variable name="ALMCM_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCM}]]></variableExpression>
+  </variable>
+  <variable name="ALMCM_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCM}]]></variableExpression>
+  </variable>
+  <variable name="ALMCMvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCMvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMCMvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCM}]]></variableExpression>
+  </variable>
+  <variable name="ALMCMvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMCMvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMTR_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTR}]]></variableExpression>
+  </variable>
+  <variable name="ALMTR_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTR}]]></variableExpression>
+  </variable>
+  <variable name="ALMTR_5" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTR}]]></variableExpression>
+  </variable>
+  <variable name="ALMTR_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTR}]]></variableExpression>
+  </variable>
+  <variable name="ALMTRvalorizado_1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTRvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMTRvalorizado_2" class="java.math.BigDecimal" resetType="Group" resetGroup="g_brand" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTRvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMTRvalorizado_3" class="java.math.BigDecimal" resetType="Group" resetGroup="g_type" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTRvalorizado}]]></variableExpression>
+  </variable>
+  <variable name="ALMTRvalorizado_4" class="java.math.BigDecimal" resetType="Group" resetGroup="g_group" calculation="Sum">
+    <variableExpression><![CDATA[$F{ALMTRvalorizado}]]></variableExpression>
+  </variable>
+  <group name="g_group">
+    <groupExpression><![CDATA[$F{m_product_group_name}]]></groupExpression>
+    <groupHeader>
+      <band height="41" splitType="Stretch">
+        <frame>
+          <reportElement mode="Opaque" x="0" y="14" width="780" height="27" backcolor="#E8E3E3" uuid="40b3f9ab-60dc-4b34-8c60-e66284532a48" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+        </frame>
+        <textField bookmarkLevel="1">
+          <reportElement x="7" y="21" width="296" height="20" uuid="70154306-7143-4212-a676-cab17aeacc54" />
+          <textElement>
+            <font size="9" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+          <anchorNameExpression><![CDATA[$F{m_product_group_name}]]></anchorNameExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="13" splitType="Stretch">
+        <printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null)]]></printWhenExpression>
+        <frame>
+          <reportElement mode="Opaque" x="0" y="0" width="780" height="13" backcolor="#E8E3E3" uuid="5bd40217-8755-429c-8398-3306adbbe79e" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+          <textField pattern="#,##0.00">
+            <reportElement x="258" y="0" width="41" height="10" uuid="7554ff26-1639-4fe3-90db-f417d10a06cd" />
+            <textElement textAlignment="Right" verticalAlignment="Middle">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMGNvalorizado_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="352" y="0" width="41" height="10" uuid="30791c00-6b67-4545-89c7-a4e48c9c2234" />
+            <textElement textAlignment="Right" verticalAlignment="Middle">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMGvalorizado_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="450" y="0" width="41" height="10" uuid="609a1dce-a674-4e01-9327-a71f4ea93e6e" />
+            <textElement textAlignment="Right" verticalAlignment="Middle">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMBvalorizado_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="732" y="0" width="44" height="10" uuid="8e9a2512-a44d-4162-929a-57b6816f5654" />
+            <textElement textAlignment="Right" verticalAlignment="Middle">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{totvalorizado_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="499" y="0" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="e8cef34b-41e7-4656-8321-90871dd81515" />
+            <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCM_5}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="546" y="0" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="c2b42c1b-bfee-4472-8010-c9fc96ee4536" />
+            <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCMvalorizado_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0">
+            <reportElement x="593" y="0" width="40" height="10" uuid="8e6eb09e-0f99-45c3-aaec-4714fd87c3d2" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTR_5}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="639" y="0" width="41" height="10" uuid="ed6b4e92-1900-4745-aa12-9782ed0b01eb" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTRvalorizado_4}]]></textFieldExpression>
+          </textField>
+        </frame>
+        <textField pattern="#,##0">
+          <reportElement x="214" y="0" width="41" height="10" uuid="751685d5-e96d-4042-9cf7-13e794df3fc5">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMGN_5}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="307" y="0" width="41" height="10" uuid="ab3a9028-7a32-4dd9-aa61-f38fa82d4cfa">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMG_5}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="404" y="0" width="41" height="10" uuid="baf38e84-62b8-4158-a0a1-7def6c6ac2f4">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMB_5}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="686" y="0" width="41" height="10" uuid="028148d6-c22b-449f-8c63-3e4ae3faea73">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_group_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{totstock_5}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="73" y="3" width="137" height="10" uuid="8d91b2f7-4c02-4cd5-b5ca-0d12470bd9a3" />
+          <textElement textAlignment="Right">
+            <font size="8" isBold="true" isItalic="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <group name="g_type">
+    <groupExpression><![CDATA[$F{m_product_type_name}]]></groupExpression>
+    <groupHeader>
+      <band height="17" splitType="Stretch">
+        <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null)]]></printWhenExpression>
+        <textField>
+          <reportElement x="7" y="2" width="184" height="14" uuid="3cc0d8d9-23df-425d-b090-bd30003e7bb7" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+        </textField>
+        <textField bookmarkLevel="2">
+          <reportElement x="194" y="3" width="187" height="14" uuid="85e3c7ac-d4c3-42e3-9396-c18e9d2a5b05" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_type_name}]]></textFieldExpression>
+          <anchorNameExpression><![CDATA[$F{m_product_type_name}]]></anchorNameExpression>
+        </textField>
+        <frame>
+          <reportElement mode="Transparent" x="0" y="0" width="780" height="17" uuid="d86fc485-ad3a-4ffa-9548-b5747254c154" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+        </frame>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="17" splitType="Stretch">
+        <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null)]]></printWhenExpression>
+        <frame>
+          <reportElement mode="Transparent" x="0" y="0" width="780" height="17" uuid="064fb73b-893e-451d-aba7-a64c2f905d38" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+          <textField pattern="#,##0.00">
+            <reportElement x="258" y="3" width="41" height="10" uuid="79c75fc1-3cbe-4651-b91c-c2f88e7746fb" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMGNvalorizado_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="352" y="3" width="41" height="10" uuid="f9b05d7d-2bc3-4b84-8925-7b8d976903a9" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMGvalorizado_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="450" y="3" width="41" height="10" uuid="2a020c25-5580-4eac-9e74-672758882d4f" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMBvalorizado_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="732" y="3" width="44" height="10" uuid="830a2b9c-be8e-47d3-bc9b-4379fbab94ea" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{totvalorizado_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="499" y="3" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4ff3afd4-1bb8-48f6-b78b-bf1e0e0dea9b" />
+            <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCM_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="546" y="3" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="a0375b70-f57b-4b4a-8203-ce613d1c8542" />
+            <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCMvalorizado_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0">
+            <reportElement x="592" y="3" width="41" height="10" uuid="29a35477-73ea-4bed-82b9-b7aaa49f330e" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTR_4}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="639" y="3" width="41" height="10" uuid="3123e836-8157-4445-9c06-8a04c6e95540" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTRvalorizado_3}]]></textFieldExpression>
+          </textField>
+        </frame>
+        <textField pattern="#,##0">
+          <reportElement x="214" y="3" width="41" height="10" uuid="5389d6db-c7e1-48d8-b9d3-869ffed8b466">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMGN_4}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="307" y="3" width="41" height="10" uuid="96a7034e-9e5e-44df-905b-414f4733b3ff">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMG_4}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="404" y="3" width="41" height="10" uuid="1eefcca3-2e2d-4b5b-a8d5-5a7bf8426e50">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMB_4}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="686" y="3" width="41" height="10" uuid="1708b098-0d0b-4d58-b749-0aa43c999829">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_type_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{totstock_4}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="13" y="3" width="197" height="13" uuid="0f77f7d0-17bd-402a-9b9d-8d8dfd9f5b63" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" isItalic="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()+" - "+$F{m_product_type_name}.trim()]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <group name="g_brand">
+    <groupExpression><![CDATA[$F{m_product_brand_name}]]></groupExpression>
+    <groupHeader>
+      <band height="15" splitType="Stretch">
+        <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null)]]></printWhenExpression>
+        <textField bookmarkLevel="3">
+          <reportElement x="390" y="1" width="187" height="14" uuid="7ca242a0-dd44-4bae-993b-8a67370ae017" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_brand_name}]]></textFieldExpression>
+          <anchorNameExpression><![CDATA[$F{m_product_brand_name}]]></anchorNameExpression>
+        </textField>
+        <textField>
+          <reportElement x="194" y="1" width="187" height="14" uuid="6a84c8a0-651a-4be1-98bf-64959eba81b4" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_type_name}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="7" y="1" width="187" height="14" uuid="238d08cf-ef53-48af-9886-dc97e93a265a" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{m_product_group_name}]]></textFieldExpression>
+        </textField>
+        <frame>
+          <reportElement mode="Transparent" x="0" y="0" width="780" height="15" uuid="3f01d7ba-ac79-41c1-ae7c-dcb779553e3d" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+        </frame>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="18" splitType="Stretch">
+        <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null)]]></printWhenExpression>
+        <frame>
+          <reportElement mode="Transparent" x="0" y="0" width="780" height="18" uuid="ea84eb45-c27d-4c94-949a-bf522eda3c05" />
+          <box>
+            <pen lineWidth="0.5" />
+            <topPen lineWidth="0.5" />
+            <leftPen lineWidth="0.5" />
+            <bottomPen lineWidth="0.5" />
+            <rightPen lineWidth="0.5" />
+          </box>
+          <textField pattern="#,##0.00">
+            <reportElement x="258" y="4" width="41" height="10" uuid="365528b9-bffa-4648-bc78-6e7ee1e4f65b" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMGNvalorizado_2}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="352" y="4" width="41" height="10" uuid="2f50df62-2f29-4884-8977-008c6cf001cc" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMGvalorizado_2}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="450" y="4" width="41" height="10" uuid="0a0105de-c1f4-4e59-b034-eee6e416b60b" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMMBvalorizado_2}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="732" y="4" width="44" height="10" uuid="d14a0049-7711-4637-97cc-47b32aceb5b4" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{totvalorizado_2}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="499" y="4" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4b0aa1ba-8e58-47d3-95b0-62237f86c9d2" />
+            <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCM_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00" isBlankWhenNull="false">
+            <reportElement mode="Transparent" x="546" y="4" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="6d119625-205c-41c2-9493-b660db691c3a" />
+            <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+              <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+              <paragraph lineSpacing="Single" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMCMvalorizado_2}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0">
+            <reportElement x="593" y="4" width="40" height="10" uuid="87b53ea7-41c6-46de-948c-1c81af80aec9" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTR_3}]]></textFieldExpression>
+          </textField>
+          <textField pattern="#,##0.00">
+            <reportElement x="639" y="4" width="41" height="10" uuid="b057d068-1a1e-4722-85b1-6e206b7588d3" />
+            <textElement textAlignment="Right">
+              <font size="6" isBold="true" />
+            </textElement>
+            <textFieldExpression><![CDATA[$V{ALMTRvalorizado_2}]]></textFieldExpression>
+          </textField>
+        </frame>
+        <textField pattern="#,##0">
+          <reportElement x="214" y="4" width="41" height="10" uuid="a9d181b9-4827-4f59-aef6-c5d4f52e90a1">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMGM_3}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="307" y="4" width="41" height="10" uuid="ba0241d0-095b-4485-bb16-5c301b3540aa">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMG_3}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="404" y="4" width="41" height="10" uuid="90b465bf-4eda-4c84-b3d0-1071033f78a3">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ALMMB_3}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0">
+          <reportElement x="686" y="4" width="41" height="10" uuid="5467d90c-aeed-42a0-9bf6-6c24f77835ef">
+            <printWhenExpression><![CDATA[new Boolean($F{m_product_brand_name} != null && $P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+          </reportElement>
+          <textElement textAlignment="Right">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{totstock_3}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="14" y="4" width="196" height="14" uuid="3566397a-5f37-4ff4-bfe6-4c07ee059bab" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" isItalic="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total "+$F{m_product_group_name}.trim()+" - "+$F{m_product_type_name}.trim()+" - "+$F{m_product_brand_name}.trim()]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="8" splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="71" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText" x="13" y="48" width="41" height="18" uuid="43a3b4d4-a62d-4846-b18d-0548e848b4b0" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Codigo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="300" y="45" width="89" height="13" uuid="047c4c09-3f31-46a8-95cd-59f63ca20c18" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tienda 01]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line" x="0" y="32" width="780" height="1" uuid="f06c6318-da61-46f7-95dd-04649676118a" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="60" y="48" width="110" height="18" uuid="9c94244c-4de9-45a9-b5d8-5a0627a28cb6" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripcion]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="405" y="45" width="81" height="13" uuid="ba8c2d57-536e-468d-9c96-a9cc819545d2" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tienda 03]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="493" y="45" width="95" height="13" uuid="87accadf-ecd4-4bf7-bb53-d569419b2df7" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Dist.Almacen]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="686" y="45" width="41" height="21" uuid="a6b6e17f-0007-43ba-8998-9d56656cf3f2" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Stock]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line" x="213" y="32" width="1" height="36" uuid="8f660202-6d22-4bf2-b68e-387dc335d202" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="304" y="33" width="379" height="16" uuid="f71ebc4a-f356-4495-aff3-9e1d67966977" />
+        <textElement textAlignment="Center">
+          <font size="9" isBold="true" />
+        </textElement>
+        <text><![CDATA[ALMACEN]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line" x="683" y="32" width="1" height="36" uuid="b55db9ce-9b4f-49c1-b7d2-304849fd5a35" />
+      </line>
+      <line>
+        <reportElement key="line" x="0" y="68" width="780" height="1" uuid="9e0b1451-6585-4f24-bd57-58934f794587" />
+      </line>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="656" y="0" width="80" height="18" uuid="1315905f-51b0-436a-8b8d-0ae56fa7132a" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="736" y="19" width="22" height="12" uuid="b78fd6fc-ae60-42b3-86cc-0d99fecbab45" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="708" y="0" width="50" height="12" uuid="060c489c-d1ac-4a2d-a99e-8aef1991b1c2" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="559" y="0" width="100" height="20" uuid="d2c4bfff-8e62-4846-b693-ebb2ad913352" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="671" y="19" width="65" height="12" uuid="653149ff-957c-418f-b0ff-e94f314d492c" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="779" y="34" width="1" height="35" uuid="01f7b8ca-ecf1-41db-b5d6-e1bb4d74052e" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-21" x="7" y="4" width="47" height="10" uuid="2814770b-2fbe-4d71-a2ae-37983557954b" />
+        <textElement>
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Filtro :]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="54" y="4" width="100" height="10" uuid="d7326a85-2e43-48d3-82e3-118fe060cdda" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="54" y="14" width="100" height="10" uuid="88894b5c-1581-4e6c-bb84-80ffc612767f" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro2}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="54" y="24" width="100" height="10" uuid="0b58d45c-3625-4547-a4be-dc09b38563af" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Filtro3}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-21" x="7" y="20" width="47" height="10" uuid="7417aaca-b048-4fd9-9d2b-49d1652bce5d" />
+        <textElement>
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Generico :]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="304" y="55" width="41" height="13" uuid="c0dad405-840e-43f3-ae7a-4beadc77255a" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="348" y="55" width="41" height="13" uuid="c636afa4-42bb-4f05-925f-734663b4f01a" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="445" y="55" width="41" height="13" uuid="2112711d-94bb-438c-bbe0-8bcd0b19a464" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="400" y="55" width="41" height="13" uuid="c1b478bd-70fb-4c9e-892c-988bbbc5e4c6" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="543" y="55" width="41" height="13" uuid="c7de86a9-c6dd-4ac6-a56c-78890af55e19" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="497" y="55" width="41" height="13" uuid="20d53566-47a7-4975-be28-8865cd091d71" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <line>
+        <reportElement x="214" y="45" width="469" height="1" uuid="91e6f153-1203-46ca-b8e4-e2ffc5ee2413" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement key="line" x="395" y="44" width="1" height="25" uuid="5fa63734-f19f-4b18-9397-8e8512fe6cf0" />
+      </line>
+      <line>
+        <reportElement key="line" x="491" y="44" width="1" height="25" uuid="bdfeeaa3-7408-4a5f-bc2e-8b54849327d5" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="730" y="45" width="46" height="13" uuid="9fb935eb-d876-4d99-b190-480a88df4ffc" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valorizado]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="324" y="1" width="132" height="17" uuid="8b02bdda-a044-446e-b3aa-c12e38076243" />
+        <textElement textAlignment="Center">
+          <font size="10" isBold="true" isUnderline="true" />
+        </textElement>
+        <text><![CDATA[Stock Valorizado Al]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line" x="173" y="33" width="1" height="36" uuid="427f27c5-fbaf-4b61-86de-ec51fb9959c8" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="176" y="48" width="34" height="18" uuid="944e55fd-e097-4333-814e-c697a0e5fdc1" />
+        <textElement textAlignment="Center">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Costo Unitario]]></text>
+      </staticText>
+      <line>
+        <reportElement key="line" x="588" y="44" width="1" height="25" uuid="97c4178e-4756-40a2-b4d3-35e1d4b48280" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="601" y="45" width="82" height="13" uuid="03402443-7b7c-4812-8466-5b799221fb71" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tienda Dist.]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="592" y="55" width="41" height="13" uuid="976b65d0-a1a6-4e6f-a0eb-3ad4bf7ea3d6" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="639" y="55" width="41" height="13" uuid="97a22547-9a6a-4dc0-983e-87cd62f07769" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor]]></text>
+      </staticText>
+      <textField pattern="dd MMMMM yyyy">
+        <reportElement x="340" y="12" width="100" height="16" uuid="93b6b227-e6b7-474e-9783-7fb241924812" />
+        <textElement textAlignment="Center">
+          <font size="10" isBold="true" isUnderline="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{DateFrom}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="303" y="43" width="1" height="25" uuid="62cb3355-929d-45fb-8a08-71ef43a4d8e2" />
+      </line>
+      <staticText>
+        <reportElement key="staticText" x="214" y="45" width="83" height="13" uuid="759b40fd-e1da-4b3b-8f39-f38f4aafb024" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Corp. Almacen]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="214" y="55" width="41" height="13" uuid="e0afd7ea-98b4-4b04-8342-d04fcf3a3132" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText" x="255" y="55" width="41" height="13" uuid="1d3cee9b-49dc-43cd-8aa5-0ee17f7410bd" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Valor]]></text>
+      </staticText>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <printWhenExpression><![CDATA[new Boolean($P{P_ProductsWithStock}.equals("N") || ($P{P_ProductsWithStock}.equals("Y") &&
+$F{totstock}.doubleValue() != 0.00))]]></printWhenExpression>
+      <frame>
+        <reportElement mode="Transparent" x="0" y="0" width="780" height="14" uuid="8fde2199-3e28-46e1-b28e-b4ed710ebe1e" />
+        <box>
+          <pen lineWidth="0.5" />
+          <topPen lineWidth="0.5" />
+          <leftPen lineWidth="0.5" />
+          <bottomPen lineWidth="0.5" />
+          <rightPen lineWidth="0.5" />
+        </box>
+        <textField pattern="#,##0.00">
+          <reportElement x="264" y="1" width="41" height="10" uuid="15bba11e-b5f0-4ebe-b841-d87aa44ff489" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMGNvalorizado}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.0000">
+          <reportElement x="176" y="1" width="34" height="10" uuid="535cddd7-bb2f-4e07-8cbb-26675ef6277d" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{currentcostprice}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00">
+          <reportElement x="355" y="0" width="41" height="10" uuid="87ca9953-156b-477e-90e9-d419568fbf19" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMMGvalorizado}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00">
+          <reportElement x="451" y="0" width="41" height="10" uuid="4259af99-e552-4557-8057-ef616453ae44" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMMBvalorizado}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00">
+          <reportElement x="732" y="0" width="44" height="10" uuid="00145464-7964-4fed-a88f-95c06c3389fd" />
+          <textElement textAlignment="Right" verticalAlignment="Middle">
+            <font size="6" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{totvalorizado}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement key="line" x="401" y="0" width="1" height="14" uuid="82d1a93c-2b1e-4edb-ad50-d62b4124415a" />
+        </line>
+        <line>
+          <reportElement key="line" x="493" y="0" width="1" height="14" uuid="2097b186-eb77-4eb9-994c-1d12946a3ddc" />
+        </line>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="497" y="0" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="28ef3c88-686b-43d5-8e34-954f1490d32e" />
+          <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+            <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMCM}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="544" y="0" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="64926127-df02-43ef-8ba2-9672085fa417" />
+          <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+            <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMCMvalorizado}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="592" y="1" width="41" height="9" uuid="5dcd1bfc-4bc3-46f6-972c-45a53adfe4b1" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMTR}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="639" y="0" width="41" height="10" uuid="c36687c4-63eb-4fe4-b6e2-f5b24346b891" />
+          <textElement>
+            <font size="6" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{ALMTR}]]></textFieldExpression>
+        </textField>
+      </frame>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="13" y="1" width="41" height="10" uuid="47dba4e8-bbfe-45d3-ad33-1e4f94346d54" />
+        <textElement verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="220" y="1" width="41" height="10" uuid="2d9ef09f-5669-45b7-aad6-9b8b8dbe739f" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ALMGN}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="310" y="0" width="41" height="10" uuid="fa9bcea8-2ecc-463d-857b-93e660ff0dc4" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ALMMG}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="407" y="0" width="41" height="10" uuid="163414fe-7679-4a03-8e57-c250ce7c12c9" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ALMMB}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="214" y="0" width="1" height="14" uuid="dc18bd98-c117-43f6-a172-bb87176c81d3" />
+      </line>
+      <line>
+        <reportElement key="line" x="683" y="0" width="1" height="14" uuid="6559314b-43d2-4c33-9c40-a133d5559846" />
+      </line>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="57" y="1" width="113" height="10" uuid="68cc1eed-0012-4844-bd06-34b7175a409a" />
+        <textElement verticalAlignment="Middle">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="305" y="0" width="1" height="14" uuid="3defa77e-4eb5-4878-84e4-70c424d67bfd" />
+      </line>
+      <line>
+        <reportElement key="line" x="172" y="0" width="1" height="14" uuid="acc9d929-8ece-4deb-9b6a-d716a79a88a7" />
+      </line>
+      <textField pattern="#,##0" isBlankWhenNull="false">
+        <reportElement key="textField" mode="Transparent" x="686" y="0" width="41" height="10" uuid="8c6a4a74-c234-486f-9b19-48f72add35fa" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{totstock}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement key="line" x="589" y="0" width="1" height="14" uuid="039c29db-8365-4ac2-831c-e5c04c58addd" />
+      </line>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band height="18" splitType="Stretch">
+      <textField pattern="#,##0">
+        <reportElement x="214" y="5" width="41" height="10" uuid="3e5b19b9-b410-4f3d-950c-da225c69e490">
+          <printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMGN_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="307" y="5" width="41" height="10" uuid="13df72a1-1439-4e58-b780-600c932a83e8">
+          <printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMMG_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="686" y="5" width="41" height="10" uuid="32f0fe1b-8432-417c-9bbb-5b3b86bfe226">
+          <printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{totstock_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="404" y="5" width="41" height="10" uuid="782b3f19-9e1a-4192-a755-c09f8ed28d51">
+          <printWhenExpression><![CDATA[new Boolean($P{M_Product_Generic_ID}.longValue() != 0L)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMMB_2}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="72" y="5" width="138" height="13" uuid="7892e57d-8f63-48ba-ad66-acb27898c59e" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" isItalic="true" />
+        </textElement>
+        <textFieldExpression><![CDATA["Total "+($P{M_Product_Generic_ID}.longValue() != 0L ? $F{m_product_generic_name}.trim() : "")]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00">
+        <reportElement x="258" y="5" width="41" height="10" uuid="e660f386-388e-4d3d-bcb8-ccb4d6a5aa96" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMGNvalorizado_1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00">
+        <reportElement x="352" y="5" width="41" height="10" uuid="9cf6e9eb-1190-43fa-a618-9c5873f22444" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMMGvalorizado_1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00">
+        <reportElement x="450" y="5" width="41" height="10" uuid="5e28ed06-87ec-46d1-b409-9b7388d1f797" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMMBvalorizado_1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00">
+        <reportElement x="727" y="5" width="49" height="10" uuid="609853b7-09c0-4bb2-8e14-8ed83c0471f3" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{totvalorizado_1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="499" y="5" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="f1e5b814-35b3-448a-80b3-56ece5db7706" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMCM_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="546" y="5" width="41" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="0966880d-5261-45bc-8590-cdc1d2426462" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMCMvalorizado_1}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="592" y="5" width="41" height="10" uuid="319a4abb-e444-44f8-a6f3-ae274f61a589" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMTR_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00">
+        <reportElement x="639" y="5" width="41" height="10" uuid="a803ccc5-bb7c-40b7-8367-af0238a5bc3e" />
+        <textElement textAlignment="Right">
+          <font size="6" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{ALMTRvalorizado_1}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+  <noData>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText" x="188" y="13" width="405" height="25" uuid="3c9b785a-1a0f-4877-bfe4-270d24ef9a86" />
+        <textElement textAlignment="Center">
+          <font size="14" isBold="true" />
+        </textElement>
+        <text><![CDATA[No existen Datos Para La Combinacion Solicitada]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

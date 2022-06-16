@@ -1,0 +1,111 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VendedorProducto" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="8f3ca35b-6a7d-4ddc-be73-5e6125015316"><property name="Description" value="VendedorProducto.jrxml" /><property name="FileName" value="VendedorProducto.jrxml" /><property name="Synchronized" value="2017-06-06 22:10:36.077" /><property name="Identifier" value="50030875-9c87-466a-a020-dfa8213b134f" />
+	<property name="ireport.zoom" value="3.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="26" />
+	<property name="ireport.callouts" value="##Mon May 20 17:00:27 PET 2013" />
+	<parameter name="C_Contact_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_Locator_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[WITH COMPRAS AS (SELECT * FROM c_invoice where c_contact_id =  $P{C_Contact_ID})
+select pc.name, p.value, p.name as prodname, invoiceline_id, (select priceactual from c_invoiceline where c_invoiceline_id = product.invoiceline_id) as cost, l.value, Bomqtyonhand(p.m_product_id, null, l.m_locator_id) from
+( SELECT distinct(m_product_id),max(c_invoiceline_id) as invoiceline_id
+FROM c_invoiceline il join compras i on il.c_invoice_id = i.c_invoice_id group by m_product_id )
+as product join m_product p on product.m_product_id = p.m_product_id
+join m_product_category pc on p.m_product_category_id = pc.m_product_category_id
+join m_storage s on p.m_product_id = s.m_product_id
+join m_locator l on s.m_locator_id = l.m_locator_id AND l.m_locator_id = $P{M_Locator_ID}
+order by pc.name, prodname]]>
+	</queryString>
+	<field name="name" class="java.lang.String" />
+	<field name="value" class="java.lang.String" />
+	<field name="prodname" class="java.lang.String" />
+	<field name="invoiceline_id" class="java.math.BigDecimal" />
+	<field name="cost" class="java.math.BigDecimal" />
+	<field name="bomqtyonhand" class="java.math.BigDecimal" />
+	<title>
+		<band splitType="Stretch" />
+	</title>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement x="155" y="1" width="82" height="12" uuid="014f2589-df3a-421b-997e-a0334c513b5a" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="1" width="260" height="12" uuid="faf0d08d-c66d-4991-b90e-42766d47575b" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="1" width="78" height="12" uuid="398c79ba-7f10-4aa7-a333-2ec6d80afb45" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[PRECIO PACTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="76" height="12" uuid="428a463d-865b-4e54-b503-c555f660dd58" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[STOCK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="497" y="1" width="78" height="12" uuid="67a2885d-e86d-4b54-b96d-546d485c7829" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[CATEGORIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="1" y="1" width="76" height="12" uuid="b834428b-272f-4342-970d-3afde0755c93" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bomqtyonhand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="77" y="1" width="78" height="12" uuid="9d536072-f2c4-413a-ac55-03776e422fa2" />
+				<textElement textAlignment="Right">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="155" y="1" width="82" height="12" uuid="24c46716-eb7e-49c0-bcee-ecdbf3a557b1" />
+				<textElement textAlignment="Center">
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="1" width="78" height="12" uuid="6ea26904-ccb9-4626-b6e1-d394ef0a5d88" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="1" width="260" height="12" uuid="ef7aeec1-4e55-4760-8b76-e5daf83ce53e" />
+				<textElement>
+					<font size="8" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prodname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
+

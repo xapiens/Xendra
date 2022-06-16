@@ -1,0 +1,247 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OVPendientes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="aca2fa1c-334d-46bb-a671-47c7192ea5cb">
+  <property name="Description" value="StockOhmlux.jrxml" />
+  <property name="FileName" value="StockOhmlux.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:32.949" />
+  <property name="Identifier" value="bd87f201-38a6-44ab-b1a9-8e7d4ed524f5" />
+  <property name="ireport.scriptlethandling" value="0" />
+  <property name="ireport.encoding" value="UTF-8" />
+  <import value="net.sf.jasperreports.engine.data.*" />
+  <import value="net.sf.jasperreports.engine.*" />
+  <import value="java.util.*" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000024)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT 
+
+
+m_product."value" as codprod,
+m_product."name" as producto,
+
+
+bomqtyavailable(m_product.m_product_id, 1000093, 1000115) as pr,
+bomqtyavailable(m_product.m_product_id, 1000094, 1000116) as pr2,
+bomqtyavailable(m_product.m_product_id, 1000095, 1000117) as pr3,
+bomqtyavailable(m_product.m_product_id, 1000096, 1000118) as pr4,
+bomqtyavailable(m_product.m_product_id, 1000097, 1000119) as pr5,
+sum(bomqtyavailable(m_product.m_product_id, 1000093, 1000115) +
+bomqtyavailable(m_product.m_product_id, 1000094, 1000116) +
+bomqtyavailable(m_product.m_product_id, 1000095, 1000117)) as stock,
+--m_warehouse."name",
+ad_client."name" as cliente,
+ad_org."name" as org
+FROM xendra.m_product
+join "xendra".ad_client on  m_product.ad_client_id = ad_client.ad_client_id
+join "xendra".ad_org on  m_product.ad_org_id = ad_org.ad_org_id
+--join "xendra".c_bpartner on  c_order.c_bpartner_id = c_bpartner.c_bpartner_id
+--right join xendra.c_orderline on  c_orderline.c_order_id = c_order.c_order_id
+--left join xendra.m_product on  c_orderline.m_product_id = m_product.m_product_id
+--right join xendra.m_transaction on  m_transaction.m_product_id = m_product.m_product_id
+--right join  xendra.m_warehouse on c_order.m_warehouse_id =m_warehouse.m_warehouse_id
+where ad_client.ad_client_id = $P{AD_Client_ID} and
+ad_org.ad_org_id = $P{AD_Org_ID}
+
+group by 1,2,3,4,5,6,7,10,9
+order by m_product."name"]]></queryString>
+  <field name="codprod" class="java.lang.String" />
+  <field name="producto" class="java.lang.String" />
+  <field name="pr" class="java.math.BigDecimal" />
+  <field name="pr2" class="java.math.BigDecimal" />
+  <field name="pr3" class="java.math.BigDecimal" />
+  <field name="pr4" class="java.math.BigDecimal" />
+  <field name="pr5" class="java.math.BigDecimal" />
+  <field name="stock" class="java.math.BigDecimal" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="org" class="java.lang.String" />
+  <variable name="V_sum_1" class="java.lang.String" calculation="Sum">
+    <variableExpression><![CDATA[$F{codprod}]]></variableExpression>
+  </variable>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-11" x="126" y="10" width="300" height="40" forecolor="#000099" uuid="b4039c05-af60-4b6c-b914-8e11aa11a904" />
+        <textElement textAlignment="Center">
+          <font size="18" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[Stock de Productos]]></text>
+      </staticText>
+    </band>
+  </title>
+  <pageHeader>
+    <band height="50" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="446" y="10" width="72" height="18" uuid="c70641a4-b4f1-4e1c-b574-612106791e5b" />
+        <textElement verticalAlignment="Top">
+          <font size="9" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-16" x="19" y="7" width="51" height="15" forecolor="#0033CC" uuid="31191a34-b800-488c-b289-57c14ae897d5" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[EMPRESA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-17" x="395" y="10" width="70" height="18" forecolor="#0033CC" uuid="8bd3db04-1678-42c9-b706-5e25c92ae7f9" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[FECHA:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-18" x="395" y="25" width="70" height="16" forecolor="#0033CC" uuid="04a02114-aada-4ccd-b8f0-6314d76f2f31" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[HORA:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="446" y="26" width="73" height="12" uuid="b57baf30-81d4-4e45-a24e-6f3f9ab1e92c" />
+        <textElement verticalAlignment="Top">
+          <font size="9" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-19" x="19" y="23" width="96" height="15" forecolor="#0033CC" uuid="d7154997-371e-4188-9046-9d0da9205432" />
+        <textElement>
+          <font size="9" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[ORGANIZACIÓN:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="120" y="6" width="99" height="13" uuid="dbf03bdf-05f0-4870-8f14-a260f0b7ac9c" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="121" y="22" width="139" height="17" uuid="a4f2a756-96e5-487f-b0cb-d97455dbd458" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{org}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="35" splitType="Stretch">
+      <line>
+        <reportElement key="line-1" x="10" y="0" width="510" height="1" forecolor="#0033CC" uuid="7623e4ab-bee9-461d-93d9-7716c2d3e978" />
+      </line>
+      <staticText>
+        <reportElement key="staticText-4" x="32" y="14" width="150" height="20" uuid="b317efed-075a-4f65-9ecc-f2dff3db5a25" />
+        <textElement textAlignment="Center">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Artículo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-10" x="484" y="14" width="38" height="20" uuid="c95acfb1-ffed-4fe9-a822-e0ef4c75873c" />
+        <textElement textAlignment="Right">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Stock]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-12" x="371" y="14" width="42" height="20" uuid="dba3430a-3e18-4f7a-beb0-ccd11c385a7c" />
+        <textElement textAlignment="Right">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Warrant]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-13" x="312" y="14" width="30" height="20" uuid="e18a900e-14d8-4c89-8287-fcd67111302a" />
+        <textElement textAlignment="Right">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Dalsac]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-14" x="437" y="14" width="29" height="20" uuid="4239b323-5043-4bb9-afde-7d410eb02171" />
+        <textElement textAlignment="Center" verticalAlignment="Top">
+          <font isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Ate]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="28" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="30" y="8" width="50" height="11" uuid="d21a881b-54e9-415b-b760-c9e114082c4d" />
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{codprod}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="79" y="8" width="210" height="11" uuid="a9ae7cde-7af8-430b-ba70-ecbb2ef1f203" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="291" y="8" width="60" height="17" uuid="a58d746c-13db-4945-a9df-afbd102be9b5" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pr}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="356" y="8" width="57" height="16" uuid="46347178-f30d-42b9-a1ef-f7e862ba9f08" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pr2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="416" y="8" width="52" height="16" uuid="213e405f-469f-417d-af33-3d344eded70c" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{pr3}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement key="textField" x="472" y="8" width="50" height="17" uuid="7fcb1c40-60ef-47fb-be98-175a378d0899" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band height="20" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-4" x="227" y="3" width="65" height="16" uuid="5d2cf17c-c17a-4ca7-8201-abda2c1b0ac9" />
+        <textElement textAlignment="Right">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-5" x="292" y="3" width="22" height="16" uuid="9eb915dc-ecae-4d2b-aec2-ff5c177b7afc" />
+        <textElement>
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CajaChica2" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="19" bottomMargin="12" uuid="69f55e03-147a-4272-9998-6d52c6683049">
+  <property name="Description" value="CajaChica2_1.jrxml" />
+  <property name="FileName" value="CajaChica2_1.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:36.153" />
+  <property name="Identifier" value="2d1c0754-3a4e-4130-bce3-4c2ef29bed3f" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="535" />
+  <property name="ireport.y" value="110" />
+  <parameter name="C_CashBook_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="StatementDate1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="StatementDate2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[SELECT
+     c_cash."c_cash_id" AS c_cash_c_cash_id,
+     c_cashline."c_cash_id" AS c_cashline_c_cash_id,
+     c_cashline."documentno" AS c_cashline_documentno,
+     c_cashline."description2" AS c_cashline_description2,
+     c_cashline."c_bpartner_id" AS c_cashline_c_bpartner_id,
+     c_cashline."amount" AS c_cashline_amount,
+     c_cashline."line" AS c_cashline_line,
+     c_cashline."created" AS c_cashline_created,
+     c_bpartner."c_bpartner_id" AS c_bpartner_c_bpartner_id,
+     c_bpartner."name" AS c_bpartner_name,
+     c_cash."name" AS c_cash_name,
+     c_cash."endingbalance" AS c_cash_endingbalance,
+     c_cash."beginningbalance" AS c_cash_beginningbalance,
+     c_cash."created" AS c_cash_created,
+     c_cash."c_cashbook_id" AS c_cash_c_cashbook_id,
+     c_cash."c_bpartner_id" AS c_cash_c_bpartner_id,
+     c_cashline."dateinvoiced" AS c_cashline_dateinvoiced,
+     c_cash."statementdate" AS c_cash_statementdate,
+     c_cashline."cashtype" AS c_cashline_cashtype,
+     c_cashline."c_invoice_id" AS c_cashline_c_invoice_id,
+     c_cashline."c_charge_id" AS c_cashline_c_charge_id,
+     c_charge."c_charge_id" AS c_charge_c_charge_id,
+     coalesce ((select c_charge."name"),'Factura') AS c_charge_name,
+     c_invoice."c_invoice_id" AS c_invoice_c_invoice_id,
+     coalesce ((select c_invoice."documentno"),'') AS c_invoice_documentno
+FROM
+     "xendra"."c_cash" c_cash INNER JOIN "xendra"."c_cashline" c_cashline ON c_cash."c_cash_id" = c_cashline."c_cash_id"
+     INNER JOIN "xendra"."c_bpartner" c_bpartner ON c_cashline."c_bpartner_id" = c_bpartner."c_bpartner_id"
+     LEFT OUTER JOIN "xendra"."c_charge" c_charge ON c_cashline."c_charge_id" = c_charge."c_charge_id"
+     FULL OUTER JOIN "xendra"."c_invoice" c_invoice ON c_cashline."c_cashline_id" = c_invoice."c_cashline_id"
+
+WHERE
+     c_cash."c_cashbook_id" = $P{C_CashBook_ID}
+     and date(c_cash."statementdate") BETWEEN date($P{StatementDate1})and date($P{StatementDate2})
+ORDER BY
+     c_cashline."cashtype" ASC,
+     c_cashline."c_charge_id" ASC,
+     c_cashline."documentno" ASC]]></queryString>
+  <field name="c_cash_c_cash_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_c_cash_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_documentno" class="java.lang.String" />
+  <field name="c_cashline_description2" class="java.lang.String" />
+  <field name="c_cashline_c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_amount" class="java.math.BigDecimal" />
+  <field name="c_cashline_line" class="java.math.BigDecimal" />
+  <field name="c_cashline_created" class="java.sql.Timestamp" />
+  <field name="c_bpartner_c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="c_bpartner_name" class="java.lang.String" />
+  <field name="c_cash_name" class="java.lang.String" />
+  <field name="c_cash_endingbalance" class="java.math.BigDecimal" />
+  <field name="c_cash_beginningbalance" class="java.math.BigDecimal" />
+  <field name="c_cash_created" class="java.sql.Timestamp" />
+  <field name="c_cash_c_cashbook_id" class="java.math.BigDecimal" />
+  <field name="c_cash_c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_dateinvoiced" class="java.sql.Timestamp" />
+  <field name="c_cash_statementdate" class="java.sql.Timestamp" />
+  <field name="c_cashline_cashtype" class="java.lang.String" />
+  <field name="c_cashline_c_invoice_id" class="java.math.BigDecimal" />
+  <field name="c_cashline_c_charge_id" class="java.math.BigDecimal" />
+  <field name="c_charge_c_charge_id" class="java.math.BigDecimal" />
+  <field name="c_charge_name" class="java.lang.String" />
+  <field name="c_invoice_c_invoice_id" class="java.math.BigDecimal" />
+  <field name="c_invoice_documentno" class="java.lang.String" />
+  <variable name="c_cashline_amount_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Cargo Group" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_cashline_amount}]]></variableExpression>
+  </variable>
+  <variable name="c_cashline_cashtype_1" class="java.lang.Integer" resetType="Group" resetGroup="Cargo Group" calculation="Count">
+    <variableExpression><![CDATA[$F{c_cashline_cashtype}]]></variableExpression>
+  </variable>
+  <variable name="c_cashline_amount_2" class="java.math.BigDecimal" resetType="Group" resetGroup="Tipo Efec" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_cashline_amount}]]></variableExpression>
+  </variable>
+  <variable name="c_cashline_amount_3" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+    <variableExpression><![CDATA[$F{c_cashline_amount}]]></variableExpression>
+  </variable>
+  <group name="Tipo Efec">
+    <groupExpression><![CDATA[$F{c_cashline_cashtype}]]></groupExpression>
+    <groupHeader>
+      <band height="13">
+        <textField>
+          <reportElement x="69" y="1" width="100" height="12" uuid="aef1adbe-e0f8-4d14-9b77-68759f36a2b0" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{c_cashline_cashtype}]]></textFieldExpression>
+        </textField>
+        <staticText>
+          <reportElement x="2" y="1" width="66" height="12" uuid="c145dbc2-ae51-4a08-b56a-63cca66d0a8f" />
+          <textElement>
+            <font size="8" isBold="true" />
+          </textElement>
+          <text><![CDATA[Tipo Efectivo :]]></text>
+        </staticText>
+      </band>
+    </groupHeader>
+  </group>
+  <group name="Cargo Group">
+    <groupExpression><![CDATA[$F{c_cashline_c_charge_id}]]></groupExpression>
+    <groupFooter>
+      <band height="14">
+        <line>
+          <reportElement x="2" y="13" width="800" height="1" uuid="232b5742-7a57-4bc0-a49c-563d17abad3b" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <staticText>
+          <reportElement x="9" y="1" width="30" height="13" uuid="1664e038-3d37-43e8-8aa2-9caba7708181" />
+          <textElement>
+            <font size="9" isBold="true" />
+          </textElement>
+          <text><![CDATA[Total]]></text>
+        </staticText>
+        <textField pattern="#,##0.00;-#,##0.00">
+          <reportElement x="728" y="1" width="50" height="12" uuid="4e97ddc1-0f2d-43d6-a226-74982b03139b" />
+          <textElement>
+            <font size="9" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{c_cashline_amount_1}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="40" y="1" width="145" height="12" uuid="938a58cc-3ffd-4390-bba2-e321db228503" />
+          <textElement>
+            <font size="9" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{c_charge_name}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <group name="Fact Group">
+    <groupExpression><![CDATA[$F{c_cashline_c_invoice_id}]]></groupExpression>
+  </group>
+  <pageHeader>
+    <band height="91" splitType="Stretch">
+      <rectangle>
+        <reportElement x="1" y="67" width="802" height="23" backcolor="#E2DEDE" uuid="70c4a98a-ef61-4129-a8fc-69b6f0e59cfc" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </rectangle>
+      <staticText>
+        <reportElement x="760" y="73" width="42" height="13" uuid="78766912-562a-4edd-ae41-b51e5a8f2fd4" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="4" y="73" width="56" height="13" uuid="561de2d9-cfd9-4a24-a429-a27d8c7296f7" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="147" y="73" width="200" height="13" uuid="2d74d64f-4dba-43b1-9839-df416601ee21" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Descripción]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="63" y="73" width="82" height="13" uuid="678c0cce-4aff-4eb8-9090-2685ae335371" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[N° Doc]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="532" y="73" width="223" height="13" uuid="acbc3959-5917-4d25-9846-ca27f327c884" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Socio de Negocio]]></text>
+      </staticText>
+      <line>
+        <reportElement x="530" y="67" width="1" height="23" uuid="41153d8c-1620-4346-94ad-3d233fc0a222" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="61" y="68" width="1" height="23" uuid="538b2540-fe6b-44eb-a55d-32221ebc7127" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="-82" y="59" width="1" height="23" uuid="a7677d9a-b33f-47fe-808e-addd8f6a7f22" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="757" y="67" width="1" height="23" uuid="da0ddd63-6ba7-4cf6-b260-04aaf952fd70" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="348" y="67" width="1" height="23" uuid="ee98e5c7-59d0-4a5d-92e6-0dfa08e5745c" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="146" y="68" width="1" height="23" uuid="d7547898-7588-49e8-b741-bbcc651ab7ee" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="491" y="73" width="38" height="13" uuid="183c189c-6031-487a-823a-d7bd2e3e8b7a" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Factura]]></text>
+      </staticText>
+      <line>
+        <reportElement x="489" y="68" width="1" height="23" uuid="7360d5c1-9780-4f5a-910d-9845be20753d" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="350" y="73" width="139" height="13" uuid="ab2ae4e0-b7ac-4c23-a509-f6a3ff55b7dc" />
+        <textElement markup="none">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nombre Cargo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="296" y="18" width="249" height="17" uuid="91bd6b21-ecb1-4a1d-8508-4825ceeaeee2" />
+        <textElement>
+          <font size="12" isBold="true" />
+        </textElement>
+        <text><![CDATA[REPORTE DIARIO CAJA CHICA]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="273" y="38" width="115" height="12" uuid="7aa9168c-7a59-4f52-b4f4-b664e02f55cd" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[DIARIO DE EFECTIVO N° :]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="273" y="52" width="115" height="12" uuid="82baf0da-fafe-4155-89cd-8407927f55f2" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[NOMBRE                         :]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="413" y="38" width="117" height="13" uuid="4b074021-5c6f-474a-8dca-ce1773523a37" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cash_c_cash_id}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="413" y="51" width="117" height="13" uuid="134d7f30-4fbc-41d9-87e6-bb0575f76354" />
+        <textElement>
+          <font size="9" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cash_name}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <detail>
+    <band height="14" splitType="Stretch">
+      <line>
+        <reportElement x="146" y="1" width="1" height="13" uuid="5f05e4ec-9181-4ecd-9b0e-bf28feab9458" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="63" y="1" width="82" height="12" uuid="903455a1-ee4f-408e-b924-35996e36c194" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cashline_documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="532" y="1" width="223" height="12" uuid="9f3f2a6d-57ce-4db9-8bfd-a6acea1a17d0" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_bpartner_name}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="348" y="1" width="1" height="13" uuid="b2c51893-3c03-432b-b1b8-1757c79447e6" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="2" y="13" width="800" height="1" uuid="f2209016-c9ef-440d-872c-7c50a19f36e9" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="760" y="1" width="42" height="12" uuid="fd59d547-78bd-48a2-bc32-c9c3a7e04e2f" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cashline_amount}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="-139" y="-13" width="56" height="12" uuid="c6cb842a-5f96-409b-814d-de44639cbdfd" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cashline_dateinvoiced}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="61" y="1" width="1" height="13" uuid="b113602e-9669-441b-89be-6c92ac1e1b22" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="148" y="1" width="200" height="12" uuid="c67f3033-e037-41d6-a608-0438d86bb475" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cashline_description2}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="530" y="0" width="1" height="13" uuid="d03ffaab-21fd-4c4b-9106-c8f2ccddec7a" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="3" y="1" width="56" height="12" uuid="646d7ffe-5d07-4be5-a57d-e709b531bb41" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cashline_dateinvoiced}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="757" y="0" width="1" height="13" uuid="dbff59a6-adcb-41ec-9351-aeab3bd051d2" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <line>
+        <reportElement x="489" y="1" width="1" height="13" uuid="6cc372de-c5b0-4291-b757-c41857527b26" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <textField>
+        <reportElement x="350" y="1" width="138" height="12" uuid="ec79fbca-fed7-4de4-b00c-a5b852b8c7da" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_charge_name}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="491" y="1" width="38" height="12" uuid="4eabe785-9e05-4e12-b676-0509e14bfd9f" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_invoice_documentno}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <pageFooter>
+    <band height="12" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="273" y="0" width="65" height="12" uuid="f42b613f-4eef-4216-be33-3a6b258ea9b3" />
+        <textElement textAlignment="Right">
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="338" y="0" width="22" height="12" uuid="2e8aeacf-c365-4fc1-824f-f79fd1a68326" />
+        <textElement>
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="728" y="0" width="60" height="12" uuid="556d1ff4-a63e-4d39-88fa-c7f234984f2a" />
+        <textElement>
+          <font size="9" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{c_cashline_amount_3}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+  <lastPageFooter>
+    <band height="69">
+      <line>
+        <reportElement x="622" y="40" width="134" height="1" uuid="44e23a65-3f03-4794-a95e-a5b98e3940d3" />
+        <graphicElement>
+          <pen lineStyle="Dotted" />
+        </graphicElement>
+      </line>
+      <staticText>
+        <reportElement x="185" y="24" width="3" height="12" uuid="4a7d044a-b91c-4119-9877-b1ce49ec07e7" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="625" y="56" width="129" height="12" uuid="503fea0b-3b26-4d98-a498-1cb9b3b8ed29" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Encargada de Caja Chica]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="625" y="43" width="130" height="12" uuid="a332776a-f9c7-4dc4-8208-635604810347" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[RIVERA ZAPATA CINTHYA]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="38" y="10" width="154" height="12" uuid="30348fb4-f865-4582-8b66-b6ca943856e6" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Ingreso de Caja Chica                  :]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="273" y="57" width="65" height="12" uuid="6106676c-5e6a-4173-8c57-f4925c982af6" />
+        <textElement textAlignment="Right">
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="204" y="10" width="128" height="13" uuid="c8927aa5-11db-4349-b283-59d6824d56d6" />
+        <textElement>
+          <font size="9" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cash_beginningbalance}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="204" y="39" width="129" height="13" uuid="ab32fa26-bf28-45a8-8efa-e5306cea6269" />
+        <textElement>
+          <font size="9" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cash_endingbalance}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="592" y="0" width="102" height="14" uuid="8537686d-9ed4-42b9-8769-f91d1171ee9a" />
+        <textElement>
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Total de Egresos :]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="39" y="39" width="156" height="12" uuid="e8c8e0c5-9a7a-4b36-b20d-023c5ce65747" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Saldo en Efectivo de Caja Chica  :]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="39" y="24" width="67" height="12" uuid="477ef89f-3db5-4e2f-a43b-0ca0535bd8e8" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Liquidación al]]></text>
+      </staticText>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="338" y="57" width="22" height="12" uuid="7fc3f852-33e2-4d58-8c97-189541a2bc55" />
+        <textElement>
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="714" y="0" width="74" height="14" uuid="166ba277-9fdd-4ff3-b986-60282e82e7c6" />
+        <textElement>
+          <font size="10" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{c_cashline_amount_3}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="204" y="24" width="128" height="13" uuid="70017c83-5b96-455a-88df-17e8dbd4d09c" />
+        <textElement>
+          <font size="9" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{c_cashline_amount_3}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="106" y="24" width="79" height="12" uuid="572e001f-1d7d-4765-a472-580f3cf3ac9b" />
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_cash_statementdate}]]></textFieldExpression>
+      </textField>
+    </band>
+  </lastPageFooter>
+</jasperReport>
+
+

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="010c91ab-2b86-4e58-a056-b8d9ed3b7e8f">
+  <property name="Description" value="PLEventas.jrxml" />
+  <property name="FileName" value="PLEventas.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:37.161" />
+  <property name="Identifier" value="f8227c01-576c-42cc-adac-60c45b06645d" />
+  <property name="ireport.zoom" value="4.0" />
+  <property name="ireport.x" value="2586" />
+  <property name="ireport.y" value="0" />
+  <parameter name="periodo" class="java.lang.String" />
+  <parameter name="dateacct1" class="java.util.Date" />
+  <parameter name="dateacct2" class="java.util.Date" />
+  <queryString><![CDATA[--set search_path to xendra
+select distinct
+i.fact_id as NroCorrelativo,'|',
+(case when (EXTRACT(DAY FROM i.dateinvoiced) < 10 and EXTRACT(MONTH FROM i.dateinvoiced) < 10) then
+('0'||EXTRACT(day FROM i.dateinvoiced)::text||'/0'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) < 10 and EXTRACT(MONTH FROM i.dateinvoiced) >= 10) then
+('0'||EXTRACT(day FROM i.dateinvoiced)::text||'/'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) >= 10 and EXTRACT(MONTH FROM i.dateinvoiced) < 10) then
+(EXTRACT(day FROM i.dateinvoiced)::text||'/0'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) >= 10 and EXTRACT(MONTH FROM i.dateinvoiced) >= 10) then
+(EXTRACT(day FROM i.dateinvoiced)::text||'/'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+end) as FechaEmision,'|',
+i.dateacct as FechaVto,'|',
+(select codsunat from c_doctype where c_doctype_id = i.c_doctype_id) as TipoComprobante,'|',
+
+lpad(i.serial,4,'0') as Serie,'|',
+
+lpad(i.documentno,10,'0') as NroDoc,'|',
+
+'0' as Campo8,'|',
+(case when bp.c_bp_doctypei='R' then '6' else
+(case when bp.c_bp_doctypei='D' then '1'
+else '0'end)
+end) as TipoIDProv,'|',
+
+bp.value as NroRUC,'|',
+bp.name as Cliente,'|',
+'0.00' as Campo12,'|',
+--(select taxbaseamt from c_invoicetax where c_invoice_id=i.c_invoice_id and c_tax_id='1000102') as BaseGrav,--campo13
+
+/*(case when gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'BASE'::text)!=0
+then gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'BASE'::text)
+else '0.00' end) AS BaseGrav,'|',*/
+
+(case when gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'BASE'::text)!=0 then
+	round(gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'BASE'::text),2)
+else '0.00' end) as BaseGrav,'|',
+
+'0.00' as Campo14,'|',
+(case when gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'NGR'::text, 'BASE'::text) !=0
+then gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'NGR'::text, 'BASE'::text)
+else '0.00' end) AS Inafecta,--campo15
+'|',
+'0.00' as Campo16,'|',
+(case when gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'IGV'::text) !=0
+then gettaxvalue( i.c_doctype_id, i.c_invoice_id, 'IGV'::text, 'IGV'::text)
+else '0.00' end) AS IGV,'|',
+--(select taxamt from c_invoicetax where c_invoice_id=i.c_invoice_id and c_tax_id='1000102') as IGV,
+'0.00' as Campo18,'|',
+'0.00' as Campo19,'|',
+'0.00' as Campo20,'|',
+
+(case when i.docstatus='VO' then '0.00' else
+(CASE WHEN charat(dt.docbasetype::character varying, 3)::text = 'C'::text THEN
+CurrencyConvert(i.grandtotal,i.C_Currency_ID, 308, i.dateinvoiced, i.c_conversiontype_id,i.AD_Client_ID, i.AD_Org_ID) * (-1)::numeric
+ELSE CurrencyConvert(i.grandtotal,i.C_Currency_ID, 308, i.dateinvoiced, i.c_conversiontype_id,i.AD_Client_ID, i.AD_Org_ID) END) end) AS ImporteTotal,--campo21
+'|',
+--currencyrate(i.c_currency_id, 308, i.dateinvoiced, i.c_conversiontype_id, i.ad_client_id, 0) as TipoCambio,
+(case when currencyrate(i.c_currency_id, 308, i.dateinvoiced, i.c_conversiontype_id, i.ad_client_id, 0)!=1
+then currencyrate(i.c_currency_id, 308, i.dateinvoiced, i.c_conversiontype_id, i.ad_client_id, 0)
+else '0.000' end) as TipoCambio,'|',
+
+--(SELECT dateinvoiced from c_invoice where c_invoice_id = i.ref_invoice_id) as fecharef,
+(case when i.docstatus='VO' then '01/01/0001' else
+(case when i.ref_invoice_id !=0 then (SELECT (case when (EXTRACT(DAY FROM i.dateinvoiced) < 10 and EXTRACT(MONTH FROM i.dateinvoiced) < 10) then
+('0'||EXTRACT(day FROM i.dateinvoiced)::text||'/0'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) < 10 and EXTRACT(MONTH FROM i.dateinvoiced) >= 10) then
+('0'||EXTRACT(day FROM i.dateinvoiced)::text||'/'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) >= 10 and EXTRACT(MONTH FROM i.dateinvoiced) < 10) then
+(EXTRACT(day FROM i.dateinvoiced)::text||'/0'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+
+when (EXTRACT(DAY FROM i.dateinvoiced) >= 10 and EXTRACT(MONTH FROM i.dateinvoiced) >= 10) then
+(EXTRACT(day FROM i.dateinvoiced)::text||'/'||EXTRACT(month FROM i.dateinvoiced)::text||'/'||EXTRACT(year FROM i.dateinvoiced)::text)
+end)
+from c_invoice where c_invoice_id = i.ref_invoice_id)
+else '01/01/0001' end) end) as FechaRef,'|',
+
+(case when i.docstatus='VO' then '00' else
+(case when i.ref_invoice_id !=0 then
+(SELECT codsunat from c_doctype where c_doctype_id in (SELECT c_doctype_id from c_invoice where c_invoice_id = i.ref_invoice_id))
+else '00' end) end) as TipoRef,'|',
+
+(case when i.docstatus='VO' then '-' else
+(case when i.ref_invoice_id !=0 then
+(SELECT lpad(serial,4,'0') from c_invoice where c_invoice_id = i.ref_invoice_id)
+else '-' end) end) as SerieRef,'|',
+
+(case when i.docstatus='VO' then '-' else
+(case when i.ref_invoice_id !=0 then
+(SELECT lpad(documentno,7,'0') from c_invoice where c_invoice_id = i.ref_invoice_id)
+else '-' end) end) as NroDocRef,'|',
+
+(case when i.docstatus='VO' then '2'
+else (case when EXTRACT(year from i.dateinvoiced) = EXTRACT(year from i.dateacct) then
+		(case when EXTRACT(month from i.dateinvoiced) = EXTRACT(month from i.dateacct) then '1'
+			when EXTRACT(month from i.dateinvoiced) < EXTRACT(month from i.dateacct) then '8'
+		else 'otro' end
+		)
+	   when EXTRACT(year from i.dateinvoiced) < EXTRACT(year from i.dateacct) then '8'
+     else 'otro' end
+     )
+end
+) as estado,'|'
+
+/*(case when i.docstatus='VO' then '2'
+when i.dateinvoiced=i.dateacct then '1'
+when i.dateinvoiced<i.dateacct then '8'
+when i.dateinvoiced>i.dateacct then '9'
+else 'otro' end) as estado,'|'*/
+
+from c_invoice i
+left join c_bpartner bp on i.c_bpartner_id=bp.c_bpartner_id
+left join c_doctype dt on i.c_doctype_id = dt.c_doctype_id
+left join c_retention r on i.c_invoice_id=r.c_invoice_id
+left join c_invoicetax it on i.c_invoice_id=it.c_invoice_id
+
+WHERE i.issotrx = 'Y'
+and length(dt.codsunat ) > 0
+--and coalesce(i.fact_id,'joshuerk')!='joshuerk'
+AND i.docstatus not in ('DR')
+--and dt.c_doctype_id!=1001340 -- Guias Corpo = 1001336 // Guias Distri = 1001340
+and date(i.dateacct) between  date($P{dateacct1}) and date($P{dateacct2})
+--and (i.dateacct)>= ('2013-01-01 00:00:00')
+--and (i.dateacct)<= ('2013-01-15 00:00:00')
+
+order by nrocorrelativo,fechaemision,estado,tipocomprobante]]></queryString>
+  <field name="nrocorrelativo" class="java.lang.String" />
+  <field name="?column?" class="java.lang.String" />
+  <field name="fechaemision" class="java.lang.String" />
+  <field name="fechavto" class="java.sql.Timestamp" />
+  <field name="tipocomprobante" class="java.lang.String" />
+  <field name="serie" class="java.lang.String" />
+  <field name="nrodoc" class="java.lang.String" />
+  <field name="campo8" class="java.lang.String" />
+  <field name="tipoidprov" class="java.lang.String" />
+  <field name="nroruc" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <field name="campo12" class="java.lang.String" />
+  <field name="basegrav" class="java.math.BigDecimal" />
+  <field name="campo14" class="java.lang.String" />
+  <field name="inafecta" class="java.math.BigDecimal" />
+  <field name="campo16" class="java.lang.String" />
+  <field name="igv" class="java.math.BigDecimal" />
+  <field name="campo18" class="java.lang.String" />
+  <field name="campo19" class="java.lang.String" />
+  <field name="campo20" class="java.lang.String" />
+  <field name="importetotal" class="java.math.BigDecimal" />
+  <field name="tipocambio" class="java.math.BigDecimal" />
+  <field name="fecharef" class="java.lang.String" />
+  <field name="tiporef" class="java.lang.String" />
+  <field name="serieref" class="java.lang.String" />
+  <field name="nrodocref" class="java.lang.String" />
+  <field name="estado" class="java.lang.String" />
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band splitType="Stretch" />
+  </pageHeader>
+  <columnHeader>
+    <band splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="11" splitType="Stretch">
+      <textField>
+        <reportElement x="0" y="0" width="30" height="10" uuid="9750e663-7173-49e0-b19a-b08e70aff4d1" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="31" y="0" width="50" height="10" uuid="37836d3b-025a-4277-a0ba-452c4e3da15e" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nrocorrelativo}]]></textFieldExpression>
+      </textField>
+      <textField pattern="MM/dd/yyyy">
+        <reportElement x="82" y="0" width="32" height="10" uuid="a0662355-3a0b-4b8a-8202-dfe2d54fbd30" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fechaemision}]]></textFieldExpression>
+      </textField>
+      <textField pattern="MM/dd/yyyy">
+        <reportElement x="115" y="0" width="32" height="10" uuid="00a508da-e8e5-416b-8a46-b7ba59a2e686" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fechavto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="148" y="0" width="10" height="10" uuid="c167790f-bcd1-4a81-875b-515f62950371" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipocomprobante}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="159" y="0" width="14" height="10" uuid="e105314c-9999-4cda-b170-7f0286fd2835" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="174" y="0" width="35" height="10" uuid="c461cb6a-94a3-4a13-b75b-80912dffdb17" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nrodoc}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="30" y="0" width="1" height="10" uuid="a4971c8b-9791-419a-bf3c-87ee7fa76ac2" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <textField>
+        <reportElement x="210" y="0" width="8" height="10" uuid="c1f844fd-8ae2-48b7-87fd-2090888065e4" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo8}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="219" y="0" width="12" height="10" uuid="6fd659a3-db79-43f1-84e3-2e980d8397b9" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipoidprov}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="232" y="0" width="43" height="10" uuid="b19aef26-ca5b-4375-b701-a237de289fa9" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nroruc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="277" y="0" width="151" height="10" uuid="9111a0fd-7256-4598-adc9-6bfdb0ac5860" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="430" y="0" width="12" height="10" uuid="4252ac7d-c8b9-47e4-917b-c7feb68810ca" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo12}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="443" y="0" width="29" height="10" uuid="44121cee-d32c-47f2-b00c-b348278cc95a" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{basegrav}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="473" y="0" width="15" height="10" uuid="4c142146-8c87-4d6f-9528-eb70808d5936" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo14}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="489" y="0" width="34" height="10" uuid="e8c57e3d-82e9-490b-80da-6ad32c63856d" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{inafecta}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="524" y="0" width="12" height="10" uuid="68d6e9dd-7887-4ae2-b6e9-5dfde841f09d" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo16}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="537" y="0" width="28" height="10" uuid="77dd9b4b-c440-401b-a397-f6cc62c6f818" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="566" y="0" width="19" height="10" uuid="a18c88c4-165a-4746-9d27-65a432dc8df9" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo18}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="586" y="0" width="20" height="10" uuid="bbd5f998-6345-4e82-95ff-cd3c1f89f0f1" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo19}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="608" y="0" width="22" height="10" uuid="c07e60e6-cf2f-4865-91d5-f8aa305e4b4a" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{campo20}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="632" y="0" width="36" height="10" uuid="24ef00d2-60e5-4d41-96fd-4b2601f76c23" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{importetotal}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="670" y="0" width="19" height="10" uuid="4336ca3b-fb48-4ebc-8d17-7d814b3215e2" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipocambio}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="691" y="0" width="32" height="10" uuid="ee99dacb-ac66-47d1-8471-4d71a7f2c9a7" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fecharef}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="725" y="0" width="15" height="10" uuid="a725cb0c-bc26-404d-b39e-d699ab98094c" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tiporef}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="742" y="0" width="19" height="10" uuid="a1fb9cdf-02cf-4817-a637-cf657c3ac418" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{serieref}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="763" y="0" width="27" height="10" uuid="135ce62b-a228-4f22-a442-d355b22db21d" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nrodocref}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="792" y="0" width="9" height="10" uuid="6bf33474-985c-47c3-abb2-a603694790c6" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="81" y="0" width="1" height="10" uuid="b8211757-a7fe-415d-9d11-6551533b441f" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="114" y="0" width="1" height="10" uuid="fa392027-3b8b-41dc-9ccc-113485587f3e" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="147" y="0" width="1" height="10" uuid="927eed35-ac79-4ced-8b49-faf995152340" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="158" y="0" width="1" height="10" uuid="ca8e5aa8-f5fa-4828-b469-94f15db74169" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="173" y="0" width="1" height="10" uuid="061068f7-d6c3-4f99-aeb4-65dff501cce0" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="209" y="0" width="1" height="10" uuid="08838374-5f14-43bf-94a7-7ac65d276842" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="218" y="0" width="1" height="10" uuid="a5fabe46-af8e-4353-99af-c0f99e60c62f" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="231" y="0" width="1" height="10" uuid="3fa42bb7-b631-4d38-bb72-a7fe6de50f47" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="275" y="0" width="1" height="10" uuid="011a2846-6c9d-4ef9-ae1b-c55b951d6987" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="428" y="0" width="1" height="10" uuid="855c8f46-3e5b-4794-af33-7c0df4dd8db8" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="442" y="0" width="1" height="10" uuid="0091da3d-60b7-4537-851a-0ee32d15582a" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="472" y="0" width="1" height="10" uuid="4473aab5-2294-4da0-8c02-f9c473b19821" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="488" y="0" width="1" height="10" uuid="6720a5df-b01f-4b52-ae9b-5d50a8bcdbf3" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="523" y="0" width="1" height="10" uuid="3dd8fb0a-969f-4640-b226-36d614eb9fa0" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="536" y="0" width="1" height="10" uuid="dab90283-bb9e-4903-8ab8-0028c140b14c" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="565" y="0" width="1" height="10" uuid="68c3eedc-d916-4926-a7f8-174d4327f476" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="585" y="0" width="1" height="10" uuid="215e3394-0eb4-4c5d-9cf0-70d5871e9e73" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="606" y="0" width="1" height="10" uuid="0f8fdd3c-214c-4cb8-981c-2119de38d907" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="630" y="0" width="1" height="10" uuid="af7d1cc8-1b0e-4d21-b0ed-3088437db450" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="668" y="0" width="1" height="10" uuid="bdc7af15-87fa-4286-8a90-d08f1899d665" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="689" y="0" width="1" height="10" uuid="b0ca316c-7cd1-467a-8ad3-815acfd30025" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="723" y="0" width="1" height="10" uuid="e6772237-5d2e-4109-9607-180f5e82c6eb" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="740" y="0" width="1" height="10" uuid="c24118c7-4330-4958-9b93-29c60a4a76b5" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="761" y="0" width="1" height="10" uuid="6f11fc91-bf3c-48e4-927e-91b4075d0b8f" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="790" y="0" width="1" height="10" uuid="bb90163e-0d23-4991-b6c5-3936b1100c22" />
+        <textElement>
+          <font size="6" isBold="false" pdfFontName="&lt;Different Values&gt;" />
+        </textElement>
+        <text><![CDATA[|]]></text>
+      </staticText>
+    </band>
+  </detail>
+  <columnFooter>
+    <band splitType="Stretch" />
+  </columnFooter>
+  <pageFooter>
+    <band splitType="Stretch" />
+  </pageFooter>
+  <summary>
+    <band splitType="Stretch" />
+  </summary>
+</jasperReport>
+
+

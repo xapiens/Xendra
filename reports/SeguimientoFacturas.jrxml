@@ -1,0 +1,609 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SeguimientoFacturas" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0d271a15-688a-48eb-80d1-f302d011176b">
+  <property name="Identifier" value="fbf995d7-2b9f-1546-ea78-b86e7c5d78eb" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="SeguimientoFacturas.jrxml" />
+  <property name="ireport.zoom" value="3.0" />
+  <property name="ireport.x" value="6" />
+  <property name="ireport.y" value="0" />
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1910-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2030-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="noOrdenOGuia" class="java.lang.String">
+    <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+  </parameter>
+  <parameter name="preciosOFDiferentes" class="java.lang.String">
+    <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+  </parameter>
+  <parameter name="productosDiferentes" class="java.lang.String">
+    <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+  </parameter>
+  <parameter name="precioCostoErrado" class="java.lang.String">
+    <defaultValueExpression><![CDATA["N"]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+*,
+preciofacturacambioordensoles-precioordensoles as dif_orden_factura_soles,
+preciofacturasoles-costprice as utilidad_perdida_bruta,
+100-((100*costprice)/preciofacturasoles) as porc_utilidad_bruta
+from (
+-- seleccion de datos directos de la db
+select
+getValidatedaveragecostforproduct(inv.ad_client_id,inv.ad_org_id,iol.m_product_id,io.movementdate,'Y') as costprice,
+inv.dateinvoiced,ord.dateordered,
+inv.documentno nrofactura,
+ord.documentno as nroorden,
+io.documentno as nroguia,
+p.name as socio,
+ol.priceentered as precioorden,
+(case when ord.c_currency_id = 308
+	then 1
+	else
+	 ocrt.multiplyrate
+	end
+) as tcambioorden,
+ocur.cursymbol as monedaOrden,
+
+(case when ord.c_currency_id = 308
+	then ol.priceentered
+	else ol.priceentered*ocrt.multiplyrate
+	end
+) as precioOrdenSoles,
+
+il.qtyinvoiced qtyFactura,
+il.priceentered as precioFactura,
+icur.cursymbol as monedaFactura,
+(case when inv.c_currency_id = 308
+	then 1
+	else
+	 icrt.multiplyrate
+	end
+) as tcambiofactura,
+(case when inv.c_currency_id = 308
+	then il.priceentered
+	else il.priceentered*ocrt.multiplyrate
+	end
+) as precioFacturaCambioOrdenSoles,
+(case when inv.c_currency_id = 308
+	then il.priceentered
+	else il.priceentered*icrt.multiplyrate
+	end
+) as precioFacturaSoles,
+
+iol.qtyentered as qtyGuia,
+dt.name,inv.c_bpartner_id,
+pro.name as producto
+from c_invoiceline il
+left join c_invoice inv on inv.c_invoice_id = il.c_invoice_id
+left join c_doctype_trl dt on dt.c_doctype_id = inv.c_doctype_id
+left join c_orderline ol on ol.c_orderline_id = il.c_orderline_id
+left join c_order ord on ord.c_order_id = ol.c_order_id
+left join m_inoutline iol on iol.m_inoutline_id = il.m_inoutline_id
+left join m_inout io on io.m_inout_id = iol.m_inout_id
+left join m_product pro on pro.m_product_id = il.m_product_id
+left join c_bpartner p on p.c_bpartner_id = inv.c_bpartner_id
+left join c_currency ocur on ocur.c_currency_id = ord.c_currency_id
+left join c_currency icur on icur.c_currency_id = inv.c_currency_id
+
+-- Cambio para la orden
+LEFT JOIN c_conversion_rate ocrt on
+	date(ord.dateordered) = ocrt.validfrom
+	and(ord.c_currency_id = ocrt.c_currency_id)
+	and ocrt.c_currency_id_to = 308
+	and(ord.c_conversiontype_id = ocrt.c_conversiontype_id)
+-- cambio para la factura
+LEFT JOIN c_conversion_rate icrt on
+	date(inv.dateinvoiced) = icrt.validfrom
+	and(inv.c_currency_id = icrt.c_currency_id)
+	and icrt.c_currency_id_to = 308
+	and(inv.c_conversiontype_id = icrt.c_conversiontype_id)
+
+where inv.c_doctype_id = 1001040 and inv.isactive='Y' and (inv.docstatus  = 'CL' or inv.docstatus = 'CO')
+and inv.c_bpartner_id != 1012821
+--and m_inoutline_id is null
+and inv.dateinvoiced > '2010-04-30'
+and date(inv.dateinvoiced) between date($P{DateFrom1}) and date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else il.m_product_id = $P{M_Product_ID}
+  end
+)
+and
+( case when coalesce($P{noOrdenOGuia},'N') = 'N'
+	then true
+	else (ord.c_order_id is null or io.m_inout_id is null)
+  end
+)
+and
+( case when coalesce($P{preciosOFDiferentes},'N') = 'N'
+	then true
+	else (il.priceentered != ol.priceentered)
+  end
+)
+and
+( case when coalesce($P{productosDiferentes},'N') = 'N'
+	then true
+	else (iol.m_product_id != il.m_product_id or ol.m_product_id != il.m_product_id)
+  end
+)
+
+--and iol.qtyentered = il.qtyinvoiced
+
+order by inv.dateinvoiced,inv.documentno
+) xx
+where
+( case when coalesce($P{precioCostoErrado},'N') = 'N'
+	then true
+	else ((preciofacturasoles-costprice) < 0 or (100-((100*costprice)/preciofacturasoles)) >= 100)
+  end
+) and
+xx.producto is not null]]></queryString>
+  <field name="costprice" class="java.math.BigDecimal" />
+  <field name="dateinvoiced" class="java.sql.Timestamp" />
+  <field name="dateordered" class="java.sql.Timestamp" />
+  <field name="nrofactura" class="java.lang.String" />
+  <field name="nroorden" class="java.lang.String" />
+  <field name="nroguia" class="java.lang.String" />
+  <field name="socio" class="java.lang.String" />
+  <field name="precioorden" class="java.math.BigDecimal" />
+  <field name="tcambioorden" class="java.math.BigDecimal" />
+  <field name="monedaorden" class="java.lang.String" />
+  <field name="precioordensoles" class="java.math.BigDecimal" />
+  <field name="qtyfactura" class="java.math.BigDecimal" />
+  <field name="preciofactura" class="java.math.BigDecimal" />
+  <field name="monedafactura" class="java.lang.String" />
+  <field name="tcambiofactura" class="java.math.BigDecimal" />
+  <field name="preciofacturacambioordensoles" class="java.math.BigDecimal" />
+  <field name="preciofacturasoles" class="java.math.BigDecimal" />
+  <field name="qtyguia" class="java.math.BigDecimal" />
+  <field name="name" class="java.lang.String" />
+  <field name="c_bpartner_id" class="java.math.BigDecimal" />
+  <field name="producto" class="java.lang.String" />
+  <field name="dif_orden_factura_soles" class="java.math.BigDecimal" />
+  <field name="utilidad_perdida_bruta" class="java.math.BigDecimal" />
+  <field name="porc_utilidad_bruta" class="java.math.BigDecimal" />
+  <group name="factura">
+    <groupExpression><![CDATA[$F{nrofactura}]]></groupExpression>
+    <groupHeader>
+      <band height="11">
+        <line>
+          <reportElement x="0" y="5" width="802" height="1" uuid="edb733b8-eb45-42cb-9d89-ad150c0c5b8c" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+      </band>
+    </groupHeader>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <pageHeader>
+    <band height="52" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-20" x="601" y="6" width="100" height="20" uuid="b71ac1fd-8773-478f-9c64-1ecb66b910a7" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-11" x="258" y="6" width="287" height="16" forecolor="#000000" uuid="b01c741e-b628-405f-ac61-32ae834ede65" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[Facturas vs Ordenes vs Guias]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="698" y="6" width="80" height="18" uuid="f1cb6adf-264c-4ecf-8f2f-be5f4e1bd39b" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="750" y="6" width="50" height="12" uuid="dd555dbc-ce93-4584-8ffe-51ba74fbbdcf" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="711" y="22" width="65" height="12" uuid="7e51a8c4-0b1c-4672-a274-603bcddd134a" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="776" y="22" width="22" height="12" uuid="ddb5e3d7-b614-4c37-ad86-89db23d23c9b" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="311" y="26" width="180" height="14" forecolor="#000000" uuid="341ab882-ce81-457a-bf73-0c1756e93b33" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{DateFrom1})+ " al " + DateFormat.getDateInstance().format($P{DateFrom2})]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="3" width="136" height="12" uuid="3730899d-2b6c-42f0-8be5-d0def0d984a8" />
+        <textElement markup="none">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{noOrdenOGuia}.equals("Y") ? "Sin Orden O Guia : SI" : "Sin Orden O Guia : NO"]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="15" width="136" height="12" uuid="34ba397d-6395-479e-aa11-ddcc92e53fe0" />
+        <textElement markup="none">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{preciosOFDiferentes}.equals("Y") ? "Verificar Precios Factura/Orden : SI" : "Verificar Precios Factura/Orden : NO"]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="27" width="136" height="12" uuid="33db3bd0-e499-4778-822f-6569045538f1" />
+        <textElement markup="none">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{productosDiferentes}.equals("Y") ? "Productos diferentes : Si" : "Productos diferentes : No"]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="2" y="39" width="136" height="12" uuid="2c5c197e-fff6-488f-a9c1-eb8eaabfcef7" />
+        <textElement markup="none">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{precioCostoErrado}.equals("Y") ? "Costos con Perdida o > 100% : SI" : "Costos con Perdida o > 100% : NO"]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="49" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="11" width="36" height="13" uuid="33f5f1a5-2b42-4181-b024-a529d936b4a2" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="36" y="11" width="30" height="13" uuid="0497aea2-d148-4d90-98b8-af27b92761b1" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="70" y="11" width="150" height="13" uuid="8b819909-630c-4cec-80a1-8c3c376487b1" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Socio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="220" y="11" width="27" height="13" uuid="654a813f-f634-4d60-b142-3ca006a8b535" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Orden]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="249" y="11" width="36" height="13" uuid="48fabf91-b0f8-4dbc-9882-627a8de9789d" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Guia]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="285" y="11" width="107" height="13" uuid="7b25a49f-1d2f-44ff-a38f-6a6f6c0dfe66" />
+        <textElement markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="408" y="28" width="26" height="13" uuid="dc9abd46-b5b6-4f25-a115-f8cc575547f9" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Precio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="438" y="28" width="29" height="13" uuid="9f9e3e87-f2d3-4acb-b105-37f010717568" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[T.C]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="467" y="28" width="35" height="13" uuid="68f945e5-d6bd-4209-a981-74b96c5aeab4" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Soles]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="408" y="11" width="94" height="13" uuid="0269bffb-03b6-4bf6-a1b6-5ede0b01f12f" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Orden]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="582" y="28" width="28" height="13" uuid="c4a86dfb-f69d-4dc7-b8f0-899e856eb299" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Precio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="641" y="28" width="42" height="13" uuid="c88e316a-845c-485c-9d9c-7dda7f5f724f" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Soles]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="612" y="28" width="29" height="13" uuid="e8bae66d-9360-4493-9589-7e3689f3f8af" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[T.C]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="582" y="11" width="94" height="13" uuid="b7c4414b-bcc8-4d1f-b681-f9f4bdb477dd" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Factura]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="683" y="11" width="31" height="30" uuid="eb73afe4-7dd3-4898-acaf-1d710a9d68d6" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Dif.Fact-Orden Soles]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="714" y="11" width="31" height="13" uuid="e821c7f9-1e60-4cd0-83ed-9ef4977866ea" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Costo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="748" y="11" width="27" height="13" uuid="a29eca98-7660-4b54-9805-674097ada841" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Util]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="775" y="11" width="26" height="13" uuid="20ab9cbd-2561-478f-b902-2d06454b9e96" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[% Util]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="44" width="802" height="1" uuid="59c3ab42-a4b8-4bda-ad07-871583b86d64" />
+      </line>
+      <line>
+        <reportElement x="0" y="6" width="802" height="1" uuid="3eada34c-997b-434e-b142-4d9908e43110" />
+      </line>
+      <staticText>
+        <reportElement x="506" y="11" width="57" height="13" uuid="92e6b75b-aa0b-4a9c-8885-1ea56220fdea" />
+        <textElement textAlignment="Center" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cantidad]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="506" y="28" width="28" height="13" uuid="94b845f0-89df-478b-b624-8a40a5350315" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Guia]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="535" y="28" width="28" height="13" uuid="e8ee6b20-07ea-4319-b196-08b48d041f74" />
+        <textElement textAlignment="Right" markup="none">
+          <font size="6" isBold="true" />
+        </textElement>
+        <text><![CDATA[Factura]]></text>
+      </staticText>
+      <line>
+        <reportElement x="408" y="6" width="1" height="38" uuid="e739ca72-9680-4143-92f8-0aabbaf5faea" />
+      </line>
+      <line>
+        <reportElement x="505" y="6" width="1" height="38" uuid="8262f0de-d063-48e6-a5e3-3eb9126bb3c1" />
+      </line>
+      <line>
+        <reportElement x="570" y="6" width="1" height="38" uuid="4d32ea3c-2f9d-4605-a1d8-62f440394739" />
+      </line>
+      <line>
+        <reportElement x="683" y="6" width="1" height="38" uuid="602cea20-8565-469c-9826-38a12c513b31" />
+      </line>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="18" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="0" y="0" width="38" height="16" uuid="cacd8070-f4b5-44a0-8dc9-279d6d9e16cb" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dateinvoiced}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="38" y="0" width="30" height="16" uuid="6ceb2052-0f29-4fef-8410-8c8d4b727738" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nrofactura}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="220" y="0" width="27" height="16" uuid="37194e75-bd41-4415-9c80-e8dc5f757671" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nroorden}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="249" y="0" width="36" height="16" uuid="599053ac-5e6c-47a7-9b51-e45428bd703a" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{nroguia}]]></textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true">
+        <reportElement x="70" y="0" width="150" height="16" uuid="2a6999e4-68db-4c15-ac9c-0d923ee7f54f" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{socio}]]></textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="285" y="0" width="107" height="16" uuid="40a052a1-0356-4fa7-b5bc-c50248b6759e" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="true">
+        <reportElement x="467" y="0" width="35" height="16" uuid="a87c83a3-b16d-4514-bdc3-d544cc36a91e" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{precioordensoles}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="395" y="0" width="13" height="16" uuid="bf170f9d-326a-49d8-b1e2-c271ce611a78" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{monedaorden}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="true">
+        <reportElement x="408" y="0" width="26" height="16" uuid="1df59f2f-a386-4c5c-be83-4eb27f7861ff" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{precioorden}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="true">
+        <reportElement x="506" y="0" width="28" height="16" uuid="f9999a14-edf4-4d67-86c8-7dcb44bf9707" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{qtyguia}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="534" y="0" width="29" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="19a2302b-e248-4aad-8df2-ee7e2ef30dd6" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{qtyfactura}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="568" y="0" width="12" height="16" uuid="5c25b5a3-f480-4026-8a45-2576e2a2ac58" />
+        <textElement>
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{monedafactura}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="580" y="0" width="30" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="a3278e69-2521-41bd-8ad3-551d532711d2" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{preciofactura}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="610" y="0" width="31" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="d7db566b-dd23-47e6-81a5-2caf841c2f77" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tcambiofactura}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="true">
+        <reportElement x="438" y="0" width="29" height="16" uuid="a25015fe-cd0e-4690-802b-1292b311e6d2" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tcambioorden}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="641" y="0" width="42" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="2187f2f0-7628-4ddd-af17-adeecf8083d1" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{preciofacturasoles}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="true">
+        <reportElement mode="Transparent" x="683" y="0" width="31" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="726e2b00-d112-4061-92f3-b5abafb637b1" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dif_orden_factura_soles}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="748" y="0" width="26" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="1b93f417-cbd4-4a31-80e9-a160341eb76f" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{utilidad_perdida_bruta}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="775" y="0" width="26" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="0a803e85-f26c-4814-96c0-6e4886ba1d82" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{porc_utilidad_bruta}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="714" y="0" width="34" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="bf30a267-091e-4dd1-a18b-d76ff1e45a24" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{costprice}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <pageFooter>
+    <band height="17" splitType="Stretch" />
+  </pageFooter>
+  <noData>
+    <band height="50">
+      <staticText>
+        <reportElement key="staticText-11" x="198" y="16" width="406" height="16" forecolor="#000000" uuid="a8f336f5-f142-4425-b88e-5bbdb826079b" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[No hay datos para los parametros especificados]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

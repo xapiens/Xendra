@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Formato3_17_2D" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="c62156d1-8ae5-4806-b6ce-8aa67039d4a3">
+	<property name="Description" value="Formato3_17_2D.jrxml"/>
+	<property name="FileName" value="Formato3_17_2D.jrxml"/>
+	<property name="Synchronized" value="2018-12-17 12:26:16.659"/>
+	<property name="Identifier" value="3895fbc3-32da-4689-bd31-3a330e4aa3b8"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Org_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000089)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_AcctSchema_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000037)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_Period_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000615)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PostingType" class="java.lang.String">
+		<defaultValueExpression><![CDATA['A']]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[-- nuevo formato 3.17A
+with fiscalyear as ( select (select fiscalyear from c_year y where y.c_year_id = p.c_year_id)  as fyear from c_period p where c_period_id = $P{C_Period_ID} ),
+prevperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE periodno < (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ) AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID} )),
+currperiod as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ),
+	tax as (SELECT CASE WHEN $P{AD_Org_ID} =0 THEN max(ci.taxid) ELSE max(oi.taxid) END as id FROM ad_orginfo oi
+		JOIN ad_clientinfo ci on ci.ad_client_id = oi.ad_client_id WHERE ci.ad_client_id = $P{AD_Client_ID}),
+period as (SELECT c_period_id, name,enddate,periodno FROM c_period WHERE periodno <= (SELECT periodno FROM c_period WHERE c_period_id = $P{C_Period_ID} ) AND c_year_id = (SELECT c_year_id FROM c_period WHERE c_period_id = $P{C_Period_ID} )),
+     client as (SELECT CASE WHEN $P{AD_Org_ID}=0 THEN (SELECT description FROM AD_Client where AD_Client_ID = $P{AD_Client_ID})
+				     ELSE (SELECT description FROM AD_org where AD_Org_ID = $P{AD_Org_ID}) END as description),
+     schema as (SELECT acc.c_acctschema_id, acc.name FROM c_acctschema acc WHERE acc.c_acctschema_id = $P{C_AcctSchema_ID})
+SELECT
+	foo.cliente,
+	foo.ruc,
+	foo.periodo,
+	foo.esquema,
+	foo.cuenta,
+	foo.descripcion,
+	SUM(foo.debe_i) as debe_i,
+	SUM(foo.haber_i) as haber_i,
+	SUM(foo.debe_m) as debe_m,
+	SUM(foo.haber_m) as haber_m,
+	SUM(foo.debe_f) as debe_f,
+	SUM(foo.haber_f) as haber_f,
+	SUM(foo.activo_b) as activo_b,
+	SUM(foo.pasivo_b) as pasivo_b,
+	SUM(foo.gasto_rn) as gasto_rn,
+	SUM(foo.ingreso_rn) as ingreso_rn,
+	SUM(foo.gasto_rf) as gasto_rf,
+	SUM(foo.ingreso_rf) as ingreso_rf
+FROM(
+	-- saldo inicial
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID} ) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	SUM(f.amtacctdr) as debe_i,
+	SUM(f.amtacctcr) as haber_i,
+	0 as debe_m,
+	0 as haber_m,
+	0 as debe_f,
+	0 as haber_f,
+	0 as activo_b,
+	0 as pasivo_b,
+	0 as gasto_rn,
+	0 as ingreso_rn,
+	0 as gasto_rf,
+	0 as ingreso_rf
+	FROM fact_acct f
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, tax, client, fiscalyear
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.isopendocument = 'Y'
+	AND f.postingtype = $P{PostingType}
+	AND extract(year from dateacct) = fiscalyear.fyear::integer
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name
+	UNION all
+	-- movimiento
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID}) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	0 as debe_i,
+	0 as haber_i,
+	SUM(f.amtacctdr) as debe_m,
+	SUM(f.amtacctcr) as haber_m,
+	0 as debe_f,
+	0 as haber_f,
+	0 as activo_b,
+	0 as pasivo_b,
+	0 as gasto_rn,
+	0 as ingreso_rn,
+	0 as gasto_rf,
+	0 as ingreso_rf
+	FROM fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, tax, client, fiscalyear
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND COALESCE(f.isopendocument,'N') = 'N'
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND f.postingtype = $P{PostingType}
+	AND extract(year from dateacct) = fiscalyear.fyear::integer
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name
+
+	UNION all
+	-- saldo final
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID}) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	0 as debe_i,
+	0 as haber_i ,
+	0 as debe_m,
+	0 as haber_m,
+	SUM(f.amtacctdr) as debe_f,
+	SUM(f.amtacctcr) as haber_f,
+	0 as activo_b,
+	0 as pasivo_b,
+	0 as gasto_rn,
+	0 as ingreso_rn,
+	0 as gasto_rf,
+	0 as ingreso_rf
+	FROM fact_acct f
+	join period p on f.c_period_id = p.c_period_id
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, tax, client
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name
+	UNION all
+	-- balance
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID}) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	0 as debe_i,
+	0 as haber_i ,
+	0 as debe_m,
+	0 as haber_m,
+	0 as debe_f,
+	0 as haber_f,
+	SUM(f.amtacctdr) as activo_b,
+	SUM(f.amtacctcr) as pasivo_b,
+	0 as gasto_rn,
+	0 as ingreso_rn,
+	0 as gasto_rf,
+	0 as ingreso_rf
+	FROM fact_acct f
+	JOIN ad_org o on f.ad_org_id = o.ad_org_id
+	JOIN ad_orginfo oi on o.ad_org_id = oi.ad_org_id
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, tax, client
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND ev.c_subject_id > 0
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name
+
+	UNION all
+	-- resultados naturaleza
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID}) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	0 as debe_i,
+	0 as haber_i ,
+	0 as debe_m,
+	0 as haber_m,
+	0 as debe_f,
+	0 as haber_f,
+	0 as activo_b,
+	0 as pasivo_b,
+	SUM(f.amtacctdr) as gasto_rn,
+	SUM(f.amtacctcr) as ingreso_rn,
+	0 as gasto_rf,
+	0 as ingreso_rf
+	FROM fact_acct f
+	join period p on f.c_period_id = p.c_period_id
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, tax, client
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id = $P{AD_Org_ID} END)
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND ev.egpn_c_subject_id > 0
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name
+
+	-- resultados funcion
+	UNION all
+	SELECT
+	client.description as cliente,
+	tax.id  as ruc,
+	(SELECT p.name FROM c_period p WHERE p.c_period_id = $P{C_Period_ID} ) as periodo,
+	acc.name as esquema,
+	(left(ev.value,2)) as cuenta,
+	(select name from c_elementvalue where (left(ev.value,2)) = value and AD_Client_ID = $P{AD_Client_ID}) as descripcion,
+	0 as debe_i,
+	0 as haber_i ,
+	0 as debe_m,
+	0 as haber_m,
+	0 as debe_f,
+	0 as haber_f,
+	0 as activo_b,
+	0 as pasivo_b,
+	0 as gasto_rn,
+	0 as ingreso_rn,
+	SUM(f.amtacctdr) as gasto_rf,
+	SUM(f.amtacctcr) as ingreso_rf
+	FROM fact_acct f
+	JOIN period p on f.c_period_id = p.c_period_id
+	JOIN schema acc on f.c_acctschema_id = acc.c_acctschema_id
+	JOIN c_elementvalue ev on f.account_id = ev.c_elementvalue_id, client, tax
+	WHERE f.ad_client_id = $P{AD_Client_ID}
+	AND (CASE WHEN COALESCE($P{AD_Org_ID}, 0)  = 0
+	       THEN true
+	       ELSE f.ad_org_id =  $P{AD_Org_ID} END)
+	AND f.postingtype = $P{PostingType}
+	AND COALESCE(f.isclosedocument,'N') = 'N'
+	AND ev.egpf_c_subject_id > 0
+	GROUP BY tax.id, client.description, acc.name, ev.value, ev.name) as foo
+	GROUP BY foo.cliente, foo.ruc, foo.periodo, foo.esquema, foo.cuenta, foo.descripcion
+	ORDER BY foo.cuenta]]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="esquema" class="java.lang.String"/>
+	<field name="cuenta" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="debe_i" class="java.math.BigDecimal"/>
+	<field name="haber_i" class="java.math.BigDecimal"/>
+	<field name="debe_m" class="java.math.BigDecimal"/>
+	<field name="haber_m" class="java.math.BigDecimal"/>
+	<field name="debe_f" class="java.math.BigDecimal"/>
+	<field name="haber_f" class="java.math.BigDecimal"/>
+	<field name="activo_b" class="java.math.BigDecimal"/>
+	<field name="pasivo_b" class="java.math.BigDecimal"/>
+	<field name="gasto_rn" class="java.math.BigDecimal"/>
+	<field name="ingreso_rn" class="java.math.BigDecimal"/>
+	<field name="gasto_rf" class="java.math.BigDecimal"/>
+	<field name="ingreso_rf" class="java.math.BigDecimal"/>
+	<variable name="Suma_debe_i" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{debe_i}.subtract( $F{haber_i} ).compareTo(new BigDecimal(0.0))>0?$F{debe_i}.subtract( $F{haber_i} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_i" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{haber_i}.subtract( $F{debe_i} ).compareTo(new BigDecimal(0.0))>0?$F{haber_i}.subtract( $F{debe_i} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_debe_m" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{debe_m}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_m" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{haber_m}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_debe_f" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{debe_f}.subtract( $F{haber_f} ).compareTo(new BigDecimal(0.0))>0?$F{debe_f}.subtract( $F{haber_f} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_f" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{haber_f}.subtract( $F{debe_f} ).compareTo(new BigDecimal(0.0))>0?$F{haber_f}.subtract( $F{debe_f} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_activo_b" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{activo_b}.subtract( $F{pasivo_b} ).compareTo(new BigDecimal(0.0))>0?$F{activo_b}.subtract( $F{pasivo_b} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_pasivo_b" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{pasivo_b}.subtract( $F{activo_b} ).compareTo(new BigDecimal(0.0))>0?$F{pasivo_b}.subtract( $F{activo_b} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_gasto_rf" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{gasto_rf}.subtract( $F{ingreso_rf} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rf}.subtract( $F{ingreso_rf} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_ingreso_rf" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{ingreso_rf}.subtract( $F{gasto_rf} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rf}.subtract( $F{gasto_rf} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_pasivo_b_bigdec" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{pasivo_b}]]></variableExpression>
+	</variable>
+	<variable name="Sado_Inicial_d" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{debe_i}.subtract( $F{haber_i} ).compareTo(new BigDecimal(0.0))>0?$F{debe_i}.subtract( $F{haber_i} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Sado_Inicial_h" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{haber_i}.subtract( $F{debe_i} ).compareTo(new BigDecimal(0.0))>0?$F{haber_i}.subtract( $F{debe_i} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Sado_Final_d" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{debe_f}.subtract( $F{haber_f} ).compareTo(new BigDecimal(0.0))>0?$F{debe_f}.subtract( $F{haber_f} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Sado_Final_h" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{haber_f}.subtract( $F{debe_f} ).compareTo(new BigDecimal(0.0))>0?$F{haber_f}.subtract( $F{debe_f} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Balance_a" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{activo_b}.subtract( $F{pasivo_b} ).compareTo(new BigDecimal(0.0))>0?$F{activo_b}.subtract( $F{pasivo_b} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Balance_p" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{pasivo_b}.subtract( $F{activo_b} ).compareTo(new BigDecimal(0.0))>0?$F{pasivo_b}.subtract( $F{activo_b} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_gf" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{gasto_rf}.subtract( $F{ingreso_rf} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rf}.subtract( $F{ingreso_rf} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_if" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{ingreso_rf}.subtract( $F{gasto_rf} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rf}.subtract( $F{gasto_rf} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_uf" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_ingreso_rf}.subtract( $V{Suma_gasto_rf} ).compareTo(new BigDecimal(0.0))>0?$V{Suma_ingreso_rf}.subtract( $V{Suma_gasto_rf} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_pf" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_gasto_rf}.subtract($V{Suma_ingreso_rf}).compareTo(new BigDecimal(0.0))>0?$V{Suma_gasto_rf}.subtract( $V{Suma_ingreso_rf} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Suma_debe_i_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{debe_i}.subtract( $F{haber_i} ).compareTo(new BigDecimal(0.0))>0?$F{debe_i}.subtract( $F{haber_i} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_i_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{haber_i}.subtract( $F{debe_i} ).compareTo(new BigDecimal(0.0))>0?$F{haber_i}.subtract( $F{debe_i} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_debe_m_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[$F{debe_m}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_m_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[$F{haber_m}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_debe_f_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{debe_f}.subtract( $F{haber_f} ).compareTo(new BigDecimal(0.0))>0?$F{debe_f}.subtract( $F{haber_f} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_haber_f_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{haber_f}.subtract( $F{debe_f} ).compareTo(new BigDecimal(0.0))>0?$F{haber_f}.subtract( $F{debe_f} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_activo_b_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{activo_b}.subtract( $F{pasivo_b} ).compareTo(new BigDecimal(0.0))>0?$F{activo_b}.subtract( $F{pasivo_b} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_pasivo_b_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{pasivo_b}.subtract( $F{activo_b} ).compareTo(new BigDecimal(0.0))>0?$F{pasivo_b}.subtract( $F{activo_b} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_gasto_rf_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{gasto_rf}.subtract( $F{ingreso_rf} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rf}.subtract( $F{ingreso_rf} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_ingreso_rf_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{ingreso_rf}.subtract( $F{gasto_rf} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rf}.subtract( $F{gasto_rf} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Resultados_Bal_a" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_activo_b}.subtract( $V{Suma_pasivo_b} ).compareTo(new BigDecimal(0.0))>0?$V{Suma_activo_b}.subtract( $V{Suma_pasivo_b} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_Bal_p" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_pasivo_b}.subtract( $V{Suma_activo_b} ).compareTo(new BigDecimal(0.0))>0?$V{Suma_pasivo_b}.subtract( $V{Suma_activo_b} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Suma_gasto_rn_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{gasto_rn}.subtract( $F{ingreso_rf} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rn}.subtract( $F{ingreso_rn} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_ingreso_rn_pag" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[($F{ingreso_rn}.subtract( $F{gasto_rn} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rn}.subtract( $F{gasto_rn} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Resultados_gn" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{gasto_rn}.subtract( $F{ingreso_rn} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rn}.subtract( $F{ingreso_rn} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_in" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{ingreso_rn}.subtract( $F{gasto_rn} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rn}.subtract( $F{gasto_rn} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Suma_gasto_rn" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{gasto_rn}.subtract( $F{ingreso_rn} ).compareTo(new BigDecimal(0.0))>0?$F{gasto_rn}.subtract( $F{ingreso_rn} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Suma_ingreso_rn" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{ingreso_rn}.subtract( $F{gasto_rn} ).compareTo(new BigDecimal(0.0))>0?$F{ingreso_rn}.subtract( $F{gasto_rn} ):new BigDecimal(0.0))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="Resultados_un" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_ingreso_rn}.subtract( $V{Suma_gasto_rn} ).compareTo(new BigDecimal(0.0))>0?$V{Suma_ingreso_rn}.subtract( $V{Suma_gasto_rn} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<variable name="Resultados_pn" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{Suma_gasto_rn}.subtract($V{Suma_ingreso_rn}).compareTo(new BigDecimal(0.0))>0?$V{Suma_gasto_rn}.subtract( $V{Suma_ingreso_rn} ):new BigDecimal(0.0))]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="43" y="3" width="693" height="16" uuid="5fe12238-4fb3-4e44-8330-8dc04a2fc007"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[FORMATO 3.17 A : "Libro de Inventarios y Balances - Balance de Comprobación"  - 2D]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="258" y="20" width="258" height="11" uuid="56238af0-38b3-43a7-b24b-d53b8c93e78a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{esquema}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-1" x="1" y="42" width="781" height="45" uuid="6ad29df8-8650-46e0-b26c-6478656ab2fc"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-5" x="89" y="14" width="5" height="12" uuid="6ef154fa-0bc1-4165-a7b5-8c14bd903d50"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="89" y="29" width="5" height="10" uuid="21b85b08-0299-4a66-b8e1-e33be1c0ae6a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="99" y="13" width="277" height="15" uuid="4e636281-c74e-4501-b606-ca572ab84bc5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="99" y="27" width="277" height="15" uuid="573e0601-49ac-4d1e-959f-fe1610350ba5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-27" x="1" y="66" width="42" height="22" uuid="539110d8-2594-4935-8930-3eed52e1fa89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" x="10" y="14" width="77" height="12" uuid="33d0971f-08d8-408c-a5d9-b2b6a6fba1f5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="10" y="27" width="77" height="12" uuid="cd8975f2-53ce-444f-90ed-35961f6c4421"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="1" y="43" width="116" height="20" uuid="1d68a749-0ba3-4e76-84fb-921c9476edf5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cuenta y Sub Cta Contable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-33" x="118" y="66" width="55" height="22" uuid="5fcb6baa-af0c-4def-9024-c6fc271950d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-32" x="672" y="43" width="110" height="20" uuid="c3faa036-fd53-4800-823b-743ade153b24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PP y GG por Función]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-18" x="41" y="64" width="1" height="24" uuid="7715e0d2-dcf8-4a7e-a469-90646d55fab0"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-28" x="41" y="66" width="76" height="22" uuid="2e6bef5b-d0a8-40b9-a382-d7a6fe54878f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Denominación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-23" x="117" y="43" width="110" height="20" uuid="2c535c5f-f302-40c7-b5ff-9474796d9709"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Saldos Iniciales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-37" x="339" y="65" width="55" height="22" uuid="ce8606d9-f6d2-4a22-b83c-be60d021addc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-34" x="172" y="65" width="55" height="22" uuid="05f4bab3-11a3-4389-bfed-a9125c6a51d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-35" x="228" y="65" width="55" height="22" uuid="cdaaa95b-a045-41e9-841e-ddfa9f5c2718"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-36" x="283" y="65" width="55" height="22" uuid="2f9087f6-5c89-40e7-af56-32d490350a25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-20" x="282" y="63" width="1" height="24" uuid="b174996b-f3b8-412c-bf7e-b5244e714327"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-29" x="228" y="44" width="110" height="20" uuid="b6d6f3e6-4342-400c-b3b2-7cd5912c1520"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Movimientos]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-13" x="116" y="42" width="1" height="44" uuid="d675ffce-bd08-44ed-a19a-88d47ba3f8ed"/>
+			</line>
+			<line>
+				<reportElement key="line-14" x="227" y="43" width="1" height="44" uuid="ed03a9a4-d106-434c-8fce-983099496b2c"/>
+			</line>
+			<line>
+				<reportElement key="line-15" x="338" y="42" width="1" height="44" uuid="d338ac28-e2c0-4622-9b94-d2f4428c162f"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-38" x="395" y="65" width="55" height="22" uuid="64dd0854-d243-4119-b36d-218bb72575d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-39" x="449" y="65" width="55" height="22" uuid="bf255cb8-5fdd-4acc-8818-ffd525ddc6fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Activo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-40" x="505" y="65" width="55" height="22" uuid="f11a7dea-7f2a-4b1d-93a0-bbaa3c7a91db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Pasivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-41" x="672" y="64" width="55" height="22" uuid="edde590d-cb41-42aa-b539-3359fa60ce12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Gasto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-42" x="727" y="64" width="55" height="22" uuid="cbab3ae3-60dd-4c56-9a65-dde141ba9551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ingreso]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-22" x="504" y="63" width="1" height="24" uuid="17fafb50-21ef-4aad-a6f7-f99982ffa372"/>
+			</line>
+			<line>
+				<reportElement key="line-24" x="2" y="63" width="780" height="1" uuid="e7a94889-fc9c-4aac-8c18-e6d89ac2755c"/>
+			</line>
+			<line>
+				<reportElement key="line-17" x="671" y="43" width="1" height="44" uuid="1f7c0cb9-20b2-4041-915f-1c93ab6e7e21"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-31" x="450" y="42" width="110" height="20" uuid="f2bd274c-f32f-415e-bede-2fa281f0cdfb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Balance General]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-30" x="340" y="43" width="110" height="20" uuid="5d3c4d6d-07d4-430a-a46d-59d39dc9fefb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Saldos Finales]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-16" x="450" y="43" width="1" height="44" uuid="42c0436c-68b0-4539-a4c4-cde08e4a44cc"/>
+			</line>
+			<line>
+				<reportElement key="line-19" x="172" y="63" width="1" height="24" uuid="42dbd3dd-2b06-4ed7-b06b-b2f156e861c5"/>
+			</line>
+			<line>
+				<reportElement key="line-21" x="394" y="63" width="1" height="24" uuid="19d22ee5-6906-43ae-ac91-407ead5b9e51"/>
+			</line>
+			<line>
+				<reportElement key="line-23" x="726" y="63" width="1" height="24" uuid="16d323a3-12a6-4fca-a52f-1bfa5a97dcc4"/>
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="99" y="-1" width="277" height="15" uuid="d14bc73a-3e20-4681-bdc6-6f76a1bef9b6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-7" x="89" y="0" width="5" height="13" uuid="1c242b9a-13f9-429e-b22c-4ea76e202232"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="0" width="77" height="14" uuid="234086f3-ae3e-433d-831e-d80ed7c5e65f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RAZÓN SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-42" x="616" y="66" width="55" height="22" uuid="f6e81e0c-d16a-487b-afa7-281b689645af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-31" x="561" y="43" width="110" height="20" uuid="0c422273-9532-49cb-a6ca-0802bfd38ba2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PP y GG por Naturaleza]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-22" x="615" y="64" width="1" height="24" uuid="3b058659-0c55-40e0-a563-8fce5e18c784"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-41" x="561" y="66" width="55" height="22" uuid="f23a5766-c5b0-4a15-960e-98521ffc20d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Gasto]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-16" x="560" y="43" width="1" height="44" uuid="364577d3-42c5-4677-9f7e-200307bf1a62"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="9" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-43" x="33" y="0" width="77" height="9" uuid="c05cb271-719f-40de-933d-68ee7a3f254a"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vienen]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="228" y="0" width="55" height="9" uuid="a1562063-3e0f-45d2-90ce-f83726e6084c"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_m}.subtract($V{Suma_debe_m_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="284" y="0" width="55" height="9" uuid="df677961-4b2c-4d96-ab63-ef8564bc5973"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_m}.subtract($V{Suma_haber_m_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="117" y="0" width="55" height="9" uuid="b0a897f2-f962-41bb-82eb-b7bafbd8ea3c"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_i}.subtract($V{Suma_debe_i_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="173" y="0" width="55" height="9" uuid="f18012e4-ed6b-4ca3-b0f1-324991febce0"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_i}.subtract($V{Suma_haber_i_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="340" y="0" width="55" height="9" uuid="90b1d38d-29e2-40d4-bba0-037cb89a7a1d"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_f}.subtract($V{Suma_debe_f_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="395" y="0" width="55" height="9" uuid="81879f17-d7b4-43fd-ba72-717755540f9f"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_f}.subtract($V{Suma_haber_f_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="451" y="0" width="55" height="9" uuid="52f9b06c-6136-49cd-9a28-afa795744353"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_activo_b}.subtract($V{Suma_activo_b_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="506" y="0" width="55" height="9" uuid="7d0bf87d-3aad-4021-8e9e-de7d39f66624"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_pasivo_b}.subtract($V{Suma_pasivo_b_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="672" y="0" width="55" height="9" uuid="db34897f-66dd-4285-ae51-dbb5734f0003"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rf}.subtract($V{Suma_gasto_rf_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="727" y="0" width="55" height="9" uuid="ea89c282-f48a-40c0-af02-7e0bcbedebd7"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rf}.subtract($V{Suma_ingreso_rf_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="561" y="0" width="55" height="9" uuid="b5fe9652-a79f-4ab8-87b7-9c5dc6fb19b5"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rn}.subtract($V{Suma_gasto_rn_pag})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="616" y="0" width="55" height="9" uuid="ad5be821-01b5-4e0c-ac5a-ac94164c755e"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rn}.subtract($V{Suma_ingreso_rn_pag})]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="0" y="0" width="26" height="9" uuid="28d4eb05-72b9-4dbe-a00f-600f474c475c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuenta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="26" y="0" width="92" height="9" uuid="e7c7c8f2-21e1-4cbc-bfa3-8c6b36785a94"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="117" y="0" width="55" height="9" uuid="39010581-61a0-4354-87d9-d872414124ad"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Sado_Inicial_d}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="173" y="0" width="55" height="9" uuid="553e1517-8f9b-4a29-b046-48c1a1106a82"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Sado_Inicial_h}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="228" y="0" width="55" height="9" uuid="61a7b09c-1422-459f-9276-1d76beb05913"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="284" y="0" width="55" height="9" uuid="a1a42bd6-9b02-4fd9-80eb-e7f264483b15"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="340" y="0" width="55" height="9" uuid="3be2ff71-b70b-4dc1-ae4e-d3152efb01ee"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Sado_Final_d}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="396" y="0" width="55" height="9" uuid="9264e143-6692-44bf-b05c-798f1243c98e"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Sado_Final_h}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="451" y="0" width="55" height="9" uuid="730b4c95-f1db-49a5-b026-287087b484f2"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Balance_a}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="506" y="0" width="55" height="9" uuid="de46e860-c5da-4e7e-9b77-44249f132b60"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Balance_p}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="672" y="0" width="55" height="9" uuid="a9db0457-9adf-4336-b27d-f93787b502ed"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_gf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="727" y="0" width="55" height="9" uuid="cccfaf04-d462-4603-a6f5-b0277046ee3f"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_if}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="561" y="0" width="55" height="9" uuid="e7a6c5c5-0e6c-43da-82a3-18e1e0c37c21"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_gn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="616" y="0" width="55" height="9" uuid="e73f04cc-6c16-4500-bb97-14c1225a5fe5"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_in}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="416" y="10" width="22" height="16" uuid="a3be7d5e-495e-4ae1-8818-16e39a6caed0"/>
+				<textElement>
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="351" y="10" width="65" height="16" uuid="b18f77b2-9a4c-4df9-8072-4edafc4bd3ef"/>
+				<textElement textAlignment="Right">
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="117" y="1" width="54" height="9" uuid="014729d2-d08a-4138-9bcd-34b34d5066f4"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_i}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-43" x="30" y="1" width="77" height="9" uuid="325799c4-38c4-4070-9145-aa47475e08ec"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Van]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="341" y="1" width="55" height="9" uuid="61b08d99-320f-4e50-8616-e11e93890a8e"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_f}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="727" y="1" width="53" height="9" uuid="011edc7f-c7c4-4680-a1c6-002fde2f6dd7"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="228" y="1" width="55" height="9" uuid="22059ee6-e065-46f7-b6fc-87d2532d6a90"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="396" y="1" width="55" height="9" uuid="b4061fa0-22c2-48ad-8d70-07fe1683b318"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_f}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="174" y="1" width="54" height="9" uuid="77817cc8-301f-4a05-baf6-2044c54df296"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_i}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="284" y="1" width="55" height="9" uuid="f969ba07-2f53-4285-89c3-308a135fd7d4"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="451" y="1" width="56" height="9" uuid="788c1e4d-96d9-4d33-b533-40e2ec9bf6de"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_activo_b}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="507" y="1" width="54" height="9" uuid="7609baaf-149d-4a87-9d78-9dec0bc301f9"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_pasivo_b}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="672" y="1" width="54" height="9" uuid="172c6af5-0fb9-46e2-9a94-7a37313717c9"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="563" y="1" width="54" height="9" uuid="532e477b-6aa8-48f7-97e4-a0fa930f529d"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="617" y="1" width="53" height="9" uuid="7d1a6dcf-bc20-4ad2-b2fb-95a1c3c25d64"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rn}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="33" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="507" y="11" width="55" height="9" uuid="691df10f-299c-49b1-b563-9775bb018774"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_Bal_a}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-25" x="450" y="21" width="333" height="1" uuid="c754c97e-bc26-48bd-b602-1124e2657c0a"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="672" y="11" width="55" height="9" uuid="32b3caac-8255-4e89-bab4-a5f7c75c1001"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_uf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="727" y="11" width="55" height="9" uuid="20f51741-c6d2-408b-9d24-659d976bfd67"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_pf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="450" y="11" width="55" height="9" uuid="1d033bee-c768-44d6-a335-8bae9198ca97"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_Bal_p}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="450" y="23" width="55" height="9" uuid="304f05a3-2ba7-4ea2-b674-80f6add09d73"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_activo_b}.add($V{Resultados_Bal_p})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="507" y="23" width="55" height="9" uuid="01ed014f-1f34-4cee-8237-b38d17b68378"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_pasivo_b}.add($V{Resultados_Bal_a})]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="416" y="16" width="22" height="16" uuid="9822019e-9991-417a-ac0a-e22f0e1bd953"/>
+				<textElement>
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="351" y="16" width="65" height="16" uuid="1f893421-a4f7-4263-badd-ac9fa82bc855"/>
+				<textElement textAlignment="Right">
+					<font size="6" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="341" y="1" width="55" height="9" uuid="9c3d2a60-b2f5-4f12-9407-7c2a3c55797e"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_f}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="672" y="1" width="55" height="9" uuid="4d7cabf7-aadf-429f-b152-002878cd9a78"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="229" y="1" width="55" height="9" uuid="6bb09038-4632-4703-aff6-c6c3172321df"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="451" y="1" width="55" height="9" uuid="c5e8acc2-7812-4bbc-bbd3-23b8323d1e4b"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_activo_b}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="727" y="1" width="55" height="9" uuid="3e775631-9b13-46f3-8e43-833d203a4508"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-43" x="30" y="1" width="77" height="9" uuid="615f3090-d706-4d39-9e53-881d328c8cb7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="117" y="1" width="54" height="9" uuid="f58cb530-d648-413f-a948-aec8c24ade16"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_debe_i}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="396" y="1" width="55" height="9" uuid="61698a80-754b-4bdb-81fd-6ba9a5d751be"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_f}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="174" y="1" width="54" height="9" uuid="f4fad8ed-d812-41e8-9933-e699672ee6a6"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_i}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="285" y="1" width="55" height="9" uuid="9d317a4c-969f-4773-9384-af8690745369"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_haber_m}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="507" y="1" width="55" height="9" uuid="0654deb9-4e6e-4a67-a9a5-2235a45dc018"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_pasivo_b}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="672" y="23" width="55" height="9" uuid="e34f393e-db3e-4e66-8c9a-b79ba454eff4"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rf}.add($V{Resultados_uf})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="727" y="23" width="55" height="9" uuid="876510f3-c0f7-4461-9e99-e9def1fc61bf"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rf}.add($V{Resultados_pf})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="563" y="1" width="55" height="9" uuid="134ee630-88aa-499c-bd7f-7f1147e06165"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="617" y="1" width="55" height="9" uuid="88954e30-5d7f-4ee4-af1c-c5a872a0586c"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="563" y="11" width="55" height="9" uuid="b50890ea-9bc6-4c10-be62-006006c20401"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_un}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="618" y="11" width="55" height="9" uuid="55230289-2761-4ac8-941f-1b9e5b6d81f3"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Resultados_pn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="563" y="23" width="55" height="9" uuid="370ac2a2-3995-4cfc-b622-864ea1c839a2"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_gasto_rn}.add($V{Resultados_un})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="618" y="23" width="55" height="9" uuid="bf5452b1-a9bd-4462-b205-918cb7e28946"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Suma_ingreso_rn}.add($V{Resultados_pn})]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

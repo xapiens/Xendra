@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="UtilidadVentasTopTen.jrxml" Name="UtilidadVentasTopTen.jrxml" BaseRole="" Description="UtilidadVentasTopTen.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="UtilidadVentasTopTen.jrxml" Identifier="a146e9ee-0007-4fdb-ae1a-86545c2bebec" Synchronized="2017-06-06 22:10:34.0">
+  <parameter Name="DateFrom2" Description="DateFrom2" Help="DateFrom2" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom2" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="1" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="8f795349-be5b-448d-81ad-053b03715cf9" Synchronized="2017-06-14 11:17:52.0" />
+  <parameter Name="DateFrom1" Description="DateFrom1" Help="DateFrom1" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom1" FieldLength="7" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="ad6d7fa1-4a27-4a0a-a4d4-6ccf2296a3cd" Synchronized="2017-06-14 11:17:52.0" />
+</process>
+
+

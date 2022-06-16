@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Productoprecio" Name="Productoprecio" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="Productoprecio.jrxml" Identifier="701f4457-582d-d8aa-6e47-bbe10c81d280" Synchronized="2017-06-06 23:00:39.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="1" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="83d9f385-af1d-6851-b2e0-ede0714bfef5" Synchronized="2017-06-06 23:00:39.0" />
+</process>
+
+

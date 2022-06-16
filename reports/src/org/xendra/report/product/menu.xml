@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Productos" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+ <menuitem Report="psicotropicos_nuevo" SeqNo="10" />
+</menuitem> 

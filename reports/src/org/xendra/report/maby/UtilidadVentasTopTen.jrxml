@@ -1,0 +1,489 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentasTopTen" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="160" isFloatColumnFooter="true" uuid="a49e137f-b0dc-4442-a1af-1587db8a7a91"><property name="Description" value="UtilidadVentasTopTen.jrxml" /><property name="FileName" value="UtilidadVentasTopTen.jrxml" /><property name="Synchronized" value="2017-06-06 22:10:34.735" /><property name="Identifier" value="a146e9ee-0007-4fdb-ae1a-86545c2bebec" />
+	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<parameter name="DateFrom1" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateFrom2" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+m_product_id,
+productcode,
+productname,
+sum(totalline_soles) as totalVentas,
+sum(totallineutil_soles) as totalUtilidades,
+min(cost) as coststatus
+from (
+(
+select
+il.m_product_id,
+i.dateinvoiced,
+(select value from m_product p where il.m_product_id = p.m_product_id) as productCode,
+(select name from m_product p where il.m_product_id = p.m_product_id) as productName,
+getCostforproduct(i.ad_client_id,i.ad_org_id,il.m_product_id,(date(i.dateinvoiced) || ' 24:00:00')::timestamp without time zone,'A','Y') as cost,
+(case when i.c_currency_id <> 308
+	then
+	( case when c_doctype_id != 1001042
+		then linenetamt*cr.multiplyrate
+		else -1*linenetamt*cr.multiplyrate
+	  end
+	)
+	else
+	( case when c_doctype_id != 1001042
+		then linenetamt
+		else -1*linenetamt
+	  end
+	)
+	end
+) as totalline_soles,
+(case when i.c_currency_id <> 308
+	then
+	( case when c_doctype_id != 1001042
+		then (linenetamt*cr.multiplyrate)-(qtyinvoiced*getCostforproduct(i.ad_client_id,i.ad_org_id,il.m_product_id,(date(i.dateinvoiced) || ' 24:00:00')::timestamp without time zone,'A','Y'))
+		else -1*((linenetamt*cr.multiplyrate)-(qtyinvoiced*getCostforproduct(i.ad_client_id,i.ad_org_id,il.m_product_id,(date(i.dateinvoiced) || ' 24:00:00')::timestamp without time zone,'A','Y')))
+	  end
+	)
+	else
+	( case when c_doctype_id != 1001042
+		then linenetamt-(qtyinvoiced*getCostforproduct(i.ad_client_id,i.ad_org_id,il.m_product_id,(date(i.dateinvoiced) || ' 24:00:00')::timestamp without time zone,'A','Y'))
+		else -1*(linenetamt-(qtyinvoiced*getCostforproduct(i.ad_client_id,i.ad_org_id,il.m_product_id,(date(i.dateinvoiced) || ' 24:00:00')::timestamp without time zone,'A','Y')))
+	  end
+	)
+	end
+) as totallineutil_soles
+from c_invoice i
+-- Retiramos las lineas que no identifican un producto ya que esttas son por lo general notas
+-- de credito ajenas a la devolucion de productos.
+join c_invoiceline il on i.c_invoice_id=il.c_invoice_id and coalesce(il.m_product_id,0) !=0
+	and il.isactive  = 'Y'
+left join c_conversion_rate cr on (cr.c_conversiontype_id = i.c_conversiontype_id
+	-- Esta linea obliga al optimizador a usar el indice creado reduciendo
+	-- el tiempo notablemente.
+	and cr.ad_client_id = 1000026  -- and cr.ad_org_id = 1000069
+	and cr.c_currency_id = i.c_currency_id
+	and cr.c_currency_id_to = 308
+	and date(i.dateinvoiced) between cr.validfrom and cr.validto
+	and i.c_currency_id != 308   -- No buscar soles a soles (casi un segundo menos)
+
+)
+
+where i.isactive  = 'Y' and i.docstatus != 'DR'
+-- CASO ESPECIAL OHNLUX CODIGO DE DOCUMENTO ANULADO
+and i.c_bpartner_id != 1012821
+-- Tampoco las notas de debito (CODIGO PARA OHMLUX)
+-- Tampoco las guias de venta  (CODIGO PARA OHMLUX) , que carajo es esto
+and i.c_doctype_id != 1001092 and i.c_doctype_id != 1001095
+and i.issotrx = 'Y'
+and i.ad_client_id = 1000026 and i.ad_org_id = 1000069
+and  il.m_product_id != 1017252
+and date(i.dateinvoiced) between date($P{DateFrom1}) and date($P{DateFrom2})
+)
+) xx
+group by m_product_id,productCode,productName
+order by totalUtilidades desc]]>
+	</queryString>
+	<field name="m_product_id" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="productcode" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="productname" class="java.lang.String">
+		<fieldDescription />
+	</field>
+	<field name="totalventas" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="totalutilidades" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<field name="coststatus" class="java.math.BigDecimal">
+		<fieldDescription />
+	</field>
+	<variable name="totalventas_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalventas}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{totalventas}.multiply( new BigDecimal(100)).divide($V{totalventas_1},3)]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalventas} : new BigDecimal(0.00)]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalutilidades} : new BigDecimal(0.00)]]></variableExpression>
+	</variable>
+	<variable name="totalutils_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalutilidades}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="52" width="534" height="23" backcolor="#E2DEDE" uuid="8ab85850-037e-419a-8e99-874d3272e599" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="55" width="72" height="13" uuid="7eb38cf6-9f10-4b3b-83b0-ef2570dee6a1" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="55" width="214" height="13" uuid="44476993-d5fa-4309-bcd4-c5d148156888" />
+				<textElement markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="55" width="72" height="19" uuid="4c1ef799-340d-4e82-b73e-cc835040c37b" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Ventas Soles]]></text>
+			</staticText>
+			<line>
+				<reportElement x="89" y="54" width="1" height="21" uuid="121f9bee-fdaf-48f8-8e50-79d4968eb014" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="309" y="53" width="1" height="21" uuid="d76582ab-a1e6-4924-a377-ef697efa0e8a" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="450" y="19" width="80" height="18" uuid="61a9498f-760b-49f0-ad4e-faca2b9385d9" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="463" y="35" width="65" height="12" uuid="68c8ddd0-5630-4d95-974c-ef280632ee03" />
+				<textElement textAlignment="Right">
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-20" x="414" y="19" width="35" height="20" uuid="81a864e7-593c-4aeb-89fc-8b083baaafd1" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="187" y="36" width="180" height="14" forecolor="#000000" uuid="8d5a0eec-8f87-4854-824f-34ab5ba1c4ce" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{DateFrom1})+ " al " + DateFormat.getDateInstance().format($P{DateFrom2})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="159" y="7" width="237" height="24" uuid="dfc9395b-1795-4586-9813-c699474aa595" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true" />
+				</textElement>
+				<text><![CDATA[Utilidades Top Ten - Ventas]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="528" y="35" width="22" height="12" uuid="b0e32a20-3529-4e8f-8320-796aeb31c533" />
+				<textElement>
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="496" y="19" width="50" height="12" uuid="439902ad-74c7-41dc-9c0a-df0c398351bd" />
+				<textElement verticalAlignment="Top">
+					<font size="7" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="393" y="55" width="72" height="19" uuid="d287ac54-5711-4a33-90d7-65587e3ac2a2" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Utilidades Soles]]></text>
+			</staticText>
+			<line>
+				<reportElement x="390" y="53" width="1" height="21" uuid="5b827b6a-51b5-4fcf-986b-1357114c3075" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="471" y="55" width="52" height="19" uuid="e15c70fb-b1f1-4b6b-9cd2-722940e0ed90" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[% Utilidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="468" y="53" width="1" height="21" uuid="0411aef6-9527-4a14-aa3b-3479cfac66fa" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="37" width="174" height="11" uuid="3c8734fd-6acc-432d-a6fe-6acf8691b69b" />
+				<textElement markup="none">
+					<font size="5" isBold="false" />
+				</textElement>
+				<text><![CDATA[Importante : Costos > Ventas Indica Producto Requiere Recosteo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="527" y="53" width="1" height="21" uuid="d22687fc-ccb4-4aa4-b7ab-585dd4e65bd9" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="530" y="55" width="15" height="19" uuid="c7a6ac5b-da49-4c13-99b2-2c41adeceaa1" />
+				<textElement textAlignment="Center" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[E]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($V{COLUMN_COUNT}.intValue() <= 10)]]></printWhenExpression>
+			<textField>
+				<reportElement x="15" y="0" width="72" height="13" uuid="7951996b-d955-4170-81a7-99712dd36f9d" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="213" height="13" uuid="003c0e79-0b1d-4a12-b6f5-1e4f8dd3b882" />
+				<textElement>
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="313" y="0" width="74" height="13" uuid="edad7860-ccd3-4958-9154-462cf0979443" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalventas} : new BigDecimal(0.00)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="12" y="0" width="1" height="17" uuid="22290342-ec17-4497-b820-a421eab2fec3" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="89" y="0" width="1" height="17" uuid="e67ba59f-dbae-4a11-b1f2-714115f20c80" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="309" y="1" width="1" height="15" uuid="3843a952-ad6e-46d3-8f5d-433af275cde8" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="527" y="0" width="1" height="17" uuid="bea0dc2e-607f-4ca4-b03b-fd8d73b004df" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="12" y="16" width="534" height="1" uuid="98c12938-b28e-446c-81b6-5af98df6a0e0" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="391" y="0" width="74" height="13" uuid="763edb30-3ea1-42a2-b69e-6fb2d45f82a1" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 10 ? $F{totalutilidades} : new BigDecimal(0.00)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="390" y="1" width="1" height="15" uuid="707d0a31-ffa6-4763-9f2b-99e79cd11e18" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00" hyperlinkType="Reference">
+				<reportElement x="471" y="1" width="52" height="13" uuid="db46d8ff-d8d8-439a-8748-6180207457c2" />
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalutilidades}.multiply(new BigDecimal(100.00)).divide($F{totalventas},BigDecimal.ROUND_HALF_DOWN)]]></textFieldExpression>
+				<anchorNameExpression><![CDATA["Detalle Utilidad"]]></anchorNameExpression>
+				<hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/UtilidadesVentasTopTen_hpl.jasper"]]></hyperlinkReferenceExpression>
+				<hyperlinkTooltipExpression><![CDATA["Detallar Utilidad"]]></hyperlinkTooltipExpression>
+				<hyperlinkParameter name="DateFrom1">
+					<hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+				</hyperlinkParameter>
+				<hyperlinkParameter name="DateFrom2">
+					<hyperlinkParameterExpression><![CDATA[$P{DateFrom2}]]></hyperlinkParameterExpression>
+				</hyperlinkParameter>
+				<hyperlinkParameter name="M_Product_ID">
+					<hyperlinkParameterExpression><![CDATA[$F{m_product_id}]]></hyperlinkParameterExpression>
+				</hyperlinkParameter>
+			</textField>
+			<line>
+				<reportElement x="468" y="1" width="1" height="15" uuid="06068960-01ad-4048-9f6a-c3f10a99d7ac" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="545" y="0" width="1" height="17" uuid="f9b8e396-7b49-4048-9ce4-e0eb75595eda" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="###0">
+				<reportElement x="531" y="1" width="11" height="13" uuid="037e4b85-3e29-44b0-bbca-1e431d29ff24">
+					<printWhenExpression><![CDATA[new Boolean($F{coststatus}.longValue() < 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="7" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coststatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40" splitType="Immediate">
+			<textField evaluationTime="Column" pattern="#,##0.00">
+				<reportElement x="313" y="20" width="74" height="13" uuid="d9e1d1fe-6411-4b76-b5b3-c59a65c742f0" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalventas_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column" pattern="#,##0.00">
+				<reportElement x="313" y="6" width="74" height="13" uuid="0de6ec3d-b91a-4fc2-a6c2-a3b77b352e4f" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="63" y="6" width="225" height="13" uuid="3d1021b6-17eb-4b6e-a066-f9c405e848ce" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total TOP TEN : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="20" width="225" height="13" uuid="08412574-88fa-4c6f-b6e9-af3a6ef38b03" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Ventas : ]]></text>
+			</staticText>
+			<textField evaluationTime="Column" pattern="#,##0.00">
+				<reportElement x="391" y="6" width="74" height="13" uuid="f3ace0b7-c392-4e92-a98f-f56738685c14" />
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="391" y="20" width="74" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="c8a5f20b-813c-4df7-8b44-2e756b01bac5" />
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+					<paragraph lineSpacing="Single" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalutils_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="471" y="6" width="52" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="81234a83-c3f3-498e-9a1d-6aaf268b45e4" />
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+					<paragraph lineSpacing="Single" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable3}.multiply(new BigDecimal(100.00)).divide($V{variable2},BigDecimal.ROUND_HALF_DOWN)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="471" y="20" width="52" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="97d8779a-0d82-4602-bc1e-196d5014796e" />
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+					<paragraph lineSpacing="Single" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalutils_1}.multiply(new BigDecimal(100.00)).divide($V{totalventas_1},BigDecimal.ROUND_HALF_DOWN)]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="318">
+			<pie3DChart>
+				<chart isShowLegend="true" renderType="draw" theme="default">
+					<reportElement x="0" y="0" width="555" height="315" uuid="29944226-b491-47dc-b1f2-991a9d5d2bb8" />
+					<chartTitle position="Top">
+						<font size="12" isBold="true" />
+						<titleExpression><![CDATA["Top Ten"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle />
+					<chartLegend position="Bottom">
+						<font size="8" />
+					</chartLegend>
+				</chart>
+				<pieDataset maxCount="10">
+					<keyExpression><![CDATA[$F{productcode}]]></keyExpression>
+					<valueExpression><![CDATA[$F{totalutilidades}]]></valueExpression>
+					<sectionHyperlink hyperlinkType="Reference">
+						<hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/UtilidadesVentasTopTen_hpl.jasper"]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA["Detallar Utilidad"]]></hyperlinkTooltipExpression>
+						<hyperlinkParameter name="DateFrom1">
+							<hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+						</hyperlinkParameter>
+						<hyperlinkParameter name="DateFrom2">
+							<hyperlinkParameterExpression><![CDATA[$P{DateFrom2}]]></hyperlinkParameterExpression>
+						</hyperlinkParameter>
+						<hyperlinkParameter name="M_Product_ID">
+							<hyperlinkParameterExpression><![CDATA[$F{m_product_id}]]></hyperlinkParameterExpression>
+						</hyperlinkParameter>
+					</sectionHyperlink>
+				</pieDataset>
+				<pie3DPlot depthFactor="0.1" isCircular="true" labelFormat="{0} ({2})" legendLabelFormat="{0} [{1}] -  ({2})">
+					<plot orientation="Horizontal" backgroundAlpha="0.0" foregroundAlpha="0.9" />
+					<itemLabel color="#000000" backgroundColor="#FFFFCC">
+						<font size="5" />
+					</itemLabel>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</pageFooter>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="57" y="18" width="441" height="17" uuid="6e56c2a2-ff9d-4ff6-8fdd-5d266d3a3270" />
+				<textElement textAlignment="Center">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[NO HAY DATOS QUE MOSTRAR EN ESTE MOMENTO]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
+

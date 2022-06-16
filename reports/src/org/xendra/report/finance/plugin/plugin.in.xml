@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="finance reports extension" description="finance reports extension" id="org.xendra.report.finance" version="1.0" category="Finanzas" synchronized="@timestamp@" tags="Finanzas" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+</plugin>
+
+

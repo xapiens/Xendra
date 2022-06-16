@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Guia_Traslado" Name="Guia_Traslado" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="goods_transfers.jrxml" Identifier="3d9cc780-7afc-2fdf-086b-09c760de7f57" Synchronized="2017-06-06 23:00:38.0" />
+
+

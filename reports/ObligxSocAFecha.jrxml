@@ -1,0 +1,629 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ObligxSocAFecha" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="098c4a8d-e4ce-4884-8188-4398b9df6469">
+  <property name="Description" value="ObligxSocAFecha.jrxml" />
+  <property name="FileName" value="ObligxSocAFecha.jrxml" />
+  <property name="Synchronized" value="2017-06-08 06:01:09.145" />
+  <property name="Identifier" value="2efe3f9c-89d2-4720-916c-550ac5b9c1aa" />
+  <property name="ireport.zoom" value="1.5" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="DateTo" class="java.util.Date" />
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_Currency_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+(select name from ad_org where ad_org_id = $P{AD_Org_ID}) as Compañia,
+--u.name as usuario,
+bp.name as Socio,
+--dt.name as doc,
+
+extract(year from $P{DateTo}::timestamp without time zone) as anio,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= -31 then  invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MENOS31AMENOS,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= -16 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= -30 THEN invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MENOS16A30,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= -8 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= -15 THEN invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MENOS8A15,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) < 0 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= -7 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MENOS1A7,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) = 0 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as Hoy,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 1 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 7 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS1A7,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 8 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 15 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS8A15,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 16 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 30 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS16A30,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 31 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 45 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS31A45,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 46 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 60 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS46A60,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 61 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 90 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS61A90,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >= 91 and ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) <= 120 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS91A120,
+
+sum(case when ((date(paymenttermduedate(i.c_paymentterm_id, i.dateinvoiced)) - date($P{DateTo}))) >=121 then invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo}))else 0.00 end) as MAS121AMAS,
+
+sum(invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,date($P{DateTo}))) as total
+
+
+FROM C_Invoice_v i
+left join c_bpartner bp on i.c_bpartner_id = bp.c_bpartner_id
+JOIN C_Currency c ON (i.C_Currency_ID=c.C_Currency_ID)
+inner join c_paymentterm pt on i.c_paymentterm_id=pt.c_paymentterm_id
+inner join ad_user u on i.salesrep_id=u.ad_user_id
+left JOIN C_DocType dt ON i.c_doctype_id = dt.c_doctype_id
+
+WHERE
+i.IsSOTrx='N'
+and invoiceOpenatdate(C_Invoice_ID,C_InvoicePaySchedule_ID,($P{DateTo})) != 0
+and i.c_currency_id =  $P{C_Currency_ID}
+and i.isactive = 'Y'
+and (i.docstatus = 'CO' or i.docstatus = 'CL')
+and i.ad_client_id = $P{AD_Client_ID}
+and i.ad_org_id = $P{AD_Org_ID}
+group by socio
+
+UNION all
+SELECT
+(select name from ad_org where ad_org_id = $P{AD_Org_ID}) as Compañia,
+--u.name as usuario,
+bp.name as Socio,
+--dt.name as doc,
+extract(year from $P{DateTo}::timestamp without time zone) as anio,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) < -31 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MENOS31AMAS,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) <= -16 and ( date(b.duedate)-date($P{DateTo})) >= -30 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MENOS16A30,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) <= -8 and ( date(b.duedate)-date($P{DateTo})) >= -15 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MENOS8A15,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) < 0 and ( date(b.duedate)-date($P{DateTo})) >= -7 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MENOS1A7,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) = 0 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as Hoy,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 1 and ( date(b.duedate)-date($P{DateTo})) <= 7 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS1A7,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 8 and ( date(b.duedate)-date($P{DateTo})) <= 15 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS8A15,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 16 and ( date(b.duedate)-date($P{DateTo})) <= 30 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS16A30,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 31 and ( date(b.duedate)-date($P{DateTo})) <= 45 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS31A45,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 46 and ( date(b.duedate)-date($P{DateTo})) <= 60 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS46A60,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 61 and ( date(b.duedate)-date($P{DateTo})) <= 90 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS61A90,
+
+sum(case when ( date(b.duedate)-date($P{DateTo})) >= 91 and ( date(b.duedate)-date($P{DateTo})) <= 120 then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS91A120,
+
+sum(case when (date(b.duedate)-date($P{DateTo})) >= 121
+then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as MAS121AMAS,
+
+sum(case when c.ISO_Code  = 'S/.' then boeOpenatdate(b.C_boe_ID,($P{DateTo})) else 0.00 end) as total
+
+from C_BOE b
+left join c_bpartner bp on b.c_bpartner_id = bp.c_bpartner_id
+JOIN C_Currency c ON (b.C_Currency_ID=c.C_Currency_ID)
+inner join c_boeline bl on b.c_boe_id=bl.c_boe_id
+inner join c_invoice i on bl.c_invoice_id=i.c_invoice_id
+inner join ad_user u on i.salesrep_id=u.ad_user_id
+left join c_doctype dt on b.c_doctype_id = dt.c_doctype_id
+
+WHERE
+
+b.IsSOTrx='N'
+and b.c_currency_id =  $P{C_Currency_ID}
+and b.docstatus != 'DR'
+and b.isactive = 'Y'
+--and boeOpen(b.C_boe_ID) > 0.10
+and i.ad_client_id = $P{AD_Client_ID}
+and i.ad_org_id = $P{AD_Org_ID}
+and boeOpenatdate(b.C_boe_ID,date(($P{DateTo}))) != 0
+
+group by socio
+order by socio]]></queryString>
+  <field name="compañia" class="java.lang.String" />
+  <field name="socio" class="java.lang.String" />
+  <field name="anio" class="java.lang.Double" />
+  <field name="menos31amenos" class="java.math.BigDecimal" />
+  <field name="menos16a30" class="java.math.BigDecimal" />
+  <field name="menos8a15" class="java.math.BigDecimal" />
+  <field name="menos1a7" class="java.math.BigDecimal" />
+  <field name="hoy" class="java.math.BigDecimal" />
+  <field name="mas1a7" class="java.math.BigDecimal" />
+  <field name="mas8a15" class="java.math.BigDecimal" />
+  <field name="mas16a30" class="java.math.BigDecimal" />
+  <field name="mas31a45" class="java.math.BigDecimal" />
+  <field name="mas46a60" class="java.math.BigDecimal" />
+  <field name="mas61a90" class="java.math.BigDecimal" />
+  <field name="mas91a120" class="java.math.BigDecimal" />
+  <field name="mas121amas" class="java.math.BigDecimal" />
+  <field name="total" class="java.math.BigDecimal" />
+  <variable name="Sum2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{menos16a30}]]></variableExpression>
+  </variable>
+  <variable name="Sum3" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{menos8a15}]]></variableExpression>
+  </variable>
+  <variable name="Sum4" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{menos1a7}]]></variableExpression>
+  </variable>
+  <variable name="Sum5" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{hoy}]]></variableExpression>
+  </variable>
+  <variable name="Sum6" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas1a7}]]></variableExpression>
+  </variable>
+  <variable name="Sum7" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas8a15}]]></variableExpression>
+  </variable>
+  <variable name="Sum8" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas16a30}]]></variableExpression>
+  </variable>
+  <variable name="Sum9" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas31a45}]]></variableExpression>
+  </variable>
+  <variable name="Sum10" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas46a60}]]></variableExpression>
+  </variable>
+  <variable name="Sum11" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas61a90}]]></variableExpression>
+  </variable>
+  <variable name="Sum12" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas91a120}]]></variableExpression>
+  </variable>
+  <variable name="Sum13" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mas121amas}]]></variableExpression>
+  </variable>
+  <variable name="SumTot" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{total}]]></variableExpression>
+  </variable>
+  <variable name="Sum1" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{menos31amenos}]]></variableExpression>
+  </variable>
+  <pageHeader>
+    <band height="57" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="27" width="752" height="30" uuid="caf096eb-f71e-4e7b-9c94-df06faafffaa" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="18" isBold="true" />
+        </textElement>
+        <text><![CDATA[OBLIGACIONES PENDIENTES]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-1" x="2" y="7" width="135" height="18" uuid="5352451d-457f-4c10-81df-242d107cd3cf" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Xendra ERP - Finanzas -]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField" x="604" y="0" width="103" height="18" uuid="7ac38138-dcd0-4c4f-8cc6-699143222d86" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false">
+        <reportElement key="textField" x="603" y="18" width="145" height="14" uuid="c4f4b9cb-d10e-45bd-b77e-7109e5e46135" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Right">
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-19" x="707" y="0" width="43" height="18" uuid="7f059f39-0590-488b-8f92-fac138dae9e8" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement>
+          <font size="8" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="137" y="7" width="466" height="18" uuid="a09414b0-3469-40af-88a3-3718c7ed1b2a" />
+        <textElement verticalAlignment="Middle">
+          <font isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{compañia}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="19" splitType="Stretch">
+      <rectangle>
+        <reportElement x="0" y="2" width="167" height="15" uuid="aa6b3999-19ad-4bfc-9487-0da2d037bd4d" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="167" y="2" width="45" height="15" uuid="99e923e8-017f-441c-8445-af2e61779cdd" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="212" y="2" width="45" height="15" uuid="71752e80-f0a0-45bb-89b8-58e76a917f08" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="257" y="2" width="45" height="15" uuid="8f94fd3b-bffd-494c-9135-21a588162137" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="302" y="2" width="45" height="15" uuid="6f51a70f-7010-4cbb-b4ce-b961d407b2ed" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="347" y="2" width="45" height="15" uuid="6b7f8464-f136-4c3e-986b-ec46c555b5c9" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="392" y="2" width="45" height="15" uuid="ee00487b-b462-41de-b826-d4da3af4d13c" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="437" y="2" width="45" height="15" uuid="c757f195-5930-418a-9050-6463ed5bd098" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="482" y="2" width="45" height="15" uuid="81cd143c-4e1b-4b20-a7a3-84826a3ada38" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="527" y="2" width="45" height="15" uuid="0e1d4dac-fef4-4dbb-8abe-4a2467b406b7" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="572" y="2" width="45" height="15" uuid="49870398-8409-4cc1-a0f8-2f5651d7ff2f" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="617" y="2" width="45" height="15" uuid="abd8ecd4-7f29-420f-a600-2c54e3e260d0" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="662" y="2" width="45" height="15" uuid="7f715ec3-4f7c-434c-a63b-583381407f94" />
+      </rectangle>
+      <rectangle>
+        <reportElement x="707" y="2" width="45" height="15" uuid="0276b21e-910f-4a67-8f31-e0101c327659" />
+      </rectangle>
+      <staticText>
+        <reportElement x="167" y="2" width="45" height="15" uuid="663c4ea7-76ef-4617-bd16-67f21ad302cc" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[-16A-30]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="212" y="2" width="45" height="15" uuid="782c8532-518d-4dae-b601-23983bb0f644" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[-8A-15]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="257" y="2" width="45" height="15" uuid="a32de584-c2d4-46c0-8492-60aced373799" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[-1A-7]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="302" y="2" width="45" height="15" uuid="408866e4-8fc0-4cf7-9e2f-1ec4eec8224b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text />
+      </staticText>
+      <staticText>
+        <reportElement x="347" y="2" width="45" height="15" uuid="15c4df31-4cfd-4eb2-a47c-19da57e242a9" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[1 A 7]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="392" y="2" width="45" height="15" uuid="682c108b-b990-4758-825d-e45afe7ac977" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[8 A 15]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="437" y="2" width="45" height="15" uuid="24d6993d-53e6-4146-8670-7d48dac8fad9" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[16 A 30]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="482" y="2" width="45" height="15" uuid="daca0ce3-e2c3-41af-800e-c4166940dc19" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[31 A 45]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="527" y="2" width="45" height="15" uuid="5eb1fcde-eaeb-4cfd-b595-ea4ae4a079e6" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[46 A 60]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="572" y="2" width="45" height="15" uuid="6e0927b9-2f2a-4bb3-a105-ada096cbb2f0" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[61 A 90]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="617" y="2" width="45" height="15" uuid="5d3c32ca-9508-43e4-a04c-67e1536d9d58" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[91 A 120]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="662" y="2" width="45" height="15" uuid="89705719-1592-4965-a05d-9a44399ad89b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[121A Mas]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="707" y="2" width="45" height="15" uuid="77202bbb-522c-4310-8d21-81486b53bd97" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[TOTAL]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="3" width="115" height="15" uuid="c5c6273d-c02d-4965-9b20-c1a7b4b51f23" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[Socio de Negocio]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yy">
+        <reportElement x="302" y="3" width="45" height="14" uuid="a85669cc-9c41-4f04-a8bc-325fe6e1e888" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{DateTo}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="121" y="3" width="47" height="15" uuid="cf498244-4945-4a23-9368-75277e699f0b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="8" isBold="true" />
+        </textElement>
+        <text><![CDATA[-31AMeno]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="16">
+      <textField pattern="###0.00">
+        <reportElement x="167" y="0" width="45" height="15" uuid="1b8446fd-1f48-4696-9e99-63676e6dbb90" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{menos16a30}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="302" y="0" width="45" height="15" uuid="2cfdf7b8-b53e-4c6a-a722-958be1ab2fbd" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{hoy}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="212" y="0" width="45" height="15" uuid="74dfbd66-8f5e-402c-9e45-9bcbacc35855" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{menos8a15}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="347" y="0" width="45" height="15" uuid="bcd02738-7a48-4060-85bc-a744c2a3455e" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas1a7}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="392" y="0" width="45" height="15" uuid="8262a941-5b5f-48ac-bedd-9ea861f20f73" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas8a15}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="257" y="0" width="45" height="15" uuid="eab4c7d6-504e-4ef2-869a-83e4a799ca9a" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{menos1a7}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="437" y="0" width="45" height="15" uuid="37f48294-0ad1-4350-a9ff-f5c3f97ecb6f" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas16a30}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="572" y="0" width="45" height="15" uuid="f2719ebe-14d5-41eb-90f7-8c016293e804" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas61a90}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="662" y="0" width="45" height="15" uuid="8c31074e-e9f3-4a39-85af-1a75b0e834d8" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas121amas}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="617" y="0" width="45" height="15" uuid="fe70082a-0a49-495d-8864-c1ff5d877010" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas91a120}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="482" y="0" width="45" height="15" uuid="d32fb46d-b3c7-462b-a458-39ebe17f1574" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas31a45}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="527" y="0" width="45" height="15" uuid="01e57dfa-0b10-4ba9-882f-5f45bc0d40c1" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mas46a60}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="707" y="0" width="45" height="15" uuid="0fab43f6-5475-4cb8-9b61-ed1d99057105" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="0" y="0" width="121" height="15" uuid="386300e2-8837-4651-8789-5a0288f74afb" />
+        <textElement verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{socio}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="121" y="1" width="45" height="15" uuid="02e96b31-e378-4f1f-824e-7b7bcefbf078" />
+        <textElement textAlignment="Right" verticalAlignment="Middle">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{menos31amenos}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="15">
+      <textField isBlankWhenNull="true">
+        <reportElement x="167" y="0" width="45" height="14" uuid="f689265c-1cef-497d-b8d0-76a4948d6a41" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum2}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="212" y="0" width="45" height="14" uuid="0f937c3d-5cc5-4bf0-8373-cb5468f9845b" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum3}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="257" y="0" width="45" height="14" uuid="c9948f43-d804-47f2-8ef5-6b15b428eb57" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum4}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="302" y="0" width="45" height="14" uuid="296b32c3-9412-402e-9d03-fb601b700bdf" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum5}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="347" y="0" width="45" height="14" uuid="9f15d080-ecef-4176-bd9b-dc57d57b451b" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum6}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="392" y="0" width="45" height="14" uuid="0506a540-70b7-47de-ad20-adb9f20e0725" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum7}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="437" y="0" width="45" height="14" uuid="0839b4cb-f60f-48f3-a68f-c788e1136887" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum8}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="482" y="0" width="45" height="14" uuid="6138ebec-f3fb-4dd1-96d6-e473890a2463" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum9}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="527" y="0" width="45" height="14" uuid="7b479d5e-55ae-4ef3-86ee-16d82ff58d9a" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum10}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="572" y="0" width="45" height="14" uuid="bcb12dfb-e61b-44cc-bd4a-f2f3858e008b" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum11}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="617" y="0" width="45" height="14" uuid="16ce8bd5-bdb7-46dd-b7fd-7f5f2efa58f9" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum12}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="662" y="0" width="45" height="14" uuid="bbe61d6a-8a09-48ee-9510-31aaa91a1ee3" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum13}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="707" y="0" width="45" height="14" uuid="042f9dff-88cd-42ab-bf29-59402b2a1b0c" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{SumTot}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="121" y="0" width="45" height="14" uuid="a6c10e7e-a206-4220-8ac3-c7ddd81068d0" />
+        <textElement textAlignment="Right">
+          <font size="6" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{Sum1}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+</jasperReport>

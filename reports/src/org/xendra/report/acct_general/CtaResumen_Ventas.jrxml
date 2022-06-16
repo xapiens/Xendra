@@ -1,0 +1,204 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CtaResumen_Ventas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2cdfe84d-8094-402c-b140-126deb6fffa2"><property name="Description" value="CtaResumen_Ventas.jrxml" /><property name="FileName" value="CtaResumen_Ventas.jrxml" /><property name="Synchronized" value="2017-06-08 05:59:23.184" /><property name="Identifier" value="792a01b7-0c5a-45fc-a792-5d57cf69d4f7" />
+	<property name="ireport.zoom" value="3.0" />
+	<property name="ireport.x" value="500" />
+	<property name="ireport.y" value="82" />
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateAcct1" class="java.util.Date" />
+	<parameter name="DateAcct2" class="java.util.Date" />
+	<queryString>
+		<![CDATA[select
+f.account_id,
+ev.value,
+ev.name,
+sum (amtsourcedr) as debe,
+sum (amtsourcecr) as haber
+from fact_acct f
+left join c_elementvalue ev on f.account_id = ev.c_elementvalue_id
+--left join c_invoice i on f.record_id = i.c_invoice_id
+where
+--ad_table_id = 318
+--and i.issotrx = 'Y'
+fact_id like '14-%'
+and date(f.dateacct) >= date($P{DateAcct1})
+and date(f.dateacct) <= date($P{DateAcct2})
+and isdistribution = 'N'
+and f.ad_client_id = $P{AD_Client_ID}
+
+group by f.account_id, ev.value, ev.name
+order by ev.value]]>
+	</queryString>
+	<field name="account_id" class="java.math.BigDecimal" />
+	<field name="value" class="java.lang.String" />
+	<field name="name" class="java.lang.String" />
+	<field name="debe" class="java.math.BigDecimal" />
+	<field name="haber" class="java.math.BigDecimal" />
+	<variable name="SumDebe" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{debe}]]></variableExpression>
+	</variable>
+	<variable name="SumHaber" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{haber}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band splitType="Stretch" />
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="200" y="2" width="152" height="12" uuid="d9b51490-1890-4a7f-85ce-2aa42a50ff25" />
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isUnderline="true" />
+				</textElement>
+				<text><![CDATA[Resumen de Ventas]]></text>
+			</staticText>
+			<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+				<reportElement key="textField-3" x="512" y="1" width="38" height="10" uuid="4928ae71-521a-420b-854d-72e1f4d863a7" />
+				<textElement verticalAlignment="Top">
+					<font size="6" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="467" y="1" width="45" height="10" uuid="9468e97f-d1c0-4394-a9fc-a2b44681ccc4" />
+				<textElement verticalAlignment="Top">
+					<font size="6" isItalic="false" />
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="523" y="10" width="22" height="12" uuid="f5711394-59e6-4824-becc-32bc05bfd9fa" />
+				<textElement>
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="458" y="10" width="65" height="12" uuid="bd18f066-03ea-4cce-bbe5-95e57a2111cf" />
+				<textElement textAlignment="Right">
+					<font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="29" width="74" height="12" uuid="dac2bf33-f6a9-4fe1-863b-9d6288259ab8" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="29" width="218" height="12" uuid="edd1e9d1-3c3c-4606-873b-c5d81b07676f" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="29" width="108" height="12" uuid="d899cb23-d130-4c8f-bd0d-15869f452c3a" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="29" width="100" height="12" uuid="3d647246-5786-4c57-a018-e37ed3f4f462" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="200" y="15" width="77" height="12" uuid="c99c5994-783e-4c5e-9ab8-3573b7398a91" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateAcct1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="298" y="14" width="72" height="13" uuid="3c33b53e-4c3c-4fb6-a730-3771d3cffac1" />
+				<textElement textAlignment="Center">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateAcct2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="15" width="21" height="12" uuid="2051ad0f-72be-4ca2-a7e2-d1e8e8200917" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Del: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="14" width="15" height="13" uuid="2c80c5bc-1c7d-4813-a015-54095abf8068" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<text><![CDATA[Al:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch" />
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="74" height="13" uuid="3ceb0def-cfc8-4137-b738-b10ecae1b7a2" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="0" width="218" height="13" uuid="db7ff82b-c753-43ea-8dd1-a083bbff60bc" />
+				<textElement>
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="303" y="0" width="108" height="13" uuid="95db7c30-7854-4b16-bb57-36c26cf5247e" />
+				<textElement textAlignment="Right">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="411" y="0" width="100" height="13" uuid="114e5c55-714e-4299-be4a-c0a3a9cfefd3" />
+				<textElement textAlignment="Right">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{haber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch" />
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="303" y="0" width="108" height="15" uuid="adef5db5-0dc7-477c-a324-0bd232e5c544" />
+				<textElement textAlignment="Right">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumDebe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="411" y="0" width="100" height="15" uuid="1c021a0c-180d-4202-83de-f237a0546cfd" />
+				<textElement textAlignment="Right">
+					<font size="9" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumHaber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch" />
+	</summary>
+</jasperReport>
+

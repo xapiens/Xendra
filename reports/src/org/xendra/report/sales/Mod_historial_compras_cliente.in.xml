@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Ventas por Cliente" Name="Ventas por Cliente" BaseRole="SLS,ALL" Description="" Help="Muestra las ventas detalladas a un determinado cliente" Classname="org.compiere.report.ReportStarter" CategoryName="Ventas" AccessLevel="3" EntityType="D" FileName="Mod_historial_compras_cliente.jrxml" Identifier="60cb69e4-edef-4a1a-aa1f-1ea01951f940" Synchronized="2016-09-08 14:32:08.0">
+  <parameter Name="C_BPartner_ID" Description="" Help="" AD_Reference_ID="6f4a17ad-b890-92c3-09cf-6811e3fb48c7" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BPartner_ID" FieldLength="10" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="3d165940-9793-4bfa-957c-a22e6069d78f" Synchronized="2016-09-08 14:32:08.0" />
+  <parameter Name="DateInvoiced" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateInvoiced" FieldLength="10" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="b36b205f-1ec4-4cb6-8f3a-e535ec428296" Synchronized="2016-09-08 14:32:08.0" />
+</process>
+
+

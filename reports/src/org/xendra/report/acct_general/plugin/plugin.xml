@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="account general reports extension" description="account general reports extension" id="org.xendra.report.acct_general" version="1.0" category="Contabilidad" synchronized="@timestamp@" tags="SUNAT,Contabilidad" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Contabilidad" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Name="Analisis" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+      <menuitem Report="AnalisisCta6" SeqNo="10" />
+      <menuitem Report="CostoContable" SeqNo="20" />
+      <menuitem Report="Cta_libro" SeqNo="30" />
+      <menuitem Report="CtaResumen_Compras" SeqNo="40" />
+      <menuitem Report="CtaResumen_ComprasTipoDoc" SeqNo="50" />
+      <menuitem Report="CtaResumen_Ventas" SeqNo="60" />
+      <menuitem Report="CtaResumen_VentasTipoDoc" SeqNo="70" />
+      <menuitem Report="CtasDetalle_Doc" SeqNo="80" />
+      <menuitem Report="Ctas_Doc" SeqNo="90" />
+      <menuitem Report="CtasResumen_ComprasTipDocImp" SeqNo="100" />
+      <menuitem Report="daot_clientes" SeqNo="110" />
+      <menuitem Report="daot_proveedores" SeqNo="120" />
+      <menuitem Report="daot_resumen_cli" SeqNo="130" />
+      <menuitem Report="daot_resumen_prov" SeqNo="140" />
+    </menuitem>
+  </menuitem>
+</plugin>
+
+

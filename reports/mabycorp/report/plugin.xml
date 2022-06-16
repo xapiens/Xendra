@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="@name@" description="@description@" id="@id@" version="1.0" category="@category@" synchronized="@timestamp@" enabled="true">
+  <menu>
+    <menuitem Name="Contabilidad" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="" Synchronized="2017-06-07 11:27:11.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Contabilidad" />
+    </menuitem>
+    <menuitem Name="POS por producto" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d5c36868-cccd-9e5e-11db-d24a93594e92" Action="R" Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Identifier="7b5cbd75-0b61-4146-ba3d-4fcf947d68e4" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="POS por producto" />
+    </menuitem>
+    <menuitem Name="Formato 05.1.1 (Resm.X Asiento)" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="6383d32a-c806-44c1-8789-7a3ffdcd0160" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="6e1cb699-4862-4866-897b-588307ffe2db" Synchronized="2017-06-07 11:28:36.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 05.1.1 (Resm.X Asiento)" />
+    </menuitem>
+    <menuitem Name="Formato 3.20" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="06d1069e-89c0-2569-3fa7-a8ead9772f30" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="0a208270-4d79-4825-b75d-01d7bb1cb8cb" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.20 - I&amp;B Resultados" />
+    </menuitem>
+    <menuitem Name="CajaGeneral" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="21e1468c-a361-6e24-732f-46580c8a2ab2" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="8cf25e53-146e-4419-bfa5-da9794d71227" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="CajaGeneral" />
+    </menuitem>
+    <menuitem Name="Formato 3.10" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="44ec9d0e-f331-f770-a820-9bfc6a50f463" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="c541e871-d913-4223-8ff3-62dd98887fd5" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.10 - I&amp;B Cta 40" />
+    </menuitem>
+    <menuitem Name="Cobrados Antiguos" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0c9a5631-e7b6-6e47-bd09-6df0da36c9cd" Action="R" Parent_ID="" Identifier="fa7d1a1c-82d1-48c0-84e2-2623d90e2140" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cobrados Antiguos" />
+    </menuitem>
+    <menuitem Name="Formato 03.17_A - I&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="713867cc-1c1f-4102-ae60-4e7fd0033b73" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="4eb23994-2756-4601-818e-b444545239a4" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.17_A - I&amp;B Comprobación" />
+    </menuitem>
+    <menuitem Name="Ventas por Categoria Resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="8a4667fd-bbb0-5d44-f5ea-a92963dd68d0" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="a1403999-0cfe-4f38-8308-538c875f54f7" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Categoria Resumen" />
+    </menuitem>
+    <menuitem Name="R_MMShipment" Description="" IsSummary="false" IsSOTrx="true" IsReadOnly="false" EntityType="D" AD_Process_ID="1113b90c-df0a-a803-d779-06d5f999c8b6" Action="R" Parent_ID="729fcd5d-8e88-4567-8cff-c3342a13dd87" Identifier="42a60e94-c381-432c-a4c7-ffa90c3720f9" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="R_EntregaMaterial" />
+    </menuitem>
+    <menuitem Name="CtaResumen_ComprasTipoDoc_Detalle" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ee85ca56-53c0-4558-a8b5-0d055b2ad6f1" Action="R" Parent_ID="" Identifier="84713d19-2673-421d-89f6-2ea37afb0255" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="CtaResumen_ComprasTipoDoc_Detalle" />
+    </menuitem>
+    <menuitem Name="Documento por Cta Detalle" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a0fe1764-2b0f-46c4-826b-337a873395c8" Action="R" Parent_ID="64d04c4d-b2e5-4694-b0e1-c7d0ba88a692" Identifier="371783b0-c943-4f77-b14f-7131ff0287cb" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Documento por Cta Detalle" />
+    </menuitem>
+    <menuitem Name="Detalle Cuentas x Cobrar" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d95b459e-37e4-e45f-e5b9-d506f35b6ea1" Action="R" Parent_ID="" Identifier="dd8177f4-799f-4f80-951b-4b0f6c998434" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Detalle Cuentas x Cobrar" />
+    </menuitem>
+    <menuitem Name="Formato 3.17" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="6ec596c1-f4f2-27b0-a19e-409845194e96" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="7b2febfa-cfa8-4007-b441-e98bf8595cb5" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.17 - I&amp;B Comprobación" />
+    </menuitem>
+    <menuitem Name="CtaResumen_Compras" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="07773136-a3e4-4f79-b4cc-6451cdf10512" Action="R" Parent_ID="" Identifier="cd5f0fd3-03a0-4348-978e-ec10ee7e107e" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x Cta Resumen" />
+    </menuitem>
+    <menuitem Name="prodsaldo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="eea1efdd-8c3c-a661-82b5-a065edc1792f" Action="R" Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Identifier="d47ae692-fc7e-4bb0-8d69-44dfad647baf" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="prodsaldo" />
+    </menuitem>
+    <menuitem Name="Formato 3.12" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d70e7736-77dd-8060-255f-1f9daf2d8fd1" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="62831696-bc39-4e00-9e6e-51349750c357" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.12 - I&amp;B Cta 42" />
+    </menuitem>
+    <menuitem Name="Cancelados Cli" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="b9f300a1-a110-bfc6-3972-ccdd9e9f66d4" Action="R" Parent_ID="" Identifier="06c7221d-60df-4e75-96da-31cb00b04d47" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cobrados" />
+    </menuitem>
+    <menuitem Name="Productos" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="19a3f1b1-01f3-48b0-a23d-32901312aeee" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Productos" />
+    </menuitem>
+    <menuitem Name="Transacciones x categoria" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="291743f4-3ef6-7ef2-8bec-432e82da7b65" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="782fbfba-e509-41c8-90cb-46a78e5c137a" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Transacciones x categoria" />
+    </menuitem>
+    <menuitem Name="Formato 06.1.1(Resm.X Asiento)" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="b4fcb210-cb0d-421a-84bf-dcce563f32a8" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="2b7dc175-6d28-44a3-ba98-6efdbb955b5c" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 06.1.1(Resm.X Asiento)" />
+    </menuitem>
+    <menuitem Name="Estados De Cuentas - Resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0eb101e1-6bfc-62aa-f98b-035b226998f2" Action="R" Parent_ID="" Identifier="eaee8edb-91a1-42fd-b3cc-bf9b86317c2e" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Estados De Cuentas - Resumen" />
+    </menuitem>
+    <menuitem Name="Imprimir Creditos x Día" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d95b459e-37e4-e45f-e5b9-d506f35b6ea1" Action="R" Parent_ID="" Identifier="1dc2e13a-43b4-4cd5-9b65-e9d61a1d94df" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Imprimir Creditos x Día" />
+    </menuitem>
+    <menuitem Name="Formato 3.14" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7bb5b49c-1001-3237-235e-d18a45a948f7" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="9b061eb4-2b50-4317-b8c3-f6691f1c2f9e" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.14 - I&amp;B Cta 47" />
+    </menuitem>
+    <menuitem Name="Stock Por Socio (Mov.Cabios)" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="e7913981-199d-f3b1-dc41-673ad98c3547" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="9c645894-7620-4ec8-b998-a5cdec0502f6" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Stock Por Socio (Mov.Cabios)" />
+    </menuitem>
+    <menuitem Name="Formato 3.3" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2ed04c23-896c-99bd-e177-1d564950be29" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="540796fd-7925-41a1-b992-f6629e4bcffa" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.3 - I&amp;B Cta 12" />
+    </menuitem>
+    <menuitem Name="Formato 3.9" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="9729d3fe-1885-c88d-a21c-2f5ee7c4c874" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="748890e3-0a01-4f50-80e8-b9e412967630" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.9 - I&amp;B Cta 34" />
+    </menuitem>
+    <menuitem Name="Letras Pendientes" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="95a60607-ea36-1ac5-f2a0-bccbce71eb27" Action="R" Parent_ID="8bbcbf5c-6c65-4638-a39f-4b81253ee25f" Identifier="5d362478-1cfa-48a9-b4f2-c2e35488a2f4" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Letras Pendientes" />
+    </menuitem>
+    <menuitem Name="Documento por Cta" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="6b21cbba-308a-4481-ad90-ed617a1bb6b7" Action="R" Parent_ID="64d04c4d-b2e5-4694-b0e1-c7d0ba88a692" Identifier="8a531918-ea18-4f61-b851-46c6be06433d" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Documento por Cta" />
+    </menuitem>
+    <menuitem Name="Compras x Fecha de Creación" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="49b3ccd5-4112-31f2-1067-f27ae7f43147" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="016e2af9-01dc-4e7f-ba9a-c4a97d6c7140" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x Fecha de Creación" />
+    </menuitem>
+    <menuitem Name="Formato 01.1.1 Libro Caja - Res" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="70d34194-4f6c-4a94-ae35-5ee5114312d4" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="08aebb4d-0bd3-46de-966e-e09d76972ced" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 01.1.1 Libro Caja - Res" />
+    </menuitem>
+    <menuitem Name="Detalle Documentos De Ventas" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="b8bea5c3-a966-4389-dc76-c634f5c8a5a9" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="147d7ac9-bb71-4db0-9515-cb56920bcdcb" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Detalle Documentos De Ventas" />
+    </menuitem>
+    <menuitem Name="Kardex Valorizado" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a589919b-74d8-d36e-4626-0ba3a9b97eba" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="456c58fe-9098-4fcc-86b4-1f9581f203df" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Kardex Valorizado" />
+    </menuitem>
+    <menuitem Name="Formato 01.2.1 Libro Bancos - Res" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="dff9d8d1-ffcf-41b8-9caa-66ccf06116e4" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="b4093961-66bd-40cb-a9c2-fa26b1a8f68e" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 01.2.1 Libro Bancos - Res" />
+    </menuitem>
+    <menuitem Name="Formato 05.1.2 (Resm.X Dia libVtas)" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="66e8fde5-45bb-410f-8513-e297b102c02f" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="9258d4c0-ba22-4ed7-853e-44dd9f9516c9" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 05.1.2 (Resm.X Dia libVtas)" />
+    </menuitem>
+    <menuitem Name="CtaResumen_Ventas" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="8620d5eb-403f-47a7-b2d6-5a0393f4396f" Action="R" Parent_ID="" Identifier="de7dc958-c622-4200-8447-0a17bad8bc57" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas x Cta Resumen" />
+    </menuitem>
+    <menuitem Name="Costo" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="64d04c4d-b2e5-4694-b0e1-c7d0ba88a692" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Costo" />
+    </menuitem>
+    <menuitem Name="CtaResumen_VentasTipoDoc" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="91a6cc85-093f-4042-af42-431c82462b03" Action="R" Parent_ID="" Identifier="a0c4a65d-36ab-4fd5-9949-e0062b5ec443" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Ventas x Cta x TipDoc Resumen" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas x Cta x TipDoc Resumen" />
+    </menuitem>
+    <menuitem Name="Ctas por Cobrar por Vendedor" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2e97e190-f7a5-5ec1-ff11-40c7219b2f6d" Action="R" Parent_ID="4c76a956-56fd-4e1e-823b-c87c68eb19aa" Identifier="089e0ac8-bd64-4e08-a246-8a00b1d2978e" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ctas por Cobrar por Vendedor" />
+    </menuitem>
+    <menuitem Name="Kardex Valorizado Mensual" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="671bfcc3-2635-e587-31f1-6680dbc5c660" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="d8f31681-7ad4-4e2e-8c12-329120fcd221" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Kardex Valorizado Mensual" />
+    </menuitem>
+    <menuitem Name="DAOT clientes" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a1811566-d575-8de1-3b2c-b108c0645a43" Action="R" Parent_ID="27731888-ac78-4861-9f9f-97c5987490a5" Identifier="0092f405-dd2b-4eb3-b4e5-a1f911bd0684" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="DAOT Clientes" />
+    </menuitem>
+    <menuitem Name="Formato 14.1.2 Resumido" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="c22d3712-d761-4ee3-b600-e162d03ebc3f" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="19c75e01-d344-45f3-9250-3815f3e952bc" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 14.1.2 Resumido" />
+    </menuitem>
+    <menuitem Name="Ventas por Tienda" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="8a703849-9041-8eba-3fd3-c05ed51475e1" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="d7c77acb-2b89-4bc1-b895-01a852ee26cd" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Tienda" />
+    </menuitem>
+    <menuitem Name="Formato 3.13" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a41e896b-4bd3-4d8d-150f-6335f75a59fb" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="5f90ef27-f45a-4a05-bb58-e4e63ee24c9e" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.13 - I&amp;B Cta 46" />
+    </menuitem>
+    <menuitem Name="Productos Top Ten" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="4b978898-c80d-6afa-9b66-0f3c95f2bc9a" Action="R" Parent_ID="19a3f1b1-01f3-48b0-a23d-32901312aeee" Identifier="42d4c71c-9c30-4937-9c3d-52ab54b37379" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Productos Top Ten" />
+    </menuitem>
+    <menuitem Name="Ventas" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas" />
+    </menuitem>
+    <menuitem Name="Formato 3.15" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d35b74c0-f19c-b903-e701-bc3765a7da52" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="4d2d26f6-f342-46a3-9dab-eee17d0598b4" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.15 - I&amp;B Cta 49" />
+    </menuitem>
+    <menuitem Name="Mov_Producto" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="c4ca8ac4-252f-48d0-81d5-0d62c1fec136" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="5231083a-0de0-45c4-81b3-6e1e7bbd3c7c" Synchronized="2017-06-07 11:29:32.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Mov_Producto" />
+    </menuitem>
+    <menuitem Name="Ventas por Categoria" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="face9951-dcc8-af00-040a-754c7024d7fc" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="71bd8383-e942-47e8-aeb2-d003c1b1278a" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Categoria" />
+    </menuitem>
+    <menuitem Name="Pendientes por Cliente" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a42b36d0-4e48-ea5d-d45b-37b725bd2022" Action="R" Parent_ID="4c76a956-56fd-4e1e-823b-c87c68eb19aa" Identifier="371b4023-00e4-4f5b-b68d-5846b26d0b1c" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Pendientes por Cliente" />
+    </menuitem>
+    <menuitem Name="Analisis Cta 6" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="f90a5b91-2edf-81c2-dce0-c156977f68a9" Action="R" Parent_ID="b42e176f-f6d2-4782-aa9c-d5a368b6f594" Identifier="8bb8bf25-870d-4e79-882b-edfb473c5260" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Analisis Cta 6" />
+    </menuitem>
+    <menuitem Name="Costo Contable" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="111fe344-db05-488f-b8ca-3bdc018a638f" Action="R" Parent_ID="64d04c4d-b2e5-4694-b0e1-c7d0ba88a692" Identifier="489fcfba-c8d1-4401-930c-0fe3592bf2d1" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Costo Contable" />
+    </menuitem>
+    <menuitem Name="Productos Nuevos" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7978719b-9c1b-0bca-6f39-a76ef841a425" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="285f5232-1905-46ac-8818-78a8573b4b29" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Productos Nuevos" />
+    </menuitem>
+    <menuitem Name="Movimiento Stock" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ef8b3eb1-bfdd-8864-a535-fe81ab3d0b15" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="d58249d5-fd4d-41f1-bb2b-8bd641847f4a" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Movimiento Stock" />
+    </menuitem>
+    <menuitem Name="Cancelados Antiguos" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="9cfef552-6f1b-cb06-b397-948fcb7c2a0a" Action="R" Parent_ID="" Identifier="3f54a489-472d-41af-98b2-03647d48579d" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cancelados Antiguos" />
+    </menuitem>
+    <menuitem Name="CtaResumen_ComprasTipoDoc" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="fb6391d4-6a92-4d8b-b570-cbbaebcda544" Action="R" Parent_ID="" Identifier="0ee2178f-1cf2-4ddf-85e5-b1a81a61b291" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x Cta x TipDoc Resumen" />
+    </menuitem>
+    <menuitem Name="Orden de Compra" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="b9dd7f0a-cfa3-4041-8da9-4b7460bb2507" Identifier="c1b66729-d2ed-4161-a6e0-9ffb93da84eb" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Orden de Compra" />
+    </menuitem>
+    <menuitem Name="Formato 3.16" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="cad47f36-86b9-ac39-6fad-c9230fa9e542" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="c122312f-8bf8-496f-bf08-e4cf99a7dc50" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.16 - I&amp;B Cta 50" />
+    </menuitem>
+    <menuitem Name="Por Cobrar" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="4c76a956-56fd-4e1e-823b-c87c68eb19aa" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Por Cobrar" />
+    </menuitem>
+    <menuitem Name="RV_Letras" Description="" IsSummary="false" IsSOTrx="true" IsReadOnly="false" EntityType="D" AD_Process_ID="256382b5-6ad4-da71-007e-9e40fe764163" Action="R" Parent_ID="729fcd5d-8e88-4567-8cff-c3342a13dd87" Identifier="cc00bb49-5488-42ff-8e34-6331e7f3d01e" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="RV_Letras" />
+    </menuitem>
+    <menuitem Name="Stock_Costo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2add46e0-64b1-ea2f-2517-fdded9f2cc89" Action="R" Parent_ID="c1b66729-d2ed-4161-a6e0-9ffb93da84eb" Identifier="93684a2c-8d35-4d16-89a5-9c3ebbd9b9c9" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Stock por Socios" />
+    </menuitem>
+    <menuitem Name="POS Report" Description="" IsSummary="false" IsSOTrx="true" IsReadOnly="false" EntityType="D" AD_Process_ID="e695aa5c-77ac-8cc8-35cd-33186ce6c5b5" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="28fddde4-71ad-429b-a2dc-b92c24241dc4" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Ventas - PDV" />
+    </menuitem>
+    <menuitem Name="POS" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="d1480446-c2bf-4bb0-947f-dfe6162be6eb" Identifier="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="PDV" />
+    </menuitem>
+    <menuitem Name="Compras x categoria resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="302ae1a8-986b-320c-c0ac-0b5e39c04454" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="5d74cb1f-32ca-4789-98e3-b561f1763f82" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x categoria resumen" />
+    </menuitem>
+    <menuitem Name="Estado de Cta Cliente" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2970e5aa-6562-9053-f47f-e509334da9f8" Action="R" Parent_ID="4c76a956-56fd-4e1e-823b-c87c68eb19aa" Identifier="915444e3-471a-438c-9f19-a24652c5a80b" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Estado de Cta Cliente" />
+    </menuitem>
+    <menuitem Name="Ultima Compra" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="e4acd627-3575-4c75-b0a8-8c5aa54c4c56" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="39d62891-9392-4369-b68c-b2c0b2f595da" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ultima Compra" />
+    </menuitem>
+    <menuitem Name="Formato 3.7" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0476cce6-2a2b-660a-d82a-e029defd579b" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="203dacc0-2794-4058-86a4-7b77aa3f73ff" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.7 - I&amp;B Cta 20 y 21" />
+    </menuitem>
+    <menuitem Name="Stock" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="39c8527c-8614-426b-b88a-220a61a9a6a9" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Stock" />
+    </menuitem>
+    <menuitem Name="RV_Vdor" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="b0f0598c-7ba2-bd6f-87b3-06261fdceae5" Action="R" Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Identifier="7e76dc47-6b6d-45a4-bf14-cd34d123d231" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="RV_Vdor" />
+    </menuitem>
+    <menuitem Name="Formato 14.1.1R.Ventas X Fecha" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="9940d9df-6068-4377-b23e-5664f637c5e8" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="8394e392-24d5-45bf-819c-ad09598de819" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 14.1.1R.Ventas X Fecha" />
+    </menuitem>
+    <menuitem Name="Transacciones x Categoria x Dia" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="U" AD_Process_ID="3a9f11f0-e314-a408-dfd0-5db3ff247970" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="840bcbf1-7b8e-4df6-ac1b-abe74e55e754" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Transacciones x Categoria x Dia" />
+    </menuitem>
+    <menuitem Name="Reports old" Description="Reports" IsSummary="true" IsSOTrx="true" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="729fcd5d-8e88-4567-8cff-c3342a13dd87" Synchronized="2012-09-22 18:26:31.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Reportes" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reportes" />
+    </menuitem>
+    <menuitem Name="Stock Valorizado" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="710d833c-91b0-56e3-9675-ce4d28dcd187" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="be5732ba-9876-4e4d-9267-704ce1c80185" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Stock Valorizado" />
+    </menuitem>
+    <menuitem Name="Formato 3.2" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a05fe810-aa89-9f06-19d3-9a17e9174557" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="e243c3ef-6d2c-4cd5-b1ea-a426bdc7b853" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.2 - I&amp;B Cta 10" />
+    </menuitem>
+    <menuitem Name="Cta_libro" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="f7edae96-84c0-4adf-a411-602e0e136849" Action="R" Parent_ID="" Identifier="c797d7f3-6721-421a-979f-306f65e7a562" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cuentas x Categoria" />
+    </menuitem>
+    <menuitem Name="Formato 05.1.3 (Resm.X Dia libVtas)XLS" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="f15d044e-bb33-405c-9965-1a78f031c8f4" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="de4e3a9d-abd3-4cc2-8eab-f279dcb485db" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 05.1.3 (Resm.X Dia libVtas)XLS" />
+    </menuitem>
+    <menuitem Name="Sunat Format" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="27731888-ac78-4861-9f9f-97c5987490a5" Identifier="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formatos Sunat" />
+    </menuitem>
+    <menuitem Name="Quote-to-Invoice" Description="" IsSummary="true" IsSOTrx="true" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="d1480446-c2bf-4bb0-947f-dfe6162be6eb" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas / Cotización-a-Factura" />
+    </menuitem>
+    <menuitem Name="Otros" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="7003dcf3-9c78-4e1b-a5e9-dd28b40b1fc8" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Otros" />
+    </menuitem>
+    <menuitem Name="Cancelados Prov" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7edb2188-8597-3aea-fb8b-e98e5081312b" Action="R" Parent_ID="" Identifier="62db2f7f-2331-4580-9c50-7929d8f9fb19" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cancelados" />
+    </menuitem>
+    <menuitem Name="DAOT Proveedores Resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ef03ce36-d0ae-442e-8d45-6ec1cb146ac4" Action="R" Parent_ID="27731888-ac78-4861-9f9f-97c5987490a5" Identifier="11e32363-1bdf-43c6-98aa-0b3b2277932c" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="DAOT Proveedores Resumen" />
+    </menuitem>
+    <menuitem Name="Open Items" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="307c9064-20c2-4799-bf21-6280f61332a9" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Caja y Bancos" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Caja y Bancos" />
+    </menuitem>
+    <menuitem Name="Ventas por Grupo Resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="24f5b659-67d5-8646-c7b9-8a80fd7a5007" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="c6e880cb-13e2-42d1-8248-747cdddf176e" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Grupo Resumen" />
+    </menuitem>
+    <menuitem Name="Performance Analysis" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="cf7cf44f-c645-4fe7-8973-7d1f77664119" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Contabilidad" />
+    </menuitem>
+    <menuitem Name="For Analysis" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="cf7cf44f-c645-4fe7-8973-7d1f77664119" Identifier="b42e176f-f6d2-4782-aa9c-d5a368b6f594" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Para el Analisis" />
+    </menuitem>
+    <menuitem Name="RV_Total" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="62559d5b-3f39-897a-7815-83ab969a39e6" Action="R" Parent_ID="6e361876-2430-4ac1-a1a7-6b1ee21ed761" Identifier="05036792-80cf-4f4e-afa7-fabd43b0382a" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="RV_Total" />
+    </menuitem>
+    <menuitem Name="Reporte de Cargos Completo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="99dcc30f-b06a-344f-e8ac-1945aca43467" Action="R" Parent_ID="" Identifier="7884613f-7a36-442c-9336-89b365c11351" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Cargos Completo" />
+    </menuitem>
+    <menuitem Name="Reportes" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reportes" />
+    </menuitem>
+    <menuitem Name="Ventas al Credito" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0b9627a9-32df-eac9-96b9-0530f5675721" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="b87026f3-a421-491d-8039-832fd3779159" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas al Credito" />
+    </menuitem>
+    <menuitem Name="Ventas por Tienda 2" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="41b58940-ddfa-4564-8d00-f8266431c257" Action="R" Parent_ID="" Identifier="f487bc4b-1fa3-4634-b116-56562a715699" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Tienda 2" />
+    </menuitem>
+    <menuitem Name="Estado de Cta Cliente Todo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2fb76997-98e5-4e97-95e4-abc2dfbd4bf5" Action="R" Parent_ID="" Identifier="29033150-0b2f-45b7-952b-d759378bac81" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Estado de Cta Cliente Todo" />
+    </menuitem>
+    <menuitem Name="Compras" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="03e51cfd-e31a-4824-b1ae-4d0dd0074ef0" Identifier="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras" />
+    </menuitem>
+    <menuitem Name="Precio de Producto" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="701f4457-582d-d8aa-6e47-bbe10c81d280" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="2fd4d8f1-ee54-4b85-b913-ace0b34fc250" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Precio de Producto" />
+    </menuitem>
+    <menuitem Name="Formato 06.1.3 (Resm.X Dia libVtas)XLS" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="033c20cd-8e6a-48dd-802c-03b0e9f632ec" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="563dd790-4981-433d-be94-cf99ac55cd82" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 06.1.3 (Resm.X " />
+    </menuitem>
+    <menuitem Name="Nuevos Socios" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="60eab039-d16a-4d25-8eb8-3c3fbd77ee3e" Action="R" Parent_ID="7003dcf3-9c78-4e1b-a5e9-dd28b40b1fc8" Identifier="0ee378ae-9ddb-40e2-b10c-da53828bf69c" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Nuevos Socios" />
+    </menuitem>
+    <menuitem Name="No Costeados" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="49b3ccd5-4112-31f2-1067-f27ae7f43147" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="4e5acc15-a7d4-4a8f-9c44-1845d4b54864" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="No Costeados" />
+    </menuitem>
+    <menuitem Name="Ventas X Cajas" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d1c301a3-2d91-9589-7e43-c1cac0415f40" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="e877ed12-dd77-4b73-9a73-dd4364a08494" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas X Cajas" />
+    </menuitem>
+    <menuitem Name="Requisition-to-Invoice" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="b9dd7f0a-cfa3-4041-8da9-4b7460bb2507" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras / Requisición-a-Factura" />
+    </menuitem>
+    <menuitem Name="Ventas x Precio" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ebd9c158-e6aa-1b33-4114-65f32cc83fb1" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="9c219e5f-72f6-4595-af04-0f95d0086ee8" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas x Precio" />
+    </menuitem>
+    <menuitem Name="Formato 1.2" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="56ffe0cf-d502-5d1f-fd0e-a6d0903fb392" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="f0e74263-e350-402f-a2b2-04d6cc5d2322" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 01.2 - Bancos" />
+    </menuitem>
+    <menuitem Name="Formato 3.8" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="9e4efef3-baa6-60a1-9d65-c5130018495c" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="097ccfbf-c1ec-45ac-ac1b-5fec06d1ed5c" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.8 - I&amp;B Cta 31" />
+    </menuitem>
+    <menuitem Name="R_SalesDocAgent" Description="" IsSummary="false" IsSOTrx="true" IsReadOnly="false" EntityType="D" AD_Process_ID="b9dfa83e-82f2-d3a7-d79a-98f6600d43b7" Action="R" Parent_ID="729fcd5d-8e88-4567-8cff-c3342a13dd87" Identifier="d62657bb-150f-4dde-a4dc-b6f886e2889d" Synchronized="2012-09-22 18:37:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="R_DocVentaxAgente" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="R_DocVentaxAgente" />
+    </menuitem>
+    <menuitem Name="Entregas_Guirom" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ff03d201-916c-4336-8f96-0ff011b625ab" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="e19a8ec5-187a-402b-9cf8-18f1ebd8c6ba" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="guirom_lineas" />
+    </menuitem>
+    <menuitem Name="Ventas por Grupo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="074c858c-73a3-8feb-2024-b94de83d5814" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="dd93480a-46df-4f3c-b816-ec806a6ba654" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Grupo" />
+    </menuitem>
+    <menuitem Name="Formato 08.1.1 Reg.Compras XLS" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="075ca6d8-811d-46c2-a7ce-c1211b87e096" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="87a5099e-808c-47cc-903b-c8f55c19d051" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 08.1.1 Reg.Compras XLS" />
+    </menuitem>
+    <menuitem Name="Formato 3.4" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="95191363-ac04-9591-2a8e-4fe8305a0eac" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="acc429ad-bc34-4fc8-b4ee-d63c300db873" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.4 - I&amp;B Cta 14" />
+    </menuitem>
+    <menuitem Name="Reporte de Clasificación" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0eb101e1-6bfc-62aa-f98b-035b226998f2" Action="R" Parent_ID="19a3f1b1-01f3-48b0-a23d-32901312aeee" Identifier="f116ed28-b58a-4d5b-891b-745d00cbcba3" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Clasificación" />
+    </menuitem>
+    <menuitem Name="CajaChica2" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="d78791d4-2ab7-4ca8-a65d-2e3360009de8" Action="R" Parent_ID="727668d8-96b3-46a2-bffa-85769fc296ef" Identifier="ed12c337-6194-44e4-bf86-3f36bb6b0cd1" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="CajaChica2" />
+    </menuitem>
+    <menuitem Name="Formato 3.5" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="a31c05c7-8c96-d81a-4698-99031df68a48" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="4b0e6f95-da10-43f7-b658-a573cd9f4270" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.5 - I&amp;B Cta 16" />
+    </menuitem>
+    <menuitem Name="Ultima compra x Vendedor" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7127f4ff-045e-0924-8483-aed158104c9f" Action="R" Parent_ID="e9f84ca9-88ea-4f44-88be-a83a569ac91b" Identifier="f6f9767b-55ed-4172-8139-bbe91134093b" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ultima compra x Vendedor" />
+    </menuitem>
+    <menuitem Name="Formato 6.1" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="29261f34-5a6b-f2cc-9b7a-909491473e12" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="d046bf11-2424-41a5-9903-5c0a53312208" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 06.1 - Mayor" />
+    </menuitem>
+    <menuitem Name="Cash" Description="Cash" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="307c9064-20c2-4799-bf21-6280f61332a9" Identifier="727668d8-96b3-46a2-bffa-85769fc296ef" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Caja" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Caja" />
+    </menuitem>
+    <menuitem Name="CtasResumen_ComprasTipDocImp" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="02101373-2bf5-4471-8c4a-6d8858fee956" Action="R" Parent_ID="" Identifier="c30aa190-3082-4123-894e-2a7fa280340c" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x TipoDoc Impuesto" />
+    </menuitem>
+    <menuitem Name="Stock Por Almacen UHM" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="176e9e55-a0fa-4e42-bcc3-b2c18028cc9c" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="6c9a3638-f412-44a0-a943-ec5ddc8b16b8" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Stock Por Almacen UHM" />
+    </menuitem>
+    <menuitem Name="Formato 3.6" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="e0678107-85d4-7396-2ac4-19cf70b95bf6" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="6187ef91-7d2b-44d1-a5e0-dabf307eeafd" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.6 - I&amp;B Cta 19" />
+    </menuitem>
+    <menuitem Name="Formato 3.11" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="0dd07b74-9187-8b1a-c023-9648375d66f1" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="29d7829a-71b8-439d-8e3d-47b5e6a4ce56" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.11 - I&amp;B Cta 41" />
+    </menuitem>
+    <menuitem Name="Compras x Cta x TipDoc Resumen  Cruce" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="f2d87828-ea03-40af-bc4a-1173d774bb33" Action="R" Parent_ID="729fcd5d-8e88-4567-8cff-c3342a13dd87" Identifier="9bdd5616-0e1f-4460-bb13-93c31ea5573d" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Compras x Cta x TipDoc Resumen  Cruce" />
+    </menuitem>
+    <menuitem Name="Ventas x Categoria" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="b19edd03-0923-438c-2415-3597426f3c1e" Action="R" Parent_ID="6ed6b11f-2d4e-47bb-8116-17c1c2b5b040" Identifier="18db5b39-6253-43d9-b21d-7f73a9ae9ea2" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas x Categoria" />
+    </menuitem>
+    <menuitem Name="System Admin" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="" Identifier="8bbcbf5c-6c65-4638-a39f-4b81253ee25f" Synchronized="2012-10-12 11:13:37.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="System Admin" />
+    </menuitem>
+    <menuitem Name="Formato 3.19" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="ed348451-f0b9-cc83-9719-a314f77ae3e0" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="9ded8d5c-b7b4-4ee1-a836-fcb278013ea2" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.19 - I&amp;B Patrimonio" />
+    </menuitem>
+    <menuitem Name="Reporte de Cargos Contabilidad" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="5d937072-f311-4cc4-a381-03709d2783b9" Action="R" Parent_ID="" Identifier="62f467b8-77fd-47e3-bbed-01569b9c9a8d" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Reporte de Cargos Contabilidad" />
+    </menuitem>
+    <menuitem Name="Estado de Cta Proveedor Todo" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="fba12656-93fb-48b9-9f80-80d88073adae" Action="R" Parent_ID="" Identifier="0ac437f0-20f1-4ede-a5e8-2956f5ceda09" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Estado de Cta Proveedor Todo" />
+    </menuitem>
+    <menuitem Name="DAOT clientes Resumen" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7802ad73-08f1-48f3-8b63-7360ca054896" Action="R" Parent_ID="27731888-ac78-4861-9f9f-97c5987490a5" Identifier="717c6a56-12ef-4a29-b4ca-83fc03c89f21" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="DAOT Clientes Resumen" />
+    </menuitem>
+    <menuitem Name="Ventas por Tarjeta" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7cada792-ea1d-4f20-86cc-66fb84ecf31e" Action="R" Parent_ID="" Identifier="581f8ac7-4d31-4427-891c-0b90e204d9b0" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Ventas por Tarjeta" />
+    </menuitem>
+    <menuitem Name="Honorarios" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="3a8b144f-37de-7740-1548-9d6e7db80d35" Action="R" Parent_ID="" Identifier="6b439e04-4dc3-4b2f-b578-9cf1d7ee89e9" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Honorarios" />
+    </menuitem>
+    <menuitem Name="Accounting Books" Description="" IsSummary="true" IsSOTrx="false" IsReadOnly="false" EntityType="D" Action="" Parent_ID="cf7cf44f-c645-4fe7-8973-7d1f77664119" Identifier="27731888-ac78-4861-9f9f-97c5987490a5" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Libros Contables" />
+    </menuitem>
+    <menuitem Name="Imprimir para vendedor" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="2d861c89-bbbb-b52c-23f3-88ff7cf4b5d7" Action="R" Parent_ID="39c8527c-8614-426b-b88a-220a61a9a6a9" Identifier="7cb9a2ce-cc17-4a46-bb8b-a20795ccf88c" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Imprimir para vendedord" />
+    </menuitem>
+    <menuitem Name="Cambio de Precio" Description="Cambio de Precio" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="49b3ccd5-4112-31f2-1067-f27ae7f43147" Action="R" Parent_ID="19a3f1b1-01f3-48b0-a23d-32901312aeee" Identifier="0d175b3c-b093-42e1-8d99-fe47be003633" Synchronized="2017-06-07 11:29:33.0">
+      <menuitem_trl Language="es_PE" ColumnName="Description" IsTranslated="Cambio de Precio" />
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Cambio de Precio" />
+    </menuitem>
+    <menuitem Name="Formato 3.18" Description="" IsSummary="false" IsSOTrx="false" IsReadOnly="false" EntityType="D" AD_Process_ID="7e5dac0d-49a3-bc14-9378-c6ccff55a217" Action="R" Parent_ID="5f6a2a2c-688f-467d-a16a-d8a2e47a4bf4" Identifier="33ad98bd-fe72-4da5-af9b-17c7a83a197f" Synchronized="2012-09-21 18:25:41.0">
+      <menuitem_trl Language="es_PE" ColumnName="Name" IsTranslated="Formato 03.18 - I&amp;B Flujo Efectivo" />
+    </menuitem>
+  </menu>
+</plugin>
+
+

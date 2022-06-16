@@ -1,0 +1,226 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compras_total" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b2ae71ab-11ef-4704-8971-e81aab5fa546">
+  <property name="Description" value="compras_total.jrxml" />
+  <property name="FileName" value="compras_total.jrxml" />
+  <property name="Synchronized" value="2017-06-08 06:29:43.173" />
+  <property name="Identifier" value="867f7517-c305-4165-a012-4b9566c8afc1" />
+  <property name="ireport.zoom" value="1.610510000000001" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="C_BPartner_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+bp.name as proveedor,
+(select name from c_doctype where c_doctype_id=i.c_doctype_id) as tipo,
+i.serial as serie,
+i.documentno as nrodoc,
+i.dateinvoiced as fecha,
+--i.grandtotal as monto,
+--i.grandtotal-it.taxamt as sinigv,
+(case when dt.docbasetype = 'APC' then (i.grandtotal*-1)
+else (i.grandtotal) end) as monto,
+(case when dt.docbasetype = 'APC' then (it.taxbaseamt*-1)
+else (it.taxbaseamt) end) as sinigv
+from c_invoice i
+inner join c_invoicetax it on i.c_invoice_id=it.c_invoice_id
+inner join c_bpartner bp on i.c_bpartner_id=bp.c_bpartner_id
+left join c_doctype dt on i.c_doctype_id = dt.c_doctype_id
+where i.issotrx='N'
+and i.docstatus='CO'
+and i.c_bpartner_id=$P{C_BPartner_ID}
+and date(i.dateinvoiced) between date($P{DateFrom1}) and date($P{DateFrom2})
+order by fecha]]></queryString>
+  <field name="proveedor" class="java.lang.String" />
+  <field name="tipo" class="java.lang.String" />
+  <field name="serie" class="java.lang.String" />
+  <field name="nrodoc" class="java.lang.String" />
+  <field name="fecha" class="java.sql.Timestamp" />
+  <field name="monto" class="java.math.BigDecimal" />
+  <field name="sinigv" class="java.math.BigDecimal" />
+  <variable name="sumlinea" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{monto}]]></variableExpression>
+  </variable>
+  <variable name="sumsinigv" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{sinigv}]]></variableExpression>
+  </variable>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="61" splitType="Stretch">
+      <textField>
+        <reportElement x="81" y="29" width="195" height="20" uuid="e7bf6ecc-9e2c-4b06-b5ce-6e05877bd29a" />
+        <textElement>
+          <font size="11" isBold="true" isItalic="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{proveedor}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="460" y="45" width="65" height="12" uuid="5dba0c27-fba9-43c9-a3de-60fe4ed600d7" />
+        <textElement textAlignment="Right">
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="525" y="45" width="22" height="12" uuid="8b2ac2df-3b78-4d77-b7fa-28e40b6e7323" />
+        <textElement>
+          <font size="7" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="151" y="0" width="258" height="20" uuid="24662d9f-9b6f-469c-925f-7c802ac578b7" />
+        <textElement textAlignment="Center">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[COMPRAS A UN PROVEEDOR]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="499" y="29" width="50" height="12" uuid="9bde473b-118b-4ab8-93bf-231f5561c35f" />
+        <textElement verticalAlignment="Top">
+          <font size="7" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="364" y="29" width="86" height="20" uuid="9977c454-d844-4074-9cfb-6e7bf4765a8b" />
+        <textElement textAlignment="Justified">
+          <font size="7" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="447" y="29" width="52" height="12" uuid="bcb434c3-cca0-439c-b241-0848f2282558" />
+        <textElement verticalAlignment="Top">
+          <font size="7" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="0" y="29" width="100" height="20" uuid="58187e3c-2189-4ba4-bf98-d552cf22590c" />
+        <textElement>
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[PROVEEDOR :]]></text>
+      </staticText>
+    </band>
+  </title>
+  <columnHeader>
+    <band height="25">
+      <staticText>
+        <reportElement x="265" y="5" width="92" height="20" uuid="9c3f1ad4-679b-41db-90ee-42561e47089a" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Documento]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="368" y="5" width="84" height="20" uuid="6d5bf94a-628b-43a4-9752-7e70acffc975" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Importe]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="460" y="5" width="89" height="20" uuid="9340c873-1935-4ed0-9fc4-5f19b09bebde" />
+        <textElement>
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Importe Inc IGV]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="199" y="5" width="65" height="20" uuid="a4de2eb7-9fc8-43c2-99e8-91907e97e5a0" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Serie]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="117" y="5" width="81" height="20" uuid="6846a874-15c2-48d1-a810-162c0de203eb" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="5" width="100" height="20" uuid="f73c51a8-515d-45c3-9106-be6e852ed808" />
+        <textElement textAlignment="Center">
+          <font isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo Documento]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="15" splitType="Stretch">
+      <textField>
+        <reportElement x="265" y="0" width="91" height="13" uuid="9f9c721d-5e8e-4a93-ace3-27258c3576ac" />
+        <textElement textAlignment="Center" />
+        <textFieldExpression><![CDATA[$F{nrodoc}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="369" y="0" width="80" height="13" uuid="56bdefeb-dee3-456c-a0d7-96ff556a6982" />
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{sinigv}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="460" y="0" width="82" height="13" uuid="b986c176-497c-450d-aa02-e17b0f4933f6" />
+        <textElement textAlignment="Right" />
+        <textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="205" y="0" width="60" height="13" uuid="faccd0c6-a13b-489c-afbf-8bd7c39355b8" />
+        <textElement textAlignment="Center" />
+        <textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+      </textField>
+      <textField pattern="MM/dd/yyyy">
+        <reportElement x="117" y="0" width="81" height="13" uuid="75a8611c-bc03-421a-aea1-536f1b0c908e" />
+        <textElement textAlignment="Center" />
+        <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+      </textField>
+      <textField pattern="">
+        <reportElement x="0" y="0" width="117" height="13" uuid="e84f85f7-938b-4c9c-815f-8d16a54a2254" />
+        <textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="20" splitType="Stretch">
+      <textField pattern="###0.00">
+        <reportElement x="460" y="0" width="87" height="20" uuid="bd58fd1d-4877-4879-b5ee-cd1c8e33c140" />
+        <textElement textAlignment="Right">
+          <font isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{sumlinea}]]></textFieldExpression>
+      </textField>
+      <textField pattern="###0.00">
+        <reportElement x="361" y="0" width="91" height="20" uuid="ad598608-315b-4605-a894-22e6fe45f662" />
+        <textElement textAlignment="Right">
+          <font isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{sumsinigv}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band height="27" splitType="Stretch">
+      <staticText>
+        <reportElement x="37" y="5" width="258" height="20" uuid="30ad924b-3df3-4a38-9403-0191f7d8e783" />
+        <textElement>
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[Distribuidora Drogueria Las Americas]]></text>
+      </staticText>
+    </band>
+  </pageFooter>
+  <summary>
+    <band height="10" splitType="Stretch" />
+  </summary>
+</jasperReport>

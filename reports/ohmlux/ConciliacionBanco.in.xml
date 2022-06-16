@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Reporte De Conciliacion Bancaria" Name="Reporte De Conciliacion Bancaria" BaseRole="" Description="" Help="Indique la reconciliacion bancaria que desea imprimir " Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="ConciliacionBanco.jrxml" Identifier="6b4a63f2-9c31-7ee6-0af5-c890b124dc22" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="Conciliacion Bancaria" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_BankStatement_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="a7ffa029-0c56-4fcd-8970-6f073f573358" Synchronized="2018-11-30 09:58:09.0" />
+</process>
+
+

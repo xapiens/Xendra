@@ -1,0 +1,837 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RegistroDeCompras" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="780" leftMargin="42" rightMargin="20" topMargin="33" bottomMargin="20" uuid="a527d394-af55-4748-9b1c-780bab27a52f">
+  <property name="Identifier" value="0f44d727-67c1-098e-bbb4-d59a667d42ef" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="RegistroDeCompras_V3.jrxml" />
+  <property name="ireport.zoom" value="3.0" />
+  <property name="ireport.x" value="430" />
+  <property name="ireport.y" value="84" />
+  <parameter name="RegDate1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="RegDate2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2010-03-30 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000069)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="C_Acctschema_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(1000026)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select
+--tx.rate as cc,
+--i.c_doctype_id as tipodoc,
+--tx.c_tax_id as ttid,
+i.dateinvoiced as fechaemision,
+i.dateacct as fechaAcct,
+i.serial as docSerie,
+i.documentno as docnum,
+-- Obtenemos el nombre del tipo de documento
+(select cd.name from c_doctype_trl cd where cd.c_doctype_id = i.c_doctype_id) as docname,
+i.fact_id as asientocont,
+
+-- Obtenemos el iso code de la moneda
+(select c.ISO_Code from C_Currency c where i.C_Currency_ID=c.C_Currency_ID) as moneda,
+
+montobase+impto+otros as docTotal,
+i.ref_invoice_id as docRefInvoice,
+
+-- obtenemos el docno del documento referido (notas de abono y credito)
+(case when (dt.codsunat <> '08' and dt.codsunat <> '07')
+	then null
+	else
+            invref.documentno
+	end
+) as  refdocno,
+
+crt.multiplyrate as tasaCambio,
+
+-- Calculamos la base imponible en soles
+
+-- CUando es factura de importacion de aduanas y el tipo de impuesto es IGV-DUA
+-- osea si montobase != 0 and impto = 0
+-- el monto representa el igv , por lo tanto
+-- el mtoBaseImponoble se calcula a partir del montobase
+-- que en este extraÃÂ±o caso indica el monto del igv
+(case when dt.codsunat in ('50','52','53')
+ then (
+	-- IGV DUA
+	case when tx.c_tax_id = 1000086 or tx.c_tax_id = 1000095 then
+	(
+		case when crt.multiplyrate > 0.00
+			then (montobase *100.00/19.00)* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then (montobase *100.00/19.00)
+		     else
+			0.00
+		end
+	)
+	-- IGV DUA18%
+	when tx.c_tax_id = 1000091 or tx.c_tax_id = 1000096 then
+	(
+		case when crt.multiplyrate > 0.00
+			then (montobase *100.00/18.00)* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then (montobase *100.00/18.00)
+		     else
+			0.00
+		end
+	)
+	when tx.rate > 0 then
+	(
+		case when crt.multiplyrate > 0.00
+			then (montobase *100.00/tx.rate)* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then (montobase *100.00/tx.rate)
+		     else
+			0.00
+		end
+	)
+	else
+	(
+		case when crt.multiplyrate > 0.00
+			then (montobase)* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then (montobase)
+		     else
+			0.00
+		end
+	)
+	end
+)
+-- de lo contrario es un caso standard
+else
+-- Si el monto base = 0 e impto = 0 es un caso de un recibo por ejemplo que no tine impuestos
+  ( case when montobase = 0 and impto = 0
+	then (
+		-- si es nota de credito debe ser saldo negativo
+		--case when i.c_doctype_id = 1001044  and i.c_currency_id = 308
+		--	then otros*-1.00
+		--      when (i.c_doctype_id = 1001044 ) and crt.multiplyrate > 0.00
+		--	then otros * crt.multiplyrate *-1.00
+		-- -     when (i.c_doctype_id = 1001044 ) and coalesce(crt.multiplyrate,0) = 0
+		--	then null
+		--      when crt.multiplyrate > 0.00
+		--	then otros * crt.multiplyrate
+		--      else
+		--	   otros
+		--      end
+		0
+
+	)
+	else (
+		-- si es nota de credito debe ser saldo negativo
+		  case when dt.codsunat = '07'  and i.c_currency_id = 308
+			then montobase*-1.00
+		      when (dt.codsunat = '07' ) and crt.multiplyrate > 0.00
+			then montobase * crt.multiplyrate *-1.00
+		      when (dt.codsunat = '07' ) and coalesce(crt.multiplyrate,0) = 0
+			then null
+		      when crt.multiplyrate > 0.00
+			then montobase * crt.multiplyrate
+		      else
+			   montobase
+			end
+	)
+	end
+ )
+end) as mtoBaseImponibleSoles,
+
+	-- Calculamos el impuesto en soles
+
+-- CUando es factura de importacion de aduanas y el tipo de impuesto es IGV-DUA
+-- osea si montobase != 0 and impto = 0
+-- el monto representa el igv , por lo tanto
+-- el mtoBaseImponoble se calcula a partir del montobase
+-- que en este extraÃÂ±o caso indica el monto del igv
+(case when dt.codsunat in ('50','52','53')
+
+ then (
+	case when crt.multiplyrate > 0.00
+	     then (montobase * crt.multiplyrate)
+	when i.c_currency_id = 308
+		then montobase
+      	     else
+	   	0.00
+	end
+)
+-- de lo contrario es un caso standard
+else
+	-- si es nota de credito debe ser saldo negativo
+	(case 	when dt.codsunat = '07'  and i.c_currency_id = 308
+			then impto *-1.00
+		when (dt.codsunat = '07' ) and crt.multiplyrate > 0.00
+			then impto * crt.multiplyrate *-1.00
+      		when (dt.codsunat = '07' ) and coalesce(crt.multiplyrate,0) = 0
+			then null
+      		when crt.multiplyrate > 0.00
+			then impto * crt.multiplyrate
+      		else
+	   		impto
+	end)
+end) as mtoImpuestoSoles,
+
+-- Calculamos otros gastos.
+(	-- si es nota de credito debe ser saldo negativo
+case when dt.codsunat = '07'  and i.c_currency_id = 308
+		then otros*-1.00
+	when (dt.codsunat = '07' ) and crt.multiplyrate > 0.00
+		then otros  * crt.multiplyrate *-1.00
+	when (dt.codsunat = '07' ) and coalesce(crt.multiplyrate,0) = 0
+		then null
+	when crt.multiplyrate > 0.00
+		then otros * crt.multiplyrate
+	else
+	otros
+end
+) as otros,
+
+-- CUando es factura de importacion de aduanas y el tipo de impuesto es IGV-DUA
+-- osea si montobase != 0 and impto = 0
+-- el monto representa el igv , por lo tanto
+-- el mtoBaseImponoble se calcula a partir del montobase
+-- que en este extrano caso indica el monto del igv
+(case when dt.codsunat in ('50','52','53')
+ then (
+	-- IGV DUA
+	case when tx.c_tax_id = 1000086  or tx.c_tax_id = 1000095 then
+	(
+		-- En este caso el monto en otros es parte del total
+		case when crt.multiplyrate > 0.00
+			then (montobase+(otros+montobase *100.00/19.00))* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then montobase+(otros+montobase *100.00/19.00)
+		     else
+			0
+		end
+	)
+	-- IGV DUA 18%
+	when tx.c_tax_id = 1000091 or tx.c_tax_id = 1000096  then
+	(
+		-- En este caso el monto en otros es parte del total
+		case when crt.multiplyrate > 0.00
+			then (montobase+(otros+montobase *100.00/18.00))* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then montobase+(otros+montobase *100.00/18.00)
+		     else
+			0
+		end
+	)
+	when tx.rate > 0 then
+	(
+		-- En este caso el monto en otros es parte del total
+		case when crt.multiplyrate > 0.00
+			then (montobase+(otros+montobase *100.00/tx.rate))* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then montobase+(otros+montobase *100.00/tx.rate)
+		     else
+			0
+		end
+	)
+	else
+	(
+		-- En este caso el monto en otros es parte del total
+		case when crt.multiplyrate > 0.00
+			then (montobase+otros)* crt.multiplyrate
+		     when i.c_currency_id = 308
+			then (montobase+otros)* crt.multiplyrate
+		     else
+			0
+		end
+	)
+	end
+)
+else
+	-- si es nota de credito debe ser saldo negativo
+	(case 	when dt.codsunat = '07'  and i.c_currency_id = 308
+			then (montobase+impto+otros)*-1.00
+		when (dt.codsunat = '07' ) and crt.multiplyrate > 0.00
+			then (montobase+impto+otros)  * crt.multiplyrate *-1.00
+		when (dt.codsunat = '07' ) and coalesce(crt.multiplyrate,0) = 0
+			then null
+      		when crt.multiplyrate > 0.00
+			then (montobase+impto+otros) * crt.multiplyrate
+     		else
+	   	(montobase+impto+otros)
+	end)
+end) as mtoTotalSoles,
+
+-- Obtenemos el nombre del impuesto
+tx.name as taxName,
+
+-- Obtenemos el nombre del tipo de cambio usado.
+-- Si hay dcumento de referencia se toma el de origen.
+(select ct.name from c_conversiontype ct where ct.c_conversiontype_id = (
+	case when (dt.codsunat <> '08' and dt.codsunat  <> '07') or coalesce(i.ref_invoice_id,0) = 0
+		then i.c_conversiontype_id
+	     else
+		invref.c_conversiontype_id
+	     end)) as ctypeName,
+
+bp.value as RUC,
+bp.name as cliente
+
+from (
+-- Totalizamos para obtener los valores
+-- aL FINAL DEBE QUEDAR ASI :
+-- Si el montobase = 0 y el Impto = 0 indicaria un documento con base pero sin imptos
+-- el montobase sera entonces el valor de otros
+
+-- Si el montobase != 0 e impto = 0 esto indicara que se trata de una dua y que el impuesto debera
+-- calcularse en forma ficticia y el valor de otros correpondera a otros cargos.
+-- En los otros caso se trata de docuemtos normales
+select invoice_id,max(tax_id) as tax_id,sum(montobase) as montobase,sum(impto) as impto,sum(otros) as otros from
+(
+select
+	inv.c_invoice_id as invoice_id,
+	(case when ctax.taxalias <> 'NGR' and d.docbasetype <> 'FPS'
+		then cl.linenetamt
+		else 0
+	 end
+	) as montobase,
+	-- Esto es una gran pendejada , fallaria si una factura tiene mas de un impuesto
+	-- que no sea SIN-IGV , bueno eso no lo he viso normalmente.
+	--(case when ctax.taxalias <> 'NGR'  and d.docbasetype <> 'FPS'
+	--	then ctax.c_tax_id
+	--	else
+	--	(
+	--	   0
+	--	)
+	--end) as tax_id,
+	ctax.c_tax_id as tax_id,
+	(case when ctax.taxalias <> 'NGR' and d.docbasetype <> 'FPS'
+		then itax.taxamt
+		else
+		(
+			0
+		)
+	end) as impto,
+	(case when ctax.taxalias= 'NGR' or d.docbasetype = 'FPS'
+		then itax.taxbaseamt
+		else 0
+	end) as otros
+		from c_invoice inv
+left join c_invoicetax itax on itax.c_invoice_id = inv.c_invoice_id
+left join c_tax ctax on ctax.c_tax_id = itax.c_tax_id
+left join c_invoiceline cl on cl.c_tax_id = itax.c_tax_id and cl.c_invoice_id = inv.c_invoice_id and cl.isactive = 'Y'
+left join c_doctype d on d.c_doctype_id = inv.c_doctype_id
+where inv.dateacct between date($P{RegDate1}) and date($P{RegDate2}) and inv.issotrx = 'N' and inv.isactive='Y' and docstatus != 'DR'
+and inv.ad_client_id = $P{AD_Client_ID} and inv.ad_org_id = $P{AD_Org_ID}
+	and coalesce(d.codsunat,'') <> ''
+) as xx
+group by invoice_id
+) yy
+join c_invoice i on i.c_invoice_id = yy.invoice_id
+left join c_doctype dt on i.c_doctype_id = dt.c_doctype_id
+LEFT  JOIN c_invoice invref on invref.c_invoice_id = i.ref_invoice_id
+
+ -- enlazamos con la table de impuestos de la factura para obtener la base im ponible y
+ -- el monto del impuesto.
+ -- Si son notas y tienen referencia se usara las de la referencia de lo ocntrario
+ -- las del documento actual.
+--LEFT  JOIN c_invoicetax itax on itax.c_invoice_id = i.c_invoice_id
+
+-- Buscamos el record del tax IGV para extraer el nombre y el rate
+-- en el caso que el impuesto sea IGV-DUA y el documento es de importacion
+-- ya que dicho valor sera usado
+-- para el calculo del monto imponible.
+LEFT  JOIN c_tax tx on tx.c_tax_id = yy.tax_id
+
+
+-- Buscamos el record del tax IGV para extraer el nombre y el rate
+-- en el caso que el impuesto sea IGV-DUA y el documento es de importacion
+-- ya que dicho valor sera usado
+-- para el calculo del monto imponible.
+--LEFT  JOIN c_tax txigv on txigv.c_tax_id = 1000084
+
+
+-- Buscamos datos del partner
+LEFT JOIN c_bpartner bp on bp.c_BPartner_id = i.c_BPartner_id
+
+-- Buscamos la tasa de cambio ijada segun los datos del docuemnto.
+LEFT JOIN c_conversion_rate crt on
+			case when (dt.codsunat <> '08' and dt.codsunat <> '07') or coalesce(i.ref_invoice_id,0) = 0
+				then
+				 	i.dateinvoiced = crt.validfrom
+					and(i.c_currency_id = crt.c_currency_id)
+					and crt.c_currency_id_to = 308
+					and(i.c_conversiontype_id = crt.c_conversiontype_id)
+					and(i.c_currency_id <> (SELECT acc.c_currency_id FROM c_acctschema acc
+				 	WHERE acc.c_acctschema_id = $P{C_Acctschema_ID} ))
+				else
+					crt.c_conversion_rate_id = (select x.c_conversion_rate_id from c_conversion_rate x where
+						invref.dateinvoiced between x.validfrom and x.validto
+						and(i.c_currency_id = x.c_currency_id)
+						and x.c_currency_id_to = 308
+						and(invref.c_conversiontype_id = x.c_conversiontype_id)
+						and(i.c_currency_id <> (SELECT acc.c_currency_id FROM c_acctschema acc
+				 			WHERE acc.c_acctschema_id = $P{C_Acctschema_ID}))
+order by x.c_conversion_rate_id desc limit 1)
+
+--invref.dateinvoiced = crt.validfrom
+--and(i.c_currency_id = crt.c_currency_id)
+--and crt.c_currency_id_to = 308
+--and(invref.c_conversiontype_id = crt.c_conversiontype_id)
+--and(i.c_currency_id <> (SELECT acc.c_currency_id FROM c_acctschema acc
+--WHERE acc.c_acctschema_id = ))
+				end
+
+order by i.c_doctype_id,fechaemision,i.documentno]]></queryString>
+  <field name="fechaemision" class="java.sql.Timestamp" />
+  <field name="fechaacct" class="java.sql.Timestamp" />
+  <field name="docserie" class="java.lang.String" />
+  <field name="docnum" class="java.lang.String" />
+  <field name="docname" class="java.lang.String" />
+  <field name="asientocont" class="java.lang.String" />
+  <field name="moneda" class="java.lang.String" />
+  <field name="doctotal" class="java.math.BigDecimal" />
+  <field name="docrefinvoice" class="java.math.BigDecimal" />
+  <field name="refdocno" class="java.lang.String" />
+  <field name="tasacambio" class="java.math.BigDecimal" />
+  <field name="mtobaseimponiblesoles" class="java.math.BigDecimal" />
+  <field name="mtoimpuestosoles" class="java.math.BigDecimal" />
+  <field name="otros" class="java.math.BigDecimal" />
+  <field name="mtototalsoles" class="java.math.BigDecimal" />
+  <field name="taxname" class="java.lang.String" />
+  <field name="ctypename" class="java.lang.String" />
+  <field name="ruc" class="java.lang.String" />
+  <field name="cliente" class="java.lang.String" />
+  <variable name="mtobaseimponiblesoles_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_tipodoc" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtobaseimponiblesoles}]]></variableExpression>
+  </variable>
+  <variable name="mtoimpuestosoles_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_tipodoc" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtoimpuestosoles}]]></variableExpression>
+  </variable>
+  <variable name="mtototalsoles_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_tipodoc" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtototalsoles}]]></variableExpression>
+  </variable>
+  <variable name="mtobaseimponiblesoles_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtobaseimponiblesoles}]]></variableExpression>
+  </variable>
+  <variable name="mtoimpuestosoles_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtoimpuestosoles}]]></variableExpression>
+  </variable>
+  <variable name="mtototalsoles_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{mtototalsoles}]]></variableExpression>
+  </variable>
+  <variable name="otros_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_tipodoc" calculation="Sum">
+    <variableExpression><![CDATA[$F{otros}]]></variableExpression>
+  </variable>
+  <variable name="otros_2" class="java.math.BigDecimal" calculation="Sum">
+    <variableExpression><![CDATA[$F{otros}]]></variableExpression>
+  </variable>
+  <group name="g_tipodoc">
+    <groupExpression><![CDATA[$F{docname}]]></groupExpression>
+    <groupHeader>
+      <band height="31" splitType="Stretch">
+        <textField>
+          <reportElement x="15" y="5" width="291" height="20" uuid="ddbe01e0-390a-4118-bf44-ad823022f435" />
+          <textFieldExpression><![CDATA[$F{docname}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="28" splitType="Stretch">
+        <textField pattern="#,##0.00;-#,##0.00">
+          <reportElement x="624" y="10" width="48" height="12" uuid="6e5e52ad-498e-4de9-83f6-6a278962cf59" />
+          <textElement textAlignment="Right">
+            <font size="5" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{mtoimpuestosoles_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00">
+          <reportElement x="719" y="10" width="48" height="12" uuid="97cf29d5-de29-4717-9c67-23699627d170" />
+          <textElement textAlignment="Right">
+            <font size="5" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{mtototalsoles_1}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement x="569" y="5" width="198" height="1" uuid="dc2d7b98-bcef-4cb4-9d09-2d18746d3e51" />
+        </line>
+        <textField>
+          <reportElement x="270" y="10" width="291" height="12" uuid="7934b2ba-c63d-4a74-96e6-a77aca6afaa9" />
+          <textElement textAlignment="Right" verticalAlignment="Top">
+            <font size="5" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total "+ $F{docname} +" : "]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00">
+          <reportElement x="568" y="10" width="48" height="12" uuid="7eb7eca2-1299-4384-aa60-3b2765a20550" />
+          <textElement textAlignment="Right">
+            <font size="5" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{mtobaseimponiblesoles_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="676" y="10" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="55ff5b7d-6eed-4e75-8468-69457580e0ac" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{otros_1}]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <columnHeader>
+    <band height="69" splitType="Stretch">
+      <staticText>
+        <reportElement x="0" y="41" width="59" height="20" uuid="70d2493e-1b86-4f75-afb0-50190b49f464" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Asiento]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="65" y="41" width="29" height="20" uuid="f177d1a1-84bd-4862-a6f7-e8ef2b721b73" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha Emision]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="98" y="41" width="24" height="20" uuid="6edb75b7-f43f-48f5-90d1-30c2cd4f20d5" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Serie]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="123" y="41" width="31" height="20" uuid="83884f42-59e9-4735-84ec-c5fb795af585" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="202" y="41" width="36" height="20" uuid="fe1bf4f2-8293-482a-91df-eb7ecab878ab" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[RUC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="241" y="41" width="128" height="20" uuid="e70c5bfe-9c4e-46fa-a3c8-74bd43eb097e" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Cliente]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="373" y="41" width="28" height="20" uuid="b94308d8-f27d-4f05-ac90-b4a84234ddd9" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Impto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="406" y="41" width="49" height="20" uuid="9e30d5cb-a791-46ed-977c-ea65bb8aa930" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo Cambio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="459" y="41" width="12" height="20" uuid="419cbd02-6bdc-49c2-9331-511263a69a66" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[M]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="474" y="41" width="54" height="20" uuid="2d77aacb-5178-4986-a972-5fd295486b19" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Moneda Original]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="528" y="41" width="36" height="20" uuid="ba440bf0-748a-4e91-befd-98836c123feb" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tasa Cambio]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="569" y="41" width="48" height="20" uuid="ce083b26-821f-4971-954a-52118a14153b" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Base Imponible]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="624" y="41" width="48" height="20" uuid="a4377064-5203-42ae-afec-0f7a25f24556" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Impuesto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="719" y="41" width="48" height="20" uuid="21222e31-6f56-487b-9af2-7fd383096cda" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="272" y="0" width="237" height="20" uuid="0d7a0dfb-32ba-44c5-b50d-8d971c70ff30" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="15" isBold="true" />
+        </textElement>
+        <text><![CDATA[REGISTRO DE COMPRAS]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="65" width="780" height="1" uuid="ca75cb88-f7d4-4dbb-b519-4d6e90d76bf1" />
+      </line>
+      <line>
+        <reportElement x="0" y="36" width="780" height="1" uuid="bf723da5-182d-4ead-a59c-e3c582a7547d" />
+      </line>
+      <staticText>
+        <reportElement x="163" y="41" width="31" height="20" uuid="f8d246d2-2d40-471c-9d4c-16422d86577f" />
+        <textElement>
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Doc.Ref]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="725" y="2" width="50" height="12" uuid="bc3541ed-bb55-49d5-b0f7-abc5a3ed438c" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="673" y="2" width="80" height="18" uuid="d5da3171-63df-4cfe-866f-f3b9fd8abc50" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="576" y="2" width="100" height="20" uuid="c74bea66-a412-404b-b59d-ee0c7df221ee" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="686" y="18" width="65" height="12" uuid="6e359019-6925-4d76-9d3f-f6f6f095ac37" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="751" y="18" width="22" height="12" uuid="8e662128-6970-4f76-b539-954ce9aa51a7" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="15" y="18" width="110" height="12" uuid="07352d22-02b6-4d2b-a3ec-d9b60cd552d0" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Formato :  Hoja De Trabajo]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="300" y="18" width="180" height="14" forecolor="#000000" uuid="d5705fec-661f-42ee-88e3-6b249fc103ea" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{RegDate1})+ " al " + DateFormat.getDateInstance().format($P{RegDate2})]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="676" y="41" width="40" height="20" uuid="a3271f7b-3019-49cb-bfd1-4d56d2ae6267" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Otros Cargos]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="12" splitType="Stretch">
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="0" width="59" height="12" uuid="12f0a96f-9e2b-4b36-b176-87797ca71a3d" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{asientocont}]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy">
+        <reportElement x="61" y="0" width="33" height="12" uuid="27b81e20-b79e-425d-aa94-1efcd166d905" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{fechaemision}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="100" y="0" width="17" height="12" uuid="f0fe5e58-3787-464b-a3d1-9c2dc07dfcc8" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{docserie}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="121" y="0" width="42" height="12" uuid="536acdb6-69b9-4a32-9286-19a434d18d48" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{docnum}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="459" y="0" width="12" height="12" uuid="640f5b35-770d-45a8-abb0-6d138e720bc7" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{moneda}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="373" y="0" width="30" height="12" uuid="e691c455-713e-4a32-9c39-762de55d2b7b" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{taxname}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="202" y="0" width="36" height="12" uuid="344f70d7-b8e5-4bca-9174-685df8711090" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="241" y="0" width="128" height="12" uuid="6fc7086f-8967-4d24-a2cf-741a575583d7" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="406" y="0" width="49" height="12" uuid="576ee337-9a8d-4382-a46c-cd0a4cf7cb4c" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ctypename}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="true">
+        <reportElement x="536" y="0" width="28" height="12" uuid="25588b93-ece2-4cc3-8af0-e74a53ad1424" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tasacambio}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="474" y="0" width="54" height="12" uuid="b0e6a546-a5dd-4bfa-acb8-4575eeeb114f" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{doctotal}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="568" y="0" width="48" height="12" uuid="aff1ebe3-a63e-47fa-acd3-bee750417e22" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mtobaseimponiblesoles}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="624" y="0" width="48" height="12" uuid="ee478976-37b0-4fa5-ab9e-3d3d9192c92e" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mtoimpuestosoles}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="719" y="0" width="48" height="12" uuid="506c90a1-8719-4ef4-a0a3-90b76f8c55a3" />
+        <textElement textAlignment="Right">
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{mtototalsoles}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="165" y="0" width="31" height="12" uuid="7b39b926-7065-4bf5-a89e-3dc1284553ff" />
+        <textElement>
+          <font size="5" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{refdocno}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="676" y="0" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="df595ff6-b2b8-4dca-806e-4c4d23dd2158" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{otros}]]></textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+  <summary>
+    <band height="27" splitType="Stretch">
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="568" y="10" width="48" height="12" uuid="b0e0df67-2a5a-4d30-973f-f88a46b67790" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{mtobaseimponiblesoles_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="624" y="10" width="48" height="12" uuid="41b24222-409d-43df-9b8d-28d7a89b3f73" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{mtoimpuestosoles_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.00;-#,##0.00">
+        <reportElement x="719" y="10" width="48" height="12" uuid="c999619f-ee69-41fa-ad8e-25633aa3fc08" />
+        <textElement textAlignment="Right">
+          <font size="5" isBold="true" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{mtototalsoles_2}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="569" y="6" width="198" height="1" uuid="44b9c5f0-4832-4700-bca0-0ba81be2735f" />
+      </line>
+      <staticText>
+        <reportElement x="270" y="10" width="291" height="12" uuid="6d2f5da1-5dba-4561-b0b2-c8785cbd8a5c" />
+        <textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+          <font size="5" isBold="true" />
+        </textElement>
+        <text><![CDATA[Total Registro De Compras :]]></text>
+      </staticText>
+      <textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="676" y="10" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="f0645e1d-762e-4000-ba74-1138d707b6e8" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{otros_2}]]></textFieldExpression>
+      </textField>
+    </band>
+  </summary>
+  <noData>
+    <band height="50" splitType="Stretch">
+      <staticText>
+        <reportElement key="staticText-11" x="170" y="15" width="412" height="16" forecolor="#000000" uuid="13a45917-d812-4bf6-af86-3457553747af" />
+        <textElement textAlignment="Center">
+          <font size="13" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1250" />
+        </textElement>
+        <text><![CDATA[No existen Datos Para El Rango Solicitado]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

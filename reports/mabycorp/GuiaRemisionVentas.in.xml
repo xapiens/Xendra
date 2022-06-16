@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="GuiaRemisionVentas" Name="GuiaRemisionVentas" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="GuiaRemisionVentas.jrxml" Identifier="cae714a9-3d71-11cd-6b46-cc351d5e2eab" Synchronized="2017-06-06 22:40:00.0" />
+
+

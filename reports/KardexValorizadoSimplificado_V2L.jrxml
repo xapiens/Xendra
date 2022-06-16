@@ -1,0 +1,635 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KardexValorizadoSimplificado_V2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f7bb6eb-232b-4005-9c14-e039da47a257">
+  <property name="Identifier" value="6ab7884c-783f-0750-59ed-e01476bbb9ec" />
+  <property name="Synchronized" value="2016-10-11 15:12:18.0" />
+  <property name="FileName" value="KardexValorizadoSimplificado_V2L.jrxml" />
+  <property name="ireport.zoom" value="2.0" />
+  <property name="ireport.x" value="253" />
+  <property name="ireport.y" value="383" />
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1910-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2030-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Client_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal("1000026")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="AD_Org_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[select nivel,doctype,upper(tipodoc) as tipodoc,
+sum(inputcost*ingresos) as total01,
+sum(currentcostprice*egresos) as total02
+from (
+(
+------------------------------------------------------------------
+--- El acumulado antes del rango de fecha pedido
+------------------------------------------------------------------
+select 'A' as nivel,
+* from (
+(select
+io.m_inout_id as movdoc_id,
+m_product_id as product_id,
+io.movementdate as movementdate,
+io.documentno,
+io.c_doctype_id as doctype,
+(select name from c_doctype_trl d where io.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+io.c_order_id,
+o.documentno as nroOrder,
+getValidatedaveragecostforproduct($P{AD_Client_ID},$P{AD_Org_ID},m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getcostforproductinput($P{AD_Client_ID},$P{AD_Org_ID} , m_product_id, io.movementdate) as inputcost,
+coalesce((
+        case when substring(io.movementtype::text, 2) != '-'
+            then il.qtyentered
+        else
+            0
+        end
+),0) as ingresos,
+
+coalesce((
+        case when substring(io.movementtype::text, 2) = '-'
+            then il.qtyentered
+        else
+            0
+        end
+),0) as egresos,
+'M_INOUT' as tableName
+from m_inout io
+join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y'
+join c_order o on o.c_order_id = io.c_order_id
+where io.isactive  = 'Y' and io.docstatus != 'DR' and io.docstatus != 'IN'  and io.docstatus != 'VO' and il.ad_client_id = $P{AD_Client_ID} and il.ad_org_id = $P{AD_Org_ID}
+and date(io.movementdate) < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+UNION all
+(
+select
+mio.m_movement_id as movdoc_id,
+m_product_id as product_id,
+mio.movementdate as movementdate,
+documentno,
+mio.c_doctype_id as doctype,
+(select name from c_doctype_trl d where mio.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y')as currentcostprice,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y')as inputcost,
+ml.movementqty as ingresos,
+ml.movementqty as egresos,
+'M_MOVEMENT' as tableName
+from m_movement mio
+join m_movementline ml on ml.m_movement_id=mio.m_movement_id and ml.isactive  = 'Y' --and ml.m_product_id = 1017928
+join m_warehouse wo on wo.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locator_id)
+join m_warehouse wd on wd.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locatorto_id)
+where mio.isactive  = 'Y' and mio.docstatus != 'DR' and mio.docstatus != 'IN'  and mio.docstatus != 'VO' and mio.ad_client_id = $P{AD_Client_ID} and mio.ad_org_id = $P{AD_Org_ID} and date(mio.movementdate) < date($P{DateFrom1})
+and
+ (case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+ end
+)
+
+)
+union all
+(
+select
+p.m_production_id as movdoc_id,
+il.m_product_id as product_id,
+p.created as movementdate,
+pp.documentno as documentno,
+pp.c_doctype_id as doctype,
+(select name from c_doctype_trl d where pp.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,il.m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getcostforproductinput($P{AD_Client_ID},$P{AD_Org_ID} , il.m_product_id, p.created) as inputcost,
+(case when il.movementqty> 0  then il.movementqty else 0 end)as ingresos,
+(case when il.movementqty<= 0  then -1*il.movementqty else 0 end)as egresos,
+'M_PRODUCTION' as tableName
+from m_productionplan p
+join m_productionline il on il.m_productionplan_id=p.m_productionplan_id and il.isactive  = 'Y'
+join m_production pp on pp.m_production_id=p.m_production_id and il.isactive  = 'Y'
+--JOIN m_warehouse w ON w.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM m_locator loc
+--						WHERE loc.m_locator_id = il.m_locator_id))
+where p.isactive='Y' and (pp.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])) and pp.isactive='Y' and p.ad_client_id = $P{AD_Client_ID} and p.ad_org_id = $P{AD_Org_ID}
+and date(p.created)  < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else il.m_product_id = $P{M_Product_ID}
+  end
+)
+
+)
+UNION all
+(
+select
+i.m_inventory_id as movdoc_id,
+m_product_id as product_id,
+i.movementdate as movementdate,
+i.documentno as documentno,
+i.c_doctype_id as doctype,
+(select d.name from c_doctype_trl d where i.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID} ,1000051, m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom1})+time '23:59:59')::timestamp without time zone,'Y') as inputcost,
+(  case when qtycount-qtybook >= 0
+        then qtycount-qtybook
+   else 0
+   end
+) as ingresos,
+(
+  case when qtycount-qtybook < 0
+        then qtybook-qtycount
+       else 0
+  end
+) as egresos,
+'M_INVENTORY' as tableName
+from m_inventoryline il
+join m_inventory i on il.m_inventory_id = i.m_inventory_id and i.isactive  = 'Y' and i.docstatus != 'DR' and i.docstatus != 'IN' and i.docstatus != 'VO'
+where il.isactive = 'Y' and il.ad_client_id = $P{AD_Client_ID} and il.ad_org_id = $P{AD_Org_ID}
+and date(i.movementdate) < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+ end
+)
+))
+) as acumpasado
+)
+union all
+-----------------------------------------------------------------------
+-- Segunda parte detalla los movimientos que afectan al stock inicial
+-- a partir del dia siguiente de la fecha usada para la primera parte.
+-- hasta una fecha tope
+-------------------------------------------------------------------------
+(
+select 'D' as nivel,
+* from (
+(select
+io.m_inout_id as movdoc_id,
+m_product_id as product_id,
+io.movementdate as movementdate,
+io.documentno,
+io.c_doctype_id as doctype,
+(select name from c_doctype_trl d where io.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+io.c_order_id,
+o.documentno as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getcostforproductinput($P{AD_Client_ID},$P{AD_Org_ID} , m_product_id, io.movementdate) as inputcost,
+coalesce((
+        case when substring(io.movementtype::text, 2) != '-'
+            then il.qtyentered
+        else
+            0
+        end
+),0) as ingresos,
+
+coalesce((
+        case when substring(io.movementtype::text, 2) = '-'
+            then il.qtyentered
+        else
+            0
+        end
+),0) as egresos,
+'M_INOUT' as tableName
+from m_inout io
+join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y'
+join c_order o on o.c_order_id = io.c_order_id
+where io.isactive  = 'Y' and io.docstatus != 'DR' and io.docstatus != 'IN'  and io.docstatus != 'VO' and io.ad_client_id = $P{AD_Client_ID} and io.ad_org_id = $P{AD_Org_ID}
+and date(io.movementdate) >= date($P{DateFrom1}) and date(io.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+UNION all
+(
+select
+mio.m_movement_id as movdoc_id,
+m_product_id as product_id,
+mio.movementdate as movementdate,
+documentno,
+mio.c_doctype_id as doctype,
+(select name from c_doctype_trl d where mio.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as inputcost,
+ml.movementqty as ingresos,
+ml.movementqty as egresos,
+'M_MOVEMENT' as tableName
+
+from m_movement mio
+join m_movementline ml on ml.m_movement_id=mio.m_movement_id and ml.isactive  = 'Y' --and ml.m_product_id = 1017928
+join m_warehouse wo on wo.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locator_id)
+join m_warehouse wd on wd.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locatorto_id)
+where mio.isactive  = 'Y' and mio.docstatus != 'DR' and mio.docstatus != 'IN'  and mio.docstatus != 'VO' and mio.ad_client_id = $P{AD_Client_ID} and mio.ad_org_id = $P{AD_Org_ID}
+and date(mio.movementdate) >= date($P{DateFrom1}) and date(mio.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+)
+union all
+(
+select
+p.m_production_id as movdoc_id,
+il.m_product_id as product_id,
+p.created as movementdate,
+pp.documentno as documentno,
+pp.c_doctype_id as doctype,
+(select name from c_doctype_trl d where pp.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,il.m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getcostforproductinput($P{AD_Client_ID},$P{AD_Org_ID} , il.m_product_id, p.created) as inputcost,
+(case when il.movementqty> 0  then il.movementqty else 0 end)as ingresos,
+(case when il.movementqty<= 0  then -1*il.movementqty else 0 end)as egresos,
+'M_PRODUCTION' as tableName
+from m_productionplan p
+join m_productionline il on il.m_productionplan_id=p.m_productionplan_id and il.isactive  = 'Y'
+join m_production pp on pp.m_production_id=p.m_production_id and il.isactive  = 'Y'
+JOIN m_warehouse w ON w.m_warehouse_id = (( SELECT loc.m_warehouse_id FROM m_locator loc
+						WHERE loc.m_locator_id = il.m_locator_id))
+where p.isactive='Y' and (pp.docstatus = ANY (ARRAY['CO'::bpchar, 'CL'::bpchar])) and pp.isactive='Y' and p.ad_client_id = $P{AD_Client_ID} and p.ad_org_id = $P{AD_Org_ID}
+and date(p.created) >= date($P{DateFrom1}) and date(p.created) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else il.m_product_id = $P{M_Product_ID}
+  end
+)
+
+)
+UNION all
+(
+select
+i.m_inventory_id as movdoc_id,
+m_product_id as product_id,
+i.movementdate as movementdate,
+i.documentno as documentno,
+i.c_doctype_id as doctype,
+(select d.name from c_doctype_trl d where i.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+null as nroOrder,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as currentcostprice,
+getaveragecost($P{AD_Client_ID},$P{AD_Org_ID},1000051,m_product_id,(date($P{DateFrom2})+time '23:59:59')::timestamp without time zone,'Y') as inputcost,
+(  case when qtycount-qtybook >= 0
+        then qtycount-qtybook
+   else 0
+   end
+) as ingresos,
+(
+  case when qtycount-qtybook < 0
+        then qtybook-qtycount
+       else 0
+  end
+) as egresos,
+'M_INVENTORY' as tableName
+
+from m_inventoryline il
+join m_inventory i on il.m_inventory_id = i.m_inventory_id and i.isactive  = 'Y' and i.docstatus != 'DR' and i.docstatus != 'IN' and i.docstatus != 'VO'
+where il.isactive = 'Y' and il.ad_client_id = $P{AD_Client_ID} and il.ad_org_id = $P{AD_Org_ID}
+and date(i.movementdate) >= date($P{DateFrom1}) and date(i.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+))
+) as detallado
+)
+) as final
+group by nivel,doctype,tipodoc
+order by nivel,tipodoc]]></queryString>
+  <field name="nivel" class="java.lang.String" />
+  <field name="doctype" class="java.math.BigDecimal" />
+  <field name="tipodoc" class="java.lang.String" />
+  <field name="total01" class="java.math.BigDecimal" />
+  <field name="total02" class="java.math.BigDecimal" />
+  <variable name="total01_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Periodo" calculation="Sum">
+    <variableExpression><![CDATA[$F{total01}]]></variableExpression>
+  </variable>
+  <variable name="total02_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Periodo" calculation="Sum">
+    <variableExpression><![CDATA[$F{total02}]]></variableExpression>
+  </variable>
+  <variable name="total01_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+    <variableExpression><![CDATA[$F{total01}]]></variableExpression>
+  </variable>
+  <variable name="total02_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+    <variableExpression><![CDATA[$F{total02}]]></variableExpression>
+  </variable>
+  <group name="Periodo">
+    <groupExpression><![CDATA[$F{nivel}]]></groupExpression>
+    <groupHeader>
+      <band height="33">
+        <printWhenExpression><![CDATA[$F{nivel}.equals("A") == true]]></printWhenExpression>
+        <textField hyperlinkType="Reference">
+          <reportElement x="12" y="9" width="248" height="20" uuid="97d12bcc-b636-4831-a925-3d7dbb10a054" />
+          <textElement>
+            <font size="12" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["SALDOS INICIALES"]]></textFieldExpression>
+          <hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/KardexValorizadoSimplificado_hlp01.jasper"]]></hyperlinkReferenceExpression>
+          <hyperlinkParameter name="DateFrom1">
+            <hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+          <hyperlinkParameter name="M_Product_ID">
+            <hyperlinkParameterExpression><![CDATA[$P{M_Product_ID}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+        </textField>
+        <staticText>
+          <reportElement x="270" y="9" width="100" height="20" uuid="3e04501d-7417-4839-bbb0-a45e875801b6" />
+          <textElement textAlignment="Right">
+            <font size="10" isBold="true" />
+          </textElement>
+          <text><![CDATA[Ingresos]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="370" y="9" width="100" height="20" uuid="5265cb40-5fe9-440f-bf8f-5c5e4036a8c6" />
+          <textElement textAlignment="Right">
+            <font size="10" isBold="true" />
+          </textElement>
+          <text><![CDATA[Egresos]]></text>
+        </staticText>
+      </band>
+      <band height="33">
+        <printWhenExpression><![CDATA[$F{nivel}.equals("A")  == false]]></printWhenExpression>
+        <staticText>
+          <reportElement x="368" y="10" width="100" height="20" uuid="eac5e206-a141-4d82-bb8b-50616a04c305" />
+          <textElement textAlignment="Right">
+            <font size="10" isBold="true" />
+          </textElement>
+          <text><![CDATA[Egresos]]></text>
+        </staticText>
+        <staticText>
+          <reportElement x="268" y="10" width="100" height="20" uuid="bdf9aec8-33bf-4549-a039-b2972c8f4db0" />
+          <textElement textAlignment="Right">
+            <font size="10" isBold="true" />
+          </textElement>
+          <text><![CDATA[Ingresos]]></text>
+        </staticText>
+        <textField hyperlinkType="Reference">
+          <reportElement x="12" y="10" width="248" height="20" uuid="e91c7d0c-ea2d-41e1-9251-2fa2a2ce5c31" />
+          <textElement>
+            <font size="12" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["MOVIMIENTOS DEL PERIODO"]]></textFieldExpression>
+          <hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/KardexValorizadoSimplificado_hlp02.jasper"]]></hyperlinkReferenceExpression>
+          <hyperlinkParameter name="DateFrom1">
+            <hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+          <hyperlinkParameter name="M_Product_ID">
+            <hyperlinkParameterExpression><![CDATA[$P{M_Product_ID}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+          <hyperlinkParameter name="DateFrom2">
+            <hyperlinkParameterExpression><![CDATA[$P{DateFrom2}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+        </textField>
+        <textField hyperlinkType="Reference">
+          <reportElement x="486" y="10" width="63" height="20" uuid="bb8c129d-cb2a-428e-9a3f-3048a2fcf8af" />
+          <textElement>
+            <font size="12" isBold="true" isUnderline="true" />
+          </textElement>
+          <textFieldExpression><![CDATA["Detallar"]]></textFieldExpression>
+          <hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/KardexValorizadoSimplificadoResumen_hlp01.jasper"]]></hyperlinkReferenceExpression>
+          <hyperlinkParameter name="DateFrom1">
+            <hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+          <hyperlinkParameter name="M_Product_ID">
+            <hyperlinkParameterExpression><![CDATA[$P{M_Product_ID}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+          <hyperlinkParameter name="DateFrom2">
+            <hyperlinkParameterExpression><![CDATA[$P{DateFrom2}]]></hyperlinkParameterExpression>
+          </hyperlinkParameter>
+        </textField>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="30">
+        <textField pattern="#,##0.0000" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="260" y="4" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="c2856390-74b9-4ae4-8ef3-aa784cd785f3" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{total01_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.0000" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="370" y="4" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="288fde8f-2299-449b-af4a-986f0c405a08" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{total02_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0.0000" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="470" y="4" width="85" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="9485ca1e-392e-481b-8d63-9e93826f2e87" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{total01_1}.subtract($V{total02_1})]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <pageHeader>
+    <band height="72" splitType="Stretch">
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="462" y="58" width="65" height="12" uuid="a3a99b5d-4e02-4429-ac4a-a574c439b462" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="447" y="39" width="80" height="18" uuid="17e28baa-2058-4182-8f9f-1c5b704bd4ff" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="118" y="0" width="318" height="20" uuid="9e7c2a60-6a7b-40f8-b4b7-561f08c0497b" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="15" isBold="true" />
+        </textElement>
+        <text><![CDATA[Inventario Valorizado]]></text>
+      </staticText>
+      <staticText>
+        <reportElement key="staticText-20" x="350" y="39" width="100" height="20" uuid="30880aaf-fc59-4d48-b4ec-e46fb904382d" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="499" y="39" width="50" height="12" uuid="0895e72f-b3e3-4408-87fb-6fcf4671c165" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="187" y="20" width="180" height="14" forecolor="#000000" uuid="e199ec76-990f-466c-8df4-8018ee4dd048" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{DateFrom1})+ " al " + DateFormat.getDateInstance().format($P{DateFrom2})]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="527" y="58" width="22" height="12" uuid="3c0d8db0-707e-4443-8a15-06be35f40802" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement x="0" y="39" width="46" height="12" uuid="59aa67a6-5ea0-4e46-9af2-8954f1c94168" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto :]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="71" width="555" height="1" uuid="b2b30333-0571-4d1e-8781-549ffe191cb5" />
+      </line>
+    </band>
+  </pageHeader>
+  <columnHeader>
+    <band height="5" splitType="Stretch" />
+  </columnHeader>
+  <detail>
+    <band height="16" splitType="Stretch">
+      <printWhenExpression><![CDATA[$F{nivel}.equals("A") == true]]></printWhenExpression>
+      <textField hyperlinkType="Reference">
+        <reportElement x="12" y="0" width="243" height="16" uuid="23eb8405-793d-4658-9320-fcfb40602963" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipodoc}]]></textFieldExpression>
+        <hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/KardexValorizadoSimplificado_hlp01.jasper"]]></hyperlinkReferenceExpression>
+        <hyperlinkParameter name="DateFrom1">
+          <hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+        <hyperlinkParameter name="M_Product_ID">
+          <hyperlinkParameterExpression><![CDATA[$P{M_Product_ID}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+        <hyperlinkParameter name="TIPODOC_ID">
+          <hyperlinkParameterExpression><![CDATA[$F{doctype}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+      </textField>
+      <textField pattern="#,##0.0000">
+        <reportElement x="260" y="0" width="100" height="16" uuid="0f0724df-942c-4b4f-a8ce-398d7f6d9b22" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total01}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="370" y="0" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="7f828689-19b1-4d89-b399-9e4cd954e18a" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total02}]]></textFieldExpression>
+      </textField>
+    </band>
+    <band height="21">
+      <printWhenExpression><![CDATA[$F{nivel}.equals("A") == false]]></printWhenExpression>
+      <textField pattern="#,##0.0000">
+        <reportElement x="260" y="4" width="100" height="16" uuid="5bc7adbd-2cea-45a5-afed-d653b51a23e7" />
+        <textElement textAlignment="Right">
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total01}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="370" y="4" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="5e7b0ed8-1ad9-46e4-b691-d9662fd967ea" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{total02}]]></textFieldExpression>
+      </textField>
+      <textField hyperlinkType="Reference">
+        <reportElement x="12" y="4" width="243" height="16" uuid="2d5f6557-a822-44fd-91d2-b7db10bb1c41" />
+        <textElement>
+          <font size="8" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipodoc}]]></textFieldExpression>
+        <hyperlinkReferenceExpression><![CDATA["http://xendra-server:8080/customreport/KardexValorizadoSimplificado_hlp02.jasper"]]></hyperlinkReferenceExpression>
+        <hyperlinkParameter name="DateFrom1">
+          <hyperlinkParameterExpression><![CDATA[$P{DateFrom1}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+        <hyperlinkParameter name="M_Product_ID">
+          <hyperlinkParameterExpression><![CDATA[$P{M_Product_ID}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+        <hyperlinkParameter name="TIPODOC_ID">
+          <hyperlinkParameterExpression><![CDATA[$F{doctype}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+        <hyperlinkParameter name="DateFrom2">
+          <hyperlinkParameterExpression><![CDATA[$P{DateFrom2}]]></hyperlinkParameterExpression>
+        </hyperlinkParameter>
+      </textField>
+    </band>
+  </detail>
+  <columnFooter>
+    <band height="29" splitType="Stretch">
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="470" y="0" width="85" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="20d45e75-6341-461f-9da6-147be46767a9" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{total01_2}.subtract($V{total02_2})]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="260" y="0" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="ce35c8c4-d2fd-4531-a5c2-f321b3d6de77" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{total01_2}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0.0000" isBlankWhenNull="false">
+        <reportElement mode="Transparent" x="370" y="0" width="100" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="45a858ac-451b-4a18-b9b8-0cb1952bd3e6" />
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$V{total02_2}]]></textFieldExpression>
+      </textField>
+    </band>
+  </columnFooter>
+  <pageFooter>
+    <band height="29" splitType="Stretch" />
+  </pageFooter>
+</jasperReport>

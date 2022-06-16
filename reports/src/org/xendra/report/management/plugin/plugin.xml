@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="management reports extension" description="management reports extension" id="org.xendra.report.management" version="1.0" category="Gerencia" synchronized="@timestamp@" tags="SUNAT" enabled="true">
+  <properties>
+    <property name="infourl" value="http://americas/public/plugin?id=org.xendra.pos" />
+  </properties>
+  <menuitem Name="Gerencia" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D" anchor="REPORTS">
+    <menuitem Report="CoberturaVendedorCliente" SeqNo="10" />
+    <menuitem Report="historicoPendientesVendedor" SeqNo="20" />
+    <menuitem Report="rankingClientesTodo" SeqNo="30" />
+  </menuitem>
+</plugin>
+
+

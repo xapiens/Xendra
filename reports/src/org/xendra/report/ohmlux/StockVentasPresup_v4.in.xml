@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Reporte De Stock Ventas Presupuesto" Name="Reporte De Stock Ventas Presupuesto" BaseRole="" Description="" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="StockVentasPresup_v4.jrxml" Identifier="66a90477-313b-27ca-b450-50118df7f0b3" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="DateFrom" Description="Fecha A Partir De La Cual se Acumularan Las Ventas" Help="Los totales de ventas se calcularan desde esta fecha a la fecha de hoy." AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="54e75a05-1c92-4058-8faa-b178b160dedc" Synchronized="2018-11-30 09:58:03.0" />
+</process>
+
+

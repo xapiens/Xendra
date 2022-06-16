@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuitem Name="Contabilidad" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D"  anchor="REPORTS" >
+ <menuitem Name="Libro Contable Sunat" IsSummary="Y" IsSOTrx="N" IsReadOnly="Y" EntityType="D">
+  <menuitem Report="Formato1_1" SeqNo="10" />
+  <menuitem Report="Formato1_1_1" SeqNo="20" />
+  <menuitem Report="Formato1_1_2" SeqNo="30" />
+  <menuitem Report="Formato1_2" SeqNo="40" />
+  <menuitem Report="Formato1_2_1" SeqNo="50" />
+  <menuitem Report="Formato1_2_2" SeqNo="60" />
+  <menuitem Report="Formato3_1" SeqNo="80" />
+  <menuitem Report="Formato3_2" SeqNo="90" />
+  <menuitem Report="Formato3_3" SeqNo="100" />
+  <menuitem Report="Formato3_4" SeqNo="110" />
+  <menuitem Report="Formato3_5" SeqNo="120" />
+  <menuitem Report="Formato3_6" SeqNo="130" />
+  <menuitem Report="Formato3_7" SeqNo="140" />
+  <menuitem Report="Formato3_8" SeqNo="150" />
+  <menuitem Report="Formato3_9" SeqNo="160" />
+  <menuitem Report="Formato3_10" SeqNo="170" />
+  <menuitem Report="Formato3_11" SeqNo="180" />
+  <menuitem Report="Formato3_12" SeqNo="190" />
+  <menuitem Report="Formato3_13" SeqNo="200" />
+  <menuitem Report="Formato3_14" SeqNo="220" />
+  <menuitem Report="Formato3_15" SeqNo="230" />
+  <menuitem Report="Formato3_16" SeqNo="240" />
+  <menuitem Report="Formato3_17" SeqNo="250" />
+  <menuitem Report="Formato3_17_A" SeqNo="260" />
+  <menuitem Report="Formato3_17_2D" SeqNo="270" />
+  <menuitem Report="Formato3_17_4D" SeqNo="280" />
+  <menuitem Report="Formato3_18" SeqNo="290" />
+  <menuitem Report="Formato3_19" SeqNo="300" />
+  <menuitem Report="Formato3_20" SeqNo="310" />
+  <menuitem Report="Formato4_1" SeqNo="320" />
+  <menuitem Report="Formato5_1" SeqNo="330" />
+  <menuitem Report="Formato5_1_1" SeqNo="340" />
+  <menuitem Report="Formato5_1_2" SeqNo="350" />
+  <menuitem Report="Formato5_1_3" SeqNo="360" />
+  <menuitem Report="Formato5_2_1" SeqNo="370" />
+  <menuitem Report="Formato5_2_2" SeqNo="380" />
+  <menuitem Report="Formato5_2_3" SeqNo="390" />
+  <menuitem Report="Formato6_1" SeqNo="400" />
+  <menuitem Report="Formato6_1_1" SeqNo="410" />
+  <menuitem Report="Formato8_1" SeqNo="440" />
+  <menuitem Report="Formato8_1_1" SeqNo="450" />
+  <menuitem Report="Formato12_1" SeqNo="460" />
+  <menuitem Report="Formato13_1" SeqNo="470" />
+  <menuitem Report="Formato14_1" SeqNo="480" />
+  <menuitem Report="Formato14_1_1" SeqNo="490" />
+  <menuitem Report="Formato14_1_2" SeqNo="500" />
+ </menuitem>
+</menuitem>

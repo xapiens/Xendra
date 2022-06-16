@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="dretencion_1Subreport1.jrxml" Name="dretencion_1Subreport1.jrxml" BaseRole="" Description="dretencion_1Subreport1.jrxml" Help="" Classname="" CategoryName="" AccessLevel="6" EntityType="D" FileName="dretencion_1Subreport1.jrxml" Identifier="012717a6-c003-4bc9-bf99-48e68395012e" Synchronized="2017-06-06 22:10:34.0">
+  <parameter Name="C_Retention_ID" Description="" Help="" AD_Reference_ID="2bdf579b-6652-8542-6c29-59598861d88c" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="C_Retention_ID" FieldLength="22" IsMandatory="false" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="0" EntityType="U" DisplayLogic="" ReadOnlyLogic="" Identifier="4f964ead-b444-4668-b4bc-40c9a6fe343e" Synchronized="2017-06-14 11:17:51.0" />
+</process>
+
+

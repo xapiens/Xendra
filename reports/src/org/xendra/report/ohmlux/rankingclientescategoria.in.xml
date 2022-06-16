@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="R_ClientGroupRanking" Name="R_ClientGroupRanking" BaseRole="" Description="R_ClientGroupRanking" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="3" EntityType="D" FileName="rankingclientescategoria.jrxml" Identifier="b02a5f55-c861-692d-3c18-92dcf0a6b716" Synchronized="2016-10-11 15:12:18.0">
+  <parameter Name="AD_Client_ID" Description="" Help="" AD_Reference_ID="3cefd939-fdfe-f99a-8105-07955b81a4cd" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="AD_Client_ID" FieldLength="0" IsMandatory="true" IsRange="false" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="478dfdee-989d-4ed8-814f-9dfd17709fd6" Synchronized="2018-11-30 09:58:07.0" />
+  <parameter Name="DateInvoiced" Description="" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateInvoiced" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="c3a41cc3-6abf-40bb-9f98-80512f34d119" Synchronized="2018-11-30 09:58:07.0" />
+</process>
+
+

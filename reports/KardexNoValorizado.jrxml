@@ -1,0 +1,1117 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kardexNoValorizado" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="797" leftMargin="25" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f01c0b5-3787-4f67-92f0-df0f256ff4ee">
+  <property name="Description" value="KardexNoValorizado.jrxml" />
+  <property name="FileName" value="KardexNoValorizado.jrxml" />
+  <property name="Synchronized" value="2017-06-06 22:10:37.618" />
+  <property name="Identifier" value="14cda055-3b11-43da-96e9-bfb9f9933d78" />
+  <property name="ireport.zoom" value="1.0" />
+  <property name="ireport.x" value="0" />
+  <property name="ireport.y" value="0" />
+  <parameter name="DateFrom1" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("1910-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="DateFrom2" class="java.sql.Timestamp">
+    <defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2030-01-01 00:00:00")]]></defaultValueExpression>
+  </parameter>
+  <parameter name="M_Product_ID" class="java.math.BigDecimal">
+    <defaultValueExpression><![CDATA[new BigDecimal(0.00)]]></defaultValueExpression>
+  </parameter>
+  <queryString><![CDATA[-----------------------------------------------------------------------
+-- ESTE QUERY DEBERIA ESTAR EN UNA VISTA ; AL FINAL LA PASARE A UNA
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- Primera parte determina el stock inicial hasta una fecha , la segunda
+-- parte sera el detalle de esta fecha en adelante
+-------------------------------------------------------------------------
+(select
+0 as movdoc_id,
+a.product_id,
+(select name from m_product m where m.m_product_id = a.product_id) as productName,
+date('1910-01-01')::timestamp as movementdate,
+null as documentno,
+null as tipoDoc,
+0::numeric as c_order_id,
+0 as almacenOrigenID,
+null as almacenOrigenNombre,
+0 as almacenDestinoID,
+null  as almacenDestinoNombre,
+0 as qtyentered,
+sum(a.OHMLUX_MOV) as OHMLUX_MOV,
+sum(a.DALSAC_MOV) as DALSAC_MOV,
+sum(a.WARRANT_MOV) as WARRANT_MOV,
+sum(a.BAJAS_MOV) as BAJAS_MOV,
+sum(a.REPROCESO_MOV) as REPROCESO_MOV,
+sum(a.AJUSTES_MOV) as AJUSTES_MOV
+
+from
+(
+select
+m_product_id as product_id,
+sum(
+	case when io.m_warehouse_id = 1000095
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as OHMLUX_MOV,
+sum(
+	case when io.m_warehouse_id = 1000093
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as DALSAC_MOV,
+sum(
+	case when io.m_warehouse_id = 1000094
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as WARRANT_MOV,
+sum(
+	case when io.m_warehouse_id = 1000096
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as BAJAS_MOV,
+sum(
+	case when io.m_warehouse_id = 1000097
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as REPROCESO_MOV,
+sum(
+
+	case when io.m_warehouse_id = 1000098
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as AJUSTES_MOV
+from m_inout io
+join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y' -- and il.m_product_id = 1017928
+where io.isactive  = 'Y' and io.docstatus != 'DR'
+and date(io.movementdate) < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+group by il.m_product_id
+
+union
+(
+
+
+select
+m_product_id as product_id,
+sum
+(
+	case when wo.m_warehouse_id = 1000095
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000095
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+) as OHMLUX_MOV,
+sum
+(
+	case when wo.m_warehouse_id = 1000093
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000093
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+) as DALSAC_MOV,
+sum
+(
+	case when wo.m_warehouse_id = 1000094
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000094
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+) as WARRANT_MOV,
+sum
+(
+	case when wo.m_warehouse_id = 1000096
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000096
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+) as BAJAS_MOV
+,
+sum
+(
+	case when wo.m_warehouse_id = 1000097
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000097
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+) as REPROCESO_MOV,
+sum
+(
+	case when wo.m_warehouse_id = 1000098
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000098
+				then ml.movementqty
+				else 0
+			end
+		)
+
+	end
+) as AJUSTES_MOV
+from m_movement mio
+join m_movementline ml on ml.m_movement_id=mio.m_movement_id and ml.isactive  = 'Y' --and ml.m_product_id = 1017928
+join m_warehouse wo on wo.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locator_id)
+join m_warehouse wd on wd.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locatorto_id)
+where mio.isactive  = 'Y' and mio.docstatus != 'DR'
+and date(mio.movementdate) < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+group by ml.m_product_id
+)
+union
+(
+select
+m_product_id as product_id,
+sum
+(
+	case when i.m_warehouse_id = 1000095
+		then qtycount-qtybook
+	else
+		0
+	end
+) as OHMLUX_MOV,
+sum
+(
+	case when i.m_warehouse_id = 1000093
+		then qtycount-qtybook
+	else
+		0
+	end
+) as DALSAC_MOV,
+sum
+(
+	case when i.m_warehouse_id = 1000094
+		then qtycount-qtybook
+	else
+		0
+	end
+) as WARRANT_MOV,
+sum
+(
+	case when i.m_warehouse_id = 1000096
+		then qtycount-qtybook
+	else
+		0
+	end
+) as BAJAS_MOV,
+sum
+(
+	case when i.m_warehouse_id = 1000097
+		then qtycount-qtybook
+	else
+		0
+	end
+) as REPROCESO_MOV,
+sum
+(
+	case when i.m_warehouse_id = 1000098
+		then qtycount-qtybook
+	else
+		0
+	end
+) as AJUSTES_MOV
+
+from m_inventoryline il
+join m_inventory i on il.m_inventory_id = i.m_inventory_id and i.isactive  = 'Y' and i.docstatus != 'DR'
+where il.isactive = 'Y'
+and date(i.movementdate) < date($P{DateFrom1})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+group by il.m_product_id
+)
+) a
+
+group by product_id
+)
+UNION
+-----------------------------------------------------------------------
+-- Segunda parte detalla los movimientos que afectan al stock inicial
+-- a partir del dia siguiente de la fecha usada para la primera parte.
+-- hasta una fecha tope
+-------------------------------------------------------------------------
+(select
+io.m_inout_id as movdoc_id,
+m_product_id as product_id,
+(select name from m_product m where m.m_product_id = il.m_product_id) as productName,
+io.movementdate as movementdate,
+documentno,
+(select name from c_doctype_trl d where io.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+c_order_id,
+m_warehouse_id as almacenOrigenID,
+(select name from m_warehouse w where io.m_warehouse_id = w.m_warehouse_id) as almacenOrigenNombre,
+0 as almacenDestinoID,
+null  as almacenDestinoNombre,
+qtyentered,
+(
+	case when io.m_warehouse_id = 1000095
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as OHMLUX_MOV,
+(
+	case when io.m_warehouse_id = 1000093
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as DALSAC_MOV,
+(
+	case when io.m_warehouse_id = 1000094
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as WARRANT_MOV,
+(
+	case when io.m_warehouse_id = 1000096
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as BAJAS_MOV,
+(
+	case when io.m_warehouse_id = 1000097
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as REPROCESO_MOV,
+(
+	case when io.m_warehouse_id = 1000098
+		then (
+			case when c_doctype_id = 1001049
+				then -1*il.qtyentered
+			else
+				il.qtyentered
+			end
+
+		)
+	else
+		0
+	end
+) as AJUSTES_MOV
+from m_inout io
+join m_inoutline il on il.m_inout_id=io.m_inout_id and il.isactive  = 'Y' -- and il.m_product_id = 1017928
+where io.isactive  = 'Y' and io.docstatus != 'DR'
+and date(io.movementdate) >= date($P{DateFrom1}) and date(io.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+UNION
+(
+select
+mio.m_movement_id as movdoc_id,
+m_product_id as product_id,
+(select name from m_product m where m.m_product_id = ml.m_product_id)  as productName,
+mio.movementdate as movementdate,
+documentno,
+(select name from c_doctype_trl d where mio.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+wo.m_warehouse_id as almacenOrigenID,
+wo.name as almacenOrigenNombre,
+wd.m_warehouse_id as almacenDestinoID,
+wd.name as almacenDestinoNombre,
+ml.movementqty as qtyentered,
+
+(
+	case when wo.m_warehouse_id = 1000095
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000095
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+
+) as OHMLUX_MOV,
+(
+	case when wo.m_warehouse_id = 1000093
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000093
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+
+) as DALSAC_MOV,
+(
+	case when wo.m_warehouse_id = 1000094
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000094
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+
+) as WARRANT_MOV,
+(
+	case when wo.m_warehouse_id = 1000096
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000096
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+
+) as BAJAS_MOV
+,
+(
+	case when wo.m_warehouse_id = 1000097
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000097
+				then ml.movementqty
+				else 0
+			end
+
+		)
+
+	end
+
+) as REPROCESO_MOV
+,
+(
+	case when wo.m_warehouse_id = 1000098
+		then -1*ml.movementqty
+		else
+		(
+			case when wd.m_warehouse_id = 1000098
+				then ml.movementqty
+				else 0
+			end
+		)
+
+	end
+
+) as AJUSTES_MOV
+from m_movement mio
+join m_movementline ml on ml.m_movement_id=mio.m_movement_id and ml.isactive  = 'Y' --and ml.m_product_id = 1017928
+join m_warehouse wo on wo.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locator_id)
+join m_warehouse wd on wd.m_warehouse_id = (select m_warehouse_id from m_locator loc where loc.m_locator_id = ml.m_locatorto_id)
+where mio.isactive  = 'Y' and mio.docstatus != 'DR'
+and date(mio.movementdate) >= date($P{DateFrom1}) and date(mio.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)
+
+)
+
+UNION
+(
+select
+i.m_inventory_id as movdoc_id,
+m_product_id as product_id,
+(select name from m_product m where m.m_product_id = il.m_product_id)  as productName,
+i.movementdate as movementdate,
+i.documentno as documentno,
+(select d.name from c_doctype_trl d where i.c_doctype_id = d.c_doctype_id ) as tipoDoc,
+null as c_order_id,
+i.m_warehouse_id as almacenOrigenID,
+(select name from m_warehouse w where i.m_warehouse_id = w.m_warehouse_id) as almacenOrigenNombre,
+0 as almacenDestinoID,
+null  as almacenDestinoNombre,
+qtycount-qtybook as qtyentered,
+(
+	case when i.m_warehouse_id = 1000095
+		then qtycount-qtybook
+	else
+		0
+	end
+) as OHMLUX_MOV,
+(
+	case when i.m_warehouse_id = 1000093
+		then qtycount-qtybook
+	else
+		0
+	end
+) as DALSAC_MOV,
+(
+	case when i.m_warehouse_id = 1000094
+		then qtycount-qtybook
+	else
+		0
+	end
+) as WARRANT_MOV,
+(
+	case when i.m_warehouse_id = 1000096
+		then qtycount-qtybook
+	else
+		0
+	end
+) as BAJAS_MOV,
+(
+	case when i.m_warehouse_id = 1000097
+		then qtycount-qtybook
+	else
+		0
+	end
+) as REPROCESO_MOV,
+(
+	case when i.m_warehouse_id = 1000098
+		then qtycount-qtybook
+	else
+		0
+	end
+) as AJUSTES_MOV
+from m_inventoryline il
+join m_inventory i on il.m_inventory_id = i.m_inventory_id and i.isactive  = 'Y' and i.docstatus != 'DR'
+where il.isactive = 'Y'
+and date(i.movementdate) >= date($P{DateFrom1}) and date(i.movementdate) <= date($P{DateFrom2})
+and
+( case when coalesce($P{M_Product_ID},0) = 0
+	then true
+	else m_product_id = $P{M_Product_ID}
+  end
+)))
+order by productName,movementdate,movdoc_id]]></queryString>
+  <field name="movdoc_id" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="product_id" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="productname" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="movementdate" class="java.sql.Timestamp">
+    <fieldDescription />
+  </field>
+  <field name="documentno" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="tipodoc" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="c_order_id" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="almacenorigenid" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="almacenorigennombre" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="almacendestinoid" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="almacendestinonombre" class="java.lang.String">
+    <fieldDescription />
+  </field>
+  <field name="qtyentered" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="ohmlux_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="dalsac_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="warrant_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="bajas_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="reproceso_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <field name="ajustes_mov" class="java.math.BigDecimal">
+    <fieldDescription />
+  </field>
+  <variable name="ohmlux_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{ohmlux_mov}]]></variableExpression>
+  </variable>
+  <variable name="dalsac_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{dalsac_mov}]]></variableExpression>
+  </variable>
+  <variable name="warrant_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{warrant_mov}]]></variableExpression>
+  </variable>
+  <variable name="bajas_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{bajas_mov}]]></variableExpression>
+  </variable>
+  <variable name="reproceso_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{reproceso_mov}]]></variableExpression>
+  </variable>
+  <variable name="ajustes_mov_1" class="java.math.BigDecimal" resetType="Group" resetGroup="g_product" calculation="Sum">
+    <variableExpression><![CDATA[$F{ajustes_mov}]]></variableExpression>
+  </variable>
+  <group name="g_product">
+    <groupExpression><![CDATA[$F{productname}]]></groupExpression>
+    <groupHeader>
+      <band height="22" splitType="Stretch">
+        <rectangle>
+          <reportElement x="0" y="1" width="334" height="15" uuid="9e37f4aa-25f7-41c1-9f25-76a964bac6a4" />
+          <graphicElement>
+            <pen lineStyle="Solid" />
+          </graphicElement>
+        </rectangle>
+        <textField bookmarkLevel="1">
+          <reportElement x="88" y="0" width="217" height="16" uuid="6b8c603f-19e3-4d78-8c10-5bc301207a56" />
+          <textElement verticalAlignment="Middle">
+            <font size="7" isBold="true" isUnderline="false" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+          <anchorNameExpression><![CDATA[$F{productname}]]></anchorNameExpression>
+        </textField>
+        <textField>
+          <reportElement x="2" y="0" width="86" height="16" uuid="b774ebd9-29d8-435f-a875-480d9f736149" />
+          <textElement verticalAlignment="Middle">
+            <font size="7" isBold="true" />
+          </textElement>
+          <textFieldExpression><![CDATA[$F{product_id}]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement x="0" y="16" width="797" height="1" uuid="8dda06e5-a984-421d-8d83-a0f0094f5230" />
+        </line>
+      </band>
+    </groupHeader>
+    <groupFooter>
+      <band height="27" splitType="Stretch">
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="297" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="c9cf875c-4360-41fb-b266-69de21159b2c" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ohmlux_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="371" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="faff674c-5abb-4e14-8c98-188a05e4755f" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{dalsac_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="445" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="8e3d6da2-4a57-4a66-a720-99157eb10f39" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{warrant_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="585" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="03e54496-5ffa-4db5-b479-10893551c5dd" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{bajas_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="657" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="e54c7b36-f9d3-4816-9df2-156b42862d02" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{reproceso_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Transparent" x="727" y="10" width="63" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="50468cb0-d952-4f1e-9751-77d1b730fadb" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ajustes_mov_1}]]></textFieldExpression>
+        </textField>
+        <textField>
+          <reportElement x="25" y="10" width="265" height="13" uuid="80d84a98-58f6-4154-9b9a-ffca4ed92e7a" />
+          <textElement textAlignment="Right">
+            <font size="7" isBold="true" isUnderline="false" />
+          </textElement>
+          <textFieldExpression><![CDATA["Total "+$F{productname}+" : "]]></textFieldExpression>
+        </textField>
+        <line>
+          <reportElement x="297" y="6" width="63" height="1" uuid="4bfbe377-d667-488d-988c-df363cf1ed5e" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="445" y="6" width="63" height="1" uuid="6065936e-ee31-477b-9bc5-f71146007fca" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="371" y="6" width="63" height="1" uuid="25051603-a5ad-4cfa-97eb-d030f88accaf" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="585" y="6" width="63" height="1" uuid="3455f258-5fe5-4563-9824-c864a569e6bf" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="658" y="6" width="63" height="1" uuid="b6b61b70-a670-4b3d-84e8-96bbfab708ab" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <line>
+          <reportElement x="727" y="6" width="63" height="1" uuid="5bf78a39-e184-48ee-8520-5e76b073f14a" />
+          <graphicElement>
+            <pen lineStyle="Dotted" />
+          </graphicElement>
+        </line>
+        <rectangle>
+          <reportElement mode="Opaque" x="512" y="7" width="68" height="16" backcolor="#EAE1E1" uuid="ce910311-6b03-46d3-a7c2-b524e6a381cf" />
+        </rectangle>
+        <textField pattern="#,##0" isBlankWhenNull="false">
+          <reportElement mode="Opaque" x="514" y="8" width="63" height="13" forecolor="#000000" backcolor="#F2F2F2" uuid="81a13462-a42c-48dd-96dd-a462c2c6e0dc" />
+          <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+            <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+            <paragraph lineSpacing="Single" />
+          </textElement>
+          <textFieldExpression><![CDATA[$V{ohmlux_mov_1}.add( $V{dalsac_mov_1}).add( $V{warrant_mov_1})]]></textFieldExpression>
+        </textField>
+      </band>
+    </groupFooter>
+  </group>
+  <background>
+    <band splitType="Stretch" />
+  </background>
+  <title>
+    <band height="11" splitType="Stretch" />
+  </title>
+  <pageHeader>
+    <band height="96" splitType="Stretch">
+      <staticText>
+        <reportElement x="2" y="33" width="46" height="12" uuid="86e4b096-8572-4f3c-b526-1fabbc746991" />
+        <textElement verticalAlignment="Middle" markup="none">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto :]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="48" width="797" height="1" uuid="dd3b74c6-740b-498d-bb9f-f0edf84ec6f2" />
+      </line>
+      <staticText>
+        <reportElement x="2" y="68" width="86" height="16" uuid="776db567-b44b-42ec-9547-0518a84a2ed4" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Fecha/Hora]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="2" y="52" width="86" height="16" uuid="96e9b363-8141-4b38-832d-f17187f2e872" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Codigo]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="88" y="52" width="217" height="16" uuid="4f1526b9-919e-480d-93b4-819a53448a48" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Producto]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="88" y="68" width="112" height="16" uuid="f43da983-45c5-4698-97e4-f2244cecb53e" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Tipo Documento]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="200" y="68" width="45" height="16" uuid="7b5a27fb-18f4-435b-973a-d90075d8d7a5" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[Nro]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="245" y="68" width="45" height="16" uuid="e36f0b53-9960-4aad-abba-14395b613dbd" />
+        <textElement>
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[O.Venta]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="297" y="68" width="63" height="16" uuid="25f89d8a-c52a-42af-8524-8ea89f896835" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[OHMLUX]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="371" y="68" width="63" height="16" uuid="66da7308-2cbe-4a6b-83d5-5170bf9b53a4" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[DALSAC]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="445" y="68" width="63" height="16" uuid="b325e6bb-a618-4f6e-b615-9f01f577e4ce" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[WARRANT]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="585" y="68" width="63" height="16" uuid="c49367f0-7299-411a-a8ad-15a80f1e8e88" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[BAJAS]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="657" y="68" width="63" height="16" uuid="40dc6fd5-917b-462d-8bb4-8452fe0448e9" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[REPROCESO]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="727" y="68" width="63" height="16" uuid="895edb51-2941-4b46-bdab-e037021ea846" />
+        <textElement textAlignment="Right">
+          <font size="7" isBold="true" />
+        </textElement>
+        <text><![CDATA[AJUSTES]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="88" width="797" height="1" uuid="697d37d4-88c2-4075-ac5a-87ac183bdf5e" />
+      </line>
+      <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+        <reportElement key="textField-2" x="694" y="6" width="80" height="18" uuid="65b216c4-7154-41a8-afbe-ece8140fcdec" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-6" x="709" y="25" width="65" height="12" uuid="a1362ddd-718a-474a-98c8-f56844d0206e" />
+        <textElement textAlignment="Right">
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField pattern="hh:mm aaa" isBlankWhenNull="false">
+        <reportElement key="textField-3" x="746" y="6" width="50" height="12" uuid="8f268722-d43f-49bd-a4a7-f802dd8125a6" />
+        <textElement verticalAlignment="Top">
+          <font size="8" isItalic="false" />
+        </textElement>
+        <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report" isBlankWhenNull="false">
+        <reportElement key="textField-7" x="774" y="25" width="22" height="12" uuid="a2505108-4411-4d02-894a-2288a201cd22" />
+        <textElement>
+          <font size="5" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement key="staticText-20" x="597" y="6" width="100" height="20" uuid="9f3d2b7e-fabb-40a3-9682-ac4ae9da3ff4" />
+        <textElement>
+          <font size="8" isBold="true" pdfFontName="Helvetica-Bold" />
+        </textElement>
+        <text><![CDATA[Fecha de Impresión:]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="242" y="4" width="318" height="20" uuid="8e02265c-47e3-4996-975e-cee3717c875d" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[Kardex De Movimientos]]></text>
+      </staticText>
+      <textField isBlankWhenNull="false">
+        <reportElement key="textField-1" x="311" y="24" width="180" height="14" forecolor="#000000" uuid="0946a909-93d8-4458-ade6-0016b443efea" />
+        <box>
+          <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+          <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000" />
+        </box>
+        <textElement textAlignment="Center">
+          <font size="8" isItalic="true" pdfFontName="Helvetica-Oblique" />
+        </textElement>
+        <textFieldExpression><![CDATA["Del " +  DateFormat.getDateInstance().format($P{DateFrom1})+ " al " + DateFormat.getDateInstance().format($P{DateFrom2})]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement mode="Transparent" x="48" y="33" width="206" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="91c0ab5a-b33e-4ba8-be68-4144773c67b1" />
+        <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <textFieldExpression><![CDATA[$P{M_Product_ID}.longValue() == 0L ? "Todos" : $F{productname}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageHeader>
+  <detail>
+    <band height="19" splitType="Stretch">
+      <textField pattern="dd/MM/yyyy HH.mm.ss">
+        <reportElement x="0" y="0" width="88" height="13" uuid="7073f091-ef1e-41c6-b19e-8dedc366508f">
+          <printWhenExpression><![CDATA[new Boolean($F{tipodoc} != null && $F{documentno} != null)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{movementdate}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="200" y="0" width="45" height="13" uuid="24571d76-8024-46bb-9138-3c10e4db51e2">
+          <printWhenExpression><![CDATA[new Boolean($F{tipodoc} != null && $F{documentno} != null)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="88" y="0" width="112" height="13" uuid="1762a46f-eb18-4381-9826-a0e9872590c5">
+          <printWhenExpression><![CDATA[new Boolean($F{tipodoc} != null && $F{documentno} != null)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{tipodoc}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="245" y="0" width="45" height="13" uuid="81043597-9072-4022-8933-8fe545ba2af7">
+          <printWhenExpression><![CDATA[new Boolean($F{tipodoc} != null && $F{documentno} != null)]]></printWhenExpression>
+        </reportElement>
+        <textElement>
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{c_order_id}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="297" y="0" width="63" height="13" uuid="ee062267-ed2c-4c50-916b-596685d1db93" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ohmlux_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="371" y="0" width="63" height="13" uuid="698a18f6-170f-4f85-a0d5-a733490e0058" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{dalsac_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="445" y="0" width="63" height="13" uuid="c53dea29-9d0b-48d6-9260-f4b6d4d82603" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{warrant_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="585" y="0" width="63" height="13" uuid="0bde9680-53bf-4508-81c7-d902c3eb2e5b" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{bajas_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="657" y="0" width="63" height="13" uuid="d977bf41-7f63-4ae2-9169-36395656e157" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{reproceso_mov}]]></textFieldExpression>
+      </textField>
+      <textField pattern="#,##0">
+        <reportElement x="727" y="0" width="63" height="13" uuid="ee360448-f06e-4dc0-9302-b3cff6441a31" />
+        <textElement textAlignment="Right">
+          <font size="7" />
+        </textElement>
+        <textFieldExpression><![CDATA[$F{ajustes_mov}]]></textFieldExpression>
+      </textField>
+      <staticText>
+        <reportElement mode="Transparent" x="190" y="2" width="100" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="eccfaa27-cd15-45b2-9007-ecd1d3cff831">
+          <printWhenExpression><![CDATA[new Boolean($F{tipodoc} == null || $F{documentno} == null)]]></printWhenExpression>
+        </reportElement>
+        <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+          <font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false" />
+          <paragraph lineSpacing="Single" />
+        </textElement>
+        <text><![CDATA[Stock Inicial :]]></text>
+      </staticText>
+    </band>
+  </detail>
+  <summary>
+    <band height="11" splitType="Stretch" />
+  </summary>
+  <noData>
+    <band height="50">
+      <staticText>
+        <reportElement x="239" y="14" width="318" height="20" uuid="c6987f25-4e92-4ce8-8430-f5d2c8e6f834" />
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="11" isBold="true" />
+        </textElement>
+        <text><![CDATA[No Existen Datos Para Las Condiciones Dadas]]></text>
+      </staticText>
+    </band>
+  </noData>
+</jasperReport>

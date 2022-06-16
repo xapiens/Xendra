@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process Value="Analisis De Kardex Vs Contabilidad" Name="Analisis De Kardex Vs Contabilidad" BaseRole="" Description="Compara los resultados del Kardex Operativo vs Las Operaciones Contables" Help="" Classname="org.compiere.report.ReportStarter" CategoryName="" AccessLevel="7" EntityType="D" FileName="AnalisisKardexContabilidad.jrxml" Identifier="2d799171-717d-0cc5-34f8-defa61b3f7d2" Synchronized="2016-10-11 15:08:18.0">
+  <parameter Name="DateFrom" Description="Rango de Fechas a Analizar" Help="" AD_Reference_ID="ecebf9e6-f3bc-656f-7e58-c16d3719068b" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="DateFrom" FieldLength="0" IsMandatory="true" IsRange="true" DefaultValue="" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="10" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="da9bdedc-ca59-4dbc-a77d-9377d847e162" Synchronized="2018-11-30 09:58:08.0" />
+  <parameter Name="P_OnlyErrors" Description="Indica si solo desea errores" Help="" AD_Reference_ID="bcbf94d0-aa1b-b784-dcb0-6961408b2d83" AD_Reference_Value_ID="" AD_Val_Rule_ID="" ColumnName="P_OnlyErrors" FieldLength="0" IsMandatory="false" IsRange="false" DefaultValue="N" DefaultValue2="" VFormat="" ValueMin="" ValueMax="" SeqNo="20" EntityType="D" DisplayLogic="" ReadOnlyLogic="" Identifier="ab25a008-506e-41c2-9f2a-594bb536da2a" Synchronized="2018-11-30 09:58:08.0" />
+</process>
+
+

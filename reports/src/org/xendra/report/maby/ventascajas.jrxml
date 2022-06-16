@@ -1,0 +1,686 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventascajas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62804938-4988-4b2b-9b18-f1c708385ff4"><property name="Description" value="ventascajas.jrxml" /><property name="FileName" value="ventascajas.jrxml" /><property name="Synchronized" value="2017-06-06 22:10:35.735" /><property name="Identifier" value="c02d9443-a37a-4249-a2d2-c314ec3f11ee" />
+	<property name="ireport.zoom" value="0.75" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<parameter name="datetrx1" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2007-01-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="datetrx2" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2008-01-04 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AD_Client_ID" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(1000033)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+machineserial,
+sum(contado) as contado,
+sum (vale) as vale,
+sum (credito) as credito,
+sum (totalcaja) as totalcaja,
+name_org,
+sum(masterunid) as masterunid,
+sum(visaunid) as visaunid,
+sum(ripleyund) as ripleyund,
+sum(cmrunid) as cmrunid,
+sum(dinersunid) as dinersunid,
+sum(americanunid) as americanunid
+from (
+select
+pl.machineserial,
+sum (pl.cashamt) as contado,
+sum (pl.couponamt) as vale,
+sum (pl.creditamt) as credito,
+sum (pl.cashamt + pl.creditamt + pl.couponamt + pl.payamt) as totalcaja,
+k.name as name_org,
+case when p.creditcardtype ='M' then sum(p.payamt) else 0 end as masterunid,
+case when p.creditcardtype ='V' then sum(p.payamt) else 0 end as visaunid,
+case when p.creditcardtype ='R' then sum(p.payamt) else 0 end as ripleyund,
+case when p.creditcardtype ='S' then sum(p.payamt) else 0 end as cmrunid,
+case when p.creditcardtype ='D' then sum(p.payamt) else 0 end as dinersunid,
+case when p.creditcardtype ='A' then sum(p.payamt) else 0 end as americanunid
+from c_poslog pl
+left outer join c_payment p on pl.c_payment_id = p.c_payment_id
+left outer join ad_org k on pl.ad_org_id = k.ad_org_id
+where
+pl.ad_client_id = $P{AD_Client_ID}
+and pl.docstatus = 'CO'
+and date(pl.datetrx)>=date($P{datetrx1})
+AND date(pl.datetrx)<=date($P{datetrx2})
+group by pl.machineserial, k.name, p.creditcardtype order by pl.machineserial) as x group by name_org, machineserial
+order by name_org, machineserial]]>
+	</queryString>
+	<field name="machineserial" class="java.lang.String" />
+	<field name="contado" class="java.math.BigDecimal" />
+	<field name="vale" class="java.math.BigDecimal" />
+	<field name="credito" class="java.math.BigDecimal" />
+	<field name="totalcaja" class="java.math.BigDecimal" />
+	<field name="name_org" class="java.lang.String" />
+	<field name="masterunid" class="java.math.BigDecimal" />
+	<field name="visaunid" class="java.math.BigDecimal" />
+	<field name="ripleyund" class="java.math.BigDecimal" />
+	<field name="cmrunid" class="java.math.BigDecimal" />
+	<field name="dinersunid" class="java.math.BigDecimal" />
+	<field name="americanunid" class="java.math.BigDecimal" />
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 12 ? $F{totalcaja} : new BigDecimal(0.00)]]></variableExpression>
+	</variable>
+	<variable name="contado_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{contado}]]></variableExpression>
+	</variable>
+	<variable name="credito_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{credito}]]></variableExpression>
+	</variable>
+	<variable name="vale_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{vale}]]></variableExpression>
+	</variable>
+	<variable name="totalcaja_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalcaja}]]></variableExpression>
+	</variable>
+	<variable name="visaunid_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{visaunid}]]></variableExpression>
+	</variable>
+	<variable name="masterunid_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{masterunid}]]></variableExpression>
+	</variable>
+	<variable name="visaunid_2" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{visaunid}]]></variableExpression>
+	</variable>
+	<variable name="masterunid_2" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{masterunid}]]></variableExpression>
+	</variable>
+	<variable name="ripleyund_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{ripleyund}]]></variableExpression>
+	</variable>
+	<variable name="cmrunid_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{cmrunid}]]></variableExpression>
+	</variable>
+	<variable name="americanunid_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{americanunid}]]></variableExpression>
+	</variable>
+	<variable name="dinersunid_1" class="java.math.BigDecimal" resetType="Group" resetGroup="tienda" calculation="Sum">
+		<variableExpression><![CDATA[$F{dinersunid}]]></variableExpression>
+	</variable>
+	<group name="total_v">
+		<groupExpression><![CDATA[$F{name_org}]]></groupExpression>
+		<groupFooter>
+			<band height="35">
+				<staticText>
+					<reportElement x="401" y="11" width="98" height="13" uuid="e6dd1c0c-f617-4c57-82ff-f651d38aa26d" />
+					<textElement textAlignment="Right" markup="none">
+						<font size="10" isBold="true" />
+					</textElement>
+					<text><![CDATA[Total Ventas ]]></text>
+				</staticText>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement x="615" y="11" width="100" height="13" uuid="10c38a3f-7cec-4af3-b7c8-9b5d22eb9ddc" />
+					<textElement>
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalcaja_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="499" y="11" width="100" height="13" uuid="8b266713-f684-493c-9ab8-b1083211e4a8" />
+					<textFieldExpression><![CDATA[$F{name_org}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="600" y="11" width="13" height="13" uuid="f0e4c21b-c58a-4fad-b776-5c2702ba6dae" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="10" isBold="true" />
+					</textElement>
+					<text><![CDATA[=]]></text>
+				</staticText>
+				<line>
+					<reportElement x="14" y="28" width="774" height="1" uuid="19d5f3b3-ced4-412f-8bfa-4bfe71012db5" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="15" y="5" width="774" height="1" uuid="6c105e6a-69c1-43a2-9709-1591682770c2" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="tienda">
+		<groupExpression><![CDATA[$F{name_org}]]></groupExpression>
+		<groupHeader>
+			<band height="73">
+				<staticText>
+					<reportElement x="320" y="29" width="22" height="12" uuid="497fe65a-ece6-4265-99d3-f20ba3de9d4c" />
+					<textElement markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[DEL : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="402" y="29" width="22" height="12" uuid="91a9e7b2-970b-4eb8-870d-ef519268cd18" />
+					<textElement markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[AL : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="185" y="52" width="283" height="13" uuid="81854185-1d16-444f-a6bb-24ffafb119b7" />
+					<textElement markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[Descripcion]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="15" y="46" width="772" height="23" backcolor="#E2DEDE" uuid="f56c4bf1-fb20-4350-9ea5-415233521af9" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="17" y="52" width="54" height="13" uuid="25ade27c-7d14-4d09-ba1f-dfaae3fc0a93" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[CAJA N°]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="74" y="52" width="72" height="13" uuid="73f425b3-b06c-46c6-8f4a-d9a7dfbab351" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[CONTADO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="150" y="52" width="86" height="13" uuid="95ff9911-bf02-4fd0-ac33-b123f7a7ef6c" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[CREDITO MABY]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="239" y="52" width="56" height="13" uuid="b5f022a3-ee27-4413-b51b-3a1526389813" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[VISA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="621" y="51" width="58" height="13" uuid="4bf9b06e-03ec-4e67-be44-30ba194ba8a8" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[VALES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="682" y="51" width="104" height="14" uuid="b4b1deb6-1912-4168-b99b-60b378b2b2e4" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[TOTAL VENTAS]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="342" y="28" width="60" height="13" uuid="4fce61cb-1090-4f9a-bdc1-51535e6cc21e" />
+					<textFieldExpression><![CDATA[$P{datetrx1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="424" y="28" width="75" height="13" uuid="e2bdc74f-9fb4-4721-806f-91e76e50a77a" />
+					<textFieldExpression><![CDATA[$P{datetrx2}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="72" y="49" width="1" height="17" uuid="317fd69a-f257-4254-9a73-344c1b845d46" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="147" y="49" width="1" height="17" uuid="626a46d6-47e9-4ad1-bbb3-9414a241f006" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="237" y="49" width="1" height="17" uuid="6a8977b7-7bb0-4ba8-9020-b6f343ba2ef3" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="296" y="49" width="1" height="17" uuid="231e06a0-6004-469d-be1d-06989f0fd5d5" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="299" y="52" width="68" height="13" uuid="dcdc14ef-f089-46a3-a8bf-92bf5968f8e6" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[MASTER CARD]]></text>
+				</staticText>
+				<line>
+					<reportElement x="368" y="49" width="1" height="17" uuid="a246fe09-397a-4d83-bb64-7d19c34fbbfe" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="371" y="51" width="50" height="13" uuid="91c4ab8c-c48d-4ab7-90d9-b6cd46912010" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[RIPLEY]]></text>
+				</staticText>
+				<line>
+					<reportElement x="423" y="49" width="1" height="17" uuid="83a162d1-d4f8-45a9-94c9-3fac34a4dcf2" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="425" y="51" width="60" height="13" uuid="5b568757-2ae0-4110-ac4f-ef1422c8bf8c" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[CMR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="489" y="51" width="55" height="13" uuid="e4745025-2852-41ac-9b73-3f1f8047f125" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[A. EXPRESS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="548" y="51" width="68" height="13" uuid="23f65dc5-34bf-4ea5-94c6-0ecece221f38" />
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="true" />
+					</textElement>
+					<text><![CDATA[DINERS CLUB]]></text>
+				</staticText>
+				<line>
+					<reportElement x="486" y="49" width="1" height="17" uuid="8fbd4af3-ce9e-456e-8662-cbba8375a11f" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="546" y="49" width="1" height="17" uuid="e85cb346-d11f-4c0d-a70a-cf364b58b927" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="618" y="49" width="1" height="17" uuid="e4bb79ae-4cc3-4841-8039-086373e09bd1" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="680" y="49" width="1" height="17" uuid="00fe2468-2508-4aa7-b4dc-6b09bf039ab7" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement key="staticText-20" x="615" y="4" width="86" height="12" uuid="81a30057-9eb9-42f7-9e3f-c48187efb3c2" />
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="5" isBold="true" pdfFontName="Helvetica-Bold" />
+					</textElement>
+					<text><![CDATA[Fecha de Impresión:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+					<reportElement key="textField-2" x="698" y="4" width="52" height="12" uuid="6edfacb4-ce20-41cd-a4b2-1b0b51855ff2" />
+					<textElement verticalAlignment="Middle">
+						<font size="5" isItalic="false" />
+					</textElement>
+					<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm aaa" isBlankWhenNull="false">
+					<reportElement key="textField-3" x="750" y="4" width="50" height="12" uuid="8b170e0e-1320-4917-b67f-12f5db3418ac" />
+					<textElement verticalAlignment="Middle">
+						<font size="5" isItalic="false" />
+					</textElement>
+					<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="223" y="11" width="223" height="13" uuid="daf9a052-aa2d-4d29-8d4c-d302e979834b" />
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="10" isBold="true" />
+					</textElement>
+					<text><![CDATA[VENTAS - CAJAS]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="443" y="11" width="173" height="13" uuid="79601fea-621a-4b2e-9a87-1745758250a8" />
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$F{name_org}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<line>
+					<reportElement x="421" y="5" width="1" height="17" uuid="8ca83b01-5ba8-410e-a12f-4284752abe09" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="485" y="5" width="1" height="17" uuid="a20420d2-b87e-48a7-9463-1fec793a41a5" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="15" y="4" width="54" height="16" uuid="7ed7492f-b052-41a1-a07d-c9a3067e2b6d" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<text><![CDATA[TOTAL]]></text>
+				</staticText>
+				<line>
+					<reportElement x="295" y="5" width="1" height="18" uuid="e39cc506-9d8c-4334-a9ed-900ff6712fac" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="70" y="5" width="1" height="18" uuid="42f00f43-87a9-4199-8a93-2592ae5abecd" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="367" y="5" width="1" height="18" uuid="5f887679-4c20-43a7-b08d-ac00918c4b20" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="235" y="5" width="1" height="18" uuid="a08ac53c-236d-487d-b6f2-773b8d0e4286" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="12" y="5" width="1" height="18" uuid="018b6e46-d4f9-43ff-90a3-615badb7ca57" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="145" y="4" width="1" height="19" uuid="4ec19128-0efc-4523-9d59-13c449888e8a" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="72" y="4" width="72" height="16" uuid="43c70384-501b-4ac7-b6bc-7dd26b772c4a" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{contado_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="148" y="4" width="86" height="16" uuid="e9481fb9-b811-4294-b626-e11875066528" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{credito_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="785" y="5" width="1" height="18" uuid="cbabc19a-0fc3-4f0e-a2b6-0dfb4badbef4" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="679" y="5" width="1" height="18" uuid="a3a0f4f9-ae9c-4b7e-8a18-d642d7c3fe83" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="617" y="5" width="1" height="18" uuid="078afa07-aa1c-435e-923a-8f39454fd318" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="544" y="5" width="1" height="18" uuid="77e71f54-addc-44b0-b68a-d3e84ecaf4f3" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="619" y="4" width="58" height="16" uuid="00b5a99b-81b7-4881-9a5c-263d2d18c077" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vale_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="681" y="4" width="103" height="16" uuid="6c059105-28d3-4274-9241-8c7435ef67a4" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalcaja_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="237" y="4" width="56" height="16" uuid="301e7dd9-f647-4870-9001-ff283b9f2bac" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{visaunid_2}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="297" y="4" width="68" height="16" uuid="fa6b0dee-6ac2-4128-8940-806d4a9886a3" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{masterunid_2}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="368" y="4" width="51" height="16" uuid="2179ca52-90ae-4ad5-a05b-72a18cab2c64" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ripleyund_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="422" y="4" width="62" height="16" uuid="194612c2-742f-4737-8bba-1dd0b677235e" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{cmrunid_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="487" y="4" width="56" height="16" uuid="704d1f8d-aa0d-4838-b618-4c5edc2749ef" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{americanunid_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="tienda" pattern="#,##0.00">
+					<reportElement isPrintRepeatedValues="false" x="546" y="4" width="68" height="16" uuid="0d9084c0-635c-47ec-aefa-29c2cebbe6b5" />
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" />
+					</textElement>
+					<textFieldExpression><![CDATA[$V{dinersunid_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="13" y="23" width="774" height="1" uuid="bc8d0e58-d320-443c-93bb-b359e42d138c" />
+					<graphicElement>
+						<pen lineStyle="Dotted" />
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement x="13" y="1" width="1" height="17" uuid="5d3d2a72-6f3b-4ca6-822d-efc94c0d567e" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="13" y="19" width="774" height="1" uuid="3bfbf0c3-cfc6-4986-82fb-59e3c0ff6d7f" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="786" y="1" width="1" height="17" uuid="5fb5e837-2792-4fc0-9984-1911fe051476" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="680" y="1" width="1" height="17" uuid="102cf283-f889-4b9d-bce6-ef93861aaa53" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="16" y="1" width="54" height="17" uuid="5513d377-51bd-4ca9-86eb-68bfccd52184" />
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{machineserial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="73" y="1" width="72" height="16" uuid="12a80eba-64d9-4e95-9740-a103b13042bd" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{contado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="149" y="1" width="86" height="16" uuid="65919198-a481-40a7-84d5-59d49ec58b91" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="620" y="2" width="58" height="16" uuid="e110acd5-eb28-433a-90e5-714a1df26f45" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{vale}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="681" y="1" width="104" height="16" uuid="7fa61c52-60d7-4833-aad4-5932609d9586" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}.intValue() <= 12 ? $F{totalcaja} : new BigDecimal(0.00)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="71" y="1" width="1" height="17" uuid="a413a359-918d-445b-b20d-1abba228a9d3" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="146" y="1" width="1" height="17" uuid="182f6f7e-943e-4b04-a901-9aa735b3fe2e" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="236" y="1" width="1" height="17" uuid="d7e28370-c48f-40d0-9b2a-86bacd3043c8" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="296" y="1" width="1" height="17" uuid="79fb1309-4639-4e70-b9bc-b1323321cd93" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="545" y="1" width="1" height="17" uuid="23d3abe5-5266-4976-92bd-1beed8e436a5" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="367" y="1" width="1" height="17" uuid="c8a8e281-905b-4d62-bd69-cff6cee85b5e" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="422" y="1" width="1" height="17" uuid="608f6833-6c19-4cdb-8c23-e5c28c26fbd1" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="486" y="2" width="1" height="17" uuid="4553500f-d7d0-4620-89fa-e42a3c55f8a2" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="618" y="1" width="1" height="17" uuid="d7dcf2a9-9894-417b-a8e5-2973d737c410" />
+				<graphicElement>
+					<pen lineStyle="Dotted" />
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="298" y="1" width="68" height="16" uuid="5dcac3a9-d340-4d7d-b234-a57aa48b9ceb" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{masterunid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="238" y="1" width="56" height="16" uuid="b3ff0ea4-8086-441a-8640-a16aec3af99f" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{visaunid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="370" y="1" width="50" height="16" uuid="4351c02d-0c36-44c5-b579-cf4354a28620" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{ripleyund}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="424" y="1" width="60" height="16" uuid="1644b143-7e49-420d-9fd1-cec088d6b98b" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{cmrunid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="488" y="1" width="55" height="16" uuid="2138a387-0a95-497f-b9d0-91d1bccc7983" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{americanunid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="547" y="1" width="68" height="16" uuid="44e7126c-ad9b-4aba-b967-5514bb8701b1" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{dinersunid}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="682" y="2" width="103" height="16" uuid="a8a137ee-fde1-471a-90dc-ba67bcec95ed" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="5" width="283" height="13" uuid="557af57e-7413-47ca-9bb4-55f2688a0804" />
+				<textElement textAlignment="Right" markup="none">
+					<font size="10" isBold="true" />
+				</textElement>
+				<text><![CDATA[Total Ventas  MABY MARKET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="667" y="5" width="13" height="13" uuid="7e4ad1a7-0c68-43af-b953-5d28e58edc2b" />
+				<textElement textAlignment="Center" markup="none">
+					<font size="10" isBold="true" />
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
+
