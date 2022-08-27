@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -220,7 +220,7 @@ TableName="C_Invoice",AccessLevel="1",AD_Window_ID="dc1a37c5-086c-c19e-c2ba-3445
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=120,IsSecurityEnabled=false,IsDeleteable=false,
 IsHighVolume=false,IsChangeLog=false,IsView=false,
 PO_Window_ID="f7b55b8d-31bd-29ee-4626-2d3ad620dccb",ID="org.xendra.commercial",
-Identifier="25b4731f-e0c4-ebd1-8fee-a738eb684e39",Synchronized="2022-05-04 21:54:17.0")
+Identifier="25b4731f-e0c4-ebd1-8fee-a738eb684e39",Synchronized="2022-08-27 17:15:51.0")
 /** TableName=C_Invoice */
 public static final String Table_Name="C_Invoice";
 
@@ -295,6 +295,16 @@ public String getAdditionalInformation()
 return (String)get_Value(COLUMNNAME_AdditionalInformation);
 }
 
+@XendraTrl(Identifier="69b16a0d-e29c-4822-879c-d1a96276de4d")
+public static String es_PE_FIELD_Invoice_AdditionalInformation_Name="additionalinformation";
+
+@XendraField(AD_Column_ID="AdditionalInformation",IsCentrallyMaintained=true,
+AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=2,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-08-27 15:47:36.0",
+Identifier="69b16a0d-e29c-4822-879c-d1a96276de4d")
+public static final String FIELDNAME_Invoice_AdditionalInformation="69b16a0d-e29c-4822-879c-d1a96276de4d";
+
 @XendraTrl(Identifier="16051fec-13d7-4773-abd8-a3e593ab02e9")
 public static String es_PE_COLUMN_AdditionalInformation_Name="AdditionalInformation";
 
@@ -305,7 +315,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="16051fec-13d7-4773-abd8-a3e593ab02e9",
-Synchronized="2022-05-04 21:13:58.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name AdditionalInformation */
 public static final String COLUMNNAME_AdditionalInformation = "AdditionalInformation";
 /** Set Trx Organization.
@@ -336,7 +346,7 @@ public static String es_PE_FIELD_Invoice_TrxOrganization_Description="Organizaci
 
 @XendraField(AD_Column_ID="AD_OrgTrx_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="@$Element_OT@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=400,SortNo=0,
+DisplayLogic="@$Element_OT@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=410,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="b51cfac9-24f0-d1f9-bb5c-817d86914960")
 public static final String FIELDNAME_Invoice_TrxOrganization="b51cfac9-24f0-d1f9-bb5c-817d86914960";
@@ -430,7 +440,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="90047f7b-3c3b-5243-2f6a-5b6ab44b6ecf",Synchronized="2022-05-02 18:31:54.0")
+Identifier="90047f7b-3c3b-5243-2f6a-5b6ab44b6ecf",Synchronized="2022-08-27 15:47:36.0")
 /** Column name AD_OrgTrx_ID */
 public static final String COLUMNNAME_AD_OrgTrx_ID = "AD_OrgTrx_ID";
 /** Set User/Contact.
@@ -461,7 +471,7 @@ public static String es_PE_FIELD_Invoice_UserContact_Description="ID de Usuario 
 
 @XendraField(AD_Column_ID="AD_User_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Status",IsDisplayed=true,
-DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=480,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=490,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="5fe7122b-157d-f83c-f422-cadd4d2107bd")
 public static final String FIELDNAME_Invoice_UserContact="5fe7122b-157d-f83c-f422-cadd4d2107bd";
@@ -555,7 +565,7 @@ FieldLength=22,DefaultValue="-1",IsKey=false,IsInternal=false,IsParent=false,IsM
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f365e9da-2e5c-86de-5451-75f4eb1d911d",Synchronized="2022-05-02 18:31:54.0")
+Identifier="f365e9da-2e5c-86de-5451-75f4eb1d911d",Synchronized="2022-08-27 15:47:36.0")
 /** Column name AD_User_ID */
 public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
 /** Set AdvanceBills.
@@ -582,7 +592,7 @@ public static String es_PE_FIELD_Invoice_AdvanceBills_Name="Facturas Adelanto";
 
 @XendraField(AD_Column_ID="AdvanceBills",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=240,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=250,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="f0b1b78a-f38d-6299-bead-3623080c9402")
 public static final String FIELDNAME_Invoice_AdvanceBills="f0b1b78a-f38d-6299-bead-3623080c9402";
@@ -606,7 +616,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="896e2298-481e-1e94-3802-d3cbf18f8194",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f0900822-6f75-84d0-96a2-f3c1d75f3bbd",Synchronized="2022-05-02 18:31:54.0")
+Identifier="f0900822-6f75-84d0-96a2-f3c1d75f3bbd",Synchronized="2022-08-27 15:47:36.0")
 /** Column name AdvanceBills */
 public static final String COLUMNNAME_AdvanceBills = "AdvanceBills";
 /** Set Activity.
@@ -637,7 +647,7 @@ public static String es_PE_FIELD_Invoice_Activity_Description="Actividad de Nego
 
 @XendraField(AD_Column_ID="C_Activity_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@$Element_AY@='Y'",DisplayLength=10,IsReadOnly=false,SeqNo=270,SortNo=0,
+DisplayLogic="@$Element_AY@='Y'",DisplayLength=10,IsReadOnly=false,SeqNo=280,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="02ac3f2f-9248-ef52-2ed7-a143c97baa26")
 public static final String FIELDNAME_Invoice_Activity="02ac3f2f-9248-ef52-2ed7-a143c97baa26";
@@ -731,7 +741,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="50fe9016-9df9-b91a-fe7d-0ad06c2a02b1",Synchronized="2022-05-02 18:31:54.0")
+Identifier="50fe9016-9df9-b91a-fe7d-0ad06c2a02b1",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Activity_ID */
 public static final String COLUMNNAME_C_Activity_ID = "C_Activity_ID";
 /** Set Bill Of Exchange.
@@ -792,7 +802,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f9b735bc-98f2-e556-3fbe-234b2fd7b8bb",
-Synchronized="2022-05-02 18:31:54.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_BOE_ID */
 public static final String COLUMNNAME_C_BOE_ID = "C_BOE_ID";
 /** Set Business Partner .
@@ -822,7 +832,7 @@ public static String es_PE_FIELD_Invoice_BusinessPartner_Description="Identifica
 
 @XendraField(AD_Column_ID="C_BPartner_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="General",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=50,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="dcefdd93-970a-e683-18fe-387b0c3ab355")
 public static final String FIELDNAME_Invoice_BusinessPartner="dcefdd93-970a-e683-18fe-387b0c3ab355";
@@ -917,7 +927,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 Callout="org.compiere.model.CalloutInvoice.bPartner",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="50aca6af-e889-5da3-d682-dad8a89b5e34",
-Synchronized="2022-05-02 18:31:54.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_BPartner_ID */
 public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 /** Set Partner Location.
@@ -947,7 +957,7 @@ public static String es_PE_FIELD_Invoice_PartnerLocation_Description="Identifica
 
 @XendraField(AD_Column_ID="C_BPartner_Location_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="General",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="e5a90f78-7769-3ce7-f22d-ad7986064568")
 public static final String FIELDNAME_Invoice_PartnerLocation="e5a90f78-7769-3ce7-f22d-ad7986064568";
@@ -1042,7 +1052,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c92d3fb8-0a4a-4f0b-89ab-df81a491eb5a",
-Synchronized="2022-05-02 18:31:54.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_BPartner_Location_ID */
 public static final String COLUMNNAME_C_BPartner_Location_ID = "C_BPartner_Location_ID";
 /** Set C_BPartner_Points.
@@ -1067,7 +1077,7 @@ public static String es_PE_FIELD_Invoice_C_BPartner_Points_Name="C_BPartner_Poin
 
 @XendraField(AD_Column_ID="C_BPartner_Points_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=490,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=500,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:14.0",
 Identifier="348ad3cb-387a-41d6-85f3-0f2011a14811")
 public static final String FIELDNAME_Invoice_C_BPartner_Points="348ad3cb-387a-41d6-85f3-0f2011a14811";
@@ -1092,7 +1102,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="4a7d1615-e69b-bcb7-67b3-5445289b98a0",
-Synchronized="2022-05-02 18:31:54.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_BPartner_Points_ID */
 public static final String COLUMNNAME_C_BPartner_Points_ID = "C_BPartner_Points_ID";
 /** Set Campaign.
@@ -1217,7 +1227,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7b24e10e-b422-3d73-f034-1326e96ef371",Synchronized="2022-05-02 18:31:55.0")
+Identifier="7b24e10e-b422-3d73-f034-1326e96ef371",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Campaign_ID */
 public static final String COLUMNNAME_C_Campaign_ID = "C_Campaign_ID";
 /** Set Cash Journal Line.
@@ -1342,7 +1352,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6546283c-fd57-5f64-24db-36d98bfb17e0",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_CashLine_ID */
 public static final String COLUMNNAME_C_CashLine_ID = "C_CashLine_ID";
 /** Set Charge.
@@ -1373,7 +1383,7 @@ public static String es_PE_FIELD_Invoice_Charge_Description="Cargos adicionales 
 
 @XendraField(AD_Column_ID="C_Charge_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@HasCharges@='Y'",DisplayLength=10,IsReadOnly=false,SeqNo=180,SortNo=0,
+DisplayLogic="@HasCharges@='Y'",DisplayLength=10,IsReadOnly=false,SeqNo=190,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="31a814a8-dc80-feae-0165-81e689f4c32a")
 public static final String FIELDNAME_Invoice_Charge="31a814a8-dc80-feae-0165-81e689f4c32a";
@@ -1467,7 +1477,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c79e7966-693f-eaba-20df-23ac935b4f24",Synchronized="2022-05-02 18:31:55.0")
+Identifier="c79e7966-693f-eaba-20df-23ac935b4f24",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set C_Contact.
@@ -1492,7 +1502,7 @@ public static String es_PE_FIELD_Invoice_C_Contact_Name="C_Contact";
 
 @XendraField(AD_Column_ID="C_Contact_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=500,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=510,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:14.0",
 Identifier="02fb7006-46f9-40f6-9477-b8073b2573a6")
 public static final String FIELDNAME_Invoice_C_Contact="02fb7006-46f9-40f6-9477-b8073b2573a6";
@@ -1516,7 +1526,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1fb56368-d9ce-44c6-925f-90390d205913",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Contact_ID */
 public static final String COLUMNNAME_C_Contact_ID = "C_Contact_ID";
 /** Set ControlActivity.
@@ -1571,7 +1581,7 @@ FieldLength=20,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f4fc81cb-f3bf-6fd3-a8a0-25881c154089",Synchronized="2022-05-02 18:31:55.0")
+Identifier="f4fc81cb-f3bf-6fd3-a8a0-25881c154089",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_ControlActivity_ID */
 public static final String COLUMNNAME_C_ControlActivity_ID = "C_ControlActivity_ID";
 /** Set Currency Type.
@@ -1602,7 +1612,7 @@ public static String es_PE_FIELD_Invoice_CurrencyType_Description="Tipo de índi
 
 @XendraField(AD_Column_ID="C_ConversionType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@C_Currency_ID@!@$C_Currency_ID@",DisplayLength=10,IsReadOnly=false,SeqNo=130,
+DisplayLogic="@C_Currency_ID@!@$C_Currency_ID@",DisplayLength=10,IsReadOnly=false,SeqNo=140,
 SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="473b2668-882e-7c8c-5783-2de5a76e7888")
 public static final String FIELDNAME_Invoice_CurrencyType="473b2668-882e-7c8c-5783-2de5a76e7888";
@@ -1696,7 +1706,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="2be09485-777f-c748-2eff-24d513649611",Synchronized="2022-05-02 18:31:55.0")
+Identifier="2be09485-777f-c748-2eff-24d513649611",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_ConversionType_ID */
 public static final String COLUMNNAME_C_ConversionType_ID = "C_ConversionType_ID";
 /** Set Currency.
@@ -1726,7 +1736,7 @@ public static String es_PE_FIELD_Invoice_Currency_Description="Moneda para este 
 
 @XendraField(AD_Column_ID="C_Currency_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="General",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=70,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=80,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="ebfd691f-0ee9-cb46-3410-ee348df11932")
 public static final String FIELDNAME_Invoice_Currency="ebfd691f-0ee9-cb46-3410-ee348df11932";
@@ -1820,7 +1830,7 @@ DefaultValue="@C_Currency_ID@",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c834025b-1e7c-a695-09b1-651951363ed1",Synchronized="2022-05-02 18:31:55.0")
+Identifier="c834025b-1e7c-a695-09b1-651951363ed1",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set Document Type.
@@ -1850,7 +1860,7 @@ public static String es_PE_FIELD_Invoice_DocumentType_Description="Tipo de docum
 
 @XendraField(AD_Column_ID="C_DocType_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=280,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=290,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="140e598c-10b7-c721-e1b1-325f47aeb706")
 public static final String FIELDNAME_Invoice_DocumentType="140e598c-10b7-c721-e1b1-325f47aeb706";
@@ -1944,7 +1954,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1e62b852-2373-ff45-e209-fdbdcc4410de",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_DocType_ID */
 public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 /** Set Target Document Type.
@@ -2069,7 +2079,7 @@ IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,ReadOnlyLogic
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutInvoice.docType",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="0ffcb8ad-5827-5daa-e512-de33535bd52d",Synchronized="2022-05-02 18:31:55.0")
+Identifier="0ffcb8ad-5827-5daa-e512-de33535bd52d",Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_DocTypeTarget_ID */
 public static final String COLUMNNAME_C_DocTypeTarget_ID = "C_DocTypeTarget_ID";
 /** Set C_GroupDoc_ID.
@@ -2094,7 +2104,7 @@ public static String es_PE_FIELD_Invoice_C_GroupDoc_ID_Name="Grupo de Documentos
 
 @XendraField(AD_Column_ID="C_GroupDoc_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=310,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=320,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="6ddf15b1-36e1-9121-ceec-3455c067bbc1")
 public static final String FIELDNAME_Invoice_C_GroupDoc_ID="6ddf15b1-36e1-9121-ceec-3455c067bbc1";
@@ -2118,7 +2128,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c91df51-bb0c-1080-b553-7b1ac2481b83",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_GroupDoc_ID */
 public static final String COLUMNNAME_C_GroupDoc_ID = "C_GroupDoc_ID";
 /** Set Charge amount.
@@ -2147,7 +2157,7 @@ public static String es_PE_FIELD_Invoice_ChargeAmount_Description="Total del Car
 
 @XendraField(AD_Column_ID="ChargeAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@HasCharges@='Y'",DisplayLength=20,IsReadOnly=false,SeqNo=190,SortNo=0,
+DisplayLogic="@HasCharges@='Y'",DisplayLength=20,IsReadOnly=false,SeqNo=200,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="9143234e-c6b2-1ed3-2340-cc544966d44d")
 public static final String FIELDNAME_Invoice_ChargeAmount="9143234e-c6b2-1ed3-2340-cc544966d44d";
@@ -2241,7 +2251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b1952aa7-64e8-46c9-89ff-33bf6e94d70c",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name ChargeAmt */
 public static final String COLUMNNAME_ChargeAmt = "ChargeAmt";
 /** Set Invoice.
@@ -2383,7 +2393,7 @@ public static String es_PE_FIELD_Invoice_CopyLines_Description="Copiar Lineas De
 
 @XendraField(AD_Column_ID="CopyFrom",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=330,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=340,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="3145b909-d6d5-71a7-1495-b9874aea77ab")
 public static final String FIELDNAME_Invoice_CopyLines="3145b909-d6d5-71a7-1495-b9874aea77ab";
@@ -2462,7 +2472,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="51c0d58d-737a-c75a-206a-1a9587f32ab7",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8ad173c6-2659-ca9e-0d83-e2d24c5248a3",Synchronized="2022-05-02 18:31:55.0")
+Identifier="8ad173c6-2659-ca9e-0d83-e2d24c5248a3",Synchronized="2022-08-27 15:47:36.0")
 /** Column name CopyFrom */
 public static final String COLUMNNAME_CopyFrom = "CopyFrom";
 /** Set Order.
@@ -2493,7 +2503,7 @@ public static String es_PE_FIELD_Invoice_Order_Description="Orden de Venta";
 
 @XendraField(AD_Column_ID="C_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=140,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=150,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="6dee4e5b-a96d-b6fa-38cb-ce956dad9383")
 public static final String FIELDNAME_Invoice_Order="6dee4e5b-a96d-b6fa-38cb-ce956dad9383";
@@ -2587,7 +2597,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0c65448d-8475-75de-7047-85aecbad9a77",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:36.0")
 /** Column name C_Order_ID */
 public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
 /** Set Payment.
@@ -2712,7 +2722,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c44af1e1-2ec5-123d-3f44-0dcc6995a187",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_Payment_ID */
 public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
 /** Set Payment Term.
@@ -2742,7 +2752,7 @@ public static String es_PE_FIELD_Invoice_PaymentTerm_Description="Condiciones de
 
 @XendraField(AD_Column_ID="C_PaymentTerm_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@PaymentRule@='P' | @PaymentRule@='D'",DisplayLength=10,IsReadOnly=false,SeqNo=200,
+DisplayLogic="@PaymentRule@='P' | @PaymentRule@='D'",DisplayLength=10,IsReadOnly=false,SeqNo=210,
 SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="98c40078-113b-d6f2-ccfe-adb31b300c0f")
 public static final String FIELDNAME_Invoice_PaymentTerm="98c40078-113b-d6f2-ccfe-adb31b300c0f";
@@ -2837,7 +2847,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="org.compiere.model.CalloutInvoice.paymentTerm",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="afe64023-1fc3-d62a-9f3e-906190d45e7e",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_PaymentTerm_ID */
 public static final String COLUMNNAME_C_PaymentTerm_ID = "C_PaymentTerm_ID";
 /** Set POS Terminal.
@@ -2868,7 +2878,7 @@ public static String es_PE_FIELD_Invoice_POSTerminal_Description="Punto de las v
 
 @XendraField(AD_Column_ID="C_POS_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=470,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=480,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="c849d261-e53d-dcdf-9146-91c22bc761dc")
 public static final String FIELDNAME_Invoice_POSTerminal="c849d261-e53d-dcdf-9146-91c22bc761dc";
@@ -2898,7 +2908,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dbbe6da5-b0c6-44c2-feea-c835b57064fb",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_POS_ID */
 public static final String COLUMNNAME_C_POS_ID = "C_POS_ID";
 /** Set POS Log.
@@ -2947,7 +2957,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80db8490-a005-af7a-67de-71314c62f818",
-Synchronized="2022-05-02 18:31:55.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_POSLog_ID */
 public static final String COLUMNNAME_C_POSLog_ID = "C_POSLog_ID";
 /** Set Project.
@@ -3072,7 +3082,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="de0d902c-c7bb-4eca-3443-a6f26efe42ff",Synchronized="2022-05-02 18:31:55.0")
+Identifier="de0d902c-c7bb-4eca-3443-a6f26efe42ff",Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_Project_ID */
 public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
 /** Set Create lines from.
@@ -3198,7 +3208,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a6120fc-8f5e-c4eb-a8f5-f30cf784c9e6",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name CreateFrom */
 public static final String COLUMNNAME_CreateFrom = "CreateFrom";
 /** Set C_Retention_ID.
@@ -3223,7 +3233,7 @@ public static String es_PE_FIELD_Invoice_C_Retention_ID_Name="Retención";
 
 @XendraField(AD_Column_ID="C_Retention_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=320,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=330,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="457ecb9c-89a4-8bdb-4fa0-3620ee8d4713")
 public static final String FIELDNAME_Invoice_C_Retention_ID="457ecb9c-89a4-8bdb-4fa0-3620ee8d4713";
@@ -3247,7 +3257,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d8cb703a-4857-b944-8fec-87898d94013c",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_Retention_ID */
 public static final String COLUMNNAME_C_Retention_ID = "C_Retention_ID";
 /** Set UnitApplication.
@@ -3316,7 +3326,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3d3ab6d2-1bd8-8f04-2489-39a60dcb6a0a",Synchronized="2022-05-02 18:31:56.0")
+Identifier="3d3ab6d2-1bd8-8f04-2489-39a60dcb6a0a",Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_UnitApplication_ID */
 public static final String COLUMNNAME_C_UnitApplication_ID = "C_UnitApplication_ID";
 /** Set Withholding.
@@ -3377,7 +3387,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="bc013196-e4c7-4d9f-a3b9-10c1f06c9bec",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name C_Withholding_ID */
 public static final String COLUMNNAME_C_Withholding_ID = "C_Withholding_ID";
 /** Set Account Date.
@@ -3405,7 +3415,7 @@ public static String es_PE_FIELD_Invoice_AccountDate_Description="Fecha contable
 
 @XendraField(AD_Column_ID="DateAcct",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=180,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="88d43207-f1dc-4f48-5bdd-5b2b02d7cdcc")
 public static final String FIELDNAME_Invoice_AccountDate="88d43207-f1dc-4f48-5bdd-5b2b02d7cdcc";
@@ -3499,7 +3509,7 @@ DefaultValue="@SysDate@",IsKey=false,IsInternal=false,IsParent=false,IsMandatory
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d9174087-0a0d-4178-556e-186c6683df65",Synchronized="2022-05-02 18:31:56.0")
+Identifier="d9174087-0a0d-4178-556e-186c6683df65",Synchronized="2022-08-27 15:47:37.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 /** Set DateDetraction.
@@ -3520,7 +3530,7 @@ public static String es_PE_FIELD_Invoice_DateDetraction_Name="DateDetraction";
 
 @XendraField(AD_Column_ID="DateDetraction",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=29,IsReadOnly=false,SeqNo=510,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=29,IsReadOnly=false,SeqNo=520,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:15.0",
 Identifier="e9f5aa61-3cb0-41e6-a081-31ab28933a8d")
 public static final String FIELDNAME_Invoice_DateDetraction="e9f5aa61-3cb0-41e6-a081-31ab28933a8d";
@@ -3544,7 +3554,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="1488c9fe-63bb-4cd7-8a80-caba5ede92e0",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DateDetraction */
 public static final String COLUMNNAME_DateDetraction = "DateDetraction";
 /** Set Date Invoiced.
@@ -3572,7 +3582,7 @@ public static String es_PE_FIELD_Invoice_DateInvoiced_Description="Fecha impresa
 
 @XendraField(AD_Column_ID="DateInvoiced",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=20,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=30,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="e55b3ca2-6da3-936c-17c7-cec6d1778376")
 public static final String FIELDNAME_Invoice_DateInvoiced="e55b3ca2-6da3-936c-17c7-cec6d1778376";
@@ -3666,7 +3676,7 @@ DefaultValue="@SysDate@",IsKey=false,IsInternal=false,IsParent=false,IsMandatory
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=true,SeqNo=2,IsTranslated=false,
 Callout="org.compiere.model.CalloutEngine.dateAcct",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="fd6f3472-4972-5c31-bbc1-b2e8d63186f5",Synchronized="2022-05-02 18:31:56.0")
+Identifier="fd6f3472-4972-5c31-bbc1-b2e8d63186f5",Synchronized="2022-08-27 15:47:37.0")
 /** Column name DateInvoiced */
 public static final String COLUMNNAME_DateInvoiced = "DateInvoiced";
 /** Set Date Ordered.
@@ -3693,7 +3703,7 @@ public static String es_PE_FIELD_Invoice_DateOrdered_Description="Fecha de la or
 
 @XendraField(AD_Column_ID="DateOrdered",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=150,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=160,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="3b940691-f959-7483-0d10-51c8d034e81c")
 public static final String FIELDNAME_Invoice_DateOrdered="3b940691-f959-7483-0d10-51c8d034e81c";
@@ -3787,7 +3797,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b2a91c2-0647-5069-2c95-ae20b6c9e7f5",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DateOrdered */
 public static final String COLUMNNAME_DateOrdered = "DateOrdered";
 /** Set Date printed.
@@ -3908,7 +3918,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="389d30e8-dacc-821c-f1c3-d9194570f9fb",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DatePrinted */
 public static final String COLUMNNAME_DatePrinted = "DatePrinted";
 /** Set DebtAmt.
@@ -3931,7 +3941,7 @@ public static String es_PE_FIELD_Invoice_DebtAmt_Name="DebtAmt";
 
 @XendraField(AD_Column_ID="DebtAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=520,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=530,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:15.0",
 Identifier="34c67ad9-b69b-4d49-b4c2-61b7dcaec061")
 public static final String FIELDNAME_Invoice_DebtAmt="34c67ad9-b69b-4d49-b4c2-61b7dcaec061";
@@ -3955,7 +3965,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="892b7eda-c99f-4072-a548-1747f3d78c33",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DebtAmt */
 public static final String COLUMNNAME_DebtAmt = "DebtAmt";
 /** Set Description.
@@ -3991,7 +4001,7 @@ public static String es_PE_FIELD_Invoice_Description_Description="Descripción c
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=255,IsReadOnly=false,SeqNo=290,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=255,IsReadOnly=false,SeqNo=300,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="19f7e16a-5e9d-81a4-f14e-286d2f713f74")
 public static final String FIELDNAME_Invoice_Description="19f7e16a-5e9d-81a4-f14e-286d2f713f74";
@@ -4085,7 +4095,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="e6292862-edfe-3ccf-3859-2dda35f7e5a2",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Difference.
@@ -4132,7 +4142,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9269967b-6b31-46cd-9294-fa8caeba6adf",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DifferenceAmt */
 public static final String COLUMNNAME_DifferenceAmt = "DifferenceAmt";
 /** Set Document Action.
@@ -4158,7 +4168,7 @@ public static String es_PE_FIELD_Invoice_DocumentAction_Name="Procesar Factura";
 
 @XendraField(AD_Column_ID="DocAction",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=350,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=360,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="9cb94e60-0d4a-f076-7e75-38859f9e5d4d")
 public static final String FIELDNAME_Invoice_DocumentAction="9cb94e60-0d4a-f076-7e75-38859f9e5d4d";
@@ -4223,7 +4233,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,
 AD_Process_ID="d2a0c97f-2078-edb6-9506-e4c2c9315366",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9fac3f7-91ce-8227-4628-f5e3bc07019d",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DocAction */
 public static final String COLUMNNAME_DocAction = "DocAction";
 /** Set DocDetraction.
@@ -4275,7 +4285,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="8a12969b-29bc-4295-8fba-a436102d2ba7",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DocDetraction */
 public static final String COLUMNNAME_DocDetraction = "DocDetraction";
 /** Set Document Status.
@@ -4307,7 +4317,7 @@ public static String es_PE_FIELD_Invoice_DocumentStatus_Description="El estado a
 
 @XendraField(AD_Column_ID="DocStatus",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Status",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=410,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=420,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="1a2bae7d-8d5b-eba6-450d-5007bb7178a4")
 public static final String FIELDNAME_Invoice_DocumentStatus="1a2bae7d-8d5b-eba6-450d-5007bb7178a4";
@@ -4401,7 +4411,7 @@ FieldLength=2,DefaultValue="DR",IsKey=false,IsInternal=false,IsParent=false,IsMa
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6de4c965-ecb9-9244-23b6-086a175860fd",Synchronized="2022-05-02 18:31:56.0")
+Identifier="6de4c965-ecb9-9244-23b6-086a175860fd",Synchronized="2022-08-27 15:47:37.0")
 /** Column name DocStatus */
 public static final String COLUMNNAME_DocStatus = "DocStatus";
 /** Set Document No.
@@ -4443,7 +4453,7 @@ public static String es_PE_FIELD_Invoice_DocumentNo_Description="Número de secu
 
 @XendraField(AD_Column_ID="DocumentNo",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=40,SortNo=-1,IsSameLine=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=50,SortNo=-1,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="a815cb3f-fd1d-bd52-a93d-2fdd23e7086b")
 public static final String FIELDNAME_Invoice_DocumentNo="a815cb3f-fd1d-bd52-a93d-2fdd23e7086b";
@@ -4537,7 +4547,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="51c3f415-79fc-980e-b4a4-6e0e19c9cd3b",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set documentto.
@@ -4560,6 +4570,16 @@ if (value == null)
   return "";
 return value;
 }
+@XendraTrl(Identifier="9131e6a7-7206-4ff7-b110-26084971d6a4")
+public static String es_PE_FIELD_Invoice_Documentto_Name="documentto";
+
+@XendraField(AD_Column_ID="documentto",IsCentrallyMaintained=true,
+AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=30,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-08-27 15:47:37.0",
+Identifier="9131e6a7-7206-4ff7-b110-26084971d6a4")
+public static final String FIELDNAME_Invoice_Documentto="9131e6a7-7206-4ff7-b110-26084971d6a4";
+
 @XendraTrl(Identifier="dda8a35e-ac83-445d-9f7c-1f6e0e398efa")
 public static String es_PE_COLUMN_documentto_Name="documentto";
 
@@ -4569,7 +4589,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dda8a35e-ac83-445d-9f7c-1f6e0e398efa",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name documentto */
 public static final String COLUMNNAME_documentto = "documentto";
 /** Set Due Date.
@@ -4585,6 +4605,22 @@ public Timestamp getDueDate()
 return (Timestamp)get_Value(COLUMNNAME_DueDate);
 }
 
+@XendraTrl(Identifier="e86f3381-0143-4222-9ee6-67165f34b1b0")
+public static String es_PE_FIELD_Invoice_DueDate_Name="Fecha de Vencimiento";
+
+@XendraTrl(Identifier="e86f3381-0143-4222-9ee6-67165f34b1b0")
+public static String es_PE_FIELD_Invoice_DueDate_Help="Fecha cuando el pago es vencido sin deducciones ó descuento";
+
+@XendraTrl(Identifier="e86f3381-0143-4222-9ee6-67165f34b1b0")
+public static String es_PE_FIELD_Invoice_DueDate_Description="Fecha cuando el pago es vencido.";
+
+@XendraField(AD_Column_ID="DueDate",IsCentrallyMaintained=true,
+AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=false,
+DisplayLogic="",DisplayLength=29,IsReadOnly=false,SeqNo=0,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-08-27 15:47:37.0",
+Identifier="e86f3381-0143-4222-9ee6-67165f34b1b0")
+public static final String FIELDNAME_Invoice_DueDate="e86f3381-0143-4222-9ee6-67165f34b1b0";
+
 @XendraTrl(Identifier="3f39316d-b377-4f08-9d0e-807b46a3934d")
 public static String es_PE_COLUMN_DueDate_Name="Due Date";
 
@@ -4594,7 +4630,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3f39316d-b377-4f08-9d0e-807b46a3934d",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name DueDate */
 public static final String COLUMNNAME_DueDate = "DueDate";
 /** Set Accounting Fact ID (per document).
@@ -4651,7 +4687,7 @@ public static String es_PE_FIELD_Invoice_AccountingFactIDPerDocument_Description
 
 @XendraField(AD_Column_ID="Fact_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=440,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=true,SeqNo=450,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="e22bacfa-99ba-165b-14f2-b4630f20f40e")
 public static final String FIELDNAME_Invoice_AccountingFactIDPerDocument="e22bacfa-99ba-165b-14f2-b4630f20f40e";
@@ -4704,7 +4740,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="164baeed-0b16-3bf4-be98-b69e5c632014",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name Fact_ID */
 public static final String COLUMNNAME_Fact_ID = "Fact_ID";
 /** Set Generate To.
@@ -4733,7 +4769,7 @@ public static String es_PE_FIELD_Invoice_GenerateTo_Description="Crear y procesa
 
 @XendraField(AD_Column_ID="GenerateTo",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=340,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=350,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="5bd18eeb-a1e6-c412-f146-da8908809256")
 public static final String FIELDNAME_Invoice_GenerateTo="5bd18eeb-a1e6-c412-f146-da8908809256";
@@ -4812,7 +4848,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="a3ef4f51-c4b8-5ebc-aa39-b46492b777e3",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6ebd4a74-93c4-5ea3-89db-00b27634187e",Synchronized="2022-05-02 18:31:56.0")
+Identifier="6ebd4a74-93c4-5ea3-89db-00b27634187e",Synchronized="2022-08-27 15:47:37.0")
 /** Column name GenerateTo */
 public static final String COLUMNNAME_GenerateTo = "GenerateTo";
 /** Set Grand Total.
@@ -4842,7 +4878,7 @@ public static String es_PE_FIELD_Invoice_GrandTotal_Description="Total del docum
 
 @XendraField(AD_Column_ID="GrandTotal",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="General",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=90,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=100,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="84494fea-d27e-d10d-7f6c-b5001517ae7a")
 public static final String FIELDNAME_Invoice_GrandTotal="84494fea-d27e-d10d-7f6c-b5001517ae7a";
@@ -4936,7 +4972,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cb7c8fd-1b57-1eda-564e-06aad7756204",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name GrandTotal */
 public static final String COLUMNNAME_GrandTotal = "GrandTotal";
 /** Set Identifier.
@@ -4988,7 +5024,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fca1c039-b1c3-4e00-a070-74f9ecd1da2f",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Collection Status.
@@ -5020,7 +5056,7 @@ public static String es_PE_FIELD_Invoice_CollectionStatus_Description="Invoice C
 
 @XendraField(AD_Column_ID="InvoiceCollectionType",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="@Processed@=Y",DisplayLength=1,IsReadOnly=false,SeqNo=370,SortNo=0,IsSameLine=false,
+DisplayLogic="@Processed@=Y",DisplayLength=1,IsReadOnly=false,SeqNo=380,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="14e65761-007f-07ce-3ee1-9395199e948e")
 public static final String FIELDNAME_Invoice_CollectionStatus="14e65761-007f-07ce-3ee1-9395199e948e";
@@ -5051,9 +5087,50 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,
 ColumnSQL="",IsAllowLogging=false,Identifier="f1d27b2c-518f-df78-f672-9473efae9cdb",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name InvoiceCollectionType */
 public static final String COLUMNNAME_InvoiceCollectionType = "InvoiceCollectionType";
+/** Set InvoiceOperationTypeCode.
+@param InvoiceOperationTypeCode InvoiceOperationTypeCode */
+public void setInvoiceOperationTypeCode (String InvoiceOperationTypeCode)
+{
+if (InvoiceOperationTypeCode != null && InvoiceOperationTypeCode.length() > 4)
+{
+log.warning("Length > 4 - truncated");
+InvoiceOperationTypeCode = InvoiceOperationTypeCode.substring(0,3);
+}
+set_Value (COLUMNNAME_InvoiceOperationTypeCode, InvoiceOperationTypeCode);
+}
+/** Get InvoiceOperationTypeCode.
+@return InvoiceOperationTypeCode */
+public String getInvoiceOperationTypeCode() 
+{
+return (String)get_Value(COLUMNNAME_InvoiceOperationTypeCode);
+}
+
+@XendraTrl(Identifier="dc9c4297-9894-463e-8435-bbfa122fa309")
+public static String es_PE_FIELD_Invoice_InvoiceOperationTypeCode_Name="invoiceoperationtypecode";
+
+@XendraField(AD_Column_ID="InvoiceOperationTypeCode",IsCentrallyMaintained=true,
+AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
+DisplayLogic="",DisplayLength=4,IsReadOnly=false,SeqNo=20,SortNo=0,IsSameLine=true,IsHeading=false,
+IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-08-27 15:47:37.0",
+Identifier="dc9c4297-9894-463e-8435-bbfa122fa309")
+public static final String FIELDNAME_Invoice_InvoiceOperationTypeCode="dc9c4297-9894-463e-8435-bbfa122fa309";
+
+@XendraTrl(Identifier="95e64c78-9e5d-42c7-a797-87a3bc91b5f5")
+public static String es_PE_COLUMN_InvoiceOperationTypeCode_Name="InvoiceOperationTypeCode";
+
+@XendraColumn(AD_Element_ID="8ae6db16-28d2-4c86-b08a-214c5e9419ac",
+ColumnName="InvoiceOperationTypeCode",AD_Reference_ID=17,
+AD_Reference_Value_ID="f21e0f28-1211-4c12-98f0-1449784900c6",AD_Val_Rule_ID="",FieldLength=4,
+DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
+ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
+ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
+ColumnSQL="",IsAllowLogging=false,Identifier="95e64c78-9e5d-42c7-a797-87a3bc91b5f5",
+Synchronized="2022-08-27 15:47:37.0")
+/** Column name InvoiceOperationTypeCode */
+public static final String COLUMNNAME_InvoiceOperationTypeCode = "InvoiceOperationTypeCode";
 /** Set IsAdvance.
 @param IsAdvance IsAdvance */
 public void setIsAdvance (boolean IsAdvance)
@@ -5078,7 +5155,7 @@ public static String es_PE_FIELD_Invoice_IsAdvance_Name="Adelanto";
 
 @XendraField(AD_Column_ID="IsAdvance",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=230,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=240,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="998210ca-9fe8-3419-f458-b811393d7a08")
 public static final String FIELDNAME_Invoice_IsAdvance="998210ca-9fe8-3419-f458-b811393d7a08";
@@ -5102,7 +5179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5fad7d04-ced1-1f8a-c4ac-be930c956fc9",
-Synchronized="2022-05-02 18:31:56.0")
+Synchronized="2022-08-27 15:47:37.0")
 /** Column name IsAdvance */
 public static final String COLUMNNAME_IsAdvance = "IsAdvance";
 /** Set Approved.
@@ -5229,7 +5306,7 @@ DefaultValue="@IsApproved@",IsKey=false,IsInternal=false,IsParent=false,IsMandat
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="1278c4ff-3c9b-88a0-0a09-f90f26c27ed9",Synchronized="2022-05-02 18:31:56.0")
+Identifier="1278c4ff-3c9b-88a0-0a09-f90f26c27ed9",Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsApproved */
 public static final String COLUMNNAME_IsApproved = "IsApproved";
 /** Set IsCosted.
@@ -5280,7 +5357,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1adcd162-fa62-4018-998f-6bf834df7859",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsCosted */
 public static final String COLUMNNAME_IsCosted = "IsCosted";
 /** Set IsDetraction.
@@ -5331,7 +5408,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="0c9e1043-cd55-6440-8e81-f4fe0b314a14",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsDetraction */
 public static final String COLUMNNAME_IsDetraction = "IsDetraction";
 /** Set Discount Printed.
@@ -5364,7 +5441,7 @@ public static String es_PE_FIELD_Invoice_DiscountPrinted_Description="Imprimir e
 
 @XendraField(AD_Column_ID="IsDiscountPrinted",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=160,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="cc5d4d0f-e996-294b-2411-ed1eb84f4abd")
 public static final String FIELDNAME_Invoice_DiscountPrinted="cc5d4d0f-e996-294b-2411-ed1eb84f4abd";
@@ -5458,7 +5535,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="af89bc67-7539-3f70-a425-f937e44bd381",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsDiscountPrinted */
 public static final String COLUMNNAME_IsDiscountPrinted = "IsDiscountPrinted";
 /** Set In Dispute.
@@ -5491,7 +5568,7 @@ public static String es_PE_FIELD_Invoice_InDispute_Description="Documento en neg
 
 @XendraField(AD_Column_ID="IsInDispute",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="@Processed@=Y",DisplayLength=1,IsReadOnly=false,SeqNo=390,SortNo=0,IsSameLine=false,
+DisplayLogic="@Processed@=Y",DisplayLength=1,IsReadOnly=false,SeqNo=400,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="564b9bd1-f093-4df1-1b85-004ff8391885")
 public static final String FIELDNAME_Invoice_InDispute="564b9bd1-f093-4df1-1b85-004ff8391885";
@@ -5585,7 +5662,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="6ba9fbab-7feb-1f31-7a48-a89fe163e7e7",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsInDispute */
 public static final String COLUMNNAME_IsInDispute = "IsInDispute";
 /** Set Paid.
@@ -5612,7 +5689,7 @@ public static String es_PE_FIELD_Invoice_Paid_Name="Pagado";
 @XendraField(AD_Column_ID="IsPaid",
 IsCentrallyMaintained=true,AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",
 AD_FieldGroup_ID="Reference",IsDisplayed=true,DisplayLogic="@Processed@=Y",DisplayLength=1,
-IsReadOnly=true,SeqNo=210,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,
+IsReadOnly=true,SeqNo=220,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,
 Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="2d3f9faa-df30-8147-d4f1-02a462505516")
 public static final String FIELDNAME_Invoice_Paid="2d3f9faa-df30-8147-d4f1-02a462505516";
@@ -5673,7 +5750,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="161b77a9-f579-43d0-218a-6e340d32d723",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsPaid */
 public static final String COLUMNNAME_IsPaid = "IsPaid";
 /** Set Pay Schedule valid.
@@ -5706,7 +5783,7 @@ public static String es_PE_FIELD_Invoice_PayScheduleValid_Description="Es el pro
 
 @XendraField(AD_Column_ID="IsPayScheduleValid",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=300,SortNo=0,IsSameLine=true,IsHeading=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=310,SortNo=0,IsSameLine=true,IsHeading=false,
 IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="84d78850-dcd4-f729-3e41-577c2058c7a6")
 public static final String FIELDNAME_Invoice_PayScheduleValid="84d78850-dcd4-f729-3e41-577c2058c7a6";
@@ -5800,7 +5877,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d12d2e52-1fb5-09b4-76a6-1ae98242ef9e",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsPayScheduleValid */
 public static final String COLUMNNAME_IsPayScheduleValid = "IsPayScheduleValid";
 /** Set Printed.
@@ -5927,7 +6004,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a83f6e27-a669-30df-51e5-f04da1b1ee0f",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsPrinted */
 public static final String COLUMNNAME_IsPrinted = "IsPrinted";
 /** Set IsRealtimePOS.
@@ -5978,7 +6055,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b97ee324-4940-fd66-c469-3f8e64a27d6b",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsRealtimePOS */
 public static final String COLUMNNAME_IsRealtimePOS = "IsRealtimePOS";
 /** Set Self-Service.
@@ -6011,7 +6088,7 @@ public static String es_PE_FIELD_Invoice_Self_Service_Description="Esta es una e
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=380,SortNo=0,IsSameLine=true,IsHeading=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=390,SortNo=0,IsSameLine=true,IsHeading=false,
 IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="afbcf2e6-bbd9-6acf-2773-f0c8cb3cf40b")
 public static final String FIELDNAME_Invoice_Self_Service="afbcf2e6-bbd9-6acf-2773-f0c8cb3cf40b";
@@ -6105,7 +6182,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="69ee5c56-0e56-b874-12f0-c2ebd3c24843",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Sales Transaction.
@@ -6232,7 +6309,7 @@ DefaultValue="@IsSOTrx@",IsKey=false,IsInternal=false,IsParent=false,IsMandatory
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="c2850fee-6e14-6c3f-3454-dcc3be3858d9",Synchronized="2022-05-02 18:31:57.0")
+Identifier="c2850fee-6e14-6c3f-3454-dcc3be3858d9",Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsSOTrx */
 public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
 /** Set Price includes Tax.
@@ -6359,7 +6436,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6f1d0fea-d18d-b208-3349-52c35e591060",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsTaxIncluded */
 public static final String COLUMNNAME_IsTaxIncluded = "IsTaxIncluded";
 /** Set Transferred.
@@ -6486,7 +6563,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3681ac8e-0c73-6920-ae0b-0c07002d6c5d",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name IsTransferred */
 public static final String COLUMNNAME_IsTransferred = "IsTransferred";
 /** Set MachineSerial.
@@ -6538,7 +6615,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c5b5891a-28a9-4148-a482-f32df71e0934",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name MachineSerial */
 public static final String COLUMNNAME_MachineSerial = "MachineSerial";
 /** Set M_PriceList_ID.
@@ -6568,7 +6645,7 @@ public static String es_PE_FIELD_Invoice_M_PriceList_ID_Description="Identificad
 
 @XendraField(AD_Column_ID="M_PriceList_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=100,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="336042b8-0921-698f-0717-ec5a795f5ff8")
 public static final String FIELDNAME_Invoice_M_PriceList_ID="336042b8-0921-698f-0717-ec5a795f5ff8";
@@ -6662,7 +6739,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="org.compiere.model.CalloutOrder.priceList",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="153e66ce-135b-da46-d46d-ee061d057b27",Synchronized="2022-05-02 18:31:57.0")
+Identifier="153e66ce-135b-da46-d46d-ee061d057b27",Synchronized="2022-08-27 15:47:38.0")
 /** Column name M_PriceList_ID */
 public static final String COLUMNNAME_M_PriceList_ID = "M_PriceList_ID";
 /** Set RMA.
@@ -6723,7 +6800,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="890bdeaa-e440-1470-4c07-db71329b3ecd",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name M_RMA_ID */
 public static final String COLUMNNAME_M_RMA_ID = "M_RMA_ID";
 /** Set Payment Rule.
@@ -6755,7 +6832,7 @@ public static String es_PE_FIELD_Invoice_PaymentRule_Description="Como se pagar�
 
 @XendraField(AD_Column_ID="PaymentRule",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=220,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=230,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="a7005db5-f614-5d22-6ce3-625ebb3733b8")
 public static final String FIELDNAME_Invoice_PaymentRule="a7005db5-f614-5d22-6ce3-625ebb3733b8";
@@ -6849,7 +6926,7 @@ FieldLength=1,DefaultValue="P",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="591768f5-c37b-e946-98e3-60d215051ab8",Synchronized="2022-05-02 18:31:57.0")
+Identifier="591768f5-c37b-e946-98e3-60d215051ab8",Synchronized="2022-08-27 15:47:38.0")
 /** Column name PaymentRule */
 public static final String COLUMNNAME_PaymentRule = "PaymentRule";
 /** Set Points.
@@ -6894,7 +6971,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1f6ff16-3eb4-00e4-9770-05554c099ff7",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name Points */
 public static final String COLUMNNAME_Points = "Points";
 /** Set Order Reference.
@@ -7022,7 +7099,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="80729249-cabd-ddb5-483c-64030486642f",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name POReference */
 public static final String COLUMNNAME_POReference = "POReference";
 /** Set Posted.
@@ -7055,7 +7132,7 @@ public static String es_PE_FIELD_Invoice_Posted_Description="Las transacciones d
 
 @XendraField(AD_Column_ID="Posted",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Action",IsDisplayed=true,
-DisplayLogic="@Processed@=Y & @#ShowAcct@=Y",DisplayLength=20,IsReadOnly=false,SeqNo=360,SortNo=0,
+DisplayLogic="@Processed@=Y & @#ShowAcct@=Y",DisplayLength=20,IsReadOnly=false,SeqNo=370,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="6835f74a-861c-204c-7deb-52a2385a90cb")
 public static final String FIELDNAME_Invoice_Posted="6835f74a-861c-204c-7deb-52a2385a90cb";
@@ -7149,7 +7226,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9230c98b-9fb9-1dc0-08f4-999cff4676e5",Synchronized="2022-05-02 18:31:57.0")
+Identifier="9230c98b-9fb9-1dc0-08f4-999cff4676e5",Synchronized="2022-08-27 15:47:38.0")
 /** Column name Posted */
 public static final String COLUMNNAME_Posted = "Posted";
 /** Set PrinterSerial.
@@ -7201,7 +7278,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="83a3112a-cda0-4592-8930-6020dece1b57",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name PrinterSerial */
 public static final String COLUMNNAME_PrinterSerial = "PrinterSerial";
 /** Set Processed.
@@ -7234,7 +7311,7 @@ public static String es_PE_FIELD_Invoice_Processed_Description="El documento ha 
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Status",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=430,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=true,SeqNo=440,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="3e4c4f8c-1a6f-957f-61fa-118d372d0b12")
 public static final String FIELDNAME_Invoice_Processed="3e4c4f8c-1a6f-957f-61fa-118d372d0b12";
@@ -7328,7 +7405,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a344a9c6-572e-7001-b6f0-8959fb044e12",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Process Now.
@@ -7419,7 +7496,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="d2a0c97f-2078-edb6-9506-e4c2c9315366",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e4914344-aea5-1377-2e1c-2179157e621e",Synchronized="2022-05-02 18:31:57.0")
+Identifier="e4914344-aea5-1377-2e1c-2179157e621e",Synchronized="2022-08-27 15:47:38.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Ref_Invoice_ID.
@@ -7444,7 +7521,7 @@ public static String es_PE_FIELD_Invoice_Ref_Invoice_ID_Name="Referencia de Fact
 
 @XendraField(AD_Column_ID="Ref_Invoice_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=130,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="577c7537-99fb-7f42-1c6d-10711afcc738")
 public static final String FIELDNAME_Invoice_Ref_Invoice_ID="577c7537-99fb-7f42-1c6d-10711afcc738";
@@ -7509,7 +7586,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 Callout="org.compiere.model.CalloutInvoice.reference",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b0e9e188-5236-1431-638d-1b0400489fe7",
-Synchronized="2022-05-02 18:31:57.0")
+Synchronized="2022-08-27 15:47:38.0")
 /** Column name Ref_Invoice_ID */
 public static final String COLUMNNAME_Ref_Invoice_ID = "Ref_Invoice_ID";
 /** Set Sales Representative.
@@ -7540,7 +7617,7 @@ public static String es_PE_FIELD_Invoice_SalesRepresentative_Description="Repres
 
 @XendraField(AD_Column_ID="SalesRep_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=110,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="0b39089d-f346-baf4-2be4-5c598ab23b74")
 public static final String FIELDNAME_Invoice_SalesRepresentative="0b39089d-f346-baf4-2be4-5c598ab23b74";
@@ -7634,7 +7711,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=true,ColumnSQL="",IsAllowLogging=false,
-Identifier="f07c0ee2-24bb-1eeb-13db-b93f9c57c173",Synchronized="2022-05-02 18:31:57.0")
+Identifier="f07c0ee2-24bb-1eeb-13db-b93f9c57c173",Synchronized="2022-08-27 15:47:38.0")
 /** Column name SalesRep_ID */
 public static final String COLUMNNAME_SalesRep_ID = "SalesRep_ID";
 /** Set Send EMail.
@@ -7761,7 +7838,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4fc5a446-8103-d5be-3b13-5f357c731495",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name SendEMail */
 public static final String COLUMNNAME_SendEMail = "SendEMail";
 /** Set Document Serial.
@@ -7795,7 +7872,7 @@ public static String es_PE_FIELD_Invoice_DocumentSerial_Description="Serie del D
 
 @XendraField(AD_Column_ID="Serial",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=30,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=40,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="dcb26ab1-a6f4-6885-4134-12dd6e15d2ff")
 public static final String FIELDNAME_Invoice_DocumentSerial="dcb26ab1-a6f4-6885-4134-12dd6e15d2ff";
@@ -7825,7 +7902,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="734ad524-d490-48a8-6213-5518a7a2cdc8",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name Serial */
 public static final String COLUMNNAME_Serial = "Serial";
 /** Set StatusDate.
@@ -7852,7 +7929,7 @@ public static String es_PE_FIELD_Invoice_StatusDate_Description="Fecha del Estad
 
 @XendraField(AD_Column_ID="StatusDate",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Status",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=420,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=true,SeqNo=430,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="8f0a89af-5b29-abfa-2665-f7638cbefd11")
 public static final String FIELDNAME_Invoice_StatusDate="8f0a89af-5b29-abfa-2665-f7638cbefd11";
@@ -7876,7 +7953,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6db10f3a-2f02-d0ba-b809-c6a98f01caf7",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name StatusDate */
 public static final String COLUMNNAME_StatusDate = "StatusDate";
 /** Set Total Lines.
@@ -7906,7 +7983,7 @@ public static String es_PE_FIELD_Invoice_TotalLines_Description="Total de todas 
 
 @XendraField(AD_Column_ID="TotalLines",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="General",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=80,SortNo=0,IsSameLine=true,IsHeading=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=true,SeqNo=90,SortNo=0,IsSameLine=true,IsHeading=false,
 IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="84fe7b70-df33-3dbd-009e-5251f6c47b6e")
 public static final String FIELDNAME_Invoice_TotalLines="84fe7b70-df33-3dbd-009e-5251f6c47b6e";
@@ -8000,7 +8077,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1478263e-7ad3-bf83-2cf9-12729663e46e",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name TotalLines */
 public static final String COLUMNNAME_TotalLines = "TotalLines";
 /** Set User List 1.
@@ -8031,7 +8108,7 @@ public static String es_PE_FIELD_Invoice_UserList_Description="El usuario defini
 
 @XendraField(AD_Column_ID="User1_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@$Element_U1@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=250,SortNo=0,
+DisplayLogic="@$Element_U1@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=260,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="50baf006-8532-5d83-be67-402b7bb7c539")
 public static final String FIELDNAME_Invoice_UserList="50baf006-8532-5d83-be67-402b7bb7c539";
@@ -8125,7 +8202,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3c99c572-9b3b-bcbb-5886-ce5978a6bafd",Synchronized="2022-05-02 18:31:58.0")
+Identifier="3c99c572-9b3b-bcbb-5886-ce5978a6bafd",Synchronized="2022-08-27 15:47:39.0")
 /** Column name User1_ID */
 public static final String COLUMNNAME_User1_ID = "User1_ID";
 /** Set User List 2.
@@ -8156,7 +8233,7 @@ public static String es_PE_FIELD_Invoice_UserList25_Description="El usuario defi
 
 @XendraField(AD_Column_ID="User2_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="Reference",IsDisplayed=true,
-DisplayLogic="@$Element_U2@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=260,SortNo=0,
+DisplayLogic="@$Element_U2@=Y",DisplayLength=10,IsReadOnly=false,SeqNo=270,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="304a5478-e0a4-6130-e7c4-333fcb27c934")
 public static final String FIELDNAME_Invoice_UserList25="304a5478-e0a4-6130-e7c4-333fcb27c934";
@@ -8250,7 +8327,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="88c7e95a-3ff5-8700-ecaf-65e327e82ed6",Synchronized="2022-05-02 18:31:58.0")
+Identifier="88c7e95a-3ff5-8700-ecaf-65e327e82ed6",Synchronized="2022-08-27 15:47:39.0")
 /** Column name User2_ID */
 public static final String COLUMNNAME_User2_ID = "User2_ID";
 /** Set WithholdingAmt.
@@ -8297,7 +8374,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="67bc6f1d-0386-4508-9765-1e26d180c658",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name WithholdingAmt */
 public static final String COLUMNNAME_WithholdingAmt = "WithholdingAmt";
 /** Set Write-off Amount.
@@ -8326,7 +8403,7 @@ public static String es_PE_FIELD_Invoice_Write_OffAmount_Description="Total por 
 
 @XendraField(AD_Column_ID="WriteOffAmt",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=530,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=131089,IsReadOnly=false,SeqNo=540,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:17.0",
 Identifier="d722efa9-8236-40ed-b129-8c20c503598f")
 public static final String FIELDNAME_Invoice_Write_OffAmount="d722efa9-8236-40ed-b129-8c20c503598f";
@@ -8356,7 +8433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e057cbc8-2885-44e1-85a2-a6fbce547e9b",
-Synchronized="2022-05-02 18:31:58.0")
+Synchronized="2022-08-27 15:47:39.0")
 /** Column name WriteOffAmt */
 public static final String COLUMNNAME_WriteOffAmt = "WriteOffAmt";
 /** Set WriteOffType.
@@ -8382,7 +8459,7 @@ public static String es_PE_FIELD_Invoice_WriteOffType_Name="writeofftype";
 
 @XendraField(AD_Column_ID="WriteOffType",IsCentrallyMaintained=true,
 AD_Tab_ID="9c7b6352-0248-15c4-ef20-aa491cc36df8",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=540,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=550,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2016-10-06 14:47:17.0",
 Identifier="338fc881-4f19-4925-9f33-7c7b45ac837d")
 public static final String FIELDNAME_Invoice_WriteOffType="338fc881-4f19-4925-9f33-7c7b45ac837d";
@@ -8396,7 +8473,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="d9ba4765-bd99-43a0-86a3-41b0f40fdca6",Synchronized="2022-05-02 18:31:58.0")
+Identifier="d9ba4765-bd99-43a0-86a3-41b0f40fdca6",Synchronized="2022-08-27 15:47:39.0")
 /** Column name WriteOffType */
 public static final String COLUMNNAME_WriteOffType = "WriteOffType";
 }

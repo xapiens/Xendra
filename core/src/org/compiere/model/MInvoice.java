@@ -144,6 +144,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		//
 		to.setC_DocType_ID(0);
 		to.setC_DocTypeTarget_ID (C_DocTypeTarget_ID);
+		to.setInvoiceOperationTypeCode(from.getInvoiceOperationTypeCode());
 		to.setIsSOTrx(isSOTrx);
 		//
 		to.setDateInvoiced (dateDoc);
@@ -350,6 +351,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		setC_BPartner_Location_ID(order.getBill_Location_ID());
 		setC_Contact_ID(order.getC_Contact_ID());
 		setAD_User_ID(order.getBill_User_ID());
+		setInvoiceOperationTypeCode(order.getInvoiceOperationTypeCode());
 	}	//	MInvoice
 
 	/**
@@ -542,6 +544,7 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		setPrinterSerial(order.getPrinterSerial());
 		setMachineSerial(order.getMachineSerial());
 		setRef_Invoice_ID(order.getRef_Invoice_ID());
+		setInvoiceOperationTypeCode(order.getInvoiceOperationTypeCode());
 		if (order.getDocumentNoToInvoice().length() > 0)
 			setDocumentNo(order.getDocumentNoToInvoice());
 		if (order.getSerialToInvoice().length() > 0)

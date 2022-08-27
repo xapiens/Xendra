@@ -28,6 +28,14 @@ public class MBPartnerCertificate extends X_C_BPartner_Certificate {
 		String value = (String) p.get(propertyname);
 		return value;
 	}
+	public int getInt(String propertyname) {
+		int ret = 0;
+		String value = get(propertyname);
+		if (value != null) {
+			ret = Integer.valueOf(value);
+		}	
+		return ret;
+	}
 	public Boolean getBoolean(String propertyname) {
 		Boolean ret = false;
 		String value = get(propertyname);

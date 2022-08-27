@@ -91,6 +91,7 @@ public class MOrder extends X_C_Order implements DocAction
 		to.setDocStatus (REF__DocumentStatus.Drafted);		//	Draft
 		to.setDocAction(REF__DocumentAction.Complete);
 		//
+		to.setInvoiceOperationTypeCode(from.getInvoiceOperationTypeCode());
 		to.setC_DocType_ID(0);
 		to.setC_DocTypeTarget_ID (C_DocTypeTarget_ID);
 		to.setIsSOTrx(isSOTrx);
@@ -184,6 +185,7 @@ public class MOrder extends X_C_Order implements DocAction
 		//
 		to.setC_DocType_ID(0);
 		to.setC_DocTypeTarget_ID (C_DocTypeTarget_ID);
+		to.setInvoiceOperationTypeCode(from.getInvoiceOperationTypeCode());
 		to.setIsSOTrx(isSOTrx);
 		//
 		to.setIsSelected (false);

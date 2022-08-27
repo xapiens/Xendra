@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -217,7 +217,7 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Product, Servic
 TableName="M_Product",AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=90,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="b819f4da-3df6-ed33-3c4a-2f06b4b46999",Synchronized="2022-05-11 21:35:15.0")
+Identifier="b819f4da-3df6-ed33-3c4a-2f06b4b46999",Synchronized="2022-05-26 18:59:42.0")
 /** TableName=M_Product */
 public static final String Table_Name="M_Product";
 
@@ -433,7 +433,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7564162a-730d-dfaa-f3fe-8401321c125a",
-Synchronized="2022-05-06 17:51:29.0")
+Synchronized="2022-05-18 10:35:08.0")
 /** Column name Classification */
 public static final String COLUMNNAME_Classification = "Classification";
 /** Set Revenue Recognition.
@@ -574,7 +574,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ea2c1a39-4df8-95a0-3cc1-0f6a12f03c45",Synchronized="2022-05-06 17:51:29.0")
+Identifier="ea2c1a39-4df8-95a0-3cc1-0f6a12f03c45",Synchronized="2022-05-18 10:35:09.0")
 /** Column name C_RevenueRecognition_ID */
 public static final String COLUMNNAME_C_RevenueRecognition_ID = "C_RevenueRecognition_ID";
 /** Set Subscription Type.
@@ -715,7 +715,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8432aea6-2852-cad1-c683-63641592daf1",Synchronized="2022-05-06 17:51:29.0")
+Identifier="8432aea6-2852-cad1-c683-63641592daf1",Synchronized="2022-05-18 10:35:09.0")
 /** Column name C_SubscriptionType_ID */
 public static final String COLUMNNAME_C_SubscriptionType_ID = "C_SubscriptionType_ID";
 /** Set Tax Category.
@@ -744,9 +744,9 @@ public static String es_PE_FIELD_Product_TaxCategory_Help="La categoría de impu
 public static String es_PE_FIELD_Product_TaxCategory_Description="Categoría del Impuesto";
 
 @XendraField(AD_Column_ID="C_TaxCategory_ID",IsCentrallyMaintained=true,
-AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Tax",IsDisplayed=true,
 DisplayLogic="@IsSold@='Y' | @IsPurchased@='Y' & @IsSummary@='N'",DisplayLength=14,
-IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
+IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
 Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="99d106b6-0340-656d-99e9-b21f177f74ac")
 public static final String FIELDNAME_Product_TaxCategory="99d106b6-0340-656d-99e9-b21f177f74ac";
@@ -859,7 +859,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4e7b86a3-547a-7452-2cd9-ecbd55e9b22f",Synchronized="2022-05-06 17:51:30.0")
+Identifier="4e7b86a3-547a-7452-2cd9-ecbd55e9b22f",Synchronized="2022-05-18 10:35:09.0")
 /** Column name C_TaxCategory_ID */
 public static final String COLUMNNAME_C_TaxCategory_ID = "C_TaxCategory_ID";
 /** Set UOM.
@@ -889,7 +889,7 @@ public static String es_PE_FIELD_Product_UOM_Description="Unidad de Medida";
 
 @XendraField(AD_Column_ID="C_UOM_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=130,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=120,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="d519fc38-f447-58bb-7d0f-f888498b95ee")
 public static final String FIELDNAME_Product_UOM="d519fc38-f447-58bb-7d0f-f888498b95ee";
@@ -999,7 +999,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f5d5df62-7f23-8b41-c0fd-7ce90e228d1f",Synchronized="2022-05-06 17:51:30.0")
+Identifier="f5d5df62-7f23-8b41-c0fd-7ce90e228d1f",Synchronized="2022-05-18 10:35:09.0")
 /** Column name C_UOM_ID */
 public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 /** Set C_UOM_Order_ID.
@@ -1024,7 +1024,7 @@ public static String es_PE_FIELD_Product_C_UOM_Order_ID_Name="UM de Compra";
 
 @XendraField(AD_Column_ID="C_UOM_Order_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=140,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=130,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="09bb9c7a-c7fd-60b3-22ef-9820580bae6b")
 public static final String FIELDNAME_Product_C_UOM_Order_ID="09bb9c7a-c7fd-60b3-22ef-9820580bae6b";
@@ -1039,7 +1039,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a18f571-0891-1a22-ad78-e409b3ea92a3",
-Synchronized="2022-05-06 17:51:30.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name C_UOM_Order_ID */
 public static final String COLUMNNAME_C_UOM_Order_ID = "C_UOM_Order_ID";
 /** Set Description.
@@ -1080,7 +1080,7 @@ public static String es_PE_FIELD_Product_Description_Description="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=60,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=60,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="be13c470-de37-2b36-c030-ae1ec0d6b03e")
 public static final String FIELDNAME_Product_Description="be13c470-de37-2b36-c030-ae1ec0d6b03e";
@@ -1190,7 +1190,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,
 AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="96fbe46f-b22e-fce0-356d-c7ee1acc1c04",Synchronized="2022-05-06 17:51:30.0")
+Identifier="96fbe46f-b22e-fce0-356d-c7ee1acc1c04",Synchronized="2022-05-18 10:35:09.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Description URL.
@@ -1221,7 +1221,7 @@ public static String es_PE_FIELD_Product_DescriptionURL_Description="Descripció
 
 @XendraField(AD_Column_ID="DescriptionURL",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=20,IsReadOnly=false,SeqNo=390,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=20,IsReadOnly=false,SeqNo=410,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="f9f6fd86-3049-ab52-d028-df070fa5a37e")
 public static final String FIELDNAME_Product_DescriptionURL="f9f6fd86-3049-ab52-d028-df070fa5a37e";
@@ -1313,7 +1313,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="155eb3ff-a360-618c-6b9d-4e5d0efde138",
-Synchronized="2022-05-06 17:51:30.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name DescriptionURL */
 public static final String COLUMNNAME_DescriptionURL = "DescriptionURL";
 /** Set Discontinued.
@@ -1456,7 +1456,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="567b2ea0-303e-5d25-0e8c-4b3e5e00b0a8",
-Synchronized="2022-05-06 17:51:30.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name Discontinued */
 public static final String COLUMNNAME_Discontinued = "Discontinued";
 /** Set Discontinued by.
@@ -1593,7 +1593,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0817f907-0714-156f-4273-9d2b2294090d",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name DiscontinuedBy */
 public static final String COLUMNNAME_DiscontinuedBy = "DiscontinuedBy";
 /** Set Document Note.
@@ -1732,7 +1732,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1cb10902-ace0-593f-fdfb-81b6c9762582",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name DocumentNote */
 public static final String COLUMNNAME_DocumentNote = "DocumentNote";
 /** Set Guarantee Days.
@@ -1761,7 +1761,7 @@ public static String es_PE_FIELD_Product_GuaranteeDays_Description="Número de d
 
 @XendraField(AD_Column_ID="GuaranteeDays",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=11,IsReadOnly=false,SeqNo=400,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=11,IsReadOnly=false,SeqNo=420,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da")
 public static final String FIELDNAME_Product_GuaranteeDays="18f46e73-bef3-ee3c-7469-6fc7a1b3a5da";
@@ -1871,7 +1871,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3ca24ba2-da61-829b-8ada-3e704e5ca49e",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name GuaranteeDays */
 public static final String COLUMNNAME_GuaranteeDays = "GuaranteeDays";
 /** Set Min Guarantee Days.
@@ -1900,7 +1900,7 @@ public static String es_PE_FIELD_Product_MinGuaranteeDays_Description="Número m
 
 @XendraField(AD_Column_ID="GuaranteeDaysMin",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=11,IsReadOnly=false,SeqNo=410,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=11,IsReadOnly=false,SeqNo=430,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="02e73528-1c4b-7607-ad79-37cb5a6fa5d4")
 public static final String FIELDNAME_Product_MinGuaranteeDays="02e73528-1c4b-7607-ad79-37cb5a6fa5d4";
@@ -2010,7 +2010,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0aee13b8-e322-bfc0-ccae-c3482bc43124",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name GuaranteeDaysMin */
 public static final String COLUMNNAME_GuaranteeDaysMin = "GuaranteeDaysMin";
 /** Set Comment/Help.
@@ -2156,7 +2156,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c6775663-9f61-3ff8-e590-b2778ec47f99",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name Help */
 public static final String COLUMNNAME_Help = "Help";
 /** Set Identifier.
@@ -2198,7 +2198,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="21b42f54-6988-4736-ac48-7373890a03e1",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Image URL.
@@ -2340,7 +2340,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="08714ebb-8c2b-bf9b-b206-25e0cbb65368",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name ImageURL */
 public static final String COLUMNNAME_ImageURL = "ImageURL";
 /** Set Bill of Materials.
@@ -2374,7 +2374,7 @@ public static String es_PE_FIELD_Product_BillOfMaterials_Description="Lista de m
 @XendraField(AD_Column_ID="IsBOM",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @ProductType@=I | @ProductType@=S",DisplayLength=1,
-IsReadOnly=false,SeqNo=310,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
+IsReadOnly=false,SeqNo=330,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,
 Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e")
 public static final String FIELDNAME_Product_BillOfMaterials="f4dd0fb4-a53e-78b0-b45d-0adcc95ce54e";
@@ -2486,7 +2486,7 @@ ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1547a86f-3fde-3b45-7920-f37b477b3b74",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsBOM */
 public static final String COLUMNNAME_IsBOM = "IsBOM";
 /** Set IsCostable.
@@ -2513,7 +2513,7 @@ public static String es_PE_FIELD_Product_IsCostable_Name="Costeable";
 
 @XendraField(AD_Column_ID="IsCostable",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=170,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=1,IsReadOnly=false,SeqNo=160,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="f8fa7f06-d8b5-ea8a-d71b-5b672c51e7d8")
 public static final String FIELDNAME_Product_IsCostable="f8fa7f06-d8b5-ea8a-d71b-5b672c51e7d8";
@@ -2527,7 +2527,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d248e364-7ed9-f758-c21e-fd15d73d2dbd",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsCostable */
 public static final String COLUMNNAME_IsCostable = "IsCostable";
 /** Set Drop Shipment.
@@ -2560,7 +2560,7 @@ public static String es_PE_FIELD_Product_DropShipment_Description="Los envíos d
 
 @XendraField(AD_Column_ID="IsDropShip",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=1,IsReadOnly=false,SeqNo=240,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=1,IsReadOnly=false,SeqNo=260,
 SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="8c85c45d-6b28-b82d-5087-2ae807a5398b")
 public static final String FIELDNAME_Product_DropShipment="8c85c45d-6b28-b82d-5087-2ae807a5398b";
@@ -2670,7 +2670,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="294e6f51-9021-e13c-a5f0-ec5a2da1c9c0",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsDropShip */
 public static final String COLUMNNAME_IsDropShip = "IsDropShip";
 /** Set Exclude Auto Delivery.
@@ -2717,7 +2717,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="69d1706f-5a57-1d1a-a78c-7f7fc59771c3",Synchronized="2022-05-06 17:51:31.0")
+Identifier="69d1706f-5a57-1d1a-a78c-7f7fc59771c3",Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsExcludeAutoDelivery */
 public static final String COLUMNNAME_IsExcludeAutoDelivery = "IsExcludeAutoDelivery";
 /** Set Print detail records on invoice .
@@ -2750,7 +2750,7 @@ public static String es_PE_FIELD_Product_PrintDetailRecordsOnInvoice_Description
 
 @XendraField(AD_Column_ID="IsInvoicePrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=340,SortNo=0,
+DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=360,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="af32840a-5771-935a-4c52-318419e5cb90")
 public static final String FIELDNAME_Product_PrintDetailRecordsOnInvoice="af32840a-5771-935a-4c52-318419e5cb90";
@@ -2860,7 +2860,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="80dcfa70-b671-acce-2716-829cff5427b6",Synchronized="2022-05-06 17:51:31.0")
+Identifier="80dcfa70-b671-acce-2716-829cff5427b6",Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsInvoicePrintDetails */
 public static final String COLUMNNAME_IsInvoicePrintDetails = "IsInvoicePrintDetails";
 /** Set Print detail records on pick list.
@@ -2893,7 +2893,7 @@ public static String es_PE_FIELD_Product_PrintDetailRecordsOnPickList_Descriptio
 
 @XendraField(AD_Column_ID="IsPickListPrintDetails",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=350,SortNo=0,
+DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=370,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="4a8aaf66-29b2-ed52-ec31-95db0396eacf")
 public static final String FIELDNAME_Product_PrintDetailRecordsOnPickList="4a8aaf66-29b2-ed52-ec31-95db0396eacf";
@@ -3003,7 +3003,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="192575d2-570d-75ae-57a5-cf7f6c09859a",Synchronized="2022-05-06 17:51:31.0")
+Identifier="192575d2-570d-75ae-57a5-cf7f6c09859a",Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsPickListPrintDetails */
 public static final String COLUMNNAME_IsPickListPrintDetails = "IsPickListPrintDetails";
 /** Set Purchased.
@@ -3036,7 +3036,7 @@ public static String es_PE_FIELD_Product_Purchased_Description="Organización qu
 
 @XendraField(AD_Column_ID="IsPurchased",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=360,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=380,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="4268004a-815a-d180-a112-dce7be3d4fa8")
 public static final String FIELDNAME_Product_Purchased="4268004a-815a-d180-a112-dce7be3d4fa8";
@@ -3146,7 +3146,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6c043dd2-5ffe-85d9-6b0b-d89a4305af64",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsPurchased */
 public static final String COLUMNNAME_IsPurchased = "IsPurchased";
 /** Set Self-Service.
@@ -3179,7 +3179,7 @@ public static String es_PE_FIELD_Product_Self_Service_Description="Esta es una e
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=420,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=440,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="b6bfbc3d-ac15-1357-a620-d12872a94a6e")
 public static final String FIELDNAME_Product_Self_Service="b6bfbc3d-ac15-1357-a620-d12872a94a6e";
@@ -3289,7 +3289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f6bfca30-d27e-3c25-ba64-dde293728dab",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Sold.
@@ -3322,7 +3322,7 @@ public static String es_PE_FIELD_Product_Sold_Description="La Organización vend
 
 @XendraField(AD_Column_ID="IsSold",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=370,SortNo=0,IsSameLine=true,
+DisplayLogic="@IsSummary@='N'",DisplayLength=1,IsReadOnly=false,SeqNo=390,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="11ec6527-b64f-4487-8454-82d3c1ccd319")
 public static final String FIELDNAME_Product_Sold="11ec6527-b64f-4487-8454-82d3c1ccd319";
@@ -3432,7 +3432,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c97f49d-6c74-14d6-28f8-929ccdeba487",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsSold */
 public static final String COLUMNNAME_IsSold = "IsSold";
 /** Set Stocked.
@@ -3465,7 +3465,7 @@ public static String es_PE_FIELD_Product_Stocked_Description="La Organización a
 
 @XendraField(AD_Column_ID="IsStocked",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=1,IsReadOnly=false,SeqNo=250,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=1,IsReadOnly=false,SeqNo=270,
 SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="304ce511-52b3-764e-2b8b-c25f6cb8287c")
 public static final String FIELDNAME_Product_Stocked="304ce511-52b3-764e-2b8b-c25f6cb8287c";
@@ -3576,7 +3576,7 @@ ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fd2e6375-efbc-b207-f470-ec2f24006683",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsStocked */
 public static final String COLUMNNAME_IsStocked = "IsStocked";
 /** Set Summary Level.
@@ -3719,7 +3719,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a7815f72-c6be-14fe-1483-e627f7b37068",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsSummary */
 public static final String COLUMNNAME_IsSummary = "IsSummary";
 /** Set Verified.
@@ -3752,7 +3752,7 @@ public static String es_PE_FIELD_Product_Verified_Description="La configuración
 
 @XendraField(AD_Column_ID="IsVerified",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=320,SortNo=0,
+DisplayLogic="@IsSummary@='N' & @IsBOM@='Y'",DisplayLength=1,IsReadOnly=false,SeqNo=340,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="60829e33-63c3-e0b0-4ec9-2802065c77f9")
 public static final String FIELDNAME_Product_Verified="60829e33-63c3-e0b0-4ec9-2802065c77f9";
@@ -3862,7 +3862,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c0429d43-038e-56c6-9118-ea4f1c883ad4",
-Synchronized="2022-05-06 17:51:31.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsVerified */
 public static final String COLUMNNAME_IsVerified = "IsVerified";
 /** Set Featured in Web Store.
@@ -4005,7 +4005,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9410d414-34e9-28e6-3e6d-b17a2614260f",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsWebStoreFeatured */
 public static final String COLUMNNAME_IsWebStoreFeatured = "IsWebStoreFeatured";
 /** Set IsWithholding.
@@ -4046,7 +4046,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d51bc498-42c8-428e-bce7-cc197ae41180",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name IsWithholding */
 public static final String COLUMNNAME_IsWithholding = "IsWithholding";
 /** Set ItemClassificationCode.
@@ -4069,6 +4069,16 @@ if (value == null)
   return "";
 return value;
 }
+@XendraTrl(Identifier="a9c6f443-080c-420a-bc45-6bb036e6e1e5")
+public static String es_PE_FIELD_Product_ItemClassificationCode_Name="itemclassificationcode";
+
+@XendraField(AD_Column_ID="ItemClassificationCode",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Tax",IsDisplayed=true,
+DisplayLogic="",DisplayLength=40,IsReadOnly=false,SeqNo=180,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-05-26 18:59:41.0",
+Identifier="a9c6f443-080c-420a-bc45-6bb036e6e1e5")
+public static final String FIELDNAME_Product_ItemClassificationCode="a9c6f443-080c-420a-bc45-6bb036e6e1e5";
+
 @XendraTrl(Identifier="56d448db-9bd5-4b00-8b75-c675248efa91")
 public static String es_PE_COLUMN_ItemClassificationCode_Name="itemclassificationcode";
 
@@ -4078,7 +4088,7 @@ FieldLength=40,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="56d448db-9bd5-4b00-8b75-c675248efa91",Synchronized="2022-05-11 21:33:26.0")
+Identifier="56d448db-9bd5-4b00-8b75-c675248efa91",Synchronized="2022-05-18 10:35:09.0")
 /** Column name ItemClassificationCode */
 public static final String COLUMNNAME_ItemClassificationCode = "ItemClassificationCode";
 /** Set Attribute Set.
@@ -4109,7 +4119,7 @@ public static String es_PE_FIELD_Product_AttributeSet_Description="Conjunto de A
 
 @XendraField(AD_Column_ID="M_AttributeSet_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=14,IsReadOnly=false,SeqNo=430,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=14,IsReadOnly=false,SeqNo=450,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="d8ebd4d8-4762-30b9-02b6-3a568a02c517")
 public static final String FIELDNAME_Product_AttributeSet="d8ebd4d8-4762-30b9-02b6-3a568a02c517";
@@ -4219,7 +4229,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6a93d47f-bad3-a1e2-0ecb-4e1a906c4aa9",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_AttributeSet_ID */
 public static final String COLUMNNAME_M_AttributeSet_ID = "M_AttributeSet_ID";
 /** Set Attribute Set Instance.
@@ -4249,7 +4259,7 @@ public static String es_PE_FIELD_Product_AttributeSetInstance_Description="Valor
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=false,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N'",DisplayLength=26,IsReadOnly=false,SeqNo=440,SortNo=0,
+DisplayLogic="@IsSummary@='N'",DisplayLength=26,IsReadOnly=false,SeqNo=460,SortNo=0,
 IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="55e9f205-72f7-50c7-c953-987ec345616d")
 public static final String FIELDNAME_Product_AttributeSetInstance="55e9f205-72f7-50c7-c953-987ec345616d";
@@ -4359,7 +4369,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8ec14b1c-8a9d-4761-eb91-2ab834d5b54c",Synchronized="2022-05-06 17:51:32.0")
+Identifier="8ec14b1c-8a9d-4761-eb91-2ab834d5b54c",Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Freight Category.
@@ -4500,7 +4510,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="3c4b5940-be48-7bd8-898b-3f5baf96f30e",Synchronized="2022-05-06 17:51:32.0")
+Identifier="3c4b5940-be48-7bd8-898b-3f5baf96f30e",Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_FreightCategory_ID */
 public static final String COLUMNNAME_M_FreightCategory_ID = "M_FreightCategory_ID";
 /** Set Locator.
@@ -4532,7 +4542,7 @@ public static String es_PE_FIELD_Product_Locator_Description="Ubicación de Alma
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@=N & @ProductType@=I & @IsStocked@=Y",DisplayLength=23,IsReadOnly=false,
-SeqNo=260,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=280,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="0112f3f9-116e-21b9-f4d6-837d6e6b47a7")
 public static final String FIELDNAME_Product_Locator="0112f3f9-116e-21b9-f4d6-837d6e6b47a7";
 
@@ -4641,7 +4651,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="636d386b-f86f-4764-f621-8f45736747e5",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Product Brand.
@@ -4669,7 +4679,7 @@ public static String es_PE_FIELD_Product_ProductBrand_Description="Linea";
 
 @XendraField(AD_Column_ID="M_Product_Brand_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=210,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=230,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="3b753a8d-ec55-91e8-2fb7-74f3d1e6a379")
 public static final String FIELDNAME_Product_ProductBrand="3b753a8d-ec55-91e8-2fb7-74f3d1e6a379";
@@ -4683,7 +4693,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b7f92bb-935f-1fd9-2c3f-f796652a2a86",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Product_Brand_ID */
 public static final String COLUMNNAME_M_Product_Brand_ID = "M_Product_Brand_ID";
 /** Set Product Category.
@@ -4824,7 +4834,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsU
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6f298307-ee89-b44b-1341-afb769b7f98c",Synchronized="2022-05-06 17:51:32.0")
+Identifier="6f298307-ee89-b44b-1341-afb769b7f98c",Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Product_Category_ID */
 public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
 /** Set Product Generic.
@@ -4852,7 +4862,7 @@ public static String es_PE_FIELD_Product_ProductGeneric_Description="Generico";
 
 @XendraField(AD_Column_ID="M_Product_Generic_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=200,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=220,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="af9d610b-6f58-350a-0337-cd5899d0f2eb")
 public static final String FIELDNAME_Product_ProductGeneric="af9d610b-6f58-350a-0337-cd5899d0f2eb";
@@ -4866,7 +4876,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5e2c5c0c-15b5-9e84-d131-e86cb3233333",Synchronized="2022-05-06 17:51:32.0")
+Identifier="5e2c5c0c-15b5-9e84-d131-e86cb3233333",Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Product_Generic_ID */
 public static final String COLUMNNAME_M_Product_Generic_ID = "M_Product_Generic_ID";
 /** Set Product Group.
@@ -4891,7 +4901,7 @@ public static String es_PE_FIELD_Product_ProductGroup_Name="Grupo";
 
 @XendraField(AD_Column_ID="M_Product_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=190,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=210,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="e3d14c62-7ed4-7b88-b74e-d6fc15bd7ede")
 public static final String FIELDNAME_Product_ProductGroup="e3d14c62-7ed4-7b88-b74e-d6fc15bd7ede";
@@ -4905,7 +4915,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ef4e67eb-3681-0229-6fe7-52ecb93f1f14",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Product_Group_ID */
 public static final String COLUMNNAME_M_Product_Group_ID = "M_Product_Group_ID";
 /** Set Product.
@@ -5062,7 +5072,7 @@ public static String es_PE_FIELD_Product_ProductType_Description="Tipo";
 
 @XendraField(AD_Column_ID="M_Product_Type_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Other options",IsDisplayed=true,
-DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=180,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=10,IsReadOnly=false,SeqNo=200,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="d20f5fc3-3a0c-ca9e-025f-84df78a16ab3")
 public static final String FIELDNAME_Product_ProductType="d20f5fc3-3a0c-ca9e-025f-84df78a16ab3";
@@ -5076,7 +5086,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="491acf00-4569-86d1-0b03-51c54bd42f0a",
-Synchronized="2022-05-06 17:51:32.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name M_Product_Type_ID */
 public static final String COLUMNNAME_M_Product_Type_ID = "M_Product_Type_ID";
 /** Set Name.
@@ -5228,7 +5238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=true,SeqNo=1,
 IsTranslated=true,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,
 AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4e3c688f-2ca2-c2a7-1c75-e233e781a684",Synchronized="2022-05-06 17:51:32.0")
+Identifier="4e3c688f-2ca2-c2a7-1c75-e233e781a684",Synchronized="2022-05-18 10:35:09.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set PO_GS.
@@ -5267,7 +5277,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="22ffb320-abff-41dd-b32c-adcc10e465cf",Synchronized="2022-05-06 17:51:32.0")
+Identifier="22ffb320-abff-41dd-b32c-adcc10e465cf",Synchronized="2022-05-18 10:35:09.0")
 /** Column name PO_GS */
 public static final String COLUMNNAME_PO_GS = "PO_GS";
 /** Set PriceTypeCode.
@@ -5288,6 +5298,16 @@ public String getPriceTypeCode()
 return (String)get_Value(COLUMNNAME_PriceTypeCode);
 }
 
+@XendraTrl(Identifier="dbabffb8-18d4-4472-8f75-5aaa71d36572")
+public static String es_PE_FIELD_Product_PriceTypeCode_Name="pricetypecode";
+
+@XendraField(AD_Column_ID="PriceTypeCode",IsCentrallyMaintained=true,
+AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="Tax",IsDisplayed=true,
+DisplayLogic="",DisplayLength=2,IsReadOnly=false,SeqNo=190,SortNo=0,IsSameLine=false,
+IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2022-05-26 18:59:41.0",
+Identifier="dbabffb8-18d4-4472-8f75-5aaa71d36572")
+public static final String FIELDNAME_Product_PriceTypeCode="dbabffb8-18d4-4472-8f75-5aaa71d36572";
+
 @XendraTrl(Identifier="5e070dd2-e6bb-49f6-80c0-992fe7d4512d")
 public static String es_PE_COLUMN_PriceTypeCode_Name="pricetypecode";
 
@@ -5297,7 +5317,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="5e070dd2-e6bb-49f6-80c0-992fe7d4512d",Synchronized="2022-05-06 17:51:32.0")
+Identifier="5e070dd2-e6bb-49f6-80c0-992fe7d4512d",Synchronized="2022-05-18 10:35:09.0")
 /** Column name PriceTypeCode */
 public static final String COLUMNNAME_PriceTypeCode = "PriceTypeCode";
 /** Set Process Now.
@@ -5331,7 +5351,7 @@ public static String es_PE_FIELD_Product_ProcessNow_Description="Verificar estru
 @XendraField(AD_Column_ID="Processing",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @IsBOM@='Y' & @IsVerified@='N'",DisplayLength=23,IsReadOnly=false,
-SeqNo=330,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=350,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="9226f0da-ae44-9173-2c05-3baa0a99d0cc")
 public static final String FIELDNAME_Product_ProcessNow="9226f0da-ae44-9173-2c05-3baa0a99d0cc";
 
@@ -5440,7 +5460,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="d551caf4-4ce8-9c21-490e-764e98942f42",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b8f5a634-f077-27b5-a1b0-73ae6d0cf569",Synchronized="2022-05-06 17:51:32.0")
+Identifier="b8f5a634-f077-27b5-a1b0-73ae6d0cf569",Synchronized="2022-05-18 10:35:09.0")
 /** Column name Processing */
 public static final String COLUMNNAME_Processing = "Processing";
 /** Set Product Type.
@@ -5472,7 +5492,7 @@ public static String es_PE_FIELD_Product_ProductType2_Description="Tipo de Produ
 
 @XendraField(AD_Column_ID="ProductType",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=150,SortNo=0,IsSameLine=true,
+DisplayLogic="",DisplayLength=14,IsReadOnly=false,SeqNo=140,SortNo=0,IsSameLine=true,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="5fab9065-8b85-fd25-02d5-9bfe9994053e")
 public static final String FIELDNAME_Product_ProductType2="5fab9065-8b85-fd25-02d5-9bfe9994053e";
@@ -5582,7 +5602,7 @@ FieldLength=1,DefaultValue="I",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b1eb05ff-9b0e-6b4f-31b9-1a771064c4ab",Synchronized="2022-05-06 17:51:32.0")
+Identifier="b1eb05ff-9b0e-6b4f-31b9-1a771064c4ab",Synchronized="2022-05-18 10:35:09.0")
 /** Column name ProductType */
 public static final String COLUMNNAME_ProductType = "ProductType";
 /** Set ProductTypeTax.
@@ -5608,7 +5628,7 @@ public static String es_PE_FIELD_Product_ProductTypeTax_Name="Tipo de Existencia
 
 @XendraField(AD_Column_ID="ProductTypeTax",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=2,IsReadOnly=false,SeqNo=160,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=2,IsReadOnly=false,SeqNo=150,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="3e7acd82-acc4-342a-7892-fc8459ff02a3")
 public static final String FIELDNAME_Product_ProductTypeTax="3e7acd82-acc4-342a-7892-fc8459ff02a3";
@@ -5622,7 +5642,7 @@ FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e92b15bd-a77a-66b2-9293-5c91c23f76fe",Synchronized="2022-05-06 17:51:33.0")
+Identifier="e92b15bd-a77a-66b2-9293-5c91c23f76fe",Synchronized="2022-05-18 10:35:09.0")
 /** Column name ProductTypeTax */
 public static final String COLUMNNAME_ProductTypeTax = "ProductTypeTax";
 /** Set Mail Template.
@@ -5763,7 +5783,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f37f98a-4091-bb3a-b951-c90e212b9359",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name R_MailText_ID */
 public static final String COLUMNNAME_R_MailText_ID = "R_MailText_ID";
 /** Set Sales Representative.
@@ -5904,7 +5924,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="a50d170c-123f-183d-a1f2-1d587810574f",Synchronized="2022-05-06 17:51:33.0")
+Identifier="a50d170c-123f-183d-a1f2-1d587810574f",Synchronized="2022-05-18 10:35:09.0")
 /** Column name SalesRep_ID */
 public static final String COLUMNNAME_SalesRep_ID = "SalesRep_ID";
 /** Set Expense Type.
@@ -6024,7 +6044,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0bafc89a-ea6a-5f13-86b0-7aa1a03389e4",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name S_ExpenseType_ID */
 public static final String COLUMNNAME_S_ExpenseType_ID = "S_ExpenseType_ID";
 /** Set Shelf Depth.
@@ -6054,7 +6074,7 @@ public static String es_PE_FIELD_Product_ShelfDepth_Description="Profundidad del
 @XendraField(AD_Column_ID="ShelfDepth",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @ProductType@=I & @IsStocked@=Y",DisplayLength=11,IsReadOnly=false,
-SeqNo=290,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=310,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2")
 public static final String FIELDNAME_Product_ShelfDepth="3bbb1e41-bcdd-45d0-e32c-2b720ac7b5e2";
 
@@ -6163,7 +6183,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1039c92e-dc25-3176-b35e-7a81aefbd213",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name ShelfDepth */
 public static final String COLUMNNAME_ShelfDepth = "ShelfDepth";
 /** Set Shelf Height.
@@ -6193,7 +6213,7 @@ public static String es_PE_FIELD_Product_ShelfHeight_Description="Altura del ana
 @XendraField(AD_Column_ID="ShelfHeight",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @ProductType@=I & @IsStocked@=Y",DisplayLength=11,IsReadOnly=false,
-SeqNo=280,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=300,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba")
 public static final String FIELDNAME_Product_ShelfHeight="d89ac9a2-9ca1-8f01-122a-9c8709fad4ba";
 
@@ -6302,7 +6322,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d7933b77-900e-b627-8aa8-4b16e9c0a197",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name ShelfHeight */
 public static final String COLUMNNAME_ShelfHeight = "ShelfHeight";
 /** Set Shelf Width.
@@ -6332,7 +6352,7 @@ public static String es_PE_FIELD_Product_ShelfWidth_Description="Ancho del anaqu
 @XendraField(AD_Column_ID="ShelfWidth",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @ProductType@=I & @IsStocked@=Y",DisplayLength=11,IsReadOnly=false,
-SeqNo=270,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=290,SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="b4f382d0-6415-9b88-e908-7542456731e2")
 public static final String FIELDNAME_Product_ShelfWidth="b4f382d0-6415-9b88-e908-7542456731e2";
 
@@ -6441,7 +6461,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ead264e3-490e-2bb5-7062-5f7426ff20c9",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name ShelfWidth */
 public static final String COLUMNNAME_ShelfWidth = "ShelfWidth";
 /** Set ShortName.
@@ -6483,7 +6503,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d1d73f17-2f30-4bb0-9b9e-bfc2dd40b082",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name ShortName */
 public static final String COLUMNNAME_ShortName = "ShortName";
 /** Set SKU.
@@ -6627,7 +6647,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="38780182-f3dd-9c5a-2c3d-4e3125b0a89d",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name SKU */
 public static final String COLUMNNAME_SKU = "SKU";
 /** Set Resource.
@@ -6655,7 +6675,7 @@ public static String es_PE_FIELD_Product_Resource_Description="Recurso";
 
 @XendraField(AD_Column_ID="S_Resource_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@ProductType@=R",DisplayLength=14,IsReadOnly=true,SeqNo=380,SortNo=0,
+DisplayLogic="@ProductType@=R",DisplayLength=14,IsReadOnly=true,SeqNo=400,SortNo=0,
 IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="3f9e3b4e-e69e-9afb-a30a-ba3c9dc136fd")
 public static final String FIELDNAME_Product_Resource="3f9e3b4e-e69e-9afb-a30a-ba3c9dc136fd";
@@ -6747,7 +6767,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="31237d94-b549-ea5d-5513-b766a7fe1ac6",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name S_Resource_ID */
 public static final String COLUMNNAME_S_Resource_ID = "S_Resource_ID";
 /** Set Units Per Pallet.
@@ -6777,7 +6797,7 @@ public static String es_PE_FIELD_Product_UnitsPerPallet_Description="Unidades po
 @XendraField(AD_Column_ID="UnitsPerPallet",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
 DisplayLogic="@IsSummary@='N' & @ProductType@=I & @IsStocked@=Y",DisplayLength=11,IsReadOnly=false,
-SeqNo=300,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
+SeqNo=320,SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="e26286ed-0dea-6d19-2fae-4346e4405c55")
 public static final String FIELDNAME_Product_UnitsPerPallet="e26286ed-0dea-6d19-2fae-4346e4405c55";
 
@@ -6886,7 +6906,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ed340deb-3244-c25f-5539-073f56f2cacb",
-Synchronized="2022-05-06 17:51:33.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name UnitsPerPallet */
 public static final String COLUMNNAME_UnitsPerPallet = "UnitsPerPallet";
 /** Set UPC/EAN.
@@ -6920,7 +6940,7 @@ public static String es_PE_FIELD_Product_UPCEAN_Description="Código de Barras (
 
 @XendraField(AD_Column_ID="UPC",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=70,SortNo=0,IsSameLine=false,
+DisplayLogic="",DisplayLength=20,IsReadOnly=false,SeqNo=80,SortNo=0,IsSameLine=false,
 IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",Synchronized="2012-03-17 18:47:14.0",
 Identifier="41543b40-a92b-d0f9-fe03-a2e1c10b93a8")
 public static final String FIELDNAME_Product_UPCEAN="41543b40-a92b-d0f9-fe03-a2e1c10b93a8";
@@ -7030,7 +7050,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3a52ba7d-bddd-6d22-ffaa-12f7581986b1",
-Synchronized="2022-05-06 17:51:34.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name UPC */
 public static final String COLUMNNAME_UPC = "UPC";
 /** Set Search Key.
@@ -7175,7 +7195,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,
 ReadOnlyLogic="@ProductType@=R | @ProductType@=E | @ProductType@=O",IsIdentifier=false,SeqNo=0,
 IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",
 IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8136eec6-1db3-f369-a841-e26d1ce019ae",Synchronized="2022-05-06 17:51:34.0")
+Identifier="8136eec6-1db3-f369-a841-e26d1ce019ae",Synchronized="2022-05-18 10:35:09.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Version No.
@@ -7298,7 +7318,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7d2ce56-ba03-644d-7661-1f3b15070ffd",
-Synchronized="2022-05-06 17:51:34.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name VersionNo */
 public static final String COLUMNNAME_VersionNo = "VersionNo";
 /** Set Volume.
@@ -7327,7 +7347,7 @@ public static String es_PE_FIELD_Product_Volume_Description="Volúmen del produc
 
 @XendraField(AD_Column_ID="Volume",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=230,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=250,
 SortNo=0,IsSameLine=true,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="a6164304-70b6-c7d1-3932-9fe7d78650c3")
 public static final String FIELDNAME_Product_Volume="a6164304-70b6-c7d1-3932-9fe7d78650c3";
@@ -7437,7 +7457,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1f05009e-6d76-93d2-2881-3a6bc6cb73af",
-Synchronized="2022-05-06 17:51:34.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name Volume */
 public static final String COLUMNNAME_Volume = "Volume";
 /** Set Weight.
@@ -7466,7 +7486,7 @@ public static String es_PE_FIELD_Product_Weight_Description="Peso del producto";
 
 @XendraField(AD_Column_ID="Weight",IsCentrallyMaintained=true,
 AD_Tab_ID="cda82352-4ccb-b0c6-7307-2c5795eb49f6",AD_FieldGroup_ID="",IsDisplayed=true,
-DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=220,
+DisplayLogic="@IsSummary@='N' & @ProductType@=I",DisplayLength=26,IsReadOnly=false,SeqNo=240,
 SortNo=0,IsSameLine=false,IsHeading=false,IsFieldOnly=false,Included_Tab_ID="",
 Synchronized="2012-03-17 18:47:14.0",Identifier="8da47754-d37b-dd8f-c87e-6e392fecba31")
 public static final String FIELDNAME_Product_Weight="8da47754-d37b-dd8f-c87e-6e392fecba31";
@@ -7576,7 +7596,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="969963cc-5561-dd1c-e8ec-80b6410e10e0",
-Synchronized="2022-05-06 17:51:34.0")
+Synchronized="2022-05-18 10:35:09.0")
 /** Column name Weight */
 public static final String COLUMNNAME_Weight = "Weight";
 /** Set WithholdingType.
@@ -7616,7 +7636,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="9652fd50-9378-4124-9a7a-0dec894c3ef2",Synchronized="2022-05-06 17:51:34.0")
+Identifier="9652fd50-9378-4124-9a7a-0dec894c3ef2",Synchronized="2022-05-18 10:35:09.0")
 /** Column name WithholdingType */
 public static final String COLUMNNAME_WithholdingType = "WithholdingType";
 }
