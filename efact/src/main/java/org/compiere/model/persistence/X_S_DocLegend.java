@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -61,7 +61,7 @@ public static String es_PE_TABLE_S_DocLegend_Name="Doc Sunat Leyenda";
 AD_Plugin_ID="",Description="",Help="",TableName="S_DocLegend",AccessLevel="3",AD_Window_ID="",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="",
-Identifier="f4bd5d90-1e4d-41a6-9e21-cc11de411725",Synchronized="2022-05-23 10:39:57.0")
+Identifier="f4bd5d90-1e4d-41a6-9e21-cc11de411725",Synchronized="2022-08-31 21:46:12.0")
 /** TableName=S_DocLegend */
 public static final String Table_Name="S_DocLegend";
 
@@ -123,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7ea852e3-1d64-4982-8767-033b01e8a9b3",
-Synchronized="2022-05-18 10:57:20.0")
+Synchronized="2022-05-23 10:39:57.0")
 /** Column name Code */
 public static final String COLUMNNAME_Code = "Code";
 /** Set Identifier.
@@ -155,9 +155,39 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5c133e30-cca7-428a-90bb-860a6f4dcfc8",
-Synchronized="2022-05-18 10:57:20.0")
+Synchronized="2022-05-23 10:39:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
+/** Set Legend.
+@param Legend Legend */
+public void setLegend (String Legend)
+{
+if (Legend != null && Legend.length() > 4)
+{
+log.warning("Length > 4 - truncated");
+Legend = Legend.substring(0,3);
+}
+set_Value (COLUMNNAME_Legend, Legend);
+}
+/** Get Legend.
+@return Legend */
+public String getLegend() 
+{
+return (String)get_Value(COLUMNNAME_Legend);
+}
+
+@XendraTrl(Identifier="6a3bc44e-5581-44eb-82e7-996275d044eb")
+public static String es_PE_COLUMN_Legend_Name="legend";
+
+@XendraColumn(AD_Element_ID="4f1a3032-53de-46e1-a3fd-9a2b2bc406fe",ColumnName="Legend",
+AD_Reference_ID=17,AD_Reference_Value_ID="489ccd5a-706a-4a94-a60c-da4cc36c8953",AD_Val_Rule_ID="",
+FieldLength=4,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="6a3bc44e-5581-44eb-82e7-996275d044eb",Synchronized="2022-08-31 21:44:57.0")
+/** Column name Legend */
+public static final String COLUMNNAME_Legend = "Legend";
 /** Set S_DocHeader_ID.
 @param S_DocHeader_ID S_DocHeader_ID */
 public void setS_DocHeader_ID (int S_DocHeader_ID)
@@ -184,7 +214,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0c056ae4-a06b-499e-a15c-53062acf8c2f",
-Synchronized="2022-05-23 10:38:27.0")
+Synchronized="2022-05-23 10:39:57.0")
 /** Column name S_DocHeader_ID */
 public static final String COLUMNNAME_S_DocHeader_ID = "S_DocHeader_ID";
 /** Set Doc Sunat Leyenda.
@@ -228,7 +258,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d9d0d2f4-0481-44d1-a08c-e0021578956b",
-Synchronized="2022-05-18 10:57:20.0")
+Synchronized="2022-05-23 10:39:57.0")
 /** Column name text */
 public static final String COLUMNNAME_text = "text";
 }
