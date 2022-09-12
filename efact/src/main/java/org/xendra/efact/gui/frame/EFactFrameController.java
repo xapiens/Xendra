@@ -48,6 +48,8 @@ public class EFactFrameController extends DockFrameController implements
 		tree.getView().addTreeSelectionListener(this);
 		tree.getView().addMouseListener(new TreeMouseListener());
 		tree.getView().addTreeSelectionListener(propertysheet);
+		tree.getView().addTreeSelectionListener(declared);
+		declared.setTreeController(tree);
 		Security.addProvider(new BouncyCastleProvider());
 		registerDockables();
 		tree.createPopupMenu();

@@ -10,19 +10,23 @@ public class PartnerBean {
 	String receivefilespath;
 	String privatealias;
 	String certificatealias;	
+	String cacertsfile;
+	String cacertspassword;
 	String FtpServer="localhost";
 	String FtpUser;
 	String FtpPort;
 	String FtpPassword;
 	String FtpBase;
+	String Provider;
 	Boolean SendEmail;
 	Boolean SendFTP;
 	Boolean SendPDF;
-	Boolean SendSUNAT;
+	Boolean SendOSE;
 	Boolean SendXML;
 	String Ambiente;
-	String SoapUser;
-	String SoapPassword;
+	String OSEUser;
+	String OSEPassword;
+	String OSEToken;
 	String PDFReportPath;
 	String PDFReportLogo;
 	String MailHost;
@@ -30,7 +34,8 @@ public class PartnerBean {
 	Boolean MailSSL;
 	Boolean MailAuth;
 	String MailUser;
-	String MailPassword; 
+	String MailPassword;
+	Boolean CheckStatus;
 	
 	public String getPassword() {
 		return password;
@@ -79,12 +84,24 @@ public class PartnerBean {
 	}
 	public void setCertificatealias(String certificatealias) {
 		this.certificatealias = certificatealias;
-	}
+	}	
 	public String getPrivatepass() {
 		return privatepass;
 	}
 	public void setPrivatepass(String privatepass) {
 		this.privatepass = privatepass;
+	}	
+	public String getCacertsfile() {
+		return cacertsfile;
+	}
+	public void setCacertsfile(String cacertsfile) {
+		this.cacertsfile = cacertsfile;
+	}
+	public String getCacertspassword() {
+		return cacertspassword;
+	}
+	public void setCacertspassword(String cacertspassword) {
+		this.cacertspassword = cacertspassword;
 	}
 	public String getFtpServer() {
 		return FtpServer;
@@ -109,6 +126,12 @@ public class PartnerBean {
 	}
 	public void setFtpBase(String ftpBase) {
 		FtpBase = ftpBase;
+	}	
+	public String getProvider() {
+		return Provider;
+	}
+	public void setProvider(String provider) {
+		Provider = provider;
 	}
 	public Boolean getSendEmail() {
 		return SendEmail;
@@ -127,12 +150,12 @@ public class PartnerBean {
 	}
 	public void setSendPDF(Boolean sendPDF) {
 		SendPDF = sendPDF;
+	}	
+	public Boolean getSendOSE() {
+		return SendOSE;
 	}
-	public Boolean getSendSUNAT() {
-		return SendSUNAT;
-	}
-	public void setSendSUNAT(Boolean sendSUNAT) {
-		SendSUNAT = sendSUNAT;
+	public void setSendOSE(Boolean sendOSE) {
+		SendOSE = sendOSE;
 	}
 	public Boolean getSendXML() {
 		return SendXML;
@@ -145,18 +168,24 @@ public class PartnerBean {
 	}
 	public void setAmbiente(String ambiente) {
 		Ambiente = ambiente;
+	}	
+	public String getOSEUser() {
+		return OSEUser;
 	}
-	public String getSoapUser() {
-		return SoapUser;
+	public void setOSEUser(String oSEUser) {
+		OSEUser = oSEUser;
 	}
-	public void setSoapUser(String soapUser) {
-		SoapUser = soapUser;
+	public String getOSEPassword() {
+		return OSEPassword;
 	}
-	public String getSoapPassword() {
-		return SoapPassword;
+	public void setOSEPassword(String oSEPassword) {
+		OSEPassword = oSEPassword;
 	}
-	public void setSoapPassword(String soapPassword) {
-		SoapPassword = soapPassword;
+	public String getOSEToken() {
+		return OSEToken;
+	}
+	public void setOSEToken(String oSEToken) {
+		OSEToken = oSEToken;
 	}
 	public String getPDFReportPath() {
 		return PDFReportPath;
@@ -211,5 +240,11 @@ public class PartnerBean {
 	}
 	public void setFtpPort(String ftpPort) {
 		FtpPort = ftpPort;
+	}
+	public Boolean getCheckStatus() {
+		return CheckStatus;
+	}
+	public void setCheckStatus(Boolean checkStatus) {
+		CheckStatus = checkStatus;
 	}	
 }

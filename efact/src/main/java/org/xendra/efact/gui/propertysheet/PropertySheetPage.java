@@ -9,9 +9,12 @@ import java.util.HashMap;
 
 import javax.swing.Icon;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.text.JTextComponent;
 
 import org.compiere.model.MBPartnerCertificate;
 import org.compiere.model.persistence.X_C_BPartner_Certificate;
@@ -20,6 +23,7 @@ import org.xendra.efact.EFactConstants;
 import org.xendra.efact.folder.EFactTreeNode;
 import org.xendra.efact.gui.tree.TreeView;
 
+import com.l2fprod.common.beans.editor.AbstractPropertyEditor;
 import com.l2fprod.common.beans.editor.ComboBoxPropertyEditor;
 import com.l2fprod.common.demo.PropertySheetPage.Bean;
 import com.l2fprod.common.model.DefaultBeanInfoResolver;
@@ -94,7 +98,9 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 					partnerbean = new PartnerBean();
 					DefaultBeanInfoResolver resolver = new DefaultBeanInfoResolver();
 					BeanInfo beanInfo = resolver.getBeanInfo(partnerbean);
-					sheet.setProperties(beanInfo.getPropertyDescriptors());					
+					sheet.setProperties(beanInfo.getPropertyDescriptors());
+					partnerbean.setCacertsfile(pc.get(EFactConstants.CACERTSFILE));
+					partnerbean.setCacertspassword(pc.get(EFactConstants.CACERTSPASSWORD));
 					partnerbean.setPassword(pc.get(EFactConstants.PASSWORD));
 					partnerbean.setAliaskey(pc.get(EFactConstants.ALIASKEY));
 					partnerbean.setFilename(pc.get(EFactConstants.FILENAME));
@@ -103,10 +109,11 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 					partnerbean.setSendfilespath( pc.get(EFactConstants.SENDFILESPATH));
 					partnerbean.setReceivefilespath(pc.get(EFactConstants.RECEIVEFILESPATH));
 					partnerbean.setPrivatealias( pc.get(EFactConstants.PRIVATEALIAS));
+					partnerbean.setProvider(pc.get(EFactConstants.PROVIDER));
 					partnerbean.setSendEmail(pc.getBoolean(EFactConstants.SENDEMAIL));
 					partnerbean.setSendFTP(pc.getBoolean(EFactConstants.SENDFTP));
 					partnerbean.setSendPDF(pc.getBoolean(EFactConstants.SENDPDF));
-					partnerbean.setSendSUNAT(pc.getBoolean(EFactConstants.SENDSUNAT));
+					partnerbean.setSendOSE(pc.getBoolean(EFactConstants.SENDOSE));
 					partnerbean.setSendXML(pc.getBoolean(EFactConstants.SENDXML));
 					partnerbean.setFtpBase(pc.get(EFactConstants.FTPBASE));
 					partnerbean.setFtpUser(pc.get(EFactConstants.FTPUSER));
@@ -122,8 +129,10 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 					partnerbean.setMailAuth(pc.getBoolean(EFactConstants.MAILAUTH));
 					partnerbean.setMailUser(pc.get(EFactConstants.MAILUSER));
 					partnerbean.setMailPassword(pc.get(EFactConstants.MAILPASSWORD));
-					partnerbean.setSoapUser(pc.get(EFactConstants.SOAPUSER));
-					partnerbean.setSoapPassword(pc.get(EFactConstants.SOAPPASSWORD));
+					partnerbean.setOSEUser(pc.get(EFactConstants.OSEUSER));
+					partnerbean.setOSEPassword(pc.get(EFactConstants.OSEPASSWORD));
+					partnerbean.setOSEToken(pc.get(EFactConstants.OSE_TOKEN));
+					partnerbean.setCheckStatus(pc.getBoolean(EFactConstants.CHECKSTATUS));
 					sheet.readFromObject(partnerbean);
 				}				
 			}
@@ -139,5 +148,36 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 			setAvailableIcons(icons);
 		}	
 	}
+
+	public static class OSEEditor extends ComboBoxPropertyEditor {
+		public OSEEditor() {
+			super();
+			setAvailableValues(new String[]{EFactConstants.OSE_EFACT, EFactConstants.OSE_SUNAT});
+			Icon[] icons = new Icon[2];
+			Arrays.fill(icons, UIManager.getIcon("Tree.openIcon"));
+			setAvailableIcons(icons);
+		}
+	}
+	
+	public static class PasswordPropertyEditor extends AbstractPropertyEditor {
+
+		  public PasswordPropertyEditor() {
+		    editor = new JPasswordField();
+		    ((JPasswordField)editor).setBorder(LookAndFeelTweaks.EMPTY_BORDER);
+		  }
+		  
+		  public Object getValue() {
+		    return ((JTextComponent)editor).getText();
+		  }
+		  
+		  public void setValue(Object value) {
+		    if (value == null) {
+		      ((JTextComponent)editor).setText("");
+		    } else {
+		      ((JTextComponent)editor).setText(String.valueOf(value));
+		    }
+		  }
+		  
+		}
 
 }
