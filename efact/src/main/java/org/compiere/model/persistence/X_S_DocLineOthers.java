@@ -58,18 +58,18 @@ public static int Table_ID=MTable.getTable_ID("S_DocLineOthers");
 public static String es_PE_TABLE_S_DocLineOthers_Name="dd";
 
 @XendraTable(Name="Sunat Otros Documento",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
-AD_Plugin_ID="",Description="",Help="",TableName="S_DocLineOthers",AccessLevel="4",AD_Window_ID="",
+AD_Plugin_ID="",Description="",Help="",TableName="S_DocLineOthers",AccessLevel="6",AD_Window_ID="",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="",
-Identifier="a977f802-0246-439e-b5c7-ad8af576b3b0",Synchronized="2022-08-23 18:58:43.0")
+Identifier="a977f802-0246-439e-b5c7-ad8af576b3b0",Synchronized="2022-09-14 10:14:24.0")
 /** TableName=S_DocLineOthers */
 public static final String Table_Name="S_DocLineOthers";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"S_DocLineOthers");
 
-protected BigDecimal accessLevel = BigDecimal.valueOf(4);
+protected BigDecimal accessLevel = BigDecimal.valueOf(6);
 /** AccessLevel
-@return 4 - System 
+@return 6 - System - Client 
 */
 protected int get_AccessLevel()
 {
@@ -123,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d671e68b-4fd1-4460-97ae-4a8a60b127da",
-Synchronized="2022-08-23 18:56:54.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name AttributeName */
 public static final String COLUMNNAME_AttributeName = "AttributeName";
 /** Set Attribute Value.
@@ -155,7 +155,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cf49a6f9-264a-4d8b-9380-dfab36907717",
-Synchronized="2022-08-23 18:56:54.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name AttributeValue */
 public static final String COLUMNNAME_AttributeValue = "AttributeValue";
 /** Set aux_cayman_01.
@@ -187,7 +187,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8dcd2c59-d3cd-4235-b223-147546f56992",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name aux_cayman_01 */
 public static final String COLUMNNAME_aux_cayman_01 = "aux_cayman_01";
 /** Set aux_cayman_02.
@@ -219,7 +219,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dd942357-a53b-47f1-9f34-2b8ec092b8a0",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name aux_cayman_02 */
 public static final String COLUMNNAME_aux_cayman_02 = "aux_cayman_02";
 /** Set chasis.
@@ -251,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c8331a5d-0164-4fbe-a22e-903c3f0c8841",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name chasis */
 public static final String COLUMNNAME_chasis = "chasis";
 /** Set color.
@@ -283,7 +283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="06ece08c-ac60-4bfb-bb18-4dfbc0e85c73",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name color */
 public static final String COLUMNNAME_color = "color";
 /** Set destino.
@@ -315,7 +315,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8983746f-6e77-4b0c-bb3e-8915475baa6d",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name destino */
 public static final String COLUMNNAME_destino = "destino";
 /** Set fabricacion.
@@ -347,7 +347,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c63b9aa8-d558-49f7-afc6-b966389fdbfe",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name fabricacion */
 public static final String COLUMNNAME_fabricacion = "fabricacion";
 /** Set fecha_hora.
@@ -379,7 +379,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4b1f5645-9250-4ba9-989d-5aec0a3d17a7",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name fecha_hora */
 public static final String COLUMNNAME_fecha_hora = "fecha_hora";
 /** Set Identifier.
@@ -411,7 +411,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5244113f-c5f8-4f61-ad6b-ac6e97dd3b2b",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set marca.
@@ -443,7 +443,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d0025f64-a2d5-4438-a9bf-c6ced94fc1be",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name marca */
 public static final String COLUMNNAME_marca = "marca";
 /** Set modelo.
@@ -475,7 +475,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="08975f68-8bf8-4918-a564-146856bc4e08",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name modelo */
 public static final String COLUMNNAME_modelo = "modelo";
 /** Set modelo_periodo.
@@ -507,7 +507,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b1fc881f-b676-4a7b-abec-1b43eac57aff",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name modelo_periodo */
 public static final String COLUMNNAME_modelo_periodo = "modelo_periodo";
 /** Set motor.
@@ -539,7 +539,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a94c20a6-5c29-4e3c-9232-63c1ad64a303",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name motor */
 public static final String COLUMNNAME_motor = "motor";
 /** Set nro_dua.
@@ -571,7 +571,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="95e69832-3c72-4b20-8910-40b92a9ae970",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name nro_dua */
 public static final String COLUMNNAME_nro_dua = "nro_dua";
 /** Set origen.
@@ -603,7 +603,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4169b536-0245-4901-8dcd-c5b89be765cc",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name origen */
 public static final String COLUMNNAME_origen = "origen";
 /** Set S_DocHeader_ID.
@@ -632,7 +632,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ae823899-eb4c-4801-a9c1-c7e07c95e613",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name S_DocHeader_ID */
 public static final String COLUMNNAME_S_DocHeader_ID = "S_DocHeader_ID";
 /** Set Sunat Linea Documento.
@@ -661,7 +661,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="43e91587-2474-41b1-812f-96ae8f77bdf7",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name S_DocLine_ID */
 public static final String COLUMNNAME_S_DocLine_ID = "S_DocLine_ID";
 /** Set Sunat Otros Documento.
@@ -710,7 +710,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5e827225-d1ba-44c0-bb1d-4bb9273d54ec",
-Synchronized="2022-05-23 10:39:29.0")
+Synchronized="2022-08-23 18:58:43.0")
 /** Column name serie_dua */
 public static final String COLUMNNAME_serie_dua = "serie_dua";
 }

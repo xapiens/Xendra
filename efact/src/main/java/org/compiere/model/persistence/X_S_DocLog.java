@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -60,18 +60,18 @@ public static int Table_ID=MTable.getTable_ID("S_DocLog");
 public static String es_PE_TABLE_S_DocLog_Name="Doc Sunat Log ";
 
 @XendraTable(Name="Doc Sunat Log ",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
-AD_Plugin_ID="",Description="",Help="",TableName="S_DocLog",AccessLevel="3",AD_Window_ID="",
+AD_Plugin_ID="",Description="",Help="",TableName="S_DocLog",AccessLevel="6",AD_Window_ID="",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="",
-Identifier="2c04ab6b-6f6f-4af6-82ef-00933c5cff4f",Synchronized="2022-04-27 11:44:27.0")
+Identifier="2c04ab6b-6f6f-4af6-82ef-00933c5cff4f",Synchronized="2022-09-14 10:19:29.0")
 /** TableName=S_DocLog */
 public static final String Table_Name="S_DocLog";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"S_DocLog");
 
-protected BigDecimal accessLevel = BigDecimal.valueOf(3);
+protected BigDecimal accessLevel = BigDecimal.valueOf(6);
 /** AccessLevel
-@return 3 - Client - Org 
+@return 6 - System - Client 
 */
 protected int get_AccessLevel()
 {
@@ -125,7 +125,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="823284a3-2fd8-4919-ab10-6559e41172d3",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name cdr_code */
 public static final String COLUMNNAME_cdr_code = "cdr_code";
 /** Set CDR_Nota.
@@ -152,7 +152,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3be5e625-9a3d-4ee3-ab0c-7af3fda7c6d7",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name CDR_Nota */
 public static final String COLUMNNAME_CDR_Nota = "CDR_Nota";
 /** Set cdr_observacion.
@@ -179,7 +179,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4f2cf3aa-5d9e-4ad5-bdbc-722e6acd6613",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name cdr_observacion */
 public static final String COLUMNNAME_cdr_observacion = "cdr_observacion";
 /** Set Identifier.
@@ -211,7 +211,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4609ef85-522f-41d9-a39b-e3553de88b31",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set S_DocHeader_ID.
@@ -239,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="33ed4c22-2b1d-434e-a4ec-3b609bd80549",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name S_DocHeader_ID */
 public static final String COLUMNNAME_S_DocHeader_ID = "S_DocHeader_ID";
 /** Set Doc Sunat Log .
@@ -281,7 +281,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2f8529ff-86c1-41b6-afcc-280a35769a3d",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name StatusDate */
 public static final String COLUMNNAME_StatusDate = "StatusDate";
 /** Set Task Status.
@@ -314,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="66a64c43-a0c8-4b44-99ce-518675960daa",
-Synchronized="2022-04-27 11:43:30.0")
+Synchronized="2022-05-18 10:57:21.0")
 /** Column name TaskStatus */
 public static final String COLUMNNAME_TaskStatus = "TaskStatus";
 }

@@ -58,18 +58,18 @@ public static int Table_ID=MTable.getTable_ID("S_DocAdvance");
 public static String es_PE_TABLE_S_DocAdvance_Name="Doc Adelanto Sunat";
 
 @XendraTable(Name="Doc Adelanto Sunat",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
-AD_Plugin_ID="",Description="",Help="",TableName="S_DocAdvance",AccessLevel="3",AD_Window_ID="",
+AD_Plugin_ID="",Description="",Help="",TableName="S_DocAdvance",AccessLevel="6",AD_Window_ID="",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="",
-Identifier="bf780937-4ba0-49ce-a01f-c5c1122810ad",Synchronized="2022-08-25 22:00:00.0")
+Identifier="bf780937-4ba0-49ce-a01f-c5c1122810ad",Synchronized="2022-09-14 10:12:36.0")
 /** TableName=S_DocAdvance */
 public static final String Table_Name="S_DocAdvance";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"S_DocAdvance");
 
-protected BigDecimal accessLevel = BigDecimal.valueOf(3);
+protected BigDecimal accessLevel = BigDecimal.valueOf(6);
 /** AccessLevel
-@return 3 - Client - Org 
+@return 6 - System - Client 
 */
 protected int get_AccessLevel()
 {
@@ -118,7 +118,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e68fee55-2463-49b1-ae99-d1826a3da5bd",
-Synchronized="2022-08-25 20:15:40.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name Amount */
 public static final String COLUMNNAME_Amount = "Amount";
 /** Set Currency.
@@ -147,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a6b8735b-05ba-425f-8988-3115379b0dc1",
-Synchronized="2022-08-25 20:15:40.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name C_Currency_ID */
 public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
 /** Set C_InvoiceAdvance.
@@ -176,7 +176,7 @@ FieldLength=10,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b5ee9529-8345-4720-851e-ed7f30603276",Synchronized="2022-08-25 20:15:40.0")
+Identifier="b5ee9529-8345-4720-851e-ed7f30603276",Synchronized="2022-08-25 21:59:59.0")
 /** Column name C_InvoiceAdvance_ID */
 public static final String COLUMNNAME_C_InvoiceAdvance_ID = "C_InvoiceAdvance_ID";
 /** Set Account Date.
@@ -201,7 +201,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c78d5b91-6750-4cf8-8adf-e3825ec584e7",
-Synchronized="2022-08-25 21:59:02.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 /** Set docu_anticipo_docu_numero.
@@ -233,7 +233,7 @@ AD_Val_Rule_ID="",FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b6b0c918-c531-4afa-8abe-c4086ee6252f",Synchronized="2022-08-25 20:15:40.0")
+Identifier="b6b0c918-c531-4afa-8abe-c4086ee6252f",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_docu_numero */
 public static final String COLUMNNAME_docu_anticipo_docu_numero = "docu_anticipo_docu_numero";
 /** Set docu_anticipo_docu_tipo.
@@ -265,7 +265,7 @@ FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="b13839b2-d185-438f-80f2-bb8f384416c1",Synchronized="2022-08-25 20:15:40.0")
+Identifier="b13839b2-d185-438f-80f2-bb8f384416c1",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_docu_tipo */
 public static final String COLUMNNAME_docu_anticipo_docu_tipo = "docu_anticipo_docu_tipo";
 /** Set docu_anticipo_fecha_emi.
@@ -297,7 +297,7 @@ FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="7ad0c155-75e8-4a08-8e70-f341249476a3",Synchronized="2022-08-25 20:15:40.0")
+Identifier="7ad0c155-75e8-4a08-8e70-f341249476a3",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_fecha_emi */
 public static final String COLUMNNAME_docu_anticipo_fecha_emi = "docu_anticipo_fecha_emi";
 /** Set docu_anticipo_hora_emi.
@@ -329,7 +329,7 @@ FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="8b3301ca-3953-483f-92bc-725dc381ebf0",Synchronized="2022-08-25 20:15:40.0")
+Identifier="8b3301ca-3953-483f-92bc-725dc381ebf0",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_hora_emi */
 public static final String COLUMNNAME_docu_anticipo_hora_emi = "docu_anticipo_hora_emi";
 /** Set docu_anticipo_numero_docu_emi.
@@ -361,7 +361,7 @@ AD_Val_Rule_ID="",FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6fd5f565-14d6-4d9f-9706-34a1c504471a",Synchronized="2022-08-25 20:15:40.0")
+Identifier="6fd5f565-14d6-4d9f-9706-34a1c504471a",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_numero_docu_emi */
 public static final String COLUMNNAME_docu_anticipo_numero_docu_emi = "docu_anticipo_numero_docu_emi";
 /** Set docu_anticipo_prepago.
@@ -393,7 +393,7 @@ FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="ae6fbd74-1ae5-4572-bbdc-83479be82eff",Synchronized="2022-08-25 20:15:40.0")
+Identifier="ae6fbd74-1ae5-4572-bbdc-83479be82eff",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_prepago */
 public static final String COLUMNNAME_docu_anticipo_prepago = "docu_anticipo_prepago";
 /** Set docu_anticipo_tipo_docu_emi.
@@ -425,7 +425,7 @@ AD_Val_Rule_ID="",FieldLength=45,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="89813d72-b10f-4366-be92-b15bdfd0b796",Synchronized="2022-08-25 20:15:40.0")
+Identifier="89813d72-b10f-4366-be92-b15bdfd0b796",Synchronized="2022-08-25 21:59:59.0")
 /** Column name docu_anticipo_tipo_docu_emi */
 public static final String COLUMNNAME_docu_anticipo_tipo_docu_emi = "docu_anticipo_tipo_docu_emi";
 /** Set Document No.
@@ -457,7 +457,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="dd3414a5-2dd2-4d33-ad4e-a1adc5de97b3",
-Synchronized="2022-08-25 20:15:40.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name DocumentNo */
 public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 /** Set Identifier.
@@ -489,7 +489,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="67803ca1-8d83-4a89-b83e-02bc34aeb692",
-Synchronized="2022-08-25 20:15:41.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set SchemeID.
@@ -521,7 +521,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0a99cb37-30ab-49c0-b076-df865cbd04c7",
-Synchronized="2022-08-25 20:15:41.0")
+Synchronized="2022-08-25 21:59:59.0")
 /** Column name SchemeID */
 public static final String COLUMNNAME_SchemeID = "SchemeID";
 /** Set Doc Adelanto Sunat.
@@ -567,7 +567,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="cee48d46-56cc-4ad0-ab85-1cbf0ae8d1db",
-Synchronized="2022-08-25 20:15:41.0")
+Synchronized="2022-08-25 22:00:00.0")
 /** Column name S_DocHeader_ID */
 public static final String COLUMNNAME_S_DocHeader_ID = "S_DocHeader_ID";
 }

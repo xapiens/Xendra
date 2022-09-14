@@ -60,18 +60,18 @@ public static int Table_ID=MTable.getTable_ID("S_Error_Codes");
 public static String es_PE_TABLE_S_Error_Codes_Name="Sunat Error Codes";
 
 @XendraTable(Name="Sunat Error Codes",AD_Package_ID="2ac04657-d663-47c2-4ec1-927ad71f1e96",
-AD_Plugin_ID="",Description="",Help="",TableName="S_Error_Codes",AccessLevel="4",AD_Window_ID="",
+AD_Plugin_ID="",Description="",Help="",TableName="S_Error_Codes",AccessLevel="6",AD_Window_ID="",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="",
-Identifier="76bfa3fd-0778-4c11-a914-848d16d87c8f",Synchronized="2022-06-09 16:49:33.0")
+Identifier="76bfa3fd-0778-4c11-a914-848d16d87c8f",Synchronized="2022-09-14 10:20:57.0")
 /** TableName=S_Error_Codes */
 public static final String Table_Name="S_Error_Codes";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"S_Error_Codes");
 
-protected BigDecimal accessLevel = BigDecimal.valueOf(4);
+protected BigDecimal accessLevel = BigDecimal.valueOf(6);
 /** AccessLevel
-@return 4 - System 
+@return 6 - System - Client 
 */
 protected int get_AccessLevel()
 {
@@ -121,7 +121,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="93d7bedd-5660-43ea-93a9-669a8e8d9925",
-Synchronized="2022-06-09 16:23:48.0")
+Synchronized="2022-06-09 16:49:33.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Identifier.
@@ -153,7 +153,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="56618e11-17f4-47d4-8284-ecbc95dd215e",
-Synchronized="2022-06-09 16:48:40.0")
+Synchronized="2022-06-09 16:49:33.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Sunat Error Codes.
@@ -203,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6cfc69b3-d8e3-4b55-8d13-df52787daca5",
-Synchronized="2022-06-09 16:23:49.0")
+Synchronized="2022-06-09 16:49:33.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }
