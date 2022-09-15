@@ -16,6 +16,7 @@ import org.compiere.model.MBankAccount;
 import org.compiere.model.MCity;
 import org.compiere.model.MCountry;
 import org.compiere.model.MCurrency;
+import org.compiere.model.MDocHeader;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
@@ -165,14 +166,11 @@ public class MigrateEInvoice  extends SvrProcess {
 				List<MInvoice> invoices = new Query(Env.getCtx(), MInvoice.Table_Name, "C_DocType_ID = ? AND C_INVOICE_ID NOT IN (SELECT C_INVOICE_ID FROM S_DOCHEADER)", null)
 						.setParameters(dt.getC_DocType_ID()).setLimit(1000).list();
 				for (MInvoice invoice:invoices) {
-					X_S_DocHeader header = new Query(Env.getCtx(), X_S_DocHeader.Table_Name, "C_Invoice_ID = ? AND Processed = 'N' AND Processing = 'N'", null)
+					MDocHeader header = new Query(Env.getCtx(), MDocHeader.Table_Name, "C_Invoice_ID = ? AND Processed = 'N' AND Processing = 'N'", null)
 							.setParameters(invoice.getC_Invoice_ID()).first();
 					if (header == null) {
-						header = new X_S_DocHeader(Env.getCtx(), 0, null);
-						header.setC_Invoice_ID(invoice.getC_Invoice_ID());
-						header.setC_BPartner_ID(invoice.getC_BPartner_ID());						
-						header.setInvoiceOperationTypeCode(invoice.getInvoiceOperationTypeCode());					
-						header.setC_BPartner_Location_ID(invoice.getC_BPartner_Location_ID());
+						header = new MDocHeader(Env.getCtx(), 0, null);
+						header.setInvoice(invoice);
 						//
 						MBPartner partner = new Query(Env.getCtx(), MBPartner.Table_Name, "C_BPartner_ID = ?", null)
 								.setParameters(invoice.getC_BPartner_ID()).first();
@@ -215,9 +213,6 @@ public class MigrateEInvoice  extends SvrProcess {
 						header.setPartnerName(partner.getName());
 						header.setPartnerTaxID(partner.getValue());
 						//
-						header.setC_Currency_ID(invoice.getC_Currency_ID());
-						header.setC_DocType_ID(invoice.getC_DocType_ID());
-						header.setDateInvoiced(invoice.getDateInvoiced());
 						header.setTaxID(taxdoc.getTaxID());
 						header.setdoc_descuento(BigDecimal.ZERO);
 						header.setdoc_exonerada(BigDecimal.ZERO);
@@ -228,13 +223,10 @@ public class MigrateEInvoice  extends SvrProcess {
 						header.setdoc_otroscargos(BigDecimal.ZERO);
 						header.setdoc_otrostributos(BigDecimal.ZERO);
 						header.setdoc_percepcion(BigDecimal.ZERO);
-						header.setdoc_subtotal(BigDecimal.ZERO);							
-						header.setGrandTotal(invoice.getGrandTotal());
+						header.setdoc_subtotal(BigDecimal.ZERO);
 						//
 						//header.setdoc_tipo_operacion(invoice.getAdditionalInformation());
-						header.setAdditionalInformation(invoice.getAdditionalInformation());
 						header.setdocu_isc(BigDecimal.ZERO);
-						header.setSerial(invoice.getSerial());
 						String InvDocumentNo = Util.pad(invoice.getDocumentNo(), 8, Formatter.FIELDALIGNMENTTYPE_TrailingRight, '0');
 						String letter = "";
 						switch (taxdoc.getTaxID()) {

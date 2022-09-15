@@ -357,6 +357,10 @@ public abstract class EFactDocument {
 				JsonNode rootNodeResponse = mapper.readTree(jsonResponse);
 				ticket = rootNodeResponse.path("description").asText();
 				System.out.println("TICKET" + ticket);
+			} else {
+				HttpEntity entity1 = response.getEntity();
+				String jsonResponse = entity1 != null ? EntityUtils.toString(entity1) : null;
+				System.out.println("X");
 			}
 			
 			// 

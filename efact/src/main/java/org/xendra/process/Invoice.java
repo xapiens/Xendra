@@ -117,13 +117,13 @@ public class Invoice extends EFactDocument {
 			//doc.appendChild(doc.createComment(" Postamble "));
 
 			//padre
-			Element UBLExtensions = doc.createElementNS("", "ext:UBLExtensions");
-			envelope.appendChild(UBLExtensions);
+			//Element UBLExtensions = doc.createElementNS("", "ext:UBLExtensions");
+			//envelope.appendChild(UBLExtensions);
 			//1 grupo
-			Element UBLExtension = doc.createElementNS("", "ext:UBLExtension");
-			envelope.appendChild(UBLExtension);
-			Element ExtensionContent = doc.createElementNS("", "ext:ExtensionContent");
-			envelope.appendChild(ExtensionContent);
+			//Element UBLExtension = doc.createElementNS("", "ext:UBLExtension");
+			//envelope.appendChild(UBLExtension);
+			//Element ExtensionContent = doc.createElementNS("", "ext:ExtensionContent");
+			//envelope.appendChild(ExtensionContent);
 
 
 			//El baseURI es la URI que se utiliza para anteponer a URIs relativos
@@ -132,9 +132,9 @@ public class Invoice extends EFactDocument {
 			//XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA); Cadena URI que se ajusta a la sintaxis URI y representa el archivo XML de entrada
 			XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA);
 
-			ExtensionContent.appendChild(sig.getElement());
-			UBLExtension.appendChild(ExtensionContent);
-			UBLExtensions.appendChild(UBLExtension);
+			//ExtensionContent.appendChild(sig.getElement());
+			//UBLExtension.appendChild(ExtensionContent);
+			//UBLExtensions.appendChild(UBLExtension);
 
 			//bloque1
 			Element UBLVersionID = doc.createElementNS("", "cbc:UBLVersionID");

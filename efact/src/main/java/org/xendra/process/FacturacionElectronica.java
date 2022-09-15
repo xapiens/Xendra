@@ -1,46 +1,20 @@
 package org.xendra.process;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 import java.util.logging.Level;
-import java.util.zip.ZipFile;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
-import org.apache.tools.zip.ZipEntry;
-import org.apache.xml.security.signature.XMLSignature;
-import org.apache.xml.security.transforms.Transforms;
-import org.apache.xml.security.utils.Constants;
-import org.apache.xml.security.utils.ElementProxy;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MBPartnerCertificate;
-import org.compiere.model.MBPartnerLocation;
-import org.compiere.model.MCurrency;
-import org.compiere.model.MDocLog;
 import org.compiere.model.MDocType;
-import org.compiere.model.MErrorCodes;
-import org.compiere.model.MOrgInfo;
-import org.compiere.model.MProduct;
-import org.compiere.model.MTax;
-import org.compiere.model.MUOM;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfo;
 import org.compiere.process.ProcessInfoParameter;
@@ -50,28 +24,13 @@ import org.compiere.util.Env;
 import org.compiere.util.Ini;
 import org.compiere.util.Language;
 import org.compiere.util.SecureEngine;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Element;
 import org.xendra.annotations.XendraProcess;
 import org.xendra.annotations.XendraProcessParameter;
 import org.xendra.annotations.XendraScheduler;
-import org.compiere.model.persistence.X_C_BP_DocType;
 import org.compiere.model.persistence.X_C_BPartner;
 import org.compiere.model.persistence.X_C_BPartner_Certificate;
 import org.compiere.model.persistence.X_C_DocumentTax;
-import org.compiere.model.persistence.X_S_DocAdvance;
 import org.compiere.model.persistence.X_S_DocHeader;
-import org.compiere.model.persistence.X_S_DocLegend;
-import org.compiere.model.persistence.X_S_DocLine;
-import org.compiere.model.persistence.X_S_DocLineOthers;
-import org.compiere.model.reference.REF_ECE_5153;
-import org.compiere.model.reference.REF_ECE_5305;
-import org.compiere.model.reference.REF_PriceTypeCode;
-import org.compiere.model.reference.REF_TaxTypeCode;
-import org.xendra.efact.process.GeneralFunctions;
-import org.xendra.efact.util.LecturaXML;
-import org.xendra.efact.util.Tools;
-import org.xendra.efact.xml.HeaderHandlerResolver;
 import org.xendra.efact.EFactConstants;
 
 @XendraProcess(value="FacturacionElectronica",
@@ -83,9 +42,6 @@ classname="org.xendra.process.FacturacionElectronica",
 updated="2022-05-13 10:05:12")
 @XendraScheduler(frequencytype="M",frequency="2",keeplogdays="7",frequencystartat="", name="FacturacionElectronica",type="A", tag="")
 public class FacturacionElectronica extends SvrProcess {
-
-	private String m_entrypoint;
-	private String m_agenda;
 
 	@XendraProcessParameter(Name="Business Partner",	
 			ColumnName=X_C_BPartner.COLUMNNAME_C_BPartner_ID,
