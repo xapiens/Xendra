@@ -4279,6 +4279,18 @@ public class PosPanel extends CFrame implements Point, Observer, FormPanel, Acti
 		return isover;
 	}
 
+	public Row[] getRows() {
+		List<Row> rows = new ArrayList<Row>();
+		ObjectViewModel adapter = view.getDataModel();
+		for (int j = 0; j < adapter.getRowCount(); j++) {
+			Row row = (Row) adapter.getRowObject(j);
+			rows.add(row);
+		}
+		Row[] xx = new Row[rows.size()];
+		rows.toArray(xx);
+		return xx;				
+	}
+	
 	public synchronized void calculateTotalLines() {
 		// to the next update
 		//executerules(null, "total");		
