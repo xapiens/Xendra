@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.security.PrivateKey;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -36,7 +37,6 @@ import org.compiere.model.persistence.X_S_DocLine;
 import org.compiere.model.persistence.X_S_DocLineOthers;
 import org.compiere.model.persistence.X_c_province;
 import org.compiere.model.reference.REF_PriceTypeCode;
-import org.compiere.model.reference.REF_TaxTypeCode;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.w3c.dom.CDATASection;
@@ -79,7 +79,7 @@ public class Boleta extends EFactDocument {
 
 	private void createPartyRegistrationAddress(Document doc, Element PartySupplier) throws Exception {
 		Element PartyLegalEntity 		 = getDoc().createElement("cac:PartyLegalEntity");
-		Element PartyRegistrationName 	 = getDoc().createElement("cac:RegistrationName");
+		Element PartyRegistrationName 	 = getDoc().createElement("cbc:RegistrationName");
 		PartyRegistrationName.appendChild(getDoc().createTextNode("EFACT SAC"));
 		Element PartyRegistrationAddress = getDoc().createElement("cac:RegistrationAddress");
 		Element Ubigeo = getDoc().createElement("cbc:ID");
@@ -88,6 +88,12 @@ public class Boleta extends EFactDocument {
 		Ubigeo.appendChild(getDoc().createTextNode(city.getLocode()));
 		PartyRegistrationAddress.appendChild(Ubigeo);//se anade al grupo partyname1
 
+		Element AddressTypeCode = getDoc().createElement("cbc:AddressTypeCode");
+		AddressTypeCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
+		AddressTypeCode.setAttributeNS(null, listName, "Establecimientos anexos");
+		AddressTypeCode.appendChild(getDoc().createTextNode("0000"));
+		PartyRegistrationAddress.appendChild(AddressTypeCode);
+		
 		Element CitySubDivision = getDoc().createElement("cbc:CitySubdivisionName");
 		CitySubDivision.appendChild(getDoc().createTextNode(""));
 		PartyRegistrationAddress.appendChild(CitySubDivision);
@@ -117,11 +123,6 @@ public class Boleta extends EFactDocument {
 		IdentificationCode.appendChild(getDoc().createTextNode("PE"));
 		Country.appendChild(IdentificationCode);
 
-		Element AddressTypeCode = getDoc().createElement("cbc:AddressTypeCode");
-		AddressTypeCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
-		AddressTypeCode.setAttributeNS(null, listName, "Establecimientos anexos");
-		AddressTypeCode.appendChild(getDoc().createTextNode("0000"));
-		PartyRegistrationAddress.appendChild(AddressTypeCode);
 		PartyLegalEntity.appendChild(PartyRegistrationName);
 		PartyLegalEntity.appendChild(PartyRegistrationAddress);								
 		PartySupplier.appendChild(PartyLegalEntity);		
@@ -249,7 +250,7 @@ public class Boleta extends EFactDocument {
 			invoice.setAttributeNS(Constants.NamespaceSpecNS, "xmlns:cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 			invoice.setAttributeNS(Constants.NamespaceSpecNS, "xmlns:cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
 			invoice.setAttributeNS(Constants.NamespaceSpecNS, "xmlns:ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
-			invoice.appendChild(getDoc().createTextNode("\n"));
+//			invoice.appendChild(getDoc().createTextNode("\n"));
 			getDoc().appendChild(invoice);
 
 			// pago cero por anticipos
@@ -257,7 +258,7 @@ public class Boleta extends EFactDocument {
 				if ("000".equals(anticipoCero1001.concat(anticipoCero1002).concat(anticipoCero1003))) {
 					Element AdditionalMonetaryTotal1 = getDoc().createElement("sac:AdditionalMonetaryTotal");
 					invoice.appendChild(AdditionalMonetaryTotal1);
-					AdditionalMonetaryTotal1.appendChild(getDoc().createTextNode("\n"));
+					//AdditionalMonetaryTotal1.appendChild(getDoc().createTextNode("\n"));
 
 					Element ID1 = getDoc().createElement("cbc:ID");
 					invoice.appendChild(ID1);
@@ -276,26 +277,20 @@ public class Boleta extends EFactDocument {
 
 					Element AdditionalMonetaryTotal2 = getDoc().createElement("sac:AdditionalMonetaryTotal");
 					invoice.appendChild(AdditionalMonetaryTotal2);
-					AdditionalMonetaryTotal2.appendChild(getDoc().createTextNode("\n"));
+					//AdditionalMonetaryTotal2.appendChild(getDoc().createTextNode("\n"));
 
 					Element ID2 = getDoc().createElement("cbc:ID");
 					invoice.appendChild(ID2);
 					ID2.appendChild(getDoc().createTextNode("1002"));
 
 					Element PayableAmount2 = getDoc().createElement("cbc:PayableAmount");
-					//PayableAmount2.setAttributeNS(null, "currencyID", items.getDocu_moneda().trim());
 					PayableAmount2.setAttributeNS(null, currencyID, currency.getISO_Code());
 					PayableAmount2.setIdAttributeNS(null, currencyID, true);
 					invoice.appendChild(PayableAmount2);
 					PayableAmount2.appendChild(getDoc().createTextNode("0.00"));
 
-					//AdditionalInformation.appendChild(AdditionalMonetaryTotal2);
-					//AdditionalMonetaryTotal2.appendChild(ID2);
-					//AdditionalMonetaryTotal2.appendChild(PayableAmount2);
-
 					Element AdditionalMonetaryTotal3 = getDoc().createElement("sac:AdditionalMonetaryTotal");
 					invoice.appendChild(AdditionalMonetaryTotal3);
-					AdditionalMonetaryTotal3.appendChild(getDoc().createTextNode("\n"));
 
 					Element ID3 = getDoc().createElement("cbc:ID");
 					invoice.appendChild(ID3);
@@ -312,7 +307,6 @@ public class Boleta extends EFactDocument {
 			if (items.getDiscount().compareTo(BigDecimal.ZERO) > 0) {
 				Element AdditionalMonetaryTotal5 = getDoc().createElement("sac:AdditionalMonetaryTotal");
 				invoice.appendChild(AdditionalMonetaryTotal5);
-				AdditionalMonetaryTotal5.appendChild(getDoc().createTextNode("\n"));
 
 				Element ID10 = getDoc().createElement("cbc:ID");
 				invoice.appendChild(ID10);
@@ -330,7 +324,6 @@ public class Boleta extends EFactDocument {
 			if (items.getAdditionalInformation().length() > 0) {
 				Element sUNATTransaction = getDoc().createElement("sac:SUNATTransaction");
 				invoice.appendChild(sUNATTransaction);
-				sUNATTransaction.appendChild(getDoc().createTextNode("\n"));
 				Element ID = getDoc().createElement("cbc:ID");
 				invoice.appendChild(ID);
 				ID.appendChild(getDoc().createTextNode(items.getAdditionalInformation().trim()));
@@ -343,7 +336,6 @@ public class Boleta extends EFactDocument {
 				for (X_S_DocLineOthers detalleotro : otrosdetalles) {
 					Element DatoAdicional = getDoc().createElement("DatoAdicional");
 					invoice.appendChild(DatoAdicional);
-					DatoAdicional.appendChild(getDoc().createTextNode("\n"));
 
 					Element Codigo = getDoc().createElement("Codigo");
 					invoice.appendChild(Codigo);
@@ -405,11 +397,10 @@ public class Boleta extends EFactDocument {
 			// 13 Tipo y numero de RUC del emisor
 			Element AccountingSupplierParty = getDoc().createElement("cac:AccountingSupplierParty");
 			invoice.appendChild(AccountingSupplierParty);
-			AccountingSupplierParty.appendChild(getDoc().createTextNode("\n"));
 
+			
 			Element Party = getDoc().createElement("cac:Party");
 			AccountingSupplierParty.appendChild(Party);
-			Party.appendChild(getDoc().createTextNode("\n"));
 
 			Element PartyIdentificationSupplier = getDoc().createElement("cac:PartyIdentification");
 
@@ -420,7 +411,8 @@ public class Boleta extends EFactDocument {
 			SupplierId.setAttributeNS(null, schemeURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06");
 			SupplierId.appendChild(getDoc().createTextNode(m_bp.getTaxID()));
 			PartyIdentificationSupplier.appendChild(SupplierId);
-			AccountingSupplierParty.appendChild(PartyIdentificationSupplier);
+			Party.appendChild(PartyIdentificationSupplier);
+
 			
 			// 14 Nombre comercial emisor
 
@@ -455,7 +447,7 @@ public class Boleta extends EFactDocument {
 			for (X_S_DocAdvance listaAnt : anticipos) {
 				Element PrepaidPayment = getDoc().createElement("cac:PrepaidPayment");
 				invoice.appendChild(PrepaidPayment);
-				PrepaidPayment.appendChild(getDoc().createTextNode("\n"));
+				//PrepaidPayment.appendChild(getDoc().createTextNode("\n"));
 
 				Element IDant = getDoc().createElement("cbc:ID");
 				IDant.setAttributeNS(null, schemeID, listaAnt.getSchemeID().trim());
@@ -493,7 +485,6 @@ public class Boleta extends EFactDocument {
 
 				Element TaxTotal = getDoc().createElement("cac:TaxTotal");
 				invoice.appendChild(TaxTotal);				
-				TaxTotal.appendChild(getDoc().createTextNode("\n"));
 
 				Element TaxAmount = getDoc().createElement("cbc:TaxAmount");
 				TaxAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
@@ -503,11 +494,10 @@ public class Boleta extends EFactDocument {
 
 				Element TaxSubtotal = getDoc().createElement("cac:TaxSubtotal");
 				TaxTotal.appendChild(TaxSubtotal);//se anade al grupo TaxTotal
-				TaxSubtotal.appendChild(getDoc().createTextNode("\n"));
 				
 				Element TaxableAmount = getDoc().createElement("cbc:TaxableAmount");
 				TaxableAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
-				TaxableAmount.appendChild(getDoc().createTextNode(items.getTaxBaseAmt().toString()));
+				TaxableAmount.appendChild(getDoc().createTextNode(items.getTaxBaseAmt().setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
 				TaxSubtotal.appendChild(TaxableAmount);
 
 				Element TaxAmount1 = getDoc().createElement("cbc:TaxAmount");
@@ -515,15 +505,13 @@ public class Boleta extends EFactDocument {
 				TaxAmount1.setIdAttributeNS(null, currencyID, true);
 				TaxSubtotal.appendChild(TaxAmount1);//se anade al grupo TaxSubtotal
 				//TaxAmount1.appendChild(getDoc().createTextNode(items.getDocu_igv().trim()));
-				TaxAmount1.appendChild(getDoc().createTextNode(items.getTaxSAmt().toString()));
+				TaxAmount1.appendChild(getDoc().createTextNode(items.getTaxSAmt().setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
 
 				Element TaxCategory = getDoc().createElement("cac:TaxCategory");
 				TaxSubtotal.appendChild(TaxCategory);//se anade al grupo TaxSubtotal
-				TaxCategory.appendChild(getDoc().createTextNode("\n"));
 
 				Element TaxScheme = getDoc().createElement("cac:TaxScheme");
 				TaxCategory.appendChild(TaxScheme);//se anade al grupo TaxCategory
-				TaxScheme.appendChild(getDoc().createTextNode("\n"));
 
 				Element ID9 = getDoc().createElement("cbc:ID");
 				ID9.setAttributeNS(null, schemeAgencyName, "PE:SUNAT");
@@ -545,7 +533,6 @@ public class Boleta extends EFactDocument {
 
 				Element TaxTotal = getDoc().createElement("cac:TaxTotal");
 				invoice.appendChild(TaxTotal);
-				TaxTotal.appendChild(getDoc().createTextNode("\n"));
 
 			
 				Element TaxAmount = getDoc().createElement("cbc:TaxAmount");
@@ -557,7 +544,6 @@ public class Boleta extends EFactDocument {
 
 				Element TaxSubtotal = getDoc().createElement("cac:TaxSubtotal");
 				TaxTotal.appendChild(TaxSubtotal);//se anade al grupo TaxTotal
-				TaxSubtotal.appendChild(getDoc().createTextNode("\n"));
 
 				Element TaxableAmount = getDoc().createElement("cbc:TaxableAmount");
 				TaxableAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
@@ -573,11 +559,9 @@ public class Boleta extends EFactDocument {
 
 				Element TaxCategory = getDoc().createElement("cac:TaxCategory");
 				TaxSubtotal.appendChild(TaxCategory);//se anade al grupo TaxSubtotal
-				TaxCategory.appendChild(getDoc().createTextNode("\n"));
 
 				Element TaxScheme = getDoc().createElement("cac:TaxScheme");
 				TaxCategory.appendChild(TaxScheme);//se anade al grupo TaxCategory
-				TaxScheme.appendChild(getDoc().createTextNode("\n"));
 
 				Element ID9 = getDoc().createElement("cbc:ID");
 				TaxScheme.appendChild(ID9);//se anade al grupo TaxScheme
@@ -594,7 +578,6 @@ public class Boleta extends EFactDocument {
 			//bloque 7     
 			Element LegalMonetaryTotal = getDoc().createElement("cac:LegalMonetaryTotal");
 			invoice.appendChild(LegalMonetaryTotal);
-			LegalMonetaryTotal.appendChild(getDoc().createTextNode("\n"));
 
 			// Anticipo total
 			//if (!items.getDocu_anticipo_total().equals("0.00")) {
@@ -608,27 +591,28 @@ public class Boleta extends EFactDocument {
 				PrepaidAmount.appendChild(getDoc().createTextNode(items.getTotalAdvanceAmount().toString()));
 			}
 
-			// 54. Importe total del comprobante
-			Element PayableAmount = getDoc().createElement("cbc:PayableAmount");
-			//PayableAmount.setAttributeNS(null, "currencyID", items.getDocu_moneda().trim());
-			PayableAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
-			PayableAmount.setIdAttributeNS(null, currencyID, true);
-			LegalMonetaryTotal.appendChild(PayableAmount);//se anade al grupo LegalMonetaryTotal
-			//PayableAmount.appendChild(getDoc().createTextNode(items.getDocu_total().trim()));
-			PayableAmount.appendChild(getDoc().createTextNode(items.getGrandTotal().toString()));
-			
 			// 55. Total valor de la venta
 			Element LineExtensionAmount = getDoc().createElement("cbc:LineExtensionAmount");
 			LineExtensionAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
-			LineExtensionAmount.appendChild(getDoc().createTextNode(items.getGrandTotal().toString()));
+			LineExtensionAmount.appendChild(getDoc().createTextNode(items.getGrandTotal()
+					.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
 			LegalMonetaryTotal.appendChild(LineExtensionAmount);
 			
 			// 56. Total precio de venta
 			Element TaxInclusiveAmount = getDoc().createElement("cbc:TaxInclusiveAmount");
 			TaxInclusiveAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
-			TaxInclusiveAmount.appendChild(getDoc().createTextNode(items.getGrandTotal().toString()));
+			TaxInclusiveAmount.appendChild(getDoc().createTextNode(items.getGrandTotal()
+					.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
 			LegalMonetaryTotal.appendChild(TaxInclusiveAmount);
 			
+			// 54. Importe total del comprobante
+			Element PayableAmount = getDoc().createElement("cbc:PayableAmount");
+			PayableAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
+			PayableAmount.setIdAttributeNS(null, currencyID, true);
+			LegalMonetaryTotal.appendChild(PayableAmount);//se anade al grupo LegalMonetaryTotal
+			PayableAmount.appendChild(getDoc().createTextNode(items.getGrandTotal()
+					.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
+						
 			// IV Datos del detalle o item de la boleta			
 			log.info("generarXMLZipiadoBoleta - Iniciamos detalle XML ");
 			int SeqNo = 1;
@@ -640,7 +624,7 @@ public class Boleta extends EFactDocument {
 				MUOM uom = MUOM.get(Env.getCtx(), listaDet.getC_UOM_ID());				
 				Element InvoiceLine = getDoc().createElement("cac:InvoiceLine");
 				invoice.appendChild(InvoiceLine);
-				InvoiceLine.appendChild(getDoc().createTextNode("\n"));
+				//InvoiceLine.appendChild(getDoc().createTextNode("\n"));
 				
 				// 24 Numero de orden del item
 				Element ID11 = getDoc().createElement("cbc:ID");
@@ -654,21 +638,49 @@ public class Boleta extends EFactDocument {
 				InvoiceLine.appendChild(Note);
 
 				Element InvoicedQuantity = getDoc().createElement("cbc:InvoicedQuantity");
-				InvoicedQuantity.setAttributeNS(null, "unitCode", uom.getUOMSymbol());
+				InvoicedQuantity.setAttributeNS(null, "unitCode", uom.getX12DE355());
 				InvoicedQuantity.setIdAttributeNS(null, "unitCode", true);
 				InvoicedQuantity.setAttributeNS(null, "unitCodeListAgencyName","United Nations Economic Commission for Europe");
 				InvoicedQuantity.setAttributeNS(null, "unitCodeListID","UN/ECE rec 20");
 				InvoiceLine.appendChild(InvoicedQuantity);//se anade al grupo InvoiceLine
-				InvoicedQuantity.appendChild(getDoc().createTextNode(listaDet.getQty().toString()));
-				
+				InvoicedQuantity.appendChild(getDoc().createTextNode(listaDet.getQty().setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));				
 				// 25 end
 
+				// punto 38 Valor de venta del item
+				//Element lineextensionamount = getDoc().createElement("cbc:LineExtensionAmount");
+				//lineextensionamount.setAttributeNS(null, currencyID,currency.getISO_Code());
+				//lineextensionamount.appendChild(getDoc().createTextNode(listaDet.getLineTotalAmt().toString()));
+				//InvoiceLine.appendChild(lineextensionamount);
+				
+				//----
+				// 38 Valor de venta del item			
+				Element PricingReference = getDoc().createElement("cac:PricingReference");
+				InvoiceLine.appendChild(PricingReference);//se anade al grupo InvoiceLine
+				Element AlternativeConditionPrice = getDoc().createElement("cac:AlternativeConditionPrice");
+				//AlternativeConditionPrice.setAttributeNS(null, listAgencyName, "PE:SUNAT");
+				//AlternativeConditionPrice.setAttributeNS(null, listName, "Tipo de Precio");
+				//AlternativeConditionPrice.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16");
+				Element PriceAmount = getDoc().createElement("cbc:PriceAmount");
+				//PriceAmount.setAttributeNS(null, "currencyID", listaDet.getItem_moneda().trim());
+				PriceAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
+				PriceAmount.setIdAttributeNS(null, currencyID, true);
+				AlternativeConditionPrice.appendChild(PriceAmount);//se anade al grupo AlternativeConditionPrice
+				//PriceAmount.appendChild(getDoc().createTextNode(listaDet.getItem_pventa().trim())); // el precio unitario de venta de ser con los impuestos y deducciones de descuentos
+				PriceAmount.appendChild(getDoc().createTextNode(listaDet.getTaxBaseAmt().toString())); // el precio unitario de venta de ser con los impuestos y deducciones de descuentos
+				PricingReference.appendChild(AlternativeConditionPrice);//se anade al grupo PricingReference
+
+				Element PriceTypeCode = getDoc().createElement("cbc:PriceTypeCode");				
+				PriceTypeCode.setAttributeNS(null, listName, "Tipo de Precio");
+				PriceTypeCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
+				PriceTypeCode.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16");
+				PriceTypeCode.appendChild(getDoc().createTextNode("01"));
+				AlternativeConditionPrice.appendChild(PriceTypeCode);											
 				//
 				// Punto 33
 				//          Inicio IGV item
 				Element TaxTotal1 = getDoc().createElement("cac:TaxTotal");
 				InvoiceLine.appendChild(TaxTotal1);//se anade al grupo InvoiceLine
-				TaxTotal1.appendChild(getDoc().createTextNode("\n"));
+				//TaxTotal1.appendChild(getDoc().createTextNode("\n"));
 
 				log.info("generarXMLZipiadoFactura - IGV ");
 				Element TaxAmount2 = getDoc().createElement("cbc:TaxAmount");
@@ -680,7 +692,7 @@ public class Boleta extends EFactDocument {
 				TaxAmount2.appendChild(getDoc().createTextNode(listaDet.gettaxamount().toString()));
 
 				Element TaxSubtotal1 = getDoc().createElement("cac:TaxSubtotal");				
-				TaxSubtotal1.appendChild(getDoc().createTextNode("\n"));				
+				//TaxSubtotal1.appendChild(getDoc().createTextNode("\n"));				
 				TaxTotal1.appendChild(TaxSubtotal1);//se anade al grupo TaxTotal1
 				
 				// 34 Monto del IGV o IVAP del item
@@ -694,10 +706,11 @@ public class Boleta extends EFactDocument {
 						 listaDet.gettaxamount(),
 						 listaDet.getLineTotalAmt(),
 						 listaDet.gettaxrate(),
-						 orginfo.getTierRange(),
+						 orginfo.getTierRange(),						 
 						 "ISC", // TaxTypeName
 						 "EXC", // TextTaxTypeCode
 						 "10",  // TextTaxExemptionReasonCode
+						 "1000", // TaxCode
 						 "48"); // TextAllowanceChargeReasonCode					
 
 				}
@@ -709,10 +722,11 @@ public class Boleta extends EFactDocument {
 							 listaDet.gettaxamount(),
 							 listaDet.getLineTotalAmt(),
 							 listaDet.gettaxrate(),
-							 orginfo.getTierRange(),
+							 orginfo.getTierRange(),							 
 							 "IGV",     // TaxTypeName
 							 "VAT",     // TextTaxTypeCode
 							 "10",      // TextTaxExemptionReasonCode
+							 "1000", 	// TaxCode
 							 "47");		// TextAllowanceChargeReasonCode			
 
 				}
@@ -750,13 +764,14 @@ public class Boleta extends EFactDocument {
 					Element Percent = getDoc().createElement("cbc:Percent");
 					//TaxSubtotal1.appendChild(Percent);//se anade al grupo TaxSubtotal1
 					//Percent.appendChild(getDoc().createTextNode("0.0"));
-					//Percent.appendChild(getDoc().createTextNode(items.getTasa_igv().trim()));				
-					Percent.appendChild(getDoc().createTextNode(listaDet.gettaxrate().toString()));
+					//Percent.appendChild(getDoc().createTextNode(items.getTasa_igv().trim()));
+					DecimalFormat df = new DecimalFormat("#,###.00");					
+					Percent.appendChild(getDoc().createTextNode(df.format(listaDet.gettaxrate())));
 
 					Element TaxCategory1 = getDoc().createElement("cac:TaxCategory");
 					TaxSubtotal1.appendChild(TaxCategory1);//se anade al grupo TaxSubtotal1
 					TaxCategory1.appendChild(Percent);
-					TaxCategory1.appendChild(getDoc().createTextNode("\n"));								
+					//TaxCategory1.appendChild(getDoc().createTextNode("\n"));								
 					TaxSubtotal1.appendChild(TaxCategory1);//se anade al grupo TaxSubtotal1
 
 					// punto 40 Monto cargo del item
@@ -784,7 +799,7 @@ public class Boleta extends EFactDocument {
 
 					Element TaxScheme1 = getDoc().createElement("cac:TaxScheme");
 					TaxCategory1.appendChild(TaxScheme1);//se anade al grupo TaxCategory1
-					TaxScheme1.appendChild(getDoc().createTextNode("\n"));
+					//TaxScheme1.appendChild(getDoc().createTextNode("\n"));
 
 					Element ID15 = getDoc().createElement("cbc:ID");
 					ID15.setAttributeNS(null, schemeAgencyName, "PE:SUNAT");
@@ -801,43 +816,23 @@ public class Boleta extends EFactDocument {
 					TaxScheme1.appendChild(TaxTypeCode);//se anade al grupo TaxScheme
 					TaxTypeCode.appendChild(getDoc().createTextNode("OTH"));
 
-					// punto 38 Valor de venta del item
-					Element lineextensionamount = getDoc().createElement("cbc:LineExtensionAmount");
-					lineextensionamount.setAttributeNS(null, currencyID,currency.getISO_Code());
-					lineextensionamount.appendChild(getDoc().createTextNode(listaDet.getLineTotalAmt().toString()));
-					InvoiceLine.appendChild(lineextensionamount);
+					
+
+					//PricingReference.appendChild(getDoc().createTextNode("\n"));
+
+					//AlternativeConditionPrice.appendChild(getDoc().createTextNode("\n"));
+
+
+
+					Element TaxTypeCode1 = getDoc().createElement("cbc:TaxTypeCode");
+					//TaxScheme1.appendChild(TaxTypeCode1);//se anade al grupo TaxCategory1
+					TaxTypeCode1.appendChild(getDoc().createTextNode("VAT"));
+					//        fin IGV Item
+		//------			
+
 
 				}
 				
-				// 38 Valor de venta del item			
-				Element PricingReference = getDoc().createElement("cac:PricingReference");
-				InvoiceLine.appendChild(PricingReference);//se anade al grupo InvoiceLine
-
-				PricingReference.appendChild(getDoc().createTextNode("\n"));
-
-				Element AlternativeConditionPrice = getDoc().createElement("cac:AlternativeConditionPrice");
-				PricingReference.appendChild(AlternativeConditionPrice);//se anade al grupo PricingReference
-				AlternativeConditionPrice.appendChild(getDoc().createTextNode("\n"));
-
-				Element PriceAmount = getDoc().createElement("cbc:PriceAmount");
-				//PriceAmount.setAttributeNS(null, "currencyID", listaDet.getItem_moneda().trim());
-				PriceAmount.setAttributeNS(null, currencyID, currency.getISO_Code());
-				PriceAmount.setIdAttributeNS(null, currencyID, true);
-				AlternativeConditionPrice.appendChild(PriceAmount);//se anade al grupo AlternativeConditionPrice
-				//PriceAmount.appendChild(getDoc().createTextNode(listaDet.getItem_pventa().trim())); // el precio unitario de venta de ser con los impuestos y deducciones de descuentos
-				PriceAmount.appendChild(getDoc().createTextNode(listaDet.getTaxBaseAmt().toString())); // el precio unitario de venta de ser con los impuestos y deducciones de descuentos
-
-				Element PriceTypeCode = getDoc().createElement("cbc:PriceTypeCode");
-				AlternativeConditionPrice.appendChild(PriceTypeCode);//se anade al grupo AlternativeConditionPrice
-				AlternativeConditionPrice.setAttributeNS(null, listName, "Tipo de Precio");
-				AlternativeConditionPrice.setAttributeNS(null, listAgencyName, "PE:SUNAT");
-				AlternativeConditionPrice.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16");
-				PriceTypeCode.appendChild(getDoc().createTextNode("01")); //=================================>Faltaba especificar ite
-
-				Element TaxTypeCode1 = getDoc().createElement("cbc:TaxTypeCode");
-				//TaxScheme1.appendChild(TaxTypeCode1);//se anade al grupo TaxCategory1
-				TaxTypeCode1.appendChild(getDoc().createTextNode("VAT"));
-				//        fin IGV Item
 				//---------------
 				// 35 Monto ISC del item				
 				if (product.getPriceTypeCode().equals(REF_PriceTypeCode.ValorReferencialUnitarioEnOperacionesNoOnerosas)) {
@@ -864,7 +859,7 @@ public class Boleta extends EFactDocument {
 
 					Element TaxTotal2 = getDoc().createElement("cac:TaxTotal");
 					InvoiceLine.appendChild(TaxTotal2);//se anade al grupo InvoiceLine
-					TaxTotal2.appendChild(getDoc().createTextNode("\n"));
+					//TaxTotal2.appendChild(getDoc().createTextNode("\n"));
 
 					log.info("generarXMLZipiadoFactura - IGV ");
 					Element TaxAmount22 = getDoc().createElement("cbc:TaxAmount");
@@ -876,7 +871,7 @@ public class Boleta extends EFactDocument {
 
 					Element TaxSubtotal2 = getDoc().createElement("cac:TaxSubtotal");
 					TaxTotal2.appendChild(TaxSubtotal2);//se anade al grupo TaxTotal1
-					TaxSubtotal2.appendChild(getDoc().createTextNode("\n"));
+					//TaxSubtotal2.appendChild(getDoc().createTextNode("\n"));
 
 					//ISC
 					Element TaxAmount32 = getDoc().createElement("cbc:TaxAmount");
@@ -888,7 +883,7 @@ public class Boleta extends EFactDocument {
 
 					Element TaxCategory12 = getDoc().createElement("cac:TaxCategory");
 					TaxSubtotal2.appendChild(TaxCategory12);//se anade al grupo TaxSubtotal1
-					TaxCategory12.appendChild(getDoc().createTextNode("\n"));
+					//TaxCategory12.appendChild(getDoc().createTextNode("\n"));
 
 					log.info("generarXMLZipiadoFactura - afectacion ");
 
@@ -899,7 +894,7 @@ public class Boleta extends EFactDocument {
 
 					Element TaxScheme12 = getDoc().createElement("cac:TaxScheme");
 					TaxCategory12.appendChild(TaxScheme12);//se anade al grupo TaxCategory1
-					TaxScheme12.appendChild(getDoc().createTextNode("\n"));
+					//TaxScheme12.appendChild(getDoc().createTextNode("\n"));
 
 					Element ID152 = getDoc().createElement("cbc:ID");
 					TaxScheme12.appendChild(ID152);//se anade al grupo TaxCategory1
@@ -918,7 +913,7 @@ public class Boleta extends EFactDocument {
 
 				Element Item = getDoc().createElement("cac:Item");
 				InvoiceLine.appendChild(Item);//se anade al grupo InvoiceLine
-				Item.appendChild(getDoc().createTextNode("\n"));
+				//Item.appendChild(getDoc().createTextNode("\n"));
 
 				Element Description = getDoc().createElement("cbc:Description");
 				Item.appendChild(Description);//se anade al grupo Item
@@ -928,7 +923,7 @@ public class Boleta extends EFactDocument {
 
 				Element SellersItemIdentification = getDoc().createElement("cac:SellersItemIdentification");
 				Item.appendChild(SellersItemIdentification);//se anade al grupo Item
-				SellersItemIdentification.appendChild(getDoc().createTextNode("\n"));
+				//SellersItemIdentification.appendChild(getDoc().createTextNode("\n"));
 
 				Element ID18 = getDoc().createElement("cbc:ID");
 				SellersItemIdentification.appendChild(ID18);//se anade al grupo Item
@@ -937,7 +932,7 @@ public class Boleta extends EFactDocument {
 
 				Element Price = getDoc().createElement("cac:Price");
 				InvoiceLine.appendChild(Price);//se anade al grupo InvoiceLine
-				Price.appendChild(getDoc().createTextNode("\n"));
+				//Price.appendChild(getDoc().createTextNode("\n"));
 
 				Element PriceAmount2 = getDoc().createElement("cbc:PriceAmount");
 				PriceAmount2.setAttributeNS(null, currencyID, currency.getISO_Code());
@@ -947,6 +942,7 @@ public class Boleta extends EFactDocument {
 				PriceAmount2.appendChild(getDoc().createTextNode(listaDet.getPriceActual().toString().trim()));
 				SeqNo++;
 			}
+
 			log.info("generarXMLZipiadoBoleta - Prepara firma digital ");
 			//sig.setId(items.getEmpr_nroruc());
 			//sig.setId(p.getTaxID());
@@ -965,16 +961,17 @@ public class Boleta extends EFactDocument {
 			}
 			//--------------------fin de construccion del xml---------------------
 			///*combinacion de firma y construccion xml////
+			//Format xx = Format.getPrettyFormat();
 			FileOutputStream f = new FileOutputStream(signatureFile);
 			Transformer tf = TransformerFactory.newInstance().newTransformer();
 			//tf.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
 			tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			//tf.setOutputProperty(OutputKeys.INDENT, "yes");
+			tf.setOutputProperty(OutputKeys.INDENT, "yes");
 			//tf.setOutputProperty(OutputKeys.STANDALONE, "no");
 			//Writer out = new StringWriter();
 			StreamResult sr = new StreamResult(f);
 			//tf.transform(new DOMSource(getDoc()), sr);
-			tf.transform(new DOMSource(getDoc()), sr);
+			tf.transform(new DOMSource(getDoc()), sr);			
 			sr.getOutputStream().close();
 
 			log.info("generarXMLZipiadoBoleta - XML creado " + pathXMLFile);
@@ -996,7 +993,7 @@ public class Boleta extends EFactDocument {
 	private void signature(Element invoice) {
 		Element Signature = getDoc().createElement("cac:Signature");
 		invoice.appendChild(Signature);
-		Signature.appendChild(getDoc().createTextNode("\n"));
+		//Signature.appendChild(getDoc().createTextNode("\n"));
 		// ID
 		Element ID6 = getDoc().createElement("cbc:ID");
 		Signature.appendChild(ID6);
@@ -1004,35 +1001,35 @@ public class Boleta extends EFactDocument {
 		// Signatory Party
 		Element SignatoryParty = getDoc().createElement("cac:SignatoryParty");
 		Signature.appendChild(SignatoryParty);
-		SignatoryParty.appendChild(getDoc().createTextNode("\n"));
+		//SignatoryParty.appendChild(getDoc().createTextNode("\n"));
 
 		Element PartyIdentification = getDoc().createElement("cac:PartyIdentification");
 		SignatoryParty.appendChild(PartyIdentification);
-		PartyIdentification.appendChild(getDoc().createTextNode("\n"));
+		//PartyIdentification.appendChild(getDoc().createTextNode("\n"));
 
 		Element ID7 = getDoc().createElement("cbc:ID");
 		PartyIdentification.appendChild(ID7);
-		ID7.appendChild(getDoc().createTextNode(p.getTaxID()));
+		ID7.appendChild(getDoc().createTextNode(m_bp.getTaxID()));		
 		//ID7.appendChild(getDoc().createTextNode(p.getTaxID()));
 
 		Element PartyName = getDoc().createElement("cac:PartyName");
 		SignatoryParty.appendChild(PartyName);
-		PartyName.appendChild(getDoc().createTextNode("\n"));
+		//PartyName.appendChild(getDoc().createTextNode("\n"));
 
 		Element Name = getDoc().createElement("cbc:Name");
 		PartyName.appendChild(Name);
-		Name.appendChild(getDoc().createTextNode(p.getName()));
+		Name.appendChild(getDoc().createTextNode(m_bp.getName()));
 		//cdata = getDoc().createCDATASection(items.getEmpr_razonsocial().trim());
 		//CDATASection cdata = getDoc().createCDATASection(p.getName().trim());
 		//Name.appendChild(cdata);
 
 		Element DigitalSignatureAttachment = getDoc().createElement("cac:DigitalSignatureAttachment");
 		Signature.appendChild(DigitalSignatureAttachment);
-		DigitalSignatureAttachment.appendChild(getDoc().createTextNode("\n"));
+		//DigitalSignatureAttachment.appendChild(getDoc().createTextNode("\n"));
 
 		Element ExternalReference = getDoc().createElement("cac:ExternalReference");
 		DigitalSignatureAttachment.appendChild(ExternalReference);
-		ExternalReference.appendChild(getDoc().createTextNode("\n"));
+		//ExternalReference.appendChild(getDoc().createTextNode("\n"));
 
 		Element URI = getDoc().createElement("cbc:URI");
 		ExternalReference.appendChild(URI);
@@ -1062,7 +1059,7 @@ public class Boleta extends EFactDocument {
 			Element Legend = getDoc().createElement("cbc:Note");
 			invoice.appendChild(Legend);
 			Legend.setAttributeNS(null, "languageLocaleID", leyenda.getLegend());
-			Legend.appendChild(getDoc().createTextNode("\n"));
+			//Legend.appendChild(getDoc().createTextNode("\n"));
 			Legend.appendChild(getDoc().createTextNode(leyenda.gettext().trim()));
 			invoice.appendChild(Legend);
 		}				
@@ -1072,9 +1069,9 @@ public class Boleta extends EFactDocument {
 		Element InvoiceTypeCode = getDoc().createElement("cbc:InvoiceTypeCode");
 		InvoiceTypeCode.setAttributeNS(null, listID, items.getInvoiceOperationTypeCode());
 		InvoiceTypeCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
-		InvoiceTypeCode.setAttributeNS(null, listName, "Tipo de Documento");
+		//InvoiceTypeCode.setAttributeNS(null, listName, "Tipo de Documento");
 		InvoiceTypeCode.setAttributeNS(null, "name", "Tipo de Operacion");
-		InvoiceTypeCode.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01");
+		//InvoiceTypeCode.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01");
 		InvoiceTypeCode.setAttributeNS(null, listSchemeURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51");
 		invoice.appendChild(InvoiceTypeCode);
 		//InvoiceTypeCode.appendChild(getDoc().createTextNode(items.getDocu_tipodocumento().trim()));//DIFERENCIA ENTRE FAC Y ND Y NC
@@ -1135,6 +1132,7 @@ public class Boleta extends EFactDocument {
 						String TaxTypeName, 
 						String TextTaxTypeCode,
 						String TextTaxExemptionReasonCode,
+						String TaxCode,
 						String TextAllowanceChargeReasonCode)  {		
 		Element TaxableAmount = getTaxableAmount(currency, BDAmount);
 		TaxSubtotal1.appendChild(TaxableAmount);
@@ -1144,9 +1142,20 @@ public class Boleta extends EFactDocument {
 		
 		Element TaxCategory1 = getDoc().createElement("cac:TaxCategory");
 
-		Element Percent = getDoc().createElement("cbc:Percent");					
-		Percent.appendChild(getDoc().createTextNode(BDTaxRate.toString()));
+		Element Percent = getDoc().createElement("cbc:Percent");			
+		DecimalFormat df = new DecimalFormat("#,###.00");
+		Percent.appendChild(getDoc().createTextNode(df.format(BDTaxRate)));
 		TaxCategory1.appendChild(Percent);
+
+		Element TaxExemptionReasonCode = getDoc().createElement("cbc:TaxExemptionReasonCode");
+		//TaxExemptionReasonCode.appendChild(getDoc().createTextNode(listaDet.getItem_afectacion().trim()));
+		TaxExemptionReasonCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
+		TaxExemptionReasonCode.setAttributeNS(null, listName, "Afectacion del IGV");
+		TaxExemptionReasonCode.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07");					
+		//TaxExemptionReasonCode.appendChild(getDoc().createTextNode("10"));
+		TaxExemptionReasonCode.appendChild(getDoc().createTextNode(TextTaxExemptionReasonCode));		
+		TaxCategory1.appendChild(TaxExemptionReasonCode);//se anade al grupo TaxCategory1					
+		
 		if (TextTierRange != null) {
 			Element TierRange = getDoc().createElement("cbc:TierRange");
 			TierRange.appendChild(getDoc().createTextNode(TextTierRange));
@@ -1155,12 +1164,13 @@ public class Boleta extends EFactDocument {
 
 		Element TaxScheme1 = getDoc().createElement("cac:TaxScheme");
 		TaxCategory1.appendChild(TaxScheme1);//se anade al grupo TaxCategory1
-		TaxScheme1.appendChild(getDoc().createTextNode("\n"));
+		//TaxScheme1.appendChild(getDoc().createTextNode("\n"));
 
 		Element ID15 = getDoc().createElement("cbc:ID");
 		ID15.setAttributeNS(null, schemeAgencyName, "PE:SUNAT");
 		ID15.setAttributeNS(null, schemeName, "Codigo de tributos");
 		ID15.setAttributeNS(null, schemeURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo05");
+		ID15.appendChild(getDoc().createTextNode(TaxCode));
 		TaxScheme1.appendChild(ID15);//se anade al grupo TaxCategory1
 
 		Element Name9 = getDoc().createElement("cbc:Name");
@@ -1174,16 +1184,8 @@ public class Boleta extends EFactDocument {
 		TaxTypeCode.appendChild(getDoc().createTextNode(TextTaxTypeCode));
 
 
-		Element TaxExemptionReasonCode = getDoc().createElement("cbc:TaxExemptionReasonCode");
-		TaxCategory1.appendChild(TaxExemptionReasonCode);//se anade al grupo TaxCategory1					
-		//TaxExemptionReasonCode.appendChild(getDoc().createTextNode(listaDet.getItem_afectacion().trim()));
-		TaxExemptionReasonCode.setAttributeNS(null, listAgencyName, "PE:SUNAT");
-		TaxExemptionReasonCode.setAttributeNS(null, listName, "Afectacion del IGV");
-		TaxExemptionReasonCode.setAttributeNS(null, listURI, "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07");					
-		//TaxExemptionReasonCode.appendChild(getDoc().createTextNode("10"));
-		TaxExemptionReasonCode.appendChild(getDoc().createTextNode(TextTaxExemptionReasonCode));		
-
 		TaxSubtotal1.appendChild(TaxCategory1);//se anade al grupo TaxSubtotal1
+		
 		// punto 38 Valor de venta del item
 		Element lineextensionamount = getDoc().createElement("cbc:LineExtensionAmount");
 		lineextensionamount.setAttributeNS(null, currencyID, currency);
@@ -1227,7 +1229,7 @@ public class Boleta extends EFactDocument {
 	private Element getTaxableAmount(String currency, BigDecimal taxableamount)  {
 		Element TaxableAmount = getDoc().createElement("cbc:TaxableAmount");					
 		TaxableAmount.setAttributeNS(null, currencyID, currency); 
-		TaxableAmount.appendChild(getDoc().createTextNode(taxableamount.toString()));
+		TaxableAmount.appendChild(getDoc().createTextNode(taxableamount.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()));
 		//element.appendChild(TaxableAmount);
 		return TaxableAmount;
 	}
