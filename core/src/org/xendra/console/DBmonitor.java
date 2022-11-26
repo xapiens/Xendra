@@ -644,8 +644,8 @@ public class DBmonitor {
 				curmajor = value;
 			else if (curminor.length() == 0)
 				curminor = value;
-		}
-		if (curmajor.compareTo(minmajor) > 0 ) {
+		}		
+		if (Integer.valueOf(curmajor).compareTo(Integer.valueOf(minmajor)) >= 0) {
 			return true;
 		} else if ( curmajor.equals(minmajor)) {
 			if (curminor.compareTo(minminor) >= 0) {
