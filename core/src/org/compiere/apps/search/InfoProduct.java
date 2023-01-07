@@ -828,6 +828,9 @@ public final class InfoProduct extends Info implements ActionListener
 		Integer M_Product_ID = getSelectedRowKey();
 		if (M_Product_ID == null)
 			return;
+		if (MRole.getDefault().isOnlySoPriceListAccess())
+			return;
+
 		KeyNamePair kn = (KeyNamePair)pickWarehouse.getSelectedItem();
 		int M_Warehouse_ID = kn.getKey();
 		int M_AttributeSetInstance_ID = m_M_AttributeSetInstance_ID;
