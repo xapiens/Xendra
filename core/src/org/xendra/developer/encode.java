@@ -17,6 +17,55 @@ import java.util.logging.Level;
 public class encode {
 	private static CLogger log = CLogger.getCLogger(encode.class);
 	
+	public static void maindecode(String[] args) {
+		org.compiere.Xendra.startupEnvironment(true);
+		CLogMgt.setLevel(Level.FINE);
+		log.info("decode   $Revision: 1.0 $");
+		log.info("----------------------------------");
+		//	first parameter
+		String directory = System.getProperty("user.home").concat("/model/");
+		if (args.length > 0)
+			directory = args[0];
+		if (directory == null || directory.length() == 0)
+		{
+			System.err.println("No Directory");
+			System.exit(1);
+		}
+		log.info("Directory: " + directory);
+		String tableLike = "'%'";	//	All tables
+		if (args.length > 1)
+			tableLike = args[1];
+		else 
+		{			
+			File dir = new File(directory);
+			for (final File fileentry: dir.listFiles()) {
+				if (!fileentry.isDirectory()) {
+					tableLike = fileentry.getName();
+					if (fileentry.getName().indexOf(".") > 0) {
+						   tableLike = fileentry.getName().substring(0, fileentry.getName().lastIndexOf("."));
+						} else {
+						   tableLike = fileentry.getName();
+						}
+					break;
+				}
+			}
+		}
+		log.info("Table Like: " + tableLike);
+		String where = "";
+		if (args.length > 2)
+			where = args[2];
+		log.info("Where : " + where);
+		try {
+			String file = String.format("%s/%s.xml", directory, tableLike);			
+			MTable table = MTable.get(Env.getCtx(), tableLike);			
+			if (table != null) {
+				List<PO> records = new Query(Env.getCtx(), tableLike, where, null).list();
+				Util.writeToFile(ReplicationEngine.getInstance().decode(records), file);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
 	public static void main(String[] args) {
 		org.compiere.Xendra.startupEnvironment(true);
 		CLogMgt.setLevel(Level.FINE);
@@ -35,23 +84,29 @@ public class encode {
 		String tableLike = "'%'";	//	All tables
 		if (args.length > 1)
 			tableLike = args[1];
-		log.info("Table Like: " + tableLike);
-		String where = "";
-		if (args.length > 2)
-			where = args[2];
-		log.info("Where : " + where);
-		try {
-			String file = String.format("%s/%s.xml", directory, tableLike);			
-			MTable table = MTable.get(Env.getCtx(), tableLike);			
-			if (table != null) {
-				List<PO> records = new Query(Env.getCtx(), tableLike, where, null).list();
-				Util.writeToFile(ReplicationEngine.getInstance().decode(records), file);
+		else 
+		{			
+			File dir = new File(directory);
+			for (final File fileentry: dir.listFiles()) {
+				if (!fileentry.isDirectory()) {
+					tableLike = fileentry.getName();
+					if (fileentry.getName().indexOf(".") > 0) {
+						   tableLike = fileentry.getName().substring(0, fileentry.getName().lastIndexOf("."));
+						} else {
+						   tableLike = fileentry.getName();
+						}
+					break;
+				}
 			}
+		}
+		String file = String.format("%s/%s.xml", directory, tableLike);
+		try {
+			ReplicationEngine.getInstance().encode(new File(file));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}				
 	}
-	public static void main2(String[] args) {		
+	public static void main2(String[] args) {	
 		if (!org.compiere.Xendra.startup(false))
 		{					
 			log.log(Level.SEVERE, "can't connect to database");
@@ -81,7 +136,7 @@ public class encode {
 		//String file = "/home/americas/model/ad_user.xml";
 		//String file = "/home/americas/model/ad_user_roles.xml";
 		//String file = "/home/americas/model/ad_plugin.xml";
-		String file = "/home/americas/model/city.xml";
+		String file = "/home/xapiens/projects/Xendra/standard/fill/C_DocumentTax.xml";
 		//String file = "/home/americas/model/invoice.xml";
 		//File file = new File("/home/americas/model/storeposlines.xml");
 		//
