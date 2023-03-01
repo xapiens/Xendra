@@ -54,11 +54,13 @@ import org.compiere.model.persistence.X_AD_Operator;
 import org.compiere.model.persistence.X_AD_Package;
 import org.compiere.model.persistence.X_AD_Plugin;
 import org.compiere.model.persistence.X_AD_Process;
+import org.compiere.model.persistence.X_AD_Process_Machine;
 import org.compiere.model.persistence.X_AD_Process_Para;
 import org.compiere.model.persistence.X_AD_Ref_List;
 import org.compiere.model.persistence.X_AD_Ref_Table;
 import org.compiere.model.persistence.X_AD_Reference;
 import org.compiere.model.persistence.X_AD_Role;
+import org.compiere.model.persistence.X_AD_Scheduler;
 import org.compiere.model.persistence.X_AD_Tab;
 import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.persistence.X_AD_TreeNodeMM;
@@ -81,6 +83,7 @@ import org.compiere.model.persistence.X_M_InventoryLine;
 import org.compiere.model.persistence.X_M_Product;
 import org.compiere.model.persistence.X_M_ProductionLine;
 import org.compiere.model.reference.REF_AD_ReferenceValidationTypes;
+import org.compiere.model.reference.REF_AD_SchedulerType;
 import org.compiere.model.reference.REF__EntityType;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.CLogger;
@@ -103,6 +106,7 @@ import org.xendra.annotations.XendraProcessParameter;
 import org.xendra.annotations.XendraRef;
 import org.xendra.annotations.XendraRefItem;
 import org.xendra.annotations.XendraRefTable;
+import org.xendra.annotations.XendraScheduler;
 import org.xendra.annotations.XendraTab;
 import org.xendra.annotations.XendraTable;
 import org.xendra.annotations.XendraTrl;
@@ -167,9 +171,6 @@ public class SyncModel {
 
 	private void Initialize() {
 		try {						
-			//fillHashtable(X_AD_WindowList.class, menus, "MENU");
-			//fillHashtable(X_AD_WindowList.class, forms, "FORM");
-			//fillHashtable(X_AD_WindowList.class, windows, "WINDOW");
 			fillHashtable();
 		}
 		catch (Exception e)
@@ -204,6 +205,7 @@ public class SyncModel {
 			}	
 		} catch (Exception e) {
 			log.log(Level.WARNING,e.getMessage());
+			error = e.getMessage();
 		}
 		return error;
 	}	
@@ -221,6 +223,7 @@ public class SyncModel {
 			checkReferences();
 			checkvalrule();
 			checkIdentifiers();
+			checksequences();
 			//
 			// tables from xendra must be matching
 			md = DB.getConnectionRO().getMetaData();
@@ -265,7 +268,7 @@ public class SyncModel {
 									throw new Exception(String.format("table %s not found", table.TableName()));
 								}								
 								X_AD_Table dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null)
-								.setParameters(table.TableName()).first();
+										.setParameters(table.TableName()).first();
 								if (dbtable == null || dbtable.getSynchronized() == null)
 								{
 									throw new Exception(String.format("table %s out of sync", table.TableName()));									
@@ -276,11 +279,12 @@ public class SyncModel {
 									throw new Exception(String.format("table %s out of sync", table.TableName()));
 								}
 								if (dbtable.getAD_Plugin_ID() == 0) {
-									throw new Exception(String.format("table %s plugin out of sync", table.TableName()));
+									//throw new Exception(String.format("table %s plugin out of sync", table.TableName()));
+									System.out.println(String.format("table %s plugin out of sync", table.TableName()));
 								}
 							} else {
 								X_AD_Table dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null)
-								.setParameters(table.TableName()).first();
+										.setParameters(table.TableName()).first();
 								if (dbtable == null || dbtable.getSynchronized() == null)
 								{
 									throw new Exception(String.format("view %s out of sync", table.TableName()));									
@@ -324,12 +328,11 @@ public class SyncModel {
 				}
 			}
 			int opercnt = 0;
-			operators = new HashSet<Class<?>>();
-			scanner.getClasses(	new ComponentQuery() 
+			//operators = new HashSet<Class<?>>();
+			operators = scanner.getClasses(	new ComponentQuery()
 			{
 				protected void query() {
-					select().from("org.compiere.model.operator").andStore(
-							thoseAnnotatedWith(XendraOperator.class).into(operators));
+					select().from("org.compiere.model.operator").returning(all());
 				}
 			});	
 			i = 1;
@@ -388,12 +391,11 @@ public class SyncModel {
 			}
 			int  viewcnt = 0;
 
-			views = new HashSet<Class<?>>();
-			scanner.getClasses(	new ComponentQuery() 
+			//views = new HashSet<Class<?>>();
+			views = scanner.getClasses(	new ComponentQuery() 
 			{
 				protected void query() {
-					select().from("org.compiere.model.view").andStore(
-							thoseAnnotatedWith(XendraView.class).into(views));
+					select().from("org.compiere.model.view").returning(all());
 				}
 			});					
 			it = views.iterator();
@@ -447,12 +449,11 @@ public class SyncModel {
 			}
 			int funccnt = 0;
 
-			functions = new HashSet<Class<?>>();
-			scanner.getClasses(	new ComponentQuery() 
+			//functions = new HashSet<Class<?>>();
+			functions = scanner.getClasses(	new ComponentQuery() 
 			{
 				protected void query() {
-					select().from("org.compiere.model.function").andStore(
-							thoseAnnotatedWith(XendraFunction.class).into(functions));
+					select().from("org.compiere.model.function").returning(all());
 				}
 			});					
 			it = functions.iterator();
@@ -494,11 +495,11 @@ public class SyncModel {
 			//			if (formcnt != forms.size())
 			//				throw new Exception();
 			// processes
-			processes = new HashSet<Class<?>>();
-			scanner.getClasses(	new ComponentQuery() 
+			//processes = new HashSet<Class<?>>();
+			processes = scanner.getClasses(	new ComponentQuery() 
 			{
 				protected void query() {
-					select().from("org.xendra.process").andStore(thoseAnnotatedWith(XendraProcess.class).into(processes));
+					select().from("org.xendra.process").returning(all());
 				}
 			});					
 			it = processes.iterator();
@@ -531,7 +532,7 @@ public class SyncModel {
 						e.printStackTrace();
 					}
 					MProcess process = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
-					.setParameters(classname).first();
+							.setParameters(classname).first();
 					if (process == null) 
 						throw new Exception(String.format("process %s not found", classname));					
 					else if (process.getSynchronized() == null) {
@@ -595,7 +596,7 @@ public class SyncModel {
 		}
 		return error;	
 	}
-	
+
 	public void AddError(String error) {
 		if (!errors.contains(error) && error.length() > 0) {
 			errors.add(error);
@@ -616,6 +617,7 @@ public class SyncModel {
 			{
 				log.log(Level.WARNING, "update model");
 				md = DB.getConnectionRO().getMetaData();
+				UpdateSequences();
 				UpdateTable();
 				UpdateFunctions();
 				UpdateOperators();
@@ -669,7 +671,7 @@ public class SyncModel {
 			if (table.save()) {
 				//dash.setMessage(String.format("%s %s", table.getName(), table.getTableName()));
 				List<X_AD_Column> columns = new Query(Env.getCtx(), X_AD_Column.Table_Name, "AD_Table_ID = ?", null)
-				.setParameters(table.getAD_Table_ID()).list();
+						.setParameters(table.getAD_Table_ID()).list();
 				for (X_AD_Column column:columns) {
 					column.setSynchronized(null);
 					column.save();
@@ -687,7 +689,7 @@ public class SyncModel {
 	public static void fillHashtable() {
 		try {
 			List<X_AD_Plugin> plugins = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "IsActive = 'Y'", null)
-			.list();
+					.list();
 			for (X_AD_Plugin plugin:plugins) {
 				String content = plugin.getplugin();
 				InputStream stream;
@@ -753,7 +755,7 @@ public class SyncModel {
 		String sync = menu.getAttributeValue(X_AD_Menu.COLUMNNAME_Synchronized);
 		Timestamp Synchronized = Timestamp.valueOf(sync);		
 		X_AD_Menu m = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "Identifier = ?", null)
-		.setParameters(Identifier).first();
+				.setParameters(Identifier).first();
 		if (m != null) {
 			if (m.getSynchronized() == null || m.getSynchronized().compareTo(Synchronized) < 0) {
 				goahead = true;
@@ -762,7 +764,7 @@ public class SyncModel {
 		else if (m == null) {
 			// try by name
 			m = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "Name = ?", null)	
-			.setParameters(Name).first();
+					.setParameters(Name).first();
 			if (m == null)
 				goahead = true;
 			else if (m != null) {
@@ -867,10 +869,10 @@ public class SyncModel {
 		syncform = new Timestamp(calref.getTime().getTime());		
 		String name = child.getAttributeValue(X_AD_Form.COLUMNNAME_Name);
 		X_AD_Form dbform = new Query(Env.getCtx(), X_AD_Form.Table_Name, "Identifier = ?", null)
-		.setParameters(Identifier).first();
+				.setParameters(Identifier).first();
 		if (dbform == null) {
 			dbform = new Query(Env.getCtx(), X_AD_Form.Table_Name, "name = ?", null)
-			.setParameters(name).first();
+					.setParameters(name).first();
 			if (dbform != null) {
 				dbform.setIdentifier(Identifier);
 				dbform.save();
@@ -938,10 +940,10 @@ public class SyncModel {
 		syncwindow = new Timestamp(calref.getTime().getTime());		
 		String name = child.getAttributeValue(X_AD_Window.COLUMNNAME_Name);
 		X_AD_Window dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Identifier = ?", null)
-		.setParameters(Identifier).first();
+				.setParameters(Identifier).first();
 		if (dbwindow == null) {
 			dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "name = ?", null)
-			.setParameters(name).first();
+					.setParameters(name).first();
 			if (dbwindow != null) {
 				dbwindow.setIdentifier(Identifier);
 				dbwindow.save();
@@ -975,14 +977,14 @@ public class SyncModel {
 			dbwindow.setIsBetaFunctionality(IsBetaFunctionality);
 			if (dbwindow.save()) {
 				List<X_AD_Client> clients = new Query(Env.getCtx(), X_AD_Client.Table_Name, "AD_Client_ID > 0 AND IsActive = 'Y'", null)
-				.list();
+						.list();
 				for (X_AD_Client client:clients) {
 					List<X_AD_Role> roles = new Query(Env.getCtx(), X_AD_Role.Table_Name, "AD_Client_ID = ?", null)
-					.setParameters(client.getAD_Client_ID())
-					.list();					
+							.setParameters(client.getAD_Client_ID())
+							.list();					
 					for (X_AD_Role role:roles) {
 						X_AD_Window_Access wc = new Query(Env.getCtx(), X_AD_Window_Access.Table_Name, "AD_Window_ID = ? AND AD_Role_ID = ?", null)
-						.setParameters(dbwindow.getAD_Window_ID(), role.getAD_Role_ID()).first();
+								.setParameters(dbwindow.getAD_Window_ID(), role.getAD_Role_ID()).first();
 						if (wc == null) {
 							wc = new X_AD_Window_Access(Env.getCtx(), 0, null);
 							wc.setAD_Role_ID(role.getAD_Role_ID());
@@ -1054,7 +1056,7 @@ public class SyncModel {
 									throw new Exception(String.format("table %s not found", table.TableName()));
 								}								
 								X_AD_Table dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null)
-								.setParameters(table.TableName()).first();
+										.setParameters(table.TableName()).first();
 								if (dbtable == null || dbtable.getSynchronized() == null)
 								{
 									throw new Exception(String.format("table %s out of sync", table.TableName()));									
@@ -1270,7 +1272,7 @@ public class SyncModel {
 				if (goahead && proc != null) {
 					Timestamp srcsynchro = Timestamp.valueOf(proc.updated());
 					MProcess process = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
-					.setParameters(classname).first();
+							.setParameters(classname).first();
 					if (process == null) 
 						throw new Exception(String.format("PROCESS %s", classname));
 					else if (process.getSynchronized() == null) {						
@@ -1305,13 +1307,14 @@ public class SyncModel {
 		if (m_checkReferences) {
 			DB.executeUpdate("Update AD_Reference set synchronized = null", null);
 		}
-		listreferences = new HashSet<Class<?>>();
+		//listreferences = new HashSet<Class<?>>();
 		ComponentScanner scanner = new ComponentScanner();	
-		scanner.getClasses(	new ComponentQuery() 
+		listreferences = scanner.getClasses(	new ComponentQuery() 
 		{
 			protected void query() {
-				select().from("org.compiere.model.reference").andStore(
-						thoseAnnotatedWith(XendraRef.class).into(listreferences));
+				select().from("org.compiere.model.reference").returning(all());
+				//select().from("org.compiere.model.reference").andStore(
+				//		thoseAnnotatedWith(XendraRef.class).into(listreferences));
 			}
 		});				
 		scanner = null;
@@ -1340,7 +1343,7 @@ public class SyncModel {
 				{
 					AddExtension(ref.Extension());
 					X_AD_Reference adref = new Query(Env.getCtx(), X_AD_Reference.Table_Name, " AD_Reference_ID = ? ", null)
-					.setParameters(referenceid).first();
+							.setParameters(referenceid).first();
 					if (adref == null)
 					{					
 						adref = new X_AD_Reference(Env.getCtx(), 0, null);
@@ -1353,7 +1356,7 @@ public class SyncModel {
 				{
 					boolean updatetable = false;
 					X_AD_Reference adref = new Query(Env.getCtx(), X_AD_Reference.Table_Name, "Identifier = ? ", null)
-					.setParameters(ref.Identifier()).first();
+							.setParameters(ref.Identifier()).first();
 					if (adref == null) {
 						updatetable = true;				
 					} else {
@@ -1392,6 +1395,49 @@ public class SyncModel {
 		} 	
 		listreferences.clear();		
 		listreferences = null;
+	}
+
+	public void checksequences() {
+		label.setText(String.format("checking sequences..."));
+		serializables = new HashSet<Class<? extends PO>>();
+		ComponentScanner scanner = new ComponentScanner();
+		scanner.getClasses(	new ComponentQuery() 
+		{
+			protected void query() {
+				select().from("org.compiere.model.persistence").andStore(thoseExtending(PO.class).into(serializables));
+			}
+		}		
+				);					
+		Iterator it = serializables.iterator();
+		int i = 0;
+		float rows = serializables.size();
+		while (it.hasNext())
+		{	
+			Class<?> clazz = (Class<?>) it.next();
+			for (Field f:clazz.getDeclaredFields()) {
+				for (Annotation ap: f.getAnnotations()) {					
+					if (ap.annotationType() == XendraTable.class) {
+						XendraTable table = (XendraTable) ap;						
+						MColumn column = new Query(Env.getCtx(),X_AD_Column.Table_Name, "IsKey = 'Y' AND AD_Table_ID = (Select AD_Table_ID from AD_Table where Tablename = ? )", null)
+								.setParameters(table.TableName()).first();
+						if (column != null && column.getColumnName().startsWith(table.TableName())) {
+							if (bar != null) {							
+								label.setText(String.format("validando secuencia de %s (%s)", table.TableName(), table.Name()));
+								float p = (i / rows) * 100;
+								bar.setValue((int) p);
+								try {
+									gui.updateScreen();
+								} catch (IOException e2) {
+									e2.printStackTrace();
+								}													
+							}																								
+							CConnection.get().getDatabase().checkSequence(table.TableName(), null);	
+						}
+					}	
+				}
+			}
+			
+		}		
 	}
 
 	public void checkIdentifiers() {
@@ -1435,13 +1481,14 @@ public class SyncModel {
 		}
 	}
 	public void checkvalrule() {
-		listvalrules = new HashSet<Class<?>>();
+		//listvalrules = new HashSet<Class<?>>();
 		ComponentScanner scanner = new ComponentScanner();	
-		scanner.getClasses(	new ComponentQuery() 
+		listvalrules = scanner.getClasses(	new ComponentQuery() 
 		{
 			protected void query() {
-				select().from("org.compiere.model.valrule").andStore(
-						thoseAnnotatedWith(XendraValRule.class).into(listvalrules));
+				select().from("org.compiere.model.valrule").returning(all());
+				//select().from("org.compiere.model.valrule").andStore(
+				//		thoseAnnotatedWith(XendraValRule.class).into(listvalrules));
 			}
 		});		
 		scanner = null;
@@ -1474,11 +1521,11 @@ public class SyncModel {
 				Integer valruleid = Integer.valueOf(ref.AD_Val_Rule_ID());
 				String valrulerefid = ref.Identifier();
 				X_AD_Val_Rule adref = new Query(Env.getCtx(), X_AD_Val_Rule.Table_Name, " Identifier = ? ", null)
-				.setParameters(valrulerefid).first();
+						.setParameters(valrulerefid).first();
 				if (adref == null)
 				{
 					adref = new Query(Env.getCtx(), X_AD_Val_Rule.Table_Name, " AD_Val_Rule_ID = ? ", null)
-					.setParameters(valruleid).first();
+							.setParameters(valruleid).first();
 					if (adref != null)
 					{
 						adref.setIdentifier(valrulerefid);
@@ -1511,6 +1558,11 @@ public class SyncModel {
 		listvalrules = null;
 	}
 
+	
+	public void UpdateSequences() throws Exception {
+		
+	}
+	
 	public void UpdateTable() throws Exception {
 		boolean ok = false;
 		Class<?> clazz = null;
@@ -1520,7 +1572,7 @@ public class SyncModel {
 				POInfo.remove(X_AD_Package.Table_ID);
 				clazz = Class.forName(X_AD_Package.class.getName());
 				UpdateStructure(clazz);
-				
+
 				POInfo.remove(X_AD_Index.Table_ID);
 				clazz = Class.forName(X_AD_Index.class.getName());
 				UpdateStructure(clazz);
@@ -1556,11 +1608,11 @@ public class SyncModel {
 				POInfo.remove(X_AD_Column.Table_ID);
 				clazz = Class.forName(X_AD_Column.class.getName());
 				UpdateStructure(clazz);	
-				
+
 				POInfo.remove(X_AD_Process.Table_ID);
 				clazz = Class.forName(X_AD_Process.class.getName());
 				UpdateStructure(clazz);
-				
+
 				POInfo.remove(X_AD_Val_Rule.Table_ID);
 				clazz = Class.forName(X_AD_Val_Rule.class.getName());
 				UpdateStructure(clazz);				
@@ -1684,11 +1736,11 @@ public class SyncModel {
 						int AD_Package_ID = 0;
 						int AD_Plugin_ID = 0;
 						X_AD_Plugin plg = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "Identifier = ?", null)
-						.setParameters(pluginid).first();
+								.setParameters(pluginid).first();
 						if (plg != null) 
 							AD_Plugin_ID = plg.getAD_Plugin_ID();
 						X_AD_Package pkg = new Query(Env.getCtx(), X_AD_Package.Table_Name, "Identifier = ?", null)
-						.setParameters(pkgid).first();
+								.setParameters(pkgid).first();
 						if (pkg != null)
 							AD_Package_ID = pkg.getAD_Package_ID();
 						if (AD_Plugin_ID > 0 && dbtable.getAD_Plugin_ID() != AD_Plugin_ID) {
@@ -1751,12 +1803,12 @@ public class SyncModel {
 						Timestamp srcsynchro = Timestamp.valueOf(column.Synchronized());
 						int AD_Process_ID = 0;
 						X_AD_Column dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ?", null)
-						.setParameters(column.Identifier()).first();
+								.setParameters(column.Identifier()).first();
 						if (dbcolumn == null && dbtable != null)
 						{
 							try {
 								dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "ColumnName = ? AND AD_Table_ID = ? ", null)
-								.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
+										.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
 								if (dbcolumn != null)
 								{
 									dbcolumn.setIdentifier(column.Identifier());
@@ -1783,7 +1835,7 @@ public class SyncModel {
 							if (column.AD_Process_ID().length() > 0)
 							{
 								X_AD_Process dbprocess = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
-								.setParameters(column.AD_Process_ID()).first();
+										.setParameters(column.AD_Process_ID()).first();
 								if (dbprocess != null)
 									AD_Process_ID = dbprocess.getAD_Process_ID();
 								else
@@ -1927,23 +1979,35 @@ public class SyncModel {
 		try {
 			boolean update = true;
 			if (elements.size() == 0)
-			{
-				final Set<Class<?>> listelements = new HashSet<Class<?>>();
+			{				
+				//Set<Class<?>> listelements = new HashSet<Class<?>>();
 				ComponentScanner scanner = new ComponentScanner();	
-				scanner.getClasses(	new ComponentQuery() 
+				//scanner.getClasses(	new ComponentQuery() 
+				//{
+				//	protected void query() {
+				//		select().from("org.compiere.model.element").andStore(
+				//				thoseAnnotatedWith(XendraElement.class).into(listelements));
+				//	}
+				//});
+				Set<Class<?>>  listelements = scanner.getClasses(	new ComponentQuery()
 				{
 					protected void query() {
-						select().from("org.compiere.model.element").andStore(
-								thoseAnnotatedWith(XendraElement.class).into(listelements));
+						select().from("org.compiere.model.element").returning(all());
 					}
-				});					
+				});	
 				Iterator it = listelements.iterator();
 				while (it.hasNext())					
 				{
-					Object processclass = it.next();					
-					Class<?> clazzref = Class.forName(((Class) processclass).getName());						
-					XendraElement ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraElement.class);
-					elements.put(ref.Identifier(), clazzref.getSimpleName());
+					Class<?> clazzref = null;
+					try {
+						Object processclass = it.next();					
+						//Class<?> clazzref = Class.forName(((Class) processclass).getName());						
+						clazzref = Class.forName(((Class) processclass).getName());
+						XendraElement ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraElement.class);
+						elements.put(ref.Identifier(), clazzref.getSimpleName());
+					} catch (Exception e) {								
+						continue;
+					}
 				}								
 			}
 			///String ColumnName = "";
@@ -1960,15 +2024,15 @@ public class SyncModel {
 				XendraElement element = clazzele.getField(X_AD_Element.COLUMNNAME_Identifier).getAnnotation(XendraElement.class);
 				Timestamp srcsynchro = Timestamp.valueOf(element.Synchronized());
 				adelement = new Query(Env.getCtx(), X_AD_Element.Table_Name, "Identifier = ?", null)
-				.setParameters(Identifier).first();
+						.setParameters(Identifier).first();
 				if (adelement == null)
 				{
 					adelement = new Query(Env.getCtx(), X_AD_Element.Table_Name, "ColumnName = ? AND Name = ?", null)
-					.setParameters(element.ColumnName(), element.Name()).first();
+							.setParameters(element.ColumnName(), element.Name()).first();
 					if (adelement == null)
 					{
 						adelement = new Query(Env.getCtx(), X_AD_Element.Table_Name, "ColumnName = ?", null)
-						.setParameters(element.ColumnName()).first();	
+								.setParameters(element.ColumnName()).first();	
 						if (adelement != null)
 						{
 							adelement.setName(element.Name());
@@ -2051,24 +2115,30 @@ public class SyncModel {
 		X_AD_Reference adreference = null;
 		try {
 			boolean update = true;
+			Class<?> clazzref  = null;
 			//if (references.size() == 0)
 			//{
 			//	fillHashtable(ReferenceList.class, references);
 			//}			
 			//String refclass = (String) references.get(Identifier);
-			Class<?> clazzref = Class.forName(String.format("org.compiere.model.reference.%s",(String) references.get(Identifier)));
+			try {
+				clazzref = Class.forName(String.format("org.compiere.model.reference.%s",(String) references.get(Identifier)));
+			} catch (Exception e) {
+				log.log(Level.SEVERE, String.format("reference search by identifier %s not found",Identifier));
+				e.printStackTrace();
+			}
 			XendraRef ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraRef.class);
 			Timestamp srcsynchro = Timestamp.valueOf(ref.Synchronized());
 			try {
 				adreference = new Query(Env.getCtx(), X_AD_Reference.Table_Name, "Identifier = ?", null)
-				.setParameters(Identifier).first();
+						.setParameters(Identifier).first();
 			}
 			catch (Exception e) {};
 			if (adreference == null)
 			{
 				try {
 					adreference = new Query(Env.getCtx(), X_AD_Reference.Table_Name, "Name = ?", null)
-					.setParameters(ref.Name()).first();
+							.setParameters(ref.Name()).first();
 				}
 				catch (Exception e) {};
 				if (adreference != null)
@@ -2100,11 +2170,11 @@ public class SyncModel {
 								if (ap.annotationType() == XendraRefItem.class) {
 									XendraRefItem ri = (XendraRefItem) ap;									
 									X_AD_Ref_List reflist = new Query(Env.getCtx(), X_AD_Ref_List.Table_Name, "Identifier = ? ", null)
-									.setParameters(ri.Identifier()).first();									
+											.setParameters(ri.Identifier()).first();									
 									if (reflist == null)
 									{
 										reflist = new Query(Env.getCtx(), X_AD_Ref_List.Table_Name, "Value = ? AND AD_Reference_ID = ?", null)
-										.setParameters(ri.Value(), adreference.getAD_Reference_ID()).first();
+												.setParameters(ri.Value(), adreference.getAD_Reference_ID()).first();
 									}
 									if (reflist == null)
 									{
@@ -2139,7 +2209,7 @@ public class SyncModel {
 									if (columnkey <= 0) 
 										continue;									
 									X_AD_Ref_Table reftable = new Query(Env.getCtx(), X_AD_Ref_Table.Table_Name, "AD_Reference_ID = ?", null)
-									.setParameters(adreference.getAD_Reference_ID()).first();
+											.setParameters(adreference.getAD_Reference_ID()).first();
 									if (reftable != null) {
 										if (columnkey != reftable.getAD_Key() || 
 												columndisplay != reftable.getAD_Display() || 
@@ -2149,17 +2219,17 @@ public class SyncModel {
 									}
 									if (reftable == null) {
 										reftable = new Query(Env.getCtx(), X_AD_Ref_Table.Table_Name, "Identifier = ?", null)
-										.setParameters(ri.Identifier()).first();
+												.setParameters(ri.Identifier()).first();
 										if (reftable == null)
 										{
 											//if (table != null && columnkey > 0) {
 											reftable = new Query(Env.getCtx(), X_AD_Ref_Table.Table_Name, "AD_Table_ID = ? AND AD_Key = ?", null)
-											.setParameters(table.getAD_Table_ID(), columnkey).first();
+													.setParameters(table.getAD_Table_ID(), columnkey).first();
 											//}
 											if (reftable != null && reftable.getAD_Reference_ID() != adreference.getAD_Reference_ID())
 											{
 												X_AD_Reference reference = new Query(Env.getCtx(), X_AD_Reference.Table_Name, "AD_Reference_ID = ?", null)
-												.setParameters(reftable.getAD_Reference_ID()).first();
+														.setParameters(reftable.getAD_Reference_ID()).first();
 												if (reference != null) {
 													if (!reference.getName().equals(adreference.getName())) {
 														reftable = null;
@@ -2214,7 +2284,7 @@ public class SyncModel {
 			String code = (String) getCode.invoke(null, null);
 			Timestamp srcsynchro = Timestamp.valueOf(valref.Synchronized());
 			rule = new Query(Env.getCtx(), X_AD_Val_Rule.Table_Name, "Identifier = ?", null)
-			.setParameters(Identifier).first();
+					.setParameters(Identifier).first();
 			if (rule != null && rule.getSynchronized() != null)
 			{
 				if (srcsynchro.compareTo(rule.getSynchronized()) <= 0)
@@ -2323,11 +2393,11 @@ public class SyncModel {
 						int AD_Package_ID = 0;
 						int AD_Plugin_ID = 0;
 						X_AD_Plugin plg = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "Identifier = ?", null)
-						.setParameters(pluginid).first();
+								.setParameters(pluginid).first();
 						if (plg != null) 
 							AD_Plugin_ID = plg.getAD_Plugin_ID();
 						X_AD_Package pkg = new Query(Env.getCtx(), X_AD_Package.Table_Name, "Identifier = ?", null)
-						.setParameters(pkgid).first();
+								.setParameters(pkgid).first();
 						if (pkg != null)
 							AD_Package_ID = pkg.getAD_Package_ID();
 						if (AD_Plugin_ID > 0 && dbtable.getAD_Plugin_ID() != AD_Plugin_ID) {
@@ -2432,7 +2502,7 @@ public class SyncModel {
 					if (translate == null)
 						continue;
 					PO potrl = new Query(Env.getCtx(), tablename, "identifier = ?", null)
-					.setParameters(identifier).first();
+							.setParameters(identifier).first();
 					if (potrl != null)
 					{
 						String key = String.format("%s_ID", tablename);
@@ -2478,7 +2548,7 @@ public class SyncModel {
 					if (ap.annotationType() == XendraField.class) {
 						XendraField field = (XendraField) ap;
 						X_AD_Field dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "identifier = ?", null)
-						.setParameters(field.Identifier()).first();
+								.setParameters(field.Identifier()).first();
 						if (dbfield == null)
 						{					
 							X_AD_Tab dbtab = null;
@@ -2487,7 +2557,7 @@ public class SyncModel {
 								if (tab.Identifier().equals(field.AD_Tab_ID()))
 								{
 									dbtab = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "identifier = ? ", null)
-									.setParameters(field.AD_Tab_ID()).first();
+											.setParameters(field.AD_Tab_ID()).first();
 									break;
 								}								
 							}
@@ -2500,7 +2570,7 @@ public class SyncModel {
 										if (column.Identifier().equals(field.AD_Column_ID()))
 										{
 											dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "identifier = ?", null)
-											.setParameters(field.AD_Column_ID()).first();
+													.setParameters(field.AD_Column_ID()).first();
 											break;
 										}										
 									}
@@ -2509,7 +2579,7 @@ public class SyncModel {
 							if (dbtab != null && dbcolumn != null)					
 							{
 								dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "AD_Tab_ID = ? AND AD_Column_ID = ?", null)
-								.setParameters(dbtab.getAD_Tab_ID(), dbcolumn.getAD_Column_ID()).first();						
+										.setParameters(dbtab.getAD_Tab_ID(), dbcolumn.getAD_Column_ID()).first();						
 							}							
 						}
 						//
@@ -2537,11 +2607,11 @@ public class SyncModel {
 			for (XendraTab tab:tabs)
 			{
 				X_AD_Tab dbtab = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "identifier = ?", null)
-				.setParameters(tab.Identifier()).first();
+						.setParameters(tab.Identifier()).first();
 				if (dbtab == null && dbtable != null)
 				{
 					dbtab = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "Name = ? AND AD_Table_ID = ?", null)
-					.setParameters(tab.Name(), dbtable.getAD_Table_ID()).first();
+							.setParameters(tab.Name(), dbtable.getAD_Table_ID()).first();
 				}
 				if (dbtab == null || dbtab.getSynchronized() == null)
 					updatetabs = true;
@@ -2558,60 +2628,6 @@ public class SyncModel {
 						updatetabs = true;										
 				}					
 			}
-			// aca deberia verificarse todo y no en el mismo bucle
-			//			if (fields != null)
-			//			{
-			//				for (XendraField field:fields)
-			//				{
-			//					if (updatetabs)
-			//						continue;
-			//					X_AD_Field dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "identifier = ?", null)
-			//					.setParameters(field.Identifier()).first();
-			//					if (dbfield == null)
-			//					{					
-			//						X_AD_Tab dbtab = null;
-			//						for (XendraTab tab:tabs)
-			//						{
-			//							if (tab.Identifier().equals(field.AD_Tab_ID()))
-			//							{
-			//								dbtab = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "identifier = ? ", null)
-			//								.setParameters(field.AD_Tab_ID()).first();
-			//								break;
-			//							}
-			//						}
-			//						X_AD_Column dbcolumn = null;
-			//						for (XendraColumn column:columns)
-			//						{
-			//							if (column.Identifier().equals(field.AD_Column_ID()))
-			//							{
-			//								dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "identifier = ?", null)
-			//								.setParameters(field.AD_Column_ID()).first();
-			//								break;
-			//							}
-			//						}
-			//						if (dbtab != null && dbcolumn != null)					
-			//						{
-			//							dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "AD_Tab_ID = ? AND AD_Column_ID = ?", null)
-			//							.setParameters(dbtab.getAD_Tab_ID(), dbcolumn.getAD_Column_ID()).first();						
-			//						}
-			//					}
-			//					Timestamp fieldsync = Timestamp.valueOf(field.Synchronized());
-			//					Timestamp dbfieldsync = null;
-			//					if (dbfield != null)
-			//						dbfieldsync = dbfield.getSynchronized();
-			//					if (dbfieldsync != null) {
-			//						Calendar calref = Calendar.getInstance();
-			//						calref.setTime(dbfield.getSynchronized());					
-			//						calref.set(Calendar.MILLISECOND, 0);
-			//						dbfieldsync = new Timestamp(calref.getTimeInMillis()); 
-			//					}
-			//				
-			//					if (dbfield == null || dbfield.getSynchronized() == null || fieldsync.compareTo(dbfieldsync) != 0)
-			//					{
-			//						updatetabs = true;
-			//					}				
-			//				}
-			//			}
 		}
 		if (updatetable)
 		{
@@ -2624,11 +2640,11 @@ public class SyncModel {
 			int AD_Package_ID = 0;
 			int AD_Plugin_ID = 0;
 			X_AD_Plugin plg = new Query(Env.getCtx(), X_AD_Plugin.Table_Name, "Identifier = ?", null)
-			.setParameters(pluginid).first();
+					.setParameters(pluginid).first();
 			if (plg != null) 
 				AD_Plugin_ID = plg.getAD_Plugin_ID();
 			X_AD_Package pkg = new Query(Env.getCtx(), X_AD_Package.Table_Name, "Identifier = ?", null)
-			.setParameters(pkgid).first();
+					.setParameters(pkgid).first();
 			if (pkg != null)
 				AD_Package_ID = pkg.getAD_Package_ID();
 			dbtable.setName(table.Name());
@@ -2676,12 +2692,12 @@ public class SyncModel {
 							Timestamp srcsynchro = Timestamp.valueOf(column.Synchronized());
 							int AD_Process_ID = 0;
 							X_AD_Column dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ?", null)
-							.setParameters(column.Identifier()).first();
+									.setParameters(column.Identifier()).first();
 							if (dbcolumn == null && dbtable != null)
 							{
 								try {
 									dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "ColumnName = ? AND AD_Table_ID = ? ", null)
-									.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
+											.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
 									if (dbcolumn != null)
 									{
 										dbcolumn.setIdentifier(column.Identifier());
@@ -2710,7 +2726,7 @@ public class SyncModel {
 								if (column.AD_Process_ID().length() > 0)
 								{
 									X_AD_Process dbprocess = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
-									.setParameters(column.AD_Process_ID()).first();
+											.setParameters(column.AD_Process_ID()).first();
 									if (dbprocess != null)
 										AD_Process_ID = dbprocess.getAD_Process_ID();
 									else
@@ -2857,367 +2873,15 @@ public class SyncModel {
 			for (XendraTab tab:tabs)
 			{
 				X_AD_Tab dbtab = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "identifier = ?", null)
-				.setParameters(tab.Identifier()).first();
+						.setParameters(tab.Identifier()).first();
 				// update window and menu options
 				int tabwindowid = 0;
 				String windowid = tab.AD_Window_ID();
 				X_AD_Window dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Identifier = ?" , null)
-				.setParameters(windowid).first();
+						.setParameters(windowid).first();
 				if (dbwindow != null) {
 					tabwindowid = dbwindow.getAD_Window_ID();
 				}
-				//				String value = (String) windows.get(windowid);
-				//				if (value != null)
-				//				{
-				//					XendraWindow window = null;
-				//					//Field f = X_AD_WindowList.class.getDeclaredField(value);
-				//					// xapiens
-				//					Field f = null;
-				//					for (Annotation ap: f.getAnnotations()) {
-				//						if (ap.annotationType() == XendraWindow.class) {
-				//							window = (XendraWindow) ap;
-				//							X_AD_Window dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Identifier = ?" , null)
-				//							.setParameters(windowid).first();
-				//							if (dbwindow == null)
-				//							{
-				//								int wincount = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Name = ?" , null)
-				//								.setParameters(window.Name()).count();
-				//								if (wincount == 1)
-				//								{
-				//									dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Name = ?" , null)
-				//									.setParameters(window.Name()).first();
-				//									dbwindow.setIdentifier(window.Identifier());
-				//									dbwindow.setSynchronized(null);
-				//								}
-				//								else
-				//								{
-				//
-				//								}								
-				//							}
-				//							if (dbwindow == null)
-				//							{
-				//								dbwindow = new X_AD_Window(Env.getCtx(), 0 , null);
-				//								dbwindow.setIdentifier(window.Identifier());										
-				//							}
-				//							Timestamp windowsync = Timestamp.valueOf(window.Synchronized());
-				//							Calendar calwin = Calendar.getInstance();
-				//							calwin.setTime(windowsync);
-				//							calwin.set(Calendar.MILLISECOND, 0);
-				//							if (dbwindow.getSynchronized() == null || calwin.getTime().compareTo(dbwindow.getSynchronized()) != 0)
-				//							{											
-				//								//System.out.print("W");
-				//								dbwindow.setName(window.Name());
-				//								dbwindow.setDescription(window.Description());
-				//								dbwindow.setHelp(window.Help());
-				//								dbwindow.setWindowType(window.WindowType());
-				//								dbwindow.setIsSOTrx(window.IsSOTrx());
-				//								dbwindow.setEntityType(REF__EntityType.Dictionary);
-				//								if (window.AD_Image_ID().length() > 0)
-				//								{
-				//									X_AD_Image img = new Query(Env.getCtx(), X_AD_Image.Table_Name, "Identifier = ?", null)
-				//									.setParameters(window.AD_Image_ID()).first();
-				//									if (img != null)
-				//									{
-				//										dbwindow.setAD_Image_ID(img.getAD_Image_ID());
-				//									}																		
-				//								}
-				//								// dbwindow isdefault winheight, winwidth BetaFunctionality
-				//								dbwindow.setIsBetaFunctionality(window.IsBetaFunctionality());
-				//								dbwindow.setSynchronized(windowsync);
-				//								dbwindow.save();
-				//							}
-				//							tabwindowid = dbwindow.getAD_Window_ID();
-				//							String menuid = window.AD_Menu_ID();
-				//							if (menuid != null && menuid.length() > 0)
-				//							{								
-				//								X_AD_TreeNodeMM mm = null;
-				//								List<ExtensionMenuItem> items = new ArrayList<ExtensionMenuItem>();
-				//								while (menuid.length() > 0)
-				//								{
-				//									String valuemenu = (String) menus.get(menuid);
-				//									XendraMenu menu = null;
-				//									//Field fm = X_AD_WindowList.class.getDeclaredField(valuemenu);
-				//									Field fm = null; 
-				//									// xapiens
-				//									for (Annotation apm: fm.getAnnotations()) {
-				//										if (apm.annotationType() == XendraMenu.class) {
-				//											menu = (XendraMenu) apm;
-				//											ExtensionMenuItem emi = new ExtensionMenuItem();
-				//											emi.setName(menu.Name());
-				//											emi.setDescription(menu.Description());
-				//											emi.setIsSummary(menu.IsSummary());
-				//											emi.setIsSOTrx(menu.IsSOTrx());
-				//											emi.setIsReadOnly(menu.IsReadOnly());
-				//											emi.setParent_ID(menu.Parent_ID());
-				//											emi.setIdentifier(menu.Identifier());
-				//											emi.setID(Integer.valueOf(menu.AD_Menu_ID()));
-				//											if (menu.Identifier().equals(window.AD_Menu_ID()))
-				//											{
-				//												emi.setAction(REF_AD_MenuAction.Window);
-				//												emi.setAD_Window_ID(tabwindowid);
-				//											}
-				//											emi.setLevel(Integer.valueOf(menu.level()));
-				//											emi.setEntityType(REF__EntityType.Dictionary);
-				//											String tstamp = menu.Synchronized();
-				//											Timestamp sync = Timestamp.valueOf(tstamp);
-				//											emi.setSynchronized(sync);
-				//											items.add(emi);
-				//											menuid = menu.Parent_ID();
-				//											//
-				//											//for (Field ftrl:X_AD_WindowList.class.getDeclaredFields())
-				//											// xapiens
-				//											for (Field ftrl:X_AD_Window.class.getDeclaredFields())
-				//											{
-				//												for (Annotation trlanno: ftrl.getAnnotations()) {
-				//													if (trlanno.annotationType() == XendraTrl.class) {
-				//														XendraTrl trlannotation  = (XendraTrl) trlanno;
-				//														if (trlannotation.Identifier().equals(emi.getIdentifier()))
-				//														{
-				//															List<String> def = new ArrayList<String>();
-				//															String var = ftrl.getName();
-				//															StringTokenizer st = new StringTokenizer(var, "_", false);
-				//															while (st.hasMoreTokens())
-				//															{
-				//																String xx = st.nextToken().trim();
-				//																def.add(xx);
-				//															}	
-				//															String lang = String.format("%s_%s", def.get(0),def.get(1));
-				//															String type = def.get(2);
-				//															String name = "";
-				//															for (int i=3; i < def.size()-1; i++)
-				//															{
-				//																if (name.length() > 0)
-				//																	name += "_";
-				//																name += def.get(i);
-				//															}
-				//															String subname = def.get(def.size()-1);
-				//															String translate = (String) ftrl.get(ftrl.getName());
-				//															String identifier = trlannotation.Identifier();
-				//															String tablename = "";
-				//															if (type.equals("TAB"))							
-				//																tablename = X_AD_Tab.Table_Name;
-				//															else if (type.equals("COLUMN"))
-				//																tablename = X_AD_Column.Table_Name;
-				//															else if (type.equals("FIELD"))
-				//																tablename = X_AD_Field.Table_Name;
-				//															else if (type.equals("TABLE"))
-				//																tablename = X_AD_Table.Table_Name;
-				//															else if (type.equals("MENU"))
-				//																tablename = X_AD_Menu.Table_Name;
-				//															else
-				//																System.out.println("X");
-				//															if (translate == null)
-				//																continue;
-				//															PO potrl = new Query(Env.getCtx(), tablename, "identifier = ?", null)
-				//															.setParameters(identifier).first();
-				//															if (potrl != null)
-				//															{
-				//																String key = String.format("%s_ID", tablename);
-				//																String sqlcount = String.format("SELECT %s FROM %s_trl WHERE %s=%s AND ad_language='%s'",subname, tablename,key, potrl.get_ID(), lang);
-				//																String dbtranslate = DB.getSQLValueString(null, sqlcount);
-				//																if (dbtranslate == null)
-				//																	dbtranslate = "";
-				//																if (dbtranslate.compareTo(translate) != 0)
-				//																{
-				//																	if (translate.contains("'"))							
-				//																		translate = translate.replace("'", "''");
-				//																	String sqlupdate = String.format("UPDATE %s_trl set %s='%s' WHERE %s=%s AND ad_language='%s'",tablename,subname,translate,key, potrl.get_ID(),lang);
-				//																	int no = DB.executeUpdate(sqlupdate, null);														
-				//																	{
-				//																		if (no == 0)
-				//																		{
-				//																			Vector vector = new Vector();					
-				//																			vector.add(lang);			
-				//																			vector.add(name);
-				//																			vector.add(subname);
-				//																			vector.add(translate);																								
-				//																			vector.add(identifier);
-				//																			vector.add(tablename);
-				//																			newtranslations.add(vector);
-				//																		}
-				//																	}
-				//																	if (no < 0)
-				//																		System.out.println("X");
-				//																}
-				//															}
-				//															else
-				//															{
-				//
-				//															}																				
-				//														}
-				//													}
-				//												}
-				//											}
-				//										}
-				//									}								
-				//								}
-				//								//
-				//								boolean goahead = true;
-				//								for (int i = 1; i < 10; i ++)
-				//								{
-				//									if (goahead)
-				//									{
-				//										for (ExtensionMenuItem item:items)
-				//										{
-				//											if (item.getLevel() == i)
-				//											{
-				//												X_AD_Menu dbmenu = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "identifier = ?", null)
-				//												.setParameters(item.getIdentifier()).first();
-				//												if (dbmenu == null)
-				//												{
-				//													dbmenu = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "AD_Menu_ID = ?", null)
-				//													.setParameters(item.getID()).first();
-				//													if (dbmenu != null)
-				//													{
-				//														if (item.getName().toLowerCase().equals(dbmenu.getName().toLowerCase()))
-				//														{
-				//															dbmenu.setIdentifier(item.getIdentifier());
-				//															dbmenu.setSynchronized(null);
-				//														}
-				//														else
-				//														{
-				//															dbmenu = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "Name = ?", null)
-				//															.setParameters(item.getName()).first();
-				//															if (dbmenu != null)
-				//															{
-				//																StringBuilder sb = new StringBuilder("WITH RECURSIVE fulltree(node_id, parent_id) as (");
-				//																sb.append("SELECT node_id, parent_id FROM AD_TreeNodeMM WHERE node_id = ? ")
-				//																.append("	UNION ALL ")
-				//																.append(" SELECT t.node_id,t.parent_id from AD_TreeNodeMM t, fulltree ft where t.node_id = ft.parent_id ) ")
-				//																.append("SELECT count(*) from fulltree");
-				//																int level = DB.getSQLValue(null, sb.toString(), dbmenu.getAD_Menu_ID());
-				//																if (level == item.getLevel())
-				//																{
-				//																	dbmenu.setIdentifier(item.getIdentifier());
-				//																	dbmenu.setSynchronized(null);
-				//																}
-				//																else
-				//																{
-				//																	dbmenu = null;
-				//																}
-				//															}
-				//														}
-				//													}											
-				//													if (dbmenu == null)
-				//													{
-				//														dbmenu = new X_AD_Menu(Env.getCtx(), 0 , null);
-				//														dbmenu.setIdentifier(item.getIdentifier());
-				//													}
-				//													//
-				//												}
-				//												Timestamp menusync = item.getSynchronized();
-				//												if (dbmenu.getSynchronized() == null || menusync.compareTo(dbmenu.getSynchronized()) != 0)
-				//												{
-				//													dbmenu.setName(item.getName());
-				//													dbmenu.setDescription(item.getDescription());
-				//													dbmenu.setIsSummary(item.getIsSummary());
-				//													dbmenu.setIsSOTrx(item.getIsSOTrx());
-				//													dbmenu.setIsReadOnly(item.getIsReadOnly());			
-				//													if (item.getAction().length() > 0)
-				//														dbmenu.setAction(item.getAction());
-				//													if (item.getAD_Window_ID() > 0)
-				//													{
-				//														dbmenu.setAD_Window_ID(item.getAD_Window_ID());
-				//													}
-				//													if (item.getAD_Process_ID().length() > 0)
-				//													{
-				//														X_AD_Process process = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
-				//														.setParameters(item.getAD_Process_ID()).first();
-				//														if (process != null)
-				//														{
-				//															dbmenu.setAD_Process_ID(process.getAD_Process_ID());		
-				//														}
-				//													}					
-				//													dbmenu.setEntityType(item.getEntityType());															
-				//													dbmenu.setSynchronized(menusync);
-				//													if (!dbmenu.save())
-				//														goahead = false;
-				//												}											
-				//												if (goahead)
-				//												{
-				//													boolean isnewmm = false;
-				//													mm = new Query(Env.getCtx(), X_AD_TreeNodeMM.Table_Name, "node_id = ?",null)
-				//													.setParameters(dbmenu.getAD_Menu_ID()).first();
-				//													if (mm == null)
-				//													{																				
-				//														if (MTree_Base.addNode(Env.getCtx(), REF_AD_TreeTypeType.Menu, dbmenu.getAD_Menu_ID(), null))
-				//														{
-				//															mm = new Query(Env.getCtx(), X_AD_TreeNodeMM.Table_Name, "node_id = ?",null)
-				//															.setParameters(dbmenu.getAD_Menu_ID()).first();
-				//															isnewmm = true;
-				//														}
-				//													}	
-				//													int parent = 0;
-				//													if (item.getParent_ID().length() > 0)
-				//													{
-				//														X_AD_Menu parentitem = new Query(Env.getCtx(), X_AD_Menu.Table_Name, "identifier = ?", null)
-				//														.setParameters(item.getParent_ID()).first();
-				//														if (parentitem != null)
-				//														{
-				//															parent = parentitem.getAD_Menu_ID();
-				//															mm.setParent_ID(parentitem.getAD_Menu_ID());
-				//														}												
-				//														else
-				//														{
-				//															System.out.println("aca hay una excepcion");
-				//														}
-				//													}
-				//													if (isnewmm)
-				//													{
-				//														int no = 0;
-				//														int count = DB.getSQLValue(null, "SELECT count(*) from AD_TreeNodeMM where parent_id = ? and exists(select 1 from ad_menu where ad_menu_id = node_id)", parent);
-				//														if (count > 0)
-				//														{
-				//															no = DB.getSQLValue(null, "SELECT MAX(seqno) from AD_TreeNodeMM where parent_id = ? and exists(select 1 from ad_menu where ad_menu_id = node_id)", parent);
-				//															no++;
-				//														}											
-				//														mm.setSeqNo(no);
-				//													}
-				//													mm.save();
-				//												}
-				//											}
-				//										}
-				//									}
-				//								}
-				//							}
-				//						}
-				//					}	
-				//					if (dbtab == null)
-				//					{
-				//						X_AD_Window dbwindow = new Query(Env.getCtx(), X_AD_Window.Table_Name, "Identifier = ?" , null)
-				//						.setParameters(windowid).first();
-				//
-				//						List<X_AD_Tab> dbtabs = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "AD_Table_ID = ?", null)
-				//						.setParameters(dbtable.getAD_Table_ID()).list();
-				//						for (X_AD_Tab dbintab:dbtabs)
-				//						{
-				//							if (dbintab.getName().equals(tab.Name()))
-				//							{
-				//								if (dbintab.getAD_Window_ID() == dbwindow.getAD_Window_ID())
-				//								{
-				//									dbtab = dbintab;
-				//									if (dbtab != null)
-				//									{
-				//										dbtab.setIdentifier(tab.Identifier());									
-				//										dbtab.setSynchronized(null);
-				//									}
-				//									break;
-				//								}
-				//							}
-				//						}						
-				//					}
-				//					if (dbtab == null)
-				//					{
-				//						dbtab = new X_AD_Tab(Env.getCtx(), 0 , null);	
-				//						dbtab.setAD_Table_ID(dbtable.getAD_Table_ID());
-				//						dbtab.setIdentifier(tab.Identifier());
-				//					}							
-				//				}	
-				//				else
-				//				{					
-				//					log.log(Level.WARNING, String.format("tab defined but the window for %s, don't exists ",table.Name()));
-				//					continue;
-				//				}
 				Timestamp tabsync = Timestamp.valueOf(tab.Synchronized());
 				Calendar caltab = Calendar.getInstance();								
 				caltab.setTime(tabsync);
@@ -3251,7 +2915,7 @@ public class SyncModel {
 					if (tab.AD_Column_ID().length() > 0)
 					{
 						X_AD_Column col = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ? ", null)
-						.setParameters(tab.AD_Column_ID()).first();
+								.setParameters(tab.AD_Column_ID()).first();
 						if (col != null)
 						{
 							dbtab.setAD_Column_ID(col.getAD_Column_ID());
@@ -3264,7 +2928,7 @@ public class SyncModel {
 					if (tab.AD_Process_ID().length() > 0)
 					{
 						X_AD_Process proc = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
-						.setParameters(tab.AD_Process_ID()).first();
+								.setParameters(tab.AD_Process_ID()).first();
 						if (proc != null)
 						{
 							dbtab.setAD_Process_ID(proc.getAD_Process_ID());
@@ -3274,14 +2938,14 @@ public class SyncModel {
 					if (tab.AD_ColumnSortOrder_ID().length() > 0)
 					{
 						X_AD_Column col = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ? ", null)
-						.setParameters(tab.AD_ColumnSortOrder_ID()).first();
+								.setParameters(tab.AD_ColumnSortOrder_ID()).first();
 						if (col != null)
 							dbtab.setAD_ColumnSortOrder_ID(col.getAD_Column_ID());
 					}
 					if (tab.AD_ColumnSortYesNo_ID().length() > 0)
 					{
 						X_AD_Column col = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ?", null)
-						.setParameters(tab.AD_ColumnSortYesNo_ID()).first();
+								.setParameters(tab.AD_ColumnSortYesNo_ID()).first();
 						if (col != null)							
 							dbtab.setAD_ColumnSortYesNo_ID(col.getAD_Column_ID());													
 					}						
@@ -3290,7 +2954,7 @@ public class SyncModel {
 					if (tab.Included_Tab_ID().length() > 0)
 					{
 						X_AD_Tab tabincl = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "Identifier = ?", null)
-						.setParameters(tab.Included_Tab_ID()).first();
+								.setParameters(tab.Included_Tab_ID()).first();
 						if (tabincl != null)
 							dbtab.setIncluded_Tab_ID(tabincl.getAD_Tab_ID());
 					}
@@ -3301,7 +2965,7 @@ public class SyncModel {
 					if (tab.Parent_Column_ID().length() > 0)
 					{
 						X_AD_Column col = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ?", null)
-						.setParameters(tab.AD_ColumnSortYesNo_ID()).first();
+								.setParameters(tab.AD_ColumnSortYesNo_ID()).first();
 						if (col != null)							
 							dbtab.setParent_Column_ID(col.getAD_Column_ID());																				
 					}
@@ -3322,15 +2986,15 @@ public class SyncModel {
 								//X_AD_Column column = new Query (Env.getCtx(), X_AD_Column.Table_Name, "Identifier  = ? ", null)
 								//.setParameters(field.AD_Column_ID()).first();
 								X_AD_Column column = new Query(Env.getCtx(), X_AD_Column.Table_Name, "ColumnName = ? AND AD_Table_ID = ?", null)
-								.setParameters(field.AD_Column_ID(), dbtable.getAD_Table_ID()).first();
+										.setParameters(field.AD_Column_ID(), dbtable.getAD_Table_ID()).first();
 								if (column != null)
 								{
 									X_AD_Field dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "identifier = ? ", null)
-									.setParameters(field.Identifier()).first();
+											.setParameters(field.Identifier()).first();
 									if (dbfield == null)
 									{
 										dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "AD_Tab_ID = ? AND AD_Column_ID = ?", null)
-										.setParameters(dbtab.getAD_Tab_ID(), column.getAD_Column_ID()).first();
+												.setParameters(dbtab.getAD_Tab_ID(), column.getAD_Column_ID()).first();
 										if (dbfield != null)
 											dbfield.setIdentifier(field.Identifier());
 									}
@@ -3358,7 +3022,7 @@ public class SyncModel {
 										if (field.AD_FieldGroup_ID().length() > 0)
 										{
 											X_AD_FieldGroup fg = new Query(Env.getCtx(), X_AD_FieldGroup.Table_Name, "name = ?", null)
-											.setParameters(field.AD_FieldGroup_ID()).first();
+													.setParameters(field.AD_FieldGroup_ID()).first();
 											if (fg != null)
 											{
 												dbfield.setAD_FieldGroup_ID(fg.getAD_FieldGroup_ID());
@@ -3383,7 +3047,7 @@ public class SyncModel {
 										if (field.Included_Tab_ID().length() > 0)
 										{
 											X_AD_Tab tabincl = new Query(Env.getCtx(), X_AD_Tab.Table_Name, "Identifier = ?", null)
-											.setParameters(tab.Included_Tab_ID()).first();
+													.setParameters(tab.Included_Tab_ID()).first();
 											if (tabincl != null)
 												dbfield.setIncluded_Tab_ID(tabincl.getAD_Tab_ID());
 										}
@@ -3407,11 +3071,11 @@ public class SyncModel {
 				//					}
 				//				}				
 				X_AD_Column column = new Query(Env.getCtx(), X_AD_Column.Table_Name, "ColumnName = ? AND AD_Table_ID = ?", null)
-				.setParameters(Constants.COLUMNNAME_IsActive, dbtable.getAD_Table_ID()).first();
+						.setParameters(Constants.COLUMNNAME_IsActive, dbtable.getAD_Table_ID()).first();
 				if (column != null)
 				{
 					X_AD_Field dbfield = new Query(Env.getCtx(), X_AD_Field.Table_Name, "AD_Tab_ID = ? AND AD_Column_ID = ?", null)
-					.setParameters(dbtab.getAD_Tab_ID(), column.getAD_Column_ID()).first();
+							.setParameters(dbtab.getAD_Tab_ID(), column.getAD_Column_ID()).first();
 					if (dbfield == null)
 					{
 						dbfield = new X_AD_Field(Env.getCtx(), 0, null);
@@ -3445,7 +3109,7 @@ public class SyncModel {
 					String identifier = (String) vector.get(4);
 					String tablename = (String) vector.get(5);
 					PO potrl = new Query(Env.getCtx(), tablename, "identifier = ?", null)
-					.setParameters(identifier).first();
+							.setParameters(identifier).first();
 					if (potrl != null)
 					{
 						if (!identifiers.contains(identifier))
@@ -3477,7 +3141,7 @@ public class SyncModel {
 					if (hashfields.size() > 0)
 					{
 						PO potrl = new Query(Env.getCtx(), tablename, "identifier = ?", null)
-						.setParameters(identifier).first();							
+								.setParameters(identifier).first();							
 						String trlfields = "";
 						String values = "";
 						for (Iterator it = hashfields.entrySet().iterator(); it.hasNext();)
@@ -3584,7 +3248,7 @@ public class SyncModel {
 					if (no != -1) // the index exists but not with the same name
 					{						
 						StringBuilder sql = new StringBuilder("COMMENT ON INDEX xendra.")
-						.append(oindex.getName()).append(" IS '").append(comments).append("'");
+								.append(oindex.getName()).append(" IS '").append(comments).append("'");
 						no = DB.executeUpdate(sql.toString(), null);
 						if (no != 0)
 						{
@@ -3746,13 +3410,14 @@ public class SyncModel {
 			}
 			rs.close();
 			pstmt.close();
-			final Set<Class<?>> views = new HashSet<Class<?>>();
+			//final Set<Class<?>> views = new HashSet<Class<?>>();
 			ComponentScanner scanner = new ComponentScanner();	
-			scanner.getClasses(	new ComponentQuery() 
+			Set<Class<?>> views  = scanner.getClasses(	new ComponentQuery() 
 			{
 				protected void query() {
-					select().from("org.compiere.model.view").andStore(
-							thoseAnnotatedWith(XendraView.class).into(views));
+					select().from("org.compiere.model.view").returning(all());
+					//select().from("org.compiere.model.view").andStore(
+					//		thoseAnnotatedWith(XendraView.class).into(views));
 				}
 			});				
 			float i = 1;
@@ -3834,7 +3499,7 @@ public class SyncModel {
 								if (ap.annotationType() == XendraTable.class) {					
 									table = (XendraTable) ap;
 									dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null)
-									.setParameters(table.TableName()).first();
+											.setParameters(table.TableName()).first();
 									Timestamp synchro = Timestamp.valueOf(table.Synchronized());
 									if (dbtable == null)
 									{
@@ -3889,12 +3554,12 @@ public class SyncModel {
 									Timestamp srcsynchro = Timestamp.valueOf(column.Synchronized());
 									int AD_Process_ID = 0;
 									X_AD_Column dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "Identifier = ?", null)
-									.setParameters(column.Identifier()).first();
+											.setParameters(column.Identifier()).first();
 									if (dbcolumn == null && dbtable != null)
 									{
 										try {
 											dbcolumn = new Query(Env.getCtx(), X_AD_Column.Table_Name, "ColumnName = ? AND AD_Table_ID = ? ", null)
-											.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
+													.setParameters(element.getColumnName(), dbtable.getAD_Table_ID()).first();
 											if (dbcolumn != null)
 											{
 												dbcolumn.setIdentifier(column.Identifier());
@@ -3921,7 +3586,7 @@ public class SyncModel {
 										if (column.AD_Process_ID().length() > 0)
 										{
 											X_AD_Process dbprocess = new Query(Env.getCtx(), X_AD_Process.Table_Name, "Identifier = ?", null)
-											.setParameters(column.AD_Process_ID()).first();
+													.setParameters(column.AD_Process_ID()).first();
 											if (dbprocess != null)
 												AD_Process_ID = dbprocess.getAD_Process_ID();
 											else
@@ -4250,18 +3915,13 @@ public class SyncModel {
 			}
 			trx.commit();
 			trx.close();
-			//}
-			//for (Object key:operators.keySet()) {
-			//Class<?> clazzref = Class.forName(String.format("org.compiere.model.operator.%s",(String) operators.get(key)));
-			final Set<Class<?>> operators = new HashSet<Class<?>>();
 			ComponentScanner scanner = new ComponentScanner();
-			scanner.getClasses(	new ComponentQuery() 
+			operators = scanner.getClasses(	new ComponentQuery()
 			{
 				protected void query() {
-					select().from("org.compiere.model.operator").andStore(
-							thoseAnnotatedWith(XendraOperator.class).into(operators));
+					select().from("org.compiere.model.operator").returning(all());
 				}
-			});			
+			});				
 			float i = 1;
 			float rows = operators.size();
 			Iterator it = operators.iterator();
@@ -4325,16 +3985,16 @@ public class SyncModel {
 					String comments = (String) getComments.invoke(null, null);					
 					int no = 0;
 					StringBuilder[] sqllist = { new StringBuilder("CREATE OPERATOR xendra."+ref.OprName()+"(")
-					.append("PROCEDURE = ").append( ref.OprProc()).append(",")
-					.append("LEFTARG = ").append(ref.LeftType()).append(",")
-					.append("RIGHTARG = ").append(ref.RightType()).append(",")
-					.append("COMMUTATOR = ").append(ref.CompOp()).append(");"),
-					new StringBuilder("ALTER OPERATOR xendra.").append(ref.OprName())
-					.append("(").append(ref.LeftType()).append(",").append(ref.RightType()).append(")")
-					.append(" OWNER TO ").append(ref.Owner()),
-					new StringBuilder("COMMENT ON OPERATOR xendra.").append(ref.OprName())
-					.append("(").append(ref.LeftType()).append(",").append(ref.RightType()).append(")")
-					.append(" IS '").append(comments).append("'") };
+							.append("PROCEDURE = ").append( ref.OprProc()).append(",")
+							.append("LEFTARG = ").append(ref.LeftType()).append(",")
+							.append("RIGHTARG = ").append(ref.RightType()).append(",")
+							.append("COMMUTATOR = ").append(ref.CompOp()).append(");"),
+							new StringBuilder("ALTER OPERATOR xendra.").append(ref.OprName())
+							.append("(").append(ref.LeftType()).append(",").append(ref.RightType()).append(")")
+							.append(" OWNER TO ").append(ref.Owner()),
+							new StringBuilder("COMMENT ON OPERATOR xendra.").append(ref.OprName())
+							.append("(").append(ref.LeftType()).append(",").append(ref.RightType()).append(")")
+							.append(" IS '").append(comments).append("'") };
 					executesql(sqllist, (String) key);
 				}
 				i++;
@@ -4670,6 +4330,7 @@ public class SyncModel {
 				}																
 				System.out.println(classname);
 				XendraProcess proc = null;
+				XendraScheduler scheduler = null;
 				Annotation[] annots = clazz.getAnnotations();
 				if (annots.length == 0) {
 					goahead = false;
@@ -4680,16 +4341,22 @@ public class SyncModel {
 							break;
 						} else if (annot.annotationType() == XendraProcess.class) {
 							proc = (XendraProcess) annot;
-						}
+						} else if (annot.annotationType() == XendraScheduler.class) {
+							scheduler = (XendraScheduler) annot;
+						}			
 					}
 				}
 				if (goahead && proc != null) {												
 					String Identifier = proc.Identifier();					
 					String updated = proc.updated();
+					Timestamp t = null;
+					try {
+						t = Timestamp.valueOf(updated);						
+					} catch (Exception e) {} 										
 					if (Identifier == null || updated == null)
 						continue;					
 					MProcess process = new Query(Env.getCtx(), MProcess.Table_Name, "classname = ?", null)
-					.setParameters(classname).first();
+							.setParameters(classname).first();
 					if (process != null) {
 						if (process.getIdentifier().compareTo(Identifier)!= 0) {
 							process.setIdentifier(Identifier);
@@ -4697,7 +4364,7 @@ public class SyncModel {
 						}
 					} 
 					else if (process == null)
-					{
+					{						
 						process = new MProcess(Env.getCtx(), 0, null);
 						process.setIdentifier(Identifier);
 						process.setValue(proc.value());
@@ -4707,6 +4374,7 @@ public class SyncModel {
 						process.setHelp(proc.help());
 						process.setIdentifier(Identifier);
 						process.setClassname(proc.classname());
+						process.setSynchronized(t);
 						if (!process.save())
 						{
 							throw new Exception("no se pudo grabar proceso nuevo");
@@ -4715,7 +4383,43 @@ public class SyncModel {
 						{
 
 						}
-					}					
+					}		
+					if (scheduler != null) {
+						X_AD_Process_Machine pm = new Query(Env.getCtx(), X_AD_Process_Machine.Table_Name, "A_Machine_ID = ? AND AD_Process_ID = ?" , null)
+						.setParameters(Env.getMachine().getA_Machine_ID(), process.getAD_Process_ID()).first();
+						if (pm == null)
+						{
+							pm = new X_AD_Process_Machine(Env.getCtx(), 0, null);
+							pm.setA_Machine_ID(Env.getMachine().getA_Machine_ID());
+							pm.setAD_Process_ID(process.getAD_Process_ID());
+							pm.save();
+						}					
+						//
+						X_AD_Scheduler dbscheduler = new Query(Env.getCtx(), X_AD_Scheduler.Table_Name, "AD_Process_ID = ?", null)
+						.setParameters(process.getAD_Process_ID()).first();
+						if (dbscheduler == null) {
+							dbscheduler = new X_AD_Scheduler(Env.getCtx(), 0, null);
+						}
+						if (dbscheduler.getSynchronized() == null || 
+								dbscheduler.getSynchronized().compareTo(t) != 0)
+						{						
+							dbscheduler.setName(scheduler.name());
+							dbscheduler.setAD_Process_ID(process.getAD_Process_ID());
+							dbscheduler.setFrequencyType(scheduler.frequencytype());
+							dbscheduler.setFrequency(Integer.valueOf(scheduler.frequency()));
+							String freqstartat = scheduler.frequencystartat();
+							if (freqstartat != null && freqstartat.length() > 0) {
+								Integer startat = Integer.valueOf(freqstartat);
+								dbscheduler.setFrequencyStartAt(startat);
+							}
+							dbscheduler.setSupervisor_ID(100);
+							dbscheduler.setKeepLogDays(Integer.valueOf(scheduler.keeplogdays()));
+							dbscheduler.setScheduleType(REF_AD_SchedulerType.Frequency);						
+							dbscheduler.setTag(scheduler.tag());
+							dbscheduler.setSynchronized(t);
+							dbscheduler.save();
+						}						
+					}
 					Timestamp Synchronized = Timestamp.valueOf(proc.updated());
 					if ( process.getSynchronized() == null || Synchronized.compareTo(process.getSynchronized()) != 0)
 					{								
@@ -4724,7 +4428,7 @@ public class SyncModel {
 						{								
 							log.log(Level.WARNING, String.format("Update Process %s", process.getName()));
 							List<X_AD_Process_Para> paramlist = new Query(Env.getCtx(), X_AD_Process_Para.Table_Name, "AD_Process_ID = ?", null)
-							.setParameters(process.getAD_Process_ID()).list();
+									.setParameters(process.getAD_Process_ID()).list();
 							for (X_AD_Process_Para param:paramlist)
 							{
 								param.delete(true);
@@ -4740,7 +4444,7 @@ public class SyncModel {
 							if (ap.annotationType() == XendraProcessParameter.class) {
 								XendraProcessParameter pp = (XendraProcessParameter) ap;
 								X_AD_Element element = new Query(Env.getCtx(), X_AD_Element.Table_Name, "ColumnName=?", null)
-								.setParameters(pp.ColumnName()).first();
+										.setParameters(pp.ColumnName()).first();
 								if (element == null)
 								{
 									element = new X_AD_Element(Env.getCtx(), 0, null);
@@ -4752,7 +4456,7 @@ public class SyncModel {
 									element.save();
 								}
 								MProcessPara mpp = new Query(Env.getCtx(), X_AD_Process_Para.Table_Name, "AD_Process_ID = ? AND ColumnName = ?", null)
-								.setParameters(process.getAD_Process_ID(), element.getColumnName()).first();
+										.setParameters(process.getAD_Process_ID(), element.getColumnName()).first();
 								if (mpp == null)
 									mpp = new MProcessPara(Env.getCtx(),0 , null);
 								mpp.setAD_Process_ID(process.getAD_Process_ID());
@@ -4769,7 +4473,7 @@ public class SyncModel {
 								if (ReferenceID != null && ReferenceID.length() > 0)
 								{
 									X_AD_Reference ref = new Query(Env.getCtx(), X_AD_Reference.Table_Name, "Identifier =  ?", null)
-									.setParameters(ReferenceID).first();
+											.setParameters(ReferenceID).first();
 									if (ref != null)
 									{
 										mpp.setAD_Reference_Value_ID(ref.getAD_Reference_ID());
@@ -4780,7 +4484,7 @@ public class SyncModel {
 								if (ValRuleID != null && ValRuleID.length() > 0)
 								{																								
 									X_AD_Val_Rule valrule = new Query(Env.getCtx(), X_AD_Val_Rule.Table_Name, "identifier=?", null)
-									.setParameters(ValRuleID).first();
+											.setParameters(ValRuleID).first();
 									if (valrule != null)
 									{
 										mpp.setAD_Val_Rule_ID(valrule.getAD_Val_Rule_ID());
@@ -4850,7 +4554,7 @@ public class SyncModel {
 			error = "SyncModel instance plugin reference not found";
 		else {
 			X_AD_Client client = new Query(Env.getCtx(), X_AD_Client.Table_Name, "AD_Client_ID = ?", null)
-			.setParameters(Integer.valueOf(clientid)).first();
+					.setParameters(Integer.valueOf(clientid)).first();
 			if (client != null) {
 				ReplicationEngine replication = new ReplicationEngine(client);
 				try {
