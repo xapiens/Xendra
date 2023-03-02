@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.io.*;
 import java.net.*;
 
-import org.apache.velocity.app.VelocityEngine;
 import org.compiere.apps.AEnv;
 import org.compiere.apps.ALogin;
 import org.compiere.model.Query;
@@ -20,8 +19,6 @@ public class LinePrinterServer implements Runnable {
 	static CLogger log = CLogger.getCLogger(LinePrinterServer.class);
 	
 	private final static LinePrinterServer INSTANCE = new LinePrinterServer();
-
-	private VelocityEngine ve; 
 	
 	/**
 	 * Constructor for LPD.
@@ -29,10 +26,7 @@ public class LinePrinterServer implements Runnable {
 	private LinePrinterServer() {
 		super();
 		log.fine("LPD(): STARTED");
-		ve = new VelocityEngine();
-		ve.setProperty(VelocityEngine.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
 		try {
-			ve.init();
 			//Template t = ve.getTemplate("foo.vm");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

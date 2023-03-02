@@ -88,7 +88,10 @@
 	<target name="toolsXendralib" depends="toolsCompile" unless="jars.uptodate" description="Create Xendralib">		
 		<jar jarfile="${dist.dir}/Xendralib.jar" duplicate="preserve">
 			<!-- add postgresql.jar -->
-			<zipfileset src="lib/postgresql-9.2-1002.jdbc4.jar">
+			<!--<zipfileset src="lib/postgresql-9.2-1002.jdbc4.jar">
+				<patternset refid="manifest.exclude"/>
+			</zipfileset>-->
+			<zipfileset src="lib/postgresql-42.5.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
 			<zipgroupfileset dir="../drools/lib" includes="*.jar"/>
@@ -184,7 +187,7 @@
 			<zipfileset src="lib/okio-1.17.3.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
-			<zipfileset src="lib/extcos-0.2b-all.jar">
+			<zipfileset src="lib/extcos-0.4b.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
 			<zipfileset src="lib/jdom-1.0.jar">
@@ -330,9 +333,10 @@
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>			
 			<!-- velocity dependency -->
+                        <!-- el generador de funciones debe ser reescrito para soportar lang3-->
 			<zipfileset src="lib/commons-lang-2.6.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>			
+			</zipfileset> 
 			<zipfileset src="lib/commons-lang3-3.2.1.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>		
@@ -376,9 +380,9 @@
 			<zipfileset src="lib/forms-1.3.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>						
-			<zipfileset src="lib/velocity-1.7.jar">
+			<!--<zipfileset src="lib/velocity-1.7.jar">
 			    <patternset refid="manifest.exclude"/>
-			</zipfileset>
+			</zipfileset>-->
 			<zipfileset src="lib/jchart2d-3.2.2.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
@@ -435,7 +439,7 @@
 			</zipfileset>		
 			<zipfileset src="lib/jeromq-0.5.3-SNAPSHOT.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>		
+			</zipfileset>		                        
 			<manifest>
 				<attribute name="Specification-Title" value="Xendra Server Tools"/>
 				<attribute name="Specification-Version" value="${env.XENDRA_VERSION}"/>

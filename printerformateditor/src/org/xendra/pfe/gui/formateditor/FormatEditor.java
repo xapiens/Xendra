@@ -23,9 +23,6 @@ import javax.swing.text.AbstractDocument;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.app.VelocityEngine;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_AD_Rule;
 import org.compiere.util.Env;
