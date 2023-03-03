@@ -187,6 +187,9 @@
 			<zipfileset src="lib/okio-1.17.3.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
+			<zipfileset src="lib/asm-6.2.1.jar">
+				<patternset refid="manifest.exclude"/>
+			</zipfileset>
 			<zipfileset src="lib/extcos-0.4b.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
@@ -326,9 +329,9 @@
 			<zipfileset src="lib/aopalliance-1.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>			
-			<zipfileset src="lib/asm-all-3.2.jar">
+			<!--<zipfileset src="lib/asm-all-3.2.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>			
+			</zipfileset>-->
 			<zipfileset src="lib/guice-2.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>			
@@ -434,9 +437,9 @@
 			<!--	<zipfileset src="lib/escposjava-1.0-SNAPSHOT.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>		-->
-			<zipfileset src="lib/core-3.2.1.jar">
+			<!--<zipfileset src="lib/core-3.2.1.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>		
+			</zipfileset>		-->
 			<zipfileset src="lib/jeromq-0.5.3-SNAPSHOT.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>		                        
@@ -703,9 +706,9 @@
 			<zipfileset src="lib/okio-1.17.3.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
-			<zipfileset src="lib/extcos-0.2b-all.jar">
+			<!--<zipfileset src="lib/extcos-0.2b-all.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>
+			</zipfileset>-->
 			<zipfileset src="lib/jdom-1.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
