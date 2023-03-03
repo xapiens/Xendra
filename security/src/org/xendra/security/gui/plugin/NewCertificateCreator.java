@@ -1,4 +1,4 @@
-package org.columba.core.gui.plugin;
+package org.xendra.security.gui.plugin;
 
 import java.io.File;
 import java.io.FileOutputStream;

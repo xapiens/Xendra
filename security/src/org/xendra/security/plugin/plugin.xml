@@ -8,6 +8,7 @@
 	enabled="true">
 		
 	<extensionlist id="org.columba.core.action">
+		<extension id="CreateAction" class="org.xendra.security.gui.action.CreateAction"/>
 		<extension id="LoadAction" class="org.xendra.security.gui.action.LoadAction"/>
 		<extension id="SaveAction" class="org.xendra.security.gui.action.SaveAction"/>		
 		<!--<extension id="AddCertificateAction" class="org.xendra.security.gui.action.AddCertificateAction"/>

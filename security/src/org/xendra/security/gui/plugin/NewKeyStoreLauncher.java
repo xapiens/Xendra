@@ -1,7 +1,8 @@
-package org.columba.core.gui.plugin.wizard;
+package org.xendra.security.gui.plugin;
 
 import java.awt.Frame;
 import java.awt.Window;
+
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
 import org.frapuccino.swing.ActiveWindowTracker;

@@ -1,4 +1,4 @@
-package org.columba.core.gui.plugin.wizard;
+package org.xendra.security.gui.plugin;
 
 import java.util.HashMap;
 

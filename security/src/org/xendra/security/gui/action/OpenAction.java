@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.security.KeyStore;
 import java.text.MessageFormat;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -12,6 +13,9 @@ import javax.swing.JOptionPane;
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
+import org.compiere.model.Query;
+import org.compiere.model.persistence.X_C_BPartner_Certificate;
+import org.compiere.util.Env;
 import org.kse.crypto.Password;
 import org.kse.crypto.keystore.KeyStoreLoadException;
 import org.kse.crypto.keystore.KeyStoreUtil;
@@ -24,6 +28,7 @@ import org.kse.gui.password.DGetPassword;
 import org.xendra.Constants;
 import org.xendra.security.gui.frame.SecurityEditorFrameController;
 import org.xendra.security.util.ResourceLoader;
+import org.xendra.security.wizard.CreateCertificatePartnerWizardLauncher;
 
 public class OpenAction extends SecurityColumbaAction {
 	public OpenAction(IFrameMediator frameMediator) {

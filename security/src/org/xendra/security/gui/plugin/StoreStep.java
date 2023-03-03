@@ -1,4 +1,4 @@
-package org.columba.core.gui.plugin.wizard;
+package org.xendra.security.gui.plugin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,7 @@ import org.compiere.util.SecureEngine;
 import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
 import org.xendra.api.XendrianServer;
-import org.xendra.core.resourceloader.ResourceLoader;
+import org.xendra.security.util.ResourceLoader;
 import net.javaprog.ui.wizard.AbstractStep;
 import net.javaprog.ui.wizard.DataModel;
 import net.javaprog.ui.wizard.DefaultDataLookup;
@@ -35,8 +35,8 @@ public class StoreStep extends AbstractStep implements ActionListener {
 	private CCheckBox passok = new CCheckBox();
 	private CCheckBox accessok = new CCheckBox();
 	public StoreStep(DataModel data) {
-		super(ResourceLoader.getString("certificate", "keystore"),
-				ResourceLoader.getString("certificate",   "keystore_description"));
+		super(ResourceLoader.getString("dialog", "certificate", "keystore"),
+				ResourceLoader.getString("dialog", "certificate", "keystore_description"));
 		this.data = data;		
 		this.setCanGoNext(false);
 	}
@@ -49,8 +49,10 @@ public class StoreStep extends AbstractStep implements ActionListener {
 		passok.setEnabled(false);
 		accessok.setEnabled(false);
 		JComponent panel = new JPanel(new MigLayout());			
-		LabelWithMnemonic passlabel = new LabelWithMnemonic(ResourceLoader.getString("certificate", "password"));
-		LabelWithMnemonic passconfirmlabel = new LabelWithMnemonic(ResourceLoader.getString("certificate", "passwordconfirm"));		
+		LabelWithMnemonic passlabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "certificate", "password"));
+		LabelWithMnemonic passconfirmlabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "certificate", "passwordconfirm"));
+		panel.add(keystorename);
+		panel.add(pickkeystore,"wrap");
 		panel.add(passlabel);
 		panel.add(pass, "wrap");
 		panel.add(passconfirmlabel);
@@ -90,17 +92,24 @@ public class StoreStep extends AbstractStep implements ActionListener {
 			if (pwd.equals(pwdconf) && pwd.length() > 0) {
 				passok.setSelected(true);
 				String pwdsecure = SecureEngine.encrypt(pwd);
-				String x = new XendrianServer().setServlet("store").setType("createstore").setRole(MRole.getDefault().getIdentifier()).setPassword(pwdsecure).start();
+				String x = new XendrianServer().setServlet("store").setType("createstore")
+						.setRole(MRole.getDefault().getIdentifier()).setPassword(pwdsecure)
+						.start();
 				//String x = Util.navigateWebServer(String.format("store?type=createstore&role=%s&password=%s", MRole.getDefault().getIdentifier(), pwdsecure));
-				SAXBuilder builder = new SAXBuilder();
-				InputStream stream = new ByteArrayInputStream(x.getBytes("UTF-8"));				
-				Document doc = builder.build(stream);
-				String error = doc.getRootElement().getChild("error").getText();
-				if (error.length() == 0) {
-					accessok.setSelected(true);
-					accessmsg.setText("acceso correcto");
+				if (x.length() > 0) {
+					SAXBuilder builder = new SAXBuilder();
+					InputStream stream = new ByteArrayInputStream(x.getBytes("UTF-8"));				
+					Document doc = builder.build(stream);
+					String error = doc.getRootElement().getChild("error").getText();
+					if (error.length() == 0) {
+						accessok.setSelected(true);
+						accessmsg.setText("acceso correcto");
+					} else {
+						accessmsg.setText(error);
+						accessok.setSelected(false);
+					}
 				} else {
-					accessmsg.setText(error);
+					accessmsg.setText("timeout");
 					accessok.setSelected(false);
 				}
 			} else {

@@ -1,4 +1,4 @@
-package org.columba.core.gui.plugin.wizard;
+package org.xendra.security.gui.plugin;
 
 import net.javaprog.ui.wizard.DataModel;
 import net.javaprog.ui.wizard.WizardModelEvent;

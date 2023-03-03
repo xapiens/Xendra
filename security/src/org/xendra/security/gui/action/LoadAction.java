@@ -6,19 +6,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.security.KeyStore;
 import java.text.MessageFormat;
-
-import javax.swing.JFileChooser;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import org.columba.api.gui.frame.IFrameMediator;
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
+import org.compiere.model.MBPartner;
+import org.compiere.model.Query;
+import org.compiere.model.persistence.X_C_BPartner_Certificate;
+import org.compiere.util.Env;
 import org.kse.crypto.Password;
 import org.kse.crypto.keystore.KeyStoreLoadException;
 import org.kse.crypto.keystore.KeyStoreUtil;
 import org.kse.gui.CurrentDirectory;
-import org.kse.gui.FileChooserFactory;
 import org.kse.gui.error.DError;
 import org.kse.gui.error.DProblem;
 import org.kse.gui.error.Problem;
@@ -26,11 +27,13 @@ import org.kse.gui.password.DGetPassword;
 import org.kse.utilities.history.KeyStoreHistory;
 import org.xendra.Constants;
 import org.xendra.security.util.ResourceLoader;
+import org.xendra.security.wizard.CreateCertificatePartnerWizardLauncher;
+import org.xendra.security.gui.dialog.PickPartnerCertificateDialog;
 import org.xendra.security.gui.frame.SecurityEditorFrameController;
 
 public class LoadAction  extends SecurityColumbaAction {
-	
-	
+
+
 	public LoadAction(IFrameMediator frameMediator) {
 		super(frameMediator, ResourceLoader.getString("menu", "mainframe", "load"));
 		putValue(Constants.ID, "load");
@@ -43,20 +46,32 @@ public class LoadAction  extends SecurityColumbaAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//((SecurityEditorFrameController) frameMediator).actionPerformed(e);
-		JFileChooser chooser = FileChooserFactory.getKeyStoreFileChooser();
-		chooser.setCurrentDirectory(CurrentDirectory.get());
-		chooser.setDialogTitle(res.getString("OpenAction.OpenKeyStore.Title"));
-		chooser.setMultiSelectionEnabled(false);
+		List<X_C_BPartner_Certificate> partners = new Query(Env.getCtx(), X_C_BPartner_Certificate.Table_Name, "IsActive = 'Y'", null)
+				.list();
+		// si no hay nada crear con el bp actual
+		if (partners.size() == 0) {
+			CreateCertificatePartnerWizardLauncher nn = new CreateCertificatePartnerWizardLauncher();
+			nn.launchWizard();					
+		}
 
-		//int rtnValue = chooser.showOpenDialog((Component) frameMediator);
-		int rtnValue = chooser.showOpenDialog(null);
-		if (rtnValue == JFileChooser.APPROVE_OPTION) {
-			File openFile = chooser.getSelectedFile();
-			CurrentDirectory.updateForFile(openFile);
+		X_C_BPartner_Certificate bpc = partners.get(0);
+		MBPartner p = new Query(Env.getCtx(), MBPartner.Table_Name, "C_BPartner_ID = ?", null)
+				.setParameters(bpc.getC_BPartner_ID()).first();
+		PickPartnerCertificateDialog dlg = new PickPartnerCertificateDialog(p);
 
-			openKeyStore(openFile);
-		}		
+		MBPartner qq = dlg.getPartner();		
+		if (qq != null) {
+			X_C_BPartner_Certificate bc = new Query(Env.getCtx(), X_C_BPartner_Certificate.Table_Name, "C_BPartner_ID = ?", null)
+					.setParameters(qq.getC_BPartner_ID()).first();
+			if (bc != null) {		
+				String filename = (String) bc.getProperties().get(Constants.XML_ATTRIBUTE_FILENAME);			
+				if (filename != null) {
+					File openFile = new File(filename);
+					CurrentDirectory.updateForFile(openFile);
+					openKeyStore(openFile);
+				}
+			}		
+		}
 	}
 	/**
 	 * Open the supplied KeyStore file from disk.

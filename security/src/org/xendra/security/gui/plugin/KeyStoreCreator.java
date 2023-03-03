@@ -1,4 +1,4 @@
-package org.columba.core.gui.plugin.wizard;
+package org.xendra.security.gui.plugin;
 
 import org.compiere.model.MStore;
 import org.compiere.model.persistence.X_AD_Plugin;

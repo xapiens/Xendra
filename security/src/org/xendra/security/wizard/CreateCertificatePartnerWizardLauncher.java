@@ -1,5 +1,6 @@
-package org.xendra.security.gui.plugin;
+package org.xendra.security.wizard;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 
@@ -7,7 +8,7 @@ import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
 import org.frapuccino.swing.ActiveWindowTracker;
 import org.xendra.common.FinishStep;
-import org.xendra.newclient.i18n.ResourceLoader;
+import org.xendra.security.util.ResourceLoader;
 
 import net.javaprog.ui.wizard.DataModel;
 import net.javaprog.ui.wizard.DefaultWizardModel;
@@ -15,27 +16,31 @@ import net.javaprog.ui.wizard.Step;
 import net.javaprog.ui.wizard.Wizard;
 import net.javaprog.ui.wizard.WizardModel;
 
-public class NewRepositoryLauncher {
+public class CreateCertificatePartnerWizardLauncher {
 	private DataModel data;
-	public void launchWizard() {	
+	public void launchWizard() {		
 		data = new DataModel();
-		Step[] steps = new Step[] {
-				new PluginReposStep(data),
-				new FinishStep() };
+		Step[] steps;
+		steps = new Step[] { new PickPartnerStep(data),
+				 new PickKeyStoreStep(data),
+				 new PickAliasStep(data),
+				 new SendFilePathStep(data),
+				 new FinishStep() };
 		WizardModel model = new DefaultWizardModel(steps);
-		model.addWizardModelListener(new RepoCreator(data));
+		model.addWizardModelListener(new BPartnerCertificateCreator(data));
 
 		Window w = ActiveWindowTracker.findActiveWindow();
-		Wizard wizard = null;
-		try {
-			wizard = new Wizard((Frame) null, model, ResourceLoader
-					.getString("dialog", "repository", "title"), ImageLoader.getIcon(IconKeys.PREFERENCES));			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+
+		Wizard wizard = new Wizard((Frame) null, model, 
+				ResourceLoader.getString("dialog", "partnerwizard", "title"), 
+				ImageLoader.getIcon(IconKeys.PREFERENCES));
+
 		wizard.setStepListRenderer(null);
+		wizard.setPreferredSize(new Dimension(750,500));
 		wizard.pack();
 		wizard.setLocationRelativeTo(null);
 		wizard.setVisible(true);		
+		
 	}
+
 }
