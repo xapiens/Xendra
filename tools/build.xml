@@ -389,12 +389,18 @@
 			<zipfileset src="lib/jchart2d-3.2.2.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
-			<zipfileset src="lib/httpcore-4.3.2.jar">
+			<!--<zipfileset src="lib/httpcore-4.3.2.jar">
+				<patternset refid="manifest.exclude"/>
+			</zipfileset>-->
+			<zipfileset src="lib/httpcore-4.4.6.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
-			<zipfileset src="lib/httpclient-4.3.3.jar">
+			<zipfileset src="lib/httpclient-4.5.3.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
+			<!--<zipfileset src="lib/httpclient-4.3.3.jar">
+				<patternset refid="manifest.exclude"/>
+			</zipfileset>-->
 			<!--<zipfileset src="lib/servlet-api-3.0.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>-->  				
@@ -434,12 +440,13 @@
 			<zipfileset src="lib/escpos_coffee.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>		
-			<!--	<zipfileset src="lib/escposjava-1.0-SNAPSHOT.jar">
+			<!-- com.google.zxing -->
+			<zipfileset src="lib/escposjava-1.0-SNAPSHOT.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>		-->
-			<!--<zipfileset src="lib/core-3.2.1.jar">
+			</zipfileset>		
+			<zipfileset src="lib/core-3.3.0.jar">
 				<patternset refid="manifest.exclude"/>
-			</zipfileset>		-->
+			</zipfileset>		
 			<zipfileset src="lib/jeromq-0.5.3-SNAPSHOT.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>		                        
