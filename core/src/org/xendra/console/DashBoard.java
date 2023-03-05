@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.compiere.db.CConnection;
 import org.compiere.model.MStore;
+import org.compiere.model.persistence.X_A_Machine;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.xendra.Constants;
@@ -12,9 +13,11 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Borders;
 import com.googlecode.lanterna.gui2.DefaultWindowManager;
+import com.googlecode.lanterna.gui2.Direction;
 import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
+import com.googlecode.lanterna.gui2.LinearLayout;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
@@ -30,12 +33,15 @@ public class DashBoard {
 	Screen screen;
 	MenuBar menubar;
 	MultiWindowTextGUI gui = null;
-	BasicWindow window = new BasicWindow();			
+	BasicWindow window = new BasicWindow();
+	private Label labelwebserver = new Label("");	
+	private Label lblwsresult = new Label("");
 	public DashBoard(Screen screen) {
 		this.screen = screen;
 		gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
 		MainMenu();
+		refresh();
 		setup();		
 	}
 	private void MainMenu() {		
@@ -145,7 +151,7 @@ public class DashBoard {
 		});
 		menuProcess.addMenuItem("Machines", new Runnable() {
 			public void run() {
-				new Machines(screen);
+				new Machines(screen);				
 			}
 		});
 		menuProcess.addMenuItem("BI", new Runnable() {
@@ -170,6 +176,7 @@ public class DashBoard {
 		menuProcess.addMenuItem("Server", new Runnable() {
 			public void run() {
 				new MachineServer(screen);
+				refresh();
 			}
 		});			
 		// plugins installed
@@ -249,19 +256,51 @@ public class DashBoard {
 		}							
 	}
 	
+	public void refresh() {
+		Env.resetServerWeb();
+		X_A_Machine webserver = Env.getServerWeb(Env.getMachine());
+		if (webserver != null) {
+			labelwebserver.setText(String.format("%s[%s]", webserver.getName(),webserver.getMac_Address()));
+		} else {
+			labelwebserver.setText("Not Defined");
+		}
+		String result = common.PingToServer();
+		if (result.length() == 0) //  no errors
+		{
+			result = common.getInfo();
+		}	
+		lblwsresult.setText(String.format("<%s>",result));
+	}
+
+	
 	public void setup() {
 		Panel panel = new Panel();
+		//panel.setLayoutManager(new LinearLayout(Direction.HORIZONTAL));
 		panel.addComponent(menubar);
 		Panel panelinfo = new Panel();
 		panelinfo.setLayoutManager(new GridLayout(6));
 		panelinfo.addComponent(new Label("Machine"));
-		panelinfo.addComponent(new Label(Env.getMachine().getName()));
-		panelinfo.addComponent(new Label("Mac Addr"));
-		panelinfo.addComponent(new Label(Env.getMachine().getMac_Address()));
+		//panelinfo.addComponent(new Label(Env.getMachine().getName()));
+		panelinfo.addComponent(new Label(String.format("%s[%s]", Env.getMachine().getName(),Env.getMachine().getMac_Address())));
+		//panelinfo.addComponent(new Label("Mac Addr"));
+		//panelinfo.addComponent(new Label(Env.getMachine().getMac_Address()));
 		panelinfo.addComponent(new Label("System"));
 		panelinfo.addComponent(new Label(Util.getLocalMacAddress()));
 		panel.addComponent(panelinfo.withBorder(Borders.singleLine("Equipment")));
+		//		
 		//
+		Panel web = new Panel();
+		web.setLayoutManager(new GridLayout(2));		
+		
+			//web.addComponent(new Label(String.format("%s[%s]", webserver.getName(),webserver.getMac_Address())));			
+		web.addComponent(labelwebserver);
+		//} else {
+		//	web.addComponent(new Label("Not Defined"));
+		//}
+		//String result = common.PingToServer();
+		//web.addComponent(new Label(String.format("<%s>",result)));
+		web.addComponent(lblwsresult);
+		panel.addComponent(web.withBorder(Borders.singleLine("Web Server")));
 		String proxyserver = "";
 		String proxyport  = "";
 		if (MStore.getInstance().getProperties().containsKey("proxyserver")) {

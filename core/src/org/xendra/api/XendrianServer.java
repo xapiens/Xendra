@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -53,7 +54,7 @@ public class XendrianServer {
 	}
 	public String get(String var) {
 		m_type = var;
-		String url = buildurl();
+		Optional<String> url = buildurl();
 		return null;
 	}
 	public XendrianServer setServlet(String var) {
@@ -104,108 +105,117 @@ public class XendrianServer {
 		m_processid = procid;
 		return this;
 	}
-	public String buildurl() {		  
-		String url = null;
+	public Optional<String> buildurl() {		  
+		Optional<String> url = Optional.empty();
 		if (m_machine == null) {
-			url = String.format("%s/%s", getWebServerUrl(), m_servlet);
+			String wsurl = getWebServerUrl();
+			if (wsurl.length() > 0) {
+				url = Optional.of(String.format("%s/%s", getWebServerUrl(), m_servlet));
+			}
 		} else {
 			HashMap props = Env.getServerProperties(m_machine.getA_Machine_ID(), REF_ServerType.WebServer); 
 			int port = 0;
 			if (props.containsKey("port")) {
 				port = Integer.valueOf(props.get("port").toString());
 			}		
-			url = String.format("http://%s:%s/%s", m_machine.getName(), port, m_servlet);
+			url = Optional.of(String.format("http://%s:%s/%s", m_machine.getName(), port, m_servlet));
 		}		
+
 		if (!servlets.containsKey(m_servlet)) {
 			X_AD_Servlet servlet = new Query(Env.getCtx(), X_AD_Servlet.Table_Name,  "name = ?", null)
-				.setParameters(m_servlet).first();
+					.setParameters(m_servlet).first();
 			if (servlet != null) {
 				servlets.put(m_servlet, servlet);
 			}
 		}
-		if (servlets.containsKey(m_servlet)) {
-			String format = "";
-			X_AD_Servlet servlet = servlets.get(m_servlet);
-			HashMap props = servlet.getProperties();
-			if (props.containsKey(m_type)) {
-				format = (String) servlet.getUrlFormat().get(m_type);
-								
-			} else {
-				url = String.format("%s?type=%s", url,m_type);
-			}
-		}
-		if (m_servlet.equals("store")) {				
-			if (m_type.equals("install")) {
-				url = String.format("%s?type=%s&instance=%s", url,m_type,m_instanceId);			
-			} else if (m_type.equals("addclient")) {
-				url = String.format("%s?type=%s&instance=%s", url,m_type,m_instanceId);
-			} else if (m_type.equals("status"))	{
-				url = String.format("%s?type=%s", url,m_type);
-			} else if (m_type.equals("validate")) {
-				url = String.format("%s?type=%s&url=%s&role=%s", url,m_type, m_internalurl, m_role);
-				//String x = Util.navigateWebServer(String.format("store?type=validate&url=%s&role=%s", url, MRole.getDefault().getIdentifier()));
-			} else if (m_type.equals("refreshstore")) {
-				url = String.format("%s?type=%s", url, m_type);
-			} else if (m_type.equals("createstore")) {
-				//String x = Util.navigateWebServer(String.format("store?type=createstore&role=%s&password=%s", MRole.getDefault().getIdentifier(), pwdsecure));
-				url = String.format("%s?type=%s&role=%s&password=%s", url, m_type,m_role, m_password);
-			} else if (m_type.equals("client")) {
-				//String result = Util.navigateWebServer(String.format("store?type=client&filename=%s", pluginfilename));
-				url = String.format("%s?type=%s&filename=%s",url,m_type,m_filename);
-			} else if (m_type.equals("addcert")) {
-				url = String.format("%s?type=%s&id=%s&%roleid=%s", url, m_type, m_certid, m_role);
-				//String url = String.format("http://%s:%s/store?type=addcerts&id=%s&roleid=%s", webserver.getName(),port, pickcert.getValue() ,MRole.getDefault().getIdentifier());
-			} else if (m_type.equals("list")) {
-				url = String.format("%s?type=%s", url, m_type);
-			} else if (m_type != null) {
-				url = String.format("%s?type=%s", url, m_type);
-			}
-		} else if (m_servlet.equals("plugin")) {
-			if (m_type.equals("core")) {
-				url = String.format("%s?type=%s", url,m_type);
-			} else if (m_type.equals("alive")) {
-				//String url = String.format("http://%s:%s/plugin?type=alive", webserver.getName(),port);
-				url = String.format("%s?type=%s", url,m_type);
-			} else if (m_type.equals("list")) {
-				url = String.format("%s?type=%s&ad_role_id=%s", url,m_type, m_role);
-				//url = String.format("http://%s:%s/plugin?ad_role_id=%s&type=list", Env.getServerUpdate().getName(),port, Env.getAD_Role_ID(Env.getCtx()));
-			} else if (m_type.equals("plugin")) {
-				url = String.format("%s?type=%s&id=%s",url, m_type, m_pluginid);
-				//String url = String.format("http://%s:%s/plugin?type=plugin&id=%s",Env.getServerUpdate().getName(), port, plugin.getId());
-			} else if (m_type.equals("pluginsize")) {
-				url = String.format("%s?type=%s&id=%s",url, m_type, m_pluginid);
-			}
-		} else if (m_servlet.equals("query")) {
-			if (m_type.equals("update")) {
-				url = String.format("%s?type=%s&role=%s&query=%s", url, m_type, m_role, m_QueryId);
-			} else {
-				url = String.format("%s?type=%s&role=%s",url, m_type, m_role);
-			}
-		} else if (m_servlet.equals("replication")) {
-			//if (m_type.equals("list")) {
-			//String url = String.format("http:/%s:%s/replication?action=list", m_machine.getName(), webport);
-			url = String.format("%s?action=%s", url, m_action);
-			//}
-		} else if (m_servlet.equals("monitor")) {
+		if (url.isPresent()) {
 
-			if (m_type.equals("runnow")) {
-				url = String.format("%s?RunNow=%s", url, m_processid);
-			} else {
-				url = String.format("%s?Action=", url, m_action);
+			if (servlets.containsKey(m_servlet)) {
+				String format = "";
+				X_AD_Servlet servlet = servlets.get(m_servlet);
+				HashMap props = servlet.getProperties();
+				if (props.containsKey(m_type)) {
+					format = (String) servlet.getUrlFormat().get(m_type);
+
+				} else {
+					url = Optional.ofNullable(String.format("%s?type=%s", url.get(),m_type));
+				}
+			}
+			if (m_servlet.equals("store")) {				
+				if (m_type.equals("install")) {
+					url = Optional.of(String.format("%s?type=%s&instance=%s", url.get(),m_type,m_instanceId));			
+				} else if (m_type.equals("addclient")) {
+					url = Optional.of(String.format("%s?type=%s&instance=%s", url.get(),m_type,m_instanceId));
+				} else if (m_type.equals("status"))	{
+					url = Optional.of(String.format("%s?type=%s", url.get(),m_type));
+				} else if (m_type.equals("validate")) {
+					url = Optional.of(String.format("%s?type=%s&url=%s&role=%s", url.get(),m_type, m_internalurl, m_role));
+					//String x = Util.navigateWebServer(String.format("store?type=validate&url=%s&role=%s", url, MRole.getDefault().getIdentifier()));
+				} else if (m_type.equals("refreshstore")) {
+					url = Optional.of(String.format("%s?type=%s", url.get(), m_type));
+				} else if (m_type.equals("createstore")) {
+					//String x = Util.navigateWebServer(String.format("store?type=createstore&role=%s&password=%s", MRole.getDefault().getIdentifier(), pwdsecure));
+					url = Optional.of(String.format("%s?type=%s&role=%s&password=%s", url.get(), m_type,m_role, m_password));
+				} else if (m_type.equals("client")) {
+					//String result = Util.navigateWebServer(String.format("store?type=client&filename=%s", pluginfilename));
+					url = Optional.of(String.format("%s?type=%s&filename=%s",url.get(),m_type,m_filename));
+				} else if (m_type.equals("addcert")) {
+					url = Optional.of(String.format("%s?type=%s&id=%s&%roleid=%s", url.get(), m_type, m_certid, m_role));
+					//String url = String.format("http://%s:%s/store?type=addcerts&id=%s&roleid=%s", webserver.getName(),port, pickcert.getValue() ,MRole.getDefault().getIdentifier());
+				} else if (m_type.equals("list")) {
+					url = Optional.of(String.format("%s?type=%s", url.get(), m_type));
+				} else if (m_type != null && m_type.length() > 0) {
+					url = Optional.of(String.format("%s?type=%s", url.get(), m_type));
+				}
+			} else if (m_servlet.equals("plugin")) {
+				if (m_type.equals("core")) {
+					url = Optional.of(String.format("%s?type=%s", url.get(),m_type));
+				} else if (m_type.equals("alive")) {
+					//String url = String.format("http://%s:%s/plugin?type=alive", webserver.getName(),port);
+					url = Optional.of(String.format("%s?type=%s", url.get(),m_type));
+				} else if (m_type.equals("list")) {
+					url = Optional.of(String.format("%s?type=%s&ad_role_id=%s", url.get(),m_type, m_role));
+					//url = String.format("http://%s:%s/plugin?ad_role_id=%s&type=list", Env.getServerUpdate().getName(),port, Env.getAD_Role_ID(Env.getCtx()));
+				} else if (m_type.equals("plugin")) {
+					url = Optional.of(String.format("%s?type=%s&id=%s",url.get(), m_type, m_pluginid));
+					//String url = String.format("http://%s:%s/plugin?type=plugin&id=%s",Env.getServerUpdate().getName(), port, plugin.getId());
+				} else if (m_type.equals("pluginsize")) {
+					url = Optional.of(String.format("%s?type=%s&id=%s",url.get(), m_type, m_pluginid));
+				}
+			} else if (m_servlet.equals("query")) {
+				if (m_type.equals("update")) {
+					url = Optional.of(String.format("%s?type=%s&role=%s&query=%s", url.get(), m_type, m_role, m_QueryId));
+				} else {
+					url = Optional.of(String.format("%s?type=%s&role=%s",url.get(), m_type, m_role));
+				}
+			} else if (m_servlet.equals("replication")) {
+				//if (m_type.equals("list")) {
+				//String url = String.format("http:/%s:%s/replication?action=list", m_machine.getName(), webport);
+				url = Optional.of(String.format("%s?action=%s", url.get(), m_action));
+				//}
+			} else if (m_servlet.equals("monitor")) {
+
+				if (m_type.equals("runnow")) {
+					url = Optional.of(String.format("%s?RunNow=%s", url.get(), m_processid));
+				} else {
+					url = Optional.of(String.format("%s?Action=", url.get(), m_action));
+				}
 			}
 		}
 		return url;
 	}
 	public void newsession() {
-		String url = buildurl();
+		Optional<String> url = buildurl();
+		if (!url.isPresent())
+			return;
 		String result = "";
 		RequestBody formBody = new FormBody.Builder()
-		.add("type", XendrianConstants.NewSession)
-		.build();
+				.add("type", XendrianConstants.NewSession)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			result = response.body().string();
@@ -218,10 +228,12 @@ public class XendrianServer {
 	}
 
 	public String start() {
-		String url = buildurl();
-		System.out.println(String.format("url=>%s",url));
 		String result = "";
-		Request request = new Request.Builder().url(url).build();
+		Optional<String> url = buildurl();
+		if (!url.isPresent())
+			return result;		
+		System.out.println(String.format("url=>%s",url.get()));		
+		Request request = new Request.Builder().url(url.get()).build();
 		try {
 
 			Response response = client.newCall(request).execute();
@@ -235,8 +247,8 @@ public class XendrianServer {
 		return result;		
 	}
 	public Response getResponse()  {
-		String url = buildurl();
-		Request request = new Request.Builder().url(url).build();				
+		Optional<String> url = buildurl();
+		Request request = new Request.Builder().url(url.get()).build();				
 		Response response = null;
 		try {
 			response = client.newCall(request).execute();
@@ -245,10 +257,10 @@ public class XendrianServer {
 		}
 		return response;
 	}
-	
+
 	public String getTextResponse()  {
-		String url = buildurl();
-		Request request = new Request.Builder().url(url).build();				
+		Optional<String> url = buildurl();
+		Request request = new Request.Builder().url(url.get()).build();				
 		Response response = null;
 		String textresponse = "";
 		try {
@@ -262,15 +274,17 @@ public class XendrianServer {
 
 	public String getProperty(String key) {
 		String result = "";
-		String url = buildurl();
+		Optional<String> url = buildurl();
+		if (!url.isPresent())
+			return result;
 		RequestBody formBody = new FormBody.Builder()
-		.add("type", XendrianConstants.getProperty)
-		.add("key", key)
-		.build();
+				.add("type", XendrianConstants.getProperty)
+				.add("key", key)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();			
 			result = response.body().string();
@@ -283,15 +297,17 @@ public class XendrianServer {
 		return result;
 	}
 	public String getError() {
-		String url = buildurl();
+		Optional<String> url = buildurl();
 		String result = "";
+		if (!url.isPresent())
+			return result;
 		RequestBody formBody = new FormBody.Builder()
-		.add("type",XendrianConstants.getError)
-		.build();
+				.add("type",XendrianConstants.getError)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			result = response.body().string();
@@ -304,15 +320,15 @@ public class XendrianServer {
 		return result;
 	}
 	public String getMessage() {
-		String url = buildurl();
+		Optional<String> url = buildurl();
 		String result = "";
 		RequestBody formBody = new FormBody.Builder()
-		.add("type", XendrianConstants.getMessage)
-		.build();
+				.add("type", XendrianConstants.getMessage)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			result = response.body().string();
@@ -325,15 +341,15 @@ public class XendrianServer {
 		return result;
 	}
 	public void addMessage(String message) {	
-		String url = buildurl();
+		Optional<String> url = buildurl();
 		RequestBody formBody = new FormBody.Builder()
-		.add("type", XendrianConstants.addMessage)
-		.add("message", message)
-		.build();
+				.add("type", XendrianConstants.addMessage)
+				.add("message", message)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			response.close();
@@ -351,17 +367,17 @@ public class XendrianServer {
 		} else {
 			this.property = (String) var;
 		}
-		String url = buildurl();
+		Optional<String> url = buildurl();
 		//OkHttpClient client = new OkHttpClient();
 		RequestBody formBody = new FormBody.Builder()
-		.add("type", XendrianConstants.addProperty)
-		.add("key", key)
-		.add("value", property)
-		.build();
+				.add("type", XendrianConstants.addProperty)
+				.add("key", key)
+				.add("value", property)
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(formBody)
-		.build();
+				.url(url.get())
+				.post(formBody)
+				.build();
 		try {
 			Response response = client.newCall(request).execute();
 			response.close();
@@ -413,37 +429,33 @@ public class XendrianServer {
 		result = String.format("http://%s:%s", webserver.getName(),port);
 		return result;
 	}
-	
+
 	public XendrianServer setMachineName(X_A_Machine machine) {
 		m_machine = machine;
 		return this;
 	}
-	
+
 	public XendrianServer upload(File file) {
-		String url = buildurl();
-        
-		
-		
+		Optional<String> url = buildurl();
 		RequestBody requestBody = new MultipartBody.Builder()
-			.setType(MultipartBody.FORM)
-			.addFormDataPart("fileName", file.getName(),						
-				RequestBody.create(MediaType.parse("application/zip"), file))
-			.addFormDataPart("some-field", "some-value")
-			.build();
+				.setType(MultipartBody.FORM)
+				.addFormDataPart("fileName", file.getName(),						
+						RequestBody.create(MediaType.parse("application/zip"), file))
+				.addFormDataPart("some-field", "some-value")
+				.build();
 		Request request = new Request.Builder()
-		.url(url)
-		.post(requestBody)
-		.build();
+				.url(url.get())
+				.post(requestBody)
+				.build();
+		System.out.println(url.get());
 		client.newCall(request).enqueue(new Callback() {
 			@Override
-			public void onFailure(final Call call, final IOException e) {
-				// Handle the error
-				e.printStackTrace();
+			public void onFailure(final Call call, final IOException e) {				
+				//e.printStackTrace();				
 			}
 			@Override
 			public void onResponse(final Call call, final Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					System.out.println("X");
+				if (!response.isSuccessful()) {					
 				}
 				// Upload successful
 			}

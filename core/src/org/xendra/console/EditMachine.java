@@ -32,6 +32,7 @@ import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.dialogs.ActionListDialogBuilder;
 import com.googlecode.lanterna.gui2.table.Table;
 
+
 public class EditMachine implements Runnable {
 	Table<String> table;
 	String type;
@@ -82,6 +83,29 @@ public class EditMachine implements Runnable {
 				props.addComponent(new Label("port https"));
 				props.addComponent(porthttps);
 				props.addComponent(checkBoxList);
+				X_A_Machine webserver = Env.getServerWeb(Env.getMachine());
+				if (webserver != null) {
+					if (Env.getMachine().getMac_Address().equals(webserver.getMac_Address())) {
+						props.addComponent(new Button("Start server", new Runnable() {
+							@Override
+							public void run() {
+								try {
+									String serverclazz = "org.xendra.xendrian.server";
+									Thread.currentThread().getContextClassLoader().loadClass(serverclazz);
+									//Class<?> s = Class.forName(serverclazz);		
+									//Runnable x = new Runnable() {
+										
+									//}
+									//Thread t = new Thread(s);
+									//t.start();
+								} catch (Exception e) {
+									e.printStackTrace();
+								} 
+								
+							}
+						}));
+					}
+				}				
 				panel.addComponent(props);
 			} else if (ms.getServerType().equals(REF_ServerType.MaterialServer)) {
 				String port = "";

@@ -25,6 +25,33 @@ import org.xendra.utils.ToolDev;
 
 public class common {
 
+	public static String getInfo() {
+		//X_A_Machine webserver = Env.getServerWeb(Env.getMachine());
+		//HashMap props = Env.getServerProperties(webserver.getA_Machine_ID(), REF_ServerType.WebServer);
+		Document doc = new XendrianServer().setServlet("plugin").setType("alive").getDocument();
+		Element root = doc.getRootElement();
+		Iterator iterator = root.getChildren().listIterator();
+		Element extensionXmlElement;
+		String dbname = "";
+		String dbhost = "";
+		String version = "";
+		Boolean update = false;
+		while (iterator.hasNext()) {
+			extensionXmlElement = (Element) iterator.next();
+			if (extensionXmlElement.getName().equals("databasename")) {
+				dbname = extensionXmlElement.getText();
+			} else if (extensionXmlElement.getName().equals("databasehost")) { 
+				dbhost = extensionXmlElement.getText();
+			} else if (extensionXmlElement.getName().equals("version")) {
+				version = extensionXmlElement.getText();
+			} else if (extensionXmlElement.getName().equals("update")) {
+				update = extensionXmlElement.getText().equals("Y");
+			}
+		}
+		String msg = String.format("db=%s host=%s version=%s update=%s", dbname, dbhost, version, update);
+		return msg;
+	}
+	
 	public static String PingToServer() {
 		String error = "";
 		String url = "";

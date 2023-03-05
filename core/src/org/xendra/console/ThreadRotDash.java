@@ -21,8 +21,10 @@ public class ThreadRotDash implements Runnable {
 			while (issync) {
 				i++;
 				i %= 4;
-				status.setText(String.format("%s %s", this.message, Character.toString(arr[i])));
-				gui.updateScreen();
+				if (gui != null) {
+					status.setText(String.format("%s %s", this.message, Character.toString(arr[i])));
+					gui.updateScreen();
+				}
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

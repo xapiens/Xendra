@@ -62,6 +62,7 @@ public class ServerKeyStore {
 	private static ServerKeyStore instance;
 	private File keystore;
 	private boolean keystoreloaded = false;
+	private boolean goahead = true;
 
 	public static ServerKeyStore getInstance() {
 		if (instance == null)
@@ -129,44 +130,44 @@ public class ServerKeyStore {
 		return keystoreloaded;
 	}
 
-	public void loadplugin(Screen screen) {		
+	public void loadplugin(Screen screen) {				
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		try {
 			File file = new FileDialogBuilder()
-			.setTitle("Open File")
-			.setDescription("Choose a file")
-			.setActionLabel("Open")
-			.build()
-			.showDialog(gui);
-			if (file.exists()) {				
+					.setTitle("Open File")
+					.setDescription("Choose a file")
+					.setActionLabel("Open")
+					.build()
+					.showDialog(gui);
+			if (file != null && file.exists()) {				
 				MessageDialogButton answer = new MessageDialogBuilder()
-				.setTitle("Confirm")
-				.setText(String.format("esta seguro de instalar %s", file.getAbsolutePath()))
-				.addButton(MessageDialogButton.Yes)				
-				.addButton(MessageDialogButton.No)
-				.build()
-				.showDialog(gui);								
+						.setTitle("Confirm")
+						.setText(String.format("esta seguro de instalar %s", file.getAbsolutePath()))
+						.addButton(MessageDialogButton.Yes)				
+						.addButton(MessageDialogButton.No)
+						.build()
+						.showDialog(gui);								
 				if (answer.equals(MessageDialogButton.Yes)) {
 					String alive = common.PingToServer();
 					if (alive == null) {
 						answer = new MessageDialogBuilder()
-						.setTitle("Error")
-						.setText("error to connect to Server")
-						.addButton(MessageDialogButton.OK)			
-						.build()
-						.showDialog(gui);																	
+								.setTitle("Error")
+								.setText("error to connect to Server")
+								.addButton(MessageDialogButton.OK)			
+								.build()
+								.showDialog(gui);																	
 					} 
 					if (alive.length() > 0) {
 						answer = new MessageDialogBuilder()
-						.setTitle("Conexion")
-						.setText(alive)
-						.addButton(MessageDialogButton.OK)				
-						.build()
-						.showDialog(gui);				
+								.setTitle("Conexion")
+								.setText(alive)
+								.addButton(MessageDialogButton.OK)				
+								.build()
+								.showDialog(gui);				
 					} else {				
 						KeyNamePair kp = new KeyNamePair(0,"");
 						final List<X_AD_Client> clients = new Query(Env.getCtx(), X_AD_Client.Table_Name, "", null)
-						.list();
+								.list();
 						final ComboBox<String> comboBox = new ComboBox<String>();											
 						for (X_AD_Client client:clients) {
 							comboBox.addItem(client.getName());
@@ -174,46 +175,53 @@ public class ServerKeyStore {
 						final BasicWindow window = new BasicWindow();						
 						window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
 						Panel panel = new Panel();
-						panel.addComponent(comboBox);
+						panel.addComponent(comboBox);						
 						Button accept = new Button("Ok", new Runnable() {			
 							@Override
 							public void run() {
-								window.close();
+								setahead(true);
+								window.close();								
 							}
 						});
 						Button cancel = new Button("Cancel", new Runnable() {			
 							@Override
 							public void run() {													
-								window.close();			
+								window.close();
+								setahead(false);								
 							}
 						});																						
 						panel.addComponent(accept);
 						panel.addComponent(cancel);
 						window.setComponent(panel.withBorder(Borders.singleLine("Options")));
-						gui.addWindowAndWait(window);		
-						int i = comboBox.getSelectedIndex();
-						if (i != -1) {
-							if (clients.get(i).getAD_Client_ID() > 0) {
-								kp = new KeyNamePair(clients.get(i).getAD_Client_ID(),clients.get(i).getName());
+						gui.addWindowAndWait(window);
+						if (getahead()) {
+							int i = comboBox.getSelectedIndex();
+							if (i != -1) {
+								if (clients.get(i).getAD_Client_ID() > 0) {
+									kp = new KeyNamePair(clients.get(i).getAD_Client_ID(),clients.get(i).getName());
+								}
+							}
+							//
+							Boolean force = false;
+							//Panel panel = new Panel();
+							panel = new Panel();
+							//final BasicWindow window = new BasicWindow();
+							final ComboBox<String> comboBox2 = new ComboBox<String>();
+							comboBox2.addItem("update");
+							comboBox2.addItem("force update all");
+							panel.addComponent(comboBox2);
+							panel.addComponent(accept);
+							panel.addComponent(cancel);
+							window.setComponent(panel);
+							gui.addWindowAndWait(window);
+							if (getahead()) {
+								i = comboBox.getSelectedIndex();
+								if (i == 1) {
+									force = true;
+								}						
+								ServerPlugins.getInstance().loadplugin(screen, file, kp, force);
 							}
 						}
-						//
-						Boolean force = false;
-						//Panel panel = new Panel();
-						panel = new Panel();
-						//final BasicWindow window = new BasicWindow();
-						final ComboBox<String> comboBox2 = new ComboBox<String>();
-						comboBox2.addItem("update");
-						comboBox2.addItem("force update all");
-						panel.addComponent(comboBox2);
-						panel.addComponent(accept);
-						window.setComponent(panel);
-						gui.addWindowAndWait(window);
-						i = comboBox.getSelectedIndex();
-						if (i == 1) {
-							force = true;
-						}						
-						ServerPlugins.getInstance().loadplugin(screen, file, kp, force);
 					}
 				}				
 			}
@@ -222,6 +230,14 @@ public class ServerKeyStore {
 		}		
 	}
 
+
+	protected boolean getahead() {	
+		return goahead;
+	}
+
+	protected void setahead(boolean b) {
+		goahead = b;		
+	}
 
 	public void loadplugins(Screen screen) {
 		try {
@@ -236,21 +252,21 @@ public class ServerKeyStore {
 		boolean loaded = false;
 		if (!pwd.equals(pwdconf) &&  pwd.length() > 0) {
 			MessageDialogButton answer = new MessageDialogBuilder()
-			.setTitle("Error")
-			.setText("password no coincide")
-			.addButton(MessageDialogButton.OK)				
-			.build()
-			.showDialog(gui);								
+					.setTitle("Error")
+					.setText("password no coincide")
+					.addButton(MessageDialogButton.OK)				
+					.build()
+					.showDialog(gui);								
 		}
 		else 
 		{			
 			if (!ToolDev.isvalidkeystore()) {
 				MessageDialogButton answer = new MessageDialogBuilder()
-				.setTitle("Error")
-				.setText("not valid key store")
-				.addButton(MessageDialogButton.OK)				
-				.build()
-				.showDialog(gui);												
+						.setTitle("Error")
+						.setText("not valid key store")
+						.addButton(MessageDialogButton.OK)				
+						.build()
+						.showDialog(gui);												
 				defineKeyStore(gui, pwd);
 			}
 			List<String> urls = new ArrayList<String>();
@@ -283,21 +299,21 @@ public class ServerKeyStore {
 			String keystorepwd = String.valueOf(ToolDev.getkeystorepassword());
 			if (!keystorepwd.equals(pwd)) {
 				MessageDialogButton answer = new MessageDialogBuilder()
-				.setTitle("Error")
-				.setText("password tienda invalido")
-				.addButton(MessageDialogButton.OK)				
-				.build()
-				.showDialog(gui);					
+						.setTitle("Error")
+						.setText("password tienda invalido")
+						.addButton(MessageDialogButton.OK)				
+						.build()
+						.showDialog(gui);					
 			} else {
 				for (String url:urls) {
 					String result = validate(url);
 					if (result.length() > 0) {
 						MessageDialogButton answer = new MessageDialogBuilder()
-						.setTitle(String.format("Error in validate %s", url))
-						.setText(result)
-						.addButton(MessageDialogButton.OK)						
-						.build()
-						.showDialog(gui);
+								.setTitle(String.format("Error in validate %s", url))
+								.setText(result)
+								.addButton(MessageDialogButton.OK)						
+								.build()
+								.showDialog(gui);
 					} else {
 						loaded = true;
 					}
@@ -309,19 +325,19 @@ public class ServerKeyStore {
 
 	private void defineKeyStore(MultiWindowTextGUI gui, String pwd) {
 		File keystoredir = new DirectoryDialogBuilder()
-		.setTitle("Open Key Store")
-		.setDescription("Choose a folder")		
-		.setActionLabel("Open")			
-		.build()
-		.showDialog(gui);
+				.setTitle("Open Key Store")
+				.setDescription("Choose a folder")		
+				.setActionLabel("Open")			
+				.build()
+				.showDialog(gui);
 		if (keystoredir != null) {
 			MessageDialogButton answer = new MessageDialogBuilder()
-			.setTitle("Confirm")
-			.setText(String.format("esta seguro de crear la tienda en %s", keystoredir.getAbsolutePath()))
-			.addButton(MessageDialogButton.Yes)				
-			.addButton(MessageDialogButton.No)
-			.build()
-			.showDialog(gui);								
+					.setTitle("Confirm")
+					.setText(String.format("esta seguro de crear la tienda en %s", keystoredir.getAbsolutePath()))
+					.addButton(MessageDialogButton.Yes)				
+					.addButton(MessageDialogButton.No)
+					.build()
+					.showDialog(gui);								
 			if (answer.equals(MessageDialogButton.Yes)) {
 				keystore = new File(keystoredir, Constants.KEYSTORE_NAME);
 				try {
@@ -346,11 +362,11 @@ public class ServerKeyStore {
 					MStore.getInstance().reload();						
 				} catch (Exception e) {
 					answer = new MessageDialogBuilder()
-					.setTitle("Error")
-					.setText(e.getMessage())
-					.addButton(MessageDialogButton.OK)									
-					.build()
-					.showDialog(gui);								
+							.setTitle("Error")
+							.setText(e.getMessage())
+							.addButton(MessageDialogButton.OK)									
+							.build()
+							.showDialog(gui);								
 				}					
 			}
 		}		
@@ -374,11 +390,11 @@ public class ServerKeyStore {
 				SSLSocketFactory sslSocketFactory;				
 				sslSocketFactory = sslContext.getSocketFactory();								
 				OkHttpClient client = new OkHttpClient.Builder()						
-				.sslSocketFactory(sslSocketFactory)
-				.build();
+						.sslSocketFactory(sslSocketFactory)
+						.build();
 				Request request = new Request.Builder()
-				.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11")
-				.url(url).build();    			
+						.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11")
+						.url(url).build();    			
 				Response response = client.newCall(request).execute();
 				response.close();				
 			} else {

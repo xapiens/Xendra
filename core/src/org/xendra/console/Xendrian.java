@@ -105,7 +105,7 @@ public class Xendrian {
 		SyncModel.getInstance().setBar(pbar);
 		SyncModel.getInstance().setBarChecking(checkpbar);
 		SyncModel.getInstance().setLabel(status);
-		SyncModel.getInstance().setLabelChecking(checking);
+		SyncModel.getInstance().setLabelChecking(checking);		
 		String error = "";
 		error= SyncModel.getInstance().SyncronizeFull(error);
 		while (error.length() > 0) {
