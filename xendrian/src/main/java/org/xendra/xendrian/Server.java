@@ -54,7 +54,7 @@ import static io.undertow.servlet.Servlets.defaultContainer;
 import static io.undertow.servlet.Servlets.deployment;
 import static io.undertow.servlet.Servlets.servlet;
 
-public class Server extends Thread {	
+public class Server extends Thread   {	
 	private static CLogger 		log = CLogger.getCLogger(Server.class);
 	public static final String 	monitor = "/monitor";
 	private List<HashMap> servlets = new ArrayList<HashMap>();

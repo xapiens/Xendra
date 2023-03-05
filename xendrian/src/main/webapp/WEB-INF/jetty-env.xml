@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+	<Set name="contextPath">/</Set>
+	<!--<Set name="war">
+		<Property name="jetty.webapps" />
+		/example-webapp.war
+	</Set>-->
+	<New class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg />
+		<Arg>mySpecialValue</Arg>
+		<Arg type="java.lang.Integer">4000</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	<New id="XendraDS" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jdbc/XendraDS</Arg>
+		<Arg>
+			<New class="com.zaxxer.hikari.HikariDataSource">
+				<Arg>
+					<New class="com.zaxxer.hikari.HikariConfig">
+						<Set name="minimumPoolSize">5</Set>
+						<Set name="maximumPoolSize">20</Set>
+						<Set name="dataSourceClassName">org.postgresql.Driver</Set>
+						<Set name="username">xendra</Set>
+						<Set name="password">xendra</Set>
+						<Call name="addDataSourceProperty">
+							<Arg>url</Arg>
+							<Arg>jdbc:postgresql://localhost:5432/qfarma</Arg>
+						</Call>
+					</New>
+				</Arg>
+			</New>
+		</Arg>
+	</New>
+</Configure>

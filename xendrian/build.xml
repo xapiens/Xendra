@@ -20,12 +20,14 @@
   <property name="plugin_id" value="org.xendra.xendrian"/>
   <property name="web.dir" value="web"/>
   <property name="jar.path" value="../lib"/>
+  <property name="tools" value="../tools/lib"/>
   <property name="jar.name" value="xendrian"/>
 
   <!-- set path to include the necessary jar files for javac -->
   <path id="project.class.path">
     <pathelement path="${classpath}"/>
     <pathelement path="${jar.path}/core.jar"/>
+    <pathelement path="${tools}/junit-4.11.jar"/>
     <pathelement path="${jar.path}/Xendralib.jar"/>
   </path>
 
@@ -85,7 +87,7 @@
 	<attribute name="Implementation-URL" value="http://www.xendra.org"/>
 	</manifest>
     </jar>
-    <copy file="src/org/xendra/xendrian/plugin/plugin.xml" todir="."/>
+    <copy file="src/main/java/org/xendra/xendrian/plugin/plugin.xml" todir="."/>
     <replace file="./plugin.xml"> 
 	<replacefilter token="@timestamp@" value="${timestamp}"/>
     </replace>	    

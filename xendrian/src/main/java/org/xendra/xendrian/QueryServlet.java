@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -37,9 +38,9 @@ public class QueryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Enumeration<String> parameterNames = request.getParameterNames();
 		String role = request.getParameter("role");
-		String type = request.getParameter("type");		
+		Optional<String> type = Optional.ofNullable(request.getParameter("type"));		
 		String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-		if (type.equals("list")) {
+		if (type.isPresent() && type.get().equals("list")) {
 			String xml = "<querys>";
 			List<X_PA_Query> querys = new Query(Env.getCtx(), X_PA_Query.Table_Name, "IsActive = 'Y'", null)
 			.setClient_ID()
@@ -66,7 +67,7 @@ public class QueryServlet extends HttpServlet {
 			response.setHeader("Content-Type", "text/xml");
 			out.write(result);
 			out.close();		
-		} else if (type.equals("update")) {
+		} else if (type.isPresent() && type.get().equals("update")) {
 			String queryid = request.getParameter("query");
 			X_PA_Query query = new Query(Env.getCtx(), X_PA_Query.Table_Name, "PA_Query_ID = ?", null)
 			.setParameters(Integer.valueOf(queryid))
