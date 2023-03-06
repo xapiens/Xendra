@@ -120,14 +120,16 @@ import org.xendra.replication.ReplicationEngine;
 import org.xendra.util.UpdatePO;
 import org.xendra.utils.ElementProperties;
 //import org.xendra.utils.Rotdash;
+import org.xendra.utils.Rotdash;
 
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.ProgressBar;
+import com.googlecode.lanterna.gui2.TextBox;
 
 
 public class SyncModel {
-	private static CLogger 		log = CLogger.getCLogger(SyncModel.class);
+	private static CLogger log = CLogger.getCLogger(SyncModel.class);
 	private static SyncModel m_syncmodel;
 	private DatabaseMetaData md;
 	private String schema = null;
@@ -151,8 +153,10 @@ public class SyncModel {
 	private Boolean m_checkReferences = false;
 	private Label label;
 	private Label checklabel;
+	private TextBox logs;
 	private ProgressBar bar;
 	private ProgressBar pbar;
+	private boolean server = false;
 	private MultiWindowTextGUI gui;
 	private List<String> errors = new ArrayList<String>();
 
@@ -170,7 +174,8 @@ public class SyncModel {
 	}
 
 	private void Initialize() {
-		try {						
+		try {					
+			logs = new TextBox();
 			fillHashtable();
 		}
 		catch (Exception e)
@@ -181,6 +186,46 @@ public class SyncModel {
 		{
 
 		}
+	}
+	public void setGUI(MultiWindowTextGUI gui) {
+		this.gui = gui;
+	}
+	public void setLabel(Label label) {
+		this.label = label;
+	}	
+	public void setBar(ProgressBar pbar) {
+		bar = pbar;
+	}
+	public void setLabelChecking(Label label) {
+		this.checklabel = label;
+	}
+	public void setBarChecking(ProgressBar pbar) {
+		this.pbar = pbar;
+	}
+	public void setModeServer() {
+		if (!server)
+			server = true;		
+	}
+	public boolean IsModeServer() {
+		return server;
+	}
+	public void setTextBox(TextBox textbox) {
+		logs = textbox;
+	}
+	
+	public void addLine(String line) {
+	    logs.addLine(line);
+	    logs.setReadOnly(false);
+	    logs.takeFocus();
+	    logs.setCaretPosition(Integer.MAX_VALUE, Integer.MAX_VALUE);
+
+	    try {
+	        Thread.sleep(15);
+	    } catch (InterruptedException e) {
+	        e.printStackTrace();
+	    }
+
+	    logs.setReadOnly(true);	    
 	}
 	public String memoryavailable() {
 		String error = "";
@@ -196,30 +241,42 @@ public class SyncModel {
 				int exp = (int) (Math.log(memory) / Math.log(unit));
 				String pre = "KMGTPE".charAt(exp-1) + "i";
 				String info = String.format("%.1f %sB RAM Available", memory / Math.pow(unit, exp), pre);
-				//System.out.println(info);
-				log.log(Level.WARNING,info);
+				//System.out.println(info);				
+				if (IsModeServer()) {
+					log.log(Level.WARNING,info);	
+				} else {
+					addLine(info);
+				}
 			}
 			if (memory < 700000)		
 			{			
 				throw new Exception(String.format("%s is insuficient Memory to Update", memory));
 			}	
 		} catch (Exception e) {
-			log.log(Level.WARNING,e.getMessage());
 			error = e.getMessage();
+			if (IsModeServer()) {
+				log.log(Level.WARNING,error);
+			} else {
+				addLine(error);
+			}			
 		}
 		return error;
 	}	
 	public String checkModelFull() {
 		//boolean isok = true;
 		String error = "";
-		//log.log(Level.WARNING,"Checking model...");
-		//Rotdash rotdash = Rotdash.getInstance();
-		//rotdash.start();		
+		if (IsModeServer()) {
+			log.log(Level.WARNING,"Checking model...");
+			//rotdash = Rotdash.getInstance();
+			Rotdash.getInstance().start();		
+		} else {
+			addLine("Checking model...");
+		}
+			 
 		try {			
 			//TODO verificar integridad de datos para trabajar en el pos			
 			//TODO verificar uuid
 			//TODO verificar seq
-
 			checkReferences();
 			checkvalrule();
 			checkIdentifiers();
@@ -279,8 +336,10 @@ public class SyncModel {
 									throw new Exception(String.format("table %s out of sync", table.TableName()));
 								}
 								if (dbtable.getAD_Plugin_ID() == 0) {
-									//throw new Exception(String.format("table %s plugin out of sync", table.TableName()));
-									System.out.println(String.format("table %s plugin out of sync", table.TableName()));
+									if (IsModeServer())
+										System.out.println(String.format("table %s plugin out of sync", table.TableName()));
+									else
+										this.addLine(String.format("table %s plugin out of sync (NO Plugin ID)", table.TableName()));
 								}
 							} else {
 								X_AD_Table dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null)
@@ -523,7 +582,7 @@ public class SyncModel {
 				}
 				if (goahead && proc != null) {
 					if (proc.updated() == null) {
-						System.out.println("X");
+						//System.out.println("X");
 					}
 					Timestamp srcsynchro = null;
 					try {
@@ -559,14 +618,21 @@ public class SyncModel {
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
-			log.log(Level.WARNING, e.getMessage());
+			error = e.getMessage();
+			if (this.IsModeServer())
+				log.log(Level.WARNING, error);
+			else
+				addLine(error);
+			//e.printStackTrace();			
 			//serializables.clear();
 			//serializables = null;			
-			//isok = false;
-			error = e.getMessage();
+			//isok = false;			
 		}
 		//rotdash.stop();
+		if (IsModeServer()) {
+			log.log(Level.WARNING,"Checking model finished...");			
+			Rotdash.getInstance().stop();
+		}		
 		return error;
 	}
 	public String SyncronizeLight() {
@@ -615,7 +681,10 @@ public class SyncModel {
 			error = checkModelFull();
 			if (error.length() > 0)
 			{
-				log.log(Level.WARNING, "update model");
+				if (this.IsModeServer())
+					log.log(Level.WARNING, "update model");
+				else
+					addLine("update model");
 				md = DB.getConnectionRO().getMetaData();
 				UpdateSequences();
 				UpdateTable();
@@ -657,7 +726,11 @@ public class SyncModel {
 		} catch (Exception e)
 		{
 			error = e.getMessage();
-			e.printStackTrace();
+			if (!this.IsModeServer()) {
+				addLine(error);
+				AddError(error);
+			}
+			//e.printStackTrace();
 		}
 		return error;
 	}
@@ -1307,14 +1380,11 @@ public class SyncModel {
 		if (m_checkReferences) {
 			DB.executeUpdate("Update AD_Reference set synchronized = null", null);
 		}
-		//listreferences = new HashSet<Class<?>>();
 		ComponentScanner scanner = new ComponentScanner();	
 		listreferences = scanner.getClasses(	new ComponentQuery() 
 		{
 			protected void query() {
 				select().from("org.compiere.model.reference").returning(all());
-				//select().from("org.compiere.model.reference").andStore(
-				//		thoseAnnotatedWith(XendraRef.class).into(listreferences));
 			}
 		});				
 		scanner = null;
@@ -1398,7 +1468,9 @@ public class SyncModel {
 	}
 
 	public void checksequences() {
-		label.setText(String.format("checking sequences..."));
+		if (!IsModeServer()) {
+			label.setText(String.format("checking sequences..."));
+		}
 		serializables = new HashSet<Class<? extends PO>>();
 		ComponentScanner scanner = new ComponentScanner();
 		scanner.getClasses(	new ComponentQuery() 
@@ -1481,14 +1553,11 @@ public class SyncModel {
 		}
 	}
 	public void checkvalrule() {
-		//listvalrules = new HashSet<Class<?>>();
 		ComponentScanner scanner = new ComponentScanner();	
 		listvalrules = scanner.getClasses(	new ComponentQuery() 
 		{
 			protected void query() {
 				select().from("org.compiere.model.valrule").returning(all());
-				//select().from("org.compiere.model.valrule").andStore(
-				//		thoseAnnotatedWith(XendraValRule.class).into(listvalrules));
 			}
 		});		
 		scanner = null;
@@ -1510,12 +1579,7 @@ public class SyncModel {
 						e2.printStackTrace();
 					}																		
 				}				
-				//for (Object key:valrules.keySet()) {
-				//	String refclass = (String) valrules.get(key);
-				//	Class<?> clazzref = null;
 				XendraValRule ref = null;
-				//	try {
-				//clazzref = Class.forName(String.format("org.compiere.model.valrule.%s", (String) refclass));
 				ref = clazzref.getField(X_AD_Val_Rule.COLUMNNAME_Identifier).getAnnotation(XendraValRule.class);
 				valrules.put(ref.Identifier(), clazzref.getSimpleName());
 				Integer valruleid = Integer.valueOf(ref.AD_Val_Rule_ID());
@@ -1669,19 +1733,20 @@ public class SyncModel {
 			}
 			i++;
 		}		
-		log.log(Level.WARNING, String.format("%d PO Objects", objects.size()));
+		if (IsModeServer()) 
+			log.log(Level.WARNING, String.format("%d PO Objects", objects.size()));
+		else 
+			addLine(String.format("%d PO Objects", objects.size()));		
 	}
 
 	void UpdateStructure(Class<?> clazz) throws Exception {
 		boolean updatetable = false;
-		//boolean isnew = false;		
 		XendraTable table = null;
 		List<XendraColumn> columns = null;
 		String tblname = (String) clazz.getField("Table_Name").get(clazz);		
 		MTable dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null).setParameters(tblname).first();
 		if (dbtable == null)
 		{
-			//isnew = true;
 			updatetable = true;
 		}
 		else if (dbtable.get_ColumnIndex(X_AD_Table.COLUMNNAME_Identifier) < 0)
@@ -1696,7 +1761,6 @@ public class SyncModel {
 			if (no == 0)
 			{
 				updatetable = true;
-				//isnew = true;
 			}
 		}		
 		for (Field f:clazz.getDeclaredFields())
@@ -1761,7 +1825,10 @@ public class SyncModel {
 		}
 		if (updatetable)
 		{
-			log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+			if (IsModeServer()) 
+				log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+			else
+				addLine(String.format("Create/Update %s ",table.Name()));
 			if (dbtable == null)
 				dbtable = new MTable(Env.getCtx(), 0, null);
 			dbtable.setName(table.Name());
@@ -1784,13 +1851,13 @@ public class SyncModel {
 			dbtable.setSynchronized(Timestamp.valueOf(table.Synchronized()));
 			if (dbtable.save())
 			{
-				//if (isnew)
-				//	dbtable.createDefaults(table.IsKey());
 				dbtable.checkdefaults(table.IsKey());
 				if (columns == null)
 				{				
-					log.log(Level.WARNING, String.format("%s don't have defined columns",table.Name()));
-					//return;
+					if (IsModeServer())
+						log.log(Level.WARNING, String.format("%s don't have defined columns",table.Name()));
+					else
+						addLine(String.format("%s don't have defined columns",table.Name()));
 				}
 				else
 				{
@@ -1940,20 +2007,28 @@ public class SyncModel {
 								String sqlcommand = sqlcommands.get(0);
 								if (sqlcommand.indexOf(DB.SQLSTATEMENT_SEPARATOR) == -1)
 								{
-									System.out.print(".");
+									AddPoint();
 									String error = Util.processSQL(sqlcommand);
-									if (error.length() > 0)
-										System.out.println(error);
+									if (error.length() > 0) {
+										if (IsModeServer())											
+											System.out.println(error);
+										else
+											addLine(error);
+									}
 								}
 								else
 								{
 									String statements[] = sqlcommand.split(DB.SQLSTATEMENT_SEPARATOR);
 									for (String statement:statements)
 									{
-										System.out.print(".");
+										AddPoint();
 										String error = Util.processSQL(statement);
 										if (error.length() > 0)
-											System.out.println(error);
+											if (IsModeServer())
+												System.out.println(error);
+											else
+												addLine(error);
+										
 									}
 								}
 								sqlcommands.remove(0);
@@ -1970,6 +2045,16 @@ public class SyncModel {
 		}		
 	}
 
+	private void AddPoint() {
+		if (IsModeServer())
+			System.out.print(".");
+		else {
+			String currenttext = logs.getText();
+			currenttext += ".";
+			logs.setText(currenttext);																				
+		}		
+	}
+	
 	public X_AD_Element UpdateElement(String Identifier, String ColumnName) {
 		if (Identifier == null)
 			return null;
@@ -1980,15 +2065,7 @@ public class SyncModel {
 			boolean update = true;
 			if (elements.size() == 0)
 			{				
-				//Set<Class<?>> listelements = new HashSet<Class<?>>();
 				ComponentScanner scanner = new ComponentScanner();	
-				//scanner.getClasses(	new ComponentQuery() 
-				//{
-				//	protected void query() {
-				//		select().from("org.compiere.model.element").andStore(
-				//				thoseAnnotatedWith(XendraElement.class).into(listelements));
-				//	}
-				//});
 				Set<Class<?>>  listelements = scanner.getClasses(	new ComponentQuery()
 				{
 					protected void query() {
@@ -2001,7 +2078,6 @@ public class SyncModel {
 					Class<?> clazzref = null;
 					try {
 						Object processclass = it.next();					
-						//Class<?> clazzref = Class.forName(((Class) processclass).getName());						
 						clazzref = Class.forName(((Class) processclass).getName());
 						XendraElement ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraElement.class);
 						elements.put(ref.Identifier(), clazzref.getSimpleName());
@@ -2010,8 +2086,6 @@ public class SyncModel {
 					}
 				}								
 			}
-			///String ColumnName = "";
-			//String Name = "";
 			if (ColumnName != null)
 			{
 				try {
@@ -2075,8 +2149,6 @@ public class SyncModel {
 			}
 			else if (adelement == null)
 			{
-				//M_Element newID = M_Element.get (Env.getCtx(), ColumnName.toLowerCase(), null);
-				//if (newID == null)
 				adelement = new M_Element(Env.getCtx(), 0, null);		
 				adelement.setName(ColumnName);
 				adelement.setDescription(ColumnName);
@@ -2107,7 +2179,7 @@ public class SyncModel {
 		adreference.setIdentifier(ref.Identifier());
 	}
 
-	public static X_AD_Reference UpdateReference(String Identifier) {
+	public X_AD_Reference UpdateReference(String Identifier) {
 		if (Identifier == null)
 			return null;
 		if (Identifier.length() == 0)
@@ -2116,16 +2188,14 @@ public class SyncModel {
 		try {
 			boolean update = true;
 			Class<?> clazzref  = null;
-			//if (references.size() == 0)
-			//{
-			//	fillHashtable(ReferenceList.class, references);
-			//}			
-			//String refclass = (String) references.get(Identifier);
 			try {
 				clazzref = Class.forName(String.format("org.compiere.model.reference.%s",(String) references.get(Identifier)));
 			} catch (Exception e) {
-				log.log(Level.SEVERE, String.format("reference search by identifier %s not found",Identifier));
-				e.printStackTrace();
+				if (IsModeServer()) 
+					log.log(Level.SEVERE, String.format("reference search by identifier %s not found",Identifier));
+					//e.printStackTrace();					
+				else
+					this.addLine(String.format("reference search by identifier %s not found",Identifier));
 			}
 			XendraRef ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraRef.class);
 			Timestamp srcsynchro = Timestamp.valueOf(ref.Synchronized());
@@ -2180,7 +2250,10 @@ public class SyncModel {
 									{
 										reflist = new X_AD_Ref_List(Env.getCtx(), 0, null);										
 									}
-									System.out.println(reflist.getName());
+									if (IsModeServer()) 
+										System.out.println(reflist.getName());
+									else 
+										addLine(reflist.getName());
 									reflist.setAD_Reference_ID(adreference.getAD_Reference_ID());
 									reflist.setValue(ri.Value());
 									reflist.setName(ri.Name());
@@ -2253,8 +2326,9 @@ public class SyncModel {
 									reftable.setWhereClause(ri.WhereClause());
 									reftable.setOrderByClause(ri.OrderByClause());
 									reftable.setIdentifier(ri.Identifier());
-									if (!reftable.save())
-										System.out.println("X");									
+									if (!reftable.save()) {
+										//System.out.println("X");
+									}
 								}
 							}
 						}
@@ -2265,7 +2339,10 @@ public class SyncModel {
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			if (!IsModeServer()) {
+				addLine(e.getMessage());
+			}
+			//e.printStackTrace();
 		}
 		return null;
 	}
@@ -2387,7 +2464,6 @@ public class SyncModel {
 							updatetable = true;
 						if (dbtable.getIdentifier().compareTo(table.Identifier()) != 0)
 							updatetable = true;
-						//System.out.println(table.TableName());
 						String pkgid = table.AD_Package_ID();
 						String pluginid = table.AD_Plugin_ID();;
 						int AD_Package_ID = 0;
@@ -2529,8 +2605,9 @@ public class SyncModel {
 									newtranslations.add(vector);
 								}
 							}
-							if (no < 0)
-								System.out.println("X");
+							if (no < 0) {
+								//System.out.println("X");
+							}
 						}
 					}
 					else
@@ -2631,7 +2708,10 @@ public class SyncModel {
 		}
 		if (updatetable)
 		{
-			log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+			if (IsModeServer()) 
+				log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+			else
+				addLine(String.format("Create/Update %s ",table.Name()));
 			if (dbtable == null)
 				dbtable = new MTable(Env.getCtx(), 0, null);
 			// add package plugin
@@ -2839,20 +2919,30 @@ public class SyncModel {
 									String sqlcommand = sqlcommands.get(0);
 									if (sqlcommand.indexOf(DB.SQLSTATEMENT_SEPARATOR) == -1)
 									{
-										System.out.print(".");
+										AddPoint();
+										//System.out.print(".");
 										String error = Util.processSQL(sqlcommand);
-										if (error.length() > 0)
-											System.out.println(error);
+										if (error.length() > 0) {
+											if (IsModeServer())
+												System.out.println(error);
+											else 
+												addLine(error);
+										}
 									}
 									else
 									{
 										String statements[] = sqlcommand.split(DB.SQLSTATEMENT_SEPARATOR);
 										for (String statement:statements)
 										{
-											System.out.print(".");
+											//System.out.print(".");
+											AddPoint();
 											String error = Util.processSQL(statement);
-											if (error.length() > 0)
-												System.out.println(error);
+											if (error.length() > 0) {
+												if (IsModeServer())
+													System.out.println(error);
+												else
+													addLine(error);
+											}
 										}
 									}
 									sqlcommands.remove(0);
@@ -2881,6 +2971,8 @@ public class SyncModel {
 						.setParameters(windowid).first();
 				if (dbwindow != null) {
 					tabwindowid = dbwindow.getAD_Window_ID();
+				} else {
+					continue;
 				}
 				Timestamp tabsync = Timestamp.valueOf(tab.Synchronized());
 				Calendar caltab = Calendar.getInstance();								
@@ -2971,7 +3063,6 @@ public class SyncModel {
 					}
 					dbtab.setSynchronized(tabsync);
 					dbtab.save();
-					//System.out.print("T");
 				}
 				int seqno = 0;
 				for (Field f:clazz.getDeclaredFields())
@@ -3029,7 +3120,7 @@ public class SyncModel {
 											}
 											else
 											{
-												System.out.println("X");
+												//System.out.println("X");
 											}
 										}								
 										dbfield.setIsDisplayed(field.IsDisplayed());
@@ -3050,11 +3141,9 @@ public class SyncModel {
 													.setParameters(tab.Included_Tab_ID()).first();
 											if (tabincl != null)
 												dbfield.setIncluded_Tab_ID(tabincl.getAD_Tab_ID());
-										}
-										//dbfield.setHideInListView(field.)
+										}										
 										dbfield.setSynchronized(fieldsync);
-										dbfield.save();
-										//System.out.print("F");
+										dbfield.save();										
 									}	
 									if (dbfield.getSeqNo() > seqno)
 										seqno = dbfield.getSeqNo();
@@ -3163,7 +3252,7 @@ public class SyncModel {
 						int no = DB.executeUpdate(sqlinsert, null);
 						if (no < 0)
 						{
-							System.out.println("X");
+							//System.out.println("X");
 						}
 					}
 				}
@@ -3252,7 +3341,7 @@ public class SyncModel {
 						no = DB.executeUpdate(sql.toString(), null);
 						if (no != 0)
 						{
-							System.out.println("X");
+							//System.out.println("X");
 						}
 					}
 				}
@@ -3410,14 +3499,11 @@ public class SyncModel {
 			}
 			rs.close();
 			pstmt.close();
-			//final Set<Class<?>> views = new HashSet<Class<?>>();
 			ComponentScanner scanner = new ComponentScanner();	
 			Set<Class<?>> views  = scanner.getClasses(	new ComponentQuery() 
 			{
 				protected void query() {
 					select().from("org.compiere.model.view").returning(all());
-					//select().from("org.compiere.model.view").andStore(
-					//		thoseAnnotatedWith(XendraView.class).into(views));
 				}
 			});				
 			float i = 1;
@@ -3522,7 +3608,10 @@ public class SyncModel {
 						}
 						if (updatetable)
 						{
-							log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+							if (this.IsModeServer())
+								log.log(Level.WARNING, String.format("Create/Update %s ",table.Name()));
+							else
+								addLine(String.format("Create/Update %s ",table.Name()));
 							if (dbtable == null)
 								dbtable = new MTable(Env.getCtx(), 0, null);
 							dbtable.setName(table.Name());
@@ -3720,16 +3809,15 @@ public class SyncModel {
 			}
 			pstmt.close();
 			rs.close();
-			//
-			final Set<Class<?>> functions = new HashSet<Class<?>>();
-			ComponentScanner scanner = new ComponentScanner();	
-			scanner.getClasses(	new ComponentQuery() 
+			Set<Class<?>> functions = null;
+			ComponentScanner scanner = new ComponentScanner();
+			functions = scanner.getClasses(	new ComponentQuery()
 			{
 				protected void query() {
-					select().from("org.compiere.model.function").andStore(
-							thoseAnnotatedWith(XendraFunction.class).into(functions));
+					select().from("org.compiere.model.function").returning(all());
 				}
-			});					
+			});	
+
 			float i = 1;
 			float rows = functions.size();
 			Iterator it = functions.iterator();
@@ -3747,8 +3835,6 @@ public class SyncModel {
 						e2.printStackTrace();
 					}													
 				}												
-				//for (Object key:functions.keySet()) {
-				//	Class<?> clazzref = Class.forName(String.format("org.compiere.model.function.%s",(String) functions.get(key)));
 				XendraFunction ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraFunction.class);				
 				Timestamp srcsynchro = Timestamp.valueOf(ref.Synchronized());				
 				String key = ref.Identifier();
@@ -4327,8 +4413,11 @@ public class SyncModel {
 					} catch (IOException e2) {
 						e2.printStackTrace();
 					}													
-				}																
-				System.out.println(classname);
+				}
+				if (this.IsModeServer())
+					System.out.println(classname);
+				else
+					addLine(classname);
 				XendraProcess proc = null;
 				XendraScheduler scheduler = null;
 				Annotation[] annots = clazz.getAnnotations();
@@ -4425,8 +4514,11 @@ public class SyncModel {
 					{								
 						// eliminamos los parametros existentes
 						if (!process.is_new())
-						{								
-							log.log(Level.WARNING, String.format("Update Process %s", process.getName()));
+						{						
+							if (this.IsModeServer())
+								log.log(Level.WARNING, String.format("Update Process %s", process.getName()));
+							else								
+								addLine(String.format("Update Process %s", process.getName()));
 							List<X_AD_Process_Para> paramlist = new Query(Env.getCtx(), X_AD_Process_Para.Table_Name, "AD_Process_ID = ?", null)
 									.setParameters(process.getAD_Process_ID()).list();
 							for (X_AD_Process_Para param:paramlist)
@@ -4435,10 +4527,13 @@ public class SyncModel {
 							}
 						}
 						else
-						{																
-							log.log(Level.WARNING, String.format("Adding process %s", process.getName()));
+						{														
+							if (IsModeServer())
+								log.log(Level.WARNING, String.format("Adding process %s", process.getName()));
+							else
+								addLine(String.format("Adding process %s", process.getName()));
 						}
-					}
+					}					
 					for (Field f:clazz.getDeclaredFields()) {						
 						for (Annotation ap: f.getAnnotations()) {
 							if (ap.annotationType() == XendraProcessParameter.class) {
@@ -4563,11 +4658,16 @@ public class SyncModel {
 					e.printStackTrace();
 				}
 				if (error == null) {
-					System.out.println("X");
+					//System.out.println("X");
 				}
 				if (error.length() > 0)
 				{				
-					System.out.println(String.format("%s %s",file,error));
+					
+					if (IsModeServer()) 
+						System.out.println(String.format("%s %s",file,error));
+					else
+						addLine(String.format("%s %s",file,error));
+					
 				}							
 				file.delete();		
 			}			
@@ -4600,20 +4700,5 @@ public class SyncModel {
 
 	public void setCheckReferences(Boolean checkReferences) {
 		m_checkReferences = checkReferences;		
-	}
-	public void setGUI(MultiWindowTextGUI gui) {
-		this.gui = gui;
-	}
-	public void setLabel(Label label) {
-		this.label = label;
-	}	
-	public void setBar(ProgressBar pbar) {
-		bar = pbar;
-	}
-	public void setLabelChecking(Label label) {
-		this.checklabel = label;
-	}
-	public void setBarChecking(ProgressBar pbar) {
-		this.pbar = pbar;
 	}
 }

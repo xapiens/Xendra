@@ -10,8 +10,10 @@ import org.compiere.model.reference.REF_ServerType;
 import org.compiere.util.Env;
 import org.xendra.xendrian.SyncModel;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.BasicWindow;
+import com.googlecode.lanterna.gui2.BorderLayout;
 import com.googlecode.lanterna.gui2.Borders;
 import com.googlecode.lanterna.gui2.DefaultWindowManager;
 import com.googlecode.lanterna.gui2.EmptySpace;
@@ -20,6 +22,8 @@ import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.ProgressBar;
+import com.googlecode.lanterna.gui2.TextBox;
+import com.googlecode.lanterna.gui2.TextBox.Style;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogBuilder;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
@@ -87,9 +91,13 @@ public class Xendrian {
 		//panel.addComponent(status);
 		ProgressBar pbar = new ProgressBar(0,100,100);
 		ProgressBar checkpbar = new ProgressBar(0,100,100);
+		TextBox logs = new TextBox(new TerminalSize(80,15), 	Style.MULTI_LINE);
+		logs.setReadOnly(true);
+		//logs.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.FILL, GridLayout.Alignment.CENTER, false, false,2 ,1));
 		panel.addComponent(pbar);
 		panel.addComponent(checking);
 		panel.addComponent(checkpbar);
+		panel.addComponent(logs, BorderLayout.Location.CENTER);
 		window.setComponent(panel.withBorder(Borders.singleLine("Loading...")));
 		gui.addWindow(window);
 		try {
@@ -105,7 +113,8 @@ public class Xendrian {
 		SyncModel.getInstance().setBar(pbar);
 		SyncModel.getInstance().setBarChecking(checkpbar);
 		SyncModel.getInstance().setLabel(status);
-		SyncModel.getInstance().setLabelChecking(checking);		
+		SyncModel.getInstance().setLabelChecking(checking);
+		SyncModel.getInstance().setTextBox(logs);
 		String error = "";
 		error= SyncModel.getInstance().SyncronizeFull(error);
 		while (error.length() > 0) {

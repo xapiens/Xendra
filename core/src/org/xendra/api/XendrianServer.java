@@ -240,7 +240,8 @@ public class XendrianServer {
 			result = response.body().string();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			result = e.getMessage();
 		} finally {
 			client.connectionPool().evictAll();
 		}

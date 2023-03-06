@@ -2222,7 +2222,7 @@ implements Serializable, Comparator, Evaluatee
 
 	public void setLastError(String lastError) {
 		if (lastError != null && lastError.length() > 0) {
-			System.out.println("X");
+			System.out.println(lastError);
 		}
 		LastError = lastError;
 	}

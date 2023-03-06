@@ -310,7 +310,9 @@ public class Plugin {
 									try {
 										if (pluginResource.listFiles().length > 0) {
 											//SyncModel.getInstance().parsereplicatefile(fillfile);
-											SyncModel.getInstance().SyncronizeLight();											
+											//SyncModel.getInstance().SyncronizeLight();
+											SyncModel.getInstance().setModeServer();
+											SyncModel.getInstance().SyncronizeFull("");
 											//SyncModel.getInstance().Replication();
 										}										
 									} catch (Exception e) {

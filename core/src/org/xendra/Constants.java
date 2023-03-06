@@ -217,7 +217,7 @@ public interface Constants {
 	public static final String REPLICATION = "replication";
 	public static final String INSTALLED = "installed";
 	public static final String DOWNLOAD = "download";
-
+	
 	public static final String MAIL_UPDATED = "mail_updated";
 	public static final String MAIL_SERVER = "mail_server";
 	public static final String ADMIN_EMAIL = "admin_email";
