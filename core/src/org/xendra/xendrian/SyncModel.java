@@ -1747,8 +1747,7 @@ public class SyncModel {
 			if (!ClazzProcessed.contains(clazz.getSimpleName()))
 			{
 				if (pbar != null) {
-					float p = (i / rows) * 100;
-					System.out.println(p);
+					float p = (i / rows) * 100;					
 					checklabel.setText(clazz.getName());					
 					pbar.setValue((int) p);					
 					try {
