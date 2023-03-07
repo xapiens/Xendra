@@ -36,7 +36,13 @@ public class Xendrian {
 	public void synchroreset(Screen screen) {
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		final BasicWindow window = new BasicWindow();
-		final Label status = new Label("/");
+		final Label dashlabel = new Label("/");			
+		final Label status = new Label("sincronizando...");
+		final Label checking = new Label("");
+		ProgressBar pbar = new ProgressBar(0,100,100);
+		ProgressBar checkpbar = new ProgressBar(0,100,100);
+		TerminalSize screenSize = screen.getTerminalSize();
+		TextBox logs = new TextBox(new TerminalSize(screenSize.getColumns(),screenSize.getRows()-8), 	Style.MULTI_LINE);
 		window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
 
 		MessageDialogButton answerreset = new MessageDialogBuilder()
@@ -48,16 +54,26 @@ public class Xendrian {
 		.showDialog(gui);	
 		if (answerreset.equals(MessageDialogButton.Yes)) {
 			Panel panel = new Panel();
-			panel.setLayoutManager(new GridLayout(1));		
-			panel.addComponent(new Label("sincronizando..."));
-			panel.addComponent(status);
+			panel.setLayoutManager(new GridLayout(1));
+			panel.addComponent(dashlabel);			
+			panel.addComponent(pbar);	
+			panel.addComponent(checking);
+			panel.addComponent(checkpbar);
+			panel.addComponent(status);			
+			panel.addComponent(logs, BorderLayout.Location.CENTER);
 			window.setComponent(panel.withBorder(Borders.singleLine("Loading...")));
 			gui.addWindow(window);
-			ThreadRotDash dash = new ThreadRotDash(gui, status);
+			ThreadRotDash dash = new ThreadRotDash(gui, dashlabel);
 			dash.start();
 			Thread thread = new Thread(dash);
 			thread.start();						
 			String error= "";
+			SyncModel.getInstance().setGUI(gui);
+			SyncModel.getInstance().setBar(pbar);
+			SyncModel.getInstance().setBarChecking(checkpbar);
+			SyncModel.getInstance().setTextBox(logs);
+			SyncModel.getInstance().setLabel(status);
+			SyncModel.getInstance().setLabelChecking(checking);
 			error = SyncModel.getInstance().SyncronizeReset(dash, error);
 			while (error.length() > 0) {
 				MessageDialogButton answer = new MessageDialogBuilder()
@@ -91,7 +107,8 @@ public class Xendrian {
 		//panel.addComponent(status);
 		ProgressBar pbar = new ProgressBar(0,100,100);
 		ProgressBar checkpbar = new ProgressBar(0,100,100);
-		TextBox logs = new TextBox(new TerminalSize(80,15), 	Style.MULTI_LINE);
+		TerminalSize screenSize = screen.getTerminalSize();
+		TextBox logs = new TextBox(new TerminalSize(screenSize.getColumns(),screenSize.getRows()-8), 	Style.MULTI_LINE);
 		logs.setReadOnly(true);
 		//logs.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.FILL, GridLayout.Alignment.CENTER, false, false,2 ,1));
 		panel.addComponent(pbar);

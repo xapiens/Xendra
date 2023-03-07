@@ -212,20 +212,32 @@ public class SyncModel {
 	public void setTextBox(TextBox textbox) {
 		logs = textbox;
 	}
-	
+
+	public void setLine(String line) {
+		String previous = logs.getText();
+		String newline = System.getProperty("line.separator");
+		if (previous.indexOf(newline) != previous.lastIndexOf(newline)) {
+			previous = previous.substring(0, previous.lastIndexOf(newline));
+			previous = String.format("%s\n%s\n", previous, line);						
+		} else {
+			previous = String.format("%s\n%s\n", previous, line);					
+		}
+		logs.setText(previous);
+	}
+
 	public void addLine(String line) {
-	    logs.addLine(line);
-	    logs.setReadOnly(false);
-	    logs.takeFocus();
-	    logs.setCaretPosition(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		logs.addLine(line);
+		logs.setReadOnly(false);
+		logs.takeFocus();
+		logs.setCaretPosition(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
-	    try {
-	        Thread.sleep(15);
-	    } catch (InterruptedException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			Thread.sleep(15);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-	    logs.setReadOnly(true);	    
+		logs.setReadOnly(true);	    
 	}
 	public String memoryavailable() {
 		String error = "";
@@ -272,7 +284,7 @@ public class SyncModel {
 		} else {
 			addLine("Checking model...");
 		}
-			 
+
 		try {			
 			//TODO verificar integridad de datos para trabajar en el pos			
 			//TODO verificar uuid
@@ -685,8 +697,8 @@ public class SyncModel {
 					log.log(Level.WARNING, "update model");
 				else
 					addLine("update model");
-				md = DB.getConnectionRO().getMetaData();
-				UpdateSequences();
+				md = DB.getConnectionRO().getMetaData();				
+				//checksequences();
 				UpdateTable();
 				UpdateFunctions();
 				UpdateOperators();
@@ -736,12 +748,24 @@ public class SyncModel {
 	}
 
 	public String SyncronizeReset(ThreadRotDash dash, String error) {
+		if (this.IsModeServer())
+			log.log(Level.WARNING, "reseteando sincronizacion...");
+		else
+			addLine("reseteando sincronizacion...");
 		List<X_AD_Table> tables = new Query(Env.getCtx(), X_AD_Table.Table_Name, "IsView = 'N'", null).list();
-		for (X_AD_Table table:tables) {
+		float i = 0;
+ 		for (X_AD_Table table:tables) {
 			if (table.getTableName().toLowerCase().endsWith("_trl"))
 				continue;
 			table.setSynchronized(null);
 			if (table.save()) {
+				if (this.IsModeServer())
+					log.log(Level.WARNING, table.getTableName());
+				else {
+					setLine(table.getTableName());
+					float p = (i / tables.size()) * 100;
+					setbar(p);
+				}
 				//dash.setMessage(String.format("%s %s", table.getName(), table.getTableName()));
 				List<X_AD_Column> columns = new Query(Env.getCtx(), X_AD_Column.Table_Name, "AD_Table_ID = ?", null)
 						.setParameters(table.getAD_Table_ID()).list();
@@ -750,10 +774,20 @@ public class SyncModel {
 					column.save();
 				}
 			}
+			i++;			
 		}		
+ 		setbar(100);
 		return SyncronizeFull(error);
 	}
 
+	private void setbar(float p) {
+		pbar.setValue((int) p);
+		try {
+			gui.updateScreen();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}				
+	}
 
 	//	public static void fillHashtable(Class<?> clazzlist, Hashtable classlist) {
 	//		fillHashtable(clazzlist, classlist, "");
@@ -1481,7 +1515,7 @@ public class SyncModel {
 		}		
 				);					
 		Iterator it = serializables.iterator();
-		int i = 0;
+		float i = 0;
 		float rows = serializables.size();
 		while (it.hasNext())
 		{	
@@ -1495,7 +1529,7 @@ public class SyncModel {
 						if (column != null && column.getColumnName().startsWith(table.TableName())) {
 							if (bar != null) {							
 								label.setText(String.format("validando secuencia de %s (%s)", table.TableName(), table.Name()));
-								float p = (i / rows) * 100;
+								float p = (i / rows) * 100;								
 								bar.setValue((int) p);
 								try {
 									gui.updateScreen();
@@ -1508,7 +1542,7 @@ public class SyncModel {
 					}	
 				}
 			}
-			
+			i++;
 		}		
 	}
 
@@ -1622,11 +1656,7 @@ public class SyncModel {
 		listvalrules = null;
 	}
 
-	
-	public void UpdateSequences() throws Exception {
-		
-	}
-	
+
 	public void UpdateTable() throws Exception {
 		boolean ok = false;
 		Class<?> clazz = null;
@@ -1702,8 +1732,8 @@ public class SyncModel {
 		List<String> objects = new ArrayList<String>();
 		while (it.hasNext())
 		{			
-			Object processclass = it.next();								
-			objects.add(((Class) processclass).getName());			
+    			Object processclass = it.next();								
+ 			objects.add(((Class) processclass).getName());			
 		}	
 		ClazzProcessed.clear();
 		serializables.clear();
@@ -1718,6 +1748,7 @@ public class SyncModel {
 			{
 				if (pbar != null) {
 					float p = (i / rows) * 100;
+					System.out.println(p);
 					checklabel.setText(clazz.getName());					
 					pbar.setValue((int) p);					
 					try {
@@ -2028,7 +2059,7 @@ public class SyncModel {
 												System.out.println(error);
 											else
 												addLine(error);
-										
+
 									}
 								}
 								sqlcommands.remove(0);
@@ -2054,7 +2085,7 @@ public class SyncModel {
 			logs.setText(currenttext);																				
 		}		
 	}
-	
+
 	public X_AD_Element UpdateElement(String Identifier, String ColumnName) {
 		if (Identifier == null)
 			return null;
@@ -2193,7 +2224,7 @@ public class SyncModel {
 			} catch (Exception e) {
 				if (IsModeServer()) 
 					log.log(Level.SEVERE, String.format("reference search by identifier %s not found",Identifier));
-					//e.printStackTrace();					
+				//e.printStackTrace();					
 				else
 					this.addLine(String.format("reference search by identifier %s not found",Identifier));
 			}
@@ -4475,7 +4506,7 @@ public class SyncModel {
 					}		
 					if (scheduler != null) {
 						X_AD_Process_Machine pm = new Query(Env.getCtx(), X_AD_Process_Machine.Table_Name, "A_Machine_ID = ? AND AD_Process_ID = ?" , null)
-						.setParameters(Env.getMachine().getA_Machine_ID(), process.getAD_Process_ID()).first();
+								.setParameters(Env.getMachine().getA_Machine_ID(), process.getAD_Process_ID()).first();
 						if (pm == null)
 						{
 							pm = new X_AD_Process_Machine(Env.getCtx(), 0, null);
@@ -4485,7 +4516,7 @@ public class SyncModel {
 						}					
 						//
 						X_AD_Scheduler dbscheduler = new Query(Env.getCtx(), X_AD_Scheduler.Table_Name, "AD_Process_ID = ?", null)
-						.setParameters(process.getAD_Process_ID()).first();
+								.setParameters(process.getAD_Process_ID()).first();
 						if (dbscheduler == null) {
 							dbscheduler = new X_AD_Scheduler(Env.getCtx(), 0, null);
 						}
@@ -4662,12 +4693,12 @@ public class SyncModel {
 				}
 				if (error.length() > 0)
 				{				
-					
+
 					if (IsModeServer()) 
 						System.out.println(String.format("%s %s",file,error));
 					else
 						addLine(String.format("%s %s",file,error));
-					
+
 				}							
 				file.delete();		
 			}			
