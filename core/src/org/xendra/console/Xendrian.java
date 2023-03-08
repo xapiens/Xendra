@@ -33,11 +33,11 @@ public class Xendrian {
 
 	private static Xendrian instance;
 
-	public void synchroreset(Screen screen) {
+	public void synchroreset(Screen screen, String title) {
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		final BasicWindow window = new BasicWindow();
 		final Label dashlabel = new Label("/");			
-		final Label status = new Label("sincronizando...");
+		final Label status = new Label("Processing...");
 		final Label checking = new Label("");
 		ProgressBar pbar = new ProgressBar(0,100,100);
 		ProgressBar checkpbar = new ProgressBar(0,100,100);
@@ -61,7 +61,7 @@ public class Xendrian {
 			panel.addComponent(checkpbar);
 			panel.addComponent(status);			
 			panel.addComponent(logs, BorderLayout.Location.CENTER);
-			window.setComponent(panel.withBorder(Borders.singleLine("Loading...")));
+			window.setComponent(panel.withBorder(Borders.singleLine(title)));
 			gui.addWindow(window);
 			ThreadRotDash dash = new ThreadRotDash(gui, dashlabel);
 			dash.start();
@@ -94,11 +94,11 @@ public class Xendrian {
 		window.close();		
 	}
 
-	public void synchro(Screen screen) {
+	public void synchro(Screen screen, String title) {
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		final BasicWindow window = new BasicWindow();
 		//final Label status = new Label("/");
-		final Label status = new Label("sincronizando...");
+		final Label status = new Label("Processing...");
 		final Label checking = new Label("");
 		window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
 		Panel panel = new Panel();
@@ -115,7 +115,7 @@ public class Xendrian {
 		panel.addComponent(checking);
 		panel.addComponent(checkpbar);
 		panel.addComponent(logs, BorderLayout.Location.CENTER);
-		window.setComponent(panel.withBorder(Borders.singleLine("Loading...")));
+		window.setComponent(panel.withBorder(Borders.singleLine(title)));
 		gui.addWindow(window);
 		try {
 			gui.updateScreen();

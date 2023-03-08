@@ -124,12 +124,31 @@ public class DashBoard {
 
 		menuFile.addMenuItem("synchronized", new Runnable() {
 			public void run() {
-				Xendrian.getInstance().synchro(screen);					
+				MessageDialogButton answer = new MessageDialogBuilder()
+						.setTitle("Confirm")
+						.setText("sincroniza estructuras del diccionario con el codigo\nuna vez iniciado no debe ser interrumpido\nDesea continuar?")
+						.addButton(MessageDialogButton.Yes)				
+						.addButton(MessageDialogButton.No)
+						.build()
+						.showDialog(gui);								
+						if (answer.equals(MessageDialogButton.Yes)) {
+							Xendrian.getInstance().synchro(screen, "synchronized");
+						}																				
 			}
 		});
 		menuFile.addMenuItem("synchronized reset", new Runnable() {
 			public void run() {
-				Xendrian.getInstance().synchroreset(screen);					
+				MessageDialogButton answer = new MessageDialogBuilder()
+						.setTitle("Confirm")
+						.setText("resetea estampados de tiempo para sincronizar estructuras del diccionario\n"
+								+ "con el codigo\nuna vez iniciado no debe ser interrumpido\nDesea continuar?")
+						.addButton(MessageDialogButton.Yes)				
+						.addButton(MessageDialogButton.No)
+						.build()
+						.showDialog(gui);								
+						if (answer.equals(MessageDialogButton.Yes)) {
+							Xendrian.getInstance().synchroreset(screen, "synchronized reset");
+						}																																	
 			}
 		});	
 		menuFile.addMenuItem("Proxy", new Runnable() {
