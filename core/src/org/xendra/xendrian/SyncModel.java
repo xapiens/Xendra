@@ -82,6 +82,7 @@ import org.compiere.model.persistence.X_M_InOutLine;
 import org.compiere.model.persistence.X_M_InventoryLine;
 import org.compiere.model.persistence.X_M_Product;
 import org.compiere.model.persistence.X_M_ProductionLine;
+import org.compiere.model.persistence.X_M_TransactionAllocation;
 import org.compiere.model.reference.REF_AD_ReferenceValidationTypes;
 import org.compiere.model.reference.REF_AD_SchedulerType;
 import org.compiere.model.reference.REF__EntityType;
@@ -289,10 +290,11 @@ public class SyncModel {
 			//TODO verificar integridad de datos para trabajar en el pos			
 			//TODO verificar uuid
 			//TODO verificar seq
+			checksequences();
 			checkReferences();
 			checkvalrule();
 			checkIdentifiers();
-			checksequences();
+
 			//
 			// tables from xendra must be matching
 			md = DB.getConnectionRO().getMetaData();
@@ -754,7 +756,7 @@ public class SyncModel {
 			addLine("reseteando sincronizacion...");
 		List<X_AD_Table> tables = new Query(Env.getCtx(), X_AD_Table.Table_Name, "IsView = 'N'", null).list();
 		float i = 0;
- 		for (X_AD_Table table:tables) {
+		for (X_AD_Table table:tables) {
 			if (table.getTableName().toLowerCase().endsWith("_trl"))
 				continue;
 			table.setSynchronized(null);
@@ -776,7 +778,7 @@ public class SyncModel {
 			}
 			i++;			
 		}		
- 		setbar(100);
+		setbar(100);
 		return SyncronizeFull(error);
 	}
 
@@ -1717,7 +1719,8 @@ public class SyncModel {
 				e.printStackTrace();
 				ok = false;
 			}
-		}
+			
+		}		
 		serializables = new HashSet<Class<? extends PO>>();
 		ComponentScanner scanner = new ComponentScanner();
 		scanner.getClasses(	new ComponentQuery() 
@@ -1727,20 +1730,20 @@ public class SyncModel {
 				.returning(all());
 			}
 		}		
-				);					
+				);						
 		Iterator it = serializables.iterator();
 		List<String> objects = new ArrayList<String>();
 		while (it.hasNext())
 		{			
-    			Object processclass = it.next();								
- 			objects.add(((Class) processclass).getName());			
-		}	
+			Object processclass = it.next();								
+			objects.add(((Class) processclass).getName());			
+		}			
 		ClazzProcessed.clear();
 		serializables.clear();
 		serializables = null;
 		Collections.sort(objects);
 		float i = 1f;
-		float rows = objects.size();
+		float rows = objects.size();		
 		for (String classname:objects)
 		{
 			clazz = Class.forName(classname);
@@ -1762,7 +1765,7 @@ public class SyncModel {
 				}
 			}
 			i++;
-		}		
+		}				
 		if (IsModeServer()) 
 			log.log(Level.WARNING, String.format("%d PO Objects", objects.size()));
 		else 
@@ -2226,6 +2229,7 @@ public class SyncModel {
 				//e.printStackTrace();					
 				else
 					this.addLine(String.format("reference search by identifier %s not found",Identifier));
+				return null;
 			}
 			XendraRef ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraRef.class);
 			Timestamp srcsynchro = Timestamp.valueOf(ref.Synchronized());
@@ -2430,7 +2434,7 @@ public class SyncModel {
 		List<XendraIndex> indexes = null;
 		List<Vector> newtranslations = new ArrayList<Vector>();
 		List<Vector> adindexes = new ArrayList<Vector>();
-		String tblname = (String) clazz.getField("Table_Name").get(clazz);
+		String tblname = (String) clazz.getField("Table_Name").get(clazz);			
 		MTable dbtable = new Query(Env.getCtx(), X_AD_Table.Table_Name, "tablename = ?", null).setParameters(tblname).first();
 		if (dbtable == null)
 		{
@@ -2438,13 +2442,13 @@ public class SyncModel {
 			updatetable = true;
 			updatetabs = true;
 			updateindex = true;
-		}
+		}		
 		else if (dbtable.get_ColumnIndex(X_AD_Table.COLUMNNAME_Identifier) < 0)
 		{
 			updatetable = true;
 			updatetabs = true;
 			updateindex = true;
-		}
+		}		
 		if (!updatetable)
 		{
 			// exist the table in the database?
@@ -2457,7 +2461,7 @@ public class SyncModel {
 				updateindex = true;
 				isnew = true;
 			}
-		}
+		}		
 		if (!updateindex) // significa que la tabla existe y tiene identifier, asi que cargamos los indices que posea para compararlos.
 		{
 			PreparedStatement pstmt = null;
@@ -2481,8 +2485,7 @@ public class SyncModel {
 			pstmt.close();
 			rs = null;
 			pstmt = null;
-		}
-
+		}		
 		for (Field f:clazz.getDeclaredFields())
 		{
 			for (Annotation ap: f.getAnnotations()) {					
@@ -2646,7 +2649,7 @@ public class SyncModel {
 					}					
 				}
 			}
-		}
+		}		
 		// buscamos otra vez para evitar llenar la ram de columns y fields
 		if (tabs != null) {
 			for (Field f:clazz.getDeclaredFields())
@@ -2708,7 +2711,7 @@ public class SyncModel {
 					}
 				}
 			}
-		}
+		}		
 		if (tabs != null)
 		{
 			for (XendraTab tab:tabs)
@@ -2883,7 +2886,9 @@ public class SyncModel {
 								dbcolumn.setIsAllowLogging(column.IsAllowLogging());
 								dbcolumn.setIdentifier(column.Identifier());
 								dbcolumn.setSynchronized(srcsynchro);
-								dbcolumn.save();
+								if (!dbcolumn.save()) {
+									
+								}
 							}
 
 						}
@@ -2987,7 +2992,7 @@ public class SyncModel {
 					POInfo.remove(dbtable.Table_ID);
 				}
 			}
-		}
+		}		
 		if (updatetabs && tabs != null)
 		{
 			for (XendraTab tab:tabs)
@@ -3287,7 +3292,7 @@ public class SyncModel {
 					}
 				}
 			}
-		}
+		}		
 		if (updateindex && indexes != null)
 		{
 			for (XendraIndex index:indexes)
@@ -3376,7 +3381,7 @@ public class SyncModel {
 					}
 				}
 			}
-		}
+		}		
 		return true;
 	}
 
