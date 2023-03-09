@@ -43,7 +43,7 @@ public class PickKeyStoreStep extends AbstractStep  implements ActionListener {
 	private CPassword pass = new CPassword(20);
 	private CPassword passconfirm = new CPassword(20);
 	private JButton pickkeystore;
-	private JButton test = new JButton("test");
+	private JButton test = new JButton("test");	
 	private JLabel keystorename = new JLabel();
 	private JLabel accessstore = new JLabel("acceso");	
 	private JLabel accessmsg = new JLabel("");
@@ -80,8 +80,10 @@ public class PickKeyStoreStep extends AbstractStep  implements ActionListener {
 		test.addActionListener(this);
 		passok.setEnabled(false);
 		accessok.setEnabled(false);				
+		LabelWithMnemonic titlekeystore = new LabelWithMnemonic(ResourceLoader.getString("dialog", "partnerwizard", "keyfile"));
 		LabelWithMnemonic passlabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "certificate", "password"));
 		LabelWithMnemonic passconfirmlabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "certificate", "passwordconfirm"));
+		panel.add(titlekeystore);
 		panel.add(keystorename, "grow");
 		panel.add(pickkeystore,"wrap");
 		panel.add(passlabel);

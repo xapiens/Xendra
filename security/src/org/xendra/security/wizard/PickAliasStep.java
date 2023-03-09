@@ -38,8 +38,8 @@ public class PickAliasStep extends AbstractStep implements ActionListener {
 		setCanGoNext(false);
 	}	
 	public PickAliasStep(MBPartner p, DataModel data) {
-		super(ResourceLoader.getString("dialog", "partnerwizard", "file"),
-				ResourceLoader.getString("dialog", "partnerwizard", "file_description"));
+		super(ResourceLoader.getString("dialog", "partnerwizard", "alias"),
+				ResourceLoader.getString("dialog", "partnerwizard", "alias_description"));
 		X_C_BPartner_Certificate pc = new Query(Env.getCtx(), X_C_BPartner_Certificate.Table_Name, "C_BPartner_ID = ?", null)
 					.setParameters(p.getC_BPartner_ID()).first();
 		//
@@ -71,7 +71,7 @@ public class PickAliasStep extends AbstractStep implements ActionListener {
 		data.registerDataLookup(SecurityConstants.ALIASKEY,new DefaultDataLookup(name, method, null));        
 		POSListPanel.addTextField(name);
 		POSListPanel.addEmptyExample();
-		component.add(POSListPanel);
+		component.add(POSListPanel);		
 		component.add(test);
 		component.add(passok);
 		return component;

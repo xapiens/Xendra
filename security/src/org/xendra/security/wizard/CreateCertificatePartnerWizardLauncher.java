@@ -6,6 +6,9 @@ import java.awt.Window;
 
 import org.columba.core.resourceloader.IconKeys;
 import org.columba.core.resourceloader.ImageLoader;
+import org.compiere.apps.AEnv;
+import org.compiere.apps.ALogin;
+import org.compiere.util.Splash;
 import org.frapuccino.swing.ActiveWindowTracker;
 import org.xendra.common.FinishStep;
 import org.xendra.security.util.ResourceLoader;
@@ -42,5 +45,28 @@ public class CreateCertificatePartnerWizardLauncher {
 		wizard.setVisible(true);		
 		
 	}
-
+	public static void main(String[] args) {
+		org.compiere.Xendra.startup(true);
+		Splash splash = Splash.getSplash();
+		ALogin login = new ALogin(splash);
+		if (!login.initLogin())		//	no automatic login
+		{
+			//	Center the window
+			try
+			{
+				AEnv.showCenterScreen(login);	//	HTML load errors
+			}
+			catch (Exception ex)
+			{
+				//log.severe(ex.toString());
+				ex.printStackTrace();
+			}
+			if (!login.isConnected() || !login.isOKpressed())
+				AEnv.exit(1);
+		}
+		CreateCertificatePartnerWizardLauncher l = new CreateCertificatePartnerWizardLauncher();
+		l.launchWizard();		
+		splash.dispose();
+		splash = null;							
+	} 
 }

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
+import org.columba.core.gui.base.LabelWithMnemonic;
+import org.columba.core.gui.base.MultiLineLabel;
 import org.compiere.model.MBPartner;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_C_BPartner_Certificate;
@@ -33,14 +35,14 @@ public class SendFilePathStep extends AbstractStep implements ActionListener  {
 	private JButton test = new JButton("test");
 	private String m_directory;
 	public SendFilePathStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "sendfilepathwizard", "file"),
-				ResourceLoader.getString("dialog", "sendfilepathwizard", "file_description"));
+		super(ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfile"),
+				ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfile_description"));
 		this.data = data;
 		setCanGoNext(false);
 	}
 	public SendFilePathStep(MBPartner p, DataModel data) {
-		super(ResourceLoader.getString("dialog", "sendfilepathwizard", "file"),
-				ResourceLoader.getString("dialog", "sendfilepathwizard", "file_description"));
+		super(ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfile"),
+				ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfile_description"));
 		X_C_BPartner_Certificate pc = new Query(Env.getCtx(), X_C_BPartner_Certificate.Table_Name, "C_BPartner_ID = ?", null)
 				.setParameters(p.getC_BPartner_ID()).first();	
 		String sendfilepath = (String) pc.getProperties().get(SecurityConstants.SENDFILESPATH);
@@ -56,6 +58,10 @@ public class SendFilePathStep extends AbstractStep implements ActionListener  {
 		picksendfilepath.addActionListener(this);
 		passok.setEnabled(false);
 		test.addActionListener(this);
+		LabelWithMnemonic sendfiletext = new LabelWithMnemonic(ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfile_text"));
+		LabelWithMnemonic sendfilelabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "sendfilepathwizard", "sendfilelabel"));
+		panel.add(sendfiletext, "wrap");
+		panel.add(sendfilelabel);
 		panel.add(sendfilepathname, "grow");
 		panel.add(picksendfilepath,"wrap");
 		panel.add(passok,"wrap");
