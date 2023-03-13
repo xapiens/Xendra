@@ -47,8 +47,8 @@ public class TaxPickStep extends AbstractStep implements ActionListener {
 	private JScrollPane yesPane = new JScrollPane(yesList);
 	private static CLogger log = CLogger.getCLogger(DocTypeStep.class);
 	public TaxPickStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "machinewizard", "doctype"),
-				ResourceLoader.getString("dialog", "machinewizard",   "doctype_description"));
+		super(ResourceLoader.getString("dialog", "efactwizard", "taxpick"),
+				ResourceLoader.getString("dialog", "efactwizard",   "taxpick_description"));
 		this.data = data;
 		setCanGoNext(false);
 	}
@@ -141,7 +141,7 @@ public class TaxPickStep extends AbstractStep implements ActionListener {
 			method = yesList.getClass().getMethod("getModel", null);
 		} catch (NoSuchMethodException nsme) {
 		}		
-		data.registerDataLookup(X_C_DocType.COLUMNNAME_C_DocType_ID,new DefaultDataLookup(yesList, method, null));
+		data.registerDataLookup(X_C_Tax.COLUMNNAME_C_Tax_ID,new DefaultDataLookup(yesList, method, null));
 		return comp;
 	}
 

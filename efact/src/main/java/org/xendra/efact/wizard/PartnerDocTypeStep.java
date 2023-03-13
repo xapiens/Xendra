@@ -36,8 +36,8 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 	protected VLookup BPartnerDT = VLookup.create(X_C_BPartner.Table_Name, X_C_BPartner.COLUMNNAME_C_BP_DocType_ID, 0);
 	protected optcheckbox isdetraction = new optcheckbox("detraccion", false);
 	public PartnerDocTypeStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "documentwizard", "create"),
-				ResourceLoader.getString("dialog", "documentwizard", "create_description"));
+		super(ResourceLoader.getString("dialog", "efactwizard", "partnerdoctype"),
+				ResourceLoader.getString("dialog", "efactwizard", "partnerdoctype_description"));
 		this.data = data;
 		setCanGoNext(false);		
 	}
@@ -56,16 +56,13 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 	protected JComponent createComponent() {		
 		Integer C_BPartner_ID = (Integer) data.getData(X_C_Invoice.COLUMNNAME_C_BPartner_ID);
 		X_C_BPartner bp = new Query(Env.getCtx(), X_C_BPartner.Table_Name, "C_BPartner_ID = ?", null)
-					.setParameters(C_BPartner_ID).first();	
-		if (bp == null) {
-			System.out.println("is null");
-		}
+					.setParameters(C_BPartner_ID).first();		
 		BPartnerDT.setValue(bp.getC_BP_DocType_ID());		
 		JComponent component = new JPanel();
 		component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "doctype", "partner")));
+		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "efactwizard", "partnerdoctype_text")));
 		component.add(Box.createVerticalStrut(40));		
-		LabelWithMnemonic typeLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "doctype", "type"));
+		LabelWithMnemonic typeLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "efactwizard", "partnerdoctype"));
 		BPartnerDT.addActionListener(this);
 		typeLabel.setLabelFor(BPartnerDT);
 		WizardTextField middlePanel = new WizardTextField();
@@ -74,6 +71,12 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 			method = BPartnerDT.getClass().getMethod("getValue", null);
 		} catch (NoSuchMethodException nsme) {}
 		data.registerDataLookup( X_C_BPartner.COLUMNNAME_C_BP_DocType_ID, new DefaultDataLookup(BPartnerDT, method, null));
+		//
+		Method detmethod = null;
+		try {			
+			detmethod = isdetraction.getClass().getMethod("isSelected", null);			
+		} catch (NoSuchMethodException nsme) {}
+		data.registerDataLookup(X_C_Invoice.COLUMNNAME_IsDetraction, new DefaultDataLookup(isdetraction, detmethod, null));
 		middlePanel.addTextField(BPartnerDT);
 		middlePanel.addEmptyExample();
 		JPanel pan1 = new JPanel();
@@ -88,10 +91,12 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 		List<Step> steps = new ArrayList<Step>();
 		if (isdetraction.isSelected()) {
 			steps.add(new DetractionStep(data));
+			steps.add(new SpotStep(data));
 		}
 		steps.add(new DocTypeStep(data));
 		steps.add(new DocumentTaxStep(data));
 		steps.add(new TaxStep());
+		steps.add(new TaxPickStep(data));
 		steps.add(new FinishStep());
 		Step[] list = new Step[steps.size()];
 		steps.toArray(list);
@@ -101,7 +106,7 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 class optcheckbox extends JCheckBox {
 	public optcheckbox(String name, boolean ischeck) {
 		setName(name);
-		String text = ResourceLoader.getString("dialog", "machinewizard", name);
+		String text = ResourceLoader.getString("dialog", "efactwizard", name);
 		setText(text);
 		setSelected(ischeck);
 	}

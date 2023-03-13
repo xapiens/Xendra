@@ -46,8 +46,8 @@ public class DocTypeStep extends AbstractStep implements ActionListener {
 	private JScrollPane yesPane = new JScrollPane(yesList);
 	private static CLogger log = CLogger.getCLogger(DocTypeStep.class);
 	public DocTypeStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "machinewizard", "doctype"),
-				ResourceLoader.getString("dialog", "machinewizard",   "doctype_description"));
+		super(ResourceLoader.getString("dialog", "efactwizard", "doctype"),
+				ResourceLoader.getString("dialog", "efactwizard",   "doctype_description"));
 		this.data = data;
 	}
 

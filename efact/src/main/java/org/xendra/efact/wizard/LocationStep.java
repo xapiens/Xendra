@@ -17,9 +17,11 @@ import org.compiere.grid.ed.VLocation;
 import org.compiere.model.MLocation;
 import org.compiere.model.MLocationLookup;
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_C_BPartner_Location;
+import org.compiere.model.persistence.X_C_Invoice;
 import org.compiere.model.persistence.X_C_Location;
 import org.compiere.util.Env;
-import org.xendra.newclient.i18n.ResourceLoader;
+import org.xendra.efact.util.ResourceLoader;
 
 import net.javaprog.ui.wizard.AbstractStep;
 import net.javaprog.ui.wizard.DataModel;
@@ -30,23 +32,30 @@ public class LocationStep extends AbstractStep implements VetoableChangeListener
 	private VLocation location;
 
 	public LocationStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "newclient", "location"),
-				ResourceLoader.getString("dialog", "newclient",   "location_description"));
+		super(ResourceLoader.getString("dialog", "efactwizard", "location"),
+				ResourceLoader.getString("dialog", "efactwizard",   "location_description"));
 		this.data = data;
 		this.setCanGoNext(false);
 	}
 
 	@Override
 	protected JComponent createComponent() {
+		Integer C_BPartner_ID = (Integer) data.getData(X_C_Invoice.COLUMNNAME_C_BPartner_ID);
 		JComponent component = new JPanel();
 		component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "newclient", "location_text")));
+		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "efactwizard", "location_text")));
 		component.add(Box.createVerticalStrut(40));		
 
 		WizardTextField locationPanel = new WizardTextField();
-		LabelWithMnemonic loclabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "newclient", "location"));
+		LabelWithMnemonic loclabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "efactwizard", "location"));
 		location = new VLocation(X_C_Location.COLUMNNAME_C_Location_ID, false, false, true, new MLocationLookup(Env.getCtx(), 0));
 		location.addVetoableChangeListener(this);
+		X_C_BPartner_Location pl = new Query(Env.getCtx(), X_C_BPartner_Location.Table_Name, "C_BPartner_ID = ?", null)
+				.setParameters(C_BPartner_ID).first();
+		if (pl != null) {
+			location.setValue(pl.getC_Location_ID());
+			this.setCanGoNext(true);
+		}						
 		Method locmethod = null;		
 		try {			
 			locmethod = location.getClass().getMethod("getValue", null);

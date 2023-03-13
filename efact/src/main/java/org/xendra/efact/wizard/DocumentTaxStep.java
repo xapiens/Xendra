@@ -28,8 +28,8 @@ public class DocumentTaxStep extends AbstractStep {
 	private Method method;
 	
 	public DocumentTaxStep(DataModel data) {
-    	super(ResourceLoader.getString("dialog", "machinewizard", "doctypeprintformat"),
-    			ResourceLoader.getString("dialog", "machinewizard",   "doctypeprintformat_description"));
+    	super(ResourceLoader.getString("dialog", "efactwizard", "doctypedocumenttax"),
+    			ResourceLoader.getString("dialog", "efactwizard",   "doctypedocumenttax_description"));
     	this.data = data;
     	setCanGoNext(true);
 	}
@@ -39,7 +39,7 @@ public class DocumentTaxStep extends AbstractStep {
 		ListModel pdtmodel = (ListModel) data.getData(X_C_DocType.COLUMNNAME_C_DocType_ID);
 		m_doctaxpanel.set(pdtmodel);
 		m_doctaxpanel.invalidate();		
-		comp.add(new LabelWithMnemonic(ResourceLoader.getString("dialog", "machinewizard", "doctypeprintformat_description")),"wrap");
+		comp.add(new LabelWithMnemonic(ResourceLoader.getString("dialog", "efactwizard", "doctypedocumenttax_description")),"wrap");
 		comp.add(m_doctaxpanel);		
 		try {			
 			method = m_doctaxpanel.getClass().getMethod("getModel", null);

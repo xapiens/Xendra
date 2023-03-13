@@ -24,15 +24,15 @@ public class DetractionStep extends AbstractStep implements ActionListener {
 	protected DataModel data;
 	VLookup BankAccount = VLookup.create(X_C_Payment.Table_Name, X_C_Payment.COLUMNNAME_C_BankAccount_ID, 0);
 	public DetractionStep(DataModel data) {
-		super(ResourceLoader.getString("dialog", "documentwizard", "create"),
-				ResourceLoader.getString("dialog", "documentwizard", "create_description"));
+		super(ResourceLoader.getString("dialog", "efactwizard", "retention"),
+				ResourceLoader.getString("dialog", "efactwizard", "retention_description"));
 		this.data = data;
 		setCanGoNext(false);
 	}
 
 	@Override
 	public void prepareRendering() {
-		if (BankAccount != null) {
+		if (BankAccount.getValue() != null) {
 			setCanGoNext(true);
 		}
 	}
@@ -48,9 +48,9 @@ public class DetractionStep extends AbstractStep implements ActionListener {
 	protected JComponent createComponent() {
 		JComponent component = new JPanel();
 		component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
-		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "doctype", "partner")));
+		component.add(new MultiLineLabel(ResourceLoader.getString("dialog", "efactwizard", "retention_text")));
 		component.add(Box.createVerticalStrut(40));		
-		LabelWithMnemonic typeLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "doctype", "type"));
+		LabelWithMnemonic typeLabel = new LabelWithMnemonic(ResourceLoader.getString("dialog", "efactwizard", "account"));
 		BankAccount.addActionListener(this);
 		typeLabel.setLabelFor(BankAccount);		
 		WizardTextField middlePanel = new WizardTextField();

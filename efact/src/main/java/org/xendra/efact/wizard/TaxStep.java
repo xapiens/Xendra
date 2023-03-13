@@ -18,8 +18,8 @@ public class TaxStep extends AbstractStep {
 	private TaxPanel m_doctaxpanel = new TaxPanel();	
 	
 	public TaxStep() {
-    	super(ResourceLoader.getString("dialog", "machinewizard", "doctypeprintformat"),
-    			ResourceLoader.getString("dialog", "machinewizard",   "doctypeprintformat_description"));    	
+    	super(ResourceLoader.getString("dialog", "efactwizard", "tax"),
+    			ResourceLoader.getString("dialog", "efactwizard",   "tax_description"));    	
     	setCanGoNext(true);
 	}
 	@Override
@@ -27,7 +27,7 @@ public class TaxStep extends AbstractStep {
 		JComponent comp = new JPanel(new MigLayout("fill"));
 		m_doctaxpanel.initialize();
 		m_doctaxpanel.invalidate();		
-		comp.add(new LabelWithMnemonic(ResourceLoader.getString("dialog", "machinewizard", "doctypeprintformat_description")),"wrap");
+		comp.add(new LabelWithMnemonic(ResourceLoader.getString("dialog", "efactwizard", "tax_text")),"wrap");
 		comp.add(m_doctaxpanel);		
 		comp.setPreferredSize(new Dimension(800,400));
 		comp.invalidate();

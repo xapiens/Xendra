@@ -26,8 +26,6 @@ public class CreateEfactWizardLauncher {
 		Step[] steps;
 		steps = new Step[] { new BPartnerStep(data), 
 							 new LocationStep(data),
-							 new TaxStep(),
-							 new TaxPickStep(data),							 							 
 							 new PartnerDocTypeStep(data)};
 		WizardModel model = new DefaultWizardModel(steps);
 		model.addWizardModelListener(new EFactConfigurationCreator(data) );
