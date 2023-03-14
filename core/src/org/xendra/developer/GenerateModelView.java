@@ -119,8 +119,7 @@ public class GenerateModelView
 	public static final String COPY = 
 			"/******************************************************************************\n"
 					+" * Product: Xendra ERP & CRM Smart Business Solution                          *\n"
-					+" * Copyright (C) 1999-2006 ComPiere, Inc. All Rights Reserved.                *\n"
-					+" * Copyright (C) 2007-2022 dravios        All Rights Reserved.                *\n"
+					+" * Copyright (C)  dravios       All Rights Reserved.                          *\n"
 					+" * This program is free software. you can redistribute it and/or modify it    *\n"
 					+" * under the terms version 2 of the GNU General Public License as published   *\n"
 					+" * by the Free Software Foundation. This program is distributed in the hope   *\n"
@@ -844,7 +843,8 @@ public class GenerateModelView
 					}										
 				}																			
 				Util.append(sb,String.format("@XendraColumn(%s=\"%s\",",X_AD_Column.COLUMNNAME_AD_Element_ID,element.getIdentifier()));	
-				Util.append(sb,String.format("%s=\"%s\",",X_AD_Column.COLUMNNAME_ColumnName,element.getColumnName()));
+				//Util.append(sb,String.format("%s=\"%s\",",X_AD_Column.COLUMNNAME_ColumnName,element.getColumnName()));
+				Util.append(sb,String.format("%s=\"%s\",",X_AD_Column.COLUMNNAME_ColumnName,column.getColumnName()));
 				Util.append(sb,String.format("%s=%s,",X_AD_Column.COLUMNNAME_AD_Reference_ID,column.getAD_Reference_ID()));
 				Util.append(sb,String.format("%s=\"%s\",",X_AD_Column.COLUMNNAME_AD_Reference_Value_ID,refID));
 				Util.append(sb,String.format("%s=\"%s\",",X_AD_Column.COLUMNNAME_AD_Val_Rule_ID,valRuleID));
