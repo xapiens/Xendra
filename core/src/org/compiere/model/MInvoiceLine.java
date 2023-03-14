@@ -20,12 +20,9 @@ import java.math.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-
-import org.compiere.apps.ALogin;
 import org.compiere.model.persistence.X_C_InvoiceLine;
 import org.compiere.util.*;
 import org.xendra.exceptions.XendraException;
-import org.xendra.replication.ReplicationEngine;
 
 /**
  *	Invoice Line Model Line
