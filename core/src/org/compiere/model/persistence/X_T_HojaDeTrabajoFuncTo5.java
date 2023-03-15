@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -63,7 +63,7 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="T_HojaDeTrabajoFuncTo5",AccessLevel="3",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=0,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.standard",
-Identifier="6027d02f-5116-e77c-883f-5eb83cda4ca5",Synchronized="2020-03-03 21:40:24.0")
+Identifier="6027d02f-5116-e77c-883f-5eb83cda4ca5",Synchronized="2023-03-15 08:38:29.0")
 /** TableName=T_HojaDeTrabajoFuncTo5 */
 public static final String Table_Name="T_HojaDeTrabajoFuncTo5";
 
@@ -120,7 +120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9c914f05-2e34-8a9f-6d27-671a348dfe60",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name accountlevel */
 public static final String COLUMNNAME_accountlevel = "accountlevel";
 /** Set account_level.
@@ -147,7 +147,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ea47cd0d-26a3-07bc-f4e9-0cf4e387f227",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name account_level */
 public static final String COLUMNNAME_account_level = "account_level";
 /** Set AccountParent.
@@ -174,7 +174,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3b07b9a6-98ad-9132-7954-c3cb4e789de6",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AccountParent */
 public static final String COLUMNNAME_AccountParent = "AccountParent";
 /** Set Account Key.
@@ -206,7 +206,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4cb65961-3278-0e70-2b22-1c8b6b350630",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AccountValue */
 public static final String COLUMNNAME_AccountValue = "AccountValue";
 /** Set AcountLevel.
@@ -233,7 +233,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a9cba8ab-5a38-9586-1fe8-e1c681590793",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AcountLevel */
 public static final String COLUMNNAME_AcountLevel = "AcountLevel";
 /** Set Process Instance.
@@ -262,7 +262,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7bd30eb4-0101-8f70-a0d9-5a0ac5c46943",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AD_PInstance_ID */
 public static final String COLUMNNAME_AD_PInstance_ID = "AD_PInstance_ID";
 /** Set Accounted Credit.
@@ -289,7 +289,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8f0ddf47-54f2-0e99-ca0f-90b7e97a4aca",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AmtAcctCr */
 public static final String COLUMNNAME_AmtAcctCr = "AmtAcctCr";
 /** Set Accounted Debit.
@@ -316,7 +316,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="54002af8-dcc8-d857-a822-10693496565d",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name AmtAcctDr */
 public static final String COLUMNNAME_AmtAcctDr = "AmtAcctDr";
 /** Set Amount.
@@ -337,13 +337,13 @@ return bd;
 @XendraTrl(Identifier="0aab8450-d7e3-09eb-38f0-3a80e7b707f1")
 public static String es_PE_COLUMN_BalanceActivo_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="BalanceActivo",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0aab8450-d7e3-09eb-38f0-3a80e7b707f1",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:24.0")
 /** Column name BalanceActivo */
 public static final String COLUMNNAME_BalanceActivo = "BalanceActivo";
 /** Set Amount.
@@ -364,13 +364,13 @@ return bd;
 @XendraTrl(Identifier="8fb20b6a-d62c-bf2d-2e02-7c388f78676d")
 public static String es_PE_COLUMN_BalancePasivo_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="BalancePasivo",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8fb20b6a-d62c-bf2d-2e02-7c388f78676d",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name BalancePasivo */
 public static final String COLUMNNAME_BalancePasivo = "BalancePasivo";
 /** Set Accounting Schema.
@@ -399,7 +399,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a61b5ec2-4f3d-b59f-4893-bc879a8b82f5",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name C_AcctSchema_ID */
 public static final String COLUMNNAME_C_AcctSchema_ID = "C_AcctSchema_ID";
 /** Set Account Element.
@@ -428,7 +428,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f2dfb474-519b-bfd2-0376-a9b544dc8072",
-Synchronized="2019-08-30 22:24:23.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name C_ElementValue_ID */
 public static final String COLUMNNAME_C_ElementValue_ID = "C_ElementValue_ID";
 /** Set Account Date.
@@ -453,7 +453,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="681940b8-a057-6483-5250-207eebdc1c77",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name DateAcct */
 public static final String COLUMNNAME_DateAcct = "DateAcct";
 /** Set Amount.
@@ -474,13 +474,13 @@ return bd;
 @XendraTrl(Identifier="48a2a5bc-afd2-3896-6f12-32b2b3dc29e4")
 public static String es_PE_COLUMN_FuncionGanancia_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="FuncionGanancia",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="48a2a5bc-afd2-3896-6f12-32b2b3dc29e4",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name FuncionGanancia */
 public static final String COLUMNNAME_FuncionGanancia = "FuncionGanancia";
 /** Set Amount.
@@ -501,13 +501,13 @@ return bd;
 @XendraTrl(Identifier="a5e427b6-6bef-2d02-c7dc-d0999ad25b8c")
 public static String es_PE_COLUMN_FuncionPerdida_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="FuncionPerdida",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a5e427b6-6bef-2d02-c7dc-d0999ad25b8c",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name FuncionPerdida */
 public static final String COLUMNNAME_FuncionPerdida = "FuncionPerdida";
 /** Set Is Only movement account.
@@ -538,7 +538,7 @@ FieldLength=1,DefaultValue="N",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="44084304-f916-0232-fa54-b6ce9779e700",Synchronized="2019-08-30 22:24:24.0")
+Identifier="44084304-f916-0232-fa54-b6ce9779e700",Synchronized="2017-08-28 09:58:25.0")
 /** Column name IsOnlyMovementAccount */
 public static final String COLUMNNAME_IsOnlyMovementAccount = "IsOnlyMovementAccount";
 /** Set IsSubTotal.
@@ -569,7 +569,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="aa58798f-dcfb-151a-e5f1-62c46ef60524",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name IsSubTotal */
 public static final String COLUMNNAME_IsSubTotal = "IsSubTotal";
 /** Set IsVisible.
@@ -600,7 +600,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="23b8264b-06bd-381d-2ca9-cc9d73428fb9",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name IsVisible */
 public static final String COLUMNNAME_IsVisible = "IsVisible";
 /** Set Amount.
@@ -621,13 +621,13 @@ return bd;
 @XendraTrl(Identifier="7d619c46-90b5-be81-efe7-6f2c5f505dea")
 public static String es_PE_COLUMN_NaturalezaGanancia_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="NaturalezaGanancia",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d619c46-90b5-be81-efe7-6f2c5f505dea",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name NaturalezaGanancia */
 public static final String COLUMNNAME_NaturalezaGanancia = "NaturalezaGanancia";
 /** Set Amount.
@@ -648,13 +648,13 @@ return bd;
 @XendraTrl(Identifier="9b50065f-6530-5dd9-8a85-8e844d2226fe")
 public static String es_PE_COLUMN_NaturalezaPerdida_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="NaturalezaPerdida",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="9b50065f-6530-5dd9-8a85-8e844d2226fe",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name NaturalezaPerdida */
 public static final String COLUMNNAME_NaturalezaPerdida = "NaturalezaPerdida";
 /** Set PostingType.
@@ -684,7 +684,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="e2097b8d-829f-156e-425a-7d1ad4e50adb",Synchronized="2019-08-30 22:24:24.0")
+Identifier="e2097b8d-829f-156e-425a-7d1ad4e50adb",Synchronized="2017-08-28 09:58:25.0")
 /** Column name PostingType */
 public static final String COLUMNNAME_PostingType = "PostingType";
 /** Set Amount.
@@ -705,13 +705,13 @@ return bd;
 @XendraTrl(Identifier="804f3458-6857-a7e8-831e-ce444d5185ee")
 public static String es_PE_COLUMN_SaldoAcreedor_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="SaldoAcreedor",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="804f3458-6857-a7e8-831e-ce444d5185ee",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name SaldoAcreedor */
 public static final String COLUMNNAME_SaldoAcreedor = "SaldoAcreedor";
 /** Set Amount.
@@ -732,13 +732,13 @@ return bd;
 @XendraTrl(Identifier="793b87a4-961b-0bd6-1b12-b34464800d58")
 public static String es_PE_COLUMN_SaldoDeudor_Name="Total";
 
-@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="Amt",
+@XendraColumn(AD_Element_ID="42827f15-aceb-2f14-cc38-b4a7c6022136",ColumnName="SaldoDeudor",
 AD_Reference_ID=12,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=14,DefaultValue="",
 IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="793b87a4-961b-0bd6-1b12-b34464800d58",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name SaldoDeudor */
 public static final String COLUMNNAME_SaldoDeudor = "SaldoDeudor";
 /** Set Value To.
@@ -770,7 +770,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e3c53059-32a0-cf83-f70e-3afac8e84852",
-Synchronized="2019-08-30 22:24:24.0")
+Synchronized="2017-08-28 09:58:25.0")
 /** Column name Value2 */
 public static final String COLUMNNAME_Value2 = "Value2";
 }
