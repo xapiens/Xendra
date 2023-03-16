@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.compiere.util.Env;
@@ -74,23 +75,30 @@ public class ImageLoader {
 		return new ImageIcon(img);
 	}
 	public static ImageIcon getIcon(String name) {
-		return getIcon(Ini.getXendraResource(), name, false);
-		//return getIcon(ImageLoader.ICON_PATH, name, false);
+		//String resourcePath = Env.getResource("org.columba.core", name);
+		return getIcon("org.columba.core", name, false);
+		//return getIcon(Ini.getXendraResource(), name, false);		
 	}
 
 	public static ImageIcon getSmallIcon(String name) {
-		return getIcon(Ini.getXendraResource(), name, true);
+		//String resourcePath = Env.getResource("org.columba.core", name);		
+		return getIcon("org.columba.core", name, true);
+		//return getIcon(Ini.getXendraResource(), name, true);
 	}
 
 	public static ImageIcon getIcon(String path, String name, boolean small) {
 		BufferedImage img;
 		try {
-		if (small)
-			//url = DiskIO.getResourceURL(path + "/16x16/" + name);
-			img = ImageIO.read(new File(Ini.getXendraResource("16x16") + name));
-		else
-			//url = DiskIO.getResourceURL(path + "/22x22/" + name);
-			img = ImageIO.read(new File(Ini.getXendraResource("22x22") + name));
+		if (small) {
+			String resourcePath = Env.getResource(path , "16x16"+File.separator+name);
+			//img = ImageIO.read(new File(path+Path.SEPARATOR+"16x16" + name));
+			img = ImageIO.read(new File(resourcePath));
+		}
+		else {
+			String resourcePath = Env.getResource(path , "22x22"+File.separator+name);
+			//img = ImageIO.read(new File(path+Path.SEPARATOR+"22x22" + name));
+			img = ImageIO.read(new File(resourcePath));
+		}
 
 		if (img == null) {
 			img = getFallback(small);
@@ -108,7 +116,10 @@ public class ImageLoader {
 	public static ImageIcon getMiscIcon(String name) {
 		URL url;
 		try {
-			BufferedImage img = ImageIO.read(new File(Ini.getXendraResource("MISC")	+ name));
+			String ResourcePath = Env.getResource("org.columba.core", "MISC"+File.separator+name);
+			System.out.println(ResourcePath);
+			//BufferedImage img = ImageIO.read(new File(Ini.getXendraResource("MISC")	+ name));
+			BufferedImage img = ImageIO.read(new File(ResourcePath));
 			if (img == null) {
 				img = getFallback(true);
 			}
@@ -121,11 +132,6 @@ public class ImageLoader {
 			e.printStackTrace();
 		}
 		return null;
-//		url = DiskIO.getResourceURL(Ini.getXendraResource("MISC") + name);
-//		if (url == null) {
-//			url = getFallback(true);
-//		}
-
 	}
 
 	private static BufferedImage getFallback(boolean small) {
@@ -145,6 +151,16 @@ public class ImageLoader {
 		catch (Exception e)
 		{}
 		return null;
+	}
+	//ImageIcon ruleIcon  = new ImageIcon(ImageIO.read(new File(Env.getResource("org.xendra.ruleeditor", "drools.png"))));	
+	public static ImageIcon getResource(String pluginname, String resource) {
+		ImageIcon icon = null;
+		try {
+			icon = new ImageIcon(ImageIO.read(new File(Env.getResource(pluginname, resource))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		return icon;
 	}
 
 }

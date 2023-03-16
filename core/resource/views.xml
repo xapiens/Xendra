@@ -1,0 +1,14 @@
+<views>
+<viewlist>
+<view id="XendraFrame">
+<window maximized="true" height="507" width="902" y="123" x="219"/>
+<toolbars main="true"/>
+</view>
+</viewlist>
+<defaultviews>
+<view id="XendraFrame">
+<window maximized="true" height="507" width="902" y="123" x="219"/>
+<toolbars main="true"/>
+</view>
+</defaultviews>
+</views>
