@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar visible="true">
+ <button action="AddMessage"/>
+ <button action="AddSection"/>
+ <button action="AddField"/>
+ <button action="SaveMessage"/>
+ <separator/>
+ <button action="CompileMessage"/>
+ <button action="ExportMessage"/>
+</toolbar>

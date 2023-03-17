@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin name="Message format editor extensions" 
+        description="Message format editor extension" 
+        id="org.xendra.mfe" 
+        version="1.0" 
+        category="Messaging"
+	synchronized="@timestamp@"	
+	enabled="true">              
+	<properties>
+		<property name="infourl" value="http://americas/public/plugin?id=org.xendra.mfe"/>
+	</properties>
+	<handlerlist>
+		<handler id="org.xendra.mfe.folder"/>
+	</handlerlist>
+	<extensionlist id="org.xendra.mfe.folder">
+		<extension id="Root" class="org.xendra.mfe.folder.Root"/>
+		<extension id="plugin"  class="org.xendra.mfe.folder.PluginFolder" />
+		<extension id="message" class="org.xendra.mfe.folder.MessageFolder"/>
+		<extension id="field" class="org.xendra.mfe.folder.FieldFolder"/>
+		<extension id="section" class="org.xendra.mfe.folder.SectionFolder"/>
+		<extension id="table" class="org.xendra.mfe.folder.TableFolder"/>
+		<extension id="process" class="org.xendra.mfe.folder.ProcessFolder"/>
+		<extension id="column" class="org.xendra.mfe.folder.ColumnFolder"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.action">
+		<extension id="CompileMessage" class="org.xendra.mfe.gui.action.CompileMessageAction"/>
+		<extension id="ExportMessage" class="org.xendra.mfe.gui.action.ExportMessageAction"/>
+		<extension id="SaveMessage" class="org.xendra.mfe.gui.action.SaveMessageAction"/>
+		<extension id="Refresh" class="org.xendra.mfe.gui.action.RefreshFolderAction"/>
+		<extension id="DeleteFolder" class="org.xendra.mfe.gui.action.DeleteFolderAction"/>
+	</extensionlist>
+	<extensionlist id="org.columba.core.frame">
+		<extension id="MessageFormatEditor" class="org.xendra.mfe.gui.frame.MFEFrameController">
+			<properties managed="true"/>
+		</extension>	
+	</extensionlist>
+	<extensionlist id="org.columba.core.config">
+		<extension id="POSConfigPlugin" class="org.xendra.mfe.plugin.ConfigPlugin"/>
+	</extensionlist>
+</plugin>
