@@ -1,24 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="2023-03-17T19:28:57.662097008"/>
-	<meta name="created" content="00:00:00">
-	<style type="text/css">
-		h2.cjk { font-family: "Noto Sans CJK SC" }
-		h2.ctl { font-family: "FreeSans" }
-		pre.cjk { font-family: "DejaVu Sans Mono", monospace }
-		h3.cjk { font-family: "Noto Sans CJK SC" }
-		h3.ctl { font-family: "FreeSans" }
-		tt.cjk { font-family: "DejaVu Sans Mono", monospace }
-	</style>
-</head>
-<body lang="es-PE" dir="ltr">
-<h1>Plugin para Editar Formatos 
-</h1>
+<h1>Plugin para Editar Formatos </h1>
 <p>El Plugin para editar formatos utiliza template MVEL, el mismo
 utilizado por Drools para su motor de reglas. A continuacion una
 explicacion breve de como usar MVEL.</p>
