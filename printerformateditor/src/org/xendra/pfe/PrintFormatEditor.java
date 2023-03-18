@@ -82,9 +82,5 @@ public class PrintFormatEditor {
 			}
 		}); 
   }
-  /** Defcon. */
-  private PrintFormatEditor() {
-    // nop
-  }
 }
       
