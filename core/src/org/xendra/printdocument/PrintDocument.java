@@ -332,6 +332,13 @@ public class PrintDocument implements Serializable {
 				addvar(var, "");
 		}																						
 	}
+	public String getvar(String varname) {
+		String val = "";
+		if (variables.containsKey(varname)) {
+			val = (String) variables.get(varname);
+		}
+		return val;
+	}
 	public void addeach(String var) {
 		eachs.add(var);
 	}	

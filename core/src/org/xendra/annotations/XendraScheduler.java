@@ -10,7 +10,9 @@ import java.lang.annotation.Target;
 public @interface XendraScheduler {
 	String frequencytype();
 	String frequency();
+	String frequencystartat();
 	String keeplogdays();
 	String name();
 	String type();
+	String tag();
 }

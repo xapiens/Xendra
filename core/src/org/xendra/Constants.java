@@ -305,4 +305,5 @@ public interface Constants {
 	public static final String NO = "N";
 	public static final String ERROR = "E";
 	public static final int SuperUser = 100;
+	public static final String SENDFILESPATH = "sendfilepath";
 } 

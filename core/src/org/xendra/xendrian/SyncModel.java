@@ -83,6 +83,7 @@ import org.compiere.model.persistence.X_M_InventoryLine;
 import org.compiere.model.persistence.X_M_Product;
 import org.compiere.model.persistence.X_M_ProductionLine;
 import org.compiere.model.persistence.X_M_TransactionAllocation;
+import org.compiere.model.persistence.X_T_DailyBook;
 import org.compiere.model.reference.REF_AD_ReferenceValidationTypes;
 import org.compiere.model.reference.REF_AD_SchedulerType;
 import org.compiere.model.reference.REF__EntityType;
@@ -1982,7 +1983,9 @@ public class SyncModel {
 							dbcolumn.setIsAllowLogging(column.IsAllowLogging());
 							dbcolumn.setIdentifier(column.Identifier());
 							dbcolumn.setSynchronized(srcsynchro);
-							dbcolumn.save();
+							if (!dbcolumn.save()) {
+								System.out.println("X");
+							}
 						}
 					}
 				}
@@ -2887,7 +2890,7 @@ public class SyncModel {
 								dbcolumn.setIdentifier(column.Identifier());
 								dbcolumn.setSynchronized(srcsynchro);
 								if (!dbcolumn.save()) {
-									
+									System.out.println("X");
 								}
 							}
 
