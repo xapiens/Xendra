@@ -28,12 +28,7 @@
   <path id="project.class.path">
 	  <pathelement path="${classpath}"/>
 	  <pathelement path="${jar.path}/core.jar"/>
-	  <pathelement path="${jar.path}/common.jar"/>
-	  <pathelement path="${jar.path}/holon.jar"/>
-	  <pathelement path="${jar.path}/postgresql.jar"/>
-	  <pathelement path="${jar.path}/Base.jar"/>
-	  <pathelement path="${jar.path}/dev.jar"/>
-	  <pathelement path="${jar.path}/Drools.jar"/>
+	  <pathelement path="${jar.path}/Xendralib.jar"/>
 	  <pathelement path="${tools.path}/jdom-1.0.jar"/>
 	  <pathelement path="${tools.path}/commons-collections-3.1.jar"/>
 	  <pathelement path="${tools.path}/commons-io-2.0.jar"/>
