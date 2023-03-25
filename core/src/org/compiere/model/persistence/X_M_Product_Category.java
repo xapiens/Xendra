@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -90,7 +90,7 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="Category of a P
 TableName="M_Product_Category",AccessLevel="3",AD_Window_ID="4e60880d-1a9c-ed56-dba9-3ba9d80c8b83",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=75,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="f631232e-7899-e9c1-2ea9-7dafc2456956",Synchronized="2020-03-03 21:38:50.0")
+Identifier="f631232e-7899-e9c1-2ea9-7dafc2456956",Synchronized="2023-03-24 23:43:21.0")
 /** TableName=M_Product_Category */
 public static final String Table_Name="M_Product_Category";
 
@@ -150,10 +150,10 @@ return ii.intValue();
 public static String es_PE_FIELD_ProductCategory_AssetGroup_Name="Grupo de Activos";
 
 @XendraTrl(Identifier="8558ab36-5c4a-73f5-bf71-345b40bb766b")
-public static String es_PE_FIELD_ProductCategory_AssetGroup_Description="Grupo de Activos";
+public static String es_PE_FIELD_ProductCategory_AssetGroup_Help="El grupo de activos determina cuentas por defaul. Si un grupo del activo se selecciona en la categoría de producto, se crean los activos al entregar el activo.";
 
 @XendraTrl(Identifier="8558ab36-5c4a-73f5-bf71-345b40bb766b")
-public static String es_PE_FIELD_ProductCategory_AssetGroup_Help="El grupo de activos determina cuentas por defaul. Si un grupo del activo se selecciona en la categoría de producto, se crean los activos al entregar el activo.";
+public static String es_PE_FIELD_ProductCategory_AssetGroup_Description="Grupo de Activos";
 
 @XendraField(AD_Column_ID="A_Asset_Group_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -171,7 +171,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c4eab5c3-5f74-b06a-cab7-563eb56809a2",
-Synchronized="2019-08-30 22:23:25.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name A_Asset_Group_ID */
 public static final String COLUMNNAME_A_Asset_Group_ID = "A_Asset_Group_ID";
 /** Set Print Color.
@@ -195,10 +195,10 @@ return ii.intValue();
 public static String es_PE_FIELD_ProductCategory_PrintColor_Name="Impresión a Color";
 
 @XendraTrl(Identifier="99d95821-14a2-f9fe-68d2-8cbd629ec9c4")
-public static String es_PE_FIELD_ProductCategory_PrintColor_Description="Color usado para imprimir";
+public static String es_PE_FIELD_ProductCategory_PrintColor_Help="Color usado para imprimir";
 
 @XendraTrl(Identifier="99d95821-14a2-f9fe-68d2-8cbd629ec9c4")
-public static String es_PE_FIELD_ProductCategory_PrintColor_Help="Color usado para imprimir";
+public static String es_PE_FIELD_ProductCategory_PrintColor_Description="Color usado para imprimir";
 
 @XendraField(AD_Column_ID="AD_PrintColor_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -216,7 +216,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bb234863-d768-49c7-0f0a-746d53c2b4df",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name AD_PrintColor_ID */
 public static final String COLUMNNAME_AD_PrintColor_ID = "AD_PrintColor_ID";
 /** Set Description.
@@ -250,10 +250,10 @@ return value;
 public static String es_PE_FIELD_ProductCategory_Description_Name="Observación";
 
 @XendraTrl(Identifier="0693cc54-be8b-8d1c-dd20-cae185125944")
-public static String es_PE_FIELD_ProductCategory_Description_Description="Observación";
+public static String es_PE_FIELD_ProductCategory_Description_Help="Observación";
 
 @XendraTrl(Identifier="0693cc54-be8b-8d1c-dd20-cae185125944")
-public static String es_PE_FIELD_ProductCategory_Description_Help="Observación";
+public static String es_PE_FIELD_ProductCategory_Description_Description="Observación";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -271,7 +271,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4b21f68d-d279-919a-01ba-e1fa5bf93c85",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -303,7 +303,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7d25f77f-9569-4046-a6b8-a89fd5d71ed5",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Default.
@@ -329,10 +329,10 @@ return false;
 public static String es_PE_FIELD_ProductCategory_Default_Name="Predeterminado";
 
 @XendraTrl(Identifier="2550c6af-9623-5749-2b1e-4e39a4b932a2")
-public static String es_PE_FIELD_ProductCategory_Default_Description="Valor Predeterminado";
+public static String es_PE_FIELD_ProductCategory_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
 
 @XendraTrl(Identifier="2550c6af-9623-5749-2b1e-4e39a4b932a2")
-public static String es_PE_FIELD_ProductCategory_Default_Help="El cuadro de verificación indica si este registro será usado como un valor predeterminado";
+public static String es_PE_FIELD_ProductCategory_Default_Description="Valor Predeterminado";
 
 @XendraField(AD_Column_ID="IsDefault",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -350,7 +350,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7e37b383-9b1c-c3a4-a170-f0d06d4d36d4",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name IsDefault */
 public static final String COLUMNNAME_IsDefault = "IsDefault";
 /** Set Self-Service.
@@ -376,10 +376,10 @@ return false;
 public static String es_PE_FIELD_ProductCategory_Self_Service_Name="Auto-Servicio";
 
 @XendraTrl(Identifier="b6578eae-4cc5-eaf7-0f7a-3261bdc56235")
-public static String es_PE_FIELD_ProductCategory_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
+public static String es_PE_FIELD_ProductCategory_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
 
 @XendraTrl(Identifier="b6578eae-4cc5-eaf7-0f7a-3261bdc56235")
-public static String es_PE_FIELD_ProductCategory_Self_Service_Help="El autoservicio permite que los usuarios incorporen datos o que pongan al día sus datos. La bandera indica, que este expediente fue incorporado o creado vía autoservicio o que el usuario puede cambiarlo vía funcionalidad del autoservicio.";
+public static String es_PE_FIELD_ProductCategory_Self_Service_Description="Esta es una entrada del autoservicio ó esta entrada se puede cambiar vía autoservicio";
 
 @XendraField(AD_Column_ID="IsSelfService",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -397,7 +397,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="259c3cd4-57da-0e3b-fa01-573bedcc2414",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name IsSelfService */
 public static final String COLUMNNAME_IsSelfService = "IsSelfService";
 /** Set Material Policy.
@@ -422,10 +422,10 @@ return (String)get_Value(COLUMNNAME_MMPolicy);
 public static String es_PE_FIELD_ProductCategory_MaterialPolicy_Name="Política de Material";
 
 @XendraTrl(Identifier="bbf4693c-7a89-a640-465d-685262a9b2ee")
-public static String es_PE_FIELD_ProductCategory_MaterialPolicy_Description="Política de movimiento de material.";
+public static String es_PE_FIELD_ProductCategory_MaterialPolicy_Help="La politica de movimiento determina como esta fluyendo la acción (PEPS ó UEPS) si un caso específico del producto no fue seleccionado. La política no puede contradecir el método de costeo (ej. PEPS movimiento de politica y UEPS metodo de costeo).";
 
 @XendraTrl(Identifier="bbf4693c-7a89-a640-465d-685262a9b2ee")
-public static String es_PE_FIELD_ProductCategory_MaterialPolicy_Help="La politica de movimiento determina como esta fluyendo la acción (PEPS ó UEPS) si un caso específico del producto no fue seleccionado. La política no puede contradecir el método de costeo (ej. PEPS movimiento de politica y UEPS metodo de costeo).";
+public static String es_PE_FIELD_ProductCategory_MaterialPolicy_Description="Política de movimiento de material.";
 
 @XendraField(AD_Column_ID="MMPolicy",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -443,7 +443,7 @@ FieldLength=1,DefaultValue="F",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="96ea7dd4-235e-a172-8ff3-1b567c8bae37",Synchronized="2019-08-30 22:23:26.0")
+Identifier="96ea7dd4-235e-a172-8ff3-1b567c8bae37",Synchronized="2023-03-22 18:56:49.0")
 /** Column name MMPolicy */
 public static final String COLUMNNAME_MMPolicy = "MMPolicy";
 /** Set Product Category.
@@ -466,10 +466,10 @@ return ii.intValue();
 public static String es_PE_FIELD_ProductCategory_ProductCategory_Name="Categoría del Producto";
 
 @XendraTrl(Identifier="1285b5a2-db5d-c6bc-8202-00f0eb7dedb7")
-public static String es_PE_FIELD_ProductCategory_ProductCategory_Description="Categoría de la que este producto es parte";
+public static String es_PE_FIELD_ProductCategory_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
 
 @XendraTrl(Identifier="1285b5a2-db5d-c6bc-8202-00f0eb7dedb7")
-public static String es_PE_FIELD_ProductCategory_ProductCategory_Help="Identifica la categoría a la que pertenece este producto. Las categorías del producto son usadas para el cálculo de precios";
+public static String es_PE_FIELD_ProductCategory_ProductCategory_Description="Categoría de la que este producto es parte";
 
 @XendraField(AD_Column_ID="M_Product_Category_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -516,7 +516,7 @@ DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,Is
 ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="",IsAllowLogging=false,Identifier="00412142-eb04-b1b4-59a8-ac46dd386126",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name M_Product_Category_Parent_ID */
 public static final String COLUMNNAME_M_Product_Category_Parent_ID = "M_Product_Category_Parent_ID";
 /** Set Name.
@@ -551,10 +551,10 @@ return new KeyNamePair(get_ID(), getName());
 public static String es_PE_FIELD_ProductCategory_Name_Name="Nombre";
 
 @XendraTrl(Identifier="0b43b1b4-bb0b-1cba-f334-3abd66a6d3d8")
-public static String es_PE_FIELD_ProductCategory_Name_Description="Identificador alfanumérico de la entidad.";
+public static String es_PE_FIELD_ProductCategory_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
 @XendraTrl(Identifier="0b43b1b4-bb0b-1cba-f334-3abd66a6d3d8")
-public static String es_PE_FIELD_ProductCategory_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
+public static String es_PE_FIELD_ProductCategory_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -572,7 +572,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="de53cb9c-7a9b-9ea0-d5ad-b680db280b6c",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Planned Margin %.
@@ -595,10 +595,10 @@ return bd;
 public static String es_PE_FIELD_ProductCategory_PlannedMargin_Name="% de Margen Planeado";
 
 @XendraTrl(Identifier="364e2c47-79c8-d210-f979-1786cc5de183")
-public static String es_PE_FIELD_ProductCategory_PlannedMargin_Description="% de Margen Planeado para este proyecto";
+public static String es_PE_FIELD_ProductCategory_PlannedMargin_Help="El Porcentaje de Margen Planeado indica el porcentaje de margen anticipado para este proyecto o línea de proyecto";
 
 @XendraTrl(Identifier="364e2c47-79c8-d210-f979-1786cc5de183")
-public static String es_PE_FIELD_ProductCategory_PlannedMargin_Help="El Porcentaje de Margen Planeado indica el porcentaje de margen anticipado para este proyecto o línea de proyecto";
+public static String es_PE_FIELD_ProductCategory_PlannedMargin_Description="% de Margen Planeado para este proyecto";
 
 @XendraField(AD_Column_ID="PlannedMargin",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -616,9 +616,39 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b0710de3-eca4-b82d-5833-45b3d7ec1f0d",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name PlannedMargin */
 public static final String COLUMNNAME_PlannedMargin = "PlannedMargin";
+/** Set PriceTypeCode.
+@param PriceTypeCode PriceTypeCode */
+public void setPriceTypeCode (String PriceTypeCode)
+{
+if (PriceTypeCode != null && PriceTypeCode.length() > 2)
+{
+log.warning("Length > 2 - truncated");
+PriceTypeCode = PriceTypeCode.substring(0,1);
+}
+set_Value (COLUMNNAME_PriceTypeCode, PriceTypeCode);
+}
+/** Get PriceTypeCode.
+@return PriceTypeCode */
+public String getPriceTypeCode() 
+{
+return (String)get_Value(COLUMNNAME_PriceTypeCode);
+}
+
+@XendraTrl(Identifier="c70d0cf8-4e32-45cf-bb4d-a70864f9a1cb")
+public static String es_PE_COLUMN_PriceTypeCode_Name="PriceTypeCode";
+
+@XendraColumn(AD_Element_ID="2f368c1a-1242-4803-ae8f-7d549670d78e",ColumnName="PriceTypeCode",
+AD_Reference_ID=17,AD_Reference_Value_ID="3ebada4e-e45b-493f-a33b-d39203375707",AD_Val_Rule_ID="",
+FieldLength=2,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,
+IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
+VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
+IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
+Identifier="c70d0cf8-4e32-45cf-bb4d-a70864f9a1cb",Synchronized="2023-03-24 23:34:26.0")
+/** Column name PriceTypeCode */
+public static final String COLUMNNAME_PriceTypeCode = "PriceTypeCode";
 /** Set Search Key.
 @param Value Search key for the record in the format required - must be unique */
 public void setValue (String Value)
@@ -644,10 +674,10 @@ return value;
 public static String es_PE_FIELD_ProductCategory_SearchKey_Name="Clave de Búsqueda";
 
 @XendraTrl(Identifier="55e788e1-578f-125c-f830-5a142606c515")
-public static String es_PE_FIELD_ProductCategory_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
+public static String es_PE_FIELD_ProductCategory_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
 
 @XendraTrl(Identifier="55e788e1-578f-125c-f830-5a142606c515")
-public static String es_PE_FIELD_ProductCategory_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
+public static String es_PE_FIELD_ProductCategory_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="4b213eeb-114c-f1de-5598-c423f9fd3ca6",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -665,7 +695,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3e78a046-7039-0de1-11c6-b376777dca3e",
-Synchronized="2019-08-30 22:23:26.0")
+Synchronized="2023-03-22 18:56:49.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }
