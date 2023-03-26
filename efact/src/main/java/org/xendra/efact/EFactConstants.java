@@ -1,0 +1,43 @@
+package org.xendra.efact;
+
+public interface EFactConstants {
+	public static final String PROVIDER = "Provider";
+	public static final String OSE_EFACT = "EFact"; 
+	public static final String OSE_SUNAT = "SUNAT";
+	public static final String OSE_TOKEN = "OSEToken";
+	public static final String FILENAME = "filename";
+	public static final String PASSWORD = "password";
+	public static final String ALIASKEY = "aliaskey";
+	public static final String CACERTSFILE = "cacertsfile";
+	public static final String CACERTSPASSWORD = "cacertspassword";
+	public static final String KEYSTORETYPE = "keystoretype";
+	public static final String PRIVATEALIAS = "privatealias";
+	public static final String PRIVATEPASS = "privatepass";
+	public static final String SENDFILESPATH = "sendfilepath";
+	public static final String RECEIVEFILESPATH = "receivefilespath";
+	public static final String FTPSERVER = "FtpServer";
+	public static final String FTPPORT = "FtpPort";
+	public static final String FTPUSER = "FtpUser";
+	public static final String FTPPASSWORD = "FtpPassword";
+	public static final String FTPBASE = "FtpBase";
+	public static final String SENDEMAIL = "SendEmail";
+	public static final String SENDFTP = "SendFTP";
+	public static final String SENDPDF = "SendPDF";
+	public static final String SENDOSE = "SendOSE";
+	public static final String SENDXML = "SendXML";
+	public static final String AMBIENTE ="Ambiente";
+	public static final String BETA = "Beta";
+	public static final String QA = "QA";
+	public static final String PRODUCTION = "Produccion";
+	public static final String OSEUSER = "OSEUser";
+	public static final String OSEPASSWORD = "OSEPassword";
+	public static final String PDFREPORT = "PDFReportPath";
+	public static final String PDFREPORTLOGO = "PDFReportLogo";
+	public static final String MAILHOST = "MailHost";
+	public static final String MAILPORT = "MailPort";
+	public static final String MAILSSL = "MailSSL";
+	public static final String MAILAUTH = "MailAuth";
+	public static final String MAILUSER = "MailUser";
+	public static final String MAILPASSWORD = "MailPassword";
+	public static final String CHECKSTATUS = "CheckStatus";
+}

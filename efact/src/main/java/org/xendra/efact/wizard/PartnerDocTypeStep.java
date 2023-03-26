@@ -95,6 +95,7 @@ public class PartnerDocTypeStep extends AbstractStep implements StepModelCustomi
 		}
 		steps.add(new DocTypeStep(data));
 		steps.add(new DocumentTaxStep(data));
+		steps.add(new ProductStep(data));
 		steps.add(new TaxStep());
 		steps.add(new TaxPickStep(data));
 		steps.add(new FinishStep());

@@ -96,8 +96,6 @@ public class DocTypeStep extends AbstractStep implements ActionListener {
 			if (goahead)
 				yesModel.addElement(pp);			
 		}
-		//	initialize = true;
-		//}
 	}
 
 	@Override

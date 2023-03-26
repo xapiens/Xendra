@@ -9,6 +9,7 @@ import javax.swing.ListModel;
 
 import org.compiere.model.MBPartner;
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_Process_Machine;
 import org.compiere.model.persistence.X_C_BP_DocType;
 import org.compiere.model.persistence.X_C_BPartner;
 import org.compiere.model.persistence.X_C_BPartner_Certificate;
@@ -19,9 +20,12 @@ import org.compiere.model.persistence.X_C_Invoice;
 import org.compiere.model.persistence.X_C_Location;
 import org.compiere.model.persistence.X_C_Payment;
 import org.compiere.model.persistence.X_C_SPOT;
+import org.compiere.model.persistence.X_M_Product;
+import org.compiere.model.persistence.X_M_Product_Category;
 import org.compiere.model.reference.REF_C_BankAccountType;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
+import org.xendra.Constants;
 import org.xendra.efact.wizard.documenttax.DocTypeDocumentTax;
 import org.xendra.util.UpdatePO;
 
@@ -90,9 +94,26 @@ public class EFactConfigurationCreator implements WizardModelListener {
 			.setParameters(ddt.getC_DocType_ID()).first();
 			if (dt != null) {
 				dt.setC_DocumentTax_ID(ddt.getC_DocumentTax_ID());
+				dt.setInvoiceOperationTypeCode(ddt.getOperationTypeCode());
 				dt.save();
 			}			
 		}		
+		List<ProductPriceTypeCode> ptcs = (List) data.getData(X_M_Product.COLUMNNAME_M_Product_Category_ID);
+		for (ProductPriceTypeCode ptc:ptcs) {
+			X_M_Product_Category pc = new Query(Env.getCtx(), X_M_Product_Category.Table_Name, "M_Product_Category_ID = ?", null)
+					.setParameters(ptc.getM_Product_Category_ID()).first();
+			pc.setPriceTypeCode(ptc.getProductPriceTypeCode());
+			if (pc.save()) {
+				UpdatePO o = new UpdatePO();
+				o.setTablename(X_M_Product.Table_Name);
+				o.setField(X_M_Product.COLUMNNAME_PriceTypeCode, pc.getPriceTypeCode());
+				o.setClient(Env.getAD_Client_ID(Env.getCtx()));
+				int no = o.update(String.format("%s=%s", X_M_Product.COLUMNNAME_M_Product_Category_ID,pc.getM_Product_Category_ID()), null);		
+				//o.update(null, null)
+				//int no = o.delete(String.format("AD_Process_Machine_ID = %s", n.getAD_Process_Machine_ID()), null);
+				//if (no > 0)
+			}
+		}
 		if (detraction) {
 			X_C_SPOT spot = new Query(Env.getCtx(), X_C_SPOT.Table_Name, "AD_Client_ID = ?", null)
 						.setParameters(Env.getAD_Client_ID(Env.getCtx())).first();

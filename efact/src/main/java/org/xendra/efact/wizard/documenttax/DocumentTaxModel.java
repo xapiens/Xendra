@@ -18,10 +18,12 @@ public class DocumentTaxModel extends AbstractTableModel {
 			{
 			ResourceLoader.getString("dialog", "machinewizard", "doctype"),			
 			ResourceLoader.getString("dialog", "machinewizard", "documenttax"),
+			ResourceLoader.getString("dialog", "machinewizard", "operationtypecode")
 			};
 	public static final int
 	NAME_COLUMN = 0,
-	DOCUMENTTAX = 1;
+	DOCUMENTTAX = 1,
+	OPERTYPECODE = 2;
 	private List<DocTypeDocumentTax> testList = new ArrayList<DocTypeDocumentTax>();
 	public List<DocTypeDocumentTax> getDocucmentTaxModel()  {
 		return testList;
@@ -38,6 +40,7 @@ public class DocumentTaxModel extends AbstractTableModel {
 					.setParameters(dt.getC_DocType_ID()).first();
 				if (doctype != null) {					
 					dtp.setC_DocumentTax_ID(doctype.getC_DocumentTax_ID());
+					dtp.setOperationTypeCode(doctype.getInvoiceOperationTypeCode());
 				}
 			} else {
 				dtp.setC_DocType_ID(kp.getKey());
@@ -70,6 +73,10 @@ public class DocumentTaxModel extends AbstractTableModel {
 			case DOCUMENTTAX:				
 				script.setC_DocumentTax_ID((Integer) aValue);
 				break;
+			case OPERTYPECODE:
+				script.setOperationTypeCode((String) aValue);
+				System.out.println(aValue);
+				break;
 			default:
 				break;
 		}
@@ -82,6 +89,8 @@ public class DocumentTaxModel extends AbstractTableModel {
 			return script.getC_DocType_ID();			
 		case DOCUMENTTAX:
 			return script.getC_DocumentTax_ID();
+		case OPERTYPECODE:
+			return script.getOperationTypeCode();
 		default:
 			break;		
 		}
