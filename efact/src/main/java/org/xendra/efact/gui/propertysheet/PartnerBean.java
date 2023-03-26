@@ -6,7 +6,7 @@ public class PartnerBean {
 	String filename;
 	String privatepass;
 	String keystoretype;
-	String sendfilespath;
+	String sendfilepath;
 	String receivefilespath;
 	String privatealias;
 	String certificatealias;	
@@ -61,12 +61,6 @@ public class PartnerBean {
 	public void setKeystoretype(String keystoretype) {
 		this.keystoretype = keystoretype;
 	}
-	public String getSendfilespath() {
-		return sendfilespath;
-	}
-	public void setSendfilespath(String sendfilepath) {
-		this.sendfilespath = sendfilepath;
-	}	
 	public String getReceivefilespath() {
 		return receivefilespath;
 	}
@@ -246,5 +240,11 @@ public class PartnerBean {
 	}
 	public void setCheckStatus(Boolean checkStatus) {
 		CheckStatus = checkStatus;
+	}
+	public String getSendfilepath() {
+		return sendfilepath;
+	}
+	public void setSendfilepath(String sendfilepath) {
+		this.sendfilepath = sendfilepath;
 	}	
 }

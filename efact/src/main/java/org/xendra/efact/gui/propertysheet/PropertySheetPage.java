@@ -106,7 +106,7 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 					partnerbean.setFilename(pc.get(EFactConstants.FILENAME));
 					partnerbean.setPrivatepass(pc.get(EFactConstants.PRIVATEPASS));
 					partnerbean.setKeystoretype( pc.get(EFactConstants.KEYSTORETYPE));
-					partnerbean.setSendfilespath( pc.get(EFactConstants.SENDFILESPATH));
+					partnerbean.setSendfilepath( pc.get(EFactConstants.SENDFILESPATH));
 					partnerbean.setReceivefilespath(pc.get(EFactConstants.RECEIVEFILESPATH));
 					partnerbean.setPrivatealias( pc.get(EFactConstants.PRIVATEALIAS));
 					partnerbean.setProvider(pc.get(EFactConstants.PROVIDER));
