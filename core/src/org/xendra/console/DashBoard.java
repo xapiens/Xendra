@@ -136,7 +136,21 @@ public class DashBoard {
 						}																				
 			}
 		});
-		menuFile.addMenuItem("synchronized reset", new Runnable() {
+		menuFile.addMenuItem("synchronized reset tables", new Runnable() {
+			public void run() {
+				MessageDialogButton answer = new MessageDialogBuilder()
+						.setTitle("Confirm")
+						.setText("sincroniza estructuras del diccionario con el codigo\nuna vez iniciado no debe ser interrumpido\nDesea continuar?")
+						.addButton(MessageDialogButton.Yes)				
+						.addButton(MessageDialogButton.No)
+						.build()
+						.showDialog(gui);								
+						if (answer.equals(MessageDialogButton.Yes)) {
+							Xendrian.getInstance().synchroresettables(screen, "synchronized reset tables");
+						}																				
+			}
+		});		
+		menuFile.addMenuItem("synchronized reset all", new Runnable() {
 			public void run() {
 				MessageDialogButton answer = new MessageDialogBuilder()
 						.setTitle("Confirm")

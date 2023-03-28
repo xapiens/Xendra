@@ -3,8 +3,10 @@ package org.xendra.console;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.model.persistence.X_A_MachineServer;
 import org.compiere.model.reference.REF_ServerType;
 import org.compiere.util.Env;
@@ -94,6 +96,38 @@ public class Xendrian {
 		window.close();		
 	}
 
+	public void synchroresettables(Screen screen, String title) {
+		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
+		final BasicWindow window = new BasicWindow();
+		ProgressBar pbar = new ProgressBar(0,100,100);
+		final Label checking = new Label("");
+		window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
+		Panel panel = new Panel();
+		panel.setLayoutManager(new GridLayout(1));			
+		panel.addComponent(pbar);
+		panel.addComponent(checking);
+		window.setComponent(panel.withBorder(Borders.singleLine(title)));
+		gui.addWindow(window);
+		List<X_AD_Table> tables = new Query(Env.getCtx(), X_AD_Table.Table_Name, "IsActive = 'Y'", null).list();
+		float i = 1f;
+		for (X_AD_Table table:tables) {
+			table.setSynchronized(null);
+			table.save();
+			if (pbar != null) {
+				float p = (i / tables.size()) * 100;					
+				checking.setText(table.getName());					
+				pbar.setValue((int) p);					
+				try {
+					gui.updateScreen();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}													
+			}		
+			i++;
+		}
+		synchro(screen, title);
+	}
+	
 	public void synchro(Screen screen, String title) {
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		final BasicWindow window = new BasicWindow();
