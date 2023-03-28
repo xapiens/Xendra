@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.ListModel;
 
 import org.compiere.model.MBPartner;
+import org.compiere.model.MClientInfo;
 import org.compiere.model.Query;
+import org.compiere.model.persistence.X_AD_ClientInfo;
 import org.compiere.model.persistence.X_AD_Process_Machine;
 import org.compiere.model.persistence.X_C_BP_DocType;
 import org.compiere.model.persistence.X_C_BPartner;
@@ -43,6 +45,32 @@ public class EFactConfigurationCreator implements WizardModelListener {
 
 	@Override
 	public void wizardFinished(WizardModelEvent arg0) {		
+		Integer C_BPartnerCashTrx_ID = (Integer) data.getData(X_AD_ClientInfo.COLUMNNAME_C_BPartnerCashTrx_ID);
+		Integer C_BPartnerCashLocation_ID = (Integer) data.getData(X_C_Location.COLUMNNAME_Address2);
+		Integer C_BPartnerCashTrx_DocType_ID = (Integer) data.getData(X_AD_ClientInfo.COLUMNNAME_AD_Tree_BPartner_ID);
+		MBPartner cashpartner = new Query(Env.getCtx(), MBPartner.Table_Name, "C_BPartner_ID = ?", null)
+					.setParameters(C_BPartnerCashTrx_ID).first();
+		if (cashpartner != null) {
+			cashpartner.setC_BP_DocType_ID(C_BPartnerCashTrx_DocType_ID);
+			cashpartner.save();
+			MClientInfo ci = MClientInfo.get(Env.getCtx());
+			ci.setC_BPartnerCashTrx_ID(cashpartner.getC_BPartner_ID());
+			ci.save();
+			X_C_BPartner_Location plothers = new Query(Env.getCtx(), X_C_BPartner_Location.Table_Name, "C_BPartner_ID = ?", null)
+					.setParameters(cashpartner.getC_BPartner_ID()).first();
+			if (plothers == null) {
+				plothers = new X_C_BPartner_Location(Env.getCtx(), 0, null);
+				plothers.setC_BPartner_ID(cashpartner.getC_BPartner_ID());				
+			}
+			plothers.setC_Location_ID(C_BPartnerCashLocation_ID);
+			plothers.save();
+		}
+		MClientInfo ci = MClientInfo.get(Env.getCtx());		
+		MBPartner partner = new Query(Env.getCtx(), X_C_BPartner.Table_Name, "C_BPartner_ID = ? ", null)
+				.setParameters(ci.getC_BPartnerCashTrx_ID()).first();						
+		
+		
+		
 		Integer C_BPartner_ID = (Integer) data.getData(X_C_Invoice.COLUMNNAME_C_BPartner_ID);
 		Integer Location_ID = (Integer) data.getData(X_C_Location.COLUMNNAME_Address1);
 		Integer C_BP_DocType_ID = (Integer) data.getData(X_C_BPartner.COLUMNNAME_C_BP_DocType_ID);
@@ -68,11 +96,9 @@ public class EFactConfigurationCreator implements WizardModelListener {
 		}
 		pl.setC_Location_ID(Location_ID);		
 		pl.save();
-		X_C_BP_DocType bpdt = new Query(Env.getCtx(), X_C_BP_DocType.Table_Name, "C_BP_DocType_ID = ?", null).setParameters(C_BP_DocType_ID).first();
-		if (bpdt != null) {
-			bp.setC_BP_DocType_ID(bpdt.getC_BP_DocType_ID());
-			bp.save();
-		} 
+		bp.setC_BP_DocType_ID(C_BP_DocType_ID);
+		bp.save();
+		 
 		
 		UpdatePO up = new UpdatePO();
 		up.setTablename(X_C_DocType.Table_Name);
