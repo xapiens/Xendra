@@ -35,7 +35,7 @@ import org.compiere.model.persistence.X_S_DocHeader;
 import org.compiere.model.persistence.X_S_DocLegend;
 import org.compiere.model.persistence.X_S_DocLine;
 import org.compiere.model.persistence.X_S_DocLineOthers;
-import org.compiere.model.persistence.X_c_province;
+import org.compiere.model.persistence.X_C_Province;
 import org.compiere.model.reference.REF_PriceTypeCode;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
@@ -51,12 +51,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.security.cert.X509Certificate;
 import org.xendra.efact.process.GeneralFunctions;
+import org.xendra.util.Tools;
 
 public class Boleta extends EFactDocument {
 
 	private MCity city;
 	private MRegion region;
-	private X_c_province province;
+	private X_C_Province province;
 	private MBPartnerLocation pl;
 	private X_C_BP_DocType bpdt;
 	private MBPartner p;
@@ -229,7 +230,7 @@ public class Boleta extends EFactDocument {
 					.setParameters(loc.getC_City_ID()).first();
 			region = new Query(Env.getCtx(), MRegion.Table_Name, "C_Region_ID = ?", null)
 					.setParameters(city.getC_Region_ID()).first();
-			province = new Query(Env.getCtx(), X_c_province.Table_Name, "C_Province_ID = ?", null)
+			province = new Query(Env.getCtx(), X_C_Province.Table_Name, "C_Province_ID = ?", null)
 					.setParameters(city.getC_Province_ID()).first();			
 			MCountry country = new Query(Env.getCtx(), MCountry.Table_Name, "C_Country_ID = ?", null)
 					.setParameters(city.getC_Country_ID()).first();
@@ -240,7 +241,7 @@ public class Boleta extends EFactDocument {
 			X_C_BP_DocType m_bpdt = new Query(Env.getCtx(), X_C_BP_DocType.Table_Name, "C_BP_DocType_ID = ?", null)
 					.setParameters(m_bp.getC_BP_DocType_ID()).first();
 
-			String pathXMLFile = getFile("xml");
+			String pathXMLFile = Tools.getInstance().getFile("xml");
 			File signatureFile = new File(pathXMLFile);
 			//			
 			
@@ -976,7 +977,7 @@ public class Boleta extends EFactDocument {
 
 			log.info("generarXMLZipiadoBoleta - XML creado " + pathXMLFile);
 			//====================== CREAR ZIP PARA EL ENVIO A SUNAT =======================
-			resultado = GeneralFunctions.crearZip(m_bp, items, getFile(), signatureFile);
+			resultado = GeneralFunctions.crearZip(m_bp, items, Tools.getInstance().getFile(), signatureFile);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			resultado = "0002|Error al generar el archivo de formato xml de la boleta.";

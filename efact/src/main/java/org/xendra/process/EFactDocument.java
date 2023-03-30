@@ -2,12 +2,10 @@ package org.xendra.process;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -16,9 +14,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.zip.ZipFile;
-
 import javax.net.ssl.SSLContext;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -26,9 +22,6 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
-//import org.apache.http.client.HttpClient;
-//import org.apache.commons.httpclient.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -59,20 +52,20 @@ import org.compiere.model.persistence.X_S_DocLine;
 import org.compiere.model.persistence.X_S_DocLineOthers;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
+import org.xendra.api.IEFact;
+import org.xendra.api.IEFactDocument;
 import org.xendra.efact.EFactConstants;
 import org.xendra.efact.process.GeneralFunctions;
 import org.xendra.efact.util.LecturaXML;
-import org.xendra.efact.util.Tools;
 import org.xendra.efact.xml.HeaderHandlerResolver;
+import org.xendra.util.Tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public abstract class EFactDocument {
+public abstract class EFactDocument implements IEFactDocument {
 	/**	Logger							*/	
 	protected CLogger			log = CLogger.getCLogger (getClass());
-	private String m_SendPath;
-	private String m_pathFile;
 	protected X509Certificate cert;
 	protected MBPartner m_bp;
 	protected MBPartnerCertificate m_bp_cert;
@@ -86,41 +79,16 @@ public abstract class EFactDocument {
 		this.items = items;
 		this.privateKey = privateKey;
 	}
-	protected void setFile(String unidadEnvio, String taxid,  String doctaxid, String DocumentNo) {
-		m_SendPath = unidadEnvio;
-		m_pathFile = String.format("%s%s-%s-%s", unidadEnvio, taxid, doctaxid, DocumentNo);
+	public String getFilePNG() {
+		File file = new File(Tools.getInstance().getFile("png"));
+		return file.getAbsolutePath();
 	}
-	protected String getSendPath() {
-		return m_SendPath;
-	}	
-	protected String getFile() {
-		return m_pathFile;
-	}
-
-	protected String getFile(String extension) {
-		String pathFile = "";
-		if (extension == null)
-			extension = "";
-		if (extension.length() == 0)
-			pathFile = m_pathFile;					
-		else
-			pathFile = String.format("%s.%s", m_pathFile, extension);
-		return pathFile;
-	}
-
 	public String Process() {
-		log.log(Level.WARNING, "ejecutando Invoice");		
 		String resultado = "";
-		// String unidadEnvio;// = Util.getPathZipFilesEnvio();
 		String pathXMLFile;
 		try {           
 			MDocType dt = new Query(Env.getCtx(), MDocType.Table_Name, "C_DocType_ID = ?", null)
 					.setParameters(items.getC_DocType_ID()).first();
-			//X_C_DocumentTax taxdoc = new Query(Env.getCtx(), X_C_DocumentTax.Table_Name, "C_DocumentTax_ID = ?", null)
-			//		.setParameters(dt.getC_DocumentTax_ID()).first();
-			//if (taxdoc == null) {
-			//	throw new Exception(String.format("Tax Document not defined in Document Type %s %s", dt.getC_DocType_ID(), dt.getName()));
-			//}			
 			log.info("generarXMLZipiadoFactura - Extraemos datos para preparar XML ");
 			System.out.println("generarXMLZipiadoFactura - Extraemos datos para preparar XML ");
 			List<X_S_DocLine> detdocelec = new Query(Env.getCtx(), X_S_DocLine.Table_Name, "S_DocHeader_ID = ?", null)
@@ -131,8 +99,6 @@ public abstract class EFactDocument {
 					.setParameters(items.getS_DocHeader_ID()).list();
 			List<X_S_DocLegend> leyendas = new Query(Env.getCtx(), X_S_DocLegend.Table_Name, "S_DocHeader_ID = ?", null)
 					.setParameters(items.getS_DocHeader_ID()).list();     
-
-
 			//String[] cdr = " | ".split("\\|", 0);
 			//           LecturaXML.guardarProcesoEstado(nrodoc, "P", " | ".split("\\|", 0), "", "", conn);
 			//LecturaXML.guardarProcesoEstado(items.getS_DocHeader_ID(), "P", "","");
@@ -143,12 +109,12 @@ public abstract class EFactDocument {
 			//crear el Xml firmado
 			if (detdocelec != null) {
 				if (items != null) {
-					//unidadEnvio = ;
-					setFile(Tools.getPathZipFilesEnvio(m_bp, items.getDateInvoiced()), m_bp.getTaxID(), items.getTaxID(),items.getDocumentNo());
-					log.info("generarXMLZipiadoFactura - Ruta de directorios " + getSendPath());
-					System.out.println("generarXMLZipiadoFactura - Ruta de directorios " + getSendPath());
+					//unidadEnvio = ;										
+					Tools.getInstance().setFile(Tools.getInstance().getPathZipFilesEnvio(m_bp, items.getDateInvoiced()), m_bp.getTaxID(), items.getTaxID(),items.getDocumentNo());
+					log.info("generarXMLZipiadoFactura - Ruta de directorios " +Tools.getInstance().getSendPath());
+					System.out.println("generarXMLZipiadoFactura - Ruta de directorios " + Tools.getInstance().getSendPath());
 					//                    pathXMLFile = unidadEnvio + items.getEmpr_nroruc() + "-" + items.getDocu_tipodocumento() + "-" + items.getDocu_numero() + ".xml";					
-					pathXMLFile = getFile("xml");					
+					pathXMLFile = Tools.getInstance().getFile("xml");					
 					//======================crear XML =======================
 					//                    if ("1".equals(items.getFlgXml())) {
 					//                        
@@ -161,14 +127,11 @@ public abstract class EFactDocument {
 					//                        LecturaXML.guardarProcesoEstado(nrodoc, "", " | ".split("\\|", 0), " ", "update cabecera set flg_xml=0 where docu_codigo= " + nrodoc, conn);
 					//                    }					
 					if (m_bp_cert.getBoolean(EFactConstants.SENDXML)) {
-
 						resultado = creaXml(items, detdocelec, anticipos, leyendas, otrosDetalles);
-
 						//======================guardar Hash Y Barcode PDF417 =======================
 						System.out.println("generarXMLZipiadoFactura - Crear Hashcode y CodeBarPDF417");
-
 						//LecturaXML.guardarHashYBarCodeQR(items.getDocu_tipodocumento(), nrodoc, "DV", pathXMLFile, conn);
-						LecturaXML.guardarHashYBarCodeQR(items.getTaxID(), items.getS_DocHeader_ID(), "DV", pathXMLFile);						
+						new LecturaXML().guardarHashYBarCodeQR(items.getTaxID(), items.getS_DocHeader_ID(), "DV", pathXMLFile);						
 						//LecturaXML.guardarProcesoEstado(items.getS_DocHeader_ID(), "Y",  " ", "update cabecera set flg_xml=0 where docu_codigo= " + items.getS_DocHeader_ID());
 						MDocLog.setStatus(items.getS_DocHeader_ID(), "Y", "", "");
 					}
@@ -182,7 +145,7 @@ public abstract class EFactDocument {
 					//====================== Guardar PDF =======================
 					if (m_bp_cert.getBoolean(EFactConstants.SENDPDF)) {					
 						System.out.println("generarXMLZipiadoFactura - Crear PDF");
-						resultado = GeneralFunctions.creaPdf(m_bp_cert, items, getFile("pdf"));
+						resultado = GeneralFunctions.creaPdf(m_bp_cert, items,Tools.getInstance().getFile("pdf"));
 						//LecturaXML.guardarProcesoEstado(items.getS_DocHeader_ID(), "Y", " ", "update cabecera set flg_pdf=0 where docu_codigo= " + items.getS_DocHeader_ID());
 						MDocLog.setStatus(items.getS_DocHeader_ID(), "Y", "", "");
 					} 									
@@ -192,7 +155,7 @@ public abstract class EFactDocument {
 					//                        LecturaXML.guardarProcesoEstado(nrodoc, "", " | ".split("\\|", 0), " ", "update cabecera set flg_ftp=0 where docu_codigo= " + nrodoc, conn);
 					//                    }
 					if (m_bp_cert.getBoolean(EFactConstants.SENDFTP)) {					
-						resultado = GeneralFunctions.copiaAFtp(m_bp_cert, items, getFile());
+						resultado = GeneralFunctions.copiaAFtp(m_bp_cert, items, Tools.getInstance().getFile());
 					}
 					//                    /*======================= EVALUANDO EMPRESA =============*/
 					//                    System.out.println("generarXMLZipiadoFactura - Evaluando Empresa para crear Link");
@@ -230,7 +193,7 @@ public abstract class EFactDocument {
 						//LecturaXML.guardarProcesoEstado(nrodoc, "E", " | ".split("\\|", 0), " ", "", conn);
 						MDocLog.setStatus(items.getS_DocHeader_ID(), "E", "", "");
 						//pathXMLFile = getFile(unidadEnvio, taxdoc,items.getDocumentNo(),   "xml");
-						resultado = enviarOSE(items, new File(getFile("xml")), new File(getFile("zip")));
+						resultado = enviarOSE(items, new File(Tools.getInstance().getFile("xml")), new File(Tools.getInstance().getFile("zip")));
 						//private String enviarASunat(X_S_DocHeader items, String unidadEnvio, String zipFileName, String fecha) throws Exception {
 
 						//LecturaXML.guardarProcesoEstado(nrodoc, "", " | ".split("\\|", 0), " ", "update cabecera set flg_sunat=0 where docu_codigo= " + nrodoc, conn);
@@ -259,7 +222,7 @@ public abstract class EFactDocument {
 					/*=======================ENVIO CORREO AL CLIENTE=============*/
 					if (m_bp_cert.getBoolean(EFactConstants.SENDEMAIL)) {
 						if (items.getCDR().equals("0")) {
-							GeneralFunctions.sendEmail(m_bp_cert, items, getFile(),"Comprobante de factura electronica");
+							GeneralFunctions.sendEmail(m_bp_cert, items, Tools.getInstance().getFile(),"Comprobante de factura electronica");
 						}
 
 					}
@@ -309,7 +272,7 @@ public abstract class EFactDocument {
 			//            }
 
 		}
-		return null;
+		return resultado;
 	}
 
 	public abstract String creaXml(X_S_DocHeader items,
@@ -359,8 +322,7 @@ public abstract class EFactDocument {
 				System.out.println("TICKET" + ticket);
 			} else {
 				HttpEntity entity1 = response.getEntity();
-				String jsonResponse = entity1 != null ? EntityUtils.toString(entity1) : null;
-				System.out.println("X");
+				String jsonResponse = entity1 != null ? EntityUtils.toString(entity1) : null;				
 			}
 			
 			// 
@@ -429,7 +391,7 @@ public abstract class EFactDocument {
 				respuestaSunat = null;
 			}
 			//======= grabando la respuesta de SUNAT en archivo ZIP
-			String pathRecepcion = Tools.getDirectorio(m_bp_cert.get(EFactConstants.RECEIVEFILESPATH), items.getDateInvoiced());
+			String pathRecepcion = Tools.getInstance().getDirectorio(m_bp_cert.get(EFactConstants.RECEIVEFILESPATH), items.getDateInvoiced());
 			//String pathRecepcion = String.format("%s%s", m_bp_cert.get(EFactConstants.RECEIVEFILESPATH), fecha);
 			// System.out.println("Preparandose para crear el cdr ");
 			FileOutputStream fos = new FileOutputStream(pathRecepcion + "R-" +zipFileName.getName());

@@ -41,7 +41,7 @@ import org.compiere.model.persistence.X_S_DocHeader;
 import org.compiere.model.persistence.X_S_DocLegend;
 import org.compiere.model.persistence.X_S_DocLine;
 import org.compiere.model.persistence.X_S_DocLineOthers;
-import org.compiere.model.persistence.X_c_province;
+import org.compiere.model.persistence.X_C_Province;
 import org.compiere.model.reference.REF_C_BankAccountType;
 import org.compiere.model.reference.REF_ECE_5305;
 import org.compiere.model.reference.REF_TaxTypeCode;
@@ -59,6 +59,7 @@ import org.xendra.annotations.XendraProcess;
 import org.xendra.annotations.XendraProcessParameter;
 import org.xendra.annotations.XendraScheduler;
 import org.xendra.printdocument.Formatter;
+import org.xendra.util.Tools;
 
 import com.l2fprod.common.propertysheet.PropertySheetTableModel;
 
@@ -194,7 +195,7 @@ public class MigrateEInvoice  extends SvrProcess {
 						if (region == null) {
 							throw new RuntimeException(String.format("Region not defined for %s ", partner.getName()));
 						}
-						X_c_province province = new Query(Env.getCtx(), X_c_province.Table_Name, "C_Province_ID = ?", null)
+						X_C_Province province = new Query(Env.getCtx(), X_C_Province.Table_Name, "C_Province_ID = ?", null)
 								.setParameters(city.getC_Province_ID()).first();
 						if (province == null) {
 							throw new RuntimeException(String.format("Province not defined for %s ", partner));
@@ -227,17 +228,18 @@ public class MigrateEInvoice  extends SvrProcess {
 						//
 						//header.setdoc_tipo_operacion(invoice.getAdditionalInformation());
 						header.setdocu_isc(BigDecimal.ZERO);
-						String InvDocumentNo = Util.pad(invoice.getDocumentNo(), 8, Formatter.FIELDALIGNMENTTYPE_TrailingRight, '0');
-						String letter = "";
-						switch (taxdoc.getTaxID()) {
-						case "01":
-							letter="F";
-							break;
-						case "03":
-							letter="B";
-							break;
-						} 
-						String DocumentNo = String.format("%s%s-%s", letter,invoice.getSerial(), InvDocumentNo);
+						String DocumentNo = Tools.getInstance().getDocumentNo(taxdoc.getTaxID(), invoice.getSerial(), invoice.getDocumentNo());
+						//String InvDocumentNo = Util.pad(invoice.getDocumentNo(), 8, Formatter.FIELDALIGNMENTTYPE_TrailingRight, '0');
+						//String letter = "";
+						//switch (taxdoc.getTaxID()) {
+						//case "01":
+						//	letter="F";
+						//	break;
+						//case "03":
+						//	letter="B";
+						//	break;
+						//} 
+						//String DocumentNo = String.format("%s%s-%s", letter,invoice.getSerial(), InvDocumentNo);
 						header.setDocumentNo(DocumentNo);						
 						//
 						BigDecimal totaltax = BigDecimal.ZERO;

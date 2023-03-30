@@ -48,7 +48,7 @@ import org.w3c.dom.Element;
 import org.xendra.efact.EFactConstants;
 import org.xendra.efact.process.GeneralFunctions;
 import org.xendra.efact.util.LecturaXML;
-import org.xendra.efact.util.Tools;
+import org.xendra.util.Tools;
 
 public class Invoice extends EFactDocument {
 
@@ -90,7 +90,7 @@ public class Invoice extends EFactDocument {
 			log.info("generarXMLZipiadoFactura - Iniciamos la generacion del XML");
 			//pathXMLFile = unidadEnvio + m_bp.getTaxID() + "-" + taxdoc.getTaxID() + "-" + items.getDocumentNo() + ".xml";
 			//String pathXMLFile = unidadEnvio + m_bp.getTaxID() +"-"+ taxdoc.getTaxID()+ "-" + items.getDocumentNo() + ".xml";
-			String pathXMLFile = getFile("xml");
+			String pathXMLFile = Tools.getInstance().getFile("xml");
 			File signatureFile = new File(pathXMLFile);
 			//
 			javax.xml.parsers.DocumentBuilderFactory dbf = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -1250,7 +1250,7 @@ public class Invoice extends EFactDocument {
 
 			log.info("generarXMLZipiadoFactura - XML creado " + pathXMLFile);
 			//====================== CREAR ZIP PARA EL ENVIO A SUNAT =======================
-			resultado = GeneralFunctions.crearZip(m_bp, items, getFile(), signatureFile);			
+			resultado = GeneralFunctions.crearZip(m_bp, items, Tools.getInstance().getFile(), signatureFile);			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			resultado = "0100|Error al generar el archivo de formato xml de la Factura.";			

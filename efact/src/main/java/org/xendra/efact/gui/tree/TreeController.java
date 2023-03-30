@@ -35,11 +35,14 @@ import org.compiere.util.Ini;
 import org.compiere.util.Msg;
 import org.xendra.core.command.Environment;
 import org.xendra.efact.folder.EFactTreeNode;
+import org.xendra.efact.folder.PartnerFolder;
 import org.xendra.efact.folder.ProviderFolder;
 import org.xendra.efact.gui.frame.EFactFrameController;
+import org.xendra.efact.wizard.CreateEfactWizardLauncher;
 import org.xendra.model.AbstractFolder;
 
 public class TreeController implements FocusOwner, ActionListener {
+	private static final String WIZARD = "WIZ";
 	private static final String DELETE = "DEL";
 	private static final String REFRESH = "REF";
 	TreeView view;
@@ -105,14 +108,18 @@ public class TreeController implements FocusOwner, ActionListener {
 			ImageIcon groupIcon = ImageLoader.getSmallIcon(IconKeys.USER);
 			ImageIcon invoiceIcon  = new ImageIcon(ImageIO.read(new File(Env.getResource("org.xendra.efact", "drools.gif"))));
 			ImageIcon deleteIcon  = new ImageIcon(ImageIO.read(new File(Env.getResource("org.columba.core", "delete.png"))));
-			ImageIcon refreshIcon = new ImageIcon(ImageIO.read(new File(Env.getResource("org.xendra.efact", "refresh.png"))));
+			ImageIcon refreshIcon = new ImageIcon(ImageIO.read(new File(Env.getResource("org.xendra.efact", "refresh.png"))));			
 			JMenuItem del = new JMenuItem(Msg.translate(Env.getCtx(), "Delete"),deleteIcon);
 			del.setActionCommand(DELETE);				
 			del.addActionListener(this);						
 
-			if (f instanceof ProviderFolder) {			
-				//
-			}
+			if (f instanceof PartnerFolder) {
+				ImageIcon wizardIcon = new ImageIcon(ImageIO.read(new File(Env.getResource("org.columba.core", "wizard.png"))));
+                JMenuItem wiz = new JMenuItem(Msg.translate(Env.getCtx(), "wizard"), wizardIcon);
+                wiz.setActionCommand(WIZARD);
+                wiz.addActionListener(this);
+                menu.add(wiz);			
+            }
 
 			menu.add(del);
 
@@ -137,7 +144,10 @@ public class TreeController implements FocusOwner, ActionListener {
 			/*
 			 * 
 			 * */
-		}		
+		} else if (e.getActionCommand().equals(WIZARD)) {
+			CreateEfactWizardLauncher l = new CreateEfactWizardLauncher();
+			l.launchWizard();		
+		}			
 		f.loadChildren();
 		((DefaultTreeModel) getView().getModel()).reload(f);			
 	}

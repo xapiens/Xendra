@@ -135,6 +135,7 @@ public class FacturacionElectronica extends SvrProcess {
 		if (privateKey == null) {
 			throw new RuntimeException("private key is null");
 		}				
+		// obligatorio
 		org.apache.xml.security.Init.init();
 		// creacion del certificado
 		cert = (X509Certificate) m_ks.getCertificate(alias);
