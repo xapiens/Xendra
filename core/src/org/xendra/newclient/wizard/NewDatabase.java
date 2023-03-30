@@ -142,7 +142,7 @@ public class NewDatabase extends AbstractStep implements ActionListener {
 						    JOptionPane.WARNING_MESSAGE);					
 				}				
 				//
-				JOptionPane.showMessageDialog(null,String.format("archivo de carga %s",filedst));									
+				//JOptionPane.showMessageDialog(null,String.format("archivo de carga %s",filedst));									
 				File test = new File(filedst);
 				InputStream in = new FileInputStream(test);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in));			
@@ -193,7 +193,7 @@ public class NewDatabase extends AbstractStep implements ActionListener {
 				ZipInputStream zin = new ZipInputStream(in);
 				ZipEntry ze = null; 
 				while ((ze = zin.getNextEntry()) != null) {
-					System.out.println(String.format("%s%s", System.getProperty("java.io.tmpdir") + System.getProperty("file.separator"),ze.getName()));
+					//System.out.println(String.format("%s%s", System.getProperty("java.io.tmpdir") + System.getProperty("file.separator"),ze.getName()));
 					String filedst = String.format("%s%s", System.getProperty("java.io.tmpdir") + System.getProperty("file.separator"),ze.getName());
 					OutputStream out = new FileOutputStream(filedst);
 					FileOutputStream fos = new FileOutputStream(filedst);
@@ -205,7 +205,7 @@ public class NewDatabase extends AbstractStep implements ActionListener {
 					out.close();
 					fillfiles.add(filedst);											
 				}							
-				JOptionPane.showMessageDialog(null,String.format("cargando %s",fillfiles.toString()));
+				//JOptionPane.showMessageDialog(null,String.format("cargando %s",fillfiles.toString()));
 				//populatedatabase();
 				C3P0ProxyConnection proxycon = (C3P0ProxyConnection) DB.getConnectionRW();
 				Method m = PGConnection.class.getMethod("getCopyAPI", new Class[]{});
