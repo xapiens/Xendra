@@ -59,7 +59,7 @@ public class NewClientWizardLauncher {
 		Wizard wizard = null;
 		try {
 			wizard = new Wizard((Frame) null, model, ResourceLoader
-					.getString("dialog", "newclient", "title"), ImageLoader.getIcon(IconKeys.PREFERENCES));			
+					.getString("dialog", "newclient", "title"), null);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
