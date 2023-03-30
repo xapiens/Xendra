@@ -22,6 +22,8 @@ public class DataSource {
 	static HashMap<String, Object> list = new HashMap<String, Object>();
 	static HashMap<String, Object> listgroup = new HashMap<String, Object>();
 	public HashMap<String, Integer> searched = new HashMap<String, Integer>();
+	public static String Name = "N";
+	public static String Value = "V";
 	public static DataSource reset() {
 		// reset
 		if (ds == null) 
@@ -53,6 +55,21 @@ public class DataSource {
 			System.out.println("X");
 		}
 		return var;
+	}
+	public static Integer getInteger(String key) {
+		String strvalue = get(key);
+		Integer intvalue = Integer.valueOf(strvalue);
+		return intvalue;
+	}
+	public static Timestamp getTimestamp(String key) {
+		String strvalue = get(key);
+		Timestamp date = Timestamp.valueOf(strvalue);
+		return date;
+	}
+	public static BigDecimal getBigDecimal(String key) {
+		String strvalue = get(key);
+		BigDecimal value = new BigDecimal(strvalue);
+		return value;
 	}
 	public static String get(String key) {
 		String var = "";
@@ -308,6 +325,30 @@ public class DataSource {
 		}
 		return ret;
 	}	
+	public static Integer getLineSize(String key) {
+		int size = 0;
+		List<Object> listvalue = new ArrayList<Object>();
+		if (list.containsKey(key)) {
+			listvalue = (List<Object>) list.get(key);
+			size = listvalue.size();
+		}
+		return size;
+	}
+	public static BigDecimal getLineBigDecimal(String key) {
+		String strval = getLine(key); 
+		BigDecimal bdval = new BigDecimal(strval);
+		return bdval;
+	}
+	public static Integer getLineInt(String key) {
+		String strvar = getLine(key);
+		Integer var = Integer.valueOf(strvar);
+		return var;
+	}
+	public static void resetLine(String key) {
+		if (index.containsKey(key)) {
+			index.put(key, 0);
+		}		
+	}
 	public static String getLine(String key) {
 		String var = "";
 		List<Object> listvalue = new ArrayList<Object>();

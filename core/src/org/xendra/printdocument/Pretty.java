@@ -51,6 +51,17 @@ public class Pretty {
 		}
 		return var;
 	}
+	
+	public static String Amount(String var) {
+		Pattern isInteger = Pattern.compile("\\d+");
+		java.util.regex.Matcher m = isInteger.matcher(var);
+		if (m.find()) {
+			Double dvar = Double.parseDouble(var);
+			var = DisplayType.getNumberFormat(DisplayType.Amount, Language.getLoginLanguage()).format(dvar);
+		}
+		return var;
+	}
+
 	public static String Qty(String var) {
 		Pattern isInteger = Pattern.compile("\\d+");
 		java.util.regex.Matcher m = isInteger.matcher(var);
