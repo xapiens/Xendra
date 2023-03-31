@@ -8,3 +8,5 @@ Xendra es un ERP de codigo abierto
 ![printformateditor](https://user-images.githubusercontent.com/1349879/229233616-b1d414b0-8a66-4dd2-ae80-ec019e719ff2.png)
 
 ![pos](https://user-images.githubusercontent.com/1349879/229233900-476ff25a-0ecf-4dd7-a437-61687666072c.png)
+
+![plugins](https://user-images.githubusercontent.com/1349879/229234085-c6e376ca-fac6-4fc7-8b9b-d186eb37731f.png)
