@@ -8,6 +8,7 @@ agrupandolas mediante plugins especializados y administrables
 ![plugins](https://user-images.githubusercontent.com/1349879/229234085-c6e376ca-fac6-4fc7-8b9b-d186eb37731f.png)
 
 como este plugin de Punto de venta
+
 ![pos](https://user-images.githubusercontent.com/1349879/229233900-476ff25a-0ecf-4dd7-a437-61687666072c.png)
 
 que usando el plugin de la facturacion electronica 
