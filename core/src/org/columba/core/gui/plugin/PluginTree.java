@@ -13,7 +13,6 @@ import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.sql.Timestamp;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -41,9 +40,6 @@ import org.columba.api.plugin.ExtensionMetadata;
 import org.columba.api.plugin.IExtensionHandler;
 import org.columba.api.plugin.IExtensionHandlerKeys;
 import org.columba.api.plugin.PluginMetadata;
-import org.columba.core.gui.plugin.wizard.NewCertificateLauncher;
-import org.columba.core.gui.plugin.wizard.NewKeyStoreLauncher;
-import org.columba.core.gui.plugin.wizard.NewRepositoryLauncher;
 import org.columba.core.plugin.Extension;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.xml.XmlIO;
@@ -64,8 +60,6 @@ import org.frapuccino.treetable.Tree;
 import org.frapuccino.treetable.TreeTable;
 import org.jdom.Document;
 import org.jdom.Element;
-import org.kse.crypto.Password;
-import org.kse.gui.password.DGetPassword;
 import org.xendra.Constants;
 import org.xendra.api.XendrianServer;
 
@@ -329,14 +323,14 @@ public class PluginTree extends TreeTable {
 					}
 					if (error.length() > 0) {
 						if (error.equals("nokeystore")) {
-							NewKeyStoreLauncher nn = new NewKeyStoreLauncher();
-							nn.launchWizard();
+							//NewKeyStoreLauncher nn = new NewKeyStoreLauncher();
+							//nn.launchWizard();
 						} else if (error.equals("norepository")) {
-							NewRepositoryLauncher nn = new NewRepositoryLauncher();							
-							nn.launchWizard();							
+							//NewRepositoryLauncher nn = new NewRepositoryLauncher();							
+							//nn.launchWizard();							
 						} else if (error.equals("nocertificates")) {
-							NewCertificateLauncher nn = new NewCertificateLauncher();
-							nn.launchWizard();
+							//NewCertificateLauncher nn = new NewCertificateLauncher();
+							//nn.launchWizard();
 						}
 					} else {
 						List childs = doc.getRootElement().getChildren();
@@ -399,12 +393,12 @@ public class PluginTree extends TreeTable {
 		}		
 	}
 
-	private Password showPasswordDialog() {
-		DGetPassword dGetPassword = new DGetPassword(null, MessageFormat.format(res.getString("OpenAction.UnlockKeyStore.Title"), "Password"));
-		dGetPassword.setLocationRelativeTo(null);
-		dGetPassword.setVisible(true);
-		return dGetPassword.getPassword();
-	}
+//	private Password showPasswordDialog() {
+//		DGetPassword dGetPassword = new DGetPassword(null, MessageFormat.format(res.getString("OpenAction.UnlockKeyStore.Title"), "Password"));
+//		dGetPassword.setLocationRelativeTo(null);
+//		dGetPassword.setVisible(true);
+//		return dGetPassword.getPassword();
+//	}
 
 	private X509TrustManager trustManagerForCertificates(InputStream in) 
 			throws GeneralSecurityException {

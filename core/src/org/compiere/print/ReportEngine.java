@@ -32,6 +32,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -254,7 +255,7 @@ public class ReportEngine implements PrintServiceAttributeListener
 	/**************************************************************************
 	 * 	Layout
 	 */
-	private void layout()
+	public void layout()
 	{
 		if (m_printFormat == null)
 			throw new IllegalStateException ("No print format");
@@ -1613,7 +1614,16 @@ queued-job-count = 0  (class javax.print.attribute.standard.QueuedJobCount)
 	 */
 	public static void main(String[] args)
 	{
-		org.compiere.Xendra.startupEnvironment(true);
+		if (!org.compiere.Xendra.startup(false))
+		{					
+			return;
+		}
+		Env.setContext(Env.getCtx(), "#Date", new Timestamp(System.currentTimeMillis()));
+		Optional<String> langName = Optional.ofNullable(Ini.getProperty(Ini.P_LANGUAGE));
+		Language language = Language.getLanguage(langName.isPresent()?langName.get():"");
+		Env.setContext(Env.getCtx(), Env.LANGUAGE, language.getAD_Language());
+
+		//org.compiere.Xendra.startupEnvironment(true);
 		//
 		int AD_Table_ID = 100;
 		MQuery q = new MQuery("AD_Table");

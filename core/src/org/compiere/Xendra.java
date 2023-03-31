@@ -397,31 +397,12 @@ public final class Xendra
 		s_supportEmail = email;
 	}   //  setSupportEMail
 
-//	/**
-//	 * 	Get JNLP CodeBase
-//	 *	@return code base or null
-//	 */
-//	public static URL getCodeBase()
-//	{
-//		try
-//		{
-//			BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService"); 
-//			URL url = bs.getCodeBase();
-//	        return url;
-//		} 
-//		catch(UnavailableServiceException ue) 
-//		{
-//			return null; 
-//		} 
-//	}	//	getCodeBase
-	
 	/**
 	 * @return True if client is started using web start
 	 */
 	public static boolean isWebStartClient()
 	{
 		return false;
-		//return getCodeBase() != null;
 	}
 
 	/**
@@ -430,10 +411,7 @@ public final class Xendra
 	 */
 	public static String getCodeBaseHost()
 	{
-		//URL url = getCodeBase();
-		//if (url == null)
 		return null;
-		//return url.getHost();
 	}	//	getCodeBase
 
 	/*************************************************************************
@@ -453,9 +431,6 @@ public final class Xendra
 		if (log != null)
 			return true;
 
-		//	Check Version
-		if (!Login.isJavaOK(isClient) && isClient)
-			System.exit(1);
 		Ini.loadProperties (false);
 		CLogMgt.initialize(isClient);
 		Ini.setClient (isClient);		//	Ini requires Logging
@@ -463,20 +438,15 @@ public final class Xendra
 		log = CLogger.getCLogger(Xendra.class);
 		//	Greeting
 		log.info(getSummaryAscii());
-	//	log.info(getXendraHome() + " - " + getJavaInfo() + " - " + getOSInfo());
 
 		//  Load System environment
-	//	EnvLoader.load(Ini.ENV_PREFIX);
 		mainClassLoader = new MainClassLoader(Xendra.class.getClassLoader());
-		//  System properties
-		//Ini.loadProperties (false);
-		
+		//  System properties		
 		//	Set up Log
 		CLogMgt.setLevel(Ini.getProperty(Ini.P_TRACELEVEL));
 		if (isClient && Ini.isPropertyBool(Ini.P_TRACEFILE)
 			&& CLogFile.get(false, null, isClient) == null)
 			CLogMgt.addHandler(CLogFile.get (true, Ini.getXendraHome(), isClient));
-			//CLogMgt.addHandler(CLogFile.get (true, Ini.findXendraHome(), isClient));
 		//	Set UI
 		if (isClient)
 		{

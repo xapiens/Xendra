@@ -258,12 +258,7 @@ public class InvoiceHistory extends CDialog
 			+ " INNER JOIN C_BPartner bp ON (i.C_BPartner_ID=bp.C_BPartner_ID) "
 			+ "WHERE l.M_Product_ID=? " 		
 			+ " AND i.IsSOTrx='" + (m_IsSOTrx ? "Y" : "N") + "' ";
-		
-			//if (MRole.getDefault().isOnlySoPriceListAccess())
-			//{
-			//	sql = sql.concat(" AND i.issotrx='Y' ");
-			//}
-		
+				
 			sql = sql.concat("ORDER BY i.DateInvoiced DESC");
 
 		Vector<Vector<Object>> data = fillTable (sql, m_M_Product_ID);

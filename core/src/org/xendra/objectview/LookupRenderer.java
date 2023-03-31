@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import org.compiere.apps.graph.GraphUtil;
 import org.compiere.model.MLookup;
 import org.compiere.util.KeyNamePair;
+import org.compiere.util.ValueNamePair;
 import org.xendra.plaf.XendraPLAF;
 
 public class LookupRenderer extends DefaultTableCellRenderer
@@ -81,9 +82,17 @@ public class LookupRenderer extends DefaultTableCellRenderer
 			}
 		} else if (table instanceof JTable) {
 			Object val = table.getValueAt(row, col);
-			KeyNamePair kp = (KeyNamePair) look.get(val);
+			Object kp = look.get(val);
+			if (kp instanceof KeyNamePair) {
+				kp = (KeyNamePair) look.get(val);
+				currentDisplay = ((KeyNamePair)kp).getName();
+			}
+			else if (kp instanceof ValueNamePair) {
+				kp = (ValueNamePair) look.get(val);
+				currentDisplay = ((ValueNamePair)kp).getName();
+			}
 			if (kp != null)
-			currentDisplay = kp.getName();
+			
 			super.setValue(currentDisplay);
 		}
 		return c;

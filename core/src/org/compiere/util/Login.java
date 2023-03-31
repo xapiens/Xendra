@@ -82,44 +82,6 @@ public class Login
 		return ctx;
 	}   //  testInit
 
-	/**
-	 *  Java Version Test
-	 *  @param isClient client connection
-	 *  @return true if Java Version is OK
-	 */
-	public static boolean isJavaOK (boolean isClient)
-	{
-		//	Java System version check
-		String jVersion = System.getProperty("java.version");
-		Integer version = Integer.valueOf(jVersion.substring(jVersion.indexOf(".")+1,jVersion.indexOf(".")+2));
-		if (version >= 5)
-			return true;
-                //vpj-cd e-evolution support to java 6
-            if (jVersion.startsWith("1.6.0"))
-			return true;
-                //end
-		//  Warning
-		boolean ok = false;
-	//	if (jVersion.startsWith("1.4")
-	//		|| jVersion.startsWith("1.5.1"))	//  later/earlier release
-	//		ok = true;
-
-		//  Error Message
-		StringBuffer msg = new StringBuffer();
-		msg.append(System.getProperty("java.vm.name")).append(" - ").append(jVersion);
-		if (ok)
-			msg.append("(untested)");
-		msg.append("  <>  1.5.0");
-		//
-		if (isClient)
-			JOptionPane.showMessageDialog(null, msg.toString(),
-				org.compiere.Xendra.getName() + " - Java Version Check",
-				ok ? JOptionPane.WARNING_MESSAGE : JOptionPane.ERROR_MESSAGE);
-		else
-			log.severe(msg.toString());
-		return ok;
-	}   //  isJavaOK
-
 	
 	/**************************************************************************
 	 * 	Login

@@ -28,9 +28,7 @@ import org.columba.core.gui.util.ProgressCircle;
 import org.columba.core.gui.base.RoundedBorder;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
-import org.xendra.Constants;
 import org.xendra.security.SSLContextFactory;
-import org.xendra.security.api.XendraKeyStore;
 
 
 public class DownloadPlugin extends JDialog {

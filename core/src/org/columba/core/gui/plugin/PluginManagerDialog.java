@@ -39,8 +39,6 @@ import org.columba.api.plugin.PluginLoadingFailedException;
 import org.columba.core.gui.base.ButtonWithMnemonic;
 import org.columba.core.gui.base.InfoViewerDialog;
 import org.columba.core.gui.base.SingleSideEtchedBorder;
-import org.columba.core.gui.plugin.wizard.NewKeyStoreLauncher;
-import org.columba.core.gui.plugin.wizard.NewRepositoryLauncher;
 import org.columba.core.help.HelpManager;
 import org.columba.core.plugin.PluginManager;
 import org.columba.core.resourceloader.GlobalResourceLoader;
@@ -544,11 +542,11 @@ public class PluginManagerDialog extends JDialog implements ActionListener, List
 				ADialog.error(m_WindowNo, this, "AccessCannotReport");
 			}
 		} else if (action.equals("KEYSTORE")) {
-			NewKeyStoreLauncher nn = new NewKeyStoreLauncher();
-			nn.launchWizard();			
-		} else if (action.equals("REPOSITORY")) {
-			NewRepositoryLauncher nn = new NewRepositoryLauncher();							
-			nn.launchWizard();										
+			//NewKeyStoreLauncher nn = new NewKeyStoreLauncher();
+			//nn.launchWizard();			
+		//} else if (action.equals("REPOSITORY")) {
+		//	NewRepositoryLauncher nn = new NewRepositoryLauncher();							
+		//	nn.launchWizard();										
 		} else if (action.equals("INSTALL")) {
 			// nos conectamos al servidor primero
 			//HashMap properties = selectedNode.getProperties();

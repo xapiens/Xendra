@@ -510,7 +510,7 @@ public final class DisplayType
 		if (DisplayType.isNumeric(displayType))
 			return "NUMERIC";
 		if (displayType == DisplayType.Binary)
-			return "BLOB";
+			return "BYTEA";
 		//if (displayType == DisplayType.TextLong || (displayType == DisplayType.Text && fieldLength >= 4000))
 		if (displayType == DisplayType.TextLong || displayType == DisplayType.Text)
 			return "TEXT";

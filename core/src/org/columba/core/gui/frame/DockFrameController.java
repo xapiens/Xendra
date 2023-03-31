@@ -122,7 +122,8 @@ public abstract class DockFrameController extends DefaultFrameController
 			//File file = new File(dockDirectory, filename);
 
 			//new XMLPersister().store(new FileOutputStream(file), dockingPort);
-			// xapiens - revisar el proceso 
+			// xapiens - revisar el proceso
+			MConfig dock = MConfig.getbyIdentifier("org.xendra.security", "docking");
 			new XMLPersister().store(dock, dockingPort);
 		} catch (Exception e) {
 			e.printStackTrace();

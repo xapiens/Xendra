@@ -2714,6 +2714,11 @@ public final class Env
 	//		machine.save();
 	//	}
 
+	
+	public static void resetServerWeb() {
+		webserver = null;
+	}
+	
 	public static X_A_Machine getServerWeb(X_A_Machine src) {
 		if (webserver == null)
 		{
