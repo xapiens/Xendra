@@ -12,6 +12,8 @@ como este plugin de Punto de venta
 
 que usando el plugin de la facturacion electronica 
 
+![efact](https://user-images.githubusercontent.com/1349879/229237428-31631090-57b2-48a6-9f62-81de6f8755c6.png)
+
 y este plugin de edicion de formatos como este
 
 ![printformateditor](https://user-images.githubusercontent.com/1349879/229233616-b1d414b0-8a66-4dd2-ae80-ec019e719ff2.png)
