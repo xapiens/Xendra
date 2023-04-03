@@ -25,11 +25,13 @@ import javax.swing.UIManager;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.xendra.developer.GenerateProcedure;
 import org.xendra.developer.ReferencetoAnnotation;
 import org.xendra.modeleditor.folder.AbstractFolder;
 import org.xendra.modeleditor.folder.ColumnFolder;
 import org.xendra.modeleditor.folder.PackageFolder;
 import org.xendra.modeleditor.folder.PluginFolder;
+import org.xendra.modeleditor.folder.ProcedureFolder;
 import org.xendra.modeleditor.folder.TabFolder;
 import org.xendra.modeleditor.folder.TableFolder;
 import org.xendra.modeleditor.folder.WindowFolder;
@@ -78,10 +80,12 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 	private static final String ADDWINDOW = "ADDW";
 	private static final String ADDTAB = "ADDTAB";
 	private static final String GENMODEL = "GENM";
+	private static final String GENPROC = "GENPROC";
 	private static final String GENWINDOW = "GENW";
 	private static final String GENCATALOG = "GENC";
 	private static final String GENREF = "GENR";
 	private static final String GENENCODE = "GENE";
+	private static final String GENDECODE = "GEND";
 	private static final String GENVALR = "GENVR";
 	private static final String DELETE = "DEL";
 	private static final String ADDPLUGIN = "ADDP";
@@ -198,10 +202,15 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 				genref.addActionListener(this);
 				menu.add(genref);
 				//
-				JMenuItem gencode = new JMenuItem("Generate Encode", processIcon);
+				JMenuItem gencode = new JMenuItem("Generate Encode (read)", processIcon);
 				gencode.setActionCommand(GENENCODE);
 				gencode.addActionListener(this);
 				menu.add(gencode);
+				//
+				JMenuItem gdecode = new JMenuItem("Generate Decode (write)", processIcon);
+				gdecode.setActionCommand(GENDECODE);
+				gdecode.addActionListener(this);
+				menu.add(gdecode);				
 				//
 				JMenuItem genvalrule = new  JMenuItem("Generate ValRule", processIcon);
 				genvalrule.setActionCommand(GENVALR);
@@ -223,6 +232,11 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 				sync.addActionListener(this);
 				menu.add(sync);
 				menu.add(del);
+			} else if (f instanceof ProcedureFolder) {
+				JMenuItem genproc = new JMenuItem("Generate Procedure", processIcon);
+				genproc.setActionCommand(GENPROC);
+				genproc.addActionListener(this);
+				menu.add(genproc); 
 			} else if (f instanceof PackageFolder) {
 				JMenuItem addcolumn = new JMenuItem("Add Table", addtblIcon);
 				addcolumn.setActionCommand(ADDTABLE);
@@ -318,6 +332,8 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 			f.loadChildren();
 		} else if (e.getActionCommand().equals(GENMODEL)) {
 			setGenerateModel(Integer.valueOf(m_uid), selectDirectory(m_directory));
+		} else if (e.getActionCommand().equals(GENPROC)) {
+			setGeneralProc(f, selectDirectory(m_directory));
 		} else if (e.getActionCommand().equals(GENWINDOW)) {
 			setGenerateWindows(selectDirectory(m_directory));		
 		} else if (e.getActionCommand().equals(GENCATALOG)) {
@@ -328,6 +344,8 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 			GenerateReferences(Integer.valueOf(m_uid), selectDirectory(m_directory));
 		} else if (e.getActionCommand().equals(GENENCODE)) {
 			setEncode(Integer.valueOf(m_uid), selectDirectory(m_directory));
+		} else if (e.getActionCommand().equals(GENDECODE)) {
+			setDecode(Integer.valueOf(m_uid), selectDirectory(m_directory));			
 		} else if (e.getActionCommand().equals(GENVALR)) {
 			setValRule(Integer.valueOf(m_uid), selectDirectory(m_directory));
 		} else if (e.getActionCommand().equals(ADDPLUGIN)) {
@@ -440,6 +458,20 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 		id.setMessage(info);
 	}
 
+	private void setDecode(Integer AD_Table_ID, File selectDirectory) {
+		X_AD_Table t = new Query(Env.getCtx(), X_AD_Table.Table_Name, "AD_Table_ID = ?", null)
+		.setParameters(AD_Table_ID).first();		
+		String[] args = {selectDirectory.getAbsolutePath().concat("/"),
+				t.getTableName()};
+		startcapture();
+		org.xendra.developer.encode.maindecode(args);
+		stopcapture();
+		String info = getcapture();
+		InfoDialog id = new InfoDialog();
+		id.setMessage(info);
+	}
+
+	
 	private void setValRule(Integer AD_Table_ID, File selectDirectory) {
 		X_AD_Table t = new Query(Env.getCtx(), X_AD_Table.Table_Name, "AD_Table_ID = ?", null)
 		.setParameters(AD_Table_ID).first();		
@@ -523,6 +555,18 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 		id.setMessage(info);
 	}
 
+	private void setGeneralProc(AbstractFolder f, File selectDirectory) {
+		startcapture();
+		Object[] args = {selectDirectory.getAbsolutePath().concat("/"),
+				f.getElement()
+		};
+		org.xendra.developer.GenerateProcedure.main(args);
+		stopcapture();
+		String info = getcapture();
+		InfoDialog id = new InfoDialog();
+		id.setMessage(info);
+	}
+	
 	private void setGenerateModel(Integer AD_Table_ID, File selectDirectory) {
 		X_AD_Table t = new Query(Env.getCtx(), X_AD_Table.Table_Name, "AD_Table_ID = ?", null)
 		.setParameters(AD_Table_ID).first();

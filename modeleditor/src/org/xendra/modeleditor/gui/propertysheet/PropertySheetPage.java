@@ -15,9 +15,11 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import org.compiere.model.Lookup;
 import org.compiere.model.MColumn;
+import org.compiere.model.MFunction;
 import org.compiere.model.MLookupFactory;
 import org.compiere.model.Query;
 import org.compiere.model.persistence.X_AD_Column;
+import org.compiere.model.persistence.X_AD_Function;
 import org.compiere.model.persistence.X_AD_Tab;
 import org.compiere.model.persistence.X_AD_Table;
 import org.compiere.util.Env;
@@ -29,6 +31,7 @@ import org.xendra.modeleditor.gui.tree.TreeView;
 import org.xendra.modeleditor.model.ColumnBean;
 import org.xendra.modeleditor.model.PackageBean;
 import org.xendra.modeleditor.model.PluginBean;
+import org.xendra.modeleditor.model.ProcedureBean;
 import org.xendra.modeleditor.model.TabBean;
 import org.xendra.modeleditor.model.TableBean;
 
@@ -37,6 +40,7 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 	private PropertySheetPanel sheet;
 	private ColumnBean columndata;
 	private TableBean tabledata;
+	private ProcedureBean procedure;
 	public PropertySheetPage() {
 		setLayout(LookAndFeelTweaks.createVerticalPercentLayout());
 		sheet = new PropertySheetPanel();
@@ -170,8 +174,24 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 		TreePath p = treeview.getSelectionPath(); 
 		if (p != null) {
 			selectedFolder = (AbstractFolder) treeview.getSelectionPath().getLastPathComponent();
-			String m_type = selectedFolder.getElement().getName();			
-			if (m_type.equals("table")) {
+			String m_type = selectedFolder.getElement().getName();
+			if (m_type.equals("procedure")) {
+				procedure = new ProcedureBean();
+				DefaultBeanInfoResolver resolver = new DefaultBeanInfoResolver();
+				BeanInfo beanInfo = resolver.getBeanInfo(procedure);
+				sheet.setProperties(beanInfo.getPropertyDescriptors());
+				procedure.setName(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Name));
+				procedure.setComments(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Comments));
+				procedure.setOutput(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Output));
+				procedure.setOwner(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Owner));
+				procedure.setLanguage(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Language));
+				procedure.setArguments(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Arguments));
+				procedure.setCode(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Code));				
+				procedure.setSynchronized(selectedFolder.getElement().getAttributeValue(X_AD_Function.COLUMNNAME_Synchronized));
+				procedure.setIdentifier(selectedFolder.getElement().getAttributeValue(MFunction.COLUMNNAME_Identifier));
+				sheet.readFromObject(procedure);
+			}
+			else if (m_type.equals("table")) {
 				Integer id = Integer.valueOf(selectedFolder.getElement().getAttributeValue("uid"));
 				if (id > 0)
 				{

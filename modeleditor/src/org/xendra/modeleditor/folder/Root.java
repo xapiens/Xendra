@@ -51,6 +51,10 @@ public class Root extends AbstractFolder {
 					e.printStackTrace();
 				}
 			}
+			Element dbitem = new Element("Database");
+			dbitem.setAttribute("name", "Database");
+			DatabaseFolder database = new DatabaseFolder(dbitem);
+			add(database);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
