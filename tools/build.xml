@@ -359,7 +359,7 @@
 			<zipfileset src="lib/flexdock-1.2.3.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>				
-			<zipfileset src="lib/jwizz-0.1.3.jar">
+			<zipfileset src="lib/jwizz-0.1.5.jar">
 				<patternset refid="manifest.exclude"/>
 			</zipfileset>
 			<zipfileset src="lib/frapuccino-1.0pre1.jar">
