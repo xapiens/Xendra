@@ -132,7 +132,6 @@ public class viewstoAnnotation extends SvrProcess {
 				description = Util.getvalue(rs, "description");
 				Timestamp currentSynchro = null;
 				String Identifier = null;
-				//String extension = "";
 				MView oview = null;
 				Hashtable props = Util.getProperties(description);
 				System.out.println(props);

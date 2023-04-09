@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -66,13 +66,13 @@ super (ctx, rs, trxName);
 public static int Table_ID=MTable.getTable_ID("M_InventoryLine");
 
 @XendraTrl(Identifier="9d14f409-9344-6b6d-75ef-31637d986133")
-public static String es_PE_TAB_InventoryCountLine_Description="Ìtem del conteo de inventario";
-
-@XendraTrl(Identifier="9d14f409-9344-6b6d-75ef-31637d986133")
 public static String es_PE_TAB_InventoryCountLine_Help="El Ìtem del Conteo de Inventario define los conteos de los diferentes productos en el inventario.";
 
 @XendraTrl(Identifier="9d14f409-9344-6b6d-75ef-31637d986133")
 public static String es_PE_TAB_InventoryCountLine_Name="Ìtem de Conteo de Inventario";
+
+@XendraTrl(Identifier="9d14f409-9344-6b6d-75ef-31637d986133")
+public static String es_PE_TAB_InventoryCountLine_Description="Ìtem del conteo de inventario";
 
 @XendraTab(Name="Inventory Count Line",Description="Inventory Count Line",
 Help="The Inventory Count Line defines the counts of the individual products in inventory. Normally you would create inventory count lines automaticelly. If you create them manually, make sure that the book value is correct. You can set the Organization, if it is a charge, otherwise it is set to the header organization.",
@@ -85,13 +85,13 @@ Identifier="9d14f409-9344-6b6d-75ef-31637d986133",Synchronized="2012-03-17 18:47
 public static final String TABNAME_InventoryCountLine="9d14f409-9344-6b6d-75ef-31637d986133";
 
 @XendraTrl(Identifier="85b41d68-eeb0-028f-710b-0b04ae6117ca")
-public static String es_PE_TAB_InternalUseLine_Description="Línea de inventario, uso interno";
-
-@XendraTrl(Identifier="85b41d68-eeb0-028f-710b-0b04ae6117ca")
 public static String es_PE_TAB_InternalUseLine_Help="La línea de la cuenta del inventario define las cuentas de los productos individuales en inventario.";
 
 @XendraTrl(Identifier="85b41d68-eeb0-028f-710b-0b04ae6117ca")
 public static String es_PE_TAB_InternalUseLine_Name="Linea Inventario, Uso Interno ";
+
+@XendraTrl(Identifier="85b41d68-eeb0-028f-710b-0b04ae6117ca")
+public static String es_PE_TAB_InternalUseLine_Description="Línea de inventario, uso interno";
 
 @XendraTab(Name="Internal Use Line",Description="Internal Use Inventory Line",
 Help="The Inventory Count Line defines the counts of the individual products in inventory.",
@@ -112,7 +112,7 @@ Description="Unique line in an Inventory document",Help="",TableName="M_Inventor
 AccessLevel="1",AD_Window_ID="a8fe7291-40b1-7bfb-fc66-0a724a144092",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=135,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="14de7113-764d-2342-3006-0fe30f440bbb",Synchronized="2020-03-03 21:38:32.0")
+Identifier="14de7113-764d-2342-3006-0fe30f440bbb",Synchronized="2023-04-08 23:42:40.0")
 /** TableName=M_InventoryLine */
 public static final String Table_Name="M_InventoryLine";
 
@@ -163,10 +163,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="592130d9-fedc-bc15-d62f-d2f8a05cbe53")
-public static String es_PE_FIELD_InventoryCountLine_Charge_Name="Cargo";
+public static String es_PE_FIELD_InventoryCountLine_Charge_Description="Cargos adicionales del documento";
 
 @XendraTrl(Identifier="592130d9-fedc-bc15-d62f-d2f8a05cbe53")
-public static String es_PE_FIELD_InventoryCountLine_Charge_Description="Cargos adicionales del documento";
+public static String es_PE_FIELD_InventoryCountLine_Charge_Name="Cargo";
 
 @XendraTrl(Identifier="592130d9-fedc-bc15-d62f-d2f8a05cbe53")
 public static String es_PE_FIELD_InventoryCountLine_Charge_Help="El cargo indica un tipo de cargo (manejo; despacho; reposición)";
@@ -179,10 +179,10 @@ Synchronized="2012-03-17 18:47:14.0",Identifier="592130d9-fedc-bc15-d62f-d2f8a05
 public static final String FIELDNAME_InventoryCountLine_Charge="592130d9-fedc-bc15-d62f-d2f8a05cbe53";
 
 @XendraTrl(Identifier="37a0f7f2-e4f1-d713-f5dc-5a047dfcc9e5")
-public static String es_PE_FIELD_InternalUseLine_Charge_Name="Cargo";
+public static String es_PE_FIELD_InternalUseLine_Charge_Description="Cargos adicionales del documento";
 
 @XendraTrl(Identifier="37a0f7f2-e4f1-d713-f5dc-5a047dfcc9e5")
-public static String es_PE_FIELD_InternalUseLine_Charge_Description="Cargos adicionales del documento";
+public static String es_PE_FIELD_InternalUseLine_Charge_Name="Cargo";
 
 @XendraTrl(Identifier="37a0f7f2-e4f1-d713-f5dc-5a047dfcc9e5")
 public static String es_PE_FIELD_InternalUseLine_Charge_Help="El cargo indica un tipo de cargo (manejo; despacho; reposición)";
@@ -203,7 +203,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f162e920-ebd4-c8d4-53ca-93e4a4fc8983",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name C_Charge_ID */
 public static final String COLUMNNAME_C_Charge_ID = "C_Charge_ID";
 /** Set Cost.
@@ -222,10 +222,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="a7a24033-fe99-43af-88f4-41fcd0b49ae3")
-public static String es_PE_FIELD_InventoryCountLine_Cost_Name="Costo";
+public static String es_PE_FIELD_InventoryCountLine_Cost_Description="Información Costo";
 
 @XendraTrl(Identifier="a7a24033-fe99-43af-88f4-41fcd0b49ae3")
-public static String es_PE_FIELD_InventoryCountLine_Cost_Description="Información Costo";
+public static String es_PE_FIELD_InventoryCountLine_Cost_Name="Costo";
 
 @XendraField(AD_Column_ID="Cost",IsCentrallyMaintained=true,
 AD_Tab_ID="9d14f409-9344-6b6d-75ef-31637d986133",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -243,7 +243,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2d34752c-12af-4c1d-94fc-51e57f4fc716",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Cost */
 public static final String COLUMNNAME_Cost = "Cost";
 /** Set Description.
@@ -274,10 +274,10 @@ return value;
 }
 
 @XendraTrl(Identifier="135f5b59-5e09-8945-6d2f-3294565aa8eb")
-public static String es_PE_FIELD_InventoryCountLine_Description_Name="Observación";
+public static String es_PE_FIELD_InventoryCountLine_Description_Description="Descripción corta opcional del registro";
 
 @XendraTrl(Identifier="135f5b59-5e09-8945-6d2f-3294565aa8eb")
-public static String es_PE_FIELD_InventoryCountLine_Description_Description="Descripción corta opcional del registro";
+public static String es_PE_FIELD_InventoryCountLine_Description_Name="Observación";
 
 @XendraTrl(Identifier="135f5b59-5e09-8945-6d2f-3294565aa8eb")
 public static String es_PE_FIELD_InventoryCountLine_Description_Help="Una descripción esta limitada a 255 caracteres";
@@ -290,10 +290,10 @@ Identifier="135f5b59-5e09-8945-6d2f-3294565aa8eb")
 public static final String FIELDNAME_InventoryCountLine_Description="135f5b59-5e09-8945-6d2f-3294565aa8eb";
 
 @XendraTrl(Identifier="0da58898-f44b-e311-1c5b-8f804353b8ae")
-public static String es_PE_FIELD_InternalUseLine_Description_Name="Observación";
+public static String es_PE_FIELD_InternalUseLine_Description_Description="Observación";
 
 @XendraTrl(Identifier="0da58898-f44b-e311-1c5b-8f804353b8ae")
-public static String es_PE_FIELD_InternalUseLine_Description_Description="Observación";
+public static String es_PE_FIELD_InternalUseLine_Description_Name="Observación";
 
 @XendraTrl(Identifier="0da58898-f44b-e311-1c5b-8f804353b8ae")
 public static String es_PE_FIELD_InternalUseLine_Description_Help="Observación";
@@ -314,7 +314,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=true,ColumnSQL="",
 IsAllowLogging=false,Identifier="452b947d-9cc6-6a93-e812-a8fe9d9264d1",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Difference.
@@ -333,10 +333,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="7e5af257-9d00-4575-b819-1bb509a4a728")
-public static String es_PE_FIELD_InventoryCountLine_Difference_Name="Diferencia Cant.";
+public static String es_PE_FIELD_InventoryCountLine_Difference_Description="Cantidad de diferencia";
 
 @XendraTrl(Identifier="7e5af257-9d00-4575-b819-1bb509a4a728")
-public static String es_PE_FIELD_InventoryCountLine_Difference_Description="Cantidad de diferencia";
+public static String es_PE_FIELD_InventoryCountLine_Difference_Name="Diferencia Cant.";
 
 @XendraField(AD_Column_ID="DifferenceQty",IsCentrallyMaintained=true,
 AD_Tab_ID="9d14f409-9344-6b6d-75ef-31637d986133",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -354,7 +354,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=false
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(QtyCount - QtyBook )",IsAllowLogging=false,
-Identifier="1107a9de-4f05-47b1-bf07-c2f671bfeb32",Synchronized="2019-08-30 22:23:14.0")
+Identifier="1107a9de-4f05-47b1-bf07-c2f671bfeb32",Synchronized="2020-03-31 22:48:57.0")
 /** Column name DifferenceQty */
 public static final String COLUMNNAME_DifferenceQty = "DifferenceQty";
 /** Set Identifier.
@@ -396,7 +396,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="18d9ca12-f41a-4538-b215-87248fc0f08e",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Inventory Type.
@@ -418,10 +418,10 @@ return (String)get_Value(COLUMNNAME_InventoryType);
 }
 
 @XendraTrl(Identifier="fdb5ad2f-923f-7131-ef02-93cbfa693991")
-public static String es_PE_FIELD_InventoryCountLine_InventoryType_Name="Tipo de Inventario";
+public static String es_PE_FIELD_InventoryCountLine_InventoryType_Description="Diferentes tipos de inventario";
 
 @XendraTrl(Identifier="fdb5ad2f-923f-7131-ef02-93cbfa693991")
-public static String es_PE_FIELD_InventoryCountLine_InventoryType_Description="Diferentes tipos de inventario";
+public static String es_PE_FIELD_InventoryCountLine_InventoryType_Name="Tipo de Inventario";
 
 @XendraTrl(Identifier="fdb5ad2f-923f-7131-ef02-93cbfa693991")
 public static String es_PE_FIELD_InventoryCountLine_InventoryType_Help="El tipo de diferencia del inventario determina que cuenta es usada. Por default es la cuenta de la diferencia del inventario definida para el almacén. Alternativamente, usted podría seleccionar cualquier carga. Esto permite que usted explique uso interno ó pérdidas extraordinarias del inventario.";
@@ -434,10 +434,10 @@ Identifier="fdb5ad2f-923f-7131-ef02-93cbfa693991")
 public static final String FIELDNAME_InventoryCountLine_InventoryType="fdb5ad2f-923f-7131-ef02-93cbfa693991";
 
 @XendraTrl(Identifier="5aa98a48-5d20-a41f-c8a0-f6c5aaaad3db")
-public static String es_PE_FIELD_InternalUseLine_InventoryType_Name="Tipo de Inventario";
+public static String es_PE_FIELD_InternalUseLine_InventoryType_Description="Diferentes tipos de inventario";
 
 @XendraTrl(Identifier="5aa98a48-5d20-a41f-c8a0-f6c5aaaad3db")
-public static String es_PE_FIELD_InternalUseLine_InventoryType_Description="Diferentes tipos de inventario";
+public static String es_PE_FIELD_InternalUseLine_InventoryType_Name="Tipo de Inventario";
 
 @XendraTrl(Identifier="5aa98a48-5d20-a41f-c8a0-f6c5aaaad3db")
 public static String es_PE_FIELD_InternalUseLine_InventoryType_Help="El tipo de diferencia del inventario determina que cuenta es usada. Por default es la cuenta de la diferencia del inventario definida para el almacén. Alternativamente, usted podría seleccionar cualquier carga. Esto permite que usted explique uso interno ó pérdidas extraordinarias del inventario.";
@@ -458,7 +458,7 @@ FieldLength=1,DefaultValue="D",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=true,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="6a0e2e3c-70e7-ae9d-7e03-ea53a7123cf0",Synchronized="2019-08-30 22:23:14.0")
+Identifier="6a0e2e3c-70e7-ae9d-7e03-ea53a7123cf0",Synchronized="2020-03-31 22:48:57.0")
 /** Column name InventoryType */
 public static final String COLUMNNAME_InventoryType = "InventoryType";
 /** Set IsCosted.
@@ -499,7 +499,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bda07b47-223d-a7a4-f5ae-7d5c7af61969",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name IsCosted */
 public static final String COLUMNNAME_IsCosted = "IsCosted";
 /** Set Line No.
@@ -524,10 +524,10 @@ return new KeyNamePair(get_ID(), String.valueOf(getLine()));
 }
 
 @XendraTrl(Identifier="2a3a69d8-214d-7c68-e39c-3094a3696c92")
-public static String es_PE_FIELD_InventoryCountLine_LineNo_Name="No. Ítem";
+public static String es_PE_FIELD_InventoryCountLine_LineNo_Description="No. Línea único para este documento";
 
 @XendraTrl(Identifier="2a3a69d8-214d-7c68-e39c-3094a3696c92")
-public static String es_PE_FIELD_InventoryCountLine_LineNo_Description="No. Línea único para este documento";
+public static String es_PE_FIELD_InventoryCountLine_LineNo_Name="No. Ítem";
 
 @XendraTrl(Identifier="2a3a69d8-214d-7c68-e39c-3094a3696c92")
 public static String es_PE_FIELD_InventoryCountLine_LineNo_Help="Indica el No. Línea para un documento. También controlará el orden de despliegue de las líneas dentro de un documento";
@@ -540,10 +540,10 @@ Identifier="2a3a69d8-214d-7c68-e39c-3094a3696c92")
 public static final String FIELDNAME_InventoryCountLine_LineNo="2a3a69d8-214d-7c68-e39c-3094a3696c92";
 
 @XendraTrl(Identifier="ae7a400b-c598-d303-890f-2e82a5e9d264")
-public static String es_PE_FIELD_InternalUseLine_LineNo_Name="No. Línea";
+public static String es_PE_FIELD_InternalUseLine_LineNo_Description="No. Línea único para este documento";
 
 @XendraTrl(Identifier="ae7a400b-c598-d303-890f-2e82a5e9d264")
-public static String es_PE_FIELD_InternalUseLine_LineNo_Description="No. Línea único para este documento";
+public static String es_PE_FIELD_InternalUseLine_LineNo_Name="No. Línea";
 
 @XendraTrl(Identifier="ae7a400b-c598-d303-890f-2e82a5e9d264")
 public static String es_PE_FIELD_InternalUseLine_LineNo_Help="Indica el No. Línea para un documento. También controlará el orden de despliegue de las líneas dentro de un documento";
@@ -565,7 +565,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="e7b8c642-19f0-3005-0b6f-2dd6a457ca19",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Line */
 public static final String COLUMNNAME_Line = "Line";
 /** Set Attribute Set Instance.
@@ -585,10 +585,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="6e8318d6-3cb0-f152-70c5-a02b84780ad5")
-public static String es_PE_FIELD_InventoryCountLine_AttributeSetInstance_Name="Lote - Serie";
+public static String es_PE_FIELD_InventoryCountLine_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="6e8318d6-3cb0-f152-70c5-a02b84780ad5")
-public static String es_PE_FIELD_InventoryCountLine_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
+public static String es_PE_FIELD_InventoryCountLine_AttributeSetInstance_Name="Lote - Serie";
 
 @XendraTrl(Identifier="6e8318d6-3cb0-f152-70c5-a02b84780ad5")
 public static String es_PE_FIELD_InventoryCountLine_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
@@ -601,10 +601,10 @@ Identifier="6e8318d6-3cb0-f152-70c5-a02b84780ad5")
 public static final String FIELDNAME_InventoryCountLine_AttributeSetInstance="6e8318d6-3cb0-f152-70c5-a02b84780ad5";
 
 @XendraTrl(Identifier="996b5ca1-00c9-863a-9f25-1a3ba6f9d2e8")
-public static String es_PE_FIELD_InternalUseLine_AttributeSetInstance_Name="Lote - Serie";
+public static String es_PE_FIELD_InternalUseLine_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="996b5ca1-00c9-863a-9f25-1a3ba6f9d2e8")
-public static String es_PE_FIELD_InternalUseLine_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
+public static String es_PE_FIELD_InternalUseLine_AttributeSetInstance_Name="Lote - Serie";
 
 @XendraTrl(Identifier="996b5ca1-00c9-863a-9f25-1a3ba6f9d2e8")
 public static String es_PE_FIELD_InternalUseLine_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
@@ -626,7 +626,7 @@ IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,I
 Callout="org.compiere.model.CalloutInventory.product",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4609a3d2-e0f6-147f-049e-5a501a29802d",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Phys.Inventory.
@@ -646,10 +646,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="36c1a0df-0def-c25f-b79a-62a0fecfc15d")
-public static String es_PE_FIELD_InventoryCountLine_PhysInventory_Name="Inventario Físico";
+public static String es_PE_FIELD_InventoryCountLine_PhysInventory_Description="Parámetros para el inventario físico.";
 
 @XendraTrl(Identifier="36c1a0df-0def-c25f-b79a-62a0fecfc15d")
-public static String es_PE_FIELD_InventoryCountLine_PhysInventory_Description="Parámetros para el inventario físico.";
+public static String es_PE_FIELD_InventoryCountLine_PhysInventory_Name="Inventario Físico";
 
 @XendraTrl(Identifier="36c1a0df-0def-c25f-b79a-62a0fecfc15d")
 public static String es_PE_FIELD_InventoryCountLine_PhysInventory_Help="El inventario físico indica parámetros únicos para el inventario físico.";
@@ -662,10 +662,10 @@ Identifier="36c1a0df-0def-c25f-b79a-62a0fecfc15d")
 public static final String FIELDNAME_InventoryCountLine_PhysInventory="36c1a0df-0def-c25f-b79a-62a0fecfc15d";
 
 @XendraTrl(Identifier="20f36025-3087-2e8f-8ccc-3af5b70056c8")
-public static String es_PE_FIELD_InternalUseLine_PhysInventory_Name="Inventario Físico";
+public static String es_PE_FIELD_InternalUseLine_PhysInventory_Description="Parámetros para el inventario físico.";
 
 @XendraTrl(Identifier="20f36025-3087-2e8f-8ccc-3af5b70056c8")
-public static String es_PE_FIELD_InternalUseLine_PhysInventory_Description="Parámetros para el inventario físico.";
+public static String es_PE_FIELD_InternalUseLine_PhysInventory_Name="Inventario Físico";
 
 @XendraTrl(Identifier="20f36025-3087-2e8f-8ccc-3af5b70056c8")
 public static String es_PE_FIELD_InternalUseLine_PhysInventory_Help="El inventario físico indica parámetros únicos para el inventario físico.";
@@ -686,7 +686,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=true,SeqNo=3,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bf5aef4a-7a90-01c4-5fea-7c4077ca7eec",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name M_Inventory_ID */
 public static final String COLUMNNAME_M_Inventory_ID = "M_Inventory_ID";
 /** Set Phys.Inventory Line.
@@ -706,10 +706,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="fe07d780-2660-3afb-0d3b-3aa8d8779989")
-public static String es_PE_FIELD_InventoryCountLine_PhysInventoryLine_Name="Item de Inventario Físico";
+public static String es_PE_FIELD_InventoryCountLine_PhysInventoryLine_Description="Item único en un documento de inventario.";
 
 @XendraTrl(Identifier="fe07d780-2660-3afb-0d3b-3aa8d8779989")
-public static String es_PE_FIELD_InventoryCountLine_PhysInventoryLine_Description="Item único en un documento de inventario.";
+public static String es_PE_FIELD_InventoryCountLine_PhysInventoryLine_Name="Item de Inventario Físico";
 
 @XendraTrl(Identifier="fe07d780-2660-3afb-0d3b-3aa8d8779989")
 public static String es_PE_FIELD_InventoryCountLine_PhysInventoryLine_Help="Indica el Item del documento del inventario físico (si es aplicable) para esta transacción.";
@@ -722,10 +722,10 @@ Identifier="fe07d780-2660-3afb-0d3b-3aa8d8779989")
 public static final String FIELDNAME_InventoryCountLine_PhysInventoryLine="fe07d780-2660-3afb-0d3b-3aa8d8779989";
 
 @XendraTrl(Identifier="c6d69fab-ab8c-8650-fb0a-e59ef3b61b77")
-public static String es_PE_FIELD_InternalUseLine_PhysInventoryLine_Name="Item de Inventario Físico";
+public static String es_PE_FIELD_InternalUseLine_PhysInventoryLine_Description="Item único en un documento de inventario.";
 
 @XendraTrl(Identifier="c6d69fab-ab8c-8650-fb0a-e59ef3b61b77")
-public static String es_PE_FIELD_InternalUseLine_PhysInventoryLine_Description="Item único en un documento de inventario.";
+public static String es_PE_FIELD_InternalUseLine_PhysInventoryLine_Name="Item de Inventario Físico";
 
 @XendraTrl(Identifier="c6d69fab-ab8c-8650-fb0a-e59ef3b61b77")
 public static String es_PE_FIELD_InternalUseLine_PhysInventoryLine_Help="Indica el Item del documento del inventario físico (si es aplicable) para esta transacción.";
@@ -755,10 +755,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="1b824bec-56f8-ea2b-5281-b2d5cf0ca7fa")
-public static String es_PE_FIELD_InventoryCountLine_Locator_Name="Ubicación";
+public static String es_PE_FIELD_InventoryCountLine_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="1b824bec-56f8-ea2b-5281-b2d5cf0ca7fa")
-public static String es_PE_FIELD_InventoryCountLine_Locator_Description="Ubicación de Almacén";
+public static String es_PE_FIELD_InventoryCountLine_Locator_Name="Ubicación";
 
 @XendraTrl(Identifier="1b824bec-56f8-ea2b-5281-b2d5cf0ca7fa")
 public static String es_PE_FIELD_InventoryCountLine_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
@@ -771,10 +771,10 @@ Identifier="1b824bec-56f8-ea2b-5281-b2d5cf0ca7fa")
 public static final String FIELDNAME_InventoryCountLine_Locator="1b824bec-56f8-ea2b-5281-b2d5cf0ca7fa";
 
 @XendraTrl(Identifier="bd035c90-4358-cebf-2603-08fcdaca5e99")
-public static String es_PE_FIELD_InternalUseLine_Locator_Name="Ubicación";
+public static String es_PE_FIELD_InternalUseLine_Locator_Description="Ubicación de Almacén";
 
 @XendraTrl(Identifier="bd035c90-4358-cebf-2603-08fcdaca5e99")
-public static String es_PE_FIELD_InternalUseLine_Locator_Description="Ubicación de Almacén";
+public static String es_PE_FIELD_InternalUseLine_Locator_Name="Ubicación";
 
 @XendraTrl(Identifier="bd035c90-4358-cebf-2603-08fcdaca5e99")
 public static String es_PE_FIELD_InternalUseLine_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
@@ -796,7 +796,7 @@ IsMandatory=true,IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,I
 Callout="org.compiere.model.CalloutInventory.product",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f832c49c-6d91-64ec-3001-5e48cf5743dc",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Product.
@@ -816,10 +816,10 @@ return ii.intValue();
 }
 
 @XendraTrl(Identifier="21582cb8-3c75-9c10-0ea0-1f6f016f79c1")
-public static String es_PE_FIELD_InventoryCountLine_Product_Name="Producto";
+public static String es_PE_FIELD_InventoryCountLine_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="21582cb8-3c75-9c10-0ea0-1f6f016f79c1")
-public static String es_PE_FIELD_InventoryCountLine_Product_Description="Producto; servicio ó artículo.";
+public static String es_PE_FIELD_InventoryCountLine_Product_Name="Producto";
 
 @XendraTrl(Identifier="21582cb8-3c75-9c10-0ea0-1f6f016f79c1")
 public static String es_PE_FIELD_InventoryCountLine_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
@@ -832,10 +832,10 @@ Identifier="21582cb8-3c75-9c10-0ea0-1f6f016f79c1")
 public static final String FIELDNAME_InventoryCountLine_Product="21582cb8-3c75-9c10-0ea0-1f6f016f79c1";
 
 @XendraTrl(Identifier="2e103f1c-f902-66bd-8fdd-419b667ef577")
-public static String es_PE_FIELD_InternalUseLine_Product_Name="Producto";
+public static String es_PE_FIELD_InternalUseLine_Product_Description="Producto; servicio ó artículo.";
 
 @XendraTrl(Identifier="2e103f1c-f902-66bd-8fdd-419b667ef577")
-public static String es_PE_FIELD_InternalUseLine_Product_Description="Producto; servicio ó artículo.";
+public static String es_PE_FIELD_InternalUseLine_Product_Name="Producto";
 
 @XendraTrl(Identifier="2e103f1c-f902-66bd-8fdd-419b667ef577")
 public static String es_PE_FIELD_InternalUseLine_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
@@ -857,7 +857,7 @@ IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false
 Callout="org.compiere.model.CalloutInventory.product",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a88d8d2c-139c-ab46-87e6-fc3c462daa3c",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Processed.
@@ -880,10 +880,10 @@ return false;
 }
 
 @XendraTrl(Identifier="704777a0-de86-a3c2-7b18-72958565cd4d")
-public static String es_PE_FIELD_InventoryCountLine_Processed_Name="Procesado";
+public static String es_PE_FIELD_InventoryCountLine_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="704777a0-de86-a3c2-7b18-72958565cd4d")
-public static String es_PE_FIELD_InventoryCountLine_Processed_Description="El documento ha sido procesado";
+public static String es_PE_FIELD_InventoryCountLine_Processed_Name="Procesado";
 
 @XendraTrl(Identifier="704777a0-de86-a3c2-7b18-72958565cd4d")
 public static String es_PE_FIELD_InventoryCountLine_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
@@ -896,10 +896,10 @@ Identifier="704777a0-de86-a3c2-7b18-72958565cd4d")
 public static final String FIELDNAME_InventoryCountLine_Processed="704777a0-de86-a3c2-7b18-72958565cd4d";
 
 @XendraTrl(Identifier="978c2d79-3dc1-30e4-68da-35747b161ea8")
-public static String es_PE_FIELD_InternalUseLine_Processed_Name="Procesado";
+public static String es_PE_FIELD_InternalUseLine_Processed_Description="El documento ha sido procesado";
 
 @XendraTrl(Identifier="978c2d79-3dc1-30e4-68da-35747b161ea8")
-public static String es_PE_FIELD_InternalUseLine_Processed_Description="El documento ha sido procesado";
+public static String es_PE_FIELD_InternalUseLine_Processed_Name="Procesado";
 
 @XendraTrl(Identifier="978c2d79-3dc1-30e4-68da-35747b161ea8")
 public static String es_PE_FIELD_InternalUseLine_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
@@ -920,7 +920,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="05c062e2-eef9-cd10-b26d-0a08be51a481",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Quantity book.
@@ -940,10 +940,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="ee0d62f9-604b-9b3b-d1ce-1aaf730c6c82")
-public static String es_PE_FIELD_InventoryCountLine_QuantityBook_Name="Cantidad Actual";
+public static String es_PE_FIELD_InventoryCountLine_QuantityBook_Description="Cantidad en Libros";
 
 @XendraTrl(Identifier="ee0d62f9-604b-9b3b-d1ce-1aaf730c6c82")
-public static String es_PE_FIELD_InventoryCountLine_QuantityBook_Description="Cantidad en Libros";
+public static String es_PE_FIELD_InventoryCountLine_QuantityBook_Name="Cantidad Actual";
 
 @XendraTrl(Identifier="ee0d62f9-604b-9b3b-d1ce-1aaf730c6c82")
 public static String es_PE_FIELD_InventoryCountLine_QuantityBook_Help="El cantidad en libros indica la cuenta de la línea almacenada en el sistema para un producto en inventario";
@@ -956,10 +956,10 @@ Identifier="ee0d62f9-604b-9b3b-d1ce-1aaf730c6c82")
 public static final String FIELDNAME_InventoryCountLine_QuantityBook="ee0d62f9-604b-9b3b-d1ce-1aaf730c6c82";
 
 @XendraTrl(Identifier="29b82f82-a99d-ec47-1572-053d6ed67c87")
-public static String es_PE_FIELD_InternalUseLine_QuantityBook_Name="Cantidad en Libros";
+public static String es_PE_FIELD_InternalUseLine_QuantityBook_Description="Cantidad en Libros";
 
 @XendraTrl(Identifier="29b82f82-a99d-ec47-1572-053d6ed67c87")
-public static String es_PE_FIELD_InternalUseLine_QuantityBook_Description="Cantidad en Libros";
+public static String es_PE_FIELD_InternalUseLine_QuantityBook_Name="Cantidad en Libros";
 
 @XendraTrl(Identifier="29b82f82-a99d-ec47-1572-053d6ed67c87")
 public static String es_PE_FIELD_InternalUseLine_QuantityBook_Help="El cantidad en libros indica la cuenta de la línea almacenada en el sistema para un producto en inventario";
@@ -980,7 +980,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fec84ce6-08ce-2b76-781c-e5fbdcdbe3ff",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name QtyBook */
 public static final String COLUMNNAME_QtyBook = "QtyBook";
 /** Set Quantity count.
@@ -1000,10 +1000,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="c555e42c-945b-e432-4d5a-d6db33cb6594")
-public static String es_PE_FIELD_InventoryCountLine_QuantityCount_Name="Cantidad Contada";
+public static String es_PE_FIELD_InventoryCountLine_QuantityCount_Description="Cantidad Contada";
 
 @XendraTrl(Identifier="c555e42c-945b-e432-4d5a-d6db33cb6594")
-public static String es_PE_FIELD_InventoryCountLine_QuantityCount_Description="Cantidad Contada";
+public static String es_PE_FIELD_InventoryCountLine_QuantityCount_Name="Cantidad Contada";
 
 @XendraTrl(Identifier="c555e42c-945b-e432-4d5a-d6db33cb6594")
 public static String es_PE_FIELD_InventoryCountLine_QuantityCount_Help="La Cantidad Contada indica la cuenta de inventario actual tomada para un producto en inventario";
@@ -1016,10 +1016,10 @@ Identifier="c555e42c-945b-e432-4d5a-d6db33cb6594")
 public static final String FIELDNAME_InventoryCountLine_QuantityCount="c555e42c-945b-e432-4d5a-d6db33cb6594";
 
 @XendraTrl(Identifier="2f08c0cb-8ad9-7ed6-b0cd-ba0dbb139ce9")
-public static String es_PE_FIELD_InternalUseLine_QuantityCount_Name="Cantidad Contada";
+public static String es_PE_FIELD_InternalUseLine_QuantityCount_Description="Cantidad Contada";
 
 @XendraTrl(Identifier="2f08c0cb-8ad9-7ed6-b0cd-ba0dbb139ce9")
-public static String es_PE_FIELD_InternalUseLine_QuantityCount_Description="Cantidad Contada";
+public static String es_PE_FIELD_InternalUseLine_QuantityCount_Name="Cantidad Contada";
 
 @XendraTrl(Identifier="2f08c0cb-8ad9-7ed6-b0cd-ba0dbb139ce9")
 public static String es_PE_FIELD_InternalUseLine_QuantityCount_Help="La Cantidad Contada indica la cuenta de inventario actual tomada para un producto en inventario";
@@ -1040,7 +1040,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=2,IsTranslated=false,Callout="",VFormat="",ValueMin="0",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b2276058-a25c-ac60-a88f-57692bda17b0",
-Synchronized="2019-08-30 22:23:14.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name QtyCount */
 public static final String COLUMNNAME_QtyCount = "QtyCount";
 /** Set Internal Use Qty.
@@ -1059,10 +1059,10 @@ return bd;
 }
 
 @XendraTrl(Identifier="6c98b3dd-848d-53d1-3279-7e99c0166c84")
-public static String es_PE_FIELD_InventoryCountLine_InternalUseQty_Name="Cantidad Usada Internamente";
+public static String es_PE_FIELD_InventoryCountLine_InternalUseQty_Description="Cantidad usada Internamente borrado por inventario";
 
 @XendraTrl(Identifier="6c98b3dd-848d-53d1-3279-7e99c0166c84")
-public static String es_PE_FIELD_InventoryCountLine_InternalUseQty_Description="Cantidad usada Internamente borrado por inventario";
+public static String es_PE_FIELD_InventoryCountLine_InternalUseQty_Name="Cantidad Usada Internamente";
 
 @XendraTrl(Identifier="6c98b3dd-848d-53d1-3279-7e99c0166c84")
 public static String es_PE_FIELD_InventoryCountLine_InternalUseQty_Help="Cantidad de inventario del producto usada internamente (si esta tomado hacia afuera positivo - negativa si está vuelto)";
@@ -1075,10 +1075,10 @@ Identifier="6c98b3dd-848d-53d1-3279-7e99c0166c84")
 public static final String FIELDNAME_InventoryCountLine_InternalUseQty="6c98b3dd-848d-53d1-3279-7e99c0166c84";
 
 @XendraTrl(Identifier="97cd4400-effc-8e15-d394-0b108818d9fd")
-public static String es_PE_FIELD_InternalUseLine_InternalUseQty_Name="Cantidad Usada Internamente";
+public static String es_PE_FIELD_InternalUseLine_InternalUseQty_Description="Cantidad usada Internamente borrado por inventario";
 
 @XendraTrl(Identifier="97cd4400-effc-8e15-d394-0b108818d9fd")
-public static String es_PE_FIELD_InternalUseLine_InternalUseQty_Description="Cantidad usada Internamente borrado por inventario";
+public static String es_PE_FIELD_InternalUseLine_InternalUseQty_Name="Cantidad Usada Internamente";
 
 @XendraTrl(Identifier="97cd4400-effc-8e15-d394-0b108818d9fd")
 public static String es_PE_FIELD_InternalUseLine_InternalUseQty_Help="Cantidad de inventario del producto usada internamente (si esta tomado hacia afuera positivo - negativa si está vuelto)";
@@ -1099,7 +1099,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a44b43b4-87cf-92cd-1cbd-6086deb9ba1e",
-Synchronized="2019-08-30 22:23:15.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name QtyInternalUse */
 public static final String COLUMNNAME_QtyInternalUse = "QtyInternalUse";
 /** Set ReversalLine_ID.
@@ -1138,9 +1138,36 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="732b337d-e564-8e87-5956-3955dc3ad005",
-Synchronized="2019-08-30 22:23:15.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name ReversalLine_ID */
 public static final String COLUMNNAME_ReversalLine_ID = "ReversalLine_ID";
+/** Set Sequence.
+@param SeqNo Method of ordering records: lowest number comes first */
+public void setSeqNo (int SeqNo)
+{
+set_Value (COLUMNNAME_SeqNo, Integer.valueOf(SeqNo));
+}
+/** Get Sequence.
+@return Method of ordering records: lowest number comes first */
+public int getSeqNo() 
+{
+Integer ii = (Integer)get_Value(COLUMNNAME_SeqNo);
+if (ii == null) return 0;
+return ii.intValue();
+}
+
+@XendraTrl(Identifier="fe482edc-75ec-4d67-8819-a410ad5d9d75")
+public static String es_PE_COLUMN_SeqNo_Name="Sequence";
+
+@XendraColumn(AD_Element_ID="38fa26fe-b59d-fce1-c129-420b57da738b",ColumnName="SeqNo",
+AD_Reference_ID=11,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=10,DefaultValue="",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="fe482edc-75ec-4d67-8819-a410ad5d9d75",
+Synchronized="2023-04-08 23:40:35.0")
+/** Column name SeqNo */
+public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set UPC/EAN.
 @param UPC Bar Code (Universal Product Code or its superset European Article Number) */
 public void setUPC (String UPC)
@@ -1157,10 +1184,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="e7c36d8f-fb48-2259-2315-4b11ba12ca06")
-public static String es_PE_FIELD_InventoryCountLine_UPCEAN_Name="UPC/EAN";
+public static String es_PE_FIELD_InventoryCountLine_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
 
 @XendraTrl(Identifier="e7c36d8f-fb48-2259-2315-4b11ba12ca06")
-public static String es_PE_FIELD_InventoryCountLine_UPCEAN_Description="Código de Barras (Codigo universal del Producto ó su super conjunto, Número de Articulo europeo)";
+public static String es_PE_FIELD_InventoryCountLine_UPCEAN_Name="UPC/EAN";
 
 @XendraTrl(Identifier="e7c36d8f-fb48-2259-2315-4b11ba12ca06")
 public static String es_PE_FIELD_InventoryCountLine_UPCEAN_Help="Use este campo para introducir el código de barras para el producto en cualquiera de las simbologías del código de barras  (Codabar; Código 25; Código 39; Código 93; Código 128; UPC (A); UPC (E); EAN-13; EAN-8; ITF; ITF-14; ISBN; ISSN; JAN-13; JAN-8; POSTNET y FIM; MSI/Plessey; y Pharmacode)";
@@ -1182,7 +1209,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT UPC FROM M_Product p WHERE p.M_Product_ID=M_InventoryLine.M_Product_ID)",
 IsAllowLogging=false,Identifier="72027e5b-5f07-bb10-88c2-66b70e0a4355",
-Synchronized="2019-08-30 22:23:15.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name UPC */
 public static final String COLUMNNAME_UPC = "UPC";
 /** Set Search Key.
@@ -1201,10 +1228,10 @@ if (value == null)
 return value;
 }
 @XendraTrl(Identifier="d3fbf629-a8da-79fc-0c78-c41c7576589b")
-public static String es_PE_FIELD_InventoryCountLine_SearchKey_Name="Clave de Búsqueda";
+public static String es_PE_FIELD_InventoryCountLine_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraTrl(Identifier="d3fbf629-a8da-79fc-0c78-c41c7576589b")
-public static String es_PE_FIELD_InventoryCountLine_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
+public static String es_PE_FIELD_InventoryCountLine_SearchKey_Name="Clave de Búsqueda";
 
 @XendraTrl(Identifier="d3fbf629-a8da-79fc-0c78-c41c7576589b")
 public static String es_PE_FIELD_InventoryCountLine_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
@@ -1226,7 +1253,7 @@ IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,
 ColumnSQL="(SELECT Value FROM M_Product p WHERE p.M_Product_ID=M_InventoryLine.M_Product_ID)",
 IsAllowLogging=false,Identifier="aea1a805-4707-7d5b-ca17-1ec6ff63313f",
-Synchronized="2019-08-30 22:23:15.0")
+Synchronized="2020-03-31 22:48:57.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -23,20 +23,20 @@ import java.sql.*;
 import java.math.*;
 import org.xendra.annotations.*;
 import org.compiere.util.*;
-/** Generated Model for c_province
+/** Generated Model for C_Province
  *  @author Xendra (generated) 
  *  @version Release 2.00 - $Id: GenerateModel.java 5535 2015-04-28 06:51:56Z xapiens $ */
-public class X_c_province extends PO
+public class X_C_Province extends PO
 {
 /** Standard Constructor
 @param ctx context
-@param c_province_ID id
+@param C_Province_ID id
 @param trxName transaction
 */
-public X_c_province (Properties ctx, int c_province_ID, String trxName)
+public X_C_Province (Properties ctx, int C_Province_ID, String trxName)
 {
-super (ctx, c_province_ID, trxName);
-/** if (c_province_ID == 0)
+super (ctx, C_Province_ID, trxName);
+/** if (C_Province_ID == 0)
 {
 setC_Country_ID (0);
 setC_Province_ID (0);
@@ -50,26 +50,26 @@ setName (null);
 @param rs result set 
 @param trxName transaction
 */
-public X_c_province (Properties ctx, ResultSet rs, String trxName)
+public X_C_Province (Properties ctx, ResultSet rs, String trxName)
 {
 super (ctx, rs, trxName);
 }
 /** AD_Table_ID=1000223 */
-public static int Table_ID=MTable.getTable_ID("c_province");
+public static int Table_ID=MTable.getTable_ID("C_Province");
 
 @XendraTrl(Identifier="7a81f13f-30a9-b7c5-60e9-5bc9950d96b9")
-public static String es_PE_TABLE_c_province_Name="c_province";
+public static String es_PE_TABLE_C_Province_Name="c_province";
 
-@XendraTable(Name="c_province",AD_Package_ID="1b3656e5-71c7-1296-994e-9b2c4549c7fd",
-AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="c_province",
+@XendraTable(Name="C_Province",AD_Package_ID="98af94a4-a4cd-bdc0-5651-5880caf79899",
+AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",TableName="C_Province",
 AccessLevel="4",AD_Window_ID="",AD_Val_Rule_ID="",IsKey=1,LoadSeq=0,IsSecurityEnabled=false,
 IsDeleteable=false,IsHighVolume=false,IsChangeLog=false,IsView=false,PO_Window_ID="",
 ID="org.xendra.standard",Identifier="7a81f13f-30a9-b7c5-60e9-5bc9950d96b9",
-Synchronized="2020-03-03 21:37:34.0")
-/** TableName=c_province */
-public static final String Table_Name="c_province";
+Synchronized="2023-03-27 16:22:05.0")
+/** TableName=C_Province */
+public static final String Table_Name="C_Province";
 
-protected static KeyNamePair Model = new KeyNamePair(Table_ID,"c_province");
+protected static KeyNamePair Model = new KeyNamePair(Table_ID,"C_Province");
 
 protected BigDecimal accessLevel = BigDecimal.valueOf(4);
 /** AccessLevel
@@ -86,7 +86,7 @@ return accessLevel.intValue();
 protected POInfo initPO (Properties ctx)
 {
   if (Table_ID == 0)
-    Table_ID = MTable.getTable_ID("c_province");
+    Table_ID = MTable.getTable_ID("C_Province");
 POInfo poi = POInfo.getPOInfo (ctx, Table_ID);
 return poi;
 }
@@ -95,7 +95,7 @@ return poi;
 */
 public String toString()
 {
-StringBuffer sb = new StringBuffer ("X_c_province[").append(get_ID()).append("]");
+StringBuffer sb = new StringBuffer ("X_C_Province[").append(get_ID()).append("]");
 return sb.toString();
 }
 /** Set Country_ID.
@@ -123,7 +123,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f1698091-17f2-b2c1-717d-dc165d6c0878",
-Synchronized="2019-08-30 22:22:10.0")
+Synchronized="2017-08-28 09:56:10.0")
 /** Column name C_Country_ID */
 public static final String COLUMNNAME_C_Country_ID = "C_Country_ID";
 /** Set C_Province_ID.
@@ -168,7 +168,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="679fb819-8499-f20c-92fa-70596f4c53d5",
-Synchronized="2019-08-30 22:22:10.0")
+Synchronized="2017-08-28 09:56:10.0")
 /** Column name C_Region_ID */
 public static final String COLUMNNAME_C_Region_ID = "C_Region_ID";
 /** Set Description.
@@ -207,7 +207,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1fdd3f04-dc80-e445-0fba-6c67ff4fe416",
-Synchronized="2019-08-30 22:22:10.0")
+Synchronized="2017-08-28 09:56:10.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set Identifier.
@@ -239,7 +239,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="64ff08f3-13c4-45b1-b8e7-39bd1477b6e5",
-Synchronized="2019-08-30 22:22:10.0")
+Synchronized="2017-08-28 09:56:10.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -279,7 +279,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c99ecb27-92bb-c91f-3dc4-d0065b53d6ec",
-Synchronized="2019-08-30 22:22:10.0")
+Synchronized="2017-08-28 09:56:10.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 }

@@ -130,7 +130,7 @@ public final class ErrorPanel extends JPanel implements ICardPanel, ActionListen
 	{
 		setError("");
 		setVisible(false);
-		if (getPrevCard().equals("buttonpanel"))
+		if (getPrevCard().equals("infoPanelX"))
 			getPOSPanel().enableEnvironment();
 		getPOSPanel().setError("");
 		getPOSPanel().activecard(getPrevCard());		
