@@ -22,6 +22,7 @@ import org.compiere.model.persistence.X_AD_Column;
 import org.compiere.model.persistence.X_AD_Function;
 import org.compiere.model.persistence.X_AD_Tab;
 import org.compiere.model.persistence.X_AD_Table;
+import org.compiere.model.persistence.X_AD_View;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.ValueNamePair;
@@ -34,6 +35,7 @@ import org.xendra.modeleditor.model.PluginBean;
 import org.xendra.modeleditor.model.ProcedureBean;
 import org.xendra.modeleditor.model.TabBean;
 import org.xendra.modeleditor.model.TableBean;
+import org.xendra.modeleditor.model.ViewBean;
 
 public class PropertySheetPage extends JPanel implements TreeSelectionListener, PropertyChangeListener {
 	private AbstractFolder selectedFolder;	
@@ -41,6 +43,7 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 	private ColumnBean columndata;
 	private TableBean tabledata;
 	private ProcedureBean procedure;
+	private ViewBean view;
 	public PropertySheetPage() {
 		setLayout(LookAndFeelTweaks.createVerticalPercentLayout());
 		sheet = new PropertySheetPanel();
@@ -175,6 +178,19 @@ public class PropertySheetPage extends JPanel implements TreeSelectionListener, 
 		if (p != null) {
 			selectedFolder = (AbstractFolder) treeview.getSelectionPath().getLastPathComponent();
 			String m_type = selectedFolder.getElement().getName();
+			if (m_type.equals("view")) {
+				view = new ViewBean();
+				DefaultBeanInfoResolver resolver = new DefaultBeanInfoResolver();
+				BeanInfo beanInfo = resolver.getBeanInfo(view);
+				sheet.setProperties(beanInfo.getPropertyDescriptors());
+				view.setName(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Name));
+				view.setComments(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Comments));
+				view.setOwner(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Owner));
+				view.setDefinition(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Definition));
+				view.setSynchronized(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Synchronized));
+				view.setIdentifier(selectedFolder.getElement().getAttributeValue(X_AD_View.COLUMNNAME_Identifier));
+				sheet.readFromObject(view);
+			}
 			if (m_type.equals("procedure")) {
 				procedure = new ProcedureBean();
 				DefaultBeanInfoResolver resolver = new DefaultBeanInfoResolver();

@@ -9,13 +9,12 @@ import org.compiere.model.persistence.X_AD_Function;
 import org.compiere.util.Env;
 import org.jdom.Element;
 
-public class ProcedureFolder extends AbstractFolder {
+public class ViewFolder extends AbstractFolder {
 	protected static ImageIcon localIcon = null;
-	public ProcedureFolder(Element item) {
+	public ViewFolder(Element item) {
 		super(item);
 		String name =  item.getAttributeValue(X_AD_Function.COLUMNNAME_Name);
-		String arguments = item.getAttributeValue(X_AD_Function.COLUMNNAME_Arguments);
-		this.setName(String.format("%s(%s)",name,arguments));
+		this.setName(String.format("%s",name));		
 	}
     public ImageIcon getIcon() {
     	if (localIcon == null)
@@ -26,5 +25,5 @@ public class ProcedureFolder extends AbstractFolder {
     		catch (Exception e) {}
     	}
         return localIcon;
-    }	
+    }		
 }

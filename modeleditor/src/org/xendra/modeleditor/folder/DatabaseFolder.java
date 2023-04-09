@@ -32,88 +32,17 @@ public class DatabaseFolder extends AbstractFolder {
     		catch (Exception e) {}
     	}
         return localIcon;
-    }	
-    public void loadChildren() {
-    	CConnection m_cc = CConnection.get();
-		removeAllChildren();
-		try {			
-			setDatabaseSystem(m_cc);		
-			PreparedStatement pstmt = DB.prepareStatement(storeprocedurestoxml.getSQLAllStoreProcedures("", ""), null);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next())
-			{
-				Element dbitem = new Element("procedure");
-				String comments = rs.getString(X_AD_Function.COLUMNNAME_Comments);
-				Hashtable props = Util.getProperties(comments);
-				Iterator keys = props.keySet().iterator();
-				while (keys.hasNext())
-				{
-					String key = (String)keys.next();					
-					if (key.equals("updated"))
-					{						
-						String value = (String) props.get(key);
-						dbitem.setAttribute(MFunction.COLUMNNAME_Synchronized, value);
-						continue;
-					}	
-					else if (key.equals("uuid"))
-					{
-						String value = (String) props.get(key);
-						dbitem.setAttribute(MFunction.COLUMNNAME_Identifier, value);
-						continue;
-					}
-					else if (key.equals(MFunction.COLUMNNAME_Identifier)) 
-					{
-						String value = (String) props.get(key);
-						dbitem.setAttribute(MFunction.COLUMNNAME_Identifier, value);
-						continue;						
-					}
-					else if (key.equals("extension"))
-					{
-						String value = (String) props.get(key);
-						dbitem.setAttribute(MFunction.COLUMNNAME_Extension, value);
-						continue;						
-					}
-					else if (key.equals(X_AD_Function.COLUMNNAME_Synchronized))
-					{						
-						Timestamp value = (Timestamp) props.get(key);
-						dbitem.setAttribute(X_AD_Function.COLUMNNAME_Synchronized, value.toString());
-					}
-				}
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Name, rs.getString("functionname"));
-				if (comments == null)
-					comments = "";
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Comments, comments);
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Output, rs.getString(X_AD_Function.COLUMNNAME_Output));				
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Owner, rs.getString(X_AD_Function.COLUMNNAME_Owner));
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Language, rs.getString("language"));
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Arguments, rs.getString("arguments"));											
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Code, rs.getString("sourcecode"));
-				dbitem.setAttribute(X_AD_Function.COLUMNNAME_Comments, comments);
-				ProcedureFolder p = new ProcedureFolder(dbitem);
-				add(p);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			setDBTarget(m_cc);
-		}
     }
-	public static void setDatabaseSystem(CConnection cc) {
-		CConnection m_cc = CConnection.get(cc.getDbHost(), cc.getDbPort(), cc.getDbName(), DB.getDatabase().getSystemUser(), "postgres");
-		setDBTarget(m_cc);		
-	}	
-	private static void setDBTarget(CConnection m_cc) {
-		DB.setDBTarget(m_cc);		
-		setsearchpath(null);
-	}
-	public static void setsearchpath(String trxName) {
-		String search_path = DB.getSQLValueString(trxName, "SELECT setting FROM pg_settings where name = 'search_path'");
-		if (!search_path.toLowerCase().contains("xendra") || !search_path.toLowerCase().contains("public"))
-		{			
-			int no = DB.executeUpdate("set search_path to public,xendra;", trxName);
-			if (no < 0)
-				System.out.println("err");
-		}
-	}		
+    public void loadChildren() {    
+		removeAllChildren();
+		Element funcitem = new Element("Function");
+		funcitem.setAttribute("name", "Functions");
+		FunctionsFolder function = new FunctionsFolder(funcitem);
+		add(function);
+		Element viewitem = new Element("View");
+		viewitem.setAttribute("name", "Views");
+		ViewsFolder view = new ViewsFolder(viewitem);
+		add(view);
+    }
 }
 

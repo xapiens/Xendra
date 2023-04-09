@@ -31,9 +31,10 @@ import org.xendra.modeleditor.folder.AbstractFolder;
 import org.xendra.modeleditor.folder.ColumnFolder;
 import org.xendra.modeleditor.folder.PackageFolder;
 import org.xendra.modeleditor.folder.PluginFolder;
-import org.xendra.modeleditor.folder.ProcedureFolder;
+import org.xendra.modeleditor.folder.FunctionFolder;
 import org.xendra.modeleditor.folder.TabFolder;
 import org.xendra.modeleditor.folder.TableFolder;
+import org.xendra.modeleditor.folder.ViewFolder;
 import org.xendra.modeleditor.folder.WindowFolder;
 import org.xendra.modeleditor.gui.dialog.tab.EditFieldsDialog;
 import org.xendra.modeleditor.gui.frame.ModelEditorFrameController;
@@ -81,6 +82,7 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 	private static final String ADDTAB = "ADDTAB";
 	private static final String GENMODEL = "GENM";
 	private static final String GENPROC = "GENPROC";
+	private static final String GENVIEW = "GENVIEW";
 	private static final String GENWINDOW = "GENW";
 	private static final String GENCATALOG = "GENC";
 	private static final String GENREF = "GENR";
@@ -232,11 +234,16 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 				sync.addActionListener(this);
 				menu.add(sync);
 				menu.add(del);
-			} else if (f instanceof ProcedureFolder) {
+			} else if (f instanceof FunctionFolder) {
 				JMenuItem genproc = new JMenuItem("Generate Procedure", processIcon);
 				genproc.setActionCommand(GENPROC);
 				genproc.addActionListener(this);
 				menu.add(genproc); 
+			} else if (f instanceof ViewFolder) {
+				JMenuItem genview = new JMenuItem("Generate View", processIcon);
+				genview.setActionCommand(GENVIEW);
+				genview.addActionListener(this);
+				menu.add(genview);
 			} else if (f instanceof PackageFolder) {
 				JMenuItem addcolumn = new JMenuItem("Add Table", addtblIcon);
 				addcolumn.setActionCommand(ADDTABLE);
@@ -334,6 +341,8 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 			setGenerateModel(Integer.valueOf(m_uid), selectDirectory(m_directory));
 		} else if (e.getActionCommand().equals(GENPROC)) {
 			setGeneralProc(f, selectDirectory(m_directory));
+		} else if (e.getActionCommand().equals(GENVIEW)) {
+			setGeneralView(f, selectDirectory(m_directory));
 		} else if (e.getActionCommand().equals(GENWINDOW)) {
 			setGenerateWindows(selectDirectory(m_directory));		
 		} else if (e.getActionCommand().equals(GENCATALOG)) {
@@ -555,6 +564,18 @@ public class TreeController extends DoubleClickListener implements FocusOwner, A
 		id.setMessage(info);
 	}
 
+	private void setGeneralView(AbstractFolder f, File selectDirectory) {
+		startcapture();
+		Object[] args = {selectDirectory.getAbsolutePath().concat("/"),
+				f.getElement()
+		};
+		org.xendra.developer.GenerateView.main(args);
+		stopcapture();
+		String info = getcapture();
+		InfoDialog id = new InfoDialog();
+		id.setMessage(info);
+	}
+	
 	private void setGeneralProc(AbstractFolder f, File selectDirectory) {
 		startcapture();
 		Object[] args = {selectDirectory.getAbsolutePath().concat("/"),
