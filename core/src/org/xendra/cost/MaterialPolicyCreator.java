@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.swing.ListModel;
 
@@ -12,6 +13,7 @@ import org.compiere.model.Query;
 import org.compiere.model.persistence.X_AD_Column;
 import org.compiere.model.persistence.X_AD_Process;
 import org.compiere.model.persistence.X_AD_Table;
+import org.compiere.model.persistence.X_C_DocType;
 import org.compiere.model.persistence.X_M_MaterialPolicy;
 import org.compiere.model.persistence.X_M_MaterialProcessor;
 import org.compiere.model.persistence.X_M_Transaction;
@@ -19,6 +21,7 @@ import org.compiere.model.reference.REF_M_TransactionTransactionType;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.ValueNamePair;
+import org.xendra.util.UpdatePO;
 
 import net.javaprog.ui.wizard.DataModel;
 import net.javaprog.ui.wizard.DefaultDataLookup;
@@ -27,7 +30,8 @@ import net.javaprog.ui.wizard.WizardModelListener;
 
 public class MaterialPolicyCreator implements WizardModelListener {
 
-	private DataModel data;	
+	private DataModel data;
+	private String tables;	
 	public MaterialPolicyCreator(DataModel data) {
 		this.data = data;
 	}
@@ -44,7 +48,7 @@ public class MaterialPolicyCreator implements WizardModelListener {
 
 	@Override
 	public void wizardFinished(WizardModelEvent e) {
-		String tables = "";
+		tables = "";
 		String dates = "";
 		String dtonlyio = "";
 		String dtiocost = "";
@@ -129,7 +133,24 @@ public class MaterialPolicyCreator implements WizardModelListener {
 		props.put("adjust", adjust);
 		props.put("process", kp.getKey());
 		policy.setProperties(props);		
-		policy.save();					
+		if (policy.save()) {
+			configure(dtonlyio, REF_M_TransactionTransactionType.OnlyMovement);
+			configure(dtiocost, REF_M_TransactionTransactionType.MovementAndCost);
+			configure(adjust, REF_M_TransactionTransactionType.Adjustment);			
+		}					
+	}
+
+	private void configure(String strdts, String transactiontype) {
+		StringTokenizer st = new StringTokenizer(strdts, ",");
+		while (st.hasMoreElements()) {
+			String tk = (String) st.nextElement();				
+			List<X_C_DocType> dts = new Query(Env.getCtx(), X_C_DocType.Table_Name, "DocBaseType = ?", null)
+			.setParameters(tk).list();
+			for (X_C_DocType dt:dts) {
+				dt.setTransactionType(transactiontype);
+				dt.save();
+			} 
+		}		
 	}
 
 	@Override
