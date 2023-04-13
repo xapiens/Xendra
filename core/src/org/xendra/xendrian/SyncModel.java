@@ -1583,7 +1583,12 @@ public class SyncModel {
 			int no = DB.getSQLValue(null, String.format("SELECT COUNT(*) FROM %s GROUP BY IDENTIFIER ORDER BY 1 DESC LIMIT 1", master));
 			while (no > 1) {
 				String id = DB.getSQLValueString(null, String.format("SELECT IDENTIFIER,count(*) from %s GROUP BY IDENTIFIER ORDER BY 2 DESC LIMIT 1", master));
-				DB.executeUpdate(String.format("UPDATE %s set identifier = getuuid() where identifier = '%s'", master, id), null);
+				int processed = 0;
+				if (id == null) {
+					processed = DB.executeUpdate(String.format("UPDATE %s set identifier = getuuid() where identifier isnull", master), null);
+				} else {
+					processed = DB.executeUpdate(String.format("UPDATE %s set identifier = getuuid() where identifier = '%s'", master, id), null);
+				}
 				no = DB.getSQLValue(null, String.format("SELECT COUNT(*) FROM %s GROUP BY IDENTIFIER ORDER BY 1 DESC LIMIT 1", master));
 			}
 			i++;
@@ -3563,6 +3568,9 @@ public class SyncModel {
 				}																
 				XendraView ref = clazzref.getField(X_AD_Reference.COLUMNNAME_Identifier).getAnnotation(XendraView.class);
 				String key = ref.Identifier();
+				if (key.equals("6d956e01-058a-741f-7113-0c8dd70ad718")) {
+					System.out.println("X");
+				}
 				Timestamp refsynchro = Timestamp.valueOf(ref.Synchronized());
 				boolean goahead = true;
 				for (ElementProperties pp:previews)
