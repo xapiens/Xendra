@@ -1,12 +1,12 @@
 package org.xendra.console;
 
 import java.io.IOException;
+
 import org.compiere.util.Ini;
 import org.xendra.api.Connection;
 
-public class App {
-
-	public App() {
+public class Tuning {
+	public Tuning() {
 		Ini.loadProperties(true);
 		String server = Ini.getProperty(Ini.P_DatabaseServer);
 		if (server == null)
@@ -21,19 +21,15 @@ public class App {
 		t.setServer(server);
 		t.setDatabase(database);
 		t.setPort(port);
-		LanterminalEngine lE = new LanterminalEngine(t);
+		TuningEngine te = new TuningEngine(t);
 		try {
-			lE.turnOn();
-		} catch (IOException e1) {
+			te.bootstrap();
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		//String attributes = Ini.getProperty (Ini.P_CONNECTION);		
-	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		App c = new App();
-	}
 
+	}
+	public static void main(String[] args) {
+		Tuning c = new Tuning();
+	}
 }

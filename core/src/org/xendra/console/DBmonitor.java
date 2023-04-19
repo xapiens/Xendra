@@ -554,12 +554,12 @@ public class DBmonitor {
 		}
 		return var;
 	}
-	private Double get_settingD(String key) {
+	Double get_settingD(String key) {
 		List<String> var = get_setting(key);
 		Double dvar = Double.valueOf(var.get(0));
 		return dvar;
 	}
-	private List<String> get_setting(String key) {		
+	List<String> get_setting(String key) {		
 		List<String> setting = new ArrayList<String>();
 		String value = "";
 		String unit = "";

@@ -73,7 +73,6 @@ public class LanterminalEngine {
 	}
 
 	private boolean login() {		
-		//final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.DEFAULT));
 		final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 		final BasicWindow window = new BasicWindow();
 		window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));		
