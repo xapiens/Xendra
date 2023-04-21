@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -75,7 +75,7 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="General Ledger 
 TableName="GL_Book",AccessLevel="3",AD_Window_ID="5d03174a-432f-b3b2-6275-87031ef6e308",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=130,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="535359f2-f6f2-dc5f-0dbe-4f8978dc4d22",Synchronized="2020-03-03 21:37:54.0")
+Identifier="535359f2-f6f2-dc5f-0dbe-4f8978dc4d22",Synchronized="2023-04-15 21:34:29.0")
 /** TableName=GL_Book */
 public static final String Table_Name="GL_Book";
 
@@ -148,7 +148,7 @@ FieldLength=1,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMand
 IsUpdateable=true,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="0",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="4bb7581b-f3c6-4b13-af84-8a540b6fe5cd",Synchronized="2019-08-30 22:22:31.0")
+Identifier="4bb7581b-f3c6-4b13-af84-8a540b6fe5cd",Synchronized="2023-03-22 18:55:33.0")
 /** Column name BookType */
 public static final String COLUMNNAME_BookType = "BookType";
 /** Set Period.
@@ -172,10 +172,10 @@ return ii.intValue();
 public static String es_PE_FIELD_GL_Book_Period_Name="Período";
 
 @XendraTrl(Identifier="88f5c49f-e357-8916-1839-3faea6c916ca")
-public static String es_PE_FIELD_GL_Book_Period_Description="Período de Calendario";
+public static String es_PE_FIELD_GL_Book_Period_Help="El Período indica un rango de fechas exclusivo para un calendario";
 
 @XendraTrl(Identifier="88f5c49f-e357-8916-1839-3faea6c916ca")
-public static String es_PE_FIELD_GL_Book_Period_Help="El Período indica un rango de fechas exclusivo para un calendario";
+public static String es_PE_FIELD_GL_Book_Period_Description="Período de Calendario";
 
 @XendraField(AD_Column_ID="C_Period_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=false,
@@ -193,7 +193,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="47a2e039-3da5-bc0c-82bc-1659a4f4a6fa",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
 /** Set Accounting Fact ID (per document).
@@ -238,7 +238,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="14e3ce3b-1c00-919e-0475-508b34ab13f6",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Fact_ID */
 public static final String COLUMNNAME_Fact_ID = "Fact_ID";
 /** Set Book.
@@ -301,7 +301,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="ce5c5b68-c837-4e88-bef6-6467f26a4663",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name GroupByClause */
 public static final String COLUMNNAME_GroupByClause = "GroupByClause";
 /** Set HAVING BY.
@@ -338,7 +338,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a205135a-fdeb-4786-981a-7b9f36ba28b3",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name HavingClause */
 public static final String COLUMNNAME_HavingClause = "HavingClause";
 /** Set Identifier.
@@ -380,7 +380,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="268f2ace-3df3-42e7-bd5e-b07330ed1e4c",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -415,10 +415,10 @@ return new KeyNamePair(get_ID(), getName());
 public static String es_PE_FIELD_GL_Book_Name_Name="Nombre";
 
 @XendraTrl(Identifier="98d02861-32c3-5ba5-a943-8be8c9ee6b05")
-public static String es_PE_FIELD_GL_Book_Name_Description="Identificador alfanumérico de la entidad.";
+public static String es_PE_FIELD_GL_Book_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
 @XendraTrl(Identifier="98d02861-32c3-5ba5-a943-8be8c9ee6b05")
-public static String es_PE_FIELD_GL_Book_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
+public static String es_PE_FIELD_GL_Book_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -436,7 +436,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=true,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bab8c6f2-5d8f-59bd-1c7e-7325a1c5a1d1",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sql ORDER BY.
@@ -458,10 +458,10 @@ return value;
 public static String es_PE_FIELD_GL_Book_SqlORDERBY_Name="Cláusula ORDER BY SQL";
 
 @XendraTrl(Identifier="cb359c80-5fbd-421e-a1fc-9b9ab7878c77")
-public static String es_PE_FIELD_GL_Book_SqlORDERBY_Description="Cláusula completamente calificada ORDER BY";
+public static String es_PE_FIELD_GL_Book_SqlORDERBY_Help="La cláusula ORDER BY indica la cláusula SQL ORDER BY a usar para la selección del registro";
 
 @XendraTrl(Identifier="cb359c80-5fbd-421e-a1fc-9b9ab7878c77")
-public static String es_PE_FIELD_GL_Book_SqlORDERBY_Help="La cláusula ORDER BY indica la cláusula SQL ORDER BY a usar para la selección del registro";
+public static String es_PE_FIELD_GL_Book_SqlORDERBY_Description="Cláusula completamente calificada ORDER BY";
 
 @XendraField(AD_Column_ID="OrderByClause",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -479,7 +479,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="58b07140-a263-4c21-80d8-bc9c1a25fd53",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name OrderByClause */
 public static final String COLUMNNAME_OrderByClause = "OrderByClause";
 /** Set Processed.
@@ -505,10 +505,10 @@ return false;
 public static String es_PE_FIELD_GL_Book_Processed_Name="Procesado";
 
 @XendraTrl(Identifier="a1f9d0ac-4185-60e8-e185-638e5cea5169")
-public static String es_PE_FIELD_GL_Book_Processed_Description="El documento ha sido procesado";
+public static String es_PE_FIELD_GL_Book_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
 
 @XendraTrl(Identifier="a1f9d0ac-4185-60e8-e185-638e5cea5169")
-public static String es_PE_FIELD_GL_Book_Processed_Help="El cuadro de verificación procesada indica que un documento ha sido procesado";
+public static String es_PE_FIELD_GL_Book_Processed_Description="El documento ha sido procesado";
 
 @XendraField(AD_Column_ID="Processed",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -526,7 +526,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="311f11fc-0689-2a51-d0e2-fb04af940b0a",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Processed */
 public static final String COLUMNNAME_Processed = "Processed";
 /** Set Processing date.
@@ -568,7 +568,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f63407ab-098e-4d98-8424-2d818c04ca17",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name ProcessingDate */
 public static final String COLUMNNAME_ProcessingDate = "ProcessingDate";
 /** Set Search Key.
@@ -596,10 +596,10 @@ return value;
 public static String es_PE_FIELD_GL_Book_SearchKey_Name="Clave de Búsqueda";
 
 @XendraTrl(Identifier="cc1479c0-6f37-61f9-1537-11a246e954f4")
-public static String es_PE_FIELD_GL_Book_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
+public static String es_PE_FIELD_GL_Book_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
 
 @XendraTrl(Identifier="cc1479c0-6f37-61f9-1537-11a246e954f4")
-public static String es_PE_FIELD_GL_Book_SearchKey_Help="Una clave de búsqueda le permite a usted un método rápido de encontrar un registro en particular";
+public static String es_PE_FIELD_GL_Book_SearchKey_Description="Clave de búsqueda para el registro en el formato requerido; debe ser única";
 
 @XendraField(AD_Column_ID="Value",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -617,7 +617,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c98c1a4b-eede-7015-15b3-ce2db88dc3fe",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Value */
 public static final String COLUMNNAME_Value = "Value";
 /** Set Sql WHERE.
@@ -639,10 +639,10 @@ return value;
 public static String es_PE_FIELD_GL_Book_SqlWHERE_Name="Cláusula Where SQL";
 
 @XendraTrl(Identifier="3a207fa6-0da6-4109-8bed-f369f6b0388d")
-public static String es_PE_FIELD_GL_Book_SqlWHERE_Description="Cláusula WHERE completamente calificada";
+public static String es_PE_FIELD_GL_Book_SqlWHERE_Help="La cláusula Where indica la cláusula SQL WHERE a usar para la selección del registro";
 
 @XendraTrl(Identifier="3a207fa6-0da6-4109-8bed-f369f6b0388d")
-public static String es_PE_FIELD_GL_Book_SqlWHERE_Help="La cláusula Where indica la cláusula SQL WHERE a usar para la selección del registro";
+public static String es_PE_FIELD_GL_Book_SqlWHERE_Description="Cláusula WHERE completamente calificada";
 
 @XendraField(AD_Column_ID="WhereClause",IsCentrallyMaintained=true,
 AD_Tab_ID="d715ef0f-412f-7703-da50-f4ad9561284f",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -660,7 +660,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="27ac7c28-a200-48e9-9c9a-a1d9a1b61245",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name WhereClause */
 public static final String COLUMNNAME_WhereClause = "WhereClause";
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -74,7 +74,7 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",Table
 AccessLevel="3",AD_Window_ID="5d03174a-432f-b3b2-6275-87031ef6e308",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=0,IsSecurityEnabled=false,IsDeleteable=true,IsHighVolume=false,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.accounting",
-Identifier="ebe9c016-03c2-4c60-90a2-98c1a7698c37",Synchronized="2020-03-03 21:37:54.0")
+Identifier="ebe9c016-03c2-4c60-90a2-98c1a7698c37",Synchronized="2023-04-15 21:35:17.0")
 /** TableName=GL_BookFile */
 public static final String Table_Name="GL_BookFile";
 
@@ -128,10 +128,10 @@ return ii.intValue();
 public static String es_PE_FIELD_GL_BookFile_Reference_Name="Referencia";
 
 @XendraTrl(Identifier="08258b85-ac2b-4cbf-b6d2-984b28be217c")
-public static String es_PE_FIELD_GL_BookFile_Reference_Description="Referencia del Sistema (Lista de Selección)";
+public static String es_PE_FIELD_GL_BookFile_Reference_Help="La Referencia indica el tipo de campo de referencia";
 
 @XendraTrl(Identifier="08258b85-ac2b-4cbf-b6d2-984b28be217c")
-public static String es_PE_FIELD_GL_BookFile_Reference_Help="La Referencia indica el tipo de campo de referencia";
+public static String es_PE_FIELD_GL_BookFile_Reference_Description="Referencia del Sistema (Lista de Selección)";
 
 @XendraField(AD_Column_ID="AD_Reference_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e882bdb6-175b-44cc-9b6a-f25bfbddd5bb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -149,7 +149,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="1f5c91aa-30f6-48d9-aa82-13cca16b4a45",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name AD_Reference_ID */
 public static final String COLUMNNAME_AD_Reference_ID = "AD_Reference_ID";
 /** Set Reference Key.
@@ -173,10 +173,10 @@ return ii.intValue();
 public static String es_PE_FIELD_GL_BookFile_ReferenceKey_Name="Valor de Referencia";
 
 @XendraTrl(Identifier="18de70d8-63ac-4846-b515-ec1f9eed3063")
-public static String es_PE_FIELD_GL_BookFile_ReferenceKey_Description="Requerido para especificar; si el tipo de datos es tabla ó lista.";
+public static String es_PE_FIELD_GL_BookFile_ReferenceKey_Help="El valor referencia indica dónde los valores referencia son almacenados. Debe especificarce si el tipo de datos es tabla ó lista.";
 
 @XendraTrl(Identifier="18de70d8-63ac-4846-b515-ec1f9eed3063")
-public static String es_PE_FIELD_GL_BookFile_ReferenceKey_Help="El valor referencia indica dónde los valores referencia son almacenados. Debe especificarce si el tipo de datos es tabla ó lista.";
+public static String es_PE_FIELD_GL_BookFile_ReferenceKey_Description="Requerido para especificar; si el tipo de datos es tabla ó lista.";
 
 @XendraField(AD_Column_ID="AD_Reference_Value_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="e882bdb6-175b-44cc-9b6a-f25bfbddd5bb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -196,7 +196,7 @@ IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogi
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f0ae3599-1c05-40fa-a7cb-4d47ed419d55",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name AD_Reference_Value_ID */
 public static final String COLUMNNAME_AD_Reference_Value_ID = "AD_Reference_Value_ID";
 /** Set Description.
@@ -230,10 +230,10 @@ return value;
 public static String es_PE_FIELD_GL_BookFile_Description_Name="Descripción";
 
 @XendraTrl(Identifier="e65d416b-33b1-48cf-89c4-1a82c6e55e0e")
-public static String es_PE_FIELD_GL_BookFile_Description_Description="Descripción corta opcional del registro";
+public static String es_PE_FIELD_GL_BookFile_Description_Help="Una descripción esta limitada a 255 caracteres";
 
 @XendraTrl(Identifier="e65d416b-33b1-48cf-89c4-1a82c6e55e0e")
-public static String es_PE_FIELD_GL_BookFile_Description_Help="Una descripción esta limitada a 255 caracteres";
+public static String es_PE_FIELD_GL_BookFile_Description_Description="Descripción corta opcional del registro";
 
 @XendraField(AD_Column_ID="Description",IsCentrallyMaintained=true,
 AD_Tab_ID="e882bdb6-175b-44cc-9b6a-f25bfbddd5bb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -251,7 +251,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="76eb46fe-6b02-4b3e-85ef-79172d6455d5",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Description */
 public static final String COLUMNNAME_Description = "Description";
 /** Set GL Book File.
@@ -317,7 +317,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=false,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b2734531-cc2b-407d-a8de-c250c20ff42d",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name GL_Book_ID */
 public static final String COLUMNNAME_GL_Book_ID = "GL_Book_ID";
 /** Set Identifier.
@@ -359,7 +359,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="be6bd860-9549-4933-911e-32090c5d666a",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set Name.
@@ -393,10 +393,10 @@ return new KeyNamePair(get_ID(), getName());
 public static String es_PE_FIELD_GL_BookFile_Name_Name="Nombre";
 
 @XendraTrl(Identifier="60adc524-9ad2-46aa-a9eb-f46e4a1ebe90")
-public static String es_PE_FIELD_GL_BookFile_Name_Description="Identificador alfanumérico de la entidad.";
+public static String es_PE_FIELD_GL_BookFile_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
 
 @XendraTrl(Identifier="60adc524-9ad2-46aa-a9eb-f46e4a1ebe90")
-public static String es_PE_FIELD_GL_BookFile_Name_Help="El nombre de una entidad (registro) se usa como una opción de búsqueda predeterminada adicional a la clave de búsqueda. El nombre es de hasta 60 caracteres de longitud.";
+public static String es_PE_FIELD_GL_BookFile_Name_Description="Identificador alfanumérico de la entidad.";
 
 @XendraField(AD_Column_ID="Name",IsCentrallyMaintained=true,
 AD_Tab_ID="e882bdb6-175b-44cc-9b6a-f25bfbddd5bb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -414,7 +414,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=true,SeqNo=1,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="341dc12a-2206-49d3-9330-b054a018d692",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name Name */
 public static final String COLUMNNAME_Name = "Name";
 /** Set Sequence.
@@ -436,10 +436,10 @@ return ii.intValue();
 public static String es_PE_FIELD_GL_BookFile_Sequence_Name="Secuencia";
 
 @XendraTrl(Identifier="615cefcb-5959-480d-a839-3caf8877dcd1")
-public static String es_PE_FIELD_GL_BookFile_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
+public static String es_PE_FIELD_GL_BookFile_Sequence_Help="La Secuencia indica el orden de los registros";
 
 @XendraTrl(Identifier="615cefcb-5959-480d-a839-3caf8877dcd1")
-public static String es_PE_FIELD_GL_BookFile_Sequence_Help="La Secuencia indica el orden de los registros";
+public static String es_PE_FIELD_GL_BookFile_Sequence_Description="Método de ordenar registros; el número más bajo viene primero";
 
 @XendraField(AD_Column_ID="SeqNo",IsCentrallyMaintained=true,
 AD_Tab_ID="e882bdb6-175b-44cc-9b6a-f25bfbddd5bb",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -457,7 +457,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a2ed0bb7-3054-4b22-856f-a40fa43a72c9",
-Synchronized="2019-08-30 22:22:31.0")
+Synchronized="2023-03-22 18:55:33.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 }

@@ -8,7 +8,7 @@ import org.compiere.model.View;
 public class VIEW_M_carding 
 {
  	@XendraView(Identifier="6d956e01-058a-741f-7113-0c8dd70ad718",
-Synchronized="2023-04-08 10:35:34.0",
+Synchronized="2023-04-20 10:35:34.0",
 Name="m_carding",
 Owner="xendra",
 Extension="")
@@ -17,7 +17,7 @@ Extension="")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2023-04-08 10:35:34.0 @Identifier=6d956e01-058a-741f-7113-0c8dd70ad718");
+ 	sb.appendln("@Synchronized=2023-04-20 10:35:34.0 @Identifier=6d956e01-058a-741f-7113-0c8dd70ad718");
 	return sb.toString();
 }
 	public static final String getDefinition() 

@@ -1,6 +1,6 @@
 /******************************************************************************
  * Product: Xendra ERP & CRM Smart Business Solution                          *
- * Copyright (C) 1999-2007 ComPiere, Inc. All Rights Reserved.                *
+ * Copyright (C)  dravios       All Rights Reserved.                          *
  * This program is free software. you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -80,15 +80,15 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",Table
 AccessLevel="3",AD_Window_ID="46ccc992-68c0-cc7a-5da1-f15017ce2fce",AD_Val_Rule_ID="",IsKey=1,
 LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,IsChangeLog=false,
 IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="be10b627-38e2-1cd8-a23a-bed77ffb560c",Synchronized="2020-11-02 20:45:36.0")
+Identifier="be10b627-38e2-1cd8-a23a-bed77ffb560c",Synchronized="2023-04-19 21:54:11.0")
 /** TableName=M_Storage */
 public static final String Table_Name="M_Storage";
 
 
-@XendraIndex(Name="storageasi",Identifier="7252f0d1-b2b5-4806-ace4-a5c911ea3b9b",
-Column_Names="m_attributesetinstance_id",IsUnique="false",
-TableIdentifier="7252f0d1-b2b5-4806-ace4-a5c911ea3b9b",Synchronized="2020-10-26 10:31:03.0")
-public static final String INDEXNAME_storageasi = "7252f0d1-b2b5-4806-ace4-a5c911ea3b9b";
+@XendraIndex(Name="m_storage_identifier",Identifier="c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0",
+Column_Names="identifier",IsUnique="false",TableIdentifier="c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0",
+Synchronized="2020-11-02 17:52:07.0")
+public static final String INDEXNAME_m_storage_identifier = "c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0";
 
 
 @XendraIndex(Name="m_storage_main",Identifier="fe714ed6-fc97-4806-8cea-528aa3ecaec8",
@@ -97,10 +97,10 @@ TableIdentifier="fe714ed6-fc97-4806-8cea-528aa3ecaec8",Synchronized="2020-11-02 
 public static final String INDEXNAME_m_storage_main = "fe714ed6-fc97-4806-8cea-528aa3ecaec8";
 
 
-@XendraIndex(Name="m_storage_identifier",Identifier="c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0",
-Column_Names="identifier",IsUnique="false",TableIdentifier="c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0",
-Synchronized="2020-11-02 17:52:07.0")
-public static final String INDEXNAME_m_storage_identifier = "c092e7e0-b2b4-48c1-bed0-75bbd6f8dbd0";
+@XendraIndex(Name="storageasi",Identifier="7252f0d1-b2b5-4806-ace4-a5c911ea3b9b",
+Column_Names="m_attributesetinstance_id",IsUnique="false",
+TableIdentifier="7252f0d1-b2b5-4806-ace4-a5c911ea3b9b",Synchronized="2020-10-26 10:31:03.0")
+public static final String INDEXNAME_storageasi = "7252f0d1-b2b5-4806-ace4-a5c911ea3b9b";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"M_Storage");
 
@@ -148,10 +148,10 @@ return (Timestamp)get_Value(COLUMNNAME_DateLastInventory);
 public static String es_PE_FIELD_Storage_DateLastInventoryCount_Name="Ultima Fecha del Conteo de Inventarios";
 
 @XendraTrl(Identifier="6da15f93-b094-217a-2229-15b3a7e66efe")
-public static String es_PE_FIELD_Storage_DateLastInventoryCount_Description="Fecha de último conteo de inventario";
+public static String es_PE_FIELD_Storage_DateLastInventoryCount_Help="La Fecha del último conteo de Inventario indica la última vez en que un conteo de inventario fue hecho";
 
 @XendraTrl(Identifier="6da15f93-b094-217a-2229-15b3a7e66efe")
-public static String es_PE_FIELD_Storage_DateLastInventoryCount_Help="La Fecha del último conteo de Inventario indica la última vez en que un conteo de inventario fue hecho";
+public static String es_PE_FIELD_Storage_DateLastInventoryCount_Description="Fecha de último conteo de inventario";
 
 @XendraField(AD_Column_ID="DateLastInventory",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -169,7 +169,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6b6c504c-f151-6a78-8e1c-b08090893426",
-Synchronized="2020-11-02 17:52:06.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name DateLastInventory */
 public static final String COLUMNNAME_DateLastInventory = "DateLastInventory";
 /** Set Date last run.
@@ -194,7 +194,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f9c8e066-fd79-4531-b0a2-c329f505fba3",
-Synchronized="2020-11-02 17:52:06.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name DateLastRun */
 public static final String COLUMNNAME_DateLastRun = "DateLastRun";
 /** Set Identifier.
@@ -226,9 +226,40 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="3964e46e-35f1-432b-b12f-a749c16fbfe8",
-Synchronized="2020-11-02 17:52:06.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
+/** Set IsCosted.
+@param IsCosted IsCosted */
+public void setIsCosted (boolean IsCosted)
+{
+set_Value (COLUMNNAME_IsCosted, Boolean.valueOf(IsCosted));
+}
+/** Get IsCosted.
+@return IsCosted */
+public boolean isCosted() 
+{
+Object oo = get_Value(COLUMNNAME_IsCosted);
+if (oo != null) 
+{
+ if (oo instanceof Boolean) return ((Boolean)oo).booleanValue();
+ return "Y".equals(oo);
+}
+return false;
+}
+
+@XendraTrl(Identifier="a13f26e1-08eb-45ec-b81d-ce1de3cfe7d0")
+public static String es_PE_COLUMN_IsCosted_Name="IsCosted";
+
+@XendraColumn(AD_Element_ID="1d2cca33-7933-6933-e8cd-036ca4cb806e",ColumnName="IsCosted",
+AD_Reference_ID=20,AD_Reference_Value_ID="",AD_Val_Rule_ID="",FieldLength=1,DefaultValue="N",
+IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,ReadOnlyLogic="",
+IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
+Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
+IsAllowLogging=false,Identifier="a13f26e1-08eb-45ec-b81d-ce1de3cfe7d0",
+Synchronized="2023-04-19 21:53:04.0")
+/** Column name IsCosted */
+public static final String COLUMNNAME_IsCosted = "IsCosted";
 /** Set Attribute Set Instance.
 @param M_AttributeSetInstance_ID Product Attribute Set Instance */
 public void setM_AttributeSetInstance_ID (int M_AttributeSetInstance_ID)
@@ -249,10 +280,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Storage_AttributeSetInstance_Name="Instancia del Conjunto de Atributos";
 
 @XendraTrl(Identifier="f6708b0d-d443-5198-a762-ca8f9d0a3667")
-public static String es_PE_FIELD_Storage_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
+public static String es_PE_FIELD_Storage_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
 
 @XendraTrl(Identifier="f6708b0d-d443-5198-a762-ca8f9d0a3667")
-public static String es_PE_FIELD_Storage_AttributeSetInstance_Help="Valor actual de Instancia del conjunto de atributos del producto";
+public static String es_PE_FIELD_Storage_AttributeSetInstance_Description="Instancia del conjunto de atributos del producto";
 
 @XendraField(AD_Column_ID="M_AttributeSetInstance_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -270,7 +301,7 @@ AD_Val_Rule_ID="",FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,Is
 IsMandatory=true,IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,
 Callout="",VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="bd1856ec-efb6-adfd-469e-ffc1ea0d11c6",Synchronized="2020-11-02 17:52:06.0")
+Identifier="bd1856ec-efb6-adfd-469e-ffc1ea0d11c6",Synchronized="2023-03-22 18:57:02.0")
 /** Column name M_AttributeSetInstance_ID */
 public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
 /** Set Locator.
@@ -293,10 +324,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Storage_Locator_Name="Ubicación";
 
 @XendraTrl(Identifier="a99d5e2c-fbe0-cc2c-8f65-11382b8857c7")
-public static String es_PE_FIELD_Storage_Locator_Description="Ubicación de Almacén";
+public static String es_PE_FIELD_Storage_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
 
 @XendraTrl(Identifier="a99d5e2c-fbe0-cc2c-8f65-11382b8857c7")
-public static String es_PE_FIELD_Storage_Locator_Help="El ID de la ubicación indica en que parte del almacén se localiza el producto";
+public static String es_PE_FIELD_Storage_Locator_Description="Ubicación de Almacén";
 
 @XendraField(AD_Column_ID="M_Locator_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -314,7 +345,7 @@ IsKey=false,IsInternal=false,IsParent=true,IsMandatory=true,IsUpdateable=false,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c719fe8b-a7be-52b1-1492-b4d24457e13e",
-Synchronized="2020-11-02 17:52:06.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name M_Locator_ID */
 public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 /** Set Product.
@@ -337,10 +368,10 @@ return ii.intValue();
 public static String es_PE_FIELD_Storage_Product_Name="Producto";
 
 @XendraTrl(Identifier="2c2cde9b-2093-2ff1-543c-a19fbbc26193")
-public static String es_PE_FIELD_Storage_Product_Description="Producto; servicio ó artículo.";
+public static String es_PE_FIELD_Storage_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
 
 @XendraTrl(Identifier="2c2cde9b-2093-2ff1-543c-a19fbbc26193")
-public static String es_PE_FIELD_Storage_Product_Help="Identifica un artículo que puede ser comprado ó vendido es esta organización.";
+public static String es_PE_FIELD_Storage_Product_Description="Producto; servicio ó artículo.";
 
 @XendraField(AD_Column_ID="M_Product_ID",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -358,7 +389,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=true,IsMand
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="f9d1bc43-2b12-6a0d-3daf-bc3f0ac44a3f",Synchronized="2020-11-02 17:52:07.0")
+Identifier="f9d1bc43-2b12-6a0d-3daf-bc3f0ac44a3f",Synchronized="2023-03-22 18:57:02.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set M_Storage.
@@ -399,10 +430,10 @@ return bd;
 public static String es_PE_FIELD_Storage_OnHandQuantity_Name="Cantidad en Existencia";
 
 @XendraTrl(Identifier="0af09c8d-b4f2-fe74-c333-627d54f20956")
-public static String es_PE_FIELD_Storage_OnHandQuantity_Description="Cantidad en existencia";
+public static String es_PE_FIELD_Storage_OnHandQuantity_Help="La cantidad en existencia indica la cantidad de un producto que se encuentra en inventario";
 
 @XendraTrl(Identifier="0af09c8d-b4f2-fe74-c333-627d54f20956")
-public static String es_PE_FIELD_Storage_OnHandQuantity_Help="La cantidad en existencia indica la cantidad de un producto que se encuentra en inventario";
+public static String es_PE_FIELD_Storage_OnHandQuantity_Description="Cantidad en existencia";
 
 @XendraField(AD_Column_ID="QtyOnHand",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -420,7 +451,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="14b1064b-4e5e-7c39-d268-3b1bcecfd074",
-Synchronized="2020-11-02 17:52:07.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name QtyOnHand */
 public static final String COLUMNNAME_QtyOnHand = "QtyOnHand";
 /** Set Ordered Quantity.
@@ -443,10 +474,10 @@ return bd;
 public static String es_PE_FIELD_Storage_OrderedQuantity_Name="Cantidad Ordenada";
 
 @XendraTrl(Identifier="86b07c6e-e298-82c2-e0a2-03a44b77c239")
-public static String es_PE_FIELD_Storage_OrderedQuantity_Description="Cantidad ordenada";
+public static String es_PE_FIELD_Storage_OrderedQuantity_Help="La Cantidad Ordenada indica la cantidad de un producto que fue ordenada";
 
 @XendraTrl(Identifier="86b07c6e-e298-82c2-e0a2-03a44b77c239")
-public static String es_PE_FIELD_Storage_OrderedQuantity_Help="La Cantidad Ordenada indica la cantidad de un producto que fue ordenada";
+public static String es_PE_FIELD_Storage_OrderedQuantity_Description="Cantidad ordenada";
 
 @XendraField(AD_Column_ID="QtyOrdered",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -464,7 +495,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="bac9e763-ca8e-9f00-4f62-38f37506c2d1",
-Synchronized="2020-11-02 17:52:07.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name QtyOrdered */
 public static final String COLUMNNAME_QtyOrdered = "QtyOrdered";
 /** Set Reserved Quantity.
@@ -487,10 +518,10 @@ return bd;
 public static String es_PE_FIELD_Storage_ReservedQuantity_Name="Cantidad Reservada";
 
 @XendraTrl(Identifier="c204b337-0291-eac0-cf89-f8ae8e81fddd")
-public static String es_PE_FIELD_Storage_ReservedQuantity_Description="Cantidad reservada";
+public static String es_PE_FIELD_Storage_ReservedQuantity_Help="La cantidad reservada indica la cantidad de un producto que se encuentra reservada para otras órdenes";
 
 @XendraTrl(Identifier="c204b337-0291-eac0-cf89-f8ae8e81fddd")
-public static String es_PE_FIELD_Storage_ReservedQuantity_Help="La cantidad reservada indica la cantidad de un producto que se encuentra reservada para otras órdenes";
+public static String es_PE_FIELD_Storage_ReservedQuantity_Description="Cantidad reservada";
 
 @XendraField(AD_Column_ID="QtyReserved",IsCentrallyMaintained=true,
 AD_Tab_ID="2b54d21b-9e81-fa0f-765f-2e564a9f8623",AD_FieldGroup_ID="",IsDisplayed=true,
@@ -508,7 +539,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="8e5b5e6e-7b96-94ff-4e6d-4c9443296341",
-Synchronized="2020-11-02 17:52:07.0")
+Synchronized="2023-03-22 18:57:02.0")
 /** Column name QtyReserved */
 public static final String COLUMNNAME_QtyReserved = "QtyReserved";
 }

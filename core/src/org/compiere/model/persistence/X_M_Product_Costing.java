@@ -114,9 +114,15 @@ AD_Plugin_ID="67dff047-7c04-1001-e4d1-ad0b0ce9a44a",Description="",Help="",
 TableName="M_Product_Costing",AccessLevel="3",AD_Window_ID="ce2d4e2c-ba4e-29bf-9f71-66fecdc05f55",
 AD_Val_Rule_ID="",IsKey=1,LoadSeq=145,IsSecurityEnabled=false,IsDeleteable=false,IsHighVolume=true,
 IsChangeLog=false,IsView=false,PO_Window_ID="",ID="org.xendra.material",
-Identifier="d72e6674-f498-5a9c-20a6-8f32d8e78546",Synchronized="2023-04-03 21:46:08.0")
+Identifier="d72e6674-f498-5a9c-20a6-8f32d8e78546",Synchronized="2023-04-19 09:53:47.0")
 /** TableName=M_Product_Costing */
 public static final String Table_Name="M_Product_Costing";
+
+
+@XendraIndex(Name="m_product_costing_carding",Identifier="8648c1f9-15ed-0df8-58b5-69d4f71304c1",
+Column_Names="ad_client_id, m_costelement_id, c_period_id, m_product_id",IsUnique="false",
+TableIdentifier="8648c1f9-15ed-0df8-58b5-69d4f71304c1",Synchronized="2023-04-19 07:35:58.0")
+public static final String INDEXNAME_m_product_costing_carding = "8648c1f9-15ed-0df8-58b5-69d4f71304c1";
 
 protected static KeyNamePair Model = new KeyNamePair(Table_ID,"M_Product_Costing");
 
@@ -204,7 +210,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="686da55f-ba50-3587-2a18-af7c0d77f386",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:06.0")
 /** Column name CostAverage */
 public static final String COLUMNNAME_CostAverage = "CostAverage";
 /** Set Average Cost Amount Sum.
@@ -264,7 +270,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="b91b50ea-fb09-42e4-360d-3e89fc03cd6d",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:06.0")
 /** Column name CostAverageCumAmt */
 public static final String COLUMNNAME_CostAverageCumAmt = "CostAverageCumAmt";
 /** Set Average Cost Quantity Sum.
@@ -324,7 +330,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="f7f5b8e7-115c-c066-1576-8801b0a83ac3",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:06.0")
 /** Column name CostAverageCumQty */
 public static final String COLUMNNAME_CostAverageCumQty = "CostAverageCumQty";
 /** Set Standard Cost.
@@ -384,7 +390,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="23e11c2a-a61c-9981-3111-74a473ede8d2",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:06.0")
 /** Column name CostStandard */
 public static final String COLUMNNAME_CostStandard = "CostStandard";
 /** Set Std Cost Amount Sum.
@@ -444,7 +450,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="2cb2a4c5-d174-fcac-95c2-19037c517bc6",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name CostStandardCumAmt */
 public static final String COLUMNNAME_CostStandardCumAmt = "CostStandardCumAmt";
 /** Set Std Cost Quantity Sum.
@@ -504,7 +510,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="80ba2659-b30e-214f-c163-25493d79e434",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name CostStandardCumQty */
 public static final String COLUMNNAME_CostStandardCumQty = "CostStandardCumQty";
 /** Set Std PO Cost Amount Sum.
@@ -564,7 +570,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="87277883-2d9c-c046-b027-d877d61478ff",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name CostStandardPOAmt */
 public static final String COLUMNNAME_CostStandardPOAmt = "CostStandardPOAmt";
 /** Set Std PO Cost Quantity Sum.
@@ -624,7 +630,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="34a9e587-18f0-a1d6-ef8f-e07958eee396",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name CostStandardPOQty */
 public static final String COLUMNNAME_CostStandardPOQty = "CostStandardPOQty";
 /** Set Period.
@@ -669,7 +675,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="0f15a054-8ecf-4583-ac14-ed03ce3a51f2",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name C_Period_ID */
 public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
 /** Set Current Cost Price.
@@ -723,7 +729,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="d4a6c198-5656-6c3b-5a6e-9056ffa2586e",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name CurrentCostPrice */
 public static final String COLUMNNAME_CurrentCostPrice = "CurrentCostPrice";
 /** Set Error Msg.
@@ -760,7 +766,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="15f7a901-be48-475f-8f23-150b5ad2be07",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name ErrorMsg */
 public static final String COLUMNNAME_ErrorMsg = "ErrorMsg";
 /** Set Future Cost Price.
@@ -808,7 +814,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=true,R
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="76df9b88-1292-9fdc-0158-6d6222815e72",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name FutureCostPrice */
 public static final String COLUMNNAME_FutureCostPrice = "FutureCostPrice";
 /** Set Identifier.
@@ -850,7 +856,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="edab8d62-e215-4113-8063-6196f76ba1a5",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name Identifier */
 public static final String COLUMNNAME_Identifier = "Identifier";
 /** Set LastCosted.
@@ -885,7 +891,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="4935236e-e9e8-4090-a1a6-7a3215e9f9e0",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name LastCosted */
 public static final String COLUMNNAME_LastCosted = "LastCosted";
 /** Set Cost Calc.
@@ -924,7 +930,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="c19dc7cd-dd0b-4fdc-8d93-6df022bbdbfb",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name M_CostCalc_ID */
 public static final String COLUMNNAME_M_CostCalc_ID = "M_CostCalc_ID";
 /** Set Cost Element.
@@ -966,7 +972,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="90c6c097-e5c8-4e34-a5c0-6af14d583053",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name M_CostElement_ID */
 public static final String COLUMNNAME_M_CostElement_ID = "M_CostElement_ID";
 /** Set Product Costing.
@@ -1054,7 +1060,7 @@ FieldLength=22,DefaultValue="",IsKey=false,IsInternal=false,IsParent=false,IsMan
 IsUpdateable=false,ReadOnlyLogic="",IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",
 VFormat="",ValueMin="",ValueMax="",Version="1",IsSelectionColumn=false,AD_Process_ID="",
 IsAlwaysUpdateable=false,ColumnSQL="",IsAllowLogging=false,
-Identifier="eca82e20-fc03-8d9c-730f-8e5f2434cfcb",Synchronized="2020-03-31 22:49:37.0")
+Identifier="eca82e20-fc03-8d9c-730f-8e5f2434cfcb",Synchronized="2023-04-03 21:46:07.0")
 /** Column name M_Product_ID */
 public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 /** Set Last Invoice Price.
@@ -1114,7 +1120,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="361bcbd2-96f5-534e-1be8-cc117a70f562",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name PriceLastInv */
 public static final String COLUMNNAME_PriceLastInv = "PriceLastInv";
 /** Set Last PO Price.
@@ -1174,7 +1180,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="6514c791-af74-e1e7-1687-1c4e432ef8bd",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name PriceLastPO */
 public static final String COLUMNNAME_PriceLastPO = "PriceLastPO";
 /** Set Sequence.
@@ -1217,7 +1223,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="a48a63fe-f1ea-4436-ad65-7fa059270be6",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name SeqNo */
 public static final String COLUMNNAME_SeqNo = "SeqNo";
 /** Set Total Invoice Amount.
@@ -1277,7 +1283,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="5d943050-6586-adb3-ddf3-c0dd4256d70b",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name TotalInvAmt */
 public static final String COLUMNNAME_TotalInvAmt = "TotalInvAmt";
 /** Set Total Invoice Quantity.
@@ -1337,7 +1343,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=true,IsUpdateable=false,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="1",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="fcd90c33-2c22-adfa-3ae4-31ea53344af0",
-Synchronized="2020-03-31 22:49:37.0")
+Synchronized="2023-04-03 21:46:07.0")
 /** Column name TotalInvQty */
 public static final String COLUMNNAME_TotalInvQty = "TotalInvQty";
 /** Set Transactions.
@@ -1364,7 +1370,7 @@ IsKey=false,IsInternal=false,IsParent=false,IsMandatory=false,IsUpdateable=true,
 IsIdentifier=false,SeqNo=0,IsTranslated=false,Callout="",VFormat="",ValueMin="",ValueMax="",
 Version="0",IsSelectionColumn=false,AD_Process_ID="",IsAlwaysUpdateable=false,ColumnSQL="",
 IsAllowLogging=false,Identifier="7aae07ac-101f-4325-a8c4-4b9af7d6656f",
-Synchronized="2023-04-03 21:44:28.0")
+Synchronized="2023-04-03 21:46:08.0")
 /** Column name Transactions */
 public static final String COLUMNNAME_Transactions = "Transactions";
 }

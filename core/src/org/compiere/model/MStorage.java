@@ -545,24 +545,17 @@ public class MStorage extends X_M_Storage
 			}
 			if (changed)
 			{
-				//diffText.append(") -> ").append(storage.toString());				
-				 
+				//diffText.append(") -> ").append(storage.toString());								
 				s_log.fine(diffText.toString());
 				if (storage0 != null)
 				{
+					storage0.setIsCosted(false);
 					storage0.save(trxName);		//	No AttributeSetInstance (reserved/ordered)
+				} else if (storage != null) {
+					storage.setIsCosted(false);
 				}
 				if (!storage.save (trxName))
 					throw new Exception ("MStorage can't be saved");
-				//BigDecimal value = DB.getSQLValueBD(null," SELECT qtydiffbyuom(?,?,0)",M_Product_ID,M_Warehouse_ID);
-				//value = value.add(diffQtyOnHand);
-				//diffText.append(")").append(M_Product_ID).append(" ->").append(value);
-//				diffText.append(" table_id="+AD_Table_ID+" record_id="+Record_ID);				
-//				StockWorker sw = new StockWorker();
-//				sw.setCommand(StockWorker.Product);
-//				sw.addProperty(X_M_Transaction.COLUMNNAME_C_Period_ID, C_Period_ID );
-//				sw.addProperty(X_M_Transaction.COLUMNNAME_M_Product_ID, M_Product_ID);				
-//				addStockWorker(sw);				
 			}
 		}
 		catch (Exception e)

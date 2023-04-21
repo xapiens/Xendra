@@ -9,7 +9,7 @@ public class Costavgmonth
 @XendraFunction(Name="costavgmonth",Output="integer",Owner="xendra",Language="plpgsql",
 Identifier="7c7baa29-2036-f500-1cef-a47ecdfe3575",
 Arguments="client_id numeric, product_id numeric, costelement_id numeric, p_period_id numeric",
-Extension="",Synchronized="2022-11-13 21:45:00.0")
+Extension="",Synchronized="2023-04-20 19:09:00.0")
 	public static final String Identifier = "7c7baa29-2036-f500-1cef-a47ecdfe3575";
 
 	public static final String getCode() 
@@ -49,6 +49,7 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("COSTCALC 		xendra.m_costcalc%ROWTYPE;");
 	sb.appendln("_tablename 		CHARACTER VARYING := '';");
 	sb.appendln("_sqlupdate 		CHARACTER VARYING := '';");
+	sb.appendln("_transactions		NUMERIC := 0;");
 	sb.appendln("_found   		NUMERIC := 0;");
 	sb.appendln("COSTELEMENT 		xendra.m_costelement%ROWTYPE;");
 	sb.appendln("_priceactual		NUMERIC := 0;");
@@ -98,6 +99,9 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("  end if;");
 	sb.appendln("  SELECT * into COSTELEMENT from xendra.M_COSTELEMENT ");
 	sb.appendln("		  WHERE m_costelement_id = costelement_id;		 ");
+	sb.appendln("  if COSTELEMENT.c_currency_id isnull then");
+	sb.appendln("	return -1;");
+	sb.appendln("  END IF;");
 	sb.appendln("  SELECT * into PERIOD from c_period WHERE C_Period_id = p_period_id;");
 	sb.appendln("  --RAISE NOTICE 'executing costavgmonth period % %', PERIOD.NAME, p_period_id;");
 	sb.appendln("  RAISE NOTICE '% %', PERIOD.NAME, productname;");
@@ -239,13 +243,13 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("	  _oldcost   := COALESCE(PRODUCT_COSTING.costaverage,0);");
 	sb.appendln("	  _oldincost := COALESCE(PRODUCT_COSTING.currentcostprice,0);	  	  	");
 	sb.appendln("	  --RAISE NOTICE 'SumPrevStock % OldStock % OldCost % OldInCost % %', _SumPrevStock, _oldstock, _oldcost, _oldincost, PERIOD.NAME		;");
-	sb.appendln("	  SELECT COUNT(*) into _found FROM xendra.m_carding t ");
+	sb.appendln("	  SELECT COUNT(*) into _transactions FROM xendra.m_carding t ");
 	sb.appendln("				WHERE t.M_Product_ID = product_ID ");
 	sb.appendln("				 AND t.AD_Client_ID = Client_ID");
 	sb.appendln("				 AND t.C_Period_ID = p_period_id");
 	sb.appendln("				 --AND seqno isnull");
 	sb.appendln("				 AND COALESCE(t.iscosted,'N') = 'N';");
-	sb.appendln("          --RAISE NOTICE '% transacciones ', _found;          				");
+	sb.appendln("          RAISE NOTICE '% Period % transacciones ', p_period_id, _transactions;          				");
 	sb.appendln("          FOR seqcarding IN ");
 	sb.appendln("	  WITH upseqno as (select row_number() over (order by movementdate,right(movementtype,1) desc) as seqno, 	  ");
 	sb.appendln("		ad_table_id, record_id from m_carding where m_product_id = product_ID AND c_period_id = p_period_id)");
@@ -378,12 +382,16 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("	      END IF;");
 	sb.appendln("	      IF _IsInput AND NOT _IsTransfer THEN ");
 	sb.appendln("	        IF _hasOrder OR _isProduction OR _IsInventory OR _IsInvoice THEN");
+	sb.appendln("	          raise notice '_hasOrder OR _isProduction OR _IsInventory OR _IsInvoice';");
+	sb.appendln("	          raise notice '_oldStock %',_oldStock;");
+	sb.appendln("	          --raise notice 'CARDING.qtyinput % %',CARDING.qtyinput,Substring(CARDING.Movementtype,2,1);");
 	sb.appendln("	          if Substring(CARDING.Movementtype,2,1) = '+' then");
 	sb.appendln("		    --_newStock := _oldStock + CARDING.MovementQty;");
 	sb.appendln("		    _newStock := _oldStock + CARDING.qtyinput;");
 	sb.appendln("		  else");
 	sb.appendln("		    _newStock := _oldStock;");
 	sb.appendln("		  end if;");
+	sb.appendln("		  raise notice '_newStock %', _newStock;");
 	sb.appendln("		  IF _IsReturn then");
 	sb.appendln("		    _returndate := xendra.getcostdate(CARDING.record_id,");
 	sb.appendln("						      CARDING.c_orderline_id,");
@@ -404,7 +412,8 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("		       IF CARDING.TRANSACTIONTYPE ISNULL THEN");
 	sb.appendln("			  --RAISE NOTICE 'ES OBLIGATORIO DEFINIR EL TRANSACTIONTYPE EN EL DOCTYPE %(%) en % %', CARDING.C_DOCTYPE_ID, CARDING.DOCUMENTTYPENAME, period.c_period_id, period.name ;");
 	sb.appendln("			  RETURN -2;");
-	sb.appendln("		       END IF;		     ");
+	sb.appendln("		       END IF;	");
+	sb.appendln("		       RAISE NOTICE 'CARDING.TRANSACTIONTYPE %', CARDING.TRANSACTIONTYPE;");
 	sb.appendln("		       IF CARDING.TRANSACTIONTYPE = 'B' OR CARDING.TRANSACTIONTYPE = 'C' THEN");
 	sb.appendln("		         _newPrice := 0;");
 	sb.appendln("		         ----RAISE NOTICE 'ProductionPlanID %',CARDING.M_ProductionPlan_ID;");
@@ -438,26 +447,33 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("			     _newPrice := _newPrice + _newCost * abs( PRODUCTION.qtyinput ) ;");
 	sb.appendln("			   end if;			     ");
 	sb.appendln("			 END LOOP;");
+	sb.appendln("			 RAISE NOTICE '_newPrice %', _newPrice;");
 	sb.appendln("		         IF _newPrice > 0 then");
 	sb.appendln("		           --IF CARDING.MovementQty > 0 THEN");
 	sb.appendln("		           IF CARDING.qtyinput > 0 THEN");
 	sb.appendln("		             --_newPrice := _newPrice / carding.MovementQty;");
+	sb.appendln("		             RAISE NOTICE 'Period % _newPrice %',PERIOD.Name, _newPrice;");
 	sb.appendln("		             _newPrice := _newPrice / carding.qtyinput;");
+	sb.appendln("		             RAISE NOTICE 'Period % _newPrice / qtyinput %',PERIOD.Name, _newPrice;");
 	sb.appendln("		           END IF;");
 	sb.appendln("			   COSTCALC.InCost := _newPrice;");
 	sb.appendln("			   UPDATE M_PRODUCTIONPLAN SET INCOST = _newPrice ");
 	sb.appendln("				where M_Product_ID = CARDING.M_Product_ID");
 	sb.appendln("				AND M_ProductionPlan_ID = CARDING.M_ProductionPlan_ID;");
+	sb.appendln("			 ELSE ");
+	sb.appendln("			   RAISE NOTICE '_newPrice = 0';	");
 	sb.appendln("			 END IF;");
 	sb.appendln("		       END IF;");
-	sb.appendln("		     ELSE");
+	sb.appendln("		     ELSE		       ");
 	sb.appendln("		       IF COALESCE(CARDING.C_ORDERLINE_ID,0) > 0 THEN");
 	sb.appendln("		       	 IF CARDING.TRANSACTIONTYPE ISNULL THEN");
 	sb.appendln("				--RAISE NOTICE 'ES OBLIGATORIO DEFINIR EL TRANSACTIONTYPE EN EL DOCTYPE % (%) en % %', CARDING.C_DOCTYPE_ID, CARDING.DOCUMENTTYPENAME, period.c_period_id, period.name ;");
 	sb.appendln("				RETURN -2;");
 	sb.appendln("		         END IF;		         ");
-	sb.appendln("		         --RAISE NOTICE 'ENTERING IN C_ORDERLINE % %', PERIOD.NAME, CARDING.RECORD_ID;");
+	sb.appendln("		         RAISE NOTICE 'ENTERING IN C_ORDERLINE % %', PERIOD.NAME, CARDING.C_ORDERLINE_ID;");
+	sb.appendln("		         RAISE NOTICE 'CARDING.TRANSACTIONTYPE %',CARDING.TRANSACTIONTYPE;");
 	sb.appendln("		         IF CARDING.TRANSACTIONTYPE = 'B' OR CARDING.TRANSACTIONTYPE = 'C' THEN");
+	sb.appendln("		           RAISE NOTICE 'ENTERING...';");
 	sb.appendln("			   select ol.priceactual,");
 	sb.appendln("				  ol.c_currency_id,				  ");
 	sb.appendln("				  o.c_conversiontype_id,");
@@ -468,19 +484,26 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("				  c_orderline ol ");
 	sb.appendln("				  join c_order o on ol.c_order_id = o.c_order_id");
 	sb.appendln("				  WHERE ol.c_orderline_id = CARDING.C_OrderLine_ID;");
-	sb.appendln("		           select max(rate) into _rate FROM c_tax ");
-	sb.appendln("				  where c_taxcategory_id in");
-	sb.appendln("				  (SELECT c_taxcategory_id from m_product where m_product_id =  product_id);");
+	sb.appendln("			   select rate into _rate from c_tax where c_tax_id = _c_tax_id;	  ");
+	sb.appendln("		           --select max(rate) into _rate FROM c_tax ");
+	sb.appendln("			   --	  where c_taxcategory_id in");
+	sb.appendln("			   --	  (SELECT c_taxcategory_id from m_product where m_product_id =  product_id);");
+	sb.appendln("		           raise notice '_ctax_id %',_c_tax_id;");
+	sb.appendln("			   raise notice '_istaxincluded %', _istaxincluded;");
+	sb.appendln("			   raise notice '_rate %', _rate;");
+	sb.appendln("			   raise notice '_priceactual 1 %', _priceactual;");
 	sb.appendln("			   IF _istaxincluded AND _rate > 0 AND _priceactual > 0 then");
 	sb.appendln("			     SELECT rate into _rate FROM c_tax ");
 	sb.appendln("			       where c_tax_id = _c_tax_id;");
 	sb.appendln("			       GET DIAGNOSTICS _found = ROW_COUNT;	 																												");
 	sb.appendln("			       IF _found = 1 THEN							   ");
 	sb.appendln("			         _rate = _rate / 100;");
-	sb.appendln("				 _rate = 1 + _rate;");
+	sb.appendln("				 _rate = 1 + _rate;				 ");
 	sb.appendln("				 _priceactual := round(_priceactual / _rate,10);");
 	sb.appendln("			       END IF;");
 	sb.appendln("			   END IF;");
+	sb.appendln("			   raise notice '_priceactual 2 %', _priceactual;");
+	sb.appendln("			   RAISE NOTICE '_c_currency_id %  COSTELEMENT.c_currency_id %',_c_currency_id, COSTELEMENT.c_currency_id;");
 	sb.appendln("			   _priceactual = currencyconvertcost(_priceactual::numeric,_c_currency_id, COSTELEMENT.c_currency_id,");
 	sb.appendln("			   CARDING.movementdate, _c_conversiontype_id::numeric, CARDING.AD_Client_ID, CARDING.AD_ORG_ID);");
 	sb.appendln("			   _PriceActual := COALESCE(_PriceActual,0);	");
@@ -490,6 +513,7 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("				COSTCALC.ERRORMSG := 'problema de conversion ' || date(CARDING.movementdate) || ' '|| COALESCE((select name from c_conversiontype where c_conversiontype_id = _c_conversiontype_id),'') ;				");
 	sb.appendln("			   end if;");
 	sb.appendln("			   COSTCALC.InCost := _pricelastpo;");
+	sb.appendln("			   RAISE NOTICE 'COSTCALC.InCost %', COSTCALC.InCost;");
 	sb.appendln("			   --_linenetamt := round(_pricelastpo * CARDING.MovementQty, 2);");
 	sb.appendln("			   _linenetamt := round(_pricelastpo * CARDING.qtyinput, 2);");
 	sb.appendln("			   COSTCALC.linenetamt := _linenetamt;");
@@ -542,6 +566,7 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("				end if;");
 	sb.appendln("		         END IF;		     		         ");
 	sb.appendln("		       ELSIF COALESCE(CARDING.M_InventoryLine_ID,0) > 0 THEN");
+	sb.appendln("		         RAISE NOTICE 'CARDING.M_InventoryLine_ID %s', CARDING.M_InventoryLine_ID;");
 	sb.appendln("		         IF CARDING.TRANSACTIONTYPE ISNULL THEN");
 	sb.appendln("				--RAISE NOTICE 'ES OBLIGATORIO DEFINIR EL TRANSACTIONTYPE EN EL DOCTYPE % (%) en % %', CARDING.C_DOCTYPE_ID, CARDING.DOCUMENTTYPENAME, period.c_period_id, period.name ;");
 	sb.appendln("				RETURN -2;");
@@ -808,6 +833,7 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("	      END IF;");
 	sb.appendln("	      PRODUCT_COSTING.totalinvqty 	:= _totalinvqty;");
 	sb.appendln("	      PRODUCT_COSTING.totalinvamt 	:= _totalinvamt;	");
+	sb.appendln("	      PRODUCT_COSTING.transactions 	:= _transactions;");
 	sb.appendln("	      PRODUCT_COSTING.m_costcalc_id 	:= costcalc.m_CostCalc_ID;	    ");
 	sb.appendln("	      --PRODUCT_COSTING.isactive 		:= 'Y';");
 	sb.appendln("	      UPDATE m_product_costing set costaverage = PRODUCT_COSTING.costaverage, ");
@@ -819,7 +845,8 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("					    errormsg		= PRODUCT_COSTING.errormsg,");
 	sb.appendln("					    pricelastinv	= PRODUCT_COSTING.pricelastinv,");
 	sb.appendln("					    totalinvqty		= PRODUCT_COSTING.totalinvqty,");
-	sb.appendln("					    totalinvamt		= PRODUCT_COSTING.totalinvamt					    ");
+	sb.appendln("					    totalinvamt		= PRODUCT_COSTING.totalinvamt,					    ");
+	sb.appendln("					    transactions	= PRODUCT_COSTING.transactions");
 	sb.appendln("		WHERE AD_Client_ID = PRODUCT_COSTING.AD_Client_ID");
 	sb.appendln("		AND m_product_ID = product_id ");
 	sb.appendln("		AND C_Period_ID = p_period_id;");
@@ -828,12 +855,12 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("		INSERT INTO M_Product_Costing (AD_Client_ID, AD_Org_ID,created, createdby,updated, updatedby, ");
 	sb.appendln("		costaverage, costaveragecumamt,costaveragecumqty, c_period_id,  currentcostprice, ");
 	sb.appendln("		isactive, lastcosted, m_costcalc_id, m_costelement_id, m_product_id, ");
-	sb.appendln("		pricelastinv, pricelastpo, totalinvamt,totalinvqty, seqno) ");
+	sb.appendln("		pricelastinv, pricelastpo, totalinvamt,totalinvqty, transactions, seqno) ");
 	sb.appendln("		VALUES (");
 	sb.appendln("		PRODUCT_COSTING.AD_Client_ID, PRODUCT_COSTING.AD_Org_ID, PRODUCT_COSTING.Created,PRODUCT_COSTING.CreatedBy,  PRODUCT_COSTING.Updated,PRODUCT_COSTING.UpdatedBy,  ");
 	sb.appendln("		PRODUCT_COSTING.costaverage, PRODUCT_COSTING.costaveragecumamt,PRODUCT_COSTING.costaveragecumqty, PRODUCT_COSTING.c_period_id, PRODUCT_COSTING.currentcostprice, ");
 	sb.appendln("		PRODUCT_COSTING.isactive, PRODUCT_COSTING.lastcosted, PRODUCT_COSTING.m_costcalc_id, PRODUCT_COSTING.m_costelement_id, PRODUCT_COSTING.m_product_id, ");
-	sb.appendln("		PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.seqno);				  			");
+	sb.appendln("		PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.transactions, PRODUCT_COSTING.seqno);				  			");
 	sb.appendln("	      END IF;					");
 	sb.appendln("	      IF COALESCE(PRODUCT_COSTING.errormsg,'') != '' THEN");
 	sb.appendln("	        --RAISE NOTICE '%', PRODUCT_COSTING.errormsg;");
@@ -861,7 +888,8 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("					    errormsg		= PRODUCT_COSTING.errormsg,");
 	sb.appendln("					    pricelastinv	= PRODUCT_COSTING.pricelastinv,");
 	sb.appendln("					    totalinvqty		= PRODUCT_COSTING.totalinvqty,");
-	sb.appendln("					    totalinvamt		= PRODUCT_COSTING.totalinvamt					    ");
+	sb.appendln("					    totalinvamt		= PRODUCT_COSTING.totalinvamt,");
+	sb.appendln("					    transactions 	= PRODUCT_COSTING.transactions					    ");
 	sb.appendln("	 	    WHERE AD_Client_ID = PRODUCT_COSTING.AD_Client_ID");
 	sb.appendln("		    AND m_product_ID = product_id ");
 	sb.appendln("	  	    AND C_Period_ID = p_period_id;");
@@ -870,12 +898,12 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("		    INSERT INTO M_Product_Costing (AD_Client_ID, AD_Org_ID,created, createdby,updated, updatedby, ");
 	sb.appendln("		      costaverage, costaveragecumamt,costaveragecumqty, c_period_id,  currentcostprice, ");
 	sb.appendln("		      isactive, lastcosted, m_costcalc_id, m_costelement_id, m_product_id, ");
-	sb.appendln("		      errormsg, pricelastinv, pricelastpo, totalinvamt,totalinvqty, seqno) ");
+	sb.appendln("		      errormsg, pricelastinv, pricelastpo, totalinvamt,totalinvqty, transactions, seqno) ");
 	sb.appendln("		    VALUES (");
 	sb.appendln("		      PRODUCT_COSTING.AD_Client_ID, PRODUCT_COSTING.AD_Org_ID, PRODUCT_COSTING.Created,PRODUCT_COSTING.CreatedBy,  PRODUCT_COSTING.Updated,PRODUCT_COSTING.UpdatedBy,  ");
 	sb.appendln("		      PRODUCT_COSTING.costaverage, PRODUCT_COSTING.costaveragecumamt,PRODUCT_COSTING.costaveragecumqty, p_period_id, PRODUCT_COSTING.currentcostprice, ");
 	sb.appendln("		      PRODUCT_COSTING.isactive, PRODUCT_COSTING.lastcosted, PRODUCT_COSTING.m_costcalc_id, PRODUCT_COSTING.m_costelement_id, PRODUCT_COSTING.m_product_id, ");
-	sb.appendln("		      PRODUCT_COSTING.errormsg, PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.seqno + 1);				  			");
+	sb.appendln("		      PRODUCT_COSTING.errormsg, PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.transactions, PRODUCT_COSTING.seqno + 1);				  			");
 	sb.appendln("	          END IF;	");
 	sb.appendln("	          IF (_checkStock) THEN			");
 	sb.appendln("		    UPDATE m_product_costing set costaveragecumqty = _SumPrevStock + _SumStock ");
@@ -890,12 +918,12 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	sb.appendln("		    INSERT INTO M_Product_Costing (AD_Client_ID, AD_Org_ID,created, createdby,updated, updatedby, ");
 	sb.appendln("		      costaverage, costaveragecumamt,costaveragecumqty, c_period_id,  currentcostprice, ");
 	sb.appendln("		      isactive, lastcosted, m_costcalc_id, m_costelement_id, m_product_id, ");
-	sb.appendln("		      errormsg, pricelastinv, pricelastpo, totalinvamt,totalinvqty, seqno) ");
+	sb.appendln("		      errormsg, pricelastinv, pricelastpo, totalinvamt,totalinvqty, transactions, seqno) ");
 	sb.appendln("		    VALUES (");
 	sb.appendln("		      PRODUCT_COSTING.AD_Client_ID, PRODUCT_COSTING.AD_Org_ID, PRODUCT_COSTING.Created,PRODUCT_COSTING.CreatedBy,  PRODUCT_COSTING.Updated,PRODUCT_COSTING.UpdatedBy,  ");
 	sb.appendln("		      PRODUCT_COSTING.costaverage, PRODUCT_COSTING.costaveragecumamt,PRODUCT_COSTING.costaveragecumqty, p_period_id, PRODUCT_COSTING.currentcostprice, ");
 	sb.appendln("		      PRODUCT_COSTING.isactive, PRODUCT_COSTING.lastcosted, PRODUCT_COSTING.m_costcalc_id, PRODUCT_COSTING.m_costelement_id, PRODUCT_COSTING.m_product_id, ");
-	sb.appendln("		      PRODUCT_COSTING.errormsg, PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.seqno + 1);				  						");
+	sb.appendln("		      PRODUCT_COSTING.errormsg, PRODUCT_COSTING.pricelastinv, PRODUCT_COSTING.pricelastpo, PRODUCT_COSTING.totalinvamt,PRODUCT_COSTING.totalinvqty, PRODUCT_COSTING.transactions, PRODUCT_COSTING.seqno + 1);				  						");
 	sb.appendln("		   END IF;");
 	sb.appendln("	        END IF;");
 	sb.appendln("	    END IF;");
@@ -911,7 +939,7 @@ Extension="",Synchronized="2022-11-13 21:45:00.0")
 	public static final String getComments() 
 {
  	StrBuilder sb = new StrBuilder();
- 	sb.appendln("@Synchronized=2022-11-13 21:45:00.0");
+ 	sb.appendln("@Synchronized=2023-04-20 19:09:00.0");
 	sb.appendln("@depends=getcostfrominvoiceline");
 	sb.appendln("@Identifier=7c7baa29-2036-f500-1cef-a47ecdfe3575");
 	return sb.toString();

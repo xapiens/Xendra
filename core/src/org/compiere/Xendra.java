@@ -59,7 +59,7 @@ public final class Xendra
 	/** Main Version String         */
 	static public final String	MAIN_VERSION	= "Release 2.00";
 	/** Detail Version as date      Used for Client/Server		*/
-	static public final String	DATE_VERSION	= "03-01-2016";
+	static public final String	DATE_VERSION	= "03-01-2023";
 	/** Database Version as date    Compared with AD_System		*/
 	static public final String	DB_VERSION		= "2009-12-21";
 
