@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================= -->
+<!-- Account plugin                            -->
+<!-- ============================================= -->
+<!-- $Header: /svn/Xendra/client/build.xml,v 1.2 2011/11/11 21:57:27 xapiens Exp $ -->
+<project name="account" default="clientDistribute" basedir=".">
+  <description>
+    This buildfile is used to build the account plugin subproject within the Xendra project.
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="../lib"/>
+  <property name="plugin_id" value="org.xendra.acct"/>
+  <property name="jar.path" value="../lib"/>
+  <property name="jar.name" value="account"/>
+  <!--<property environment="env"/>-->
+  <import file="../utils_dev/properties.xml"/>
+  <!-- set path to include the necessary jar files for javac -->
+  <path id="project.class.path">
+    <pathelement path="${classpath}"/>    
+    <pathelement path="${jar.path}/Xendralib.jar"/>
+    <pathelement path="${jar.path}/core.jar"/>
+  </path>
+
+  <target name="clientInit" description="initialization target">
+    <echo message="=========== Build Account"/>
+    <!-- create the time stamp -->
+    <tstamp> 
+      <format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+    </tstamp>
+    <!-- create the build directory structure used by compile -->
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${plugin_id}"/>
+    <!-- check for the distribution directory -->
+    <available file="${dist.dir}" type="dir" property="dist.dir.exists"/>
+    <uptodate property="jar.uptodate"
+		targetfile="${dist.dir}/${jar.name}.jar">
+      <srcfiles dir="${src}" includes="**/*.java"/>
+    </uptodate>
+  </target>
+  <target name="clientMakedir" depends="clientInit" unless="dist.dir.exists">
+    <!-- create the distribution directory if not available -->
+    <mkdir dir="${dist.dir}"/>
+  </target>
+  <!-- =========================================== -->
+  <!-- Compile                                     -->
+  <!-- =========================================== -->
+  <target name="clientCompile" depends="clientMakedir">
+    <!-- compile the java code from ${src} into ${build.dir} -->
+    <javac srcdir="${src}" destdir="${build.dir}" deprecation="off" debug="on">
+      <classpath refid="project.class.path"/>
+    </javac>
+    <!-- copy all image & sound files from src to the build directory -->
+    <copy todir="${build.dir}">
+      <fileset dir="${src}">
+        <include name="**/images/*"/>
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.png"/>
+        <include name="**/*.wav"/>
+        <include name="**/*.htm"/>
+	<include name="**/*.txt"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.html"/>
+        <include name="**/*.properties"/>
+        <exclude name="**/package.html"/>      	
+      </fileset>
+    </copy>
+  </target>
+  <!-- =========================================== -->
+  <!-- Distribution                                -->
+  <!-- =========================================== -->
+  <target name="clientDistribute" depends="clientCompile" unless="jar.uptodate">
+    <!-- put everything from ${build.dir} into Xendra.jar file -->
+    <jar jarfile="${plugin_id}/${jar.name}.jar" basedir="${build.dir}" duplicate="preserve" index="yes">
+      <manifest>
+        <attribute name="Specification-Title" value="Xendra"/>
+        <attribute name="Specification-Version" value="${env.XENDRA_VERSION}"/>
+        <attribute name="Specification-Vendor" value="Xendra"/>
+        <attribute name="Implementation-Title" value="Xendra ${env.XENDRA_VERSION}"/>
+        <attribute name="Implementation-Version" value="${env.XENDRA_VERSION} ${DSTAMP}-${TSTAMP}"/>
+        <attribute name="Implementation-Vendor" value="${env.XENDRA_VENDOR}"/> 
+        <attribute name="Implementation-URL" value="http://www.xendra.org"/>
+      </manifest> 
+    </jar>
+    <copy file="src/org/xendra/acct/plugin/plugin.xml" todir="."/>
+    <replace file="./plugin.xml">
+       <replacefilter token="@timestamp@" value="${timestamp}"/>
+    </replace>
+    <zip destfile="${dist.dir}/${jar.name}.zip">
+      <zipfileset dir="${plugin_id}" prefix="${plugin_id}">
+	      <include name="${jar.name}.jar"/>
+     </zipfileset>
+     <zipfileset dir="." includes="plugin.xml" prefix="${plugin_id}"/>
+     <zipfileset dir="resource" prefix="${plugin_id}/resource"/>
+     <zipfileset dir="fill" prefix="${plugin_id}/fill"/>
+   </zip>
+   <copy file="${plugin_id}/${jar.name}.jar" todir="${dist.dir}"/>
+   <delete file="./plugin.xml"/>
+  </target>
+  <target name="clean">
+    <!-- Delete the ${build.dir} directory trees -->
+    <delete dir="${build.dir}"/>
+    <delete file="${dist.dir}/${jar.name}.jar" failonerror="false"/>
+  </target>
+</project>

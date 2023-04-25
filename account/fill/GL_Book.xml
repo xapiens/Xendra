@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="1" name="GL_Book">
+    <table name="GL_Book" accesslevel="0" level="1" Identifier="321bfd3e-d495-abb4-e788-d2128ee99669">
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="321bfd3e-d495-abb4-e788-d2128ee99669" Name="080100 - REGISTRO DE COMPRAS-PLE" Processed="false" ProcessingDate="dateacct" Value="080100" IsActive="false" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="fc00d860-d5a8-d88a-4b50-df9cb9fb589c" Name="060100 - LIBRO MAYOR-PLE" Processed="false" ProcessingDate="dateacct" Value="060100" IsActive="true">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c240f167-8422-e009-279b-ffcf85fdaf77" Name="030900 - I&amp;B Cta 34" Processed="false" ProcessingDate="dateacct" Value="030900" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, description]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="bfccf430-19ba-004d-dd83-52b96c8a3328" Name="050100 - LIBRO DE DIARIO-PLE" Processed="false" ProcessingDate="dateacct" Value="050100" IsActive="true">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c2e3cdd4-6c06-4ad2-90fd-87fc0f8a6cc4" Name="031500 - I&amp;B Cta 37 y 49" Processed="false" ProcessingDate="dateacct" Value="031500" IsActive="true">
+        <GroupByClause><![CDATA[valueacct,taxid,serial,invoicedocumentno,description]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="e893315c-a5b8-df36-eb13-411d8abe1148" Name="04 - LIBRO DE RETENCIONES - RENTA" Processed="false" Value="04" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="afecc3c6-2a9e-081d-1330-1355ea106b4d" Name="01 - LIBRO CAJA Y BANCOS" Processed="false" Value="01" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="81bb7588-bd12-e2f9-0ba0-99f127585e99" Name="030700 - I&amp;B Cta 20 y 21" Processed="false" ProcessingDate="dateacct" Value="030700" IsActive="true">
+        <GroupByClause><![CDATA[producttypetax, valuep, namep, um]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="25e25ea7-3f53-ea73-e1e9-f3706cd4e7ea" Name="032000 - I&amp;B Resultados" Processed="false" ProcessingDate="dateacct" Value="032000" IsActive="true">
+        <GroupByClause><![CDATA[taxid]]></GroupByClause>
+        <OrderByClause><![CDATA[taxid]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="26be5192-0899-8f78-f997-5d590758a72a" Name="03 - LIBRO DE INVENTARIOS Y BALANCES" Processed="false" Value="03" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="d151a4f8-f1a9-9791-f7ed-b494310d4198" Name="010200 - LIBRO BANCOS" Processed="false" ProcessingDate="dateacct" Value="010200" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="f9fe6e66-3cb6-bf07-1470-f23f09d3bbcd" Name="030300 - I&amp;B Cta 12 y 13" Processed="false" ProcessingDate="dateacct" Value="030300" IsActive="true">
+        <GroupByClause><![CDATA[taxid, namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="1d81ccef-0699-4065-8898-b6263b549f33" Name="031602 - I&amp;B Participacion" Processed="false" ProcessingDate="created" Value="031602" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="670b568f-d0dc-ae83-31c9-e60dbafbf676" Name="120100 - Inventario Unidades Fiscas" Processed="false" ProcessingDate="movementdate" Value="120100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8aa3c792-6bad-c926-94ba-5273be2c68fb" Name="031200 - I&amp;B Cta 42 y 43" Processed="false" ProcessingDate="dateacct" Value="031200" IsActive="true">
+        <GroupByClause><![CDATA[taxtype,taxid,namebp]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c188057d-9e63-d5a8-6c9e-fc760cd6d0d0" Name="06 - LIBRO MAYOR" Processed="false" ProcessingDate="dateacct" Value="06" IsActive="false">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="49679599-e513-60d3-b756-d58ec5491855" Name="05 - LIBRO DIARIO - PLE" Processed="false" ProcessingDate="dateacct" Value="05" IsActive="false">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="3bd55531-4dda-9d37-8125-cc1fd4c61831" Name="05 - LIBRO DIARIO" Processed="false" Value="05" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c139f038-aee3-1db9-4d86-6173c47fb74b" Name="010100 - LIBRO CAJA" Processed="false" ProcessingDate="dateacct" Value="010100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8d253def-98f6-8607-9ccf-483ed3a5ae31" Name="030600 - I&amp;B Cta 19" Processed="false" ProcessingDate="dateacct" Value="030600" IsActive="true">
+        <GroupByClause><![CDATA[taxid, namebp, taxtype, codsunat, serial, invoicedocumentno]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="a57b90d9-0301-e69f-8198-e190d883e100" Name="030500 - I&amp;B Cta 16 y 17" Processed="false" ProcessingDate="dateacct" Value="030500" IsActive="true">
+        <GroupByClause><![CDATA[taxid,namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+        <OrderByClause><![CDATA[namebp]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="edf12cf9-cb73-15db-875d-0940811bbe94" Name="14 - REGISTRO DE VENTAS E INGRESOS" Processed="false" ProcessingDate="dateacct" Value="14" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="2ac55dcb-50cc-c7c9-b91f-3dfd8eb5a5e6" Name="030200 - I&amp;B Cta 10" Processed="false" ProcessingDate="dateacct" Value="030200" IsActive="true">
+        <GroupByClause><![CDATA[valueacct,banktax,accountno,currencytax]]></GroupByClause>
+        <OrderByClause><![CDATA[valueacct]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="e73b53f9-ce7c-a2f5-481b-932d035cb776" Name="030800 - I&amp;B Cta 30" Processed="false" ProcessingDate="dateacct" Value="030800" IsActive="true">
+        <GroupByClause><![CDATA[taxtype, valuebp, namebp]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="3380c1ef-bf28-db8f-e170-7cb59088558c" Name="140100 - REGISTRO DE VENTAS-PLE" Processed="false" ProcessingDate="dateacct" Value="140100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Name="080100 - REGISTRO DE COMPRAS - PLE" Processed="false" ProcessingDate="dateacct" Value="080100" IsActive="true">
+        <WhereClause><![CDATA[(select  C_BP_Group_ID from c_bpartner where c_bpartner_id =($P{TABLE}.c_bpartner_id))  !=1004425]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="5664a25e-e0c5-4158-b4f2-564c1ef4deb9" Name="050300 - LIBRO DIARIO DETALLE DEL PLAN DE CUENTAS" Processed="false" ProcessingDate="created" Value="050300" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Name="08 - REGISTRO DE COMPRAS" Processed="false" Value="08" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c2ddb065-f45b-48e8-87e3-b6c267f94091" Name="080200 - REGISTRO DE COMPRAS NO DOMICILIADOS" Processed="false" ProcessingDate="dateacct" Value="080200" IsActive="true">
+        <WhereClause><![CDATA[(select  C_BP_Group_ID from c_bpartner where c_bpartner_id =($P{TABLE}.c_bpartner_id))  =1004425]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="41c8b837-12ba-0737-d7bb-404e4ec6b7de" Name="030100 - I&amp;B Balance" Processed="false" ProcessingDate="dateacct" Value="030100" IsActive="true">
+        <GroupByClause><![CDATA[taxid]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="b400dafa-3168-4101-8856-81f198d69749" Name="031601 - I&amp;B Cta 50" Processed="false" ProcessingDate="dateacct" Value="031601" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="a18db1ab-188d-4239-ac2e-12f835b549e1" Name="130100 - Inventario Valorizado" Processed="false" ProcessingDate="movementdate" Value="130100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" Identifier="3f586418-72e4-4f57-3e2e-cd2795d997c7" Name="02 - LIBRO DE INGRESOS Y GASTOS" Processed="false" Value="02" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c8ed8dca-c62a-6a45-9710-a013ab04f0f9" Name="031300 - I&amp;B Cta 46 y 47" Processed="false" ProcessingDate="dateacct" Value="031300" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, taxtype, taxid, namebp]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="4c713835-45bb-29d8-84c1-42fe394b0eb3" Name="031100 - I&amp;B Cta 41" Processed="false" ProcessingDate="dateacct" Value="031100" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, taxtype, taxid, namebp, $P{TABLE}.user]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="18988374-540c-c762-5c2f-87a085050605" Name="030400 - I&amp;B Cta 14" Processed="false" ProcessingDate="dateacct" Value="030400" IsActive="true">
+        <GroupByClause><![CDATA[taxid,namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+        <OrderByClause><![CDATA[namebp]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8bfd103e-fbf6-cbfa-30b4-35fad1deb928" Name="031700 - I&amp;B Comprobacion" Processed="false" ProcessingDate="dateacct" Value="031700" IsActive="true">
+        <GroupByClause><![CDATA[valueacct]]></GroupByClause>
+        <OrderByClause><![CDATA[valueacct]]></OrderByClause>
+      </row>
+    </table>
+  </record>
+</stream>
+

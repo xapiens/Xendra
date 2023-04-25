@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stream>
+  <record level="2" name="GL_BookLine">
+    <table name="GL_BookLine" accesslevel="0" level="1" Identifier="945af3bb-e6b9-11c0-1ca7-5e81c88de22e">
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="ac05da00-3aef-bd57-8c0e-8dd357d01dfb" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="945af3bb-e6b9-11c0-1ca7-5e81c88de22e" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="f42a5ba1-f144-48a5-8b7a-4245c7744b62" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="1e0c5631-c93a-4cf2-ab42-932b1b75a3a4" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="6f68d10d-2a14-9f7f-c3e3-7b6fdc922f4b" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="f0d192b1-21b5-76a3-a45b-f9f88f4965cf" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="6daa156c-a527-f866-0bdd-d5c09d27c88f" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="32679db1-ed36-361f-3012-4fc98da468b8" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="a67c6f93-c5ae-4601-ad6e-d5bc830ccdf3" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="80b9c548-c113-3f00-4006-bc201d5e1c38" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="aadaa897-42d3-4a80-8e91-1754d4fda5c5" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0aabf758-2446-17ab-def8-90df2ca2a8f3" GL_Book_ID="5664a25e-e0c5-4158-b4f2-564c1ef4deb9" Identifier="0dec73af-eaaa-44a5-9b46-9d291d2a4728" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="46aa4be2-9af1-fcc3-e7a6-bcefcbdc3d25" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="0ab36444-774b-b46e-0b3d-2d85493f3625" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="c14add02-a8ba-4608-806f-3d8ffceeeb14" GL_Book_ID="8bfd103e-fbf6-cbfa-30b4-35fad1deb928" Identifier="84934118-2dad-4316-9002-2c67d1feb838" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="dbe22e56-7ca9-94d1-364a-1ac0769722d6" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0539d3b9-afef-45b6-a49d-2970f3626ca4" GL_Book_ID="25e25ea7-3f53-ea73-e1e9-f3706cd4e7ea" Identifier="7e24f1f9-1395-4862-8520-8c89844c6835" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" C_DocType_ID="969b125c-5a01-738a-7145-004c16ad1620" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="116b4fd1-6c4a-7ffc-b56c-3ec1f9319d7b" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="80b9c548-c113-3f00-4006-bc201d5e1c38" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="ae134a02-c7f8-f603-0b26-12f4ba9c0daf" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="b27f8914-6a88-86b3-2eac-00fafdd8fd95" GL_Book_ID="3380c1ef-bf28-db8f-e170-7cb59088558c" Identifier="516917c3-df34-46e2-83e2-6198dce853d2" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="6f68d10d-2a14-9f7f-c3e3-7b6fdc922f4b" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="a0ee4479-3950-4518-b27f-7bf9cf766f9e" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="32679db1-ed36-361f-3012-4fc98da468b8" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="71ef1997-a9e5-f56c-e3cd-076aede93a62" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="052ecd2b-2283-ed96-dc38-1e66ba93a487" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="8bc6945f-d5ff-4d64-989c-cb36d0ee547a" GL_Book_ID="c139f038-aee3-1db9-4d86-6173c47fb74b" Identifier="fa3c8b6b-8d47-c30d-4b36-a87b658648b5" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="7b77d670-6a9a-08be-94c9-f3fdd4a538b6" C_DocType_ID="691ccfaa-675a-ccd2-9c6b-4dc19fd26ed8" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="bb068982-bada-e5f2-35cb-1d4dcaf0960a" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="a8297d40-c73a-7ea0-bf0e-ed176520db99" C_DocType_ID="7ff7b05f-2223-a246-cfbd-6142b8f19cac" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="0d1f5001-65de-0f83-80f1-81f5a1d0dbea" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="de812bb9-0fdb-466c-b991-dfe45e8d6228" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="44bb803e-4f78-4be3-a6c8-764674696560" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="da0e7e4b-652c-7e6e-91b6-4ff277f89b9a" C_DocType_ID="cc7a856f-1f02-07ef-257a-517f19ffcdbc" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="2cecc7d1-e57b-864a-7d59-70b1e27ab2bb" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="3d08cde2-66c6-bac8-8a8f-4d30439f19d6" GL_Book_ID="edf12cf9-cb73-15db-875d-0940811bbe94" Identifier="69df98df-526f-d33e-c51c-d6d61f0281e6" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="44f06c1a-0957-bbf4-4dce-136c929b7aeb" GL_Book_ID="bfccf430-19ba-004d-dd83-52b96c8a3328" Identifier="21a9f37b-6ff6-f239-499d-6d40bfe8bd6b" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="b27f8914-6a88-86b3-2eac-00fafdd8fd95" GL_Book_ID="edf12cf9-cb73-15db-875d-0940811bbe94" Identifier="d7e51092-cda9-2d82-bfc6-6bab8fa50ee9" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="a51858e9-6fca-2aa2-3c32-acd9fcf88b58" GL_Book_ID="c2ddb065-f45b-48e8-87e3-b6c267f94091" Identifier="3cc20304-f7e0-49ae-b00e-0d6ae45e4ffb" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="367e2031-aef6-bee3-7547-32e7b20dd1fd" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="ba38f1ae-dcf7-d8ac-a568-c52219cb141a" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="46f51377-04b5-4056-982c-2951901d95a3" GL_Book_ID="a57b90d9-0301-e69f-8198-e190d883e100" Identifier="05a25b72-7f06-4a75-a603-a64760bbe215" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="3d08cde2-66c6-bac8-8a8f-4d30439f19d6" GL_Book_ID="3380c1ef-bf28-db8f-e170-7cb59088558c" Identifier="8d69f00c-1f0d-4864-9c9a-bb6aa79b9f15" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b56eee3-2271-8a46-80c2-c8ad74a02b26" C_DocType_ID="9b706c54-1780-e959-a149-b8224efbcb4e" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="a31a1230-b4ee-ccba-b0bd-26f183a660b4" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="afd6e46b-b7a0-7f9b-e336-1a3d177bc7dc" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="b94bbe52-dedc-4c6c-abbd-5a891468e180" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="49a6aff2-4173-48ec-884e-e6ddb5901ead" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="3288447b-b6bd-e46e-2bd5-22cadfcf607d" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="a1a81289-2ed3-5ffd-f96e-0382fb926a4c" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="17e119b0-2263-bb85-894f-ced685b0b70e" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="44f06c1a-0957-bbf4-4dce-136c929b7aeb" GL_Book_ID="fc00d860-d5a8-d88a-4b50-df9cb9fb589c" Identifier="691d667d-98e4-f54f-06fe-e36ff4200cf1" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="9b3266a6-acfe-468e-a8aa-e3f7ecc3ed30" GL_Book_ID="41c8b837-12ba-0737-d7bb-404e4ec6b7de" Identifier="003bf85c-7c75-4e78-b62e-4b7c59efde72" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b56eee3-2271-8a46-80c2-c8ad74a02b26" C_DocType_ID="1c4dd251-259a-4b4e-74fa-15ffd3807b50" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="b922daa4-fc0c-3181-88cc-84c64b7d2f45" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="6389f413-5425-d82a-c1a2-f8d3e479450e" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="384016bf-2c4c-14d7-381a-91a3afc88c2e" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="e7c4f016-4086-d1cd-9d9c-b799622d243f" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="be029ce1-5537-4c89-80f4-cf0311bc8b8d" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="fbab5612-0be6-44b3-aded-f10da1fd9f01" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="a0790267-bf3d-4d97-bd91-f5aa0e15fca2" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" C_DocType_ID="e063d8a6-d11a-f084-085f-0da76c48a9de" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="a5a2aa72-4ec7-6e48-13a5-02d9329a0a2b" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="6ba912b2-1451-bf78-4b41-27cad9bc46db" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="b691963d-69bf-4838-8979-5c6989122057" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="a51858e9-6fca-2aa2-3c32-acd9fcf88b58" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="b5c2256e-9813-4bdc-ab2b-727570aa2bb9" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="44f06c1a-0957-bbf4-4dce-136c929b7aeb" GL_Book_ID="49679599-e513-60d3-b756-d58ec5491855" Identifier="5946a01c-7c60-31cb-d797-ba2c757aa5ca" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="77c4fb36-da4d-49c1-92e6-350874b71d55" GL_Book_ID="81bb7588-bd12-e2f9-0ba0-99f127585e99" Identifier="b84a31a0-5630-4417-b102-3caa37c84e0f" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6d1f9faf-e2b9-4733-b919-b49c199fc059" GL_Book_ID="4c713835-45bb-29d8-84c1-42fe394b0eb3" Identifier="4e06db31-2e9b-4717-af2e-f265349cdc90" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="f42a5ba1-f144-48a5-8b7a-4245c7744b62" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="489a893e-e56c-4dd3-8542-91f425ef289f" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="d6c6fc86-1c87-4eb9-9d78-25ccdb7555e1" GL_Book_ID="2ac55dcb-50cc-c7c9-b91f-3dfd8eb5a5e6" Identifier="526f7d30-ceb9-46fa-8a1e-fcca9e9cb2d2" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="b8f754ee-7406-38cf-a66e-3cc3ac6fe2a0" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="fd977221-78b5-4891-b7f1-9fee2afc70b4" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="a7fc0fbe-1bad-47da-bf2e-9613ac46a944" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="44f06c1a-0957-bbf4-4dce-136c929b7aeb" GL_Book_ID="c188057d-9e63-d5a8-6c9e-fc760cd6d0d0" Identifier="d7d3821c-2030-dfae-e5c4-6f4ed9b29aa9" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="8b9c05b1-d2f0-40a7-9b0e-28fee9879634" GL_Book_ID="c240f167-8422-e009-279b-ffcf85fdaf77" Identifier="49c258fc-a3b7-452a-b757-1192e5e5c86f" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="afd6e46b-b7a0-7f9b-e336-1a3d177bc7dc" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="0edec72e-78d3-e8c6-dd5e-415d2016f9e6" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="4a14c612-39a9-b8dd-0a46-a1f2074560e6" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="f3baa799-9c9e-42e7-bd02-7513151e9b8a" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b56eee3-2271-8a46-80c2-c8ad74a02b26" C_DocType_ID="f6af44b9-5b2b-6cf1-4531-822b470bf22f" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="b8388ec3-3075-d3ef-2a6e-a328618b70c3" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="6c26b541-13cc-fef0-0c8f-7ff4b6ab6e61" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="ed165336-c6f2-8489-e8ce-19cd3859daf1" GL_Book_ID="edf12cf9-cb73-15db-875d-0940811bbe94" Identifier="b696cab0-51b1-e4a8-a740-a2fe68291567" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="a51858e9-6fca-2aa2-3c32-acd9fcf88b58" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="61cf872d-b9d5-b3e4-111f-eec93e3d3473" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="46aa4be2-9af1-fcc3-e7a6-bcefcbdc3d25" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="b5ba32da-f9fe-44a8-b402-46353c4c9247" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="01e6e05f-08c2-4dbf-edf8-3b366753be40" GL_Book_ID="edf12cf9-cb73-15db-875d-0940811bbe94" Identifier="8f78d8ad-6108-8beb-8aa4-c5bada0e7fdc" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="c7b85b32-1069-fa55-06b2-f59fb3a175ba" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="f4d24e33-69dc-85e9-a83b-601aa87f9ace" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0609f171-faf3-4a79-ae0c-348e6a26c42a" GL_Book_ID="e73b53f9-ce7c-a2f5-481b-932d035cb776" Identifier="448eb6a1-55fd-4309-92ab-f7121e7346d9" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" C_DocType_ID="995ed493-a5b2-4557-4f8b-76231715c9be" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="c4b4db5e-2349-db31-799c-c8208b629667" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="5fce2edf-1da1-d72f-523c-56b2011508c5" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="7f83bc3a-8c69-5d97-cc98-01d2babcdd91" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="e2a1d4f7-e385-b6d7-4635-96107cfed2d0" GL_Book_ID="3380c1ef-bf28-db8f-e170-7cb59088558c" Identifier="ff3c0b5a-ddc0-4d60-9f33-a27bcd39cb93" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="4a14c612-39a9-b8dd-0a46-a1f2074560e6" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="86c5cf93-0b6d-c180-35a6-16223aa12188" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="12236eab-4d01-4aa4-9707-fee9ada1747c" GL_Book_ID="d151a4f8-f1a9-9791-f7ed-b494310d4198" Identifier="c38223b4-731e-e816-75f0-07808db93012" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="668ae4a4-9c96-1c53-f7b8-d8fd196ff662" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" GL_Book_ID="c2e3cdd4-6c06-4ad2-90fd-87fc0f8a6cc4" Identifier="d344a041-81c9-4fcc-aa4c-1fa17b6c1efd" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="6b126832-064f-412e-a6af-c60944f1415d" GL_Book_ID="18988374-540c-c762-5c2f-87a085050605" Identifier="64828fd0-18ad-4f77-9167-a6f7f02ce684" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="736cd69c-65da-6f7a-897b-c501e6132352" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="d6de27e3-bccb-4878-9812-49d4574e57eb" GL_Book_ID="8d253def-98f6-8607-9ccf-483ed3a5ae31" Identifier="e3dab73a-6f8b-4383-9afe-50e65d010fbd" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="f650f29a-5631-e17a-96d3-6acb469f5946" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="b13bdeff-e8ba-e248-75c5-22d3e2733a93" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="73ad5a5b-c395-4b54-bcd1-91be19f3f5ae" GL_Book_ID="8aa3c792-6bad-c926-94ba-5273be2c68fb" Identifier="528bd740-6cfe-4c32-aab3-288c80c7778c" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="ed165336-c6f2-8489-e8ce-19cd3859daf1" GL_Book_ID="3380c1ef-bf28-db8f-e170-7cb59088558c" Identifier="3211cc9f-8477-4c71-b042-fae54940f8c1" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="fbab5612-0be6-44b3-aded-f10da1fd9f01" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="d7c157cb-70fc-43ce-9c83-586722f80ebc" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="f650f29a-5631-e17a-96d3-6acb469f5946" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="fdaf1359-99a0-40fe-a4c2-ff80a822eb5a" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="34624857-e37e-e31d-b092-7199df9f8d29" C_DocType_ID="ce38b716-5a31-9f52-6bb3-5aa0f30bb1e2" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="88714348-a8b2-4ec7-46dd-736d99150265" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="6ba912b2-1451-bf78-4b41-27cad9bc46db" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="6558eb4c-9ba2-81da-a1d0-738d667161bf" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="e2a1d4f7-e385-b6d7-4635-96107cfed2d0" GL_Book_ID="edf12cf9-cb73-15db-875d-0940811bbe94" Identifier="faeb03f1-eed9-89ab-609b-778807722ba5" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="87f207b5-c664-8acf-f670-c3041ff7df9b" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="199af374-587f-4b9b-968d-f4b4cf9ece4d" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="f1a5e083-e9ba-b46b-baba-d1fb547f57e5" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="8b55bcc8-2875-aad5-6c0b-53abd3ca6a7c" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="e7c4f016-4086-d1cd-9d9c-b799622d243f" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="7b81cd85-f483-34f1-9152-9db78c64ba7d" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="de812bb9-0fdb-466c-b991-dfe45e8d6228" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="417f060f-d824-48e9-8d47-455da812ad64" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="22c1d505-296a-6010-1ff3-8e2249652afb" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="c13648d0-9cde-b8a9-6ba8-f86ccaae9e97" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" GL_Book_ID="1d81ccef-0699-4065-8898-b6263b549f33" Identifier="fd110286-f227-43d0-9fcc-03dfb23db0af" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" C_DocType_ID="ba1608c9-9723-f46f-9ff4-aaa2e0ea472b" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="cbbdce27-6675-7e33-7a74-3cfe7221a0cf" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="7ed57e42-d595-4296-bcd1-3ee92dcc4330" GL_Book_ID="b400dafa-3168-4101-8856-81f198d69749" Identifier="f9af4c62-4cb9-4f20-8c5d-ff460f701db4" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" GL_Book_ID="a18db1ab-188d-4239-ac2e-12f835b549e1" Identifier="6ca478a4-1560-47bc-bd4e-4e9630d569fe" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0f8ae0d3-2cc7-dd69-276e-0374ea5ed645" C_DocType_ID="c7b85b32-1069-fa55-06b2-f59fb3a175ba" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="b0ad9da6-cb23-96a2-68b0-22e796d52008" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="01e6e05f-08c2-4dbf-edf8-3b366753be40" GL_Book_ID="3380c1ef-bf28-db8f-e170-7cb59088558c" Identifier="e81d5117-e260-4675-827f-ffbfd73692b9" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="cd8fb645-af6d-0007-902c-83119a322c11" C_DocType_ID="751f884a-af3f-4f80-e1ed-1030fbc38829" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="ee98b689-d4e4-0e02-d2be-8d0d74f6354b" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="22c1d505-296a-6010-1ff3-8e2249652afb" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="12da914c-c383-4ef8-92b0-4f0532054630" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="0ad94ea3-6b1f-830d-408f-4ca92b26cb35" C_DocType_ID="f8380cdf-36b8-7a56-b3fc-e9af2a738a9e" GL_Book_ID="afecc3c6-2a9e-081d-1330-1355ea106b4d" Identifier="3257f261-345b-181e-8c1d-83ac93f34d23" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="c4150ac2-44d2-4fbe-86f9-747300e569f3" GL_Book_ID="f9fe6e66-3cb6-bf07-1470-f23f09d3bbcd" Identifier="33de4215-574c-4462-b4d2-7406e9067890" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="b31dff7e-e4e1-c048-f0da-bf0ec0061b5a" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="147986c0-f2cc-5310-2ebd-37efcbd0a03c" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="bd1cc8b2-7d9e-48c3-8246-829be55e957c" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="eabeaaff-5523-495c-b7b9-94e5e190a79c" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" GL_Book_ID="670b568f-d0dc-ae83-31c9-e60dbafbf676" Identifier="9373aa34-ac1b-4d53-9706-f08673aa1d4f" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="80b9c548-c113-3f00-4006-bc201d5e1c38" GL_Book_ID="c2ddb065-f45b-48e8-87e3-b6c267f94091" Identifier="ddf8026f-06cc-4675-9c73-0d23522f717d" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="87f207b5-c664-8acf-f670-c3041ff7df9b" GL_Book_ID="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Identifier="bdbb76d2-2dde-c145-2229-83ea473b36a2" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" GL_Book_ID="321bfd3e-d495-abb4-e788-d2128ee99669" Identifier="308d02ff-948c-40e8-d5ad-6898306735d8" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="e7b4b20e-ce60-7a2e-750d-d40107352348" C_DocType_ID="d692c4dd-7bd6-726e-adca-d53b1da6c108" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="7823f407-42ab-1a20-b95d-2061f8a7ff43" IsSOTrx="true" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="7f786b36-f176-43c5-9dc6-709c8d662628" C_DocType_ID="f1a5e083-e9ba-b46b-baba-d1fb547f57e5" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="edd6fcc9-46b0-a49d-32ef-cd71c2738403" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="05634882-f316-4d8f-b2be-327cbda34ffc" GL_Book_ID="c8ed8dca-c62a-6a45-9710-a013ab04f0f9" Identifier="14429478-609b-459a-9bd5-623dbe9915ce" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="25b4731f-e0c4-ebd1-8fee-a738eb684e39" C_DocType_ID="a1a81289-2ed3-5ffd-f96e-0382fb926a4c" GL_Book_ID="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Identifier="4c5d3ede-f3df-4e51-ae78-eeb54f6279bf" IsSOTrx="false" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" AD_Table_ID="34624857-e37e-e31d-b092-7199df9f8d29" C_DocType_ID="44c670f8-b4e8-31d3-917f-d4eec3ce7041" GL_Book_ID="3bd55531-4dda-9d37-8125-cc1fd4c61831" Identifier="982a6e09-ea33-ec3d-897e-78c361455368" IsSOTrx="false" IsActive="true" />
+    </table>
+    <table name="GL_Book" accesslevel="0" level="2" Identifier="321bfd3e-d495-abb4-e788-d2128ee99669">
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="321bfd3e-d495-abb4-e788-d2128ee99669" Name="080100 - REGISTRO DE COMPRAS-PLE" Processed="false" ProcessingDate="dateacct" Value="080100" IsActive="false" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="fc00d860-d5a8-d88a-4b50-df9cb9fb589c" Name="060100 - LIBRO MAYOR-PLE" Processed="false" ProcessingDate="dateacct" Value="060100" IsActive="true">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c240f167-8422-e009-279b-ffcf85fdaf77" Name="030900 - I&amp;B Cta 34" Processed="false" ProcessingDate="dateacct" Value="030900" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, description]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="bfccf430-19ba-004d-dd83-52b96c8a3328" Name="050100 - LIBRO DE DIARIO-PLE" Processed="false" ProcessingDate="dateacct" Value="050100" IsActive="true">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c2e3cdd4-6c06-4ad2-90fd-87fc0f8a6cc4" Name="031500 - I&amp;B Cta 37 y 49" Processed="false" ProcessingDate="dateacct" Value="031500" IsActive="true">
+        <GroupByClause><![CDATA[valueacct,taxid,serial,invoicedocumentno,description]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="afecc3c6-2a9e-081d-1330-1355ea106b4d" Name="01 - LIBRO CAJA Y BANCOS" Processed="false" Value="01" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="81bb7588-bd12-e2f9-0ba0-99f127585e99" Name="030700 - I&amp;B Cta 20 y 21" Processed="false" ProcessingDate="dateacct" Value="030700" IsActive="true">
+        <GroupByClause><![CDATA[producttypetax, valuep, namep, um]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="25e25ea7-3f53-ea73-e1e9-f3706cd4e7ea" Name="032000 - I&amp;B Resultados" Processed="false" ProcessingDate="dateacct" Value="032000" IsActive="true">
+        <GroupByClause><![CDATA[taxid]]></GroupByClause>
+        <OrderByClause><![CDATA[taxid]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="d151a4f8-f1a9-9791-f7ed-b494310d4198" Name="010200 - LIBRO BANCOS" Processed="false" ProcessingDate="dateacct" Value="010200" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="f9fe6e66-3cb6-bf07-1470-f23f09d3bbcd" Name="030300 - I&amp;B Cta 12 y 13" Processed="false" ProcessingDate="dateacct" Value="030300" IsActive="true">
+        <GroupByClause><![CDATA[taxid, namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="1d81ccef-0699-4065-8898-b6263b549f33" Name="031602 - I&amp;B Participacion" Processed="false" ProcessingDate="created" Value="031602" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="670b568f-d0dc-ae83-31c9-e60dbafbf676" Name="120100 - Inventario Unidades Fiscas" Processed="false" ProcessingDate="movementdate" Value="120100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8aa3c792-6bad-c926-94ba-5273be2c68fb" Name="031200 - I&amp;B Cta 42 y 43" Processed="false" ProcessingDate="dateacct" Value="031200" IsActive="true">
+        <GroupByClause><![CDATA[taxtype,taxid,namebp]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c188057d-9e63-d5a8-6c9e-fc760cd6d0d0" Name="06 - LIBRO MAYOR" Processed="false" ProcessingDate="dateacct" Value="06" IsActive="false">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="49679599-e513-60d3-b756-d58ec5491855" Name="05 - LIBRO DIARIO - PLE" Processed="false" ProcessingDate="dateacct" Value="05" IsActive="false">
+        <WhereClause><![CDATA[(round(fact_acct.amtacctdr,2) - round(fact_acct.amtacctcr,2)) != 0]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="3bd55531-4dda-9d37-8125-cc1fd4c61831" Name="05 - LIBRO DIARIO" Processed="false" Value="05" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8d253def-98f6-8607-9ccf-483ed3a5ae31" Name="030600 - I&amp;B Cta 19" Processed="false" ProcessingDate="dateacct" Value="030600" IsActive="true">
+        <GroupByClause><![CDATA[taxid, namebp, taxtype, codsunat, serial, invoicedocumentno]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c139f038-aee3-1db9-4d86-6173c47fb74b" Name="010100 - LIBRO CAJA" Processed="false" ProcessingDate="dateacct" Value="010100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="a57b90d9-0301-e69f-8198-e190d883e100" Name="030500 - I&amp;B Cta 16 y 17" Processed="false" ProcessingDate="dateacct" Value="030500" IsActive="true">
+        <GroupByClause><![CDATA[taxid,namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+        <OrderByClause><![CDATA[namebp]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="edf12cf9-cb73-15db-875d-0940811bbe94" Name="14 - REGISTRO DE VENTAS E INGRESOS" Processed="false" ProcessingDate="dateacct" Value="14" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="2ac55dcb-50cc-c7c9-b91f-3dfd8eb5a5e6" Name="030200 - I&amp;B Cta 10" Processed="false" ProcessingDate="dateacct" Value="030200" IsActive="true">
+        <GroupByClause><![CDATA[valueacct,banktax,accountno,currencytax]]></GroupByClause>
+        <OrderByClause><![CDATA[valueacct]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="3380c1ef-bf28-db8f-e170-7cb59088558c" Name="140100 - REGISTRO DE VENTAS-PLE" Processed="false" ProcessingDate="dateacct" Value="140100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="1ebb8fbd-08ca-7d16-8c06-a54a0105456b" Name="080100 - REGISTRO DE COMPRAS - PLE" Processed="false" ProcessingDate="dateacct" Value="080100" IsActive="true">
+        <WhereClause><![CDATA[(select  C_BP_Group_ID from c_bpartner where c_bpartner_id =($P{TABLE}.c_bpartner_id))  !=1004425]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="e73b53f9-ce7c-a2f5-481b-932d035cb776" Name="030800 - I&amp;B Cta 30" Processed="false" ProcessingDate="dateacct" Value="030800" IsActive="true">
+        <GroupByClause><![CDATA[taxtype, valuebp, namebp]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="5664a25e-e0c5-4158-b4f2-564c1ef4deb9" Name="050300 - LIBRO DIARIO DETALLE DEL PLAN DE CUENTAS" Processed="false" ProcessingDate="created" Value="050300" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="S" Identifier="ef4f2776-dd07-2267-c72a-ac2f66d0c40c" Name="08 - REGISTRO DE COMPRAS" Processed="false" Value="08" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c2ddb065-f45b-48e8-87e3-b6c267f94091" Name="080200 - REGISTRO DE COMPRAS NO DOMICILIADOS" Processed="false" ProcessingDate="dateacct" Value="080200" IsActive="true">
+        <WhereClause><![CDATA[(select  C_BP_Group_ID from c_bpartner where c_bpartner_id =($P{TABLE}.c_bpartner_id))  =1004425]]></WhereClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="41c8b837-12ba-0737-d7bb-404e4ec6b7de" Name="030100 - I&amp;B Balance" Processed="false" ProcessingDate="dateacct" Value="030100" IsActive="true">
+        <GroupByClause><![CDATA[taxid]]></GroupByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="b400dafa-3168-4101-8856-81f198d69749" Name="031601 - I&amp;B Cta 50" Processed="false" ProcessingDate="dateacct" Value="031601" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="a18db1ab-188d-4239-ac2e-12f835b549e1" Name="130100 - Inventario Valorizado" Processed="false" ProcessingDate="movementdate" Value="130100" IsActive="true" />
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="c8ed8dca-c62a-6a45-9710-a013ab04f0f9" Name="031300 - I&amp;B Cta 46 y 47" Processed="false" ProcessingDate="dateacct" Value="031300" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, taxtype, taxid, namebp]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="4c713835-45bb-29d8-84c1-42fe394b0eb3" Name="031100 - I&amp;B Cta 41" Processed="false" ProcessingDate="dateacct" Value="031100" IsActive="true">
+        <GroupByClause><![CDATA[valueacct, taxtype, taxid, namebp, $P{TABLE}.user]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="8bfd103e-fbf6-cbfa-30b4-35fad1deb928" Name="031700 - I&amp;B Comprobacion" Processed="false" ProcessingDate="dateacct" Value="031700" IsActive="true">
+        <GroupByClause><![CDATA[valueacct]]></GroupByClause>
+        <OrderByClause><![CDATA[valueacct]]></OrderByClause>
+      </row>
+      <row AD_Client_ID="0" AD_Org_ID="0" BookType="P" Identifier="18988374-540c-c762-5c2f-87a085050605" Name="030400 - I&amp;B Cta 14" Processed="false" ProcessingDate="dateacct" Value="030400" IsActive="true">
+        <GroupByClause><![CDATA[taxid,namebp,taxtype]]></GroupByClause>
+        <HavingClause><![CDATA[(SUM($P{TABLE}.amtacctdr) - SUM($P{TABLE}.amtacctcr)) <> 0]]></HavingClause>
+        <OrderByClause><![CDATA[namebp]]></OrderByClause>
+      </row>
+    </table>
+  </record>
+</stream>
+
