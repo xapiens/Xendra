@@ -42,16 +42,17 @@ public class DemandGenerate extends SvrProcess {
 
 	// group by client, org can duplicate periods 
 	private String getSQL() {
-		String sql =  "INSERT into m_demandline (m_demand_id, m_demandline_id, created, createdby, updated, updatedby, ad_client_id, ad_org_id, c_period_id, m_product_id, qty) " +
-				" SELECT ?, nextval('m_demandline_seq'),now(), 100, now(), 100, ad_client_id, org, ( SELECT p.c_period_id FROM c_period p WHERE y.dd >= p.startdate AND y.dd <= p.enddate AND p.ad_client_id = y.ad_client_id) AS c_period_id,"+
-				"		m_product_id, qty from ( " +
-				"		select ad_client_id, org, make_date(year::integer,month::integer,1) as dd, m_product_id, qty from ( " +
-				"		select iol.ad_client_id, iol.ad_org_id as org, extract(year from movementdate) as year, extract(month from movementdate) as month, m_product_id, sum(movementqty) as qty "+
-				"		  from m_inoutline iol join m_inout io " + 
-				"		    on  iol.m_inout_id = io.m_inout_id " +
-				"		    where io.issotrx = 'Y' and io.docstatus = 'CO' " +
-				"		    and extract(year from movementdate) = ? " +
-				"		  group by iol.ad_client_id, iol.ad_org_id, year, month,m_product_id) as x) as y; ";
+		String sql =  "INSERT into m_demandline (m_demand_id, m_demandline_id, created, createdby, updated, updatedby, ad_client_id, ad_org_id, c_period_id, m_product_id, qty, linenetamt) " +
+				"       SELECT ?, nextval('m_demandline_seq'),now(), 100, now(), 100, ad_client_id, org, ( SELECT p.c_period_id FROM c_period p WHERE y.dd >= p.startdate AND y.dd <= p.enddate AND p.ad_client_id = y.ad_client_id) AS c_period_id,"+
+				"		m_product_id, qty, linenetamt from ( " +
+				"		select ad_client_id, org, make_date(year::integer,month::integer,1) as dd, m_product_id, qty,linenetamt from ( " +
+				"		select iol.ad_client_id, iol.ad_org_id as org, extract(year from movementdate) as year, extract(month from movementdate) as month, iol.m_product_id, sum(movementqty) as qty, SUM(ol.linenetamt) as linenetamt "+
+				"		  FROM m_inoutline iol " +
+			    "         JOIN m_inout io  on  iol.m_inout_id = io.m_inout_id " +
+				"		  JOIN c_orderline ol on  iol.c_orderline_id = ol.c_orderline_id " +				
+				"		   where io.issotrx = 'Y' and io.docstatus = 'CO' " +
+				"		   and extract(year from movementdate) = ? " +
+				"		  group by iol.ad_client_id, iol.ad_org_id, year, month,iol.m_product_id) as x) as y; ";
 		return sql;
 	}
 
